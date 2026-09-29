@@ -60,24 +60,37 @@ function EquipmentShape({name}:{name:string}){
  if(name==="Trybuna")return <g fill="#66726d">{[0,1,2].map(i=><rect key={i} x={-55+i*8} y={-25+i*16} width={110-i*16} height="12"/>)}</g>;
  return <circle r="20" fill="#d8ff77"/>;
 }
-function EditorObjectView({o,h,selected,onPointerDown}:{o:EditorObject;h:number;selected:boolean;onPointerDown:(e:React.PointerEvent<SVGGElement>,id:string)=>void}){
+function EditorObjectView({o,h,selected,onPointerDown}:{o:EditorObject;h:number;selected:boolean;onPointerDown:(e:React.PointerEvent<SVGElement>,id:string,mode?:"move"|"scale"|"rotate")=>void}){
  let x=o.x,y=o.y,rot=o.rotation;
  if(o.target==="band-top")y=-22;
  if(o.target==="band-bottom")y=h+22;
  if(o.target==="band-left"){x=-22;rot-=90}
  if(o.target==="band-right"){x=622;rot+=90}
  const tr="translate("+x+" "+y+") rotate("+rot+") scale("+o.scale/100+")";
- return <g className={"editable-object "+(selected?"selected":"")} transform={tr} opacity={o.opacity/100} onPointerDown={e=>onPointerDown(e,o.id)}>
+ return <g className={"editable-object "+(selected?"selected":"")} transform={tr} opacity={o.opacity/100} onPointerDown={e=>onPointerDown(e,o.id,"move")}>
    {o.kind==="image"&&o.src?<image href={o.src} x="-55" y="-55" width="110" height="110" preserveAspectRatio="xMidYMid meet"/>:null}
    {o.kind==="text"?<text textAnchor="middle" dominantBaseline="middle" fill={o.color} fontSize="34" fontWeight="800">{o.text||"TWÓJ TEKST"}</text>:null}
    {o.kind==="sponsor"?<g><rect x="-58" y="-22" width="116" height="44" rx="5" fill="#18221f" stroke={o.color} strokeWidth="2"/><text textAnchor="middle" dominantBaseline="middle" fill={o.color} fontSize="17" fontWeight="900" letterSpacing="1">{o.text||o.name}</text></g>:null}
    {o.kind==="equipment"?<EquipmentShape name={o.name}/>:null}
-   {selected?<rect x="-66" y="-66" width="132" height="132" fill="none" stroke="#d8ff77" strokeWidth="3" strokeDasharray="7 5" vectorEffect="non-scaling-stroke"/>:null}
+   {selected?<g className="transform-ui" opacity="1">
+     <rect x="-66" y="-66" width="132" height="132" rx="4" fill="none" stroke="#d8ff77" strokeWidth="3" strokeDasharray="7 5" vectorEffect="non-scaling-stroke"/>
+     <line x1="0" y1="-66" x2="0" y2="-87" stroke="#d8ff77" strokeWidth="2" vectorEffect="non-scaling-stroke"/>
+     <circle className="transform-handle rotate-handle" cx="0" cy="-94" r="8" fill="#20352c" stroke="#d8ff77" strokeWidth="3" vectorEffect="non-scaling-stroke" onPointerDown={e=>{e.stopPropagation();onPointerDown(e,o.id,"rotate")}}/>
+     <circle className="transform-handle scale-handle" cx="70" cy="70" r="9" fill="#d8ff77" stroke="#20352c" strokeWidth="3" vectorEffect="non-scaling-stroke" onPointerDown={e=>{e.stopPropagation();onPointerDown(e,o.id,"scale")}}/>
+   </g>:null}
  </g>;
 }
 function EventScene({h}:{h:number}){
  const people=[[-45,40],[-48,85],[-50,135],[-48,190],[-42,250],[645,45],[650,95],[646,150],[650,205],[646,260],[120,-48],[190,-46],[260,-50],[340,-47],[420,-50],[490,-46]];
- return <g className="event-scene">{people.map(([x,y],i)=><g key={i} transform={"translate("+x+" "+y+")"}><circle r="8" fill={i%3===0?"#ff7757":i%3===1?"#d8ff77":"#e8ece9"}/><path d="M0 8v20M-10 15L0 23l10-8" stroke="#283733" strokeWidth="4" fill="none"/></g>)}<g transform={"translate(130 "+(h+55)+")"}><EquipmentShape name="DJ booth"/></g><g transform={"translate(480 "+(h+55)+") scale(.75)"}><EquipmentShape name="Namiot"/></g><text x="300" y={h+70} textAnchor="middle" fontSize="13" fontWeight="800" fill="#5b685f" letterSpacing="2">EVENT MODE / COMMUNITY / MUSIC / GAME</text></g>;
+ return <g className="event-scene">
+   <g transform={"translate(-70 "+h/2+") rotate(-90) scale(.9)"}><EquipmentShape name="Trybuna"/></g>
+   <g transform={"translate(670 "+h/2+") rotate(90) scale(.9)"}><EquipmentShape name="Trybuna"/></g>
+   {people.map(([x,y],i)=><g key={i} transform={"translate("+x+" "+y+")"}><circle r="8" fill={i%3===0?"#ff7757":i%3===1?"#d8ff77":"#e8ece9"}/><path d="M0 8v20M-10 15L0 23l10-8" stroke="#283733" strokeWidth="4" fill="none"/></g>)}
+   <g transform={"translate(130 "+(h+58)+")"}><EquipmentShape name="DJ booth"/></g>
+   <g transform={"translate(490 "+(h+58)+") scale(.75)"}><EquipmentShape name="Namiot"/></g>
+   <g transform={"translate(300 -55)"}><rect x="-120" y="-18" width="240" height="36" rx="4" fill="#20352c"/><text textAnchor="middle" dominantBaseline="middle" fill="#d8ff77" fontSize="16" fontWeight="900" letterSpacing="3">GAMEFIELDS / LIVE</text></g>
+   <g transform={"translate(300 "+(h+58)+")"}><rect x="-115" y="-15" width="230" height="30" rx="3" fill="#ffffff" stroke="#20352c" strokeWidth="2"/><text textAnchor="middle" dominantBaseline="middle" fill="#20352c" fontSize="13" fontWeight="900" letterSpacing="2">COMMUNITY · MUSIC · GAME</text></g>
+ </g>;
 }
 function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEquipment}:{p:Project;iso?:boolean;small?:boolean;selectedId?:string|null;onSelect?:(id:string|null)=>void;onDragStart?:(e:React.PointerEvent<SVGGElement>,id:string)=>void;onDropEquipment?:(name:string,x:number,y:number)=>void}){
  const w=600,h=600*p.width/p.length;
@@ -91,7 +104,14 @@ function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEq
   <path d={"M0 "+h*.25+"h100v"+h*.5+"H0Z M600 "+h*.25+"H500v"+h*.5+"h100Z"} fill={p.zone}/>
   <Pattern p={p} h={h}/>
   {p.lines?<g fill="none" stroke={p.lineColor} strokeWidth="2.5"><rect x="10" y="10" width="580" height={h-20}/><path d={"M300 10V"+(h-10)}/><circle cx="300" cy={h/2} r={Math.min(48,h*.18)}/>{(p.sport.includes("nożna")||p.sport==="Wielofunkcyjne")?<><path d={"M10 "+h*.25+"H100V"+h*.75+"H10 M590 "+h*.25+"H500V"+h*.75+"H590"}/><circle cx="68" cy={h/2} r="2"/><circle cx="532" cy={h/2} r="2"/></>:null}{(p.sport==="Koszykówka"||p.sport==="Wielofunkcyjne")?<><path d={"M10 "+h*.2+"Q240 "+h/2+" 10 "+h*.8+" M590 "+h*.2+"Q360 "+h/2+" 590 "+h*.8}/><rect x="10" y={h/2-45} width="100" height="90"/><rect x="490" y={h/2-45} width="100" height="90"/></>:null}</g>:null}
-  <rect x="-8" y="-8" width="616" height={h+16} fill="none" stroke="#273933" strokeWidth="10" opacity=".9"/>
+  <g className="band-shell">
+    <rect x="-8" y="-13" width="616" height="18" rx="2" fill="#20352c"/>
+    <rect x="-8" y={h-5} width="616" height="18" rx="2" fill="#20352c"/>
+    <rect x="-13" y="-5" width="18" height={h+10} rx="2" fill="#20352c"/>
+    <rect x="595" y="-5" width="18" height={h+10} rx="2" fill="#20352c"/>
+    <text x="300" y="-1" textAnchor="middle" fill="#d8ff77" fontSize="8" fontWeight="900" letterSpacing="2">GAMEFIELDS</text>
+    <text x="300" y={h+8} textAnchor="middle" fill="#d8ff77" fontSize="8" fontWeight="900" letterSpacing="2">DESIGN THE GAME</text>
+  </g>
   {p.scene==="event"?<EventScene h={h}/>:null}
   {p.objects.map(o=><EditorObjectView key={o.id} o={o} h={h} selected={o.id===selectedId} onPointerDown={onDragStart||(()=>{})}/>)}
   {!small?<g fill={p.scene==="night"?"#d7e1dc":"#66736d"} fontSize="13"><text x="300" y="-68" textAnchor="middle">{p.length} m</text><text x="670" y={h/2} textAnchor="middle">{p.width} m</text></g>:null}
@@ -115,7 +135,29 @@ export default function Home(){
  function redo(){const next=redoStack[redoStack.length-1];if(!next)return;setUndo(s=>[...s,p]);setRedo(s=>s.slice(0,-1));setP(next);setSelectedId(null)}
  function switchVariant(i:number){if(i===activeVariant)return;const next=[...variants];next[activeVariant]={...p,name:"Wariant "+String.fromCharCode(65+activeVariant)};setVariants(next);setP(next[i]);setActiveVariant(i);setSelectedId(null);setUndo([]);setRedo([])}
  function copyVariant(i:number){const next=[...variants];next[i]={...p,id:"GF-"+String.fromCharCode(65+i),name:"Wariant "+String.fromCharCode(65+i),objects:p.objects.map(o=>({...o,id:uid()}))};setVariants(next);toast.success("Skopiowano projekt do wariantu "+String.fromCharCode(65+i))}
- function startDrag(e:React.PointerEvent<SVGGElement>,id:string){if(iso)return;e.stopPropagation();setSelectedId(id);dragStart.current=p;const svg=e.currentTarget.ownerSVGElement;if(!svg)return;const move=(ev:PointerEvent)=>{const pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;const ctm=svg.getScreenCTM();if(!ctm)return;const loc=pt.matrixTransform(ctm.inverse());setP(v=>({...v,objects:v.objects.map(o=>o.id===id?{...o,x:Math.max(-50,Math.min(650,loc.x)),y:Math.max(-60,Math.min(600*v.width/v.length+70,loc.y))}:o)}))};const up=()=>{if(dragStart.current)history(dragStart.current);dragStart.current=null;window.removeEventListener("pointermove",move);window.removeEventListener("pointerup",up)};window.addEventListener("pointermove",move);window.addEventListener("pointerup",up)}
+ function startDrag(e:React.PointerEvent<SVGElement>,id:string,mode:"move"|"scale"|"rotate"="move"){
+   if(iso)return;
+   e.stopPropagation();setSelectedId(id);
+   const startProject=p,startObj=p.objects.find(o=>o.id===id);if(!startObj)return;
+   dragStart.current=startProject;
+   const svg=e.currentTarget.ownerSVGElement;if(!svg)return;
+   const h=600*p.width/p.length;
+   const center={x:startObj.target==="band-left"?-22:startObj.target==="band-right"?622:startObj.x,y:startObj.target==="band-top"?-22:startObj.target==="band-bottom"?h+22:startObj.y};
+   const point=(clientX:number,clientY:number)=>{const pt=svg.createSVGPoint();pt.x=clientX;pt.y=clientY;const ctm=svg.getScreenCTM();return ctm?pt.matrixTransform(ctm.inverse()):null};
+   const first=point(e.clientX,e.clientY);if(!first)return;
+   const startDist=Math.max(10,Math.hypot(first.x-center.x,first.y-center.y));
+   const startAngle=Math.atan2(first.y-center.y,first.x-center.x)*180/Math.PI;
+   const move=(ev:PointerEvent)=>{const loc=point(ev.clientX,ev.clientY);if(!loc)return;
+     setP(v=>({...v,objects:v.objects.map(o=>{
+       if(o.id!==id)return o;
+       if(mode==="scale"){const dist=Math.hypot(loc.x-center.x,loc.y-center.y);return {...o,scale:Math.max(20,Math.min(220,Math.round(startObj.scale*dist/startDist)))}} 
+       if(mode==="rotate"){const angle=Math.atan2(loc.y-center.y,loc.x-center.x)*180/Math.PI;return {...o,rotation:Math.round(startObj.rotation+(angle-startAngle))}}
+       return {...o,x:Math.max(-50,Math.min(650,loc.x)),y:Math.max(-60,Math.min(600*v.width/v.length+70,loc.y))}
+     })}))
+   };
+   const up=()=>{if(dragStart.current)history(dragStart.current);dragStart.current=null;window.removeEventListener("pointermove",move);window.removeEventListener("pointerup",up)};
+   window.addEventListener("pointermove",move);window.addEventListener("pointerup",up)
+ }
  function handleUploads(files:FileList|null){if(!files)return;[...files].forEach((f,i)=>{if(!["image/png","image/svg+xml"].includes(f.type)){toast.error("Obsługiwane są pliki PNG i SVG.");return}const r=new FileReader();r.onload=()=>addObject(obj("image",f.name,300+i*25,area>250?180:140,{src:String(r.result),scale:90}));r.readAsDataURL(f)})}
  function addText(){const o=obj("text","Tekst",300,180,{text:"TWOJE MIASTO",color:"#ffffff",scale:100});addObject(o)}
  function addSponsor(name:string,color:string){addObject(obj("sponsor",name,300,220,{text:name,color,scale:90}))}
