@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Gamefields Studio — konfigurator boisk",
-  description: "Zaprojektuj boisko: wymiary, nawierzchnia, kolory, linie i wyposażenie. Gamefields OS — prototyp v0.1.",
+  description: "Zaprojektuj boisko: wymiary, nawierzchnia, kolory, linie i wyposażenie. Grafiki, warianty A/B/C i orientacyjny budżet. Gamefields Studio v0.3.1.",
   other: {
     "codex-preview": "development",
   },

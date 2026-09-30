@@ -1,24 +1,23 @@
-# Gamefields Studio v0.1
+# Gamefields Studio v0.3.1
 
-Polski prototyp konfiguratora boisk i Gamefields OS. React 19 + Vinext, gotowy do publikacji przez Sites.
+Polski edytor koncepcji boisk oparty na React 19 i Vinext.
 
 ## Funkcje
-- Landing, konfiguracja typu projektu, sportu i wymiarów.
-- Interaktywny rzut SVG: nawierzchnia, kolory, linie, wyposażenie, grafiki.
-- Dynamiczne podsumowanie i demonstracyjne zapytanie o wycenę.
-- Dashboard OS, lista i karta projektu.
-- Eksport/import JSON. Dane formularza zapytania zawarte w pobranym pliku.
+- Wymiary, nawierzchnie, kolory i oznakowanie sportowe.
+- Import logo PNG/SVG, tekst, biblioteka sponsorów i wyposażenia.
+- Przesuwanie, obrót, skalowanie, przezroczystość i grafiki na bandach.
+- Cofnij/ponów, warianty A/B/C, scena dzienna, nocna i eventowa.
+- Budżet demonstracyjny, eksport i walidowany import JSON.
+- Gamefields OS: lista projektów bieżącej sesji.
 
-## Granice v0.1
-Brak bazy danych, rzeczywistej wysyłki formularza, silnika cenowego i kont użytkowników. Projekty są utrzymywane w pamięci bieżącej sesji. Plik JSON zachowuje konfigurację. Widok perspektywiczny jest transformacją rzutu 2D. Geometria ma charakter poglądowy.
+## Ograniczenia
+Projekty działają w pamięci sesji: pobierz JSON przed zamknięciem strony. Brak kont, bazy danych i automatycznej wysyłki zapytań. Budżet wykorzystuje demonstracyjne stawki, nie jest ofertą ani kalkulacją wykonawczą. Widok 3D jest perspektywą SVG; edycja przeciąganiem działa w planie 2D. Geometria linii jest poglądowa. Import obsługuje format edytora v0.3; stare pliki v0.1 wymagają migracji.
 
-## Rozwój
-Uruchom zgodnie ze skryptami package.json. `pnpm dev`, `pnpm build`. Kontrola typów: `pnpm exec tsc --noEmit`.
-
-## GitHub
+## Uruchomienie
+`pnpm dev`, `pnpm build`, `pnpm exec tsc --noEmit`.
 
 Kod: https://github.com/DamianRyh/gamefields-os
+Studio: https://gamefields-studio.ryhfs90.chatgpt.site
+Integracja WordPress: https://www.gamefields.eu/konfigurator-boisk/
 
-Opublikowany prototyp: https://gamefields-studio.ryhfs90.chatgpt.site
-
-Synchronizacja z GitHub nie włącza automatycznej publikacji. Wdrożenie strony jest obsługiwane przez Sites.
+Sites publikuje aplikację niezależnie od GitHub. WordPress osadza tę samą aplikację; aktualizacje Studio są widoczne również w osadzeniu. Eksport/import JSON pozwala przenosić projekty między kartami. Nie ma automatycznej synchronizacji danych użytkownika.
