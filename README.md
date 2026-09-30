@@ -1,4 +1,4 @@
-# Gamefields Studio v0.3.1
+# Gamefields Studio v0.4
 
 Polski edytor koncepcji boisk oparty na React 19 i Vinext.
 
@@ -21,3 +21,10 @@ Studio: https://gamefields-studio.ryhfs90.chatgpt.site
 Integracja WordPress: https://www.gamefields.eu/konfigurator-boisk/
 
 Sites publikuje aplikację niezależnie od GitHub. WordPress osadza tę samą aplikację; aktualizacje Studio są widoczne również w osadzeniu. Eksport/import JSON pozwala przenosić projekty między kartami. Nie ma automatycznej synchronizacji danych użytkownika.
+
+## Gotowe projekty — WordPress
+Zarządzanie: Wpisy, kategoria `gamefields-wzory` (ID 629). Dodaj nazwę, zajawkę, opcjonalny obrazek wyróżniający i blok Plik z eksportem „Wzór do WordPress” (.txt, zawartość JSON). Katalog czyta wyłącznie opublikowane wpisy z tej kategorii. Wycofanie: status Szkic; media pozostają publiczne jak zwykłe pliki WordPress.
+
+Aplikacja udostępnia katalog `/api/templates` oraz odczyt pojedynczego projektu `?id=<post_id>`. Pliki tylko z HTTPS www.gamefields.eu/wp-content/uploads/, bez przekierowań, limit 12 MB, walidacja schematu. Brak publicznych operacji zapisu. Katalog jest stronicowany; otwarcie tworzy kopię z nowym identyfikatorem. Link do katalogu: `?view=templates`.
+
+Instrukcja w WordPressie: szkic wpisu 3649.
