@@ -114,7 +114,13 @@ const familyVariantNames:Record<string,string[]>={
  "contour":["Center Map","West Ridge","East Ridge","Wide Basin","South Peak","North Peak","Tilted Map","Reverse Ridge","Dual Basin","Twin Peaks","Tight Topo","Wide Topo"],
  "street-grid":["City Blocks","Offset","Skew Grid","Diamond Blocks","Transit","L Grid","Wide Blocks","Corner Shift","Metro","Dense Grid","Broken Grid","Full Grid"],
  "radial":["Sunburst","West Burst","East Burst","North Burst","South Burst","Corner Burst","Opposite Burst","Fine Burst","Target Burst","Micro Burst","Offset Sun","Split Sun"],
- "premium":["Cut Stone","Gallery","Diagonal Hall","Twin Arch","Studio","Band","Pavilion","Terrace","Diamond Hall","Facade","Orbit Hall","Frame"]
+ "premium":["Cut Stone","Gallery","Diagonal Hall","Twin Arch","Studio","Band","Pavilion","Terrace","Diamond Hall","Facade","Orbit Hall","Frame"],
+ "soft-blobs":["Soft Islands","Wide Drift","Pebbles","Top Bottom","Lagoon Spots","Center Cloud","Corner Drift","Balance","Horizon","Checker Soft","Long Cloud","Double Row"],
+ "color-block":["Classic Split","Horizontal Bands","Vertical Trio","Four Fields","Diagonal Split","Frame Bands","Open Corners","Quarter Cut","Center Strip","Side Frame","Slash Bands","Half Grid"],
+ "pixel":["Sparse Grid","Pixel Core","Diagonal Pixels","Wide Pixels","Broken Raster","Dense Field","Cross Raster","Offset Blocks","Center Pixel","City Pixel","Fragmented","Full Raster"],
+ "diagonal":["Forward Slash","Reverse Slash","Triple Cut","Diamond Slash","Corner Cuts","Speed Lines","Center Cut","Twin Chevron","Runway","Hourglass","Broken Slash","Half Slash"],
+ "sunset":["Soft Horizon","High Tide","Low Bands","Deep Sunset","Warm Flow","Layered Sky","Ripple Horizon","Wide Glow","Low Sun","Long Dusk","Late Light","Final Horizon"],
+ "neon":["Pulse","Vertical Signal","Circuit","Lightning","Wave Glow","Split Beam","Twin Pulse","Cross Light","Loop Signal","Frame Light","Night Rush","Parallel Glow"]
 };
 
 export function patternVariantName(familyId:string,variant:number){
