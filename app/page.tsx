@@ -6,10 +6,11 @@ import {Switch} from "@/components/ui/switch";
 import {Toaster,toast} from "sonner";
 
 import {projectSchema,type Project,type EditorObject,type Target,type ObjectKind} from "@/lib/project";
+import {patternFamilies,patternPalettes,patternFilters,variants as patternVariants,getPatternFamily,getPatternPalette,patternCode,patternComplexity,filteredPatternFamilies,PATTERN_COUNT} from "@/lib/pattern-library";
 
 const uid=()=>Math.random().toString(36).slice(2,9);
 const obj=(kind:ObjectKind,name:string,x:number,y:number,extra:Partial<EditorObject>={}):EditorObject=>({id:uid(),kind,name,x,y,scale:100,rotation:0,opacity:100,color:"#ffffff",target:"court",...extra});
-const initial:Project={id:"GF-001",name:"Moje boisko 3×3",type:"Nowe boisko",sport:"Piłka nożna 3×3",length:15,width:10,surface:"Akryl sportowy",base:"#246f70",zone:"#ef744e",outside:"#dedfd4",lineColor:"#ffffff",lines:true,pattern:"Diagonal",graphicOpacity:45,graphicScale:100,graphicRotation:0,scene:"day",objects:[obj("equipment","Bramka",26,200,{scale:85}),obj("equipment","Bramka",574,200,{scale:85,rotation:180})],status:"Szkic",date:"29.09.2026"};
+const initial:Project={id:"GF-001",name:"Moje boisko 3×3",type:"Nowe boisko",sport:"Piłka nożna 3×3",length:15,width:10,surface:"Akryl sportowy",base:"#246f70",zone:"#ef744e",outside:"#dedfd4",lineColor:"#ffffff",lines:true,pattern:"Organic Flow",patternFamily:"organic-flow",patternPalette:"miami",patternVariant:1,patternDensity:100,graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:"day",objects:[obj("equipment","Bramka",26,200,{scale:85}),obj("equipment","Bramka",574,200,{scale:85,rotation:180})],status:"Szkic",date:"29.09.2026"};
 const modules=[["Wymiary",Ruler],["Nawierzchnia",Layers],["Kolory",Palette],["Linie",CircleDashed],["Wyposażenie",Goal],["Studio",Paintbrush]] as const;
 const sports=["Piłka nożna 3×3","Koszykówka","Siatkówka","Wielofunkcyjne"];
 const surfaces=["Akryl sportowy","EPDM","Sztuczna trawa 60 mm","Moduły sportowe"];
@@ -33,15 +34,46 @@ function budget(p:Project){
 function pln(n:number){return new Intl.NumberFormat("pl-PL",{style:"currency",currency:"PLN",maximumFractionDigits:0}).format(n)}
 
 function Pattern({p,h}:{p:Project;h:number}){
- const opacity=p.graphicOpacity/100,scale=p.graphicScale/100,transform="rotate("+p.graphicRotation+" 300 "+h/2+") scale("+scale+")";
- if(p.pattern==="Geometria")return <path d={"M0 0L230 "+h+"H330L100 0Z M400 0L600 "+h+"V"+h*.5+"L500 0Z"} fill={p.zone} opacity={opacity}/>;
- if(p.pattern==="Kręgi")return <g fill="none" stroke={p.zone} strokeWidth="24" opacity={opacity} transform={transform}><circle cx="300" cy={h/2} r="100"/><circle cx="300" cy={h/2} r="160"/></g>;
- if(p.pattern==="Diagonal")return <g opacity={opacity} transform={transform} fill={p.zone}>{[0,120,240,360,480].map(x=><path key={x} d={"M"+(x-120)+" 0 L"+(x+40)+" 0 L"+(x+220)+" "+h+" L"+(x+60)+" "+h+" Z"}/>)}</g>;
- if(p.pattern==="Checker")return <g opacity={opacity} transform={transform} fill={p.zone}>{Array.from({length:24}).map((_,i)=>{const c=i%6,r=Math.floor(i/6);return(c+r)%2===0?<rect key={i} x={c*100} y={r*h/4} width="100" height={h/4}/>:null})}</g>;
- if(p.pattern==="Waves")return <g fill="none" stroke={p.zone} strokeWidth="28" opacity={opacity} transform={transform}>{[.25,.5,.75].map((yy,i)=><path key={i} d={"M-20 "+h*yy+" Q130 "+h*(yy-.18)+" 280 "+h*yy+" T620 "+h*yy}/>)}</g>;
- if(p.pattern==="Target")return <g fill="none" stroke={p.zone} strokeWidth="22" opacity={opacity} transform={transform}>{[55,110,165,220].map(r=><circle key={r} cx="300" cy={h/2} r={r}/>)}</g>;
- if(p.pattern==="Street")return <text x="300" y={h/2+42} textAnchor="middle" fill={p.zone} opacity={opacity} transform={"rotate("+(-12+p.graphicRotation)+" 300 "+h/2+") scale("+scale+")"} fontSize="105" fontWeight="900" letterSpacing="-5">PLAY HERE</text>;
- return null;
+ const family=getPatternFamily(p.patternFamily),palette=getPatternPalette(p.patternPalette),v=p.patternVariant||1;
+ const opacity=p.graphicOpacity/100,scale=(p.graphicScale/100)*((p.patternDensity||100)/100);
+ const [a,b,c,d,e]=palette.colors;
+ const turn=(v%6)*7-14,dx=((v*47)%120)-60,dy=((v*31)%90)-45;
+ const transform=`translate(${dx} ${dy}) rotate(${p.graphicRotation+turn} 300 ${h/2}) scale(${scale})`;
+ const blobs=<g opacity={opacity} transform={transform}>
+   <path d={`M-90 40 C70 -80 165 25 250 120 S390 255 520 90 S700 20 720 -100 L720 -130H-90Z`} fill={a}/>
+   <path d={`M-80 ${h*.78} C80 ${h*.45} 165 ${h*.95} 285 ${h*.63} S470 ${h*.25} 700 ${h*.55} L700 ${h+90}H-80Z`} fill={b}/>
+   <path d={`M360 -90 C300 35 440 90 395 170 S300 260 390 ${h+60} H690V-90Z`} fill={c}/>
+   <circle cx={90+(v*17)%100} cy={85+(v*13)%70} r={44+(v%3)*14} fill={d}/>
+   <ellipse cx={430+(v%4)*34} cy={h*.62} rx={45+(v%3)*15} ry={30+(v%4)*9} fill={e}/>
+ </g>;
+ switch(family.renderer){
+  case "organic": return blobs;
+  case "blobs": return <g opacity={opacity} transform={transform}>{[0,1,2,3,4].map((n)=><ellipse key={n} cx={80+n*130+(v%3)*18} cy={h*(.2+((n*23+v*9)%60)/100)} rx={70+(n%2)*30} ry={48+((n+v)%3)*18} fill={[a,b,c,d,e][n]}/>)}</g>;
+  case "geometry": return <g opacity={opacity} transform={transform}><path d={`M-60 0H210L410 ${h}H140Z`} fill={a}/><path d={`M260 0H540L650 ${h*.62} 430 ${h}Z`} fill={b}/><circle cx="455" cy={h*.24} r="78" fill={c}/><rect x="40" y={h*.58} width="155" height={h*.34} fill={d}/></g>;
+  case "bauhaus": return <g opacity={opacity} transform={transform}><rect x="-20" y="-20" width="250" height={h*.55} fill={a}/><circle cx="210" cy={h*.65} r="125" fill={b}/><path d={`M330 0H620V${h*.45}H500A170 170 0 0 1 330 ${h*.15}Z`} fill={c}/><circle cx="490" cy={h*.77} r="54" fill={d}/><rect x="285" y={h*.42} width="88" height={h*.58} fill={e}/></g>;
+  case "blocks": return <g opacity={opacity} transform={transform}><rect width="210" height={h} fill={a}/><rect x="210" width="180" height={h*.5} fill={b}/><rect x="210" y={h*.5} width="180" height={h*.5} fill={c}/><rect x="390" width="230" height={h*.65} fill={d}/><rect x="390" y={h*.65} width="230" height={h*.35} fill={e}/></g>;
+  case "waves": return <g opacity={opacity} transform={transform} fill="none" strokeLinecap="round">{[a,b,c,d,e].map((col,i)=><path key={col} d={`M-80 ${h*(.15+i*.17)} Q110 ${h*(.02+i*.14)} 290 ${h*(.17+i*.14)} T680 ${h*(.12+i*.16)}`} stroke={col} strokeWidth={42-(i%2)*10}/>)}</g>;
+  case "contour": return <g opacity={opacity} transform={transform} fill="none" stroke={b} strokeWidth="7">{Array.from({length:9}).map((_,i)=><ellipse key={i} cx={300+(i%2)*18} cy={h/2} rx={55+i*38} ry={30+i*24} />)}</g>;
+  case "camo": return <g opacity={opacity} transform={transform}>{Array.from({length:13}).map((_,i)=><path key={i} d={`M${(i*91)%620-80} ${(i*57)%h-40} q${70+(i%3)*25} -45 ${125+(i%4)*28} 12 t${-20+(i%2)*50} 105 q-95 55 -165 8z`} fill={[a,b,c,d,e][i%5]}/>)}</g>;
+  case "grid": return <g opacity={opacity} transform={transform}>{Array.from({length:30}).map((_,i)=>{const x=(i%6)*105-10,y=Math.floor(i/6)*(h/5);return <rect key={i} x={x} y={y} width={75+(i%3)*18} height={h/7} fill={[a,b,c,d,e][(i+v)%5]}/>})}</g>;
+  case "pixel": return <g opacity={opacity} transform={transform}>{Array.from({length:48}).map((_,i)=>{const x=(i%8)*78-10,y=Math.floor(i/8)*(h/6);return <rect key={i} x={x} y={y} width="58" height={h/8} fill={[a,b,c,d,e][(i*3+v)%5]} opacity={.45+((i+v)%4)*.16}/>})}</g>;
+  case "diagonal": return <g opacity={opacity} transform={transform}>{[0,1,2,3,4].map((i)=><path key={i} d={`M${i*150-210} -40 H${i*150-80} L${i*150+140} ${h+40} H${i*150+10}Z`} fill={[a,b,c,d,e][i]}/>)}</g>;
+  case "radial": return <g opacity={opacity} transform={transform}>{[a,b,c,d,e,a,b,c].map((col,i)=><path key={i} d={`M300 ${h/2} L${300+520*Math.cos(i*Math.PI/4)} ${h/2+520*Math.sin(i*Math.PI/4)} L${300+520*Math.cos((i+1)*Math.PI/4)} ${h/2+520*Math.sin((i+1)*Math.PI/4)}Z`} fill={col}/>)}</g>;
+  case "sunset": return <g opacity={opacity} transform={transform}>{[e,d,c,b,a].map((col,i)=><path key={col} d={`M-60 ${h*(.15+i*.16)} Q150 ${h*(.02+i*.14)} 320 ${h*(.18+i*.14)} T660 ${h*(.12+i*.16)} V${h+70}H-60Z`} fill={col}/>)}</g>;
+  case "neon": return <g opacity={opacity} transform={transform} fill="none" strokeLinecap="round">{[b,c,d,e].map((col,i)=><path key={col} d={`M${-80+i*25} ${h*(.2+i*.17)} C140 ${h*(.05+i*.08)} 380 ${h*(.85-i*.12)} 680 ${h*(.2+i*.16)}`} stroke={col} strokeWidth={12+i*5}/>)}</g>;
+  case "mono": return <g opacity={opacity*.8} transform={transform}>{[0,1,2,3,4].map(i=><path key={i} d={`M${-120+i*110} -40 C${40+i*95} ${h*.2} ${20+i*120} ${h*.8} ${180+i*105} ${h+40}H${330+i*80}V-40Z`} fill={[a,b,c,d,e][i]}/>)}</g>;
+  case "concrete": return <g opacity={opacity*.65} transform={transform}><rect x="-40" y="-40" width="680" height={h*.3} fill={a}/><rect x="350" y={h*.3} width="290" height={h*.7} fill={b}/><circle cx="160" cy={h*.7} r="92" fill={c}/></g>;
+  case "graffiti": return <g opacity={opacity} transform={transform} fill="none" strokeLinecap="round">{[a,b,c,d,e].map((col,i)=><path key={col} d={`M${-40+i*15} ${h*(.18+i*.11)} C120 ${h*(.8-i*.06)} 260 ${-20+i*35} 390 ${h*(.72-i*.05)} S570 ${h*(.08+i*.08)} 660 ${h*(.58-i*.03)}`} stroke={col} strokeWidth={26-(i%3)*5}/>)}</g>;
+  case "type": return <g opacity={opacity} transform={transform}><text x="300" y={h*.48} textAnchor="middle" fill={a} fontSize="112" fontWeight="900" letterSpacing="-7">PLAY</text><text x="300" y={h*.72} textAnchor="middle" fill={b} fontSize="55" fontWeight="900" letterSpacing="8">THE CITY</text></g>;
+  case "local": return <g opacity={opacity} transform={transform}><rect width="600" height={h} fill={a}/><path d={`M0 ${h*.62} L600 ${h*.18} V${h}H0Z`} fill={b}/><text x="300" y={h*.57} textAnchor="middle" fill={c} fontSize="88" fontWeight="900" letterSpacing="4">CITY</text></g>;
+  case "nature": return <g opacity={opacity} transform={transform}>{[0,1,2,3,4,5].map((i)=><path key={i} d={`M${30+i*95} ${h+45} Q${80+i*75} ${h*.35} ${125+i*80} ${h*.08} Q${190+i*60} ${h*.48} ${210+i*75} ${h+45}Z`} fill={[a,b,c,d,e][i%5]}/>)}</g>;
+  case "kids": return <g opacity={opacity} transform={transform}>{Array.from({length:18}).map((_,i)=>i%3===0?<circle key={i} cx={(i*71)%620} cy={(i*47)%h} r={22+(i%4)*8} fill={[a,b,c,d,e][i%5]}/>:<rect key={i} x={(i*83)%620} y={(i*39)%h} width={35+(i%3)*20} height={35+(i%2)*20} rx={i%2?18:4} fill={[a,b,c,d,e][i%5]}/>)}</g>;
+  case "premium": return <g opacity={opacity*.88} transform={transform}><rect width="600" height={h} fill={a}/><path d={`M0 ${h*.75} L220 0 H390L160 ${h}H0Z`} fill={b}/><circle cx="485" cy={h*.28} r="95" fill={c}/><rect x="410" y={h*.62} width="190" height={h*.38} fill={d}/></g>;
+  case "brand": return <g opacity={opacity} transform={transform}><rect width="600" height={h} fill={a}/><path d={`M0 0H210L420 ${h}H210Z`} fill={b}/><rect x="390" y={h*.12} width="170" height={h*.76} rx="16" fill={c}/><rect x="414" y={h*.35} width="122" height={h*.3} rx="10" fill={d}/></g>;
+  case "ribbons": return <g opacity={opacity} transform={transform} fill="none" strokeLinecap="round">{[a,b,c,d].map((col,i)=><path key={col} d={`M-80 ${h*(.2+i*.13)} C130 ${h*(.85-i*.08)} 250 ${h*(-.1+i*.11)} 680 ${h*(.65-i*.08)}`} stroke={col} strokeWidth={52-i*7}/>)}</g>;
+  case "terrazzo": return <g opacity={opacity} transform={transform}>{Array.from({length:42}).map((_,i)=>{const x=(i*97)%640-20,y=(i*53)%h,r=8+(i%5)*4;return <path key={i} d={`M${x-r} ${y} q${r} -${r*1.6} ${r*2} 0 q-${r*.3} ${r*1.8} -${r*2} 0z`} fill={[a,b,c,d,e][i%5]}/>})}</g>;
+  default:return blobs;
+ }
 }
 function EquipmentShape({name}:{name:string}){
  if(name==="Bramka")return <g fill="#e9efec" stroke="#18372e" strokeWidth="3"><rect x="-24" y="-38" width="48" height="76" rx="3"/><path d="M-24-38l-12 10v56l12 10M24-38l12 10v56L24 38" fill="none"/></g>;
