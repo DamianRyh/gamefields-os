@@ -1,6 +1,6 @@
 "use client";
 import {useEffect,useId,useMemo,useRef,useState} from "react";
-import {Grid2X2,Layers,Ruler,Palette,Goal,Paintbrush,CircleDashed,Plus,Check,Download,FolderOpen,LayoutDashboard,ChevronLeft,RotateCcw,Undo2,Redo2,Upload,Type,Image as ImageIcon,Copy,Trash2,Move,Sun,Moon,PartyPopper,Users,WalletCards} from "lucide-react";
+import {Grid2X2,Layers,Ruler,Palette,Goal,Paintbrush,CircleDashed,Plus,Check,Download,FolderOpen,RotateCcw,Undo2,Redo2,Upload,Type,Copy,Trash2,Move,Sun,Moon,PartyPopper,WalletCards} from "lucide-react";
 import {Slider} from "@/components/ui/slider";
 import {Switch} from "@/components/ui/switch";
 import {Toaster,toast} from "sonner";
@@ -147,7 +147,7 @@ function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEq
  </svg>;
 }
 
-function download(p:Project,wordpress=false){if(wordpress&&!projectSchema.safeParse(p).success){toast.error("Uzupełnij nazwę i sprawdź ustawienia projektu przed eksportem wzoru.");return}const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(p,null,2)],{type:wordpress?"text/plain":"application/json"}));a.download=p.id+(wordpress?"-wzor-gamefields.txt":"-gamefields-v03.json");a.click();URL.revokeObjectURL(a.href)}
+function download(p:Project,wordpress=false){if(wordpress&&!projectSchema.safeParse(p).success){toast.error("Uzupełnij nazwę i sprawdź ustawienia projektu przed eksportem wzoru.");return}const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(p,null,2)],{type:wordpress?"text/plain":"application/json"}));a.download=p.id+(wordpress?"-wzor-gamefields.txt":"-gamefields-v05.json");a.click();URL.revokeObjectURL(a.href)}
 
 type TemplateCard={id:number;title:string;description:string;image:string|null;link:string};
 export default function Home(){
@@ -158,9 +158,9 @@ export default function Home(){
  async function openTemplate(item:TemplateCard){if(openingTemplate!==null)return;setOpeningTemplate(item.id);try{const r=await fetch("/api/templates?id="+item.id,{cache:"no-store"});if(!r.ok)throw new Error();const data=await r.json() as {project:unknown};const original=projectSchema.parse(data.project);const copy={...original,id:"GF-"+uid(),name:item.title.slice(0,190)+" — kopia",objects:original.objects.map(o=>({...o,id:uid()}))};finishDrag.current?.();history(p);setP(copy);setSelectedId(null);setView("builder");toast.success("Otworzono kopię wzoru. Oryginał pozostaje bez zmian.")}catch{toast.error("Ten wzór nie ma poprawnego pliku projektu lub został wycofany.")}finally{setOpeningTemplate(null)}}
  useEffect(()=>{if(new URLSearchParams(window.location.search).get("view")==="templates"){setView("templates");void loadTemplates(1)}},[]);
 
- const [p,setP]=useState<Project>(initial),[view,setView]=useState("builder"),[module,setModule]=useState(5),[iso,setIso]=useState(false),[selectedId,setSelectedId]=useState<string|null>(null),[undoStack,setUndo]=useState<Project[]>([]),[redoStack,setRedo]=useState<Project[]>([]),[projects,setProjects]=useState<Project[]>([]),[activeVariant,setActiveVariant]=useState(0),[variants,setVariants]=useState<Project[]>([{...initial,name:"Wariant A"},{...initial,id:"GF-B",name:"Wariant B",base:"#3157b7",zone:"#e9d44d"},{...initial,id:"GF-C",name:"Wariant C",base:"#1f2a2b",zone:"#b8e36f",pattern:"Target"}]);
+ const [p,setP]=useState<Project>(initial),[view,setView]=useState("builder"),[module,setModule]=useState(5),[iso,setIso]=useState(false),[selectedId,setSelectedId]=useState<string|null>(null),[undoStack,setUndo]=useState<Project[]>([]),[redoStack,setRedo]=useState<Project[]>([]),[projects,setProjects]=useState<Project[]>([]),[activeVariant,setActiveVariant]=useState(0),[variants,setVariants]=useState<Project[]>([{...initial,name:"Wariant A"},{...initial,id:"GF-B",name:"Wariant B",pattern:"Bauhaus",patternFamily:"bauhaus",patternPalette:"club",patternVariant:4,base:"#1E2D55",zone:"#E9D44D"},{...initial,id:"GF-C",name:"Wariant C",pattern:"Court Camo",patternFamily:"court-camo",patternPalette:"berlin",patternVariant:7,base:"#101414",zone:"#B9FF3D"}]);
  const uploadRef=useRef<HTMLInputElement>(null),importRef=useRef<HTMLInputElement>(null);
- async function importProject(file?:File){if(!file)return;if(file.size>12000000){toast.error("Plik projektu może mieć maksymalnie 12 MB.");return}try{const next=projectSchema.parse(JSON.parse(await file.text()));if(new Set(next.objects.map(o=>o.id)).size!==next.objects.length)throw new Error("ids");history(p);setP(next);setSelectedId(null);setView("builder");toast.success("Wczytano projekt")}catch{toast.error("Nieprawidłowy plik projektu. Wybierz eksport JSON z edytora v0.3.")}}
+ async function importProject(file?:File){if(!file)return;if(file.size>12000000){toast.error("Plik projektu może mieć maksymalnie 12 MB.");return}try{const next=projectSchema.parse(JSON.parse(await file.text()));if(new Set(next.objects.map(o=>o.id)).size!==next.objects.length)throw new Error("ids");history(p);setP(next);setSelectedId(null);setView("builder");toast.success("Wczytano projekt")}catch{toast.error("Nieprawidłowy plik projektu. Wybierz eksport JSON z edytora v0.5.")}}
  const dragStart=useRef<Project|null>(null);
  const finishDrag=useRef<(()=>void)|null>(null);
  const area=p.length*p.width,b=useMemo(()=>budget(p),[p]);
