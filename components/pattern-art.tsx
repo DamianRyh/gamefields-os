@@ -314,7 +314,7 @@ function neonCourt(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
   [`M-40 ${h*.18}C120 ${h*.82} 240 ${h*.10} 360 ${h*.62}S530 ${h*.86} 640 ${h*.26}`,`M-40 ${h*.82}C120 ${h*.18} 240 ${h*.90} 360 ${h*.38}S530 ${h*.14} 640 ${h*.74}`],
   [`M-40 ${h*.22}H640`,`M-40 ${h*.50}H640`,`M-40 ${h*.78}H640`]
  ][v-1]||[];
- return <><rect width="600" height={h} fill={a} opacity=".22"/>{paths.map((path,i)=><g key={i}><S d={path} stroke={[b,c,d,e][i%4]} width={18-i*2} opacity=".22"/><S d={path} stroke={[b,c,d,e][i%4]} width={7+i*2}/></g>)}{v%3===0?<circle cx="300" cy={h*.5} r="58" fill="none" stroke={e} strokeWidth="8" opacity=".9"/>:null}</>;
+ return <><rect width="600" height={h} fill={a} opacity=".22"/>{paths.map((path,i)=><g key={i}><S d={path} stroke={[b,c,d,e][i%4]} width={18-i*2} opacity={.22}/><S d={path} stroke={[b,c,d,e][i%4]} width={7+i*2}/></g>)}{v%3===0?<circle cx="300" cy={h*.5} r="58" fill="none" stroke={e} strokeWidth="8" opacity=".9"/>:null}</>;
 }
 
 
