@@ -15,7 +15,7 @@ const obj=(kind:ObjectKind,name:string,x:number,y:number,extra:Partial<EditorObj
 const initial:Project={id:"GF-001",name:"Moje boisko 3×3",type:"Nowe boisko",sport:"Piłka nożna 3×3",length:15,width:10,surface:"Akryl sportowy",base:"#246f70",zone:"#ef744e",outside:"#dedfd4",lineColor:"#ffffff",lines:true,pattern:"Organic Flow",patternFamily:"organic-flow",patternPalette:"miami",patternVariant:1,patternDensity:100,gradientEnabled:false,textureEnabled:false,shadowEnabled:true,artistFinishEnabled:false,creativity:0,shadowIntensity:25,graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:"day",objects:[obj("equipment","Bramka",26,200,{scale:85}),obj("equipment","Bramka",574,200,{scale:85,rotation:180})],status:"Szkic",date:"29.09.2026"};
 const modules=[["Wymiary",Ruler],["Nawierzchnia",Layers],["Kolory",Palette],["Linie",CircleDashed],["Wyposażenie",Goal],["Studio",Paintbrush]] as const;
 const sports=sportProfiles.map(x=>x.sport);
-const surfaces=["Akryl sportowy","EPDM","Sztuczna trawa 60 mm","Moduły sportowe"];
+const surfaces=["Akryl sportowy","EPDM","Sztuczna trawa 60 mm","Moduły sportowe","Piasek sportowy","Beton sportowy"];
 const sponsors=[["GAMEFIELDS","#d7ff74"],["WARSAW FC","#ff6b45"],["ADIDAS","#ffffff"],["NIKE","#ffffff"],["RED BULL","#f5d747"],["CITY","#86c7ff"]];
 const targetLabel:Record<Target,string>={"court":"Nawierzchnia","band-top":"Banda górna","band-bottom":"Banda dolna","band-left":"Banda lewa","band-right":"Banda prawa"};
 
@@ -41,6 +41,12 @@ function EquipmentShape({name}:{name:string}){
  if(name==="Słupki tenisowe")return <g fill="#33453f"><rect x="-42" y="-30" width="7" height="60" rx="2"/><rect x="35" y="-30" width="7" height="60" rx="2"/></g>;
  if(name==="Szkło padel")return <g fill="rgba(183,225,235,.22)" stroke="#5d7b78" strokeWidth="3"><rect x="-56" y="-34" width="112" height="68" rx="3"/><path d="M0-34V34M-56 0H56"/></g>;
  if(name==="Krzesło sędziowskie")return <g fill="none" stroke="#4a5b55" strokeWidth="4"><path d="M-18 30L10-34M18 30L-10-34M-10-20H14V-7H-15"/></g>;
+ if(name==="Bramka futsal")return <g fill="none" stroke="#eef2ef" strokeWidth="4"><rect x="-30" y="-38" width="60" height="76" rx="2"/><path d="M-30-38l-12 10v56l12 10M30-38l12 10v56L30 38" opacity=".65"/></g>;
+ if(name==="Siatka badminton")return <g fill="none" stroke="#f3f4ef" strokeWidth="1.6"><path d="M-48 0H48"/><path d="M-48-13V13M48-13V13"/><path d="M-32-13V13M-16-13V13M0-13V13M16-13V13M32-13V13" opacity=".55"/><path d="M-48-7H48M-48 7H48" opacity=".55"/></g>;
+ if(name==="Słupki badmintonowe")return <g fill="#394a44"><rect x="-44" y="-24" width="6" height="48" rx="2"/><rect x="38" y="-24" width="6" height="48" rx="2"/></g>;
+ if(name==="Siatka beach")return <g fill="none" stroke="#fff" strokeWidth="2.5"><path d="M-56 0H56"/><path d="M-56-17V17M56-17V17"/><path d="M-42-17V17M-28-17V17M-14-17V17M0-17V17M14-17V17M28-17V17M42-17V17" opacity=".55"/><path d="M-56-9H56M-56 9H56" opacity=".55"/></g>;
+ if(name==="Słupki beach")return <g fill="#374c45"><rect x="-50" y="-30" width="8" height="60" rx="3"/><rect x="42" y="-30" width="8" height="60" rx="3"/></g>;
+ if(name==="Stół Teqball")return <g><path d="M-48 6Q0-20 48 6V18Q0-8-48 18Z" fill="#243832" stroke="#d8ff77" strokeWidth="3"/><path d="M0 0V25" stroke="#e9efe9" strokeWidth="3"/><rect x="-4" y="-12" width="8" height="25" fill="#e9efe9"/></g>;
  if(name==="Piłkochwyt")return <rect x="-55" y="-10" width="110" height="20" fill="none" stroke="#54786a" strokeWidth="3" strokeDasharray="6 5"/>;
  if(name==="Banda")return <rect x="-60" y="-10" width="120" height="20" rx="2" fill="#263934"/>;
  if(name==="Namiot")return <g><path d="M-45 20L0-35L45 20Z" fill="#f0efe6" stroke="#273933" strokeWidth="3"/><path d="M-38 20v35M38 20v35" stroke="#273933" strokeWidth="4"/></g>;
