@@ -284,7 +284,7 @@ export default function Home(){
    <div className="sport-summary-card"><span className="eyebrow">{getSportProfile(p.sport).eyebrow}</span><strong>{getSportProfile(p.sport).label}</strong><small>{p.length} × {p.width} m · {area} m²</small><button className="textbtn compact" onClick={()=>setView("sport")}>Zmień dyscyplinę</button></div>
    <div className="dimension"><label>Długość <strong>{p.length} m</strong></label><Slider min={6} max={60} value={[p.length]} onValueChange={v=>update({length:v[0]})}/></div>
    <div className="dimension"><label>Szerokość <strong>{p.width} m</strong></label><Slider min={6} max={40} value={[p.width]} onValueChange={v=>update({width:v[0]})}/></div>
-   <h3>Nawierzchnia</h3>{choices(surfaces,p.surface,s=>update({surface:s}),true)}
+   <h3>Nawierzchnia</h3>{choices(surfaces,p.surface,s=>update({surface:s}))}
    <details className="advanced-options"><summary>Linie i ustawienia techniczne</summary><div><label className="switchrow">Pokaż linie<Switch checked={p.lines} onCheckedChange={v=>update({lines:v})}/></label><label className="colorrow"><span>Kolor linii</span><input type="color" value={p.lineColor} onChange={e=>update({lineColor:e.target.value})}/></label></div></details>
   </>:null}
   {module===1?<>
