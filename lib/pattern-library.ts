@@ -10,6 +10,16 @@ export type PatternFamily={
  renderer:string;
 };
 export type PatternPalette={id:string;name:string;colors:[string,string,string,string,string];tone:string};
+export type SignaturePreset={
+ id:string;
+ name:string;
+ eyebrow:string;
+ familyId:string;
+ variant:number;
+ paletteId:string;
+ useCase:string;
+ note:string;
+};
 
 export const patternFamilies:PatternFamily[]=[
  {id:"organic-flow",name:"Organic Flow",short:"FLOW",group:"organic",description:"Duże płynne plamy i miękkie przejścia inspirowane muralem.",tags:["organiczne","energetyczne","mural"],baseComplexity:3,renderer:"organic"},
@@ -60,6 +70,23 @@ export const patternPalettes:PatternPalette[]=[
  {id:"mono-green",name:"Mono Green",colors:["#244B3B","#3E6654","#6E8A75","#A9B7A8","#E5E9DF"],tone:"tonalna"}
 ];
 
+
+
+export const signaturePresets:SignaturePreset[]=[
+ {id:"city-fluid",name:"City Fluid",eyebrow:"SIGNATURE 01",familyId:"organic-flow",variant:6,paletteId:"warsaw",useCase:"miasto / rewitalizacja",note:"Duże muralowe plamy, czytelne z daleka i dobrze pracujące z istniejącą architekturą."},
+ {id:"riviera-court",name:"Riviera Court",eyebrow:"SIGNATURE 02",familyId:"soft-blobs",variant:9,paletteId:"lagoon",useCase:"lifestyle / hospitality",note:"Lekka, premium kompozycja do przestrzeni rekreacyjnych, hoteli i aktywacji letnich."},
+ {id:"club-heritage",name:"Club Heritage",eyebrow:"SIGNATURE 03",familyId:"bauhaus",variant:4,paletteId:"club",useCase:"klub / sponsor",note:"Sportowa geometria z miejscem na kolor klubowy, znak i partnera głównego."},
+ {id:"urban-camo",name:"Urban Camo",eyebrow:"SIGNATURE 04",familyId:"court-camo",variant:7,paletteId:"berlin",useCase:"street / youth",note:"Surowy, mocny kierunek do boisk miejskich i komunikacji streetwearowej."},
+ {id:"metro-lines",name:"Metro Lines",eyebrow:"SIGNATURE 05",familyId:"contour",variant:10,paletteId:"tokyo",useCase:"miejska ikona",note:"Warstwice i rytm linii — spokojny z góry, bardzo charakterystyczny w detalach."},
+ {id:"night-signal",name:"Night Signal",eyebrow:"SIGNATURE 06",familyId:"neon",variant:11,paletteId:"night",useCase:"event / night",note:"Wysoki kontrast i energia pod oświetlenie wieczorne, event i content."},
+ {id:"brand-stage",name:"Brand Stage",eyebrow:"SIGNATURE 07",familyId:"brand-activation",variant:5,paletteId:"luxury",useCase:"marka / kampania",note:"Kontrolowane pole pod logo i kampanię bez utraty czytelności sportowej."},
+ {id:"earth-motion",name:"Earth Motion",eyebrow:"SIGNATURE 08",familyId:"ribbons",variant:3,paletteId:"earth",useCase:"park / eco",note:"Naturalne wstęgi i kolory, które dobrze wpisują się w zieleń i przestrzeń publiczną."},
+ {id:"play-system",name:"Play System",eyebrow:"SIGNATURE 09",familyId:"kids",variant:8,paletteId:"pastel",useCase:"szkoła / dzieci",note:"Czytelne formy, przyjazne kolory i modularność dla stref wielofunkcyjnych."},
+ {id:"raw-architecture",name:"Raw Architecture",eyebrow:"SIGNATURE 10",familyId:"premium",variant:2,paletteId:"concrete",useCase:"premium / architektura",note:"Minimalna paleta, duże płaszczyzny i mocny dialog z betonem, stalą i drewnem."},
+ {id:"local-lettering",name:"Local Lettering",eyebrow:"SIGNATURE 11",familyId:"local-id",variant:12,paletteId:"warsaw",useCase:"dzielnica / placemaking",note:"Wzór budowany pod nazwę miejsca, dzielnicy lub lokalne hasło."},
+ {id:"festival-art",name:"Festival Art",eyebrow:"SIGNATURE 12",familyId:"street-art",variant:5,paletteId:"sunset",useCase:"event / kultura",note:"Najbardziej ekspresyjny kierunek do realizacji muralowych i przestrzeni eventowych."}
+];
+
 export const patternFilters=[
  {id:"all",label:"Wszystkie"},
  {id:"organic",label:"Organiczne"},
@@ -77,6 +104,9 @@ export const variants=Array.from({length:12},(_,i)=>({
 
 export function getPatternFamily(id?:string){return patternFamilies.find(x=>x.id===id)||patternFamilies[0]}
 export function getPatternPalette(id?:string){return patternPalettes.find(x=>x.id===id)||patternPalettes[0]}
+export function complexityLabel(level:number){
+ return ["","prosty","standard","mural","art"][Math.max(1,Math.min(4,level))];
+}
 export function patternComplexity(familyId:string,variant:number){
  const base=getPatternFamily(familyId).baseComplexity;
  const bump=variant%5===0?1:variant%7===0?1:0;
