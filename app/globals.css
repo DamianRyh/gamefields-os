@@ -68,3 +68,11 @@
 .randomizer-actions{display:grid;gap:8px;margin-top:14px}.randomizer-actions .btn{min-height:46px;justify-content:center}
 @media(max-width:980px){.pattern-randomizer{grid-template-columns:1fr}.randomizer-stage{min-height:420px}.randomizer-info{padding:24px}}
 @media(max-width:600px){.randomizer-stage{min-height:300px;padding:14px}.randomizer-info h2{font-size:28px}.randomizer-info{padding:18px}}
+
+
+/* v1.3 Gradient Premium */
+.gradient-premium{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center;margin:16px 0 18px;padding:16px;border:1px solid #dfe5de;border-radius:12px;background:linear-gradient(145deg,#f7f8f5,#eef3ed);transition:.2s ease}
+.gradient-premium.active{border-color:#789d89;background:linear-gradient(145deg,#f4f8f4,#e7f0e9);box-shadow:0 10px 26px rgba(26,61,43,.08)}
+.gradient-premium .eyebrow{color:#6e7f73}.gradient-premium h3{margin:4px 0 6px;font-size:15px}.gradient-premium p{margin:0 0 9px;font-size:10px;line-height:1.5;color:#6c786f}.gradient-premium strong{display:block;color:#173f30;font-size:13px}.gradient-premium strong small{font-size:9px;font-weight:600;color:#7b867e}
+.gradient-premium [data-state="checked"]{background:#173f30}
+@media(max-width:600px){.gradient-premium{grid-template-columns:1fr auto;padding:13px}}
