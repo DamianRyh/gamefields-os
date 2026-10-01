@@ -107,7 +107,13 @@ function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEq
   <rect x="-40" y="-40" width={w+80} height={h+80} rx="3" fill={p.outside}/>
   <rect width={w} height={h} fill={p.base}/>
   {p.surface.includes("trawa")?<rect width={w} height={h} fill={"url(#"+patternId+")"}/>:null}
-  <path d={"M0 "+h*.25+"h100v"+h*.5+"H0Z M600 "+h*.25+"H500v"+h*.5+"h100Z"} fill={p.zone}/>
+  {(p.sport.includes("Piłka nożna")||p.sport==="Futsal")?<path d={"M0 "+h*.25+"h100v"+h*.5+"H0Z M600 "+h*.25+"H500v"+h*.5+"h100Z"} fill={p.zone}/>:null}
+  {(p.sport==="Koszykówka"||p.sport==="Koszykówka 3×3")?<path d={p.sport==="Koszykówka 3×3"?"M0 "+(h/2-55)+"H130V"+(h/2+55)+"H0Z":"M0 "+(h/2-55)+"H125V"+(h/2+55)+"H0Z M600 "+(h/2-55)+"H475V"+(h/2+55)+"H600Z"} fill={p.zone}/>:null}
+  {["Tenis","Padel","Badminton","Pickleball"].includes(p.sport)?<rect x="175" y="10" width="250" height={h-20} fill={p.zone} opacity=".28"/>:null}
+  {(p.sport==="Siatkówka"||p.sport==="Siatkówka plażowa")?<rect x="200" y="10" width="200" height={h-20} fill={p.zone} opacity=".28"/>:null}
+  {p.sport==="Teqball"?<rect x="240" y={Math.max(10,h/2-70)} width="120" height="140" rx="18" fill={p.zone} opacity=".34"/>:null}
+  {p.sport==="Skate"?<path d={"M50 "+h*.18+"H250L320 "+h*.42+"H550V"+h*.72+"H350L280 "+h*.55+"H50Z"} fill={p.zone} opacity=".32"/>:null}
+  {p.sport==="Street Workout"?<><rect x="70" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".32"/><rect x="350" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".22"/></>:null}
   <g clipPath={"url(#"+clipId+")"}><PatternArt p={p} h={h}/></g>
   {p.lines?<g fill="none" stroke={p.lineColor} strokeWidth="2.5">
    <rect x="10" y="10" width="580" height={h-20}/>
