@@ -24,19 +24,23 @@ export async function POST(request:Request){
    "Akryl sportowy":n("QUOTE_COST_SURFACE_ACRYLIC"),
    "EPDM":n("QUOTE_COST_SURFACE_EPDM"),
    "Sztuczna trawa 60 mm":n("QUOTE_COST_SURFACE_TURF"),
-   "Moduły sportowe":n("QUOTE_COST_SURFACE_MODULES")
+   "Moduły sportowe":n("QUOTE_COST_SURFACE_MODULES"),
+   "Piasek sportowy":n("QUOTE_COST_SURFACE_SAND"),
+   "Beton sportowy":n("QUOTE_COST_SURFACE_CONCRETE")
   };
   const surfaceMarket:Record<string,number>={
    "Akryl sportowy":n("QUOTE_MARKET_SURFACE_ACRYLIC"),
    "EPDM":n("QUOTE_MARKET_SURFACE_EPDM"),
    "Sztuczna trawa 60 mm":n("QUOTE_MARKET_SURFACE_TURF"),
-   "Moduły sportowe":n("QUOTE_MARKET_SURFACE_MODULES")
+   "Moduły sportowe":n("QUOTE_MARKET_SURFACE_MODULES"),
+   "Piasek sportowy":n("QUOTE_MARKET_SURFACE_SAND"),
+   "Beton sportowy":n("QUOTE_MARKET_SURFACE_CONCRETE")
   };
   const equipmentCost:Record<string,number>={
-   "Bramka":4200,"Kosz":6100,"Ławka":1500,"Lampa":9300,"Piłkochwyt":11800,"Banda":14500,"Namiot":2800,"DJ booth":5200,"Totem":900,"Trybuna":10500
+   "Bramka":4200,"Bramka futsal":5200,"Kosz":6100,"Siatka":1800,"Siatka badminton":1300,"Słupki badmintonowe":1100,"Siatka beach":1900,"Słupki beach":1700,"Stół Teqball":10500,"Szkło padel":18500,"Słupki tenisowe":1400,"Krzesło sędziowskie":2600,"Quarter pipe":14500,"Funbox":12500,"Rail skate":4200,"Ledge":6500,"Bank":9800,"Drążki":7200,"Poręcze":5900,"Monkey bars":9800,"Box treningowy":2800,"Kółka treningowe":2200,"Ławka":1500,"Lampa":9300,"Piłkochwyt":11800,"Banda":14500,"Namiot":2800,"DJ booth":5200,"Totem":900,"Trybuna":10500
   };
   const equipmentMarket:Record<string,number>={
-   "Bramka":6500,"Kosz":9000,"Ławka":2500,"Lampa":14000,"Piłkochwyt":18000,"Banda":22000,"Namiot":4500,"DJ booth":8500,"Totem":1800,"Trybuna":16000
+   "Bramka":6500,"Bramka futsal":7900,"Kosz":9000,"Siatka":3200,"Siatka badminton":2400,"Słupki badmintonowe":2100,"Siatka beach":3500,"Słupki beach":3100,"Stół Teqball":16500,"Szkło padel":29000,"Słupki tenisowe":2600,"Krzesło sędziowskie":4400,"Quarter pipe":22500,"Funbox":19500,"Rail skate":7200,"Ledge":9800,"Bank":14800,"Drążki":11200,"Poręcze":9200,"Monkey bars":15200,"Box treningowy":4900,"Kółka treningowe":3900,"Ławka":2500,"Lampa":14000,"Piłkochwyt":18000,"Banda":22000,"Namiot":4500,"DJ booth":8500,"Totem":1800,"Trybuna":16000
   };
 
   const paintRate=n("QUOTE_COST_PAINT_L");
