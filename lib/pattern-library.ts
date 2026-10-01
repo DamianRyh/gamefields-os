@@ -20,6 +20,22 @@ export type SignaturePreset={
  useCase:string;
  note:string;
 };
+export type CuratedPattern={
+ familyId:string;
+ variant:number;
+ paletteId:string;
+ badge:string;
+ useCase:string;
+};
+export type PatternExecutionMeta={
+ colors:number;
+ masking:"niska"|"średnia"|"wysoka"|"bardzo wysoka";
+ laborHoursMin:number;
+ laborHoursMax:number;
+ paintLiters:number;
+ costMin:number;
+ costMax:number;
+};
 
 export const patternFamilies:PatternFamily[]=[
  {id:"organic-flow",name:"Organic Flow",short:"FLOW",group:"organic",description:"Duże płynne plamy i miękkie przejścia inspirowane muralem.",tags:["organiczne","energetyczne","mural"],baseComplexity:3,renderer:"organic"},
@@ -86,6 +102,92 @@ export const signaturePresets:SignaturePreset[]=[
  {id:"local-lettering",name:"Local Lettering",eyebrow:"SIGNATURE 11",familyId:"local-id",variant:12,paletteId:"warsaw",useCase:"dzielnica / placemaking",note:"Wzór budowany pod nazwę miejsca, dzielnicy lub lokalne hasło."},
  {id:"festival-art",name:"Festival Art",eyebrow:"SIGNATURE 12",familyId:"street-art",variant:5,paletteId:"sunset",useCase:"event / kultura",note:"Najbardziej ekspresyjny kierunek do realizacji muralowych i przestrzeni eventowych."}
 ];
+
+
+export const curatedPatterns:CuratedPattern[]=[
+ {familyId:"organic-flow",variant:6,paletteId:"warsaw",badge:"CITY",useCase:"rewitalizacja / przestrzeń publiczna"},
+ {familyId:"organic-flow",variant:9,paletteId:"miami",badge:"MURAL",useCase:"boisko jako miejska ikona"},
+ {familyId:"bauhaus",variant:4,paletteId:"club",badge:"CLUB",useCase:"klub / partner techniczny"},
+ {familyId:"bauhaus",variant:9,paletteId:"tokyo",badge:"DESIGN",useCase:"premium / architektura"},
+ {familyId:"court-camo",variant:7,paletteId:"berlin",badge:"STREET",useCase:"street football / youth"},
+ {familyId:"court-camo",variant:11,paletteId:"warsaw",badge:"URBAN",useCase:"miejska aktywacja"},
+ {familyId:"street-art",variant:5,paletteId:"sunset",badge:"ART",useCase:"mural / kultura / event"},
+ {familyId:"street-art",variant:9,paletteId:"night",badge:"EVENT",useCase:"event / content / noc"},
+ {familyId:"brand-activation",variant:5,paletteId:"luxury",badge:"BRAND",useCase:"kampania / sponsor"},
+ {familyId:"brand-activation",variant:10,paletteId:"club",badge:"SPONSOR",useCase:"partner główny / turniej"},
+ {familyId:"ribbons",variant:3,paletteId:"earth",badge:"ECO",useCase:"park / przestrzeń zielona"},
+ {familyId:"ribbons",variant:11,paletteId:"ocean",badge:"FLOW",useCase:"rekreacja / lifestyle"},
+ {familyId:"geometric",variant:4,paletteId:"tokyo",badge:"ICON",useCase:"miejski landmark"},
+ {familyId:"geometric",variant:10,paletteId:"club",badge:"SPORT",useCase:"klub / akademia"},
+ {familyId:"waves",variant:6,paletteId:"lagoon",badge:"LIFESTYLE",useCase:"hotel / resort / rekreacja"},
+ {familyId:"waves",variant:11,paletteId:"ocean",badge:"FLOW",useCase:"park / waterfront"},
+ {familyId:"contour",variant:10,paletteId:"tokyo",badge:"TOPO",useCase:"placemaking / miasto"},
+ {familyId:"contour",variant:4,paletteId:"forest",badge:"LAND",useCase:"eco / teren zielony"},
+ {familyId:"street-grid",variant:1,paletteId:"berlin",badge:"URBAN",useCase:"street / beton"},
+ {familyId:"street-grid",variant:9,paletteId:"warsaw",badge:"CITY",useCase:"dzielnica / osiedle"},
+ {familyId:"radial",variant:1,paletteId:"sunset",badge:"CENTER",useCase:"basket / event"},
+ {familyId:"radial",variant:9,paletteId:"club",badge:"TARGET",useCase:"brand / środek boiska"},
+ {familyId:"premium",variant:2,paletteId:"concrete",badge:"ARCH",useCase:"architektura / premium"},
+ {familyId:"premium",variant:7,paletteId:"luxury",badge:"PREMIUM",useCase:"hotel / deweloper"},
+ {familyId:"soft-blobs",variant:9,paletteId:"lagoon",badge:"SOFT",useCase:"lifestyle / rekreacja"},
+ {familyId:"soft-blobs",variant:12,paletteId:"pastel",badge:"PLAY",useCase:"szkoła / family"},
+ {familyId:"color-block",variant:4,paletteId:"club",badge:"SIMPLE",useCase:"niski koszt / wysoka czytelność"},
+ {familyId:"color-block",variant:11,paletteId:"warsaw",badge:"CITY",useCase:"miejska modernizacja"},
+ {familyId:"diagonal",variant:8,paletteId:"club",badge:"SPEED",useCase:"sport / dynamika"},
+ {familyId:"diagonal",variant:5,paletteId:"citrus",badge:"ACTIVE",useCase:"aktywizacja / szkoła"},
+ {familyId:"neon",variant:11,paletteId:"night",badge:"NIGHT",useCase:"noc / event / muzyka"},
+ {familyId:"neon",variant:3,paletteId:"tokyo",badge:"SIGNAL",useCase:"content / kampania"},
+ {familyId:"local-id",variant:12,paletteId:"warsaw",badge:"LOCAL",useCase:"miasto / dzielnica / placemaking"},
+ {familyId:"typography",variant:3,paletteId:"berlin",badge:"TYPE",useCase:"hasło / marka / kampania"},
+ {familyId:"nature",variant:12,paletteId:"forest",badge:"NATURE",useCase:"park / eco / CSR"},
+ {familyId:"terrazzo",variant:12,paletteId:"pastel",badge:"PLAY",useCase:"plac zabaw / rekreacja"}
+];
+
+const executionProfiles:Record<string,{colors:number;paint:number;labor:number;cost:[number,number];mask:number}>={
+ organic:{colors:5,paint:.42,labor:.18,cost:[95,145],mask:3},
+ blobs:{colors:4,paint:.36,labor:.14,cost:[75,115],mask:2},
+ geometry:{colors:4,paint:.34,labor:.15,cost:[75,120],mask:3},
+ bauhaus:{colors:5,paint:.38,labor:.17,cost:[90,140],mask:3},
+ blocks:{colors:4,paint:.31,labor:.10,cost:[55,85],mask:1},
+ waves:{colors:4,paint:.33,labor:.15,cost:[75,115],mask:2},
+ contour:{colors:3,paint:.24,labor:.18,cost:[85,135],mask:4},
+ camo:{colors:5,paint:.40,labor:.18,cost:[95,145],mask:3},
+ grid:{colors:4,paint:.35,labor:.17,cost:[85,130],mask:4},
+ pixel:{colors:5,paint:.37,labor:.18,cost:[90,140],mask:4},
+ diagonal:{colors:4,paint:.33,labor:.12,cost:[65,100],mask:2},
+ radial:{colors:5,paint:.37,labor:.16,cost:[80,125],mask:3},
+ sunset:{colors:5,paint:.40,labor:.16,cost:[85,130],mask:2},
+ neon:{colors:4,paint:.27,labor:.19,cost:[95,150],mask:4},
+ mono:{colors:3,paint:.30,labor:.11,cost:[60,90],mask:2},
+ concrete:{colors:3,paint:.28,labor:.10,cost:[55,85],mask:1},
+ graffiti:{colors:5,paint:.43,labor:.24,cost:[120,190],mask:4},
+ type:{colors:3,paint:.26,labor:.18,cost:[90,145],mask:4},
+ local:{colors:4,paint:.34,labor:.17,cost:[85,135],mask:3},
+ nature:{colors:5,paint:.39,labor:.19,cost:[95,150],mask:3},
+ kids:{colors:5,paint:.38,labor:.18,cost:[90,140],mask:3},
+ premium:{colors:4,paint:.31,labor:.12,cost:[70,110],mask:2},
+ brand:{colors:4,paint:.34,labor:.15,cost:[80,125],mask:3},
+ ribbons:{colors:4,paint:.31,labor:.17,cost:[85,135],mask:3},
+ terrazzo:{colors:5,paint:.32,labor:.22,cost:[105,165],mask:4}
+};
+
+export function patternExecutionMeta(familyId:string,variant:number,area:number):PatternExecutionMeta{
+ const family=getPatternFamily(familyId);
+ const profile=executionProfiles[family.renderer]||executionProfiles.geometry;
+ const complexity=patternComplexity(familyId,variant);
+ const multiplier=1+(complexity-2)*.08;
+ const maskLabels=["niska","średnia","wysoka","bardzo wysoka"] as const;
+ const baseHours=Math.max(6,Math.round(area*profile.labor*multiplier));
+ return {
+  colors:Math.max(2,Math.min(5,profile.colors+(variant%7===0?1:0))),
+  masking:maskLabels[Math.max(0,Math.min(3,profile.mask-1))],
+  laborHoursMin:baseHours,
+  laborHoursMax:Math.round(baseHours*1.45),
+  paintLiters:Math.max(3,Math.round(area*profile.paint*multiplier)),
+  costMin:Math.round(area*profile.cost[0]*multiplier/100)*100,
+  costMax:Math.round(area*profile.cost[1]*multiplier/100)*100
+ };
+}
 
 export const patternFilters=[
  {id:"all",label:"Wszystkie"},
