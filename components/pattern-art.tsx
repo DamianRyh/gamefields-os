@@ -317,6 +317,133 @@ function neonCourt(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
  return <><rect width="600" height={h} fill={a} opacity=".22"/>{paths.map((path,i)=><g key={i}><S d={path} stroke={[b,c,d,e][i%4]} width={18-i*2} opacity=".22"/><S d={path} stroke={[b,c,d,e][i%4]} width={7+i*2}/></g>)}{v%3===0?<circle cx="300" cy={h*.5} r="58" fill="none" stroke={e} strokeWidth="8" opacity=".9"/>:null}</>;
 }
 
+
+function monoLayers(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const mid=h/2;
+ switch(v){
+  case 1:return <>{[0,1,2,3,4].map(i=><path key={i} d={`M${-100+i*115} -30C${35+i*92} ${h*.18} ${20+i*118} ${h*.82} ${180+i*102} ${h+30}H${330+i*72}V-30Z`} fill={[a,b,c,d,e][i]}/>)}</>;
+  case 2:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H205L360 ${h}H155Z`} fill={b}/><path d={`M245 0H390L545 ${h}H400Z`} fill={c}/><path d={`M455 0H600V${h}Z`} fill={d}/></>;
+  case 3:return <><rect width="600" height={h} fill={a}/><circle cx="300" cy={mid} r="170" fill={b}/><circle cx="300" cy={mid} r="112" fill={c}/><circle cx="300" cy={mid} r="58" fill={d}/></>;
+  case 4:return <><rect width="600" height={h} fill={a}/><rect y={h*.18} width="600" height={h*.17} fill={b}/><rect y={h*.42} width="600" height={h*.17} fill={c}/><rect y={h*.66} width="600" height={h*.17} fill={d}/></>;
+  case 5:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H600V${h*.28}L0 ${h*.62}Z`} fill={b}/><path d={`M0 ${h*.62}L600 ${h*.28}V${h*.58}L0 ${h*.92}Z`} fill={c}/><path d={`M0 ${h*.92}L600 ${h*.58}V${h}H0Z`} fill={d}/></>;
+  case 6:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H160L300 ${mid}L160 ${h}H0Z`} fill={b}/><path d={`M600 0H440L300 ${mid}L440 ${h}H600Z`} fill={c}/><rect x="270" width="60" height={h} fill={d}/></>;
+  case 7:return <><rect width="600" height={h} fill={a}/><path d={`M0 ${h*.72}C110 ${h*.20} 215 ${h*.18} 300 ${h*.56}S500 ${h*.86} 600 ${h*.38}V${h}H0Z`} fill={b}/><path d={`M0 ${h*.38}C130 ${h*.72} 225 ${h*.74} 320 ${h*.42}S510 ${h*.10} 600 ${h*.54}V0H0Z`} fill={c}/></>;
+  case 8:return <><rect width="600" height={h} fill={a}/><rect x="0" width="165" height={h} fill={b}/><rect x="220" width="160" height={h} fill={c}/><rect x="435" width="165" height={h} fill={d}/></>;
+  case 9:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H600L420 ${mid}L600 ${h}H0L180 ${mid}Z`} fill={b}/><path d={`M180 ${mid}L300 0L420 ${mid}L300 ${h}Z`} fill={c}/></>;
+  case 10:return <><rect width="600" height={h} fill={a}/><ellipse cx="120" cy={h*.30} rx="155" ry="90" fill={b}/><ellipse cx="330" cy={h*.62} rx="190" ry="100" fill={c}/><ellipse cx="560" cy={h*.26} rx="130" ry="80" fill={d}/></>;
+  case 11:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H250V${h*.55}H0Z`} fill={b}/><path d={`M250 0H600V${h*.35}H420V${h}H250Z`} fill={c}/><rect x="0" y={h*.55} width="250" height={h*.45} fill={d}/></>;
+  default:return <><rect width="600" height={h} fill={a}/><path d={`M0 ${h*.18}Q150 ${h*.02} 300 ${h*.18}T600 ${h*.18}V${h*.36}Q450 ${h*.54} 300 ${h*.36}T0 ${h*.36}Z`} fill={b}/><path d={`M0 ${h*.58}Q150 ${h*.42} 300 ${h*.58}T600 ${h*.58}V${h*.76}Q450 ${h*.94} 300 ${h*.76}T0 ${h*.76}Z`} fill={c}/></>;
+ }
+}
+
+function rawConcrete(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const mid=h/2;
+ switch(v){
+  case 1:return <><rect width="600" height={h} fill={e}/><rect width="600" height={h*.24} fill={a}/><rect x="355" y={h*.24} width="245" height={h*.76} fill={b}/><circle cx="145" cy={h*.73} r="88" fill={c}/></>;
+  case 2:return <><rect width="600" height={h} fill={e}/><rect x="0" width="145" height={h} fill={a}/><rect x="455" width="145" height={h} fill={b}/><rect x="215" y={h*.22} width="170" height={h*.56} fill={c}/></>;
+  case 3:return <><rect width="600" height={h} fill={e}/><path d={`M0 0H335L215 ${h}H0Z`} fill={a}/><path d={`M335 0H600V${h}H430Z`} fill={b}/><rect x="275" y={h*.20} width="50" height={h*.60} fill={c}/></>;
+  case 4:return <><rect width="600" height={h} fill={e}/><rect y={h*.14} width="600" height={h*.18} fill={a}/><rect y={h*.68} width="600" height={h*.18} fill={b}/><rect x="250" width="100" height={h} fill={c}/></>;
+  case 5:return <><rect width="600" height={h} fill={e}/><circle cx="0" cy={mid} r="220" fill={a}/><circle cx="600" cy={mid} r="220" fill={b}/><rect x="270" width="60" height={h} fill={c}/></>;
+  case 6:return <><rect width="600" height={h} fill={e}/><path d={`M0 ${h*.72}L220 0H370L135 ${h}H0Z`} fill={a}/><rect x="430" y={h*.15} width="170" height={h*.30} fill={b}/><rect x="430" y={h*.58} width="170" height={h*.27} fill={c}/></>;
+  case 7:return <><rect width="600" height={h} fill={e}/><rect x="0" width="260" height={h*.44} fill={a}/><rect x="340" y={h*.56} width="260" height={h*.44} fill={b}/><circle cx="300" cy={mid} r="70" fill={c}/></>;
+  case 8:return <><rect width="600" height={h} fill={e}/><path d={`M0 0H600V${h*.26}L0 ${h*.66}Z`} fill={a}/><path d={`M0 ${h*.66}L600 ${h*.26}V${h}H0Z`} fill={b}/></>;
+  case 9:return <><rect width="600" height={h} fill={e}/><rect x="0" width="190" height={h} fill={a}/><rect x="205" width="190" height={h} fill={b}/><rect x="410" width="190" height={h} fill={c}/></>;
+  case 10:return <><rect width="600" height={h} fill={e}/><path d={`M0 0H600L430 ${mid}L600 ${h}H0L170 ${mid}Z`} fill={a}/><circle cx="300" cy={mid} r="62" fill={b}/></>;
+  case 11:return <><rect width="600" height={h} fill={e}/><rect x="0" y={h*.18} width="220" height={h*.64} fill={a}/><rect x="380" y={h*.18} width="220" height={h*.64} fill={b}/><rect x="260" width="80" height={h} fill={c}/></>;
+  default:return <><rect width="600" height={h} fill={e}/><path d={`M0 0H260V${mid}H0Z`} fill={a}/><path d={`M340 ${mid}H600V${h}H340Z`} fill={b}/><rect x="260" width="80" height={h} fill={c}/><circle cx="300" cy={mid} r="30" fill={d}/></>;
+ }
+}
+
+function typographyArt(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const words=["PLAY","MOVE","GAME","CITY","COURT","STREET","LOCAL","TOGETHER","SPORT","URBAN","GO","HERE"];
+ const word=words[v-1]||"PLAY";
+ const small=["THE CITY","MOVE DAILY","PLAY HERE","YOUR COURT","OPEN GAME","STREET CLUB","LOCAL RULES","COME PLAY","MAKE SPACE","CITY GAME","LET’S GO","THIS PLACE"][v-1]||"THE CITY";
+ switch(v){
+  case 1:return <><text x="300" y={h*.48} textAnchor="middle" fill={a} fontSize="118" fontWeight="900" letterSpacing="-8">{word}</text><text x="300" y={h*.70} textAnchor="middle" fill={b} fontSize="38" fontWeight="900" letterSpacing="9">{small}</text></>;
+  case 2:return <><text x="35" y={h*.42} fill={a} fontSize="126" fontWeight="900" letterSpacing="-9">{word}</text><text x="40" y={h*.66} fill={b} fontSize="44" fontWeight="900" letterSpacing="5">{small}</text></>;
+  case 3:return <><g transform={`rotate(-18 300 ${h/2})`}><text x="300" y={h*.48} textAnchor="middle" fill={a} fontSize="120" fontWeight="900" letterSpacing="-8">{word}</text><rect x="95" y={h*.56} width="410" height="46" fill={b}/><text x="300" y={h*.65} textAnchor="middle" fill={c} fontSize="26" fontWeight="900" letterSpacing="8">{small}</text></g></>;
+  case 4:return <><text x="300" y={h*.35} textAnchor="middle" fill={a} fontSize="84" fontWeight="900" letterSpacing="10">{word}</text><text x="300" y={h*.65} textAnchor="middle" fill={b} fontSize="84" fontWeight="900" letterSpacing="-5">{small}</text></>;
+  case 5:return <><text x="55" y={h*.32} fill={a} fontSize="72" fontWeight="900">{word}</text><text x="545" y={h*.74} textAnchor="end" fill={b} fontSize="72" fontWeight="900">{word}</text><text x="300" y={h*.54} textAnchor="middle" fill={c} fontSize="28" fontWeight="900" letterSpacing="7">{small}</text></>;
+  case 6:return <><g transform={`rotate(90 300 ${h/2})`}><text x="300" y={h*.44} textAnchor="middle" fill={a} fontSize="105" fontWeight="900" letterSpacing="-5">{word}</text><text x="300" y={h*.64} textAnchor="middle" fill={b} fontSize="30" fontWeight="900" letterSpacing="8">{small}</text></g></>;
+  case 7:return <><text x="300" y={h*.56} textAnchor="middle" fill="none" stroke={a} strokeWidth="5" fontSize="126" fontWeight="900" letterSpacing="-8">{word}</text><text x="300" y={h*.72} textAnchor="middle" fill={b} fontSize="26" fontWeight="900" letterSpacing="7">{small}</text></>;
+  case 8:return <><rect x="50" y={h*.24} width="500" height={h*.50} fill={a}/><text x="300" y={h*.52} textAnchor="middle" fill={c} fontSize="90" fontWeight="900" letterSpacing="-5">{word}</text><text x="300" y={h*.65} textAnchor="middle" fill={d} fontSize="24" fontWeight="900" letterSpacing="6">{small}</text></>;
+  case 9:return <><text x="300" y={h*.42} textAnchor="middle" fill={a} fontSize="105" fontWeight="900" letterSpacing="18">{word}</text><S d={`M90 ${h*.53}H510`} stroke={b} width={12}/><text x="300" y={h*.69} textAnchor="middle" fill={c} fontSize="30" fontWeight="900" letterSpacing="5">{small}</text></>;
+  case 10:return <><g transform={`translate(300 ${h/2}) rotate(-90) translate(-300 -${h/2})`}><text x="300" y={h*.48} textAnchor="middle" fill={a} fontSize="98" fontWeight="900" letterSpacing="-4">{word}</text><text x="300" y={h*.66} textAnchor="middle" fill={b} fontSize="28" fontWeight="900" letterSpacing="7">{small}</text></g></>;
+  case 11:return <><text x="45" y={h*.58} fill={a} fontSize="170" fontWeight="900" letterSpacing="-14">{word}</text><rect x="430" y={h*.20} width="125" height={h*.60} fill={b}/><text x="492" y={h*.51} textAnchor="middle" fill={c} fontSize="18" fontWeight="900" letterSpacing="3">{small}</text></>;
+  default:return <><text x="300" y={h*.34} textAnchor="middle" fill={a} fontSize="76" fontWeight="900" letterSpacing="12">{word}</text><text x="300" y={h*.58} textAnchor="middle" fill={b} fontSize="126" fontWeight="900" letterSpacing="-10">{small.split(" ")[0]}</text><text x="300" y={h*.76} textAnchor="middle" fill={c} fontSize="24" fontWeight="900" letterSpacing="8">{small}</text></>;
+ }
+}
+
+function localIdArt(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const label=["CITY","DISTRICT","HOME","LOCAL","PLACE","BLOCK","NEIGHBOR","GROUND","AREA","HERE","COMMUNITY","CITY 01"][v-1]||"CITY";
+ const mid=h/2;
+ switch(v){
+  case 1:return <><rect width="600" height={h} fill={a}/><path d={`M0 ${h*.62}L600 ${h*.18}V${h}H0Z`} fill={b}/><text x="300" y={h*.57} textAnchor="middle" fill={c} fontSize="86" fontWeight="900" letterSpacing="4">{label}</text></>;
+  case 2:return <><rect width="600" height={h} fill={a}/><rect x="0" y={h*.18} width="600" height={h*.64} fill={b}/><text x="300" y={h*.54} textAnchor="middle" fill={c} fontSize="74" fontWeight="900" letterSpacing="10">{label}</text><circle cx="85" cy={mid} r="38" fill={d}/></>;
+  case 3:return <><rect width="600" height={h} fill={a}/><circle cx="300" cy={mid} r="150" fill={b}/><text x="300" y={h*.55} textAnchor="middle" fill={c} fontSize="74" fontWeight="900" letterSpacing="6">{label}</text></>;
+  case 4:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H600L410 ${mid}L600 ${h}H0L190 ${mid}Z`} fill={b}/><text x="300" y={h*.54} textAnchor="middle" fill={c} fontSize="68" fontWeight="900" letterSpacing="5">{label}</text></>;
+  case 5:return <><rect width="600" height={h} fill={a}/><rect x="0" width="190" height={h} fill={b}/><text x="225" y={h*.55} fill={c} fontSize="76" fontWeight="900" letterSpacing="4">{label}</text></>;
+  case 6:return <><rect width="600" height={h} fill={a}/><path d={`M0 ${h*.28}H600V${h*.72}H0Z`} fill={b}/><text x="300" y={h*.55} textAnchor="middle" fill={c} fontSize="78" fontWeight="900" letterSpacing="8">{label}</text><circle cx="520" cy={mid} r="28" fill={d}/></>;
+  case 7:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H300V${h}H0Z`} fill={b}/><text x="300" y={h*.55} textAnchor="middle" fill={c} fontSize="68" fontWeight="900" letterSpacing="4">{label}</text></>;
+  case 8:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H180L360 ${h}H180Z`} fill={b}/><path d={`M360 0H600V${h}H540Z`} fill={c}/><text x="300" y={h*.55} textAnchor="middle" fill={d} fontSize="64" fontWeight="900" letterSpacing="5">{label}</text></>;
+  case 9:return <><rect width="600" height={h} fill={a}/><circle cx="90" cy={h*.22} r="110" fill={b}/><circle cx="520" cy={h*.78} r="125" fill={c}/><text x="300" y={h*.55} textAnchor="middle" fill={d} fontSize="72" fontWeight="900" letterSpacing="5">{label}</text></>;
+  case 10:return <><rect width="600" height={h} fill={a}/><rect y={h*.15} width="600" height={h*.18} fill={b}/><rect y={h*.67} width="600" height={h*.18} fill={c}/><text x="300" y={h*.55} textAnchor="middle" fill={d} fontSize="78" fontWeight="900" letterSpacing="6">{label}</text></>;
+  case 11:return <><rect width="600" height={h} fill={a}/><path d={`M0 ${h*.72}Q140 ${h*.28} 300 ${h*.58}T600 ${h*.30}V${h}H0Z`} fill={b}/><text x="300" y={h*.50} textAnchor="middle" fill={c} fontSize="72" fontWeight="900" letterSpacing="5">{label}</text></>;
+  default:return <><rect width="600" height={h} fill={a}/><rect x="55" y={h*.18} width="490" height={h*.64} fill={b}/><rect x="80" y={h*.24} width="440" height={h*.52} fill="none" stroke={c} strokeWidth="8"/><text x="300" y={h*.55} textAnchor="middle" fill={d} fontSize="72" fontWeight="900" letterSpacing="5">{label}</text></>;
+ }
+}
+
+function natureArt(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ switch(v){
+  case 1:return <>{[0,1,2,3,4].map(i=><path key={i} d={`M${-30+i*135} ${h+35}Q${70+i*115} ${h*.38} ${125+i*115} ${h*.08}Q${185+i*90} ${h*.48} ${205+i*110} ${h+35}Z`} fill={[a,b,c,d,e][i]}/>)}</>;
+  case 2:return <><path d={`M0 ${h}Q120 ${h*.28} 250 ${h*.62}T500 ${h*.20}T650 ${h*.48}V${h}Z`} fill={a}/><path d={`M0 ${h*.64}Q130 ${h*.12} 280 ${h*.46}T600 ${h*.18}V0H0Z`} fill={b}/><circle cx="470" cy={h*.72} r="58" fill={c}/></>;
+  case 3:return <><rect width="600" height={h} fill={e}/>{[75,190,315,445,555].map((x,i)=><g key={x} transform={`translate(${x} ${h*(.25+(i%2)*.42)}) rotate(${-35+i*17})`}><ellipse rx="72" ry="30" fill={[a,b,c,d,e][i]}/><path d="M-55 0H55" stroke={[b,c,d,e,a][i]} strokeWidth="5"/></g>)}</>;
+  case 4:return <><rect width="600" height={h} fill={e}/>{[0,1,2,3].map(i=><path key={i} d={`M-40 ${h*(.22+i*.20)}C120 ${h*(.05+i*.18)} 230 ${h*(.35+i*.12)} 360 ${h*(.18+i*.18)}S520 ${h*(.04+i*.22)} 650 ${h*(.20+i*.20)}`} fill="none" stroke={[a,b,c,d][i]} strokeWidth={22-i*3} strokeLinecap="round"/>)}</>;
+  case 5:return <><rect width="600" height={h} fill={e}/>{[0,1,2,3,4,5,6].map(i=><circle key={i} cx={55+(i*83)%560} cy={h*(.18+((i*19)%62)/100)} r={28+(i%3)*16} fill={[a,b,c,d,e][i%5]}/>)}</>;
+  case 6:return <><rect width="600" height={h} fill={e}/><path d={`M0 ${h*.78}Q120 ${h*.18} 250 ${h*.52}T500 ${h*.20}T650 ${h*.44}V${h}Z`} fill={a}/><path d={`M0 ${h*.48}Q120 ${h*.08} 260 ${h*.38}T590 ${h*.10}V0H0Z`} fill={b}/></>;
+  case 7:return <><rect width="600" height={h} fill={e}/>{[0,1,2,3,4].map(i=><path key={i} d={`M${40+i*125} ${h*.86}Q${90+i*110} ${h*.18} ${150+i*105} ${h*.14}Q${205+i*90} ${h*.48} ${190+i*110} ${h*.86}Z`} fill={[a,b,c,d,e][i]}/>)}</>;
+  case 8:return <><rect width="600" height={h} fill={e}/><circle cx="300" cy={h*.5} r="170" fill={a}/><circle cx="300" cy={h*.5} r="118" fill={b}/><path d={`M300 ${h*.23}C360 ${h*.38} 410 ${h*.48} 300 ${h*.77}C190 ${h*.48} 240 ${h*.38} 300 ${h*.23}Z`} fill={c}/></>;
+  case 9:return <><rect width="600" height={h} fill={e}/>{[0,1,2,3,4].map(i=><ellipse key={i} cx={85+i*110} cy={h*(.25+(i%2)*.48)} rx={70} ry={42} fill={[a,b,c,d,e][i]}/>)}</>;
+  case 10:return <><rect width="600" height={h} fill={e}/><path d={`M0 0H600V${h*.30}Q450 ${h*.14} 300 ${h*.30}T0 ${h*.30}Z`} fill={a}/><path d={`M0 ${h}H600V${h*.70}Q450 ${h*.86} 300 ${h*.70}T0 ${h*.70}Z`} fill={b}/><ellipse cx="300" cy={h*.5} rx="105" ry="60" fill={c}/></>;
+  case 11:return <><rect width="600" height={h} fill={e}/>{[0,1,2,3].map(i=><path key={i} d={`M-40 ${h*(.18+i*.22)}Q130 ${h*(.08+i*.17)} 300 ${h*(.22+i*.18)}T650 ${h*(.16+i*.21)}`} fill="none" stroke={[a,b,c,d][i]} strokeWidth={36-i*5} strokeLinecap="round"/>)}</>;
+  default:return <><rect width="600" height={h} fill={e}/><path d={`M0 ${h*.72}C130 ${h*.22} 225 ${h*.86} 340 ${h*.42}S520 ${h*.10} 600 ${h*.54}V${h}H0Z`} fill={a}/><path d={`M0 ${h*.32}C120 ${h*.74} 240 ${h*.10} 370 ${h*.56}S520 ${h*.86} 600 ${h*.28}V0H0Z`} fill={b}/><circle cx="300" cy={h*.5} r="46" fill={c}/></>;
+ }
+}
+
+function playgroundArt(v:number,h:number,colors:C):ReactNode{
+ const [a,b,c,d,e]=colors;
+ const count=18+(v%4)*4;
+ return <>{Array.from({length:count}).map((_,i)=>{
+  const x=(i*83+v*41)%620-10,y=(i*47+v*29)%Math.max(80,h),col=colors[(i+v)%5],mode=(i+v)%5;
+  if(v===1&&i%2)return null;
+  if(v===2&&x>300&&i%3===0)return null;
+  if(v===3&&y>h*.55&&i%2===0)return null;
+  if(v===4&&Math.abs(x-300)>190&&i%3!==0)return null;
+  if(mode===0)return <circle key={i} cx={x} cy={y} r={18+(i%4)*7} fill={col}/>;
+  if(mode===1)return <rect key={i} x={x-24} y={y-24} width={48+(i%2)*20} height={48} rx="16" fill={col}/>;
+  if(mode===2)return <path key={i} d={`M${x} ${y-28}L${x+28} ${y+24}H${x-28}Z`} fill={col}/>;
+  if(mode===3)return <g key={i}><circle cx={x} cy={y} r="28" fill={col}/><circle cx={x} cy={y} r="12" fill={[a,b,c,d,e][(i+2)%5]}/></g>;
+  return <path key={i} d={`M${x-28} ${y-10}Q${x} ${y-36} ${x+28} ${y-10}Q${x} ${y+30} ${x-28} ${y-10}Z`} fill={col}/>;
+ })}</>;
+}
+
+function terrazzoArt(v:number,h:number,colors:C):ReactNode{
+ const count=30+(v%4)*8;
+ const scale=v%3===0?1.5:v%3===1?.85:1.1;
+ return <>{Array.from({length:count}).map((_,i)=>{
+  const x=(i*97+v*53)%650-25,y=(i*61+v*37)%Math.max(90,h),r=(7+(i%5)*4)*scale,col=colors[(i*2+v)%5],rot=(i*37+v*19)%180;
+  const mode=(v+i)%4;
+  if(v===2&&i%3===0)return null;
+  if(v===5&&x<260&&i%2===0)return null;
+  if(v===8&&y<h*.45&&i%2===1)return null;
+  if(v===11&&Math.abs(x-300)<115&&i%3!==0)return null;
+  if(mode===0)return <circle key={i} cx={x} cy={y} r={r*.72} fill={col}/>;
+  if(mode===1)return <rect key={i} x={x-r} y={y-r*.55} width={r*2} height={r*1.1} rx={r*.30} transform={`rotate(${rot} ${x} ${y})`} fill={col}/>;
+  if(mode===2)return <path key={i} d={`M${x-r} ${y}Q${x-r*.15} ${y-r*1.35} ${x+r} ${y-r*.15}Q${x+r*.25} ${y+r} ${x-r} ${y}Z`} fill={col}/>;
+  return <path key={i} d={`M${x} ${y-r}L${x+r} ${y+r*.65}L${x-r} ${y+r*.65}Z`} transform={`rotate(${rot} ${x} ${y})`} fill={col}/>;
+ })}</>;
+}
+
 function generic(renderer:string,v:number,h:number,[a,b,c,d,e]:C):ReactNode{
  switch(renderer){
   case "blobs":return <>{[0,1,2,3,4].map(n=><ellipse key={n} cx={70+n*130+(v%3)*15} cy={h*(.18+((n*23+v*11)%62)/100)} rx={66+(n%2)*28} ry={44+((n+v)%3)*16} fill={[a,b,c,d,e][n]}/>)}</>;
@@ -367,6 +494,13 @@ export function PatternArt({p,h}:{p:Project;h:number}){
   case "diagonal":art=diagonalArt(v,h,colors);break;
   case "sunset":art=sunsetBands(v,h,colors);break;
   case "neon":art=neonCourt(v,h,colors);break;
+  case "mono":art=monoLayers(v,h,colors);break;
+  case "concrete":art=rawConcrete(v,h,colors);break;
+  case "type":art=typographyArt(v,h,colors);break;
+  case "local":art=localIdArt(v,h,colors);break;
+  case "nature":art=natureArt(v,h,colors);break;
+  case "kids":art=playgroundArt(v,h,colors);break;
+  case "terrazzo":art=terrazzoArt(v,h,colors);break;
   default:art=generic(family.renderer,v,h,colors);
  }
  return <g opacity={opacity} transform={transform}>{art}</g>;
