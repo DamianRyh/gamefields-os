@@ -473,11 +473,13 @@ export function PatternArt({p,h}:{p:Project;h:number}){
  const family=getPatternFamily(p.patternFamily),palette=getPatternPalette(p.patternPalette),v=Math.max(1,Math.min(12,p.patternVariant||1));
  const opacity=p.graphicOpacity/100,scale=(p.graphicScale/100)*((p.patternDensity||100)/100);
  const uid=useId().replace(/:/g,"");
- const raw=palette.colors;
- const gradientOn=!!p.gradientEnabled,textureOn=!!p.textureEnabled||!!p.artistFinishEnabled,depthOn=!!p.shadowEnabled||!!p.artistFinishEnabled,artistOn=!!p.artistFinishEnabled;
- const gradIds=raw.map((_,i)=>`gf-grad-${uid}-${i}`);
- const colors=(gradientOn?gradIds.map(id=>`url(#${id})`):raw) as C;
- const lightId=`gf-light-${uid}`,shadeId=`gf-shade-${uid}`,textureId=`gf-texture-${uid}`,depthId=`gf-depth-${uid}`;
+ const colors=palette.colors as C;
+ const shadow=Math.max(0,Math.min(100,p.shadowIntensity??0));
+ const depthOn=shadow>0;
+ const depthId=`gf-depth-${uid}`,shadeId=`gf-shade-${uid}`;
+ const shadowOpacity=.05+(shadow/100)*.24;
+ const shadowBlur=1.5+(shadow/100)*5;
+ const shadowDy=.8+(shadow/100)*4.2;
  const transform=`translate(300 ${h/2}) rotate(${p.graphicRotation}) scale(${scale}) translate(-300 -${h/2})`;
  let art:ReactNode;
  switch(family.renderer){
@@ -508,54 +510,19 @@ export function PatternArt({p,h}:{p:Project;h:number}){
   case "terrazzo":art=terrazzoArt(v,h,colors);break;
   default:art=generic(family.renderer,v,h,colors);
  }
- const angle=(v*31+family.id.length*17)%360;
- const x1=50-45*Math.cos(angle*Math.PI/180),y1=50-45*Math.sin(angle*Math.PI/180),x2=50+45*Math.cos(angle*Math.PI/180),y2=50+45*Math.sin(angle*Math.PI/180);
  return <>
   <defs>
-   {raw.map((col,i)=>{
-    const next=raw[(i+1)%raw.length],accent=raw[(i+2)%raw.length];
-    const radial=(i+v)%3===0;
-    return radial
-     ? <radialGradient key={gradIds[i]} id={gradIds[i]} cx={i%2?"68%":"32%"} cy={(i+v)%2?"30%":"70%"} r="82%">
-        <stop offset="0%" stopColor={accent} stopOpacity=".96"/>
-        <stop offset="46%" stopColor={col} stopOpacity=".98"/>
-        <stop offset="100%" stopColor={next} stopOpacity=".92"/>
-       </radialGradient>
-     : <linearGradient key={gradIds[i]} id={gradIds[i]} x1={`${x1}%`} y1={`${y1}%`} x2={`${x2}%`} y2={`${y2}%`}>
-        <stop offset="0%" stopColor={col}/>
-        <stop offset="52%" stopColor={col}/>
-        <stop offset="100%" stopColor={next}/>
-       </linearGradient>;
-   })}
-   <linearGradient id={lightId} x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stopColor="#ffffff" stopOpacity=".18"/>
-    <stop offset="38%" stopColor="#ffffff" stopOpacity=".03"/>
-    <stop offset="72%" stopColor="#000000" stopOpacity=".03"/>
-    <stop offset="100%" stopColor="#000000" stopOpacity=".18"/>
-   </linearGradient>
-   <radialGradient id={shadeId} cx="50%" cy="46%" r="72%">
+   <filter id={depthId} x="-16%" y="-16%" width="132%" height="132%" colorInterpolationFilters="sRGB">
+    <feDropShadow dx="0" dy={shadowDy} stdDeviation={shadowBlur} floodColor="#0b1712" floodOpacity={shadowOpacity}/>
+   </filter>
+   <radialGradient id={shadeId} cx="50%" cy="45%" r="74%">
     <stop offset="58%" stopColor="#000000" stopOpacity="0"/>
-    <stop offset="100%" stopColor="#000000" stopOpacity=".16"/>
+    <stop offset="100%" stopColor="#000000" stopOpacity={shadowOpacity*.55}/>
    </radialGradient>
-   <filter id={depthId} x="-12%" y="-12%" width="124%" height="124%" colorInterpolationFilters="sRGB">
-    <feDropShadow dx="0" dy="3" stdDeviation="3.5" floodColor="#0b1712" floodOpacity=".16"/>
-   </filter>
-   <filter id={textureId} x="-5%" y="-5%" width="110%" height="110%">
-    <feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed={v*17} result="noise"/>
-    <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
-    <feComponentTransfer in="mono" result="softnoise"><feFuncA type="table" tableValues="0 .11"/></feComponentTransfer>
-    <feBlend in="SourceGraphic" in2="softnoise" mode="multiply"/>
-   </filter>
   </defs>
   <g opacity={opacity} transform={transform}>
    {depthOn?<g filter={`url(#${depthId})`}>{art}</g>:art}
-   {depthOn?<><rect x="-30" y="-30" width="660" height={h+60} fill={`url(#${lightId})`} opacity=".72" pointerEvents="none"/><rect x="-30" y="-30" width="660" height={h+60} fill={`url(#${shadeId})`} pointerEvents="none"/></>:null}
-   {textureOn?<rect x="-30" y="-30" width="660" height={h+60} fill="transparent" filter={`url(#${textureId})`} opacity={artistOn?.78:.48} pointerEvents="none"/>:null}
-   {artistOn?<g pointerEvents="none" opacity=".68" style={{mixBlendMode:"screen"}}>
-     <S d={`M-40 ${h*.18}C120 ${h*.05} 190 ${h*.38} 340 ${h*.21}S510 ${h*.08} 650 ${h*.28}`} stroke={raw[(v+1)%5]} width={9+(v%3)*3} opacity={.50}/>
-     <S d={`M-30 ${h*.78}C120 ${h*.52} 265 ${h*.92} 420 ${h*.63}S560 ${h*.44} 650 ${h*.72}`} stroke={raw[(v+3)%5]} width={6+(v%4)*2} opacity={.42}/>
-     {Array.from({length:12}).map((_,i)=><circle key={i} cx={(i*71+v*37)%620-10} cy={(i*43+v*29)%Math.max(100,h)} r={2+(i%4)*1.3} fill={raw[(i+v)%5]} opacity={.28+(i%3)*.12}/>)}
-    </g>:null}
+   {depthOn?<rect x="-30" y="-30" width="660" height={h+60} fill={`url(#${shadeId})`} pointerEvents="none"/>:null}
   </g>
  </>;
 }
