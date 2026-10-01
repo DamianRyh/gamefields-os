@@ -118,6 +118,18 @@ export default function Home(){
  useEffect(()=>{if(new URLSearchParams(window.location.search).get("view")==="templates"){setView("templates");void loadTemplates(1)}},[]);
 
  const [p,setP]=useState<Project>(initial),[view,setView]=useState("builder"),[module,setModule]=useState(5),[iso,setIso]=useState(false),[selectedId,setSelectedId]=useState<string|null>(null),[undoStack,setUndo]=useState<Project[]>([]),[redoStack,setRedo]=useState<Project[]>([]),[projects,setProjects]=useState<Project[]>([]);
+ useEffect(()=>{
+   const params=new URLSearchParams(window.location.search);
+   const familyId=params.get("pattern"),paletteId=params.get("palette"),sport=params.get("sport");
+   const variantRaw=Number(params.get("variant")||"1");
+   if(familyId&&patternFamilies.some(x=>x.id===familyId)){
+     const family=getPatternFamily(familyId);
+     const variant=Math.max(1,Math.min(12,Number.isFinite(variantRaw)?variantRaw:1));
+     const palette=patternPalettes.some(x=>x.id===paletteId)?getPatternPalette(paletteId||"miami"):getPatternPalette("miami");
+     setP(v=>({...v,pattern:family.name,patternFamily:family.id,patternVariant:variant,patternPalette:palette.id,base:palette.colors[4],zone:palette.colors[1],sport:sport&&sports.includes(sport)?sport:v.sport,graphicOpacity:100}));
+     setModule(5);setView("builder");
+   }
+ },[]);
  const uploadRef=useRef<HTMLInputElement>(null),importRef=useRef<HTMLInputElement>(null);
  async function importProject(file?:File){if(!file)return;if(file.size>12000000){toast.error("Plik projektu może mieć maksymalnie 12 MB.");return}try{const next=projectSchema.parse(JSON.parse(await file.text()));if(new Set(next.objects.map(o=>o.id)).size!==next.objects.length)throw new Error("ids");history(p);setP(next);setSelectedId(null);setView("builder");toast.success("Wczytano projekt")}catch{toast.error("Nieprawidłowy plik projektu. Wybierz eksport JSON z edytora v0.5.")}}
  const dragStart=useRef<Project|null>(null);
@@ -186,7 +198,7 @@ export default function Home(){
  }
  const choices=(items:string[],value:string,change:(s:string)=>void)=><div className="choices compact">{items.map(s=><button key={s} className={value===s?"choice selected":"choice"} onClick={()=>change(s)}><span>{s}</span>{value===s?<Check size={15}/>:null}</button>)}</div>;
  return <><Toaster position="bottom-right"/>
- <header className="header"><button className="brand" onClick={()=>setView("builder")}><span className="brand-icon"><Grid2X2 size={21}/></span>gamefields<span className="brand-studio">STUDIO</span></button><nav><button className={view==="builder"?"active":""} onClick={()=>setView("builder")}>Studio</button><button className={view==="patterns"?"active":""} onClick={()=>{setPatternPage(1);setView("patterns")}}>Biblioteka wzorów <span className="navcount">{PATTERN_COUNT}</span></button><button className={view==="templates"?"active":""} onClick={showTemplates}>Gotowe projekty</button><button className={view==="projects"?"active":""} onClick={()=>setView("projects")}>Gamefields OS</button></nav><a className="site-link" href="https://www.gamefields.eu/" target="_top">← Gamefields.eu</a><span className="version">v1.2</span></header>
+ <header className="header"><button className="brand" onClick={()=>setView("builder")}><span className="brand-icon"><Grid2X2 size={21}/></span>gamefields<span className="brand-studio">STUDIO</span></button><nav><button className={view==="builder"?"active":""} onClick={()=>setView("builder")}>Studio</button><button className={view==="patterns"?"active":""} onClick={()=>{setPatternPage(1);setView("patterns")}}>Biblioteka wzorów <span className="navcount">{PATTERN_COUNT}</span></button><button className={view==="templates"?"active":""} onClick={showTemplates}>Gotowe projekty</button><button className={view==="projects"?"active":""} onClick={()=>setView("projects")}>Gamefields OS</button></nav><a className="site-link" href="https://www.gamefields.eu/" target="_top">← Gamefields.eu</a><span className="version">v1.2.1</span></header>
  {view==="builder"?<>
  <div className="projectbar v03bar"><div><span className="eyebrow">PROJEKT / {p.id}</span><input className="projectname" aria-label="Nazwa projektu" maxLength={200} value={p.name} onChange={e=>update({name:e.target.value},false)}/></div><div className="history-actions"><button onClick={undo} disabled={!undoStack.length}><Undo2 size={17}/> Cofnij</button><button onClick={redo} disabled={!redoStack.length}><Redo2 size={17}/> Ponów</button></div><div className="actions"><input hidden ref={importRef} type="file" accept=".json,.txt,application/json,text/plain" onChange={e=>{void importProject(e.target.files?.[0]);e.target.value=""}}/><button className="btn subtle" onClick={()=>importRef.current?.click()}>Wczytaj JSON</button><button className="btn subtle" onClick={()=>{setProjects(x=>[p,...x.filter(q=>q.id!==p.id)]);toast.success("Projekt zapisany w tej sesji")}}>Zapisz</button><button className="btn subtle" onClick={()=>download(p,true)} title="Pobierz konfigurację do dodania w WordPressie">Wzór do WordPress</button><button className="btn dark" onClick={()=>download(p)}><Download size={16}/> Eksport JSON</button></div></div>
  <div className="builder v03builder"><aside className="rail">{modules.map(([name,Icon],i)=><button key={name} className={i===module?"module active":"module"} onClick={()=>setModule(i)}><Icon size={22}/><span>{name}</span></button>)}</aside>
