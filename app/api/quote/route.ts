@@ -16,7 +16,7 @@ export async function POST(request:Request){
   if(!parsed.success)return json({error:"Invalid project"},400);
   const p=parsed.data;
   const area=p.length*p.width;
-  const creativity=Math.max(0,Math.min(100,p.creativity??45));
+  const shadowIntensity=Math.max(0,Math.min(100,p.shadowIntensity??25));
   const complexity=patternComplexity(p.patternFamily||"organic-flow",p.patternVariant||1);
   const execution=patternExecutionMeta(p.patternFamily||"organic-flow",p.patternVariant||1,area);
 
@@ -48,12 +48,12 @@ export async function POST(request:Request){
   const marginBase=n("QUOTE_MARGIN_BASE");
   const minProject=n("QUOTE_MIN_PROJECT");
 
-  const creativityLabor=1+creativity*.0045;
-  const creativityPaint=1+creativity*.0018;
-  const maskingFactor=1+(complexity-1)*.08+creativity*.0015;
-  const laborHours=((execution.laborHoursMin+execution.laborHoursMax)/2)*creativityLabor*maskingFactor;
-  const designHours=4+complexity*1.8+creativity*.085;
-  const paintLiters=execution.paintLiters*creativityPaint;
+  const shadowLabor=1+shadowIntensity*.0018;
+  const shadowPaint=1+shadowIntensity*.0008;
+  const maskingFactor=1+(complexity-1)*.08+shadowIntensity*.0006;
+  const laborHours=((execution.laborHoursMin+execution.laborHoursMax)/2)*shadowLabor*maskingFactor;
+  const designHours=4+complexity*1.8+shadowIntensity*.025;
+  const paintLiters=execution.paintLiters*shadowPaint;
   const equipmentInternal=p.objects.filter(o=>o.kind==="equipment").reduce((sum,o)=>sum+(equipmentCost[o.name]||1800),0);
   const equipmentSell=p.objects.filter(o=>o.kind==="equipment").reduce((sum,o)=>sum+(equipmentMarket[o.name]||2500),0);
   const brandingCount=p.objects.filter(o=>o.kind!=="equipment").length;
@@ -67,26 +67,26 @@ export async function POST(request:Request){
    brandingCount*520+
    (p.scene==="event"?8500:0)+
    logisticsBase+area*3.5+
-   900+complexity*420+creativity*14;
+   900+complexity*420+shadowIntensity*5;
 
-  const riskRate=riskBase+(complexity-1)*.012+creativity*.00055;
+  const riskRate=riskBase+(complexity-1)*.012+shadowIntensity*.00015;
   const costBasis=direct*(1+overheadRate)*(1+riskRate);
-  const targetMargin=Math.min(.46,marginBase+(complexity-1)*.01+creativity*.00075);
+  const targetMargin=Math.min(.44,marginBase+(complexity-1)*.01+shadowIntensity*.00015);
   const marginPrice=costBasis/(1-targetMargin);
 
-  const creativeMarketFactor=1+creativity*.0038+(complexity-1)*.035;
+  const visualMarketFactor=1+shadowIntensity*.0012+(complexity-1)*.035;
   const marketFloor=
    area*(surfaceMarket[p.surface]||surfaceMarket["Akryl sportowy"])+
    equipmentSell+
    brandingCount*1200+
    (p.scene==="event"?18000:0)+
-   execution.costMin*creativeMarketFactor+
+   execution.costMin*visualMarketFactor+
    logisticsBase;
 
   const priceNet=roundUp(Math.max(minProject,marginPrice,marketFloor),500);
   const priceGross=roundUp(priceNet*1.23,100);
 
-  return json({priceNet,priceGross,currency:"PLN",creativity});
+  return json({priceNet,priceGross,currency:"PLN"});
  }catch{
   return json({error:"Quote temporarily unavailable"},503);
  }
