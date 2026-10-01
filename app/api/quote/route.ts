@@ -25,7 +25,7 @@ export async function POST(request:Request){
    "EPDM":n("QUOTE_COST_SURFACE_EPDM"),
    "Sztuczna trawa 60 mm":n("QUOTE_COST_SURFACE_TURF"),
    "Moduły sportowe":n("QUOTE_COST_SURFACE_MODULES"),
-   "Piasek sportowy":n("QUOTE_COST_SURFACE_SAND"),
+   "Piasek sportowy":n("QUOTE_COST_SURFACE_EPDM")*.52,
    "Beton sportowy":n("QUOTE_COST_SURFACE_CONCRETE")
   };
   const surfaceMarket:Record<string,number>={
