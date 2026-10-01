@@ -475,7 +475,7 @@ export function PatternArt({p,h}:{p:Project;h:number}){
  const uid=useId().replace(/:/g,"");
  const raw=palette.colors;
  const gradIds=raw.map((_,i)=>`gf-grad-${uid}-${i}`);
- const colors=gradIds.map(id=>`url(#${id})`) as C;
+ const colors=(p.gradientEnabled?gradIds.map(id=>`url(#${id})`):raw) as C;
  const lightId=`gf-light-${uid}`,shadeId=`gf-shade-${uid}`,textureId=`gf-texture-${uid}`,depthId=`gf-depth-${uid}`;
  const transform=`translate(300 ${h/2}) rotate(${p.graphicRotation}) scale(${scale}) translate(-300 -${h/2})`;
  let art:ReactNode;
