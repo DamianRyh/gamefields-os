@@ -124,6 +124,10 @@ function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEq
    {p.sport==="Padel"?<><path d={"M300 10V"+(h-10)}/><path d={"M175 10V"+(h-10)+" M425 10V"+(h-10)}/><path d={"M175 "+h/2+"H425"}/></>:null}
    {p.sport==="Siatkówka"?<><path d={"M300 10V"+(h-10)}/><path d={"M200 10V"+(h-10)+" M400 10V"+(h-10)}/></>:null}
    {p.sport==="Pickleball"?<><path d={"M300 10V"+(h-10)}/><path d={"M210 10V"+(h-10)+" M390 10V"+(h-10)}/><path d={"M10 "+h/2+"H210 M390 "+h/2+"H590"}/></>:null}
+   {p.sport==="Futsal"?<><path d={"M300 10V"+(h-10)}/><circle cx="300" cy={h/2} r={Math.min(50,h*.14)}/><path d={"M10 "+h*.22+"Q135 "+h/2+" 10 "+h*.78+" M590 "+h*.22+"Q465 "+h/2+" 590 "+h*.78}/><circle cx="95" cy={h/2} r="3"/><circle cx="505" cy={h/2} r="3"/></>:null}
+   {p.sport==="Badminton"?<><path d={"M300 10V"+(h-10)}/><path d={"M10 "+h*.08+"H590 M10 "+h*.92+"H590"}/><path d={"M75 10V"+(h-10)+" M525 10V"+(h-10)}/><path d={"M210 10V"+(h-10)+" M390 10V"+(h-10)}/><path d={"M75 "+h/2+"H210 M390 "+h/2+"H525"}/></>:null}
+   {p.sport==="Siatkówka plażowa"?<path d={"M300 10V"+(h-10)}/>:null}
+   {p.sport==="Teqball"?<><path d={"M300 10V"+(h-10)}/><path d={"M10 "+h/2+"H590"} opacity=".5"/></>:null}
    {p.sport==="Wielofunkcyjne"?<><path d={"M10 "+h*.18+"Q240 "+h/2+" 10 "+h*.82+" M590 "+h*.18+"Q360 "+h/2+" 590 "+h*.82} opacity=".7"/><rect x="10" y={h/2-45} width="100" height="90" opacity=".7"/><rect x="490" y={h/2-45} width="100" height="90" opacity=".7"/></>:null}
   </g>:null}
   {(p.sport.includes("Piłka nożna")||p.sport==="Padel"||p.sport==="Wielofunkcyjne"||p.sport==="Custom Court")?<g className="band-shell">
