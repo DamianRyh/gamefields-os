@@ -108,7 +108,13 @@ const familyVariantNames:Record<string,string[]>={
  "court-camo":["Drift","Cluster","Edge Camo","Split Camo","Patchwork","Field Camo","Diagonal Camo","Corner Camo","Transit","Wide Camo","Urban Patch","Full Camo"],
  "street-art":["Flow Tag","Zigzag","Loop","Spray Lines","Wildstyle","Split Stroke","Eye","Cross","Scatter","Rail","Rush","Marker"],
  "brand-activation":["Sponsor Lane","Dual Zone","Crown","Center Stage","Split Brand","Wave Brand","Twin Panels","Chevron Brand","Orbit Brand","Banner","Impact","Activation"],
- "ribbons":["Twin Flow","Vertical Loop","Soft Cross","Interlace","Center Wave","Double Arc","Drop","Fast Cross","Metro","Orbit","Dual Rush","Track"]
+ "ribbons":["Twin Flow","Vertical Loop","Soft Cross","Interlace","Center Wave","Double Arc","Drop","Fast Cross","Metro","Orbit","Dual Rush","Track"],
+ "geometric":["Cut","Split Axis","Ribbon Cut","Twin Arrow","Module","Slash","Four Point","Fold","Corner Grid","Double Chevron","Runway","Core"],
+ "waves":["Calm","Current","Vertical Tide","Triple Arc","Ripple","Cross Tide","Loop Wave","Metro Wave","Swell","Axis Wave","Fast Tide","Parallel"],
+ "contour":["Center Map","West Ridge","East Ridge","Wide Basin","South Peak","North Peak","Tilted Map","Reverse Ridge","Dual Basin","Twin Peaks","Tight Topo","Wide Topo"],
+ "street-grid":["City Blocks","Offset","Skew Grid","Diamond Blocks","Transit","L Grid","Wide Blocks","Corner Shift","Metro","Dense Grid","Broken Grid","Full Grid"],
+ "radial":["Sunburst","West Burst","East Burst","North Burst","South Burst","Corner Burst","Opposite Burst","Fine Burst","Target Burst","Micro Burst","Offset Sun","Split Sun"],
+ "premium":["Cut Stone","Gallery","Diagonal Hall","Twin Arch","Studio","Band","Pavilion","Terrace","Diamond Hall","Facade","Orbit Hall","Frame"]
 };
 
 export function patternVariantName(familyId:string,variant:number){
