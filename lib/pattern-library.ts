@@ -120,7 +120,14 @@ const familyVariantNames:Record<string,string[]>={
  "pixel":["Sparse Grid","Pixel Core","Diagonal Pixels","Wide Pixels","Broken Raster","Dense Field","Cross Raster","Offset Blocks","Center Pixel","City Pixel","Fragmented","Full Raster"],
  "diagonal":["Forward Slash","Reverse Slash","Triple Cut","Diamond Slash","Corner Cuts","Speed Lines","Center Cut","Twin Chevron","Runway","Hourglass","Broken Slash","Half Slash"],
  "sunset":["Soft Horizon","High Tide","Low Bands","Deep Sunset","Warm Flow","Layered Sky","Ripple Horizon","Wide Glow","Low Sun","Long Dusk","Late Light","Final Horizon"],
- "neon":["Pulse","Vertical Signal","Circuit","Lightning","Wave Glow","Split Beam","Twin Pulse","Cross Light","Loop Signal","Frame Light","Night Rush","Parallel Glow"]
+ "neon":["Pulse","Vertical Signal","Circuit","Lightning","Wave Glow","Split Beam","Twin Pulse","Cross Light","Loop Signal","Frame Light","Night Rush","Parallel Glow"],
+ "mono":["Layer Flow","Mono Slash","Mono Target","Tonal Bands","Soft Diagonal","Mono Chevron","Tonal Wave","Vertical Tone","Mono Diamond","Tonal Clouds","Block Tone","Soft Rhythm"],
+ "raw-concrete":["Header Mass","Twin Walls","Concrete Cut","Cross Beam","Half Arches","Pavilion Cut","Corner Mass","Raw Diagonal","Three Slabs","Concrete Diamond","Portal","Concrete Core"],
+ "typography":["Play","Move","Game","City","Court","Street","Local","Together","Sport","Urban","Go","Here"],
+ "local-id":["City Mark","District Band","Home Circle","Local Diamond","Place Side","Block Band","Neighbor Split","Ground Slash","Area Orbit","Here Lines","Community Flow","City Frame"],
+ "nature":["Grass Blades","River","Leaves","Water Lines","Pebbles","Valley","Canopy","Seed","Forest Islands","Horizon","Stream","Landscape"],
+ "kids":["Dots","Play Mix","Upper Play","Center Play","Shapes","Big Small","Corners","Orbit Play","Row Play","Soft Toys","Open Center","Full Playground"],
+ "terrazzo":["Classic Chips","Sparse Chips","Large Chips","Dense Mix","Side Scatter","Fine Grain","Triangle Mix","Low Scatter","Round Mix","Color Chips","Open Center","Full Terrazzo"]
 };
 
 export function patternVariantName(familyId:string,variant:number){
