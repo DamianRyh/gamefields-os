@@ -13,7 +13,7 @@ const uid=()=>Math.random().toString(36).slice(2,9);
 const obj=(kind:ObjectKind,name:string,x:number,y:number,extra:Partial<EditorObject>={}):EditorObject=>({id:uid(),kind,name,x,y,scale:100,rotation:0,opacity:100,color:"#ffffff",target:"court",...extra});
 const initial:Project={id:"GF-001",name:"Moje boisko 3×3",type:"Nowe boisko",sport:"Piłka nożna 3×3",length:15,width:10,surface:"Akryl sportowy",base:"#246f70",zone:"#ef744e",outside:"#dedfd4",lineColor:"#ffffff",lines:true,pattern:"Organic Flow",patternFamily:"organic-flow",patternPalette:"miami",patternVariant:1,patternDensity:100,graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:"day",objects:[obj("equipment","Bramka",26,200,{scale:85}),obj("equipment","Bramka",574,200,{scale:85,rotation:180})],status:"Szkic",date:"29.09.2026"};
 const modules=[["Wymiary",Ruler],["Nawierzchnia",Layers],["Kolory",Palette],["Linie",CircleDashed],["Wyposażenie",Goal],["Studio",Paintbrush]] as const;
-const sports=["Piłka nożna 3×3","Koszykówka","Siatkówka","Wielofunkcyjne"];
+const sports=["Piłka nożna 3×3","Piłka nożna 1×1","Koszykówka","Siatkówka","Wielofunkcyjne"];
 const surfaces=["Akryl sportowy","EPDM","Sztuczna trawa 60 mm","Moduły sportowe"];
 const sponsors=[["GAMEFIELDS","#d7ff74"],["WARSAW FC","#ff6b45"],["ADIDAS","#ffffff"],["NIKE","#ffffff"],["RED BULL","#f5d747"],["CITY","#86c7ff"]];
 const equipmentLibrary=["Bramka","Kosz","Ławka","Lampa","Piłkochwyt","Banda","Namiot","DJ booth","Totem","Trybuna"];
