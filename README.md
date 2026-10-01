@@ -1,4 +1,4 @@
-# Gamefields Studio v0.5
+# Gamefields Studio v1.0
 
 Polski edytor koncepcji boisk oparty na React 19 i Vinext.
 
@@ -34,3 +34,16 @@ Instrukcja w WordPressie: szkic wpisu 3649.
 Biblioteka jest generowana z danych w `lib/pattern-library.ts`. Każda rodzina ma 12 kompozycji i może być łączona z dowolną paletą, sportem oraz wymiarem boiska. Warstwa artworku jest niezależna od linii sportowych i wyposażenia. Kod wzoru ma format `GF-<RODZINA>-<WARIANT>`.
 
 Kategorie: Organic, Geometric, Street, Premium, Brand i Play. Poziom wykonawczy 1–4 jest wyliczany dla wzoru i może być później podpięty do kalkulatora robocizny, liczby kolorów oraz zużycia materiałów.
+
+
+## Pattern Engine v1.0
+Biblioteka obejmuje 25 rodzin projektowych × 12 kompozycji = 300 bazowych wzorów. Każda kompozycja ma własny układ, a nie tylko przesunięcie lub obrót jednego motywu.
+
+Dopracowane rodziny:
+- Organic Flow, Soft Blobs, Geometric, Bauhaus, Color Block
+- Waves, Contour, Court Camo, Street Grid, Pixel, Diagonal, Radial
+- Sunset Bands, Neon Court, Mono Layers, Raw Concrete
+- Street Art, Typography, Local ID, Nature, Playground
+- Architectural, Brand Activation, Ribbons, Terrazzo
+
+Warstwa wzoru jest parametryczna i niezależna od linii sportowych, wyposażenia oraz brandingu. Wzory można łączyć z 18 paletami, skalować, obracać i regulować ich intensywność.
