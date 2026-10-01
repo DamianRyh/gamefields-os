@@ -117,6 +117,104 @@ function ribbons(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
  return <><S d={p1} stroke={a} width={58}/><S d={p1} stroke={b} width={31}/><S d={p2} stroke={c} width={48}/><S d={p2} stroke={d} width={20}/><circle cx={300+(v%3-1)*105} cy={h*(.25+(v%4)*.14)} r={16+(v%3)*6} fill={e}/></>;
 }
 
+
+function geometry(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const mid=h/2;
+ switch(v){
+  case 1:return <><path d={`M-30 0H210L405 ${h}H150Z`} fill={a}/><path d={`M245 0H450L610 ${h*.62}L440 ${h}Z`} fill={b}/><circle cx="470" cy={h*.23} r="72" fill={c}/><rect x="42" y={h*.62} width="145" height={h*.28} fill={d}/></>;
+  case 2:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H300L190 ${h}H0Z`} fill={b}/><path d={`M600 0H420L300 ${h}H600Z`} fill={c}/><circle cx="300" cy={mid} r="78" fill={d}/><rect x="275" width="50" height={h} fill={e}/></>;
+  case 3:return <><path d={`M0 0H600V${h*.34}L0 ${h*.72}Z`} fill={a}/><path d={`M0 ${h*.72}L600 ${h*.34}V${h}H0Z`} fill={b}/><rect x="225" y={h*.22} width="150" height={h*.56} fill={c}/><circle cx="300" cy={mid} r="44" fill={d}/></>;
+  case 4:return <><rect width="600" height={h} fill={a}/><path d={`M0 0L270 ${mid}L0 ${h}Z`} fill={b}/><path d={`M600 0L330 ${mid}L600 ${h}Z`} fill={c}/><rect x="270" width="60" height={h} fill={d}/><circle cx="300" cy={mid} r="64" fill={e}/></>;
+  case 5:return <><path d={`M0 0H240V${h*.42}H0Z`} fill={a}/><path d={`M240 0H600V${h*.24}H420V${h*.55}H240Z`} fill={b}/><path d={`M0 ${h*.42}H420V${h}H0Z`} fill={c}/><rect x="420" y={h*.24} width="180" height={h*.76} fill={d}/><circle cx="420" cy={h*.55} r="52" fill={e}/></>;
+  case 6:return <><rect width="600" height={h} fill={a}/><path d={`M-30 ${h*.78}L180 0H310L90 ${h}H-30Z`} fill={b}/><path d={`M290 0H470L620 ${h*.72}V${h}H520Z`} fill={c}/><circle cx="390" cy={h*.48} r="82" fill={d}/></>;
+  case 7:return <><path d={`M0 0H600L300 ${mid}Z`} fill={a}/><path d={`M0 ${h}H600L300 ${mid}Z`} fill={b}/><path d={`M0 0V${h}L300 ${mid}Z`} fill={c}/><path d={`M600 0V${h}L300 ${mid}Z`} fill={d}/><circle cx="300" cy={mid} r="38" fill={e}/></>;
+  case 8:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H185L300 ${mid}L185 ${h}H0Z`} fill={b}/><path d={`M600 0H415L300 ${mid}L415 ${h}H600Z`} fill={c}/><rect x="235" y={mid-48} width="130" height="96" fill={d}/></>;
+  case 9:return <><path d={`M0 0H600V${h*.28}H0Z`} fill={a}/><path d={`M0 ${h*.28}H220V${h}H0Z`} fill={b}/><path d={`M220 ${h*.28}H600V${h*.68}H220Z`} fill={c}/><path d={`M220 ${h*.68}H600V${h}H220Z`} fill={d}/><circle cx="220" cy={h*.68} r="56" fill={e}/></>;
+  case 10:return <><rect width="600" height={h} fill={a}/><path d={`M0 ${mid}L145 0H300L155 ${mid}L300 ${h}H145Z`} fill={b}/><path d={`M300 0H455L600 ${mid}L455 ${h}H300L445 ${mid}Z`} fill={c}/><circle cx="300" cy={mid} r="55" fill={d}/></>;
+  case 11:return <><path d={`M0 0H160L320 ${h}H160Z`} fill={a}/><path d={`M160 0H330L490 ${h}H320Z`} fill={b}/><path d={`M330 0H500L660 ${h}H490Z`} fill={c}/><circle cx="115" cy={h*.72} r="48" fill={d}/><circle cx="500" cy={h*.23} r="36" fill={e}/></>;
+  default:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H300V${mid}H0Z`} fill={b}/><path d={`M300 ${mid}H600V${h}H300Z`} fill={c}/><path d={`M300 0L420 ${mid}L300 ${h}L180 ${mid}Z`} fill={d}/><circle cx="300" cy={mid} r="38" fill={e}/></>;
+ }
+}
+
+function waves(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const sets=[
+  [`M-60 ${h*.18}Q110 ${h*.02} 300 ${h*.22}T660 ${h*.18}`,`M-60 ${h*.52}Q130 ${h*.34} 310 ${h*.56}T660 ${h*.50}`,`M-60 ${h*.80}Q150 ${h*.64} 320 ${h*.82}T660 ${h*.78}`],
+  [`M-60 ${h*.20}C120 ${h*.70} 220 ${h*.00} 360 ${h*.48}S540 ${h*.78} 660 ${h*.24}`,`M-60 ${h*.46}C110 ${h*.92} 245 ${h*.20} 390 ${h*.63}S545 ${h*.90} 660 ${h*.52}`,`M-60 ${h*.72}C130 ${h*.98} 260 ${h*.42} 430 ${h*.78}S560 ${h*.92} 660 ${h*.72}`],
+  [`M80 -40C160 ${h*.10} 120 ${h*.52} 250 ${h*.65}S430 ${h*.42} 520 ${h+40}`,`M210 -40C290 ${h*.18} 240 ${h*.55} 360 ${h*.70}S510 ${h*.50} 610 ${h+40}`,`M-30 ${h*.40}Q180 ${h*.22} 300 ${h*.50}T630 ${h*.46}`],
+  [`M-50 ${h*.14}Q120 ${h*.48} 300 ${h*.14}T650 ${h*.14}`,`M-50 ${h*.46}Q120 ${h*.80} 300 ${h*.46}T650 ${h*.46}`,`M-50 ${h*.78}Q120 ${h*.44} 300 ${h*.78}T650 ${h*.78}`],
+  [`M-40 ${h*.12}C95 ${h*.32} 165 ${h*.32} 300 ${h*.12}S505 ${h*.00} 640 ${h*.22}`,`M-40 ${h*.46}C95 ${h*.66} 165 ${h*.66} 300 ${h*.46}S505 ${h*.34} 640 ${h*.56}`,`M-40 ${h*.80}C95 ${h*.60} 165 ${h*.60} 300 ${h*.80}S505 ${h*.92} 640 ${h*.70}`],
+  [`M-60 ${h*.28}Q120 ${h*.05} 270 ${h*.34}T660 ${h*.20}`,`M-60 ${h*.56}Q150 ${h*.85} 310 ${h*.52}T660 ${h*.68}`,`M90 -30Q260 ${h*.22} 390 -20T620 ${h*.24}`],
+  [`M-60 ${h*.22}C150 ${h*.22} 150 ${h*.66} 300 ${h*.66}S450 ${h*.22} 660 ${h*.22}`,`M-60 ${h*.52}C150 ${h*.52} 150 ${h*.90} 300 ${h*.90}S450 ${h*.52} 660 ${h*.52}`,`M70 -30C190 ${h*.16} 120 ${h*.66} 300 ${h*.52}S490 ${h*.28} 560 ${h+30}`],
+  [`M-50 ${h*.16}L140 ${h*.16}C250 ${h*.16} 240 ${h*.48} 340 ${h*.48}H650`,`M-50 ${h*.76}H220C320 ${h*.76} 310 ${h*.42} 420 ${h*.42}H650`,`M-50 ${h*.48}Q170 ${h*.24} 300 ${h*.48}T650 ${h*.48}`],
+  [`M-50 ${h*.12}Q150 ${h*.70} 300 ${h*.12}T650 ${h*.12}`,`M-50 ${h*.50}Q150 ${h*.92} 300 ${h*.50}T650 ${h*.50}`,`M-50 ${h*.86}Q150 ${h*.28} 300 ${h*.86}T650 ${h*.86}`],
+  [`M-60 ${h*.30}Q120 ${h*.06} 300 ${h*.30}Q480 ${h*.54} 660 ${h*.30}`,`M-60 ${h*.58}Q120 ${h*.82} 300 ${h*.58}Q480 ${h*.34} 660 ${h*.58}`,`M300 -30V${h+30}`],
+  [`M-40 ${h*.20}C130 ${h*.72} 240 ${h*.08} 360 ${h*.54}S520 ${h*.86} 640 ${h*.26}`,`M-40 ${h*.74}C120 ${h*.26} 230 ${h*.94} 380 ${h*.46}S530 ${h*.12} 640 ${h*.70}`,`M-40 ${h*.48}H640`],
+  [`M-60 ${h*.25}C120 ${h*.10} 210 ${h*.42} 300 ${h*.25}S500 ${h*.08} 660 ${h*.25}`,`M-60 ${h*.50}C120 ${h*.35} 210 ${h*.67} 300 ${h*.50}S500 ${h*.33} 660 ${h*.50}`,`M-60 ${h*.75}C120 ${h*.60} 210 ${h*.92} 300 ${h*.75}S500 ${h*.58} 660 ${h*.75}`]
+ ][v-1]||[];
+ return <>{sets.map((dPath,i)=><S key={i} d={dPath} stroke={[a,b,c,d,e][i%5]} width={48-i*9}/>)}</>;
+}
+
+function contour(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const cfg=[
+  [300,.50,0,1],[165,.43,18,1],[445,.55,-12,1],[300,.50,0,1.35],[115,.66,25,.9],[490,.32,-20,.95],
+  [300,.50,35,1],[300,.50,-35,1],[210,.38,8,1.15],[390,.62,-8,1.15],[300,.50,0,.78],[300,.50,18,1.6]
+ ][v-1]||[300,.5,0,1];
+ const [cx,cy,rot,scale]=cfg as number[];
+ return <><rect width="600" height={h} fill={e} opacity=".16"/><g transform={`rotate(${rot} ${cx} ${h*cy})`} fill="none">
+  {Array.from({length:10}).map((_,i)=><ellipse key={i} cx={cx} cy={h*cy} rx={(42+i*31)*scale} ry={(24+i*20)*scale} stroke={[a,b,c,d][i%4]} strokeWidth={i%3===0?8:5} opacity={.92-i*.035}/>)}
+  {v%3===0?<S d={`M-40 ${h*.22}C130 ${h*.62} 245 ${h*.04} 365 ${h*.52}S530 ${h*.86} 650 ${h*.28}`} stroke={d} width={8}/>:null}
+  {v%4===0?<circle cx={cx} cy={h*cy} r="18" fill={a} stroke="none"/>:null}
+ </g></>;
+}
+
+function streetGrid(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const cellW=v%2===0?92:108,cellH=h/(v%3===0?6:5),cols=Math.ceil(600/cellW)+1,rows=Math.ceil(h/cellH)+1;
+ return <>{Array.from({length:cols*rows}).map((_,i)=>{
+   const col=i%cols,row=Math.floor(i/cols),x=col*cellW-18,y=row*cellH-12;
+   const mode=v%6;
+   if(mode===0)return <rect key={i} x={x+(row%2)*24} y={y} width={cellW*.64} height={cellH*.66} fill={[a,b,c,d,e][(i+row)%5]}/>;
+   if(mode===1)return <rect key={i} x={x} y={y} width={col%2?cellW*.35:cellW*.78} height={cellH*.72} rx={col%2?0:12} fill={[a,b,c,d,e][(i+v)%5]}/>;
+   if(mode===2)return <path key={i} d={`M${x} ${y}H${x+cellW*.72}L${x+cellW*.48} ${y+cellH*.74}H${x-cellW*.12}Z`} fill={[a,b,c,d,e][(i+row*2)%5]}/>;
+   if(mode===3)return <rect key={i} x={x+(col%2)*cellW*.28} y={y+(row%2)*cellH*.18} width={cellW*.52} height={cellH*.52} transform={`rotate(45 ${x+cellW*.26} ${y+cellH*.26})`} fill={[a,b,c,d,e][(i+2)%5]}/>;
+   if(mode===4)return <><rect x={x} y={y} width={cellW*.80} height={cellH*.18} fill={[a,b,c,d,e][i%5]}/><rect x={x} y={y+cellH*.32} width={cellW*.46} height={cellH*.46} fill={[a,b,c,d,e][(i+2)%5]}/></>;
+   return <path key={i} d={`M${x} ${y}H${x+cellW*.68}V${y+cellH*.22}H${x+cellW*.26}V${y+cellH*.68}H${x}Z`} fill={[a,b,c,d,e][(i+v)%5]}/>;
+ })}</>;
+}
+
+function radial(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const configs=[
+  [300,.5,8,0],[205,.5,7,.25],[395,.5,7,.12],[300,.32,10,0],[300,.68,10,.1],[145,.32,8,.2],
+  [455,.68,8,.05],[300,.5,12,.13],[300,.5,6,.5],[300,.5,16,.0],[230,.58,9,.28],[370,.42,9,.12]
+ ][v-1]||[300,.5,8,0];
+ const [cx,cy,count,start]=configs as number[];
+ const radius=720;
+ return <>{Array.from({length:count}).map((_,i)=>{
+   const a0=(Math.PI*2*(i/count+start)),a1=(Math.PI*2*((i+1)/count+start));
+   return <path key={i} d={`M${cx} ${h*cy}L${cx+radius*Math.cos(a0)} ${h*cy+radius*Math.sin(a0)}L${cx+radius*Math.cos(a1)} ${h*cy+radius*Math.sin(a1)}Z`} fill={[a,b,c,d,e][i%5]}/>;
+ })}
+ {v===9?<circle cx={cx} cy={h*cy} r="92" fill={e}/>:null}
+ {v===10?<circle cx={cx} cy={h*cy} r="58" fill={a}/>:null}
+ </>;
+}
+
+function architectural(v:number,h:number,[a,b,c,d,e]:C):ReactNode{
+ const mid=h/2;
+ switch(v){
+  case 1:return <><rect width="600" height={h} fill={a}/><path d={`M0 ${h*.76}L220 0H390L160 ${h}H0Z`} fill={b}/><circle cx="490" cy={h*.27} r="92" fill={c}/><rect x="410" y={h*.63} width="190" height={h*.37} fill={d}/></>;
+  case 2:return <><rect width="600" height={h} fill={a}/><rect x="0" y="0" width="175" height={h} fill={b}/><rect x="175" y={h*.18} width="250" height={h*.64} fill={c}/><rect x="425" width="175" height={h} fill={d}/><circle cx="300" cy={mid} r="48" fill={e}/></>;
+  case 3:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H600V${h*.30}L0 ${h*.72}Z`} fill={b}/><path d={`M0 ${h*.72}L600 ${h*.30}V${h}H0Z`} fill={c}/><rect x="265" y={h*.18} width="70" height={h*.64} fill={d}/></>;
+  case 4:return <><rect width="600" height={h} fill={a}/><circle cx="0" cy={mid} r="230" fill={b}/><circle cx="600" cy={mid} r="230" fill={c}/><rect x="250" width="100" height={h} fill={d}/></>;
+  case 5:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H240L360 ${h}H120Z`} fill={b}/><path d={`M360 0H600V${h}H480Z`} fill={c}/><circle cx="420" cy={h*.32} r="58" fill={d}/></>;
+  case 6:return <><rect width="600" height={h} fill={a}/><rect x="0" y="0" width="600" height={h*.24} fill={b}/><rect x="0" y={h*.76} width="600" height={h*.24} fill={c}/><rect x="220" y={h*.24} width="160" height={h*.52} fill={d}/></>;
+  case 7:return <><rect width="600" height={h} fill={a}/><path d={`M0 ${h}V${h*.45}L170 0H320L130 ${h}Z`} fill={b}/><path d={`M320 0H470L600 ${h*.55}V${h}H510Z`} fill={c}/><circle cx="390" cy={mid} r="72" fill={d}/></>;
+  case 8:return <><rect width="600" height={h} fill={a}/><rect x="0" y="0" width="210" height={h*.62} fill={b}/><rect x="210" y={h*.38} width="190" height={h*.62} fill={c}/><rect x="400" y="0" width="200" height={h*.68} fill={d}/></>;
+  case 9:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H600L430 ${mid}L600 ${h}H0L170 ${mid}Z`} fill={b}/><rect x="250" y={mid-80} width="100" height="160" fill={c}/><circle cx="300" cy={mid} r="34" fill={d}/></>;
+  case 10:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H190V${h}H0Z`} fill={b}/><path d={`M190 0H410L330 ${h}H110Z`} fill={c}/><rect x="410" width="190" height={h} fill={d}/></>;
+  case 11:return <><rect width="600" height={h} fill={a}/><circle cx="300" cy={mid} r="170" fill={b}/><circle cx="300" cy={mid} r="105" fill={c}/><circle cx="300" cy={mid} r="48" fill={d}/><rect x="290" width="20" height={h} fill={e}/></>;
+  default:return <><rect width="600" height={h} fill={a}/><path d={`M0 0H600V${h*.20}H0Z`} fill={b}/><path d={`M0 ${h*.80}H600V${h}H0Z`} fill={c}/><rect x="0" y={h*.20} width="135" height={h*.60} fill={d}/><rect x="465" y={h*.20} width="135" height={h*.60} fill={e}/></>;
+ }
+}
+
 function generic(renderer:string,v:number,h:number,[a,b,c,d,e]:C):ReactNode{
  switch(renderer){
   case "blobs":return <>{[0,1,2,3,4].map(n=><ellipse key={n} cx={70+n*130+(v%3)*15} cy={h*(.18+((n*23+v*11)%62)/100)} rx={66+(n%2)*28} ry={44+((n+v)%3)*16} fill={[a,b,c,d,e][n]}/>)}</>;
@@ -155,6 +253,12 @@ export function PatternArt({p,h}:{p:Project;h:number}){
   case "graffiti":art=graffiti(v,h,colors);break;
   case "brand":art=brand(v,h,colors);break;
   case "ribbons":art=ribbons(v,h,colors);break;
+  case "geometry":art=geometry(v,h,colors);break;
+  case "waves":art=waves(v,h,colors);break;
+  case "contour":art=contour(v,h,colors);break;
+  case "grid":art=streetGrid(v,h,colors);break;
+  case "radial":art=radial(v,h,colors);break;
+  case "premium":art=architectural(v,h,colors);break;
   default:art=generic(family.renderer,v,h,colors);
  }
  return <g opacity={opacity} transform={transform}>{art}</g>;
