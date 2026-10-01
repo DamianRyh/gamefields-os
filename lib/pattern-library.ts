@@ -102,6 +102,20 @@ export const variants=Array.from({length:12},(_,i)=>({
  name:["Origin","Split","Drift","Pulse","Offset","Loop","Fragment","Cross","Edge","Center","Rush","Field"][i]
 }));
 
+const familyVariantNames:Record<string,string[]>={
+ "organic-flow":["Source","River Split","Islands","Soft Divide","Tide","Serpentine","Broken Bay","Cross Current","Lagoon","Twin Flow","Rush","Field"],
+ "bauhaus":["Block Arc","Dual Circle","Target Cross","Chevron","Four Quarters","Arch","Slash Grid","Corner Orbits","Twin Rings","Diamond","Wave Block","Axis"],
+ "court-camo":["Drift","Cluster","Edge Camo","Split Camo","Patchwork","Field Camo","Diagonal Camo","Corner Camo","Transit","Wide Camo","Urban Patch","Full Camo"],
+ "street-art":["Flow Tag","Zigzag","Loop","Spray Lines","Wildstyle","Split Stroke","Eye","Cross","Scatter","Rail","Rush","Marker"],
+ "brand-activation":["Sponsor Lane","Dual Zone","Crown","Center Stage","Split Brand","Wave Brand","Twin Panels","Chevron Brand","Orbit Brand","Banner","Impact","Activation"],
+ "ribbons":["Twin Flow","Vertical Loop","Soft Cross","Interlace","Center Wave","Double Arc","Drop","Fast Cross","Metro","Orbit","Dual Rush","Track"]
+};
+
+export function patternVariantName(familyId:string,variant:number){
+ const names=familyVariantNames[familyId];
+ return names?.[Math.max(1,Math.min(12,variant))-1]||variants[Math.max(1,Math.min(12,variant))-1]?.name||"Variant";
+}
+
 export function getPatternFamily(id?:string){return patternFamilies.find(x=>x.id===id)||patternFamilies[0]}
 export function getPatternPalette(id?:string){return patternPalettes.find(x=>x.id===id)||patternPalettes[0]}
 export function complexityLabel(level:number){
