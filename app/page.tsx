@@ -51,6 +51,16 @@ function EquipmentShape({name}:{name:string}){
  if(name==="Banda")return <rect x="-60" y="-10" width="120" height="20" rx="2" fill="#263934"/>;
  if(name==="Namiot")return <g><path d="M-45 20L0-35L45 20Z" fill="#f0efe6" stroke="#273933" strokeWidth="3"/><path d="M-38 20v35M38 20v35" stroke="#273933" strokeWidth="4"/></g>;
  if(name==="DJ booth")return <g><rect x="-42" y="-24" width="84" height="48" rx="4" fill="#222d2a"/><circle cx="-20" cy="0" r="11" fill="#d8ff77"/><circle cx="20" cy="0" r="11" fill="#ff7757"/></g>;
+ if(name==="Quarter pipe")return <g fill="#aeb4b0" stroke="#465650" strokeWidth="3"><path d="M-50 34V10Q-50-34-6-34H50V34Z"/><path d="M-38 26Q-34-19 8-22H45" fill="none"/></g>;
+ if(name==="Funbox")return <g fill="#aeb4b0" stroke="#465650" strokeWidth="3"><path d="M-52 28L-34-28H34L52 28Z"/><rect x="-18" y="-28" width="36" height="56" fill="#c8ccc9"/></g>;
+ if(name==="Rail skate")return <g fill="none" stroke="#495a53" strokeWidth="5"><path d="M-48 0H48M-38 0V28M38 0V28"/></g>;
+ if(name==="Ledge")return <g fill="#9fa7a2" stroke="#43544d" strokeWidth="3"><rect x="-50" y="-18" width="100" height="36" rx="3"/><path d="M-50-8H50"/></g>;
+ if(name==="Bank")return <g fill="#b4bab6" stroke="#485952" strokeWidth="3"><path d="M-50 28L-20-28H50V28Z"/></g>;
+ if(name==="Drążki")return <g fill="none" stroke="#e5ece7" strokeWidth="5"><path d="M-42 35V-30M42 35V-30M-42-25H42"/></g>;
+ if(name==="Poręcze")return <g fill="none" stroke="#e5ece7" strokeWidth="5"><path d="M-42-15H42M-42 15H42M-34-15V30M34-15V30M-34 15V30M34 15V30"/></g>;
+ if(name==="Monkey bars")return <g fill="none" stroke="#e5ece7" strokeWidth="4"><rect x="-48" y="-24" width="96" height="48" rx="3"/><path d="M-32-24V24M-16-24V24M0-24V24M16-24V24M32-24V24"/></g>;
+ if(name==="Box treningowy")return <g fill="#62716a" stroke="#d8ff77" strokeWidth="3"><rect x="-34" y="-28" width="68" height="56" rx="4"/><path d="M-34 0H34"/></g>;
+ if(name==="Kółka treningowe")return <g fill="none" stroke="#e9efea" strokeWidth="4"><path d="M-22-35V-12M22-35V-12"/><circle cx="-22" cy="4" r="16"/><circle cx="22" cy="4" r="16"/></g>;
  if(name==="Totem")return <rect x="-15" y="-48" width="30" height="96" rx="3" fill="#d8ff77" stroke="#273933" strokeWidth="3"/>;
  if(name==="Trybuna")return <g fill="#66726d">{[0,1,2].map(i=><rect key={i} x={-55+i*8} y={-25+i*16} width={110-i*16} height="12"/>)}</g>;
  return <circle r="20" fill="#d8ff77"/>;
