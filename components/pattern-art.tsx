@@ -552,8 +552,8 @@ export function PatternArt({p,h}:{p:Project;h:number}){
    {depthOn?<><rect x="-30" y="-30" width="660" height={h+60} fill={`url(#${lightId})`} opacity=".72" pointerEvents="none"/><rect x="-30" y="-30" width="660" height={h+60} fill={`url(#${shadeId})`} pointerEvents="none"/></>:null}
    {textureOn?<rect x="-30" y="-30" width="660" height={h+60} fill="transparent" filter={`url(#${textureId})`} opacity={artistOn?.78:.48} pointerEvents="none"/>:null}
    {artistOn?<g pointerEvents="none" opacity=".68" style={{mixBlendMode:"screen"}}>
-     <S d={`M-40 ${h*.18}C120 ${h*.05} 190 ${h*.38} 340 ${h*.21}S510 ${h*.08} 650 ${h*.28}`} stroke={raw[(v+1)%5]} width={9+(v%3)*3} opacity=".50"/>
-     <S d={`M-30 ${h*.78}C120 ${h*.52} 265 ${h*.92} 420 ${h*.63}S560 ${h*.44} 650 ${h*.72}`} stroke={raw[(v+3)%5]} width={6+(v%4)*2} opacity=".42"/>
+     <S d={`M-40 ${h*.18}C120 ${h*.05} 190 ${h*.38} 340 ${h*.21}S510 ${h*.08} 650 ${h*.28}`} stroke={raw[(v+1)%5]} width={9+(v%3)*3} opacity={.50}/>
+     <S d={`M-30 ${h*.78}C120 ${h*.52} 265 ${h*.92} 420 ${h*.63}S560 ${h*.44} 650 ${h*.72}`} stroke={raw[(v+3)%5]} width={6+(v%4)*2} opacity={.42}/>
      {Array.from({length:12}).map((_,i)=><circle key={i} cx={(i*71+v*37)%620-10} cy={(i*43+v*29)%Math.max(100,h)} r={2+(i%4)*1.3} fill={raw[(i+v)%5]} opacity={.28+(i%3)*.12}/>)}
     </g>:null}
   </g>
