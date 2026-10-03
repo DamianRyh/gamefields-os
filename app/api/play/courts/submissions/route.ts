@@ -33,7 +33,9 @@ export async function POST(request: Request) {
     const address = String(body.address || "").trim().slice(0, 180) || null;
     const latitude = Number(body.latitude);
     const longitude = Number(body.longitude);
-    const sports = Array.isArray(body.sports) ? body.sports.map(String).filter((sport) => ALLOWED_SPORTS.has(sport)) : [];
+    const sports = Array.isArray(body.sports)
+      ? body.sports.map(String).filter((sport: string) => ALLOWED_SPORTS.has(sport))
+      : [];
     const surface = String(body.surface || "").trim().slice(0, 60) || null;
     const notes = String(body.notes || "").trim().slice(0, 1000) || null;
 
