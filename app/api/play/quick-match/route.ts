@@ -19,6 +19,7 @@ export async function POST(request: Request) {
     const home = await d1.prepare(
       "SELECT c.id,c.city FROM home_courts h JOIN courts c ON c.id=h.court_id WHERE h.user_id=? AND h.sport=?"
     ).bind(user.id, sport).first<{id:string;city:string}>();
+    const city = home?.city || user.city;
 
     const rows = (await d1.prepare(`
       SELECT
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
       FROM games g
       JOIN courts c ON c.id=g.court_id
       WHERE g.sport=?
+        AND c.city=?
         AND g.status='open'
         AND g.starts_at>=?
         AND g.starts_at<=?
@@ -40,7 +42,7 @@ export async function POST(request: Request) {
         AND (SELECT count(*) FROM game_players gp2 WHERE gp2.game_id=g.id) < g.max_players
       ORDER BY priority ASC, g.starts_at ASC, playerCount DESC
       LIMIT 20
-    `).bind(home?.id || "", home?.city || user.city, sport, now - 300, horizon, format, format, user.id)
+    `).bind(home?.id || "", city, sport, city, now - 300, horizon, format, format, user.id)
       .all<{id:string;courtId:string;format:string;startsAt:number;city:string;priority:number;playerCount:number}>()).results;
 
     const candidate = rows[0];
