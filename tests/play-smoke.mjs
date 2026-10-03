@@ -39,6 +39,25 @@ try{
  assert.equal((await db.prepare('SELECT count(*) n FROM play_game_settlements WHERE game_id=?').bind(game.gameId).first()).n,1);
  for(const id of accounts.slice(0,2))assert.equal((await db.prepare("SELECT games FROM player_sports WHERE user_id=? AND sport='football'").bind(id).first()).games,1);
  assert.equal((await call(0,'/api/play/rankings?sport=football&scope=court')).players.length,2);
+ // Quick Match never auto-joins a game outside the player's local city.
+ await db.prepare("INSERT INTO courts (id,slug,name,city,latitude,longitude,sports,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?)").bind('court_quick_remote','quick-remote','Quick Match remote court','Łódź',51.76,19.46,'["football"]',1,1).run();
+ const quickStart=minutes=>new Date(Date.now()+minutes*60000).toISOString();
+ const quickCreate=(courtId,minutes=10,format='1v1')=>call(0,'/api/play',{action:'create_game',courtId,sport:'football',format,startsAt:quickStart(minutes)});
+ const remoteGame=await quickCreate('court_quick_remote',3);
+ assert.equal((await call(1,'/api/play/quick-match',{sport:'football',format:'1v1'})).matched,false);
+ assert.equal((await call(0,`/api/play/game-room?gameId=${remoteGame.gameId}`)).players.length,1);
+ const cityGame=await quickCreate('court_agrykola',4);
+ const homeGame=await quickCreate('court_lazienkowski',10);
+ assert.equal((await call(1,'/api/play/quick-match',{sport:'football',format:'1v1'})).gameId,homeGame.gameId,'Home Court takes priority over an earlier game in the same city');
+ assert.equal((await call(2,'/api/play/quick-match',{sport:'football',format:'1v1'})).gameId,cityGame.gameId,'Without Home Court, use the profile city and skip earlier remote games');
+ await call(3,'/api/play',{action:'update_profile',city:'Łódź'});
+ assert.equal((await call(3,'/api/play/quick-match',{sport:'football',format:'1v1'})).gameId,remoteGame.gameId,'Profile city can match its own local game');
+ assert.equal((await call(2,'/api/play/quick-match',{sport:'football',format:'1v1'})).matched,false,'Full games are excluded');
+ const homeCityGame=await quickCreate('court_agrykola',10,'2v2');
+ await call(3,'/api/play',{action:'set_home_court',courtId:'court_lazienkowski',sport:'football'});
+ assert.equal((await call(3,'/api/play/quick-match',{sport:'football',format:'2v2'})).gameId,homeCityGame.gameId,'Home Court city takes priority over the profile city');
+ await call(3,'/api/play',{action:'update_profile',city:'Warszawa'});
+ await db.prepare("UPDATE games SET status='cancelled' WHERE id IN (?,?,?,?)").bind(remoteGame.gameId,cityGame.gameId,homeGame.gameId,homeCityGame.gameId).run();
  const challenge=await call(0,'/api/play',{action:'create_challenge',courtId:'court_lazienkowski',sport:'football',format:'1v1',startsAt:start,invitedUserIds:[accounts[1]],message:'Gramy?'});assert.ok((await call(1,'/api/play/social')).notifications.some(n=>n.entityId===challenge.challengeId));const accepted=await call(1,'/api/play',{action:'respond_challenge',challengeId:challenge.challengeId,response:'accepted'});assert.ok(accepted.gameId);await call(1,'/api/play',{action:'respond_challenge',challengeId:challenge.challengeId,response:'accepted'});assert.equal((await db.prepare('SELECT count(*) n FROM games WHERE id=?').bind(accepted.gameId).first()).n,1);assert.equal((await call(0,`/api/play/game-room?gameId=${accepted.gameId}`)).players.length,2);
  const tournament=await call(0,'/api/play/tournaments',{action:'create',courtId:'court_lazienkowski',sport:'football',name:'Pilot bracket',format:'1v1',maxEntries:4,startsAt:start});for(let i=1;i<4;i++)await call(i,'/api/play/tournaments',{action:'join',tournamentId:tournament.tournamentId});let t=await call(0,'/api/play/tournaments',{action:'start',tournamentId:tournament.tournamentId});assert.equal(t.matches.length,3);
  const first=t.matches.filter(m=>m.round===1);for(const m of first){const a=accounts.indexOf(m.playerAUserId),b=accounts.indexOf(m.playerBUserId);await call(a,'/api/play/tournaments',{action:'submit_match',tournamentId:tournament.tournamentId,matchId:m.id,scoreA:2,scoreB:1});await call(a,'/api/play/tournaments',{action:'confirm_match',tournamentId:tournament.tournamentId,matchId:m.id},400);t=await call(b,'/api/play/tournaments',{action:'confirm_match',tournamentId:tournament.tournamentId,matchId:m.id});await call(a,'/api/play/tournaments',{action:'submit_match',tournamentId:tournament.tournamentId,matchId:m.id,scoreA:1,scoreB:3},400);}
@@ -48,5 +67,5 @@ try{
  const report=await call(0,'/api/play',{action:'report_court',courtId:'court_lazienkowski',category:'surface',description:'Nawierzchnia wymaga naprawy.'});await call(1,'/api/play',{action:'support_report',reportId:report.reportId});await call(1,'/api/play',{action:'support_report',reportId:report.reportId});assert.equal((await call(0,'/api/play/court?id=court_lazienkowski&sport=football')).reports.find(r=>r.id===report.reportId).supportCount,1);
  const project={id:'GF-smoke',name:'Redesign Łazienkowski',type:'Renowacja',sport:'Piłka nożna 3×3',length:15,width:10,surface:'Akryl sportowy',base:'#246f70',zone:'#ef744e',outside:'#dedfd4',lineColor:'#ffffff',lines:true,pattern:'Organic Flow',graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:'day',objects:[],status:'Szkic',date:'3.10.2026'};const redesign=await call(0,'/api/projects',{action:'save',courtId:'court_lazienkowski',source:'play-redesign',project},201);await call(0,'/api/projects',{action:'publish',id:redesign.id});for(let i=0;i<2;i++)await call(1,'/api/projects',{action:'support',id:redesign.id});assert.equal((await call(1,`/api/projects?id=${redesign.id}`)).projectRecord.supportCount,1);
  const csrf=await mf.dispatchFetch('https://gamefields.test/api/play',{method:'POST',headers:{Origin:'https://unrelated.test',Cookie:jar.get(0),'Content-Type':'application/json'},body:JSON.stringify({action:'checkout'})});assert.equal(csrf.status,403);
- console.log(`PASS: ${checks} HTTP checks; four independent accounts; login/logout, onboarding, READY, game lifecycle, concurrent ELO confirmation, rankings, challenge, 4-player bracket, moderated submissions, duplicate detection, report/support and Builder publication.`);
+ console.log(`PASS: ${checks} HTTP checks; four independent accounts; login/logout, onboarding, READY, game lifecycle, concurrent ELO confirmation, rankings, local Quick Match, challenge, 4-player bracket, moderated submissions, duplicate detection, report/support and Builder publication.`);
 }finally{await mf.dispose();}
