@@ -1,0 +1,14 @@
+@media (max-width: 760px) {
+  .play-auth-page {
+    grid-template-columns: 1fr !important;
+  }
+
+  .play-auth-side {
+    display: none !important;
+  }
+
+  .play-auth-page > section {
+    width: min(520px, calc(100% - 28px)) !important;
+    padding-top: 28px !important;
+  }
+}
