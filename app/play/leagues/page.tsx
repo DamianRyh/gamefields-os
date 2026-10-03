@@ -24,9 +24,13 @@ type LeagueResponse = {
   ok:boolean;
   sport:string;
   scope:"court"|"district"|"city";
-  period:"30d"|"all";
+  period:"season"|"previous"|"30d"|"all";
   context:{label:string};
+  season:{key:string;label:string}|null;
+  currentSeason:{key:string;label:string};
+  previousSeason:{key:string;label:string};
   myPosition:number|null;
+  champion:Row|null;
   standings:Row[];
 };
 
@@ -35,7 +39,7 @@ const scopeLabels = {court:"COURT",district:"DISTRICT",city:"CITY"} as const;
 export default function LeaguesPage(){
   const [sport,setSport]=useState("football");
   const [scope,setScope]=useState<"court"|"district"|"city">("court");
-  const [period,setPeriod]=useState<"30d"|"all">("30d");
+  const [period,setPeriod]=useState<"season"|"previous"|"30d"|"all">("season");
   const [data,setData]=useState<LeagueResponse|null>(null);
   const [error,setError]=useState("");
   const [loading,setLoading]=useState(true);
@@ -52,6 +56,7 @@ export default function LeaguesPage(){
   },[sport,scope,period]);
 
   const subtitle=useMemo(()=>data?`${scopeLabels[data.scope]} LEAGUE · ${data.context.label}`:"AUTO LEAGUES",[data]);
+  const championTitle=scope==="court"?"COURT CHAMPION":scope==="district"?"DISTRICT CHAMPION":"CITY CHAMPION";
 
   return <main className="p-page">
     <PlayHeader title="LEAGUES" back="/play/more"/>
@@ -59,13 +64,15 @@ export default function LeaguesPage(){
       <div>
         <p className="p-kicker">GAMEFIELDS PLAY</p>
         <h1>Grasz. Liga liczy się sama.</h1>
-        <p className="p-muted">Każdy potwierdzony mecz zasila tabelę automatycznie. Bez zapisów sezonowych, bez organizatora i bez ręcznego liczenia punktów.</p>
+        <p className="p-muted">Każdy potwierdzony mecz zasila tabelę automatycznie. Sezony zamykają się co miesiąc bez zapisów, administratora i ręcznego liczenia punktów.</p>
       </div>
       <Sports sport={sport} setSport={setSport}/>
       <div className="p-tabs" aria-label="Zakres ligi">
         {(Object.keys(scopeLabels) as Array<keyof typeof scopeLabels>).map(item=><button key={item} className={scope===item?"p-tab active":"p-tab"} onClick={()=>setScope(item)}>{scopeLabels[item]}</button>)}
       </div>
       <div className="p-tabs" aria-label="Okres ligi">
+        <button className={period==="season"?"p-tab active":"p-tab"} onClick={()=>setPeriod("season")}>TEN SEZON</button>
+        <button className={period==="previous"?"p-tab active":"p-tab"} onClick={()=>setPeriod("previous")}>POPRZEDNI</button>
         <button className={period==="30d"?"p-tab active":"p-tab"} onClick={()=>setPeriod("30d")}>30 DNI</button>
         <button className={period==="all"?"p-tab active":"p-tab"} onClick={()=>setPeriod("all")}>ALL TIME</button>
       </div>
@@ -75,10 +82,11 @@ export default function LeaguesPage(){
         <section className="p-card">
           <p className="p-kicker">{subtitle}</p>
           <div style={{display:"flex",justifyContent:"space-between",gap:16,alignItems:"flex-end",flexWrap:"wrap"}}>
-            <div><h2 style={{marginBottom:4}}>{data.context.label}</h2><p className="p-muted">3 pkt wygrana · 1 pkt remis · 0 pkt porażka</p></div>
+            <div><h2 style={{marginBottom:4}}>{data.context.label}</h2><p className="p-muted">{data.season?data.season.label:"3 pkt wygrana · 1 pkt remis · 0 pkt porażka"}</p></div>
             <div style={{textAlign:"right"}}><span className="p-muted">Twoja pozycja</span><div style={{fontSize:32,fontWeight:900}}>{data.myPosition?`#${data.myPosition}`:"—"}</div></div>
           </div>
         </section>
+        {data.season?<section className="p-card"><p className="p-kicker">{championTitle}</p>{data.champion?<div className="p-row"><div style={{display:"flex",alignItems:"center",gap:12}}><Avatar nickname={data.champion.nickname} url={data.champion.avatarUrl}/><div><h2 style={{margin:0}}>@{data.champion.nickname}</h2><p className="p-muted">{data.champion.points} pkt · {data.champion.wins} wygranych · {data.champion.matches} meczów</p></div></div><span className="p-badge">#{data.champion.rank}</span></div>:<p className="p-muted">Pierwszy potwierdzony mecz uruchomi walkę o tytuł.</p>}</section>:null}
         <section className="p-card" style={{overflowX:"auto"}}>
           <table style={{width:"100%",borderCollapse:"collapse",minWidth:720}}>
             <thead><tr style={{textAlign:"left"}}><th>#</th><th>GRACZ</th><th>M</th><th>W</th><th>R</th><th>P</th><th>+/−</th><th>PTS</th><th>ELO</th></tr></thead>

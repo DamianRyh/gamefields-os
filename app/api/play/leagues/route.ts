@@ -17,6 +17,18 @@ type Standing = {
   eloDelta: number;
 };
 
+function monthWindow(offset:number) {
+  const now = new Date();
+  const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + offset, 1));
+  const end = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + offset + 1, 1));
+  return {
+    from: Math.floor(start.getTime()/1000),
+    to: Math.floor(end.getTime()/1000),
+    key: `${start.getUTCFullYear()}-${String(start.getUTCMonth()+1).padStart(2,"0")}`,
+    label: start.toLocaleDateString("pl-PL",{month:"long",year:"numeric",timeZone:"UTC"}),
+  };
+}
+
 export async function GET(request: Request) {
   try {
     const user = await requireCurrentPlayUser();
@@ -35,7 +47,11 @@ export async function GET(request: Request) {
     const city = url.searchParams.get("city") || home?.city || user.city;
     const district = url.searchParams.get("district") || home?.district || "";
     const courtId = url.searchParams.get("courtId") || home?.id || "";
-    const period = url.searchParams.get("period") === "all" ? "all" : "30d";
+    const rawPeriod = url.searchParams.get("period") || "season";
+    const period = ["season","previous","30d","all"].includes(rawPeriod) ? rawPeriod : "season";
+    const currentSeason = monthWindow(0);
+    const previousSeason = monthWindow(-1);
+    const season = period === "previous" ? previousSeason : currentSeason;
     const since = Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60;
 
     let scopeSql = "c.city=?";
@@ -51,8 +67,16 @@ export async function GET(request: Request) {
       scopeArgs = [courtId];
     }
 
-    const periodSql = period === "30d" ? "AND g.result_confirmed_at>=?" : "";
-    const args = [sport, ...scopeArgs, ...(period === "30d" ? [since] : [])];
+    let periodSql = "";
+    let periodArgs: unknown[] = [];
+    if (period === "30d") {
+      periodSql = "AND g.result_confirmed_at>=?";
+      periodArgs = [since];
+    } else if (period === "season" || period === "previous") {
+      periodSql = "AND g.result_confirmed_at>=? AND g.result_confirmed_at<?";
+      periodArgs = [season.from,season.to];
+    }
+    const args = [sport, ...scopeArgs, ...periodArgs];
 
     const sql = `
       WITH eligible AS (
@@ -113,10 +137,14 @@ export async function GET(request: Request) {
       sport,
       scope,
       period,
+      season:(period==="season"||period==="previous")?season:null,
+      currentSeason,
+      previousSeason,
       context,
       homeCourt:home,
       rules:{win:3,draw:1,loss:0,source:"confirmed_games"},
       myPosition:standings.find(row=>row.userId===user.id)?.rank || null,
+      champion:standings[0] || null,
       standings,
     },{headers:{"Cache-Control":"no-store"}});
   } catch (error) {
