@@ -35,6 +35,8 @@ export const tournamentMatches = sqliteTable("play_tournament_matches", {
   playerBUserId: text("player_b_user_id").references(() => users.id, { onDelete: "set null" }),
   scoreA: integer("score_a"),
   scoreB: integer("score_b"),
+  submittedByUserId: text("submitted_by_user_id").references(() => users.id, { onDelete: "set null" }),
+  resultConfirmedAt: integer("result_confirmed_at", { mode: "timestamp" }),
   winnerUserId: text("winner_user_id").references(() => users.id, { onDelete: "set null" }),
   nextMatchId: text("next_match_id"),
   status: text("status").notNull().default("pending"),
