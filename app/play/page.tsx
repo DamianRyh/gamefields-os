@@ -5,14 +5,20 @@ import Link from "next/link";
 
 type Court = { id: string; name: string; city: string; district: string | null; sports: string; latitude: number; longitude: number };
 type Game = { id: string; courtId: string; courtName: string; sport: string; format: string; level: string; startsAt: string; maxPlayers: number; playerCount: number };
-type Ranking = { userId: string; nickname: string; displayName: string | null; sport: string; elo: number; games: number; wins: number };
+type Ranking = { userId: string; nickname: string; displayName: string | null; sport: string; skillLevel: string; tier: string; elo: number; games: number; wins: number };
+type PlayerSport = { id: string; sport: string; skillLevel: string; tier: string; elo: number; games: number; wins: number; losses: number; draws: number };
+type ChallengeParticipant = { userId: string; side: string; role: string; status: string; nickname: string; displayName: string | null; avatarUrl: string | null };
+type Challenge = { id: string; creatorUserId: string; courtId: string; courtName: string; sport: string; format: string; startsAt: string; status: string; message: string | null; gameId: string | null; participants: ChallengeParticipant[] };
 type Bootstrap = {
   ok: boolean;
   user: { id: string; nickname: string; city: string; displayName: string | null };
+  coins: number;
+  sports: PlayerSport[];
   courts: Court[];
   games: Game[];
   rankings: Ranking[];
   activeCheckins: { courtId: string; playersNow: number }[];
+  challenges: Challenge[];
 };
 
 async function callPlay(action: string, payload: Record<string, unknown> = {}) {
@@ -61,6 +67,8 @@ export default function PlayPage() {
 
   const checkins = useMemo(() => new Map((data?.activeCheckins || []).map((item) => [item.courtId, Number(item.playersNow)])), [data]);
   const rankings = useMemo(() => (data?.rankings || []).filter((item) => item.sport === sport).slice(0, 10), [data, sport]);
+  const currentSport = useMemo(() => data?.sports.find((item) => item.sport === sport), [data, sport]);
+  const pendingChallenges = useMemo(() => (data?.challenges || []).filter((item) => item.status === "pending"), [data]);
 
   async function run(action: string, payload: Record<string, unknown>) {
     setBusy(true);
@@ -73,6 +81,18 @@ export default function PlayPage() {
     } finally {
       setBusy(false);
     }
+  }
+
+  async function challengePlayer(player: Ranking) {
+    if (!courtId || !data || player.userId === data.user.id) return;
+    await run("create_challenge", {
+      sport,
+      courtId,
+      format: "1v1",
+      startsAt: new Date(startTime).toISOString(),
+      invitedUserIds: [player.userId],
+      message: `Gamefields PLAY challenge: @${data.user.nickname} vs @${player.nickname}`,
+    });
   }
 
   if (error === "UNAUTHENTICATED") {
@@ -97,7 +117,10 @@ export default function PlayPage() {
           <div style={styles.brand}>GAMEFIELDS <span style={styles.green}>PLAY</span></div>
           <div style={styles.muted}>Warszawa · v0.1</div>
         </div>
-        <div style={styles.profile}>@{data.user.nickname}</div>
+        <div style={styles.headerRight}>
+          <div style={styles.coinPill}>◉ {data.coins} COINS</div>
+          <div style={styles.profile}>@{data.user.nickname}</div>
+        </div>
       </header>
 
       {error && <div style={styles.error}>{error}</div>}
@@ -106,9 +129,33 @@ export default function PlayPage() {
         <div>
           <div style={styles.kicker}>FIND IT. PLAY IT. RANK IT. CHANGE IT.</div>
           <h1 style={styles.heroTitle}>Gdzie grasz dzisiaj?</h1>
-          <p style={styles.muted}>Znajdź boisko, dołącz do gry albo utwórz własny mecz.</p>
+          <p style={styles.muted}>Znajdź boisko, dołącz do gry, wyzwij gracza i buduj swoją pozycję w mieście.</p>
         </div>
-        <div style={styles.heroStat}><b>{data.games.length}</b><span>otwartych gier</span></div>
+        <div style={styles.heroStats}>
+          <div style={styles.heroStat}><b>{data.games.length}</b><span>otwartych gier</span></div>
+          <div style={styles.heroStat}><b>{pendingChallenges.length}</b><span>challenge</span></div>
+        </div>
+      </section>
+
+      <section style={styles.playerBar}>
+        <div>
+          <div style={styles.kicker}>{sport.toUpperCase()}</div>
+          <div style={styles.playerLevel}>{currentSport?.elo ?? 900} ELO <span style={styles.tier}>{currentSport?.tier ?? "Rookie"}</span></div>
+        </div>
+        <div style={styles.skillWrap}>
+          <span style={styles.muted}>Poziom startowy</span>
+          <select
+            style={styles.compactInput}
+            value={currentSport?.skillLevel || "beginner"}
+            disabled={busy || (currentSport?.games || 0) > 0}
+            onChange={(e) => run("set_skill_level", { sport, skillLevel: e.target.value })}
+          >
+            <option value="beginner">Początkujący</option>
+            <option value="intermediate">Średniozaawansowany</option>
+            <option value="advanced">Zaawansowany</option>
+            <option value="competitive">Turniejowy</option>
+          </select>
+        </div>
       </section>
 
       <div style={styles.grid}>
@@ -129,7 +176,7 @@ export default function PlayPage() {
               </button>
             ))}
           </div>
-          {courtId && <button disabled={busy} style={styles.secondary} onClick={() => run("checkin", { courtId })}>I'M HERE / CHECK-IN</button>}
+          {courtId && <button disabled={busy} style={styles.secondary} onClick={() => run("checkin", { courtId })}>I'M HERE / CHECK-IN +5</button>}
         </section>
 
         <section style={styles.card}>
@@ -156,6 +203,39 @@ export default function PlayPage() {
       </div>
 
       <section style={styles.card}>
+        <div style={styles.sectionHeader}>
+          <div style={styles.sectionTitle}>CHALLENGES</div>
+          <div style={styles.muted}>Wyzwania pomiędzy graczami</div>
+        </div>
+        <div style={styles.challengeGrid}>
+          {data.challenges.slice(0, 8).map((challenge) => {
+            const myLink = challenge.participants.find((participant) => participant.userId === data.user.id);
+            const rivals = challenge.participants.filter((participant) => participant.userId !== data.user.id);
+            return (
+              <article key={challenge.id} style={styles.challengeCard}>
+                <div style={styles.challengeTop}>
+                  <div style={styles.kicker}>{challenge.sport.toUpperCase()} · {challenge.format}</div>
+                  <span style={challenge.status === "accepted" ? styles.statusAccepted : styles.status}>{challenge.status.toUpperCase()}</span>
+                </div>
+                <h3 style={{ margin: "8px 0" }}>{challenge.courtName}</h3>
+                <div style={styles.muted}>{new Date(challenge.startsAt).toLocaleString("pl-PL")}</div>
+                <div style={styles.rivals}>{rivals.map((participant) => `@${participant.nickname}`).join(" · ")}</div>
+                {challenge.message && <div style={styles.challengeMessage}>{challenge.message}</div>}
+                {challenge.status === "pending" && myLink?.role === "invitee" && myLink.status === "pending" && (
+                  <div style={styles.challengeActions}>
+                    <button disabled={busy} style={styles.primarySmall} onClick={() => run("respond_challenge", { challengeId: challenge.id, response: "accepted" })}>ACCEPT</button>
+                    <button disabled={busy} style={styles.ghostSmall} onClick={() => run("respond_challenge", { challengeId: challenge.id, response: "declined" })}>DECLINE</button>
+                  </div>
+                )}
+                {challenge.gameId && <div style={styles.ready}>GAME READY · {challenge.gameId.slice(0, 16)}…</div>}
+              </article>
+            );
+          })}
+          {data.challenges.length === 0 && <div style={styles.muted}>Nie masz jeszcze challenge. Wybierz gracza z rankingu i rzuć mu wyzwanie.</div>}
+        </div>
+      </section>
+
+      <section style={styles.card}>
         <div style={styles.sectionTitle}>GRY DLA CIEBIE</div>
         <div style={styles.gameGrid}>
           {data.games.filter((game) => game.sport === sport).map((game) => (
@@ -172,13 +252,20 @@ export default function PlayPage() {
       </section>
 
       <section style={styles.card}>
-        <div style={styles.sectionTitle}>RANKING WARSZAWA · {sport.toUpperCase()}</div>
+        <div style={styles.sectionHeader}>
+          <div style={styles.sectionTitle}>RANKING WARSZAWA · {sport.toUpperCase()}</div>
+          <div style={styles.muted}>Challenge gracza bezpośrednio z tabeli</div>
+        </div>
         <div style={styles.list}>
           {rankings.map((player, index) => (
             <div key={`${player.userId}-${player.sport}`} style={styles.rankRow}>
               <span style={styles.rankNo}>{index + 1}</span>
-              <div style={{ flex: 1 }}><b>@{player.nickname}</b><div style={styles.muted}>{player.games} gier · {player.wins} zwycięstw</div></div>
+              <div style={{ flex: 1 }}>
+                <b>@{player.nickname}</b>
+                <div style={styles.muted}>{player.games} gier · {player.wins} zwycięstw · {player.tier}</div>
+              </div>
               <b style={styles.green}>{player.elo} ELO</b>
+              {player.userId !== data.user.id && <button disabled={busy || !courtId} style={styles.challengeButton} onClick={() => challengePlayer(player)}>CHALLENGE</button>}
             </div>
           ))}
         </div>
@@ -190,16 +277,25 @@ export default function PlayPage() {
 const styles: Record<string, React.CSSProperties> = {
   page: { minHeight: "100vh", background: "#071016", color: "#f4f8f5", padding: "24px", fontFamily: "Arial, sans-serif" },
   center: { minHeight: "100vh", display: "grid", placeItems: "center", background: "#071016", color: "white", padding: 24 },
-  header: { maxWidth: 1180, margin: "0 auto 28px", display: "flex", justifyContent: "space-between", alignItems: "center" },
+  header: { maxWidth: 1180, margin: "0 auto 28px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16 },
+  headerRight: { display: "flex", alignItems: "center", gap: 10 },
   brand: { fontSize: 24, fontWeight: 900, letterSpacing: -1 },
   green: { color: "#77ff55" },
+  coinPill: { border: "1px solid #514a24", borderRadius: 999, padding: "10px 14px", background: "#1b1a0d", color: "#ffe66a", fontWeight: 800, fontSize: 13 },
   profile: { border: "1px solid #24343d", borderRadius: 999, padding: "10px 14px", background: "#0d1820" },
   hero: { maxWidth: 1180, margin: "0 auto 20px", border: "1px solid #20323b", borderRadius: 24, padding: 28, background: "linear-gradient(135deg,#0d1820,#0a1319)", display: "flex", justifyContent: "space-between", gap: 24, alignItems: "end" },
   heroTitle: { margin: "6px 0", fontSize: "clamp(36px,7vw,72px)", lineHeight: .95, letterSpacing: -3 },
-  heroStat: { minWidth: 140, borderLeft: "1px solid #2b3c45", paddingLeft: 24, display: "grid", gap: 4 },
+  heroStats: { display: "flex", gap: 24 },
+  heroStat: { minWidth: 110, borderLeft: "1px solid #2b3c45", paddingLeft: 20, display: "grid", gap: 4 },
   kicker: { fontSize: 12, letterSpacing: 1.5, color: "#77ff55", fontWeight: 800 },
+  playerBar: { maxWidth: 1180, margin: "0 auto 20px", border: "1px solid #20323b", borderRadius: 18, padding: 18, background: "#0c171e", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap" },
+  playerLevel: { fontSize: 24, fontWeight: 900, marginTop: 4 },
+  tier: { color: "#77ff55", fontSize: 13, padding: "5px 8px", marginLeft: 8, border: "1px solid #345b35", borderRadius: 999, verticalAlign: "middle" },
+  skillWrap: { display: "flex", gap: 10, alignItems: "center" },
+  compactInput: { padding: "9px 10px", borderRadius: 10, border: "1px solid #253840", background: "#101d25", color: "white" },
   grid: { maxWidth: 1180, margin: "0 auto 20px", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 20 },
   card: { maxWidth: 1180, margin: "0 auto 20px", border: "1px solid #20323b", borderRadius: 20, padding: 20, background: "#0c171e" },
+  sectionHeader: { display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 16 },
   sectionTitle: { fontWeight: 900, marginBottom: 16, fontSize: 15, letterSpacing: .7 },
   segmented: { display: "flex", gap: 8, marginBottom: 14 },
   segment: { background: "#101f27", color: "#9fb0b9", border: "1px solid #24343d", borderRadius: 999, padding: "9px 14px", cursor: "pointer" },
@@ -217,7 +313,19 @@ const styles: Record<string, React.CSSProperties> = {
   gameGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 12 },
   gameCard: { border: "1px solid #243740", borderRadius: 16, padding: 16, background: "#101d25" },
   gameMeta: { marginTop: 14, fontSize: 14 },
-  rankRow: { display: "flex", alignItems: "center", gap: 14, padding: "12px 4px", borderBottom: "1px solid #172930" },
+  challengeGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 12 },
+  challengeCard: { border: "1px solid #29404a", borderRadius: 16, padding: 16, background: "linear-gradient(145deg,#101d25,#0b161c)" },
+  challengeTop: { display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 },
+  status: { fontSize: 10, padding: "5px 7px", borderRadius: 999, border: "1px solid #5e5830", color: "#f5d867" },
+  statusAccepted: { fontSize: 10, padding: "5px 7px", borderRadius: 999, border: "1px solid #345b35", color: "#77ff55" },
+  rivals: { marginTop: 14, fontWeight: 800 },
+  challengeMessage: { marginTop: 10, padding: 10, borderRadius: 10, background: "#14232b", color: "#aebdc5", fontSize: 13 },
+  challengeActions: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 14 },
+  primarySmall: { padding: "10px 12px", borderRadius: 10, border: 0, background: "#77ff55", color: "#071007", fontWeight: 900, cursor: "pointer" },
+  ghostSmall: { padding: "10px 12px", borderRadius: 10, border: "1px solid #3a4c55", background: "transparent", color: "#c7d2d8", fontWeight: 800, cursor: "pointer" },
+  ready: { marginTop: 12, color: "#77ff55", fontSize: 12, fontWeight: 800 },
+  rankRow: { display: "flex", alignItems: "center", gap: 14, padding: "12px 4px", borderBottom: "1px solid #172930", flexWrap: "wrap" },
   rankNo: { width: 28, color: "#91a3ad", fontWeight: 800 },
+  challengeButton: { padding: "8px 10px", borderRadius: 9, border: "1px solid #77ff55", background: "transparent", color: "#77ff55", fontWeight: 900, fontSize: 11, cursor: "pointer" },
   error: { maxWidth: 1180, margin: "0 auto 18px", padding: 12, borderRadius: 12, background: "#351519", border: "1px solid #722831", color: "#ff9da8" },
 };
