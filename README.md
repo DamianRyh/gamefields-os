@@ -1,49 +1,192 @@
-# Gamefields Studio v1.0
+# Gamefields Platform
 
-Polski edytor koncepcji boisk oparty na React 19 i Vinext.
+Gamefields to połączony ekosystem dwóch głównych warstw:
 
-## Funkcje
-- Wymiary, nawierzchnie, kolory i oznakowanie sportowe.\n- Pattern Engine: 25 rodzin × 12 kompozycji = 300 bazowych wzorów nawierzchni.\n- 18 gotowych palet kolorystycznych, filtrowanie, wyszukiwarka, losowanie kierunku i wariantów podobnych.\n- Parametryczne SVG: wariant, paleta, intensywność, skala i obrót wzoru bez zapisywania setek bitmap.
-- Import logo PNG/SVG, tekst, biblioteka sponsorów i wyposażenia.
-- Przesuwanie, obrót, skalowanie, przezroczystość i grafiki na bandach.
-- Cofnij/ponów, warianty A/B/C, scena dzienna, nocna i eventowa.
-- Budżet demonstracyjny, eksport i walidowany import JSON.
-- Gamefields OS: lista projektów bieżącej sesji.
+- **Gamefields Studio / Builder** — projektowanie i wycena koncepcji boisk oraz przestrzeni sportowych.
+- **Gamefields PLAY** — społecznościowa aplikacja sportowa: boiska, gry, zawodnicy, rankingi, challenge i turnieje.
 
-## Ograniczenia
-Projekty działają w pamięci sesji: pobierz JSON przed zamknięciem strony. Brak kont, bazy danych i automatycznej wysyłki zapytań. Budżet wykorzystuje demonstracyjne stawki, nie jest ofertą ani kalkulacją wykonawczą. Widok 3D jest perspektywą SVG; edycja przeciąganiem działa w planie 2D. Geometria linii jest poglądowa. Import obsługuje format edytora v0.5 i zachowuje zgodność z projektami v0.3 dzięki opcjonalnym polom Pattern Engine; stare pliki v0.1 wymagają migracji.
+Aplikacja jest oparta na React 19, Next/Vinext, Drizzle ORM i Cloudflare D1.
 
-## Uruchomienie
-`pnpm dev`, `pnpm build`, `pnpm exec tsc --noEmit`.
+## Gamefields PLAY
 
-Kod: https://github.com/DamianRyh/gamefields-os
-Studio: https://gamefields-studio.ryhfs90.chatgpt.site
-Integracja WordPress: https://www.gamefields.eu/konfigurator-boisk/
+Aktualny rdzeń PLAY obejmuje:
 
-Sites publikuje aplikację niezależnie od GitHub. WordPress osadza tę samą aplikację; aktualizacje Studio są widoczne również w osadzeniu. Eksport/import JSON pozwala przenosić projekty między kartami. Nie ma automatycznej synchronizacji danych użytkownika.
+- publiczne konto Gamefields: rejestracja, logowanie i wylogowanie,
+- profile zawodników,
+- osobne ELO dla dyscyplin,
+- poziomy i tiery graczy,
+- Football i Basketball jako sporty startowe,
+- mapę / bazę boisk,
+- Home Court i Court Ranking,
+- check-in na obiekcie,
+- tworzenie gier i dołączanie do nich,
+- Game Room,
+- generowanie zespołów na podstawie ELO,
+- submit + confirm wyniku,
+- zabezpieczenie przed podwójnym naliczeniem ELO,
+- Gamefields Coins,
+- Player Discovery,
+- Follow / Community / Notifications,
+- Challenges i Challenge Room,
+- wiadomości w ramach challenge,
+- Tournament Engine i drabinki,
+- submit / confirm wyniku turniejowego i automatyczny awans,
+- zgłoszenia problemów z boiskiem,
+- przejście Court → Gamefields Builder z kontekstem obiektu,
+- mobilny shell i manifest PWA.
+
+Główne ścieżki:
+
+- `/play`
+- `/play/auth`
+- `/play/account`
+- `/play/courts`
+- `/play/games`
+- `/play/players`
+- `/play/tournaments`
+- `/play/community`
+
+Health check bazy:
+
+`GET /api/play/health`
+
+Pełny runbook wydaniowy znajduje się w `docs/PLAY_RELEASE.md`.
+
+## Gamefields Account
+
+Publiczny auth PLAY wykorzystuje:
+
+- sesję 30-dniową,
+- cookie HttpOnly,
+- `SameSite=Lax`,
+- `Secure` w produkcji,
+- hash tokenu sesyjnego SHA-256 zapisywany w D1,
+- PBKDF2 SHA-256 + losowy salt dla haseł,
+- czasową blokadę po serii błędnych logowań.
+
+Hosted auth środowiska pozostaje kompatybilnym, równoległym providerem.
+
+## Baza danych
+
+PLAY używa trwałej bazy Cloudflare D1 przez binding `DB`.
+
+Migracje znajdują się w `drizzle/` i muszą być wykonywane kolejno:
+
+1. `0001_gamefields_play.sql`
+2. `0002_play_social_engine.sql`
+3. `0003_play_tournaments.sql`
+4. `0004_play_tournament_confirmation.sql`
+5. `0005_play_social_graph.sql`
+6. `0006_play_public_auth.sql`
+
+Nie należy ponownie wykonywać starych migracji na istniejącej bazie bez sprawdzenia stanu schematu.
+
+## Gamefields Studio / Builder
+
+Studio obsługuje m.in.:
+
+- wymiary, nawierzchnie, kolory i oznakowanie sportowe,
+- Pattern Engine: 25 rodzin × 12 kompozycji = 300 bazowych wzorów,
+- 18 palet kolorystycznych,
+- parametryczne SVG,
+- import logo PNG/SVG i tekst,
+- bibliotekę sponsorów i wyposażenia,
+- przesuwanie, obrót, skalowanie i przezroczystość,
+- grafiki na bandach,
+- undo/redo,
+- warianty A/B/C,
+- scenę dzienną, nocną i eventową,
+- orientacyjny budżet,
+- walidowany import i eksport JSON,
+- gotowe projekty z WordPressa,
+- wejście do redesignu bezpośrednio z profilu boiska w PLAY.
+
+### Pattern Engine
+
+Biblioteka wzorów znajduje się w `lib/pattern-library.ts`.
+
+Kategorie:
+
+- Organic
+- Geometric
+- Street
+- Premium
+- Brand
+- Play
+
+Kod wzoru ma format `GF-<RODZINA>-<WARIANT>`.
+
+## Ważne ograniczenie Studio
+
+**PLAY posiada już trwałe konta i bazę danych.**
+
+Natomiast projekty samego Buildera nadal w dużej części działają w stanie sesji przeglądarki. Do czasu przeniesienia projektów Buildera do trwałej warstwy projektowej należy korzystać z eksportu JSON przy ważnych projektach.
+
+Budżet Buildera ma charakter orientacyjny i nie jest ofertą wykonawczą.
+
+## Uruchomienie lokalne
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Walidacja:
+
+```bash
+pnpm exec tsc --noEmit
+pnpm build
+```
+
+Generowanie zmian Drizzle:
+
+```bash
+pnpm db:generate
+```
+
+## Hosting
+
+Konfiguracja hostingu używa bindingu D1 `DB` z `.openai/hosting.json`.
+
+Aktualne integracje historyczne:
+
+- Studio: `https://gamefields-studio.ryhfs90.chatgpt.site`
+- WordPress: `https://www.gamefields.eu/konfigurator-boisk/`
+
+Dla publicznego Gamefields PLAY preferowane jest uruchomienie aplikacji pod domeną należącą do Gamefields, np. `gamefields.eu/play` albo `play.gamefields.eu`, zamiast polegania na cross-site iframe dla sesji użytkownika.
 
 ## Gotowe projekty — WordPress
-Zarządzanie: Wpisy, kategoria `gamefields-wzory` (ID 629). Dodaj nazwę, zajawkę, opcjonalny obrazek wyróżniający i blok Plik z eksportem „Wzór do WordPress” (.txt, zawartość JSON). Katalog czyta wyłącznie opublikowane wpisy z tej kategorii. Wycofanie: status Szkic; media pozostają publiczne jak zwykłe pliki WordPress.
 
-Aplikacja udostępnia katalog `/api/templates` oraz odczyt pojedynczego projektu `?id=<post_id>`. Pliki tylko z HTTPS www.gamefields.eu/wp-content/uploads/, bez przekierowań, limit 12 MB, walidacja schematu. Brak publicznych operacji zapisu. Katalog jest stronicowany; otwarcie tworzy kopię z nowym identyfikatorem. Link do katalogu: `?view=templates`.
+Zarządzanie wzorami odbywa się przez wpisy WordPress w kategorii `gamefields-wzory` (ID 629).
 
-Instrukcja w WordPressie: szkic wpisu 3649.
+Wpis może zawierać:
 
+- nazwę,
+- zajawkę,
+- obrazek wyróżniający,
+- plik eksportu projektu.
 
-## Pattern Engine v0.5
-Biblioteka jest generowana z danych w `lib/pattern-library.ts`. Każda rodzina ma 12 kompozycji i może być łączona z dowolną paletą, sportem oraz wymiarem boiska. Warstwa artworku jest niezależna od linii sportowych i wyposażenia. Kod wzoru ma format `GF-<RODZINA>-<WARIANT>`.
+Katalog aplikacji czyta wyłącznie opublikowane wpisy z tej kategorii.
 
-Kategorie: Organic, Geometric, Street, Premium, Brand i Play. Poziom wykonawczy 1–4 jest wyliczany dla wzoru i może być później podpięty do kalkulatora robocizny, liczby kolorów oraz zużycia materiałów.
+API katalogu:
 
+- `/api/templates`
+- `/api/templates?id=<post_id>`
 
-## Pattern Engine v1.0
-Biblioteka obejmuje 25 rodzin projektowych × 12 kompozycji = 300 bazowych wzorów. Każda kompozycja ma własny układ, a nie tylko przesunięcie lub obrót jednego motywu.
+Pliki projektu są walidowane przed otwarciem, a otwarcie gotowego wzoru tworzy jego kopię.
 
-Dopracowane rodziny:
-- Organic Flow, Soft Blobs, Geometric, Bauhaus, Color Block
-- Waves, Contour, Court Camo, Street Grid, Pixel, Diagonal, Radial
-- Sunset Bands, Neon Court, Mono Layers, Raw Concrete
-- Street Art, Typography, Local ID, Nature, Playground
-- Architectural, Brand Activation, Ribbons, Terrazzo
+## Release
 
-Warstwa wzoru jest parametryczna i niezależna od linii sportowych, wyposażenia oraz brandingu. Wzory można łączyć z 18 paletami, skalować, obracać i regulować ich intensywność.
+Przed pilotem PLAY wymagane są:
+
+- zielone CI,
+- poprawne migracje D1,
+- zielony `/api/play/health`,
+- test dwóch niezależnych kont,
+- potwierdzenie pojedynczej aktualizacji ELO,
+- działający Challenge flow,
+- działający turniej,
+- działający Court → Builder,
+- test mobile.
+
+Szczegóły: `docs/PLAY_RELEASE.md`.
