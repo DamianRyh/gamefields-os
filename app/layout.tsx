@@ -1,16 +1,36 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { BuilderPlayBridge } from "@/components/builder-play-bridge";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gamefields Studio — konfigurator boisk",
-  description: "Zaprojektuj boisko: wymiary, nawierzchnia, kolory, linie i wyposażenie. Grafiki, warianty A/B/C i orientacyjny budżet. Gamefields Studio v0.3.1.",
+  title: {
+    default: "Gamefields",
+    template: "%s — Gamefields",
+  },
+  description: "Gamefields łączy projektowanie, grę i rozwój miejskiej infrastruktury sportowej.",
+  applicationName: "Gamefields PLAY",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Gamefields PLAY",
+  },
   other: {
     "codex-preview": "development",
+    "mobile-web-app-capable": "yes",
   },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#071016",
 };
 
 export default function RootLayout({
@@ -20,7 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <BuilderPlayBridge />
+      </body>
     </html>
   );
 }

@@ -1,0 +1,104 @@
+.play-shell {
+  min-height: 100vh;
+  background: #071016;
+  padding-bottom: calc(86px + env(safe-area-inset-bottom));
+}
+
+.play-nav {
+  position: fixed;
+  left: 50%;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 70;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(72px, 1fr));
+  gap: 4px;
+  width: min(760px, calc(100vw - 20px));
+  padding: 6px;
+  border: 1px solid #263b45;
+  border-radius: 18px;
+  background: rgba(8, 18, 24, .94);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, .35);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.play-nav::-webkit-scrollbar { display: none; }
+
+.play-nav-link {
+  display: grid;
+  place-items: center;
+  min-height: 42px;
+  padding: 8px 9px;
+  border-radius: 12px;
+  color: #dce8e5;
+  text-decoration: none;
+  font: 900 10px/1 Arial, sans-serif;
+  letter-spacing: .35px;
+  white-space: nowrap;
+}
+
+.play-nav-link:focus-visible {
+  outline: 2px solid #77ff55;
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  .play-shell {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom));
+  }
+
+  .play-nav {
+    left: 8px;
+    right: 8px;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    transform: none;
+    width: auto;
+    grid-template-columns: repeat(6, 72px);
+    justify-content: start;
+    border-radius: 16px;
+  }
+
+  .play-nav-link {
+    min-height: 40px;
+    padding: 7px 6px;
+    font-size: 9px;
+  }
+
+  .play-shell main {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .play-shell main > section,
+  .play-shell main > header,
+  .play-shell main > div {
+    max-width: 100% !important;
+  }
+
+  .play-shell main [style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .play-shell main [style*="minmax(240px,.8fr)"],
+  .play-shell main [style*="minmax(320px,1.2fr)"],
+  .play-shell main [style*="minmax(310px,1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .play-shell h1 {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 420px) {
+  .play-nav {
+    grid-template-columns: repeat(6, 68px);
+  }
+
+  .play-shell main [style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
