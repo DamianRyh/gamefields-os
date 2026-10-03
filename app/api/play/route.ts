@@ -1,6 +1,9 @@
-import { and, desc, eq, gt, sql } from "drizzle-orm";
+import { and, desc, eq, gt, inArray, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import {
+  challengeMessages,
+  challengePlayers,
+  challenges,
   courtCheckins,
   courtReportSupports,
   courtReports,
@@ -13,12 +16,16 @@ import {
 } from "@/db/schema";
 import { requireCurrentPlayUser } from "@/lib/play-auth";
 import {
+  awardCoins,
   confirmResultAndApplyElo,
   ensurePlayerSport,
   generateBalancedTeams,
   isPlaySport,
+  isSkillLevel,
   newId,
   normalizeNickname,
+  playerTier,
+  setPlayerSkillLevel,
 } from "@/lib/play-engine";
 
 function json(data: unknown, status = 200) {
@@ -60,13 +67,14 @@ export async function GET() {
       .groupBy(games.id)
       .orderBy(games.startsAt);
 
-    const rankings = await db
+    const rawRankings = await db
       .select({
         userId: playerSports.userId,
         nickname: users.nickname,
         displayName: users.displayName,
         avatarUrl: users.avatarUrl,
         sport: playerSports.sport,
+        skillLevel: playerSports.skillLevel,
         elo: playerSports.elo,
         games: playerSports.games,
         wins: playerSports.wins,
@@ -82,18 +90,47 @@ export async function GET() {
       .where(gt(courtCheckins.expiresAt, now))
       .groupBy(courtCheckins.courtId);
 
-    const sports = await db.select().from(playerSports).where(eq(playerSports.userId, user.id));
+    const rawSports = await db.select().from(playerSports).where(eq(playerSports.userId, user.id));
     const home = await db.select().from(homeCourts).where(eq(homeCourts.userId, user.id));
+    const myChallengeLinks = await db.select().from(challengePlayers).where(eq(challengePlayers.userId, user.id));
+    const challengeIds = myChallengeLinks.map((item) => item.challengeId);
+
+    let myChallenges: Array<Record<string, unknown>> = [];
+    if (challengeIds.length) {
+      const challengeRows = await db.select().from(challenges).where(inArray(challenges.id, challengeIds)).orderBy(desc(challenges.createdAt));
+      const participantRows = await db
+        .select({
+          challengeId: challengePlayers.challengeId,
+          userId: challengePlayers.userId,
+          side: challengePlayers.side,
+          role: challengePlayers.role,
+          status: challengePlayers.status,
+          nickname: users.nickname,
+          displayName: users.displayName,
+          avatarUrl: users.avatarUrl,
+        })
+        .from(challengePlayers)
+        .innerJoin(users, eq(users.id, challengePlayers.userId))
+        .where(inArray(challengePlayers.challengeId, challengeIds));
+      const courtById = new Map(allCourts.map((court) => [court.id, court]));
+      myChallenges = challengeRows.map((challenge) => ({
+        ...challenge,
+        courtName: courtById.get(challenge.courtId)?.name || "Court",
+        participants: participantRows.filter((player) => player.challengeId === challenge.id),
+      }));
+    }
 
     return json({
       ok: true,
       user,
-      sports,
+      coins: user.coins,
+      sports: rawSports.map((item) => ({ ...item, tier: playerTier(item.elo) })),
       homeCourts: home,
       courts: allCourts,
       games: openGames,
-      rankings,
+      rankings: rawRankings.map((item) => ({ ...item, tier: playerTier(item.elo) })),
       activeCheckins,
+      challenges: myChallenges,
     });
   } catch (error) {
     return fail(error);
@@ -120,6 +157,14 @@ export async function POST(request: Request) {
         updatedAt: now,
       }).where(eq(users.id, user.id));
       return json({ ok: true });
+    }
+
+    if (action === "set_skill_level") {
+      const sport = String(body.sport || "");
+      const skillLevel = String(body.skillLevel || "");
+      if (!isPlaySport(sport)) throw new Error("INVALID_SPORT");
+      if (!isSkillLevel(skillLevel)) throw new Error("INVALID_SKILL_LEVEL");
+      return json({ ok: true, ...(await setPlayerSkillLevel(user.id, sport, skillLevel)) });
     }
 
     if (action === "set_home_court") {
@@ -210,6 +255,112 @@ export async function POST(request: Request) {
       return json({ ok: true, result: await confirmResultAndApplyElo(String(body.gameId || ""), user.id) });
     }
 
+    if (action === "create_challenge") {
+      const sport = String(body.sport || "");
+      const courtId = String(body.courtId || "");
+      if (!isPlaySport(sport)) throw new Error("INVALID_SPORT");
+      const court = (await db.select().from(courts).where(eq(courts.id, courtId)).limit(1))[0];
+      if (!court) throw new Error("COURT_NOT_FOUND");
+      const startsAt = new Date(body.startsAt);
+      if (!Number.isFinite(startsAt.getTime())) throw new Error("INVALID_START_TIME");
+
+      const incoming = Array.isArray(body.participants)
+        ? body.participants
+        : Array.isArray(body.invitedUserIds)
+          ? body.invitedUserIds.map((userId: unknown) => ({ userId, side: "B" }))
+          : [];
+      const unique = new Map<string, "A" | "B">();
+      for (const item of incoming.slice(0, 15)) {
+        const userId = String(item?.userId || "");
+        if (!userId || userId === user.id) continue;
+        unique.set(userId, item?.side === "A" ? "A" : "B");
+      }
+      if (!unique.size) throw new Error("CHALLENGE_NEEDS_PLAYERS");
+      const invitedIds = [...unique.keys()];
+      const existingUsers = await db.select({ id: users.id }).from(users).where(inArray(users.id, invitedIds));
+      if (existingUsers.length !== invitedIds.length) throw new Error("PLAYER_NOT_FOUND");
+
+      const challengeId = newId("challenge");
+      await db.insert(challenges).values({
+        id: challengeId,
+        creatorUserId: user.id,
+        courtId,
+        sport,
+        format: String(body.format || "1v1").slice(0, 12),
+        startsAt,
+        status: "pending",
+        message: body.message ? String(body.message).slice(0, 500) : null,
+        createdAt: now,
+        updatedAt: now,
+      });
+      await db.insert(challengePlayers).values({
+        id: newId("cp"), challengeId, userId: user.id, side: "A", role: "creator", status: "accepted", createdAt: now, respondedAt: now,
+      });
+      for (const [invitedUserId, side] of unique) {
+        await db.insert(challengePlayers).values({
+          id: newId("cp"), challengeId, userId: invitedUserId, side, role: "invitee", status: "pending", createdAt: now,
+        });
+      }
+      return json({ ok: true, challengeId });
+    }
+
+    if (action === "respond_challenge") {
+      const challengeId = String(body.challengeId || "");
+      const response = String(body.response || "");
+      if (response !== "accepted" && response !== "declined") throw new Error("INVALID_RESPONSE");
+      const challenge = (await db.select().from(challenges).where(eq(challenges.id, challengeId)).limit(1))[0];
+      if (!challenge) throw new Error("CHALLENGE_NOT_FOUND");
+      if (challenge.status !== "pending") throw new Error("CHALLENGE_CLOSED");
+      const link = (await db.select().from(challengePlayers).where(and(eq(challengePlayers.challengeId, challengeId), eq(challengePlayers.userId, user.id))).limit(1))[0];
+      if (!link || link.role === "creator") throw new Error("NOT_CHALLENGE_INVITEE");
+      if (link.status !== "pending") throw new Error("ALREADY_RESPONDED");
+
+      await db.update(challengePlayers).set({ status: response, respondedAt: now }).where(eq(challengePlayers.id, link.id));
+      if (response === "declined") {
+        await db.update(challenges).set({ status: "declined", updatedAt: now }).where(eq(challenges.id, challengeId));
+        return json({ ok: true, status: "declined" });
+      }
+
+      const allLinks = await db.select().from(challengePlayers).where(eq(challengePlayers.challengeId, challengeId));
+      const pendingOthers = allLinks.filter((item) => item.id !== link.id && item.status === "pending");
+      if (pendingOthers.length) return json({ ok: true, status: "pending" });
+      if (!isPlaySport(challenge.sport)) throw new Error("INVALID_SPORT");
+
+      const gameId = newId("game");
+      await db.insert(games).values({
+        id: gameId,
+        creatorUserId: challenge.creatorUserId,
+        courtId: challenge.courtId,
+        sport: challenge.sport,
+        format: challenge.format,
+        level: "challenge",
+        startsAt: challenge.startsAt,
+        maxPlayers: allLinks.length,
+        status: "open",
+        createdAt: now,
+        updatedAt: now,
+      });
+      for (const participant of allLinks) {
+        await ensurePlayerSport(participant.userId, challenge.sport);
+        await db.insert(gamePlayers).values({
+          id: newId("gp"), gameId, userId: participant.userId, team: participant.side, joinedAt: now,
+        });
+        await awardCoins(participant.userId, "challenge_ready", challengeId, 5, "Challenge accepted");
+      }
+      await db.update(challenges).set({ status: "accepted", gameId, updatedAt: now }).where(eq(challenges.id, challengeId));
+      return json({ ok: true, status: "accepted", gameId });
+    }
+
+    if (action === "send_challenge_message") {
+      const challengeId = String(body.challengeId || "");
+      const message = String(body.message || "").trim().slice(0, 1000);
+      if (!message) throw new Error("EMPTY_MESSAGE");
+      const member = await db.select({ id: challengePlayers.id }).from(challengePlayers).where(and(eq(challengePlayers.challengeId, challengeId), eq(challengePlayers.userId, user.id))).limit(1);
+      if (!member[0]) throw new Error("NOT_IN_CHALLENGE");
+      await db.insert(challengeMessages).values({ id: newId("cm"), challengeId, userId: user.id, body: message, createdAt: now });
+      return json({ ok: true });
+    }
+
     if (action === "checkin") {
       const courtId = String(body.courtId || "");
       const court = (await db.select().from(courts).where(eq(courts.id, courtId)).limit(1))[0];
@@ -219,6 +370,7 @@ export async function POST(request: Request) {
         id: newId("checkin"), userId: user.id, courtId, checkedInAt: now,
         expiresAt: new Date(now.getTime() + 2 * 60 * 60 * 1000),
       });
+      await awardCoins(user.id, "court_checkin", `${courtId}:${now.toISOString().slice(0, 10)}`, 5, "Court check-in");
       return json({ ok: true });
     }
 
@@ -243,6 +395,7 @@ export async function POST(request: Request) {
         status: "open",
         createdAt: now,
       });
+      await awardCoins(user.id, "court_report", reportId, 10, "Court improvement report");
       return json({ ok: true, reportId });
     }
 
