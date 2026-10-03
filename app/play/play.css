@@ -84,8 +84,19 @@
 
   .play-shell main [style*="minmax(240px,.8fr)"],
   .play-shell main [style*="minmax(320px,1.2fr)"],
-  .play-shell main [style*="minmax(310px,1fr)"] {
+  .play-shell main [style*="minmax(310px,1fr)"],
+  .play-shell main [style*="minmax(0,1.6fr)"] {
     grid-template-columns: 1fr !important;
+  }
+
+  .play-shell main [style*="minHeight:480"],
+  .play-shell main [style*="min-height: 480"] {
+    min-height: 390px !important;
+    height: 52vh !important;
+  }
+
+  .play-shell main [style*="marginLeft:auto"] {
+    margin-left: 0 !important;
   }
 
   .play-shell h1 {

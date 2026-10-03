@@ -23,6 +23,7 @@ const REQUIRED_TABLES = [
   "play_notifications",
   "play_accounts",
   "play_sessions",
+  "play_availability",
 ] as const;
 
 export async function GET() {
