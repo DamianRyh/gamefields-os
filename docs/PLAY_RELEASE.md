@@ -9,6 +9,7 @@ Ten dokument opisuje minimalny proces wypuszczenia Gamefields PLAY na środowisk
 - binding Cloudflare D1 pod nazwą `DB`
 - HTTPS na środowisku produkcyjnym
 - wszystkie migracje PLAY zastosowane w kolejności
+- opcjonalnie `PLAY_ADMIN_EMAILS` jako lista e-maili moderatorów oddzielonych przecinkami
 
 ## 2. Migracje D1
 
@@ -21,8 +22,9 @@ Stosuj migracje po kolei. Nie pomijaj wcześniejszych plików na nowej bazie:
 5. `drizzle/0005_play_social_graph.sql`
 6. `drizzle/0006_play_public_auth.sql`
 7. `drizzle/0007_play_discovery.sql`
+8. `drizzle/0008_play_court_network.sql`
 
-Na środowisku, które ma już PLAY v0.1–v0.6, przed discovery layer wymagana jest migracja `0007_play_discovery.sql`.
+Na środowisku z PLAY v0.7 przed Court Network wymagana jest migracja `0008_play_court_network.sql`.
 
 Nigdy nie uruchamiaj ponownie migracji `CREATE TABLE` w ciemno na istniejącej bazie. Najpierw sprawdź stan przez health endpoint.
 
@@ -69,7 +71,20 @@ Na co najmniej dwóch kontach testowych:
 8. wyłącz READY i potwierdź zniknięcie statusu,
 9. sprawdź automatyczne wygaśnięcie availability po zadanym czasie.
 
-## 6. Smoke test — PLAY loop
+## 6. Smoke test — Court Network
+
+1. Wejdź na `/play/courts/add`.
+2. Użyj lokalizacji telefonu lub wpisz współrzędne ręcznie.
+3. Dodaj nazwę, sport i parametry obiektu.
+4. Wyślij zgłoszenie i potwierdź status `PENDING` w sekcji „Twoje zgłoszenia”.
+5. Na środowisku moderatorskim ustaw `PLAY_ADMIN_EMAILS`.
+6. Zaloguj się kontem moderatora i otwórz `/play/admin/courts`.
+7. Sprawdź lokalizację zgłoszenia i wybierz `OPUBLIKUJ NA MAPIE`.
+8. Potwierdź zmianę statusu na `APPROVED` i powstanie `publishedCourtId`.
+9. Otwórz `/play/map` i sprawdź nowy obiekt w poprawnej lokalizacji.
+10. Osobno sprawdź ścieżkę `ODRZUĆ` — odrzucone zgłoszenie nie może trafić do `courts`.
+
+## 7. Smoke test — PLAY loop
 
 Na dwóch kontach testowych:
 
@@ -84,7 +99,7 @@ Na dwóch kontach testowych:
 9. sprawdź zmianę ELO i Court Ranking,
 10. sprawdź historię ELO na profilu.
 
-## 7. Smoke test — Player Discovery
+## 8. Smoke test — Player Discovery
 
 - wyszukiwanie po nicku / imieniu,
 - filtr READY NOW,
@@ -93,7 +108,7 @@ Na dwóch kontach testowych:
 - sortowanie po ELO, READY, liczbie gier i win rate,
 - przejście z profilu gracza do challenge.
 
-## 8. Smoke test — social / competition
+## 9. Smoke test — social / competition
 
 - Follow / Unfollow
 - Challenge z profilu gracza
@@ -107,7 +122,7 @@ Na dwóch kontach testowych:
 - confirm result
 - automatyczny awans zwycięzcy
 
-## 9. Court → Builder
+## 10. Court → Builder
 
 Na karcie boiska kliknij `REDESIGN IN BUILDER` i sprawdź:
 
@@ -116,7 +131,7 @@ Na karcie boiska kliknij `REDESIGN IN BUILDER` i sprawdź:
 - nazwę projektu redesignu,
 - otwarcie właściwego presetu Buildera.
 
-## 10. Hosting publiczny
+## 11. Hosting publiczny
 
 Preferowana architektura:
 
@@ -127,7 +142,7 @@ Nie rekomendujemy docelowego publicznego auth wyłącznie w cross-site iframe z 
 
 WordPress może linkować do PLAY lub osadzać część widoków informacyjnych, ale właściwa aplikacja z kontami powinna działać na domenie należącej do Gamefields.
 
-## 11. Security checklist
+## 12. Security checklist
 
 - HTTPS aktywne
 - `Secure` cookie w produkcji
@@ -135,11 +150,13 @@ WordPress może linkować do PLAY lub osadzać część widoków informacyjnych,
 - w D1 przechowywany wyłącznie hash tokenu sesji
 - hasła PBKDF2 + losowy salt
 - brak haseł i tokenów w Analytics / error payloads
-- lokalizacja użytkownika jest opcjonalna i używana w przeglądarce wyłącznie do sortowania odległości
+- lokalizacja użytkownika jest opcjonalna i używana w przeglądarce wyłącznie do sortowania lub dobrowolnego zgłoszenia obiektu
+- Court Network publikuje obiekty dopiero po moderacji
+- `PLAY_ADMIN_EMAILS` nie powinno być ujawniane w kliencie
 - rate limiting na warstwie edge zalecany przed szerokim publicznym launch'em
 - reset hasła / weryfikacja e-mail wymagane przed pełnym produkcyjnym rolloutem
 
-## 12. Definition of ready for pilot
+## 13. Definition of ready for pilot
 
 Pilot można uruchomić, gdy:
 
@@ -147,6 +164,7 @@ Pilot można uruchomić, gdy:
 - `/api/play/health` jest zielone,
 - rejestracja, onboarding i ponowne logowanie działają,
 - MAP pokazuje poprawne współrzędne, live activity i READY TO PLAY,
+- użytkownik może zgłosić nowe miejsce, a moderator zatwierdzić je na mapę,
 - dwa niezależne konta potrafią rozegrać i potwierdzić mecz,
 - ELO aktualizuje się dokładnie raz,
 - Challenge działa end-to-end,
