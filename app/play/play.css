@@ -183,6 +183,7 @@
 }
 
 .play-shell { color:#f3f6f4; font-family:Arial,sans-serif; color-scheme:dark; }
+.play-shell.play-builder-shell { color:#233a2f; color-scheme:light; background:#fafbf8; padding-bottom:0; }
 .play-shell *, .play-shell *::before, .play-shell *::after { box-sizing:border-box; }
 .play-shell button,.play-shell input,.play-shell select,.play-shell textarea { font:inherit; }
 .play-shell button,.play-shell select { cursor:pointer; }

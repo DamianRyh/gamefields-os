@@ -63,7 +63,7 @@ export default function PlayLayout({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <div className="play-shell">
+    <div className={pathname === "/play/builder" ? "play-shell play-builder-shell" : "play-shell"}>
       {children}
       {!isBarePage ? (
         <nav className="play-nav" aria-label="Gamefields PLAY">
