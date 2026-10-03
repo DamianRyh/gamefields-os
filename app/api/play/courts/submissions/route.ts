@@ -1,3 +1,4 @@
+import { assertSameOrigin, validImageUrl } from "@/lib/play-http";
 import { desc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { courtSubmissions } from "@/db/play-courts";
@@ -24,6 +25,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    assertSameOrigin(request);
     const db = getDb();
     const user = await requireCurrentPlayUser();
     const body = await request.json();
@@ -39,6 +41,7 @@ export async function POST(request: Request) {
     const surface = String(body.surface || "").trim().slice(0, 60) || null;
     const notes = String(body.notes || "").trim().slice(0, 1000) || null;
 
+    if (city.length < 2) throw new Error("INVALID_CITY");
     if (name.length < 3) throw new Error("INVALID_NAME");
     if (!Number.isFinite(latitude) || latitude < 49 || latitude > 55) throw new Error("INVALID_LATITUDE");
     if (!Number.isFinite(longitude) || longitude < 14 || longitude > 24.5) throw new Error("INVALID_LONGITUDE");
@@ -60,6 +63,7 @@ export async function POST(request: Request) {
       lighting: Boolean(body.lighting),
       isFree: body.isFree !== false,
       notes,
+      imageUrl: validImageUrl(body.imageUrl),
       status: "pending",
       createdAt: now,
       updatedAt: now,

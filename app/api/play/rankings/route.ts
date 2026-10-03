@@ -1,168 +1,33 @@
-import { and, desc, eq, inArray, sql } from "drizzle-orm";
-import { getDb } from "@/db";
-import { playerFollows } from "@/db/play-social";
-import { courts, gamePlayers, games, homeCourts, playerSports, users } from "@/db/schema";
+import { getD1 } from "@/db";
 import { requireCurrentPlayUser } from "@/lib/play-auth";
 import { isPlaySport, playerTier } from "@/lib/play-engine";
-
-function json(data: unknown, status = 200) {
-  return Response.json(data, { status, headers: { "Cache-Control": "no-store" } });
-}
-
-type RankRow = {
-  userId: string;
-  nickname: string;
-  displayName: string | null;
-  avatarUrl: string | null;
-  city: string;
-  elo: number;
-  games: number;
-  wins: number;
-  losses: number;
-  draws: number;
-  localGames?: number;
-};
-
-function enrich(rows: RankRow[], currentUserId: string) {
-  const mapped = rows.map((row, index) => ({
-    ...row,
-    rank: index + 1,
-    tier: playerTier(row.elo),
-    winRate: row.games > 0 ? Math.round((row.wins / row.games) * 100) : 0,
-  }));
-  const myIndex = mapped.findIndex((row) => row.userId === currentUserId);
-  return {
-    rows: mapped,
-    myRank: myIndex >= 0 ? myIndex + 1 : null,
-    me: myIndex >= 0 ? mapped[myIndex] : null,
-    nextTarget: myIndex > 0 ? mapped[myIndex - 1] : null,
-  };
-}
+import { playError } from "@/lib/play-http";
 
 export async function GET(request: Request) {
   try {
-    const db = getDb();
-    const current = await requireCurrentPlayUser();
-    const url = new URL(request.url);
-    const sport = String(url.searchParams.get("sport") || "football");
-    const scope = String(url.searchParams.get("scope") || "city");
-    if (!isPlaySport(sport)) return json({ ok: false, error: "INVALID_SPORT" }, 400);
-    if (!["city", "district", "court", "friends"].includes(scope)) return json({ ok: false, error: "INVALID_SCOPE" }, 400);
-
-    const myHome = (await db
-      .select({ courtId: homeCourts.courtId, district: courts.district, courtName: courts.name })
-      .from(homeCourts)
-      .innerJoin(courts, eq(courts.id, homeCourts.courtId))
-      .where(and(eq(homeCourts.userId, current.id), eq(homeCourts.sport, sport)))
-      .limit(1))[0] || null;
-
-    let context: Record<string, unknown> = { city: current.city };
-    let rows: RankRow[] = [];
-
-    if (scope === "city") {
-      rows = await db
-        .select({
-          userId: users.id,
-          nickname: users.nickname,
-          displayName: users.displayName,
-          avatarUrl: users.avatarUrl,
-          city: users.city,
-          elo: playerSports.elo,
-          games: playerSports.games,
-          wins: playerSports.wins,
-          losses: playerSports.losses,
-          draws: playerSports.draws,
-        })
-        .from(playerSports)
-        .innerJoin(users, eq(users.id, playerSports.userId))
-        .where(and(eq(playerSports.sport, sport), eq(users.city, current.city)))
-        .orderBy(desc(playerSports.elo))
-        .limit(250);
-    }
-
-    if (scope === "district") {
-      const district = String(url.searchParams.get("district") || myHome?.district || "").trim();
-      if (!district) return json({ ok: true, sport, scope, context: { city: current.city, district: null }, rows: [], myRank: null, me: null, nextTarget: null });
-      context = { city: current.city, district };
-      rows = await db
-        .select({
-          userId: users.id,
-          nickname: users.nickname,
-          displayName: users.displayName,
-          avatarUrl: users.avatarUrl,
-          city: users.city,
-          elo: playerSports.elo,
-          games: playerSports.games,
-          wins: playerSports.wins,
-          losses: playerSports.losses,
-          draws: playerSports.draws,
-        })
-        .from(homeCourts)
-        .innerJoin(users, eq(users.id, homeCourts.userId))
-        .innerJoin(playerSports, and(eq(playerSports.userId, users.id), eq(playerSports.sport, sport)))
-        .innerJoin(courts, eq(courts.id, homeCourts.courtId))
-        .where(and(eq(homeCourts.sport, sport), eq(courts.city, current.city), eq(courts.district, district)))
-        .orderBy(desc(playerSports.elo))
-        .limit(250);
-    }
-
-    if (scope === "court") {
-      const courtId = String(url.searchParams.get("courtId") || myHome?.courtId || "").trim();
-      if (!courtId) return json({ ok: true, sport, scope, context: { courtId: null, courtName: null }, rows: [], myRank: null, me: null, nextTarget: null });
-      const court = (await db.select({ id: courts.id, name: courts.name, district: courts.district }).from(courts).where(eq(courts.id, courtId)).limit(1))[0];
-      if (!court) return json({ ok: false, error: "COURT_NOT_FOUND" }, 404);
-      context = { courtId: court.id, courtName: court.name, district: court.district };
-      rows = await db
-        .select({
-          userId: users.id,
-          nickname: users.nickname,
-          displayName: users.displayName,
-          avatarUrl: users.avatarUrl,
-          city: users.city,
-          elo: playerSports.elo,
-          games: playerSports.games,
-          wins: playerSports.wins,
-          losses: playerSports.losses,
-          draws: playerSports.draws,
-          localGames: sql<number>`count(distinct ${games.id})`,
-        })
-        .from(gamePlayers)
-        .innerJoin(games, eq(games.id, gamePlayers.gameId))
-        .innerJoin(users, eq(users.id, gamePlayers.userId))
-        .innerJoin(playerSports, and(eq(playerSports.userId, users.id), eq(playerSports.sport, sport)))
-        .where(and(eq(games.courtId, courtId), eq(games.sport, sport), eq(games.status, "completed")))
-        .groupBy(users.id, playerSports.id)
-        .orderBy(desc(playerSports.elo))
-        .limit(250);
-    }
-
-    if (scope === "friends") {
-      const followed = await db.select({ id: playerFollows.followingUserId }).from(playerFollows).where(eq(playerFollows.followerUserId, current.id));
-      const ids = [...new Set([current.id, ...followed.map((item) => item.id)])];
-      context = { count: ids.length };
-      rows = await db
-        .select({
-          userId: users.id,
-          nickname: users.nickname,
-          displayName: users.displayName,
-          avatarUrl: users.avatarUrl,
-          city: users.city,
-          elo: playerSports.elo,
-          games: playerSports.games,
-          wins: playerSports.wins,
-          losses: playerSports.losses,
-          draws: playerSports.draws,
-        })
-        .from(playerSports)
-        .innerJoin(users, eq(users.id, playerSports.userId))
-        .where(and(eq(playerSports.sport, sport), inArray(users.id, ids)))
-        .orderBy(desc(playerSports.elo))
-        .limit(250);
-    }
-
-    return json({ ok: true, sport, scope, context, ...enrich(rows, current.id) });
-  } catch (error) {
-    const code = error instanceof Error ? error.message : "UNKNOWN_ERROR";
-    return json({ ok: false, error: code }, code === "UNAUTHENTICATED" ? 401 : 400);
-  }
+    const user = await requireCurrentPlayUser(), db = getD1();
+    const url = new URL(request.url), sport = url.searchParams.get("sport") || "football";
+    if (!isPlaySport(sport)) throw new Error("INVALID_SPORT");
+    const home = await db.prepare("SELECT c.id,c.name,c.city,c.district FROM home_courts h JOIN courts c ON c.id=h.court_id WHERE h.user_id=? AND h.sport=?").bind(user.id,sport).first<{id:string;name:string;city:string;district:string|null}>();
+    const city = url.searchParams.get("city") || user.city;
+    const courtId = url.searchParams.get("courtId") || home?.id || "";
+    const district = url.searchParams.get("district") || home?.district || "";
+    const filters: Record<string,{sql:string;args:unknown[]}> = {
+      city: {sql:"u.city=?",args:[city]},
+      district: {sql:"EXISTS (SELECT 1 FROM home_courts h JOIN courts c ON c.id=h.court_id WHERE h.user_id=u.id AND h.sport=p.sport AND c.city=? AND c.district=?)",args:[city,district]},
+      court: {sql:"(EXISTS (SELECT 1 FROM home_courts h WHERE h.user_id=u.id AND h.sport=p.sport AND h.court_id=?) OR EXISTS (SELECT 1 FROM game_players gp JOIN games g ON g.id=gp.game_id WHERE gp.user_id=u.id AND g.sport=p.sport AND g.court_id=? AND g.status='completed'))",args:[courtId,courtId]},
+      friends: {sql:"(u.id=? OR EXISTS (SELECT 1 FROM play_player_follows f WHERE f.follower_user_id=? AND f.following_user_id=u.id))",args:[user.id,user.id]},
+    };
+    const scope = url.searchParams.get("scope") || "city";
+    if (!filters[scope]) throw new Error("INVALID_SCOPE");
+    const query = (name:string) => {
+      const filter=filters[name];
+      return db.prepare(`SELECT u.id AS userId,u.nickname,u.avatar_url AS avatarUrl,p.elo,p.games,p.wins,ROW_NUMBER() OVER (ORDER BY p.elo DESC,p.games DESC,u.nickname) AS rank FROM player_sports p JOIN users u ON u.id=p.user_id WHERE p.sport=? AND ${filter.sql}`).bind(sport,...filter.args);
+    };
+    const all = await Promise.all(Object.keys(filters).map(async name=>({name,rows:(await query(name).all<{userId:string;nickname:string;avatarUrl:string|null;elo:number;games:number;wins:number;rank:number}>()).results})));
+    const ranks = Object.fromEntries(all.map(x=>[x.name,x.rows.find(p=>p.userId===user.id)?.rank || null]));
+    const history = (await db.prepare("SELECT e.change AS delta FROM elo_history e JOIN games g ON g.id=e.game_id WHERE e.user_id=? AND e.sport=? ORDER BY g.result_confirmed_at DESC LIMIT 30").bind(user.id,sport).all<{delta:number}>()).results;
+    let streak=0; for(const row of history){if(row.delta<=0)break;streak++;}
+    return Response.json({ok:true,sport,scope,city,district,homeCourt:home,myRanks:ranks,streak,players:all.find(x=>x.name===scope)!.rows.slice(0,100).map(p=>({...p,tier:playerTier(p.elo),winRate:p.games?Math.round(p.wins/p.games*100):0}))},{headers:{"Cache-Control":"no-store"}});
+  } catch(error){return playError(error);}
 }

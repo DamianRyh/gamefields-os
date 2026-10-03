@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     const sport = String(url.searchParams.get("sport") || "football");
     if (!isPlaySport(sport)) return json({ ok: false, error: "INVALID_SPORT" }, 400);
 
-    const player = (await db.select().from(users).where(eq(users.nickname, nickname)).limit(1))[0];
+    const player = (await db.select().from(users).where(url.searchParams.get("id")?eq(users.id,url.searchParams.get("id")!):eq(users.nickname, nickname)).limit(1))[0];
     if (!player) return json({ ok: false, error: "PLAYER_NOT_FOUND" }, 404);
 
     const sports = await db.select().from(playerSports).where(eq(playerSports.userId, player.id));

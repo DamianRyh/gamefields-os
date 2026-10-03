@@ -1,6 +1,7 @@
-import { and, desc, eq, gt, inArray, sql } from "drizzle-orm";
-import { getDb } from "@/db";
+import { and, desc, eq, gt, sql } from "drizzle-orm";
 import { playAvailability } from "@/db/play-discovery";
+import { builderProjects,builderProjectSupports } from "@/db/builder-projects";
+import { getDb } from "@/db";
 import { courtCheckins, courtReportSupports, courtReports, courts, gamePlayers, games, homeCourts, playerSports, users } from "@/db/schema";
 import { requireCurrentPlayUser } from "@/lib/play-auth";
 import { isPlaySport, playerTier } from "@/lib/play-engine";
@@ -29,22 +30,6 @@ export async function GET(request: Request) {
       .from(courtCheckins)
       .innerJoin(users, eq(users.id, courtCheckins.userId))
       .where(and(eq(courtCheckins.courtId, court.id), gt(courtCheckins.expiresAt, now)))
-      .limit(50);
-
-    const readyPlayers = await db
-      .select({
-        userId: users.id,
-        nickname: users.nickname,
-        displayName: users.displayName,
-        avatarUrl: users.avatarUrl,
-        availableUntil: playAvailability.availableUntil,
-        elo: playerSports.elo,
-      })
-      .from(playAvailability)
-      .innerJoin(users, eq(users.id, playAvailability.userId))
-      .leftJoin(playerSports, and(eq(playerSports.userId, users.id), eq(playerSports.sport, sport)))
-      .where(and(eq(playAvailability.courtId, court.id), eq(playAvailability.sport, sport), gt(playAvailability.availableUntil, now)))
-      .orderBy(desc(playerSports.elo))
       .limit(50);
 
     const upcomingGames = await db
@@ -88,7 +73,6 @@ export async function GET(request: Request) {
     const homeCount = Number((await db.select({ count: sql<number>`count(*)` }).from(homeCourts).where(and(eq(homeCourts.courtId, court.id), eq(homeCourts.sport, sport))))[0]?.count || 0);
     const myHome = Boolean((await db.select({ id: homeCourts.id }).from(homeCourts).where(and(eq(homeCourts.userId, current.id), eq(homeCourts.courtId, court.id), eq(homeCourts.sport, sport))).limit(1))[0]);
     const myCheckin = Boolean((await db.select({ id: courtCheckins.id }).from(courtCheckins).where(and(eq(courtCheckins.userId, current.id), eq(courtCheckins.courtId, court.id), gt(courtCheckins.expiresAt, now))).limit(1))[0]);
-    const myReady = (await db.select({ id: playAvailability.id, availableUntil: playAvailability.availableUntil }).from(playAvailability).where(and(eq(playAvailability.userId, current.id), eq(playAvailability.courtId, court.id), eq(playAvailability.sport, sport), gt(playAvailability.availableUntil, now))).limit(1))[0] || null;
 
     const reports = await db
       .select({
@@ -108,27 +92,23 @@ export async function GET(request: Request) {
       .orderBy(desc(courtReports.createdAt))
       .limit(20);
 
-    const reportIds = reports.map((report) => report.id);
-    const mySupports = reportIds.length
-      ? await db.select({ reportId: courtReportSupports.reportId }).from(courtReportSupports).where(and(eq(courtReportSupports.userId, current.id), inArray(courtReportSupports.reportId, reportIds)))
-      : [];
-    const supportedIds = new Set(mySupports.map((support) => support.reportId));
-
+    const readyPlayers=await db.select({userId:users.id,nickname:users.nickname,avatarUrl:users.avatarUrl,availableUntil:playAvailability.availableUntil}).from(playAvailability).innerJoin(users,eq(users.id,playAvailability.userId)).where(and(eq(playAvailability.courtId,court.id),eq(playAvailability.sport,sport),gt(playAvailability.availableUntil,now)));
+    const homePlayerList=await db.select({userId:users.id,nickname:users.nickname,avatarUrl:users.avatarUrl}).from(homeCourts).innerJoin(users,eq(users.id,homeCourts.userId)).where(and(eq(homeCourts.courtId,court.id),eq(homeCourts.sport,sport))).limit(30);
+    const redesigns=await db.select({id:builderProjects.id,title:builderProjects.name,nickname:users.nickname,votes:sql<number>`(SELECT count(*) FROM builder_project_supports WHERE project_id=${builderProjects.id})`}).from(builderProjects).innerJoin(users,eq(users.id,builderProjects.ownerUserId)).where(and(eq(builderProjects.courtId,court.id),eq(builderProjects.visibility,"public"),eq(builderProjects.status,"published"))).orderBy(desc(builderProjects.publishedAt)).limit(12);
     return json({
       ok: true,
+      readyPlayers,homePlayerList,redesigns,
+      myReady:readyPlayers.some(p=>p.userId===current.id),
       court,
       sport,
       livePlayers,
-      readyPlayers: readyPlayers.map((player) => ({ ...player, elo: player.elo ?? 1000, tier: playerTier(player.elo ?? 1000) })),
-      upcomingGames,
+      upcomingGames:upcomingGames.filter(g=>g.status!=="completed"),
       ranking: ranking.map((item, index) => ({ ...item, rank: index + 1, tier: playerTier(item.elo), winRate: item.games ? Math.round((item.wins / item.games) * 100) : 0 })),
       courtKing: ranking[0] ? { ...ranking[0], tier: playerTier(ranking[0].elo) } : null,
       homePlayers: homeCount,
       myHome,
       myCheckin,
-      myReady: Boolean(myReady),
-      myReadyUntil: myReady?.availableUntil || null,
-      reports: reports.map((report) => ({ ...report, supportCount: Number(report.supportCount || 0), supportedByMe: supportedIds.has(report.id) })),
+      reports:await Promise.all(reports.map(async r=>({...r,supportedByMe:!!(await db.select({id:courtReportSupports.id}).from(courtReportSupports).where(and(eq(courtReportSupports.reportId,r.id),eq(courtReportSupports.userId,current.id))).limit(1))[0]}))),
     });
   } catch (error) {
     const code = error instanceof Error ? error.message : "UNKNOWN_ERROR";

@@ -16,6 +16,7 @@ type Profile = {
 export default function PlayerProfilePage() {
   const params = useSearchParams();
   const nickname = params.get("nickname") || "";
+  const playerId = params.get("id") || "";
   const [sport, setSport] = useState(params.get("sport") || "football");
   const [data, setData] = useState<Profile | null>(null);
   const [isFollowing,setIsFollowing]=useState(false);
@@ -23,9 +24,9 @@ export default function PlayerProfilePage() {
   const [error, setError] = useState("");
 
   async function load() {
-    if (!nickname) return;
+    if (!nickname && !playerId) return;
     setError("");
-    const response = await fetch(`/api/play/player-profile?nickname=${encodeURIComponent(nickname)}&sport=${sport}`, { cache: "no-store" });
+    const response = await fetch(`/api/play/player-profile?${playerId?`id=${encodeURIComponent(playerId)}`:`nickname=${encodeURIComponent(nickname)}`}&sport=${sport}`, { cache: "no-store" });
     const result = await response.json();
     if (!response.ok || !result.ok) { setError(result.error || "LOAD_FAILED"); return; }
     setData(result);
@@ -35,7 +36,7 @@ export default function PlayerProfilePage() {
       if(socialResponse.ok&&social.ok)setIsFollowing((social.followingUserIds||[]).includes(result.player.id));
     }
   }
-  useEffect(() => { void load(); }, [nickname, sport]);
+  useEffect(() => { void load(); }, [nickname, playerId, sport]);
 
   async function toggleFollow(){
     if(!data||data.isMe)return;setBusy(true);setError("");

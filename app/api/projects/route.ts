@@ -1,3 +1,4 @@
+import {assertSameOrigin,playError} from "@/lib/play-http";
 import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import { builderProjectSupports, builderProjects } from "@/db/builder-projects";
@@ -12,11 +13,7 @@ function json(data: unknown, status = 200) {
   return Response.json(data, { status, headers: { "Cache-Control": "no-store" } });
 }
 
-function fail(error: unknown) {
-  const code = error instanceof Error ? error.message : "UNKNOWN_ERROR";
-  const status = code === "UNAUTHENTICATED" ? 401 : code.endsWith("NOT_FOUND") ? 404 : code === "FORBIDDEN" ? 403 : 400;
-  return json({ ok: false, error: code }, status);
-}
+const fail=playError;
 
 export async function GET(request: Request) {
   try {
@@ -117,6 +114,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    assertSameOrigin(request);
     const db = getDb();
     const current = await requireCurrentPlayUser();
     const body = await request.json();
@@ -189,7 +187,7 @@ export async function POST(request: Request) {
       if (!project) throw new Error("PROJECT_NOT_FOUND");
       if (project.visibility !== "public" || project.status !== "published") throw new Error("PROJECT_NOT_PUBLIC");
       const existing = await db.select({ id: builderProjectSupports.id }).from(builderProjectSupports).where(and(eq(builderProjectSupports.projectId, id), eq(builderProjectSupports.userId, current.id))).limit(1);
-      if (!existing[0]) await db.insert(builderProjectSupports).values({ id: newId("builder_support"), projectId: id, userId: current.id, createdAt: now });
+      if (!existing[0]) await db.insert(builderProjectSupports).values({ id: newId("builder_support"), projectId: id, userId: current.id, createdAt: now }).onConflictDoNothing();
       const supportCount = Number((await db.select({ count: sql<number>`count(*)` }).from(builderProjectSupports).where(eq(builderProjectSupports.projectId, id)))[0]?.count || 0);
       return json({ ok: true, supportCount });
     }

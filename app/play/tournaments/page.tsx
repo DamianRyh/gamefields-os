@@ -77,7 +77,7 @@ function TournamentMatch({
   const canConfirm =
     match.status === "awaiting_confirmation" &&
     canAct &&
-    (isOrganizer || match.submittedByUserId !== currentUserId);
+    match.submittedByUserId !== currentUserId;
 
   return (
     <article style={s.match}>

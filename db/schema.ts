@@ -1,4 +1,4 @@
-import { integer, real, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
+import { index, integer, real, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
@@ -59,6 +59,7 @@ export const homeCourts = sqliteTable("home_courts", {
   sport: text("sport").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 }, (table) => ({
+  courtSportIdx:index("home_courts_court_sport_idx").on(table.courtId,table.sport),
   homeCourtIdx: uniqueIndex("home_courts_user_sport_unique").on(table.userId, table.sport),
 }));
 
@@ -78,13 +79,14 @@ export const games = sqliteTable("games", {
   resultConfirmedAt: integer("result_confirmed_at", { mode: "timestamp" }),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
-});
+},table=>({discoveryIdx:index("games_sport_status_start_idx").on(table.sport,table.status,table.startsAt)}));
 
 export const gamePlayers = sqliteTable("game_players", {
   id: text("id").primaryKey(),
   gameId: text("game_id").notNull().references(() => games.id, { onDelete: "cascade" }),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   team: text("team"),
+  readyAt: integer("ready_at", { mode: "timestamp" }),
   joinedAt: integer("joined_at", { mode: "timestamp" }).notNull(),
 }, (table) => ({
   gamePlayerIdx: uniqueIndex("game_players_game_user_unique").on(table.gameId, table.userId),

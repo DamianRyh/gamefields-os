@@ -23,9 +23,9 @@ Stosuj migracje po kolei. Nie pomijaj wcześniejszych plików na nowej bazie:
 6. `drizzle/0006_play_public_auth.sql`
 7. `drizzle/0007_play_discovery.sql`
 8. `drizzle/0008_play_court_network.sql`
-9. `drizzle/0009_builder_persistence.sql`
+9. `drizzle/0009_builder_persistence.sql and 0010_play_pilot.sql`
 
-Migracja `0009_builder_persistence.sql` jest wymagana przed użyciem trwałych projektów konta i publikowaniem redesignów społeczności.
+Migracja `0009_builder_persistence.sql and 0010_play_pilot.sql` jest wymagana przed użyciem trwałych projektów konta i publikowaniem redesignów społeczności.
 
 Nigdy nie uruchamiaj ponownie migracji `CREATE TABLE` w ciemno na istniejącej bazie. Najpierw sprawdź stan przez health endpoint.
 
@@ -190,3 +190,5 @@ Pilot można uruchomić, gdy:
 - Court → Builder zachowuje kontekst obiektu,
 - projekt Buildera może zostać zapisany trwale na koncie,
 - mobile navigation działa na iOS/Android viewportach.
+
+Pilot validation: CI runs tests/play-smoke.mjs against the production Worker and tests/play-mobile.mjs at 375×812, 390×844 and 430×932. The WordPress gateway and installation instructions are in integrations/wordpress. The hosting file manager/SFTP is required to install the gateway; the connected WordPress API cannot edit files.

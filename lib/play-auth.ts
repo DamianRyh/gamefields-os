@@ -28,7 +28,7 @@ async function getHostedPlayUser() {
   });
 }
 
-async function getPublicSessionUser() {
+export async function getPublicSessionUser() {
   const cookieStore = await cookies();
   const token = cookieStore.get(PLAY_SESSION_COOKIE)?.value;
   if (!token) return null;
@@ -46,7 +46,7 @@ async function getPublicSessionUser() {
 }
 
 export async function getCurrentPlayUser() {
-  return (await getHostedPlayUser()) || (await getPublicSessionUser());
+  return (await getPublicSessionUser()) || (await getHostedPlayUser());
 }
 
 export async function requireCurrentPlayUser() {

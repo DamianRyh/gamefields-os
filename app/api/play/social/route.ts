@@ -1,3 +1,4 @@
+import { assertSameOrigin } from "@/lib/play-http";
 import { and, desc, eq, inArray, isNull, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import { playerFollows, playNotifications } from "@/db/play-social";
@@ -108,6 +109,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    assertSameOrigin(request);
     const db = getDb();
     const current = await requireCurrentPlayUser();
     const body = await request.json();

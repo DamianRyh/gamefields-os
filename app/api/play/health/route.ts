@@ -25,6 +25,7 @@ const REQUIRED_TABLES = [
   "play_sessions",
   "play_availability",
   "play_court_submissions",
+  "play_game_settlements",
   "builder_projects",
   "builder_project_supports",
 ] as const;

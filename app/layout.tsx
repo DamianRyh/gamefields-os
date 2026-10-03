@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { BuilderPlayBridge } from "@/components/builder-play-bridge";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -42,7 +41,6 @@ export default function RootLayout({
     <html lang="pl">
       <body className="antialiased">
         {children}
-        <BuilderPlayBridge />
       </body>
     </html>
   );

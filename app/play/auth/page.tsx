@@ -100,7 +100,7 @@ export default function PlayAuthPage() {
           </button>
         </form>
 
-        <div style={s.security}>Sesja: HttpOnly · SameSite · 30 dni · hasło PBKDF2</div>
+
       </section>
 
       <aside className="play-auth-side" style={s.side}>
