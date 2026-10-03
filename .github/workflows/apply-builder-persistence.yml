@@ -1,0 +1,34 @@
+name: Apply Builder Persistence Patch
+
+on:
+  push:
+    branches:
+      - feat/gamefields-v12-native-builder-save
+
+permissions:
+  contents: write
+
+jobs:
+  patch-builder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/gamefields-v12-native-builder-save
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply guarded Builder transform
+        run: node scripts/apply-builder-persistence.mjs
+      - name: Commit transformed Studio
+        run: |
+          if git diff --quiet -- app/page.tsx; then
+            echo "No Builder changes required."
+            exit 0
+          fi
+          git config user.name "gamefields-ci"
+          git config user.email "actions@users.noreply.github.com"
+          git add app/page.tsx
+          git commit -m "feat(builder): wire native account save and load"
+          git push origin HEAD:feat/gamefields-v12-native-builder-save
