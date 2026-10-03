@@ -7,6 +7,7 @@ export const users = sqliteTable("users", {
   displayName: text("display_name"),
   avatarUrl: text("avatar_url"),
   city: text("city").notNull().default("Warszawa"),
+  coins: integer("coins").notNull().default(0),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
 }, (table) => ({
@@ -18,6 +19,7 @@ export const playerSports = sqliteTable("player_sports", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   sport: text("sport").notNull(),
+  skillLevel: text("skill_level").notNull().default("beginner"),
   elo: integer("elo").notNull().default(1000),
   games: integer("games").notNull().default(0),
   wins: integer("wins").notNull().default(0),
@@ -117,6 +119,53 @@ export const courtCheckins = sqliteTable("court_checkins", {
   checkedInAt: integer("checked_in_at", { mode: "timestamp" }).notNull(),
   expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
 });
+
+export const challenges = sqliteTable("challenges", {
+  id: text("id").primaryKey(),
+  creatorUserId: text("creator_user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  courtId: text("court_id").notNull().references(() => courts.id, { onDelete: "cascade" }),
+  sport: text("sport").notNull(),
+  format: text("format").notNull().default("1v1"),
+  startsAt: integer("starts_at", { mode: "timestamp" }).notNull(),
+  status: text("status").notNull().default("pending"),
+  message: text("message"),
+  gameId: text("game_id").references(() => games.id, { onDelete: "set null" }),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
+});
+
+export const challengePlayers = sqliteTable("challenge_players", {
+  id: text("id").primaryKey(),
+  challengeId: text("challenge_id").notNull().references(() => challenges.id, { onDelete: "cascade" }),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  side: text("side").notNull(),
+  role: text("role").notNull().default("invitee"),
+  status: text("status").notNull().default("pending"),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  respondedAt: integer("responded_at", { mode: "timestamp" }),
+}, (table) => ({
+  challengePlayerIdx: uniqueIndex("challenge_players_challenge_user_unique").on(table.challengeId, table.userId),
+}));
+
+export const challengeMessages = sqliteTable("challenge_messages", {
+  id: text("id").primaryKey(),
+  challengeId: text("challenge_id").notNull().references(() => challenges.id, { onDelete: "cascade" }),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  body: text("body").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const coinLedger = sqliteTable("coin_ledger", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  sourceType: text("source_type").notNull(),
+  sourceId: text("source_id").notNull(),
+  amount: integer("amount").notNull(),
+  note: text("note"),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+}, (table) => ({
+  coinSourceIdx: uniqueIndex("coin_ledger_user_source_unique").on(table.userId, table.sourceType, table.sourceId),
+}));
 
 export const courtReports = sqliteTable("court_reports", {
   id: text("id").primaryKey(),
