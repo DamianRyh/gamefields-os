@@ -2,7 +2,7 @@ import { and, eq } from "drizzle-orm";
 import { getDb, getD1 } from "@/db";
 import { gameLifecycle } from "@/lib/play-lifecycle";
 import { assertSameOrigin, playError } from "@/lib/play-http";
-import { courts, gamePlayers, games, playerSports, users } from "@/db/schema";
+import { courts, eloHistory, gamePlayers, games, playerSports, users } from "@/db/schema";
 import { requireCurrentPlayUser } from "@/lib/play-auth";
 import { confirmResultAndApplyElo, generateBalancedTeams, isPlaySport, playerTier } from "@/lib/play-engine";
 
@@ -63,7 +63,9 @@ async function room(gameId: string, currentUserId: string) {
   const teamB = players.filter((player) => player.team === "B");
   const avg = (items: typeof players) => items.length ? Math.round(items.reduce((sum, p) => sum + p.elo, 0) / items.length) : 0;
 
+  const changes=game.status==="completed"?await db.select({userId:eloHistory.userId,before:eloHistory.before,after:eloHistory.after,change:eloHistory.change}).from(eloHistory).where(eq(eloHistory.gameId,gameId)):[];
   return {
+    eloChanges:changes,myEloChange:changes.find(c=>c.userId===currentUserId)||null,
     game,
     lifecycle: gameLifecycle(game, players),
     players,

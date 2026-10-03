@@ -11,21 +11,16 @@
   transform: translateX(-50%);
   z-index: 70;
   display: grid;
-  grid-template-columns: repeat(8, minmax(72px, 1fr));
+  grid-template-columns: repeat(5, minmax(82px, 1fr));
   gap: 4px;
-  width: min(940px, calc(100vw - 20px));
+  width: min(620px, calc(100vw - 20px));
   padding: 6px;
   border: 1px solid #263b45;
   border-radius: 18px;
   background: rgba(8, 18, 24, .94);
   backdrop-filter: blur(18px);
   box-shadow: 0 14px 44px rgba(0, 0, 0, .35);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
 }
-
-.play-nav::-webkit-scrollbar { display: none; }
 
 .play-nav-link {
   display: grid;
@@ -33,11 +28,26 @@
   min-height: 42px;
   padding: 8px 9px;
   border-radius: 12px;
-  color: #dce8e5;
+  color: #9fb0b8;
   text-decoration: none;
   font: 900 10px/1 Arial, sans-serif;
   letter-spacing: .35px;
   white-space: nowrap;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+
+.play-nav-link:hover {
+  color: #eef6f3;
+  background: #102029;
+}
+
+.play-nav-link.is-active {
+  color: #071016;
+  background: #77ff55;
+}
+
+.play-nav-link:active {
+  transform: translateY(1px);
 }
 
 .play-nav-link:focus-visible {
@@ -56,20 +66,20 @@
     bottom: max(8px, env(safe-area-inset-bottom));
     transform: none;
     width: auto;
-    grid-template-columns: repeat(8, 72px);
-    justify-content: start;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     border-radius: 16px;
   }
 
   .play-nav-link {
-    min-height: 40px;
-    padding: 7px 6px;
+    min-height: 44px;
+    padding: 7px 4px;
     font-size: 9px;
   }
 
   .play-shell main {
     padding-left: 14px !important;
     padding-right: 14px !important;
+    overflow-x: hidden;
   }
 
   .play-shell main > section,
@@ -78,8 +88,21 @@
     max-width: 100% !important;
   }
 
-  .play-shell main [style*="grid-template-columns: repeat(4"] {
+  .play-shell main [style*="1.5fr"],
+  .play-shell main [style*="2fr 1fr"],
+  .play-shell main [style*="repeat(2, minmax(0, 1fr))"],
+  .play-shell main [style*="repeat(2,minmax(0,1fr))"],
+  .play-shell main [style*="2fr 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .play-shell main [style*="grid-template-columns: repeat(4"],
+  .play-shell main [style*="grid-template-columns: repeat(3"] {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .play-shell main [style*="repeat(6"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
   .play-shell main [style*="minmax(240px,.8fr)"],
@@ -94,6 +117,26 @@
     grid-template-columns: 1fr !important;
   }
 
+  .play-shell main [style*="grid-template-columns: repeat(4,minmax(0,1fr))"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .play-shell main [style*="grid-template-columns: 50px minmax(0,1fr) 130px 90px"] {
+    grid-template-columns: 38px minmax(0,1fr) 72px !important;
+  }
+
+  .play-shell main [style*="grid-template-columns: 50px minmax(0,1fr) 130px 90px"] > :nth-child(3) {
+    display: none !important;
+  }
+
+  .play-shell main [style*="grid-template-columns: 40px 1fr auto 80px"] {
+    grid-template-columns: 34px minmax(0,1fr) 72px !important;
+  }
+
+  .play-shell main [style*="grid-template-columns: 40px 1fr auto 80px"] > :last-child {
+    display: none !important;
+  }
+
   .play-shell main [style*="min-height: 480"] {
     min-height: 390px !important;
     height: 52vh !important;
@@ -103,18 +146,39 @@
     margin-left: 0 !important;
   }
 
-  .play-shell h1 {
+  .play-shell main [style*="justify-content: space-between"] {
+    min-width: 0;
+  }
+
+  .play-shell h1,
+  .play-shell h2,
+  .play-shell h3 {
     overflow-wrap: anywhere;
+  }
+
+  .play-shell input,
+  .play-shell select,
+  .play-shell button,
+  .play-shell a,
+  .play-shell textarea {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
-@media (max-width: 420px) {
-  .play-nav {
-    grid-template-columns: repeat(8, 68px);
+@media (max-width: 430px) {
+  .play-shell main [style*="grid-template-columns: repeat(4"],
+  .play-shell main [style*="grid-template-columns: repeat(3"],
+  .play-shell main [style*="repeat(6"] {
+    grid-template-columns: 1fr 1fr !important;
   }
 
-  .play-shell main [style*="grid-template-columns: repeat(4"] {
-    grid-template-columns: 1fr 1fr !important;
+  .play-shell main [style*="grid-template-columns: 38px minmax(0,1fr) 72px"] {
+    grid-template-columns: 32px minmax(0,1fr) 62px !important;
+  }
+
+  .play-shell main [style*="grid-template-columns: 1fr auto"] {
+    grid-template-columns: 1fr !important;
   }
 }
 

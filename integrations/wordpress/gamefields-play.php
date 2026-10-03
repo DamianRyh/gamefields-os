@@ -10,7 +10,7 @@ add_action('init', function () {
     $uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
     $path = (string) parse_url($uri, PHP_URL_PATH);
     $app = $path === '/play' || strpos($path, '/play/') === 0;
-    $api = $path === '/api/play' || strpos($path, '/api/play/') === 0 || in_array($path, array('/api/quote', '/api/templates'), true);
+    $api = $path === '/api/play' || strpos($path, '/api/play/') === 0 || in_array($path, array('/api/quote', '/api/templates', '/api/projects'), true);
     $asset = preg_match('#^/(?:assets|_next)/[a-zA-Z0-9_./-]+$#', $path) === 1 || in_array($path, array('/manifest.webmanifest', '/favicon.svg'), true);
     if (!$app && !$api && !$asset) { return; }
     if (strpos($path, '..') !== false || strpos($path, "\0") !== false) { status_header(400); exit; }
@@ -35,8 +35,8 @@ add_action('init', function () {
         $headers['Cookie'] = 'gf_play_session=' . $_COOKIE['gf_play_session'];
     }
     if ($method === 'POST') { $headers['Origin'] = $upstream; }
-    $body = $method === 'POST' ? file_get_contents('php://input', false, null, 0, 1048577) : '';
-    if (strlen($body) > 1048576) { status_header(413); exit; }
+    $body = $method === 'POST' ? file_get_contents('php://input', false, null, 0, 2097153) : '';
+    if (strlen($body) > 2097152) { status_header(413); exit; }
     $response = wp_remote_request($upstream . $uri, array(
         'method' => $method, 'headers' => $headers, 'body' => $body,
         'timeout' => 30, 'redirection' => 0, 'sslverify' => true,

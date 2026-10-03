@@ -6,7 +6,7 @@ The existing WordPress homepage stays in place. The application is served direct
 
 1. Take the normal hosting backup.
 2. Upload `gamefields-play.php` to `wp-content/mu-plugins/gamefields-play.php` using the hosting file manager or SFTP. Create `mu-plugins` if it does not exist. WordPress loads this integration automatically. This method does not require disabling `DISALLOW_FILE_EDIT`.
-3. Exclude `/play*`, `/api/play*`, `/api/quote` and `/api/templates` from the hosting/CDN full-page cache. Exclude requests carrying `gf_play_session`. Purge old cached responses for those paths.
+3. Exclude `/play*`, `/api/play*`, `/api/quote` and `/api/templates`, `/api/projects` from the hosting/CDN full-page cache. Exclude requests carrying `gf_play_session`. Purge old cached responses for those paths.
 4. Verify `/api/play/health` returns HTTP 200 with `schemaReady: true`, then open `/play/auth` in two independent browsers. Check registration, login, logout, check-in, READY, game creation, joining, readiness, result submission and opposite-team confirmation.
 5. Check that `gamefields.eu` and the site's existing `www` redirect preserve the full path. All application pages should resolve on the canonical Gamefields origin.
 

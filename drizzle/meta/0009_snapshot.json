@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "eb9df600-1ff4-4d25-9753-ba0280e60000",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "b35e4de2-4e6d-4a4f-8d37-f2923b45388a",
+  "prevId": "0a32fb3f-b179-48a6-9023-4bc8ca4027c5",
   "tables": {
     "challenge_messages": {
       "name": "challenge_messages",
@@ -898,6 +898,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "ready_at": {
+          "name": "ready_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "joined_at": {
           "name": "joined_at",
           "type": "integer",
@@ -1059,7 +1066,17 @@
           "autoincrement": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "games_sport_status_start_idx": {
+          "name": "games_sport_status_start_idx",
+          "columns": [
+            "sport",
+            "status",
+            "starts_at"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {
         "games_creator_user_id_users_id_fk": {
           "name": "games_creator_user_id_users_id_fk",
@@ -1132,6 +1149,14 @@
         }
       },
       "indexes": {
+        "home_courts_court_sport_idx": {
+          "name": "home_courts_court_sport_idx",
+          "columns": [
+            "court_id",
+            "sport"
+          ],
+          "isUnique": false
+        },
         "home_courts_user_sport_unique": {
           "name": "home_courts_user_sport_unique",
           "columns": [
@@ -2133,6 +2158,20 @@
           "notNull": false,
           "autoincrement": false
         },
+        "image_url": {
+          "name": "image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "review_note": {
+          "name": "review_note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "status": {
           "name": "status",
           "type": "text",
@@ -2472,6 +2511,265 @@
             "id"
           ],
           "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "play_game_settlements": {
+      "name": "play_game_settlements",
+      "columns": {
+        "game_id": {
+          "name": "game_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "play_game_settlements_game_id_games_id_fk": {
+          "name": "play_game_settlements_game_id_games_id_fk",
+          "tableFrom": "play_game_settlements",
+          "tableTo": "games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "builder_project_supports": {
+      "name": "builder_project_supports",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "project_id": {
+          "name": "project_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "builder_project_supports_unique": {
+          "name": "builder_project_supports_unique",
+          "columns": [
+            "project_id",
+            "user_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "builder_project_supports_project_id_builder_projects_id_fk": {
+          "name": "builder_project_supports_project_id_builder_projects_id_fk",
+          "tableFrom": "builder_project_supports",
+          "tableTo": "builder_projects",
+          "columnsFrom": [
+            "project_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "builder_project_supports_user_id_users_id_fk": {
+          "name": "builder_project_supports_user_id_users_id_fk",
+          "tableFrom": "builder_project_supports",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "builder_projects": {
+      "name": "builder_projects",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "owner_user_id": {
+          "name": "owner_user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "project_key": {
+          "name": "project_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "court_id": {
+          "name": "court_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "sport": {
+          "name": "sport",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "project_json": {
+          "name": "project_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source": {
+          "name": "source",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'studio'"
+        },
+        "visibility": {
+          "name": "visibility",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'private'"
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'draft'"
+        },
+        "published_at": {
+          "name": "published_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "builder_projects_owner_project_unique": {
+          "name": "builder_projects_owner_project_unique",
+          "columns": [
+            "owner_user_id",
+            "project_key"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "builder_projects_owner_user_id_users_id_fk": {
+          "name": "builder_projects_owner_user_id_users_id_fk",
+          "tableFrom": "builder_projects",
+          "tableTo": "users",
+          "columnsFrom": [
+            "owner_user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "builder_projects_court_id_courts_id_fk": {
+          "name": "builder_projects_court_id_courts_id_fk",
+          "tableFrom": "builder_projects",
+          "tableTo": "courts",
+          "columnsFrom": [
+            "court_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
           "onUpdate": "no action"
         }
       },

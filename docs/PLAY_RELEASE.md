@@ -8,7 +8,7 @@ Ten dokument opisuje minimalny proces wypuszczenia Gamefields PLAY na środowisk
 - działający build aplikacji
 - binding Cloudflare D1 pod nazwą `DB`
 - HTTPS na środowisku produkcyjnym
-- wszystkie migracje PLAY zastosowane w kolejności
+- wszystkie migracje PLAY / Builder zastosowane w kolejności
 - opcjonalnie `PLAY_ADMIN_EMAILS` jako lista e-maili moderatorów oddzielonych przecinkami
 
 ## 2. Migracje D1
@@ -23,8 +23,9 @@ Stosuj migracje po kolei. Nie pomijaj wcześniejszych plików na nowej bazie:
 6. `drizzle/0006_play_public_auth.sql`
 7. `drizzle/0007_play_discovery.sql`
 8. `drizzle/0008_play_court_network.sql`
+9. `drizzle/0009_builder_persistence.sql and 0010_play_pilot.sql`
 
-Na środowisku z PLAY v0.7 przed Court Network wymagana jest migracja `0008_play_court_network.sql`.
+Migracja `0009_builder_persistence.sql and 0010_play_pilot.sql` jest wymagana przed użyciem trwałych projektów konta i publikowaniem redesignów społeczności.
 
 Nigdy nie uruchamiaj ponownie migracji `CREATE TABLE` w ciemno na istniejącej bazie. Najpierw sprawdź stan przez health endpoint.
 
@@ -99,7 +100,29 @@ Na dwóch kontach testowych:
 9. sprawdź zmianę ELO i Court Ranking,
 10. sprawdź historię ELO na profilu.
 
-## 8. Smoke test — Player Discovery
+## 8. Smoke test — Court / Infrastructure
+
+1. Otwórz kartę court.
+2. Sprawdź osobno `PLAYERS HERE NOW` i `READY TO PLAY`.
+3. Utwórz grę przez `PLAY HERE`.
+4. Wróć do court i opublikuj `REPORT PROBLEM`.
+5. Drugim kontem kliknij `SUPPORT`.
+6. Potwierdź, że jedno konto nie może naliczyć poparcia drugi raz.
+7. Otwórz `REDESIGN IN BUILDER` i sprawdź przekazanie court id, nazwy, sportu i współrzędnych.
+
+## 9. Smoke test — Builder persistence
+
+1. Otwórz `/projects` jako zalogowany użytkownik.
+2. Zaimportuj poprawny eksport JSON ze Studio i sprawdź trwały zapis w `builder_projects`.
+3. Odśwież stronę i potwierdź, że projekt nadal istnieje.
+4. Otwórz projekt przez `OPEN / EDIT` po podłączeniu natywnego load flow w Studio.
+5. Dla projektu przypisanego do court wybierz `PUBLISH TO COMMUNITY`.
+6. Potwierdź `visibility=public`, `status=published` i `published_at`.
+7. Drugim kontem dodaj support i sprawdź pojedyncze naliczenie per konto.
+8. Sprawdź `UNPUBLISH` oraz `DELETE`.
+9. Sprawdź limit rozmiaru projektu i odrzucenie niepoprawnego `projectSchema`.
+
+## 10. Smoke test — Player Discovery
 
 - wyszukiwanie po nicku / imieniu,
 - filtr READY NOW,
@@ -108,7 +131,7 @@ Na dwóch kontach testowych:
 - sortowanie po ELO, READY, liczbie gier i win rate,
 - przejście z profilu gracza do challenge.
 
-## 9. Smoke test — social / competition
+## 11. Smoke test — social / competition
 
 - Follow / Unfollow
 - Challenge z profilu gracza
@@ -122,16 +145,7 @@ Na dwóch kontach testowych:
 - confirm result
 - automatyczny awans zwycięzcy
 
-## 10. Court → Builder
-
-Na karcie boiska kliknij `REDESIGN IN BUILDER` i sprawdź:
-
-- poprawny sport,
-- kontekst `court_id`,
-- nazwę projektu redesignu,
-- otwarcie właściwego presetu Buildera.
-
-## 11. Hosting publiczny
+## 12. Hosting publiczny
 
 Preferowana architektura:
 
@@ -142,7 +156,7 @@ Nie rekomendujemy docelowego publicznego auth wyłącznie w cross-site iframe z 
 
 WordPress może linkować do PLAY lub osadzać część widoków informacyjnych, ale właściwa aplikacja z kontami powinna działać na domenie należącej do Gamefields.
 
-## 12. Security checklist
+## 13. Security checklist
 
 - HTTPS aktywne
 - `Secure` cookie w produkcji
@@ -153,15 +167,18 @@ WordPress może linkować do PLAY lub osadzać część widoków informacyjnych,
 - lokalizacja użytkownika jest opcjonalna i używana w przeglądarce wyłącznie do sortowania lub dobrowolnego zgłoszenia obiektu
 - Court Network publikuje obiekty dopiero po moderacji
 - `PLAY_ADMIN_EMAILS` nie powinno być ujawniane w kliencie
+- projekty Buildera są walidowane przez `projectSchema` przed zapisem
+- publiczny redesign wymaga powiązania z istniejącym court
+- support projektu i improvement request ma unikalność per konto
 - rate limiting na warstwie edge zalecany przed szerokim publicznym launch'em
 - reset hasła / weryfikacja e-mail wymagane przed pełnym produkcyjnym rolloutem
 
-## 13. Definition of ready for pilot
+## 14. Definition of ready for pilot
 
 Pilot można uruchomić, gdy:
 
 - CI jest zielone,
-- `/api/play/health` jest zielone,
+- `/api/play/health` jest zielone po migracjach 0001–0009,
 - rejestracja, onboarding i ponowne logowanie działają,
 - MAP pokazuje poprawne współrzędne, live activity i READY TO PLAY,
 - użytkownik może zgłosić nowe miejsce, a moderator zatwierdzić je na mapę,
@@ -169,5 +186,9 @@ Pilot można uruchomić, gdy:
 - ELO aktualizuje się dokładnie raz,
 - Challenge działa end-to-end,
 - turniej działa co najmniej dla drabinki 4-osobowej,
+- Court → Problem → Support działa end-to-end,
 - Court → Builder zachowuje kontekst obiektu,
+- projekt Buildera może zostać zapisany trwale na koncie,
 - mobile navigation działa na iOS/Android viewportach.
+
+Pilot validation: CI runs tests/play-smoke.mjs against the production Worker and tests/play-mobile.mjs at 375×812, 390×844 and 430×932. The WordPress gateway and installation instructions are in integrations/wordpress. The hosting file manager/SFTP is required to install the gateway; the connected WordPress API cannot edit files.

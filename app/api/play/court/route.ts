@@ -1,6 +1,6 @@
 import { and, desc, eq, gt, sql } from "drizzle-orm";
 import { playAvailability } from "@/db/play-discovery";
-import { courtRedesigns,redesignVotes } from "@/db/play-pilot";
+import { builderProjects,builderProjectSupports } from "@/db/builder-projects";
 import { getDb } from "@/db";
 import { courtCheckins, courtReportSupports, courtReports, courts, gamePlayers, games, homeCourts, playerSports, users } from "@/db/schema";
 import { requireCurrentPlayUser } from "@/lib/play-auth";
@@ -94,7 +94,7 @@ export async function GET(request: Request) {
 
     const readyPlayers=await db.select({userId:users.id,nickname:users.nickname,avatarUrl:users.avatarUrl,availableUntil:playAvailability.availableUntil}).from(playAvailability).innerJoin(users,eq(users.id,playAvailability.userId)).where(and(eq(playAvailability.courtId,court.id),eq(playAvailability.sport,sport),gt(playAvailability.availableUntil,now)));
     const homePlayerList=await db.select({userId:users.id,nickname:users.nickname,avatarUrl:users.avatarUrl}).from(homeCourts).innerJoin(users,eq(users.id,homeCourts.userId)).where(and(eq(homeCourts.courtId,court.id),eq(homeCourts.sport,sport))).limit(30);
-    const redesigns=await db.select({id:courtRedesigns.id,title:courtRedesigns.title,nickname:users.nickname,votes:sql<number>`(SELECT count(*) FROM play_redesign_votes WHERE redesign_id=${courtRedesigns.id})`}).from(courtRedesigns).innerJoin(users,eq(users.id,courtRedesigns.userId)).where(and(eq(courtRedesigns.courtId,court.id),eq(courtRedesigns.status,"community"))).orderBy(desc(courtRedesigns.createdAt)).limit(12);
+    const redesigns=await db.select({id:builderProjects.id,title:builderProjects.name,nickname:users.nickname,votes:sql<number>`(SELECT count(*) FROM builder_project_supports WHERE project_id=${builderProjects.id})`}).from(builderProjects).innerJoin(users,eq(users.id,builderProjects.ownerUserId)).where(and(eq(builderProjects.courtId,court.id),eq(builderProjects.visibility,"public"),eq(builderProjects.status,"published"))).orderBy(desc(builderProjects.publishedAt)).limit(12);
     return json({
       ok: true,
       readyPlayers,homePlayerList,redesigns,
@@ -108,7 +108,7 @@ export async function GET(request: Request) {
       homePlayers: homeCount,
       myHome,
       myCheckin,
-      reports,
+      reports:await Promise.all(reports.map(async r=>({...r,supportedByMe:!!(await db.select({id:courtReportSupports.id}).from(courtReportSupports).where(and(eq(courtReportSupports.reportId,r.id),eq(courtReportSupports.userId,current.id))).limit(1))[0]}))),
     });
   } catch (error) {
     const code = error instanceof Error ? error.message : "UNKNOWN_ERROR";
