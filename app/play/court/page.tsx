@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import CommunityRedesigns from "./community-redesigns";
 
 type Court={id:string;slug:string;name:string;city:string;district:string|null;address:string|null;latitude:number;longitude:number;sports:string;surface:string|null;lighting:boolean;isFree:boolean;builderProjectId:string|null};
 type Ranking={userId:string;nickname:string;displayName:string|null;elo:number;games:number;wins:number;localGames:number;rank:number;tier:string;winRate:number};
@@ -66,6 +67,7 @@ export default function CourtPage(){
    {showReport&&<div style={s.reportForm}><label style={s.label}>Problem<select style={s.input} value={reportCategory} onChange={e=>setReportCategory(e.target.value)}>{reportCategories.map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label><label style={s.label}>Co dokładnie trzeba poprawić?<textarea style={s.textarea} rows={4} value={reportDescription} onChange={e=>setReportDescription(e.target.value)} placeholder="Opisz problem tak, żeby społeczność i Gamefields wiedzieli czego dotyczy."/></label><button disabled={busy||reportDescription.trim().length<4} style={s.primary} onClick={()=>void submitReport()}>PUBLISH IMPROVEMENT REQUEST</button></div>}
    <div style={s.reports}>{data.reports.map(r=><article key={r.id} style={s.report}><div><span style={s.category}>{r.category.toUpperCase()}</span><b style={s.reportTitle}>{r.description||"Zgłoszenie bez opisu"}</b><small style={s.personMeta}>@{r.reporterNickname} · {r.status}</small></div><div style={s.support}><strong>{r.supportCount}</strong><span>SUPPORTERS</span><button disabled={busy||r.supportedByMe} style={r.supportedByMe?s.supported:s.supportButton} onClick={()=>void run(()=>post("support_report",{reportId:r.id}))}>{r.supportedByMe?"SUPPORTED ✓":"SUPPORT"}</button></div></article>)}{!data.reports.length&&<div style={s.empty}>Brak zgłoszeń. Jeśli widzisz problem, uruchom pierwszy improvement request.</div>}</div>
   </section>
+  <CommunityRedesigns courtId={c.id}/>
  </main>;
 }
 
