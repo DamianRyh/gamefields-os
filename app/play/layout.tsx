@@ -8,12 +8,9 @@ import "./play.css";
 const items = [
   ["PLAY", "/play"],
   ["MAP", "/play/map"],
-  ["+ SPOT", "/play/courts/add"],
   ["GAMES", "/play/games"],
-  ["PLAYERS", "/play/players"],
-  ["TOURNAMENTS", "/play/tournaments"],
-  ["COMMUNITY", "/play/community"],
-  ["ACCOUNT", "/play/account"],
+  ["RANK", "/play/rankings"],
+  ["ME", "/play/account"],
 ] as const;
 
 export default function PlayLayout({ children }: { children: React.ReactNode }) {
@@ -69,11 +66,14 @@ export default function PlayLayout({ children }: { children: React.ReactNode }) 
       {children}
       {!isBarePage ? (
         <nav className="play-nav" aria-label="Gamefields PLAY">
-          {items.map(([label, href]) => (
-            <Link className="play-nav-link" href={href} key={href}>
-              {label}
-            </Link>
-          ))}
+          {items.map(([label, href]) => {
+            const active = href === "/play" ? pathname === href : pathname.startsWith(href);
+            return (
+              <Link className={`play-nav-link${active ? " is-active" : ""}`} href={href} key={href} aria-current={active ? "page" : undefined}>
+                {label}
+              </Link>
+            );
+          })}
         </nav>
       ) : null}
     </div>
