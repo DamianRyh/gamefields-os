@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
+import "./auth.css";
 
 type Mode = "login" | "register";
 
@@ -12,6 +13,12 @@ const errors: Record<string, string> = {
   INVALID_CREDENTIALS: "Nieprawidłowy e-mail lub hasło.",
   AUTH_TEMP_LOCKED: "Za dużo nieudanych prób. Spróbuj ponownie za około 15 minut.",
 };
+
+function returnTarget() {
+  const value = new URLSearchParams(window.location.search).get("returnTo");
+  if (!value || !value.startsWith("/") || value.startsWith("//") || value.startsWith("/play/auth")) return "/play";
+  return value;
+}
 
 export default function PlayAuthPage() {
   const [mode, setMode] = useState<Mode>("login");
@@ -27,7 +34,7 @@ export default function PlayAuthPage() {
       try {
         const response = await fetch("/api/play/auth", { cache: "no-store" });
         const data = await response.json();
-        if (response.ok && data.authenticated) window.location.replace("/play");
+        if (response.ok && data.authenticated) window.location.replace(returnTarget());
       } finally {
         setChecking(false);
       }
@@ -47,7 +54,7 @@ export default function PlayAuthPage() {
       });
       const data = await response.json();
       if (!response.ok || !data.ok) throw new Error(data.error || "REQUEST_FAILED");
-      window.location.href = "/play";
+      window.location.href = returnTarget();
     } catch (caught) {
       const code = caught instanceof Error ? caught.message : "REQUEST_FAILED";
       setError(errors[code] || "Nie udało się zalogować. Spróbuj ponownie.");
@@ -57,7 +64,7 @@ export default function PlayAuthPage() {
   }
 
   return (
-    <main style={s.page}>
+    <main className="play-auth-page" style={s.page}>
       <section style={s.panel}>
         <Link href="/play" style={s.back}>← GAMEFIELDS PLAY</Link>
         <div style={s.kicker}>YOUR CITY. YOUR GAME.</div>
@@ -96,7 +103,7 @@ export default function PlayAuthPage() {
         <div style={s.security}>Sesja: HttpOnly · SameSite · 30 dni · hasło PBKDF2</div>
       </section>
 
-      <aside style={s.side}>
+      <aside className="play-auth-side" style={s.side}>
         <div style={s.sideKicker}>GAMEFIELDS PLAY</div>
         <h2 style={s.sideTitle}>Znajdź. Zagraj. Rywalizuj. Zmień swoje boisko.</h2>
         <div style={s.features}>
