@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { and, eq, gt } from "drizzle-orm";
+import { and, eq, gt, sql } from "drizzle-orm";
 import { getChatGPTUser } from "@/app/chatgpt-auth";
 import { getDb } from "@/db";
 import { playSessions } from "@/db/play-auth";
@@ -17,12 +17,13 @@ async function getHostedPlayUser() {
   const existingById = (await db.select().from(users).where(eq(users.id, auth.userId)).limit(1))[0];
   if (existingById) return existingById;
 
-  const existingByEmail = (await db.select().from(users).where(eq(users.email, auth.email.toLowerCase())).limit(1))[0];
+  const email = auth.email.trim().toLowerCase();
+  const existingByEmail = (await db.select().from(users).where(sql`lower(${users.email}) = ${email}`).limit(1))[0];
   if (existingByEmail) return existingByEmail;
 
   return ensurePlayer({
     id: auth.userId,
-    email: auth.email.toLowerCase(),
+    email,
     displayName: auth.fullName || auth.displayName,
   });
 }
