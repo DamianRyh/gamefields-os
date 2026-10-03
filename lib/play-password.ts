@@ -15,6 +15,10 @@ function fromBase64Url(value: string) {
   return bytes;
 }
 
+function toArrayBuffer(bytes: Uint8Array): ArrayBuffer {
+  return Uint8Array.from(bytes).buffer;
+}
+
 function constantTimeEqual(a: Uint8Array, b: Uint8Array) {
   if (a.length !== b.length) return false;
   let diff = 0;
@@ -26,7 +30,7 @@ async function derivePassword(password: string, salt: Uint8Array) {
   const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey("raw", encoder.encode(password), "PBKDF2", false, ["deriveBits"]);
   const bits = await crypto.subtle.deriveBits(
-    { name: "PBKDF2", salt, iterations: PBKDF2_ITERATIONS, hash: HASH },
+    { name: "PBKDF2", salt: toArrayBuffer(salt), iterations: PBKDF2_ITERATIONS, hash: HASH },
     key,
     256,
   );
