@@ -11,9 +11,9 @@
   transform: translateX(-50%);
   z-index: 70;
   display: grid;
-  grid-template-columns: repeat(7, minmax(72px, 1fr));
+  grid-template-columns: repeat(8, minmax(72px, 1fr));
   gap: 4px;
-  width: min(860px, calc(100vw - 20px));
+  width: min(940px, calc(100vw - 20px));
   padding: 6px;
   border: 1px solid #263b45;
   border-radius: 18px;
@@ -56,7 +56,7 @@
     bottom: max(8px, env(safe-area-inset-bottom));
     transform: none;
     width: auto;
-    grid-template-columns: repeat(7, 72px);
+    grid-template-columns: repeat(8, 72px);
     justify-content: start;
     border-radius: 16px;
   }
@@ -85,17 +85,21 @@
   .play-shell main [style*="minmax(240px,.8fr)"],
   .play-shell main [style*="minmax(320px,1.2fr)"],
   .play-shell main [style*="minmax(310px,1fr)"],
-  .play-shell main [style*="minmax(0,1.6fr)"] {
+  .play-shell main [style*="minmax(0,1.6fr)"],
+  .play-shell main [style*="minmax(0,1.15fr)"] {
     grid-template-columns: 1fr !important;
   }
 
-  .play-shell main [style*="minHeight:480"],
+  .play-shell main [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
   .play-shell main [style*="min-height: 480"] {
     min-height: 390px !important;
     height: 52vh !important;
   }
 
-  .play-shell main [style*="marginLeft:auto"] {
+  .play-shell main [style*="margin-left: auto"] {
     margin-left: 0 !important;
   }
 
@@ -106,7 +110,7 @@
 
 @media (max-width: 420px) {
   .play-nav {
-    grid-template-columns: repeat(7, 68px);
+    grid-template-columns: repeat(8, 68px);
   }
 
   .play-shell main [style*="grid-template-columns: repeat(4"] {
