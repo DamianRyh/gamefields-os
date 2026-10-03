@@ -18,6 +18,8 @@ const items = [
 export default function PlayLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAuthPage = pathname === "/play/auth";
+  const isOnboardingPage = pathname === "/play/onboarding";
+  const isBarePage = isAuthPage || isOnboardingPage;
   const [ready, setReady] = useState(isAuthPage);
 
   useEffect(() => {
@@ -29,14 +31,25 @@ export default function PlayLayout({ children }: { children: React.ReactNode }) 
     let cancelled = false;
     async function guard() {
       try {
-        const response = await fetch("/api/play/auth", { cache: "no-store" });
-        const data = await response.json();
+        const authResponse = await fetch("/api/play/auth", { cache: "no-store" });
+        const auth = await authResponse.json();
         if (cancelled) return;
-        if (!response.ok || !data.authenticated) {
+        if (!authResponse.ok || !auth.authenticated) {
           const returnTo = `${window.location.pathname}${window.location.search}`;
           window.location.replace(`/play/auth?returnTo=${encodeURIComponent(returnTo)}`);
           return;
         }
+
+        if (pathname === "/play") {
+          const bootstrapResponse = await fetch("/api/play", { cache: "no-store" });
+          const bootstrap = await bootstrapResponse.json();
+          if (cancelled) return;
+          if (bootstrapResponse.ok && bootstrap.ok && Array.isArray(bootstrap.homeCourts) && bootstrap.homeCourts.length === 0) {
+            window.location.replace("/play/onboarding");
+            return;
+          }
+        }
+
         setReady(true);
       } catch {
         if (!cancelled) window.location.replace("/play/auth");
@@ -53,7 +66,7 @@ export default function PlayLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="play-shell">
       {children}
-      {!isAuthPage ? (
+      {!isBarePage ? (
         <nav className="play-nav" aria-label="Gamefields PLAY">
           {items.map(([label, href]) => (
             <Link className="play-nav-link" href={href} key={href}>
