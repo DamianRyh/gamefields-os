@@ -1,6 +1,7 @@
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import {
+  coinLedger,
   eloHistory,
   gamePlayers,
   games,
@@ -12,8 +13,30 @@ import {
 export const PLAY_SPORTS = ["football", "basketball"] as const;
 export type PlaySport = (typeof PLAY_SPORTS)[number];
 
+export const SKILL_LEVELS = ["beginner", "intermediate", "advanced", "competitive"] as const;
+export type SkillLevel = (typeof SKILL_LEVELS)[number];
+
 export function isPlaySport(value: string): value is PlaySport {
   return (PLAY_SPORTS as readonly string[]).includes(value);
+}
+
+export function isSkillLevel(value: string): value is SkillLevel {
+  return (SKILL_LEVELS as readonly string[]).includes(value);
+}
+
+export function startingElo(level: SkillLevel) {
+  if (level === "competitive") return 1350;
+  if (level === "advanced") return 1200;
+  if (level === "intermediate") return 1050;
+  return 900;
+}
+
+export function playerTier(elo: number) {
+  if (elo >= 1500) return "Legend";
+  if (elo >= 1350) return "Elite";
+  if (elo >= 1200) return "Challenger";
+  if (elo >= 1050) return "Street";
+  return "Rookie";
 }
 
 export function newId(prefix: string) {
@@ -56,6 +79,7 @@ export async function ensurePlayer(input: {
     nickname,
     displayName: input.displayName || null,
     city: "Warszawa",
+    coins: 0,
     createdAt: now,
     updatedAt: now,
   });
@@ -63,7 +87,7 @@ export async function ensurePlayer(input: {
   return (await db.select().from(users).where(eq(users.id, input.id)).limit(1))[0];
 }
 
-export async function ensurePlayerSport(userId: string, sport: PlaySport) {
+export async function ensurePlayerSport(userId: string, sport: PlaySport, skillLevel: SkillLevel = "beginner") {
   const db = getDb();
   const existing = await db
     .select()
@@ -75,7 +99,8 @@ export async function ensurePlayerSport(userId: string, sport: PlaySport) {
     id: newId("ps"),
     userId,
     sport,
-    elo: 1000,
+    skillLevel,
+    elo: startingElo(skillLevel),
     games: 0,
     wins: 0,
     losses: 0,
@@ -88,6 +113,39 @@ export async function ensurePlayerSport(userId: string, sport: PlaySport) {
     .from(playerSports)
     .where(and(eq(playerSports.userId, userId), eq(playerSports.sport, sport)))
     .limit(1))[0];
+}
+
+export async function setPlayerSkillLevel(userId: string, sport: PlaySport, skillLevel: SkillLevel) {
+  const db = getDb();
+  const current = await ensurePlayerSport(userId, sport, skillLevel);
+  if (current.games > 0) throw new Error("SKILL_LEVEL_LOCKED");
+  const elo = startingElo(skillLevel);
+  await db.update(playerSports).set({ skillLevel, elo, updatedAt: new Date() }).where(eq(playerSports.id, current.id));
+  return { skillLevel, elo, tier: playerTier(elo) };
+}
+
+export async function awardCoins(userId: string, sourceType: string, sourceId: string, amount: number, note?: string) {
+  const db = getDb();
+  const safeAmount = Math.max(-5000, Math.min(5000, Math.trunc(amount)));
+  if (!safeAmount) return false;
+  const existing = await db
+    .select({ id: coinLedger.id })
+    .from(coinLedger)
+    .where(and(eq(coinLedger.userId, userId), eq(coinLedger.sourceType, sourceType), eq(coinLedger.sourceId, sourceId)))
+    .limit(1);
+  if (existing[0]) return false;
+
+  await db.insert(coinLedger).values({
+    id: newId("coin"),
+    userId,
+    sourceType: sourceType.slice(0, 40),
+    sourceId: sourceId.slice(0, 120),
+    amount: safeAmount,
+    note: note?.slice(0, 200) || null,
+    createdAt: new Date(),
+  });
+  await db.update(users).set({ coins: sql`${users.coins} + ${safeAmount}`, updatedAt: new Date() }).where(eq(users.id, userId));
+  return true;
 }
 
 function kFactor(gamesPlayed: number) {
@@ -189,7 +247,7 @@ export async function confirmResultAndApplyElo(gameId: string, confirmerUserId: 
   const actualA = game.scoreA === game.scoreB ? 0.5 : game.scoreA > game.scoreB ? 1 : 0;
   const actualB = 1 - actualA;
   const now = new Date();
-  const changes: Array<{ userId: string; before: number; after: number; change: number }> = [];
+  const changes: Array<{ userId: string; before: number; after: number; change: number; tier: string }> = [];
 
   for (const p of roster) {
     const current = byUser.get(p.userId)!;
@@ -221,7 +279,12 @@ export async function confirmResultAndApplyElo(gameId: string, confirmerUserId: 
       change: delta,
       createdAt: now,
     });
-    changes.push({ userId: p.userId, before: current.elo, after: next, change: delta });
+
+    await awardCoins(p.userId, "game_complete", gameId, 25, "Completed game");
+    if (won) await awardCoins(p.userId, "game_win", gameId, 15, "Game win");
+    if (drawn) await awardCoins(p.userId, "game_draw", gameId, 5, "Game draw");
+
+    changes.push({ userId: p.userId, before: current.elo, after: next, change: delta, tier: playerTier(next) });
   }
 
   await db.insert(resultConfirmations).values({
