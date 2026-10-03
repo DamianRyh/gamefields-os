@@ -1,11 +1,11 @@
 interface Body {
-  json(): Promise<any>;
+  json<T = any>(): Promise<T>;
 }
 
 interface Request {
-  json(): Promise<any>;
+  json<T = any>(): Promise<T>;
 }
 
 interface Response {
-  json(): Promise<any>;
+  json<T = any>(): Promise<T>;
 }
