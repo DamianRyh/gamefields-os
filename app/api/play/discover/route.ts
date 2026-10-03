@@ -1,7 +1,7 @@
 import { and, desc, eq, gt, like, ne, or } from "drizzle-orm";
 import { getDb } from "@/db";
 import { playAvailability } from "@/db/play-discovery";
-import { courtCheckins, courts, homeCourts, playerSports, users } from "@/db/schema";
+import { courtCheckins, courts, games, gamePlayers, homeCourts, playerSports, users } from "@/db/schema";
 import { requireCurrentPlayUser } from "@/lib/play-auth";
 import { isPlaySport, playerTier } from "@/lib/play-engine";
 
@@ -51,10 +51,7 @@ export async function GET(request: Request) {
       .orderBy(desc(playerSports.elo))
       .limit(200);
 
-    const liveRows = await db
-      .select({ userId: courtCheckins.userId, courtId: courtCheckins.courtId, expiresAt: courtCheckins.expiresAt })
-      .from(courtCheckins)
-      .where(gt(courtCheckins.expiresAt, now));
+    const liveRows=await db.select({userId:gamePlayers.userId,courtId:games.courtId}).from(gamePlayers).innerJoin(games,eq(games.id,gamePlayers.gameId)).where(and(eq(games.sport,sport),eq(games.status,"in_progress")));
     const readyRows = await db
       .select({ userId: playAvailability.userId, courtId: playAvailability.courtId, availableUntil: playAvailability.availableUntil })
       .from(playAvailability)

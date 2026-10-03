@@ -1,4 +1,6 @@
 import { and, desc, eq, gt, sql } from "drizzle-orm";
+import { playAvailability } from "@/db/play-discovery";
+import { courtRedesigns,redesignVotes } from "@/db/play-pilot";
 import { getDb } from "@/db";
 import { courtCheckins, courtReportSupports, courtReports, courts, gamePlayers, games, homeCourts, playerSports, users } from "@/db/schema";
 import { requireCurrentPlayUser } from "@/lib/play-auth";
@@ -90,12 +92,17 @@ export async function GET(request: Request) {
       .orderBy(desc(courtReports.createdAt))
       .limit(20);
 
+    const readyPlayers=await db.select({userId:users.id,nickname:users.nickname,avatarUrl:users.avatarUrl,availableUntil:playAvailability.availableUntil}).from(playAvailability).innerJoin(users,eq(users.id,playAvailability.userId)).where(and(eq(playAvailability.courtId,court.id),eq(playAvailability.sport,sport),gt(playAvailability.availableUntil,now)));
+    const homePlayerList=await db.select({userId:users.id,nickname:users.nickname,avatarUrl:users.avatarUrl}).from(homeCourts).innerJoin(users,eq(users.id,homeCourts.userId)).where(and(eq(homeCourts.courtId,court.id),eq(homeCourts.sport,sport))).limit(30);
+    const redesigns=await db.select({id:courtRedesigns.id,title:courtRedesigns.title,nickname:users.nickname,votes:sql<number>`(SELECT count(*) FROM play_redesign_votes WHERE redesign_id=${courtRedesigns.id})`}).from(courtRedesigns).innerJoin(users,eq(users.id,courtRedesigns.userId)).where(and(eq(courtRedesigns.courtId,court.id),eq(courtRedesigns.status,"community"))).orderBy(desc(courtRedesigns.createdAt)).limit(12);
     return json({
       ok: true,
+      readyPlayers,homePlayerList,redesigns,
+      myReady:readyPlayers.some(p=>p.userId===current.id),
       court,
       sport,
       livePlayers,
-      upcomingGames,
+      upcomingGames:upcomingGames.filter(g=>g.status!=="completed"),
       ranking: ranking.map((item, index) => ({ ...item, rank: index + 1, tier: playerTier(item.elo), winRate: item.games ? Math.round((item.wins / item.games) * 100) : 0 })),
       courtKing: ranking[0] ? { ...ranking[0], tier: playerTier(ranking[0].elo) } : null,
       homePlayers: homeCount,

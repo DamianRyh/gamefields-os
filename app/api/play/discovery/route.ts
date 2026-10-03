@@ -1,7 +1,9 @@
+import { tournaments } from "@/db/play-competition";
+import { assertSameOrigin } from "@/lib/play-http";
 import { and, desc, eq, gt, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import { playAvailability } from "@/db/play-discovery";
-import { courtCheckins, courts, gamePlayers, games, playerSports, users } from "@/db/schema";
+import { courtCheckins, courtReports, courts, gamePlayers, games, homeCourts, playerSports, users } from "@/db/schema";
 import { requireCurrentPlayUser } from "@/lib/play-auth";
 import { ensurePlayerSport, isPlaySport, newId, playerTier } from "@/lib/play-engine";
 
@@ -61,6 +63,9 @@ export async function GET(request: Request) {
       .orderBy(games.startsAt)
       .limit(100);
 
+    const home = (await db.select().from(homeCourts).where(and(eq(homeCourts.userId,current.id),eq(homeCourts.sport,sport))).limit(1))[0];
+    const problems = await db.select({courtId:courtReports.courtId,count:sql<number>`count(*)`}).from(courtReports).where(eq(courtReports.status,"open")).groupBy(courtReports.courtId);
+    const events = await db.select().from(tournaments).where(and(eq(tournaments.sport,sport),eq(tournaments.status,"open"),gt(tournaments.startsAt,now))).limit(50);
     const myReady = ready.find((item) => item.userId === current.id) || null;
     const checkinMap = new Map(checkins.map((item) => [item.courtId, Number(item.count)]));
     const readyCount = new Map<string, number>();
@@ -85,6 +90,9 @@ export async function GET(request: Request) {
           ...court,
           playersNow: checkinMap.get(court.id) || 0,
           readyNow: readyCount.get(court.id) || 0,
+          isHome: home?.courtId===court.id,
+          problemCount: Number(problems.find(p=>p.courtId===court.id)?.count || 0),
+          events:events.filter(e=>e.courtId===court.id),
           openGames: openGames.filter((game) => game.courtId === court.id),
         })),
       readyPlayers: ready.map((item) => ({ ...item, tier: playerTier(item.elo) })),
@@ -98,6 +106,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    assertSameOrigin(request);
     const db = getDb();
     const current = await requireCurrentPlayUser();
     const body = await request.json();
@@ -119,10 +128,11 @@ export async function POST(request: Request) {
       }
 
       await ensurePlayerSport(current.id, sport);
-      const minutes = Math.max(15, Math.min(180, Number(body.minutes || 60)));
+      const inputMinutes=Number(body.minutes || 60);
+      if(!Number.isFinite(inputMinutes)) throw new Error("INVALID_DURATION");
+      const minutes = Math.max(15, Math.min(180, inputMinutes));
       const now = new Date();
       const availableUntil = new Date(now.getTime() + minutes * 60 * 1000);
-      await db.delete(playAvailability).where(and(eq(playAvailability.userId, current.id), eq(playAvailability.sport, sport)));
       await db.insert(playAvailability).values({
         id: newId("ready"),
         userId: current.id,
@@ -131,7 +141,7 @@ export async function POST(request: Request) {
         availableUntil,
         createdAt: now,
         updatedAt: now,
-      });
+      }).onConflictDoUpdate({target:[playAvailability.userId,playAvailability.sport],set:{courtId,availableUntil,updatedAt:now}});
       return json({ ok: true, availableUntil, courtId });
     }
 

@@ -25,6 +25,9 @@ const REQUIRED_TABLES = [
   "play_sessions",
   "play_availability",
   "play_court_submissions",
+  "play_game_settlements",
+  "play_court_redesigns",
+  "play_redesign_votes",
 ] as const;
 
 export async function GET() {

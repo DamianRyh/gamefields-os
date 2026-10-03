@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import {Avatar} from "@/components/play-ui";
 import { useEffect, useState } from "react";
 
 type Player = {
   userId: string;
+  avatarUrl:string|null;
   nickname: string;
   displayName: string | null;
   city: string;
@@ -76,13 +78,14 @@ export default function PlayersPage() {
       {error && <div style={s.error}>{error}</div>}
       <section style={s.summary}><b>{players.length}</b><span>graczy pasuje do filtrów</span>{ready ? <em>READY TO PLAY</em> : null}{live ? <em>LIVE</em> : null}</section>
       <section style={s.grid}>
-        {players.map((p) => <Link key={p.userId} href={`/play/player?nickname=${encodeURIComponent(p.nickname)}&sport=${sport}`} style={{ ...s.card, ...(p.readyNow ? s.readyCard : {}) }}>
-          <div style={s.row}><div><b style={s.nick}>@{p.nickname}</b><div style={s.muted}>{p.displayName || p.city}</div></div><div style={s.states}>{p.readyNow && <span style={s.ready}>⚡ READY</span>}{p.playingNow && <span style={s.live}>● LIVE</span>}</div></div>
+        {players.map((p) => <article key={p.userId} style={{ ...s.card, ...(p.readyNow ? s.readyCard : {}) }}>
+          <div style={s.row}><Avatar nickname={p.nickname} url={p.avatarUrl}/><div><b style={s.nick}>@{p.nickname}</b><div style={s.muted}>{p.displayName || p.city}</div></div><div style={s.states}>{p.readyNow && <span style={s.ready}>⚡ READY</span>}{p.playingNow && <span style={s.live}>● LIVE</span>}</div></div>
           <div style={s.rating}><strong>{p.elo}</strong><span>ELO</span><em>{p.tier}</em></div>
           <div style={s.meta}><span>{p.games} gier</span><span>{p.winRate}% win</span><span>{p.skillLevel}</span></div>
           {p.homeCourtName && <div style={s.home}>⌖ {p.homeCourtName}</div>}
           {p.readyNow && p.availableUntil ? <div style={s.until}>szuka gry do {new Date(p.availableUntil).toLocaleTimeString("pl-PL", { hour: "2-digit", minute: "2-digit" })}</div> : null}
-        </Link>)}
+          <div className="p-actions"><Link className="p-btn" href={`/play/challenge/new?playerId=${p.userId}&sport=${sport}`}>CHALLENGE</Link><Link className="p-btn secondary" href={`/play/player?nickname=${encodeURIComponent(p.nickname)}&sport=${sport}`}>PROFIL ↗</Link></div>
+        </article>)}
         {!players.length && !error && <div style={s.empty}><b>Nikt nie pasuje do tego filtra.</b><span>Zmień zakres albo sprawdź mapę — aktywność może pojawić się na konkretnym boisku.</span><Link href="/play/map" style={s.primaryLink}>OTWÓRZ MAPĘ</Link></div>}
       </section>
     </main>

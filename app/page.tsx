@@ -1,5 +1,5 @@
 "use client";
-import {useEffect,useId,useMemo,useRef,useState} from "react";
+import {useCallback,useEffect,useId,useMemo,useRef,useState} from "react";
 import {Grid2X2,Layers,Ruler,Palette,Goal,Paintbrush,CircleDashed,Plus,Check,Download,FolderOpen,RotateCcw,Undo2,Redo2,Upload,Type,Trash2,Move,Sun,Moon,PartyPopper,WalletCards} from "lucide-react";
 import {Slider} from "@/components/ui/slider";
 import {Switch} from "@/components/ui/switch";
@@ -8,6 +8,8 @@ import {Toaster,toast} from "sonner";
 import {projectSchema,type Project,type EditorObject,type Target,type ObjectKind} from "@/lib/project";
 import {patternFamilies,patternPalettes,patternFilters,signaturePresets,variants as patternVariants,getPatternFamily,getPatternPalette,patternCode,patternComplexity,complexityLabel,patternVariantName,filteredPatternFamilies,PATTERN_COUNT} from "@/lib/pattern-library";
 import {PatternArt} from "@/components/pattern-art";
+import {BuilderPlayBridge,type CourtContext} from "@/components/builder-play-bridge";
+import {playRequest} from "@/components/play-ui";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 
 const uid=()=>Math.random().toString(36).slice(2,9);
@@ -103,7 +105,7 @@ function EventScene({h}:{h:number}){
    <g transform={"translate(300 "+(h+58)+")"}><rect x="-115" y="-15" width="230" height="30" rx="3" fill="#ffffff" stroke="#20352c" strokeWidth="2"/><text textAnchor="middle" dominantBaseline="middle" fill="#20352c" fontSize="13" fontWeight="900" letterSpacing="2">COMMUNITY · MUSIC · GAME</text></g>
  </g>;
 }
-function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEquipment}:{p:Project;iso?:boolean;small?:boolean;selectedId?:string|null;onSelect?:(id:string|null)=>void;onDragStart?:(e:React.PointerEvent<SVGElement>,id:string,mode?:"move"|"scale"|"rotate")=>void;onDropEquipment?:(name:string,x:number,y:number)=>void}){
+export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEquipment}:{p:Project;iso?:boolean;small?:boolean;selectedId?:string|null;onSelect?:(id:string|null)=>void;onDragStart?:(e:React.PointerEvent<SVGElement>,id:string,mode?:"move"|"scale"|"rotate")=>void;onDropEquipment?:(name:string,x:number,y:number)=>void}){
  const w=600,h=600*p.width/p.length;
  const svgRef=useRef<SVGSVGElement>(null);
  const patternId=useId(),clipId=useId();
@@ -162,6 +164,7 @@ export default function Home(){
  async function openTemplate(item:TemplateCard){if(openingTemplate!==null)return;setOpeningTemplate(item.id);try{const r=await fetch("/api/templates?id="+item.id,{cache:"no-store"});if(!r.ok)throw new Error();const data=await r.json() as {project:unknown};const original=projectSchema.parse(data.project);const copy={...original,id:"GF-"+uid(),name:item.title.slice(0,190)+" — kopia",objects:original.objects.map(o=>({...o,id:uid()}))};finishDrag.current?.();history(p);setP(copy);setSelectedId(null);setView("builder");toast.success("Otworzono kopię wzoru. Oryginał pozostaje bez zmian.")}catch{toast.error("Ten wzór nie ma poprawnego pliku projektu lub został wycofany.")}finally{setOpeningTemplate(null)}}
  useEffect(()=>{if(new URLSearchParams(window.location.search).get("view")==="templates"){setView("templates");void loadTemplates(1)}},[]);
 
+ const [playContext,setPlayContext]=useState<CourtContext|null>(null);
  const [p,setP]=useState<Project>(initial),[view,setView]=useState("sport"),[module,setModule]=useState(5),[iso,setIso]=useState(false),[selectedId,setSelectedId]=useState<string|null>(null),[undoStack,setUndo]=useState<Project[]>([]),[redoStack,setRedo]=useState<Project[]>([]),[projects,setProjects]=useState<Project[]>([]);
  useEffect(()=>{
    const params=new URLSearchParams(window.location.search);
@@ -218,6 +221,8 @@ export default function Home(){
   setP(v=>({...v,name:profile.label+" — projekt",sport:profile.sport,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,lines:!["Skate","Street Workout"].includes(profile.sport),objects}));
   setModule(0);setView("builder");setSelectedId(null);setUndo([]);setRedo([]);
  }
+ const initializeCourt=useCallback((court:CourtContext)=>{setPlayContext(court);selectSport(getSportProfile(court.builderSport));setP(v=>({...v,id:"GF-"+crypto.randomUUID(),name:"Redesign — "+court.name,date:new Date().toLocaleDateString("pl-PL")}));},[]);
+ async function saveProject(){if(playContext){try{await playRequest("/api/play/redesigns",{action:"save_draft",courtId:playContext.id,sport:playContext.sport,project:p});toast.success("Projekt zapisany na Twoim koncie");}catch{toast.error("Nie udało się zapisać projektu. Spróbuj ponownie.");return;}}else{toast.success("Projekt zapisany w tej sesji");}setProjects(x=>[p,...x.filter(q=>q.id!==p.id)]);}
  function updateObject(id:string,patch:Partial<EditorObject>,track=true){if(track)history(p);setP(v=>({...v,objects:v.objects.map(o=>o.id===id?{...o,...patch}:o)}))}
  function addObject(o:EditorObject){history(p);setP(v=>({...v,objects:[...v.objects,o]}));setSelectedId(o.id)}
  function removeObject(id:string){if(!p.objects.some(o=>o.id===id))return;finishDrag.current?.();history(p);setP(v=>({...v,objects:v.objects.filter(o=>o.id!==id)}));setSelectedId(current=>current===id?null:current);toast.success("Usunięto element. Możesz użyć Cofnij.")}
@@ -272,11 +277,11 @@ export default function Home(){
    applyPattern(family.id,variant,palette.id);
  }
  const choices=(items:string[],value:string,change:(s:string)=>void)=><div className="choices compact">{items.map(s=><button key={s} className={value===s?"choice selected":"choice"} onClick={()=>change(s)}><span>{s}</span>{value===s?<Check size={15}/>:null}</button>)}</div>;
- return <><Toaster position="bottom-right"/>
+ return <><Toaster position="bottom-right"/><BuilderPlayBridge project={p} onContext={initializeCourt}/>
  <header className="header"><button className="brand" onClick={()=>setView("builder")}><span className="brand-icon"><Grid2X2 size={21}/></span>gamefields<span className="brand-studio">STUDIO</span></button><nav><button className={view==="builder"?"active":""} onClick={()=>setView("builder")}>Studio</button><button className={view==="patterns"?"active":""} onClick={()=>{setPatternPage(1);setView("patterns")}}>Wzory</button><button className={view==="projects"?"active":""} onClick={()=>setView("projects")}>Projekty</button></nav><a className="site-link" href="https://www.gamefields.eu/" target="_top">← Gamefields.eu</a><span className="version">v2.2</span></header>
  {view==="sport"?<main className="sport-start"><section className="sport-start-head"><span className="eyebrow">GAMEFIELDS / SPORT ENGINE</span><h1>Co chcesz zaprojektować?</h1><p>Wybierz dyscyplinę. Resztę ustawimy automatycznie — geometrię, wymiary startowe, linie, wyposażenie i nawierzchnię.</p></section><section className="sport-grid featured">{sportProfiles.filter(profile=>featuredSportIds.includes(profile.id)).map(profile=>{const preview={...p,sport:profile.sport,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,objects:[]};return <button className="sport-card" key={profile.id} onClick={()=>selectSport(profile)}><div className="sport-preview"><Court p={preview} small/></div><div className="sport-card-copy"><span className="eyebrow">{profile.eyebrow}</span><h2>{profile.label}</h2><p>{profile.description}</p><div className="sport-meta"><span>{profile.length} × {profile.width} m</span><span>{profile.tags.slice(0,2).join(" · ")}</span></div></div></button>})}</section><details className="more-sports"><summary>Więcej dyscyplin <span>+</span></summary><div className="sport-groups">{sportGroups.map(group=><section key={group.label}><h2>{group.label}</h2><div className="sport-compact-grid">{sportProfiles.filter(profile=>group.ids.includes(profile.id)).map(profile=><button key={profile.id} onClick={()=>selectSport(profile)}><span>{profile.label}</span><small>{profile.length} × {profile.width} m</small></button>)}</div></section>)}</div></details></main>:null}
  {view==="builder"?<>
- <div className="projectbar v03bar"><div><span className="eyebrow">PROJEKT / {getSportProfile(p.sport).label}</span><input className="projectname" aria-label="Nazwa projektu" maxLength={200} value={p.name} onChange={e=>update({name:e.target.value},false)}/></div><div className="history-actions"><button onClick={undo} disabled={!undoStack.length}><Undo2 size={17}/> Cofnij</button><button onClick={redo} disabled={!redoStack.length}><Redo2 size={17}/> Ponów</button></div><div className="actions"><button className="btn dark" onClick={()=>{setProjects(x=>[p,...x.filter(q=>q.id!==p.id)]);toast.success("Projekt zapisany w tej sesji")}}>Zapisz projekt</button><details className="more-actions"><summary>•••</summary><div><input hidden ref={importRef} type="file" accept=".json,.txt,application/json,text/plain" onChange={e=>{void importProject(e.target.files?.[0]);e.target.value=""}}/><button onClick={()=>importRef.current?.click()}>Wczytaj JSON</button><button onClick={()=>download(p,true)}>Wzór do WordPress</button><button onClick={()=>download(p)}>Eksport JSON</button></div></details></div></div>
+ <div className="projectbar v03bar"><div><span className="eyebrow">PROJEKT / {getSportProfile(p.sport).label}</span><input className="projectname" aria-label="Nazwa projektu" maxLength={200} value={p.name} onChange={e=>update({name:e.target.value},false)}/></div><div className="history-actions"><button onClick={undo} disabled={!undoStack.length}><Undo2 size={17}/> Cofnij</button><button onClick={redo} disabled={!redoStack.length}><Redo2 size={17}/> Ponów</button></div><div className="actions"><button className="btn dark" onClick={()=>void saveProject()}>Zapisz projekt</button><details className="more-actions"><summary>•••</summary><div><input hidden ref={importRef} type="file" accept=".json,.txt,application/json,text/plain" onChange={e=>{void importProject(e.target.files?.[0]);e.target.value=""}}/><button onClick={()=>importRef.current?.click()}>Wczytaj JSON</button><button onClick={()=>download(p,true)}>Wzór do WordPress</button><button onClick={()=>download(p)}>Eksport JSON</button></div></details></div></div>
  <div className={"builder v03builder "+(selected?"has-inspector":"")}>
  <aside className="rail">{modules.map(([name,Icon],i)=><button key={name} className={i===module?"module active":"module"} onClick={()=>setModule(i)}><Icon size={22}/><span>{name}</span></button>)}</aside>
  <section className="settings"><div className="paneltitle"><span className="eyebrow">0{module+1} / 04</span><h1>{modules[module][0]}</h1><p>{["Sport, wymiary, nawierzchnia i linie.","Wzór, kolory i charakter projektu.","Tylko wyposażenie właściwe dla tej dyscypliny.","Sprawdź projekt i orientacyjną cenę realizacji."][module]}</p></div><div className="panelbody">

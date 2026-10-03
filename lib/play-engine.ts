@@ -1,5 +1,5 @@
 import { and, eq, inArray, sql } from "drizzle-orm";
-import { getDb } from "@/db";
+import { getDb, getD1 } from "@/db";
 import {
   coinLedger,
   eloHistory,
@@ -107,7 +107,7 @@ export async function ensurePlayerSport(userId: string, sport: PlaySport, skillL
     draws: 0,
     provisionalGames: 0,
     updatedAt: new Date(),
-  });
+  }).onConflictDoNothing();
   return (await db
     .select()
     .from(playerSports)
@@ -125,27 +125,16 @@ export async function setPlayerSkillLevel(userId: string, sport: PlaySport, skil
 }
 
 export async function awardCoins(userId: string, sourceType: string, sourceId: string, amount: number, note?: string) {
-  const db = getDb();
+  const d1 = getD1();
   const safeAmount = Math.max(-5000, Math.min(5000, Math.trunc(amount)));
   if (!safeAmount) return false;
-  const existing = await db
-    .select({ id: coinLedger.id })
-    .from(coinLedger)
-    .where(and(eq(coinLedger.userId, userId), eq(coinLedger.sourceType, sourceType), eq(coinLedger.sourceId, sourceId)))
-    .limit(1);
-  if (existing[0]) return false;
-
-  await db.insert(coinLedger).values({
-    id: newId("coin"),
-    userId,
-    sourceType: sourceType.slice(0, 40),
-    sourceId: sourceId.slice(0, 120),
-    amount: safeAmount,
-    note: note?.slice(0, 200) || null,
-    createdAt: new Date(),
-  });
-  await db.update(users).set({ coins: sql`${users.coins} + ${safeAmount}`, updatedAt: new Date() }).where(eq(users.id, userId));
-  return true;
+  const id = newId("coin");
+  const now = Math.floor(Date.now() / 1000);
+  const results = await d1.batch([
+    d1.prepare("INSERT OR IGNORE INTO coin_ledger (id,user_id,source_type,source_id,amount,note,created_at) VALUES (?,?,?,?,?,?,?)").bind(id,userId,sourceType.slice(0,40),sourceId.slice(0,120),safeAmount,note?.slice(0,200)||null,now),
+    d1.prepare("UPDATE users SET coins = coins + ?, updated_at = ? WHERE id = ? AND EXISTS (SELECT 1 FROM coin_ledger WHERE id = ?)").bind(safeAmount,now,userId,id),
+  ]);
+  return results[0].meta.changes > 0;
 }
 
 function kFactor(gamesPlayed: number) {
@@ -162,137 +151,76 @@ export async function generateBalancedTeams(gameId: string) {
   const db = getDb();
   const game = (await db.select().from(games).where(eq(games.id, gameId)).limit(1))[0];
   if (!game) throw new Error("GAME_NOT_FOUND");
+  if (game.status !== "open") throw new Error("GAME_NOT_OPEN");
   if (!isPlaySport(game.sport)) throw new Error("INVALID_SPORT");
-
-  const players = await db
-    .select({
-      id: gamePlayers.id,
-      userId: gamePlayers.userId,
-      elo: playerSports.elo,
-    })
-    .from(gamePlayers)
-    .leftJoin(
-      playerSports,
-      and(eq(playerSports.userId, gamePlayers.userId), eq(playerSports.sport, game.sport)),
-    )
+  const players = await db.select({ id: gamePlayers.id, userId: gamePlayers.userId, elo: playerSports.elo })
+    .from(gamePlayers).leftJoin(playerSports, and(eq(playerSports.userId, gamePlayers.userId), eq(playerSports.sport, game.sport)))
     .where(eq(gamePlayers.gameId, gameId));
-
-  if (players.length < 2) throw new Error("NOT_ENOUGH_PLAYERS");
-  const ranked = [...players].sort((a, b) => (b.elo ?? 1000) - (a.elo ?? 1000));
-  let sumA = 0;
-  let sumB = 0;
-  const assignments: Array<{ id: string; team: "A" | "B" }> = [];
-  for (const player of ranked) {
-    const elo = player.elo ?? 1000;
-    const team = sumA <= sumB ? "A" : "B";
-    assignments.push({ id: player.id, team });
-    if (team === "A") sumA += elo;
-    else sumB += elo;
+  if (players.length !== game.maxPlayers) throw new Error("FULL_ROSTER_REQUIRED");
+  const ranked = [...players].sort((a,b)=>(b.elo??1000)-(a.elo??1000) || a.userId.localeCompare(b.userId));
+  let sumA=0, sumB=0, countA=0, countB=0;
+  const assignments: Array<{id:string;team:"A"|"B"}> = [];
+  for (const p of ranked) {
+    const team = countA >= game.maxPlayers/2 ? "B" : countB >= game.maxPlayers/2 ? "A" : sumA <= sumB ? "A" : "B";
+    assignments.push({id:p.id,team});
+    if(team==="A"){sumA+=p.elo??1000;countA++;}else{sumB+=p.elo??1000;countB++;}
   }
-
-  for (const assignment of assignments) {
-    await db.update(gamePlayers).set({ team: assignment.team }).where(eq(gamePlayers.id, assignment.id));
-  }
-  return { teamA: sumA, teamB: sumB, players: assignments };
+  const d1=getD1();
+  await d1.batch(assignments.map(a=>d1.prepare("UPDATE game_players SET team = ?, ready_at = NULL WHERE id = ? AND EXISTS (SELECT 1 FROM games WHERE id = ? AND status = 'open')").bind(a.team,a.id,gameId)));
+  return {teamA:sumA,teamB:sumB,players:assignments};
 }
 
 export async function confirmResultAndApplyElo(gameId: string, confirmerUserId: string) {
   const db = getDb();
-  const game = (await db.select().from(games).where(eq(games.id, gameId)).limit(1))[0];
+  const d1 = getD1();
+  const game = (await db.select().from(games).where(eq(games.id,gameId)).limit(1))[0];
   if (!game) throw new Error("GAME_NOT_FOUND");
   if (!isPlaySport(game.sport)) throw new Error("INVALID_SPORT");
-  if (game.scoreA == null || game.scoreB == null || !game.submittedByUserId) throw new Error("RESULT_NOT_SUBMITTED");
-  if (game.resultConfirmedAt) return { alreadyApplied: true };
-  if (confirmerUserId === game.submittedByUserId) throw new Error("SECOND_PARTY_REQUIRED");
-
-  const player = (await db
-    .select()
-    .from(gamePlayers)
-    .where(and(eq(gamePlayers.gameId, gameId), eq(gamePlayers.userId, confirmerUserId)))
-    .limit(1))[0];
+  const roster = await db.select().from(gamePlayers).where(eq(gamePlayers.gameId,gameId));
+  const player = roster.find(p=>p.userId===confirmerUserId);
   if (!player) throw new Error("NOT_IN_GAME");
-
-  const submitter = (await db
-    .select()
-    .from(gamePlayers)
-    .where(and(eq(gamePlayers.gameId, gameId), eq(gamePlayers.userId, game.submittedByUserId)))
-    .limit(1))[0];
-  if (!submitter || !submitter.team || !player.team || submitter.team === player.team) {
-    throw new Error("OPPOSING_TEAM_REQUIRED");
-  }
-
-  const existingHistory = await db.select({ id: eloHistory.id }).from(eloHistory).where(eq(eloHistory.gameId, gameId)).limit(1);
-  if (existingHistory[0]) {
-    await db.update(games).set({ resultConfirmedAt: new Date(), status: "completed", updatedAt: new Date() }).where(eq(games.id, gameId));
-    return { alreadyApplied: true };
-  }
-
-  const roster = await db
-    .select({ id: gamePlayers.id, userId: gamePlayers.userId, team: gamePlayers.team })
-    .from(gamePlayers)
-    .where(eq(gamePlayers.gameId, gameId));
-  if (roster.some((p) => p.team !== "A" && p.team !== "B")) throw new Error("TEAMS_NOT_SET");
-
-  const userIds = roster.map((p) => p.userId);
-  for (const userId of userIds) await ensurePlayerSport(userId, game.sport);
-  const ratings = await db
-    .select()
-    .from(playerSports)
-    .where(and(inArray(playerSports.userId, userIds), eq(playerSports.sport, game.sport)));
-  const byUser = new Map(ratings.map((r) => [r.userId, r]));
-  const teamA = roster.filter((p) => p.team === "A");
-  const teamB = roster.filter((p) => p.team === "B");
-  const avgA = teamA.reduce((s, p) => s + (byUser.get(p.userId)?.elo ?? 1000), 0) / teamA.length;
-  const avgB = teamB.reduce((s, p) => s + (byUser.get(p.userId)?.elo ?? 1000), 0) / teamB.length;
-  const actualA = game.scoreA === game.scoreB ? 0.5 : game.scoreA > game.scoreB ? 1 : 0;
-  const actualB = 1 - actualA;
-  const now = new Date();
-  const changes: Array<{ userId: string; before: number; after: number; change: number; tier: string }> = [];
-
+  if (game.resultConfirmedAt) return {alreadyApplied:true};
+  if (game.status !== "awaiting_confirmation" || game.scoreA==null || game.scoreB==null || !game.submittedByUserId) throw new Error("RESULT_NOT_SUBMITTED");
+  const submitter=roster.find(p=>p.userId===game.submittedByUserId);
+  if (confirmerUserId===game.submittedByUserId) throw new Error("SECOND_PARTY_REQUIRED");
+  if (!submitter?.team || !player.team || submitter.team===player.team) throw new Error("OPPOSING_TEAM_REQUIRED");
+  if (roster.length!==game.maxPlayers || roster.some(p=>!p.team)) throw new Error("TEAMS_NOT_SET");
+  const ratings = await db.select().from(playerSports).where(and(inArray(playerSports.userId,roster.map(p=>p.userId)),eq(playerSports.sport,game.sport)));
+  const byUser = new Map(ratings.map(r=>[r.userId,r]));
+  if (ratings.length!==roster.length) throw new Error("PLAYER_SPORT_REQUIRED");
+  const teamA=roster.filter(p=>p.team==="A"),teamB=roster.filter(p=>p.team==="B");
+  if (!teamA.length || teamA.length!==teamB.length) throw new Error("TEAMS_NOT_SET");
+  const avgA=teamA.reduce((s,p)=>s+byUser.get(p.userId)!.elo,0)/teamA.length;
+  const avgB=teamB.reduce((s,p)=>s+byUser.get(p.userId)!.elo,0)/teamB.length;
+  const actualA=game.scoreA===game.scoreB?0.5:game.scoreA>game.scoreB?1:0;
+  const now=Math.floor(Date.now()/1000), token=newId("settlement");
+  const guard="EXISTS (SELECT 1 FROM play_game_settlements WHERE game_id = ? AND token = ?)";
+  const ratingChecks=ratings.map(()=>"EXISTS (SELECT 1 FROM player_sports WHERE id = ? AND elo = ? AND games = ?)").join(" AND ");
+  const batch = [d1.prepare(`INSERT INTO play_game_settlements (game_id,token,created_at) SELECT id,?,? FROM games WHERE id=? AND status='awaiting_confirmation' AND result_confirmed_at IS NULL AND score_a=? AND score_b=? AND submitted_by_user_id=? AND ${ratingChecks}`)
+    .bind(token,now,gameId,game.scoreA,game.scoreB,game.submittedByUserId,...ratings.flatMap(r=>[r.id,r.elo,r.games]))];
+  const changes: Array<{userId:string;before:number;after:number;change:number;tier:string}> = [];
   for (const p of roster) {
-    const current = byUser.get(p.userId)!;
-    const expected = p.team === "A" ? expectedScore(current.elo, avgB) : expectedScore(current.elo, avgA);
-    const actual = p.team === "A" ? actualA : actualB;
-    const delta = Math.round(kFactor(current.games) * (actual - expected));
-    const next = Math.max(100, current.elo + delta);
-    const won = actual === 1;
-    const lost = actual === 0;
-    const drawn = actual === 0.5;
-
-    await db.update(playerSports).set({
-      elo: next,
-      games: sql`${playerSports.games} + 1`,
-      wins: won ? sql`${playerSports.wins} + 1` : current.wins,
-      losses: lost ? sql`${playerSports.losses} + 1` : current.losses,
-      draws: drawn ? sql`${playerSports.draws} + 1` : current.draws,
-      provisionalGames: sql`${playerSports.provisionalGames} + 1`,
-      updatedAt: now,
-    }).where(eq(playerSports.id, current.id));
-
-    await db.insert(eloHistory).values({
-      id: newId("elo"),
-      gameId,
-      userId: p.userId,
-      sport: game.sport,
-      before: current.elo,
-      after: next,
-      change: delta,
-      createdAt: now,
-    });
-
-    await awardCoins(p.userId, "game_complete", gameId, 25, "Completed game");
-    if (won) await awardCoins(p.userId, "game_win", gameId, 15, "Game win");
-    if (drawn) await awardCoins(p.userId, "game_draw", gameId, 5, "Game draw");
-
-    changes.push({ userId: p.userId, before: current.elo, after: next, change: delta, tier: playerTier(next) });
+    const r=byUser.get(p.userId)!;
+    const actual=p.team==="A"?actualA:1-actualA;
+    const delta=Math.round(kFactor(r.games)*(actual-expectedScore(r.elo,p.team==="A"?avgB:avgA)));
+    const next=Math.max(100,r.elo+delta),change=next-r.elo;
+    const coins=25+(actual===1?15:actual===0.5?5:0);
+    batch.push(d1.prepare(`INSERT INTO elo_history (id,game_id,user_id,sport,before,after,change,created_at) SELECT ?,?,?,?,?,?,?,? WHERE ${guard}`).bind(newId("elo"),gameId,p.userId,game.sport,r.elo,next,change,now,gameId,token));
+    batch.push(d1.prepare(`UPDATE player_sports SET elo=?, games=games+1, wins=wins+?, losses=losses+?, draws=draws+?, provisional_games=provisional_games+1, updated_at=? WHERE id=? AND ${guard}`).bind(next,actual===1?1:0,actual===0?1:0,actual===0.5?1:0,now,r.id,gameId,token));
+    batch.push(d1.prepare(`INSERT INTO coin_ledger (id,user_id,source_type,source_id,amount,note,created_at) SELECT ?,?,'game_complete',?,?,?,? WHERE ${guard}`).bind(newId("coin"),p.userId,gameId,coins,"Potwierdzony mecz",now,gameId,token));
+    batch.push(d1.prepare(`UPDATE users SET coins=coins+?, updated_at=? WHERE id=? AND ${guard}`).bind(coins,now,p.userId,gameId,token));
+    batch.push(d1.prepare(`INSERT INTO play_notifications (id,user_id,type,entity_id,title,body,created_at) SELECT ?,?,'game_result',?,?,?,? WHERE ${guard}`).bind(newId("notify"),p.userId,gameId,"Wynik potwierdzony",`${change>=0?"+":""}${change} ELO · ${game.scoreA}:${game.scoreB}`,now,gameId,token));
+    changes.push({userId:p.userId,before:r.elo,after:next,change,tier:playerTier(next)});
   }
-
-  await db.insert(resultConfirmations).values({
-    id: newId("confirm"),
-    gameId,
-    userId: confirmerUserId,
-    confirmedAt: now,
-  });
-  await db.update(games).set({ status: "completed", resultConfirmedAt: now, updatedAt: now }).where(eq(games.id, gameId));
-  return { alreadyApplied: false, changes };
+  batch.push(d1.prepare(`INSERT INTO result_confirmations (id,game_id,user_id,confirmed_at) SELECT ?,?,?,? WHERE ${guard}`).bind(newId("confirm"),gameId,confirmerUserId,now,gameId,token));
+  batch.push(d1.prepare(`UPDATE games SET status='completed',result_confirmed_at=?,updated_at=? WHERE id=? AND ${guard}`).bind(now,now,gameId,gameId,token));
+  try {
+    const results=await d1.batch(batch);
+    if (!results[0].meta.changes) throw new Error("STATE_CHANGED");
+  } catch(error) {
+    const settled=await db.select({id:games.id}).from(games).where(and(eq(games.id,gameId),eq(games.status,"completed"))).limit(1);
+    if (settled[0]) return {alreadyApplied:true};
+    throw error;
+  }
+  return {alreadyApplied:false,changes};
 }

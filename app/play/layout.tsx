@@ -4,23 +4,21 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import "./play.css";
+import {House,MapPin,Users,Gamepad2,Menu} from "lucide-react";
 
 const items = [
-  ["PLAY", "/play"],
-  ["MAP", "/play/map"],
-  ["+ SPOT", "/play/courts/add"],
-  ["GAMES", "/play/games"],
-  ["PLAYERS", "/play/players"],
-  ["TOURNAMENTS", "/play/tournaments"],
-  ["COMMUNITY", "/play/community"],
-  ["ACCOUNT", "/play/account"],
+  ["PLAY", "/play", House],
+  ["MAP", "/play/map", MapPin],
+  ["GAMES", "/play/games", Gamepad2],
+  ["PLAYERS", "/play/players", Users],
+  ["WIĘCEJ", "/play/more", Menu],
 ] as const;
 
 export default function PlayLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAuthPage = pathname === "/play/auth";
   const isOnboardingPage = pathname === "/play/onboarding";
-  const isBarePage = isAuthPage || isOnboardingPage;
+  const isBarePage = isAuthPage || isOnboardingPage || pathname === "/play/builder";
   const [ready, setReady] = useState(isAuthPage);
 
   useEffect(() => {
@@ -69,9 +67,9 @@ export default function PlayLayout({ children }: { children: React.ReactNode }) 
       {children}
       {!isBarePage ? (
         <nav className="play-nav" aria-label="Gamefields PLAY">
-          {items.map(([label, href]) => (
-            <Link className="play-nav-link" href={href} key={href}>
-              {label}
+          {items.map(([label, href, Icon]) => (
+            <Link className={pathname===href?"play-nav-link active":"play-nav-link"} aria-current={pathname===href?"page":undefined} href={href} key={href}>
+              <Icon aria-hidden="true"/>{label}
             </Link>
           ))}
         </nav>

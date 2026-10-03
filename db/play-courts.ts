@@ -15,6 +15,8 @@ export const courtSubmissions = sqliteTable("play_court_submissions", {
   lighting: integer("lighting", { mode: "boolean" }).notNull().default(false),
   isFree: integer("is_free", { mode: "boolean" }).notNull().default(true),
   notes: text("notes"),
+  imageUrl: text("image_url"),
+  reviewNote: text("review_note"),
   status: text("status").notNull().default("pending"),
   publishedCourtId: text("published_court_id"),
   reviewedByUserId: text("reviewed_by_user_id").references(() => users.id, { onDelete: "set null" }),

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import {ErrorNotice,PlayHeader,playRequest,when} from "@/components/play-ui";
 import { useSearchParams } from "next/navigation";
 
 type Participant = {
@@ -71,7 +72,7 @@ export default function ChallengeRoomPage() {
     setData(result);
   }
 
-  useEffect(() => { void load(); }, [challengeId]);
+  useEffect(() => { void load().catch(()=>setError("LOAD_FAILED")); const timer=setInterval(()=>{if(document.visibilityState==="visible")void load().catch(()=>{});},15000);return()=>clearInterval(timer); }, [challengeId]);
 
   async function respond(response: "accepted" | "declined") {
     setBusy(true);
@@ -102,6 +103,7 @@ export default function ChallengeRoomPage() {
     }
   }
 
+  if (!challengeId) return <ChallengeList/>;
   if (!data) return <main style={styles.center}>{error || "Ładowanie challenge…"}</main>;
 
   const challenge = data.challenge;
@@ -208,3 +210,5 @@ const styles: Record<string, React.CSSProperties> = {
   input: { minWidth: 0, padding: "12px 13px", borderRadius: 12, border: "1px solid #29404a", background: "#101d25", color: "white" },
   send: { padding: "0 18px", border: 0, borderRadius: 12, background: "#77ff55", color: "#071016", fontWeight: 900 },
 };
+
+function ChallengeList(){const[data,setData]=useState<any>(null),[error,setError]=useState("");useEffect(()=>{playRequest("/api/play").then(setData).catch(e=>setError(e.message));},[]);return <main className="p-page"><PlayHeader title="CHALLENGES"/><h1>Kto podejmuje wyzwanie?</h1><ErrorNotice error={error}/><Link href="/play/players" className="p-btn">ZNAJDŹ PRZECIWNIKA →</Link><div className="p-list">{data?.challenges.map((c:any)=><Link key={c.id} className="p-card" style={{color:"inherit",textDecoration:"none"}} href={`/play/challenge?id=${c.id}`}><span className="p-badge">{c.status.toUpperCase()}</span><h2>{c.courtName} · {c.format}</h2><p className="p-muted">{c.participants.filter((p:any)=>p.userId!==data.user.id).map((p:any)=>"@"+p.nickname).join(" · ")}</p><p className="p-muted">{when(c.startsAt)}</p><span className="p-back">CHALLENGE ROOM →</span></Link>)}</div>{data&&!data.challenges.length&&<p className="p-muted">Pierwsze wyzwanie czeka na Twój ruch.</p>}</main>;}

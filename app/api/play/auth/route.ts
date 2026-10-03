@@ -1,10 +1,12 @@
+import { assertSameOrigin } from "@/lib/play-http";
 import { cookies } from "next/headers";
 import { and, eq, lt, sql } from "drizzle-orm";
 import { getChatGPTUser } from "@/app/chatgpt-auth";
 import { getDb } from "@/db";
 import { playAccounts, playSessions } from "@/db/play-auth";
 import { users } from "@/db/schema";
-import { getCurrentPlayUser, PLAY_SESSION_COOKIE } from "@/lib/play-auth";
+import { getCurrentPlayUser, getPublicSessionUser, PLAY_SESSION_COOKIE } from "@/lib/play-auth";
+import { isPlayAdmin } from "@/lib/play-admin";
 import { ensurePlayer, newId } from "@/lib/play-engine";
 import { hashPassword, hashSessionToken, newSessionToken, verifyPassword } from "@/lib/play-password";
 
@@ -82,7 +84,8 @@ export async function GET() {
     return json({
       ok: true,
       authenticated: true,
-      provider: hostedIdentity ? "hosted" : "gamefields",
+      provider: await getPublicSessionUser() ? "gamefields" : hostedIdentity ? "hosted" : "gamefields",
+      isAdmin: await isPlayAdmin(user),
       user: { id: user.id, email: user.email, nickname: user.nickname, displayName: user.displayName, city: user.city },
     });
   } catch (error) {
@@ -92,6 +95,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    assertSameOrigin(request);
     const db = getDb();
     const body = await request.json();
     const action = String(body.action || "");
@@ -106,7 +110,10 @@ export async function POST(request: Request) {
       if (existingAccount) throw new Error("ACCOUNT_EXISTS");
 
       let user = (await db.select().from(users).where(sql`lower(${users.email}) = ${email}`).limit(1))[0];
-      if (!user) user = await ensurePlayer({ id: newId("user"), email, displayName });
+      if (user) {
+        const hosted = await getChatGPTUser();
+        if (!hosted || hosted.userId !== user.id || hosted.email.toLowerCase() !== email) throw new Error("ACCOUNT_EXISTS");
+      } else user = await ensurePlayer({ id: newId("user"), email, displayName });
 
       const passwordData = await hashPassword(password);
       const now = new Date();
@@ -116,7 +123,7 @@ export async function POST(request: Request) {
         email,
         passwordHash: passwordData.hash,
         passwordSalt: passwordData.salt,
-        passwordVersion: 1,
+        passwordVersion: 2,
         failedAttempts: 0,
         lockedUntil: null,
         createdAt: now,
