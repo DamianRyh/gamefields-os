@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
+import { and, asc, desc, eq, sql } from "drizzle-orm";
 import { getDb } from "@/db";
 import { tournamentEntries, tournamentMatches, tournaments } from "@/db/play-competition";
 import { courts, playerSports, users } from "@/db/schema";
@@ -169,7 +169,7 @@ export async function POST(request: Request) {
       if (!existing) {
         await ensurePlayerSport(user.id, tournament.sport);
         await db.insert(tournamentEntries).values({ id: newId("entry"), tournamentId, userId: user.id, status: "active", createdAt: now });
-        await awardCoins(user.id, 10, "tournament_join", tournamentId);
+        await awardCoins(user.id, "tournament_join", tournamentId, 10, "Joined tournament");
       }
       return json({ ok: true, ...(await tournamentDetail(tournamentId, user.id)) });
     }
@@ -268,9 +268,9 @@ export async function POST(request: Request) {
         }).where(eq(tournamentMatches.id, next.id));
       } else {
         await db.update(tournaments).set({ status: "completed", updatedAt: now }).where(eq(tournaments.id, tournamentId));
-        await awardCoins(winnerUserId, 250, "tournament_win", tournamentId);
+        await awardCoins(winnerUserId, "tournament_win", tournamentId, 250, "Tournament champion");
       }
-      await awardCoins(winnerUserId, 25, "tournament_match_win", matchId);
+      await awardCoins(winnerUserId, "tournament_match_win", matchId, 25, "Tournament match win");
       return json({ ok: true, ...(await tournamentDetail(tournamentId, user.id)) });
     }
 
