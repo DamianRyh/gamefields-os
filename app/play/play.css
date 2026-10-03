@@ -79,6 +79,7 @@
   .play-shell main {
     padding-left: 14px !important;
     padding-right: 14px !important;
+    overflow-x: hidden;
   }
 
   .play-shell main > section,
@@ -87,9 +88,20 @@
     max-width: 100% !important;
   }
 
+  .play-shell main [style*="1.5fr"],
+  .play-shell main [style*="repeat(2, minmax(0, 1fr))"],
+  .play-shell main [style*="repeat(2,minmax(0,1fr))"],
+  .play-shell main [style*="2fr 1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
   .play-shell main [style*="grid-template-columns: repeat(4"],
   .play-shell main [style*="grid-template-columns: repeat(3"] {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .play-shell main [style*="repeat(6"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
   .play-shell main [style*="minmax(240px,.8fr)"],
@@ -125,14 +137,32 @@
     margin-left: 0 !important;
   }
 
-  .play-shell h1 {
+  .play-shell main [style*="justify-content: space-between"] {
+    min-width: 0;
+  }
+
+  .play-shell h1,
+  .play-shell h2,
+  .play-shell h3 {
     overflow-wrap: anywhere;
+  }
+
+  .play-shell input,
+  .play-shell select,
+  .play-shell button,
+  .play-shell a {
+    max-width: 100%;
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 430px) {
   .play-shell main [style*="grid-template-columns: repeat(4"],
-  .play-shell main [style*="grid-template-columns: repeat(3"] {
+  .play-shell main [style*="grid-template-columns: repeat(3"],
+  .play-shell main [style*="repeat(6"] {
     grid-template-columns: 1fr 1fr !important;
+  }
+
+  .play-shell main [style*="grid-template-columns: 38px minmax(0,1fr) 72px"] {
+    grid-template-columns: 32px minmax(0,1fr) 62px !important;
   }
 }
