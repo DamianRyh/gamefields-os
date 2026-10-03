@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
-import { and, eq, lt } from "drizzle-orm";
+import { and, eq, lt, sql } from "drizzle-orm";
+import { getChatGPTUser } from "@/app/chatgpt-auth";
 import { getDb } from "@/db";
 import { playAccounts, playSessions } from "@/db/play-auth";
 import { users } from "@/db/schema";
@@ -75,11 +76,13 @@ async function clearSession() {
 
 export async function GET() {
   try {
+    const hostedIdentity = await getChatGPTUser();
     const user = await getCurrentPlayUser();
-    if (!user) return json({ ok: true, authenticated: false });
+    if (!user) return json({ ok: true, authenticated: false, provider: null });
     return json({
       ok: true,
       authenticated: true,
+      provider: hostedIdentity ? "hosted" : "gamefields",
       user: { id: user.id, email: user.email, nickname: user.nickname, displayName: user.displayName, city: user.city },
     });
   } catch (error) {
@@ -102,10 +105,8 @@ export async function POST(request: Request) {
       const existingAccount = (await db.select({ id: playAccounts.id }).from(playAccounts).where(eq(playAccounts.email, email)).limit(1))[0];
       if (existingAccount) throw new Error("ACCOUNT_EXISTS");
 
-      let user = (await db.select().from(users).where(eq(users.email, email)).limit(1))[0];
-      if (!user) {
-        user = await ensurePlayer({ id: newId("user"), email, displayName });
-      }
+      let user = (await db.select().from(users).where(sql`lower(${users.email}) = ${email}`).limit(1))[0];
+      if (!user) user = await ensurePlayer({ id: newId("user"), email, displayName });
 
       const passwordData = await hashPassword(password);
       const now = new Date();
@@ -123,7 +124,7 @@ export async function POST(request: Request) {
       });
 
       await setSession(user.id);
-      return json({ ok: true, user: { id: user.id, email: user.email, nickname: user.nickname } });
+      return json({ ok: true, provider: "gamefields", user: { id: user.id, email: user.email, nickname: user.nickname } });
     }
 
     if (action === "login") {
@@ -157,7 +158,7 @@ export async function POST(request: Request) {
       await db.update(playAccounts).set({ failedAttempts: 0, lockedUntil: null, updatedAt: now }).where(eq(playAccounts.id, account.id));
       await setSession(account.userId);
       const user = (await db.select().from(users).where(eq(users.id, account.userId)).limit(1))[0];
-      return json({ ok: true, user: user ? { id: user.id, email: user.email, nickname: user.nickname } : null });
+      return json({ ok: true, provider: "gamefields", user: user ? { id: user.id, email: user.email, nickname: user.nickname } : null });
     }
 
     if (action === "logout") {
