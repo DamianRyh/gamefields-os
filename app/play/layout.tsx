@@ -8,6 +8,7 @@ import "./play.css";
 const items = [
   ["PLAY", "/play"],
   ["MAP", "/play/map"],
+  ["+ SPOT", "/play/courts/add"],
   ["GAMES", "/play/games"],
   ["PLAYERS", "/play/players"],
   ["TOURNAMENTS", "/play/tournaments"],
