@@ -25,10 +25,24 @@ const sportGroups=[
 ];
 const surfaces=["Akryl sportowy","EPDM","Sztuczna trawa 60 mm","Moduły sportowe","Piasek sportowy","Beton sportowy"];
 const designDirections=[
- {family:"organic-flow",variant:1,palette:"miami",name:"Organic Flow",copy:"Nowoczesny, dynamiczny wzór, który ożywia przestrzeń i przyciąga użytkowników.",tag:"Rekomendowany",previewImage:"/studio/organic-flow-park.webp",previewAlt:"Realistyczna wizualizacja boiska Street Football 3×3 w parku z wzorem Organic Flow"},
- {family:"geometric",variant:5,palette:"tokyo",name:"Urban Contrast",copy:"Wyrazisty, miejski charakter dla aktywnych, współczesnych przestrzeni.",previewImage:"/studio/urban-contrast-park.webp",previewAlt:"Realistyczna wizualizacja boiska Street Football 3×3 w parku z wzorem Urban Contrast"},
- {family:"mono",variant:2,palette:"earth",name:"Classic Lines",copy:"Spokojniejszy kierunek, który łatwo wpisuje się w istniejącą architekturę.",previewImage:"/studio/classic-lines-park.webp",previewAlt:"Realistyczna wizualizacja boiska Street Football 3×3 w parku z wzorem Classic Lines"}
+ {family:"organic-flow",variant:1,palette:"miami",name:"Organic Flow",copy:"Nowoczesny, dynamiczny wzór, który ożywia przestrzeń i przyciąga użytkowników.",tag:"Rekomendowany"},
+ {family:"geometric",variant:5,palette:"tokyo",name:"Urban Contrast",copy:"Wyrazisty, miejski charakter dla aktywnych, współczesnych przestrzeni."},
+ {family:"mono",variant:2,palette:"earth",name:"Classic Lines",copy:"Spokojniejszy kierunek, który łatwo wpisuje się w istniejącą architekturę."}
 ] as const;
+type DesignFamily=(typeof designDirections)[number]["family"];
+type RealisticPreview={src:string;alt:string};
+const realisticPreviews:Partial<Record<string,Record<DesignFamily,RealisticPreview>>>= {
+ "Piłka nożna 3×3":{
+  "organic-flow":{src:"/studio/organic-flow-park.webp",alt:"Realistyczna wizualizacja boiska Street Football 3×3 w parku z wzorem Organic Flow"},
+  geometric:{src:"/studio/urban-contrast-park.webp",alt:"Realistyczna wizualizacja boiska Street Football 3×3 w parku z wzorem Urban Contrast"},
+  mono:{src:"/studio/classic-lines-park.webp",alt:"Realistyczna wizualizacja boiska Street Football 3×3 w parku z wzorem Classic Lines"}
+ },
+ "Koszykówka 3×3":{
+  "organic-flow":{src:"/studio/basketball-3x3-organic-flow-park.webp",alt:"Realistyczna wizualizacja boiska Basketball 3×3 w parku z wzorem Organic Flow"},
+  geometric:{src:"/studio/basketball-3x3-urban-contrast-park.webp",alt:"Realistyczna wizualizacja boiska Basketball 3×3 w parku z wzorem Urban Contrast"},
+  mono:{src:"/studio/basketball-3x3-classic-lines-park.webp",alt:"Realistyczna wizualizacja boiska Basketball 3×3 w parku z wzorem Classic Lines"}
+ }
+};
 const targetLabel:Record<Target,string>={"court":"Nawierzchnia","band-top":"Banda górna","band-bottom":"Banda dolna","band-left":"Banda lewa","band-right":"Banda prawa"};
 
 function pln(n:number){return new Intl.NumberFormat("pl-PL",{style:"currency",currency:"PLN",maximumFractionDigits:0}).format(n)}
@@ -171,7 +185,7 @@ export default function Home(){
 
  const [playContext,setPlayContext]=useState<CourtContext|null>(null);
  const [p,setP]=useState<Project>(initial),[view,setView]=useState("sport"),[module,setModule]=useState(0),[iso,setIso]=useState(false),[realisticView,setRealisticView]=useState(true),[selectedId,setSelectedId]=useState<string|null>(null),[undoStack,setUndo]=useState<Project[]>([]),[redoStack,setRedo]=useState<Project[]>([]),[projects,setProjects]=useState<SavedProjectRecord[]>([]),[projectsLoading,setProjectsLoading]=useState(false),[savingProject,setSavingProject]=useState(false);
- useEffect(()=>{designDirections.forEach(direction=>{const image=new Image();image.src=direction.previewImage})},[]);
+ useEffect(()=>{Object.values(realisticPreviews).forEach(sport=>Object.values(sport??{}).forEach(preview=>{const image=new Image();image.src=preview.src}))},[]);
  async function loadProjects(){
   setProjectsLoading(true);
   try{
@@ -248,6 +262,8 @@ export default function Home(){
  },[p]);
  const selected=p.objects.find(o=>o.id===selectedId)||null;
  const selectedDesignDirection=designDirections.find(direction=>direction.family===p.patternFamily)??designDirections[0];
+ const selectedRealisticPreview=realisticPreviews[p.sport]?.[selectedDesignDirection.family];
+ const showRealisticPreview=realisticView&&Boolean(selectedRealisticPreview);
  const patternCatalog=useMemo(()=>filteredPatternFamilies(patternFilter).flatMap(family=>patternVariants.map(v=>({family,variant:v.variant,name:patternVariantName(family.id,v.variant)}))).filter(item=>!patternSearch.trim()||[item.family.name,item.family.description,...item.family.tags,patternCode(item.family.id,item.variant)].join(" ").toLowerCase().includes(patternSearch.toLowerCase())),[patternFilter,patternSearch]);
  const patternPages=Math.max(1,Math.ceil(patternCatalog.length/24));
  const visiblePatterns=patternCatalog.slice((patternPage-1)*24,patternPage*24);
@@ -369,8 +385,8 @@ export default function Home(){
    <p className="summary-note">Finalna cena jest potwierdzana po weryfikacji miejsca i warunków realizacji.</p>
   </>:null}
  </div></section>
- <section className={"canvas editorcanvas "+p.scene}><div className="canvashead"><span><i/> PODGLĄD NA ŻYWO</span>{selected?<button type="button" className="btn danger canvas-delete" onClick={removeSelected}><Trash2 size={16}/> Usuń: {selected.name}</button>:null}{module===1?<div className="view-switch"><button className={realisticView?"active":""} onClick={()=>setRealisticView(true)}>Widok realistyczny</button><button className={!realisticView?"active":""} onClick={()=>setRealisticView(false)}>Widok z góry</button></div>:<div className="scene-controls"><button className={p.scene==="day"?"active":""} onClick={()=>update({scene:"day"})}><Sun size={14}/> Dzień</button><button className={p.scene==="night"?"active":""} onClick={()=>update({scene:"night"})}><Moon size={14}/> Noc</button><button className={p.scene==="event"?"active":""} onClick={()=>update({scene:"event"})}><PartyPopper size={14}/> Event</button><button onClick={()=>setIso(!iso)} className={iso?"active":""}><RotateCcw size={14}/> {iso?"Plan":"3D"}</button></div>}</div>
- {module===1&&realisticView?<div className="realistic-stage"><img key={selectedDesignDirection.previewImage} src={selectedDesignDirection.previewImage} alt={selectedDesignDirection.previewAlt} decoding="async"/><div className="realistic-badge" aria-live="polite"><b>{selectedDesignDirection.name}</b><span>{getPatternPalette(p.patternPalette).name} · wizualizacja koncepcyjna</span></div></div>:<div className="drawing editing-area"><Court p={p} iso={iso} selectedId={selectedId} onSelect={setSelectedId} onDragStart={startDrag} onDropEquipment={addEquipment}/></div>}
+ <section className={"canvas editorcanvas "+p.scene}><div className="canvashead"><span><i/> PODGLĄD NA ŻYWO</span>{selected?<button type="button" className="btn danger canvas-delete" onClick={removeSelected}><Trash2 size={16}/> Usuń: {selected.name}</button>:null}{module===1?<div className="view-switch"><button disabled={!selectedRealisticPreview} className={showRealisticPreview?"active":""} onClick={()=>setRealisticView(true)}>Widok realistyczny</button><button className={!showRealisticPreview?"active":""} onClick={()=>setRealisticView(false)}>Widok z góry</button></div>:<div className="scene-controls"><button className={p.scene==="day"?"active":""} onClick={()=>update({scene:"day"})}><Sun size={14}/> Dzień</button><button className={p.scene==="night"?"active":""} onClick={()=>update({scene:"night"})}><Moon size={14}/> Noc</button><button className={p.scene==="event"?"active":""} onClick={()=>update({scene:"event"})}><PartyPopper size={14}/> Event</button><button onClick={()=>setIso(!iso)} className={iso?"active":""}><RotateCcw size={14}/> {iso?"Plan":"3D"}</button></div>}</div>
+ {module===1&&showRealisticPreview&&selectedRealisticPreview?<div className="realistic-stage"><img key={selectedRealisticPreview.src} src={selectedRealisticPreview.src} alt={selectedRealisticPreview.alt} decoding="async"/><div className="realistic-badge" aria-live="polite"><b>{selectedDesignDirection.name}</b><span>{getPatternPalette(p.patternPalette).name} · wizualizacja koncepcyjna</span></div></div>:<div className="drawing editing-area"><Court p={p} iso={iso} selectedId={selectedId} onSelect={setSelectedId} onDragStart={startDrag} onDropEquipment={addEquipment}/></div>}
  {iso?<p className="viewhint">Widok poglądowy. Do przeciągania obiektów wybierz Plan.</p>:null}<div className="canvasmeta"><span>{p.sport} · {p.length} × {p.width} m</span><strong>{quoteLoading?"Przeliczam…":quote?pln(quote.priceNet)+" netto":"Do wyceny"}</strong></div>
  {module===1?<section className="guided-footer"><div><span>SZACOWANY ZAKRES INWESTYCJI</span><strong>{quoteLoading?"Obliczam…":quote?pln(Math.round(quote.priceNet*.9))+" – "+pln(Math.round(quote.priceNet*1.12)):"Wymaga wyceny"}</strong><small>Orientacyjnie netto · aktualizowane wraz z projektem</small></div><button className="btn subtle" onClick={()=>{setPatternPage(1);setView("patterns")}}>Porównaj warianty</button><button className="btn dark" onClick={()=>setModule(2)}>Kontynuuj do wyposażenia →</button></section>:null}
  </section>
