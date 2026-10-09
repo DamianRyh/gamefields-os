@@ -19,6 +19,8 @@ The page includes the supplied author-studio copy, Damian section, service and a
 
 Live page opens with the new SEO title and description, one H1, no duplicate IDs, no missing internal anchor targets, and working image loads. CTA clicks reach the contact and report sections. Desktop 1440 px and mobile 390 px layouts were visually inspected; mobile hero has no horizontal overflow. Both CF7 forms render with their expected fields. Radar loads the existing map.
 
-Email delivery and attachment delivery were not tested by sending a submission. A real Damian portrait remains a TODO; existing field imagery is explicitly captioned as a placeholder. GitHub merge does not deploy this WordPress page automatically. WordPress revisions are the rollback mechanism for the live page.
+Email delivery and attachment delivery were not tested by sending a submission. The existing WordPress portrait (media 3681, 918 × 1140) is now used in the Damian section and personal contact. Hero retains the field concept image. GitHub merge does not deploy this WordPress page automatically. WordPress revisions are the rollback mechanism for the live page.
 
 Local HTML integrity and inline JavaScript syntax checks passed. Repository `pnpm lint` and `pnpm build` were attempted, but could not start because this checkout has no `node_modules` (missing eslint/vinext). The Builder application code is unchanged.
+
+Polish: homepage menu now reads Oferta / Studio / Realizacje / Builder / Kontakt / Zgłoś miejsce; the mobile layout remains Oferta / Studio / Zgłoś miejsce / Kontakt. Contact has a portrait, a direct invitation to talk, a named email CTA, and a labelled phone link. Subpage copy is deferred to the next stage.
