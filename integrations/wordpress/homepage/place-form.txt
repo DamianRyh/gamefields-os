@@ -1,0 +1,31 @@
+<label>Imię i nazwisko [text* your-name autocomplete:name]</label>
+<label>E-mail [email* your-email autocomplete:email]</label>
+<label>Telefon [tel your-phone autocomplete:tel]</label>
+<label>Miasto / lokalizacja miejsca [text* place-location]</label>
+<label>Typ miejsca [select* place-type include_blank "stare boisko" "plac / asfalt" "przestrzeń szkolna" "teren osiedlowy" "przestrzeń eventowa" "inne"]</label>
+<p>Dodaj zdjęcia miejsca — maksymalnie 3 pliki JPG, PNG lub WebP, do 3 MB każdy.</p>
+<label>Zdjęcie 1 [file place-photo-1 limit:3mb filetypes:jpg|jpeg|png|webp]</label>
+<label>Zdjęcie 2 [file place-photo-2 limit:3mb filetypes:jpg|jpeg|png|webp]</label>
+<label>Zdjęcie 3 [file place-photo-3 limit:3mb filetypes:jpg|jpeg|png|webp]</label>
+<label>Co chciałbyś/chciałabyś tam zrobić? [textarea* your-message]</label>
+<label>Czy jest budżet lub partner? [select* place-budget include_blank "tak" "nie" "nie wiem" "szukamy sponsora / partnera"]</label>
+[submit "Wyślij miejsce do sprawdzenia"]
+
+Mail subject:
+Gamefields — zgłoszenie miejsca: [place-location]
+
+Mail body:
+Imię i nazwisko: [your-name]
+E-mail: [your-email]
+Telefon: [your-phone]
+Lokalizacja: [place-location]
+Typ miejsca: [place-type]
+Budżet lub partner: [place-budget]
+
+Pomysł na miejsce:
+[your-message]
+
+Wysłano przez formularz zgłoszenia miejsca na [_site_url].
+
+Success message:
+Dzięki. Miejsce trafiło do Gamefields. Sprawdzę lokalizację, zdjęcia i opis. Jeśli zobaczę realny potencjał, odezwę się z pierwszym kierunkiem: co można zrobić szybko, co wymaga większego projektu i od czego najlepiej zacząć.
