@@ -23,6 +23,20 @@ jobs:
       - run: pnpm test:play
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:mobile
+      - run: pnpm build:objects
+      - run: pnpm test:objects
+      - run: php -l integrations/wordpress/court-objects/gamefields-court-objects.php
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gamefields-court-objects-wordpress
+          path: dist/court-objects/gamefields-court-objects.zip
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: court-objects-screens
+          path: outputs/court-objects
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         if: always()
         with:
