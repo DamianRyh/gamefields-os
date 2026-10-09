@@ -10,7 +10,7 @@ import {projectSchema,type Project,type EditorObject,type Target,type ObjectKind
 import {patternFamilies,patternPalettes,patternFilters,signaturePresets,variants as patternVariants,getPatternFamily,getPatternPalette,patternCode,patternComplexity,complexityLabel,patternVariantName,filteredPatternFamilies,PATTERN_COUNT} from "@/lib/pattern-library";
 import {PatternArt} from "@/components/pattern-art";
 import {BuilderPlayBridge,type CourtContext} from "@/components/builder-play-bridge";
-import {isRoundCourt,courtArea,courtDimensions,clampToCircle} from "@/lib/court-geometry";
+import {isRoundCourt,courtArea,courtDimensions,clampToCircle,roundBandPosition} from "@/lib/court-geometry";
 import {PannaRealisticPreview} from "@/components/panna-realistic-preview";
 import {SurfaceAppearance} from "@/components/surface-material";
 import {isTurf} from "@/lib/surface-materials";
@@ -103,7 +103,7 @@ function EditorObjectView({o,h,round=false,selected,onPointerDown}:{o:EditorObje
  if(o.target==="band-bottom")y=h+22;
  if(o.target==="band-left"){x=-22;rot-=90}
  if(o.target==="band-right"){x=622;rot+=90}
- if(round&&o.target!=="court"){const theta=o.target==="band-top"?-Math.PI/2:o.target==="band-bottom"?Math.PI/2:o.target==="band-left"?Math.PI:0;x=300+322*Math.cos(theta);y=300+322*Math.sin(theta);}
+ if(round&&o.target!=="court"){const pos=roundBandPosition(o);x=pos.x;y=pos.y;rot=o.rotation+pos.rotation;}
  const tr="translate("+x+" "+y+") rotate("+rot+") scale("+o.scale/100+")";
  return <g className={"editable-object "+(selected?"selected":"")} transform={tr} opacity={o.opacity/100} onPointerDown={e=>onPointerDown(e,o.id,"move")}>
    {o.kind==="image"&&o.src?<image href={o.src} x="-55" y="-55" width="110" height="110" preserveAspectRatio="xMidYMid meet"/>:null}
@@ -310,7 +310,7 @@ export default function Home(){
    dragStart.current=startProject;
    const svg=e.currentTarget.ownerSVGElement;if(!svg)return;
    const h=600*p.width/p.length;
-   const center={x:startObj.target==="band-left"?-22:startObj.target==="band-right"?622:startObj.x,y:startObj.target==="band-top"?-22:startObj.target==="band-bottom"?h+22:startObj.y};
+   const center=isRoundCourt(p)&&startObj.target!=="court"?roundBandPosition(startObj):{x:startObj.target==="band-left"?-22:startObj.target==="band-right"?622:startObj.x,y:startObj.target==="band-top"?-22:startObj.target==="band-bottom"?h+22:startObj.y};
    const point=(clientX:number,clientY:number)=>{const pt=svg.createSVGPoint();pt.x=clientX;pt.y=clientY;const ctm=svg.getScreenCTM();return ctm?pt.matrixTransform(ctm.inverse()):null};
    const first=point(e.clientX,e.clientY);if(!first)return;
    const startDist=Math.max(10,Math.hypot(first.x-center.x,first.y-center.y));
