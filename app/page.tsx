@@ -17,9 +17,9 @@ const obj=(kind:ObjectKind,name:string,x:number,y:number,extra:Partial<EditorObj
 const initial:Project={id:"GF-001",name:"Moje boisko 3×3",type:"Nowe boisko",sport:"Piłka nożna 3×3",length:15,width:10,surface:"Akryl sportowy",base:"#246f70",zone:"#ef744e",outside:"#dedfd4",lineColor:"#ffffff",lines:true,pattern:"Organic Flow",patternFamily:"organic-flow",patternPalette:"miami",patternVariant:1,patternDensity:100,gradientEnabled:false,textureEnabled:false,shadowEnabled:true,artistFinishEnabled:false,creativity:0,shadowIntensity:25,graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:"day",objects:[obj("equipment","Bramka",26,200,{scale:85}),obj("equipment","Bramka",574,200,{scale:85,rotation:180})],status:"Szkic",date:"29.09.2026"};
 const modules=[["Boisko",Ruler],["Design",Paintbrush],["Wyposażenie",Goal],["Podsumowanie",WalletCards]] as const;
 const sports=sportProfiles.map(x=>x.sport);
-const featuredSportIds=["street-football-3x3","basketball-3x3","tennis","padel","pickleball","skate"];
+const featuredSportIds=["street-football-3x3","street-football-1x1","basketball-3x3","tennis","padel","pickleball","skate"];
 const sportGroups=[
- {label:"Football",ids:["street-football-1x1","futsal"]},
+ {label:"Football",ids:["futsal"]},
  {label:"Court Sports",ids:["basketball-full","badminton","volleyball","beach-volleyball"]},
  {label:"Urban & Training",ids:["teqball","street-workout"]},
  {label:"Flexible",ids:["multisport","custom"]}
