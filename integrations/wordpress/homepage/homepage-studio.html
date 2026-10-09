@@ -1,0 +1,373 @@
+<!-- wp:html -->
+<style>
+body:has(.gf2) #nm-header,body:has(.gf2) #nm-footer{display:none!important}.gf2{--bg:#0b0b0b;--paper:#f4f2ed;--ink:#111;--acid:#dfff38;--line:rgba(17,17,17,.16);font-family:Arial,Helvetica,sans-serif;background:var(--paper);color:var(--ink);width:100%;overflow:hidden}.gf2 *{box-sizing:border-box}.gf2 a{text-decoration:none;color:inherit}.gf2 .wrap{max-width:1440px;margin:0 auto;padding:0 48px}.gf2 .eyebrow{font-size:11px;line-height:1.2;letter-spacing:.16em;text-transform:uppercase;font-weight:800}.gf2 h1,.gf2 h2,.gf2 h3,.gf2 p{margin:0}.gf2 h1{font-size:clamp(54px,7.6vw,118px);line-height:.88;letter-spacing:-.06em;font-weight:800;text-transform:uppercase;max-width:1050px}.gf2 h2{font-size:clamp(40px,5.5vw,82px);line-height:.92;letter-spacing:-.05em;font-weight:800;text-transform:uppercase}.gf2 h3{font-size:clamp(27px,3vw,44px);line-height:1;letter-spacing:-.04em}.gf2 p{font-size:18px;line-height:1.55}.gf2 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 24px;border:1px solid currentColor;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;transition:.2s}.gf2 .btn:hover{transform:translateY(-2px)}.gf2 .btn.dark{background:#111;color:#fff;border-color:#111}.gf2 .btn.light{background:#fff;color:#111;border-color:#fff}.gf2 .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}.gf2 .topbar{position:sticky;top:0;z-index:50;background:rgba(11,11,11,.94);backdrop-filter:blur(10px);color:#fff;border-bottom:1px solid rgba(255,255,255,.12)}.gf2 .topbar-in{height:66px;display:flex;align-items:center;justify-content:space-between;gap:28px}.gf2 .brand{font-size:15px;font-weight:900;letter-spacing:.08em}.gf2 .nav{display:flex;gap:25px;align-items:center;margin-left:auto}.gf2 .nav a{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.8}.gf2 .nav a:hover{opacity:1}.gf2 .nav-cta{background:var(--acid);color:#111!important;padding:12px 16px;opacity:1!important}.gf2 .hero{min-height:88vh;position:relative;display:flex;align-items:flex-end;color:#fff;background:#111 url('https://www.gamefields.eu/wp-content/uploads/2024/03/eventy-1536x762.jpg') center/cover no-repeat}.gf2 .hero:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.79))}.gf2 .hero-in{position:relative;z-index:2;width:100%;padding:130px 0 60px}.gf2 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:58px;align-items:end}.gf2 .hero-side p{font-size:19px;margin-bottom:26px;max-width:390px}.gf2 .hero-actions{display:flex;gap:10px;flex-wrap:wrap}.gf2 .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#d7d7d7}.gf2 .statement{padding:88px 0}.gf2 .statement-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:70px;align-items:end}.gf2 .statement .lead{max-width:620px;font-size:23px}.gf2 .audience{padding:0 0 88px}.gf2 .audience-title{margin-bottom:28px}.gf2 .audience-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.gf2 .audience-card{padding:26px;min-height:170px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.gf2 .audience-card b{display:block;font-size:17px;margin-bottom:10px}.gf2 .audience-card span{font-size:14px;line-height:1.45;color:#666}.gf2 .pillars{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.gf2 .pillar{min-height:390px;padding:38px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transition:.2s}.gf2 .pillar p{max-width:420px;margin-top:15px;color:#606060}.gf2 .pillar:hover{background:#111;color:#fff}.gf2 .pillar:hover p{color:#bbb}.gf2 .pillar .more{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.gf2 .space{background:#111;color:#fff;padding:88px 0}.gf2 .space-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center}.gf2 .space-photo{height:580px;background:url('https://www.gamefields.eu/wp-content/uploads/2015/08/Areny-Panna-Football-Alternative-Soccer-Warszawa-4.jpg') center/cover no-repeat}.gf2 .space-copy p{max-width:550px;margin:24px 0 30px;color:#c8c8c8}.gf2 .sizes{padding:88px 0}.gf2 .rows{margin-top:46px;border-top:1px solid #aaa}.gf2 .row{display:grid;grid-template-columns:190px 1fr 50px;gap:22px;align-items:center;padding:23px 0;border-bottom:1px solid #aaa}.gf2 .row strong{font-size:28px;letter-spacing:-.04em}.gf2 .row span{font-size:15px;line-height:1.4;color:#656565}.gf2 .row em{font-style:normal;font-size:26px;text-align:right}.gf2 .build{background:var(--acid);padding:88px 0}.gf2 .two{display:grid;grid-template-columns:1fr 1fr;gap:58px;align-items:center}.gf2 .build-photo{height:620px;background:#ddd url('https://www.gamefields.eu/wp-content/uploads/2024/12/8-4.jpg') center/cover no-repeat}.gf2 .specs{display:grid;grid-template-columns:1fr 1fr;margin:34px 0;border-top:1px solid #111}.gf2 .spec{padding:17px 0;border-bottom:1px solid #111;font-size:16px}.gf2 .spec:nth-child(odd){border-right:1px solid #111;padding-right:18px}.gf2 .spec:nth-child(even){padding-left:18px}.gf2 .spec b{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}.gf2 .proof{min-height:74vh;position:relative;display:flex;align-items:flex-end;color:#fff;background:url('https://www.gamefields.eu/wp-content/uploads/2024/12/7-4.jpg') center/cover no-repeat}.gf2 .proof:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.8))}.gf2 .proof-in{position:relative;z-index:2;padding:100px 0 56px}.gf2 .renew{padding:88px 0}.gf2 .renew-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:46px}.gf2 .renew-card{height:520px;background-size:cover;background-position:center;position:relative}.gf2 .renew-card.one{background-image:url('https://www.gamefields.eu/wp-content/uploads/2025/06/RENOWQCJA-BOISK-SPORTOWYCH-RENOWACJA-NAWIERZCHNI-BETONOWYCH-.png')}.gf2 .renew-card.two{background-image:url('https://www.gamefields.eu/wp-content/uploads/2025/06/MALOWANIE-BOISK-SPORTOWYCH-BETONOWYCH-WZORNICTWO-USLUGA-MALOWANIA-BETONU--768x768.png')}.gf2 .tag{position:absolute;left:20px;bottom:20px;background:#fff;padding:10px 13px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.gf2 .process{background:#111;color:#fff;padding:88px 0}.gf2 .process-intro{max-width:760px}.gf2 .steps{display:grid;grid-template-columns:repeat(6,1fr);margin-top:50px;border-top:1px solid #444}.gf2 .step{min-height:175px;padding:23px 16px 0 0;border-right:1px solid #444}.gf2 .step:last-child{border-right:0}.gf2 .step b{display:block;font-size:10px;color:#888;letter-spacing:.14em;margin-bottom:21px}.gf2 .step span{font-size:18px;font-weight:800}.gf2 .cities{padding:88px 0}.gf2 .city-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:70px}.gf2 .problems{border-top:1px solid #aaa}.gf2 .problem{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:19px 0;border-bottom:1px solid #aaa}.gf2 .problem b{font-size:14px}.gf2 .problem span{font-size:14px;color:#656565}.gf2 .activation{min-height:74vh;position:relative;display:flex;align-items:flex-end;color:#fff;background:url('https://www.gamefields.eu/wp-content/uploads/2024/12/Mistrzostwa-Polski-Panna-1na1-Lodz-2016-x-Alternative-Soccer.jpg') center/cover no-repeat}.gf2 .activation:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.87))}.gf2 .activation-in{position:relative;z-index:2;padding:100px 0 56px}.gf2 .activation p{max-width:610px;margin:23px 0 27px;color:#ddd}.gf2 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.gf2 .chips span{border:1px solid rgba(255,255,255,.5);padding:8px 11px;font-size:10px;font-weight:800;letter-spacing:.1em}.gf2 .street{padding:88px 0;background:#dedede}.gf2 .street-photo{height:570px;background:url('https://www.gamefields.eu/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3.jpg') center/cover no-repeat}.gf2 .street p{max-width:550px;margin:23px 0 29px;color:#555}.gf2 .builder{padding:88px 0;background:#fff}.gf2 .builder-grid{display:grid;grid-template-columns:1fr;max-width:900px;gap:32px}.gf2 .builder-note{margin-top:22px;color:#666;max-width:500px;font-size:16px}.gf2 .builder-box{display:none;border:1px solid #aaa;padding:28px}.gf2 .field{padding:20px 0;border-bottom:1px solid #d0d0d0}.gf2 .field:first-child{padding-top:0}.gf2 .field:last-child{border-bottom:0;padding-bottom:0}.gf2 .field label{display:block;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}.gf2 .options{display:flex;gap:8px;flex-wrap:wrap}.gf2 .option{border:1px solid #aaa;padding:10px 12px;font-size:12px;background:#fff}.gf2 .option.active{background:#111;color:#fff;border-color:#111}.gf2 .disabled{opacity:.45;cursor:not-allowed}.gf2 .final{background:var(--acid);padding:88px 0}.gf2 .final-grid{display:grid;grid-template-columns:1fr 360px;gap:50px;align-items:end}.gf2 .final p{margin-bottom:24px}.gf2 .foot{background:#111;color:#999;padding:24px 0;font-size:10px;letter-spacing:.09em;text-transform:uppercase}.gf2 .foot .wrap{display:flex;justify-content:space-between;gap:20px}@media(max-width:980px){.gf2 .topbar-in{height:auto;min-height:66px;flex-wrap:wrap;padding:10px 0}.gf2 .nav{width:100%;overflow-x:auto;gap:16px;padding-bottom:2px}.gf2 .nav a{display:block!important;white-space:nowrap}.gf2 .wrap{padding:0 24px}.gf2 .hero-grid,.gf2 .statement-grid,.gf2 .space-grid,.gf2 .two,.gf2 .city-grid,.gf2 .builder-grid,.gf2 .final-grid{grid-template-columns:1fr}.gf2 .hero-grid{gap:30px}.gf2 .audience-grid{grid-template-columns:repeat(2,1fr)}.gf2 .pillars{grid-template-columns:1fr}.gf2 .pillar{min-height:280px;padding:28px}.gf2 .statement,.gf2 .audience,.gf2 .space,.gf2 .sizes,.gf2 .build,.gf2 .renew,.gf2 .process,.gf2 .cities,.gf2 .street,.gf2 .builder,.gf2 .final{padding-top:76px;padding-bottom:76px}.gf2 .space-photo,.gf2 .build-photo,.gf2 .street-photo{height:430px}.gf2 .steps{grid-template-columns:repeat(2,1fr)}.gf2 .renew-grid{grid-template-columns:1fr}.gf2 .row{grid-template-columns:130px 1fr 34px}.gf2 .row strong{font-size:22px}}@media(max-width:560px){.gf2 .wrap{padding:0 18px}.gf2 .topbar-in{height:auto;min-height:58px}.gf2 .brand{font-size:13px}.gf2 .nav-cta{font-size:10px;padding:10px 12px}.gf2 h1{font-size:12.5vw}.gf2 h2{font-size:10.5vw}.gf2 p{font-size:16px}.gf2 .hero{min-height:76vh}.gf2 .hero-in{padding-top:100px}.gf2 .hero-side p{font-size:17px}.gf2 .hero-actions{display:grid;grid-template-columns:1fr}.gf2 .hero-actions .btn{width:100%}.gf2 .statement .lead{font-size:19px}.gf2 .audience-grid{grid-template-columns:1fr}.gf2 .audience-card{min-height:auto}.gf2 .space-photo,.gf2 .build-photo,.gf2 .street-photo{height:320px}.gf2 .row{grid-template-columns:1fr 32px}.gf2 .row strong,.gf2 .row span{grid-column:1}.gf2 .row em{grid-column:2;grid-row:1/3}.gf2 .specs{grid-template-columns:1fr}.gf2 .spec:nth-child(odd){border-right:0}.gf2 .spec:nth-child(even){padding-left:0}.gf2 .problem{grid-template-columns:1fr;gap:7px}.gf2 .steps{grid-template-columns:1fr 1fr}.gf2 .foot .wrap{display:block}.gf2 .foot span{display:block;margin-top:7px}}
+
+/* GAMEFIELDS UI POLISH 2026 */
+.gf2 .wrap{max-width:1360px}
+.gf2 .topbar{background:#0d0d0d;border-bottom:1px solid rgba(255,255,255,.08)}
+.gf2 .topbar-in{height:76px}
+.gf2 .brand{font-size:16px;letter-spacing:.14em;flex:0 0 auto}
+.gf2 .nav{gap:28px}
+.gf2 .nav a{font-size:11px;letter-spacing:.1em;white-space:nowrap}
+.gf2 .nav-cta{padding:15px 18px;background:var(--acid);color:#111!important}
+.gf2 .hero{min-height:760px;height:calc(100vh - 76px);max-height:900px;align-items:center;background:#0d0d0d!important;overflow:hidden}
+.gf2 .hero:before{display:none}
+.gf2 .hero-media{position:absolute;z-index:0;top:0;right:0;width:49%;height:100%;background:url('https://www.gamefields.eu/wp-content/uploads/2015/08/uid_32993a0208b2993ef81d898ec089d82f1650614679256_width_900_play_0_pos_0_gs_0_height_506.jpg') center/cover no-repeat}
+.gf2 .hero-media:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0d0d0d 0%,rgba(13,13,13,.72) 14%,rgba(13,13,13,.08) 58%,rgba(13,13,13,.08) 100%)}
+.gf2 .hero-in{padding:76px 0;display:flex;align-items:center;min-height:100%}
+.gf2 .hero-grid{display:block;max-width:790px;position:relative;z-index:2}
+.gf2 .hero h1{color:#fff!important;font-size:clamp(58px,6.4vw,104px);line-height:.9;letter-spacing:-.055em;max-width:790px;text-wrap:balance}
+.gf2 .hero .eyebrow{color:var(--acid);margin-bottom:22px}
+.gf2 .hero-side{max-width:560px;margin-top:32px}
+.gf2 .hero-side p{color:#d8d8d8;font-size:18px;line-height:1.55;margin-bottom:26px}
+.gf2 .hero .btn.light{background:var(--acid);border-color:var(--acid);color:#111}
+.gf2 .hero .btn.ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.gf2 .hero .meta{color:#9d9d9d;margin-top:24px}
+.gf2 h2{font-size:clamp(38px,4.8vw,72px);line-height:.94}
+.gf2 .statement .lead{font-size:20px;line-height:1.5}
+.gf2 .audience-card{background:rgba(255,255,255,.52);min-height:150px}
+.gf2 .pillar{min-height:340px}
+.gf2 .row{transition:.18s}
+.gf2 .row:hover{padding-left:12px;padding-right:12px;background:#fff}
+.gf2 .activation{background-image:url('https://www.gamefields.eu/wp-content/uploads/2024/12/Mistrzostwa-Polski-Panna-1na1-Lodz-2016-x-Alternative-Soccer.jpg')!important;background-position:center 42%}
+@media(max-width:980px){
+ .gf2 .topbar-in{height:66px;gap:16px}
+ .gf2 .nav{overflow-x:auto;gap:18px;padding-bottom:2px;scrollbar-width:none}
+ .gf2 .nav::-webkit-scrollbar{display:none}
+ .gf2 .hero{height:auto;min-height:720px;max-height:none}
+ .gf2 .hero-media{width:100%;opacity:.5}
+ .gf2 .hero-media:after{background:linear-gradient(90deg,rgba(13,13,13,.96) 0%,rgba(13,13,13,.78) 58%,rgba(13,13,13,.5) 100%)}
+ .gf2 .hero-in{padding:110px 24px 72px}
+ .gf2 .hero-grid{max-width:720px}
+ .gf2 .hero h1{font-size:clamp(54px,11vw,88px);max-width:720px}
+}
+@media(max-width:560px){
+ .gf2 .topbar-in{height:62px}
+ .gf2 .brand{font-size:12px}
+ .gf2 .nav a{font-size:9px}
+ .gf2 .nav-cta{padding:11px 12px}
+ .gf2 .hero{min-height:680px}
+ .gf2 .hero-in{padding:92px 18px 54px}
+ .gf2 .hero h1{font-size:clamp(48px,13vw,66px);line-height:.92}
+ .gf2 .hero-side{margin-top:24px}
+ .gf2 .hero-side p{font-size:16px}
+ .gf2 h2{font-size:clamp(38px,10vw,54px)}
+}
+
+.gf2 .builder-grid{grid-template-columns:minmax(0,760px);justify-content:start}
+.gf2 .builder-box{display:none}
+.gf2 .contact-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.gf2 .contact-ghost{background:transparent!important;color:#111!important;border-color:#111!important}
+.gf2 .contact-mini{margin-top:14px!important;font-size:13px!important;color:#777!important}
+.gf2 .gf-lead-form{margin-top:36px;padding-top:28px;border-top:1px solid #aaa}
+.gf2 .gf-lead-form h3{font-size:28px;line-height:1.15;margin-bottom:20px}
+.gf2 .gf-lead-form .wpcf7{margin:0}
+.gf2 .gf-lead-form .gf-lead-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 22px}
+.gf2 .gf-lead-form label{display:block;font-size:14px;line-height:1.5;font-weight:700}
+.gf2 .gf-lead-form label p,.gf2 .gf-lead-form form p{margin:0 0 18px;font-size:14px}
+.gf2 .gf-lead-form input:not([type=submit]),.gf2 .gf-lead-form select,.gf2 .gf-lead-form textarea{display:block;width:100%;max-width:100%;margin-top:8px;padding:12px 14px;min-height:48px;border:1px solid #999;background:#fff;color:#111;font:400 16px/1.5 Arial,Helvetica,sans-serif;border-radius:0}
+.gf2 .gf-lead-form textarea{min-height:140px;resize:vertical}
+.gf2 .gf-lead-form input:focus-visible,.gf2 .gf-lead-form select:focus-visible,.gf2 .gf-lead-form textarea:focus-visible,.gf2 a:focus-visible{outline:3px solid #111;outline-offset:3px}
+.gf2 .gf-lead-form input[type=submit]{min-height:52px;padding:14px 24px;background:#111;color:#fff;border:1px solid #111;font:700 16px/1.4 Arial,Helvetica,sans-serif;cursor:pointer;white-space:normal}
+.gf2 .gf-lead-form input[type=submit]:disabled{opacity:.55;cursor:wait}
+.gf2 .gf-lead-form .gf-lead-note{font-size:14px;line-height:1.55;color:#555;margin:12px 0 20px}
+.gf2 .gf-lead-form .wpcf7-response-output{margin:20px 0 0;padding:16px;font-size:16px;line-height:1.5;color:#111}
+.gf2 .gf-lead-form .wpcf7-not-valid-tip{font-size:14px;line-height:1.4;margin-top:6px;color:#a31616}
+.gf2 #zapytanie{scroll-margin-top:90px}
+@media(max-width:560px){.gf2 .gf-lead-form .gf-lead-grid{grid-template-columns:minmax(0,1fr);gap:0}.gf2 .gf-lead-form input[type=submit]{width:100%}}
+body.admin-bar .gf2 .topbar{top:32px}
+@media(max-width:782px){body.admin-bar .gf2 .topbar{top:46px}}
+
+/* Gamefields Studio — homepage 2026-10 */
+.gf2{--paper:#fafbf8;--ink:#243c30;--acid:#e2ecd6;--line:#dce4d9;--bg:#284b38;color:var(--ink);background:var(--paper);font-family:Arial,Helvetica,sans-serif}
+.gf2 .wrap{max-width:1360px;padding-left:48px;padding-right:48px}
+.gf2 h1,.gf2 h2,.gf2 h3{text-transform:none;font-weight:600;letter-spacing:-.035em}
+.gf2 h2{font-size:clamp(32px,3.5vw,48px);line-height:1.12}
+.gf2 h3{font-size:clamp(26px,2.5vw,34px);line-height:1.15}
+.gf2 p{line-height:1.65}
+.gf2 .eyebrow{font-size:12px;line-height:1.5;letter-spacing:.09em;color:#56705d;margin-bottom:18px}
+.gf2 .btn{min-height:50px;padding:0 22px;border-radius:8px;font-size:14px;font-weight:600;letter-spacing:0;text-transform:none}
+.gf2 .btn.dark,.gf2 .btn.light{background:#284b38;color:#fff;border-color:#284b38}
+.gf2 .btn.ghost{color:#284b38;border-color:#ccd8ca;background:transparent}
+.gf2 a:focus-visible{outline:3px solid #699354;outline-offset:4px}
+.gf2 .topbar{background:rgba(250,251,248,.97);color:#243c30;border-bottom:1px solid var(--line)}
+.gf2 .topbar-in{height:78px;gap:24px}
+.gf2 .brand{font-size:17px;letter-spacing:.1em}
+.gf2 .brand span{display:block;font-size:10px;font-weight:400;letter-spacing:.06em;margin-top:4px}
+.gf2 .nav{gap:27px}
+.gf2 .nav a{font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;opacity:1}
+.gf2 .nav a:hover{color:#52713f}
+.gf2 .nav .nav-cta{background:#284b38;color:#fff!important;padding:13px 18px;border-radius:8px}
+.gf2 .hero{height:auto;min-height:0;max-height:none;background:#f1f5ec!important;color:#243c30;overflow:visible}
+.gf2 .hero-in{display:block;min-height:0;padding-top:76px;padding-bottom:64px}
+.gf2 .hero-grid{display:grid;grid-template-columns:.92fr 1.08fr;align-items:center;gap:46px;max-width:none}
+.gf2 .hero h1{color:#243c30!important;font-size:clamp(40px,4.05vw,58px);line-height:1.1;letter-spacing:-.045em;max-width:600px;text-wrap:balance}
+.gf2 .hero .eyebrow{color:#56705d;margin-bottom:24px}
+.gf2 .hero-side{max-width:500px;margin-top:24px}
+.gf2 .hero-side p{color:#5a685d;font-size:17px;line-height:1.7;max-width:none;margin-bottom:28px}
+.gf2 .hero .btn.light{background:#284b38;border-color:#284b38;color:#fff}
+.gf2 .hero .btn.ghost{color:#284b38;border-color:#c5d2bf}
+.gf2 .hero .meta{color:#62705f;gap:10px;margin-top:28px;font-size:12px;letter-spacing:0;text-transform:none;font-weight:500}
+.gf2 .hero .meta span{padding:6px 12px;border:1px solid #d8e1d1;border-radius:20px}
+.gf2 .studio-preview{margin:0;overflow:hidden;background:#fff;border:1px solid #d8e1d1;border-radius:12px;box-shadow:0 16px 45px rgba(40,75,56,.08)}
+.gf2 .preview-head{display:flex;justify-content:space-between;gap:10px;padding:17px 20px;font-size:11px;letter-spacing:.06em;font-weight:700;color:#284b38}
+.gf2 .preview-status{font-weight:400;letter-spacing:0;color:#778374}
+.gf2 .studio-preview img{display:block;width:100%;height:auto;aspect-ratio:1672/941;object-fit:cover}
+.gf2 .studio-preview figcaption{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px;font-size:12px}
+.gf2 .studio-preview strong{display:block;font-size:17px;font-weight:600;margin-bottom:5px}
+.gf2 .studio-preview figcaption span{color:#71806d;display:block;line-height:1.5}
+.gf2 .studio-preview figcaption a{font-size:13px;font-weight:600;white-space:nowrap;color:#284b38}
+.gf2 .statement,.gf2 .space,.gf2 .sizes,.gf2 .build,.gf2 .renew,.gf2 .process,.gf2 .cities,.gf2 .street,.gf2 .builder,.gf2 .final{padding-top:72px;padding-bottom:72px}
+.gf2 .statement-grid,.gf2 .space-grid,.gf2 .two,.gf2 .city-grid{gap:56px}
+.gf2 .statement .lead{font-size:18px;color:#64705f}
+.gf2 .audience{padding-bottom:64px}
+.gf2 .audience-grid{border:0;gap:16px}
+.gf2 .audience-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px;min-height:155px}
+.gf2 .audience-card span,.gf2 .pillar p,.gf2 .street p{color:#64705f}
+.gf2 .audience-card:hover{border-color:#849d73;background:#f1f5ec}
+.gf2 .pillars{max-width:1264px;margin:0 auto 72px;border:0;gap:16px;padding:0}
+.gf2 .pillar{min-height:270px;padding:32px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.gf2 .pillar:hover{background:#eaf1e3;color:#243c30;border-color:#9caf8d}
+.gf2 .pillar:hover p{color:#53644d}
+.gf2 .pillar .more{font-size:13px;letter-spacing:0;text-transform:none}
+.gf2 .space,.gf2 .process{background:#284b38;color:#fff}
+.gf2 .space .eyebrow,.gf2 .process .eyebrow{color:#c5d5bc}
+.gf2 .space-copy p{color:#d9e2d4}
+.gf2 .space .btn.light{background:#fff;color:#284b38;border-color:#fff}
+.gf2 .space-photo,.gf2 .build-photo,.gf2 .street-photo{height:430px;border-radius:12px}
+.gf2 .build,.gf2 .final{background:#e7efdd}
+.gf2 .street{background:#f0f4ea}
+.gf2 .specs,.gf2 .spec,.gf2 .problems,.gf2 .problem,.gf2 .rows,.gf2 .row{border-color:#c9d6c0}
+.gf2 .spec b{font-size:12px;letter-spacing:.05em}
+.gf2 .proof,.gf2 .activation{min-height:480px}
+.gf2 .proof .eyebrow,.gf2 .activation .eyebrow{color:#d5e4c9}
+.gf2 .proof h2,.gf2 .activation h2{color:#fff}
+.gf2 .proof-in,.gf2 .activation-in{padding-top:80px;padding-bottom:48px}
+.gf2 .activation .btn.light{background:#fff;color:#284b38;border-color:#fff}
+.gf2 .chips span{font-size:12px;letter-spacing:0;border-radius:20px;font-weight:500}
+.gf2 .renew-card{height:420px;border-radius:12px;overflow:hidden}
+.gf2 .tag{font-size:12px;letter-spacing:0;text-transform:none;border-radius:6px}
+.gf2 .steps,.gf2 .step{border-color:#56745e}
+.gf2 .step b{color:#bfd1b6;font-size:12px}
+.gf2 .step span{font-size:16px;font-weight:500}
+.gf2 .builder-note{max-width:650px;line-height:1.7;color:#64705f;margin-bottom:24px}
+.gf2 #studio{background:#f0f4ea}
+.gf2 .gf-lead-form{border-color:#dce4d9}
+.gf2 .gf-lead-form input:not([type=submit]),.gf2 .gf-lead-form select,.gf2 .gf-lead-form textarea{border-color:#b8c7b0;border-radius:8px;color:#243c30}
+.gf2 .gf-lead-form input[type=submit]{background:#284b38;border-color:#284b38;border-radius:8px}
+.gf2 .contact-ghost{color:#284b38!important;border-color:#b8c7b0!important}
+.gf2 .foot{background:#203b2d;color:#d1dccb;text-transform:none;font-size:13px;letter-spacing:0;line-height:1.7;padding:30px 0}
+.gf2 section[id]{scroll-margin-top:90px}
+@media(max-width:1320px){.gf2 .pillars{margin-left:48px;margin-right:48px}}
+@media(max-width:980px){
+.gf2 .wrap{padding-left:24px;padding-right:24px}
+.gf2 .topbar-in{height:auto;min-height:76px;padding-top:14px;padding-bottom:14px;gap:16px}
+.gf2 .nav{gap:22px;padding-bottom:4px}
+.gf2 .hero-in{padding-top:48px;padding-bottom:48px}
+.gf2 .hero-grid{grid-template-columns:1fr;gap:36px}
+.gf2 .hero h1{font-size:clamp(40px,6.5vw,58px);max-width:680px}
+.gf2 .hero-side{max-width:650px}
+.gf2 .studio-preview{max-width:750px}
+.gf2 .statement-grid,.gf2 .space-grid,.gf2 .two,.gf2 .city-grid,.gf2 .final-grid{grid-template-columns:1fr;gap:32px}
+.gf2 .pillars{margin-left:24px;margin-right:24px;grid-template-columns:1fr 1fr}
+.gf2 .pillar{padding:24px;min-height:290px}
+.gf2 .audience-grid{grid-template-columns:1fr 1fr}
+.gf2 .steps{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:560px){
+.gf2 .wrap{padding-left:18px;padding-right:18px}
+.gf2 .brand{font-size:15px}
+.gf2 .nav a{font-size:13px}
+.gf2 .nav .nav-cta{font-size:13px;padding:11px 14px}
+.gf2 .hero-in{padding-top:36px;padding-bottom:36px}
+.gf2 .hero h1{font-size:clamp(34px,9vw,46px);line-height:1.12}
+.gf2 .hero-side p{font-size:16px}
+.gf2 .hero-actions{display:flex;flex-direction:column;align-items:stretch}
+.gf2 .hero .meta{gap:6px}
+.gf2 .preview-head{padding:14px;font-size:10px}
+.gf2 .preview-status{display:none}
+.gf2 .studio-preview figcaption{padding:16px;flex-wrap:wrap}
+.gf2 h2{font-size:34px;line-height:1.15}
+.gf2 .statement,.gf2 .space,.gf2 .sizes,.gf2 .build,.gf2 .renew,.gf2 .process,.gf2 .cities,.gf2 .street,.gf2 .builder,.gf2 .final{padding-top:48px;padding-bottom:48px}
+.gf2 .audience{padding-bottom:48px}
+.gf2 .audience-grid,.gf2 .pillars{grid-template-columns:1fr}
+.gf2 .pillars{margin-left:18px;margin-right:18px;margin-bottom:48px}
+.gf2 .pillar{min-height:240px}
+.gf2 .space-photo,.gf2 .build-photo,.gf2 .street-photo,.gf2 .renew-card{height:310px}
+.gf2 .steps{grid-template-columns:1fr 1fr}
+.gf2 .proof,.gf2 .activation{min-height:420px}
+.gf2 .final-grid{gap:28px}
+}
+
+
+/* Home refinement — images, studio collection, contact */
+.gf2 h1,.gf2 h2,.gf2 h3{color:#243c30}
+.gf2 .space h2,.gf2 .process h2,.gf2 .proof h2,.gf2 .activation h2{color:#fff}
+.gf2 .street{background:#fafbf8;border-top:1px solid var(--line);padding-top:60px;padding-bottom:60px}
+.gf2 .street .two{grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.gf2 figure.street-photo{height:auto;margin:0;background:none;overflow:hidden;border-radius:12px;border:1px solid var(--line)}
+.gf2 .street-photo img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.gf2 .street-photo figcaption{padding:14px 18px;background:#f0f4ea;color:#64705f;font-size:12px;line-height:1.5}
+.gf2 .street p{font-size:17px}
+.gf2 .studio-collection{padding:64px 0;background:#f0f4ea}
+.gf2 .collection-heading{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:32px}
+.gf2 .collection-heading p{color:#64705f;font-size:17px;max-width:560px;margin-bottom:22px}
+.gf2 .direction-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.gf2 .direction-card{margin:0;background:#fff;overflow:hidden;border:1px solid #d8e1d1;border-radius:12px}
+.gf2 .direction-card img{display:block;width:100%;height:auto;aspect-ratio:1672/941;object-fit:cover}
+.gf2 .direction-card figcaption{display:flex;gap:14px;align-items:flex-start;padding:22px}
+.gf2 .direction-number{font-size:12px;color:#7a8e71;padding-top:4px}
+.gf2 .direction-card h3{font-size:21px;line-height:1.2;letter-spacing:-.02em}
+.gf2 .direction-card p{font-size:14px;line-height:1.6;color:#64705f;margin-top:8px}
+.gf2 .collection-caption{font-size:12px;color:#70816b;margin-top:14px}
+.gf2 .studio-journey{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-top:28px;margin-top:28px;border-top:1px solid #d5dfcd}
+.gf2 .studio-journey>div{display:flex;align-items:center;gap:12px}
+.gf2 .studio-journey span{display:flex;width:32px;height:32px;align-items:center;justify-content:center;background:#e1ead8;border-radius:50%;font-size:12px;color:#46613b;flex-shrink:0}
+.gf2 .studio-journey strong{font-size:14px;font-weight:500;line-height:1.5}
+.gf2 #builder{background:#fafbf8}
+.gf2 .builder-grid{max-width:none;grid-template-columns:1fr}
+.gf2 .builder-grid>div:first-child{display:grid;grid-template-columns:.78fr 1.22fr;column-gap:64px;align-content:start;grid-template-rows:repeat(5,min-content)}
+.gf2 .builder-grid>div:first-child>.eyebrow,.gf2 .builder-grid>div:first-child>h2,.gf2 .builder-grid>div:first-child>.builder-note,.gf2 .builder-grid>div:first-child>.contact-actions,.gf2 .builder-grid>div:first-child>.contact-mini{grid-column:1}
+.gf2 .builder-grid>div:first-child>.gf-lead-form{grid-column:2;grid-row:1/6;padding:30px;border:1px solid #dce4d9;border-radius:12px;background:#fff;margin:0}
+.gf2 .builder-grid>div:first-child>.builder-note{margin-bottom:0}
+.gf2 .builder-grid>div:first-child>.contact-actions{margin-top:24px;align-self:start}
+.gf2 .gf-lead-form h3{font-size:25px}
+.gf2 .final{padding-top:48px;padding-bottom:48px}
+@media(max-width:980px){
+.gf2 .collection-heading{gap:32px}
+.gf2 .direction-grid{gap:12px}
+.gf2 .direction-card figcaption{padding:16px;gap:10px}
+.gf2 .direction-card h3{font-size:18px}
+.gf2 .studio-journey{gap:16px}
+.gf2 .street .two{gap:32px}
+.gf2 .builder-grid>div:first-child{grid-template-columns:1fr;display:block}
+.gf2 .builder-grid>div:first-child>.gf-lead-form{margin-top:32px}
+}
+@media(max-width:700px){
+.gf2 .street .two,.gf2 .collection-heading{grid-template-columns:1fr}
+.gf2 .direction-grid{grid-template-columns:1fr;gap:20px}
+.gf2 .direction-card figcaption{padding:20px}
+.gf2 .direction-card h3{font-size:22px}
+.gf2 .direction-card p{font-size:15px}
+.gf2 .studio-journey{grid-template-columns:1fr;gap:16px}
+.gf2 .collection-caption{line-height:1.7}
+.gf2 .studio-collection,.gf2 .street{padding-top:48px;padding-bottom:48px}
+.gf2 .builder-grid>div:first-child>.gf-lead-form{padding:22px}
+}
+
+
+.gf2{overflow:clip}
+.gf2 .builder-grid>div:first-child{grid-template-rows:auto;align-items:start}
+.gf2 .builder-grid>div:first-child>.contact-copy{grid-column:1;grid-row:1}
+.gf2 .builder-grid>div:first-child>.gf-lead-form{grid-column:2;grid-row:1}
+.gf2 .contact-copy .builder-note{margin-bottom:0}
+@media(max-width:980px){.gf2 section[id]{scroll-margin-top:140px}}
+body:has(.gf2) .nm-page-wrap{overflow:clip}
+</style>
+<style id="gamefields-author-studio-v1">
+html body .gf2[data-author-studio]{--paper:#f4f2ed!important;--ink:#171b18!important;--acid:#dfff38!important;--line:#d4d8cf!important;--bg:#111713!important;background:var(--paper)!important;color:var(--ink)!important}html body .gf2[data-author-studio] h1,html body .gf2[data-author-studio] h2,html body .gf2[data-author-studio] h3{color:var(--ink)!important;font-weight:800!important;letter-spacing:-.045em!important}html body .gf2[data-author-studio] h2{font-size:clamp(32px,4.4vw,62px)!important;line-height:1.06!important}html body .gf2[data-author-studio] p{font-size:17px!important;line-height:1.7!important}html body .gf2[data-author-studio] .topbar{background:#111713!important;color:#f4f2ed!important}html body .gf2[data-author-studio] .brand span{color:#b6c0b4!important}html body .gf2[data-author-studio] .nav a{color:#f4f2ed!important}html body .gf2[data-author-studio] .nav .nav-cta{background:var(--acid)!important;color:#111!important;border-radius:4px!important}html body .gf2[data-author-studio] .hero{background:#111713!important;color:#f4f2ed!important}html body .gf2[data-author-studio] .hero-grid{grid-template-columns:1.1fr .9fr!important;gap:56px!important;align-items:center!important}html body .gf2[data-author-studio] .hero h1{color:#f4f2ed!important;font-size:clamp(40px,4.7vw,68px)!important;line-height:1.03!important}html body .gf2[data-author-studio] .hero .eyebrow{color:var(--acid)!important}html body .gf2[data-author-studio] .hero-side{max-width:650px!important}html body .gf2[data-author-studio] .hero-side p{color:#c8d0c4!important;font-size:16px!important;line-height:1.65!important;margin-bottom:18px!important}html body .gf2[data-author-studio] .hero-side .studio-lead{color:#f4f2ed!important;font-size:21px!important;line-height:1.45!important;font-weight:600!important}html body .gf2[data-author-studio] .hero .btn.light{background:var(--acid)!important;border-color:var(--acid)!important;color:#111!important}html body .gf2[data-author-studio] .hero .btn.ghost{color:#f4f2ed!important;border-color:#63705d!important}html body .gf2[data-author-studio] .hero-actions{margin-top:26px!important}html body .gf2[data-author-studio] .hero .meta{color:#c8d0c4!important}html body .gf2[data-author-studio] .hero .meta span{border-color:#4c5948!important}html body .gf2[data-author-studio] .studio-preview{border-radius:4px!important;box-shadow:none!important}html body .gf2[data-author-studio] .author-section{padding:80px 0!important;border-bottom:1px solid var(--line)!important}html body .gf2[data-author-studio] .author-heading{max-width:900px!important;margin-bottom:36px!important}html body .gf2[data-author-studio] .author-heading p{max-width:780px!important;margin-top:22px!important;color:#566050!important}html body .gf2[data-author-studio] .author-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important}html body .gf2[data-author-studio] .author-card{border:1px solid var(--line)!important;padding:28px!important;background:#fafbf8!important;border-radius:4px!important}html body .gf2[data-author-studio] .author-card h3{font-size:24px!important;line-height:1.15!important;letter-spacing:-.025em!important}html body .gf2[data-author-studio] .author-card p{font-size:16px!important;color:#566050!important;margin-top:18px!important}html body .gf2[data-author-studio] .author-card .eyebrow{color:#64745c!important;margin-bottom:25px!important}html body .gf2[data-author-studio] .author-links{margin-top:32px!important;display:flex!important;gap:14px!important;flex-wrap:wrap!important}html body .gf2[data-author-studio] .btn.dark{background:#111713!important;border-color:#111713!important;color:#fff!important}html body .gf2[data-author-studio] .damian-grid{display:grid!important;grid-template-columns:.85fr 1.15fr!important;gap:56px!important;align-items:start!important}html body .gf2[data-author-studio] .damian-photo{margin:0!important}html body .gf2[data-author-studio] .damian-photo img{display:block!important;width:100%!important;aspect-ratio:4/5!important;object-fit:cover!important;border-radius:4px!important}html body .gf2[data-author-studio] .damian-photo figcaption{padding:20px 0!important;font-size:14px!important;color:#566050!important;line-height:1.6!important}html body .gf2[data-author-studio] .damian-photo strong{display:block!important;color:#171b18!important;font-size:19px!important}html body .gf2[data-author-studio] .damian-copy p{margin-top:22px!important}html body .gf2[data-author-studio] .damian-copy .btn{margin-top:28px!important}html body .gf2[data-author-studio] .small-studio{background:#e5ebdf!important}html body .gf2[data-author-studio] .small-studio .studio-body{max-width:850px!important;margin-bottom:36px!important}html body .gf2[data-author-studio] .studio-body p+p{margin-top:20px!important}html body .gf2[data-author-studio] .author-process{background:#111713!important;color:#f4f2ed!important}html body .gf2[data-author-studio] .author-process h2,html body .gf2[data-author-studio] .author-process h3{color:#f4f2ed!important}html body .gf2[data-author-studio] .author-process .eyebrow{color:var(--acid)!important}html body .gf2[data-author-studio] .author-process .author-heading p{color:#bec8b8!important}html body .gf2[data-author-studio] .process-list{display:grid!important;grid-template-columns:1fr!important;gap:0!important}html body .gf2[data-author-studio] .process-item{display:grid!important;grid-template-columns:70px .8fr 1.2fr!important;gap:24px!important;border-top:1px solid #42503d!important;padding:28px 0!important;align-items:start!important}html body .gf2[data-author-studio] .process-item>span{color:var(--acid)!important;font-size:16px!important}html body .gf2[data-author-studio] .process-item h3{font-size:25px!important}html body .gf2[data-author-studio] .process-item p{color:#bec8b8!important;font-size:16px!important}html body .gf2[data-author-studio] .author-audience{grid-template-columns:repeat(3,minmax(0,1fr))!important}html body .gf2[data-author-studio] .report-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:56px!important;align-items:start!important}html body .gf2[data-author-studio] .report-grid p{margin-top:22px!important}html body .gf2[data-author-studio] .report-grid .btn{margin-top:28px!important}html body .gf2[data-author-studio] .report-panel{border:1px solid var(--line)!important;background:#fff!important;padding:28px!important}html body .gf2[data-author-studio] .report-panel h3{font-size:26px!important}html body .gf2[data-author-studio] .report-panel p{font-size:16px!important}html body .gf2[data-author-studio] .contact-name{font-size:21px!important;font-weight:700!important}html body .gf2[data-author-studio] .contact-mini{color:#566050!important}html body .gf2[data-author-studio] .foot{background:#111713!important;color:#c8d0c4!important}html body .gf2[data-author-studio] .gf-lead-form input[type=submit]{background:#111713!important;border-color:#111713!important}html body .gf2[data-author-studio] #kontakt,html body .gf2[data-author-studio] #zglos-miejsce{scroll-margin-top:100px!important}html body .gf2[data-author-studio] .nav .mobile-only{display:none!important}html body .gf2[data-author-studio] .author-card a{text-decoration:underline!important;text-underline-offset:4px!important}html body .gf2[data-author-studio] .author-card a:focus-visible{outline:3px solid #526a40!important}html body .gf2[data-author-studio] .hero a:focus-visible,html body .gf2[data-author-studio] .topbar a:focus-visible{outline:3px solid var(--acid)!important}
+@media(max-width:980px){html body .gf2[data-author-studio] .hero-grid,html body .gf2[data-author-studio] .damian-grid,html body .gf2[data-author-studio] .report-grid{grid-template-columns:1fr!important;gap:32px!important}html body .gf2[data-author-studio] .author-grid,html body .gf2[data-author-studio] .author-audience{grid-template-columns:repeat(2,minmax(0,1fr))!important}html body .gf2[data-author-studio] .damian-photo img{aspect-ratio:4/3!important}html body .gf2[data-author-studio] .process-item{grid-template-columns:44px 1fr!important}html body .gf2[data-author-studio] .process-item p{grid-column:2!important}html body .gf2[data-author-studio] .author-section{padding:56px 0!important}html body .gf2[data-author-studio] #kontakt,html body .gf2[data-author-studio] #zglos-miejsce{scroll-margin-top:160px!important}}
+@media(max-width:560px){html body .gf2[data-author-studio] .nav{width:100%!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:5px!important}html body .gf2[data-author-studio] .nav a{font-size:12px!important;text-align:center!important;justify-content:center!important;min-height:44px!important}html body .gf2[data-author-studio] .nav .desktop-only{display:none!important}html body .gf2[data-author-studio] .nav .nav-cta{padding:10px 6px!important;margin:0!important}html body .gf2[data-author-studio] .nav a:nth-child(1){order:2!important}html body .gf2[data-author-studio] .nav a:nth-child(2){order:1!important}html body .gf2[data-author-studio] .nav a:nth-child(5){order:3!important}html body .gf2[data-author-studio] .nav a:nth-child(6){order:4!important}html body .gf2[data-author-studio] .author-grid,html body .gf2[data-author-studio] .author-audience{grid-template-columns:1fr!important}html body .gf2[data-author-studio] .author-card{padding:24px!important}html body .gf2[data-author-studio] .author-section{padding:44px 0!important}html body .gf2[data-author-studio] .hero h1{font-size:39px!important}html body .gf2[data-author-studio] .hero-side .studio-lead{font-size:19px!important}html body .gf2[data-author-studio] .report-panel{padding:22px!important}html body .gf2[data-author-studio] .hero-in{padding-top:40px!important;padding-bottom:44px!important}html body .gf2[data-author-studio] .author-heading{margin-bottom:28px!important}html body .gf2[data-author-studio] .process-item{gap:16px!important}html body .gf2[data-author-studio] .foot .wrap{display:block!important}}
+</style><div class="gf2" data-author-studio="v1"><header class="topbar"><div class="wrap topbar-in"><a class="brand" href="/" aria-label="Gamefields — strona główna">GAMEFIELDS<span>autorskie studio boisk miejskich</span></a><nav class="nav" aria-label="Główna nawigacja Gamefields"><a href="#damian">Studio</a><a href="#rozwiazania">Oferta</a><a class="desktop-only" href="/realizacje-gamefields/">Realizacje</a><a class="desktop-only" href="/konfigurator-boisk/">Builder</a><a class="nav-cta" href="#zglos-miejsce">Zgłoś miejsce</a><a href="#kontakt">Kontakt</a></nav></div></header>
+<section class="hero" id="top"><div class="wrap hero-in"><div class="hero-grid"><div><div class="eyebrow">Gamefields / Damian Gawrych</div><h1>Najpierw była gra. Teraz budujemy boiska.</h1><div class="hero-side"><p class="studio-lead">Gamefields to autorskie studio boisk miejskich Damiana Gawrycha.</p><p>Projektuję, odnawiam i realizuję przestrzenie do gry: boiska panna, street football, kolorowe nawierzchnie, murale, modułowe areny i koncepcje miejsc sportowych dla miast, szkół, deweloperów i marek.</p><p>Po kilkunastu latach przy street footballu, wydarzeniach i infrastrukturze sportowej buduję studio, które łączy doświadczenie z boiska, wykonawstwo i technologię.</p><p>Nie tworzymy obiektów, które dobrze wyglądają tylko na wizualizacji. Tworzymy miejsca, do których ludzie chcą wracać.</p><div class="hero-actions"><a class="btn light" href="#zapytanie">Zaprojektuj boisko</a><a class="btn ghost" href="#zglos-miejsce">Zgłoś miejsce</a></div></div></div><!-- TODO: replace with Damian portrait / field process photo --><figure class="studio-preview"><div class="preview-head"><span>GAMEFIELDS STUDIO</span><span class="preview-status">Od pomysłu do przestrzeni</span></div><img src="https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Studio-—-Organic-Flow.webp" width="1672" height="941" alt="Wizualizacja koncepcyjna kolorowego boiska Gamefields w parku" fetchpriority="high" decoding="async"><figcaption><div><strong>Organic Flow</strong><span>Wizualizacja koncepcyjna · Piłka nożna 3×3</span></div><a href="/konfigurator-boisk/">Odkryj Builder ↗</a></figcaption></figure></div></div></section><section class="author-section"><div class="wrap"><div class="author-heading"><div class="eyebrow">01 / Trzy perspektywy</div><h2>Z gry. Z projektu. Z wykonania.</h2><p>Gamefields łączy trzy perspektywy, które rzadko spotykają się w jednym miejscu.</p></div><div class="author-grid"><article class="author-card"><div class="eyebrow">01</div><h3>Z gry</h3><p>Znam boisko od strony ludzi, którzy naprawdę z niego korzystają. Wiem, kiedy miejsce żyje, a kiedy jest tylko pustą nawierzchnią z liniami.</p></article><article class="author-card"><div class="eyebrow">02</div><h3>Z projektu</h3><p>Przekładam pomysł na układ, funkcję, kolor, wizualizację i czytelny kierunek realizacji. Boisko ma działać sportowo, wizualnie i społecznie.</p></article><article class="author-card"><div class="eyebrow">03</div><h3>Z wykonania</h3><p>Prowadzę projekt do fizycznego miejsca: nawierzchni, modułów, malowania, brandingu, wyposażenia i uruchomienia boiska.</p></article></div></div></section><section class="author-section" id="rozwiazania"><div class="wrap"><div class="author-heading"><div class="eyebrow">02 / Co robimy</div><h2>Boiska, które mają po co istnieć</h2><p>Tworzymy przestrzenie sportowe, które nie kończą się na nawierzchni. Projektujemy miejsca do gry, spotkań, wydarzeń, aktywacji marek i codziennego ruchu.</p></div><div class="author-grid"><article class="author-card"><div class="eyebrow">01</div><h3>Boiska panna i street football</h3><p>Kompaktowe areny do gry 1 na 1, małe boiska street footballowe, strefy turniejowe i przestrzenie do codziennej rywalizacji.</p><p><a href="/boiska-street-football/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">02</div><h3>Renowacje boisk</h3><p>Odnawiamy istniejące boiska, place i nawierzchnie. Dodajemy im nowy układ, kolor, funkcję i energię.</p><p><a href="/renowacja-boisk/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">03</div><h3>Malowanie nawierzchni i murale</h3><p>Traktujemy boisko jak miejskie płótno. Projektujemy linie, wzory, kolory, murale i identyfikację miejsca.</p><p><a href="/malowanie-boisk/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">04</div><h3>Modułowe areny i eventy</h3><p>Tworzymy mobilne i półstałe przestrzenie do turniejów, eventów, premier, aktywacji marek i miejskich wydarzeń sportowych.</p><p><a href="/eventy-sportowe/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">05</div><h3>Koncepcje dla miast, szkół i deweloperów</h3><p>Pomagamy przejść od pustej przestrzeni do konkretnego pomysłu: analiza, koncepcja, wizualizacja, zakres, etapy i możliwy koszt.</p><p><a href="/dla-miast/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">06</div><h3>Gamefields Studio / Builder</h3><p>Rozwijamy platformę do projektowania, wizualizacji i zgłaszania miejsc z potencjałem. To cyfrowe narzędzie, które ma skracać drogę od pomysłu do boiska.</p><p><a href="/konfigurator-boisk/">Poznaj rozwiązanie →</a></p></article></div><div class="author-links"><a class="btn dark" href="#zglos-miejsce">Sprawdź potencjał miejsca</a></div></div></section><section class="author-section" id="damian"><div class="wrap damian-grid"><!-- TODO: add Damian portrait / field process photo --><figure class="damian-photo"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3.jpg" width="797" height="598" alt="Gra street football w arenie panna Gamefields — zdjęcie z boiska" loading="lazy" decoding="async"><figcaption><strong>Damian Gawrych</strong>Founder / Project Lead, Gamefields<br>Street football, boiska miejskie, projektowanie przestrzeni do gry.<br><small>Na zdjęciu: gra w arenie panna Gamefields.</small></figcaption></figure><div class="damian-copy"><div class="eyebrow">03 / Damian Gawrych</div><h2>Od gry do projektowania boisk</h2><p>Nazywam się Damian Gawrych i buduję Gamefields jako autorskie studio boisk miejskich.</p><p>Od kilkunastu lat jestem blisko street footballu, boisk panna, wydarzeń sportowych i infrastruktury do gry. Znam te miejsca nie tylko z projektów i kosztorysów, ale też z perspektywy zawodnika, organizatora i osoby, która widziała, jak dobre boisko potrafi uruchomić całą okolicę.</p><p>Gamefields powstało z prostego przekonania: boisko nie powinno być tylko kawałkiem nawierzchni z liniami. Może być miejscem spotkań, energii, rywalizacji, designu, lokalnej dumy i codziennego ruchu.</p><p>Dlatego łączę projektowanie, wykonawstwo i technologię. Pomagam miastom, szkołom, deweloperom i markom tworzyć przestrzenie, które dobrze wyglądają, działają w praktyce i mają szansę naprawdę żyć po otwarciu.</p><a class="btn dark" href="#male-studio">Poznaj studio</a></div></div></section><section class="author-section small-studio" id="male-studio"><div class="wrap"><div class="author-heading"><div class="eyebrow">04 / Małe studio</div><h2>Małe studio. Bezpośredni kontakt. Konkretna odpowiedzialność.</h2></div><div class="studio-body"><p>Gamefields rozwijam jako małe, wyspecjalizowane studio. Dzięki temu projekt nie ginie w strukturze, prezentacjach i przypadkowych decyzjach.</p><p>Rozmawiasz bezpośrednio z osobą, która rozumie grę, projektuje kierunek i prowadzi realizację. Do konkretnych zadań dobieram sprawdzonych wykonawców, producentów i partnerów technicznych, ale kierunek, jakość i odpowiedzialność zostają po stronie Gamefields.</p><p>To pozwala działać szybciej, bardziej elastycznie i bliżej realnych potrzeb miejsca.</p></div><div class="author-grid"><article class="author-card"><div class="eyebrow">01</div><h3>Szybsze decyzje</h3><p>Bez wielu warstw komunikacji. Rozmawiamy konkretnie o miejscu, budżecie, możliwościach i kolejnych krokach.</p></article><article class="author-card"><div class="eyebrow">02</div><h3>Autorski kierunek</h3><p>Każde boisko ma mieć własny charakter. Nie kopiujemy jednego szablonu na każdą lokalizację.</p></article><article class="author-card"><div class="eyebrow">03</div><h3>Odpowiedzialność od początku do końca</h3><p>Od pierwszej rozmowy przez koncepcję po realizację wiadomo, kto prowadzi temat.</p></article></div></div></section><section class="author-section author-process" id="proces"><div class="wrap"><div class="author-heading"><div class="eyebrow">05 / Jak pracujemy</div><h2>Od pustego miejsca do boiska, które żyje</h2><p>Nie zaczynamy od katalogu produktów. Zaczynamy od miejsca, ludzi i potencjału.</p></div><div class="process-list"><article class="process-item"><span>01</span><h3>Rozpoznajemy miejsce</h3><p>Patrzymy na lokalizację, użytkowników, budżet, ograniczenia i potencjał. Sprawdzamy, kto będzie z boiska korzystał i co musi się wydarzyć, żeby miejsce naprawdę zaczęło działać.</p></article><article class="process-item"><span>02</span><h3>Projektujemy kierunek</h3><p>Tworzymy pomysł na przestrzeń: układ, funkcję, kolor, styl, charakter i możliwy scenariusz użytkowania. Przygotowujemy pierwsze koncepcje i wizualizacje.</p></article><article class="process-item"><span>03</span><h3>Dobieramy rozwiązania</h3><p>Wybieramy odpowiedni typ boiska, nawierzchni, modułów, oznaczeń, muralu, wyposażenia i ewentualnego brandingu partnera.</p></article><article class="process-item"><span>04</span><h3>Realizujemy</h3><p>Prowadzimy wykonanie samodzielnie lub z dobranymi partnerami technicznymi. Pilnujemy, żeby projekt nie rozpadł się między koncepcją a placem budowy.</p></article><article class="process-item"><span>05</span><h3>Uruchamiamy boisko</h3><p>Boisko nie kończy się na odbiorze technicznym. Możemy pomóc zaplanować otwarcie, wydarzenie, turniej, komunikację albo aktywację sponsorską.</p></article></div></div></section><section class="author-section" id="dla-kogo"><div class="wrap"><div class="author-heading"><div class="eyebrow">06 / Dla kogo</div><h2>Dla miast, szkół, marek i ludzi, którzy widzą potencjał miejsca</h2></div><div class="author-grid author-audience"><article class="author-card"><div class="eyebrow">01</div><h3>Miasta i samorządy</h3><p>Dla miejsc, które chcą ożywić boiska, place, osiedla, szkoły i przestrzenie rekreacyjne bez budowania kolejnych anonimowych obiektów.</p><p><a href="/dla-miast/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">02</div><h3>Szkoły i uczelnie</h3><p>Dla placówek, które chcą stworzyć boisko, z którego uczniowie naprawdę korzystają — nie tylko na lekcjach WF-u.</p><p><a href="/boiska-dla-szkol/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">03</div><h3>Deweloperzy i zarządcy przestrzeni</h3><p>Dla inwestycji, osiedli i obiektów, które potrzebują atrakcyjnej, widocznej i aktywnej przestrzeni sportowej.</p><p><a href="/boiska-dla-deweloperow/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">04</div><h3>Marki i sponsorzy</h3><p>Dla marek, które chcą wejść w sport miejski nie przez baner na płocie, ale przez realne miejsce, doświadczenie i społeczność.</p><p><a href="/aktywacje-sportowe-dla-marek/">Poznaj rozwiązanie →</a></p></article><article class="author-card"><div class="eyebrow">05</div><h3>Lokalne społeczności</h3><p>Dla ludzi, którzy wiedzą, że w ich okolicy jest przestrzeń z potencjałem i chcą pokazać, że można zrobić z nią coś więcej.</p><p><a href="#zglos-miejsce">Poznaj rozwiązanie →</a></p></article></div></div></section><section class='studio-collection' id='studio'><div class='wrap'><div class='collection-heading'><div><div class='eyebrow'>Gamefields Studio / Kierunki projektowe</div><h2>Jedno boisko.<br>Trzy różne charaktery.</h2></div><div><p>Zobacz, jak grafika zmienia tę samą przestrzeń. W Studio dopasujesz projekt do wybranego sportu, nawierzchni i swojego miejsca.</p><a class='btn dark' href='/konfigurator-boisk/'>Stwórz swój projekt ↗</a></div></div><div class='direction-grid'><figure class='direction-card'><img src='https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Studio-—-Organic-Flow.webp' alt='Wizualizacja koncepcyjna boiska — Organic Flow' width='1672' height='941' loading='lazy' decoding='async'><figcaption><span class='direction-number'>01</span><div><h3>Organic Flow</h3><p>Płynne kształty i kolorowe strefy gry.</p></div></figcaption></figure><figure class='direction-card'><img src='https://www.gamefields.eu/wp-content/uploads/2026/10/Studio-Urban-Contrast.webp' alt='Wizualizacja koncepcyjna boiska — Urban Contrast' width='1672' height='941' loading='lazy' decoding='async'><figcaption><span class='direction-number'>02</span><div><h3>Urban Contrast</h3><p>Geometryczny układ i mocniejsze kontrasty.</p></div></figcaption></figure><figure class='direction-card'><img src='https://www.gamefields.eu/wp-content/uploads/2026/10/Studio-Classic-Lines.webp' alt='Wizualizacja koncepcyjna boiska — Classic Lines' width='1672' height='941' loading='lazy' decoding='async'><figcaption><span class='direction-number'>03</span><div><h3>Classic Lines</h3><p>Spokojna kompozycja i czytelne linie boiska.</p></div></figcaption></figure></div><p class='collection-caption'>Wizualizacje koncepcyjne · Piłka nożna 3×3 · Przykładowe kierunki graficzne</p><div class='studio-journey'><div><span>01</span><strong>Wybierz sport i wymiary</strong></div><div><span>02</span><strong>Dopasuj grafikę i wyposażenie</strong></div><div><span>03</span><strong>Sprawdź orientacyjny budżet</strong></div></div></div></section><style>
+.gf2 .gf-radar{padding:64px 0;background:#101a16;color:#fff;scroll-margin-top:100px}.gf2 .gf-radar-header{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:28px}.gf2 .gf-radar h2{color:#fff!important;font-size:clamp(34px,4vw,64px);margin:12px 0}.gf2 .gf-radar .eyebrow{color:#dfff38;font-size:13px}.gf2 .gf-radar-header p{max-width:580px;color:#b8c7be;font-size:16px}.gf2 .gf-radar-link{border-bottom:1px solid #dfff38;color:#dfff38!important;padding:10px 0;white-space:nowrap;font-size:14px}.gf2 .gf-radar-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;border:1px solid #435149}.gf2 #gf-radar-map{height:510px;position:relative;z-index:1;background:#dce2db}.gf2 .gf-radar-side{padding:24px;background:#172820}.gf2 .gf-radar-side h3{color:#fff!important;font-size:27px;margin:14px 0}.gf2 .gf-radar-side p{font-size:16px;color:#b8c7be}.gf2 .gf-radar-place{width:100%;display:block;text-align:left;margin-top:12px;padding:16px;border:1px solid #516259;background:transparent;color:#fff;font:inherit;font-size:16px;cursor:pointer}.gf2 .gf-radar-place[aria-pressed=true]{background:#dfff38;color:#111;border-color:#dfff38}.gf2 .gf-radar-detail{display:inline-block;margin:20px 0;font-size:14px;color:#dfff38!important;border-bottom:1px solid #dfff38}.gf2 .gf-radar-note{font-size:14px;line-height:1.5;color:#b8c7be;margin-top:18px}.gf2 .gf-radar-pin{display:block;width:30px;height:30px;border:4px solid white;border-radius:50% 50% 50% 6px;background:#193e2c;box-shadow:0 4px 12px #0006;transform:rotate(-45deg)}.gf2 .gf-radar-pin.active{background:#dfff38}.gf2 .gf-radar-pin-shell{background:none;border:0}.gf2 #gf-radar-map .leaflet-control-attribution{font-size:11px}.gf2 #gf-radar-map .leaflet-control-zoom a{color:#111}.gf2 .gf-radar-error{padding:24px;color:#172820}.gf2 .gf-radar-place:focus-visible,.gf2 .gf-radar-link:focus-visible{outline:3px solid white;outline-offset:4px}@media(max-width:760px){.gf2 .gf-radar{padding:40px 0}.gf2 .gf-radar-header{align-items:start;flex-direction:column;gap:12px}.gf2 .gf-radar-layout{grid-template-columns:1fr}.gf2 #gf-radar-map{height:370px}.gf2 .gf-radar-side{padding:20px}.gf2 .gf-radar-places{display:flex;flex-wrap:wrap;gap:8px}.gf2 .gf-radar-place{width:auto;margin:0;padding:12px;font-size:14px}}
+</style>
+<style>
+.gf2 .gf-radar-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:28px}.gf2 .gf-radar-gallery figure{margin:0;background:#172820;border:1px solid #435149}.gf2 .gf-radar-gallery img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}.gf2 .gf-radar-gallery figcaption{padding:18px;color:#fff;font-size:16px;line-height:1.5}.gf2 .gf-radar-gallery figcaption small{display:block;color:#b8c7be;font-size:14px}.gf2 .gf-radar-side .gf-radar-detail{white-space:normal;line-height:1.5}.gf2 .gf-radar-gallery-title{color:#fff!important;font-size:27px;margin-top:32px}.gf2 #gf-radar-map .leaflet-popup-content{color:#172820;font-size:15px}@media(max-width:760px){.gf2 .gf-radar-gallery{grid-template-columns:1fr}}
+</style>
+<section class="gf-radar" id="radar" aria-labelledby="gf-radar-title"><div class="wrap">
+<header class="gf-radar-header"><div><div class="eyebrow">Gamefields Radar · Pierwsza koncepcja</div><h2 id="gf-radar-title">Jedno miejsce. Nowy potencjał.</h2><p>Boisko do koszykówki w Warszawie — miejsce wskazane na mapie.</p></div><a class="gf-radar-link" href="https://maps.app.goo.gl/27TMoWyVACAXKMbVA" target="_blank" rel="noopener noreferrer">Miejsce w Google Maps</a></header>
+<div class="gf-radar-layout"><div id="gf-radar-map" role="region" aria-label="Mapa jednej koncepcji: boisko do koszykówki w Warszawie"><p class="gf-radar-error" id="gf-radar-loading">Ładowanie mapy… Lokalizację możesz również otworzyć w Google Maps.</p></div><aside class="gf-radar-side"><div class="eyebrow">01 / Warszawa</div><h3>Boisko do koszykówki</h3><p>Pierwsza koncepcja odnowienia boiska: kolorowa nawierzchnia, czytelne linie i nowy charakter miejsca.</p><a class="gf-radar-detail" href="/radar-boisko-koszykowki-warszawa/">Zobacz koncepcję</a><p class="gf-radar-note">Pinezka wskazuje dokładny punkt z przesłanego linku, nie orientacyjny środek dzielnicy.</p></aside></div>
+<p class="gf-radar-note">Niezależna koncepcja Gamefields, nie zatwierdzona inwestycja. Wizualizacje nie oznaczają zgody właściciela ani planowanej budowy. Mapa: OpenStreetMap.</p>
+</div></section>
+<script>
+(function(){
+ var root=document.getElementById('radar');if(!root)return;
+ function fail(){var loading=document.getElementById('gf-radar-loading');if(loading)loading.textContent='Mapa jest chwilowo niedostępna. Lokalizację możesz otworzyć w Google Maps powyżej.';}
+ function start(){try{var L=window.L,el=document.getElementById('gf-radar-map');el.textContent='';var map=L.map(el,{scrollWheelZoom:false,zoomControl:false}).setView([52.2211322,21.0197612],16);L.control.zoom({position:'bottomleft'}).addTo(map);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);var icon=L.divIcon({className:'gf-radar-pin-shell',html:'<span class="gf-radar-pin active"></span>',iconSize:[34,40],iconAnchor:[17,34]});L.marker([52.2211322,21.0197612],{icon:icon,title:'Boisko do koszykówki — pierwsza koncepcja',alt:'Boisko do koszykówki w Warszawie',keyboard:true}).addTo(map).on('click',function(){window.location.assign('/radar-boisko-koszykowki-warszawa/');});if(window.ResizeObserver)new ResizeObserver(function(){map.invalidateSize();}).observe(el);}catch(e){fail();}}
+ function load(){if(window.L){start();return;}var css=document.createElement('link');css.rel='stylesheet';css.href='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css';document.head.appendChild(css);var script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js';script.onload=start;script.onerror=fail;document.head.appendChild(script);}
+ if('IntersectionObserver' in window){var observer=new IntersectionObserver(function(entries){if(entries.some(function(e){return e.isIntersecting;})){observer.disconnect();load();}},{rootMargin:'400px'});observer.observe(root);}else{load();}
+})();
+</script>
+
+
+<section class="author-section small-studio" id="zglos-miejsce"><div class="wrap report-grid"><div><div class="eyebrow">07 / Zgłoś miejsce</div><h2>Masz miejsce, które można uruchomić?</h2><p>Puste boisko. Stary asfalt. Szkolny plac. Osiedlowa przestrzeń. Niedokończona strefa sportowa. Miejsce, obok którego wszyscy przechodzą, ale nikt jeszcze nie zobaczył w nim boiska.</p><p><strong>Pokaż mi je.</strong></p><p>Wyślij lokalizację, kilka zdjęć i krótki opis. Sprawdzimy, co da się z nim zrobić: od szybkiej koncepcji i wizualizacji po projekt, partnerów i realizację.</p><a class="btn dark" href="#formularz-miejsca">Zgłoś miejsce</a></div><div class="report-panel gf-lead-form" id="formularz-miejsca"><h3>Zacznij od lokalizacji</h3><p>Podaj lokalizację, opisz pomysł i dodaj zdjęcia miejsca.</p>[contact-form-7 id="ff9375c" title="Gamefields — zgłoś miejsce"]</div></div></section><section class="builder" id="kontakt"><span id="builder"></span><div class="wrap builder-grid"><div><div class="contact-copy"><div class="eyebrow">08 / Kontakt</div><h2>Porozmawiajmy o Twoim boisku</h2><p class="builder-note">Masz miejsce do odnowienia, pomysł na boisko albo chcesz stworzyć sportową przestrzeń dla miasta, szkoły, osiedla lub marki?</p><p class="builder-note">Napisz bezpośrednio.</p><p class="contact-name">Damian Gawrych</p><p>Founder / Project Lead<br>Gamefields</p><div class="contact-actions"><a class="btn dark" href="mailto:info@gamefields.eu?subject=Projekt%20Gamefields">info@gamefields.eu</a><a class="btn contact-ghost" href="tel:+48794911746">+48 794 911 746</a></div><p class="contact-mini">Warszawa / Polska / Europa</p></div><div class="gf-lead-form" id="zapytanie"><h3>Opisz swój projekt</h3>[contact-form-7 id="3758" title="Gamefields — zapytanie o projekt"]</div></div></div></section><footer class="foot"><div class="wrap"><span>Gamefields — autorskie studio boisk miejskich.</span><span><a href="/o-nas/">O nas</a> / <a href="/baza-wiedzy/">Baza wiedzy</a> / <a href="/kontakt/">Kontakt</a></span></div></footer></div><style id="gf-pattern-switcher-style">
+.gf2 .direction-card{position:relative;cursor:pointer;border:2px solid transparent;border-radius:14px;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;background:#fff}
+.gf2 .direction-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(36,60,48,.12)}
+.gf2 .direction-card.is-active{border-color:#284b38;box-shadow:0 0 0 3px rgba(40,75,56,.1)}
+.gf2 .direction-card:focus-visible{outline:3px solid #699354;outline-offset:4px}
+.gf2 .direction-card:after{content:"Wybierz";position:absolute;top:14px;right:14px;padding:7px 10px;border-radius:999px;background:rgba(250,251,248,.92);color:#284b38;font-size:11px;font-weight:700;letter-spacing:.02em;opacity:0;transform:translateY(-3px);transition:.2s}
+.gf2 .direction-card:hover:after,.gf2 .direction-card:focus-visible:after{opacity:1;transform:none}
+.gf2 .direction-card.is-active:after{content:"Wybrany";opacity:1;transform:none;background:#284b38;color:#fff}
+.gf2 .studio-preview img{transition:opacity .22s ease,transform .3s ease}
+.gf2 .studio-preview.is-switching img{opacity:.3;transform:scale(.995)}
+.gf2 .preview-status[aria-live]{min-width:0}
+@media (prefers-reduced-motion:reduce){.gf2 .direction-card,.gf2 .direction-card:after,.gf2 .studio-preview img{transition:none!important}}
+</style>
+<script id="gf-pattern-switcher">
+(function(){
+  function initPatternSwitcher(){
+    var root=document.querySelector(".gf2");
+    if(!root)return;
+    var preview=root.querySelector(".studio-preview");
+    var cards=Array.prototype.slice.call(root.querySelectorAll(".direction-card"));
+    if(!preview||!cards.length)return;
+    var previewImage=preview.querySelector("img");
+    var previewTitle=preview.querySelector("figcaption strong");
+    var previewMeta=preview.querySelector("figcaption span");
+    var status=preview.querySelector(".preview-status");
+    if(!previewImage||!previewTitle)return;
+
+    cards.forEach(function(card,index){
+      var image=card.querySelector("img");
+      if(image){var preload=new Image();preload.src=image.currentSrc||image.src;}
+      card.setAttribute("role","button");
+      card.setAttribute("tabindex","0");
+      card.setAttribute("aria-label","Pokaż wzór "+((card.querySelector("h3")||{}).textContent||index+1));
+      card.setAttribute("aria-pressed",index===0?"true":"false");
+      if(index===0)card.classList.add("is-active");
+
+      function activate(){
+        var source=card.querySelector("img");
+        var title=card.querySelector("h3");
+        var description=card.querySelector("p");
+        if(!source||!title)return;
+        cards.forEach(function(item){
+          item.classList.remove("is-active");
+          item.setAttribute("aria-pressed","false");
+        });
+        card.classList.add("is-active");
+        card.setAttribute("aria-pressed","true");
+        preview.classList.add("is-switching");
+        var nextSrc=source.currentSrc||source.src;
+        var swap=function(){
+          previewImage.src=nextSrc;
+          previewImage.alt=source.alt||("Wizualizacja wzoru "+title.textContent.trim());
+          previewTitle.textContent=title.textContent.trim();
+          if(previewMeta)previewMeta.textContent=(description?description.textContent.trim()+" · ":"")+"Piłka nożna 3×3";
+          if(status)status.textContent="Wybrany wzór: "+title.textContent.trim();
+          preview.classList.remove("is-switching");
+        };
+        var loader=new Image();
+        loader.onload=swap;
+        loader.onerror=swap;
+        loader.src=nextSrc;
+        if(loader.complete)swap();
+      }
+      card.addEventListener("click",activate);
+      card.addEventListener("keydown",function(event){
+        if(event.key==="Enter"||event.key===" "){event.preventDefault();activate();}
+      });
+    });
+  }
+  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",initPatternSwitcher);}
+  else{initPatternSwitcher();}
+})();
+</script>
+
+<style>html body .gf2[data-author-studio] .brand{filter:invert(1)}html body .gf2[data-author-studio] .hero .studio-lead{font-weight:600!important}html body .gf2[data-author-studio] .hero-grid>div{min-width:0}</style>
+<style>html body .gf2[data-author-studio] .studio-preview{background:#fafbf8!important;color:#171b18!important}html body .gf2[data-author-studio] .studio-preview :is(.preview-head,figcaption,strong){color:#243c30!important}html body .gf2[data-author-studio] .studio-preview figcaption span{color:#64705f!important}html body .gf2[data-author-studio] .gf-radar :is(h2,h3){color:#f4f2ed!important}html body .gf2[data-author-studio] .contact-name{margin-top:24px!important}@media(max-width:560px){html body .gf2[data-author-studio] .nav{grid-template-columns:1fr 1fr 1.45fr 1fr!important}html body .gf2[data-author-studio] .nav a{white-space:nowrap!important}}</style>
+<style id="gamefields-studio-brand-v1">
+html body .gf2[data-author-studio]{--paper:#f8f7f3!important;--ink:#171918!important;--acid:#171918!important;--line:#dadcd6!important;background:#f8f7f3!important;color:#171918!important;font-family:GamefieldsSans,Arial,sans-serif!important}html body .gf2[data-author-studio] :is(h1,h2,h3){font-family:inherit!important;font-weight:400!important;letter-spacing:-.04em!important;color:#171918!important}html body .gf2[data-author-studio] .topbar{background:#f8f7f3!important;color:#171918!important;border-bottom:1px solid #dadcd6!important}html body .gf2[data-author-studio] .brand{filter:none!important}html body .gf2[data-author-studio] .nav a{color:#171918!important;font-weight:400!important}html body .gf2[data-author-studio] .nav .nav-cta{background:#171918!important;color:#f8f7f3!important;border-radius:0!important}html body .gf2[data-author-studio] .hero{background:#f8f7f3!important;color:#171918!important}html body .gf2[data-author-studio] .hero h1{color:#171918!important;font-weight:400!important}html body .gf2[data-author-studio] .hero .eyebrow{color:#626661!important}html body .gf2[data-author-studio] .hero-side p{color:#626661!important}html body .gf2[data-author-studio] .hero-side .studio-lead{color:#171918!important;font-weight:400!important}html body .gf2[data-author-studio] .hero .btn.light{background:#171918!important;color:#f8f7f3!important;border-color:#171918!important}html body .gf2[data-author-studio] .hero .btn.ghost{background:transparent!important;color:#171918!important;border-color:#92968e!important}html body .gf2[data-author-studio] :is(.btn,.author-card,.studio-preview,.report-panel){border-radius:0!important;box-shadow:none!important}html body .gf2[data-author-studio] .btn{font-family:inherit!important;font-weight:400!important}html body .gf2[data-author-studio] .author-card{background:#fafaf7!important}html body .gf2[data-author-studio] .small-studio{background:#eeede8!important}html body .gf2[data-author-studio] .author-process{background:#171918!important}html body .gf2[data-author-studio] .author-process :is(h2,h3){color:#f8f7f3!important}html body .gf2[data-author-studio] .author-process .eyebrow{color:#c4c7c0!important}html body .gf2[data-author-studio] .process-item>span{color:#c4c7c0!important}html body .gf2[data-author-studio] .author-process p{color:#c4c7c0!important}html body .gf2[data-author-studio] .gf-radar{background:#eeede8!important;color:#171918!important}html body .gf2[data-author-studio] .gf-radar :is(h2,h3){color:#171918!important}html body .gf2[data-author-studio] .gf-radar :is(p,.eyebrow,.gf-radar-detail,.gf-radar-link){color:#626661!important}html body .gf2[data-author-studio] .gf-radar-side{background:#f8f7f3!important}html body .gf2[data-author-studio] .gf-radar-layout{border-color:#dadcd6!important}html body .gf2[data-author-studio] .gf-radar :is(.gf-radar-link,.gf-radar-detail){border-color:#171918!important}html body .gf2[data-author-studio] .hero a:focus-visible,html body .gf2[data-author-studio] .topbar a:focus-visible{outline:2px solid #171918!important}html body .gf2[data-author-studio] .damian-photo img{border-radius:0!important}html body .gf2[data-author-studio] .contact-name{font-weight:400!important}html body .gf2[data-author-studio] .foot{background:#171918!important}html body .gf2[data-author-studio] .nav{gap:18px!important}@media(max-width:560px){html body .gf2[data-author-studio] .nav{grid-template-columns:1fr 1fr 1.45fr 1fr!important;gap:5px!important}}
+</style>
+<!-- /wp:html -->
