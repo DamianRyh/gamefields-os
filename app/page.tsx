@@ -10,6 +10,11 @@ import {projectSchema,type Project,type EditorObject,type Target,type ObjectKind
 import {patternFamilies,patternPalettes,patternFilters,signaturePresets,variants as patternVariants,getPatternFamily,getPatternPalette,patternCode,patternComplexity,complexityLabel,patternVariantName,filteredPatternFamilies,PATTERN_COUNT} from "@/lib/pattern-library";
 import {PatternArt} from "@/components/pattern-art";
 import {BuilderPlayBridge,type CourtContext} from "@/components/builder-play-bridge";
+import {isRoundCourt,courtArea,courtDimensions,clampToCircle} from "@/lib/court-geometry";
+import {PannaRealisticPreview} from "@/components/panna-realistic-preview";
+import {SurfaceAppearance} from "@/components/surface-material";
+import {isTurf} from "@/lib/surface-materials";
+import {REALISTIC_LOCATIONS,type RealisticLocation} from "@/lib/realistic-locations";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 
 const uid=()=>Math.random().toString(36).slice(2,9);
@@ -92,12 +97,13 @@ function EquipmentShape({name}:{name:string}){
  if(name==="Trybuna")return <g fill="#66726d">{[0,1,2].map(i=><rect key={i} x={-55+i*8} y={-25+i*16} width={110-i*16} height="12"/>)}</g>;
  return <circle r="20" fill="#d8ff77"/>;
 }
-function EditorObjectView({o,h,selected,onPointerDown}:{o:EditorObject;h:number;selected:boolean;onPointerDown:(e:React.PointerEvent<SVGElement>,id:string,mode?:"move"|"scale"|"rotate")=>void}){
+function EditorObjectView({o,h,round=false,selected,onPointerDown}:{o:EditorObject;h:number;round?:boolean;selected:boolean;onPointerDown:(e:React.PointerEvent<SVGElement>,id:string,mode?:"move"|"scale"|"rotate")=>void}){
  let x=o.x,y=o.y,rot=o.rotation;
  if(o.target==="band-top")y=-22;
  if(o.target==="band-bottom")y=h+22;
  if(o.target==="band-left"){x=-22;rot-=90}
  if(o.target==="band-right"){x=622;rot+=90}
+ if(round&&o.target!=="court"){const theta=o.target==="band-top"?-Math.PI/2:o.target==="band-bottom"?Math.PI/2:o.target==="band-left"?Math.PI:0;x=300+322*Math.cos(theta);y=300+322*Math.sin(theta);}
  const tr="translate("+x+" "+y+") rotate("+rot+") scale("+o.scale/100+")";
  return <g className={"editable-object "+(selected?"selected":"")} transform={tr} opacity={o.opacity/100} onPointerDown={e=>onPointerDown(e,o.id,"move")}>
    {o.kind==="image"&&o.src?<image href={o.src} x="-55" y="-55" width="110" height="110" preserveAspectRatio="xMidYMid meet"/>:null}
@@ -125,26 +131,26 @@ function EventScene({h}:{h:number}){
  </g>;
 }
 export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEquipment}:{p:Project;iso?:boolean;small?:boolean;selectedId?:string|null;onSelect?:(id:string|null)=>void;onDragStart?:(e:React.PointerEvent<SVGElement>,id:string,mode?:"move"|"scale"|"rotate")=>void;onDropEquipment?:(name:string,x:number,y:number)=>void}){
- const w=600,h=600*p.width/p.length;
+ const round=isRoundCourt(p),w=600,h=600*p.width/p.length;
  const svgRef=useRef<SVGSVGElement>(null);
  const patternId=useId(),clipId=useId();
  function drop(e:React.DragEvent<SVGSVGElement>){if(!onDropEquipment)return;e.preventDefault();const name=e.dataTransfer.getData("gamefields/equipment");if(!name)return;const svg=svgRef.current;if(!svg)return;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const ctm=svg.getScreenCTM();if(!ctm)return;const loc=pt.matrixTransform(ctm.inverse());onDropEquipment(name,Math.max(0,Math.min(600,loc.x)),Math.max(0,Math.min(h,loc.y)))}
- return <svg ref={svgRef} role="img" aria-label={"Projekt boiska "+p.length+" na "+p.width+" metrów"} className={"court "+(iso?"iso":"")} viewBox={"-95 -95 "+(w+190)+" "+(h+190)} onPointerDown={e=>{if(e.target===e.currentTarget)onSelect?.(null)}} onDragOver={e=>e.preventDefault()} onDrop={drop}>
-  <defs><pattern id={patternId} width="60" height="60" patternUnits="userSpaceOnUse"><rect width="30" height="60" fill="#fff" opacity=".045"/></pattern><clipPath id={clipId}><rect width={w} height={h}/></clipPath></defs>
-  <rect x="-40" y="-40" width={w+80} height={h+80} rx="3" fill={p.outside}/>
-  <rect width={w} height={h} fill={p.base}/>
+ return <svg ref={svgRef} role="img" aria-label={"Projekt boiska "+courtDimensions(p)} className={"court "+(iso?"iso":"")} viewBox={"-95 -95 "+(w+190)+" "+(h+190)} onPointerDown={e=>{if(e.target===e.currentTarget)onSelect?.(null)}} onDragOver={e=>e.preventDefault()} onDrop={drop}>
+  <defs><pattern id={patternId} width="60" height="60" patternUnits="userSpaceOnUse"><rect width="30" height="60" fill="#fff" opacity=".045"/></pattern><clipPath id={clipId}>{round?<circle cx="300" cy="300" r="300"/>:<rect width={w} height={h}/>}</clipPath></defs>
+  {round?<circle cx="300" cy="300" r="340" fill={p.outside}/>:<rect x="-40" y="-40" width={w+80} height={h+80} rx="3" fill={p.outside}/>}
+  {round?<circle cx="300" cy="300" r="300" fill={p.base}/>:<rect width={w} height={h} fill={p.base}/>}
   {p.surface.includes("trawa")?<rect width={w} height={h} fill={"url(#"+patternId+")"}/>:null}
-  {(p.sport.includes("Piłka nożna")||p.sport==="Futsal")?<path d={"M0 "+h*.25+"h100v"+h*.5+"H0Z M600 "+h*.25+"H500v"+h*.5+"h100Z"} fill={p.zone}/>:null}
+  {!round&&(p.sport.includes("Piłka nożna")||p.sport==="Futsal")?<path d={"M0 "+h*.25+"h100v"+h*.5+"H0Z M600 "+h*.25+"H500v"+h*.5+"h100Z"} fill={p.zone}/>:null}
   {(p.sport==="Koszykówka"||p.sport==="Koszykówka 3×3")?<path d={p.sport==="Koszykówka 3×3"?"M0 "+(h/2-55)+"H130V"+(h/2+55)+"H0Z":"M0 "+(h/2-55)+"H125V"+(h/2+55)+"H0Z M600 "+(h/2-55)+"H475V"+(h/2+55)+"H600Z"} fill={p.zone}/>:null}
   {["Tenis","Padel","Badminton","Pickleball"].includes(p.sport)?<rect x="175" y="10" width="250" height={h-20} fill={p.zone} opacity=".28"/>:null}
   {(p.sport==="Siatkówka"||p.sport==="Siatkówka plażowa")?<rect x="200" y="10" width="200" height={h-20} fill={p.zone} opacity=".28"/>:null}
   {p.sport==="Teqball"?<rect x="240" y={Math.max(10,h/2-70)} width="120" height="140" rx="18" fill={p.zone} opacity=".34"/>:null}
   {p.sport==="Skate"?<path d={"M50 "+h*.18+"H250L320 "+h*.42+"H550V"+h*.72+"H350L280 "+h*.55+"H50Z"} fill={p.zone} opacity=".32"/>:null}
   {p.sport==="Street Workout"?<><rect x="70" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".32"/><rect x="350" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".22"/></>:null}
-  <g clipPath={"url(#"+clipId+")"}><PatternArt p={p} h={h}/></g>
+  <g clipPath={"url(#"+clipId+")"}>{!p.sport.includes("Piłka nożna")||!isTurf(p.surface)?<PatternArt p={p} h={h}/>:null}{p.sport.includes("Piłka nożna")?<SurfaceAppearance surface={p.surface} id={patternId.replace(/:/g,"")} height={h} length={p.length}/>:null}</g>
   {p.lines?<g fill="none" stroke={p.lineColor} strokeWidth="2.5">
-   <rect x="10" y="10" width="580" height={h-20}/>
-   {(p.sport.includes("Piłka nożna")||p.sport==="Wielofunkcyjne")?<><path d={"M300 10V"+(h-10)}/><circle cx="300" cy={h/2} r={Math.min(48,h*.18)}/><path d={"M10 "+h*.25+"H100V"+h*.75+"H10 M590 "+h*.25+"H500V"+h*.75+"H590"}/><circle cx="68" cy={h/2} r="2"/><circle cx="532" cy={h/2} r="2"/></>:null}
+   {round?<circle cx="300" cy="300" r="290"/>:<rect x="10" y="10" width="580" height={h-20}/>}
+   {!round&&(p.sport.includes("Piłka nożna")||p.sport==="Wielofunkcyjne")?<><path d={"M300 10V"+(h-10)}/><circle cx="300" cy={h/2} r={Math.min(48,h*.18)}/><path d={"M10 "+h*.25+"H100V"+h*.75+"H10 M590 "+h*.25+"H500V"+h*.75+"H590"}/><circle cx="68" cy={h/2} r="2"/><circle cx="532" cy={h/2} r="2"/></>:null}
    {p.sport==="Koszykówka"?<><path d={"M300 10V"+(h-10)}/><circle cx="300" cy={h/2} r={Math.min(48,h*.18)}/><path d={"M10 "+h*.16+"Q235 "+h/2+" 10 "+h*.84+" M590 "+h*.16+"Q365 "+h/2+" 590 "+h*.84}/><rect x="10" y={h/2-48} width="108" height="96"/><rect x="482" y={h/2-48} width="108" height="96"/></>:null}
    {p.sport==="Koszykówka 3×3"?<><path d={"M10 "+h*.12+"Q270 "+h/2+" 10 "+h*.88}/><rect x="10" y={h/2-50} width="118" height="100"/><path d={"M128 "+(h/2-50)+"A50 50 0 0 1 128 "+(h/2+50)}/><circle cx="42" cy={h/2} r="3"/></>:null}
    {p.sport==="Tenis"?<><path d={"M300 10V"+(h-10)}/><path d={"M10 "+h*.16+"H590 M10 "+h*.84+"H590"}/><path d={"M190 "+h*.16+"V"+h*.84+" M410 "+h*.16+"V"+h*.84}/><path d={"M190 "+h/2+"H410"}/></>:null}
@@ -158,16 +164,16 @@ export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,o
    {p.sport==="Wielofunkcyjne"?<><path d={"M10 "+h*.18+"Q240 "+h/2+" 10 "+h*.82+" M590 "+h*.18+"Q360 "+h/2+" 590 "+h*.82} opacity=".7"/><rect x="10" y={h/2-45} width="100" height="90" opacity=".7"/><rect x="490" y={h/2-45} width="100" height="90" opacity=".7"/></>:null}
   </g>:null}
   {(p.sport.includes("Piłka nożna")||p.sport==="Padel"||p.sport==="Wielofunkcyjne"||p.sport==="Custom Court")?<g className="band-shell">
-    <rect x="-8" y="-13" width="616" height="18" rx="2" fill="#20352c"/>
+    {round?<circle cx="300" cy="300" r="305" fill="none" stroke="#20352c" strokeWidth="18"/>:<><rect x="-8" y="-13" width="616" height="18" rx="2" fill="#20352c"/>
     <rect x="-8" y={h-5} width="616" height="18" rx="2" fill="#20352c"/>
     <rect x="-13" y="-5" width="18" height={h+10} rx="2" fill="#20352c"/>
     <rect x="595" y="-5" width="18" height={h+10} rx="2" fill="#20352c"/>
     <text x="300" y="-1" textAnchor="middle" fill="#d8ff77" fontSize="8" fontWeight="900" letterSpacing="2">GAMEFIELDS</text>
-    <text x="300" y={h+8} textAnchor="middle" fill="#d8ff77" fontSize="8" fontWeight="900" letterSpacing="2">DESIGN THE GAME</text>
+    <text x="300" y={h+8} textAnchor="middle" fill="#d8ff77" fontSize="8" fontWeight="900" letterSpacing="2">DESIGN THE GAME</text></>}
   </g>:null}
   {p.scene==="event"?<EventScene h={h}/>:null}
-  {p.objects.map(o=><EditorObjectView key={o.id} o={o} h={h} selected={o.id===selectedId} onPointerDown={onDragStart||(()=>{})}/>)}
-  {!small?<g fill={p.scene==="night"?"#d7e1dc":"#66736d"} fontSize="13"><text x="300" y="-68" textAnchor="middle">{p.length} m</text><text x="670" y={h/2} textAnchor="middle">{p.width} m</text></g>:null}
+  {p.objects.map(o=><g key={o.id} clipPath={round&&o.target==="court"&&o.kind!=="equipment"?"url(#"+clipId+")":undefined}><EditorObjectView o={o} h={h} round={round} selected={o.id===selectedId} onPointerDown={onDragStart||(()=>{})}/></g>)}
+  {!small?<g fill={p.scene==="night"?"#d7e1dc":"#66736d"} fontSize="13"><text x="300" y="-68" textAnchor="middle">{round?"Ø 7 m":p.length+" m"}</text><text x="670" y={h/2} textAnchor="middle">{round?"Panna 1×1":p.width+" m"}</text></g>:null}
  </svg>;
 }
 
@@ -244,7 +250,7 @@ export default function Home(){
  async function importProject(file?:File){if(!file)return;if(file.size>12000000){toast.error("Plik projektu może mieć maksymalnie 12 MB.");return}try{const next=projectSchema.parse(JSON.parse(await file.text()));if(new Set(next.objects.map(o=>o.id)).size!==next.objects.length)throw new Error("ids");history(p);setP(next);setSelectedId(null);setView("builder");toast.success("Wczytano projekt")}catch{toast.error("Nieprawidłowy plik projektu. Wybierz eksport JSON z edytora v0.5.")}}
  const dragStart=useRef<Project|null>(null);
  const finishDrag=useRef<(()=>void)|null>(null);
- const area=p.length*p.width;
+ const area=Math.round(courtArea(p)*100)/100;
  const [quote,setQuote]=useState<{priceNet:number;priceGross:number;currency:string}|null>(null),[quoteLoading,setQuoteLoading]=useState(true);
  useEffect(()=>{
   const controller=new AbortController();
@@ -264,7 +270,8 @@ export default function Home(){
  const selected=p.objects.find(o=>o.id===selectedId)||null;
  const selectedDesignDirection=designDirections.find(direction=>direction.family===p.patternFamily)??designDirections[0];
  const selectedRealisticPreview=realisticPreviews[p.sport]?.[selectedDesignDirection.family];
- const showRealisticPreview=realisticView&&Boolean(selectedRealisticPreview);
+ const showRealisticPreview=realisticView&&(isRoundCourt(p)||Boolean(selectedRealisticPreview));
+ const [pannaView,setPannaView]=useState<"perspective"|"aerial"|"ground">("perspective"),[pannaLocation,setPannaLocation]=useState<RealisticLocation>("park");
  const patternCatalog=useMemo(()=>filteredPatternFamilies(patternFilter).flatMap(family=>patternVariants.map(v=>({family,variant:v.variant,name:patternVariantName(family.id,v.variant)}))).filter(item=>!patternSearch.trim()||[item.family.name,item.family.description,...item.family.tags,patternCode(item.family.id,item.variant)].join(" ").toLowerCase().includes(patternSearch.toLowerCase())),[patternFilter,patternSearch]);
  const patternPages=Math.max(1,Math.ceil(patternCatalog.length/24));
  const visiblePatterns=patternCatalog.slice((patternPage-1)*24,patternPage*24);
@@ -283,7 +290,7 @@ export default function Home(){
   if(profile.sport==="Teqball")objects.push(obj("equipment","Stół Teqball",300,h/2,{scale:110}));
   if(profile.sport==="Skate")objects.push(obj("equipment","Funbox",300,h/2,{scale:105}),obj("equipment","Rail skate",180,h*.68,{scale:85}),obj("equipment","Ledge",430,h*.3,{scale:90}));
   if(profile.sport==="Street Workout")objects.push(obj("equipment","Drążki",180,h/2,{scale:100}),obj("equipment","Poręcze",390,h*.62,{scale:95}),obj("equipment","Monkey bars",390,h*.3,{scale:90}));
-  setP(v=>({...v,name:profile.label+" — projekt",sport:profile.sport,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,lines:!["Skate","Street Workout"].includes(profile.sport),objects}));
+  setP(v=>({...v,name:profile.label+" — projekt",sport:profile.sport,courtShape:profile.courtShape,diameter:profile.diameter,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,lines:!["Skate","Street Workout"].includes(profile.sport),objects}));
   setModule(0);setView("builder");setSelectedId(null);setUndo([]);setRedo([]);
  }
  const initializeCourt=useCallback((court:CourtContext)=>{setPlayContext(court);if(new URLSearchParams(location.search).has("projectId"))return;selectSport(getSportProfile(court.builderSport));setP(v=>({...v,id:"GF-"+crypto.randomUUID(),name:"Redesign — "+court.name,date:new Date().toLocaleDateString("pl-PL")}));},[]);
@@ -350,14 +357,14 @@ export default function Home(){
  {view==="sport"?<main className="sport-start"><section className="sport-start-head"><span className="eyebrow">GAMEFIELDS / SPORT ENGINE</span><h1>Co chcesz zaprojektować?</h1><p>Wybierz dyscyplinę. Resztę ustawimy automatycznie — geometrię, wymiary startowe, linie, wyposażenie i nawierzchnię.</p></section><section className="sport-grid featured">{sportProfiles.filter(profile=>featuredSportIds.includes(profile.id)).map(profile=>{const preview={...p,sport:profile.sport,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,objects:[]};return <button className="sport-card" key={profile.id} onClick={()=>selectSport(profile)}><div className="sport-preview"><Court p={preview} small/></div><div className="sport-card-copy"><span className="eyebrow">{profile.eyebrow}</span><h2>{profile.label}</h2><p>{profile.description}</p><div className="sport-meta"><span>{profile.length} × {profile.width} m</span><span>{profile.tags.slice(0,2).join(" · ")}</span></div></div></button>})}</section><details className="more-sports"><summary>Więcej dyscyplin <span>+</span></summary><div className="sport-groups">{sportGroups.map(group=><section key={group.label}><h2>{group.label}</h2><div className="sport-compact-grid">{sportProfiles.filter(profile=>group.ids.includes(profile.id)).map(profile=><button key={profile.id} onClick={()=>selectSport(profile)}><span>{profile.label}</span><small>{profile.length} × {profile.width} m</small></button>)}</div></section>)}</div></details></main>:null}
  {view==="builder"?<>
  <div className="projectbar v03bar"><div><span className="eyebrow">PROJEKT / {getSportProfile(p.sport).label}</span><input className="projectname" aria-label="Nazwa projektu" maxLength={200} value={p.name} onChange={e=>update({name:e.target.value},false)}/></div><div className="history-actions"><button onClick={undo} disabled={!undoStack.length}><Undo2 size={17}/> Cofnij</button><button onClick={redo} disabled={!redoStack.length}><Redo2 size={17}/> Ponów</button></div><div className="actions"><button className="btn dark" disabled={savingProject} onClick={()=>void saveProjectToAccount()}>{savingProject?"Zapisywanie…":"Zapisz na koncie"}</button><details className="more-actions"><summary>•••</summary><div><input hidden ref={importRef} type="file" accept=".json,.txt,application/json,text/plain" onChange={e=>{void importProject(e.target.files?.[0]);e.target.value=""}}/><button onClick={()=>importRef.current?.click()}>Wczytaj JSON</button><button onClick={()=>download(p,true)}>Wzór do WordPress</button><button onClick={()=>download(p)}>Eksport JSON</button></div></details></div></div>
- <section className="project-readiness" aria-label="Gotowość projektu"><div className="readiness-progress"><strong>Twój projekt jest w {module===0?"38":module===1?"72":module===2?"86":"100"}% gotowy</strong><span><i style={{width:(module===0?38:module===1?72:module===2?86:100)+"%"}}/></span></div><div className="readiness-signal done"><Check size={18}/><p><b>Wymiary potwierdzone</b><small>{p.length} × {p.width} m</small></p></div><div className="readiness-signal done"><Check size={18}/><p><b>Nawierzchnia wybrana</b><small>{p.surface}</small></p></div><div className="readiness-signal pending"><CircleDashed size={18}/><p><b>Warunki lokalizacji</b><small>Do uzupełnienia</small></p></div></section>
+ <section className="project-readiness" aria-label="Gotowość projektu"><div className="readiness-progress"><strong>Twój projekt jest w {module===0?"38":module===1?"72":module===2?"86":"100"}% gotowy</strong><span><i style={{width:(module===0?38:module===1?72:module===2?86:100)+"%"}}/></span></div><div className="readiness-signal done"><Check size={18}/><p><b>Wymiary potwierdzone</b><small>{courtDimensions(p)}</small></p></div><div className="readiness-signal done"><Check size={18}/><p><b>Nawierzchnia wybrana</b><small>{p.surface}</small></p></div><div className="readiness-signal pending"><CircleDashed size={18}/><p><b>Warunki lokalizacji</b><small>Do uzupełnienia</small></p></div></section>
  <div className={"builder v03builder "+(selected?"has-inspector":"")+(module===1?" guided-design":"")}>
  <aside className="rail">{modules.map(([name,Icon],i)=><button key={name} className={i===module?"module active":"module"} onClick={()=>setModule(i)}><Icon size={22}/><span>{name}</span></button>)}</aside>
  <section className="settings"><div className="paneltitle"><span className="eyebrow">0{module+1} / 04</span><h1>{modules[module][0]}</h1><p>{["Sport, wymiary, nawierzchnia i linie.","Wzór, kolory i charakter projektu.","Tylko wyposażenie właściwe dla tej dyscypliny.","Sprawdź projekt i orientacyjną cenę realizacji."][module]}</p></div><div className="panelbody">
   {module===0?<>
-   <div className="sport-summary-card"><span className="eyebrow">{getSportProfile(p.sport).eyebrow}</span><strong>{getSportProfile(p.sport).label}</strong><small>{p.length} × {p.width} m · {area} m²</small><button className="textbtn compact" onClick={()=>setView("sport")}>Zmień dyscyplinę</button></div>
-   <div className="dimension"><label>Długość <strong>{p.length} m</strong></label><Slider min={6} max={60} value={[p.length]} onValueChange={v=>update({length:v[0]})}/></div>
-   <div className="dimension"><label>Szerokość <strong>{p.width} m</strong></label><Slider min={6} max={40} value={[p.width]} onValueChange={v=>update({width:v[0]})}/></div>
+   <div className="sport-summary-card"><span className="eyebrow">{getSportProfile(p.sport).eyebrow}</span><strong>{getSportProfile(p.sport).label}</strong><small>{courtDimensions(p)} · {area} m²</small><button className="textbtn compact" onClick={()=>setView("sport")}>Zmień dyscyplinę</button></div>
+   {isRoundCourt(p)?<div className="dimension"><label>Średnica areny <strong>Ø 7 m</strong></label><p>{area} m² · okrągła arena Panna</p></div>:<>   <div className="dimension"><label>Długość <strong>{p.length} m</strong></label><Slider min={6} max={60} value={[p.length]} onValueChange={v=>update({length:v[0]})}/></div>
+   <div className="dimension"><label>Szerokość <strong>{p.width} m</strong></label><Slider min={6} max={40} value={[p.width]} onValueChange={v=>update({width:v[0]})}/></div></>}
    <h3>Nawierzchnia</h3>{choices(surfaces,p.surface,s=>update({surface:s}))}
    <details className="advanced-options"><summary>Linie i ustawienia techniczne</summary><div><label className="switchrow">Pokaż linie<Switch checked={p.lines} onCheckedChange={v=>update({lines:v})}/></label><label className="colorrow"><span>Kolor linii</span><input type="color" value={p.lineColor} onChange={e=>update({lineColor:e.target.value})}/></label></div></details>
   </>:null}
@@ -379,16 +386,16 @@ export default function Home(){
    {p.objects.length?<div className="current-objects"><h3>Dodane elementy</h3>{p.objects.map((o,i)=><button key={o.id} className={o.id===selectedId?"selected":""} onClick={()=>setSelectedId(o.id)}><span>{i+1}. {o.name}</span><small>Edytuj →</small></button>)}</div>:null}
   </>:null}
   {module===3?<>
-   <div className="summary-card"><span className="eyebrow">TWÓJ PROJEKT</span><h2>{getSportProfile(p.sport).label}</h2><div className="summary-specs"><span><b>{p.length} × {p.width} m</b> wymiary</span><span><b>{area} m²</b> powierzchnia</span><span><b>{p.surface}</b> nawierzchnia</span><span><b>{getPatternFamily(p.patternFamily).name}</b> wzór</span><span><b>{p.objects.length}</b> elementów</span></div></div>
+   <div className="summary-card"><span className="eyebrow">TWÓJ PROJEKT</span><h2>{getSportProfile(p.sport).label}</h2><div className="summary-specs"><span><b>{courtDimensions(p)}</b> wymiary</span><span><b>{area} m²</b> powierzchnia</span><span><b>{p.surface}</b> nawierzchnia</span><span><b>{getPatternFamily(p.patternFamily).name}</b> wzór</span><span><b>{p.objects.length}</b> elementów</span></div></div>
    <div className="summary-price"><span>SZACOWANA CENA REALIZACJI</span><strong>{quoteLoading?"Obliczam…":quote?pln(quote.priceNet):"Do wyceny"}</strong><small>{quote?"netto · aktualizowana wraz z projektem":"Cena pojawi się po przeliczeniu konfiguracji"}</small></div>
    <button className="btn dark full" disabled={savingProject} onClick={()=>void saveProjectToAccount()}>{savingProject?"Zapisywanie…":"Zapisz na koncie"}</button>
    <button className="btn subtle full" onClick={()=>download(p)}>Pobierz projekt</button>
    <p className="summary-note">Finalna cena jest potwierdzana po weryfikacji miejsca i warunków realizacji.</p>
   </>:null}
  </div></section>
- <section className={"canvas editorcanvas "+p.scene}><div className="canvashead"><span><i/> PODGLĄD NA ŻYWO</span>{selected?<button type="button" className="btn danger canvas-delete" onClick={removeSelected}><Trash2 size={16}/> Usuń: {selected.name}</button>:null}{module===1?<div className="view-switch"><button disabled={!selectedRealisticPreview} className={showRealisticPreview?"active":""} onClick={()=>setRealisticView(true)}>Widok realistyczny</button><button className={!showRealisticPreview?"active":""} onClick={()=>setRealisticView(false)}>Widok z góry</button></div>:<div className="scene-controls"><button className={p.scene==="day"?"active":""} onClick={()=>update({scene:"day"})}><Sun size={14}/> Dzień</button><button className={p.scene==="night"?"active":""} onClick={()=>update({scene:"night"})}><Moon size={14}/> Noc</button><button className={p.scene==="event"?"active":""} onClick={()=>update({scene:"event"})}><PartyPopper size={14}/> Event</button><button onClick={()=>setIso(!iso)} className={iso?"active":""}><RotateCcw size={14}/> {iso?"Plan":"3D"}</button></div>}</div>
- {module===1&&showRealisticPreview&&selectedRealisticPreview?<div className="realistic-stage"><img key={selectedRealisticPreview.src} src={selectedRealisticPreview.src} alt={selectedRealisticPreview.alt} decoding="async"/><div className="realistic-badge" aria-live="polite"><b>{selectedDesignDirection.name}</b><span>{getPatternPalette(p.patternPalette).name} · wizualizacja koncepcyjna</span></div></div>:<div className="drawing editing-area"><Court p={p} iso={iso} selectedId={selectedId} onSelect={setSelectedId} onDragStart={startDrag} onDropEquipment={addEquipment}/></div>}
- {iso?<p className="viewhint">Widok poglądowy. Do przeciągania obiektów wybierz Plan.</p>:null}<div className="canvasmeta"><span>{p.sport} · {p.length} × {p.width} m</span><strong>{quoteLoading?"Przeliczam…":quote?pln(quote.priceNet)+" netto":"Do wyceny"}</strong></div>
+ <section className={"canvas editorcanvas "+p.scene}><div className="canvashead"><span><i/> PODGLĄD NA ŻYWO</span>{selected?<button type="button" className="btn danger canvas-delete" onClick={removeSelected}><Trash2 size={16}/> Usuń: {selected.name}</button>:null}{module===1&&isRoundCourt(p)?<div className="preview-switches"><div className="location-switch">{REALISTIC_LOCATIONS.filter(x=>x.enabled).map(x=><button key={x.id} onClick={()=>setPannaLocation(x.id)} className={pannaLocation===x.id?"active":""}>{x.name}</button>)}</div><div className="view-switch">{(["perspective","aerial","ground"] as const).map((v,i)=><button key={v} onClick={()=>{setPannaView(v);setRealisticView(true)}} className={pannaView===v&&realisticView?"active":""}>{["Boczny","Z góry","Z boiska"][i]}</button>)}<button onClick={()=>setRealisticView(false)}>Plan</button></div></div>:module===1?<div className="view-switch"><button disabled={!selectedRealisticPreview} className={showRealisticPreview?"active":""} onClick={()=>setRealisticView(true)}>Widok realistyczny</button><button className={!showRealisticPreview?"active":""} onClick={()=>setRealisticView(false)}>Widok z góry</button></div>:<div className="scene-controls"><button className={p.scene==="day"?"active":""} onClick={()=>update({scene:"day"})}><Sun size={14}/> Dzień</button><button className={p.scene==="night"?"active":""} onClick={()=>update({scene:"night"})}><Moon size={14}/> Noc</button><button className={p.scene==="event"?"active":""} onClick={()=>update({scene:"event"})}><PartyPopper size={14}/> Event</button><button onClick={()=>setIso(!iso)} className={iso?"active":""}><RotateCcw size={14}/> {iso?"Plan":"3D"}</button></div>}</div>
+ {module===1&&showRealisticPreview&&isRoundCourt(p)?<PannaRealisticPreview project={p} location={pannaLocation} view={pannaView}/>:module===1&&showRealisticPreview&&selectedRealisticPreview?<div className="realistic-stage"><img key={selectedRealisticPreview.src} src={selectedRealisticPreview.src} alt={selectedRealisticPreview.alt} decoding="async"/><div className="realistic-badge" aria-live="polite"><b>{selectedDesignDirection.name}</b><span>{getPatternPalette(p.patternPalette).name} · wizualizacja koncepcyjna</span></div></div>:<div className="drawing editing-area"><Court p={p} iso={iso} selectedId={selectedId} onSelect={setSelectedId} onDragStart={startDrag} onDropEquipment={addEquipment}/></div>}
+ {iso?<p className="viewhint">Widok poglądowy. Do przeciągania obiektów wybierz Plan.</p>:null}<div className="canvasmeta"><span>{p.sport} · {courtDimensions(p)}</span><strong>{quoteLoading?"Przeliczam…":quote?pln(quote.priceNet)+" netto":"Do wyceny"}</strong></div>
  {module===1?<section className="guided-footer"><div><span>SZACOWANY ZAKRES INWESTYCJI</span><strong>{quoteLoading?"Obliczam…":quote?pln(Math.round(quote.priceNet*.9))+" – "+pln(Math.round(quote.priceNet*1.12)):"Wymaga wyceny"}</strong><small>Orientacyjnie netto · aktualizowane wraz z projektem</small></div><button className="btn subtle" onClick={()=>{setPatternPage(1);setView("patterns")}}>Porównaj warianty</button><button className="btn dark" onClick={()=>setModule(2)}>Kontynuuj do wyposażenia →</button></section>:null}
  </section>
  {selected?<aside className="inspector contextual"><div className="inspectorhead"><span className="eyebrow">EDYCJA ELEMENTU</span><h2>{selected.name}</h2><button className="inspector-close" onClick={()=>setSelectedId(null)}>×</button></div><div className="inspectorbody"><div className="object-type">{selected.kind.toUpperCase()} <span>{targetLabel[selected.target]}</span></div>{(selected.kind==="text"||selected.kind==="sponsor")?<label>Treść<input value={selected.text||""} onChange={e=>updateObject(selected.id,{text:e.target.value})}/></label>:null}<label>Miejsce<select value={selected.target} onChange={e=>updateObject(selected.id,{target:e.target.value as Target})}>{Object.keys(targetLabel).map(k=><option key={k} value={k}>{targetLabel[k as Target]}</option>)}</select></label>{selected.kind!=="equipment"?<label className="colorrow"><span>Kolor</span><input type="color" value={selected.color} onChange={e=>updateObject(selected.id,{color:e.target.value})}/></label>:null}<div className="dimension"><label>Rozmiar <strong>{selected.scale}%</strong></label><Slider min={20} max={220} value={[selected.scale]} onValueChange={v=>updateObject(selected.id,{scale:v[0]})}/></div><div className="dimension"><label>Obrót <strong>{selected.rotation}°</strong></label><Slider min={-180} max={180} step={5} value={[selected.rotation]} onValueChange={v=>updateObject(selected.id,{rotation:v[0]})}/></div><button className="btn danger full" onClick={removeSelected}><Trash2 size={16}/> Usuń element</button></div></aside>:null}
