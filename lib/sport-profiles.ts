@@ -6,6 +6,8 @@ export type SportProfile={
  description:string;
  length:number;
  width:number;
+ courtShape?:"rectangle"|"circle";
+ diameter?:number;
  surface:string;
  base:string;
  zone:string;
@@ -17,7 +19,7 @@ export type SportProfile={
 
 export const sportProfiles:SportProfile[]=[
  {id:"street-football-3x3",sport:"Piłka nożna 3×3",label:"Street Football 3×3",eyebrow:"URBAN / COMMUNITY",description:"Kompaktowe boisko miejskie do szybkiej gry, aktywacji i wydarzeń.",length:15,width:10,surface:"Akryl sportowy",base:"#236F70",zone:"#EF744E",outside:"#DDE0D7",lineColor:"#FFFFFF",equipment:["Bramka","Banda","Piłkochwyt","Lampa","Ławka","DJ booth"],tags:["miejski","event","community"]},
- {id:"street-football-1x1",sport:"Piłka nożna 1×1",label:"Street Football 1×1",eyebrow:"SKILL / PANNA",description:"Mała arena do pojedynków 1×1, panna i aktywacji turniejowych.",length:10,width:6,surface:"Akryl sportowy",base:"#1D5147",zone:"#D8FF77",outside:"#DFE2DB",lineColor:"#FFFFFF",equipment:["Bramka","Banda","Piłkochwyt","Lampa"],tags:["skill","panna","event"]},
+ {id:"street-football-1x1",sport:"Piłka nożna 1×1",label:"Panna Football 1×1",eyebrow:"SKILL / PANNA",description:"Jeden na jednego. Mała przestrzeń do technicznej gry, pojedynków i spotkań wokół piłki.",length:7,width:7,courtShape:"circle",diameter:7,surface:"Akryl sportowy",base:"#1D5147",zone:"#D8FF77",outside:"#DFE2DB",lineColor:"#FFFFFF",equipment:["Bramka","Banda","Piłkochwyt","Lampa","Ławka","DJ booth"],tags:["skill","panna","event"]},
  {id:"basketball-3x3",sport:"Koszykówka 3×3",label:"Basketball 3×3",eyebrow:"STREET / OLYMPIC FORMAT",description:"Nowoczesny half-court pod 3×3, kulturę streetballu i markowe aktywacje.",length:15,width:11,surface:"Akryl sportowy",base:"#3157B7",zone:"#E9D44D",outside:"#E3E1D9",lineColor:"#FFFFFF",equipment:["Kosz","Piłkochwyt","Lampa","Ławka","Trybuna","DJ booth"],tags:["streetball","brand","event"]},
  {id:"basketball-full",sport:"Koszykówka",label:"Basketball Full Court",eyebrow:"FULL COURT",description:"Pełne boisko do koszykówki z przestrzenią na mocny projekt nawierzchni.",length:28,width:15,surface:"Akryl sportowy",base:"#B24A3B",zone:"#EACB65",outside:"#DCDDD6",lineColor:"#FFFFFF",equipment:["Kosz","Piłkochwyt","Lampa","Ławka","Trybuna"],tags:["club","school","urban"]},
  {id:"tennis",sport:"Tenis",label:"Tennis",eyebrow:"CLUB / LIFESTYLE",description:"Kort tenisowy do renowacji lub nowej realizacji, z czytelną strefą gry i brandingiem.",length:23.77,width:10.97,surface:"Akryl sportowy",base:"#35685C",zone:"#BFD97A",outside:"#D9D8CF",lineColor:"#FFFFFF",equipment:["Siatka","Słupki tenisowe","Ławka","Krzesło sędziowskie","Lampa","Piłkochwyt"],tags:["club","lifestyle","premium"]},
