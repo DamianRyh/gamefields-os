@@ -23,6 +23,7 @@ export interface StructuralMember {
 }
 
 export interface StructuralModel {
+  modularProduct?: { panelRoles: Record<string, string>; cornerIds: string[]; ballStopHeightM: number; engineerApprovalRequired: true };
   nodes: StructuralNode[];
   members: StructuralMember[];
   meta: {
