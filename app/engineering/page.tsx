@@ -1,0 +1,234 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import styles from "./engineering.module.css";
+import {
+  COURT_PRESETS,
+  RHS_SECTIONS,
+  type CourtEngineeringInput,
+  type CourtPresetId,
+  estimateCourtStructure,
+} from "./domain";
+import { generateRectangularCourtModel } from "./model";
+import {
+  DEFAULT_ANALYSIS_INPUT,
+  analyzePreliminaryStructure,
+  type StructuralAnalysisInput,
+} from "./analysis";
+import { optimizePostSection } from "./optimizer";
+import { DEFAULT_PROJECT_PROFILE, type EngineeringProjectProfile } from "./project";
+import { sizeBaseConnectionConcept } from "./foundation";
+import { buildEngineeringHandoffPackage, handoffToCsv } from "./package";
+
+function numberValue(value: string, fallback: number) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function downloadText(filename: string, content: string, mime: string) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
+export default function EngineeringPage() {
+  const [input, setInput] = useState<CourtEngineeringInput>(COURT_PRESETS["GF-3V3-15X10"]);
+  const [analysisInput, setAnalysisInput] = useState<StructuralAnalysisInput>(DEFAULT_ANALYSIS_INPUT);
+  const [profile, setProfile] = useState<EngineeringProjectProfile>(DEFAULT_PROJECT_PROFILE);
+
+  const estimate = useMemo(() => estimateCourtStructure(input), [input]);
+  const model = useMemo(() => generateRectangularCourtModel(input), [input]);
+  const analysis = useMemo(() => analyzePreliminaryStructure(input, model, analysisInput), [input, model, analysisInput]);
+  const optimization = useMemo(() => optimizePostSection(input, analysisInput), [input, analysisInput]);
+  const baseConnection = useMemo(() => sizeBaseConnectionConcept(input, analysis), [input, analysis]);
+  const handoff = useMemo(() => buildEngineeringHandoffPackage({ profile, input, estimate, model, analysis, optimization, baseConnection }), [profile, input, estimate, model, analysis, optimization, baseConnection]);
+
+  function set<K extends keyof CourtEngineeringInput>(key: K, value: CourtEngineeringInput[K]) {
+    setInput((current) => ({ ...current, [key]: value }));
+  }
+
+  function setAnalysis<K extends keyof StructuralAnalysisInput>(key: K, value: StructuralAnalysisInput[K]) {
+    setAnalysisInput((current) => ({ ...current, [key]: value }));
+  }
+
+  function setProject<K extends keyof EngineeringProjectProfile>(key: K, value: EngineeringProjectProfile[K]) {
+    setProfile((current) => ({ ...current, [key]: value }));
+  }
+
+  function applyPreset(id: CourtPresetId) {
+    setInput({ ...COURT_PRESETS[id] });
+  }
+
+  function exportJson() {
+    downloadText(`${profile.projectCode}-${profile.revision}.json`, JSON.stringify(handoff, null, 2), "application/json");
+  }
+
+  function exportCsv() {
+    downloadText(`${profile.projectCode}-${profile.revision}-members.csv`, handoffToCsv(handoff), "text/csv;charset=utf-8");
+  }
+
+  const maxX = Math.max(1, model.meta.lengthM);
+  const maxY = Math.max(1, model.meta.widthM);
+  const planMembers = model.members.filter((member) => member.type === "rail");
+  const nodeById = new Map(model.nodes.map((node) => [node.id, node]));
+
+  return (
+    <main className={styles.shell}>
+      <header className={styles.header}>
+        <div>
+          <span className={styles.eyebrow}>GAMEFIELDS ENGINEERING / v0.3</span>
+          <h1>Structural Court Engine</h1>
+          <p>Parametric steel-court pre-design workspace: geometry, loads, section screening, optimization, base-connection concept and engineering handoff export.</p>
+        </div>
+        <div className={styles.status}>PRE-DESIGN</div>
+      </header>
+
+      <section className={styles.actionBar}>
+        <div>
+          <b>{profile.projectCode}</b>
+          <span>{profile.projectName} · {profile.city} · {profile.revision}</span>
+        </div>
+        <div className={styles.actionButtons}>
+          <button onClick={exportJson}>EXPORT JSON</button>
+          <button onClick={exportCsv}>EXPORT MEMBERS CSV</button>
+        </div>
+      </section>
+
+      <section className={styles.presets}>
+        {(Object.keys(COURT_PRESETS) as CourtPresetId[]).map((id) => (
+          <button key={id} className={input.presetId === id ? styles.presetActive : styles.preset} onClick={() => applyPreset(id)}>{id}</button>
+        ))}
+      </section>
+
+      <div className={styles.grid}>
+        <section className={styles.panel}>
+          <div className={styles.panelTitle}>01 / PROJECT</div>
+          <div className={styles.formGrid}>
+            <label>Project code<input value={profile.projectCode} onChange={(e) => setProject("projectCode", e.target.value)} /></label>
+            <label>Revision<input value={profile.revision} onChange={(e) => setProject("revision", e.target.value)} /></label>
+            <label>Project name<input value={profile.projectName} onChange={(e) => setProject("projectName", e.target.value)} /></label>
+            <label>City<input value={profile.city} onChange={(e) => setProject("city", e.target.value)} /></label>
+            <label>Execution class target<select value={profile.executionClassTarget} onChange={(e) => setProject("executionClassTarget", e.target.value as EngineeringProjectProfile["executionClassTarget"])}><option>EXC2</option><option>EXC3</option></select></label>
+            <label>Design life [years]<input value={profile.designWorkingLifeYears} type="number" min="1" onChange={(e) => setProject("designWorkingLifeYears", numberValue(e.target.value, profile.designWorkingLifeYears))} /></label>
+          </div>
+
+          <div className={styles.panelTitle}>02 / GEOMETRY</div>
+          <div className={styles.formGrid}>
+            <label>Length [m]<input value={input.lengthM} type="number" step="0.5" onChange={(e) => set("lengthM", numberValue(e.target.value, input.lengthM))} /></label>
+            <label>Width [m]<input value={input.widthM} type="number" step="0.5" onChange={(e) => set("widthM", numberValue(e.target.value, input.widthM))} /></label>
+            <label>Board height [m]<input value={input.boardHeightM} type="number" step="0.1" onChange={(e) => set("boardHeightM", numberValue(e.target.value, input.boardHeightM))} /></label>
+            <label>Ball-stop above boards [m]<input value={input.netHeightM} type="number" step="0.5" onChange={(e) => set("netHeightM", numberValue(e.target.value, input.netHeightM))} /></label>
+            <label>Post spacing [m]<input value={input.postSpacingM} type="number" step="0.25" onChange={(e) => set("postSpacingM", numberValue(e.target.value, input.postSpacingM))} /></label>
+            <label>Steel grade<select value={input.steelGrade} onChange={(e) => set("steelGrade", e.target.value as CourtEngineeringInput["steelGrade"])}><option>S235</option><option>S275</option><option>S355</option></select></label>
+          </div>
+
+          <div className={styles.panelTitle}>03 / SECTIONS</div>
+          <div className={styles.formGrid}>
+            <label>Posts<select value={input.postSectionCode} onChange={(e) => set("postSectionCode", e.target.value)}>{RHS_SECTIONS.map((section) => <option key={section.code}>{section.code}</option>)}</select></label>
+            <label>Rails<select value={input.railSectionCode} onChange={(e) => set("railSectionCode", e.target.value)}>{RHS_SECTIONS.map((section) => <option key={section.code}>{section.code}</option>)}</select></label>
+            <label>Gates<input value={input.gateCount} type="number" min="0" onChange={(e) => set("gateCount", numberValue(e.target.value, input.gateCount))} /></label>
+            <label>Goals<input value={input.goalCount} type="number" min="0" onChange={(e) => set("goalCount", numberValue(e.target.value, input.goalCount))} /></label>
+          </div>
+
+          <div className={styles.panelTitle}>04 / LOAD ASSUMPTIONS</div>
+          <div className={styles.formGrid}>
+            <label>Wind pressure [kPa]<input value={analysisInput.windPressureKpa} type="number" min="0" step="0.05" onChange={(e) => setAnalysis("windPressureKpa", numberValue(e.target.value, analysisInput.windPressureKpa))} /></label>
+            <label>Net solidity [0–1]<input value={analysisInput.netSolidity} type="number" min="0" max="1" step="0.05" onChange={(e) => setAnalysis("netSolidity", numberValue(e.target.value, analysisInput.netSolidity))} /></label>
+            <label>Impact load [kN]<input value={analysisInput.impactLoadKn} type="number" min="0" step="0.1" onChange={(e) => setAnalysis("impactLoadKn", numberValue(e.target.value, analysisInput.impactLoadKn))} /></label>
+            <label>SLS limit H /<input value={analysisInput.serviceabilityLimitRatio} type="number" min="1" step="10" onChange={(e) => setAnalysis("serviceabilityLimitRatio", numberValue(e.target.value, analysisInput.serviceabilityLimitRatio))} /></label>
+          </div>
+        </section>
+
+        <section className={styles.results}>
+          <div className={styles.preview}>
+            <div className={styles.previewMeta}>GENERATED STRUCTURAL PLAN</div>
+            <div className={styles.modelCanvas} style={{ aspectRatio: `${maxX} / ${maxY}` }}>
+              <svg viewBox={`0 0 ${maxX} ${maxY}`} preserveAspectRatio="none" aria-label="Structural plan">
+                {planMembers.map((member) => {
+                  const a = nodeById.get(member.startNodeId);
+                  const b = nodeById.get(member.endNodeId);
+                  if (!a || !b || Math.abs(a.z - input.boardHeightM) > 0.001) return null;
+                  return <line key={member.id} x1={a.x} y1={a.y} x2={b.x} y2={b.y} vectorEffect="non-scaling-stroke" />;
+                })}
+                {model.nodes.filter((node) => node.z === 0).map((node) => <circle key={node.id} cx={node.x} cy={node.y} r="0.09" vectorEffect="non-scaling-stroke" />)}
+              </svg>
+              <div className={styles.modelLabel}>{input.lengthM} × {input.widthM} m / H {model.meta.totalHeightM} m</div>
+            </div>
+          </div>
+
+          <div className={styles.metrics}>
+            <article><span>Nodes</span><strong>{model.nodes.length}</strong></article>
+            <article><span>Members</span><strong>{model.members.length}</strong></article>
+            <article><span>Steel</span><strong>{Math.round(estimate.estimatedSteelKg)} kg</strong></article>
+            <article><span>Posts</span><strong>{estimate.postCount}</strong></article>
+          </div>
+
+          <div className={styles.analysisCard}>
+            <div className={styles.analysisHead}>
+              <div><span className={styles.panelTitle}>05 / STRUCTURAL SCREEN</span><h2>{analysis.postCheck.governingStatus}</h2></div>
+              <div className={analysis.postCheck.governingStatus === "OK" ? styles.okBadge : styles.failBadge}>{Math.round(analysis.postCheck.utilization * 100)}% ULS</div>
+            </div>
+            <div className={styles.checkGrid}>
+              <div><span>Post</span><b>{analysis.postCheck.sectionCode}</b></div>
+              <div><span>Resistance</span><b>{analysis.postCheck.resistanceKnM.toFixed(2)} kNm</b></div>
+              <div><span>Governing MEd</span><b>{analysis.postCheck.governingMomentKnM.toFixed(2)} kNm</b></div>
+              <div><span>Deflection</span><b>{analysis.postCheck.characteristicDeflectionMm.toFixed(1)} / {analysis.postCheck.deflectionLimitMm.toFixed(1)} mm</b></div>
+            </div>
+            <div className={styles.loadRows}>{analysis.loadCases.map((loadCase) => <div key={loadCase.id}><span>{loadCase.id} — {loadCase.label}</span><b>{loadCase.designMomentKnM.toFixed(2)} kNm</b></div>)}</div>
+          </div>
+
+          <div className={styles.optimizerCard}>
+            <div>
+              <span className={styles.panelTitle}>06 / AUTO OPTIMIZER</span>
+              <h3>{optimization.recommended ? optimization.recommended.sectionCode : "NO PASSING SECTION"}</h3>
+              <p>{optimization.recommended ? `Lightest section passing the current preliminary ULS + SLS screen. Estimated post steel: ${optimization.recommended.estimatedPostSteelKg.toFixed(0)} kg.` : "None of the current SHS library candidates passes the active assumptions."}</p>
+            </div>
+            {optimization.recommended && optimization.recommended.sectionCode !== input.postSectionCode && (
+              <button className={styles.applyButton} onClick={() => set("postSectionCode", optimization.recommended!.sectionCode)}>APPLY RECOMMENDED</button>
+            )}
+          </div>
+
+          <div className={styles.foundationCard}>
+            <span className={styles.panelTitle}>07 / BASE CONNECTION CONCEPT</span>
+            <div className={styles.foundationGrid}>
+              <div><span>Base plate</span><b>{baseConnection.plateWidthMm} × {baseConnection.plateLengthMm} × {baseConnection.plateThicknessMm} mm</b></div>
+              <div><span>Anchors</span><b>{baseConnection.anchorCount} × M{baseConnection.anchorDiameterMm}</b></div>
+              <div><span>Peak tension</span><b>{baseConnection.estimatedPeakAnchorTensionKn.toFixed(1)} kN</b></div>
+              <div><span>Footing concept</span><b>{baseConnection.footingConceptMm.width} × {baseConnection.footingConceptMm.length} × {baseConnection.footingConceptMm.depth} mm</b></div>
+            </div>
+            <p>Budgeting/coordination geometry only. Anchor, concrete, reinforcement and geotechnical checks remain outside v0.3.</p>
+          </div>
+
+          <div className={styles.bom}>
+            <div className={styles.panelTitle}>08 / PRELIMINARY BOM</div>
+            {estimate.bom.map((line) => <div className={styles.bomLine} key={line.id}><div><strong>{line.name}</strong><span>{line.section ?? "Assembly allowance"}</span></div><div className={styles.bomNumbers}>{line.quantity} {line.unit}<br /><b>{line.totalWeightKg ?? 0} kg</b></div></div>)}
+          </div>
+
+          <div className={styles.memberTable}>
+            <div className={styles.panelTitle}>09 / MEMBER REGISTER</div>
+            {model.members.slice(0, 12).map((member) => <div key={member.id}><code>{member.id}</code><span>{member.type}</span><span>{member.startNodeId} → {member.endNodeId}</span><span>{member.sectionCode}</span><b>{member.lengthM.toFixed(2)} m</b></div>)}
+            {model.members.length > 12 && <p>+ {model.members.length - 12} additional generated members</p>}
+          </div>
+
+          <div className={styles.handoffCard}>
+            <span className={styles.panelTitle}>10 / ENGINEERING HANDOFF</span>
+            <h3>GF-STRUCTURAL-JSON-0.3</h3>
+            <p>Solver-neutral package contains project metadata, geometry, node/member register, load assumptions, screen results, optimization candidates, BOM and base-connection concept.</p>
+            <div className={styles.handoffMeta}><span>Units: m-kN-mm-MPa</span><span>Approval: NOT APPROVED</span><span>Engineer review: REQUIRED</span></div>
+          </div>
+
+          <div className={styles.warning}>
+            <strong>PRE-DESIGN ONLY — NOT A STRUCTURAL APPROVAL</strong>
+            <p>{analysis.limitations.join(" ")} {baseConnection.notes.join(" ")}</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}
