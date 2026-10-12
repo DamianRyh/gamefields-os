@@ -8,12 +8,13 @@ import { createProjectSnapshot } from "./project";
 import type { PreliminarySolverResult } from "./solver";
 import type { Frame3DSolverResult } from "./frame3d";
 import type { EurocodeEngineResult } from "./eurocode";
+import type { StabilityEngineResult } from "./stability";
 import type { FabricationPackage } from "./fabrication";
 import type { EngineerReviewGate } from "./engineer";
 import type { SolverNeutralModelV04 } from "./solver-adapters";
 
 export interface EngineeringHandoffPackage {
-  version: "gamefields-engineering-v0.6";
+  version: "gamefields-engineering-v0.7";
   project: ReturnType<typeof createProjectSnapshot>;
   input: CourtEngineeringInput;
   estimate: EngineeringEstimate;
@@ -22,6 +23,7 @@ export interface EngineeringHandoffPackage {
   solver?: PreliminarySolverResult;
   frame3d?: Frame3DSolverResult;
   eurocode?: EurocodeEngineResult;
+  stability?: StabilityEngineResult;
   optimization: SectionOptimizationResult;
   baseConnection: BaseConnectionConcept;
   fabrication?: FabricationPackage;
@@ -31,6 +33,7 @@ export interface EngineeringHandoffPackage {
     solverNeutralSchema: "GF-SOLVER-NEUTRAL-0.4";
     frame3dSchema: "GF-FRAME3D-0.5";
     eurocodeSchema: "GF-EUROCODE-0.6";
+    stabilitySchema: "GF-STABILITY-0.7";
     fabricationSchema: "GF-FABRICATION-0.4";
     coordinateSystem: "X length / Y width / Z up";
     units: "m-kN-mm-MPa";
@@ -53,6 +56,7 @@ export function buildEngineeringHandoffPackage(args: {
   solver?: PreliminarySolverResult;
   frame3d?: Frame3DSolverResult;
   eurocode?: EurocodeEngineResult;
+  stability?: StabilityEngineResult;
   optimization: SectionOptimizationResult;
   baseConnection: BaseConnectionConcept;
   fabrication?: FabricationPackage;
@@ -60,7 +64,7 @@ export function buildEngineeringHandoffPackage(args: {
   solverNeutral?: SolverNeutralModelV04;
 }): EngineeringHandoffPackage {
   return {
-    version: "gamefields-engineering-v0.6",
+    version: "gamefields-engineering-v0.7",
     project: createProjectSnapshot(args.profile),
     input: args.input,
     estimate: args.estimate,
@@ -69,6 +73,7 @@ export function buildEngineeringHandoffPackage(args: {
     solver: args.solver,
     frame3d: args.frame3d,
     eurocode: args.eurocode,
+    stability: args.stability,
     optimization: args.optimization,
     baseConnection: args.baseConnection,
     fabrication: args.fabrication,
@@ -78,6 +83,7 @@ export function buildEngineeringHandoffPackage(args: {
       solverNeutralSchema: "GF-SOLVER-NEUTRAL-0.4",
       frame3dSchema: "GF-FRAME3D-0.5",
       eurocodeSchema: "GF-EUROCODE-0.6",
+      stabilitySchema: "GF-STABILITY-0.7",
       fabricationSchema: "GF-FABRICATION-0.4",
       coordinateSystem: "X length / Y width / Z up",
       units: "m-kN-mm-MPa",
@@ -94,10 +100,12 @@ export function buildEngineeringHandoffPackage(args: {
 
 export function handoffToCsv(pkg: EngineeringHandoffPackage): string {
   const utilization = new Map(pkg.eurocode?.members.map((m) => [m.memberId, m]) ?? []);
+  const stability = new Map(pkg.stability?.members.map((m) => [m.memberId, m]) ?? []);
   const rows = [
-    ["member_id", "type", "start_node", "end_node", "section", "steel_grade", "length_m", "uls_utilization", "uls_status", "governing_combination"],
+    ["member_id", "type", "start_node", "end_node", "section", "steel_grade", "length_m", "uls_utilization", "stability_utilization", "section_class", "status", "governing_combination"],
     ...pkg.model.members.map((m) => {
       const check = utilization.get(m.id);
+      const stab = stability.get(m.id);
       return [
         m.id,
         m.type,
@@ -107,8 +115,10 @@ export function handoffToCsv(pkg: EngineeringHandoffPackage): string {
         m.steelGrade,
         m.lengthM.toFixed(3),
         check ? check.utilization.toFixed(4) : "",
-        check?.status ?? "",
-        check?.governingCombination ?? "",
+        stab ? stab.combinedUtilization.toFixed(4) : "",
+        stab?.sectionClass ?? "",
+        stab?.status ?? check?.status ?? "",
+        stab?.governingCombination ?? check?.governingCombination ?? "",
       ];
     }),
   ];

@@ -4,6 +4,7 @@ import type { BaseConnectionConcept } from "./foundation";
 import type { PreliminarySolverResult } from "./solver";
 import type { Frame3DSolverResult } from "./frame3d";
 import type { EurocodeEngineResult } from "./eurocode";
+import type { StabilityEngineResult } from "./stability";
 
 export type EngineerCheckStatus = "PASS" | "WARN" | "BLOCK";
 
@@ -15,7 +16,7 @@ export interface EngineerCheck {
 }
 
 export interface EngineerReviewGate {
-  schema: "GF-ENGINEER-GATE-0.2";
+  schema: "GF-ENGINEER-GATE-0.3";
   checks: EngineerCheck[];
   summary: {
     pass: number;
@@ -33,6 +34,7 @@ export function runEngineerReviewGate(args: {
   solver: PreliminarySolverResult;
   frame3d?: Frame3DSolverResult;
   eurocode?: EurocodeEngineResult;
+  stability?: StabilityEngineResult;
   baseConnection: BaseConnectionConcept;
   fabrication: FabricationPackage;
 }): EngineerReviewGate {
@@ -87,10 +89,37 @@ export function runEngineerReviewGate(args: {
   });
 
   checks.push({
-    id: "EUROCODE_SCOPE",
-    label: "Advanced EN 1993 stability verification",
+    id: "STABILITY_ENGINE",
+    label: "Member stability screening",
+    status: !args.stability ? "BLOCK" : args.stability.summary.failedMembers > 0 ? "BLOCK" : args.stability.summary.warningMembers > 0 ? "WARN" : "PASS",
+    note: args.stability
+      ? `${args.stability.summary.checkedMembers} members; max stability utilization ${(args.stability.summary.maxCombinedUtilization * 100).toFixed(0)}%; ${args.stability.summary.failedMembers} failed; ${args.stability.summary.warningMembers} warnings.`
+      : "Stability Engine result is missing.",
+  });
+
+  checks.push({
+    id: "SECTION_CLASSIFICATION",
+    label: "Cross-section classification screen",
+    status: !args.stability ? "BLOCK" : args.stability.summary.class4Members > 0 ? "BLOCK" : "PASS",
+    note: args.stability
+      ? `${args.stability.summary.class4Members} Class 4 member(s). Class 4 requires effective-section treatment before release.`
+      : "Section classification result is missing.",
+  });
+
+  checks.push({
+    id: "SECOND_ORDER",
+    label: "Second-order sensitivity screen",
+    status: !args.stability ? "BLOCK" : args.stability.summary.maxSecondOrderRatio >= args.stability.profile.secondOrderFailureRatio ? "BLOCK" : args.stability.summary.maxSecondOrderRatio > args.stability.profile.secondOrderWarningRatio ? "WARN" : "PASS",
+    note: args.stability
+      ? `Max NEd/Ncr ${(args.stability.summary.maxSecondOrderRatio * 100).toFixed(1)}%. v0.7 uses member-level Euler amplification, not nonlinear global P-Delta.`
+      : "Second-order screen is missing.",
+  });
+
+  checks.push({
+    id: "LTB_REVIEW",
+    label: "Lateral-torsional buckling review",
     status: "WARN",
-    note: "Buckling, LTB, section classification, imperfections, second-order effects and detailed interaction checks are not yet included in GF Eurocode Engine v0.6.",
+    note: "Closed RHS/SHS members are flagged for LTB review; v0.7 does not perform a complete Mcr/chiLT verification.",
   });
 
   checks.push({
@@ -137,7 +166,7 @@ export function runEngineerReviewGate(args: {
   };
 
   return {
-    schema: "GF-ENGINEER-GATE-0.2",
+    schema: "GF-ENGINEER-GATE-0.3",
     checks,
     summary,
     releaseStatus: summary.block > 0 ? "BLOCKED" : summary.warn > 0 ? "ENGINEER_REVIEW_REQUIRED" : "PRE_DESIGN_READY",
@@ -145,10 +174,12 @@ export function runEngineerReviewGate(args: {
     constructionReleaseAllowed: false,
     requiredNextActions: [
       "Confirm project-specific actions, wind parameters, load categories and applicable Polish National Annex / Eurocode edition.",
-      "Add member stability: cross-section classification, buckling, LTB, imperfections and second-order effects where relevant.",
+      "Confirm profile manufacturing route, buckling curves, member effective lengths, restraint conditions and joint stiffness assumptions.",
+      "Run an independent nonlinear/global stability verification including imperfections and second-order effects where required.",
+      "Complete LTB verification where applicable and effective-section checks for any Class 4 elements.",
       "Design and verify steel connections, welds, bolts and anchors.",
       "Verify foundations using geotechnical parameters and concrete design.",
-      "Cross-check GF Frame 3D against an independent structural solver before relying on results for fabrication.",
+      "Cross-check GF Frame 3D and Stability Engine against an independent structural solver before fabrication.",
       "Obtain review/approval by an appropriately qualified structural engineer before fabrication or construction.",
     ],
   };
