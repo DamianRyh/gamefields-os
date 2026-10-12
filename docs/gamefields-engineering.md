@@ -25,7 +25,7 @@ Wind pressure is a direct project input. A future location engine must derive de
 
 ## Standards roadmap
 
-The architecture is prepared for an EN 1990 / EN 1991 / EN 1993 workflow. The second generation of the Eurocodes is in the European transition period; national implementation and National Annex handling therefore need to be versioned explicitly in the future standards engine.
+The architecture is prepared for an EN 1990 / EN 1991 / EN 1993 workflow. As of October 2026, the second-generation Eurocodes have completed formal voting and definitive texts have been distributed to National Standards Bodies, but the common European date of publication is 30 September 2027 and conflicting first-generation standards are scheduled for withdrawal by 30 March 2028. The standards engine must therefore version the exact Eurocode generation and National Annex used for every project.
 
 Planned steps:
 
