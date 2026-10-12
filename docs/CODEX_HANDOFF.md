@@ -25,9 +25,11 @@ Final dimensions, connection locations, weights, materials and GLB URLs are null
 
 - `pnpm exec tsc --noEmit`
 - `pnpm test:modular`: 54 configuration combinations, replacement/opening invariants, counts, structural heights, BOM/scene/cost parity, growth, API schema validation, safety and registry contracts.
-- `pnpm test:modular:viewer`: starts a local server, exercises live controls, growth/removal, API validation, registry and responsive layouts. Uses `CHROMIUM_PATH` if supplied, otherwise system Chromium when available or Playwright's installed browser.
+- `pnpm test:modular:viewer`: serves the production build through a local Worker, exercises live controls, growth/removal, API validation, registry and responsive layouts. Uses `CHROMIUM_PATH` if supplied, otherwise system Chromium when available or Playwright's installed browser.
 - `pnpm build`
 - `pnpm test:play`, `pnpm test:mobile`, `pnpm build:objects`, `pnpm test:objects` preserve regression coverage.
+
+New catalogue navigation uses document links because the current vinext production Link/prefetch runtime throws errors; the production viewer test covers this transition.
 
 CI contains the modular engine/viewer checks and screenshot artifact. Verify remote CI before any merge. Do not auto-merge.
 

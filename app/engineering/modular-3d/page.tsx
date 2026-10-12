@@ -1,3 +1,4 @@
+// Use document navigation until the vinext production Link/prefetch runtime is fixed.
 "use client";
 
 import { useMemo, useRef, useState } from "react";
@@ -5,7 +6,6 @@ import styles from "./modular-3d.module.css";
 
 import { generateModularProduct } from "../modular-pipeline";
 import type { Modular3DComponentType as ComponentType } from "../modular-3d";
-import Link from "next/link";
 
 const PX_PER_M = 34;
 const money = new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 0 });
@@ -299,9 +299,9 @@ export default function Modular3DPage() {
           <p className={styles.tip}>
             Piłkochwyt: {count("BALLSTOP_POST")} osobnych słupów górnych.
           </p>
-          <Link href="/engineering/components" className={styles.libraryLink}>
+          <a href="/engineering/components" className={styles.libraryLink}>
             COMPONENT LIBRARY v1.0 ↗
-          </Link>
+          </a>
         </aside>
 
         <section className={styles.viewerWrap}>

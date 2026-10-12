@@ -1,4 +1,4 @@
-import Link from "next/link";
+// Use document navigation until the vinext production Link/prefetch runtime is fixed.
 import { GAMEFIELDS_COMPONENT_LIBRARY } from "../component-library";
 export default function ComponentLibraryPage() {
   return (
@@ -10,7 +10,7 @@ export default function ComponentLibraryPage() {
         minHeight: "100vh",
       }}
     >
-      <Link href="/engineering/modular-3d">← MODULAR PRODUCT</Link>
+      <a href="/engineering/modular-3d">← MODULAR PRODUCT</a>
       <p style={{ marginTop: 32, fontSize: 12, letterSpacing: 2 }}>
         GAMEFIELDS / COMPONENT LIBRARY v1.0
       </p>
