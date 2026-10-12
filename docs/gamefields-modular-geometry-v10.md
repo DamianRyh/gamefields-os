@@ -6,7 +6,7 @@ Zbudować warstwę konfiguratora podobną do logiki produktów modułowych: uży
 
 ## Zasada nadrzędna
 
-`wymiar docelowy -> snap do systemu modułowego -> liczba segmentów -> geometria -> BOM -> Engineering -> koszt -> 3D`
+`wymiar docelowy -> snap do systemu modułowego -> liczba segmentów -> geometria -> StructuralModel -> BOM/Engineering -> koszt -> instancje 3D`
 
 Istniejące moduły Gamefields pozostają bez zmian. Ten silnik jest warstwą addytywną pomiędzy Builderem/Studio a Engineering.
 
@@ -18,7 +18,11 @@ Istniejące moduły Gamefields pozostają bez zmian. Ten silnik jest warstwą ad
 - snap wymiarów zamiast skalowania paneli,
 - jawna liczba paneli i słupów,
 - pozycja i orientacja każdego modułu,
-- API `/api/engineering/modular`,
+- adapter `ModularLayout -> StructuralModel`,
+- manifest instancji 3D `GF-MODULAR-3D-1.0`,
+- każdy panel i słup jako osobna instancja 3D zamiast skalowania całego boiska,
+- stabilne `assetKey` pod późniejsze modele GLB/mesh,
+- API `/api/engineering/modular` zwracające `layout`, `structuralModel` i `scene3d`,
 - podgląd `/engineering/modular`.
 
 ## Ważne ograniczenie Panna
@@ -29,8 +33,8 @@ Generator kołowy jest obecnie ogólnym systemem modularnym. Nie należy przedst
 
 1. Moduły specjalne: bramka, wejście, narożnik, panel brandingowy.
 2. Reguły symetrii i pozycjonowania bramek/wejść.
-3. Adapter `ModularLayout -> StructuralModel`.
-4. BOM liczony bezpośrednio z modułów.
-5. Model 3D z instancjonowanych komponentów GLB/mesh zamiast skalowania bryły.
-6. Aktualizacja kosztu na żywo przy każdej zmianie modułu.
+3. BOM liczony bezpośrednio z modułów i reconciliacja z StructuralModel.
+4. Podpięcie `scene3d` do realnego viewer'a WebGL/Three.js i modeli GLB.
+5. Aktualizacja kosztu na żywo przy każdej zmianie modułu.
+6. Iteracyjne przeliczenie Engineering po każdej zmianie liczby modułów.
 7. Biblioteka systemów: 3v3, 1v1, Panna Circle, Panna Kids, 5m i kolejne konstrukcje.
