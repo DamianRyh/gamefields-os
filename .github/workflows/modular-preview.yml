@@ -79,11 +79,36 @@ jobs:
         env:
           PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
-          curl --fail --silent --show-error --retry 10 --retry-delay 6 --retry-all-errors "$PREVIEW_URL" --output /tmp/gamefields-public-review.html
-          python3 - <<'PYTHON'
+          for attempt in $(seq 1 15); do
+            if curl --location --compressed --fail --silent --show-error "$PREVIEW_URL?review_commit=$GITHUB_SHA" --output /tmp/gamefields-public-review.html; then
+              if python3 - <<'PYTHON'
           from pathlib import Path
           html = Path('/tmp/gamefields-public-review.html').read_text()
-          assert 'GAMEFIELDS — Modular Product v1.2' in html, 'Unexpected public page'
-          assert 'modular-scene' in html, 'Public modular viewer is missing'
-          print('Public GAMEFIELDS modular review is reachable and contains the viewer.')
+          valid = 'GAMEFIELDS — Modular Product v1.2' in html and 'modular-scene' in html
+          if valid:
+              print('Public GAMEFIELDS modular review is reachable and contains the viewer.')
+          raise SystemExit(0 if valid else 1)
+          PYTHON
+              then exit 0; fi
+            fi
+            sleep 4
+          done
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          class TitleParser(HTMLParser):
+              title = ''
+              in_title = False
+              def handle_starttag(self, tag, attrs):
+                  self.in_title = tag == 'title'
+              def handle_endtag(self, tag):
+                  if tag == 'title': self.in_title = False
+              def handle_data(self, data):
+                  if self.in_title: self.title += data
+          file = Path('/tmp/gamefields-public-review.html')
+          html = file.read_text() if file.exists() else ''
+          parser = TitleParser()
+          parser.feed(html)
+          print(f'::error::Unexpected public page: title={parser.title!r}, length={len(html)}, viewer_present={"modular-scene" in html}')
+          raise SystemExit(1)
           PYTHON
