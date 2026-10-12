@@ -29,7 +29,7 @@ export const DEFAULT_PROJECT_PROFILE: EngineeringProjectProfile = {
 export function createProjectSnapshot(profile: EngineeringProjectProfile) {
   return {
     ...profile,
-    engineVersion: "gamefields-engineering-v0.3",
+    engineVersion: "gamefields-engineering-v0.4",
     status: "pre-design" as const,
     generatedAt: new Date().toISOString(),
     verificationRequired: true,
