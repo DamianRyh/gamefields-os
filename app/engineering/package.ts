@@ -17,12 +17,12 @@ export interface EngineeringHandoffPackage {
   estimate: EngineeringEstimate;
   model: StructuralModel;
   analysis: StructuralAnalysisResult;
-  solver: PreliminarySolverResult;
+  solver?: PreliminarySolverResult;
   optimization: SectionOptimizationResult;
   baseConnection: BaseConnectionConcept;
-  fabrication: FabricationPackage;
-  engineerGate: EngineerReviewGate;
-  solverNeutral: SolverNeutralModelV04;
+  fabrication?: FabricationPackage;
+  engineerGate?: EngineerReviewGate;
+  solverNeutral?: SolverNeutralModelV04;
   exports: {
     solverNeutralSchema: "GF-SOLVER-NEUTRAL-0.4";
     fabricationSchema: "GF-FABRICATION-0.4";
@@ -44,12 +44,12 @@ export function buildEngineeringHandoffPackage(args: {
   estimate: EngineeringEstimate;
   model: StructuralModel;
   analysis: StructuralAnalysisResult;
-  solver: PreliminarySolverResult;
+  solver?: PreliminarySolverResult;
   optimization: SectionOptimizationResult;
   baseConnection: BaseConnectionConcept;
-  fabrication: FabricationPackage;
-  engineerGate: EngineerReviewGate;
-  solverNeutral: SolverNeutralModelV04;
+  fabrication?: FabricationPackage;
+  engineerGate?: EngineerReviewGate;
+  solverNeutral?: SolverNeutralModelV04;
 }): EngineeringHandoffPackage {
   return {
     version: "gamefields-engineering-v0.4",
