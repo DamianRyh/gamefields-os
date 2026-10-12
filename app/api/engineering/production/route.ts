@@ -89,7 +89,7 @@ export async function POST(request: Request) {
   const solver = solvePreliminaryPostFEM(input, assumptions);
   const optimization = optimizePostSection(input, assumptions);
   const baseConnection = sizeBaseConnectionConcept(input, analysis);
-  const fabrication = buildFabricationPackage({ input, estimate, model, analysis, baseConnection });
+  const fabrication = buildFabricationPackage({ input, estimate, model, analysis, solver, baseConnection });
   const solverNeutral = buildSolverNeutralModel(input, model, solver);
   const engineerGate = runEngineerReviewGate({ analysis, solver, baseConnection, fabrication });
   const pkg = buildEngineeringHandoffPackage({ profile, input, estimate, model, analysis, solver, optimization, baseConnection, fabrication, engineerGate, solverNeutral });
