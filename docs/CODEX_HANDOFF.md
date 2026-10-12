@@ -1,0 +1,38 @@
+# GAMEFIELDS — Codex handoff
+
+Updated 2026-10-12 on `feat/gamefields-modular-product-v12`.
+
+This handoff was reconstructed from the user's brief, `GAMEFIELDS-PRODUCT-CONTINUITY.md` and the checked-out implementation. The requested handoff/principles files were absent from the starting branch; no earlier milestone record was available there.
+
+## Current milestone
+
+Modular Product v1.2 is implemented with a single pure transaction in `app/engineering/modular-pipeline.ts`. API `/api/engineering/modular` and the live viewer `/engineering/modular-3d` call the same generator. A change produces geometry → product layout → independent 3D instances → structural model → BOM → component budget. No court mesh is resized along X/Y. Rectangle sliders step through 1.5 m bays; the generic circle resolves requested diameter by segment count.
+
+- Goals/gates replace perimeter slots; branding is a panel variant.
+- Rectangular corners are separate connector instances.
+- Ballstop nets and separate prototype upper-post segments are reflected in scene, structural height and BOM.
+- Structural ground rails do not cross goal/gate openings; headers carry goal/gate roles. Their sections and assumed fixed supports are provisional, not certified connection designs.
+- All responses require Engineer Gate; approval is always false.
+- Default component budgets retain BUDGETARY_DEFAULT provenance. Upper-post pricing reuses the existing provisional post allowance, explicitly disclosed. Surfacing, foundations, logistics and engineering are not included.
+
+## Component Library v1.0
+
+`component-library.ts` defines 12 catalogue contracts and unique stable asset keys. `/engineering/components` and `/api/engineering/components` expose the registry. Each scene instance resolves to a catalogue component id. GLB/PBR contracts specify metre units, Z-up and bottom-centred origin. Instance dimensions remain PROTOTYPE_BOUNDS, not instructions to stretch future GLBs.
+
+Final dimensions, connection locations, weights, materials and GLB URLs are null/UNCONFIRMED/NOT_SUPPLIED. Compatibility lists are conceptual only. Unpriced equipment is not silently added to the BOM. Adding a GLB requires confirmed physical fit and validated connection interfaces; load/clone it via the asset key without changing Modular Geometry Engine.
+
+## Validation
+
+- `pnpm exec tsc --noEmit`
+- `pnpm test:modular`: 54 configuration combinations, replacement/opening invariants, counts, structural heights, BOM/scene/cost parity, growth, API schema validation, safety and registry contracts.
+- `pnpm test:modular:viewer`: starts a local server, exercises live controls, growth/removal, API validation, registry and responsive layouts. Uses `CHROMIUM_PATH` if supplied, otherwise system Chromium when available or Playwright's installed browser.
+- `pnpm build`
+- `pnpm test:play`, `pnpm test:mobile`, `pnpm build:objects`, `pnpm test:objects` preserve regression coverage.
+
+CI contains the modular engine/viewer checks and screenshot artifact. Verify remote CI before any merge. Do not auto-merge.
+
+## Next unfinished milestone
+
+Supply and integrate confirmed GAMEFIELDS component specifications and GLB/PBR assets, followed by engineer-reviewed opening/header, corner and upper-layer connections. Do not manufacture missing dimensions, capacities, ground parameters, supplier prices or approvals. The current circle is generic and is not Damian's exact Panna product.
+
+Existing Studio/Builder, Objects, Radar/PLAY, Engineering/Frame3D/Eurocode/Stability, connections/foundations, Optimizer/Generator, costing/proposals, events and showroom directions remain additive and preserved.
