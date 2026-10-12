@@ -9,12 +9,13 @@ import type { PreliminarySolverResult } from "./solver";
 import type { Frame3DSolverResult } from "./frame3d";
 import type { EurocodeEngineResult } from "./eurocode";
 import type { StabilityEngineResult } from "./stability";
+import type { ConnectionFoundationResult } from "./connection-foundation";
 import type { FabricationPackage } from "./fabrication";
 import type { EngineerReviewGate } from "./engineer";
 import type { SolverNeutralModelV04 } from "./solver-adapters";
 
 export interface EngineeringHandoffPackage {
-  version: "gamefields-engineering-v0.7";
+  version: "gamefields-engineering-v0.8";
   project: ReturnType<typeof createProjectSnapshot>;
   input: CourtEngineeringInput;
   estimate: EngineeringEstimate;
@@ -24,6 +25,7 @@ export interface EngineeringHandoffPackage {
   frame3d?: Frame3DSolverResult;
   eurocode?: EurocodeEngineResult;
   stability?: StabilityEngineResult;
+  connectionFoundation?: ConnectionFoundationResult;
   optimization: SectionOptimizationResult;
   baseConnection: BaseConnectionConcept;
   fabrication?: FabricationPackage;
@@ -34,6 +36,7 @@ export interface EngineeringHandoffPackage {
     frame3dSchema: "GF-FRAME3D-0.5";
     eurocodeSchema: "GF-EUROCODE-0.6";
     stabilitySchema: "GF-STABILITY-0.7";
+    connectionFoundationSchema: "GF-CONNECTION-FOUNDATION-0.8";
     fabricationSchema: "GF-FABRICATION-0.4";
     coordinateSystem: "X length / Y width / Z up";
     units: "m-kN-mm-MPa";
@@ -57,6 +60,7 @@ export function buildEngineeringHandoffPackage(args: {
   frame3d?: Frame3DSolverResult;
   eurocode?: EurocodeEngineResult;
   stability?: StabilityEngineResult;
+  connectionFoundation?: ConnectionFoundationResult;
   optimization: SectionOptimizationResult;
   baseConnection: BaseConnectionConcept;
   fabrication?: FabricationPackage;
@@ -64,7 +68,7 @@ export function buildEngineeringHandoffPackage(args: {
   solverNeutral?: SolverNeutralModelV04;
 }): EngineeringHandoffPackage {
   return {
-    version: "gamefields-engineering-v0.7",
+    version: "gamefields-engineering-v0.8",
     project: createProjectSnapshot(args.profile),
     input: args.input,
     estimate: args.estimate,
@@ -74,6 +78,7 @@ export function buildEngineeringHandoffPackage(args: {
     frame3d: args.frame3d,
     eurocode: args.eurocode,
     stability: args.stability,
+    connectionFoundation: args.connectionFoundation,
     optimization: args.optimization,
     baseConnection: args.baseConnection,
     fabrication: args.fabrication,
@@ -84,6 +89,7 @@ export function buildEngineeringHandoffPackage(args: {
       frame3dSchema: "GF-FRAME3D-0.5",
       eurocodeSchema: "GF-EUROCODE-0.6",
       stabilitySchema: "GF-STABILITY-0.7",
+      connectionFoundationSchema: "GF-CONNECTION-FOUNDATION-0.8",
       fabricationSchema: "GF-FABRICATION-0.4",
       coordinateSystem: "X length / Y width / Z up",
       units: "m-kN-mm-MPa",
