@@ -29,7 +29,9 @@ export const DEFAULT_PROJECT_PROFILE: EngineeringProjectProfile = {
 export function createProjectSnapshot(profile: EngineeringProjectProfile) {
   return {
     ...profile,
-    engineVersion: "gamefields-engineering-v0.4",
+    engineVersion: "gamefields-engineering-v0.6",
+    eurocodeEngineVersion: "GF-EUROCODE-0.6",
+    globalFrameSolverVersion: "GF-FRAME3D-0.5",
     status: "pre-design" as const,
     generatedAt: new Date().toISOString(),
     verificationRequired: true,
