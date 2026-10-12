@@ -1,12 +1,19 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { analyzePreliminaryStructure, DEFAULT_ANALYSIS_INPUT } from "../../../engineering/analysis";
-import { COURT_PRESETS, RHS_SECTIONS } from "../../../engineering/domain";
+import { COURT_PRESETS, RHS_SECTIONS, estimateCourtStructure } from "../../../engineering/domain";
 import { generateRectangularCourtModel } from "../../../engineering/model";
 import { optimizePostSection } from "../../../engineering/optimizer";
+import { sizeBaseConnectionConcept } from "../../../engineering/foundation";
+import { DEFAULT_PROJECT_PROFILE } from "../../../engineering/project";
+import { buildEngineeringHandoffPackage } from "../../../engineering/package";
 
 const bodySchema = z.object({
   presetId: z.enum(["GF-PANNA-7000", "GF-1V1-10X6", "GF-3V3-15X10"]).default("GF-3V3-15X10"),
+  projectName: z.string().min(1).optional(),
+  projectCode: z.string().min(1).optional(),
+  city: z.string().min(1).optional(),
+  revision: z.string().min(1).optional(),
   lengthM: z.number().positive().optional(),
   widthM: z.number().positive().optional(),
   boardHeightM: z.number().nonnegative().optional(),
@@ -56,16 +63,20 @@ export async function POST(request: Request) {
     serviceabilityLimitRatio: body.serviceabilityLimitRatio ?? DEFAULT_ANALYSIS_INPUT.serviceabilityLimitRatio,
   };
 
+  const profile = {
+    ...DEFAULT_PROJECT_PROFILE,
+    projectName: body.projectName ?? DEFAULT_PROJECT_PROFILE.projectName,
+    projectCode: body.projectCode ?? DEFAULT_PROJECT_PROFILE.projectCode,
+    city: body.city ?? DEFAULT_PROJECT_PROFILE.city,
+    revision: body.revision ?? DEFAULT_PROJECT_PROFILE.revision,
+  };
+
+  const estimate = estimateCourtStructure(input);
   const model = generateRectangularCourtModel(input);
   const analysis = analyzePreliminaryStructure(input, model, assumptions);
   const optimization = optimizePostSection(input, assumptions);
+  const baseConnection = sizeBaseConnectionConcept(input, analysis);
+  const handoff = buildEngineeringHandoffPackage({ profile, input, estimate, model, analysis, optimization, baseConnection });
 
-  return NextResponse.json({
-    version: "gamefields-engineering-v0.2",
-    status: "pre-design",
-    input,
-    model,
-    analysis,
-    optimization,
-  });
+  return NextResponse.json(handoff);
 }
