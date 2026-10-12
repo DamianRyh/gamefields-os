@@ -14,6 +14,7 @@ import { buildEngineeringHandoffPackage, handoffToCsv } from "../../../engineeri
 import { DEFAULT_PROJECT_PROFILE } from "../../../engineering/project";
 import { buildSolverNeutralModel, solverNeutralToCsv } from "../../../engineering/solver-adapters";
 import { solvePreliminaryPostFEM } from "../../../engineering/solver";
+import { DEFAULT_STABILITY_PROFILE, runStabilityEngine, stabilityToCsv } from "../../../engineering/stability";
 
 const bodySchema = z.object({
   presetId: z.enum(["GF-PANNA-7000", "GF-1V1-10X6", "GF-3V3-15X10"]).default("GF-3V3-15X10"),
@@ -35,6 +36,14 @@ const bodySchema = z.object({
     gammaM0: z.number().positive().optional(),
     serviceabilityLimitRatio: z.number().positive().optional(),
   }).optional(),
+  stability: z.object({
+    gammaM1: z.number().positive().optional(),
+    defaultBucklingAlpha: z.number().nonnegative().optional(),
+    effectiveLengthFactorPost: z.number().positive().optional(),
+    effectiveLengthFactorRail: z.number().positive().optional(),
+    secondOrderWarningRatio: z.number().positive().optional(),
+    secondOrderFailureRatio: z.number().positive().optional(),
+  }).optional(),
   project: z.object({
     projectName: z.string().min(1).optional(),
     projectCode: z.string().min(1).optional(),
@@ -52,6 +61,8 @@ const bodySchema = z.object({
     "frame3d_json",
     "eurocode_json",
     "utilization_csv",
+    "stability_json",
+    "stability_csv",
   ]).default("package"),
 });
 
@@ -102,6 +113,16 @@ export async function POST(request: Request) {
     serviceabilityLimitRatio: body.eurocode?.serviceabilityLimitRatio ?? DEFAULT_EUROCODE_PROFILE.serviceabilityLimitRatio,
   };
 
+  const stabilityProfile = {
+    ...DEFAULT_STABILITY_PROFILE,
+    gammaM1: body.stability?.gammaM1 ?? DEFAULT_STABILITY_PROFILE.gammaM1,
+    defaultBucklingAlpha: body.stability?.defaultBucklingAlpha ?? DEFAULT_STABILITY_PROFILE.defaultBucklingAlpha,
+    effectiveLengthFactorPost: body.stability?.effectiveLengthFactorPost ?? DEFAULT_STABILITY_PROFILE.effectiveLengthFactorPost,
+    effectiveLengthFactorRail: body.stability?.effectiveLengthFactorRail ?? DEFAULT_STABILITY_PROFILE.effectiveLengthFactorRail,
+    secondOrderWarningRatio: body.stability?.secondOrderWarningRatio ?? DEFAULT_STABILITY_PROFILE.secondOrderWarningRatio,
+    secondOrderFailureRatio: body.stability?.secondOrderFailureRatio ?? DEFAULT_STABILITY_PROFILE.secondOrderFailureRatio,
+  };
+
   const profile = {
     ...DEFAULT_PROJECT_PROFILE,
     projectName: body.project?.projectName ?? DEFAULT_PROJECT_PROFILE.projectName,
@@ -116,12 +137,13 @@ export async function POST(request: Request) {
   const solver = solvePreliminaryPostFEM(input, assumptions);
   const frame3d = solveGlobalFrame3D(input, model, assumptions);
   const eurocode = runEurocodeEngine({ input, model, frame3d, profile: eurocodeProfile });
+  const stability = runStabilityEngine({ input, model, frame3d, eurocode, profile: stabilityProfile });
   const optimization = optimizePostSection(input, assumptions);
   const baseConnection = sizeBaseConnectionConcept(input, analysis);
   const fabrication = buildFabricationPackage({ input, estimate, model, analysis, solver, baseConnection });
   const solverNeutral = buildSolverNeutralModel(input, model, solver);
-  const engineerGate = runEngineerReviewGate({ analysis, solver, frame3d, eurocode, baseConnection, fabrication });
-  const pkg = buildEngineeringHandoffPackage({ profile, input, estimate, model, analysis, solver, frame3d, eurocode, optimization, baseConnection, fabrication, engineerGate, solverNeutral });
+  const engineerGate = runEngineerReviewGate({ analysis, solver, frame3d, eurocode, stability, baseConnection, fabrication });
+  const pkg = buildEngineeringHandoffPackage({ profile, input, estimate, model, analysis, solver, frame3d, eurocode, stability, optimization, baseConnection, fabrication, engineerGate, solverNeutral });
 
   const stem = `${profile.projectCode}-${profile.revision}`.replace(/[^A-Za-z0-9_-]/g, "_");
   switch (body.export) {
@@ -134,6 +156,8 @@ export async function POST(request: Request) {
     case "frame3d_json": return textResponse(JSON.stringify(frame3d, null, 2), "application/json; charset=utf-8", `${stem}-frame3d.json`);
     case "eurocode_json": return textResponse(JSON.stringify(eurocode, null, 2), "application/json; charset=utf-8", `${stem}-eurocode.json`);
     case "utilization_csv": return textResponse(eurocodeUtilizationToCsv(eurocode), "text/csv; charset=utf-8", `${stem}-utilization.csv`);
+    case "stability_json": return textResponse(JSON.stringify(stability, null, 2), "application/json; charset=utf-8", `${stem}-stability.json`);
+    case "stability_csv": return textResponse(stabilityToCsv(stability), "text/csv; charset=utf-8", `${stem}-stability.csv`);
     default: return NextResponse.json(pkg);
   }
 }
