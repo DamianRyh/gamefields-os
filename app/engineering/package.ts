@@ -6,18 +6,20 @@ import type { BaseConnectionConcept } from "./foundation";
 import type { EngineeringProjectProfile } from "./project";
 import { createProjectSnapshot } from "./project";
 import type { PreliminarySolverResult } from "./solver";
+import type { Frame3DSolverResult } from "./frame3d";
 import type { FabricationPackage } from "./fabrication";
 import type { EngineerReviewGate } from "./engineer";
 import type { SolverNeutralModelV04 } from "./solver-adapters";
 
 export interface EngineeringHandoffPackage {
-  version: "gamefields-engineering-v0.4";
+  version: "gamefields-engineering-v0.5";
   project: ReturnType<typeof createProjectSnapshot>;
   input: CourtEngineeringInput;
   estimate: EngineeringEstimate;
   model: StructuralModel;
   analysis: StructuralAnalysisResult;
   solver?: PreliminarySolverResult;
+  frame3d?: Frame3DSolverResult;
   optimization: SectionOptimizationResult;
   baseConnection: BaseConnectionConcept;
   fabrication?: FabricationPackage;
@@ -25,6 +27,7 @@ export interface EngineeringHandoffPackage {
   solverNeutral?: SolverNeutralModelV04;
   exports: {
     solverNeutralSchema: "GF-SOLVER-NEUTRAL-0.4";
+    frame3dSchema: "GF-FRAME3D-0.5";
     fabricationSchema: "GF-FABRICATION-0.4";
     coordinateSystem: "X length / Y width / Z up";
     units: "m-kN-mm-MPa";
@@ -45,6 +48,7 @@ export function buildEngineeringHandoffPackage(args: {
   model: StructuralModel;
   analysis: StructuralAnalysisResult;
   solver?: PreliminarySolverResult;
+  frame3d?: Frame3DSolverResult;
   optimization: SectionOptimizationResult;
   baseConnection: BaseConnectionConcept;
   fabrication?: FabricationPackage;
@@ -52,13 +56,14 @@ export function buildEngineeringHandoffPackage(args: {
   solverNeutral?: SolverNeutralModelV04;
 }): EngineeringHandoffPackage {
   return {
-    version: "gamefields-engineering-v0.4",
+    version: "gamefields-engineering-v0.5",
     project: createProjectSnapshot(args.profile),
     input: args.input,
     estimate: args.estimate,
     model: args.model,
     analysis: args.analysis,
     solver: args.solver,
+    frame3d: args.frame3d,
     optimization: args.optimization,
     baseConnection: args.baseConnection,
     fabrication: args.fabrication,
@@ -66,6 +71,7 @@ export function buildEngineeringHandoffPackage(args: {
     solverNeutral: args.solverNeutral,
     exports: {
       solverNeutralSchema: "GF-SOLVER-NEUTRAL-0.4",
+      frame3dSchema: "GF-FRAME3D-0.5",
       fabricationSchema: "GF-FABRICATION-0.4",
       coordinateSystem: "X length / Y width / Z up",
       units: "m-kN-mm-MPa",
