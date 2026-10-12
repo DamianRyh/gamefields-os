@@ -7,6 +7,7 @@ import {
   GF_PANNA_MODULAR_RULES,
 } from "../../../engineering/modular";
 import { modularLayoutToStructuralModel } from "../../../engineering/modular-structural";
+import { modularLayoutTo3DManifest } from "../../../engineering/modular-3d";
 
 export async function POST(request: Request) {
   try {
@@ -21,7 +22,8 @@ export async function POST(request: Request) {
       const layout = buildCircularModularLayout(diameterM, GF_PANNA_MODULAR_RULES);
       const preset = COURT_PRESETS["GF-PANNA-7000"];
       const structuralModel = modularLayoutToStructuralModel(layout, preset);
-      return NextResponse.json({ layout, structuralModel });
+      const scene3d = modularLayoutTo3DManifest(layout, preset.boardHeightM);
+      return NextResponse.json({ layout, structuralModel, scene3d });
     }
 
     const lengthM = Number(body?.lengthM ?? 15);
@@ -33,7 +35,8 @@ export async function POST(request: Request) {
     const layout = buildRectangularModularLayout(lengthM, widthM, GF_3V3_MODULAR_RULES);
     const preset = COURT_PRESETS["GF-3V3-15X10"];
     const structuralModel = modularLayoutToStructuralModel(layout, preset);
-    return NextResponse.json({ layout, structuralModel });
+    const scene3d = modularLayoutTo3DManifest(layout, preset.boardHeightM);
+    return NextResponse.json({ layout, structuralModel, scene3d });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Modular geometry generation failed" },
