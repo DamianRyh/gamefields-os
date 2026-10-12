@@ -44,7 +44,6 @@ export default function ProposalPreviewPage() {
     <section className={styles.workspace}>
       <div className={styles.workspaceHead}>
         <div><span>GAMEFIELDS / COMMERCIAL v1.2</span><h1>Proposal Preview</h1><p>Statyczny podgląd warstwy handlowej — bez zależności od API i silnika obliczeniowego.</p></div>
-        <div className={styles.actions}><button onClick={undefined as never}>PREVIEW</button></div>
       </div>
     </section>
 
