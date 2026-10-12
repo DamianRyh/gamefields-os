@@ -325,3 +325,26 @@ export function runEurocodeEngine(args: {
     ],
   };
 }
+
+export function eurocodeUtilizationToCsv(result: EurocodeEngineResult): string {
+  const rows = [
+    ["member_id", "type", "section", "steel_grade", "combination", "N_Ed_kN", "My_Ed_kNm", "Mz_Ed_kNm", "N_Rd_kN", "My_Rd_kNm", "Mz_Rd_kNm", "utilization", "status", "heat"],
+    ...result.members.map((m) => [
+      m.memberId,
+      m.memberType,
+      m.sectionCode,
+      m.steelGrade,
+      m.governingCombination,
+      m.axialKn.toFixed(3),
+      m.momentYKnM.toFixed(3),
+      m.momentZKnM.toFixed(3),
+      m.axialResistanceKn.toFixed(3),
+      m.bendingResistanceYKnM.toFixed(3),
+      m.bendingResistanceZKnM.toFixed(3),
+      m.utilization.toFixed(4),
+      m.status,
+      m.heat,
+    ]),
+  ];
+  return rows.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\n");
+}
