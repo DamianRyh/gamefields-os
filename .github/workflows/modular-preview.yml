@@ -1,0 +1,77 @@
+name: GAMEFIELDS Modular Public Preview
+on:
+  push:
+    branches: [feat/gamefields-modular-product-v12]
+    paths:
+      - 'app/engineering/**'
+      - 'scripts/build-modular-review.mjs'
+      - 'tests/modular-review.mjs'
+      - 'tests/modular-product.mjs'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/modular-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gamefields-modular-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      pages_enabled: ${{ steps.pages.outputs.enabled }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm test:modular
+      - run: pnpm build:modular:review
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:modular:review
+      - name: Check Pages configuration
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/pages" > /dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Enable GitHub Pages with Source=GitHub Actions, then rerun this workflow."
+          fi
+      - uses: actions/configure-pages@v5
+        if: steps.pages.outputs.enabled == 'true'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gamefields-modular-review-html
+          path: dist/modular-review/index.html
+          retention-days: 30
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/modular-review
+  deploy:
+    needs: build
+    if: needs.build.outputs.pages_enabled == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish modular review
+        id: deployment
+        uses: actions/deploy-pages@v4

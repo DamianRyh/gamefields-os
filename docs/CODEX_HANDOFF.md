@@ -38,3 +38,9 @@ CI contains the modular engine/viewer checks and screenshot artifact. Verify rem
 Supply and integrate confirmed GAMEFIELDS component specifications and GLB/PBR assets, followed by engineer-reviewed opening/header, corner and upper-layer connections. Do not manufacture missing dimensions, capacities, ground parameters, supplier prices or approvals. The current circle is generic and is not Damian's exact Panna product.
 
 Existing Studio/Builder, Objects, Radar/PLAY, Engineering/Frame3D/Eurocode/Stability, connections/foundations, Optimizer/Generator, costing/proposals, events and showroom directions remain additive and preserved.
+
+## Public review distribution
+
+`pnpm build:modular:review` creates a self-contained `dist/modular-review/index.html` from the same viewer and catalogue. `pnpm test:modular:review` validates the static distribution without backend/API calls. The `GAMEFIELDS Modular Public Preview` workflow publishes this artifact via GitHub Pages from the v1.2 feature branch, without merging or changing gamefields.eu.
+
+Pages must first be enabled in repository Settings → Pages → Source: GitHub Actions. If disabled, the workflow validates/uploads the downloadable HTML and skips deployment with a warning. The connected app cannot enable Pages (GitHub returned HTTP 403 for the settings mutation); a repository administrator must enable it. Rerun the preview workflow after the setting changes. An existing github-pages environment must allow the feature branch and any required environment reviewers must approve deployment; do not remove protection rules to bypass review.
