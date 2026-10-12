@@ -31,7 +31,7 @@ Wind pressure is a direct project input. A future location engine must derive de
 
 The architecture is prepared for an EN 1990 / EN 1991 / EN 1993 workflow. As of October 2026, the second-generation Eurocodes have completed formal voting and definitive texts have been distributed to National Standards Bodies, but the common European date of publication is 30 September 2027 and conflicting first-generation standards are scheduled for withdrawal by 30 March 2028. The standards engine must therefore version the exact Eurocode generation and National Annex used for every project.
 
-### v0.3 target
+## Next milestone — v0.3
 
 The next engineering milestone is the transition from isolated post screening to project-level structural design data:
 
@@ -43,3 +43,5 @@ The next engineering milestone is the transition from isolated post screening to
 6. Calculation-report data model with immutable input snapshot.
 
 Later milestones add member stability, interaction and section classification; joint design; foundations/geotechnics; fabrication outputs; IFC/STEP/DXF adapters; and the engineer verification workflow.
+
+**v0.2 milestone status: implemented on `feat/gamefields-engineering-v01`; CI validation is required before merge.**
