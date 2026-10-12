@@ -15,6 +15,10 @@ Gamefields Engineering is the technical layer behind Gamefields Studio. It conve
 - Automatic post-section optimizer selecting the lightest library SHS that passes the active preliminary checks.
 - `POST /api/engineering/analyze` for use by Gamefields Studio or other clients.
 
+### Analysis API
+
+`POST /api/engineering/analyze` accepts a preset plus optional geometry, material, section and load overrides. It returns the generated node/member model, load-screen result and post-section optimization result. The response is always identified as `pre-design` so downstream clients cannot silently treat it as an approved calculation package.
+
 ## Safety boundary
 
 v0.2 is explicitly **pre-design** software. It is not a certified Eurocode implementation and must not be used as a substitute for a structural engineer's final calculations or approval.
