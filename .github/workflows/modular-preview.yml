@@ -75,3 +75,15 @@ jobs:
       - name: Publish modular review
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify public review response
+        env:
+          PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          curl --fail --silent --show-error --retry 10 --retry-delay 6 --retry-all-errors "$PREVIEW_URL" --output /tmp/gamefields-public-review.html
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          html = Path('/tmp/gamefields-public-review.html').read_text()
+          assert 'GAMEFIELDS — Modular Product v1.2' in html, 'Unexpected public page'
+          assert 'modular-scene' in html, 'Public modular viewer is missing'
+          print('Public GAMEFIELDS modular review is reachable and contains the viewer.')
+          PYTHON
