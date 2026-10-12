@@ -31,15 +31,15 @@ Wind pressure is a direct project input. A future location engine must derive de
 
 The architecture is prepared for an EN 1990 / EN 1991 / EN 1993 workflow. As of October 2026, the second-generation Eurocodes have completed formal voting and definitive texts have been distributed to National Standards Bodies, but the common European date of publication is 30 September 2027 and conflicting first-generation standards are scheduled for withdrawal by 30 March 2028. The standards engine must therefore version the exact Eurocode generation and National Annex used for every project.
 
-Planned steps:
+### v0.3 target
 
-1. Standards profile and National Annex versioning.
-2. Location/terrain wind action engine.
-3. Load combinations and project-specific design situations.
-4. Frame solver / FEA adapter.
-5. Member stability, interaction and section classification.
-6. Joint, baseplate and anchor checks.
-7. Foundation/geotechnical adapter.
-8. Fabrication outputs: cutting lists, plates, bolts, welds and drawings.
-9. IFC/STEP/DXF export adapters.
-10. Engineer verification workflow and immutable calculation report.
+The next engineering milestone is the transition from isolated post screening to project-level structural design data:
+
+1. Standards profile + National Annex version on every project.
+2. Location/terrain wind action input model.
+3. Explicit load cases and ULS/SLS combination objects.
+4. Solver-neutral frame-analysis payload for Robot / IDEA / future FEA adapter.
+5. Baseplate, anchor and foundation data contracts.
+6. Calculation-report data model with immutable input snapshot.
+
+Later milestones add member stability, interaction and section classification; joint design; foundations/geotechnics; fabrication outputs; IFC/STEP/DXF adapters; and the engineer verification workflow.
