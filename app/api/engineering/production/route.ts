@@ -6,6 +6,7 @@ import { COURT_PRESETS, RHS_SECTIONS, estimateCourtStructure } from "../../../en
 import { runEngineerReviewGate } from "../../../engineering/engineer";
 import { buildFabricationPackage, cutListToCsv } from "../../../engineering/fabrication";
 import { sizeBaseConnectionConcept } from "../../../engineering/foundation";
+import { solveGlobalFrame3D } from "../../../engineering/frame3d";
 import { generateRectangularCourtModel } from "../../../engineering/model";
 import { optimizePostSection } from "../../../engineering/optimizer";
 import { buildEngineeringHandoffPackage, handoffToCsv } from "../../../engineering/package";
@@ -33,7 +34,7 @@ const bodySchema = z.object({
     city: z.string().min(1).optional(),
     revision: z.string().min(1).optional(),
   }).optional(),
-  export: z.enum(["package", "cut_csv", "member_csv", "model_dxf", "base_plate_dxf", "step_reference", "solver_csv"]).default("package"),
+  export: z.enum(["package", "cut_csv", "member_csv", "model_dxf", "base_plate_dxf", "step_reference", "solver_csv", "frame3d_json"]).default("package"),
 });
 
 function textResponse(content: string, contentType: string, filename: string) {
@@ -87,12 +88,13 @@ export async function POST(request: Request) {
   const model = generateRectangularCourtModel(input);
   const analysis = analyzePreliminaryStructure(input, model, assumptions);
   const solver = solvePreliminaryPostFEM(input, assumptions);
+  const frame3d = solveGlobalFrame3D(input, model);
   const optimization = optimizePostSection(input, assumptions);
   const baseConnection = sizeBaseConnectionConcept(input, analysis);
   const fabrication = buildFabricationPackage({ input, estimate, model, analysis, solver, baseConnection });
   const solverNeutral = buildSolverNeutralModel(input, model, solver);
   const engineerGate = runEngineerReviewGate({ analysis, solver, baseConnection, fabrication });
-  const pkg = buildEngineeringHandoffPackage({ profile, input, estimate, model, analysis, solver, optimization, baseConnection, fabrication, engineerGate, solverNeutral });
+  const pkg = buildEngineeringHandoffPackage({ profile, input, estimate, model, analysis, solver, frame3d, optimization, baseConnection, fabrication, engineerGate, solverNeutral });
 
   const stem = `${profile.projectCode}-${profile.revision}`.replace(/[^A-Za-z0-9_-]/g, "_");
   switch (body.export) {
@@ -102,6 +104,7 @@ export async function POST(request: Request) {
     case "base_plate_dxf": return textResponse(basePlateToDxf(fabrication), "application/dxf", `${stem}-base-plate.dxf`);
     case "step_reference": return textResponse(modelToStepReference(model, stem), "application/step", `${stem}-reference.step`);
     case "solver_csv": return textResponse(solverNeutralToCsv(solverNeutral), "text/csv; charset=utf-8", `${stem}-solver.csv`);
+    case "frame3d_json": return textResponse(JSON.stringify(frame3d, null, 2), "application/json; charset=utf-8", `${stem}-frame3d.json`);
     default: return NextResponse.json(pkg);
   }
 }
