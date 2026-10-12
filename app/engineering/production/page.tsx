@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import styles from "./production.module.css";
+import AutomaticOptimizerPanel from "./AutomaticOptimizerPanel";
 import { COURT_PRESETS, estimateCourtStructure, type CourtPresetId } from "../domain";
 import { generateRectangularCourtModel } from "../model";
 import { DEFAULT_ANALYSIS_INPUT, analyzePreliminaryStructure } from "../analysis";
@@ -58,14 +59,16 @@ export default function EngineeringProductionPage() {
     <main className={styles.shell}>
       <header className={styles.top}>
         <div>
-          <span className={styles.eyebrow}>GAMEFIELDS ENGINEERING / v0.8</span>
+          <span className={styles.eyebrow}>GAMEFIELDS ENGINEERING / v0.9</span>
           <h1>Engineering → Production</h1>
-          <p>Global 3D frame, Eurocode/stability screening, base connection, anchors, weld and footing pre-design, fabrication data and engineer review gate.</p>
+          <p>Automatic structural optimization over the global 3D frame, Eurocode/stability screening, base connection, anchors, weld and footing pre-design, fabrication data and engineer review gate.</p>
         </div>
         <div className={styles.badge}>PRE-DESIGN / ENGINEER REVIEW</div>
       </header>
 
       <div className={styles.presetRow}>{(Object.keys(COURT_PRESETS) as CourtPresetId[]).map((id) => <button key={id} className={id === presetId ? styles.active : styles.button} onClick={() => setPresetId(id)}>{id}</button>)}</div>
+
+      <AutomaticOptimizerPanel presetId={presetId} />
 
       <section className={styles.hero}>
         <div className={styles.metric}><span>CONNECTION GOV.</span><b>{cf.summary.governingCheck}</b></div>
@@ -117,7 +120,7 @@ export default function EngineeringProductionPage() {
           <div className={styles.card}><h2>10 / Auto-size</h2><div className={styles.rows}>{eurocode.sizing.map((s) => <div key={s.memberType}><code>{s.memberType}</code><span>{s.currentSectionCode}</span><span>→ {s.recommendedSectionCode ?? "none"}</span><b>{s.status}</b></div>)}</div></div>
           <div className={styles.card}><h2>11 / Cut list</h2><div className={styles.rows}>{fabrication.cutList.slice(0, 8).map((item) => <div key={item.mark}><code>{item.mark}</code><span>{item.sectionCode}</span><span>{item.lengthMm} mm × {item.quantity}</span><b>{item.estimatedWeightKg ?? "–"} kg</b></div>)}</div></div>
 
-          <div className={styles.warning}>GF Connection + Foundation Engine v0.8 is a pre-design screening layer. Anchor capacities and soil parameters are project inputs; EN 1992-4 failure modes, connection component-method checks, weld-group stresses, reinforced-concrete footing design, geotechnics, frost/groundwater/settlement and independent engineer approval remain mandatory before fabrication or construction release.</div>
+          <div className={styles.warning}>GF Automatic Structural Optimizer v0.9 and all downstream engines remain PRE-DESIGN. Optimization uses discrete search and a transparent relative-cost objective; anchor capacities, soil inputs, project actions, fabrication details, nonlinear/global verification and independent engineer approval remain mandatory before fabrication or construction release.</div>
         </section>
       </div>
     </main>
