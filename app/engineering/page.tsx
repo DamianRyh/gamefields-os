@@ -15,6 +15,7 @@ import {
   analyzePreliminaryStructure,
   type StructuralAnalysisInput,
 } from "./analysis";
+import { optimizePostSection } from "./optimizer";
 
 function numberValue(value: string, fallback: number) {
   const parsed = Number(value);
@@ -26,10 +27,8 @@ export default function EngineeringPage() {
   const [analysisInput, setAnalysisInput] = useState<StructuralAnalysisInput>(DEFAULT_ANALYSIS_INPUT);
   const estimate = useMemo(() => estimateCourtStructure(input), [input]);
   const model = useMemo(() => generateRectangularCourtModel(input), [input]);
-  const analysis = useMemo(
-    () => analyzePreliminaryStructure(input, model, analysisInput),
-    [input, model, analysisInput],
-  );
+  const analysis = useMemo(() => analyzePreliminaryStructure(input, model, analysisInput), [input, model, analysisInput]);
+  const optimization = useMemo(() => optimizePostSection(input, analysisInput), [input, analysisInput]);
 
   function set<K extends keyof CourtEngineeringInput>(key: K, value: CourtEngineeringInput[K]) {
     setInput((current) => ({ ...current, [key]: value }));
@@ -45,7 +44,7 @@ export default function EngineeringPage() {
 
   const maxX = Math.max(1, model.meta.lengthM);
   const maxY = Math.max(1, model.meta.widthM);
-  const planMembers = model.members.filter((member) => member.type === "rail").slice(0, model.members.length);
+  const planMembers = model.members.filter((member) => member.type === "rail");
   const nodeById = new Map(model.nodes.map((node) => [node.id, node]));
 
   return (
@@ -54,22 +53,14 @@ export default function EngineeringPage() {
         <div>
           <span className={styles.eyebrow}>GAMEFIELDS ENGINEERING / v0.2</span>
           <h1>Structural Court Engine</h1>
-          <p>
-            Parametric steel-court model with preliminary load cases, member screening and fabrication-oriented geometry.
-          </p>
+          <p>Parametric steel-court model with preliminary load cases, member screening and fabrication-oriented geometry.</p>
         </div>
         <div className={styles.status}>PRE-DESIGN</div>
       </header>
 
       <section className={styles.presets}>
         {(Object.keys(COURT_PRESETS) as CourtPresetId[]).map((id) => (
-          <button
-            key={id}
-            className={input.presetId === id ? styles.presetActive : styles.preset}
-            onClick={() => applyPreset(id)}
-          >
-            {id}
-          </button>
+          <button key={id} className={input.presetId === id ? styles.presetActive : styles.preset} onClick={() => applyPreset(id)}>{id}</button>
         ))}
       </section>
 
@@ -137,25 +128,27 @@ export default function EngineeringPage() {
               <div><span>Governing MEd</span><b>{analysis.postCheck.governingMomentKnM.toFixed(2)} kNm</b></div>
               <div><span>Deflection</span><b>{analysis.postCheck.characteristicDeflectionMm.toFixed(1)} / {analysis.postCheck.deflectionLimitMm.toFixed(1)} mm</b></div>
             </div>
-            <div className={styles.loadRows}>
-              {analysis.loadCases.map((loadCase) => (
-                <div key={loadCase.id}><span>{loadCase.id} — {loadCase.label}</span><b>{loadCase.designMomentKnM.toFixed(2)} kNm</b></div>
-              ))}
+            <div className={styles.loadRows}>{analysis.loadCases.map((loadCase) => <div key={loadCase.id}><span>{loadCase.id} — {loadCase.label}</span><b>{loadCase.designMomentKnM.toFixed(2)} kNm</b></div>)}</div>
+          </div>
+
+          <div className={styles.optimizerCard}>
+            <div>
+              <span className={styles.panelTitle}>05 / AUTO OPTIMIZER</span>
+              <h3>{optimization.recommended ? optimization.recommended.sectionCode : "NO PASSING SECTION"}</h3>
+              <p>{optimization.recommended ? `Lightest section passing the current preliminary ULS + SLS screen. Estimated post steel: ${optimization.recommended.estimatedPostSteelKg.toFixed(0)} kg.` : "None of the current SHS library candidates passes the active assumptions."}</p>
             </div>
+            {optimization.recommended && optimization.recommended.sectionCode !== input.postSectionCode && (
+              <button className={styles.applyButton} onClick={() => set("postSectionCode", optimization.recommended!.sectionCode)}>APPLY RECOMMENDED</button>
+            )}
           </div>
 
           <div className={styles.bom}>
-            <div className={styles.panelTitle}>05 / PRELIMINARY BOM</div>
-            {estimate.bom.map((line) => (
-              <div className={styles.bomLine} key={line.id}>
-                <div><strong>{line.name}</strong><span>{line.section ?? "Assembly allowance"}</span></div>
-                <div className={styles.bomNumbers}>{line.quantity} {line.unit}<br /><b>{line.totalWeightKg ?? 0} kg</b></div>
-              </div>
-            ))}
+            <div className={styles.panelTitle}>06 / PRELIMINARY BOM</div>
+            {estimate.bom.map((line) => <div className={styles.bomLine} key={line.id}><div><strong>{line.name}</strong><span>{line.section ?? "Assembly allowance"}</span></div><div className={styles.bomNumbers}>{line.quantity} {line.unit}<br /><b>{line.totalWeightKg ?? 0} kg</b></div></div>)}
           </div>
 
           <div className={styles.memberTable}>
-            <div className={styles.panelTitle}>06 / MEMBER REGISTER</div>
+            <div className={styles.panelTitle}>07 / MEMBER REGISTER</div>
             {model.members.slice(0, 12).map((member) => <div key={member.id}><code>{member.id}</code><span>{member.type}</span><span>{member.startNodeId} → {member.endNodeId}</span><span>{member.sectionCode}</span><b>{member.lengthM.toFixed(2)} m</b></div>)}
             {model.members.length > 12 && <p>+ {model.members.length - 12} additional generated members</p>}
           </div>
