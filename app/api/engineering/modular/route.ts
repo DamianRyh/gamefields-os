@@ -8,22 +8,31 @@ import {
 } from "../../../engineering/modular";
 import { modularLayoutToStructuralModel } from "../../../engineering/modular-structural";
 import { modularLayoutTo3DManifest } from "../../../engineering/modular-3d";
+import { applyProductModules, summarizeModularProduct } from "../../../engineering/modular-product";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const shape = body?.shape === "CIRCLE" ? "CIRCLE" : "RECTANGLE";
+    const productOptions = {
+      goalCount: Number(body?.goalCount ?? 2),
+      gateCount: Number(body?.gateCount ?? 1),
+      brandingPanelCount: Number(body?.brandingPanelCount ?? 4),
+      ballStopHeightM: Number(body?.ballStopHeightM ?? (shape === "RECTANGLE" ? 3 : 0)),
+    };
 
     if (shape === "CIRCLE") {
       const diameterM = Number(body?.diameterM ?? 7);
       if (!Number.isFinite(diameterM) || diameterM <= 0) {
         return NextResponse.json({ error: "diameterM must be a positive number" }, { status: 400 });
       }
-      const layout = buildCircularModularLayout(diameterM, GF_PANNA_MODULAR_RULES);
+      const baseLayout = buildCircularModularLayout(diameterM, GF_PANNA_MODULAR_RULES);
+      const layout = applyProductModules(baseLayout, productOptions);
       const preset = COURT_PRESETS["GF-PANNA-7000"];
       const structuralModel = modularLayoutToStructuralModel(layout, preset);
       const scene3d = modularLayoutTo3DManifest(layout, preset.boardHeightM);
-      return NextResponse.json({ layout, structuralModel, scene3d });
+      const productSummary = summarizeModularProduct(layout);
+      return NextResponse.json({ layout, structuralModel, scene3d, productSummary });
     }
 
     const lengthM = Number(body?.lengthM ?? 15);
@@ -32,14 +41,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "lengthM and widthM must be positive numbers" }, { status: 400 });
     }
 
-    const layout = buildRectangularModularLayout(lengthM, widthM, GF_3V3_MODULAR_RULES);
+    const baseLayout = buildRectangularModularLayout(lengthM, widthM, GF_3V3_MODULAR_RULES);
+    const layout = applyProductModules(baseLayout, productOptions);
     const preset = COURT_PRESETS["GF-3V3-15X10"];
     const structuralModel = modularLayoutToStructuralModel(layout, preset);
     const scene3d = modularLayoutTo3DManifest(layout, preset.boardHeightM);
-    return NextResponse.json({ layout, structuralModel, scene3d });
+    const productSummary = summarizeModularProduct(layout);
+    return NextResponse.json({ layout, structuralModel, scene3d, productSummary });
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Modular geometry generation failed" },
+      { error: error instanceof Error ? error.message : "Modular product generation failed" },
       { status: 500 },
     );
   }
