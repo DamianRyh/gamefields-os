@@ -29,7 +29,9 @@ export const DEFAULT_PROJECT_PROFILE: EngineeringProjectProfile = {
 export function createProjectSnapshot(profile: EngineeringProjectProfile) {
   return {
     ...profile,
-    engineVersion: "gamefields-engineering-v1.1",
+    engineVersion: "gamefields-engineering-v1.2",
+    commercialProposalVersion: "GF-COMMERCIAL-PROPOSAL-1.2",
+    commercialPolicyVersion: "GF-COMMERCIAL-POLICY-1.2",
     designGeneratorVersion: "GF-DESIGN-GENERATOR-1.1",
     locationWindEngineVersion: "GF-LOCATION-WIND-1.1",
     costEngineVersion: "GF-DESIGN-COST-1.1",
