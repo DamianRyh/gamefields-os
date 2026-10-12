@@ -15,7 +15,9 @@
     "test:play": "node tests/play-smoke.mjs",
     "test:mobile": "node tests/play-mobile.mjs",
     "build:objects": "node scripts/build-court-objects.mjs",
-    "test:objects": "COURT_OBJECTS_STANDALONE=1 node tests/court-objects.mjs"
+    "test:objects": "COURT_OBJECTS_STANDALONE=1 node tests/court-objects.mjs",
+    "test:modular": "node tests/modular-product.mjs",
+    "test:modular:viewer": "node scripts/test-modular-viewer.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
