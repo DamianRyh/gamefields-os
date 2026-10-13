@@ -4,6 +4,9 @@ on:
     branches: [feat/gamefields-modular-product-v12]
     paths:
       - 'app/engineering/**'
+      - 'components/gamefields/**'
+      - 'public/models/gamefields/**'
+      - 'tests/source-components.mjs'
       - 'scripts/build-modular-review.mjs'
       - 'tests/modular-review.mjs'
       - 'tests/modular-product.mjs'
@@ -37,6 +40,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec tsc --noEmit
       - run: pnpm test:modular
+      - run: pnpm test:source-components
       - run: pnpm build:modular:review
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:modular:review

@@ -20,6 +20,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec tsc --noEmit
       - run: pnpm test:modular
+      - run: pnpm test:source-components
       - run: pnpm build
       - run: pnpm test:play
       - run: pnpm exec playwright install --with-deps chromium

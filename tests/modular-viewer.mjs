@@ -8,7 +8,7 @@ const browser = await chromium.launch({
     process.env.CHROMIUM_PATH ||
     (existsSync("/usr/bin/chromium") ? "/usr/bin/chromium" : undefined),
   headless: true,
-  args: ["--no-sandbox"],
+  args: ["--no-sandbox", "--enable-unsafe-swiftshader"],
 });
 try {
   const page = await browser.newPage({
@@ -134,6 +134,15 @@ try {
     .getByRole("heading", { name: "Komponenty, nie skalowany model." })
     .waitFor();
   assert.equal(await page.locator("article").count(), 12);
+  await page.getByRole("link", {name:/^WASZE MODELE GLB/}).click();
+  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.loaded==='true');
+  assert.equal(await page.getByTestId('source-glb-viewer').getAttribute('data-mesh-count'),'358');
+  await page.getByRole('button',{name:'SKŁADANIE K1',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.instanceCount==='3');
+  await page.getByRole('slider',{name:'Liczba zespołów K1'}).press('End');
+  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.instanceCount==='8');
+  assert.equal(await page.getByTestId('source-glb-viewer').getAttribute('data-mesh-count'),'96');
+  await page.screenshot({path:'outputs/modular/source-k1-production.png',fullPage:true});
   assert.deepEqual(errors, []);
   console.log(
     "PASS: live slider growth/removal, constant panel width, BOM/budget, gate replacement, circle gates, upper layer removal, API validation, catalogue and responsive viewer.",
