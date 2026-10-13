@@ -1,5 +1,5 @@
 import { build } from "esbuild";
-import { mkdir, writeFile, cp } from "node:fs/promises";
+import { mkdir, writeFile, rm } from "node:fs/promises";
 const result = await build({
   stdin: {
     contents: `import React,{useEffect,useState} from 'react';import{createRoot}from'react-dom/client';import Viewer from './app/engineering/modular-3d/page';import Library from './app/engineering/components/page';import SourceModels from './app/engineering/source-models/page';function Review(){const[view,setView]=useState(()=>new URLSearchParams(location.search).get('view')==='source'?'source':'viewer');useEffect(()=>{function navigate(event){const anchor=event.target.closest?.('a');if(!anchor)return;const href=anchor.getAttribute('href');if(href==='/engineering/components'||href==='/engineering/modular-3d'||href==='/engineering/source-models'){event.preventDefault();setView(href==='/engineering/components'?'library':href==='/engineering/source-models'?'source':'viewer');window.scrollTo(0,0);}}document.addEventListener('click',navigate);return()=>document.removeEventListener('click',navigate)},[]);return view==='library'?<Library/>:view==='source'?<SourceModels assetBase="models/gamefields"/>:<Viewer assetBase="models/gamefields"/>}createRoot(document.getElementById('root')).render(<Review/>);`,
@@ -26,6 +26,5 @@ await writeFile(
 );
 console.log("Standalone modular review: dist/modular-review/index.html");
 
-await cp("public/models/gamefields", "dist/modular-review/models/gamefields", {
-  recursive: true,
-});
+// Remove stale native assets when rebuilding an existing preview directory.
+await rm("dist/modular-review/models", { recursive: true, force: true });

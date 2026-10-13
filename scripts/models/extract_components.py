@@ -2,7 +2,7 @@
 import bpy, pathlib, json, math, hashlib, re, struct
 from mathutils import Vector, Matrix
 ROOT=pathlib.Path(__file__).resolve().parents[2]
-BASE=ROOT/'public/models/gamefields'
+BASE=ROOT/'assets/private/gamefields'
 SELECTIONS={
  'boisko-p1.glb': {'k1':('K1_-1_0 ',),'k2':('K2_-1_-1 ',),'k3':('K3_-1_-1 ',),'k4':('K4_-1 ',),'s1':('=S1','=S1 stopa')},
  'panna-kids-o1.glb': {'po1':('PO1 0 0 ',),'po2':('PO2 0 -1 ',),'po3':('PO3 0 ',)},

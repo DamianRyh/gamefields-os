@@ -1,4 +1,5 @@
 // Use document navigation until the vinext production Link/prefetch runtime is fixed.
+import { NATIVE_MODELS_PUBLIC } from "../native-model-access";
 import { GAMEFIELDS_COMPONENT_LIBRARY } from "../component-library";
 export default function ComponentLibraryPage() {
   return (
@@ -11,11 +12,11 @@ export default function ComponentLibraryPage() {
       }}
     >
       <a href="/engineering/modular-3d">← MODULAR PRODUCT</a>
-      <p>
+      {NATIVE_MODELS_PUBLIC && <p>
         <a href="/engineering/source-models">
           WASZE MODELE GLB / 12 WYDZIELONYCH ZESPOŁÓW ↗
         </a>
-      </p>
+      </p>}
       <p style={{ marginTop: 32, fontSize: 12, letterSpacing: 2 }}>
         GAMEFIELDS / COMPONENT LIBRARY v1.0
       </p>

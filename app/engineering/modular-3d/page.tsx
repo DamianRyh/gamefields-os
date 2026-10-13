@@ -7,6 +7,7 @@ import styles from "./modular-3d.module.css";
 import { generateModularProduct } from "../modular-pipeline";
 import type { Modular3DComponentType as ComponentType } from "../modular-3d";
 
+import { NATIVE_MODELS_PUBLIC } from "../native-model-access";
 import SourceModelsPage from "../source-models/page";
 
 const nativeProducts = [
@@ -23,7 +24,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get("product");
     const frame = requestAnimationFrame(() => {
-      if (nativeProducts.some((p) => p.id === id)) setProduct(id!);
+      if (NATIVE_MODELS_PUBLIC && nativeProducts.some((p) => p.id === id)) setProduct(id!);
     });
     return () => cancelAnimationFrame(frame);
   }, []);
@@ -147,7 +148,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
       </header>
 
       <nav className={styles.productPicker} aria-label="Wybierz produkt GAMEFIELDS">
-        {[{ id: "concept", name: "System koncepcyjny" }, ...nativeProducts].map((p) => (
+        {[{ id: "concept", name: "System koncepcyjny" }, ...(NATIVE_MODELS_PUBLIC ? nativeProducts : [])].map((p) => (
           <button key={p.id} aria-pressed={product === p.id} onClick={() => selectProduct(p.id)}>
             {p.name}
           </button>
@@ -351,7 +352,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
         </aside>
 
         <section className={styles.viewerWrap}>
-        <p><a href="/engineering/source-models">WASZE PANELE / MODELE Z BLENDERA ↗</a></p>
+        {NATIVE_MODELS_PUBLIC && <p><a href="/engineering/source-models">WASZE PANELE / MODELE Z BLENDERA ↗</a></p>}
           <div className={styles.viewerHead}>
             <span>LIVE MODULAR ASSEMBLY</span>
             <b>{data?.scene3d.schema ?? "GF-MODULAR-3D-1.2"}</b>

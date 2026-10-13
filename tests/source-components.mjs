@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-const base = "public/models/gamefields/";
+const base = "assets/private/gamefields/";
 const library = JSON.parse(await readFile(base + "library.json", "utf8"));
 // Geometry-only audit in Node; textures are exercised by the browser viewer.
 const loader = new GLTFLoader().register(() => ({

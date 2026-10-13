@@ -70,27 +70,6 @@ try {
   await page.waitForFunction(
     () => !document.querySelector('[data-component="BALLSTOP_POST"]'),
   );
-  for (const [name, file, meshes] of [
-    ["GAMEFIELDS P1", "boisko-p1", 358],
-    ["Panna Kids O1", "panna-kids-o1", 172],
-    ["GAMEFIELDS W1", "boisko-w1", 118],
-  ]) {
-    await page.getByRole("navigation", { name: "Wybierz produkt GAMEFIELDS" }).getByRole("button", { name, exact: true }).click();
-    await page.waitForFunction(({file, meshes}) => {
-      const d = document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;
-      return d?.loaded === "true" && d?.assetUrl?.endsWith('/' + file + '.glb') && d?.meshCount === String(meshes);
-    }, {file, meshes});
-    assert.equal(await page.getByTestId("live-budget").count(), 0, "Prototype rates must not price source parts");
-    assert.equal(await page.getByTestId("modular-scene").count(), 0);
-  }
-  await page.reload();
-  await page.getByTestId("native-configurator").waitFor();
-  await page.getByRole("button", { name: "SKŁADANIE K1", exact: true }).click();
-  await page.getByRole("slider", { name: "Liczba zespołów K1" }).press("End");
-  await page.waitForFunction(() => document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.meshCount === "96");
-  assert.equal(await page.getByTestId("source-glb-viewer").getAttribute("data-instance-scales"), Array(8).fill("1,1,1").join(";"));
-  await page.getByRole("navigation", { name: "Wybierz produkt GAMEFIELDS" }).getByRole("button", { name: "System koncepcyjny" }).click();
-  await page.getByTestId("live-budget").waitFor();
   await page.getByRole("link", { name: "COMPONENT LIBRARY v1.0 ↗" }).click();
   await page
     .getByRole("heading", { name: "Komponenty, nie skalowany model." })
@@ -98,104 +77,24 @@ try {
   assert.equal(await page.locator("article").count(), 12);
   await page.getByRole("link", { name: "← MODULAR PRODUCT" }).click();
   await page.getByTestId("live-bom").waitFor();
-  await page
-    .getByRole("link", { name: "WASZE PANELE / MODELE Z BLENDERA ↗" })
-    .click();
-  await page.waitForFunction(
-    () =>
-      document.querySelector('[data-testid="source-glb-viewer"]')?.dataset
-        .meshCount === "358" &&
-      document.querySelector('[data-testid="source-glb-viewer"]')?.dataset
-        .loaded === "true",
-  );
-  for (const [name, meshes] of [
-    ["panna-kids-o1", 172],
-    ["boisko-w1", 118],
-  ]) {
-    await page.getByRole("button", { name: new RegExp(name) }).click();
-    await page.waitForFunction(
-      (count) =>
-        document.querySelector('[data-testid="source-glb-viewer"]')?.dataset
-          .meshCount === String(count),
-      meshes,
-    );
+  assert.equal(await page.getByRole("link", { name: "WASZE PANELE / MODELE Z BLENDERA ↗" }).count(), 0);
+  await page.goto(base + "?view=source");
+  await page.getByRole("heading", { name: "Modele w przygotowaniu." }).waitFor();
+  assert.equal(await page.getByTestId("source-glb-viewer").count(), 0);
+  assert.equal(await page.getByRole("link", { name: /Pobierz/ }).count(), 0);
+  await page.goto(base + "?view=viewer&product=boisko-w1");
+  await page.locator("[data-instance-id]").first().waitFor();
+  assert.equal(await page.getByTestId("native-configurator").count(), 0);
+  assert.equal(existsSync("dist/modular-review/models"), false, "No native files in published artifact");
+  const privateLibrary = JSON.parse(await readFile("assets/private/gamefields/library.json", "utf8"));
+  for (const asset of [...privateLibrary.sources, ...privateLibrary.components]) {
+    const response = await page.request.get(base + "/models/gamefields/" + asset.file);
+    assert.equal(response.status(), 404, asset.file + " must not be public");
   }
-  await page.getByRole("button", { name: "CZĘŚCI", exact: true }).click();
-  for (const [name, meshes] of [
-    ["K1", 12],
-    ["K2", 9],
-    ["K3", 34],
-    ["K4", 34],
-    ["S1", 2],
-    ["PO1", 12],
-    ["PO2", 10],
-    ["PO3", 11],
-    ["RW1", 7],
-    ["RW2", 15],
-    ["ST1", 2],
-    ["E1", 1],
-  ]) {
-    await page.getByRole("button", { name, exact: true }).click();
-    await page.waitForFunction(
-      ({ count, name }) => {
-        const d = document.querySelector(
-          '[data-testid="source-glb-viewer"]',
-        )?.dataset;
-        return (
-          d?.meshCount === String(count) &&
-          d?.loaded === "true" &&
-          d?.assetUrl?.endsWith("/" + name.toLowerCase() + ".glb")
-        );
-      },
-      { count: meshes, name },
-    );
-  }
-  await page.getByRole("button", { name: "SKŁADANIE K1", exact: true }).click();
-  await page.waitForFunction(
-    () =>
-      document.querySelector('[data-testid="source-glb-viewer"]')?.dataset
-        .instanceCount === "3",
-  );
-  await page.getByRole("slider", { name: "Liczba zespołów K1" }).press("End");
-  await page.waitForFunction(
-    () =>
-      document.querySelector('[data-testid="source-glb-viewer"]')?.dataset
-        .instanceCount === "8",
-  );
-  assert.equal(
-    await page.getByTestId("source-glb-viewer").getAttribute("data-mesh-count"),
-    "96",
-  );
-  assert.ok(
-    (
-      await page
-        .getByTestId("source-glb-viewer")
-        .getAttribute("data-instance-scales")
-    )
-      .split(";")
-      .every((scale) => scale === "1,1,1"),
-  );
-  await page.setViewportSize({ width: 390, height: 844 });
-  assert.ok(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth,
-    ),
-  );
-  await page.goto(base + "?view=source&model=boisko-w1");
-  await page.waitForFunction(() => {
-    const d = document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;
-    return d?.loaded === "true" && d?.assetUrl?.endsWith("/boisko-w1.glb") && d?.meshCount === "118";
-  });
-  assert.equal(await page.locator(".gf-source-choice").count(), 3);
-  assert.equal(await page.getByRole("button", { name: /boisko-w1/ }).getAttribute("aria-pressed"), "true");
-  await page.getByRole("button", { name: /boisko-p1/ }).click();
-  assert.equal(new URL(page.url()).searchParams.get("model"), "boisko-p1");
-  await page.reload();
-  await page.waitForFunction(() => document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.meshCount === "358");
   assert.deepEqual(errors, []);
   assert.deepEqual(external, []);
   console.log(
-    "PASS: static public review, live modular growth, budget, fixed panel sizes, upper layer, catalogue navigation and mobile; 3 uploaded GLBs, 12 derived components, eight 1:1 K1 instances; no external requests or runtime errors.",
+    "PASS: static public review, live modular growth, budget, fixed panel sizes, upper layer, catalogue navigation and mobile; native preview withheld; all 15 native GLB endpoints return 404; no external requests or runtime errors.",
   );
 } finally {
   await browser.close();

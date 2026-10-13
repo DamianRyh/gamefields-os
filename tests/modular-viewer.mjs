@@ -129,41 +129,17 @@ try {
       fullPage: true,
     });
   }
-  for (const [name, file, meshes] of [
-    ["GAMEFIELDS P1", "boisko-p1", 358],
-    ["Panna Kids O1", "panna-kids-o1", 172],
-    ["GAMEFIELDS W1", "boisko-w1", 118],
-  ]) {
-    await page.getByRole("navigation", { name: "Wybierz produkt GAMEFIELDS" }).getByRole("button", { name, exact: true }).click();
-    await page.waitForFunction(({file, meshes}) => {
-      const d = document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;
-      return d?.loaded === "true" && d?.assetUrl?.endsWith('/' + file + '.glb') && d?.meshCount === String(meshes);
-    }, {file, meshes});
-    assert.equal(await page.getByTestId("live-budget").count(), 0, "Prototype rates must not price source parts");
-    assert.equal(await page.getByTestId("modular-scene").count(), 0);
-  }
-  await page.reload();
-  await page.getByTestId("native-configurator").waitFor();
-  await page.getByRole("button", { name: "SKŁADANIE K1", exact: true }).click();
-  await page.getByRole("slider", { name: "Liczba zespołów K1" }).press("End");
-  await page.waitForFunction(() => document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.meshCount === "96");
-  assert.equal(await page.getByTestId("source-glb-viewer").getAttribute("data-instance-scales"), Array(8).fill("1,1,1").join(";"));
-  await page.getByRole("navigation", { name: "Wybierz produkt GAMEFIELDS" }).getByRole("button", { name: "System koncepcyjny" }).click();
-  await page.getByTestId("live-budget").waitFor();
   await page.getByRole("link", { name: "COMPONENT LIBRARY v1.0 ↗" }).click();
   await page
     .getByRole("heading", { name: "Komponenty, nie skalowany model." })
     .waitFor();
   assert.equal(await page.locator("article").count(), 12);
-  await page.getByRole("link", {name:/^WASZE MODELE GLB/}).click();
-  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.loaded==='true');
-  assert.equal(await page.getByTestId('source-glb-viewer').getAttribute('data-mesh-count'),'358');
-  await page.getByRole('button',{name:'SKŁADANIE K1',exact:true}).click();
-  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.instanceCount==='3');
-  await page.getByRole('slider',{name:'Liczba zespołów K1'}).press('End');
-  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.instanceCount==='8');
-  assert.equal(await page.getByTestId('source-glb-viewer').getAttribute('data-mesh-count'),'96');
-  await page.screenshot({path:'outputs/modular/source-k1-production.png',fullPage:true});
+  assert.equal(await page.getByRole("link", {name:/^WASZE MODELE GLB/}).count(), 0);
+  await page.goto(base + "/engineering/source-models");
+  await page.getByRole("heading", { name: "Modele w przygotowaniu." }).waitFor();
+  assert.equal(await page.getByTestId("source-glb-viewer").count(), 0);
+  const glbResponse = await page.request.get(base + "/models/gamefields/source/boisko-w1.glb");
+  assert.equal(glbResponse.status(), 404);
   assert.deepEqual(errors, []);
   console.log(
     "PASS: live slider growth/removal, constant panel width, BOM/budget, gate replacement, circle gates, upper layer removal, API validation, catalogue and responsive viewer.",

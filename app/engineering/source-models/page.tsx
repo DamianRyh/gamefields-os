@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import library from "../../../public/models/gamefields/library.json";
+import { NATIVE_MODELS_PUBLIC } from "../native-model-access";
+import library from "../../../assets/private/gamefields/library.json";
 import { GlbViewer } from "../../../components/gamefields/glb-viewer";
 import "./source-models.css";
 
@@ -53,6 +54,13 @@ export default function SourceModelsPage({
   const bounds = selected.measuredBoundsM,
     pitch = k1.repeatStudy?.pitchM ?? 0;
   const url = assetBase + "/" + selected.file;
+  if (!NATIVE_MODELS_PUBLIC) return (
+    <section className="gf-source-page">
+      <h1>Modele w przygotowaniu.</h1>
+      <p>Podgląd modeli GAMEFIELDS jest obecnie niedostępny publicznie.</p>
+      <a href="/engineering/modular-3d">← KONFIGURATOR MODUŁOWY</a>
+    </section>
+  );
   return (
     <div className={`gf-source-page${embedded ? " gf-source-embedded" : ""}`}>
       {!embedded && <>
