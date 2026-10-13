@@ -11,6 +11,11 @@ export default function ComponentLibraryPage() {
       }}
     >
       <a href="/engineering/modular-3d">← MODULAR PRODUCT</a>
+      <p>
+        <a href="/engineering/source-models">
+          WASZE MODELE GLB / 12 WYDZIELONYCH ZESPOŁÓW ↗
+        </a>
+      </p>
       <p style={{ marginTop: 32, fontSize: 12, letterSpacing: 2 }}>
         GAMEFIELDS / COMPONENT LIBRARY v1.0
       </p>

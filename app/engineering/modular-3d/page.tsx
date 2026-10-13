@@ -305,6 +305,7 @@ export default function Modular3DPage() {
         </aside>
 
         <section className={styles.viewerWrap}>
+        <p><a href="/engineering/source-models">WASZE PANELE / MODELE Z BLENDERA ↗</a></p>
           <div className={styles.viewerHead}>
             <span>LIVE MODULAR ASSEMBLY</span>
             <b>{data?.scene3d.schema ?? "GF-MODULAR-3D-1.2"}</b>
