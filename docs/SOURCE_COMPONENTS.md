@@ -1,6 +1,6 @@
 # Uploaded GAMEFIELDS Blender models
 
-The three supplied GLB files are preserved byte-for-byte under `public/models/gamefields/source/`. `library.json` records their SHA-256 digests, imported mesh counts and model-measured bounding boxes. They were exported by Blender's glTF exporter v3.6.28.
+The three supplied GLB files are preserved byte-for-byte under `assets/private/gamefields/source/`. `library.json` records their SHA-256 digests, imported mesh counts and model-measured bounding boxes. They were exported by Blender's glTF exporter v3.6.28.
 
 ## Reusable geometry
 
@@ -27,7 +27,7 @@ The measured library is exposed additively through `/api/engineering/components`
 
 ## Public review
 
-The existing Pages distribution copies `public/models/gamefields/` into its static asset directory. Use `?view=source` on the public review URL to open native models directly; the original modular configurator is retained. `pnpm test:modular:review` exercises model loading, all extracted components, K1 repetition at unit scale, mobile layout and catalogue navigation.
+The existing Pages distribution copies `assets/private/gamefields/` into its static asset directory. Use `?view=source` on the public review URL to open native models directly; the original modular configurator is retained. `pnpm test:modular:review` exercises model loading, all extracted components, K1 repetition at unit scale, mobile layout and catalogue navigation.
 
 ## Next production prerequisite
 
@@ -38,3 +38,9 @@ Confirm which named groups constitute saleable panel/goal/post SKUs, physical co
 `/engineering/modular-3d` now includes a product selector for P1, Panna Kids O1 and W1 alongside the preserved conceptual system. Native mode reuses the source/component viewer and the K1 instance-count study directly inside the configurator. The static distribution supplies its relative asset base to the same page. Share a native selection with `?view=viewer&product=boisko-w1`; production uses `/engineering/modular-3d?product=boisko-w1`.
 
 Native mode hides the conceptual dimension controls, structural results and budget rather than assigning 1.5 m placeholder rules or rates to actual geometry. All original court GLBs retain unit scale; K1 copies add/remove actual meshes at the observed pitch. K1 always identifies P1 as its source, even when accessed after selecting another court. Full native court resizing, source-backed StructuralModel and manufacturing BOM/cost remain dependent on confirmed assembly rules and supplier data. Embedded source selection and the product picker remain synchronized, with URL selection restored on reload.
+
+## Public model withdrawal — 2026-10-13
+
+At the owner's request, native GLBs are withheld from the public website. Files are stored outside `public/` in `assets/private/gamefields/`; this is a packaging boundary, not GitHub access control. `NATIVE_MODELS_PUBLIC` is false, native product choices are hidden, source-review routes display an unavailable message, and the static build removes its model directory (including stale copies). CI verifies all fifteen former public GLB URLs return 404. The conceptual configurator remains available. Original native viewer and component logic are retained for future authenticated delivery.
+
+The owner explicitly chose to keep GitHub public for now. Files and their history remain downloadable on GitHub; previously downloaded copies cannot be recalled. Do not claim models are confidential or protected by merely removing a download button. Re-enabling the browser viewer would again deliver model bytes to clients.

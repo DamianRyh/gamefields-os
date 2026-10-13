@@ -47,7 +47,7 @@ Pages must first be enabled in repository Settings → Pages → Source: GitHub 
 
 ## 2026-10-13 — actual Blender source assets
 
-Three uploaded GLBs and twelve rigidly normalized assemblies are preserved in `public/models/gamefields/`; see `SOURCE_COMPONENTS.md`. Native-model viewer `/engineering/source-models` and the public `?view=source` review use GLTFLoader with authored materials. A K1 repeat study uses source-observed ~2.06 m placement with independent unit-scale instances. Curved source modules are not forced into the generic 1.5 m polygon system. Actual geometry is available; production compatibility, connection positions, dimensions and pricing remain unconfirmed/UNPRICED. `pnpm test:source-components` audits originals, component identities, rigid transform geometry conservation and provenance. Next milestone is confirmed manufacturing/connection rules before a full source-backed court/StructuralModel/BOM/price pipeline.
+Three uploaded GLBs and twelve rigidly normalized assemblies are preserved in `assets/private/gamefields/`; see `SOURCE_COMPONENTS.md`. Native-model viewer `/engineering/source-models` and the public `?view=source` review use GLTFLoader with authored materials. A K1 repeat study uses source-observed ~2.06 m placement with independent unit-scale instances. Curved source modules are not forced into the generic 1.5 m polygon system. Actual geometry is available; production compatibility, connection positions, dimensions and pricing remain unconfirmed/UNPRICED. `pnpm test:source-components` audits originals, component identities, rigid transform geometry conservation and provenance. Next milestone is confirmed manufacturing/connection rules before a full source-backed court/StructuralModel/BOM/price pipeline.
 
 ## Three-court model collection
 
@@ -56,3 +56,9 @@ The source-model page presents P1, Panna Kids O1 and W1 as three selectable cour
 ## Native-model configurator integration
 
 P1, Panna Kids O1 and W1 can be selected in `/engineering/modular-3d` itself. Native mode embeds source geometry, twelve component assemblies and K1 repetition while hiding unrelated prototype budget/structure/dimension controls. The conceptual system and its complete existing pipeline remain intact, including state on switching back. Public deep link: `?view=viewer&product=boisko-w1`. Browser tests cover all three actual GLBs, reload selection, native K1 unit-scale growth and return to the conceptual pipeline. Full native manufacturing configuration still requires confirmed connection and assembly rules; do not substitute placeholder costs or assert an approved full-court design.
+
+## Public model withdrawal — 2026-10-13
+
+At the owner's request, native GLBs are withheld from the public website. Files are stored outside `public/` in `assets/private/gamefields/`; this is a packaging boundary, not GitHub access control. `NATIVE_MODELS_PUBLIC` is false, native product choices are hidden, source-review routes display an unavailable message, and the static build removes its model directory (including stale copies). CI verifies all fifteen former public GLB URLs return 404. The conceptual configurator remains available. Original native viewer and component logic are retained for future authenticated delivery.
+
+The owner explicitly chose to keep GitHub public for now. Files and their history remain downloadable on GitHub; previously downloaded copies cannot be recalled. Do not claim models are confidential or protected by merely removing a download button. Re-enabling the browser viewer would again deliver model bytes to clients.

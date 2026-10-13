@@ -5,7 +5,7 @@ on:
     paths:
       - 'app/engineering/**'
       - 'components/gamefields/**'
-      - 'public/models/gamefields/**'
+      - 'assets/private/gamefields/**'
       - 'tests/source-components.mjs'
       - 'scripts/build-modular-review.mjs'
       - 'tests/modular-review.mjs'
@@ -116,32 +116,20 @@ jobs:
           print(f'::error::Unexpected public page: title={parser.title!r}, length={len(html)}, viewer_present={"modular-scene" in html}')
           raise SystemExit(1)
           PYTHON
-      - name: Verify published source GLB library
+      - name: Verify native models are not public
         env:
           PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
           python3 - <<'PYTHON'
-          import hashlib, json, os, struct, time
+          import os
           from urllib.request import urlopen
+          from urllib.error import HTTPError
           from urllib.parse import urljoin
-          base = os.environ['PREVIEW_URL']
-          def read(path):
-              last = None
-              for attempt in range(10):
-                  try:
-                      with urlopen(urljoin(base, path), timeout=30) as response:
-                          return response.read()
-                  except Exception as error:
-                      last = error
-                      time.sleep(3)
-              raise last
-          catalog = json.loads(read('models/gamefields/library.json'))
-          assert len(catalog['sources']) == 3 and len(catalog['components']) == 12
-          for asset in catalog['sources'] + catalog['components']:
-              data = read('models/gamefields/' + asset['file'])
-              magic, version, length = struct.unpack_from('<III', data)
-              assert magic == 0x46546c67 and version == 2 and length == len(data), asset['file']
-              if 'sha256' in asset:
-                  assert hashlib.sha256(data).hexdigest() == asset['sha256'], asset['file']
-          print('All three source GLBs and twelve component GLBs are publicly reachable and valid.')
+          for filename in ['source/boisko-p1.glb', 'source/panna-kids-o1.glb', 'source/boisko-w1.glb'] + ['components/' + name + '.glb' for name in ['k1', 'k2', 'k3', 'k4', 's1', 'po1', 'po2', 'po3', 'rw1', 'rw2', 'st1', 'e1']]:
+              try:
+                  with urlopen(urljoin(os.environ['PREVIEW_URL'], 'models/gamefields/' + filename), timeout=30) as response:
+                      raise AssertionError('Native asset still public: ' + filename)
+              except HTTPError as error:
+                  assert error.code == 404, error.code
+          print('Native source and component assets are no longer publicly served.')
           PYTHON
