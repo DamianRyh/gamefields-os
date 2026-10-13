@@ -52,3 +52,7 @@ Three uploaded GLBs and twelve rigidly normalized assemblies are preserved in `p
 ## Three-court model collection
 
 The source-model page presents P1, Panna Kids O1 and W1 as three selectable court variants, preserving component and K1 study tools. Direct public selection: `?view=source&model=boisko-w1`. Selection updates the shareable URL and survives reload. These are source-backed model previews; pricing and production specifications remain unconfirmed. No whole-model resizing or engineering approval is introduced.
+
+## Native-model configurator integration
+
+P1, Panna Kids O1 and W1 can be selected in `/engineering/modular-3d` itself. Native mode embeds source geometry, twelve component assemblies and K1 repetition while hiding unrelated prototype budget/structure/dimension controls. The conceptual system and its complete existing pipeline remain intact, including state on switching back. Public deep link: `?view=viewer&product=boisko-w1`. Browser tests cover all three actual GLBs, reload selection, native K1 unit-scale growth and return to the conceptual pipeline. Full native manufacturing configuration still requires confirmed connection and assembly rules; do not substitute placeholder costs or assert an approved full-court design.

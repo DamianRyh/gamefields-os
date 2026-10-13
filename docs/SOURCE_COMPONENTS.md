@@ -32,3 +32,9 @@ The existing Pages distribution copies `public/models/gamefields/` into its stat
 ## Next production prerequisite
 
 Confirm which named groups constitute saleable panel/goal/post SKUs, physical connector positions, allowable assembly rules (especially curved modules), drawing dimensions and supplier pricing. Then bind confirmed SKUs to the product pipeline and engineer-reviewed structural assemblies. Full source models are review references, not auto-approved structural designs.
+
+## Native models inside the modular configurator
+
+`/engineering/modular-3d` now includes a product selector for P1, Panna Kids O1 and W1 alongside the preserved conceptual system. Native mode reuses the source/component viewer and the K1 instance-count study directly inside the configurator. The static distribution supplies its relative asset base to the same page. Share a native selection with `?view=viewer&product=boisko-w1`; production uses `/engineering/modular-3d?product=boisko-w1`.
+
+Native mode hides the conceptual dimension controls, structural results and budget rather than assigning 1.5 m placeholder rules or rates to actual geometry. All original court GLBs retain unit scale; K1 copies add/remove actual meshes at the observed pitch. K1 always identifies P1 as its source, even when accessed after selecting another court. Full native court resizing, source-backed StructuralModel and manufacturing BOM/cost remain dependent on confirmed assembly rules and supplier data. Embedded source selection and the product picker remain synchronized, with URL selection restored on reload.

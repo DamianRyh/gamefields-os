@@ -70,6 +70,27 @@ try {
   await page.waitForFunction(
     () => !document.querySelector('[data-component="BALLSTOP_POST"]'),
   );
+  for (const [name, file, meshes] of [
+    ["GAMEFIELDS P1", "boisko-p1", 358],
+    ["Panna Kids O1", "panna-kids-o1", 172],
+    ["GAMEFIELDS W1", "boisko-w1", 118],
+  ]) {
+    await page.getByRole("navigation", { name: "Wybierz produkt GAMEFIELDS" }).getByRole("button", { name, exact: true }).click();
+    await page.waitForFunction(({file, meshes}) => {
+      const d = document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;
+      return d?.loaded === "true" && d?.assetUrl?.endsWith('/' + file + '.glb') && d?.meshCount === String(meshes);
+    }, {file, meshes});
+    assert.equal(await page.getByTestId("live-budget").count(), 0, "Prototype rates must not price source parts");
+    assert.equal(await page.getByTestId("modular-scene").count(), 0);
+  }
+  await page.reload();
+  await page.getByTestId("native-configurator").waitFor();
+  await page.getByRole("button", { name: "SKŁADANIE K1", exact: true }).click();
+  await page.getByRole("slider", { name: "Liczba zespołów K1" }).press("End");
+  await page.waitForFunction(() => document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.meshCount === "96");
+  assert.equal(await page.getByTestId("source-glb-viewer").getAttribute("data-instance-scales"), Array(8).fill("1,1,1").join(";"));
+  await page.getByRole("navigation", { name: "Wybierz produkt GAMEFIELDS" }).getByRole("button", { name: "System koncepcyjny" }).click();
+  await page.getByTestId("live-budget").waitFor();
   await page.getByRole("link", { name: "COMPONENT LIBRARY v1.0 ↗" }).click();
   await page
     .getByRole("heading", { name: "Komponenty, nie skalowany model." })
