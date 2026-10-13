@@ -216,3 +216,5 @@
     font-size: 11px;
   }
 }
+
+.gf-source-embedded { padding: 0; min-height: 0; background: transparent; }

@@ -12,26 +12,37 @@ const offerNames: Record<string, string> = {
 
 export default function SourceModelsPage({
   assetBase = "/models/gamefields",
+  initialModelId,
+  embedded = false,
+  onModelChange,
 }: {
   assetBase?: string;
+  initialModelId?: string;
+  embedded?: boolean;
+  onModelChange?: (id: string) => void;
 }) {
   const [mode, setMode] = useState<"source" | "component" | "study">("source"),
-    [sourceIndex, setSourceIndex] = useState(0),
+    [sourceIndex, setSourceIndex] = useState(() =>
+      Math.max(0, library.sources.findIndex((s) => s.id === initialModelId)),
+    ),
     [componentIndex, setComponentIndex] = useState(0),
     [count, setCount] = useState(3);
   useEffect(() => {
+    if (embedded) return;
     const model = new URLSearchParams(window.location.search).get("model");
     const index = library.sources.findIndex((s) => s.id === model);
     const frame = window.requestAnimationFrame(() => {
       if (index >= 0) setSourceIndex(index);
     });
     return () => window.cancelAnimationFrame(frame);
-  }, []);
+  }, [embedded]);
   function selectSource(index: number) {
     setSourceIndex(index);
+    onModelChange?.(library.sources[index].id);
     const link = new URL(window.location.href);
     link.searchParams.set("model", library.sources[index].id);
-    link.searchParams.set("view", "source");
+    link.searchParams.set("view", embedded ? "viewer" : "source");
+    if (embedded) link.searchParams.set("product", library.sources[index].id);
     window.history.replaceState(null, "", link);
   }
   const source = library.sources[sourceIndex],
@@ -43,7 +54,8 @@ export default function SourceModelsPage({
     pitch = k1.repeatStudy?.pitchM ?? 0;
   const url = assetBase + "/" + selected.file;
   return (
-    <main className="gf-source-page">
+    <div className={`gf-source-page${embedded ? " gf-source-embedded" : ""}`}>
+      {!embedded && <>
       <header>
         <div>
           <span>GAMEFIELDS / KOLEKCJA BOISK</span>
@@ -63,6 +75,7 @@ export default function SourceModelsPage({
         <a href="/engineering/modular-3d">← KONFIGURATOR MODUŁOWY</a>
         <span>GLB LIBRARY / MODEL MEASURED</span>
       </nav>
+      </>}
       <section className="gf-source-layout">
         <aside>
           <div className="gf-source-tabs">
@@ -116,7 +129,7 @@ export default function SourceModelsPage({
             </>
           ) : (
             <>
-              <h2>STUDIUM MODUŁU K1</h2>
+              <h2>STUDIUM MODUŁU K1 / ŹRÓDŁO P1</h2>
               <label>
                 Liczba zespołów K1 <strong>{count}</strong>
                 <input
@@ -190,6 +203,6 @@ export default function SourceModelsPage({
           </p>
         </section>
       </section>
-    </main>
+    </div>
   );
 }

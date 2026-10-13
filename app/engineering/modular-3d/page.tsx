@@ -1,16 +1,45 @@
 // Use document navigation until the vinext production Link/prefetch runtime is fixed.
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./modular-3d.module.css";
 
 import { generateModularProduct } from "../modular-pipeline";
 import type { Modular3DComponentType as ComponentType } from "../modular-3d";
 
+import SourceModelsPage from "../source-models/page";
+
+const nativeProducts = [
+  { id: "boisko-p1", name: "GAMEFIELDS P1" },
+  { id: "panna-kids-o1", name: "Panna Kids O1" },
+  { id: "boisko-w1", name: "GAMEFIELDS W1" },
+];
+
 const PX_PER_M = 34;
 const money = new Intl.NumberFormat("pl-PL", { maximumFractionDigits: 0 });
 
-export default function Modular3DPage() {
+export default function Modular3DPage({ assetBase = "/models/gamefields" }: { assetBase?: string }) {
+  const [product, setProduct] = useState("concept");
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("product");
+    const frame = requestAnimationFrame(() => {
+      if (nativeProducts.some((p) => p.id === id)) setProduct(id!);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+  function selectProduct(id: string) {
+    setProduct(id);
+    const link = new URL(window.location.href);
+    link.searchParams.set("view", "viewer");
+    if (id === "concept") {
+      link.searchParams.delete("product");
+      link.searchParams.delete("model");
+    } else {
+      link.searchParams.set("product", id);
+      link.searchParams.set("model", id);
+    }
+    window.history.replaceState(null, "", link);
+  }
   const [shape, setShape] = useState<"RECTANGLE" | "CIRCLE">("RECTANGLE");
   const [lengthM, setLengthM] = useState(15);
   const [widthM, setWidthM] = useState(10.5);
@@ -111,13 +140,30 @@ export default function Modular3DPage() {
           <h1>Boisko jako produkt modułowy.</h1>
         </div>
         <p>
-          Wymiar, bramki, wejście, branding i piłkochwyt składają się z osobnych
+          {product === "concept" ? <>Wymiar, bramki, wejście, branding i piłkochwyt składają się z osobnych
           komponentów. Każda zmiana przebudowuje 3D, BOM, model konstrukcyjny i
-          budżet.
+          budżet.</> : <>Twoje modele z Blendera w konfiguratorze. Wybierz boisko, obejrzyj jego części lub sprawdź składanie zespołów K1.</>}
         </p>
       </header>
 
-      <section className={styles.layout}>
+      <nav className={styles.productPicker} aria-label="Wybierz produkt GAMEFIELDS">
+        {[{ id: "concept", name: "System koncepcyjny" }, ...nativeProducts].map((p) => (
+          <button key={p.id} aria-pressed={product === p.id} onClick={() => selectProduct(p.id)}>
+            {p.name}
+          </button>
+        ))}
+      </nav>
+      {product !== "concept" ? (
+        <section data-testid="native-configurator">
+          <p className={styles.tipDark}>
+            Twoje modele GLB: oryginalne boisko, osobne zespoły i składanie K1.
+            Suwak K1 dodaje lub usuwa rzeczywiste zespoły bez skalowania.
+            Zmiana wymiarów pełnego boiska, StructuralModel i wycena wymagają
+            potwierdzonych reguł połączeń i cennika. Engineer Gate pozostaje wymagany.
+          </p>
+          <SourceModelsPage key={product} initialModelId={product} assetBase={assetBase} onModelChange={selectProduct} embedded />
+        </section>
+      ) : <section className={styles.layout}>
         <aside className={styles.controls}>
           <div className={styles.segmented}>
             <button
@@ -468,7 +514,7 @@ export default function Modular3DPage() {
             ))}
           </div>
         </section>
-      </section>
+      </section>}
     </main>
   );
 }
