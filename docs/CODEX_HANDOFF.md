@@ -48,3 +48,7 @@ Pages must first be enabled in repository Settings → Pages → Source: GitHub 
 ## 2026-10-13 — actual Blender source assets
 
 Three uploaded GLBs and twelve rigidly normalized assemblies are preserved in `public/models/gamefields/`; see `SOURCE_COMPONENTS.md`. Native-model viewer `/engineering/source-models` and the public `?view=source` review use GLTFLoader with authored materials. A K1 repeat study uses source-observed ~2.06 m placement with independent unit-scale instances. Curved source modules are not forced into the generic 1.5 m polygon system. Actual geometry is available; production compatibility, connection positions, dimensions and pricing remain unconfirmed/UNPRICED. `pnpm test:source-components` audits originals, component identities, rigid transform geometry conservation and provenance. Next milestone is confirmed manufacturing/connection rules before a full source-backed court/StructuralModel/BOM/price pipeline.
+
+## Three-court model collection
+
+The source-model page presents P1, Panna Kids O1 and W1 as three selectable court variants, preserving component and K1 study tools. Direct public selection: `?view=source&model=boisko-w1`. Selection updates the shareable URL and survives reload. These are source-backed model previews; pricing and production specifications remain unconfirmed. No whole-model resizing or engineering approval is introduced.

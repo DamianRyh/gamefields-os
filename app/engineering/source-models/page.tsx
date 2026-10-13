@@ -1,8 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import library from "../../../public/models/gamefields/library.json";
 import { GlbViewer } from "../../../components/gamefields/glb-viewer";
 import "./source-models.css";
+
+const offerNames: Record<string, string> = {
+  "boisko-p1": "GAMEFIELDS P1",
+  "panna-kids-o1": "GAMEFIELDS Panna Kids O1",
+  "boisko-w1": "GAMEFIELDS W1",
+};
 
 export default function SourceModelsPage({
   assetBase = "/models/gamefields",
@@ -13,6 +19,21 @@ export default function SourceModelsPage({
     [sourceIndex, setSourceIndex] = useState(0),
     [componentIndex, setComponentIndex] = useState(0),
     [count, setCount] = useState(3);
+  useEffect(() => {
+    const model = new URLSearchParams(window.location.search).get("model");
+    const index = library.sources.findIndex((s) => s.id === model);
+    const frame = window.requestAnimationFrame(() => {
+      if (index >= 0) setSourceIndex(index);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+  function selectSource(index: number) {
+    setSourceIndex(index);
+    const link = new URL(window.location.href);
+    link.searchParams.set("model", library.sources[index].id);
+    link.searchParams.set("view", "source");
+    window.history.replaceState(null, "", link);
+  }
   const source = library.sources[sourceIndex],
     component = library.components[componentIndex],
     k1 = library.components.find((c) => c.id === "K1")!;
@@ -25,11 +46,11 @@ export default function SourceModelsPage({
     <main className="gf-source-page">
       <header>
         <div>
-          <span>GAMEFIELDS / SOURCE COMPONENTS</span>
+          <span>GAMEFIELDS / KOLEKCJA BOISK</span>
           <h1>
-            Wasze panele.
+            Trzy boiska.
             <br />
-            Rzeczywista geometria.
+            Wasze modele.
           </h1>
         </div>
         <p>
@@ -61,16 +82,18 @@ export default function SourceModelsPage({
           </div>
           {mode === "source" ? (
             <>
-              <h2>MODELE ŹRÓDŁOWE</h2>
+              <h2>WYBIERZ BOISKO / 03 MODELE</h2>
               {library.sources.map((s, i) => (
                 <button
                   className="gf-source-choice"
                   key={s.id}
                   aria-pressed={sourceIndex === i}
-                  onClick={() => setSourceIndex(i)}
+                  onClick={() => selectSource(i)}
                 >
-                  <strong>{s.id}</strong>
-                  <span>{s.meshCount} osobnych meshów</span>
+                  <span>0{i + 1} / BOISKO</span>
+                  <strong>{offerNames[s.id]}</strong>
+                  <span>{s.id}.glb</span>
+                  <span>Obejrzyj model 3D ↗</span>
                 </button>
               ))}
             </>
@@ -121,6 +144,12 @@ export default function SourceModelsPage({
                 kompletnym boiskiem ani jego produkcyjnym BOM.
               </p>
             </>
+          )}
+          {mode === "source" && (
+            <p>Wybrany wariant: <strong>{offerNames[source.id]}</strong>.
+              Cena i specyfikacja produkcyjna do indywidualnego potwierdzenia.
+              Model pokazujemy w oryginalnej geometrii, bez zmiany wymiarów.
+            </p>
           )}
           <dl>
             <dt>OBWIEDNIA MODELU / m</dt>

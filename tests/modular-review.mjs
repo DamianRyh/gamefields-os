@@ -160,6 +160,17 @@ try {
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   );
+  await page.goto(base + "?view=source&model=boisko-w1");
+  await page.waitForFunction(() => {
+    const d = document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;
+    return d?.loaded === "true" && d?.assetUrl?.endsWith("/boisko-w1.glb") && d?.meshCount === "118";
+  });
+  assert.equal(await page.locator(".gf-source-choice").count(), 3);
+  assert.equal(await page.getByRole("button", { name: /boisko-w1/ }).getAttribute("aria-pressed"), "true");
+  await page.getByRole("button", { name: /boisko-p1/ }).click();
+  assert.equal(new URL(page.url()).searchParams.get("model"), "boisko-p1");
+  await page.reload();
+  await page.waitForFunction(() => document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.meshCount === "358");
   assert.deepEqual(errors, []);
   assert.deepEqual(external, []);
   console.log(
