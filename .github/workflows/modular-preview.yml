@@ -116,3 +116,32 @@ jobs:
           print(f'::error::Unexpected public page: title={parser.title!r}, length={len(html)}, viewer_present={"modular-scene" in html}')
           raise SystemExit(1)
           PYTHON
+      - name: Verify published source GLB library
+        env:
+          PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PYTHON'
+          import hashlib, json, os, struct, time
+          from urllib.request import urlopen
+          from urllib.parse import urljoin
+          base = os.environ['PREVIEW_URL']
+          def read(path):
+              last = None
+              for attempt in range(10):
+                  try:
+                      with urlopen(urljoin(base, path), timeout=30) as response:
+                          return response.read()
+                  except Exception as error:
+                      last = error
+                      time.sleep(3)
+              raise last
+          catalog = json.loads(read('models/gamefields/library.json'))
+          assert len(catalog['sources']) == 3 and len(catalog['components']) == 12
+          for asset in catalog['sources'] + catalog['components']:
+              data = read('models/gamefields/' + asset['file'])
+              magic, version, length = struct.unpack_from('<III', data)
+              assert magic == 0x46546c67 and version == 2 and length == len(data), asset['file']
+              if 'sha256' in asset:
+                  assert hashlib.sha256(data).hexdigest() == asset['sha256'], asset['file']
+          print('All three source GLBs and twelve component GLBs are publicly reachable and valid.')
+          PYTHON
