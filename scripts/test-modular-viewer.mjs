@@ -12,7 +12,9 @@ try {
   const {Miniflare}=await import(wranglerRequire.resolve('miniflare'));
   const files=(await readdir('dist/server',{recursive:true})).filter(file=>/\.m?js$/.test(file));
   worker=new Miniflare({modules:['index.js',...files.filter(file=>file!=='index.js')].map(file=>({type:'ESModule',path:resolve('dist/server',file)})),modulesRoot:resolve('dist/server'),compatibilityDate:'2026-05-15',compatibilityFlags:['nodejs_compat'],d1Databases:['DB']});
-  const mime={'.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.woff2':'font/woff2'};
+  const db=await worker.getD1Database('DB');
+  await db.exec((await readFile('drizzle/0011_panna_kids_inquiries.sql','utf8')).replace(/\n/g,' '));
+  const mime={'.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.glb':'model/gltf-binary','.woff2':'font/woff2'};
   server=createServer(async(request,response)=>{
    try {
     const pathname=new URL(request.url,'http://localhost').pathname;

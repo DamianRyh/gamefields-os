@@ -44,3 +44,7 @@ Native mode hides the conceptual dimension controls, structural results and budg
 At the owner's request, native GLBs are withheld from the public website. Files are stored outside `public/` in `assets/private/gamefields/`; this is a packaging boundary, not GitHub access control. `NATIVE_MODELS_PUBLIC` is false, native product choices are hidden, source-review routes display an unavailable message, and the static build removes its model directory (including stale copies). CI verifies all fifteen former public GLB URLs return 404. The conceptual configurator remains available. Original native viewer and component logic are retained for future authenticated delivery.
 
 The owner explicitly chose to keep GitHub public for now. Files and their history remain downloadable on GitHub; previously downloaded copies cannot be recalled. Do not claim models are confidential or protected by merely removing a download button. Re-enabling the browser viewer would again deliver model bytes to clients.
+
+## Panna Kids public product authorization — 2026-10-17
+
+The owner subsequently allowed public GLBs. The first sales journey now exports the original Panna Kids GLB explicitly at `/products/panna-kids/panna-kids.glb`, including in the Pages product review. Native materials can change panel color without modifying geometry or scale. Source-group evidence and pricing limits are documented in `PANNA_KIDS_PRODUCT_V1.md`. Old source-gallery URLs remain withheld; this dedicated publication does not require copying the entire source library into public assets.

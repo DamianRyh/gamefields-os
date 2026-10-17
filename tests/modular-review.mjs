@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {testPannaKidsFlow} from "./panna-kids-flow.mjs";
 import { chromium } from "playwright";
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
@@ -7,9 +8,9 @@ import { resolve } from "node:path";
 const html = await readFile("dist/modular-review/index.html");
 const server = createServer(async (request, response) => {
   const pathname = new URL(request.url, "http://localhost").pathname;
-  if (pathname.startsWith("/models/gamefields/")) {
+  if (pathname.startsWith("/models/gamefields/") || pathname.startsWith("/products/panna-kids/")) {
     const file = resolve("dist/modular-review", "." + pathname),
-      root = resolve("dist/modular-review/models/gamefields") + "/";
+      root = resolve("dist/modular-review") + "/";
     if (!file.startsWith(root)) {
       response.writeHead(400).end();
       return;
@@ -18,7 +19,7 @@ const server = createServer(async (request, response) => {
       const data = await readFile(file);
       response.setHeader(
         "Content-Type",
-        file.endsWith(".glb") ? "model/gltf-binary" : "application/json",
+        file.endsWith(".glb") ? "model/gltf-binary" : file.endsWith(".webp") ? "image/webp" : "application/json",
       );
       response.end(data);
     } catch {
@@ -91,10 +92,11 @@ try {
     const response = await page.request.get(base + "/models/gamefields/" + asset.file);
     assert.equal(response.status(), 404, asset.file + " must not be public");
   }
+  await testPannaKidsFlow(page,{url:base+"?view=panna-kids",production:false});
   assert.deepEqual(errors, []);
   assert.deepEqual(external, []);
   console.log(
-    "PASS: static public review, live modular growth, budget, fixed panel sizes, upper layer, catalogue navigation and mobile; native preview withheld; all 15 native GLB endpoints return 404; no external requests or runtime errors.",
+    "PASS: static public review, live modular growth, budget, fixed panel sizes, upper layer, catalogue navigation and mobile; legacy source gallery withheld; all 15 former GLB endpoints return 404; no external requests or runtime errors.",
   );
 } finally {
   await browser.close();

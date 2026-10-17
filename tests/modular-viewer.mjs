@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {testPannaKidsFlow} from "./panna-kids-flow.mjs";
 import { chromium } from "playwright";
 import { existsSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
@@ -140,6 +141,7 @@ try {
   assert.equal(await page.getByTestId("source-glb-viewer").count(), 0);
   const glbResponse = await page.request.get(base + "/models/gamefields/source/boisko-w1.glb");
   assert.equal(glbResponse.status(), 404);
+  await testPannaKidsFlow(page,{url:base+"/products/panna-kids",production:true});
   assert.deepEqual(errors, []);
   console.log(
     "PASS: live slider growth/removal, constant panel width, BOM/budget, gate replacement, circle gates, upper layer removal, API validation, catalogue and responsive viewer.",

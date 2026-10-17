@@ -4,6 +4,10 @@ on:
     branches: [feat/gamefields-modular-product-v12]
     paths:
       - 'app/engineering/**'
+      - 'app/products/**'
+      - 'public/products/**'
+      - 'lib/products/**'
+      - 'tests/panna-kids*'
       - 'components/gamefields/**'
       - 'assets/private/gamefields/**'
       - 'tests/source-components.mjs'
@@ -40,6 +44,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec tsc --noEmit
       - run: pnpm test:modular
+      - run: pnpm test:panna-kids
       - run: pnpm test:source-components
       - run: pnpm build:modular:review
       - run: pnpm exec playwright install --with-deps chromium
@@ -116,7 +121,7 @@ jobs:
           print(f'::error::Unexpected public page: title={parser.title!r}, length={len(html)}, viewer_present={"modular-scene" in html}')
           raise SystemExit(1)
           PYTHON
-      - name: Verify native models are not public
+      - name: Verify legacy source-gallery URLs remain withheld
         env:
           PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
@@ -131,5 +136,23 @@ jobs:
                       raise AssertionError('Native asset still public: ' + filename)
               except HTTPError as error:
                   assert error.code == 404, error.code
-          print('Native source and component assets are no longer publicly served.')
+          print('Legacy source-gallery and component URLs remain withheld.')
+          PYTHON
+
+      - name: Verify public Panna Kids product assets
+        env:
+          PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PYTHON'
+          import hashlib, os
+          from urllib.request import urlopen
+          from urllib.parse import urljoin
+          with urlopen(urljoin(os.environ['PREVIEW_URL'], 'products/panna-kids/panna-kids.glb'), timeout=30) as response:
+              data = response.read()
+          assert hashlib.sha256(data).hexdigest() == '1b3a58dff0e5b2edcdb6a6f53acd1ae0438147e8422b5e33237be9c9239a4c34'
+          for name in ['perspective', 'overhead', 'detail']:
+              with urlopen(urljoin(os.environ['PREVIEW_URL'], 'products/panna-kids/' + name + '.webp'), timeout=30) as response:
+                  data = response.read()
+                  assert data[:4] == b'RIFF' and data[8:12] == b'WEBP'
+          print('Public Panna Kids GLB and product renders verified.')
           PYTHON
