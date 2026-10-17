@@ -1,3 +1,4 @@
+import {courtArea} from "@/lib/court-geometry";
 import {projectSchema} from "@/lib/project";
 import {patternComplexity,patternExecutionMeta} from "@/lib/pattern-library";
 
@@ -15,7 +16,7 @@ export async function POST(request:Request){
   const parsed=projectSchema.safeParse(body);
   if(!parsed.success)return json({error:"Invalid project"},400);
   const p=parsed.data;
-  const area=p.length*p.width;
+  const area=courtArea(p);
   const shadowIntensity=Math.max(0,Math.min(100,p.shadowIntensity??25));
   const complexity=patternComplexity(p.patternFamily||"organic-flow",p.patternVariant||1);
   const execution=patternExecutionMeta(p.patternFamily||"organic-flow",p.patternVariant||1,area);
