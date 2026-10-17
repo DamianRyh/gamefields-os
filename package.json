@@ -20,7 +20,8 @@
     "test:modular:viewer": "node scripts/test-modular-viewer.mjs",
     "build:modular:review": "node scripts/build-modular-review.mjs",
     "test:modular:review": "node tests/modular-review.mjs",
-    "test:source-components": "node tests/source-components.mjs"
+    "test:source-components": "node tests/source-components.mjs",
+    "test:panna-kids": "node tests/panna-kids-domain.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
