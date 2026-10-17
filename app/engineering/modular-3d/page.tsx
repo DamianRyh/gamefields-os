@@ -147,6 +147,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
         </p>
       </header>
 
+      <p><a href="/products/panna-kids">PANNA KIDS / ZAPROJEKTUJ SWOJE BOISKO ↗</a></p>
       <nav className={styles.productPicker} aria-label="Wybierz produkt GAMEFIELDS">
         {[{ id: "concept", name: "System koncepcyjny" }, ...(NATIVE_MODELS_PUBLIC ? nativeProducts : [])].map((p) => (
           <button key={p.id} aria-pressed={product === p.id} onClick={() => selectProduct(p.id)}>

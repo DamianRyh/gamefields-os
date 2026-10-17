@@ -8,15 +8,25 @@ export function GlbViewer({
   url,
   count = 1,
   pitch = 0,
+  panelColor,
 }: {
   url: string;
   count?: number;
   pitch?: number;
+  panelColor?: string;
 }) {
   const container = useRef<HTMLDivElement>(null),
     latestCount = useRef(count),
-    controller = useRef<{ rebuild: (count: number) => void } | null>(null);
+    latestColor = useRef(panelColor),
+    controller = useRef<{
+      rebuild: (count: number) => void;
+      recolor: (color?: string) => void;
+    } | null>(null);
   const [message, setMessage] = useState("Wczytywanie modelu GLB…");
+  useEffect(() => {
+    latestColor.current = panelColor;
+    controller.current?.recolor(panelColor);
+  }, [panelColor]);
   useEffect(() => {
     latestCount.current = count;
     controller.current?.rebuild(count);
@@ -129,7 +139,28 @@ export function GlbViewer({
           });
           host.dataset.meshCount = String(meshes);
         };
-        controller.current = { rebuild };
+        const baseColors = new Map<THREE.MeshStandardMaterial, THREE.Color>();
+        const recolor = (color?: string) => {
+          template?.traverse((node) => {
+            if (!(node instanceof THREE.Mesh)) return;
+            for (const material of Array.isArray(node.material)
+              ? node.material
+              : [node.material]) {
+              if (
+                material instanceof THREE.MeshStandardMaterial &&
+                material.name.startsWith("Panele - kolor edytowalny")
+              ) {
+                if (!baseColors.has(material))
+                  baseColors.set(material, material.color.clone());
+                material.color.copy(
+                  color ? new THREE.Color(color) : baseColors.get(material)!,
+                );
+              }
+            }
+          });
+          host.dataset.panelColor = color || "source";
+        };
+        controller.current = { rebuild, recolor };
         new GLTFLoader().load(
           url,
           (gltf) => {
@@ -143,6 +174,7 @@ export function GlbViewer({
             template.position.sub(
               new THREE.Vector3(center.x, box.min.y, center.z),
             );
+            recolor(latestColor.current);
             rebuild(latestCount.current);
             setMessage("");
           },
