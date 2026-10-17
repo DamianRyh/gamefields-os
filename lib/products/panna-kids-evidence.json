@@ -1,0 +1,94 @@
+{
+  "status": "OBSERVED_SCENE_INVENTORY_NOT_MANUFACTURING_BOM",
+  "sourceFile": "panna-kids-o1.glb",
+  "sha256": "1b3a58dff0e5b2edcdb6a6f53acd1ae0438147e8422b5e33237be9c9239a4c34",
+  "meshCount": 172,
+  "measuredBoundsM": {
+    "x": 6.002000331878662,
+    "y": 6.6230549812316895,
+    "z": 1.5160000324249268
+  },
+  "inventory": [
+    {
+      "family": "PO1",
+      "label": "Panele niskie",
+      "quantity": 6,
+      "sourceGroups": [
+        "PO1 0 0",
+        "PO1 0 1",
+        "PO1 0 2",
+        "PO1 3.141592653589793 0",
+        "PO1 3.141592653589793 1",
+        "PO1 3.141592653589793 2"
+      ]
+    },
+    {
+      "family": "PO2",
+      "label": "Zespoły przejść",
+      "quantity": 4,
+      "sourceGroups": [
+        "PO2 0 -1",
+        "PO2 0 1",
+        "PO2 3.141592653589793 -1",
+        "PO2 3.141592653589793 1"
+      ]
+    },
+    {
+      "family": "PO3",
+      "label": "Nadproża",
+      "quantity": 2,
+      "sourceGroups": [
+        "PO3 0",
+        "PO3 3.141592653589793"
+      ]
+    },
+    {
+      "family": "BR1",
+      "label": "Zespoły bramek",
+      "quantity": 2,
+      "sourceGroups": [
+        "BR1 -1",
+        "BR1 1"
+      ]
+    },
+    {
+      "family": "S1",
+      "label": "Słupki S1",
+      "quantity": 8,
+      "sourceGroups": [
+        "S1",
+        "S1.001",
+        "S1.002",
+        "S1.003",
+        "S1.004",
+        "S1.005",
+        "S1.006",
+        "S1.007"
+      ]
+    },
+    {
+      "family": "PO2-post",
+      "label": "Słupki wysokie PO2",
+      "quantity": 4,
+      "sourceGroups": [
+        "PO2 slup wysoki",
+        "PO2 slup wysoki.001",
+        "PO2 slup wysoki.002",
+        "PO2 slup wysoki.003"
+      ]
+    }
+  ],
+  "sourceMaterialNames": [
+    "Bramki - kolor edytowalny",
+    "Panele - kolor edytowalny",
+    "Rama - stal malowana proszkowo"
+  ],
+  "authoredSheetThicknessMm": [
+    2
+  ],
+  "confirmedManufacturingDimensions": null,
+  "confirmedWeightKg": null,
+  "connectionPoints": null,
+  "confirmedSurface": null,
+  "confirmedPriceNetPln": null
+}

@@ -19,10 +19,20 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec tsc --noEmit
+      - run: pnpm test:modular
+      - run: pnpm test:panna-kids
+      - run: pnpm test:source-components
       - run: pnpm build
       - run: pnpm test:play
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:mobile
+      - run: pnpm test:modular:viewer
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: modular-viewer-screens
+          path: outputs/modular
+          retention-days: 7
       - run: pnpm build:objects
       - run: pnpm test:objects
       - run: php -l integrations/wordpress/court-objects/gamefields-court-objects.php
@@ -42,4 +52,11 @@ jobs:
         with:
           name: play-mobile-screens
           path: outputs/mobile
+          retention-days: 7
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: panna-kids-screens
+          path: outputs/panna-kids
           retention-days: 7

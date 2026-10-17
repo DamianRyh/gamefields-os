@@ -1,0 +1,158 @@
+name: GAMEFIELDS Modular Public Preview
+on:
+  push:
+    branches: [feat/gamefields-modular-product-v12]
+    paths:
+      - 'app/engineering/**'
+      - 'app/products/**'
+      - 'public/products/**'
+      - 'lib/products/**'
+      - 'tests/panna-kids*'
+      - 'components/gamefields/**'
+      - 'assets/private/gamefields/**'
+      - 'tests/source-components.mjs'
+      - 'scripts/build-modular-review.mjs'
+      - 'tests/modular-review.mjs'
+      - 'tests/modular-product.mjs'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/modular-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gamefields-modular-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      pages_enabled: ${{ steps.pages.outputs.enabled }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm test:modular
+      - run: pnpm test:panna-kids
+      - run: pnpm test:source-components
+      - run: pnpm build:modular:review
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:modular:review
+      - name: Check Pages configuration
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/pages" > /dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Enable GitHub Pages with Source=GitHub Actions, then rerun this workflow."
+          fi
+      - uses: actions/configure-pages@v5
+        if: steps.pages.outputs.enabled == 'true'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gamefields-modular-review-html
+          path: dist/modular-review/index.html
+          retention-days: 30
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/modular-review
+  deploy:
+    needs: build
+    if: needs.build.outputs.pages_enabled == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish modular review
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify public review response
+        env:
+          PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          for attempt in $(seq 1 15); do
+            if curl --location --compressed --fail --silent --show-error "$PREVIEW_URL?review_commit=$GITHUB_SHA" --output /tmp/gamefields-public-review.html; then
+              if python3 - <<'PYTHON'
+          from pathlib import Path
+          html = Path('/tmp/gamefields-public-review.html').read_text()
+          valid = 'GAMEFIELDS — Modular Product v1.2' in html and 'modular-scene' in html
+          if valid:
+              print('Public GAMEFIELDS modular review is reachable and contains the viewer.')
+          raise SystemExit(0 if valid else 1)
+          PYTHON
+              then exit 0; fi
+            fi
+            sleep 4
+          done
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          class TitleParser(HTMLParser):
+              title = ''
+              in_title = False
+              def handle_starttag(self, tag, attrs):
+                  self.in_title = tag == 'title'
+              def handle_endtag(self, tag):
+                  if tag == 'title': self.in_title = False
+              def handle_data(self, data):
+                  if self.in_title: self.title += data
+          file = Path('/tmp/gamefields-public-review.html')
+          html = file.read_text() if file.exists() else ''
+          parser = TitleParser()
+          parser.feed(html)
+          print(f'::error::Unexpected public page: title={parser.title!r}, length={len(html)}, viewer_present={"modular-scene" in html}')
+          raise SystemExit(1)
+          PYTHON
+      - name: Verify legacy source-gallery URLs remain withheld
+        env:
+          PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PYTHON'
+          import os
+          from urllib.request import urlopen
+          from urllib.error import HTTPError
+          from urllib.parse import urljoin
+          for filename in ['source/boisko-p1.glb', 'source/panna-kids-o1.glb', 'source/boisko-w1.glb'] + ['components/' + name + '.glb' for name in ['k1', 'k2', 'k3', 'k4', 's1', 'po1', 'po2', 'po3', 'rw1', 'rw2', 'st1', 'e1']]:
+              try:
+                  with urlopen(urljoin(os.environ['PREVIEW_URL'], 'models/gamefields/' + filename), timeout=30) as response:
+                      raise AssertionError('Native asset still public: ' + filename)
+              except HTTPError as error:
+                  assert error.code == 404, error.code
+          print('Legacy source-gallery and component URLs remain withheld.')
+          PYTHON
+
+      - name: Verify public Panna Kids product assets
+        env:
+          PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PYTHON'
+          import hashlib, os
+          from urllib.request import urlopen
+          from urllib.parse import urljoin
+          with urlopen(urljoin(os.environ['PREVIEW_URL'], 'products/panna-kids/panna-kids.glb'), timeout=30) as response:
+              data = response.read()
+          assert hashlib.sha256(data).hexdigest() == '1b3a58dff0e5b2edcdb6a6f53acd1ae0438147e8422b5e33237be9c9239a4c34'
+          for name in ['perspective', 'overhead', 'detail']:
+              with urlopen(urljoin(os.environ['PREVIEW_URL'], 'products/panna-kids/' + name + '.webp'), timeout=30) as response:
+                  data = response.read()
+                  assert data[:4] == b'RIFF' and data[8:12] == b'WEBP'
+          print('Public Panna Kids GLB and product renders verified.')
+          PYTHON
