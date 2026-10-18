@@ -27,15 +27,23 @@ try{
   assert.equal(await page.locator('#gc-studio-frame').getAttribute('src'),'https://gamefields-studio.ryhfs90.chatgpt.site/?home=1');
   assert.equal(await page.locator('.gc-direction').count(),3);
   const message=page.locator('[name="your-message"]');await message.fill('Treść testu interfejsu — bez wysyłki.');
+  const existingProject='Boisko: 20 × 12 m; nawierzchnia EPDM; wyposażenie: 2 bramki.';
+  await page.locator('[name="project-details"]').evaluate((field,value)=>{field.value=value;field.dispatchEvent(new Event('input',{bubbles:true}))},existingProject);
   for(const name of ['Organic Flow','Urban Contrast','Classic Lines']){
    await page.getByRole('button',{name:'Zapytaj o '+name,exact:true}).click();
    assert.ok((await page.locator('[name="project-details"]').inputValue()).includes(name));
+   const details=await page.locator('[name="project-details"]').inputValue();
+   assert.ok(details.includes(existingProject),'Existing Studio parameters are preserved');
+   assert.equal(details.split('Wstępny kierunek wizualny:').length,2,'Only one direction summary');
    assert.equal(await message.inputValue(),'Treść testu interfejsu — bez wysyłki.');
    assert.equal(await page.locator('[data-gf-inquiry][aria-pressed="true"]').count(),1);
    assert.equal(await page.evaluate(()=>document.activeElement===document.querySelector('[name="your-email"]')),true);
    assert.ok(await page.locator('#gc-attached').isVisible());
    assert.ok((await page.locator('#gc-attached').innerText()).includes(name));
   }
+  await page.locator('[name="project-details"]').evaluate(field=>{field.value='Nowy projekt ze Studio';field.dispatchEvent(new Event('input',{bubbles:true}))});
+  assert.equal(await page.locator('[data-gf-inquiry][aria-pressed="true"]').count(),0,'New Studio project clears stale gallery selection');
+  assert.ok((await page.locator('#gc-attached').innerText()).includes('ze Studio'));
   const faq=page.locator('.gc-faq details').first();await faq.locator('summary').click();assert.ok(await faq.getAttribute('open')!==null);
   if(width<=900){const menu=page.getByRole('button',{name:'Menu',exact:true});await menu.click();assert.equal(await menu.getAttribute('aria-expanded'),'true');await page.locator('#gc-nav').getByRole('link',{name:'Kierunki',exact:true}).click();assert.equal(await menu.getAttribute('aria-expanded'),'false')}
   await page.locator('#kierunki').scrollIntoViewIfNeeded();
@@ -48,5 +56,5 @@ try{
   assert.deepEqual(errors,[]);
   await page.close();
  }
- console.log('PASS: WordPress homepage at 1440/768/390px, three directions, real form prefill, message preserved, focus, FAQ, mobile menu and no overflow. No form submitted.');
+ console.log('PASS: WordPress homepage at 1440/768/390px, three directions, real form prefill, message and Studio parameters preserved, focus, FAQ, mobile menu and no overflow. No form submitted.');
 }finally{await browser.close()}

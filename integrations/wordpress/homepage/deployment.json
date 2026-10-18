@@ -1,10 +1,10 @@
 {
   "page_id": 3462,
   "url": "https://www.gamefields.eu/",
-  "published_at_utc": "2026-10-18T12:22:02.414870+00:00",
-  "source_sha256": "8bdcc4b5a8f5bdb1563e407f334aa0dce466a010d4dc5fd5cda755a941290d23",
-  "modified_gmt": "2026-10-18T12:22:01",
+  "published_at_utc": "2026-10-18T12:29:43.970367+00:00",
+  "source_sha256": "b6ea46d64ba5b824028fa8187b85fa8ecf83e43c3821d70ce37cee62e544b78b",
+  "modified_gmt": "2026-10-18T12:29:43",
   "draft_id": 3880,
   "draft_status": "trash",
-  "public_ui_test": "passed at 1440/768/390px, without submitting form"
+  "public_ui_test": "passed at 1440/768/390px, message and existing Studio parameters retained, without submitting form"
 }

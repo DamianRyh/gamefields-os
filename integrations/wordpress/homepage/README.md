@@ -6,7 +6,7 @@
 
 - Pozycja „Kierunki” w nawigacji oraz skrót z głównego nagłówka.
 - Trzy porównywalne karty Organic Flow, Urban Contrast i Classic Lines z istniejącymi wizualizacjami koncepcyjnymi z biblioteki WordPressa. Nie są przedstawiane jako zdjęcia gotowych realizacji.
-- Wybór kierunku trafia do istniejącego pola `project-details` w Contact Form 7, formularz ID `3758`. Wiadomość klienta pozostaje zachowana, focus przechodzi na e-mail, a wybrany kierunek ma widoczny stan i potwierdzenie.
+- Wybór kierunku trafia do istniejącego pola `project-details` w Contact Form 7, formularz ID `3758`. Wiadomość klienta i już dołączone parametry Studio pozostają zachowane; ponowny wybór zastępuje tylko opis kierunku. Nowy projekt z aplikacji czyści nieaktualne zaznaczenie galerii. Focus przechodzi na e-mail, a wybrany kierunek ma widoczny stan i potwierdzenie.
 - Trzy kroki od inspiracji do określenia zakresu i cztery odpowiedzi FAQ.
 - Menu na telefonach i tabletach, wymiary obrazów i lazy loading, obsługa preferencji ograniczonego ruchu.
 
