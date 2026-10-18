@@ -43,3 +43,7 @@ Cofnięcie: przywrócić poprzednią treść przez wersje WordPressa albo prywat
 ## Granica zakresu
 
 Jest to wdrożenie prezentacji oferty i przejścia do kontaktu inspirowane sposobem pracy Tylko. Nie publikuje nowej wersji aplikacji z PR #43. Sam render iframe nie potwierdza działania wszystkich funkcji Studio. API health aplikacji zwraca 404; wcześniejsze 403 z technicznych odczytów nie dowodziły całkowitej niedostępności osadzenia w przeglądarce. Pełne Studio, integracja domeny, cennik i backend projektów wymagają osobnego odbioru.
+
+## Etap produktowy
+
+Nawigacja udostępnia istniejący katalog „Boiska Panna”. Parametr `gf_product` rozpoznaje siedem znanych slugów (mapowanie w `../products/products.json`) i dołącza nazwę modelu do `project-details`. Kierunki zachowują ten opis, a potwierdzenie przy formularzu pokazuje zarówno model, jak i kierunek. Nowy projekt ze Studio zastępuje wcześniejszy opis i czyści nieaktualne oznaczenie produktu. Pozostałe parametry URL nie służą do budowania HTML.

@@ -1,0 +1,44 @@
+[
+  {
+    "id": 3473,
+    "name": "Panna Perfo-Circle",
+    "slug": "panna-perfo-circle",
+    "shape": "okrag"
+  },
+  {
+    "id": 3475,
+    "name": "Panna Perfo-Rect",
+    "slug": "panna-perfo-rect",
+    "shape": "prostokat"
+  },
+  {
+    "id": 3476,
+    "name": "Panna Net-Rect",
+    "slug": "panna-net-rect",
+    "shape": "prostokat"
+  },
+  {
+    "id": 3477,
+    "name": "Panna Solid-Circle",
+    "slug": "panna-solid-circle",
+    "shape": "okrag"
+  },
+  {
+    "id": 3478,
+    "name": "Panna Net-Circle",
+    "slug": "panna-net-circle",
+    "shape": "okrag"
+  },
+  {
+    "id": 3479,
+    "name": "Panna High Net-Circle",
+    "slug": "panna-high-net-circle",
+    "shape": "okrag"
+  },
+  {
+    "id": 3480,
+    "name": "Panna Steel OctaGround",
+    "slug": "panna-steel-octaground",
+    "shape": "oktagon"
+  }
+]
