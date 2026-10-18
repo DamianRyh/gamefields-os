@@ -1,0 +1,78 @@
+{
+  "published_at_utc": "2026-10-18T12:56:45.264851+00:00",
+  "pages": [
+    {
+      "id": 3462,
+      "draft": 3885,
+      "url": "https://www.gamefields.eu/",
+      "source_sha256": "bbfa08834c2d92aebb3fdc02f9c33a018f77030ff0da3f1311a5ca4f53b9552e",
+      "modified_gmt": "2026-10-18T12:56:20",
+      "draft_status": "trash"
+    },
+    {
+      "id": 3465,
+      "draft": 3886,
+      "url": "https://www.gamefields.eu/boiska-street-football/",
+      "source_sha256": "16f145c76f4de5b1e5625d06ade69de83002b0b6e40a6a2877c949111f50603c",
+      "modified_gmt": "2026-10-18T12:56:24",
+      "draft_status": "trash"
+    },
+    {
+      "id": 3473,
+      "draft": 3887,
+      "url": "https://www.gamefields.eu/panna-perfo-circle/",
+      "source_sha256": "184bd62029618d67c1a3645bea3ba9cffa9aaa6aaf27d4cc2f5d3635fe12b45a",
+      "modified_gmt": "2026-10-18T12:56:27",
+      "draft_status": "trash"
+    },
+    {
+      "id": 3475,
+      "draft": 3888,
+      "url": "https://www.gamefields.eu/panna-perfo-rect/",
+      "source_sha256": "570903dcd97d61a7b41f1fdf7f7a52e301028023c017ec73afd91edaaddb6ed3",
+      "modified_gmt": "2026-10-18T12:56:30",
+      "draft_status": "trash"
+    },
+    {
+      "id": 3476,
+      "draft": 3889,
+      "url": "https://www.gamefields.eu/panna-net-rect/",
+      "source_sha256": "65d506ab9d8bbf59ed7cd54790a644f5fed9c1bb91912ec10919ec7165d970e6",
+      "modified_gmt": "2026-10-18T12:56:33",
+      "draft_status": "trash"
+    },
+    {
+      "id": 3477,
+      "draft": 3890,
+      "url": "https://www.gamefields.eu/panna-solid-circle/",
+      "source_sha256": "f9b4f827fb4968018f48851be6c9d1cfaffe44f4fbe4332f91836074b2a86d18",
+      "modified_gmt": "2026-10-18T12:56:36",
+      "draft_status": "trash"
+    },
+    {
+      "id": 3478,
+      "draft": 3891,
+      "url": "https://www.gamefields.eu/panna-net-circle/",
+      "source_sha256": "4e6f3d03512639b96589893e89b574c4668924e358c9380f781c73bf0266bb37",
+      "modified_gmt": "2026-10-18T12:56:39",
+      "draft_status": "trash"
+    },
+    {
+      "id": 3479,
+      "draft": 3892,
+      "url": "https://www.gamefields.eu/panna-high-net-circle/",
+      "source_sha256": "ef49f064a6c63f3074ebfa4758b7ff4190e80974d28f59d6c596b484fbf4e551",
+      "modified_gmt": "2026-10-18T12:56:42",
+      "draft_status": "trash"
+    },
+    {
+      "id": 3480,
+      "draft": 3893,
+      "url": "https://www.gamefields.eu/panna-steel-octaground/",
+      "source_sha256": "31b96899372716d52b9074cf469736c13cbff47e77ecde51d84bb49ce8dcac21",
+      "modified_gmt": "2026-10-18T12:56:45",
+      "draft_status": "trash"
+    }
+  ],
+  "tests": "PASS: public and draft product UI at 1440/768/390px; homepage regression passed; no forms submitted"
+}

@@ -107,3 +107,11 @@ Cel jakościowy Tylko pozostaje docelowym wynikiem całego programu, nie etykiet
 - W przeglądarce osadzenie obecnego Studio renderuje interfejs. Wcześniejszy 403 przy domyślnym technicznym User-Agent nie był dowodem całkowitej niedostępności aplikacji dla klientów. Nie potwierdzono jednak wszystkich funkcji ani zgodności działającego deploymentu z kodem `main`; health nadal zwraca 404.
 - Źródło wdrożonej strony, identyfikatory istniejących obrazów, zakres testów i cofnięcie: `integrations/wordpress/homepage/README.md`. Prywatna kopia zmienianej treści i konfiguracji formularza pozostaje poza Git. Nie jest pełnym backupem hostingu/D1.
 - Następny etap: ustalić i wyrównać wersję publicznej aplikacji z `main`, zweryfikować rzeczywisty backend projektów/cennika oraz dopracować karty produktów i ofertę. Ta aktualizacja nie zastępuje całego programu osiągnięcia docelowej jakości Tylko.
+
+## Etap produktowy — katalog Panna i zapytanie o model
+
+Kolejna iteracja obejmuje istniejący katalog `/boiska-street-football/`, siedem kart modeli Panna oraz formularz na stronie głównej. Filtry kształtu i porównanie parametrów pomagają wybrać model. CTA przekazuje do kontaktu dozwolony identyfikator produktu; model, kierunek i wiadomość pozostają razem w `project-details`. Poprawiono również mobilne tło nawigacji i nieaktualne kotwice kontaktu/procesu.
+
+Źródła i procedura cofnięcia: `integrations/wordpress/products/README.md`. Numery stron i sumy źródeł: `integrations/wordpress/products/deployment.json`. Raport bieżącego odbioru i konkretne zależności poza WordPressem: `docs/STUDIO-PUBLIC-ACCEPTANCE.md`.
+
+Nie publikowano nowego builda aplikacji na zewnętrznym hoście. Obecne publiczne Studio działa w sprawdzonym przepływie edycja → podsumowanie, ale nie potwierdzono zgodności z `main`, backend health zwraca 404. Aktywacja bramy WordPress i pełny rollout aplikacji wymagają ustalenia źródła wdrożenia, dostępu do publikacji i backupu bazy aplikacji.
