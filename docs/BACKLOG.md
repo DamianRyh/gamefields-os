@@ -1,31 +1,24 @@
-# Gamefields backlog
+# Kolejka prac Gamefields
 
-Updated: 2026-10-04
+Aktualizacja: 18.10.2026. Cel: uporządkować i rozwijać obecny projekt. Wykonanie dokumentacji nie oznacza wykonania opisanych zadań.
 
-## P0 — current Studio iteration
+| Priorytet | Zadanie | Warunek zakończenia | Zależność |
+| --- | --- | --- | --- |
+| P0 | Ustalić hosting, DNS, właściciela deploymentu aplikacji i D1 | Każda usługa ma potwierdzonego właściciela, identyfikator i sposób dostępu | Właściciel projektu / administrator |
+| P0 | Skonfigurować uwierzytelniony dostęp WordPress | Odczyt bieżącego użytkownika i dozwolonych operacji API bez ujawnienia hasła | Bezpieczne ustawienia środowiska |
+| P0 | Pełny backup WP i D1 | Kopie bazy i plików oraz sprawdzone odtworzenie w oddzielnym środowisku | Hosting i konto bazy |
+| P0 | Rozwiązać przekierowanie `/studio` do obrazka | Trasa otwiera docelowy moduł, media pozostają dostępne | Dostęp WP/hosting, zdrowy upstream |
+| P0 | Ustalić działający upstream i integrację `/play` | Health HTTP 200 i `schemaReady: true`, poprawne sesje na domenie | Deployment, D1, gateway i cache |
+| P1 | Ocenić PR #41, #27, #26, #13 | Osobna decyzja dla każdego PR na podstawie diff, CI i zgodności produktu | Bieżący kod i podglądy |
+| P1 | Doprowadzić lokalne poprawki Studio do oddzielnego PR | Przegląd kodu, desktop/mobile, aktualny test sportów, kierunków i ceny | Obecne niezacommitowane pliki Studio |
+| P1 | Uporządkować gałęzie | 23 kandydatów po weryfikacji zależności i archiwizacji, 19 pozostałych po ocenie różnic | Pełna kopia refs; bez automatycznego kasowania |
+| P1 | Ochrona `main` | Wymagany PR i adekwatne CI, blokada force-push, sprawdzona możliwość pracy właściciela | GitHub Settings / administration:write |
+| P1 | Trwała obsługa zapytań Court Objects | Zapis serwerowy, identyfikator zgłoszenia i potwierdzony odbiór przez obsługę | Wybór backendu i odbiorcy |
+| P1 | Zatwierdzony cennik | 18 zmiennych QUOTE_* i potwierdzone reguły netto/brutto, test rzeczywistego API | Decyzje biznesowe i konfiguracja |
+| P1 | Konta publiczne | Odzyskanie hasła, potwierdzanie adresu i test dwóch niezależnych sesji | Backend / dostawca poczty |
+| P2 | Kompozytor realistycznego podglądu | Kolory, wzór i geometria zgodne między planem a sceną dla wybranych sportów | Sceny, maski i wydajność mobile |
+| P2 | Kolejne sceny i kontekst miejsca | Tenis/Padel oraz park/szkoła/osiedle; ustawienia zapisują się w projekcie | Stabilny kompozytor |
+| P2 | Porządek w treściach i mediach WP | Mapa stron, menu i duplikatów z zachowaniem SEO i powiązań mediów | Pełny eksport WP, backup |
+| P2 | Rozliczenie danych i retencji | Ustalony okres i sposób przechowywania zgłoszeń, kont, mediów i kopii | Mapa danych i decyzje właściciela |
 
-- Validate the three Basketball 3×3 realistic previews at desktop and mobile breakpoints.
-- Open a focused PR for `feat/studio-multisport-realistic-previews`, run full CI and publish after approval.
-
-Acceptance: selecting Basketball 3×3 and then Organic Flow, Urban Contrast or Classic Lines updates the realistic image immediately; switching back to Street Football restores its own imagery; unsupported sports never display the wrong court.
-
-## P1 — Studio workflow
-
-- Build the automated realistic compositor: neutral scene per sport, calibrated court mask and homography, Canvas/WebGL texture layer, sport lines/equipment above the graphic.
-- Add Tennis and Padel as the next calibrated scenes, each starting with three dominant color directions.
-- Extend realistic preview coverage to the highest-value Signature presets after the compositor is stable.
-- Add location context so visualization surroundings can reflect park, school, housing estate or club.
-- Add comparison mode for two selected directions using the same camera and location.
-- Persist selected visualization context with the Builder project.
-
-## P1 — platform integration
-
-- Complete and verify the WordPress MU-plugin installation through hosting access.
-- Move the canonical public experience to `gamefields.eu/play` with same-origin auth.
-- Merge or rebase PR #13 only after its CI and product review are complete.
-
-## P2 — quality
-
-- Add a Studio-specific browser test for sport/direction/image mapping and cached switching.
-- Add image asset budgets and automated checks for dimensions, format and maximum size.
-- Validate accessibility labels and keyboard selection across the full guided workflow.
+Wszystkie obszary produktu pozostają zachowane zgodnie z `GAMEFIELDS-PRODUCT-CONTINUITY.md`. Poprzednią kolejkę z 04.10.2026 zachowano w `archive/2026-10-04/BACKLOG.md`.
