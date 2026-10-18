@@ -54,7 +54,19 @@ try{
   if(process.env.GF_WP_PREVIEW_AUTH==='1')await page.addStyleTag({content:'#wpadminbar{display:none!important}html{margin-top:0!important}'});
   await page.locator('#kierunki').screenshot({path:`outputs/www-wordpress/directions-${width}.png`});
   assert.deepEqual(errors,[]);
+  const review=page.locator('#gc-project-review');await review.locator('summary').click();
+  assert.equal(await page.locator('#gc-project-text').textContent(),await page.locator('[name="project-details"]').inputValue());
+  const literal='Parametry: 20 × 12 m. <strong>Tekst klienta</strong>';
+  await page.locator('[name="project-details"]').evaluate((field,value)=>{field.value=value;field.dispatchEvent(new Event('input',{bubbles:true}))},literal);
+  await page.waitForFunction(value=>document.getElementById('gc-project-text').textContent===value,literal);
+  assert.equal(await page.locator('#gc-project-text strong').count(),0,'Context is rendered as plain text');
+  await page.locator('[name="your-email"]').fill('test-ui@example.invalid');await page.locator('[name="your-name"]').fill('Test interfejsu');
+  await review.screenshot({path:`outputs/www-wordpress/inquiry-review-${width}.png`});
+  await page.getByRole('button',{name:'Usuń dołączone parametry',exact:true}).click();
+  assert.equal(await page.locator('[name="project-details"]').inputValue(),'');assert.ok(await review.isHidden());assert.ok(await page.locator('#gc-attached').isHidden());
+  assert.equal(await message.inputValue(),'Treść testu interfejsu — bez wysyłki.');assert.equal(await page.locator('[name="your-email"]').inputValue(),'test-ui@example.invalid');assert.equal(await page.locator('[name="your-name"]').inputValue(),'Test interfejsu');
+  await page.getByRole('button',{name:'Zapytaj o Organic Flow',exact:true}).click();assert.ok((await page.locator('[name="project-details"]').inputValue()).includes('Organic Flow'));assert.ok(!(await page.locator('[name="project-details"]').inputValue()).includes(literal));
   await page.close();
  }
- console.log('PASS: WordPress homepage at 1440/768/390px, three directions, real form prefill, message and Studio parameters preserved, focus, FAQ, mobile menu and no overflow. No form submitted.');
+ console.log('PASS: WordPress homepage at 1440/768/390px, three directions, real form prefill, message and Studio parameters preserved, focus, FAQ, mobile menu, context review and clearing without data loss, and no overflow. No form submitted.');
 }finally{await browser.close()}

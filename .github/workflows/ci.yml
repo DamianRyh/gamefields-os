@@ -18,6 +18,7 @@ jobs:
           node-version: 22.13.0
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: node scripts/sync-wordpress-product-design.mjs --check
       - run: pnpm exec tsc --noEmit
       - run: pnpm build
       - run: pnpm test:play

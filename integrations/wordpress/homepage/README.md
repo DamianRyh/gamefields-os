@@ -47,3 +47,7 @@ Jest to wdrożenie prezentacji oferty i przejścia do kontaktu inspirowane sposo
 ## Etap produktowy
 
 Nawigacja udostępnia istniejący katalog „Boiska Panna”. Parametr `gf_product` rozpoznaje siedem znanych slugów (mapowanie w `../products/products.json`) i dołącza nazwę modelu do `project-details`. Kierunki zachowują ten opis, a potwierdzenie przy formularzu pokazuje zarówno model, jak i kierunek. Nowy projekt ze Studio zastępuje wcześniejszy opis i czyści nieaktualne oznaczenie produktu. Pozostałe parametry URL nie służą do budowania HTML.
+
+## Podgląd dołączonych parametrów
+
+Rozwijany obszar przy formularzu pokazuje dokładną treść `project-details` jako tekst. Klient może usunąć dołączony wybór, zachowując wiadomość i dane kontaktowe. Usunięcie czyści również zaznaczenie kart i `gf_product` w adresie; kolejny wybór ponownie uzupełnia podgląd. Test strony głównej sprawdza tę ścieżkę oraz to, że tekst przypominający HTML nie jest interpretowany jako znaczniki.
