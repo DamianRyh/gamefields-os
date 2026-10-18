@@ -28,3 +28,9 @@ Kopie dziewięciu stron przed zmianą i szkice odbiorowe znajdują się prywatni
 Przy cofnięciu przywrócić poprzednie `content.raw` dziewięciu stron z kopii lub wersji WordPressa, bez nadpisywania innych ustawień. Przed przywróceniem sprawdzić, czy od publikacji nie było cudzych zmian. Szkice odbiorowe przenieść do kosza po zakończeniu odbioru. Sumy opublikowanych źródeł są w `deployment.json`.
 
 Odbiór szkiców i publicznych stron zakończony sukcesem. Dodatkowa regresja strony głównej także zaliczona na 1440/768/390 px; nawigację sprawdzono również przy 912/1024 px. Zrzuty są lokalnie w `outputs/www-wordpress/`. Kontrola porównuje wszystkie dziewięć treści WordPressa z plikami w repozytorium. Szkice `3885`–`3893` po odbiorze przeniesiono do kosza.
+
+## Wspólna warstwa wizualna
+
+Nowsza iteracja stosuje identyfikację strony głównej, pełne obrazy konstrukcji z opisem alternatywnym, ścieżkę nawigacji na karcie i wspólną stopkę. Źródło: `gamefields-product-design.css`; po jego zmianie uruchomić `node scripts/sync-wordpress-product-design.mjs`. Opcja `--check` kontroluje zgodność osadzonych stylów i jest w CI. Test produktów obejmuje teraz również szerokość 1024 px, semantyczne obrazy oraz nawigację powrotną.
+
+Szczegóły, ograniczenia materiałów i procedura odbioru: `docs/WWW-VISUAL-REFINEMENT.md`. Aktualny stan publikacji i szkiców wskazuje `deployment.json`.

@@ -115,3 +115,7 @@ Kolejna iteracja obejmuje istniejący katalog `/boiska-street-football/`, siedem
 Źródła i procedura cofnięcia: `integrations/wordpress/products/README.md`. Numery stron i sumy źródeł: `integrations/wordpress/products/deployment.json`. Raport bieżącego odbioru i konkretne zależności poza WordPressem: `docs/STUDIO-PUBLIC-ACCEPTANCE.md`.
 
 Nie publikowano nowego builda aplikacji na zewnętrznym hoście. Obecne publiczne Studio działa w sprawdzonym przepływie edycja → podsumowanie, ale nie potwierdzono zgodności z `main`, backend health zwraca 404. Aktywacja bramy WordPress i pełny rollout aplikacji wymagają ustalenia źródła wdrożenia, dostępu do publikacji i backupu bazy aplikacji.
+
+## Spójność wizualna i podgląd zapytania
+
+Katalog i siedem kart produktów otrzymują wspólną warstwę identyfikacji strony głównej, pełne semantyczne obrazy i nawigację powrotną. Formularz pokazuje treść dołączonych parametrów i pozwala ją usunąć bez utraty wiadomości lub kontaktu. Zakres, odbiór i cofnięcie: `docs/WWW-VISUAL-REFINEMENT.md`. Aktualny stan wdrożenia zawierają manifesty przy źródłach WordPressa.

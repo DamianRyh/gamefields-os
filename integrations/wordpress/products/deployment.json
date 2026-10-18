@@ -1,78 +1,78 @@
 {
-  "published_at_utc": "2026-10-18T12:56:45.264851+00:00",
+  "published_at_utc": "2026-10-18T13:30:29.659386+00:00",
   "pages": [
     {
       "id": 3462,
-      "draft": 3885,
+      "draft": 3929,
       "url": "https://www.gamefields.eu/",
-      "source_sha256": "bbfa08834c2d92aebb3fdc02f9c33a018f77030ff0da3f1311a5ca4f53b9552e",
-      "modified_gmt": "2026-10-18T12:56:20",
+      "source_sha256": "12a8ed087b80ef221883096c009b648ff8633eb616ab96a0fea0026dd66aa4b3",
+      "modified_gmt": "2026-10-18T13:30:01",
       "draft_status": "trash"
     },
     {
       "id": 3465,
-      "draft": 3886,
+      "draft": 3930,
       "url": "https://www.gamefields.eu/boiska-street-football/",
-      "source_sha256": "16f145c76f4de5b1e5625d06ade69de83002b0b6e40a6a2877c949111f50603c",
-      "modified_gmt": "2026-10-18T12:56:24",
+      "source_sha256": "08f379f2fdd73a0084bbfe6d1297c7439f444321ed14d66efa1e958f514423f8",
+      "modified_gmt": "2026-10-18T13:30:05",
       "draft_status": "trash"
     },
     {
       "id": 3473,
-      "draft": 3887,
+      "draft": 3931,
       "url": "https://www.gamefields.eu/panna-perfo-circle/",
-      "source_sha256": "184bd62029618d67c1a3645bea3ba9cffa9aaa6aaf27d4cc2f5d3635fe12b45a",
-      "modified_gmt": "2026-10-18T12:56:27",
+      "source_sha256": "53c701a294c2c5ac20ead42b0034a55e1fd3f8212b42ace91eaa095f934b43de",
+      "modified_gmt": "2026-10-18T13:30:08",
       "draft_status": "trash"
     },
     {
       "id": 3475,
-      "draft": 3888,
+      "draft": 3932,
       "url": "https://www.gamefields.eu/panna-perfo-rect/",
-      "source_sha256": "570903dcd97d61a7b41f1fdf7f7a52e301028023c017ec73afd91edaaddb6ed3",
-      "modified_gmt": "2026-10-18T12:56:30",
+      "source_sha256": "e2d10ae52add77c7ef11ce6e3278890ac4822032fcff4637bba9fe4a2e888cd2",
+      "modified_gmt": "2026-10-18T13:30:12",
       "draft_status": "trash"
     },
     {
       "id": 3476,
-      "draft": 3889,
+      "draft": 3933,
       "url": "https://www.gamefields.eu/panna-net-rect/",
-      "source_sha256": "65d506ab9d8bbf59ed7cd54790a644f5fed9c1bb91912ec10919ec7165d970e6",
-      "modified_gmt": "2026-10-18T12:56:33",
+      "source_sha256": "8f1aa065c659b916345038e4dfb14b70a4db3c3f75fd55e1e7b4f054b99d6754",
+      "modified_gmt": "2026-10-18T13:30:16",
       "draft_status": "trash"
     },
     {
       "id": 3477,
-      "draft": 3890,
+      "draft": 3934,
       "url": "https://www.gamefields.eu/panna-solid-circle/",
-      "source_sha256": "f9b4f827fb4968018f48851be6c9d1cfaffe44f4fbe4332f91836074b2a86d18",
-      "modified_gmt": "2026-10-18T12:56:36",
+      "source_sha256": "76a3e9d378dfc703f82ce749571532cc9107ef0b20dfd0bb179edc39c94f3da0",
+      "modified_gmt": "2026-10-18T13:30:19",
       "draft_status": "trash"
     },
     {
       "id": 3478,
-      "draft": 3891,
+      "draft": 3935,
       "url": "https://www.gamefields.eu/panna-net-circle/",
-      "source_sha256": "4e6f3d03512639b96589893e89b574c4668924e358c9380f781c73bf0266bb37",
-      "modified_gmt": "2026-10-18T12:56:39",
+      "source_sha256": "325909df80fab94088f5e91f6073eb38dc00b004f954ed3fb7538c261bb0cc72",
+      "modified_gmt": "2026-10-18T13:30:22",
       "draft_status": "trash"
     },
     {
       "id": 3479,
-      "draft": 3892,
+      "draft": 3936,
       "url": "https://www.gamefields.eu/panna-high-net-circle/",
-      "source_sha256": "ef49f064a6c63f3074ebfa4758b7ff4190e80974d28f59d6c596b484fbf4e551",
-      "modified_gmt": "2026-10-18T12:56:42",
+      "source_sha256": "35e94cf614d3ba871fcc11d19bd45cc5c482bd3f4b3718b66330ee96b9372afa",
+      "modified_gmt": "2026-10-18T13:30:26",
       "draft_status": "trash"
     },
     {
       "id": 3480,
-      "draft": 3893,
+      "draft": 3937,
       "url": "https://www.gamefields.eu/panna-steel-octaground/",
-      "source_sha256": "31b96899372716d52b9074cf469736c13cbff47e77ecde51d84bb49ce8dcac21",
-      "modified_gmt": "2026-10-18T12:56:45",
+      "source_sha256": "34a4d66d45bccfbd9dac5dda0a24783fa96ecb8b1df59ff2fce3c8a30c292ccf",
+      "modified_gmt": "2026-10-18T13:30:29",
       "draft_status": "trash"
     }
   ],
-  "tests": "PASS: public and draft product UI at 1440/768/390px; homepage regression passed; no forms submitted"
+  "tests": "PASS: draft and public product UI at 1440/1024/768/390px; homepage context review/clear regression at 1440/768/390px; no forms submitted"
 }
