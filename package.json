@@ -14,6 +14,8 @@
     "db:generate": "drizzle-kit generate",
     "test:play": "node tests/play-smoke.mjs",
     "test:mobile": "node tests/play-mobile.mjs",
+    "test:studio": "node scripts/test-studio.mjs",
+    "build:wordpress": "node scripts/build-wordpress-gateway.mjs",
     "build:objects": "node scripts/build-court-objects.mjs",
     "test:objects": "COURT_OBJECTS_STANDALONE=1 node tests/court-objects.mjs"
   },
