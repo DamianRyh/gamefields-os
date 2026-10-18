@@ -97,3 +97,13 @@ Nie znaleziono potwierdzonej listy wyłączonych agentów lub ich uprawnień. Ni
 | 6. Realistyczne sceny i publikacja | Kompozytor, kolejne sporty, mobile, dostępność, pomiar i pełny test domeny | Codex + QA + właściciel |
 
 Cel jakościowy Tylko pozostaje docelowym wynikiem całego programu, nie etykietą gotowości tego pierwszego PR-a. Wyłączonych agentów ani ich zewnętrznych uprawnień nie można przywrócić z dostępnego zestawu narzędzi.
+
+## Aktualizacja po wdrożeniu WordPress — 18.10.2026
+
+- PR #43 został scalony do `main` po pełnym sukcesie CI. Zbudowany lokalny Worker również zaliczył testy Studio z mockowanym API wyceny.
+- Dostęp administracyjny WordPressa działa; poprzednie informacje o braku tego dostępu opisują stan sprzed poprawnego logowania. Sesji i danych uwierzytelniających nie zapisano w repozytorium.
+- Na istniejącej stronie głównej `3462` opublikowano galerię trzech kierunków, wybór przekazywany do `project-details` w istniejącym Contact Form 7, opis procesu i FAQ. Nie zmieniono adresu, tytułu, szablonu ani konfiguracji SEO i poczty. Zachowano osadzenie Studio, ofertę i pozostałe obszary.
+- Odbiór szkicu i publicznej strony zaliczył 1440/768/390 px: obrazy, trzy wybory, zachowanie wiadomości, focus, FAQ, menu oraz brak poziomego overflow. Formularza nie wysyłano; dostarczenie poczty wymaga osobnego sprawdzenia.
+- W przeglądarce osadzenie obecnego Studio renderuje interfejs. Wcześniejszy 403 przy domyślnym technicznym User-Agent nie był dowodem całkowitej niedostępności aplikacji dla klientów. Nie potwierdzono jednak wszystkich funkcji ani zgodności działającego deploymentu z kodem `main`; health nadal zwraca 404.
+- Źródło wdrożonej strony, identyfikatory istniejących obrazów, zakres testów i cofnięcie: `integrations/wordpress/homepage/README.md`. Prywatna kopia zmienianej treści i konfiguracji formularza pozostaje poza Git. Nie jest pełnym backupem hostingu/D1.
+- Następny etap: ustalić i wyrównać wersję publicznej aplikacji z `main`, zweryfikować rzeczywisty backend projektów/cennika oraz dopracować karty produktów i ofertę. Ta aktualizacja nie zastępuje całego programu osiągnięcia docelowej jakości Tylko.
