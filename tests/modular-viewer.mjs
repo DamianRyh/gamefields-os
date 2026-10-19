@@ -141,6 +141,8 @@ try {
   assert.equal(await page.getByTestId("source-glb-viewer").count(), 1);
   const glbResponse = await page.request.get(base + "/models/gamefields/source/boisko-w1.glb");
   assert.equal(glbResponse.status(), 200);
+  await page.goto(base + "/engineering/modular-3d?product=boisko-p1&scene=urban");
+  await page.waitForFunction(()=>{const d=document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;return d?.loaded==='true'&&d.backgroundReady==='true'&&d.cameraMode==='fixed-scene'},{},{timeout:60000});
   await testPannaKidsFlow(page,{url:base+"/products/panna-kids",production:true});
   assert.deepEqual(errors, []);
   console.log(

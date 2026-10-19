@@ -24,7 +24,8 @@ export default function SourceModelsPage({
   embedded?: boolean;
   onModelChange?: (id: string) => void;
 }) {
-  const [scene, setScene] = useState(()=>typeof window!=="undefined" && new URLSearchParams(location.search).get("scene")==="urban");
+  const [scene, setScene] = useState(false);
+  useEffect(()=>{const frame=requestAnimationFrame(()=>setScene(["urban","school"].includes(new URLSearchParams(location.search).get("scene")||"")));return ()=>cancelAnimationFrame(frame)},[]);
   const [mode, setMode] = useState<"source" | "component" | "study">("source"),
     [sourceIndex, setSourceIndex] = useState(() =>
       Math.max(0, library.sources.findIndex((s) => s.id === initialModelId)),
