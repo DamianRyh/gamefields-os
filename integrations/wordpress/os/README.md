@@ -4,7 +4,7 @@
 
 Właściciel 19.10.2026 wyraźnie polecił: „udostepnij wszystkie modele oraz podgląd 3d , cały sestem operacyjny”. Wcześniej potwierdził, że publiczny P-1 oznacza możliwość pobrania GLB. W związku z tym publiczna dystrybucja obejmuje wszystkie 3 źródłowe modele i 12 komponentów. Nie zmieniono geometrii ani mechanizmów logowania do danych kont.
 
-P-1 i Panna Kids mają wygenerowane scenerie 2D. W scenerii kamera jest stała, geometria zachowuje skalę 1:1, pod modelem jest płaszczyzna cienia kontaktowego. Neutralny widok zachowuje orbitę, zoom i pan. Nieudane wczytanie tła pozostawia działający model na neutralnym tle z komunikatem. Tła nie są panoramami HDRI ani zdjęciami rzeczywistych realizacji.
+Domyślnie wszystkie pełne boiska mają obrotowy widok studyjny: wykończenie paneli i ramy, nawierzchnię dopasowaną do obwiedni paneli, linie oraz cienie. Podłoże i wykończenie są prezentacją koncepcyjną, bez zmiany konstrukcji, wymiarów i pobieranych GLB. P-1 i Panna Kids mają też opcjonalne wygenerowane scenerie 2D. W scenerii kamera jest stała, geometria zachowuje skalę 1:1, pod modelem jest płaszczyzna cienia kontaktowego. Neutralny widok zachowuje orbitę, zoom i pan. Nieudane wczytanie tła pozostawia działający model na neutralnym tle z komunikatem. Tła nie są panoramami HDRI ani zdjęciami rzeczywistych realizacji.
 
 ## Publikacja
 

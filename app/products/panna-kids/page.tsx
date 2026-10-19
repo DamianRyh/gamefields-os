@@ -46,7 +46,7 @@ export default function PannaKidsPage({
   const [image, setImage] = useState(0);
   const [show3d, setShow3d] = useState(false);
   const [scene, setScene] = useState(false);
-  useEffect(()=>{if(new URLSearchParams(location.search).get("scene")==="school"){setShow3d(true);setScene(true)}},[]);
+  useEffect(()=>{const query=new URLSearchParams(location.search);if(query.get("scene")==="school"){setShow3d(true);setScene(true)}else if(query.get("preview")==="3d"){setShow3d(true)}},[]);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [inquiryMessage, setInquiryMessage] = useState("");
@@ -294,7 +294,7 @@ export default function PannaKidsPage({
                 />
               )}
               <figcaption>
-                {scene && show3d ? "Sceneria koncepcyjna — stałe ujęcie. " : ""}Oryginalna geometria modelu. Kolor paneli zmienia się w
+                {scene && show3d ? "Sceneria koncepcyjna — stałe ujęcie. " : ""}Geometria modelu bez zmiany wymiarów. Nawierzchnia, linie i materiały są propozycją wizualną. Kolor paneli zmienia się w
                 podglądzie 3D; rendery pozostają bazowe. Wykończenia i
                 nawierzchnia wymagają potwierdzenia.
               </figcaption>
