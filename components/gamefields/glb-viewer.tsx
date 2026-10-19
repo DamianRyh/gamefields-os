@@ -198,6 +198,7 @@ export function GlbViewer({
             texture.colorSpace = THREE.SRGBColorSpace;
             scene.background = texture;
             backgroundActive = true;
+            renderer!.domElement.style.touchAction = "pan-y";
             host.dataset.backgroundReady = "true";
             rebuild(latestCount.current);
           }, undefined, ()=>{

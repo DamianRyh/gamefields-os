@@ -135,12 +135,12 @@ try {
     .getByRole("heading", { name: "Komponenty, nie skalowany model." })
     .waitFor();
   assert.equal(await page.locator("article").count(), 12);
-  assert.equal(await page.getByRole("link", {name:/^WASZE MODELE GLB/}).count(), 0);
+  assert.equal(await page.getByRole("link", {name:/^WASZE MODELE GLB/}).count(), 1);
   await page.goto(base + "/engineering/source-models");
-  await page.getByRole("heading", { name: "Modele w przygotowaniu." }).waitFor();
-  assert.equal(await page.getByTestId("source-glb-viewer").count(), 0);
+  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.loaded==='true');
+  assert.equal(await page.getByTestId("source-glb-viewer").count(), 1);
   const glbResponse = await page.request.get(base + "/models/gamefields/source/boisko-w1.glb");
-  assert.equal(glbResponse.status(), 404);
+  assert.equal(glbResponse.status(), 200);
   await testPannaKidsFlow(page,{url:base+"/products/panna-kids",production:true});
   assert.deepEqual(errors, []);
   console.log(

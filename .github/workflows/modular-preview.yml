@@ -125,7 +125,7 @@ jobs:
           print(f'::error::Unexpected public page: title={parser.title!r}, length={len(html)}, viewer_present={"modular-scene" in html}')
           raise SystemExit(1)
           PYTHON
-      - name: Verify legacy source-gallery URLs remain withheld
+      - name: Verify approved public model library and backgrounds
         env:
           PREVIEW_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
@@ -135,12 +135,13 @@ jobs:
           from urllib.error import HTTPError
           from urllib.parse import urljoin
           for filename in ['source/boisko-p1.glb', 'source/panna-kids-o1.glb', 'source/boisko-w1.glb'] + ['components/' + name + '.glb' for name in ['k1', 'k2', 'k3', 'k4', 's1', 'po1', 'po2', 'po3', 'rw1', 'rw2', 'st1', 'e1']]:
-              try:
-                  with urlopen(urljoin(os.environ['PREVIEW_URL'], 'models/gamefields/' + filename), timeout=30) as response:
-                      raise AssertionError('Native asset still public: ' + filename)
-              except HTTPError as error:
-                  assert error.code == 404, error.code
-          print('Legacy source-gallery and component URLs remain withheld.')
+              with urlopen(urljoin(os.environ['PREVIEW_URL'], 'models/gamefields/' + filename), timeout=30) as response:
+                  data = response.read()
+                  assert data[:4] == b'glTF', filename
+          for filename in ['p1-urban.png', 'panna-kids-school.png']:
+              with urlopen(urljoin(os.environ['PREVIEW_URL'], 'configurator-backgrounds/' + filename), timeout=30) as response:
+                  assert response.read(8) == b'\x89PNG\r\n\x1a\n', filename
+          print('All 15 approved GLB endpoints and both backgrounds are public.')
           PYTHON
 
       - name: Verify public Panna Kids product assets

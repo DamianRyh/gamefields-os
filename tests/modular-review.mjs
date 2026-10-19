@@ -82,6 +82,10 @@ try {
   await page.goto(base + "?view=source");
   await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.loaded==='true');
   assert.equal(await page.getByRole('button',{name:'CZĘŚCI',exact:true}).count(),1);
+  await page.getByRole('button',{name:'CZĘŚCI',exact:true}).click();
+  await page.waitForFunction(()=>{const d=document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;return d?.loaded==='true'&&d.assetUrl.includes('/components/k1.glb')});
+  await page.getByRole('button',{name:'SKŁADANIE K1',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.instanceCount==='3');
   await page.goto(base + "?view=viewer&product=boisko-w1");
   await page.getByTestId("native-configurator").waitFor();
   assert.equal(await page.getByTestId("native-configurator").count(), 1);
