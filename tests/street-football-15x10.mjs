@@ -50,6 +50,8 @@ try {
  assert.equal(config.panelColor,'#123456');assert.equal(config.surfaceColor,'#15814b');assert.equal(config.markings,false);assert.equal(config.surfaceThicknessM,.2);
  await page.getByRole('button',{name:'Przywróć kolory standardowe'}).click();
  assert.equal(await page.getByRole('button',{name:'Grafit',exact:true}).getAttribute('aria-pressed'),'true');assert.equal(loads,1,'Color changes do not reload GLB');
+ await viewer.hover();const beforeZoom=await viewer.screenshot();await page.mouse.wheel(0,-300);await page.waitForTimeout(200);
+ assert.notDeepEqual(await viewer.screenshot(),beforeZoom,'Wheel zoom redraws an idle preview');
  for(const file of ['boisko-15x10.glb','murawa.glb','konstrukcja.glb','boisko-15x10.blend'])assert.equal((await page.request.get(base+'/'+asset+'/'+file)).status(),200);
  await page.screenshot({path:'outputs/street15/desktop.png',fullPage:true});
  await page.setViewportSize({width:390,height:844});

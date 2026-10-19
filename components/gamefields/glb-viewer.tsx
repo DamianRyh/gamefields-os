@@ -122,6 +122,7 @@ export function GlbViewer({
         floor.visible = true;
         scene.add(floor);
         controls = new OrbitControls(camera, renderer.domElement);
+        controls.addEventListener("change",()=>{needsRender=true});
         controls.enableDamping = true;
         controls.minDistance = 0.2;
         controls.maxDistance = 150;
