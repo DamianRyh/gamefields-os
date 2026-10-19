@@ -1,3 +1,4 @@
+import {execFileSync} from "node:child_process";
 import { build } from "esbuild";
 import { mkdir, writeFile, rm, cp } from "node:fs/promises";
 const result = await build({
@@ -73,3 +74,7 @@ for (const name of [
 await cp("public/configurator-backgrounds", "dist/modular-review/configurator-backgrounds", {recursive:true});
 
 await cp("public/models/gamefields", "dist/modular-review/models/gamefields", {recursive:true});
+
+execFileSync(process.execPath,["scripts/build-court-objects.mjs"],{stdio:"inherit"});
+await mkdir("dist/modular-review/court-objects",{recursive:true});
+await cp("dist/court-objects/GAMEFIELDS-Court-Objects.html","dist/modular-review/court-objects/index.html");

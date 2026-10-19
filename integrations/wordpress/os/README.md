@@ -1,6 +1,6 @@
 # Gamefields OS — publiczny panel
 
-`gamefields-os.html` jest treścią strony `/os/` w WordPressie. Panel udostępnia P-1, Panna Kids, W-1, bibliotekę 3D, katalog komponentów, koncepcyjny system modułowy i istniejące Studio. Moduły 3D są osadzone z publicznego wdrożenia GitHub Pages tego samego repozytorium. Powiązane źródła React i statyczny eksport są w tej wersji projektu.
+`gamefields-os.html` jest treścią strony `/os/` w WordPressie. Panel udostępnia P-1, Panna Kids, W-1, bibliotekę 3D, katalog komponentów, koncepcyjny system modułowy, Court Objects i istniejące Studio. Moduły 3D są osadzone z publicznego wdrożenia GitHub Pages tego samego repozytorium. Powiązane źródła React i statyczny eksport są w tej wersji projektu.
 
 Właściciel 19.10.2026 wyraźnie polecił: „udostepnij wszystkie modele oraz podgląd 3d , cały sestem operacyjny”. Wcześniej potwierdził, że publiczny P-1 oznacza możliwość pobrania GLB. W związku z tym publiczna dystrybucja obejmuje wszystkie 3 źródłowe modele i 12 komponentów. Nie zmieniono geometrii ani mechanizmów logowania do danych kont.
 
@@ -24,3 +24,16 @@ Publiczny panel i modele działają bez dostępu do prywatnych danych. Pełne fu
 W tej sesji nie ma narzędzia publikacji hosta `gamefields-studio.ryhfs90.chatgpt.site`, a odczyt nazw sekretów wdrożeniowych GitHub zwraca 403. Nie uzyskano w ten sposób dostępu do konfiguracji backendu. Do zakończenia tego zakresu potrzebne jest połączenie środowiska hostującego aplikację lub konfiguracja publikacji przez właściciela. Przed migracją istniejącej D1 potrzebny jest backup i odczyt stanu migracji. Nie opublikowano danych kont, bazy ani poświadczeń.
 
 WordPress podczas odbioru emitował fragment `nm-wishlist` przed JSON REST. Narzędzia publikacji odczytują właściwą odpowiedź po tym znanym prefiksie; nie zmieniano wtyczki Wishlist. To osobna usterka odpowiedzi REST wymagająca korekty w motywie/wtyczce.
+
+## Dostępność modułów po tej publikacji
+
+| Moduł | Dostępność |
+| --- | --- |
+| P-1, Kids, W-1, komponenty/K1 | Publiczne 3D i GLB |
+| Tła P-1/Kids | Publiczne, stałe ujęcie; neutralna kamera obrotowa pozostaje dostępna |
+| Modułowy BOM i budżet | Publiczna kalkulacja koncepcyjna, bez zatwierdzenia produkcyjnego |
+| Court Objects | Publiczny samodzielny konfigurator |
+| Studio | Istniejąca publiczna aplikacja; nowy build całego backendu nie został opublikowany na jej hoście |
+| Kids — lead serwerowy | W statycznym widoku pobranie briefu; zapis serwerowy wymaga backendu |
+| Konta, projekty online, PLAY | Wymagają uruchomienia usług aplikacji i D1 |
+| Serwerowe Engineering/propozycje/produkcja | Kod w repozytorium; publikacja usług i dostępów wymaga backendu |
