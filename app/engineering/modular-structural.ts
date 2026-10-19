@@ -1,16 +1,35 @@
 import type { CourtEngineeringInput } from "./domain";
-import type { StructuralMember, StructuralModel, StructuralNode } from "./model";
+import type {
+  StructuralMember,
+  StructuralModel,
+  StructuralNode,
+} from "./model";
 import type { ModularLayout } from "./modular";
+import type { ModularProductLayout } from "./modular-product";
 
 const r3 = (v: number) => Math.round(v * 1000) / 1000;
 const key = (x: number, y: number, z: number) => `${r3(x)}|${r3(y)}|${r3(z)}`;
 
 export function modularLayoutToStructuralModel(
-  layout: ModularLayout,
-  input: Pick<CourtEngineeringInput, "boardHeightM" | "netHeightM" | "postSectionCode" | "railSectionCode" | "steelGrade">,
+  layout: ModularLayout | ModularProductLayout,
+  input: Pick<
+    CourtEngineeringInput,
+    | "boardHeightM"
+    | "netHeightM"
+    | "postSectionCode"
+    | "railSectionCode"
+    | "steelGrade"
+  >,
 ): StructuralModel {
-  const totalHeightM = r3(input.boardHeightM + input.netHeightM);
-  const levels = input.netHeightM > 0 ? [0, input.boardHeightM, totalHeightM] : [0, input.boardHeightM];
+  const netHeightM =
+    layout.schema === "GF-MODULAR-PRODUCT-1.2"
+      ? layout.productOptions.ballStopHeightM
+      : input.netHeightM;
+  const totalHeightM = r3(input.boardHeightM + netHeightM);
+  const levels =
+    netHeightM > 0
+      ? [0, input.boardHeightM, totalHeightM]
+      : [0, input.boardHeightM];
   const nodes: StructuralNode[] = [];
   const members: StructuralMember[] = [];
   const nodeMap = new Map<string, StructuralNode>();
@@ -33,7 +52,12 @@ export function modularLayoutToStructuralModel(
     return node;
   }
 
-  function addMember(type: StructuralMember["type"], a: StructuralNode, b: StructuralNode, sectionCode: string) {
+  function addMember(
+    type: StructuralMember["type"],
+    a: StructuralNode,
+    b: StructuralNode,
+    sectionCode: string,
+  ) {
     const dx = b.x - a.x;
     const dy = b.y - a.y;
     const dz = b.z - a.z;
@@ -59,14 +83,24 @@ export function modularLayoutToStructuralModel(
     const boardTop = getNode(point.x, point.y, input.boardHeightM);
     addMember("post", bottom, boardTop, input.postSectionCode);
     if (totalHeightM > input.boardHeightM) {
-      addMember("post", boardTop, getNode(point.x, point.y, totalHeightM), input.postSectionCode);
+      addMember(
+        "post",
+        boardTop,
+        getNode(point.x, point.y, totalHeightM),
+        input.postSectionCode,
+      );
     }
   }
 
   for (const z of levels) {
     for (const panel of layout.panels) {
+      // No ground rail crosses an entrance/goal opening. The upper edge is a provisional header.
+      if (z === 0 && (panel.role === "goal" || panel.role === "gate")) continue;
       addMember(
-        "rail",
+        z === input.boardHeightM &&
+          (panel.role === "goal" || panel.role === "gate")
+          ? panel.role
+          : "rail",
         getNode(panel.start.x, panel.start.y, z),
         getNode(panel.end.x, panel.end.y, z),
         input.railSectionCode,
@@ -76,12 +110,30 @@ export function modularLayoutToStructuralModel(
 
   const xs = [...uniqueBasePoints.values()].map((p) => p.x);
   const ys = [...uniqueBasePoints.values()].map((p) => p.y);
-  const lengthM = layout.shape === "RECTANGLE" ? layout.resolved.lengthM ?? Math.max(...xs) - Math.min(...xs) : layout.resolved.diameterM ?? Math.max(...xs) - Math.min(...xs);
-  const widthM = layout.shape === "RECTANGLE" ? layout.resolved.widthM ?? Math.max(...ys) - Math.min(...ys) : layout.resolved.diameterM ?? Math.max(...ys) - Math.min(...ys);
+  const lengthM =
+    layout.shape === "RECTANGLE"
+      ? (layout.resolved.lengthM ?? Math.max(...xs) - Math.min(...xs))
+      : (layout.resolved.diameterM ?? Math.max(...xs) - Math.min(...xs));
+  const widthM =
+    layout.shape === "RECTANGLE"
+      ? (layout.resolved.widthM ?? Math.max(...ys) - Math.min(...ys))
+      : (layout.resolved.diameterM ?? Math.max(...ys) - Math.min(...ys));
 
   return {
     nodes,
     members,
+    ...(layout.schema === "GF-MODULAR-PRODUCT-1.2"
+      ? {
+          modularProduct: {
+            panelRoles: Object.fromEntries(
+              layout.panels.map((p) => [p.id, p.role]),
+            ),
+            cornerIds: layout.specialModules.corners.map((c) => c.id),
+            ballStopHeightM: netHeightM,
+            engineerApprovalRequired: true as const,
+          },
+        }
+      : {}),
     meta: {
       lengthM: r3(lengthM),
       widthM: r3(widthM),

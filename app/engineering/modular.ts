@@ -69,10 +69,12 @@ export function buildRectangularModularLayout(
   requestedWidthM: number,
   rules: ModularRuleSet = GF_3V3_MODULAR_RULES,
 ): ModularLayout {
+  if (!Number.isFinite(requestedLengthM) || !Number.isFinite(requestedWidthM) || requestedLengthM <= 0 || requestedWidthM <= 0 || !Number.isFinite(rules.moduleWidthM) || rules.moduleWidthM <= 0) throw new Error("Finite positive dimensions and module width required");
   if (rules.shape !== "RECTANGLE") throw new Error("Rectangular layout requires RECTANGLE rule set");
   const min = rules.minModulesPerSide ?? 2;
   const nx = snapModules(requestedLengthM, rules.moduleWidthM, min);
   const ny = snapModules(requestedWidthM, rules.moduleWidthM, min);
+  if (!Number.isInteger(nx) || !Number.isInteger(ny) || 2 * (nx + ny) > 2000) throw new Error("Modular preview capacity exceeded");
   const lengthM = r3(nx * rules.moduleWidthM);
   const widthM = r3(ny * rules.moduleWidthM);
   const panels: ModularPanel[] = [];
@@ -119,11 +121,13 @@ export function buildCircularModularLayout(
   requestedDiameterM: number,
   rules: ModularRuleSet = GF_PANNA_MODULAR_RULES,
 ): ModularLayout {
+  if (!Number.isFinite(requestedDiameterM) || requestedDiameterM <= 0 || !Number.isFinite(rules.moduleWidthM) || rules.moduleWidthM <= 0) throw new Error("Finite positive dimensions and module width required");
   if (rules.shape !== "CIRCLE") throw new Error("Circular layout requires CIRCLE rule set");
   const targetCircumference = Math.PI * requestedDiameterM;
   const min = rules.minModulesCircle ?? 8;
   const max = rules.maxModulesCircle ?? 64;
   const count = Math.min(max, Math.max(min, Math.round(targetCircumference / rules.moduleWidthM)));
+  if (!Number.isInteger(count) || count < 3 || count > 2000) throw new Error("Invalid circle module count");
   const angle = (2 * Math.PI) / count;
   const radius = rules.moduleWidthM / (2 * Math.sin(Math.PI / count));
   const diameterM = r3(radius * 2);
@@ -160,7 +164,7 @@ export function buildCircularModularLayout(
     panels,
     notes: [
       `Requested Ø${requestedDiameterM} m resolved to Ø${diameterM} m using ${count} identical chord modules.`,
-      "Diameter changes by changing segment count; modules keep their production length.",
+      "Diameter changes by changing segment count; modules keep their fixed prototype length.",
       "This is a generic circular modular cage, not yet the final 1:1 Damian/Gamefields Panna product geometry.",
     ],
   };

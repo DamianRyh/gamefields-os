@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {testPannaKidsApi} from './panna-kids-api.mjs';
 import {readFile,readdir} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {resolve} from 'node:path';
@@ -26,6 +27,7 @@ try{
  const adminToken=crypto.randomUUID().replaceAll('-','')+crypto.randomUUID().replaceAll('-','');
  const tokenHash=Buffer.from(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(adminToken))).toString('base64url');
  await db.prepare('INSERT INTO play_sessions (id,user_id,token_hash,expires_at,created_at,last_seen_at) VALUES (?,?,?,?,?,?)').bind('smoke_session','smoke_admin',tokenHash,Math.floor(Date.now()/1000)+3600,1,1).run();jar.set('admin',`gf_play_session=${adminToken}`);
+ await testPannaKidsApi({mf,db,adminCookie:jar.get('admin'),userCookie:jar.get(0)});
  await call(0,'/api/play/auth',{action:'logout'});assert.equal((await call(0,'/api/play/auth')).authenticated,false);await call(0,'/api/play/auth',{action:'login',email:'pilot-0@example.test',password});
  for(let i=0;i<2;i++){assert.equal((await call(i,'/api/play/auth')).user.id,accounts[i]);await call(i,'/api/play',{action:'update_profile',nickname:`pilot_${i}`,city:'Warszawa'});await call(i,'/api/play',{action:'set_home_court',courtId:'court_lazienkowski',sport:'football'});await call(i,'/api/play',{action:'checkin',courtId:'court_lazienkowski'});await call(i,'/api/play/discovery',{action:'set_ready',courtId:'court_lazienkowski',sport:'football'});}
  const discovery=await call(0,'/api/play/discovery?sport=football');assert.equal(discovery.courts.find(c=>c.id==='court_lazienkowski').readyNow,2);assert.equal(discovery.courts.find(c=>c.id==='court_lazienkowski').playersNow,2);

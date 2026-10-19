@@ -1,0 +1,1038 @@
+{
+  "schema": "GF-SOURCE-GLB-LIBRARY-1.0",
+  "measurementStatus": "MODEL_MEASURED_NOT_MANUFACTURING_CONFIRMED",
+  "engineeringApproval": "REQUIRED",
+  "sources": [
+    {
+      "id": "boisko-p1",
+      "file": "source/boisko-p1.glb",
+      "sha256": "681d786ce42e504484ab95d80b916e4cc9c7db3759ab466948dc8f2e0d57d735",
+      "meshCount": 358,
+      "measuredBoundsM": {
+        "x": 5.6529998779296875,
+        "y": 7.939377307891846,
+        "z": 1.2239996194839478
+      },
+      "familyMeshCounts": {
+        "K1": 72,
+        "K2": 36,
+        "K3": 144,
+        "K4": 68,
+        "BR1": 14,
+        "S1": 16,
+        "SL2": 8
+      }
+    },
+    {
+      "id": "panna-kids-o1",
+      "file": "source/panna-kids-o1.glb",
+      "sha256": "1b3a58dff0e5b2edcdb6a6f53acd1ae0438147e8422b5e33237be9c9239a4c34",
+      "meshCount": 172,
+      "measuredBoundsM": {
+        "x": 6.002000331878662,
+        "y": 6.6230549812316895,
+        "z": 1.5160000324249268
+      },
+      "familyMeshCounts": {
+        "PO1": 72,
+        "PO2": 48,
+        "PO3": 22,
+        "BR1": 14,
+        "S1": 16
+      }
+    },
+    {
+      "id": "boisko-w1",
+      "file": "source/boisko-w1.glb",
+      "sha256": "cae6c9dccf826d73e92816fe9a960e9849343a15cf0094087311d82886613a6f",
+      "meshCount": 118,
+      "measuredBoundsM": {
+        "x": 5.090000152587891,
+        "y": 5.831394672393799,
+        "z": 1.0
+      },
+      "familyMeshCounts": {
+        "RW1": 42,
+        "RW2": 30,
+        "BR2": 22,
+        "ST1": 16,
+        "E1": 8
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "K1",
+      "assetKey": "gamefields/measured/k1",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo"
+      ],
+      "file": "components/k1.glb",
+      "source": "boisko-p1",
+      "sourceNodeNames": [
+        "K1_-1_0 blacha",
+        "K1_-1_0 dolny",
+        "K1_-1_0 gorny",
+        "K1_-1_0 pion",
+        "K1_-1_0 pion.001",
+        "K1_-1_0 pion.002",
+        "K1_-1_0 pion.003",
+        "K1_-1_0 pion.004",
+        "K1_-1_0 skos dol",
+        "K1_-1_0 skos gora",
+        "K1_-1_0 skos dol.001",
+        "K1_-1_0 skos gora.001"
+      ],
+      "meshCount": 12,
+      "measuredBoundsM": {
+        "x": 2.0350000858306885,
+        "y": 0.05000054091215134,
+        "z": 0.5550007223338027
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": {
+        "pitchM": 2.059999973704514,
+        "status": "OBSERVED_SOURCE_PLACEMENT_NOT_APPROVED_CONNECTION",
+        "sourceGroupA": "K1_-1_0",
+        "sourceGroupB": "K1_-1_1"
+      },
+      "authoredMetadata": {
+        "K1_-1_0 blacha": {
+          "sheet_thickness_mm": 2,
+          "perforation": "RV5-8"
+        },
+        "K1_-1_0 dolny": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 gorny": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 pion": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 pion.001": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 pion.002": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 pion.003": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 pion.004": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 skos dol": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 skos gora": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 skos dol.001": {
+          "part": "K1 - boki"
+        },
+        "K1_-1_0 skos gora.001": {
+          "part": "K1 - boki"
+        }
+      }
+    },
+    {
+      "id": "K2",
+      "assetKey": "gamefields/measured/k2",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo"
+      ],
+      "file": "components/k2.glb",
+      "source": "boisko-p1",
+      "sourceNodeNames": [
+        "K2_-1_-1 blacha",
+        "K2_-1_-1 dolny",
+        "K2_-1_-1 gorny",
+        "K2_-1_-1 pion",
+        "K2_-1_-1 pion.001",
+        "K2_-1_-1 skos dol",
+        "K2_-1_-1 skos gora",
+        "K2_-1_-1 skos dol.001",
+        "K2_-1_-1 skos gora.001"
+      ],
+      "meshCount": 9,
+      "measuredBoundsM": {
+        "x": 0.5314999222755432,
+        "y": 0.4908602833747864,
+        "z": 0.5550001244190916
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "K2_-1_-1 blacha": {
+          "sheet_thickness_mm": 2,
+          "perforation": "RV5-8"
+        },
+        "K2_-1_-1 dolny": {
+          "part": "K2 - narozniki"
+        },
+        "K2_-1_-1 gorny": {
+          "part": "K2 - narozniki"
+        },
+        "K2_-1_-1 pion": {
+          "part": "K2 - narozniki"
+        },
+        "K2_-1_-1 pion.001": {
+          "part": "K2 - narozniki"
+        },
+        "K2_-1_-1 skos dol": {
+          "part": "K2 - narozniki"
+        },
+        "K2_-1_-1 skos gora": {
+          "part": "K2 - narozniki"
+        },
+        "K2_-1_-1 skos dol.001": {
+          "part": "K2 - narozniki"
+        },
+        "K2_-1_-1 skos gora.001": {
+          "part": "K2 - narozniki"
+        }
+      }
+    },
+    {
+      "id": "K3",
+      "assetKey": "gamefields/measured/k3",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo"
+      ],
+      "file": "components/k3.glb",
+      "source": "boisko-p1",
+      "sourceNodeNames": [
+        "K3_-1_-1 blacha",
+        "K3_-1_-1 dolny",
+        "K3_-1_-1 gorny",
+        "K3_-1_-1 gorny.001",
+        "K3_-1_-1 gorny.002",
+        "K3_-1_-1 gorny.003",
+        "K3_-1_-1 gorny.004",
+        "K3_-1_-1 gorny.005",
+        "K3_-1_-1 gorny.006",
+        "K3_-1_-1 gorny.007",
+        "K3_-1_-1 gorny.008",
+        "K3_-1_-1 gorny.009",
+        "K3_-1_-1 gorny.010",
+        "K3_-1_-1 gorny.011",
+        "K3_-1_-1 gorny.012",
+        "K3_-1_-1 gorny.013",
+        "K3_-1_-1 gorny.014",
+        "K3_-1_-1 gorny.015",
+        "K3_-1_-1 gorny.016",
+        "K3_-1_-1 gorny.017",
+        "K3_-1_-1 gorny.018",
+        "K3_-1_-1 gorny.019",
+        "K3_-1_-1 gorny.020",
+        "K3_-1_-1 gorny.021",
+        "K3_-1_-1 gorny.022",
+        "K3_-1_-1 gorny.023",
+        "K3_-1_-1 pion",
+        "K3_-1_-1 pion.001",
+        "K3_-1_-1 pion.002",
+        "K3_-1_-1 pion.003",
+        "K3_-1_-1 skos dol",
+        "K3_-1_-1 skos gora",
+        "K3_-1_-1 skos dol.001",
+        "K3_-1_-1 skos gora.001"
+      ],
+      "meshCount": 34,
+      "measuredBoundsM": {
+        "x": 1.6049998998641968,
+        "y": 0.050000037997961044,
+        "z": 1.1459512710571291
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "K3_-1_-1 blacha": {
+          "sheet_thickness_mm": 2,
+          "perforation": "RV5-8"
+        },
+        "K3_-1_-1 dolny": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.001": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.002": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.003": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.004": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.005": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.006": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.007": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.008": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.009": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.010": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.011": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.012": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.013": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.014": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.015": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.016": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.017": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.018": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.019": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.020": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.021": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.022": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 gorny.023": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 pion": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 pion.001": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 pion.002": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 pion.003": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 skos dol": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 skos gora": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 skos dol.001": {
+          "part": "K3 - konce"
+        },
+        "K3_-1_-1 skos gora.001": {
+          "part": "K3 - konce"
+        }
+      }
+    },
+    {
+      "id": "K4",
+      "assetKey": "gamefields/measured/k4",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo"
+      ],
+      "file": "components/k4.glb",
+      "source": "boisko-p1",
+      "sourceNodeNames": [
+        "K4_-1 blacha",
+        "K4_-1 dolny",
+        "K4_-1 gorny",
+        "K4_-1 gorny.001",
+        "K4_-1 gorny.002",
+        "K4_-1 gorny.003",
+        "K4_-1 gorny.004",
+        "K4_-1 gorny.005",
+        "K4_-1 gorny.006",
+        "K4_-1 gorny.007",
+        "K4_-1 gorny.008",
+        "K4_-1 gorny.009",
+        "K4_-1 gorny.010",
+        "K4_-1 gorny.011",
+        "K4_-1 gorny.012",
+        "K4_-1 gorny.013",
+        "K4_-1 gorny.014",
+        "K4_-1 gorny.015",
+        "K4_-1 gorny.016",
+        "K4_-1 gorny.017",
+        "K4_-1 gorny.018",
+        "K4_-1 gorny.019",
+        "K4_-1 gorny.020",
+        "K4_-1 gorny.021",
+        "K4_-1 gorny.022",
+        "K4_-1 gorny.023",
+        "K4_-1 pion",
+        "K4_-1 pion.001",
+        "K4_-1 pion.002",
+        "K4_-1 pion.003",
+        "K4_-1 skos dol",
+        "K4_-1 skos gora",
+        "K4_-1 skos dol.001",
+        "K4_-1 skos gora.001"
+      ],
+      "meshCount": 34,
+      "measuredBoundsM": {
+        "x": 1.4499999284744263,
+        "y": 0.05000004544854164,
+        "z": 0.655999612994492
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "K4_-1 blacha": {
+          "sheet_thickness_mm": 2,
+          "perforation": "RV5-8"
+        },
+        "K4_-1 dolny": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.001": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.002": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.003": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.004": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.005": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.006": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.007": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.008": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.009": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.010": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.011": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.012": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.013": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.014": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.015": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.016": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.017": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.018": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.019": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.020": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.021": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.022": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 gorny.023": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 pion": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 pion.001": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 pion.002": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 pion.003": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 skos dol": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 skos gora": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 skos dol.001": {
+          "part": "K4 - nadproza"
+        },
+        "K4_-1 skos gora.001": {
+          "part": "K4 - nadproza"
+        }
+      }
+    },
+    {
+      "id": "S1",
+      "assetKey": "gamefields/measured/s1",
+      "pbrMaterialSlots": [
+        "Rama - stal malowana proszkowo"
+      ],
+      "file": "components/s1.glb",
+      "source": "boisko-p1",
+      "sourceNodeNames": [
+        "S1",
+        "S1 stopa"
+      ],
+      "meshCount": 2,
+      "measuredBoundsM": {
+        "x": 0.1300000101327896,
+        "y": 0.08000002056360245,
+        "z": 0.5799999833106995
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "S1": {
+          "part": "Slupki i stopy"
+        },
+        "S1 stopa": {
+          "part": "Slupki i stopy"
+        }
+      }
+    },
+    {
+      "id": "PO1",
+      "assetKey": "gamefields/measured/po1",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo",
+        "Rama - stal malowana proszkowo.001"
+      ],
+      "file": "components/po1.glb",
+      "source": "panna-kids-o1",
+      "sourceNodeNames": [
+        "PO1 0 0 blacha",
+        "PO1 0 0 profil gorny",
+        "PO1 0 0 profil dolny",
+        "PO1 0 0 pion",
+        "PO1 0 0 pion.001",
+        "PO1 0 0 pion.002",
+        "PO1 0 0 pion.003",
+        "PO1 0 0 pion.004",
+        "PO1 0 0 skos dol",
+        "PO1 0 0 skos gora",
+        "PO1 0 0 skos dol.001",
+        "PO1 0 0 skos gora.001"
+      ],
+      "meshCount": 12,
+      "measuredBoundsM": {
+        "x": 1.5612154603004456,
+        "y": 1.243017315864563,
+        "z": 0.550000011920929
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "PO1 0 0 blacha": {
+          "sheet_thickness_mm": 2
+        },
+        "PO1 0 0 pion": {
+          "part": "PO1 - panele niskie"
+        },
+        "PO1 0 0 pion.001": {
+          "part": "PO1 - panele niskie"
+        },
+        "PO1 0 0 pion.002": {
+          "part": "PO1 - panele niskie"
+        },
+        "PO1 0 0 pion.003": {
+          "part": "PO1 - panele niskie"
+        },
+        "PO1 0 0 pion.004": {
+          "part": "PO1 - panele niskie"
+        },
+        "PO1 0 0 skos dol": {
+          "part": "PO1 - panele niskie"
+        },
+        "PO1 0 0 skos gora": {
+          "part": "PO1 - panele niskie"
+        },
+        "PO1 0 0 skos dol.001": {
+          "part": "PO1 - panele niskie"
+        },
+        "PO1 0 0 skos gora.001": {
+          "part": "PO1 - panele niskie"
+        }
+      }
+    },
+    {
+      "id": "PO2",
+      "assetKey": "gamefields/measured/po2",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo",
+        "Rama - stal malowana proszkowo.001"
+      ],
+      "file": "components/po2.glb",
+      "source": "panna-kids-o1",
+      "sourceNodeNames": [
+        "PO2 0 -1 blacha",
+        "PO2 0 -1 profil gorny",
+        "PO2 0 -1 profil dolny",
+        "PO2 0 -1 pion",
+        "PO2 0 -1 pion.001",
+        "PO2 0 -1 pion.002",
+        "PO2 0 -1 skos dol",
+        "PO2 0 -1 skos gora",
+        "PO2 0 -1 skos dol.001",
+        "PO2 0 -1 skos gora.001"
+      ],
+      "meshCount": 10,
+      "measuredBoundsM": {
+        "x": 0.9708458185195923,
+        "y": 0.4433911442756653,
+        "z": 1.4160000085830688
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "PO2 0 -1 blacha": {
+          "sheet_thickness_mm": 2
+        },
+        "PO2 0 -1 pion": {
+          "part": "PO2 - przejscia"
+        },
+        "PO2 0 -1 pion.001": {
+          "part": "PO2 - przejscia"
+        },
+        "PO2 0 -1 pion.002": {
+          "part": "PO2 - przejscia"
+        },
+        "PO2 0 -1 skos dol": {
+          "part": "PO2 - przejscia"
+        },
+        "PO2 0 -1 skos gora": {
+          "part": "PO2 - przejscia"
+        },
+        "PO2 0 -1 skos dol.001": {
+          "part": "PO2 - przejscia"
+        },
+        "PO2 0 -1 skos gora.001": {
+          "part": "PO2 - przejscia"
+        }
+      }
+    },
+    {
+      "id": "PO3",
+      "assetKey": "gamefields/measured/po3",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo",
+        "Rama - stal malowana proszkowo.001"
+      ],
+      "file": "components/po3.glb",
+      "source": "panna-kids-o1",
+      "sourceNodeNames": [
+        "PO3 0 blacha",
+        "PO3 0 profil gorny",
+        "PO3 0 profil dolny",
+        "PO3 0 pion",
+        "PO3 0 pion.001",
+        "PO3 0 pion.002",
+        "PO3 0 pion.003",
+        "PO3 0 skos dol",
+        "PO3 0 skos gora",
+        "PO3 0 skos dol.001",
+        "PO3 0 skos gora.001"
+      ],
+      "meshCount": 11,
+      "measuredBoundsM": {
+        "x": 1.4499999284744263,
+        "y": 0.13327714800834656,
+        "z": 0.9860000610351562
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "PO3 0 blacha": {
+          "sheet_thickness_mm": 2
+        },
+        "PO3 0 pion": {
+          "part": "PO3 - nadproza"
+        },
+        "PO3 0 pion.001": {
+          "part": "PO3 - nadproza"
+        },
+        "PO3 0 pion.002": {
+          "part": "PO3 - nadproza"
+        },
+        "PO3 0 pion.003": {
+          "part": "PO3 - nadproza"
+        },
+        "PO3 0 skos dol": {
+          "part": "PO3 - nadproza"
+        },
+        "PO3 0 skos gora": {
+          "part": "PO3 - nadproza"
+        },
+        "PO3 0 skos dol.001": {
+          "part": "PO3 - nadproza"
+        },
+        "PO3 0 skos gora.001": {
+          "part": "PO3 - nadproza"
+        }
+      }
+    },
+    {
+      "id": "RW1",
+      "assetKey": "gamefields/measured/rw1",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo",
+        "Rama - stal malowana proszkowo.001"
+      ],
+      "file": "components/rw1.glb",
+      "source": "boisko-w1",
+      "sourceNodeNames": [
+        "RW1 2 blacha",
+        "RW1 2 profil gorny",
+        "RW1 2 profil dolny",
+        "RW1 2 pion",
+        "RW1 2 pion.001",
+        "RW1 2 pion.002",
+        "RW1 2 pion.003"
+      ],
+      "meshCount": 7,
+      "measuredBoundsM": {
+        "x": 1.9537245035171509,
+        "y": 0.241823710501194,
+        "z": 1.0
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "RW1 2 blacha": {
+          "sheet_thickness_mm": 2
+        },
+        "RW1 2 pion": {
+          "part": "PO1 - panele niskie"
+        },
+        "RW1 2 pion.001": {
+          "part": "PO1 - panele niskie"
+        },
+        "RW1 2 pion.002": {
+          "part": "PO1 - panele niskie"
+        },
+        "RW1 2 pion.003": {
+          "part": "PO1 - panele niskie"
+        }
+      }
+    },
+    {
+      "id": "RW2",
+      "assetKey": "gamefields/measured/rw2",
+      "pbrMaterialSlots": [
+        "Panele - kolor edytowalny",
+        "Rama - stal malowana proszkowo",
+        "Rama - stal malowana proszkowo.001"
+      ],
+      "file": "components/rw2.glb",
+      "source": "boisko-w1",
+      "sourceNodeNames": [
+        "RW2 bok lewy 0 blacha",
+        "RW2 bok lewy 0 profil gorny",
+        "RW2 bok lewy 0 profil dolny",
+        "RW2 bok lewy 0 pion",
+        "RW2 bok lewy 0 pion.001",
+        "RW2 nadproze 0 blacha",
+        "RW2 nadproze 0 profil gorny",
+        "RW2 nadproze 0 profil dolny",
+        "RW2 nadproze 0 pion",
+        "RW2 nadproze 0 pion.001",
+        "RW2 bok prawy 0 blacha",
+        "RW2 bok prawy 0 profil gorny",
+        "RW2 bok prawy 0 profil dolny",
+        "RW2 bok prawy 0 pion",
+        "RW2 bok prawy 0 pion.001"
+      ],
+      "meshCount": 15,
+      "measuredBoundsM": {
+        "x": 1.978724479675293,
+        "y": 0.23992061614990234,
+        "z": 1.0
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "RW2 bok lewy 0 blacha": {
+          "sheet_thickness_mm": 2
+        },
+        "RW2 bok lewy 0 pion": {
+          "part": "RW2 - bramkowe"
+        },
+        "RW2 bok lewy 0 pion.001": {
+          "part": "RW2 - bramkowe"
+        },
+        "RW2 nadproze 0 blacha": {
+          "sheet_thickness_mm": 2
+        },
+        "RW2 nadproze 0 pion": {
+          "part": "RW2 - bramkowe"
+        },
+        "RW2 nadproze 0 pion.001": {
+          "part": "RW2 - bramkowe"
+        },
+        "RW2 bok prawy 0 blacha": {
+          "sheet_thickness_mm": 2
+        },
+        "RW2 bok prawy 0 pion": {
+          "part": "RW2 - bramkowe"
+        },
+        "RW2 bok prawy 0 pion.001": {
+          "part": "RW2 - bramkowe"
+        }
+      }
+    },
+    {
+      "id": "ST1",
+      "assetKey": "gamefields/measured/st1",
+      "pbrMaterialSlots": [
+        "Rama - stal malowana proszkowo.001"
+      ],
+      "file": "components/st1.glb",
+      "source": "boisko-w1",
+      "sourceNodeNames": [
+        "ST1 stopa 0",
+        "ST1 lacznik 0"
+      ],
+      "meshCount": 2,
+      "measuredBoundsM": {
+        "x": 0.1300000101327896,
+        "y": 0.08000002056360245,
+        "z": 0.10499999672174454
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "ST1 stopa 0": {
+          "part": "Slupki i stopy"
+        },
+        "ST1 lacznik 0": {
+          "part": "Slupki i stopy"
+        }
+      }
+    },
+    {
+      "id": "E1",
+      "assetKey": "gamefields/measured/e1",
+      "pbrMaterialSlots": [
+        "Rama - stal malowana proszkowo.001"
+      ],
+      "file": "components/e1.glb",
+      "source": "boisko-w1",
+      "sourceNodeNames": [
+        "E1 lacznik 0"
+      ],
+      "meshCount": 1,
+      "measuredBoundsM": {
+        "x": 0.04000000283122063,
+        "y": 0.020000005140900612,
+        "z": 0.10000002384185791
+      },
+      "normalization": "RIGID_ROTATION_TRANSLATION_ONLY",
+      "upAxis": "Y",
+      "origin": "BOTTOM_CENTER",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "connectionPoints": null,
+      "weightKg": null,
+      "materialConfirmation": null,
+      "costStatus": "UNPRICED",
+      "productionDimensionsStatus": "UNCONFIRMED",
+      "repeatStudy": null,
+      "authoredMetadata": {
+        "E1 lacznik 0": {
+          "part": "Slupki i stopy"
+        }
+      }
+    }
+  ]
+}
