@@ -18,6 +18,13 @@ try{
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await viewer.screenshot({path:`outputs/backgrounds/${id}-${width}.png`});
    if(id==='kids'){await page.getByRole('button',{name:'Obróć model 3D',exact:true}).click();await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.cameraMode==='orbit');await page.getByRole('button',{name:'Na dziedzińcu',exact:true}).click();await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.backgroundReady==='true')}
   }
+  for(const [id,model,meshes] of [['p1','boisko-p1','358'],['kids','panna-kids-o1','172'],['w1','boisko-w1','118']]){
+   await page.goto(base+'/?view=source&model='+model);
+   await page.waitForFunction(model=>{const d=document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;return d?.loaded==='true'&&d?.assetUrl.includes(model)&&d?.playingSurface==='true'},model,{timeout:60000});
+   const viewer=page.getByTestId('source-glb-viewer');assert.equal(await viewer.getAttribute('data-mesh-count'),meshes);assert.equal(await viewer.getAttribute('data-camera-mode'),'orbit');assert.equal(await viewer.getAttribute('data-instance-scales'),'1,1,1');
+   const extent=(await viewer.getAttribute('data-projected-extent')).split(',').map(Number);assert.ok(extent.every(v=>Number.isFinite(v)&&v>0&&v<1),'Whole model must fit inside the viewport');
+   await viewer.screenshot({path:`outputs/backgrounds/${id}-studio-${width}.png`});
+  }
   assert.deepEqual(errors,[]);await page.close();
  }
  const page=await browser.newPage();await page.route('**/panna-kids-school.png',route=>route.fulfill({status:404,body:''}));await page.goto(base+'/?view=panna-kids&scene=school');await page.waitForFunction(()=>{const d=document.querySelector('[data-testid="source-glb-viewer"]')?.dataset;return d?.loaded==='true'&&d?.backgroundReady==='false'&&d?.cameraMode==='orbit'});assert.ok(await page.getByText('Tło jest niedostępne.',{exact:false}).isVisible());await page.close();

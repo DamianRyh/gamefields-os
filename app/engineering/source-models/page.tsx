@@ -78,7 +78,7 @@ export default function SourceModelsPage({
           </h1>
         </div>
         <p>
-          Modele z Blendera, oryginalne materiały i osobne części. Geometria
+          Modele boisk i osobne części konstrukcyjne. Geometria
           zachowana bez rozciągania. Pomiary modelu wymagają potwierdzenia
           produkcyjnego.
         </p>
@@ -204,13 +204,13 @@ export default function SourceModelsPage({
             count={mode === "study" ? count : 1}
             pitch={mode === "study" ? pitch : 0}
           />
-          {mode === "source" && ["boisko-p1","panna-kids-o1"].includes(source.id) && <button type="button" aria-pressed={scene} onClick={()=>setScene(value=>!value)}>{scene ? "Wróć do neutralnego tła" : "Pokaż w scenerii"}</button>}
+          {mode === "source" && ["boisko-p1","panna-kids-o1"].includes(source.id) && <button type="button" aria-pressed={scene} onClick={()=>setScene(value=>!value)}>{scene ? "Wróć do widoku 3D" : "Zobacz fototło"}</button>}
           <div className="gf-source-caption">
             <span>{selected.id.toUpperCase()} / GLB</span>
             <span>{scene && mode === "source" && ["boisko-p1","panna-kids-o1"].includes(source.id) ? "SCENERIA · STAŁE UJĘCIE" : "ORBIT · ZOOM · PAN"}</span>
           </div>
           <p className="gf-source-note">
-            Wymiary powyżej oznaczają obwiednię geometrii, nie rozstaw montażowy
+            Nawierzchnia, linie i wykończenie pełnych boisk są propozycją wizualną; pobierany GLB zachowuje źródłową konstrukcję. Wymiary powyżej oznaczają obwiednię geometrii, nie rozstaw montażowy
             ani wymiary z dokumentacji warsztatowej. Nazwy rodzin zachowano ze
             źródła; klasyfikacja części, materiały fizyczne, masa, połączenia i
             nośności wymagają potwierdzenia.

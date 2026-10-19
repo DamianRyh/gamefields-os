@@ -137,13 +137,13 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
     <main className={styles.shell}>
       <header className={styles.header}>
         <div>
-          <span>GAMEFIELDS / MODULAR PRODUCT v1.2</span>
-          <h1>Boisko jako produkt modułowy.</h1>
+          <span>{product === "concept" ? "GAMEFIELDS / SYSTEM MODUŁOWY" : "GAMEFIELDS / BOISKA 3D"}</span>
+          <h1>{product === "concept" ? "Boisko jako produkt modułowy." : nativeProducts.find(p=>p.id===product)?.name}</h1>
         </div>
         <p>
           {product === "concept" ? <>Wymiar, bramki, wejście, branding i piłkochwyt składają się z osobnych
           komponentów. Każda zmiana przebudowuje 3D, BOM, model konstrukcyjny i
-          budżet.</> : <>Twoje modele z Blendera w konfiguratorze. Wybierz boisko i obejrzyj je w scenerii lub na neutralnym tle.</>}
+          budżet.</> : <>Obejrzyj boisko z każdej strony. Obracaj model, przybliżaj detale i porównuj warianty.</>}
         </p>
       </header>
 
@@ -158,9 +158,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
       {product !== "concept" ? (
         <section data-testid="native-configurator">
           <p className={styles.tipDark}>
-            Oryginalna geometria boiska. Sceneria korzysta ze stałej kamery; neutralne tło pozwala obracać model. Dostępne są również W-1 i osobne zespoły konstrukcyjne.
-            Zmiana wymiarów pełnego boiska, StructuralModel i wycena wymagają
-            potwierdzonych reguł połączeń i cennika. Engineer Gate pozostaje wymagany.
+            Geometria boiska zachowuje oryginalne wymiary. Nawierzchnia, linie i materiały to propozycja wizualna; wykonanie oraz wycena wymagają indywidualnego potwierdzenia.
           </p>
           <SourceModelsPage key={product} initialModelId={product} assetBase={assetBase} onModelChange={selectProduct} embedded />
         </section>
