@@ -1,0 +1,60 @@
+import assert from 'node:assert/strict';
+import {readFile,mkdir} from 'node:fs/promises';
+import {createServer} from 'node:http';
+import {resolve,extname} from 'node:path';
+import {chromium} from 'playwright';
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+
+const root=resolve('dist/modular-review'),asset='products/street-football-15x10';
+const bytes=await readFile(root+'/'+asset+'/boisko-15x10.glb');
+const doc=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)));
+assert.deepEqual(doc.nodes.map(n=>n.name).sort(),['Konstrukcja','Murawa']);
+assert.equal(doc.meshes.length,2);
+assert.equal(doc.images,undefined);
+assert.deepEqual(doc.materials.map(m=>m.name).sort(),['Nawierzchnia_baza','Nawierzchnia_boki','Panele - kolor edytowalny','Stal ocynkowana'].sort());
+const gltf=await new Promise((ok,no)=>new GLTFLoader().parse(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.length),'',ok,no));
+const surface=gltf.scene.getObjectByName('Murawa'),size=new THREE.Box3().setFromObject(surface).getSize(new THREE.Vector3());
+assert.ok(Math.abs(size.y-.2)<1e-6);assert.ok(Math.abs(size.x-15)<1e-6);assert.ok(Math.abs(size.z-10)<1e-6);
+surface.traverse(n=>{if(n.isMesh)assert.ok(n.geometry.attributes.uv)});
+const full=new THREE.Box3().setFromObject(gltf.scene).getSize(new THREE.Vector3());
+const recorded=JSON.parse(await readFile('public/products/street-football-15x10/product.json','utf8')).measuredBoundsM;
+assert.ok(Math.abs(recorded.x-full.x)<1e-5);assert.ok(Math.abs(recorded.y-full.z)<1e-5);assert.ok(Math.abs(recorded.z-full.y)<1e-5);
+const server=createServer(async(req,res)=>{
+ try {const path=new URL(req.url,'http://localhost').pathname;const file=path==='/'?root+'/index.html':resolve(root,'.'+path);if(!file.startsWith(root+'/')){res.writeHead(400).end();return}const data=await readFile(file);res.setHeader('Content-Type',({'.html':'text/html','.glb':'model/gltf-binary','.png':'image/png','.webp':'image/webp'})[extname(file)]||'application/octet-stream');res.end(data)}catch{res.writeHead(404).end()}
+});
+await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
+const base=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({headless:true,args:['--enable-unsafe-swiftshader']});
+await mkdir('outputs/street15',{recursive:true});
+try {
+ const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];let loads=0;
+ page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(r.url().endsWith('/boisko-15x10.glb'))loads++});
+ await page.goto(base+'/?view=street-football-15x10');
+ const viewer=page.getByTestId('source-glb-viewer');
+ await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.loaded==='true');
+ const before=await viewer.screenshot();
+ await page.getByRole('button',{name:'Fiolet',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]').dataset.panelColor==='#6336f5');
+ await page.waitForTimeout(100);
+ assert.notDeepEqual(await viewer.screenshot(),before,'Panel color changes the rendered model');
+ await page.getByLabel('Własny kolor paneli').fill('#123456');
+ await page.getByLabel('Kolor nawierzchni',{exact:true}).fill('#15814b');
+ await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]').dataset.surfaceColor==='#15814b');
+ const downloading=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz konfigurację JSON'}).click();
+ const download=await downloading,config=JSON.parse(await readFile(await download.path(),'utf8'));
+ assert.equal(config.panelColor,'#123456');assert.equal(config.surfaceColor,'#15814b');assert.equal(config.markings,false);assert.equal(config.surfaceThicknessM,.2);
+ await page.getByRole('button',{name:'Przywróć kolory standardowe'}).click();
+ assert.equal(await page.getByRole('button',{name:'Grafit',exact:true}).getAttribute('aria-pressed'),'true');assert.equal(loads,1,'Color changes do not reload GLB');
+ for(const file of ['boisko-15x10.glb','murawa.glb','konstrukcja.glb','boisko-15x10.blend'])assert.equal((await page.request.get(base+'/'+asset+'/'+file)).status(),200);
+ await page.screenshot({path:'outputs/street15/desktop.png',fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ assert.ok((await page.locator('.street-preview').boundingBox()).height<600,'No full-screen blank gap before mobile controls');
+ await page.screenshot({path:'outputs/street15/mobile.png',fullPage:true});
+ await page.goto(base+'/?view=source');
+ await page.getByRole('link',{name:'Street Football 15 × 10 — konfiguruj kolory ↗'}).click();
+ await page.getByRole('heading',{name:'Kolor paneli',exact:true}).waitFor();
+ assert.deepEqual(errors,[]);
+ console.log('PASS: two objects, blank panels, 20 cm UV surface, measured dimensions, visible live recoloring, custom colors, JSON download, reset, all downloads, mobile layout and product-library integration.');
+} finally {await browser.close();await new Promise(ok=>server.close(ok))}

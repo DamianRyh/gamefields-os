@@ -9,20 +9,24 @@ export function GlbViewer({
   count = 1,
   pitch = 0,
   panelColor,
+  surfaceColor,
   backgroundUrl,
 }: {
   url: string;
   count?: number;
   pitch?: number;
   panelColor?: string;
+  surfaceColor?: string;
   backgroundUrl?: string;
 }) {
   const container = useRef<HTMLDivElement>(null),
     latestCount = useRef(count),
     latestColor = useRef(panelColor),
+    latestSurface = useRef(surfaceColor),
     controller = useRef<{
       rebuild: (count: number) => void;
       recolor: (color?: string) => void;
+      recolorSurface: (color?: string) => void;
     } | null>(null);
   const [backgroundError, setBackgroundError] = useState("");
   const [message, setMessage] = useState("Wczytywanie modelu GLB…");
@@ -30,6 +34,10 @@ export function GlbViewer({
     latestColor.current = panelColor;
     controller.current?.recolor(panelColor);
   }, [panelColor]);
+  useEffect(() => {
+    latestSurface.current = surfaceColor;
+    controller.current?.recolorSurface(surfaceColor);
+  }, [surfaceColor]);
   useEffect(() => {
     latestCount.current = count;
     controller.current?.rebuild(count);
@@ -191,7 +199,19 @@ export function GlbViewer({
           });
           host.dataset.panelColor = color || "source";
         };
-        controller.current = { rebuild, recolor };
+        const recolorSurface = (color?: string) => {
+          template?.traverse(node => {
+            if (!(node instanceof THREE.Mesh)) return;
+            for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
+              if (material instanceof THREE.MeshStandardMaterial && material.name === 'Nawierzchnia_baza') {
+                if (!baseColors.has(material)) baseColors.set(material, material.color.clone());
+                material.color.copy(color ? new THREE.Color(color) : baseColors.get(material)!);
+              }
+            }
+          });
+          host.dataset.surfaceColor = color || 'source';
+        };
+        controller.current = { rebuild, recolor, recolorSurface };
         if (backgroundUrl) {
           backdrop = new THREE.TextureLoader().load(backgroundUrl, texture=>{
             if(disposed){texture.dispose();return;}
@@ -219,6 +239,7 @@ export function GlbViewer({
               new THREE.Vector3(center.x, box.min.y, center.z),
             );
             recolor(latestColor.current);
+            recolorSurface(latestSurface.current);
             rebuild(latestCount.current);
             setMessage("");
           },

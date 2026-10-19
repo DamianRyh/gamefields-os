@@ -55,6 +55,7 @@ jobs:
       - run: pnpm build:modular:review
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:modular:review
+      - run: node tests/street-football-15x10.mjs
       - run: node tests/configurator-backgrounds.mjs
       - name: Check Pages configuration
         id: pages

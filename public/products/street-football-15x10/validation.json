@@ -1,0 +1,53 @@
+{
+  "units": "meters",
+  "source": "boisko_15x10.blend",
+  "objects": {
+    "Murawa": {
+      "vertices": 16,
+      "triangles": 28,
+      "dimensions_blender_xyz": [
+        15.0,
+        10.0,
+        0.20000000298023224
+      ],
+      "materials": [
+        "Nawierzchnia_baza",
+        "Nawierzchnia_boki"
+      ]
+    },
+    "Konstrukcja": {
+      "vertices": 9792,
+      "triangles": 18592,
+      "dimensions_blender_xyz": [
+        16.650001525878906,
+        10.10400104522705,
+        1.1500003337860107
+      ],
+      "materials": [
+        "Panele - kolor edytowalny",
+        "Stal ocynkowana"
+      ]
+    }
+  },
+  "surface": {
+    "thickness_m": 0.2,
+    "top_z": 0,
+    "bottom_z": -0.2,
+    "markings": false,
+    "top_material": "Nawierzchnia_baza",
+    "uv": "U=(X+7.5)/15; V=(Y+5)/10",
+    "neutral_base": true
+  },
+  "boisko-15x10.glb": {
+    "bytes": 1054908,
+    "sha256": "0ac703dbac6ebb0708dd2c2cd50e18430b0b1f62575f2d62cad0a72fc5f5ca0d"
+  },
+  "murawa.glb": {
+    "bytes": 3676,
+    "sha256": "ab94462fca79abf6c21f63cc69b0878e03c225bcc92e32adf76e82541d7ede03"
+  },
+  "konstrukcja.glb": {
+    "bytes": 1051464,
+    "sha256": "80a6c0df4769b48adb8adb6e6239b97df69cf97eab355f2bec5b405b92a7d039"
+  }
+}

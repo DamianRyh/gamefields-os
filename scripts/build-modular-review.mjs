@@ -10,7 +10,8 @@ import Viewer from './app/engineering/modular-3d/page';
 import Library from './app/engineering/components/page';
 import SourceModels from './app/engineering/source-models/page';
 import PannaKids from './app/products/panna-kids/page';
-function readView(){const v=new URLSearchParams(location.search).get('view');return ['source','panna-kids','library'].includes(v)?v:'viewer'}
+import StreetFootball from './app/products/street-football-15x10/page';
+function readView(){const v=new URLSearchParams(location.search).get('view');return ['source','panna-kids','street-football-15x10','library'].includes(v)?v:'viewer'}
 function Review(){
  const[view,setView]=useState(readView);
  useEffect(()=>{
@@ -23,7 +24,7 @@ function Review(){
   const back=()=>setView(readView());document.addEventListener('click',navigate);window.addEventListener('popstate',back);
   return()=>{document.removeEventListener('click',navigate);window.removeEventListener('popstate',back)}
  },[]);
- return view==='panna-kids'?<PannaKids assetBase="products/panna-kids" inquiryEndpoint={null} studioHref="/engineering/modular-3d" backgroundBase="configurator-backgrounds"/>:view==='library'?<Library/>:view==='source'?<SourceModels assetBase="models/gamefields"/>:<Viewer assetBase="models/gamefields"/>
+ return view==='street-football-15x10'?<StreetFootball assetBase="products/street-football-15x10"/>:view==='panna-kids'?<PannaKids assetBase="products/panna-kids" inquiryEndpoint={null} studioHref="/engineering/modular-3d" backgroundBase="configurator-backgrounds"/>:view==='library'?<Library/>:view==='source'?<SourceModels assetBase="models/gamefields"/>:<Viewer assetBase="models/gamefields"/>
 }
 createRoot(document.getElementById('root')).render(<Review/>);
 `,
@@ -74,6 +75,7 @@ for (const name of [
 await cp("public/configurator-backgrounds", "dist/modular-review/configurator-backgrounds", {recursive:true});
 
 await cp("public/models/gamefields", "dist/modular-review/models/gamefields", {recursive:true});
+await cp("public/products/street-football-15x10", "dist/modular-review/products/street-football-15x10", {recursive:true});
 
 execFileSync(process.execPath,["scripts/build-court-objects.mjs"],{stdio:"inherit"});
 await mkdir("dist/modular-review/court-objects",{recursive:true});

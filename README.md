@@ -1,5 +1,7 @@
 # Gamefields OS
 
+Street Football 15 × 10: `/products/street-football-15x10` or `?view=street-football-15x10` in the public static catalogue. Two-object GLB and Blender source: `public/products/street-football-15x10/`. Blank, independently recolorable panels and a separate 20 cm surface without markings. Test: `node tests/street-football-15x10.mjs` after `pnpm build:modular:review`.
+
 Gamefields OS is the operating system and design environment behind Gamefields Studio.
 
 ## Gamefields Engineering v0.2

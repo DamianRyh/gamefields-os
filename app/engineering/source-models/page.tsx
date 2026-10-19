@@ -85,6 +85,7 @@ export default function SourceModelsPage({
       </header>
       <nav className="gf-source-nav">
         <a href="/engineering/modular-3d">← KONFIGURATOR MODUŁOWY</a>
+        <a href={assetBase.startsWith('/') ? '/products/street-football-15x10' : '?view=street-football-15x10'}>Street Football 15 × 10 — konfiguruj kolory ↗</a>
         <span>GLB LIBRARY / MODEL MEASURED</span>
       </nav>
       </>}
