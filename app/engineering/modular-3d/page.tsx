@@ -7,7 +7,7 @@ import styles from "./modular-3d.module.css";
 import { generateModularProduct } from "../modular-pipeline";
 import type { Modular3DComponentType as ComponentType } from "../modular-3d";
 
-import { NATIVE_MODELS_PUBLIC } from "../native-model-access";
+import { NATIVE_MODELS_PUBLIC, PUBLIC_SOURCE_MODEL_IDS } from "../native-model-access";
 import SourceModelsPage from "../source-models/page";
 
 const nativeProducts = [
@@ -24,7 +24,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get("product");
     const frame = requestAnimationFrame(() => {
-      if (NATIVE_MODELS_PUBLIC && nativeProducts.some((p) => p.id === id)) setProduct(id!);
+      if ((NATIVE_MODELS_PUBLIC || PUBLIC_SOURCE_MODEL_IDS.includes(id || "")) && nativeProducts.some((p) => p.id === id)) setProduct(id!);
     });
     return () => cancelAnimationFrame(frame);
   }, []);
@@ -143,13 +143,13 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
         <p>
           {product === "concept" ? <>Wymiar, bramki, wejście, branding i piłkochwyt składają się z osobnych
           komponentów. Każda zmiana przebudowuje 3D, BOM, model konstrukcyjny i
-          budżet.</> : <>Twoje modele z Blendera w konfiguratorze. Wybierz boisko, obejrzyj jego części lub sprawdź składanie zespołów K1.</>}
+          budżet.</> : <>Twoje modele z Blendera w konfiguratorze. Wybierz boisko i obejrzyj je w scenerii lub na neutralnym tle.</>}
         </p>
       </header>
 
       <p><a href="/products/panna-kids">PANNA KIDS / ZAPROJEKTUJ SWOJE BOISKO ↗</a></p>
       <nav className={styles.productPicker} aria-label="Wybierz produkt GAMEFIELDS">
-        {[{ id: "concept", name: "System koncepcyjny" }, ...(NATIVE_MODELS_PUBLIC ? nativeProducts : [])].map((p) => (
+        {[{ id: "concept", name: "System koncepcyjny" }, ...nativeProducts.filter(p=>NATIVE_MODELS_PUBLIC || PUBLIC_SOURCE_MODEL_IDS.includes(p.id))].map((p) => (
           <button key={p.id} aria-pressed={product === p.id} onClick={() => selectProduct(p.id)}>
             {p.name}
           </button>
@@ -158,8 +158,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
       {product !== "concept" ? (
         <section data-testid="native-configurator">
           <p className={styles.tipDark}>
-            Twoje modele GLB: oryginalne boisko, osobne zespoły i składanie K1.
-            Suwak K1 dodaje lub usuwa rzeczywiste zespoły bez skalowania.
+            Oryginalna geometria boiska. Sceneria korzysta ze stałej kamery; neutralne tło pozwala obracać model. Dostępne są również W-1 i osobne zespoły konstrukcyjne.
             Zmiana wymiarów pełnego boiska, StructuralModel i wycena wymagają
             potwierdzonych reguł połączeń i cennika. Engineer Gate pozostaje wymagany.
           </p>

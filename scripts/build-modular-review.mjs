@@ -22,7 +22,7 @@ function Review(){
   const back=()=>setView(readView());document.addEventListener('click',navigate);window.addEventListener('popstate',back);
   return()=>{document.removeEventListener('click',navigate);window.removeEventListener('popstate',back)}
  },[]);
- return view==='panna-kids'?<PannaKids assetBase="products/panna-kids" inquiryEndpoint={null} studioHref="/engineering/modular-3d"/>:view==='library'?<Library/>:view==='source'?<SourceModels assetBase="models/gamefields"/>:<Viewer assetBase="models/gamefields"/>
+ return view==='panna-kids'?<PannaKids assetBase="products/panna-kids" inquiryEndpoint={null} studioHref="/engineering/modular-3d" backgroundBase="configurator-backgrounds"/>:view==='library'?<Library/>:view==='source'?<SourceModels assetBase="models/gamefields"/>:<Viewer assetBase="models/gamefields"/>
 }
 createRoot(document.getElementById('root')).render(<Review/>);
 `,
@@ -69,3 +69,7 @@ for (const name of [
     "dist/modular-review/products/panna-kids/" + name,
   );
 }
+
+await cp("public/configurator-backgrounds", "dist/modular-review/configurator-backgrounds", {recursive:true});
+
+await cp("public/models/gamefields", "dist/modular-review/models/gamefields", {recursive:true});

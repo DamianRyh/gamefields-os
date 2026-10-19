@@ -9,11 +9,13 @@ export function GlbViewer({
   count = 1,
   pitch = 0,
   panelColor,
+  backgroundUrl,
 }: {
   url: string;
   count?: number;
   pitch?: number;
   panelColor?: string;
+  backgroundUrl?: string;
 }) {
   const container = useRef<HTMLDivElement>(null),
     latestCount = useRef(count),
@@ -22,6 +24,7 @@ export function GlbViewer({
       rebuild: (count: number) => void;
       recolor: (color?: string) => void;
     } | null>(null);
+  const [backgroundError, setBackgroundError] = useState("");
   const [message, setMessage] = useState("Wczytywanie modelu GLB…");
   useEffect(() => {
     latestColor.current = panelColor;
@@ -39,7 +42,12 @@ export function GlbViewer({
       renderer: THREE.WebGLRenderer | undefined,
       controls: OrbitControls | undefined,
       observer: ResizeObserver | undefined,
-      template: THREE.Group | undefined;
+      template: THREE.Group | undefined,
+      backdrop: THREE.Texture | undefined,
+      floor: THREE.Mesh<THREE.PlaneGeometry, THREE.ShadowMaterial> | undefined;
+    let backgroundActive = false;
+    setBackgroundError("");
+    setMessage("Wczytywanie modelu GLB…");
     const release = (object: THREE.Object3D) => {
       const geometries = new Set<THREE.BufferGeometry>(),
         materials = new Set<THREE.Material>(),
@@ -66,6 +74,8 @@ export function GlbViewer({
         renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
         renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
         renderer.setClearColor("#e8e7df");
+        renderer.shadowMap.enabled = !!backgroundUrl;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.outputColorSpace = THREE.SRGBColorSpace;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.1;
@@ -75,12 +85,20 @@ export function GlbViewer({
         scene.add(new THREE.HemisphereLight(0xffffff, 0x8d9385, 2.2));
         const sun = new THREE.DirectionalLight(0xffffff, 3);
         sun.position.set(5, 10, 6);
+        sun.castShadow = !!backgroundUrl;
+        sun.shadow.mapSize.set(1024, 1024);
+        sun.shadow.bias = -0.0001;
         scene.add(sun);
         const fill = new THREE.DirectionalLight(0xffffff, 1);
         fill.position.set(-6, 3, -4);
         scene.add(fill);
         const assembly = new THREE.Group();
         scene.add(assembly);
+        floor = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.ShadowMaterial({opacity:0.22}));
+        floor.rotation.x = -Math.PI / 2;
+        floor.receiveShadow = true;
+        floor.visible = false;
+        scene.add(floor);
         controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.minDistance = 0.2;
@@ -113,19 +131,32 @@ export function GlbViewer({
             size = box.getSize(new THREE.Vector3()),
             center = box.getCenter(new THREE.Vector3());
           const distance = Math.max(size.length() * 1.3, 0.25);
+          const target = center.clone();
+          if (backgroundActive) target.y += size.length() * 0.10;
           camera.position
-            .copy(center)
+            .copy(target)
             .add(
               new THREE.Vector3(
                 distance * 0.7,
-                distance * 0.5,
+                distance * (backgroundActive ? 0.77 : 0.5),
                 distance * 0.85,
               ),
             );
           camera.near = Math.max(0.001, distance / 10000);
           camera.far = Math.max(100, distance * 10);
           camera.updateProjectionMatrix();
-          controls?.target.copy(center);
+          controls!.enabled = !backgroundActive;
+          controls?.target.copy(target);
+          if (floor) {
+            floor.visible = backgroundActive;
+            floor.position.set(center.x, box.min.y - 0.003, center.z);
+            floor.scale.setScalar(Math.max(size.x, size.z, 1) * 4);
+          }
+          const span = Math.max(size.x, size.z, 1) * 2;
+          Object.assign(sun.shadow.camera, {left:-span,right:span,top:span,bottom:-span,far:200});
+          sun.shadow.camera.updateProjectionMatrix();
+          assembly.traverse(node=>{if(node instanceof THREE.Mesh)node.castShadow=backgroundActive});
+          host.dataset.cameraMode = backgroundActive ? "fixed-scene" : "orbit";
           controls?.update();
           host.dataset.loaded = "true";
           host.dataset.assetUrl = url;
@@ -161,6 +192,18 @@ export function GlbViewer({
           host.dataset.panelColor = color || "source";
         };
         controller.current = { rebuild, recolor };
+        if (backgroundUrl) {
+          backdrop = new THREE.TextureLoader().load(backgroundUrl, texture=>{
+            if(disposed){texture.dispose();return;}
+            texture.colorSpace = THREE.SRGBColorSpace;
+            scene.background = texture;
+            backgroundActive = true;
+            host.dataset.backgroundReady = "true";
+            rebuild(latestCount.current);
+          }, undefined, ()=>{
+            if(!disposed){host.dataset.backgroundReady="false";setBackgroundError("Tło jest niedostępne. Pokazujemy model na neutralnym tle.");}
+          });
+        }
         new GLTFLoader().load(
           url,
           (gltf) => {
@@ -199,22 +242,29 @@ export function GlbViewer({
       observer?.disconnect();
       controls?.dispose();
       if (template) release(template);
+      backdrop?.dispose();
+      floor?.geometry.dispose();
+      floor?.material.dispose();
       renderer?.dispose();
       renderer?.forceContextLoss();
       renderer?.domElement.remove();
       controller.current = null;
       delete host.dataset.loaded;
       delete host.dataset.assetUrl;
+      delete host.dataset.backgroundReady;
+      delete host.dataset.cameraMode;
     };
-  }, [url, pitch]);
+  }, [url, pitch, backgroundUrl]);
   return (
     <div
       ref={container}
       className="gf-source-canvas"
       data-testid="source-glb-viewer"
-      aria-label="Interaktywny podgląd modelu GLB"
+      style={backgroundUrl ? {aspectRatio:"1672 / 941",height:"auto"} : undefined}
+      aria-label={backgroundUrl ? "Model w scenerii — stałe ujęcie" : "Interaktywny podgląd modelu GLB"}
     >
       {message ? <p role="status">{message}</p> : null}
+      {backgroundError ? <p role="status">{backgroundError}</p> : null}
     </div>
   );
 }

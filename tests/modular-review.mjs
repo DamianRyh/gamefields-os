@@ -8,7 +8,7 @@ import { resolve } from "node:path";
 const html = await readFile("dist/modular-review/index.html");
 const server = createServer(async (request, response) => {
   const pathname = new URL(request.url, "http://localhost").pathname;
-  if (pathname.startsWith("/models/gamefields/") || pathname.startsWith("/products/panna-kids/")) {
+  if (pathname.startsWith("/configurator-backgrounds/") || pathname.startsWith("/models/gamefields/") || pathname.startsWith("/products/panna-kids/")) {
     const file = resolve("dist/modular-review", "." + pathname),
       root = resolve("dist/modular-review") + "/";
     if (!file.startsWith(root)) {
@@ -19,7 +19,7 @@ const server = createServer(async (request, response) => {
       const data = await readFile(file);
       response.setHeader(
         "Content-Type",
-        file.endsWith(".glb") ? "model/gltf-binary" : file.endsWith(".webp") ? "image/webp" : "application/json",
+        file.endsWith(".png") ? "image/png" : file.endsWith(".glb") ? "model/gltf-binary" : file.endsWith(".webp") ? "image/webp" : "application/json",
       );
       response.end(data);
     } catch {
@@ -78,25 +78,23 @@ try {
   assert.equal(await page.locator("article").count(), 12);
   await page.getByRole("link", { name: "← MODULAR PRODUCT" }).click();
   await page.getByTestId("live-bom").waitFor();
-  assert.equal(await page.getByRole("link", { name: "WASZE PANELE / MODELE Z BLENDERA ↗" }).count(), 0);
+  assert.equal(await page.getByRole("link", { name: "WASZE PANELE / MODELE Z BLENDERA ↗" }).count(), 1);
   await page.goto(base + "?view=source");
-  await page.getByRole("heading", { name: "Modele w przygotowaniu." }).waitFor();
-  assert.equal(await page.getByTestId("source-glb-viewer").count(), 0);
-  assert.equal(await page.getByRole("link", { name: /Pobierz/ }).count(), 0);
+  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.loaded==='true');
+  assert.equal(await page.getByRole('button',{name:'CZĘŚCI',exact:true}).count(),1);
   await page.goto(base + "?view=viewer&product=boisko-w1");
-  await page.locator("[data-instance-id]").first().waitFor();
-  assert.equal(await page.getByTestId("native-configurator").count(), 0);
-  assert.equal(existsSync("dist/modular-review/models"), false, "No native files in published artifact");
+  await page.getByTestId("native-configurator").waitFor();
+  assert.equal(await page.getByTestId("native-configurator").count(), 1);
   const privateLibrary = JSON.parse(await readFile("assets/private/gamefields/library.json", "utf8"));
   for (const asset of [...privateLibrary.sources, ...privateLibrary.components]) {
     const response = await page.request.get(base + "/models/gamefields/" + asset.file);
-    assert.equal(response.status(), 404, asset.file + " must not be public");
+    assert.equal(response.status(), 200, asset.file);
   }
   await testPannaKidsFlow(page,{url:base+"?view=panna-kids",production:false});
   assert.deepEqual(errors, []);
   assert.deepEqual(external, []);
   console.log(
-    "PASS: static public review, live modular growth, budget, fixed panel sizes, upper layer, catalogue navigation and mobile; legacy source gallery withheld; all 15 former GLB endpoints return 404; no external requests or runtime errors.",
+    "PASS: static public review, live modular growth, budget, fixed panel sizes, upper layer, catalogue navigation and mobile; all owner-approved source and component GLBs public; no external requests or runtime errors.",
   );
 } finally {
   await browser.close();

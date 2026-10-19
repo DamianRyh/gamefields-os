@@ -32,10 +32,12 @@ export default function PannaKidsPage({
   assetBase = "/products/panna-kids",
   inquiryEndpoint = "/api/products/panna-kids/inquiries",
   studioHref = "/",
+  backgroundBase = "/configurator-backgrounds",
 }: {
   assetBase?: string;
   inquiryEndpoint?: string | null;
   studioHref?: string;
+  backgroundBase?: string;
 }) {
   const [project, setProject] = useState<PannaConfiguration>(initial);
   const [saved, setSaved] = useState<PannaConfiguration[]>([]);
@@ -43,6 +45,8 @@ export default function PannaKidsPage({
   const [step, setStep] = useState(0);
   const [image, setImage] = useState(0);
   const [show3d, setShow3d] = useState(false);
+  const [scene, setScene] = useState(false);
+  useEffect(()=>{if(new URLSearchParams(location.search).get("scene")==="school"){setShow3d(true);setScene(true)}},[]);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [inquiryMessage, setInquiryMessage] = useState("");
@@ -272,6 +276,7 @@ export default function PannaKidsPage({
                 <div className={styles.modelFrame}>
                   <GlbViewer
                     url={`${assetBase}/panna-kids.glb`}
+                    backgroundUrl={scene ? `${backgroundBase}/panna-kids-school.png` : undefined}
                     panelColor={
                       project.color === "undecided"
                         ? undefined
@@ -289,12 +294,13 @@ export default function PannaKidsPage({
                 />
               )}
               <figcaption>
-                Oryginalna geometria modelu. Kolor paneli zmienia się w
+                {scene && show3d ? "Sceneria koncepcyjna — stałe ujęcie. " : ""}Oryginalna geometria modelu. Kolor paneli zmienia się w
                 podglądzie 3D; rendery pozostają bazowe. Wykończenia i
                 nawierzchnia wymagają potwierdzenia.
               </figcaption>
             </figure>
             <div className={styles.views} aria-label="Widok produktu">
+              <button type="button" aria-pressed={show3d && scene} onClick={()=>{setShow3d(true);setScene(true)}}>Na dziedzińcu</button>
               {imageViews.map((v, i) => (
                 <button
                   type="button"
@@ -310,8 +316,8 @@ export default function PannaKidsPage({
               ))}
               <button
                 type="button"
-                aria-pressed={show3d}
-                onClick={() => setShow3d(true)}
+                aria-pressed={show3d && !scene}
+                onClick={() => {setShow3d(true);setScene(false)}}
               >
                 Obróć model 3D
               </button>

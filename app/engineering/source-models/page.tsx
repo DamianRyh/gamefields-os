@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { NATIVE_MODELS_PUBLIC } from "../native-model-access";
-import library from "../../../assets/private/gamefields/library.json";
+import { NATIVE_MODELS_PUBLIC, PUBLIC_SOURCE_MODEL_IDS } from "../native-model-access";
+import fullLibrary from "../../../assets/private/gamefields/library.json";
 import { GlbViewer } from "../../../components/gamefields/glb-viewer";
 import "./source-models.css";
+
+const library = {...fullLibrary, sources:fullLibrary.sources.filter(s=>NATIVE_MODELS_PUBLIC || PUBLIC_SOURCE_MODEL_IDS.includes(s.id))};
 
 const offerNames: Record<string, string> = {
   "boisko-p1": "GAMEFIELDS P1",
@@ -22,6 +24,7 @@ export default function SourceModelsPage({
   embedded?: boolean;
   onModelChange?: (id: string) => void;
 }) {
+  const [scene, setScene] = useState(()=>typeof window!=="undefined" && new URLSearchParams(location.search).get("scene")==="urban");
   const [mode, setMode] = useState<"source" | "component" | "study">("source"),
     [sourceIndex, setSourceIndex] = useState(() =>
       Math.max(0, library.sources.findIndex((s) => s.id === initialModelId)),
@@ -54,7 +57,7 @@ export default function SourceModelsPage({
   const bounds = selected.measuredBoundsM,
     pitch = k1.repeatStudy?.pitchM ?? 0;
   const url = assetBase + "/" + selected.file;
-  if (!NATIVE_MODELS_PUBLIC) return (
+  if (!library.sources.length) return (
     <section className="gf-source-page">
       <h1>Modele w przygotowaniu.</h1>
       <p>Podgląd modeli GAMEFIELDS jest obecnie niedostępny publicznie.</p>
@@ -68,7 +71,7 @@ export default function SourceModelsPage({
         <div>
           <span>GAMEFIELDS / KOLEKCJA BOISK</span>
           <h1>
-            Trzy boiska.
+            Modele boisk.
             <br />
             Wasze modele.
           </h1>
@@ -87,7 +90,7 @@ export default function SourceModelsPage({
       <section className="gf-source-layout">
         <aside>
           <div className="gf-source-tabs">
-            {(["source", "component", "study"] as const).map((m) => (
+            {(NATIVE_MODELS_PUBLIC ? ["source", "component", "study"] as const : ["source"] as const).map((m) => (
               <button
                 key={m}
                 aria-pressed={mode === m}
@@ -103,7 +106,7 @@ export default function SourceModelsPage({
           </div>
           {mode === "source" ? (
             <>
-              <h2>WYBIERZ BOISKO / 03 MODELE</h2>
+              <h2>WYBIERZ BOISKO</h2>
               {library.sources.map((s, i) => (
                 <button
                   className="gf-source-choice"
@@ -196,12 +199,14 @@ export default function SourceModelsPage({
         <section>
           <GlbViewer
             url={url}
+            backgroundUrl={scene && mode === "source" && ["boisko-p1","panna-kids-o1"].includes(source.id) ? assetBase.replace(/models\/gamefields\/?$/, "configurator-backgrounds") + (source.id === "boisko-p1" ? "/p1-urban.png" : "/panna-kids-school.png") : undefined}
             count={mode === "study" ? count : 1}
             pitch={mode === "study" ? pitch : 0}
           />
+          {mode === "source" && ["boisko-p1","panna-kids-o1"].includes(source.id) && <button type="button" aria-pressed={scene} onClick={()=>setScene(value=>!value)}>{scene ? "Wróć do neutralnego tła" : "Pokaż w scenerii"}</button>}
           <div className="gf-source-caption">
             <span>{selected.id.toUpperCase()} / GLB</span>
-            <span>ORBIT · ZOOM · PAN</span>
+            <span>{scene && mode === "source" && ["boisko-p1","panna-kids-o1"].includes(source.id) ? "SCENERIA · STAŁE UJĘCIE" : "ORBIT · ZOOM · PAN"}</span>
           </div>
           <p className="gf-source-note">
             Wymiary powyżej oznaczają obwiednię geometrii, nie rozstaw montażowy

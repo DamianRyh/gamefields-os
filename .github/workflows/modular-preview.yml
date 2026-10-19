@@ -6,6 +6,9 @@ on:
       - 'app/engineering/**'
       - 'app/products/**'
       - 'public/products/**'
+      - 'public/configurator-backgrounds/**'
+      - 'public/models/**'
+      - 'tests/configurator-backgrounds.mjs'
       - 'lib/products/**'
       - 'tests/panna-kids*'
       - 'components/gamefields/**'
@@ -49,6 +52,7 @@ jobs:
       - run: pnpm build:modular:review
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:modular:review
+      - run: node tests/configurator-backgrounds.mjs
       - name: Check Pages configuration
         id: pages
         env:
