@@ -1,0 +1,12 @@
+{
+  "id": 3964,
+  "url": "https://www.gamefields.eu/os/",
+  "source_sha256": "0eb5bf893c6526008bfe435162fe8db9008116bd34c055ffde3d268a751002b1",
+  "modified_gmt": "2026-10-19T07:35:53",
+  "published_at_utc": "2026-10-19T07:39:53.053985+00:00",
+  "pages_release_commit": "c3a05e98753d7717bbeedbb86b66b90714216bf4",
+  "pages_url": "https://damianryh.github.io/gamefields-os/",
+  "pages_workflow_run": 39216665869,
+  "public_ui_test": "PASS: eight modules, links, selection and no overflow at 1440/1024/390px; live P1 and Kids 3D with backgrounds. All 15 GLB files and both backgrounds verified. No forms submitted.",
+  "backend_status": "Not deployed in this session: hosting authorization unavailable; accounts/projects/PLAY remain protected and require backend deployment."
+}

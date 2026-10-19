@@ -1,20 +1,20 @@
 {
-  "published_at_utc": "2026-10-18T13:30:29.659386+00:00",
+  "published_at_utc": "2026-10-19T07:39:53.053985+00:00",
   "pages": [
     {
       "id": 3462,
-      "draft": 3929,
       "url": "https://www.gamefields.eu/",
-      "source_sha256": "12a8ed087b80ef221883096c009b648ff8633eb616ab96a0fea0026dd66aa4b3",
-      "modified_gmt": "2026-10-18T13:30:01",
+      "source_sha256": "004d6f3833387b94e4a2eff03b196848b786d689e3b4e0ac75ad94b5233a40b1",
+      "modified_gmt": "2026-10-19T07:35:57",
+      "draft": 3965,
       "draft_status": "trash"
     },
     {
       "id": 3465,
-      "draft": 3930,
       "url": "https://www.gamefields.eu/boiska-street-football/",
-      "source_sha256": "08f379f2fdd73a0084bbfe6d1297c7439f444321ed14d66efa1e958f514423f8",
-      "modified_gmt": "2026-10-18T13:30:05",
+      "source_sha256": "1f11525569d3b20141b826ab83d5f449fc13bdb9d069c5de3a48f1d802f97a9a",
+      "modified_gmt": "2026-10-19T07:36:00",
+      "draft": 3966,
       "draft_status": "trash"
     },
     {
@@ -74,5 +74,5 @@
       "draft_status": "trash"
     }
   ],
-  "tests": "PASS: draft and public product UI at 1440/1024/768/390px; homepage context review/clear regression at 1440/768/390px; no forms submitted"
+  "tests": "PASS: existing product templates unchanged except catalog OS entry; live homepage, catalog OS link and OS portal checked; 3D backgrounds verified at 1440/1024/390px. No forms submitted."
 }
