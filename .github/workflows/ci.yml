@@ -18,6 +18,7 @@ jobs:
           node-version: 22.13.0
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: node scripts/sync-wordpress-product-design.mjs --check
       - run: pnpm exec tsc --noEmit
       - run: pnpm test:modular
       - run: pnpm test:panna-kids
@@ -25,7 +26,11 @@ jobs:
       - run: pnpm build
       - run: pnpm test:play
       - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:studio
       - run: pnpm test:mobile
+      - run: pnpm build:modular:review
+      - run: pnpm test:modular:review
+      - run: node tests/configurator-backgrounds.mjs
       - run: pnpm test:modular:viewer
       - uses: actions/upload-artifact@v4
         if: always()
@@ -36,6 +41,13 @@ jobs:
       - run: pnpm build:objects
       - run: pnpm test:objects
       - run: php -l integrations/wordpress/court-objects/gamefields-court-objects.php
+      - run: php -l integrations/wordpress/gamefields-play.php
+      - run: pnpm build:wordpress
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gamefields-studio-play-wordpress
+          path: dist/wordpress/gamefields-studio-play.zip
+          retention-days: 30
       - uses: actions/upload-artifact@v4
         with:
           name: gamefields-court-objects-wordpress
@@ -46,6 +58,12 @@ jobs:
         with:
           name: court-objects-screens
           path: outputs/court-objects
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: studio-screens
+          path: outputs/studio-review
           retention-days: 7
       - uses: actions/upload-artifact@v4
         if: always()

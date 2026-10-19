@@ -1,7 +1,7 @@
 name: GAMEFIELDS Modular Public Preview
 on:
   push:
-    branches: [feat/gamefields-modular-product-v12]
+    branches: [main, feat/gamefields-modular-product-v12]
     paths:
       - 'app/engineering/**'
       - 'app/products/**'

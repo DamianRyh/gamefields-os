@@ -19,3 +19,23 @@ Rename the integration file to `gamefields-play.php.disabled`. No WordPress cont
 ## Current access limitation
 
 The connected WordPress API reports `DISALLOW_FILE_EDIT`. It cannot install this file. Upload through the hosting file manager/SFTP is the remaining infrastructure action; do not weaken the file editing protection just for this integration.
+
+## Studio — przygotowane wejście WWW
+
+Gateway obsługuje też `/studio` i `/studio/` oraz sceny WebP z `/studio/`. Najpierw opublikuj aplikację zawierającą trasę `app/studio/page.tsx`, następnie zaktualizuj gateway. Wyklucz obie trasy strony z cache; sceny mogą pozostać publicznie cacheowane. Dodaj pozycję Studio w menu WP i sprawdź bezpośredni link, przeładowanie, podglądy, wycenę i zapis konta. Gateway nie przechwytuje strony głównej WordPressa. Szczegółowy plan: `docs/WWW-ROLLOUT.md`.
+
+## Alternative: install through the WordPress plugin panel
+
+If the administrator can install plugins, SFTP is not required for the gateway itself. Build the ordinary plugin package with `pnpm build:wordpress` (requires the `zip` command), then use **Plugins → Add New → Upload Plugin** and select `dist/wordpress/gamefields-studio-play.zip`. The package contains the same gateway code under `gamefields-studio-play/gamefields-play.php`.
+
+Before activation:
+
+1. Back up the WordPress database and files.
+2. Deploy the matching application and verify its health from the hosting network. A 403 at the upstream is a blocker until its access policy is understood and resolved.
+3. Resolve the existing `/studio` redirect to `studio.webp`; identify its source and preserve the image. Configure session/API cache exclusions listed above.
+4. Use **one** installation method. An old MU-plugin can intercept requests before the new normal plugin. Update or remove the old installation through the hosting administrator before enabling a second copy.
+5. Activate **Gamefields Studio & PLAY**. Check `/studio`, scene images, `/play`, `/api/play/health`, a real quote, and account project save/reopen in two browsers.
+
+Rollback for the ordinary plugin: deactivate it in the Plugins panel. For the MU-plugin: rename its file as described above. Keep the previous deployment and database backup available; deactivating the gateway does not undo application migrations.
+
+If the upload option is missing or plugin installation is disabled, the administrator must use the hosting file manager/SFTP. `DISALLOW_FILE_EDIT` alone does not establish that plugin installation is disabled; the current site's permissions have not been verified.
