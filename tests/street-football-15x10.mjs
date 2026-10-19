@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {existsSync} from 'node:fs';
 import {readFile,mkdir} from 'node:fs/promises';
 import {createServer} from 'node:http';
 import {resolve,extname} from 'node:path';
@@ -25,7 +26,7 @@ const server=createServer(async(req,res)=>{
 });
 await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
 const base=`http://127.0.0.1:${server.address().port}`;
-const browser=await chromium.launch({headless:true,args:['--enable-unsafe-swiftshader']});
+const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),headless:true,args:['--no-sandbox','--enable-unsafe-swiftshader']});
 await mkdir('outputs/street15',{recursive:true});
 try {
  const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];let loads=0;
@@ -39,8 +40,11 @@ try {
  await page.waitForTimeout(100);
  assert.notDeepEqual(await viewer.screenshot(),before,'Panel color changes the rendered model');
  await page.getByLabel('Własny kolor paneli').fill('#123456');
+ await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]').dataset.panelColor==='#123456');
+ const beforeSurface=await viewer.screenshot();
  await page.getByLabel('Kolor nawierzchni',{exact:true}).fill('#15814b');
  await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]').dataset.surfaceColor==='#15814b');
+ assert.notDeepEqual(await viewer.screenshot(),beforeSurface,'Changing only the surface color redraws an idle preview');
  const downloading=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz konfigurację JSON'}).click();
  const download=await downloading,config=JSON.parse(await readFile(await download.path(),'utf8'));
  assert.equal(config.panelColor,'#123456');assert.equal(config.surfaceColor,'#15814b');assert.equal(config.markings,false);assert.equal(config.surfaceThicknessM,.2);

@@ -253,6 +253,7 @@ export function GlbViewer({
             }
           });
           host.dataset.surfaceColor = color || 'source';
+          needsRender = true;
         };
         controller.current = { rebuild, recolor, recolorSurface };
         if (backgroundUrl) {
