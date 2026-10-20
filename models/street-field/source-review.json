@@ -1,0 +1,25 @@
+{
+  "status": "RESOLVED_BY_OWNER",
+  "assembly": "models/street-field/sources/Boisko 02 - wymiary 09-09-2023.pdf",
+  "assembly_date": "2023-09-09",
+  "dimensions_mm": {
+    "internal_length": 6214,
+    "internal_width": 4648,
+    "base_overall_length": 6550,
+    "base_overall_width": 4984,
+    "goals_overall_length": 7024,
+    "post_height": 1091,
+    "panel_height": 1000
+  },
+  "later_component_date": "2023-09-16",
+  "later_panel_width_mm": 2000,
+  "counts": {
+    "standard_panels": 11,
+    "entry_panels": 1,
+    "goal_panels": 2,
+    "posts": 14
+  },
+  "conflict": "Four 2000 mm panels plus posts cannot fit the dimensioned 6214 mm internal side. Need selected source revision before building final arena.",
+  "source_sha256": "dd8fd04acecba44154cc9368eca211c41467adf4e235a75bc8910e5e3dd9e605",
+  "decision": "Use dimensioned 6.214 x 4.648 m field; adapt later panel widths"
+}

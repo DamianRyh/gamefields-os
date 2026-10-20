@@ -1,0 +1,47 @@
+{
+  "name": "Street Field",
+  "status": "VALIDATED_DIMENSIONED_ADAPTATION",
+  "source": "Boisko 02 (1).pdf, 09.09.2023",
+  "userDecision": "Use inner field 6.214 x 4.648 m and adapt later panel widths",
+  "length_m": 6.214,
+  "width_m": 4.648,
+  "height_m": 1.091,
+  "base_bounds_m": [
+    6.55,
+    4.984
+  ],
+  "goal_total_length_m": 7.024,
+  "surface_thickness_m": 0.2,
+  "moduleCounts": {
+    "standard": 11,
+    "entry": 1,
+    "goal": 2,
+    "posts": 14
+  },
+  "adapted_panel_widths": {
+    "long_m": 1.4925,
+    "short_m": 1.5046666666666666
+  },
+  "meshCount": 45,
+  "triangles": 11100,
+  "notes": [
+    "Detailed 2 m panels have adapted widths, not an unchanged manufacturing assembly.",
+    "Section dimensions retained: frame 50 x 30 x 3, infill 25 x 25 x 2, posts 80 x 80 x 3 mm.",
+    "Connector geometry simplified; bolts, holes and welds omitted.",
+    "20 cm neutral slab added for Studio; no default artwork or lines."
+  ],
+  "artifacts": {
+    "street-field.blend": {
+      "bytes": 183400,
+      "sha256": "514d4dfeb157a1a8f90b0a013721fe1df9589294e80a515f557dcd18703a5dd7"
+    },
+    "street-field.glb": {
+      "bytes": 644340,
+      "sha256": "1c7f6af9563f252c1f858be869b2cbe9640919ea4dfe332334f713a70435bf40"
+    },
+    "studio-mesh.json": {
+      "bytes": 1104095,
+      "sha256": "765164ef583fe6816a564ec10f04473acaba032d495838443a7848830e72c55a"
+    }
+  }
+}
