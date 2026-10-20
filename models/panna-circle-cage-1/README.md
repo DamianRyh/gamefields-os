@@ -1,4 +1,4 @@
-# Panna Circle Cage 1.0
+# Panna Cage 90 — GF-CT-005
 
 Model według rysunku złożeniowego Boisko 03 (28.11.2023) i tych samych 39 szczegółowych rysunków modułów z lutego 2024 co Panna Circle Cage 2.0. Oryginał złożenia pozostaje lokalnie w sources/; wspólne detale w ../panna-circle-cage-2/sources/. Manifest zachowuje źródła.
 
@@ -16,3 +16,7 @@ Pliki: edytowalny .blend, webowy .glb, studio-mesh.json (Y do góry), podglad.pn
 
 Produkt circle-cage-1 korzysta ze wspólnego wyboru modeli, kolorów, wzorów, grafik, nawierzchni, linii, kamer i importu/eksportu projektu. Nie tworzy nowej podstrony ani konfiguratora.
 https://www.gamefields.eu/konfigurator-boisk/?arena=circle-cage-1
+
+## Obowiązująca nazwa
+
+Panna Cage 90 (GF-CT-005), zatwierdzona 20.10.2026. Dawna nazwa: Panna Circle Cage 1.0. Kody części, nazwy źródłowych plików i adresy pozostają stałe. Aktualne nazwy i aliasy: ../../docs/PRODUCT_NAMES.md. Historyczne opisy poniżej zachowują odniesienia do źródeł.

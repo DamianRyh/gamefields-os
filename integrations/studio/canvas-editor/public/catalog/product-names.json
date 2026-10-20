@@ -1,0 +1,90 @@
+{
+  "approved_at": "2026-10-20",
+  "schema": "GF-PRODUCT-NAMES-1",
+  "products": [
+    {
+      "code": "GF-CT-001",
+      "id": "w1",
+      "name": "Panna Ring",
+      "legacy_name": "W-1",
+      "family": "F03",
+      "aliases": [
+        "W-1"
+      ]
+    },
+    {
+      "code": "GF-CT-002",
+      "id": "o1",
+      "name": "Panna Play",
+      "legacy_name": "Panna Kids O-1",
+      "family": "F02",
+      "aliases": [
+        "Panna Kids O-1",
+        "Panna Kids",
+        "Panna Kids O1"
+      ]
+    },
+    {
+      "code": "GF-CT-003",
+      "id": "p1",
+      "name": "Panna Court",
+      "legacy_name": "P-1",
+      "family": "F01",
+      "aliases": [
+        "P-1"
+      ]
+    },
+    {
+      "code": "GF-CT-004",
+      "id": "street15",
+      "name": "Street Arena 15",
+      "legacy_name": "Street Football 15 x 10",
+      "family": "F04",
+      "aliases": [
+        "Street Football 15 x 10",
+        "Street Football 15 × 10",
+        "Street Football 15x10"
+      ]
+    },
+    {
+      "code": "GF-CT-005",
+      "id": "circle-cage-1",
+      "name": "Panna Cage 90",
+      "legacy_name": "Panna Circle Cage 1.0",
+      "family": "F05",
+      "aliases": [
+        "Panna Circle Cage 1.0"
+      ]
+    },
+    {
+      "code": "GF-CT-006",
+      "id": "circle-cage-2",
+      "name": "Panna Cage 180",
+      "legacy_name": "Panna Circle Cage 2.0",
+      "family": "F05",
+      "aliases": [
+        "Panna Circle Cage 2.0"
+      ]
+    },
+    {
+      "code": "GF-CT-007",
+      "id": "street-field",
+      "name": "Panna Grid",
+      "legacy_name": "Street Field",
+      "family": "F06",
+      "aliases": [
+        "Street Field"
+      ]
+    },
+    {
+      "code": "GF-CT-008",
+      "id": "octagon",
+      "name": "Panna Octa",
+      "legacy_name": "Octagon",
+      "family": "F07",
+      "aliases": [
+        "Octagon"
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# Panna Circle Cage 2.0
+# Panna Cage 180 — GF-CT-006
 
 Model złożony według rysunku Boisko 03-H, PNG0005-00-00-000 (28.11.2023) oraz 39 rysunków komponentów z lutego 2024, przekazanych w folderze Google Drive. Manifest zachowuje identyfikatory źródeł; oryginały PDF pozostają lokalnie w sources/.
 
@@ -21,3 +21,7 @@ Uruchom build_components.py w pustej scenie Blendera; otwórz zapisane panna-cir
 ## Studio
 
 Model dodany do wspólnego wyboru istniejącego Gamefields Studio jako circle-cage-2. Używa tych samych wzorów, palet, ustawień nawierzchni, kolorów konstrukcji, kamer i eksportu/importu JSON. Nie tworzy osobnego konfiguratora ani strony produktu. Link do wejścia w edycję: https://gamefields-studio.ryhfs90.chatgpt.site/?arena=circle-cage-2
+
+## Obowiązująca nazwa
+
+Panna Cage 180 (GF-CT-006), zatwierdzona 20.10.2026. Dawna nazwa: Panna Circle Cage 2.0. Kody części, nazwy źródłowych plików i adresy pozostają stałe. Aktualne nazwy i aliasy: ../../docs/PRODUCT_NAMES.md. Historyczne opisy poniżej zachowują odniesienia do źródeł.

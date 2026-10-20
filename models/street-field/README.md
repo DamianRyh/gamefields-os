@@ -1,4 +1,4 @@
-# Street Field
+# Panna Grid — GF-CT-007
 
 Model koncepcyjny według Boisko 02 (1).pdf, 09.09.2023, i detali z folderu Street Field. Użytkownik wybrał pole 6,214 × 4,648 m z załącznika i dopasowanie szerokości paneli, ponieważ późniejsze detale z 16–18.09.2023 pokazują panele 2 m, które nie mieszczą się w tym obrysie w podanej liczbie.
 
@@ -15,3 +15,7 @@ W osobnym procesie Blender uruchom build_arena.py: tworzy street-field.blend, st
 Materiały ramy, wypełnienia i bramek są niezależne. Nawierzchnia ma osobny obiekt z UV. Studio używa osi Y do góry i wspólnych narzędzi kolorów, nawierzchni, wzorów, grafik, linii, kamer oraz projektu JSON. Produkt dodany do istniejącego wyboru, bez nowej strony.
 
 https://www.gamefields.eu/konfigurator-boisk/?arena=street-field
+
+## Obowiązująca nazwa
+
+Panna Grid (GF-CT-007), zatwierdzona 20.10.2026. Dawna nazwa: Street Field. Kody części, nazwy źródłowych plików i adresy pozostają stałe. Aktualne nazwy i aliasy: ../../docs/PRODUCT_NAMES.md. Historyczne opisy poniżej zachowują odniesienia do źródeł.

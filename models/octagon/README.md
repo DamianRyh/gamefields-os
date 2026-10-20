@@ -1,4 +1,4 @@
-# Octagon
+# Panna Octa — GF-CT-008
 
 Model koncepcyjny złożony według Boisko 01.PDF (01.10.2021) z rodziny elementów Street Field. Wymiar wewnętrzny między przeciwległymi płaszczyznami 4962 mm, wysokość 1218 mm, długość z koszami bramek 5642 mm. Osiem modułów: 4 zwykłe, 2 przeciwległe bramkowe i 2 przeciwległe wejściowe; 8 słupów. Wejścia: światło 720 mm, próg 802 mm. Bramki: szerokość 1000 mm, wysokość frontu 462 mm.
 
@@ -9,3 +9,7 @@ Osobna ośmiokątna nawierzchnia 20 cm ma 6 m między przeciwległymi bokami i o
 Uruchom build_arena.py w osobnym procesie Blender; tworzy octagon.blend, octagon.glb, studio-mesh.json i validation.json. Otwórz model i uruchom render_arena.py dla podglad.png. Generator zastępuje własną scenę. Oryginał PDF pozostaje lokalnie w sources/, szczegóły rodziny w ../street-field/sources/.
 
 Produkt dodany do wspólnego Studio bez nowych stron: https://www.gamefields.eu/konfigurator-boisk/?arena=octagon
+
+## Obowiązująca nazwa
+
+Panna Octa (GF-CT-008), zatwierdzona 20.10.2026. Dawna nazwa: Octagon. Kody części, nazwy źródłowych plików i adresy pozostają stałe. Aktualne nazwy i aliasy: ../../docs/PRODUCT_NAMES.md. Historyczne opisy poniżej zachowują odniesienia do źródeł.
