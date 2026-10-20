@@ -1,0 +1,93 @@
+# Gamefields — stan projektu
+
+## Wspólna nawigacja — 2026-10-08
+GamefieldsHeader zastępuje osobne nagłówki Studio/Radar i stron lokalizacji. Wspólne Boiska / Radar · mapa / Projektuj boisko, aktywna sekcja, dostępne cele dotykowe i układ mobilny. Zakładki konfiguratora nie przeładowują projektu. WordPress: menu Main PL współdzielone przez desktop i mobile, Radar w miejscu linku City; homepage usuwa stary link PLAY; landing Studio usuwa niedziałające ulubione i avatar. Grafiki, wzory i geometria pozostają bez zmian. Style stron WordPress w integrations/wordpress/shared-navigation.css.
+
+## Odchudzenie — 2026-10-08 (opublikowane Sites v41)
+Na decyzję właściciela zakres to Studio / boiska i Radar / mapa. Usunięto 23 pliki PLAY: nieużywane biblioteki i schematy runtime, testy, instrukcje oraz lokalną bramkę WordPress. Publiczne trasy PLAY były już nieobecne.
+
+Usunięto martwe konto projektów i wywołania /api/projects. JSON import/export i katalog WordPress pozostają. Manifest startuje od /, nie /play. Nie zmieniono cen ani wartości materiałów.
+
+Usunięto preload wszystkich podglądów. Compositor buforuje maksymalnie trzy wybrane zdjęcia i grupuje szybkie zmiany w oknie 60 ms. Geometria i rozdzielczość są zachowane; błędy ładowania mają retry.
+
+Zachowano kompaktowe karty czterech nawierzchni, szczegóły i zbliżenia. Zachowano wszystkie grafiki, 300 wzorów, 18 palet i 12 kierunków Signature. Park, Szkoła, Podwórko i Warszawa mają trzy perspektywy; Kraków enabled:false. Pozostają poprawki mobilnych bramek i identyfikacja Minimal v2.
+
+Usunięto odtwarzalny cache pnpm i starą paczkę outputs/gamefields-studio-402fd74.tar.gz. Wolne miejsce wzrosło z około 41 MiB do 1,6 GiB (wartość zależy również od innych procesów).
+
+WordPress: gateway PLAY trwale usunięto po zatwierdzeniu wymaganej operacji przez właściciela. Konfigurator osadza Site bezpośrednio przez iframe i nie potrzebuje bramki. Usunięto także rozpoznane stare paczki site-v14.tar.gz, site-v17.tar.gz i gamefields-wordpress-gateway.zip; ich przygotowane grafiki są nadal obecne w public/studio.
+
+Kontrola typów, test zakresu i produkcyjny build przeszły. Lokalny browser sprawdził 12 kombinacji materiał/kamera i układ 390 px. Test 375 px wykrył dziedziczony minimalny rozmiar elementów siatki; dodano min-width:0 przed końcową regresją.
+
+Historyczne migracje, dane produkcyjne i Git nie są kasowane. Studio Radar pozostaje pilotażowy, WordPress ma osobne zatwierdzone materiały przed/po.
+
+Odchudzenie potwierdzone: Sites v41, commit 710e0afc4678ef94aacd33ead42e072d96cc31a3. Testy 48 kombinacji oraz przejścia Radar projekt/powrót przeszły. Publikację kolejnych zmian potwierdza native deployment status.
+
+2026-10-09: Added Panna Football 1×1 immediately after Street Football 3×3 in the entry selector. Reuses validated Piłka nożna 1×1 profile, 10 × 6 m start, two goals, materials and existing design library. Panna uses the proportionate SVG preview; calibrated 3×3 photos remain assigned to 3×3.
+
+2026-10-09: Panna now uses a circular Ø7m plan and twelve dedicated greenscreen scenes (four locations × three cameras). Shared 300 patterns, 18 palettes, 12 Signature directions, four materials and project tools remain. JSON preserves explicit circle geometry; legacy rectangular imports remain rectangular. Quote and summary use circle area. Type check, build, geometry tests and 96 mobile/desktop scene combinations passed; Radar navigation remains covered. See PANNA_SCENES.md for conceptual projection and photo-equipment limitations.
+
+Panna band branding follows the circular arc when moved, with rotation/scaling centred on its displayed position. Equipment choices now mirror Street Football 3×3, including benches and DJ booth.
+
+Homepage integration: `?home=1&sport=Piłka%20nożna%201×1` opens the Panna entry block with live round preview and design directions. Embedded blocks hide the sport selector; the primary CTA transfers sport and design into the full builder. WordPress homepage adds Panna immediately after the existing 3×3 embed.
+
+2026-10-10: Homepage arrangement — WordPress 3462 opens with the live Street Football builder, concise navigation, compact before/after and author sections. Panna, process and location submission remain available in native disclosure sections. Repeated introductions are hidden. Embedded Street Football headline shortened to prevent an isolated numeral; no design, palette, project or scene behavior changed. WordPress source verified against the proposed targeted patches; live desktop iframe no longer scrolls inside the page. Mobile physical-device QA remains outstanding.
+Validation for 2026-10-10 copy-only Studio change: TypeScript, Studio scope test and production build passed. Mobile regression was attempted but could not run because the Chromium headless executable is absent; no browser was installed. Live desktop checks cover disclosure sections and before/after slider.
+
+
+2026-10-10: Blender construction catalogue prepared: W-1 (5.09 m external, 1 m height), O-1 (about 6 m external), P-1 (7.139 × 5.573 m). Separate products and arenaModel JSON identity; construction colors first, optional surface, three cameras. Legacy Panna removed from active selection, historical assets preserved. Clean conceptual backgrounds replace photos with baked-in old courts. Local catalogue QA passed 36 location/camera combinations, colors, text, JSON, mobile. Production checks and publication recorded below when complete.
+
+Production validation: TypeScript, Sites Vinext build, Studio/Radar scope, round geometry, and 144 Blender + 48 Street Football combinations passed on 375/390/430/1440 px; JSON export/import and Radar navigation passed.
+
+W-1 now loads the original `/arenas/boisko-w1.glb` directly. Parts, transforms, branding UVs and Blender normals are preserved; floor remains the optional configurable surface. TypeScript and production build passed.
+
+W-1 withdrawn from the public offer and new-project selection on 2026-10-10. O-1 and P-1 remain available; saved model files preserved.
+
+
+2026-10-10: P-1 now uses the optimized Blender slab (7.139 × 5.573 × 0.10 m; 220 triangles) instead of the flat floor. Four finishes use physically scaled colour, normal and roughness maps with mipmaps and anisotropic filtering. Artwork and chosen colours remain separate; turf preserves line and logo colours. Existing project JSON remains compatible. TypeScript, production build, Studio/Radar scope and watertight-slab tests passed. Browser regression results are recorded below.
+
+Browser regression passed: 96 O-1/P-1 and 48 Street Football location/camera combinations at 375/390/430/1440 px; 16 P-1 material switches, non-empty WebGL rendering, no GL errors or overflow, preserved JSON colours/surface identity, and Radar navigation.
+
+
+2026-10-10: Arena aerial preview now uses yaw 0 and pitch π/2, so the top-down view aligns the court edges with the screen. Perspective and ground cameras keep their existing orientations. TypeScript, Studio scope and production build passed.
+Camera regression passed: 96 arena and 48 Street Football location/camera combinations on 375/390/430/1440 px, materials, JSON and Radar; no overflow or runtime errors.
+
+
+## Studio: dark workspace (2026-10-12, local work)
+The approved dark/mint editor is connected to the retained court engine, including cameras, the 300-pattern library, material controls, equipment/branding editing, validated JSON import/export and browser-local draft saving. Source checks and TypeScript passed; browser captures are under design/studio-ux in the parent workspace. The required scene/material/JSON/Radar regression suite passed on 375/390/430/1440 px, including browser-draft restoration and same-model preservation. The approved dark interface is prepared for deployment to Studio and WordPress page 3644. See design-qa.md.
+
+
+## Court Culture — 12.10.2026
+Nowa identyfikacja Studio: fiolet, maślany żółty, bordo. Zachowano wszystkie wzory, sporty i dotychczasowe palety; dodano Court Culture (19 palet). Builder osadzany na głównej. Podsumowanie przekazuje parametry do formularza WordPress przez sprawdzany origin i źródło okna; logo pozostaje w eksporcie lokalnym. Sprawdzono: tsc --noEmit, test:studio i build. Browser QA oraz test:mobile pominięto — w tej sesji brak wymaganego control-browser dla managed preview. Publikacja jest wykonywana w tej sesji.
+
+
+## Panna Circle Cage 2.0 i Street Football 15 × 10 — 2026-10-19
+
+Dodano do wspólnego wyboru produktów Studio modele circle-cage-2 i street15. Circle Cage opiera się na rysunku Boisko 03-H i detalach paneli: Ø 6 m, wysokość 1,8 m, 12 paneli zwykłych, 2 bramkowe i 2 z wycięciem. Oba modele korzystają z nawierzchni 20 cm oraz wspólnych kolorów, wzorów, kamer i projektu JSON. Migracja historycznych projektów Ø 6 m nie nadpisuje nowego modelu Circle Cage. Bez nowych tras produktu. Sprawdzenie: TypeScript, Studio scope, build i tests/new-blender-arenas.mjs (390/1440 px, kolory, kamery, WebGL, JSON). Pełna regresja mobilna w tests/studio-mobile-goals.mjs.
+
+
+## Panna Circle Cage 1.0 — 2026-10-19
+
+Dodano jednopoziomową arenę Ø 6 m / 0,9 m według Boisko 03 i wspólnych detali: 5 zwykłych paneli, 2 bramki, 1 wejście. Osobna nawierzchnia 20 cm, edytowalne kolory, bez domyślnych napisów i linii. Model w istniejącym Studio (`?arena=circle-cage-1`), bez nowych tras; import JSON zachowuje średnicę 6 m. Źródła, generatory i audyt: `models/panna-circle-cage-1/`.
+
+Sprawdzone: TypeScript, test:studio (300 wzorów, 19 palet, Radar), build oraz tests/new-blender-arenas.mjs dla trzech modeli na 390/1440 px: kolory, materiały, linie, kamery, widoczna geometria WebGL i zachowanie modelu w JSON. Model 1.0: 19 siatek, 48060 trójkątów; wysokość geometrii 0,9 m i osobne podłoże 0,2 m.
+
+
+## Street Field — 2026-10-20
+
+Dodano produkt street-field do wspólnego Studio. Pole 6,214 × 4,648 m, wysokość 1,091 m, dwie bramki i obniżone wejście; szerokości paneli dopasowane zgodnie z decyzją użytkownika do wcześniejszego zwymiarowanego złożenia. Osobna nawierzchnia 20 cm, bez domyślnych napisów i linii. Generatory, natywny Blender/GLB, źródła i audyt w models/street-field. Bez nowych tras.
+
+
+Street Field — korekta podłoża 2026-10-20: nawierzchnia 7,30 × 5,30 m, grubość 20 cm. Obejmuje wszystkie podstawy słupów i oba kosze bramek z zapasem. Pole gry i geometria konstrukcji pozostają 6,214 × 4,648 m. Sprawdzono zawieranie wszystkich wierzchołków konstrukcji w obrysie podłoża.
+
+
+## Octagon — 2026-10-20
+
+Produkt octagon w istniejącym Studio: obrys wewnętrzny 4,962 × 4,962 m, wysokość 1,218 m, 4 panele zwykłe, 2 bramkowe, 2 wejściowe i 8 słupów. Rodzina profili Street Field dopasowana do Boisko 01. Ośmiokątne podłoże 6 m / 20 cm obejmuje całość. Osobny model i nawierzchnia, kolory, wzory, linie i projekt JSON. Generatory i audyt w models/octagon. Bez nowych tras.
+
+## Studio canvas — wybrany wariant 2, 2026-10-20
+
+Edytor w istniejącej trasie Studio: duży podgląd WebGL, lewy pasek czterech narzędzi, dolny panel ustawień, skróty nawierzchni i paneli na podglądzie. Mobilnie widoczny model i poziomy pasek nad dolnym panelem. Zachowano 300 wzorów, 19 palet, wszystkie modele, kolory konstrukcji, tekst/logo, materiały, sceny, plan edycji, undo/redo, lokalny szkic, walidowany JSON, Radar i formularz wyceny. Domyślna kamera boczna; geometria i zapisane projekty bez migracji.
+
+Weryfikacja: TypeScript, test:studio i produkcyjny build przeszły. Pełna regresja mobile: 96 kombinacji O-1/P-1 i 48 Street Football; 16 zmian materiału P-1 z widocznym WebGL, bez błędów GL/JS i przepełnienia; kolory i materiał zachowane w JSON, szkic po odświeżeniu, Radar filtr/szczegóły/powrót na 375/390/430/1440 px. Dodatkowo pięć aren Blender (Circle Cage 1/2, Street Field, Octagon, Street15) na 390/1440 px: kolory, puste domyślne napisy/linie, materiały, warianty, 20 cm podłoża, JSON i trzy kamery. Wizualne porównanie desktop + mobilna adaptacja: design-qa.md, wynik passed.
+
+Zależności: istniejące zależności pnpm ze współdzielonego lokalnego katalogu wystarczyły; instalator wymaga narzędzi Linux na tym Macu, więc nie instalowano nowych pakietów. Brak zmian zależności i backendu. Ostrzeżenia builda o rozmiarze pakietu i statycznej klasyfikacji tras pozostają.
