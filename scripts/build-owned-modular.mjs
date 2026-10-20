@@ -1,5 +1,10 @@
 import {execFileSync} from 'node:child_process';
 execFileSync(process.execPath,['tests/owned-modular.mjs'],{stdio:'inherit'});
 import {build} from 'esbuild';
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 await build({entryPoints:['components/gamefields/owned-modular/app.mjs'],bundle:true,minify:true,format:'iife',outfile:'public/models/gamefields/owned-modular/app.js'});
+const root='public/models/gamefields/owned-modular/';
+const version=createHash('sha256').update(await readFile(root+'app.js')).digest('hex').slice(0,12);
+await writeFile(root+'index.html',(await readFile(root+'index.html','utf8')).replace(/src="app\.js(?:\?v=[^"]*)?"/,`src="app.js?v=${version}"`));
 console.log('Built source-only Gamefields modular assembly.');
