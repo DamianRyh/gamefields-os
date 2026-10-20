@@ -12,6 +12,8 @@
   ],
   "goal_total_length_m": 7.024,
   "surface_thickness_m": 0.2,
+  "surface_length_m": 7.3,
+  "surface_width_m": 5.3,
   "moduleCounts": {
     "standard": 11,
     "entry": 1,
@@ -32,16 +34,16 @@
   ],
   "artifacts": {
     "street-field.blend": {
-      "bytes": 183400,
-      "sha256": "514d4dfeb157a1a8f90b0a013721fe1df9589294e80a515f557dcd18703a5dd7"
+      "bytes": 176612,
+      "sha256": "695ea05689844527e7700350d553aff1ae09a0b5b41839850a707791aadb0e30"
     },
     "street-field.glb": {
       "bytes": 644340,
-      "sha256": "1c7f6af9563f252c1f858be869b2cbe9640919ea4dfe332334f713a70435bf40"
+      "sha256": "de342eb96ca9443e2574ef767c878924c6e47bc87562afd0f02c0b5a54db764c"
     },
     "studio-mesh.json": {
-      "bytes": 1104095,
-      "sha256": "765164ef583fe6816a564ec10f04473acaba032d495838443a7848830e72c55a"
+      "bytes": 1104059,
+      "sha256": "cbd5b1944b2f6b085d312c9230291c733a9b40966174ab981e36ee8141c82846"
     }
   }
 }

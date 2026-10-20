@@ -5,6 +5,7 @@ OUT=os.path.dirname(os.path.abspath(__file__))
 bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
 scene=bpy.context.scene;scene.unit_settings.system='METRIC';scene.unit_settings.length_unit='METERS'
 L,W=6.214,4.648
+SLAB_L,SLAB_W=7.3,5.3
 def material(name,color,metal=.6):
  m=bpy.data.materials.new(name);m.diffuse_color=(*color,1);m.use_nodes=True
  n=m.node_tree.nodes.get('Principled BSDF');n.inputs['Base Color'].default_value=(*color,1);n.inputs['Metallic'].default_value=metal;n.inputs['Roughness'].default_value=.48
@@ -101,9 +102,9 @@ for i,(x,y) in enumerate(posts):
  g=Geometry();g.beam((x,y,.005),(x,y,1.086),.08,.08,.003);g.box((x,y,.0025),(.14,.14,.005));g.box((x,y,1.0885),(.09,.09,.005));g.object(f'Slup {i+1:02d}','frame')
  # Simplified connector plates; hardware holes and welds omitted.
 assert counts=={'standard':11,'entry':1,'goal':2,'posts':14}
-g=Geometry();g.box((0,0,-.1),(L,W,.2));floor=g.object('Nawierzchnia','floor');uv=floor.data.uv_layers.new(name='Surface UV')
+g=Geometry();g.box((0,0,-.1),(SLAB_L,SLAB_W,.2));floor=g.object('Nawierzchnia','floor');uv=floor.data.uv_layers.new(name='Surface UV')
 for loop in floor.data.loops:
- v=floor.data.vertices[loop.vertex_index].co;uv.data[loop.index].uv=((v.x+L/2)/L,(v.y+W/2)/W)
+ v=floor.data.vertices[loop.vertex_index].co;uv.data[loop.index].uv=((v.x+SLAB_L/2)/SLAB_L,(v.y+SLAB_W/2)/SLAB_W)
 scene['Project']='Street Field';scene['SourceAssembly']='Boisko 02, 09.09.2023';scene['Adaptation']='Owner approved assembly footprint; panel widths adapted from later 2 m component drawings.'
 bpy.context.preferences.filepaths.save_version=0;bpy.context.view_layer.update()
 bpy.ops.wm.save_as_mainfile(filepath=OUT+'/street-field.blend',compress=True)
@@ -116,7 +117,7 @@ for o in scene.objects:
   for loop in o.data.loops:uvs[loop.vertex_index]=list(o.data.uv_layers.active.data[loop.index].uv)
  meshes.append({'id':'floor' if o==floor else o.name.replace(' ','-'),'label':o.name,'group':o['group'],'v':[[round(v.x,6),round(v.z,6),round(-v.y,6)] for v in vs],'f':[list(t.vertices) for t in o.data.loop_triangles],'uv':uvs,'artwork':False})
 with open(OUT+'/studio-mesh.json','w') as f:json.dump(meshes,f,separators=(',',':'))
-report={'name':'Street Field','status':'VALIDATED_DIMENSIONED_ADAPTATION','source':'Boisko 02 (1).pdf, 09.09.2023','userDecision':'Use inner field 6.214 x 4.648 m and adapt later panel widths','length_m':L,'width_m':W,'height_m':1.091,'base_bounds_m':[6.55,4.984],'goal_total_length_m':7.024,'surface_thickness_m':.2,'moduleCounts':counts,'adapted_panel_widths':widths,'meshCount':len(meshes),'triangles':sum(len(m['f']) for m in meshes),'notes':['Detailed 2 m panels have adapted widths, not an unchanged manufacturing assembly.','Section dimensions retained: frame 50 x 30 x 3, infill 25 x 25 x 2, posts 80 x 80 x 3 mm.','Connector geometry simplified; bolts, holes and welds omitted.','20 cm neutral slab added for Studio; no default artwork or lines.'],'artifacts':{}}
+report={'name':'Street Field','status':'VALIDATED_DIMENSIONED_ADAPTATION','source':'Boisko 02 (1).pdf, 09.09.2023','userDecision':'Use inner field 6.214 x 4.648 m and adapt later panel widths','length_m':L,'width_m':W,'height_m':1.091,'base_bounds_m':[6.55,4.984],'goal_total_length_m':7.024,'surface_thickness_m':.2,'surface_length_m':SLAB_L,'surface_width_m':SLAB_W,'moduleCounts':counts,'adapted_panel_widths':widths,'meshCount':len(meshes),'triangles':sum(len(m['f']) for m in meshes),'notes':['Detailed 2 m panels have adapted widths, not an unchanged manufacturing assembly.','Section dimensions retained: frame 50 x 30 x 3, infill 25 x 25 x 2, posts 80 x 80 x 3 mm.','Connector geometry simplified; bolts, holes and welds omitted.','20 cm neutral slab added for Studio; no default artwork or lines.'],'artifacts':{}}
 for filename in ['street-field.blend','street-field.glb','studio-mesh.json']:
  b=open(OUT+'/'+filename,'rb').read();report['artifacts'][filename]={'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
 with open(OUT+'/validation.json','w') as f:json.dump(report,f,indent=2)
