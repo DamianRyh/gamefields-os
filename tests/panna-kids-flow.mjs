@@ -20,7 +20,7 @@ export async function testPannaKidsFlow(page, { url, production }) {
   assert.equal(firstSaved.name, "Panna Kids / test wersji");
   await page.reload();
   await page.waitForFunction(
-    () => document.querySelector("input")?.disabled === false,
+    () => document.querySelector("input")?.matches(":enabled") === true,
   );
   assert.equal(await name.inputValue(), "Panna Kids / test wersji");
   await page.getByRole("button", { name: /02.*Wygląd/ }).click();
@@ -179,7 +179,7 @@ export async function testPannaKidsFlow(page, { url, production }) {
   }
   await page.reload();
   await page.waitForFunction(
-    () => document.querySelector("input")?.disabled === false,
+    () => document.querySelector("input")?.matches(":enabled") === true,
   );
   assert.equal(await name.inputValue(), saved.name);
   if (production)
