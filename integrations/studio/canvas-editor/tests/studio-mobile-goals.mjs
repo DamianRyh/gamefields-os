@@ -24,7 +24,7 @@ try{
    const ready=()=>page.locator('[data-model="'+arena+'"][data-ready="true"]').waitFor({timeout:30000});await ready();
    await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();
    await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#1d7056');await page.getByLabel('Tekst na bandach',{exact:true}).fill(arena.toUpperCase());await ready();
-   const event=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz projekt',exact:true}).first().click();const project=JSON.parse(await readFile(await(await event).path(),'utf8'));assert.equal(project.arenaModel,arena);
+   const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const project=JSON.parse(await readFile(await(await event).path(),'utf8'));assert.equal(project.arenaModel,arena);
    await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.locator('input[type=file][accept*="application/json"]').setInputFiles({name:'arena.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});await ready();
    if(arena==='p1'){
     await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();
@@ -36,7 +36,7 @@ try{
      assert.equal(await page.locator('[data-model="p1"]').getAttribute('data-slab-thickness'),'0.10');
      const glResult=await page.locator('.panna-model-overlay').evaluate(canvas=>{const gl=canvas.getContext('webgl'),p=new Uint8Array(canvas.width*canvas.height*4);gl.readPixels(0,0,canvas.width,canvas.height,gl.RGBA,gl.UNSIGNED_BYTE,p);return {error:gl.getError(),visible:p.filter((v,i)=>i%4===3&&v>0).length}});
      assert.equal(glResult.error,0,'PBR shader must render without WebGL errors');assert.ok(glResult.visible>100,'Construction and slab must be visible');
-     const download=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz projekt',exact:true}).first().click();const exported=JSON.parse(await readFile(await(await download).path(),'utf8'));
+     const download=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const exported=JSON.parse(await readFile(await(await download).path(),'utf8'));
      assert.equal(exported.surface,surface);assert.equal(exported.base,'#245e87');assert.equal(exported.arenaModel,'p1');
      if(width===1440)await page.locator('.panna-studio-model').screenshot({path:`outputs/mobile/gamefields-p1-${slug}.jpg`,type:'jpeg',quality:85});
     }
@@ -86,7 +86,7 @@ try{
   await page.waitForURL(base+'/');
   await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
   if(await page.locator('button.entry-start').isVisible())await page.locator('button.entry-start').click();
-  await page.getByRole('button',{name:'Podsumowanie i wycena',exact:true}).click();
+  await page.getByRole('button',{name:'Podsumowanie',exact:true}).click();
   await page.getByRole('button',{name:'Wróć do edycji',exact:true}).click();
   await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
   await page.close();

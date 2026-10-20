@@ -1,4 +1,5 @@
 "use client";
+import {nextProjectName} from "@/lib/studio-ux.mjs";
 /* eslint-disable @next/next/no-html-link-for-pages */
 import {useEffect,useId,useMemo,useRef,useState} from "react";
 import {Grid2X2,Layers,Ruler,Palette,Goal,Paintbrush,CircleDashed,Plus,Check,Download,FolderOpen,RotateCcw,Undo2,Redo2,Upload,Type,Trash2,Move,Sun,Moon,PartyPopper,MapPin,Camera,SlidersHorizontal,Sparkles} from "lucide-react";
@@ -20,7 +21,7 @@ import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profi
 
 const uid=()=>Math.random().toString(36).slice(2,9);
 const obj=(kind:ObjectKind,name:string,x:number,y:number,extra:Partial<EditorObject>={}):EditorObject=>({id:uid(),kind,name,x,y,scale:100,rotation:0,opacity:100,color:"#ffffff",target:"court",...extra});
-const initial:Project={id:"GF-001",name:"Moje boisko 3×3",type:"Nowe boisko",sport:"Piłka nożna 3×3",length:15,width:10,surface:"EPDM",base:"#6336F5",zone:"#F3E68A",outside:"#4A122B",lineColor:"#ffffff",lines:true,pattern:"Organic Flow",patternFamily:"organic-flow",patternPalette:"court-culture",patternVariant:6,patternDensity:100,gradientEnabled:false,textureEnabled:false,shadowEnabled:true,artistFinishEnabled:false,creativity:0,shadowIntensity:25,graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:"day",objects:[obj("equipment","Bramka",26,200,{scale:85}),obj("equipment","Bramka",574,200,{scale:85,rotation:180})],status:"Szkic",date:"29.09.2026"};
+const initial:Project={id:"GF-001",name:"Street Football 3×3 — projekt",type:"Nowe boisko",sport:"Piłka nożna 3×3",length:15,width:10,surface:"EPDM",base:"#6336F5",zone:"#F3E68A",outside:"#4A122B",lineColor:"#ffffff",lines:true,pattern:"Organic Flow",patternFamily:"organic-flow",patternPalette:"court-culture",patternVariant:6,patternDensity:100,gradientEnabled:false,textureEnabled:false,shadowEnabled:true,artistFinishEnabled:false,creativity:0,shadowIntensity:25,graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:"day",objects:[obj("equipment","Bramka",26,200,{scale:85}),obj("equipment","Bramka",574,200,{scale:85,rotation:180})],status:"Szkic",date:"29.09.2026"};
 const modules=[["Design",Paintbrush],["Wyposażenie",Goal],["Wymiary i wycena",Ruler]] as const;
 const sports=sportProfiles.map(x=>x.sport);
 const surfaces=["Akryl sportowy","EPDM","Sztuczna trawa 60 mm","Moduły sportowe","Piasek sportowy","Beton sportowy"];
@@ -266,8 +267,8 @@ export default function Home(){
   if(profile.sport==="Teqball")objects.push(obj("equipment","Stół Teqball",300,h/2,{scale:110}));
   if(profile.sport==="Skate")objects.push(obj("equipment","Funbox",300,h/2,{scale:105}),obj("equipment","Rail skate",180,h*.68,{scale:85}),obj("equipment","Ledge",430,h*.3,{scale:90}));
   if(profile.sport==="Street Workout")objects.push(obj("equipment","Drążki",180,h/2,{scale:100}),obj("equipment","Poręcze",390,h*.62,{scale:95}),obj("equipment","Monkey bars",390,h*.3,{scale:90}));
-  setP(v=>({...v,name:profile.label+" — projekt",arenaModel:profile.arenaModel,sport:profile.sport,courtShape:profile.courtShape,diameter:profile.diameter,arenaDesign:profile.arenaModel?{panelColor:"#b90f35",frameColor:"#30363c",goalColor:"#30363c",finish:"matte",text:"",side:"both"}:undefined,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,lines:!["circle-cage-1","circle-cage-2","street-field","octagon","street15"].includes(profile.arenaModel||"")&&!["Skate","Street Workout"].includes(profile.sport),objects}));
-  setModule(0);if(enterBuilder)setView("builder");setSelectedId(null);
+  setP(v=>({...v,name:nextProjectName(v.name,getSportProfile(v.sport,v.arenaModel).label,profile.label),arenaModel:profile.arenaModel,sport:profile.sport,courtShape:profile.courtShape,diameter:profile.diameter,arenaDesign:profile.arenaModel?{panelColor:"#b90f35",frameColor:"#30363c",goalColor:"#30363c",finish:"matte",text:"",side:"both"}:undefined,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,lines:!["circle-cage-1","circle-cage-2","street-field","octagon","street15"].includes(profile.arenaModel||"")&&!["Skate","Street Workout"].includes(profile.sport),objects}));
+  setModule(0);if(enterBuilder)setView("builder");setSelectedId(null);toast.success("Wybrano "+profile.label+". Przywrócono ustawienia modelu. Możesz użyć Cofnij.");
  }
  function updateObject(id:string,patch:Partial<EditorObject>,track=true){if(track)history(p);setP(v=>({...v,objects:v.objects.map(o=>o.id===id?{...o,...patch}:o)}))}
  function addObject(o:EditorObject){history(p);setP(v=>({...v,objects:[...v.objects,o]}));setSelectedId(o.id)}

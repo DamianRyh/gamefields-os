@@ -1,7 +1,10 @@
-# Studio — nazwy produktów
+# Studio — wersja 68, poprawki użyteczności
 
-20.10.2026: wersja 67 istniejącego Studio. Źródło Sites: af064e031e4537c7b4dd788947f262d6a73ec61a.
+Źródła Site: `df6125d3187fa787f0f54324bfa9da88b30a44ff`.
+Istniejący adres: https://gamefields-studio.ryhfs90.chatgpt.site/
 
-Nazwy z public/catalog/product-names.json; zachowano identyfikatory arenaModel, geometrię, kolory i własne nazwy projektów. Automatyczne tytuły z dawnymi nazwami przechodzą przez canonicalProjectName w walidacji JSON. Testy TypeScript, Studio scope, build, product-names, mobile i nowych aren zakończyły się powodzeniem.
+Ta kopia źródeł należy do istniejącego Studio i jest wyłączona z kompilacji aplikacji OS przez `tsconfig.json`. Nie zastępuje plików aplikacji OS.
 
-Ten katalog jest kopią integracyjną istniejącego Studio; root Gamefields OS wyklucza go z własnego sprawdzania TypeScript. Nie należy stosować tych plików do głównej aplikacji OS.
+Zmiany: prawdziwy status lokalnego zapisu, pobranie JSON, mobilne Undo/Redo i cele dotykowe44px, karty modeli z wymiarami, zachowanie własnej nazwy projektu, pełne podsumowanie i edycja sekcji, poprawne zaznaczenie kompozycji, obsługa fokusu dialogów.
+
+Walidacja: TypeScript, build, studio-scope (300 wzorów /19 palet), studio-ux, product-names, studio-usability375/390/430/1440, studio-mobile-goals i new-blender-arenas — PASS. Źródła Baymard/Tylko i granice wniosków: docs/STUDIO_UX_AUDIT.md.

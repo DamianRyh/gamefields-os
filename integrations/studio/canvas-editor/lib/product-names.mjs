@@ -1,5 +1,6 @@
 import catalog from "../public/catalog/product-names.json" with {type:"json"};
 export const productNames=Object.fromEntries(catalog.products.map(p=>[p.id,p.name]));
+export const productCodes=Object.fromEntries(catalog.products.map(p=>[p.id,p.code]));
 // Only known automatic titles change. User-authored project names stay intact.
 export function canonicalProjectName(name,model){
  const p=catalog.products.find(p=>p.id===model);if(!p)return name;

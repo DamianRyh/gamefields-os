@@ -34,7 +34,7 @@ try{
    await page.getByLabel('Pokaż linie',{exact:true}).uncheck();await ready();
    await page.locator('.studio-section > summary').filter({hasText:/^Zaawansowane/}).click();
    await page.getByRole('button',{name:'Wariant 2',exact:true}).click();await ready();
-   const event=page.waitForEvent('download');await page.getByRole('button',{name:'Zapisz projekt',exact:true}).first().click();
+   const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();
    const exported=JSON.parse(await readFile(await(await event).path(),'utf8'));
    assert.equal(exported.arenaModel,arena);assert.equal(exported.arenaDesign.panelColor,'#205967');assert.equal(exported.lines,false);
    assert.equal(exported.surface,'EPDM');assert.equal(exported.patternVariant,2);
@@ -47,7 +47,7 @@ try{
    }
    await page.locator('[data-model="'+arena+'"]').screenshot({path:'outputs/new-arenas/'+arena+'-'+width+'.png'});
    await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();
-   assert.ok(await page.getByRole('button',{name:'Panna Circle Cage 2.0',exact:false}).count());
+   assert.ok(await page.getByRole('button',{name:'Panna Cage 180',exact:false}).count());
   }
   await page.close();
  }

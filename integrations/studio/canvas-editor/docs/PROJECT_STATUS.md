@@ -91,3 +91,19 @@ Edytor w istniejącej trasie Studio: duży podgląd WebGL, lewy pasek czterech n
 Weryfikacja: TypeScript, test:studio i produkcyjny build przeszły. Pełna regresja mobile: 96 kombinacji O-1/P-1 i 48 Street Football; 16 zmian materiału P-1 z widocznym WebGL, bez błędów GL/JS i przepełnienia; kolory i materiał zachowane w JSON, szkic po odświeżeniu, Radar filtr/szczegóły/powrót na 375/390/430/1440 px. Dodatkowo pięć aren Blender (Circle Cage 1/2, Street Field, Octagon, Street15) na 390/1440 px: kolory, puste domyślne napisy/linie, materiały, warianty, 20 cm podłoża, JSON i trzy kamery. Wizualne porównanie desktop + mobilna adaptacja: design-qa.md, wynik passed.
 
 Zależności: istniejące zależności pnpm ze współdzielonego lokalnego katalogu wystarczyły; instalator wymaga narzędzi Linux na tym Macu, więc nie instalowano nowych pakietów. Brak zmian zależności i backendu. Ostrzeżenia builda o rozmiarze pakietu i statycznej klasyfikacji tras pozostają.
+
+
+## Nazwy zatwierdzone — 20.10.2026
+
+Panna Ring (GF-CT-001), Panna Play (GF-CT-002), Panna Court (GF-CT-003), Street Arena 15 (GF-CT-004), Panna Cage 90 (GF-CT-005), Panna Cage 180 (GF-CT-006), Panna Grid (GF-CT-007), Panna Octa (GF-CT-008). Nazwy centralnie w public/catalog/product-names.json. Kody, arenaModel, adresy i geometria bez zmian. Historyczne wpisy i rysunki mogą zawierać dawne nazwy jako aliasy. Automatyczne tytuły dawnych projektów aktualizowane podczas walidacji; własne nazwy użytkownika zachowane.
+
+Walidacja nazw: tests/product-names.mjs PASS (8 nazw, stałe kody/arenaModel, aktualizacja automatycznych tytułów i zachowanie własnych nazw). TypeScript, test:studio, build, pełna regresja mobile oraz pięć nowych aren PASS. Bez zmiany geometrii, materiałów i parametrów zapisanych projektów.
+
+
+## Studio: użyteczność — 20.10.2026
+
+Audyt czterech etapów i publiczne źródła Baymard/Tylko: `docs/STUDIO_UX_AUDIT.md`. Doprecyzowano lokalny szkic i pobranie JSON; przywrócono mobilne Ponów, cele dotykowe 44 px i widoczny zapis. Karty modeli pokazują kształt i wymiary oraz wyjaśniają reset ustawień. Nazwy własne projektów pozostają zachowane. Podsumowanie obejmuje kod modelu, kolory, wykończenie, napisy, logo, linie i wyposażenie; grupy można bezpośrednio edytować. Dialogi izolują tło i przywracają fokus. Zaznaczenie kompozycji odpowiada wariantowi, palecie i faktycznym kolorom.
+
+Testy domenowe: `tests/studio-ux.mjs`; regresja interfejsu: `tests/studio-usability.mjs` (375/390/430/1440 px, Undo/Redo, JSON, fokus). Zachowano 300 wzorów, 19 palet, modele 3D, format projektów i Radar. To adaptacja publicznych badań, bez deklaracji certyfikacji Baymard lub pełnej zgodności WCAG.
+
+Weryfikacja końcowa: TypeScript i build PASS; studio-scope (300/19) PASS; studio-ux i product-names PASS; studio-usability PASS (375/390/430/1440); studio-mobile-goals PASS (96 konfiguracji O-1/P-1, 48 Street, 16 zmian materiału, draft JSON i Radar); new-blender-arenas PASS (5 modeli, 390/1440, kamery i WebGL). Nie wysyłano zapytań ofertowych.
