@@ -59,7 +59,7 @@ try {
  assert.ok((await page.locator('.street-preview').boundingBox()).height<600,'No full-screen blank gap before mobile controls');
  await page.screenshot({path:'outputs/street15/mobile.png',fullPage:true});
  await page.goto(base+'/?view=source');
- await page.getByRole('link',{name:'Street Football 15 × 10 — konfiguruj kolory ↗'}).click();
+ await page.getByRole('link',{name:'Street Arena 15 — konfiguruj kolory ↗'}).click();
  await page.getByRole('heading',{name:'Kolor paneli',exact:true}).waitFor();
  assert.deepEqual(errors,[]);
  console.log('PASS: two objects, blank panels, 20 cm UV surface, measured dimensions, visible live recoloring, custom colors, JSON download, reset, all downloads, mobile layout and product-library integration.');

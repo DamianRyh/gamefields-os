@@ -148,8 +148,8 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
         </p>
       </header>
 
-      <p><a href="/products/panna-kids">PANNA KIDS / ZAPROJEKTUJ SWOJE BOISKO ↗</a></p>
-      <p><a href={assetBase.startsWith('/') ? '/products/street-football-15x10' : '?view=street-football-15x10'}>STREET FOOTBALL 15 × 10 / KOLORY PANELI ↗</a></p>
+      <p><a href="/products/panna-kids">PANNA PLAY / ZAPROJEKTUJ SWOJE BOISKO ↗</a></p>
+      <p><a href={assetBase.startsWith('/') ? '/products/street-football-15x10' : '?view=street-football-15x10'}>STREET ARENA 15 / KOLORY PANELI ↗</a></p>
       <nav className={styles.productPicker} aria-label="Wybierz produkt GAMEFIELDS">
         {[{ id: "concept", name: "Twoje komponenty" }, ...nativeProducts.filter(p=>NATIVE_MODELS_PUBLIC || PUBLIC_SOURCE_MODEL_IDS.includes(p.id))].map((p) => (
           <button key={p.id} aria-pressed={product === p.id} onClick={() => selectProduct(p.id)}>

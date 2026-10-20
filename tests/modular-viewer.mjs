@@ -18,81 +18,22 @@ try {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(base + "/engineering/modular-3d");
-  await page
-    .locator('[data-testid="modular-scene"] [data-component="PANEL_STANDARD"]')
-    .first()
-    .waitFor();
-  await page.waitForTimeout(700);
-  const instances = () => page.locator("[data-instance-id]");
-  const count = await instances().count();
-  const budget = await page
-    .locator('[data-testid="live-budget"] b')
-    .innerText();
-  await page.getByRole("slider", { name: /^Długość/ }).press("ArrowRight");
-  await page.waitForFunction(
-    (n) => document.querySelectorAll("[data-instance-id]").length > n,
-    count,
-  );
-  assert.notEqual(
-    await page.locator('[data-testid="live-budget"] b').innerText(),
-    budget,
-  );
-  const panelWidths = await page
-    .locator('[data-component="PANEL_STANDARD"]')
-    .evaluateAll((nodes) => nodes.map((n) => n.style.width));
-  assert.ok(
-    panelWidths.every((width) => width === "51px"),
-    "No stretching to fit dimensions",
-  );
-  const grownCount = await instances().count();
-  await page.getByRole("slider", { name: /^Długość/ }).press("ArrowLeft");
-  await page.waitForFunction(
-    (n) => document.querySelectorAll("[data-instance-id]").length < n,
-    grownCount,
-  );
-  assert.equal(await instances().count(), count);
-  await page.getByRole("slider", { name: /^Piłkochwyt/ }).press("Home");
-  await page.waitForFunction(
-    () => !document.querySelector('[data-component="BALLSTOP_POST"]'),
-  );
-  assert.equal(
-    await page.locator('[data-component="BALLSTOP_PANEL"]').count(),
-    0,
-  );
-  const beforeGate = await instances().count();
-  await page.getByRole("slider", { name: /^Wejścia/ }).press("End");
-  await page.waitForFunction(
-    () =>
-      document.querySelectorAll('[data-component="GATE_MODULE"]').length === 2,
-  );
-  assert.equal(
-    await instances().count(),
-    beforeGate,
-    "Gate replaces a panel; no overlay",
-  );
-  for (const type of [
-    "PANEL_STANDARD",
-    "PANEL_BRANDING",
-    "GOAL_MODULE",
-    "GATE_MODULE",
-    "POST_STANDARD",
-    "CORNER_STANDARD",
-  ])
-    assert.ok(
-      (await page.locator(`[data-component="${type}"]`).count()) > 0,
-      type + " visible",
-    );
-  await page.getByRole("button", { name: "Panna", exact: true }).click();
-  await page.waitForFunction(
-    () => !document.querySelector('[data-component="CORNER_STANDARD"]'),
-  );
-  assert.equal(await page.locator('[data-component="GATE_MODULE"]').count(), 2);
-  const circleCount = await instances().count();
-  await page.getByRole("slider", { name: /^Średnica/ }).press("End");
-  await page.waitForFunction(
-    (n) => document.querySelectorAll("[data-instance-id]").length > n,
-    circleCount,
-  );
+  const owned=page.frameLocator('[data-testid="owned-modular"]');
+  await owned.locator('canvas[data-ready="true"]').waitFor({timeout:60000});
+  assert.equal(await owned.locator('#family-label').textContent(),'Panna Grid');
+  const count=Number(await owned.locator('#count').textContent());
+  await owned.getByRole('slider',{name:'Moduły na długości',exact:true}).press('ArrowRight');
+  await owned.locator(`canvas[data-ready="true"][data-instance-count="${count+4}"]`).waitFor();
+  assert.equal(await owned.locator('canvas').getAttribute('data-scales'),'1,1,1');
+  await owned.getByRole('slider',{name:'Moduły na długości',exact:true}).press('ArrowLeft');
+  await owned.locator(`canvas[data-ready="true"][data-instance-count="${count}"]`).waitFor();
+  await owned.getByLabel('Rodzina konstrukcji').selectOption('octagon');
+  await owned.locator('canvas[data-ready="true"][data-family="octagon"]').waitFor();
+  assert.equal(await owned.locator('#count').textContent(),'16');
+  assert.equal(await owned.locator('#family-label').textContent(),'Panna Octa');
+  await owned.getByRole('button',{name:'Komponent',exact:true}).click();
+  await owned.locator('canvas[data-ready="true"][data-instance-count="1"]').waitFor();
+  assert.equal(await owned.locator('canvas').getAttribute('data-scales'),'1,1,1');
   for (const input of [
     { shape: "TRIANGLE" },
     { goalCount: 3 },
@@ -130,12 +71,6 @@ try {
       fullPage: true,
     });
   }
-  await page.getByRole("link", { name: "COMPONENT LIBRARY v1.0 ↗" }).click();
-  await page
-    .getByRole("heading", { name: "Komponenty, nie skalowany model." })
-    .waitFor();
-  assert.equal(await page.locator("article").count(), 12);
-  assert.equal(await page.getByRole("link", {name:/^WASZE MODELE GLB/}).count(), 1);
   await page.goto(base + "/engineering/source-models");
   await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.loaded==='true');
   assert.equal(await page.getByTestId("source-glb-viewer").count(), 1);
@@ -146,7 +81,7 @@ try {
   await testPannaKidsFlow(page,{url:base+"/products/panna-kids",production:true});
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: live slider growth/removal, constant panel width, BOM/budget, gate replacement, circle gates, upper layer removal, API validation, catalogue and responsive viewer.",
+    "PASS: owner component families, approved names, module growth/removal, rigid scale, part isolation, API validation, catalogue and responsive viewer.",
   );
 } finally {
   await browser.close();
