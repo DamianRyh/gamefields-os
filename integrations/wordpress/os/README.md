@@ -5,3 +5,6 @@ Istniejąca strona WordPress 3964 /os/. Osiem produktów GLB: P-1, Panna Kids O-
 Przejście do istniejącego Studio dla obsługiwanych modeli; W-1 zachowuje własny istniejący panel ustawień. Zakładki biblioteki, komponentów, systemu modułowego i Court Objects zachowane. Kod w all-models-3d.html jest kopią końcowej sekcji po punktowych zmianach content/edit, nie nową stroną. Oryginalna strona korzysta z nagłówka UTF-8 WordPress; meta dodano do samodzielnego podglądu.
 
 Sprawdzenie: rzeczywiste zdarzenia load ośmiu GLB, wymiary modeli, obracanie myszą, układ mobilny oraz powrót z systemu modułowego do modelu.
+
+
+System modułowy i Komponenty wskazują teraz na ten sam edytor źródłowy `models/gamefields/owned-modular/index.html` (Komponenty z `?mode=part`). Jedna rodzina na boisko, sztywne moduły 1:1, skokowy wymiar Street Field, źródłowe warianty Octagon i Circle Cage, katalog części i oryginalne konstrukcje pozostałych rodzin. Kod i ograniczenia: models/owned-components/README.md. Publikacja i testy: GitHub Actions run 39388442372.
