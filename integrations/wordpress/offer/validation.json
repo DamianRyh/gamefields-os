@@ -1,0 +1,18 @@
+{
+  "models": 8,
+  "comparison_rows": 8,
+  "shape_counts": {
+    "okrag": 4,
+    "prostokat": 3,
+    "oktagon": 1
+  },
+  "studio_links": 7,
+  "mobile_viewport": 390,
+  "mobile_document_width": 390,
+  "octagon_os_loaded": true,
+  "octagon_studio_selected": true,
+  "w1_inquiry_prefilled": true,
+  "form_submitted": false,
+  "private_source_documents_published": false,
+  "date": "2026-10-20"
+}
