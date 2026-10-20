@@ -1,13 +1,15 @@
+import catalog from "../../../public/catalog/product-names.json" with {type:"json"};
+const NAMES=Object.fromEntries(catalog.products.map(p=>[p.id,p.name]));
 export const RAW='https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/';
 const old=(id,label,source,parts)=>({id,label,kind:'source',source:RAW+source,parts});
 export const FAMILIES={
- 'street-field':{id:'street-field',label:'Panna Grid',kind:'rectangle',long:'sf-long',short:'sf-short',goal:'sf-goal',entry:'sf-entry',post:'sf-post',pitchL:1.6025,pitchW:1.6146666666666667,height:1.091},
- octagon:{id:'octagon',label:'Panna Octa',kind:'octagon',standard:'oct-standard',goal:'oct-goal',entry:'oct-entry',post:'oct-post',height:1.218},
- 'circle-cage':{id:'circle-cage',label:'Panna Cage 90 / 180',kind:'circle',standard:'cc-standard',goal:'cc-goal',entry:'cc-entry',upper:'cc-upper-entry',height:.9},
- p1:old('p1','Panna Court','public/models/gamefields/source/boisko-p1.glb',['k1','k2','k3','k4','s1']),
- o1:old('o1','Panna Play','public/models/gamefields/source/panna-kids-o1.glb',['po1','po2','po3']),
- w1:old('w1','Panna Ring','public/models/gamefields/source/boisko-w1.glb',['rw1','rw2','st1','e1']),
- street15:old('street15','Street Arena 15','public/products/street-football-15x10/boisko-15x10.glb',[])
+ 'street-field':{id:'street-field',label:NAMES["street-field"],kind:'rectangle',long:'sf-long',short:'sf-short',goal:'sf-goal',entry:'sf-entry',post:'sf-post',pitchL:1.6025,pitchW:1.6146666666666667,height:1.091},
+ octagon:{id:'octagon',label:NAMES["octagon"],kind:'octagon',standard:'oct-standard',goal:'oct-goal',entry:'oct-entry',post:'oct-post',height:1.218},
+ 'circle-cage':{id:'circle-cage',label:NAMES["circle-cage-1"]+" / "+NAMES["circle-cage-2"],kind:'circle',standard:'cc-standard',goal:'cc-goal',entry:'cc-entry',upper:'cc-upper-entry',height:.9},
+ p1:old('p1',NAMES["p1"],'public/models/gamefields/source/boisko-p1.glb',['k1','k2','k3','k4','s1']),
+ o1:old('o1',NAMES["o1"],'public/models/gamefields/source/panna-kids-o1.glb',['po1','po2','po3']),
+ w1:old('w1',NAMES["w1"],'public/models/gamefields/source/boisko-w1.glb',['rw1','rw2','st1','e1']),
+ street15:old('street15',NAMES["street15"],'public/products/street-football-15x10/boisko-15x10.glb',[])
 };
 export function partIds(f){return [...new Set(['long','short','standard','goal','entry','post','upper'].map(k=>f[k]).filter(Boolean))].concat(f.parts||[])}
 export function normalize(value={}){
