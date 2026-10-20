@@ -133,6 +133,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
     setZoom((z) => Math.max(0.55, Math.min(1.7, z - event.deltaY * 0.001)));
   }
 
+  if(product === "concept") return <iframe data-testid="owned-modular" title="Gamefields — system z własnych komponentów" src={`${assetBase}/owned-modular/index.html`} style={{width:"100%",height:"100vh",minHeight:760,border:0}}/>;
   return (
     <main className={styles.shell}>
       <header className={styles.header}>
@@ -150,7 +151,7 @@ export default function Modular3DPage({ assetBase = "/models/gamefields" }: { as
       <p><a href="/products/panna-kids">PANNA KIDS / ZAPROJEKTUJ SWOJE BOISKO ↗</a></p>
       <p><a href={assetBase.startsWith('/') ? '/products/street-football-15x10' : '?view=street-football-15x10'}>STREET FOOTBALL 15 × 10 / KOLORY PANELI ↗</a></p>
       <nav className={styles.productPicker} aria-label="Wybierz produkt GAMEFIELDS">
-        {[{ id: "concept", name: "System koncepcyjny" }, ...nativeProducts.filter(p=>NATIVE_MODELS_PUBLIC || PUBLIC_SOURCE_MODEL_IDS.includes(p.id))].map((p) => (
+        {[{ id: "concept", name: "Twoje komponenty" }, ...nativeProducts.filter(p=>NATIVE_MODELS_PUBLIC || PUBLIC_SOURCE_MODEL_IDS.includes(p.id))].map((p) => (
           <button key={p.id} aria-pressed={product === p.id} onClick={() => selectProduct(p.id)}>
             {p.name}
           </button>

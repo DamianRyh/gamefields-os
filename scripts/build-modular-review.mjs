@@ -1,6 +1,7 @@
 import {execFileSync} from "node:child_process";
 import { build } from "esbuild";
 import { mkdir, writeFile, rm, cp } from "node:fs/promises";
+execFileSync(process.execPath,["scripts/build-owned-modular.mjs"],{stdio:"inherit"});
 const result = await build({
   stdin: {
     contents: `

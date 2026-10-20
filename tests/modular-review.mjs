@@ -19,7 +19,7 @@ const server = createServer(async (request, response) => {
       const data = await readFile(file);
       response.setHeader(
         "Content-Type",
-        file.endsWith(".png") ? "image/png" : file.endsWith(".glb") ? "model/gltf-binary" : file.endsWith(".webp") ? "image/webp" : "application/json",
+        file.endsWith(".html") ? "text/html; charset=utf-8" : file.endsWith(".js") ? "text/javascript" : file.endsWith(".png") ? "image/png" : file.endsWith(".glb") ? "model/gltf-binary" : file.endsWith(".webp") ? "image/webp" : "application/json",
       );
       response.end(data);
     } catch {
@@ -51,34 +51,16 @@ try {
       external.push(request.url());
   });
   await page.goto(base);
-  await page.locator("[data-instance-id]").first().waitFor();
-  const count = await page.locator("[data-instance-id]").count();
-  const budget = await page.getByTestId("live-budget").innerText();
-  await page.getByRole("slider", { name: /^Długość/ }).press("ArrowRight");
-  await page.waitForFunction(
-    (count) => document.querySelectorAll("[data-instance-id]").length > count,
-    count,
-  );
-  assert.notEqual(await page.getByTestId("live-budget").innerText(), budget);
-  assert.ok(
-    await page
-      .locator('[data-component="PANEL_STANDARD"]')
-      .evaluateAll((nodes) =>
-        nodes.every((node) => node.style.width === "51px"),
-      ),
-  );
-  await page.getByRole("slider", { name: /^Piłkochwyt/ }).press("Home");
-  await page.waitForFunction(
-    () => !document.querySelector('[data-component="BALLSTOP_POST"]'),
-  );
-  await page.getByRole("link", { name: "COMPONENT LIBRARY v1.0 ↗" }).click();
-  await page
-    .getByRole("heading", { name: "Komponenty, nie skalowany model." })
-    .waitFor();
-  assert.equal(await page.locator("article").count(), 12);
-  await page.getByRole("link", { name: "← MODULAR PRODUCT" }).click();
-  await page.getByTestId("live-bom").waitFor();
-  assert.equal(await page.getByRole("link", { name: "WASZE PANELE / MODELE Z BLENDERA ↗" }).count(), 1);
+  await page.getByTestId('owned-modular').waitFor();
+  const owned=page.frameLocator('[data-testid="owned-modular"]');
+  await owned.locator('canvas[data-ready="true"]').waitFor({timeout:60000});
+  const count=Number(await owned.locator('#count').textContent());
+  await owned.getByRole('slider',{name:'Moduły na długości',exact:true}).press('ArrowRight');
+  await owned.locator(`canvas[data-ready="true"][data-instance-count="${count+4}"]`).waitFor();
+  assert.equal(await owned.locator('canvas').getAttribute('data-scales'),'1,1,1');
+  await owned.getByLabel('Rodzina konstrukcji').selectOption('octagon');
+  await owned.locator('canvas[data-ready="true"][data-family="octagon"]').waitFor();
+  assert.equal(await owned.locator('#count').textContent(),'16');
   await page.goto(base + "?view=source");
   await page.waitForFunction(()=>document.querySelector('[data-testid="source-glb-viewer"]')?.dataset.loaded==='true');
   assert.equal(await page.getByRole('button',{name:'CZĘŚCI',exact:true}).count(),1);
@@ -98,7 +80,7 @@ try {
   assert.deepEqual(errors, []);
   assert.deepEqual(external, []);
   console.log(
-    "PASS: static public review, live modular growth, budget, fixed panel sizes, upper layer, catalogue navigation and mobile; all owner-approved source and component GLBs public; no external requests or runtime errors.",
+    "PASS: static public review, owner-only modular families, rigid source components, whole-module growth, family switch and native source navigation; all owner-approved source and component GLBs public; no external requests or runtime errors.",
   );
 } finally {
   await browser.close();

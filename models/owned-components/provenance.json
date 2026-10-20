@@ -1,0 +1,201 @@
+{
+  "schema": "GF-OWNED-MODULES-1",
+  "components": [
+    {
+      "id": "sf-long",
+      "file": "sf-long.glb",
+      "source": "models/street-field/street-field.blend",
+      "sourceObjects": [
+        "Bok 1 panel 1 rama",
+        "Bok 1 panel 1 wypelnienie"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "35a8f7814cd6dadcc76f11d1fb4227ad71a0057f7cb41511a377b37d5968d7a4"
+    },
+    {
+      "id": "sf-entry",
+      "file": "sf-entry.glb",
+      "source": "models/street-field/street-field.blend",
+      "sourceObjects": [
+        "Bok -1 panel 2 rama",
+        "Bok -1 panel 2 wypelnienie"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "8959281a9e1b674e53ba19f62e12976f9fd006d37236115803cbb483f655dde5"
+    },
+    {
+      "id": "sf-short",
+      "file": "sf-short.glb",
+      "source": "models/street-field/street-field.blend",
+      "sourceObjects": [
+        "Czolo 1 panel 1 rama",
+        "Czolo 1 panel 1 wypelnienie"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "c7f5440ed436868da03a4703a730e2f14a1c5480faca79baf3ef8a491fdb75cc"
+    },
+    {
+      "id": "sf-goal",
+      "file": "sf-goal.glb",
+      "source": "models/street-field/street-field.blend",
+      "sourceObjects": [
+        "Czolo 1 panel 2 rama",
+        "Czolo 1 panel 2 wypelnienie",
+        "Czolo 1 panel 2 bramka"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "5ba8c0b4cde58b9d2621b58669428bb4bc5a0e9e6e2c6915bf190107cf393b15"
+    },
+    {
+      "id": "sf-post",
+      "file": "sf-post.glb",
+      "source": "models/street-field/street-field.blend",
+      "sourceObjects": [
+        "Slup 01"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "f970e72da05c75e8af854f707d70954f3dcb7ebb81fad07569d1ede0fed13f34"
+    },
+    {
+      "id": "oct-standard",
+      "file": "oct-standard.glb",
+      "source": "models/octagon/octagon.blend",
+      "sourceObjects": [
+        "Panel 2 rama",
+        "Panel 2 wypelnienie"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "1e72827d28e9350641c903124d7b29907d32c34f7dfb72c93a534f614629c7a7"
+    },
+    {
+      "id": "oct-entry",
+      "file": "oct-entry.glb",
+      "source": "models/octagon/octagon.blend",
+      "sourceObjects": [
+        "Panel 1 rama",
+        "Panel 1 wypelnienie"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "d3c11214bef4ca02ddad6a69bc91059f1a3a68eb3160343aac264ef6188abe46"
+    },
+    {
+      "id": "oct-goal",
+      "file": "oct-goal.glb",
+      "source": "models/octagon/octagon.blend",
+      "sourceObjects": [
+        "Panel 3 rama",
+        "Panel 3 wypelnienie",
+        "Panel 3 bramka"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "05a92a77ee639cab9d62eb39c60c6d350f935cacd2c08b6135d61b8fd496acf7"
+    },
+    {
+      "id": "oct-post",
+      "file": "oct-post.glb",
+      "source": "models/octagon/octagon.blend",
+      "sourceObjects": [
+        "Slup 01"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "4aad5d66089b5e39872bd4a54396f0e43b4ae5415493aeef2c766e5ccf8ccdee"
+    },
+    {
+      "id": "cc-standard",
+      "file": "cc-standard.glb",
+      "source": "models/panna-circle-cage-2/panna-circle-cage-2.blend",
+      "sourceObjects": [
+        "Panel 01 L1 S3 rama",
+        "Panel 01 L1 S3 siatka"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "2e0831a92264bb09680cc57c869c2c03eab89ac291323b838a2e8a645f489490"
+    },
+    {
+      "id": "cc-entry",
+      "file": "cc-entry.glb",
+      "source": "models/panna-circle-cage-2/panna-circle-cage-2.blend",
+      "sourceObjects": [
+        "Panel 03 L1 S2 rama",
+        "Panel 03 L1 S2 siatka"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "21b8b0f3b15be6f5751cb4e4cc66e954264f1e96787c19743ef36bb80b416f58"
+    },
+    {
+      "id": "cc-goal",
+      "file": "cc-goal.glb",
+      "source": "models/panna-circle-cage-2/panna-circle-cage-2.blend",
+      "sourceObjects": [
+        "Panel 02 L1 S1 rama",
+        "Panel 02 L1 S1 siatka",
+        "Panel 02 L1 S1 bramka"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "097d8dad568a4d61ddbf0ee87c710d04b6cb9534e72084504e268ca9835f4492"
+    },
+    {
+      "id": "cc-upper-entry",
+      "file": "cc-upper-entry.glb",
+      "source": "models/panna-circle-cage-2/panna-circle-cage-2.blend",
+      "sourceObjects": [
+        "Panel 03 L2 S2 rama",
+        "Panel 03 L2 S2 siatka"
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "sha256": "431e7e0b8e5e4d45146f556013b2400f2d9db23116c163e9a5671779e678e0e0"
+    }
+  ]
+}
