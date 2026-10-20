@@ -18,7 +18,7 @@ export const pannaTargetLabel =
 // Source geometry is evidence of appearance, not a manufacturing specification.
 export const PANNA_KIDS = {
   id: "panna-kids",
-  name: "Panna Kids",
+  name: "Panna Play",
   catalogueVersion: 1,
   dimensionsM: null,
   priceNetPln: null,
@@ -80,7 +80,7 @@ export function newPannaConfiguration(id: string): PannaConfiguration {
     productId: "panna-kids",
     id,
     revision: 1,
-    name: "Moje Panna Kids",
+    name: "Moje Panna Play",
     color: "undecided",
     surface: "undecided",
     branding: false,

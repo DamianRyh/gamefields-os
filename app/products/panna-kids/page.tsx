@@ -239,12 +239,12 @@ export default function PannaKidsPage({
             Wielka gra.
           </h1>
           <p className={styles.intro}>
-            Panna Kids. Zacznij od pomysłu na miejsce do gry. Dopasuj kierunek
+            Panna Play. Zacznij od pomysłu na miejsce do gry. Dopasuj kierunek
             wizualny i opowiedz nam o swojej przestrzeni — wspólnie ustalimy
             finalny produkt.
           </p>
           <a className={styles.primary} href="#konfigurator">
-            Zaprojektuj Panna Kids <span>↘</span>
+            Zaprojektuj Panna Play <span>↘</span>
           </a>
           <p className={styles.quiet}>
             Indywidualna wycena · bez składania zamówienia
@@ -253,7 +253,7 @@ export default function PannaKidsPage({
         <figure className={styles.heroImage}>
           <img
             src={`${assetBase}/perspective.webp`}
-            alt="Render dostarczonego modelu Panna Kids, widok perspektywiczny"
+            alt="Render dostarczonego modelu Panna Play, widok perspektywiczny"
             fetchPriority="high"
             width={1400}
             height={1100}
@@ -265,7 +265,7 @@ export default function PannaKidsPage({
         <div className={styles.sectionHeading}>
           <div>
             <p className={styles.eyebrow}>TWOJE MIEJSCE DO GRY</p>
-            <h2>Twoje Panna Kids.</h2>
+            <h2>Twoje Panna Play.</h2>
           </div>
           <span>Preferencje do wyceny / nie projekt produkcyjny</span>
         </div>
@@ -290,7 +290,7 @@ export default function PannaKidsPage({
                   src={`${assetBase}/${imageViews[image].file}`}
                   width={1400}
                   height={1100}
-                  alt={`Panna Kids — ${imageViews[image].label}, render modelu bazowego`}
+                  alt={`Panna Play — ${imageViews[image].label}, render modelu bazowego`}
                 />
               )}
               <figcaption>
@@ -357,7 +357,7 @@ export default function PannaKidsPage({
           </div>
           <section
             className={styles.panel}
-            aria-label="Konfiguracja Panna Kids"
+            aria-label="Konfiguracja Panna Play"
           >
             <nav className={styles.steps} aria-label="Etapy konfiguracji">
               {steps.map((s, i) => (
@@ -381,13 +381,13 @@ export default function PannaKidsPage({
               </small>
             </div>
             <fieldset disabled={!ready || busy} className={styles.fields}>
-              <legend className={styles.srOnly}>Preferencje Panna Kids</legend>
+              <legend className={styles.srOnly}>Preferencje Panna Play</legend>
               {step === 0 && (
                 <>
                   <p className={styles.eyebrow}>01 / PRODUKT</p>
                   <h3>Jeden punkt wyjścia.</h3>
                   <p>
-                    Pracujemy na dostarczonym modelu Panna Kids. Przygotuj szkic
+                    Pracujemy na dostarczonym modelu Panna Play. Przygotuj szkic
                     preferencji; potwierdzimy jego wykonalność przed ofertą.
                   </p>
                   <label>

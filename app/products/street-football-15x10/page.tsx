@@ -16,7 +16,7 @@ export default function StreetFootballPage({assetBase='/products/street-football
   return <main className="gf-street-product">
     <header><a href="https://www.gamefields.eu/">gamefields</a><nav aria-label="Nawigacja produktu"><a href="https://www.gamefields.eu/boiska-street-football/">Wszystkie boiska</a><a href="https://www.gamefields.eu/os/">Gamefields OS</a></nav></header>
     <section className="street-intro"><p>BOISKO MODUŁOWE / STREET FOOTBALL</p><h1>Street Football<br/>15 × 10.</h1><p>Twoje kolory. Czysta przestrzeń do gry.</p></section>
-    <section className="street-layout" aria-label="Konfigurator Street Football 15 × 10">
+    <section className="street-layout" aria-label="Konfigurator Street Arena 15">
       <div className="gf-source-page street-preview"><GlbViewer url={assetBase+'/boisko-15x10.glb'} panelColor={panelColor} surfaceColor={surfaceColor}/><p>Obróć model przeciągnięciem · Przybliż kółkiem lub gestem</p></div>
       <aside><h2>Kolor paneli</h2><p>Gładkie bandy bez napisów w standardzie. Stalowe ramy zachowują swój kolor.</p>
         <div className="street-swatches" role="group" aria-label="Kolory paneli">{colors.map(color=><button type="button" key={color.value} aria-pressed={panelColor===color.value} onClick={()=>setPanelColor(color.value)}><span style={{background:color.value}}/>{color.name}</button>)}</div>

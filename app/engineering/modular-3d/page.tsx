@@ -11,9 +11,9 @@ import { NATIVE_MODELS_PUBLIC, PUBLIC_SOURCE_MODEL_IDS } from "../native-model-a
 import SourceModelsPage from "../source-models/page";
 
 const nativeProducts = [
-  { id: "boisko-p1", name: "GAMEFIELDS P1" },
-  { id: "panna-kids-o1", name: "Panna Kids O1" },
-  { id: "boisko-w1", name: "GAMEFIELDS W1" },
+  { id: "boisko-p1", name: "Panna Court" },
+  { id: "panna-kids-o1", name: "Panna Play" },
+  { id: "boisko-w1", name: "Panna Ring" },
 ];
 
 const PX_PER_M = 34;

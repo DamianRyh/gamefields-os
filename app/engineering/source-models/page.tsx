@@ -8,9 +8,9 @@ import "./source-models.css";
 const library = {...fullLibrary, sources:fullLibrary.sources.filter(s=>NATIVE_MODELS_PUBLIC || PUBLIC_SOURCE_MODEL_IDS.includes(s.id))};
 
 const offerNames: Record<string, string> = {
-  "boisko-p1": "GAMEFIELDS P1",
-  "panna-kids-o1": "GAMEFIELDS Panna Kids O1",
-  "boisko-w1": "GAMEFIELDS W1",
+  "boisko-p1": "Panna Court",
+  "panna-kids-o1": "GAMEFIELDS Panna Play",
+  "boisko-w1": "Panna Ring",
 };
 
 export default function SourceModelsPage({
@@ -85,7 +85,7 @@ export default function SourceModelsPage({
       </header>
       <nav className="gf-source-nav">
         <a href="/engineering/modular-3d">← KONFIGURATOR MODUŁOWY</a>
-        <a href={assetBase.startsWith('/') ? '/products/street-football-15x10' : '?view=street-football-15x10'}>Street Football 15 × 10 — konfiguruj kolory ↗</a>
+        <a href={assetBase.startsWith('/') ? '/products/street-football-15x10' : '?view=street-football-15x10'}>Street Arena 15 — konfiguruj kolory ↗</a>
         <span>GLB LIBRARY / MODEL MEASURED</span>
       </nav>
       </>}

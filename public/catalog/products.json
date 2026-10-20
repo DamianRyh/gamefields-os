@@ -4,7 +4,7 @@
     {
       "code": "GF-CT-001",
       "id": "w1",
-      "name": "W-1",
+      "name": "Panna Ring",
       "shape": "okrag",
       "shape_label": "Okrąg",
       "dimension_label": "około 5 m",
@@ -18,7 +18,7 @@
     {
       "code": "GF-CT-002",
       "id": "o1",
-      "name": "Panna Kids O-1",
+      "name": "Panna Play",
       "shape": "okrag",
       "shape_label": "Okrąg",
       "dimension_label": "około 6 m",
@@ -32,7 +32,7 @@
     {
       "code": "GF-CT-003",
       "id": "p1",
-      "name": "P-1",
+      "name": "Panna Court",
       "shape": "prostokat",
       "shape_label": "Prostokąt",
       "dimension_label": "7,14 × 5,57 m",
@@ -46,7 +46,7 @@
     {
       "code": "GF-CT-004",
       "id": "street15",
-      "name": "Street Football 15 × 10",
+      "name": "Street Arena 15",
       "shape": "prostokat",
       "shape_label": "Prostokąt",
       "dimension_label": "15 × 10 m",
@@ -60,7 +60,7 @@
     {
       "code": "GF-CT-005",
       "id": "circle-cage-1",
-      "name": "Panna Circle Cage 1.0",
+      "name": "Panna Cage 90",
       "shape": "okrag",
       "shape_label": "Okrąg",
       "dimension_label": "około 6 m",
@@ -74,7 +74,7 @@
     {
       "code": "GF-CT-006",
       "id": "circle-cage-2",
-      "name": "Panna Circle Cage 2.0",
+      "name": "Panna Cage 180",
       "shape": "okrag",
       "shape_label": "Okrąg",
       "dimension_label": "około 6 m",
@@ -88,7 +88,7 @@
     {
       "code": "GF-CT-007",
       "id": "street-field",
-      "name": "Street Field",
+      "name": "Panna Grid",
       "shape": "prostokat",
       "shape_label": "Prostokąt",
       "dimension_label": "6,214 × 4,648 m",
@@ -102,7 +102,7 @@
     {
       "code": "GF-CT-008",
       "id": "octagon",
-      "name": "Octagon",
+      "name": "Panna Octa",
       "shape": "oktagon",
       "shape_label": "Oktagon",
       "dimension_label": "4,962 m między bokami",
