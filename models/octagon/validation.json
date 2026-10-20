@@ -1,0 +1,45 @@
+{
+  "name": "Octagon",
+  "status": "SOURCE_DERIVED_CONCEPT",
+  "source": "Boisko 01.PDF, 01.10.2021",
+  "length_m": 4.962,
+  "width_m": 4.962,
+  "height_m": 1.218,
+  "goal_total_length_m": 5.642,
+  "surface_thickness_m": 0.2,
+  "surface_length_m": 6,
+  "surface_width_m": 6,
+  "surface_shape": "regular octagon",
+  "moduleCounts": {
+    "standard": 4,
+    "entry": 2,
+    "goal": 2,
+    "posts": 8
+  },
+  "entry_clear_width_m": 0.72,
+  "entry_sill_height_m": 0.802,
+  "goal_width_m": 1,
+  "goal_front_height_m": 0.462,
+  "meshCount": 27,
+  "triangles": 8092,
+  "notes": [
+    "Shared profile sections and bar infill from Street Field; height and openings adapted to older Boisko 01 assembly.",
+    "Eight 2 m modules, two opposing goals and two opposing notches.",
+    "Connector geometry simplified; bolt holes and welds omitted.",
+    "Octagonal neutral slab 20 cm thick added for Studio, 6 m across flats."
+  ],
+  "artifacts": {
+    "octagon.blend": {
+      "bytes": 178900,
+      "sha256": "e9d8ef9d189047afd2ac2712bf4dbe414942b1e098be371428a86d8f415fae40"
+    },
+    "octagon.glb": {
+      "bytes": 476792,
+      "sha256": "00f7fe6535109e87674072858f81d41677d25be9bcb02ccac113551c70aba97f"
+    },
+    "studio-mesh.json": {
+      "bytes": 831398,
+      "sha256": "d50e19df42fd154043de81a8723b320fc104b3ae9700288f0be1d8cc2317c877"
+    }
+  }
+}
