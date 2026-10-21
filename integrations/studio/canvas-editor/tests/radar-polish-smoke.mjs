@@ -20,14 +20,16 @@ try{
   const page=await browser.newPage({viewport:{width,height:1000}});page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base+'/radar');
   await page.getByRole('heading',{name:'Jak mogłoby zmienić się to miasto?'}).waitFor();
-  await page.getByRole('button',{name:'Piłka nożna',exact:true}).click();
+  const filter=page.getByRole('button',{name:'Piłka nożna',exact:true});
+  const measure=async locator=>{const result=await locator.evaluate(el=>({height:el.getBoundingClientRect().height,font:parseFloat(getComputedStyle(el).fontSize)}));assert.ok(result.height>=44);assert.ok(result.font>=14);};
+  await measure(filter);await filter.click();
   assert.equal(await page.locator('.radar-project-link').count(),1);
-  await page.locator('.radar-project-link').click();await page.waitForURL('**/radar/*');
+  await measure(page.locator('.radar-project-link'));await page.locator('.radar-project-link').click();await page.waitForURL('**/radar/*');
   await page.getByRole('heading',{name:'Niezależna wizja miejskiego sportu'}).waitFor();
-  await page.getByRole('link',{name:'WRÓĆ DO MAPY'}).click();await page.waitForURL('**/radar');
+  await measure(page.getByRole('link',{name:'WRÓĆ DO MAPY'}));await page.getByRole('link',{name:'WRÓĆ DO MAPY'}).click();await page.waitForURL('**/radar');
   await page.getByRole('button',{name:'Wszystkie',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
   await page.close();
  }
- assert.deepEqual(errors,[]);console.log('PASS: Polish Radar filters/detail/back navigation at390/810/1440px; no runtime errors or overflow.');
+ assert.deepEqual(errors,[]);console.log('PASS: Polish Radar filters/detail/back navigation at390/810/1440px; 44px filters/links and14px typography; no runtime errors or overflow.');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

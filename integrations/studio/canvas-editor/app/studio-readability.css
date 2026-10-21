@@ -103,3 +103,6 @@
 body:has(.studio-canvas-editor) [data-sonner-toaster]{top:86px!important;bottom:auto!important;pointer-events:none}
 body:has(.studio-canvas-editor) [data-sonner-toast]{pointer-events:none}
 @media(max-width:800px){body:has(.studio-canvas-editor) [data-sonner-toaster]{top:134px!important}}
+/* Radar: readable navigation without changing the filter values or scrolling. */
+.radar-page .radar-filters button{font-size:14px;min-height:44px;line-height:1.4;letter-spacing:normal;text-transform:none;padding:10px 16px;flex-shrink:0}
+.radar-page :is(.radar-project-link,.radar-card-copy>a,.radar-detail-hero>a){display:inline-flex;align-items:center;min-height:44px;font-size:14px;line-height:1.4;letter-spacing:normal;padding-top:10px;padding-bottom:10px}

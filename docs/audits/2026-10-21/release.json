@@ -1,0 +1,30 @@
+{
+  "studio_version": 70,
+  "source_commit": "7099a41da2704339ff0c1d2f28200fedcdb0330c",
+  "deployment_id": "appgdep_6ad8580b85888191a9de0a9d1aa84a53",
+  "status": "succeeded",
+  "url": "https://gamefields-studio.ryhfs90.chatgpt.site/",
+  "wordpress_privacy_page": 4087,
+  "privacy_scope": "interim factual notice; infrastructure details outstanding",
+  "lighthouse_mobile": {
+    "performance": 57,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100,
+    "lcp_s": 3.3,
+    "tbt_ms": 1310,
+    "cls": 0.086,
+    "transfer_kib": 4972
+  },
+  "checks_passed": [
+    "tsc",
+    "build",
+    "studio-scope",
+    "studio-mobile-goals",
+    "studio-surface-readability",
+    "radar-polish-smoke",
+    "studio-usability",
+    "new-blender-arenas"
+  ],
+  "inquiry_sent": false
+}
