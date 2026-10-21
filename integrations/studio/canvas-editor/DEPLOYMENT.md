@@ -1,7 +1,6 @@
-# Studio — wersja 70
+# Studio — wersja 71
 
-Opublikowano 21.10.2026: https://gamefields-studio.ryhfs90.chatgpt.site/
-Źródło:7099a41da2704339ff0c1d2f28200fedcdb0330c.
-Publikacja:appgdep_6ad8580b85888191a9de0a9d1aa84a53, succeeded.
-
-Nawierzchnia zawiera kompozycję i logo; czytelne kontrolki, polski Radar14px/44px. TypeScript/build/scope/mobile/surface/Radar/usability/new-blender-arenas PASS. Kopia integracyjna, wyłączona z kompilacji OS.
+https://gamefields-studio.ryhfs90.chatgpt.site/
+Commit: 142391e275bb481b50279949a0ea26599ed251d0.
+Deployment: appgdep_6ad860d2040c8191b093e520f33f6fe3 — succeeded.
+Naprawa nagłówka do 360 px, test reflow i klawiatury 720/320, własne fonty OFL dla WordPress. TypeScript/build/scope/usability/reflow PASS. Kopia integracyjna wyłączona z kompilacji OS.
