@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import vm from 'node:vm';
+const html=await readFile(process.argv[2],'utf8');
+const script=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]).find(s=>s.includes('gf-contact-ready'));
+assert.ok(script,'public homepage bridge must be present');
+const compiled=new vm.Script(script); // Test the rendered bytes, including WordPress text filters.
+const replies=[];const source={postMessage:(data,origin)=>replies.push({data,origin})};
+const field={value:'unchanged',dispatchEvent:()=>{}};
+const frame={contentWindow:source,style:{}};
+const nodes={'.gc-menu':{addEventListener:()=>{}},'#gc-nav':{querySelectorAll:()=>[]},'#gc-studio-frame':frame,'[name="project-details"]':field,'#gc-attached':{hidden:true},'#kontakt':{scrollIntoView:()=>{}},'[name="your-email"]':{focus:()=>{}}};
+let handler;
+compiled.runInNewContext({document:{getElementById:()=>({querySelector:s=>nodes[s]}),querySelector:()=>null},window:{opener:null,innerWidth:1280,addEventListener:(type,callback)=>{if(type==='message')handler=callback}},Event:class{}});
+const summary=JSON.stringify({name:'Pełny projekt',objects:Array.from({length:200},(_,id)=>({id,text:'ą😀'.repeat(166)}))});
+const message={type:'gf-inquiry',requestId:'regression-1',summary};
+const dispatch=(data=message,origin='https://gamefields-studio.ryhfs90.chatgpt.site',sender=source)=>handler({origin,source:sender,data});
+dispatch(message,'https://evil.example');dispatch(message,undefined,{});
+assert.equal(field.value,'unchanged');assert.equal(replies.length,0);
+dispatch();assert.equal(field.value,summary);assert.equal(JSON.parse(field.value).objects.length,200);
+assert.equal(replies[0].data.type,'gf-inquiry-attached');assert.equal(replies[0].data.requestId,'regression-1');assert.equal(replies[0].data.summaryLength,summary.length);assert.equal(replies[0].origin,'https://gamefields-studio.ryhfs90.chatgpt.site');
+dispatch({...message,summary:'{"broken":'});assert.equal(field.value,summary);assert.equal(replies.at(-1).data.type,'gf-inquiry-rejected');
+const count=replies.length;dispatch({...message,summary:'x'.repeat(500001)});assert.equal(replies.length,count);assert.equal(field.value,summary);
+dispatch({type:'gf-inquiry',summary:'{"legacy":true}'});assert.equal(field.value,'{"legacy":true}');assert.equal(replies.length,count);
+console.log('PASS: rendered WordPress script syntax, complete 200-object payload, exact acknowledgement, origin/source guards, malformed JSON rejection, size cap, legacy sender.');

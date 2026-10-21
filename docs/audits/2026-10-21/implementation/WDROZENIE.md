@@ -1,8 +1,39 @@
 # Gamefields — realizacja zaleceń po audycie
 
-## Aktualizacja kontynuacji — 21 października 2026
+## Aktualny stan — wersja 75, 21 października 2026
 
-**Stan aktualny:** Studio wersja **74**, publicznie wdrożone. Source commit `23b395853d0d826ee3de07f5f3b1b6a38666c0fe`; deployment `appgdep_6ad8ecb49a988191b11960f74ff09bd7` — **succeeded**, revision środowiska 3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Wersja 73 z orientacyjnym cennikiem konstrukcji pozostaje zachowana w tej wersji; brak zmian cen ani zakresu wyceny.
+**Wdrożone publicznie:** [Studio](https://gamefields-studio.ryhfs90.chatgpt.site), wersja **75**. Commit źródłowy `afee6406ca1c7818c20cad4acf2241418e3d8245`; deployment `appgdep_6ad91b8a28a481918db470404f658961` — **succeeded**, revision środowiska 3. Zachowano publiczny dostęp, modele, projekt JSON i cennik.
+
+### Domknięcie S5-03: potwierdzenie przekazania projektu
+
+- Studio czeka na potwierdzenie dołączenia parametrów do formularza. Wiadomość musi pochodzić z właściwej domeny i okna, dotyczyć bieżącego identyfikatora próby oraz potwierdzać dokładną długość przekazanego tekstu.
+- Po 15 sekundach bez odpowiedzi pojawia się komunikat z możliwością ponowienia próby lub pobrania kopii JSON. Spóźnione i zduplikowane odpowiedzi nie potwierdzają nowej próby. W trakcie oczekiwania przycisk zapytania jest nieaktywny.
+- W osadzonym Studio podsumowanie zamyka się dopiero po potwierdzeniu. W pełnym ekranie nowo otwarte okno formularza zgłasza gotowość, a Studio pokazuje jawny stan „Parametry dołączone do formularza”.
+- WordPress sprawdza poprawność JSON przed zastąpieniem zawartości pola i odsyła potwierdzenie lub odrzucenie. Starsze Studio bez identyfikatora próby nadal może przekazać poprawny JSON.
+- Potwierdzenie dotyczy **dołączenia parametrów**, nie wysłania zapytania ani doręczenia e-maila. Wysyłka nadal wymaga działania użytkownika. Nie wysłano żadnej kolejnej wiadomości testowej.
+
+### Dowody i sprawdzenie
+
+PASS: TypeScript, końcowy build, test:studio z testami dużego JSON i transportu, quote-engine, construction-pricing oraz końcowy test:mobile na 375/390/430/1440. Zakres mobilny: 96 scen O1/P1, 48 scen Street, 16 zmian materiału, JSON, szkic i przejścia Radaru. Pierwszy przebieg mobilny przerwano po drobnej korekcie resetowania statusu; wynik PASS pochodzi z pełnego przebiegu na końcowym buildzie. Pozostały wcześniejsze ostrzeżenia wielkości chunków i ścieżek ikon Leaflet.
+
+Nowy test transportu sprawdza źródło/domenę, identyfikator, długość danych, gotowość okna, stare i podwójne odpowiedzi, odrzucenie, timeout, ponowienie, sprzątanie timerów oraz błąd wysyłki. Oddzielny test na **wyrenderowanych bajtach publicznej strony WordPress** kompiluje odbiornik i sprawdza 200 obiektów, uszkodzony JSON, limit oraz zgodność ze starszym nadawcą. Uwzględniono kodowanie znaków przez filtry treści WordPress.
+
+Ręcznie w przeglądarce: brak odpowiedzi w lokalnym podglądzie → komunikat po 15 sekundach i aktywna ponowna próba. Po publikacji oba tryby — osadzony oraz pełnoekranowy — otrzymały potwierdzenie. W formularzu odczytano poprawny JSON: Panna Octa, 4 881 znaków, aktualna kalkulacja partial. Nie zmieniono szkicu klienta ani konfiguracji poczty.
+
+![Potwierdzenie dołączenia projektu w opublikowanym Studio](07-inquiry-acknowledged.png)
+
+### Pozostałe zależności i zakres kolejnych etapów
+
+- **WPCode Lite nadal nie jest zainstalowany.** Narzędzie WPVibe wymaga instalacji przez właściciela oraz osobistego włączenia przygotowanego fragmentu. Optymalizacja czterech arkuszy na sześciu stronach pozostaje niewdrożona; nie zastąpiono jej globalnym wyłączeniem zasobów sklepu.
+- Uzupełnienie polityki prywatności wymaga potwierdzonych danych adresowych i umownych hostingu/poczty, retencji i transferów. Odbiór wcześniejszego pojedynczego testu w skrzynce nadal niepotwierdzony.
+- Rzeczywiste urządzenia, czytnik ekranu i badania z uczestnikami pozostają do wykonania. Ta wersja nie oznacza zakończenia całej wieloetapowej listy Product Intelligence, np. technicznego BOM i porównywania wariantów.
+- Nie wykonywano ponownego Lighthouse w tej kontynuacji. Ostatni pomiar laboratoryjny pozostaje 94/100 wydajności, LCP 2,8 s; brak danych CrUX. Nie deklarujemy poprawy na podstawie samego wdrożenia.
+
+---
+
+## Poprzedni etap — wersja 74, 21 października 2026
+
+**Stan tego etapu:** Studio wersja **74**, publicznie wdrożone. Source commit `23b395853d0d826ee3de07f5f3b1b6a38666c0fe`; deployment `appgdep_6ad8ecb49a988191b11960f74ff09bd7` — **succeeded**, revision środowiska 3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Wersja 73 z orientacyjnym cennikiem konstrukcji pozostaje zachowana w tej wersji; brak zmian cen ani zakresu wyceny.
 
 ### Zrealizowane w kontynuacji
 

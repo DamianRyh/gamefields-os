@@ -1,0 +1,14 @@
+{
+  "site": "https://www.gamefields.eu",
+  "receiverPost": 3462,
+  "limit": 500000,
+  "applied": true,
+  "change": {
+    "target_type": "post",
+    "post_id": 3462,
+    "field": "post_content",
+    "old_content": "field.value=event.data.summary;field.dispatchEvent(new Event('input',{bubbles:true}));",
+    "new_content": "const requestId=typeof event.data.requestId==='string'&&event.data.requestId.length<=100?event.data.requestId:null;try{JSON.parse(event.data.summary)}catch{if(requestId)event.source.postMessage({type:'gf-inquiry-rejected',requestId},'https://gamefields-studio.ryhfs90.chatgpt.site');return}field.value=event.data.summary;field.dispatchEvent(new Event('input',{bubbles:true}));if(requestId)if(field.value===event.data.summary)event.source.postMessage({type:'gf-inquiry-attached',requestId,summaryLength:field.value.length},'https://gamefields-studio.ryhfs90.chatgpt.site');"
+  },
+  "notes": "Final receiver uses nested if to avoid WordPress ampersand text filtering. Rendered public script compiled and tested with 200 objects, malformed JSON, source/origin guards and legacy senders."
+}

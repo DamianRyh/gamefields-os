@@ -1,0 +1,38 @@
+{
+  "version": 75,
+  "sourceCommit": "afee6406ca1c7818c20cad4acf2241418e3d8245",
+  "deployment": {
+    "id": "appgdep_6ad91b8a28a481918db470404f658961",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "title": "Gamefields Studio",
+    "version_id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_f67a8b18fbc08191ba2ce4fc71fa1e7d",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gamefields-studio.ryhfs90.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abbd0ba26f0819197701343bf156f1b",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-10-21T20:08:04.406614+00:00"
+  },
+  "tests": {
+    "typeScript": "PASS",
+    "studio": "PASS",
+    "build": "PASS",
+    "mobile": "PASS",
+    "quoteEngine": "PASS",
+    "constructionPricing": "PASS",
+    "inquiryTransport": "PASS",
+    "renderedWordPressBridge": "PASS"
+  },
+  "emailSent": false,
+  "production": {
+    "embedded": "PASS — modal closed after matching acknowledgement",
+    "standalone": "PASS — attached status shown",
+    "payloadChars": 4881,
+    "model": "octagon",
+    "estimate": "partial",
+    "emailSent": false
+  }
+}
