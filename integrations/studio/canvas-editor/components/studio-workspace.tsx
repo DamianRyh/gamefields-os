@@ -2,6 +2,8 @@
 
 import {useEffect,useRef,useState,type ReactNode} from "react";
 import {ArrowRight,ArrowUpRight,Check,ChevronDown,Download,FolderOpen,Grid2X2,Goal,MapPin,Minus,Palette,Plus,SlidersHorizontal,Type,Undo2,Redo2,Upload,Trash2,Layers,Camera,Move,Eye,Box,Droplets,X} from "lucide-react";
+import {ProjectQuote,QuoteBadge} from "@/components/project-quote";
+import type {QuoteState} from "@/hooks/use-project-quote";
 import type {Project,EditorObject,Target} from "@/lib/project";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 import {getPatternFamily,getPatternPalette,patternPalettes,signaturePresets,variants} from "@/lib/pattern-library";
@@ -14,7 +16,7 @@ import {isSignaturePresetActive} from "@/lib/studio-ux.mjs";
 import {productCodes} from "@/lib/product-names.mjs";
 
 type Props={
- project:Project;saveStatus:string;selected:EditorObject|null;canUndo:boolean;canRedo:boolean;
+ quote:QuoteState;project:Project;saveStatus:string;selected:EditorObject|null;canUndo:boolean;canRedo:boolean;
  previewMode:"realistic"|"aerial"|"ground";location:RealisticLocation;hasLivePreview:boolean;
  update:(patch:Partial<Project>,track?:boolean)=>void;selectSport:(profile:SportProfile,enter?:boolean)=>void;
  setPreviewMode:(mode:"realistic"|"aerial"|"ground")=>void;setLocation:(location:RealisticLocation)=>void;
@@ -58,13 +60,13 @@ export function StudioWorkspace(props:Props){
  useEffect(()=>{
   const onReady=(event:MessageEvent)=>{
    if(event.origin!=="https://www.gamefields.eu"||event.source!==contactWindow.current||event.data?.type!=="gf-contact-ready")return;
-   const summary=JSON.stringify({...p,objects:p.objects.map(({src,...object})=>object)},null,2);
+   const summary=JSON.stringify({estimate:props.quote.loading?undefined:props.quote.data,...p,objects:p.objects.map(({src,...object})=>object)},null,2);
    contactWindow.current?.postMessage({type:"gf-inquiry",summary:summary.slice(0,18000)},"https://www.gamefields.eu");
   };
   window.addEventListener("message",onReady);return()=>window.removeEventListener("message",onReady);
- },[p]);
+ },[p,props.quote.data,props.quote.loading]);
  const requestInquiry=()=>{
-  const summary=JSON.stringify({...p,objects:p.objects.map(({src,...object})=>object)},null,2).slice(0,18000);
+  const summary=JSON.stringify({estimate:props.quote.loading?undefined:props.quote.data,...p,objects:p.objects.map(({src,...object})=>object)},null,2).slice(0,18000);
   if(window.parent!==window){window.parent.postMessage({type:"gf-inquiry",summary},"https://www.gamefields.eu");setSummaryOpen(false);}
   else contactWindow.current=window.open("https://www.gamefields.eu/#kontakt","gamefields-inquiry");
  };
@@ -90,7 +92,7 @@ export function StudioWorkspace(props:Props){
   <header className="studio-topbar">
    <a href="https://www.gamefields.eu/" target="_top" className="studio-logo" aria-label="Gamefields — strona główna">gamefields <span>studio</span></a>
    <input aria-label="Nazwa projektu" maxLength={200} value={p.name} onChange={e=>update({name:e.target.value},false)} className="studio-project-name"/>
-   <span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span><div className="studio-top-actions"><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={props.download}><Download size={18}/><span>Pobierz projekt</span></button><button className="studio-primary" onClick={showSummary}>Podsumowanie <ArrowRight size={18}/></button></div>
+   <span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span><div className="studio-top-actions"><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={props.download}><Download size={18}/><span>Pobierz projekt</span></button><QuoteBadge quote={props.quote} onClick={showSummary}/></div>
   </header>
   <div className="studio-screen">
    <nav className="studio-tool-rail" aria-label="Narzędzia edycji">{([[
@@ -139,11 +141,11 @@ export function StudioWorkspace(props:Props){
   </div>
   </div>
   {patternsOpen?<div className="studio-modal-backdrop" onClick={()=>setPatternsOpen(false)}><section className="studio-modal" role="dialog" aria-modal="true" aria-label="Wybierz wzór" onClick={e=>e.stopPropagation()}><div className="studio-modal-head"><div><span>GAMEFIELDS DESIGN ENGINE</span><h2>Wybierz charakter boiska</h2></div><button autoFocus onClick={()=>setPatternsOpen(false)}>Zamknij</button></div><div className="studio-direction-grid">{signaturePresets.map(item=>{const q={...p,patternFamily:item.familyId,patternVariant:item.variant,patternPalette:item.paletteId,base:getPatternPalette(item.paletteId).colors[4],zone:getPatternPalette(item.paletteId).colors[1]};const active=isSignaturePresetActive(p,item,getPatternPalette(item.paletteId));return <button key={item.id} aria-pressed={active} onClick={()=>{props.applyDirection(item.familyId,item.variant,item.paletteId);setPatternsOpen(false)}}><span>{thumb(q)}</span><b>{item.name}{active?<Check size={17}/>:null}</b><small>{item.useCase}</small></button>})}</div><button className="studio-primary" onClick={()=>{setPatternsOpen(false);props.openPatterns()}}>Wszystkie 300 wzorów <ArrowRight size={18}/></button></section></div>:null}
-  {summaryOpen?<div className="studio-modal-backdrop" onClick={()=>setSummaryOpen(false)}><section className="studio-modal studio-summary" role="dialog" aria-modal="true" aria-label="Podsumowanie projektu" onClick={e=>e.stopPropagation()}><div className="studio-modal-head"><div><span>TWÓJ PROJEKT</span><h2>Sprawdź swój projekt</h2></div><button autoFocus onClick={()=>setSummaryOpen(false)}>Wróć do edycji</button></div><p className="studio-summary-name">{p.name}</p>
+  {summaryOpen?<div className="studio-modal-backdrop" onClick={()=>setSummaryOpen(false)}><section className="studio-modal studio-summary" role="dialog" aria-modal="true" aria-label="Podsumowanie projektu" onClick={e=>e.stopPropagation()}><div className="studio-modal-head"><div><span>TWÓJ PROJEKT</span><h2>Sprawdź swój projekt</h2></div><button autoFocus onClick={()=>setSummaryOpen(false)}>Wróć do edycji</button></div><p className="studio-summary-name">{p.name}</p><ProjectQuote quote={props.quote}/>
    {summarySection("Boisko","model",[["Model",profile.label],["Kod produktu",modelCode||"Projekt indywidualny"],["Wymiary",courtDimensions(p)],[p.arenaModel==="octagon"?"Pole prostokąta obrysu":"Powierzchnia",`${Math.round(courtArea(p)*100)/100} m²`]])}
    {summarySection("Nawierzchnia i grafika","surface",[["Materiał",surfaceLabel(p.surface)],["Wzór",`${family.name} · wariant ${p.patternVariant||1}`],["Paleta",getPatternPalette(p.patternPalette).name],["Pole gry",summaryColor(p.base)],["Strefy",summaryColor(p.zone)],["Otoczenie",summaryColor(p.outside)],["Linie",p.lines?summaryColor(p.lineColor):"Wyłączone"]])}
    {p.arenaModel?summarySection("Konstrukcja","construction",[["Kolor paneli",summaryColor(design.panelColor)],["Kolor ramy",summaryColor(design.frameColor)],["Kolor bramek",summaryColor(design.goalColor)],["Wykończenie",({matte:"Matowe",gloss:"Połysk",metal:"Metal lakierowany"})[design.finish]],["Napis na panelach",design.text||"Brak"],["Logo na panelach",design.src?"Dodane":"Brak"],...(design.text||design.src?[["Strona oznaczeń",({both:"Obie strony",inner:"Od wewnątrz",outer:"Na zewnątrz"})[design.side]] as [string,ReactNode]]:[]) ]):null}
    {summarySection("Wyposażenie i miejsce","equipment",[["Elementy projektu",p.objects.length?p.objects.map(o=>o.name).join(", "):"Brak dodatkowych elementów"],["Sceneria poglądowa",location?.name||"Park"]])}
-   <div className="studio-summary-quote"><h3>Wycena indywidualna</h3><p>Parametry wszystkich sekcji dołączymy do formularza. Cenę potwierdzimy po sprawdzeniu miejsca, podłoża i zakresu prac. Pliki logo możesz przesłać osobno w dalszej rozmowie.</p></div><button className="studio-primary" onClick={requestInquiry}>Zapytaj o realizację <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
+   <p className="studio-hint">Parametry projektu i bieżącą kalkulację dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p><button className="studio-primary" onClick={requestInquiry}>Zapytaj o realizację <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
  </main>;
 }

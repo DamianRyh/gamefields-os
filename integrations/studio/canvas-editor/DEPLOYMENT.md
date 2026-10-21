@@ -1,3 +1,14 @@
+# Studio — wersja 72
+
+https://gamefields-studio.ryhfs90.chatgpt.site/
+
+Commit: bcd6f4a559925fe2f95f07785a3b507f996d15ff.
+Deployment: appgdep_6ad8dc9436cc819181e29fe36c448d9e — succeeded.
+
+Live estimate request and itemised summary restored. Production rates are absent: quantities/unknown positions work, numeric totals require the owner's rate sheet. No test prices were published. See docs/PRICING.md and docs/PRICING_RELEASE.md.
+
+## Previous deployment / rollback reference
+
 # Studio — wersja 71
 
 https://gamefields-studio.ryhfs90.chatgpt.site/
