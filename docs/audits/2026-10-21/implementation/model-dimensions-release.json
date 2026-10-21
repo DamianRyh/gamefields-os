@@ -1,0 +1,51 @@
+{
+  "version": 76,
+  "sourceCommit": "0e5000edf7d3c955518e8140af9d2dd10276885c",
+  "deployment": {
+    "id": "appgdep_6ad920a463148191967a841c4190ba77",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "title": "Gamefields Studio",
+    "version_id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_d75684dcb3888191a6929c6f055ada2c",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gamefields-studio.ryhfs90.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abbd0ba26f0819197701343bf156f1b",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-10-21T20:30:24.112640+00:00"
+  },
+  "scope": "S2-01 live model adapter and S2-02 shared surface quantities",
+  "contributors": [
+    "implementation lead",
+    "source geometry verifier",
+    "dimension UX reviewer",
+    "brief progress reviewer"
+  ],
+  "tests": {
+    "typeScript": "PASS",
+    "build": "PASS",
+    "studio": "PASS",
+    "projectDimensions": "PASS",
+    "quoteEngine": "PASS",
+    "constructionPricing": "PASS",
+    "mobile": "PASS"
+  },
+  "manual": {
+    "desktop": "PASS — Construction and summary source disclosure",
+    "mobile375": "PASS — document/row width375/309; no horizontal overflow",
+    "keyboardDisclosure": "PASS — Enter opens source",
+    "production": "PASS — Octagon summary and quote29.82 m²; construction subtotal15300 retained"
+  },
+  "emailSent": false,
+  "sourceMeshesChanged": false,
+  "projectSchemaChanged": false,
+  "commercialRatesChanged": false,
+  "remaining": [
+    "Technical playing dimensions/module pitch/clearance require approved data",
+    "R02 vs live source asset revisions and thickness consistency",
+    "Named variant comparison/recovery adapter/BOM work",
+    "WPCode owner step, privacy facts, mailbox receipt, physical devices/screen reader/human research"
+  ]
+}

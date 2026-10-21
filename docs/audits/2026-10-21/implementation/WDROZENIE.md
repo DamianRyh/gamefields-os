@@ -1,6 +1,35 @@
 # Gamefields — realizacja zaleceń po audycie
 
-## Aktualny stan — wersja 75, 21 października 2026
+## Aktualny stan — wersja 76, realizacja zmiany.txt
+
+**21.10.2026:** [Studio](https://gamefields-studio.ryhfs90.chatgpt.site) wersja **76**, commit `0e5000edf7d3c955518e8140af9d2dd10276885c`, deployment `appgdep_6ad920a463148191967a841c4190ba77` — **succeeded**, revision środowiska 3. Kontynuacja planu Product Intelligence z udziałem prowadzącego wdrożenie i trzech agentów: geometria, UX i stan sprintów. Dokument właściciela urywa się w Sprincie6; nie dopowiadano brakującej części.
+
+### Wdrożony etap S2-01 / S2-02
+
+- Wspólny adapter danych ośmiu bieżących modeli rozdziela **wymiary zapisane w projekcie**, **obrys i powierzchnię nawierzchni** oraz **obrys konstrukcji z bramkami**. Sekcja „Wymiary i nawierzchnia” znajduje się w Konstrukcji i w podsumowaniu.
+- Kalkulacja i podsumowanie korzystają z tego samego pola górnych trójkątów modelu. Usunięto konkurencyjne pole prostokąta z podsumowania. Octagon: **29,82 m²** w obu miejscach; jego obrys nawierzchni to 6 × 6 m, a zapisane wymiary projektu pozostają 4,962 × 4,962 m.
+- Metadane generowane z bieżących źródeł zawierają SHA256 i rewizję. W1 konstrukcja mierzona z rzeczywistego GLB, podłoże z obecnego JSON; P1 korzysta z aktualnego osobnego podłoża. Brak zatwierdzonych rozstawów modułów lub stref bezpieczeństwa oznacza dane nieznane, nie zero.
+- Nie zmieniono geometrii, schematu projektu, migracji, cennika ani ilości wcześniej używanych do wyceny. Nie wdrożono automatycznie przyszłych płyt z kart R02. Potwierdzanie przekazania zapytania z wersji75 pozostaje zachowane.
+
+### Sprawdzenie
+
+PASS: TypeScript, końcowy build, test:studio (300 wzorów / 19 palet), nowy test wymiarów, quote-engine, construction-pricing, pełny test:mobile na 375/390/430/1440. Test wymiarów sprawdza osiem źródeł i ich hashe, niezmienione ilości, analityczny wielokąt Octagonu, W1 GLB, obrysy, stare zapisane wymiary, brak zgadywania dla nieznanego modelu i polskie formatowanie. Istniejące ostrzeżenia chunków/ikon Leaflet pozostają.
+
+Ręcznie: rozwijana sekcja w Konstrukcji, otwarcie źródła klawiaturą, podsumowanie przy375px (szerokość dokumentu375px; wiersze309px, bez przepełnienia). Po publikacji potwierdzono Octagon29,82m² zarówno w podsumowaniu, jak i kalkulacji oraz zachowany subtotal konstrukcji15 300zł. Nie wysłano zapytania. Nie mierzono ponownie Lighthouse ani wydajności renderera.
+
+![Wspólne dane wymiarów w opublikowanym Studio](08-model-dimensions.png)
+
+### Aktualny plan i granice zakończenia
+
+[Stan realizacji zmiany.txt](../../../product-intelligence/2026-10-21/REALIZACJA_ZMIANY.md) rozdziela wykonane funkcje od kolejnych zależności. Zaktualizowano mapę funkcji i backlog; stare zalecenie wyłączonej ceny zachowano jako historyczne i oznaczono jako zastąpione późniejszą decyzją właściciela.
+
+S2-02 jest zakończony w zakresie ilości aktualnych modeli cyfrowych. S2-01 pozostaje częściowy: pole gry, rozstawy modułów i bezpieczne odstępy wymagają danych technicznych. Dalej: zgodność rewizji modeli z kartami produktów, adapter odzyskiwania projektu i porównanie nazwanych wariantów; następnie zatwierdzony rejestr części/BOM. **Nie oznaczono całych sprintów jako zakończonych.**
+
+Wciąż pozostają: różnice źródeł R02 i grubości warstw; instalacja/aktywacja WPCode przez właściciela; fakty umowne prywatności; potwierdzenie odbioru wcześniejszego pojedynczego testu poczty; fizyczne urządzenia, czytnik i badania z uczestnikami.
+
+---
+
+## Poprzedni etap — wersja 75, 21 października 2026
 
 **Wdrożone publicznie:** [Studio](https://gamefields-studio.ryhfs90.chatgpt.site), wersja **75**. Commit źródłowy `afee6406ca1c7818c20cad4acf2241418e3d8245`; deployment `appgdep_6ad91b8a28a481918db470404f658961` — **succeeded**, revision środowiska 3. Zachowano publiczny dostęp, modele, projekt JSON i cennik.
 

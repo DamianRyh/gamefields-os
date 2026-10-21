@@ -3,17 +3,9 @@ export type RateCard={notice?:string;version:string;currency:"PLN";vatRate?:numb
 export type QuoteInput={arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string}[]};
 export type QuoteItem={id:string;label:string;quantity:number;unit:string;unitNet:number|null;totalNet:number|null;note?:string};
 export type ProjectQuote={constructionPrices?:Record<string,number>;notice?:string;schemaVersion:2;status:"estimated"|"partial"|"unpriced";currency:"PLN";rateVersion:string|null;priceNet:number|null;priceGross:number|null;vatRate:number|null;knownSubtotalNet:number|null;area:number;areaLabel:string;items:QuoteItem[];exclusions:string[];assumptions:string[]};
-// Projected top faces of the current Blender floor meshes; not the construction's bounding box.
-export const arenaSurfaceQuantities:Record<string,{area:number;source:string}>={
- "street-field":{area:38.69,source:"public/arenas/street-field.json"},
- "street15":{area:149.155,source:"public/arenas/street15.json"},
- "octagon":{area:29.823379,source:"public/arenas/octagon.json"},
- "circle-cage-1":{area:28.26298,source:"public/arenas/circle-cage-1.json"},
- "circle-cage-2":{area:28.26298,source:"public/arenas/circle-cage-2.json"},
- p1:{area:39.251386,source:"components/assets-blender/p1-surface.json"},
- o1:{area:27.353366,source:"components/assets-blender/o1.json"},
- w1:{area:19.553002,source:"components/assets-blender/w1.json"},
-};
+// Shared source-derived geometry; keep this re-export for existing consumers.
+import {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
+export {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
 const money=(n:number)=>Math.round((n+Number.EPSILON)*100)/100;
 const rate=(v:unknown):v is number=>typeof v==="number"&&Number.isFinite(v)&&v>=0&&v<=1e8;
 export function parseRateCard(raw:string|undefined):RateCard|null{
@@ -57,5 +49,5 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
  const priceNet=missing?null:subtotal;
  const assumptions=["Orientacyjny koszt wybranego zakresu; cena końcowa po sprawdzeniu lokalizacji i podłoża.","Kolor i sceneria podglądu nie zmieniają ceny. Skala i pozycja wyposażenia nie zmieniają liczby sztuk."];
  if(p.arenaModel)assumptions.push("Ilość nawierzchni z obrysu warstwy w modelu Blender, wraz z zapasem pod konstrukcją. Grubość wizualnej warstwy nie określa technologii wykonania.","Standardowe kolory konstrukcji w cenie bazowej; wykończenie specjalne i montaż są osobnymi pozycjami.");
- return {...(c?{constructionPrices:{...c.arenaNet}}:{}),...(c?.notice?{notice:c.notice}:{}),schemaVersion:2,status:missing?(known.length?"partial":"unpriced"):"estimated",currency:"PLN",rateVersion:c?.version||null,priceNet,priceGross:priceNet!==null&&c?.vatRate!==undefined?money(priceNet*(1+c.vatRate)):null,vatRate:c?.vatRate??null,knownSubtotalNet:subtotal,area,areaLabel:p.arenaModel?"Obrys nawierzchni w modelu":"Powierzchnia projektu",items,assumptions,exclusions:["Przygotowanie terenu, podbudowa, fundamenty, przyłącza i formalności nie są ujęte w tej kalkulacji.",...(c?.exclusions||[])]};
+ return {...(c?{constructionPrices:{...c.arenaNet}}:{}),...(c?.notice?{notice:c.notice}:{}),schemaVersion:2,status:missing?(known.length?"partial":"unpriced"):"estimated",currency:"PLN",rateVersion:c?.version||null,priceNet,priceGross:priceNet!==null&&c?.vatRate!==undefined?money(priceNet*(1+c.vatRate)):null,vatRate:c?.vatRate??null,knownSubtotalNet:subtotal,area,areaLabel:p.arenaModel?"Powierzchnia nawierzchni z modelu":"Powierzchnia projektu",items,assumptions,exclusions:["Przygotowanie terenu, podbudowa, fundamenty, przyłącza i formalności nie są ujęte w tej kalkulacji.",...(c?.exclusions||[])]};
 }

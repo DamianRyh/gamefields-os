@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {measureArenaGeometry,serializeGeometry} from '../scripts/build-arena-geometry.mjs';
+import {arenaGeometry,arenaSurfaceQuantities} from '../lib/arena-geometry-data.mjs';
+import {projectDimensions,formatArea,formatBounds} from '../lib/project-dimensions.ts';
+import {calculateProjectQuote} from '../lib/quote-engine.ts';
+const measured=await measureArenaGeometry();
+assert.deepEqual(measured,arenaGeometry,'Metadata must match current renderer assets and source hashes');
+assert.equal(await readFile('lib/arena-geometry-data.mjs','utf8'),serializeGeometry(measured));
+const expected={w1:19.553002,o1:27.353366,p1:39.251386,street15:149.155,'circle-cage-1':28.26298,'circle-cage-2':28.26298,'street-field':38.69,octagon:29.823379};
+const base={length:4.962,width:4.962,surface:'EPDM',lines:false,graphicOpacity:100,objects:[]};
+for(const [arenaModel,area] of Object.entries(expected)){
+ const p={...base,arenaModel},before=JSON.stringify(p),geometry=projectDimensions(p),quote=calculateProjectQuote(p,null,1);
+ assert.equal(geometry.area,area);assert.equal(quote.area,geometry.area);assert.equal(arenaSurfaceQuantities[arenaModel].area,area);
+ assert.equal(geometry.model.clearance,null);assert.equal(geometry.model.modulePitch,null);
+ assert.equal(geometry.model.sourceRevision.length,64);assert.equal(JSON.stringify(p),before);
+ assert.equal(projectDimensions({...p,length:60,width:40}).area,area,'Legacy imported values must not scale source geometry');
+}
+assert(Math.abs(arenaGeometry.octagon.area-72*Math.tan(Math.PI/8))<.000005,'Actual regular octagon polygon, not square bbox');
+assert.notEqual(arenaGeometry.octagon.area,36);assert.notEqual(arenaGeometry.octagon.area,4.962**2);
+assert.equal(formatBounds(arenaGeometry['street-field'].surfaceBounds),'7,3 × 5,3 m');
+assert.equal(formatBounds(arenaGeometry.p1.surfaceBounds),'7,138 × 5,572 m');
+assert.deepEqual(arenaGeometry.w1.constructionBounds,{x:5.09,z:5.831395,y:1},'W1 bounds independently checked against runtime GLB');
+assert.deepEqual(arenaGeometry['street-field'].constructionBounds,{x:7.024,z:4.984,y:1.091});
+assert.equal(formatArea(arenaGeometry.octagon.area),'29,82 m²');
+assert.equal(projectDimensions({...base,arenaModel:'unknown'}).area,null,'Unknown model has no guessed nominal area');
+assert.equal(projectDimensions({...base,length:15,width:10}).area,150);
+assert.equal(projectDimensions({...base,courtShape:'circle',diameter:6}).area,Math.PI*9);
+assert.equal(projectDimensions({...base,courtShape:'circle',diameter:6}).reference,'Ø 6 m');
+assert.equal(projectDimensions(base).reference,'4,962 × 4,962 m');
+console.log('PASS: eight current model revisions/bounds, exact unchanged quote areas, octagon analytic polygon, unknown clearance/pitch, custom shapes, Polish formatting and immutable legacy dimensions.');

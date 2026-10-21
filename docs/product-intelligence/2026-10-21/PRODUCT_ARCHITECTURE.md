@@ -1,5 +1,7 @@
 # Product architecture — Sprint 0 decision proposal
 
+> Aktualizacja 21.10.2026: poniżej zachowano historyczny audyt/propozycję Sprintu0. Aktualny stan realizacji i późniejsze decyzje właściciela (włączony cennik, potwierdzanie zapytania, wspólna geometria) opisuje [REALIZACJA_ZMIANY.md](REALIZACJA_ZMIANY.md). Dawne zalecenie pricing OFF i prostokątnej powierzchni Octagonu nie opisuje bieżącego Studio.
+
 Status: proposed architecture, 21.10.2026. No application change, migration, rate approval or publication. Source and bounded working evidence: CODE_AUDIT.md and FEATURE_MAP.csv. Benchmark observations supplied by the parent browser audit: USM distinguishes module dimensions from external dimensions; Roomle exposes a part list with article IDs and quantities; an IKEA add/undo interaction updates both the model and displayed price. These observations inform acceptance criteria; they do not establish equivalent functionality in Gamefields or describe every competitor product.
 
 ## Preserve the current system

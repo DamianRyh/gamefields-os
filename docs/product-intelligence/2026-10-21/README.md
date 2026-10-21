@@ -1,5 +1,7 @@
 # Gamefields Studio — Sprint0: audyt, benchmark i kierunek produktu
 
+> Aktualizacja 21.10.2026: poniżej zachowano historyczny audyt/propozycję Sprintu0. Aktualny stan realizacji i późniejsze decyzje właściciela (włączony cennik, potwierdzanie zapytania, wspólna geometria) opisuje [REALIZACJA_ZMIANY.md](REALIZACJA_ZMIANY.md). Dawne zalecenie pricing OFF i prostokątnej powierzchni Octagonu nie opisuje bieżącego Studio.
+
 Checkpoint 21.10.2026. Wykonano etap badawczy0–2 nowego briefu; redesign i kolejne silniki wymagają osobnych sprintów z testami. Rozwijamy istniejące Studio i katalog, zachowując projekty użytkowników.
 
 ## Stan odniesienia

@@ -1,5 +1,7 @@
 # Ryzyka i bramki decyzji
 
+> Aktualizacja 21.10.2026: poniżej zachowano historyczny audyt/propozycję Sprintu0. Aktualny stan realizacji i późniejsze decyzje właściciela (włączony cennik, potwierdzanie zapytania, wspólna geometria) opisuje [REALIZACJA_ZMIANY.md](REALIZACJA_ZMIANY.md). Dawne zalecenie pricing OFF i prostokątnej powierzchni Octagonu nie opisuje bieżącego Studio.
+
 | Priorytet | Ryzyko / dowód | Działanie i warunek zamknięcia |
 |---|---|---|
 | P0 | Biblioteka zapowiada przeliczanie ceny, request wyłączony | Sprint1: uczciwa informacja o indywidualnej wycenie; bez aktywacji starego kalkulatora. |
