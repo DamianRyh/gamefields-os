@@ -1,0 +1,8 @@
+import {writeFile,mkdir,readFile} from 'node:fs/promises';
+import {models,anchors,fx,scaleConstruction} from '../pricing/scaling-2026.mjs';
+const catalog=JSON.parse(await readFile('public/catalog/product-names.json','utf8'));
+const rows=models.map(model=>({...model,...scaleConstruction(model),...Object.fromEntries(['name','code'].map(key=>[key,catalog.products.find(p=>p.id===model.id)[key]]))}));
+const card={version:'GF-CONSTRUCTION-2026-10-21-PITCH-REFERENCE-v1',currency:'PLN',notice:'Orientacyjna cena konstrukcji bazowej z bramkami, skalowana z oferty referencyjnej 2026. Przyjęto kwoty netto; VAT do potwierdzenia. Nawierzchnia, montaż, transport i personalizacja osobno.',surfaces:{},patternNetPerM2:{},arenaNet:Object.fromEntries(rows.map(row=>[row.id,row.pln])),arenaInstallationNet:{},finishNet:{},equipmentNet:{},exclusions:[`Przeliczenie referencyjne: 1 EUR = ${fx.eurPln} PLN; NBP ${fx.table}, ${fx.date}. Kurs jest zamrożonym założeniem budżetowym, nie ceną sprzedaży waluty.`, 'Oferta źródłowa nie określa zawartości cen ani podstawy VAT. W Gamefields wyceniamy tu wyłącznie konstrukcję bazową; cena końcowa po potwierdzeniu specyfikacji.', 'Ceny są propozycją orientacyjną, a nie potwierdzonym kosztem produkcji. Różnice materiałów, połączeń, bramek i liczby modułów wymagają indywidualnej weryfikacji.']};
+await mkdir('pricing',{recursive:true});await writeFile('pricing/rate-card-2026-10-21.json',JSON.stringify(card,null,2)+'\n');
+await writeFile('pricing/scaled-products-2026-10-21.json',JSON.stringify({source:'Pitch offer 2026.pdf',status:'OWNER_AUTHORISED_BUDGET_INSPIRATION',fx,anchors,models:rows},null,2)+'\n');
+console.log(rows.map(r=>`${r.name}: ${r.eur} EUR → ${r.pln} PLN netto (założenie)`).join('\n'));

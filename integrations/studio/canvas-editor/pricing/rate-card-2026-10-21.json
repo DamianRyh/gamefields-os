@@ -1,0 +1,25 @@
+{
+  "version": "GF-CONSTRUCTION-2026-10-21-PITCH-REFERENCE-v1",
+  "currency": "PLN",
+  "notice": "Orientacyjna cena konstrukcji bazowej z bramkami, skalowana z oferty referencyjnej 2026. Przyjęto kwoty netto; VAT do potwierdzenia. Nawierzchnia, montaż, transport i personalizacja osobno.",
+  "surfaces": {},
+  "patternNetPerM2": {},
+  "arenaNet": {
+    "w1": 13100,
+    "o1": 10500,
+    "p1": 22300,
+    "street15": 26200,
+    "circle-cage-1": 14000,
+    "circle-cage-2": 22700,
+    "street-field": 16600,
+    "octagon": 15300
+  },
+  "arenaInstallationNet": {},
+  "finishNet": {},
+  "equipmentNet": {},
+  "exclusions": [
+    "Przeliczenie referencyjne: 1 EUR = 4.3641 PLN; NBP 205/A/NBP/2026, 2026-10-21. Kurs jest zamrożonym założeniem budżetowym, nie ceną sprzedaży waluty.",
+    "Oferta źródłowa nie określa zawartości cen ani podstawy VAT. W Gamefields wyceniamy tu wyłącznie konstrukcję bazową; cena końcowa po potwierdzeniu specyfikacji.",
+    "Ceny są propozycją orientacyjną, a nie potwierdzonym kosztem produkcji. Różnice materiałów, połączeń, bramek i liczby modułów wymagają indywidualnej weryfikacji."
+  ]
+}

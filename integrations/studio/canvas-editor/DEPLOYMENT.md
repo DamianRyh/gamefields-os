@@ -1,3 +1,17 @@
+# Studio — wersja 73
+
+https://gamefields-studio.ryhfs90.chatgpt.site/
+
+Commit: 0583fd5e26b033d53637b9ab98d47936eeaf9b33.
+Deployment: appgdep_6ad8e4d9f3188191abdd328b916e7a3b — succeeded.
+Environment revision: 3.
+
+Eight indicative construction rates, scaled from the owner-supplied Pitch offer 2026, are active. Rate-card version GF-CONSTRUCTION-2026-10-21-PITCH-REFERENCE-v1. Proposed net basis is disclosed; source PDF does not define tax. Surface, installation, transport and other scope remain unpriced, not zero. See docs/CONSTRUCTION_PRICING_2026.md and pricing/. Production Panna Octa subtotal 15300 PLN verified.
+
+Rollback requires both the intended saved Site version and the intended QUOTE_RATE_CARD environment revision; rolling back code alone does not remove rates.
+
+## Previous deployments
+
 # Studio — wersja 72
 
 https://gamefields-studio.ryhfs90.chatgpt.site/

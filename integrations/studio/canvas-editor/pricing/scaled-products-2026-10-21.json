@@ -1,0 +1,150 @@
+{
+  "source": "Pitch offer 2026.pdf",
+  "status": "OWNER_AUTHORISED_BUDGET_INSPIRATION",
+  "fx": {
+    "eurPln": 4.3641,
+    "date": "2026-10-21",
+    "table": "205/A/NBP/2026",
+    "url": "https://nbp.pl/statystyka-i-sprawozdawczosc/kursy/tabela-a/"
+  },
+  "anchors": [
+    {
+      "name": "The Cage",
+      "page": 1,
+      "length": 15,
+      "width": 10,
+      "height": 2.5,
+      "eur": 25000
+    },
+    {
+      "name": "The Pitch",
+      "page": 2,
+      "length": 15,
+      "width": 10,
+      "height": 1,
+      "eur": 6000
+    },
+    {
+      "name": "Kids Pitch",
+      "page": 3,
+      "length": 15,
+      "width": 10,
+      "height": 0.5,
+      "eur": 4000
+    },
+    {
+      "name": "Panna Cage",
+      "page": 4,
+      "length": 6,
+      "width": 6,
+      "height": 1.8,
+      "eur": 5200
+    },
+    {
+      "name": "Panna Pitch",
+      "page": 5,
+      "length": 6,
+      "width": 6,
+      "height": 0.6,
+      "eur": 2500
+    }
+  ],
+  "models": [
+    {
+      "id": "w1",
+      "family": "panna",
+      "perimeter": 15.990706606772047,
+      "height": 1,
+      "basis": "Obwód zewnętrzny Ø5,09m; wysokość1m.",
+      "rawEur": 2979.125,
+      "eur": 3000,
+      "pln": 13100,
+      "name": "Panna Ring",
+      "code": "GF-CT-001"
+    },
+    {
+      "id": "o1",
+      "family": "panna",
+      "perimeter": 18.84955592153876,
+      "height": 0.55,
+      "basis": "Niska banda0,55m; wyższe ramy bramek objęte częścią stałą. Niewielka ekstrapolacja poniżej0,6m.",
+      "rawEur": 2387.5,
+      "eur": 2400,
+      "pln": 10500,
+      "name": "Panna Play",
+      "code": "GF-CT-002"
+    },
+    {
+      "id": "p1",
+      "family": "rectangular",
+      "perimeter": 25.424,
+      "height": 1.22,
+      "basis": "Wymiary katalogowe7,139×5,573m i konserwatywnie maksymalna wysokość1,22m.",
+      "rawEur": 5057.668266666666,
+      "eur": 5100,
+      "pln": 22300,
+      "name": "Panna Court",
+      "code": "GF-CT-003"
+    },
+    {
+      "id": "street15",
+      "family": "rectangular",
+      "perimeter": 50,
+      "height": 1,
+      "basis": "Bezpośredni odpowiednik wymiarów The Pitch15×10×1m.",
+      "rawEur": 6000,
+      "eur": 6000,
+      "pln": 26200,
+      "name": "Street Arena 15",
+      "code": "GF-CT-004"
+    },
+    {
+      "id": "circle-cage-1",
+      "family": "panna",
+      "perimeter": 18.84955592153876,
+      "height": 0.9,
+      "basis": "Ø6m, wysokość0,9m; interpolacja Panna Pitch/Panna Cage.",
+      "rawEur": 3175,
+      "eur": 3200,
+      "pln": 14000,
+      "name": "Panna Cage 90",
+      "code": "GF-CT-005"
+    },
+    {
+      "id": "circle-cage-2",
+      "family": "panna",
+      "perimeter": 18.84955592153876,
+      "height": 1.8,
+      "basis": "Bezpośrednia wysokość i nominalny wymiar referencyjnego Panna Cage.",
+      "rawEur": 5200,
+      "eur": 5200,
+      "pln": 22700,
+      "name": "Panna Cage 180",
+      "code": "GF-CT-006"
+    },
+    {
+      "id": "street-field",
+      "family": "rectangular",
+      "perimeter": 21.724,
+      "height": 1.091,
+      "basis": "Wymiary pola6,214×4,648m i wysokość1,091m; nominalny obwód, bez wypustów bramek.",
+      "rawEur": 3786.314613333333,
+      "eur": 3800,
+      "pln": 16600,
+      "name": "Panna Grid",
+      "code": "GF-CT-007"
+    },
+    {
+      "id": "octagon",
+      "family": "panna",
+      "perimeter": 16.44262157196238,
+      "height": 1.218,
+      "basis": "Regularny ośmiobok4,962m między równoległymi bokami; wysokość1,218m.",
+      "rawEur": 3473.5223188674445,
+      "eur": 3500,
+      "pln": 15300,
+      "name": "Panna Octa",
+      "code": "GF-CT-008"
+    }
+  ]
+}
