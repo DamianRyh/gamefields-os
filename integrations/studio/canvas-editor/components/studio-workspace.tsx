@@ -13,6 +13,7 @@ import {REALISTIC_LOCATIONS,type RealisticLocation} from "@/lib/realistic-locati
 import {SurfaceMaterialPicker} from "@/components/surface-material";
 import {ArenaSettings} from "@/components/blender-arena-preview";
 import {isSignaturePresetActive} from "@/lib/studio-ux.mjs";
+import {inquirySummary} from "@/lib/inquiry-summary.mjs";
 import {productCodes} from "@/lib/product-names.mjs";
 
 type Props={
@@ -34,6 +35,7 @@ export function StudioWorkspace(props:Props){
  const {project:p,update}=props;
  const [patternsOpen,setPatternsOpen]=useState(false),[summaryOpen,setSummaryOpen]=useState(false),[editPlan,setEditPlan]=useState(false),[zoom,setZoom]=useState(props.previewMode==="aerial"?170:100);
  const [activeTool,setActiveTool]=useState<StudioTool>("surface"),[materialOpen,setMaterialOpen]=useState(false),[advancedOpen,setAdvancedOpen]=useState(false);
+ const [inquiryError,setInquiryError]=useState("");
  const contactWindow=useRef<Window|null>(null);
  const modalTrigger=useRef<HTMLElement|null>(null);
  const showSummary=()=>{modalTrigger.current=document.activeElement as HTMLElement|null;setSummaryOpen(true)};
@@ -60,15 +62,15 @@ export function StudioWorkspace(props:Props){
  useEffect(()=>{
   const onReady=(event:MessageEvent)=>{
    if(event.origin!=="https://www.gamefields.eu"||event.source!==contactWindow.current||event.data?.type!=="gf-contact-ready")return;
-   const summary=JSON.stringify({estimate:props.quote.loading?undefined:props.quote.data,...p,objects:p.objects.map(({src,...object})=>object)},null,2);
-   contactWindow.current?.postMessage({type:"gf-inquiry",summary:summary.slice(0,18000)},"https://www.gamefields.eu");
+   try{const summary=inquirySummary(p,props.quote.loading||props.quote.error?null:props.quote.data);contactWindow.current?.postMessage({type:"gf-inquiry",summary},"https://www.gamefields.eu")}catch(error){setInquiryError((error as Error).message);setSummaryOpen(true)}
   };
   window.addEventListener("message",onReady);return()=>window.removeEventListener("message",onReady);
- },[p,props.quote.data,props.quote.loading]);
+ },[p,props.quote.data,props.quote.loading,props.quote.error]);
  const requestInquiry=()=>{
-  const summary=JSON.stringify({estimate:props.quote.loading?undefined:props.quote.data,...p,objects:p.objects.map(({src,...object})=>object)},null,2).slice(0,18000);
+  setInquiryError("");
+  let summary:string;try{summary=inquirySummary(p,props.quote.loading||props.quote.error?null:props.quote.data)}catch(error){setInquiryError((error as Error).message);return}
   if(window.parent!==window){window.parent.postMessage({type:"gf-inquiry",summary},"https://www.gamefields.eu");setSummaryOpen(false);}
-  else contactWindow.current=window.open("https://www.gamefields.eu/#kontakt","gamefields-inquiry");
+  else {contactWindow.current=window.open("https://www.gamefields.eu/#kontakt","gamefields-inquiry");if(!contactWindow.current)setInquiryError("Przeglądarka zablokowała formularz. Zezwól na otwarcie okna i spróbuj ponownie.")}
  };
  useEffect(()=>{
   if(window.parent===window)return;
@@ -146,6 +148,6 @@ export function StudioWorkspace(props:Props){
    {summarySection("Nawierzchnia i grafika","surface",[["Materiał",surfaceLabel(p.surface)],["Wzór",`${family.name} · wariant ${p.patternVariant||1}`],["Paleta",getPatternPalette(p.patternPalette).name],["Pole gry",summaryColor(p.base)],["Strefy",summaryColor(p.zone)],["Otoczenie",summaryColor(p.outside)],["Linie",p.lines?summaryColor(p.lineColor):"Wyłączone"]])}
    {p.arenaModel?summarySection("Konstrukcja","construction",[["Kolor paneli",summaryColor(design.panelColor)],["Kolor ramy",summaryColor(design.frameColor)],["Kolor bramek",summaryColor(design.goalColor)],["Wykończenie",({matte:"Matowe",gloss:"Połysk",metal:"Metal lakierowany"})[design.finish]],["Napis na panelach",design.text||"Brak"],["Logo na panelach",design.src?"Dodane":"Brak"],...(design.text||design.src?[["Strona oznaczeń",({both:"Obie strony",inner:"Od wewnątrz",outer:"Na zewnątrz"})[design.side]] as [string,ReactNode]]:[]) ]):null}
    {summarySection("Wyposażenie i miejsce","equipment",[["Elementy projektu",p.objects.length?p.objects.map(o=>o.name).join(", "):"Brak dodatkowych elementów"],["Sceneria poglądowa",location?.name||"Park"]])}
-   <p className="studio-hint">Parametry projektu i bieżącą kalkulację dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p><button className="studio-primary" onClick={requestInquiry}>Zapytaj o realizację <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
+   <p className="studio-hint">Parametry projektu i bieżącą kalkulację dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}<button className="studio-primary" onClick={requestInquiry}>Zapytaj o realizację <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
  </main>;
 }

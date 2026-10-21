@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {inquirySummary,MAX_INQUIRY_CHARS} from '../lib/inquiry-summary.mjs';
+const project={name:'Pełny projekt',arenaDesign:{src:'data:image/png;base64,'+'A'.repeat(1400000),text:'Panel',panelColor:'#ff0000'},objects:Array.from({length:200},(_,i)=>({id:String(i),name:'N'.repeat(200),kind:i%2?'image':'text',text:'ą😀'.repeat(166),src:'data:image/png;base64,AAAA',x:i,y:-i,rotation:45}))};
+const estimate={status:'partial',rateCardVersion:'test',items:[{code:'construction',subtotal:15300}],notice:'Pozostałe koszty nieznane'};
+const summary=inquirySummary(project,estimate),parsed=JSON.parse(summary);
+assert.ok(summary.length>18000&&summary.length<MAX_INQUIRY_CHARS);
+assert.equal(parsed.objects.length,200);assert.equal(parsed.objects[199].text,project.objects[199].text);assert.equal(parsed.objects[199].x,199);
+assert.deepEqual(parsed.estimate,estimate);assert.equal(parsed.arenaDesign.text,'Panel');assert.equal(parsed.artwork.panelLogo,true);assert.equal(parsed.artwork.floorImages,200);
+assert.ok(!summary.includes('data:image'));assert.ok(project.arenaDesign.src.length>1000000);assert.ok(project.objects[0].src);
+assert.throws(()=>inquirySummary({...project,name:'x'.repeat(MAX_INQUIRY_CHARS)},estimate),/Pobierz/);
+assert.equal(JSON.parse(inquirySummary(project,null)).estimate,undefined);
+console.log('PASS: 200 objects, Unicode, full estimate, artwork omission, immutability, bounded rejection; chars='+summary.length);

@@ -1,0 +1,20 @@
+{
+  "site": "https://www.gamefields.eu",
+  "applied": true,
+  "edits": [
+    {
+      "target_type": "post",
+      "post_id": 3462,
+      "field": "post_content",
+      "old_content": "event.data.summary.length>18000",
+      "new_content": "event.data.summary.length>500000"
+    },
+    {
+      "target_type": "meta",
+      "post_id": 3758,
+      "meta_key": "_form",
+      "old_content": "<div hidden>[textarea project-details maxlength:18000]</div>",
+      "new_content": "<div hidden>[textarea project-details maxlength:500000]</div>"
+    }
+  ]
+}

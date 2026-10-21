@@ -1,0 +1,40 @@
+{
+  "version": 74,
+  "commit": "23b395853d0d826ee3de07f5f3b1b6a38666c0fe",
+  "deployment": {
+    "id": "appgdep_6ad8ecb49a988191b11960f74ff09bd7",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "title": "Gamefields Studio",
+    "version_id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_b1bc3d59bf508191ad14e8a0e0b575e3",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gamefields-studio.ryhfs90.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abbd0ba26f0819197701343bf156f1b",
+    "failure_message": null,
+    "env_set_revision": 3,
+    "updated_at": "2026-10-21T16:48:27.730991+00:00"
+  },
+  "tests": {
+    "typeScript": "pass",
+    "build": "pass",
+    "studio": "pass",
+    "mobile": "pass",
+    "quoteEngine": "pass",
+    "constructionPricing": "pass",
+    "inquirySummary": {
+      "status": "pass",
+      "objects": 200,
+      "chars": 168599
+    }
+  },
+  "productionHandoff": {
+    "chars": 4881,
+    "limit": 500000,
+    "model": "octagon",
+    "objects": 2,
+    "estimate": "partial",
+    "emailSent": false
+  }
+}
