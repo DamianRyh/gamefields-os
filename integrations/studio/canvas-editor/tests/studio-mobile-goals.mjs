@@ -77,10 +77,10 @@ try{
   await page.screenshot({path:`outputs/mobile/studio-${width}.jpg`,type:'jpeg',quality:85});
   await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('link',{name:'Radar · mapa',exact:true}).click();
   await page.waitForURL('**/radar');
-  await page.getByRole('button',{name:'FOOTBALL',exact:true}).click();
+  await page.getByRole('button',{name:'Piłka nożna',exact:true}).click();
   await page.locator('.radar-project-link').click();
   await page.waitForURL('**/radar/*');
-  await page.getByRole('link',{name:'BACK TO MAP'}).click();
+  await page.getByRole('link',{name:'WRÓĆ DO MAPY'}).click();
   await page.waitForURL('**/radar');
   await page.getByRole('link',{name:'Boiska',exact:true}).click();
   await page.waitForURL(base+'/');

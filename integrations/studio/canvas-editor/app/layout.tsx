@@ -5,6 +5,7 @@ import "./studio-workspace.css";
 import "./court-culture.css";
 import "./studio-canvas.css";
 import "./studio-usability.css";
+import "./studio-readability.css";
 
 export const metadata: Metadata = {
   title: {

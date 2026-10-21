@@ -29,7 +29,7 @@ try{
    await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();
    await page.locator('.studio-material-trigger').click();
    await page.getByRole('button',{name:/^Granulat —/}).click();await ready();
-   await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Grafika',exact:true}).click();
+   await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();
    await page.getByLabel('Pokaż linie',{exact:true}).check();await ready();
    await page.getByLabel('Pokaż linie',{exact:true}).uncheck();await ready();
    await page.locator('.studio-section > summary').filter({hasText:/^Zaawansowane/}).click();

@@ -1,0 +1,105 @@
+/* Surface editing and readable controls: applied after the v68 workspace styles. */
+.studio-canvas-editor{font-size:16px;line-height:1.5}
+.studio-canvas-editor :is(input:not([type=range]):not([type=color]),textarea,select){font-size:16px!important;line-height:1.5}
+.studio-canvas-editor :is(.studio-tool-rail button,.studio-cameras button,.studio-color,.studio-lines-toggle,.studio-lines-toggle>span:last-child,.studio-material-trigger,.studio-dock-heading button,.studio-variants button,.studio-brand-actions button,.studio-palettes button,.studio-range>span,.studio-object-editor label,.studio-visual-footer button,.studio-visual-footer a,.studio-project-chip,.studio-panel-actions button){font-size:14px!important;line-height:1.5}
+.studio-canvas-editor :is(.studio-hint,.studio-file-help,.studio-model-guidance,.material-copy small,.material-selection,.material-note,.studio-current-pattern small,.studio-material-trigger small,.studio-models button small,.studio-direction-grid small,.studio-summary dt,.studio-summary dd,.studio-save){font-size:14px;line-height:1.5}
+.studio-canvas-editor .studio-color small{font-size:13px}
+.studio-canvas-editor :is(.studio-variants button,.studio-brand-actions button,.studio-palettes button,.studio-range input,.studio-palette-details>summary,.studio-section>summary,.studio-object-list button,.studio-delete){min-height:44px}
+.studio-canvas-editor .studio-range input{display:block;margin:0;scroll-margin:80px 0 20px}
+.studio-canvas-editor .studio-range{min-width:0;margin:10px 0}
+.studio-canvas-editor .studio-range>span{gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.studio-canvas-editor .studio-range b{white-space:nowrap}
+.studio-canvas-editor .studio-composition h2{font-size:16px;line-height:1.5;margin:0 0 10px}
+.studio-canvas-editor .studio-advanced-section .studio-section-body{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 24px}
+.studio-canvas-editor .studio-composition{grid-column:1/-1}
+.studio-canvas-editor .studio-brand-actions{margin:0}
+.studio-canvas-editor .studio-advanced-section .studio-hint{margin:0;align-self:center}
+.studio-canvas-editor .studio-surface-options{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:start;margin-top:20px;padding-top:16px;border-top:1px solid var(--studio-line)}
+.studio-canvas-editor .studio-palette-details{min-width:0}
+.studio-canvas-editor .studio-palette-details>summary{display:flex;align-items:center;font-size:16px;color:#4a122b}
+.studio-canvas-editor .studio-palettes{grid-template-columns:repeat(3,minmax(0,1fr))}
+.studio-canvas-editor .studio-line-color{padding-top:5px}
+.studio-canvas-editor .studio-dock-heading{position:sticky;top:-22px;z-index:3;background:#fff;margin-top:-10px;padding:10px 0 12px;border-bottom:1px solid var(--studio-line)}
+.studio-canvas-editor .studio-dock-heading h1{font-size:22px;overflow-wrap:anywhere}
+.studio-canvas-editor .studio-direction-grid small{font-size:14px;line-height:1.5}
+.studio-canvas-editor .studio-summary .studio-modal-head button{font-size:14px}
+.studio-canvas-editor .studio-graphics-content h2{font-size:20px;margin:0 0 10px}
+/* Explicit rows keep the editing dock out of the preview at every expansion level. */
+@media(min-width:801px){
+ .studio-canvas-editor{min-height:0}
+ .studio-canvas-editor .studio-screen{display:grid;grid-template-columns:122px minmax(0,1fr);grid-template-rows:minmax(220px,1fr) minmax(230px,40%);height:calc(100dvh - 74px);min-height:0;padding:0;gap:0}
+ .studio-canvas-editor[data-expanded=true] .studio-screen{grid-template-rows:minmax(220px,1fr) minmax(260px,48%)}
+ .studio-canvas-editor .studio-tool-rail{position:relative;inset:auto;grid-column:1;grid-row:1/-1;width:auto;margin:12px 8px 12px 12px;align-self:start;box-shadow:none}
+ .studio-canvas-editor .studio-visual{position:relative;inset:auto;grid-column:2;grid-row:1;min-width:0;min-height:0}
+ .studio-canvas-editor .studio-panel{position:relative;inset:auto;grid-column:2;grid-row:2;min-width:0;min-height:0;height:auto;max-height:none;margin:8px 16px 12px 0;padding:20px 24px;scroll-padding:90px 16px 20px;overscroll-behavior:contain}
+ .studio-canvas-editor .studio-toolbar{left:12px;right:12px;display:grid;grid-template-columns:96px minmax(0,1fr) 140px;gap:8px}
+ .studio-canvas-editor .studio-history{position:static;display:flex;gap:2px}
+ .studio-canvas-editor .studio-history button{min-height:44px;min-width:44px;padding:10px}
+ .studio-canvas-editor .studio-cameras{justify-self:center;justify-content:center}
+ .studio-canvas-editor .studio-location-short{position:static;justify-self:end;max-width:140px;display:flex}
+ .studio-canvas-editor .studio-surface-bar{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px}
+ .studio-canvas-editor .studio-surface-colors{min-width:0;gap:12px;padding-left:16px;flex-wrap:wrap}
+ .studio-canvas-editor .studio-lines-toggle{border-left:0;padding-left:0;min-height:44px}
+ .studio-canvas-editor .studio-material-trigger{grid-column:2;grid-row:2;min-width:0;padding:0;min-height:44px}
+ .studio-canvas-editor .studio-material-trigger small{display:block;margin-left:0}
+ .studio-canvas-editor .studio-stage-footer{bottom:52px;left:12px;right:12px}
+ .studio-canvas-editor .studio-visual-footer{left:4px;right:4px}
+ .studio-canvas-editor .studio-dock-heading{top:-20px}
+}
+@media(min-width:801px) and (max-width:1100px){
+ .studio-canvas-editor .studio-screen{grid-template-columns:134px minmax(0,1fr)}
+ .studio-canvas-editor .studio-toolbar{grid-template-columns:88px minmax(0,1fr)}
+ .studio-canvas-editor .studio-location-short{display:none}
+ .studio-canvas-editor .studio-cameras button{padding:8px;gap:5px}
+ .studio-canvas-editor .studio-current-pattern{gap:12px}
+ .studio-canvas-editor .studio-pattern-thumb{width:90px}
+ .studio-canvas-editor .studio-surface-colors{gap:8px;justify-content:space-between}
+ .studio-canvas-editor .studio-color{flex-direction:column;text-align:center;gap:5px}
+ .studio-canvas-editor .studio-color input[type=color]{width:44px;height:44px;min-width:44px}
+ .studio-canvas-editor .studio-color small{display:none}
+}
+@media(max-width:800px){
+ .studio-canvas-editor .studio-project-name{min-height:30px;font-size:16px!important}
+ .studio-canvas-editor .studio-save{font-size:12px}
+ .studio-canvas-editor .studio-screen{grid-template-rows:minmax(190px,1fr) 74px minmax(0,290px)}
+ .studio-canvas-editor:not([data-tool=surface]) .studio-screen,.studio-canvas-editor:has(.studio-panel.is-expanded) .studio-screen{grid-template-rows:198px 74px minmax(0,1fr)}
+ .studio-canvas-editor .studio-tool-rail{min-height:74px}
+ .studio-canvas-editor .studio-tool-rail button{min-height:72px;font-size:13px!important}
+ .studio-canvas-editor .studio-tool-rail svg{width:20px;height:20px}
+ .studio-canvas-editor .studio-panel{scroll-padding:80px 12px 20px;padding:10px 14px 18px}
+ .studio-canvas-editor .studio-dock-heading{top:-10px;padding-top:10px;margin-top:-10px;min-height:54px}
+ .studio-canvas-editor .studio-dock-heading h1{font-size:20px}
+ .studio-canvas-editor .studio-surface-bar{grid-template-columns:minmax(0,1fr) 100px;gap:14px}
+ .studio-canvas-editor .studio-current-pattern b{font-size:15px}
+ .studio-canvas-editor .studio-current-pattern small{font-size:14px}
+ .studio-canvas-editor .studio-surface-colors{gap:10px;min-height:72px}
+ .studio-canvas-editor .studio-color{font-size:14px!important;min-height:72px}
+ .studio-canvas-editor .studio-material-trigger{font-size:16px!important;min-height:54px}
+ .studio-canvas-editor .studio-material-trigger small{display:block;margin-left:0}
+ .studio-canvas-editor .studio-surface-options{grid-template-columns:minmax(0,1fr);gap:10px;margin-top:16px}
+ .studio-canvas-editor .studio-line-color .studio-color{flex-direction:row;justify-content:start;text-align:left;gap:12px}
+ .studio-canvas-editor .studio-advanced-section .studio-section-body{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+ .studio-canvas-editor .studio-palettes{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .studio-canvas-editor .studio-variants{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ .studio-canvas-editor .studio-visual-footer :is(button,a){font-size:12px!important}
+ .studio-canvas-editor .studio-project-chip{font-size:12px!important}
+ .studio-canvas-editor .studio-cameras button{font-size:12px!important}
+ .studio-canvas-editor .studio-visual-footer svg{display:none}
+ .studio-canvas-editor .studio-summary :is(dt,dd){font-size:14px}
+}
+/* Short landscape windows scroll as a page instead of clipping the editing panel. */
+@media(max-height:600px){
+ .studio-canvas-editor{height:auto;min-height:100dvh;overflow:visible}
+ .studio-canvas-editor .studio-workspace-content{height:auto}
+ .studio-canvas-editor .studio-screen,.studio-canvas-editor[data-expanded=true] .studio-screen,.studio-canvas-editor:not([data-tool=surface]) .studio-screen,.studio-canvas-editor:has(.studio-panel.is-expanded) .studio-screen{height:auto;min-height:0;grid-template-rows:260px minmax(320px,auto)}
+ .studio-canvas-editor .studio-panel{max-height:none;overflow:visible}
+ .studio-canvas-editor .studio-dock-heading{position:relative;top:auto}
+}
+@media(max-width:800px) and (max-height:600px){
+ .studio-canvas-editor .studio-screen,.studio-canvas-editor:not([data-tool=surface]) .studio-screen,.studio-canvas-editor:has(.studio-panel.is-expanded) .studio-screen{grid-template-rows:240px 74px minmax(320px,auto)}
+}
+.studio-canvas-editor .studio-range input[type=range]{font-size:16px;line-height:1.5}
+/* Non-action status toasts stay over the preview, away from editing controls. */
+body:has(.studio-canvas-editor) [data-sonner-toaster]{top:86px!important;bottom:auto!important;pointer-events:none}
+body:has(.studio-canvas-editor) [data-sonner-toast]{pointer-events:none}
+@media(max-width:800px){body:has(.studio-canvas-editor) [data-sonner-toaster]{top:134px!important}}

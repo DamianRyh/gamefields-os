@@ -1,10 +1,9 @@
-# Studio — wersja 68, poprawki użyteczności
+# Studio — wersja 69
 
-Źródła Site: `df6125d3187fa787f0f54324bfa9da88b30a44ff`.
-Istniejący adres: https://gamefields-studio.ryhfs90.chatgpt.site/
+Opublikowano 21.10.2026: https://gamefields-studio.ryhfs90.chatgpt.site/
+Źródło Site: 151edc39c31a2d0acc6a41215021424d9d8b2e14.
+Publikacja appgdep_6ad855f751708191b7ddc058261e4cc3: succeeded.
 
-Ta kopia źródeł należy do istniejącego Studio i jest wyłączona z kompilacji aplikacji OS przez `tsconfig.json`. Nie zastępuje plików aplikacji OS.
+Nawierzchnia zawiera zaawansowane ustawienia kompozycji i logo; czytelne kontrolki, polski Radar. Testy TypeScript/build/scope/mobile/surface/Radar/usability/new-blender-arenas PASS. Jedyna późniejsza różnica źródła w tej kopii: selektor testu new-blender-arenas Grafika → Nawierzchnia. Kod aplikacji i sprawdzony build odpowiadają wersji69.
 
-Zmiany: prawdziwy status lokalnego zapisu, pobranie JSON, mobilne Undo/Redo i cele dotykowe44px, karty modeli z wymiarami, zachowanie własnej nazwy projektu, pełne podsumowanie i edycja sekcji, poprawne zaznaczenie kompozycji, obsługa fokusu dialogów.
-
-Walidacja: TypeScript, build, studio-scope (300 wzorów /19 palet), studio-ux, product-names, studio-usability375/390/430/1440, studio-mobile-goals i new-blender-arenas — PASS. Źródła Baymard/Tylko i granice wniosków: docs/STUDIO_UX_AUDIT.md.
+Raport całej strony: docs/FULL_SITE_AUDIT_2026-10-21.md w głównym repo. To kopia integracyjna, wyłączona z kompilacji OS. Nie zastępuje głównej aplikacji OS.

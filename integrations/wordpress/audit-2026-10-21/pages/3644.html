@@ -1,0 +1,19 @@
+<!-- wp:html -->
+<style>
+html:has(.gf-builder-page){margin-top:0!important}
+body:has(.gf-builder-page){background:#0b131b!important;overflow-x:hidden}
+body:has(.gf-builder-page) #nm-header,body:has(.gf-builder-page) #nm-footer,body:has(.gf-builder-page) #wpadminbar,body:has(.gf-builder-page) .nm-page-title{display:none!important}
+body:has(.gf-builder-page) .nm-page-wrap,body:has(.gf-builder-page) .nm-page-wrap-inner,body:has(.gf-builder-page) #nm-page-overflow,body:has(.gf-builder-page) #nm-page,body:has(.gf-builder-page) .nm-page-content,body:has(.gf-builder-page) .nm-row,body:has(.gf-builder-page) .nm-page-default-col{padding:0!important;margin:0!important;width:100%!important;max-width:none!important}
+.gf-builder-page{margin:0!important;background:#0b131b;width:100%;max-width:none}
+.gf-builder-frame{display:block;width:100%;height:100vh;height:100dvh;min-height:0;border:0;background:#0b131b}
+.gf-builder-fallback{padding:10px 20px;margin:0;font:12px Arial,sans-serif;color:#a9b7c4;text-align:center;background:#0b131b}.gf-builder-fallback a{color:#87f5b4;text-decoration:underline}
+
+.gf-builder-fallback{font-size:16px!important;line-height:1.5!important}.gf-builder-fallback a{display:inline-flex;align-items:center;min-height:44px}
+/* Gamefields readability audit 2026-10-20 */
+.gf-builder-fallback a:focus-visible{outline:3px solid #87f5b4;outline-offset:4px}
+</style>
+<main class="gf-builder-page"><iframe id="studio" class="gf-builder-frame" src="https://gamefields-studio.ryhfs90.chatgpt.site/?v=59" title="Gamefields Studio — edytuj swoje boisko" allow="fullscreen; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="gf-builder-fallback">Potrzebujesz osobnej karty? <a href="https://gamefields-studio.ryhfs90.chatgpt.site/" target="_blank" rel="noopener">Otwórz Gamefields Studio</a></p></main>
+<script>
+(()=>{const incoming=new URLSearchParams(location.search),frame=document.getElementById('studio');if(!frame)return;const url=new URL(frame.src);let changed=false;for(const key of ['arena','sport','pattern','variant','palette','shadow','view']){const value=incoming.get(key);if(value&&value.length<150){url.searchParams.set(key,value);changed=true}}if(changed)frame.src=url.toString()})();
+</script>
+<!-- /wp:html -->
