@@ -11,7 +11,7 @@ W tej kontynuacji pracowały równolegle cztery role wykonawcze: agent prowadzą
 | S1: narzędzia, czytelność i nawigacja | PARTIAL | Cztery narzędzia, Nawierzchnia, klawiatura, fokus i testy reflow istnieją. Nie oznacza to pełnego badania wszystkich 12 odpowiedzialności ani certyfikacji. |
 | S2-01: semantyka wymiarów | PARTIAL | Wspólny adapter ośmiu modeli: zapisane wymiary, nawierzchnia i obrys konstrukcji rozdzielone. Pole gry, rozstaw modułów i strefy bezpieczeństwa wymagają potwierdzonych danych technicznych. |
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
-| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Istnieją testy scen, kamer i materiałów; w tym etapie renderer niezmieniony. Brak zatwierdzonego budżetu pomiarowego startu/aktualizacji renderera. |
+| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Istnieją testy scen, kamer i materiałów. Przygotowano lokalnego kandydata synchronizacji tekstur i scenariusz pomiarowy; build przerwany ENOSPC. Brak ukończonych pomiarów i zatwierdzonego budżetu. Publiczne Studio pozostaje v80. |
 | S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
 | S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje i eksportuje ilości z rewizjami. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
@@ -57,7 +57,7 @@ Prace prowadzono z ekspertami kontraktu/mapowania i UX/akceptacji; testy domenow
 
 ## Kolejność dalszej pracy
 
-1. **S2-04/S6 — następny etap pomiarowy:** zdefiniować stałe sceny ośmiu modeli, rozmiary ekranu, profil przeglądarki/cache i operacje. Zmierzyć start oraz aktualizację renderera, w tym złożone grafiki, i dopiero na wynikach ustalić budżet oraz optymalizację. Nie deklarować uniwersalnego FPS ani testu fizycznego urządzenia.
+1. **S2-04/S6 — w toku, zależność środowiskowa:** zwolnić co najmniej1GB miejsca na dysku. Następnie ukończyć build, sprawdzić scenariusz pomiarowy, wykonać pełne pomiary i regresje oraz opublikować zweryfikowanego kandydata. Sceny ośmiu modeli i sześć operacji są przygotowane lokalnie. Budżet i dalszą optymalizację ustalić dopiero na wynikach. Nie deklarować uniwersalnego FPS ani testu fizycznego urządzenia.
 2. **Powiązanie konfiguracji:** określić jawny kontrakt między stanem OS a Project Studio i rewizją geometrii. Ta sama rodzina/nazwa nie oznacza identycznej konfiguracji. Nie dopisywać niezależnych ilości inspektora do aktywnego technicalBill.
 3. **Dane wykonawcze:** potwierdzić docelowe rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po potwierdzeniu oraz wiązaniu instancji rozszerzyć techniczny BOM; do tego czasu rows=null i UNCONFIRMED.
 4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport i warunki podatkowe/ofertowe; wycena powiązana z tą samą konfiguracją. Odrębnie głębsza kontrola rastrów, fizyczne urządzenia, czytnik ekranu i badania z klientami. Aktywne orientacyjne ceny konstrukcji zachowane.
@@ -106,3 +106,16 @@ PASS: TypeScript/build/test:studio,594 konfiguracje konstrukcji+25 części, wal
 Ręczny test zbudowanego Workera: fałszywe bom999999 pominięte, wynik28 instancji, eksport manufacturingReady=false. Aktywny Project dokładnie niezmieniony po inspekcji/pobraniu/czyszczeniu/błędzie; wynik po odświeżeniu nie jest zachowywany.375px bez przepełnienia, tabela325px/tekst16px, przycisk46px. Bez deklaracji fizycznego urządzenia lub zatwierdzenia wykonawczego.
 
 Kontrakt: [OWNED_CONFIGURATION_INSPECTOR](../../../integrations/studio/canvas-editor/docs/OWNED_CONFIGURATION_INSPECTOR.md). Nie zmieniono R02, stawek, SQL ani silnika aktywnego OS; nie wysyłano formularzy. Na potrzeby paczki usunięto jedynie odtwarzalne archiwa już opublikowanych wydań78/79, zachowując źródła i raporty.
+
+
+## Kontynuacja S2-04/S6 — przygotowanie pomiarów, 22.10.2026
+
+**PARTIAL — kod lokalny, nieopublikowany.** Prowadzący pracował z dwoma ekspertami: scenariusza pomiarowego oraz niezależnego przeglądu renderera. Przygotowano `tests/renderer-baseline.mjs`: 8 modeli ×2 szerokości375/1440 ×5 powtórzeń ×6 operacji, łącznie480 planowanych próbek. Operacje: start w nowym kontekście, druga nawigacja w tym samym kontekście, kolor paneli, tekst paneli, import projektu z SVG500 ścieżek oraz ponowne rysowanie z cache. W1 wymaga jawnego historycznego szkicu, nie stanowi nowej pozycji oferty.
+
+Punkt końcowy to wydanie ostatniego draw dla aktualnej generacji po oczekiwaniu na jej tekstury, nie prezentacja GPU ani FPS. Profil: lokalny zbudowany Worker, Chromium/SwiftShader, DPR1; cache przeglądarki i cache systemu rozróżnione. Przygotowany skrypt nie jest dowodem wykonania pomiarów.
+
+Ekspert wykrył wyścig: kolejne wywołanie tej samej tekstury mogło pominąć jeszcze trwające dekodowanie. Kandydat współdzieli obietnicę dekodowania/uploadu i generowania grafiki panelu; anulowana generacja nie zgłasza zakończenia. Niezależny ponowny przegląd nie znalazł kolejnego blokera tej synchronizacji. Dedykowane testy współbieżności, błędu/retry, nadpisania, clear/reload i dispose przeszły. To nie zastępuje pełnej regresji przeglądarkowej.
+
+**Blokada środowiska:** kompilacja zakończyła się ENOSPC przy kopiowaniu publicznego zasobu; odczyt wykazał28MB wolnego miejsca. Późniejsza próba TypeScript z zapisem tsbuildinfo także zatrzymała się ENOSPC. Nie uzyskano pełnych wyników baseline ani nowego kompletu bramek publikacji. Nie deklarujemy poprawy czasu ani gotowego budżetu wydajności. Publiczne Studio nadal v80; bieżący kandydat nie został wdrożony. Dalsza próba usunięcia niepełnego dist nie została wykonana, ponieważ automatyczna kontrola zatwierdzenia nie mogła otworzyć pliku blokady z powodu ENOSPC; nie była to ocena polecenia jako niebezpiecznego.
+
+Następny krok po zwolnieniu min.1GB: hashe wejść pomiaru, build, smoke scenariusza, pełne480 próbek, analiza median/maksimów, regresje mobile/materials/cameras/JSON/Radar, budżet oparty na wynikach i publikacja. Powiązanie OS–Project pozostaje kolejnym etapem, a techniczny BOM nadal rows=null.
