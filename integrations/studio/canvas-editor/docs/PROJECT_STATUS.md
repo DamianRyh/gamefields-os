@@ -157,3 +157,9 @@ Continue existing Product Intelligence plan with geometry, UX and progress agent
 ## Odzyskiwanie i warianty — 22.10.2026
 
 S3-01/S3-03 wykonane w zakresie lokalnym: kopia przed zastąpieniem, ochrona uszkodzonego szkicu i błędów pamięci, sześć pełnych wariantów, porównanie dwóch planów/parametrów, przywrócenie i Cofnij, kontrola rewizji. Testy domenowe, TypeScript, build i pełny mobile PASS. Szczegóły w PROJECT_RECOVERY_VARIANTS.md. Rejestr 42 plików live/R02 zweryfikowany osobno; kandydaci R02 nadal nieprzeznaczeni do publikacji. Nie zmieniono modeli ani stawek.
+
+## Rejestr / eksport konfiguracji — 22.10.2026
+
+56 cyfrowych artykułów zweryfikowanych po SHA źródła; adapter odrzuca rodziny mieszane, podmianę źródła/rewizji/skali i duplikaty instancji. Podsumowanie eksportuje pełny projekt z deterministycznym SHA256, rewizją modelu/katalogu i ilością nawierzchni. Brak technicznych instancji pozostaje rows=null, swobodne obiekty nie są artykułami. Bez zatwierdzenia produkcyjnego i bez podmiany R02. Szczegóły: COMPONENT_SPECIFICATION.md.
+
+Bramki etapu rejestru/eksportu: TypeScript/build/test:studio/quote/construction-pricing/mobile PASS. Rzeczywisty download specyfikacji potwierdzony; SHA zgodny z niezależnym odtworzeniem. 375px bez przepełnienia, przycisk50px/tekst16px.

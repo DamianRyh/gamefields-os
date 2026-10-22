@@ -9,6 +9,7 @@ import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profi
 import {getPatternFamily,getPatternPalette,patternPalettes,signaturePresets,variants} from "@/lib/pattern-library";
 import type {useProjectRecovery} from "@/hooks/use-project-recovery";
 import {ProjectVariants} from "@/components/project-variants";
+import {ProjectSpecification} from "@/components/project-specification";
 import {ProjectDimensions} from "@/components/project-dimensions";
 import {courtDimensions} from "@/lib/court-geometry";
 import {surfaceLabel} from "@/lib/surface-materials";
@@ -167,6 +168,6 @@ export function StudioWorkspace(props:Props){
    {summarySection("Nawierzchnia i grafika","surface",[["Materiał",surfaceLabel(p.surface)],["Wzór",`${family.name} · wariant ${p.patternVariant||1}`],["Paleta",getPatternPalette(p.patternPalette).name],["Pole gry",summaryColor(p.base)],["Strefy",summaryColor(p.zone)],["Otoczenie",summaryColor(p.outside)],["Linie",p.lines?summaryColor(p.lineColor):"Wyłączone"]])}
    {p.arenaModel?summarySection("Konstrukcja","construction",[["Kolor paneli",summaryColor(design.panelColor)],["Kolor ramy",summaryColor(design.frameColor)],["Kolor bramek",summaryColor(design.goalColor)],["Wykończenie",({matte:"Matowe",gloss:"Połysk",metal:"Metal lakierowany"})[design.finish]],["Napis na panelach",design.text||"Brak"],["Logo na panelach",design.src?"Dodane":"Brak"],...(design.text||design.src?[["Strona oznaczeń",({both:"Obie strony",inner:"Od wewnątrz",outer:"Na zewnątrz"})[design.side]] as [string,ReactNode]]:[]) ]):null}
    {summarySection("Wyposażenie i miejsce","equipment",[["Elementy projektu",p.objects.length?p.objects.map(o=>o.name).join(", "):"Brak dodatkowych elementów"],["Sceneria poglądowa",location?.name||"Park"]])}
-   <p className="studio-hint">Parametry projektu i bieżącą kalkulację dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}{inquiryState!=="idle"&&inquiryState!=="error"?<p role="status">{inquiryMessage}</p>:null}<button className="studio-primary" disabled={inquiryState==="waiting"} onClick={requestInquiry}>Zapytaj o realizację <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
+   <ProjectSpecification project={p}/><p className="studio-hint">Parametry projektu i bieżącą kalkulację dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}{inquiryState!=="idle"&&inquiryState!=="error"?<p role="status">{inquiryMessage}</p>:null}<button className="studio-primary" disabled={inquiryState==="waiting"} onClick={requestInquiry}>Zapytaj o realizację <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
  </main>;
 }

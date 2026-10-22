@@ -144,3 +144,9 @@ Continue existing Product Intelligence plan with geometry, UX and progress agent
 - DONE (lokalny zakres S3): odzyskanie poprzedniego szkicu, ochrona danych, nazwane warianty max6, porównanie dwóch i przywrócenie z Cofnij. Kontrakt: PROJECT_RECOVERY_VARIANTS.md.
 - Zweryfikowano integralność 42 plików live/R02. Adopcja R02 nadal wymaga rozstrzygnięcia różnic geometrii i danych technicznych.
 - Następnie: zatwierdzony rejestr artykułów/kompatybilności i techniczny BOM; brakujące stawki nawierzchni/montażu/transportu; specyfikacja z rewizją. Synchronizacja w chmurze i porównanie 3D/cen nie są częścią ukończonego lokalnego zakresu.
+
+## Rejestr / eksport konfiguracji — 22.10.2026
+
+- DONE: inwentaryzacja 56 cyfrowych artykułów i izolowany adapter jednej rodziny; źródła/revizje/ilości walidowane.
+- DONE: eksport specyfikacji konfiguracji z pełnym Project i SHA256 w istniejącym Podsumowaniu.
+- PENDING: zatwierdzenie artykułów i połączeń; spięcie instancji OS/Studio w techniczny BOM. Rejestr cyfrowy i lista dostępnych elementów nie stanowią BOM wybranego modelu.

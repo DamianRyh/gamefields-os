@@ -1,6 +1,17 @@
 # Gamefields — realizacja zaleceń po audycie
 
-## Wersja 77 — odzyskiwanie i warianty, 22.10.2026
+
+## Wydanie rejestru i specyfikacji — Studio78
+
+22.10.2026, źródło `dd5856cc2a9b67d54b09ca67bd1580ea2125bf5b`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_f5da9ba168f48191baee4e21cf9f4152`, deployment `appgdep_6ad9a4d7865c8191934cd1af12ee1e6f` — **succeeded**, środowisko revision3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka zgodna ze źródłem, SHA256 `1381653a8a87b566c99a2b0bd0233f09495e020f7f8381eb3427f244ddd52bb8`.
+
+PASS: TypeScript, build, test:studio, component-specification, weryfikacja56 źródeł, quote-engine, construction-pricing i pełne test:mobile (96aren,48Street,16materiałów,JSON,Radar;375/390/430/1440). Rzeczywisty pobrany eksport ma poprawny kod GF-CT-008, powierzchnię29,823379m², pełny projekt i SHA zgodny z niezależnym odtworzeniem. Na375px brak przepełnienia, przycisk50px i tekst16px. Brak testu fizycznego urządzenia i czytnika ekranu. Bez wysyłania formularzy, zmian SQL, podmiany R02 lub stawek.
+
+Kontrakt i ograniczenia: [COMPONENT_SPECIFICATION](../../../../integrations/studio/canvas-editor/docs/COMPONENT_SPECIFICATION.md). Rejestr cyfrowy i gotowy adapter nie oznaczają wdrożonego technicznego BOM. Jego status pozostaje PARTIAL; rows=null w specyfikacji jest celowe.
+
+---
+
+## Historia — wersja 77, odzyskiwanie i warianty, 22.10.2026
 
 Źródło `d770de1a5fcb4e10c77ac80a6ff697d0d3e1b185`. Zapisana wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_cbf02b25e8bc819196b71b437ff67ccd`. Publikacja: `appgdep_6ad99e344664819188ef8ec2e456a076` — **succeeded**, środowisko revision3, [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Na produkcji potwierdzono sekcje odzyskiwania i pustej biblioteki wariantów oraz działającą kalkulację Panna Octa. Nie dodawano testowych wariantów do magazynu produkcyjnego.
 
@@ -150,4 +161,5 @@ PASS: TypeScript, produkcyjny build, test:studio (300wzorów/19palet), studio-us
 ![Wysłany jeden test formularza](06-form-test-sent.png)
 
 Podejście do odraczania ciężkiego osadzenia: [Google Chrome — third-party facades](https://developer.chrome.com/docs/lighthouse/performance/third-party-facades). Czcionka i licencja: [oficjalne repozytorium Google Fonts](https://github.com/google/fonts/tree/main/ofl/spacegrotesk).
+
 

@@ -146,3 +146,7 @@ Continue existing Product Intelligence plan with geometry, UX and progress agent
 ## Odzyskiwanie i warianty — 22.10.2026
 
 Pliki projektu zawierają ochronę uszkodzonego szkicu, poprzednią kopię i do sześciu pełnych nazwanych wariantów z porównaniem dwóch planów 2D. Przywrócenie podlega Cofnij i sprawdza rewizję modelu. Dane pozostają w przeglądarce; JSON jest niezależną kopią. Kontrakt i ograniczenia: [PROJECT_RECOVERY_VARIANTS](docs/PROJECT_RECOVERY_VARIANTS.md).
+
+## Specyfikacja i cyfrowe artykuły — 22.10.2026
+
+Podsumowanie eksportuje pełną konfigurację z SHA256 i rewizją modelu. Rejestr 56 cyfrowych elementów i adapter jednej rodziny przygotowują dalszą integrację BOM. Połączenia i artykuły wykonawcze pozostają niezatwierdzone. Kontrakt: [COMPONENT_SPECIFICATION](docs/COMPONENT_SPECIFICATION.md).

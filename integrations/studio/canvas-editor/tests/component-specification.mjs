@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {componentRegistry,componentBill,modelFamilies} from '../lib/component-registry.mjs';
+import {projectSpecification,canonicalConfiguration} from '../lib/project-specification.ts';
+const articles=componentRegistry.articles;
+assert.equal(componentRegistry.revision,createHash('sha256').update(canonicalConfiguration(articles)).digest('hex'));
+assert.equal(articles.length,56);assert.equal(new Set(articles.map(a=>a.articleId)).size,56);
+for(const a of articles){assert.match(a.sourceRevision,/^[a-f0-9]{64}$/);assert.equal(a.approval,'UNCONFIRMED');assert.equal(a.connectionApproval,'UNCONFIRMED');assert.equal(a.unit,'pcs');assert(!a.source.includes('gamefields-internal'));}
+const a=articles.find(a=>a.family==='F06'),b=articles.find(a=>a.family==='F05');
+const instance=(a,id)=>({id,articleId:a.articleId,revision:a.revision,sourceRevision:a.sourceRevision});
+const input={schema:'GF-DIGITAL-ASSEMBLY-1',family:'F06',instances:[instance(a,'a'),instance(a,'b')]};
+const before=JSON.stringify(input),bill=componentBill(input);assert.equal(bill.rows[0].quantity,2);assert.equal(bill.rows[0].sourceRevision,a.sourceRevision);assert.equal(bill.manufacturingReady,false);assert.equal(JSON.stringify(input),before);
+for(const bad of [{...input,instances:[instance(b,'x')]},{...input,instances:[{...instance(a,'x'),scale:[2,2,2]}]},{...input,instances:[{...instance(a,'x'),url:'https://evil.invalid'}]},{...input,url:'https://evil.invalid'},{...input,instances:[{...instance(a,'x'),articleId:'Bench'}]},{...input,instances:[{...instance(a,'x'),sourceRevision:'old'}]},{...input,instances:[instance(a,'x'),instance(a,'x')]}])assert.throws(()=>componentBill(bad));
+const project={id:'GF-spec',name:'Moja nazwa',arenaModel:'octagon',length:4.962,width:4.962,sport:'Piłka nożna 1×1',surface:'EPDM',base:'#123456',zone:'#234567',outside:'#345678',lineColor:'#ffffff',lines:false,pattern:'Organic Flow',graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:'day',objects:[{id:'a',kind:'equipment',name:a.articleId,x:0,y:0,scale:100,rotation:0,opacity:100,color:'#123456',target:'court'},{id:'b',kind:'image',name:'Logo',src:'data:image/png;base64,aGVsbG8=',x:0,y:0,scale:100,rotation:0,opacity:100,color:'#123456',target:'court'}]};
+const spec=await projectSpecification(project);assert.equal(spec.product.family,'F07');assert.equal(spec.product.code,'GF-CT-008');assert.equal(spec.quantities.surfaceAreaM2,29.823379);assert.equal(spec.technicalBill.rows,null);assert.equal(spec.technicalBill.manufacturingReady,false);assert.equal(spec.freeObjects[0].technicalArticleId,null,'A matching free-object name never becomes a technical article');assert.equal(spec.project.objects[1].src,project.objects[1].src);assert.equal(spec.project.name,project.name);assert.equal(spec.configurationRevision,createHash('sha256').update(canonicalConfiguration(spec.project)).digest('hex'));
+const reordered=Object.fromEntries(Object.entries(project).reverse());assert.equal((await projectSpecification(reordered)).configurationRevision,spec.configurationRevision);assert.notEqual((await projectSpecification({...project,base:'#112233'})).configurationRevision,spec.configurationRevision);assert.equal((await projectSpecification({...project,arenaModel:undefined})).product.family,null);
+assert.equal(spec.pricing.status,'NOT_INCLUDED');assert.equal(spec.quantities.modulePitch,null);assert.equal(spec.quantities.clearance,null);
+console.log('PASS: 56 unique digital articles; single-family/revision/source/scale guards; deterministic configuration SHA; full artwork; free-object boundary; unknown technical BOM and prices preserved.');

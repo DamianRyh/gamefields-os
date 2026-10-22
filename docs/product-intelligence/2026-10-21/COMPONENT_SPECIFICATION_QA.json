@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-22",
+  "version": 78,
+  "sourceCommit": "dd5856cc2a9b67d54b09ca67bd1580ea2125bf5b",
+  "deployment": "appgdep_6ad9a4d7865c8191934cd1af12ee1e6f",
+  "status": "succeeded",
+  "envSetRevision": 3,
+  "verifiedComponentSourceHashes": 56,
+  "tests": [
+    "typescript",
+    "build",
+    "studio-scope",
+    "component-specification",
+    "quote-engine",
+    "construction-pricing",
+    "studio-mobile-goals"
+  ],
+  "manual": {
+    "browserDownload": true,
+    "independentShaMatch": true,
+    "width375": 375,
+    "buttonHeight": 50,
+    "fontSize": 16
+  },
+  "technicalBillReady": false,
+  "candidateModelsDeployed": false,
+  "priceChanges": false
+}
