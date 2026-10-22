@@ -11,7 +11,7 @@ W tej kontynuacji pracowały równolegle cztery role wykonawcze: agent prowadzą
 | S1: narzędzia, czytelność i nawigacja | PARTIAL | Cztery narzędzia, Nawierzchnia, klawiatura, fokus i testy reflow istnieją. Nie oznacza to pełnego badania wszystkich 12 odpowiedzialności ani certyfikacji. |
 | S2-01: semantyka wymiarów | PARTIAL | Wspólny adapter ośmiu modeli: zapisane wymiary, nawierzchnia i obrys konstrukcji rozdzielone. Pole gry, rozstaw modułów i strefy bezpieczeństwa wymagają potwierdzonych danych technicznych. |
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
-| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Istnieją testy scen, kamer i materiałów. Przygotowano lokalnego kandydata synchronizacji tekstur i scenariusz pomiarowy; build przerwany ENOSPC. Brak ukończonych pomiarów i zatwierdzonego budżetu. Publiczne Studio pozostaje v80. |
+| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio81: poprawka synchronizacji tekstur i pełna lokalna baza480próbek. Sceny, kamery i materiały przeszły regresje. Profilowanie/porównanie kolejnej optymalizacji i liczbowy budżet pozostają do wykonania. |
 | S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
 | S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje i eksportuje ilości z rewizjami. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
@@ -57,7 +57,7 @@ Prace prowadzono z ekspertami kontraktu/mapowania i UX/akceptacji; testy domenow
 
 ## Kolejność dalszej pracy
 
-1. **S2-04/S6 — w toku, zależność środowiskowa:** zwolnić co najmniej1GB miejsca na dysku. Następnie ukończyć build, sprawdzić scenariusz pomiarowy, wykonać pełne pomiary i regresje oraz opublikować zweryfikowanego kandydata. Sceny ośmiu modeli i sześć operacji są przygotowane lokalnie. Budżet i dalszą optymalizację ustalić dopiero na wynikach. Nie deklarować uniwersalnego FPS ani testu fizycznego urządzenia.
+1. **S2-04/S6 — kontynuacja po pierwszej bazie:** profilować generowanie/dekodowanie/upload/draw grafik paneli, zwłaszcza Circle Cage2; zebrać rozrzut porównywalnych serii i dopiero ustalić budżet liczbowy. Pierwsza pełna baza480próbek i poprawka synchronizacji opublikowane w Studio81. Każdy kolejny kandydat wymaga tego samego scenariusza i kontroli obrazu. Nie deklarować uniwersalnego FPS ani testu fizycznego urządzenia.
 2. **Powiązanie konfiguracji:** określić jawny kontrakt między stanem OS a Project Studio i rewizją geometrii. Ta sama rodzina/nazwa nie oznacza identycznej konfiguracji. Nie dopisywać niezależnych ilości inspektora do aktywnego technicalBill.
 3. **Dane wykonawcze:** potwierdzić docelowe rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po potwierdzeniu oraz wiązaniu instancji rozszerzyć techniczny BOM; do tego czasu rows=null i UNCONFIRMED.
 4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport i warunki podatkowe/ofertowe; wycena powiązana z tą samą konfiguracją. Odrębnie głębsza kontrola rastrów, fizyczne urządzenia, czytnik ekranu i badania z klientami. Aktywne orientacyjne ceny konstrukcji zachowane.
@@ -108,7 +108,9 @@ Ręczny test zbudowanego Workera: fałszywe bom999999 pominięte, wynik28 instan
 Kontrakt: [OWNED_CONFIGURATION_INSPECTOR](../../../integrations/studio/canvas-editor/docs/OWNED_CONFIGURATION_INSPECTOR.md). Nie zmieniono R02, stawek, SQL ani silnika aktywnego OS; nie wysyłano formularzy. Na potrzeby paczki usunięto jedynie odtwarzalne archiwa już opublikowanych wydań78/79, zachowując źródła i raporty.
 
 
-## Kontynuacja S2-04/S6 — przygotowanie pomiarów, 22.10.2026
+## Historia — przygotowanie pomiarów i usunięta blokada ENOSPC, 22.10.2026
+
+Poniższy zapis opisuje wcześniejszą próbę. Aktualny stan: pełne pomiary i bramki ukończone; Studio81 opublikowane, szczegóły niżej.
 
 **PARTIAL — kod lokalny, nieopublikowany.** Prowadzący pracował z dwoma ekspertami: scenariusza pomiarowego oraz niezależnego przeglądu renderera. Przygotowano `tests/renderer-baseline.mjs`: 8 modeli ×2 szerokości375/1440 ×5 powtórzeń ×6 operacji, łącznie480 planowanych próbek. Operacje: start w nowym kontekście, druga nawigacja w tym samym kontekście, kolor paneli, tekst paneli, import projektu z SVG500 ścieżek oraz ponowne rysowanie z cache. W1 wymaga jawnego historycznego szkicu, nie stanowi nowej pozycji oferty.
 
@@ -119,3 +121,36 @@ Ekspert wykrył wyścig: kolejne wywołanie tej samej tekstury mogło pominąć 
 **Blokada środowiska:** kompilacja zakończyła się ENOSPC przy kopiowaniu publicznego zasobu; odczyt wykazał28MB wolnego miejsca. Późniejsza próba TypeScript z zapisem tsbuildinfo także zatrzymała się ENOSPC. Nie uzyskano pełnych wyników baseline ani nowego kompletu bramek publikacji. Nie deklarujemy poprawy czasu ani gotowego budżetu wydajności. Publiczne Studio nadal v80; bieżący kandydat nie został wdrożony. Dalsza próba usunięcia niepełnego dist nie została wykonana, ponieważ automatyczna kontrola zatwierdzenia nie mogła otworzyć pliku blokady z powodu ENOSPC; nie była to ocena polecenia jako niebezpiecznego.
 
 Następny krok po zwolnieniu min.1GB: hashe wejść pomiaru, build, smoke scenariusza, pełne480 próbek, analiza median/maksimów, regresje mobile/materials/cameras/JSON/Radar, budżet oparty na wynikach i publikacja. Powiązanie OS–Project pozostaje kolejnym etapem, a techniczny BOM nadal rows=null.
+
+
+## S2-04/S6 — pierwsza baza pomiarowa renderera, 22.10.2026
+
+**DONE — scenariusz i pierwsza lokalna baza. PARTIAL — cały etap wydajności/budżetu.** Po zwolnieniu miejsca build i pomiary zostały ukończone. Pełna macierz8modeli ×2szerokości375/1440 ×5powtórzeń ×6operacji: **480próbek,96komórek,0błędów**. Niezależny ekspert odtworzył wszystkie mediany/maksima oraz sprawdził hashe wejść i geometrii.
+
+| Operacja | Zakres median [ms] | Maksimum próbek [ms] |
+|---|---:|---:|
+| startup-fresh-context | 303.7–818.8 | 4225.4 |
+| startup-same-context-navigation | 320.3–924.4 | 1035.5 |
+| panel-colour | 3.2–51.0 | 106.9 |
+| panel-text | 187.1–2208.6 | 2218.8 |
+| complex-project-import | 37.6–78.7 | 110.1 |
+| complex-scene-cached-redraw | 197.0–2027.0 | 2269.3 |
+
+Mierzono finalne wydanie draw aktualnej generacji po oczekiwaniu na jej tekstury, nie prezentację GPU ani FPS. Lokalne środowisko AppleM1/Darwin23.4.0, Node24.19.0, Chromium149.0.7827.55, SwiftShader, DPR1. Nowy kontekst nie oznacza zimnego cache systemu; druga nawigacja nie gwarantuje pełnego trafienia cache i nie zawsze była szybsza. W1 używa jawnego historycznego szkicu; pozostałe modele publicznego parametru arena.
+
+Złożony import obejmuje walidację JSON, backup recovery i renderowanie SVG500statycznych ścieżek. Późniejsze cached-redraw jest osobną operacją. Najwolniejsza mediana tekstu paneli2208,6ms: Circle Cage2/1440. Generowanie/dekodowanie/upload/draw grafik paneli to pierwszy obszar do profilowania; sam test nie rozdziela ich kosztów. Zachowano pojedynczy start4225,4ms. Brak porównywalnego pomiaru v80, więc nie deklarujemy przyspieszenia przed/po.
+
+Poprawka współdzieli Promise dekodowania/uploadu i leniwego generowania paneli; aktualna generacja prawidłowo oczekuje pracy, anulowana nie publikuje zakończenia. Testy pokrywają współbieżność, nadpisanie, clear/reload, błąd/retry i dispose. To poprawka synchronizacji, nie zmiana modeli czy stawek.
+
+Zasady dalszego porównania: pięć surowych próbek każdej komórki, mediana, różnica ms/% i maksimum obu serii. Bez p95 przy n=5. Zmieniony sprzęt/runtime/fixture/DPR/cache wymaga nowej bazy. Wzrost wymaga naprzemiennego ponowienia bazowej i nowej serii; pojedynczy max nie stanowi SLA. Budżet liczbowy pozostaje PENDING do pomiaru rozrzutu między seriami i uzgodnienia celów produktu/urządzeń.
+
+[Metoda i wyniki](../../../integrations/studio/canvas-editor/docs/RENDERER_BASELINE.md), [surowe480próbek i hashe](../../../integrations/studio/canvas-editor/docs/renderer-baseline-2026-10-22.json). Nie przeprowadzono testu fizycznego telefonu ani prezentacji GPU.
+
+
+## Wydanie pomiarów i synchronizacji tekstur — Studio81
+
+22.10.2026: źródło `e1e6666b96e006c72ab4ebc0e0a953d36214fabf`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_c7ff626b281481918336f9feeb61301d`, deployment `appgdep_6ad9f5cc257c81919909cfa4e060c6f2` — **succeeded**, środowisko revision3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka `sha256:120efbb0bf9f646c765b4c12feb17f3e5537bf9a380267e500d091b2d5574613`.
+
+PASS: TypeScript/build/test:studio, renderer-texture-jobs, quote-engine/construction-pricing, pełne test:mobile (96aren/48Street/16materiałów,JSON,Radar;375/390/430/1440) i Surface7viewport. Pełne480próbek lokalnego renderera/96komórek/0błędów; niezależna kontrola hashów, median i maksimów PASS. Poprawiono oczekiwanie na współdzielone dekodowanie/upload tekstur. Brak deklaracji porównawczego przyspieszenia v80→v81, FPS, prezentacji GPU lub testu fizycznego telefonu. Budżet liczbowy i profilowanie paneli nadal PENDING.
+
+Kompilacja i testy ukończone po zwolnieniu miejsca; wcześniejsza blokada ENOSPC jest historyczna. Modele, cennik i SQL niezmienione; nie wysłano formularzy.

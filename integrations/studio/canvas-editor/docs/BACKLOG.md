@@ -163,3 +163,7 @@ Continue existing Product Intelligence plan with geometry, UX and progress agent
 - DONE — cyfrowy zakres: niezależny import natywnej koperty OS, ścisły config, ponowne wygenerowanie instancji, mapowanie artykułów i eksport z rewizjami. Brak zaufania do wejściowego bom.
 - NEXT: odtwarzalny scenariusz i pomiary renderera przed budżetem/zmianami wydajności.
 - PENDING: jawne związanie konfiguracji OS z Project Studio i zatwierdzone dane połączeń/artykułów przed technicznym BOM oraz pełną wyceną. Nie przypisywać wyników po nazwie/rodzinie.
+
+## Renderer — 22.10.2026
+
+Ukończono pierwszą lokalną bazę480próbek dla8modeli/2szerokości/6operacji/5powtórzeń. Współdzielone dekodowanie tekstur jest prawidłowo oczekiwane przez aktualną generację. Szczegóły, surowe dane, hashe, ograniczenia i kolejność optymalizacji: docs/RENDERER_BASELINE.md. Nie deklarujemy przyspieszenia względemv80 ani budżetu SLA. Następnie: panelowe grafiki Circle Cage2, porównywalny kandydat i pomiar rozrzutu; niezależnie jawne powiązanie OS–Project przed technicznym BOM.

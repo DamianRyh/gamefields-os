@@ -171,3 +171,7 @@ Wdrożono wspólny ograniczony profil statycznego SVG w upload i projectSchema; 
 ## Inspektor OS — 22.10.2026
 
 Oddzielny inspektor w Plikach odtwarza cyfrowe ilości z konfiguracji OS przez istniejący przypięty silnik.594konstrukcje+25części i negatywne przypadki PASS;25hashy runtime zweryfikowanych. UI/export sprawdzone ręcznie; pełny Project pozostał identyczny po poprawnych i błędnych działaniach. Brak powiązania z technicznym BOM Studio jest celowy; manufacturingReady=false. TypeScript/build/studio/quote/construction-pricing i pełne mobile PASS po rozróżnieniu selektorów inputów. Surface7viewport również PASS. Szczegóły: OWNED_CONFIGURATION_INSPECTOR.md.
+
+## Renderer — 22.10.2026
+
+Ukończono pierwszą lokalną bazę480próbek dla8modeli/2szerokości/6operacji/5powtórzeń. Współdzielone dekodowanie tekstur jest prawidłowo oczekiwane przez aktualną generację. Szczegóły, surowe dane, hashe, ograniczenia i kolejność optymalizacji: docs/RENDERER_BASELINE.md. Nie deklarujemy przyspieszenia względemv80 ani budżetu SLA. Następnie: panelowe grafiki Circle Cage2, porównywalny kandydat i pomiar rozrzutu; niezależnie jawne powiązanie OS–Project przed technicznym BOM.

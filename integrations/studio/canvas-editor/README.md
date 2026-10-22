@@ -158,3 +158,7 @@ Wspólny profil statycznego SVG chroni upload, import i odczyt projektów. Popra
 ## Inspektor OS — 22.10.2026
 
 Pliki projektu zawierają niezależną kontrolę konfiguracji Systemu modułowego. Ilości są odtwarzane z config, załączone bom pomijane, wynik ma przypięte rewizje i osobny eksport. Projekt Studio i jego cena pozostają niezależne. Kontrakt: [OWNED_CONFIGURATION_INSPECTOR](docs/OWNED_CONFIGURATION_INSPECTOR.md).
+
+## Renderer — 22.10.2026
+
+Ukończono pierwszą lokalną bazę480próbek dla8modeli/2szerokości/6operacji/5powtórzeń. Współdzielone dekodowanie tekstur jest prawidłowo oczekiwane przez aktualną generację. Szczegóły, surowe dane, hashe, ograniczenia i kolejność optymalizacji: docs/RENDERER_BASELINE.md. Nie deklarujemy przyspieszenia względemv80 ani budżetu SLA. Następnie: panelowe grafiki Circle Cage2, porównywalny kandydat i pomiar rozrzutu; niezależnie jawne powiązanie OS–Project przed technicznym BOM.
