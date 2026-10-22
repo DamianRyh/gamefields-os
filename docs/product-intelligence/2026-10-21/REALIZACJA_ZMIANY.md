@@ -1,8 +1,10 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 22.10.2026
 
+Aktualny etap: **Studio 82 opublikowane** — współdzielenie grafik paneli i porównanie wyników; zakres i kolejność dalszych prac opisano poniżej.
+
 Dokument właściciela jest planem rozwoju istniejącego Studio. Nie zastępuje bieżących decyzji właściciela ani nie oznacza startu nowej aplikacji. Kończy się w połowie pozycji „Testy regres” w Sprincie6; brakującej części nie odtworzono z domysłów.
 
-W tej kontynuacji pracowały równolegle cztery role wykonawcze: agent prowadzący wdrożenie, agent geometrii i źródeł, agent UX wymiarowania oraz agent stanu planu. Wyniki weryfikowano w bieżącym kodzie; nie traktowano rekomendacji jako gotowej funkcji.
+We wcześniejszym etapie pracowały równolegle cztery role wykonawcze: agent prowadzący wdrożenie, agent geometrii i źródeł, agent UX wymiarowania oraz agent stanu planu. Wyniki weryfikowano w bieżącym kodzie; nie traktowano rekomendacji jako gotowej funkcji.
 
 | Obszar planu | Status | Co potwierdzono / czego brakuje |
 |---|---|---|
@@ -11,7 +13,7 @@ W tej kontynuacji pracowały równolegle cztery role wykonawcze: agent prowadzą
 | S1: narzędzia, czytelność i nawigacja | PARTIAL | Cztery narzędzia, Nawierzchnia, klawiatura, fokus i testy reflow istnieją. Nie oznacza to pełnego badania wszystkich 12 odpowiedzialności ani certyfikacji. |
 | S2-01: semantyka wymiarów | PARTIAL | Wspólny adapter ośmiu modeli: zapisane wymiary, nawierzchnia i obrys konstrukcji rozdzielone. Pole gry, rozstaw modułów i strefy bezpieczeństwa wymagają potwierdzonych danych technicznych. |
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
-| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio81: poprawka synchronizacji tekstur i pełna lokalna baza480próbek. Sceny, kamery i materiały przeszły regresje. Profilowanie/porównanie kolejnej optymalizacji i liczbowy budżet pozostają do wykonania. |
+| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio 82: profil paneli i współdzielenie PNG, porównanie 480+480 próbek oraz 48 identycznych obrazów trzech kamer. Pozostały koszt upload/draw i budżet czasowy nadal do wykonania. |
 | S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
 | S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje i eksportuje ilości z rewizjami. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
@@ -57,10 +59,11 @@ Prace prowadzono z ekspertami kontraktu/mapowania i UX/akceptacji; testy domenow
 
 ## Kolejność dalszej pracy
 
-1. **S2-04/S6 — kontynuacja po pierwszej bazie:** profilować generowanie/dekodowanie/upload/draw grafik paneli, zwłaszcza Circle Cage2; zebrać rozrzut porównywalnych serii i dopiero ustalić budżet liczbowy. Pierwsza pełna baza480próbek i poprawka synchronizacji opublikowane w Studio81. Każdy kolejny kandydat wymaga tego samego scenariusza i kontroli obrazu. Nie deklarować uniwersalnego FPS ani testu fizycznego urządzenia.
-2. **Powiązanie konfiguracji:** określić jawny kontrakt między stanem OS a Project Studio i rewizją geometrii. Ta sama rodzina/nazwa nie oznacza identycznej konfiguracji. Nie dopisywać niezależnych ilości inspektora do aktywnego technicalBill.
-3. **Dane wykonawcze:** potwierdzić docelowe rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po potwierdzeniu oraz wiązaniu instancji rozszerzyć techniczny BOM; do tego czasu rows=null i UNCONFIRMED.
-4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport i warunki podatkowe/ofertowe; wycena powiązana z tą samą konfiguracją. Odrębnie głębsza kontrola rastrów, fizyczne urządzenia, czytnik ekranu i badania z klientami. Aktywne orientacyjne ceny konstrukcji zachowane.
+1. **Pozostały koszt paneli:** osobno profilować dekodowanie, upload i draw, zachowując kontrolę anulowania oraz identyczny obraz. Porównywać na tej samej macierzy; zebrać rozrzut serii przed budżetem czasowym. Współdzielenie PNG oraz budżet liczby kodowań są już wykonane.
+2. **Strony paneli Circle Cage:** ustalić jawne mapowanie inner/outer/both na rzeczywiste strony meshów i dodać przypadki akceptacyjne. Nie uznawać identycznych obrazów side=both za test wszystkich stron.
+3. **Powiązanie OS–Project:** jawny kontrakt konfiguracji i rewizji geometrii. Ta sama rodzina/nazwa nie oznacza identycznego boiska. Nie dopisywać niezależnych ilości inspektora do aktywnego technicalBill.
+4. **Dane wykonawcze:** potwierdzić rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po potwierdzeniu oraz wiązaniu instancji rozszerzyć techniczny BOM; obecnie rows=null i UNCONFIRMED.
+5. **Dane komercyjne i badania:** nawierzchnia, montaż, transport i warunki podatkowe; wycena tej samej konfiguracji. Osobno kontrola rastrów, fizyczne urządzenia, czytnik ekranu i badania z klientami. Orientacyjne ceny konstrukcji pozostają aktywne.
 
 Pozostałe zależności WordPress: instalacja i osobista aktywacja WPCode przez właściciela, potwierdzone fakty prywatności, odbiór wcześniejszego pojedynczego testu poczty. Nie wysyłać kolejnych testów bez nowej instrukcji.
 
@@ -154,3 +157,36 @@ Zasady dalszego porównania: pięć surowych próbek każdej komórki, mediana, 
 PASS: TypeScript/build/test:studio, renderer-texture-jobs, quote-engine/construction-pricing, pełne test:mobile (96aren/48Street/16materiałów,JSON,Radar;375/390/430/1440) i Surface7viewport. Pełne480próbek lokalnego renderera/96komórek/0błędów; niezależna kontrola hashów, median i maksimów PASS. Poprawiono oczekiwanie na współdzielone dekodowanie/upload tekstur. Brak deklaracji porównawczego przyspieszenia v80→v81, FPS, prezentacji GPU lub testu fizycznego telefonu. Budżet liczbowy i profilowanie paneli nadal PENDING.
 
 Kompilacja i testy ukończone po zwolnieniu miejsca; wcześniejsza blokada ENOSPC jest historyczna. Modele, cennik i SQL niezmienione; nie wysłano formularzy.
+
+
+## S2-04/S6 — profilowanie i pierwsza optymalizacja paneli
+
+**DONE — ograniczony zakres profilowania, współdzielenia PNG i porównania. PARTIAL — pozostałe koszty renderera oraz budżet czasowy.** Powtórzona baza v81 i kandydat: po **480 próbek / 96 komórek / 0 błędów**; **48/48 końcowych obrazów canvas trzech kamer identycznych**. Hashy kodu aplikacji bazy sprawdzono z opublikowanym źródłem v81; hashe kandydata są zapisane w surowych wynikach. Wcześniejsza pierwsza baza pozostaje historyczna.
+
+| Circle Cage 2 — mediana | Przed [ms] | Po [ms] | Zmiana |
+|---|---:|---:|---:|
+| Tekst paneli / 375 px | 1071,6 | 911,4 | −14,9% |
+| Tekst paneli / 1440 px | 2017,2 | 1812,4 | −10,2% |
+| Złożona scena: zmiana koloru / 375 px | 1026,2 | 748,8 | −27,0% |
+| Złożona scena: zmiana koloru / 1440 px | 1894,0 | 1575,1 | −16,8% |
+
+To obserwacje jednej lokalnej pary serii na M1/Chromium/SwiftShader/DPR1, nie FPS, prezentacja GPU, telefon lub SLA. Wszystkie 16 median panel-text zmalało; przy złożonym przerysowaniu poprawa w 15/16 komórek. Łącznie 55 median zmalało, 37 wzrosło, 4 bez zmiany. P1/375: 533→544,5 ms przy nakładających się zakresach i niższym maksimum. Zachowano także wyższe maksima P1/1440 i Circle Cage 1/1440, wzrost mediany drugiej nawigacji do 59,6 ms oraz importu W1/375 o 16,9 ms. Nie deklarujemy przyspieszenia każdej operacji lub próbki.
+
+Profil z licznikami jest oddzielny od pomiaru czasu. Potwierdził 16→1 kodowań PNG / rysowań tekstu, przy niezmienionych 16 uploadach. Czas wywołania texImage2D nie jest pomiarem GPU; suma nakładających się image.onload nie jest czasem całej operacji. Deterministyczny budżet tej iteracji: najwyżej jedno kodowanie PNG na unikalną recepturę w generacji. Budżet liczbowy czasu pozostaje do ustalenia na podstawie rozrzutu i celów urządzeń.
+
+Cache używa dokładnego rozmiaru, koloru, tekstu i logo; pozostaje lokalny dla generacji, a błąd usuwa wpis do retry. Zachowano dotychczasowy klucz tekstur, anulowanie i mapowanie stron. Test pikseli obejmuje cztery warianty oraz różne szerokości w tej samej pamięci cache. Pierwszy harness wyczerpał pamięć przy przekazywaniu całych geometrii; ograniczono go do potrzebnych paneli {id,group,v}, bez zwiększania heap. Poprawiony test i ponowienie przeszły.
+
+Znany wcześniejszy problem pozostaje jawny: ID paneli Circle Cage 2 nie mają końcówek inner/outer, więc obecny filtr nie mapuje poprawnie wyboru stron. Ta optymalizacja go nie naprawia; kontrola 48 obrazów dotyczy side=both. Osobny kontrakt stron/meshów ma kolejny priorytet.
+
+[Metoda, wyniki i ograniczenia](../../../integrations/studio/canvas-editor/docs/PANEL_ARTWORK_OPTIMIZATION.md), [pełne porównanie](../../../integrations/studio/canvas-editor/docs/panel-artwork-2026-10-22/comparison.json).
+
+
+## Wydanie optymalizacji grafik paneli — Studio 82
+
+22.10.2026: źródło `6bfcc1f5d961e43a6986c4ac1d3d308a4a753c7d`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_a2da575e41c881919ac92b1cf03609c7`, deployment `appgdep_6ad9fc6852fc8191b7c715a7acf0a8ed` — **succeeded**, środowisko revision 3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka `sha256:5e09cdd1077cc0d66579977fbe2c80e406d7f1eef064c699ffc137a96d8022df`.
+
+PASS: TypeScript, build, test:studio, quote-engine/construction-pricing, pełne test:mobile (96 scen aren, 48 Street, 16 zmian materiałów, JSON i Radar; 375/390/430/1440) oraz Surface w 7 rozmiarach widoku. Test 138 paneli / 21 szerokości / 84 dokładnych porównań RGBA, cache i retry PASS. Pracowali prowadzący oraz eksperci scenariusza/testów i niezależnego przeglądu; sprawdzono recepturę, integrację, hashe i wyniki.
+
+Współdzielenie PNG ograniczono do jednej generacji aktualizacji. Circle Cage 2: **16→1 kodowań PNG**, ale nadal 16 uploadów oraz osobne tekstury GPU. Bez zmian geometrii, źródeł modeli, cennika, SQL i Project JSON; nie wysyłano formularzy.
+
+Publiczny odczyt po publikacji: zachowany szkic Panna Octa, cena częściowa 15 300 zł, model octagon data-ready=true, żądanie i zakończenie generacji zgodne (1/1). Nie wstawiano grafik QA do projektu użytkownika.

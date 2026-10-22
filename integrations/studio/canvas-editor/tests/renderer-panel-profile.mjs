@@ -1,0 +1,70 @@
+import assert from 'node:assert/strict';
+import {readFile,readdir,mkdir,writeFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {resolve,extname} from 'node:path';
+import {createServer} from 'node:http';
+import {createHash} from 'node:crypto';
+import os from 'node:os';
+import {chromium} from 'playwright';
+import {arenaGeometry} from '../lib/arena-geometry-data.mjs';
+const repeats=3;
+assert.ok(Number.isInteger(repeats)&&repeats>=3,'BENCH_REPEATS must be an integer >=3');
+const allModels=['w1','o1','p1','street15','circle-cage-1','circle-cage-2','street-field','octagon'];
+const models=['circle-cage-2'];
+const widths=[1440];
+assert.ok(models.length&&models.every(m=>allModels.includes(m))&&new Set(models).size===models.length,'BENCH_MODELS must contain unique known IDs');
+assert.ok(widths.length&&widths.every(w=>[375,1440].includes(w))&&new Set(widths).size===widths.length,'BENCH_WIDTHS must contain unique supported widths 375,1440');
+const out=resolve('outputs/renderer-baseline/panel-profile-'+(process.env.PANEL_PROFILE_LABEL||'baseline')+'.json');
+await mkdir(resolve('outputs/renderer-baseline'),{recursive:true});
+const report={schemaVersion:1,startedAt:new Date().toISOString(),status:'running',scope:'Instrumented panel work profiling only; wrappers affect timings; do not compare these timings with uninstrumented baseline. submissionMs is synchronous call duration, imageLoad sums overlapping asynchronous intervals, neither is GPU time.',method:{repeats,models,viewports:widths,height:1000,harnessCachePolicy:'Static dist/client files: Cache-Control public, max-age=3600. Worker HTML/API responses retain their original headers.',cold:'Fresh browser context, empty browser cache/storage; local server and OS cache not cold',warm:'Second navigation in the same context',edits:'Input event performance.now to current generation final draw timestamp; UI opening excluded',graphics:'One valid SVG image containing 500 paths; complex-project-import includes JSON validation, recovery backup and rendering; subsequent complex-scene-cached-redraw reuses floor texture'},runtime:{node:process.version,platform:os.platform(),arch:os.arch(),osRelease:os.release(),cpu:os.cpus()[0]?.model,flags:['--enable-webgl','--use-gl=angle','--use-angle=swiftshader']},sources:{},samples:[],summaries:[],errors:[]};
+for(const [model,g]of Object.entries(arenaGeometry)){report.sources[model]={sourceRevision:g.sourceRevision,files:[]};for(const f of g.sourceFiles??[]){const hash=createHash('sha256').update(await readFile(f.path)).digest('hex');assert.equal(hash,f.sha256,`Source hash mismatch: ${f.path}`);report.sources[model].files.push({path:f.path,sha256:hash});}}
+report.codeInputs={baseCommit:'3a75f940c647312fb9f562ef0175a6eb858bf652',state:'candidate',sha256:{}};
+for(const path of ['components/renderer.ts','components/blender-arena-preview.tsx','tests/renderer-baseline.mjs','tests/renderer-panel-profile.mjs','package.json','pnpm-lock.yaml'])report.codeInputs.sha256[path]=createHash('sha256').update(await readFile(path)).digest('hex');
+const require=createRequire(import.meta.url),wranglerRequire=createRequire(require.resolve('wrangler/package.json'));
+const {Miniflare}=await import(wranglerRequire.resolve('miniflare'));
+const files=(await readdir('dist/server',{recursive:true})).filter(f=>/\.m?js$/.test(f));
+const mf=new Miniflare({modules:['index.js',...files.filter(f=>f!=='index.js')].map(f=>({type:'ESModule',path:resolve('dist/server',f)})),modulesRoot:resolve('dist/server'),compatibilityDate:'2026-05-15',compatibilityFlags:['nodejs_compat'],d1Databases:['DB']});
+const legacyW1={id:'PERF-W1',name:'Legacy W1 benchmark',type:'Nowe boisko',arenaModel:'w1',sport:'Piłka nożna 1×1',courtShape:'circle',diameter:4.99,length:4.99,width:4.99,surface:'EPDM',base:'#6336F5',zone:'#F3E68A',outside:'#4A122B',lineColor:'#ffffff',lines:true,pattern:'Organic Flow',patternFamily:'organic-flow',patternPalette:'court-culture',patternVariant:6,patternDensity:100,gradientEnabled:false,textureEnabled:false,shadowEnabled:true,artistFinishEnabled:false,creativity:0,shadowIntensity:25,graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:'day',objects:[],arenaDesign:{panelColor:'#b90f35',frameColor:'#30363c',goalColor:'#30363c',finish:'matte',text:'',side:'both'},status:'Szkic',date:'2026-10-22'};
+report.method.startupByModel=Object.fromEntries(models.map(model=>[model,model==='w1'?'Legacy W1 fixed valid local draft seeded before navigation to /; W1 is not a public arena query option':'Public /?arena='+model]));
+let browser,server;
+const persist=()=>writeFile(out,JSON.stringify(report,null,2)+'\n');
+const ready=async(page,model,after=0)=>{await page.waitForFunction(({model,after})=>{const e=document.querySelector('.panna-studio-model');if(!e)return false;const r=Number(e.dataset.renderRequest),c=Number(e.dataset.renderComplete);return e.dataset.model===model&&e.dataset.renderModel===model&&r>after&&r===c&&e.dataset.ready==='true'&&Number(e.dataset.renderCompleteAt)>0;},{model,after},{timeout:45000});return page.locator('.panna-studio-model').evaluate(e=>({generation:Number(e.dataset.renderComplete),at:Number(e.dataset.renderCompleteAt)}));};
+const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">'+Array.from({length:500},(_,i)=>`<path fill="${i%2?'#f5b34d':'#246b73'}" d="M${i%25*24} ${Math.floor(i/25)*30}h18v22h-18z"/>`).join('')+'</svg>';
+const src='data:image/svg+xml;base64,'+Buffer.from(svg).toString('base64');assert.ok(Buffer.byteLength(svg)<2*1024*1024);report.method.fixture={svgBytes:Buffer.byteLength(svg),svgSha256:createHash('sha256').update(svg).digest('hex'),pathCount:500};
+try{
+ const mime={'.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.woff2':'font/woff2'};
+ server=createServer(async(req,res)=>{try{const path=new URL(req.url,'http://localhost').pathname,file=resolve('dist/client','.'+path),root=resolve('dist/client')+'/';if(file.startsWith(root)&&!path.startsWith('/api/')){try{const bytes=await readFile(file);res.setHeader('Content-Type',mime[extname(file)]||'application/octet-stream');res.setHeader('Cache-Control','public, max-age=3600');res.end(bytes);return;}catch{}}const chunks=[];for await(const c of req)chunks.push(c);const response=await mf.dispatchFetch(`http://${req.headers.host}${req.url}`,{method:req.method,headers:req.headers,body:chunks.length?Buffer.concat(chunks):undefined});res.statusCode=response.status;for(const[k,v]of response.headers)if(k!=='set-cookie')res.setHeader(k,v);const cookies=response.headers.getSetCookie();if(cookies.length)res.setHeader('Set-Cookie',cookies);res.end(Buffer.from(await response.arrayBuffer()));}catch(e){res.statusCode=500;res.end(String(e));}});
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const base=`http://localhost:${server.address().port}`;
+ browser=await chromium.launch({headless:true,args:report.runtime.flags,...(process.env.PLAYWRIGHT_EXECUTABLE_PATH?{executablePath:process.env.PLAYWRIGHT_EXECUTABLE_PATH}:{})});report.runtime.browser=browser.version();
+ for(const width of report.method.viewports)for(const model of models)for(let repeat=1;repeat<=repeats;repeat++){
+  const context=await browser.newContext({viewport:{width,height:1000},deviceScaleFactor:1,acceptDownloads:true});
+  if(model==='w1')await context.addInitScript(project=>{localStorage.setItem('gamefields-studio-draft-v1',JSON.stringify(project));},legacyW1);
+  const startupUrl=model==='w1'?base+'/':base+'/?arena='+model;
+  await context.addInitScript(()=>{
+    const counters={};Object.defineProperty(window,'panelWorkProfile',{value:counters});
+    const wrap=(proto,name,label)=>{const original=proto[name];proto[name]=function(...args){const t=performance.now();try{return original.apply(this,args)}finally{const c=counters[label]??(counters[label]={calls:0,submissionMs:0});c.calls++;c.submissionMs+=performance.now()-t}}};
+    wrap(HTMLCanvasElement.prototype,'toDataURL','pngEncode');wrap(CanvasRenderingContext2D.prototype,'fillText','textDraw');wrap(WebGLRenderingContext.prototype,'texImage2D','textureUpload');wrap(WebGLRenderingContext.prototype,'drawArrays','meshDraw');
+    const desc=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,'src');Object.defineProperty(HTMLImageElement.prototype,'src',{...desc,set(value){const t=performance.now();this.addEventListener('load',()=>{const c=counters.imageLoad??(counters.imageLoad={calls:0,asyncTotalMs:0});c.calls++;c.asyncTotalMs+=performance.now()-t},{once:true});return desc.set.call(this,value)}});
+   });
+   const page=await context.newPage();page.on('pageerror',e=>report.errors.push({model,width,repeat,type:'pageerror',message:e.message}));
+  const cacheEvidence=()=>page.evaluate(()=>{const resources=performance.getEntriesByType('resource');return {resourceCount:resources.length,zeroTransferWithEncodedBody:resources.filter(r=>r.transferSize===0&&r.encodedBodySize>0).length,transferredResources:resources.filter(r=>r.transferSize>0).length};});
+  const record=(scenario,ms,resources)=>{assert.ok(Number.isFinite(ms)&&ms>=0,`Invalid latency ${scenario}: ${ms}`);report.samples.push({model,width,repeat,scenario,ms,...(resources?{resources}:{})});};
+  try{
+   await page.goto(startupUrl,{waitUntil:'domcontentloaded'});let done=await ready(page,model);record('startup-fresh-context',done.at,await cacheEvidence());
+   await page.goto(startupUrl,{waitUntil:'domcontentloaded'});done=await ready(page,model);record('startup-same-context-navigation',done.at,await cacheEvidence());
+   if(!report.runtime.webgl)report.runtime.webgl=await page.locator('.panna-model-overlay').evaluate(c=>{const gl=c.getContext('webgl'),ext=gl.getExtension('WEBGL_debug_renderer_info');return {dpr:devicePixelRatio,vendor:gl.getParameter(ext?ext.UNMASKED_VENDOR_WEBGL:gl.VENDOR),renderer:gl.getParameter(ext?ext.UNMASKED_RENDERER_WEBGL:gl.RENDERER),version:gl.getParameter(gl.VERSION)};});
+   const construction=()=>page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();
+   async function edit(label,value,scenario){await page.evaluate(()=>{for(const k of Object.keys(window.panelWorkProfile))delete window.panelWorkProfile[k]});await construction();const input=page.getByLabel(label,{exact:true});const before=await ready(page,model);await input.evaluate(e=>{e.addEventListener('input',()=>{e.dataset.benchmarkInputAt=String(performance.now());},{once:true});});await input.fill(value);assert.equal(await input.inputValue(),value);const result=await ready(page,model,before.generation);const start=Number(await input.getAttribute('data-benchmark-input-at'));assert.ok(start>0,'Missing input event timestamp');record(scenario,result.at-start);report.samples.at(-1).profile=await page.evaluate(()=>window.panelWorkProfile);}
+   await edit('Kolor: Bandy','#17654f','panel-colour');await edit('Tekst na bandach','PERF QA','panel-text');
+   const download=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const project=JSON.parse(await readFile(await(await download).path(),'utf8'));assert.equal(project.arenaModel,model);assert.equal(project.arenaDesign.panelColor,'#17654f');assert.equal(project.arenaDesign.text,'PERF QA');
+   project.objects.push({id:'perf-svg-500',kind:'image',name:'Benchmark 500 static paths',x:50,y:50,scale:100,rotation:0,opacity:100,color:'#ffffff',src,target:'court'});
+   await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();const before=await ready(page,model);const importer=page.getByLabel('Wczytaj projekt Studio JSON',{exact:true});await importer.evaluate(e=>{e.addEventListener('change',()=>{e.dataset.benchmarkChangeAt=String(performance.now());},{once:true});});await importer.setInputFiles({name:'benchmark.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});const imported=await ready(page,model,before.generation);const changedAt=Number(await importer.getAttribute('data-benchmark-change-at'));assert.ok(changedAt>0,'Missing import change event timestamp');record('complex-project-import',imported.at-changedAt);
+   await edit('Kolor: Bandy','#205967','complex-scene-cached-redraw');
+   const pixels=await page.locator('.panna-model-overlay').evaluate(c=>{const gl=c.getContext('webgl'),p=new Uint8Array(c.width*c.height*4);gl.readPixels(0,0,c.width,c.height,gl.RGBA,gl.UNSIGNED_BYTE,p);return {error:gl.getError(),visible:p.some((v,i)=>i%4===3&&v>0),width:c.width,height:c.height};});assert.equal(pixels.error,0);assert.ok(pixels.visible,'Empty render');
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Horizontal overflow');
+   console.log(`PASS ${model} ${width}px repeat ${repeat}/${repeats}`);await persist();
+  }catch(e){report.errors.push({model,width,repeat,type:'scenario',message:String(e),stack:e.stack});await persist();throw e;}finally{await context.close();}
+ }
+ for(const model of Object.keys(report.sources))for(const width of report.method.viewports)for(const scenario of [...new Set(report.samples.map(s=>s.scenario))]){const values=report.samples.filter(s=>s.model===model&&s.width===width&&s.scenario===scenario).map(s=>s.ms).sort((a,b)=>a-b);if(values.length)report.summaries.push({model,width,scenario,count:values.length,medianMs:values.length%2?values[(values.length-1)/2]:(values[values.length/2-1]+values[values.length/2])/2,maxMs:values.at(-1)});}
+ assert.equal(report.errors.length,0,'Runtime errors recorded');report.status='passed';console.log(`PASS renderer baseline: ${report.samples.length} samples; ${out}`);
+}catch(e){report.status='failed';report.failure=String(e);throw e;}finally{report.finishedAt=new Date().toISOString();await persist();await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

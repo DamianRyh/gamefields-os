@@ -5,6 +5,7 @@ import {resolve,extname} from 'node:path';
 import {createServer} from 'node:http';
 import {createHash} from 'node:crypto';
 import os from 'node:os';
+import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 import {arenaGeometry} from '../lib/arena-geometry-data.mjs';
 const repeats=Number(process.env.BENCH_REPEATS??5);
@@ -14,12 +15,14 @@ const models=process.env.BENCH_MODELS?process.env.BENCH_MODELS.split(','):allMod
 const widths=process.env.BENCH_WIDTHS?process.env.BENCH_WIDTHS.split(',').map(Number):[375,1440];
 assert.ok(models.length&&models.every(m=>allModels.includes(m))&&new Set(models).size===models.length,'BENCH_MODELS must contain unique known IDs');
 assert.ok(widths.length&&widths.every(w=>[375,1440].includes(w))&&new Set(widths).size===widths.length,'BENCH_WIDTHS must contain unique supported widths 375,1440');
-const out=resolve('outputs/renderer-baseline/results.json');
+const out=resolve(process.env.BENCH_OUTPUT||'outputs/renderer-baseline/results.json');
 await mkdir(resolve('outputs/renderer-baseline'),{recursive:true});
 const report={schemaVersion:1,startedAt:new Date().toISOString(),status:'running',scope:'Local built application render-completion latency; not GPU presentation, FPS or production network performance',method:{repeats,models,viewports:widths,height:1000,harnessCachePolicy:'Static dist/client files: Cache-Control public, max-age=3600. Worker HTML/API responses retain their original headers.',cold:'Fresh browser context, empty browser cache/storage; local server and OS cache not cold',warm:'Second navigation in the same context',edits:'Input event performance.now to current generation final draw timestamp; UI opening excluded',graphics:'One valid SVG image containing 500 paths; complex-project-import includes JSON validation, recovery backup and rendering; subsequent complex-scene-cached-redraw reuses floor texture'},runtime:{node:process.version,platform:os.platform(),arch:os.arch(),osRelease:os.release(),cpu:os.cpus()[0]?.model,flags:['--enable-webgl','--use-gl=angle','--use-angle=swiftshader']},sources:{},samples:[],summaries:[],errors:[]};
 for(const [model,g]of Object.entries(arenaGeometry)){report.sources[model]={sourceRevision:g.sourceRevision,files:[]};for(const f of g.sourceFiles??[]){const hash=createHash('sha256').update(await readFile(f.path)).digest('hex');assert.equal(hash,f.sha256,`Source hash mismatch: ${f.path}`);report.sources[model].files.push({path:f.path,sha256:hash});}}
-report.codeInputs={baseCommit:'3a75f940c647312fb9f562ef0175a6eb858bf652',state:'candidate',sha256:{}};
+report.codeInputs={baseCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),state:'candidate',sha256:{}};
 for(const path of ['components/renderer.ts','components/blender-arena-preview.tsx','tests/renderer-baseline.mjs','package.json','pnpm-lock.yaml'])report.codeInputs.sha256[path]=createHash('sha256').update(await readFile(path)).digest('hex');
+try{report.codeInputs.sha256['lib/panel-artwork.ts']=createHash('sha256').update(await readFile('lib/panel-artwork.ts')).digest('hex')}catch(e){if(e.code!=='ENOENT')throw e}
+report.frames=[];report.method.frameCapture='Optional BENCH_CAPTURE=1: first repeat only; exact canvas RGBA SHA256 after three cameras, outside timed operations';
 const require=createRequire(import.meta.url),wranglerRequire=createRequire(require.resolve('wrangler/package.json'));
 const {Miniflare}=await import(wranglerRequire.resolve('miniflare'));
 const files=(await readdir('dist/server',{recursive:true})).filter(f=>/\.m?js$/.test(f));
@@ -56,6 +59,7 @@ try{
    await edit('Kolor: Bandy','#205967','complex-scene-cached-redraw');
    const pixels=await page.locator('.panna-model-overlay').evaluate(c=>{const gl=c.getContext('webgl'),p=new Uint8Array(c.width*c.height*4);gl.readPixels(0,0,c.width,c.height,gl.RGBA,gl.UNSIGNED_BYTE,p);return {error:gl.getError(),visible:p.some((v,i)=>i%4===3&&v>0),width:c.width,height:c.height};});assert.equal(pixels.error,0);assert.ok(pixels.visible,'Empty render');
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Horizontal overflow');
+   if(process.env.BENCH_CAPTURE==='1'&&repeat===1){for(const camera of ['Boczny','Z góry','Z boiska']){const before=await ready(page,model);await page.getByRole('button',{name:camera,exact:true}).click();await ready(page,model,camera==='Boczny'?0:before.generation);const capture=await page.locator('.panna-model-overlay').evaluate(c=>{const gl=c.getContext('webgl'),p=new Uint8Array(c.width*c.height*4);gl.readPixels(0,0,c.width,c.height,gl.RGBA,gl.UNSIGNED_BYTE,p);let s='';for(let i=0;i<p.length;i+=32768)s+=String.fromCharCode(...p.subarray(i,i+32768));return {width:c.width,height:c.height,bytes:btoa(s),error:gl.getError()}});assert.equal(capture.error,0);report.frames.push({model,width,camera,pixelWidth:capture.width,pixelHeight:capture.height,sha256:createHash('sha256').update(Buffer.from(capture.bytes,'base64')).digest('hex')});}}
    console.log(`PASS ${model} ${width}px repeat ${repeat}/${repeats}`);await persist();
   }catch(e){report.errors.push({model,width,repeat,type:'scenario',message:String(e),stack:e.stack});await persist();throw e;}finally{await context.close();}
  }

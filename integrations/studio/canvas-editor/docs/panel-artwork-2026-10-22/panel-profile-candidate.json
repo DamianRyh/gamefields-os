@@ -1,0 +1,514 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-10-22T11:55:38.575Z",
+  "status": "passed",
+  "scope": "Instrumented panel work profiling only; wrappers affect timings; do not compare these timings with uninstrumented baseline. submissionMs is synchronous call duration, imageLoad sums overlapping asynchronous intervals, neither is GPU time.",
+  "method": {
+    "repeats": 3,
+    "models": [
+      "circle-cage-2"
+    ],
+    "viewports": [
+      1440
+    ],
+    "height": 1000,
+    "harnessCachePolicy": "Static dist/client files: Cache-Control public, max-age=3600. Worker HTML/API responses retain their original headers.",
+    "cold": "Fresh browser context, empty browser cache/storage; local server and OS cache not cold",
+    "warm": "Second navigation in the same context",
+    "edits": "Input event performance.now to current generation final draw timestamp; UI opening excluded",
+    "graphics": "One valid SVG image containing 500 paths; complex-project-import includes JSON validation, recovery backup and rendering; subsequent complex-scene-cached-redraw reuses floor texture",
+    "startupByModel": {
+      "circle-cage-2": "Public /?arena=circle-cage-2"
+    },
+    "fixture": {
+      "svgBytes": 22823,
+      "svgSha256": "1a1fda603652753a3b6ebd0141a92708b8ee36249acd3817ded9aad6e437d7de",
+      "pathCount": 500
+    }
+  },
+  "runtime": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "23.4.0",
+    "cpu": "Apple M1",
+    "flags": [
+      "--enable-webgl",
+      "--use-gl=angle",
+      "--use-angle=swiftshader"
+    ],
+    "browser": "149.0.7827.55",
+    "webgl": {
+      "dpr": 1,
+      "vendor": "Google Inc. (Google)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "version": "WebGL 1.0 (OpenGL ES 2.0 Chromium)"
+    }
+  },
+  "sources": {
+    "w1": {
+      "sourceRevision": "a81bfdec3013309db048d55e28700260bc835359237ca65aef70e15b641e203b",
+      "files": [
+        {
+          "path": "components/assets-blender/w1.json",
+          "sha256": "487fc6ae05448ae3fb6a7604dc5a524e0dc0f0be6d3f5db688436e9bcf314191"
+        },
+        {
+          "path": "public/arenas/boisko-w1.glb",
+          "sha256": "cae6c9dccf826d73e92816fe9a960e9849343a15cf0094087311d82886613a6f"
+        }
+      ]
+    },
+    "o1": {
+      "sourceRevision": "12d00e49dfad836ebbc7cde0b36528d9ac7b84fe6309786be99b6f3ad97ac581",
+      "files": [
+        {
+          "path": "components/assets-blender/o1.json",
+          "sha256": "cec7ae1f4b4c20eede64bd09e9e4f827aa8215bbc9476cb05bc634cfb826e72a"
+        }
+      ]
+    },
+    "p1": {
+      "sourceRevision": "4b5f694dc6067356875fcd791c9d26afef42d3022e382b88c4e4eaeb0982f84c",
+      "files": [
+        {
+          "path": "components/assets-blender/p1.json",
+          "sha256": "6725f91c6f0b7018149ec47eec2d8fe0119d60999965e1ecb2c50bb4b0c3f2c2"
+        },
+        {
+          "path": "components/assets-blender/p1-surface.json",
+          "sha256": "2748b094b3affdc5e9757c71558eadbe21cdcfeb1ea4f547b6fa15eec85627de"
+        }
+      ]
+    },
+    "street15": {
+      "sourceRevision": "5ea524e1717b39dd1d95ad9d222d2d0594b6eef6d848d3b3ecedfe848747e8be",
+      "files": [
+        {
+          "path": "public/arenas/street15.json",
+          "sha256": "176f3fd10a5b576155376ffccc914ea0d7fe34f714b34811986f681509999984"
+        }
+      ]
+    },
+    "circle-cage-1": {
+      "sourceRevision": "cd0cfc0551d42c616729abcc730ed809b09dcf87be82a2c33e02b6b0acc6e687",
+      "files": [
+        {
+          "path": "public/arenas/circle-cage-1.json",
+          "sha256": "d019703cc03557779e4d4d8df794d098aee86b14005f5ffbbd3a7b270721f5df"
+        }
+      ]
+    },
+    "circle-cage-2": {
+      "sourceRevision": "dd74af05a58f92649936f4f558ce0e9333ff01f7b9ec54a33c95bb4aa0eebc39",
+      "files": [
+        {
+          "path": "public/arenas/circle-cage-2.json",
+          "sha256": "897fc08a610b122d1962ea7cd7b7fc4351a2d279a1ea5d271a3d8243558d1339"
+        }
+      ]
+    },
+    "street-field": {
+      "sourceRevision": "ee0865e41f238c637b1e0d3078e31bc5adcb02c3d95f3851e146c86a145ee3f7",
+      "files": [
+        {
+          "path": "public/arenas/street-field.json",
+          "sha256": "cbd5b1944b2f6b085d312c9230291c733a9b40966174ab981e36ee8141c82846"
+        }
+      ]
+    },
+    "octagon": {
+      "sourceRevision": "5d204c44dc4e2a89727c30093a662a569aac2ebe5010fefed37d084a0f98242f",
+      "files": [
+        {
+          "path": "public/arenas/octagon.json",
+          "sha256": "d50e19df42fd154043de81a8723b320fc104b3ae9700288f0be1d8cc2317c877"
+        }
+      ]
+    }
+  },
+  "samples": [
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 1,
+      "scenario": "startup-fresh-context",
+      "ms": 4280.70000000298,
+      "resources": {
+        "resourceCount": 17,
+        "zeroTransferWithEncodedBody": 0,
+        "transferredResources": 17
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 1,
+      "scenario": "startup-same-context-navigation",
+      "ms": 975.6000000089407,
+      "resources": {
+        "resourceCount": 17,
+        "zeroTransferWithEncodedBody": 15,
+        "transferredResources": 2
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 1,
+      "scenario": "panel-colour",
+      "ms": 3.2999999970197678,
+      "profile": {
+        "meshDraw": {
+          "calls": 70,
+          "submissionMs": 0.09999999403953552
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 0
+        }
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 1,
+      "scenario": "panel-text",
+      "ms": 1619.7000000029802,
+      "profile": {
+        "meshDraw": {
+          "calls": 700,
+          "submissionMs": 0.10000000894069672
+        },
+        "textDraw": {
+          "calls": 1,
+          "submissionMs": 0.19999998807907104
+        },
+        "pngEncode": {
+          "calls": 1,
+          "submissionMs": 253.20000000298023
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 1259.4000000059605
+        },
+        "imageLoad": {
+          "calls": 16,
+          "asyncTotalMs": 10308.200000047684
+        }
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 1,
+      "scenario": "complex-project-import",
+      "ms": 72.69999998807907
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 1,
+      "scenario": "complex-scene-cached-redraw",
+      "ms": 1238.5,
+      "profile": {
+        "meshDraw": {
+          "calls": 665,
+          "submissionMs": 0.09999999403953552
+        },
+        "textDraw": {
+          "calls": 1,
+          "submissionMs": 0.10000000894069672
+        },
+        "pngEncode": {
+          "calls": 1,
+          "submissionMs": 89.19999998807907
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 1110.4000000059605
+        },
+        "imageLoad": {
+          "calls": 16,
+          "asyncTotalMs": 9948.800000056624
+        }
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 2,
+      "scenario": "startup-fresh-context",
+      "ms": 550.8000000119209,
+      "resources": {
+        "resourceCount": 17,
+        "zeroTransferWithEncodedBody": 0,
+        "transferredResources": 17
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 2,
+      "scenario": "startup-same-context-navigation",
+      "ms": 761.1999999880791,
+      "resources": {
+        "resourceCount": 16,
+        "zeroTransferWithEncodedBody": 15,
+        "transferredResources": 1
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 2,
+      "scenario": "panel-colour",
+      "ms": 3.2999999970197678,
+      "profile": {
+        "meshDraw": {
+          "calls": 70,
+          "submissionMs": 0
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 0
+        }
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 2,
+      "scenario": "panel-text",
+      "ms": 1544.0999999940395,
+      "profile": {
+        "meshDraw": {
+          "calls": 700,
+          "submissionMs": 0.30000001192092896
+        },
+        "textDraw": {
+          "calls": 1,
+          "submissionMs": 0.29999999701976776
+        },
+        "pngEncode": {
+          "calls": 1,
+          "submissionMs": 292.80000001192093
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 1169.5999999940395
+        },
+        "imageLoad": {
+          "calls": 16,
+          "asyncTotalMs": 9467
+        }
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 2,
+      "scenario": "complex-project-import",
+      "ms": 43.20000000298023
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 2,
+      "scenario": "complex-scene-cached-redraw",
+      "ms": 1248.5,
+      "profile": {
+        "meshDraw": {
+          "calls": 665,
+          "submissionMs": 0.09999999403953552
+        },
+        "textDraw": {
+          "calls": 1,
+          "submissionMs": 0
+        },
+        "pngEncode": {
+          "calls": 1,
+          "submissionMs": 62.5
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 1152.2000000476837
+        },
+        "imageLoad": {
+          "calls": 16,
+          "asyncTotalMs": 10478.200000032783
+        }
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 3,
+      "scenario": "startup-fresh-context",
+      "ms": 510.70000000298023,
+      "resources": {
+        "resourceCount": 16,
+        "zeroTransferWithEncodedBody": 0,
+        "transferredResources": 16
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 3,
+      "scenario": "startup-same-context-navigation",
+      "ms": 737,
+      "resources": {
+        "resourceCount": 16,
+        "zeroTransferWithEncodedBody": 15,
+        "transferredResources": 1
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 3,
+      "scenario": "panel-colour",
+      "ms": 3.5,
+      "profile": {
+        "meshDraw": {
+          "calls": 105,
+          "submissionMs": 0
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 0
+        }
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 3,
+      "scenario": "panel-text",
+      "ms": 1538.9000000059605,
+      "profile": {
+        "meshDraw": {
+          "calls": 665,
+          "submissionMs": 0
+        },
+        "textDraw": {
+          "calls": 1,
+          "submissionMs": 0.30000001192092896
+        },
+        "pngEncode": {
+          "calls": 1,
+          "submissionMs": 289.3999999910593
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 1191
+        },
+        "imageLoad": {
+          "calls": 16,
+          "asyncTotalMs": 10194.20000000298
+        }
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 3,
+      "scenario": "complex-project-import",
+      "ms": 36.900000005960464
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "repeat": 3,
+      "scenario": "complex-scene-cached-redraw",
+      "ms": 1242.199999988079,
+      "profile": {
+        "meshDraw": {
+          "calls": 665,
+          "submissionMs": 0.29999999701976776
+        },
+        "textDraw": {
+          "calls": 1,
+          "submissionMs": 0.09999999403953552
+        },
+        "pngEncode": {
+          "calls": 1,
+          "submissionMs": 61.20000000298023
+        },
+        "textureUpload": {
+          "calls": 16,
+          "submissionMs": 1144.4999999850988
+        },
+        "imageLoad": {
+          "calls": 16,
+          "asyncTotalMs": 10404.100000038743
+        }
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 3,
+      "medianMs": 550.8000000119209,
+      "maxMs": 4280.70000000298
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 3,
+      "medianMs": 761.1999999880791,
+      "maxMs": 975.6000000089407
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 3,
+      "medianMs": 3.2999999970197678,
+      "maxMs": 3.5
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 3,
+      "medianMs": 1544.0999999940395,
+      "maxMs": 1619.7000000029802
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 3,
+      "medianMs": 43.20000000298023,
+      "maxMs": 72.69999998807907
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 3,
+      "medianMs": 1242.199999988079,
+      "maxMs": 1248.5
+    }
+  ],
+  "errors": [],
+  "codeInputs": {
+    "baseCommit": "3a75f940c647312fb9f562ef0175a6eb858bf652",
+    "state": "candidate",
+    "sha256": {
+      "components/renderer.ts": "1066f94f83c968b5475c2908df70904294f27a6d5cc72ee996b56d881e4a4acf",
+      "components/blender-arena-preview.tsx": "c4a0ba838965ae0c7a7645dd4691fc68f6fcf08ce1c799f9e9edbeba28655456",
+      "tests/renderer-baseline.mjs": "0ec9a4fd8b9e251ac5ee8da6b5e4c88d7e8a181cac52ca551cd45de07df48167",
+      "tests/renderer-panel-profile.mjs": "810674ece26bc697733035c9681ec880c2557e74a07afec07b1e9eef1a6c8925",
+      "package.json": "18cbd7f1cdd2b89c309d43da006979b00b9fded7d775200e1fe65b124ac0474d",
+      "pnpm-lock.yaml": "12ccd94a9f721938c4771e995d69a2f63e90f30a8a771571cee7a24e9d1b3dc4"
+    }
+  },
+  "finishedAt": "2026-10-22T11:56:01.253Z"
+}
