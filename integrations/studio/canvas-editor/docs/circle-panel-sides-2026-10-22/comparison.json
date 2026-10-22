@@ -1,0 +1,2298 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-22T13:26:20.655Z",
+  "status": "passed",
+  "scope": "Like-for-like local SwiftShader draw-completion comparison; no latency SLA, p95, GPU presentation or physical-device claim",
+  "inputs": {
+    "baseline": {
+      "path": "docs/panel-artwork-2026-10-22/v82-candidate.json",
+      "sha256": "18a0ebd64dbd9d02ce2bdde5337dceea879b4fba0a71f338794e5c7e2e96951b",
+      "codeInputs": {
+        "baseCommit": "e1e6666b96e006c72ab4ebc0e0a953d36214fabf",
+        "state": "candidate",
+        "sha256": {
+          "components/renderer.ts": "1066f94f83c968b5475c2908df70904294f27a6d5cc72ee996b56d881e4a4acf",
+          "components/blender-arena-preview.tsx": "c4a0ba838965ae0c7a7645dd4691fc68f6fcf08ce1c799f9e9edbeba28655456",
+          "tests/renderer-baseline.mjs": "0ec9a4fd8b9e251ac5ee8da6b5e4c88d7e8a181cac52ca551cd45de07df48167",
+          "package.json": "18cbd7f1cdd2b89c309d43da006979b00b9fded7d775200e1fe65b124ac0474d",
+          "pnpm-lock.yaml": "12ccd94a9f721938c4771e995d69a2f63e90f30a8a771571cee7a24e9d1b3dc4",
+          "lib/panel-artwork.ts": "b64e4929844969c5d877db7d53f901f4353fe5e5cf204e45577108129c841d41"
+        }
+      }
+    },
+    "candidate": {
+      "path": "outputs/renderer-baseline/v83-candidate.json",
+      "sha256": "c6f076e2cf665ec9f86f670f8d6f022b86468af6ad16e98aefbaf67db67742b3",
+      "codeInputs": {
+        "baseCommit": "6bfcc1f5d961e43a6986c4ac1d3d308a4a753c7d",
+        "state": "candidate",
+        "sha256": {
+          "components/renderer.ts": "1066f94f83c968b5475c2908df70904294f27a6d5cc72ee996b56d881e4a4acf",
+          "components/blender-arena-preview.tsx": "7f4b77a97da4c6225b6ebfd74db16b8d893ed540a525796e28fde06291c8466a",
+          "tests/renderer-baseline.mjs": "787f2a4be4ee68da8d7769c37bafd02e0976218da1239f3c216c6b31e1f58ae5",
+          "package.json": "18cbd7f1cdd2b89c309d43da006979b00b9fded7d775200e1fe65b124ac0474d",
+          "pnpm-lock.yaml": "12ccd94a9f721938c4771e995d69a2f63e90f30a8a771571cee7a24e9d1b3dc4",
+          "lib/panel-artwork.ts": "b64e4929844969c5d877db7d53f901f4353fe5e5cf204e45577108129c841d41",
+          "lib/circle-panel-sides.ts": "e8652af03686f96b18a3af52a99469326a6d2108b3ccadbdf350c4b660d55d9d"
+        }
+      }
+    }
+  },
+  "cells": [
+    {
+      "model": "w1",
+      "width": 375,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 390.5,
+      "candidateMedianMs": 351.40000000596046,
+      "medianDeltaMs": -39.099999994039536,
+      "medianDeltaPercent": -10.012804095784771,
+      "baselineMaxMs": 3687.7000000029802,
+      "candidateMaxMs": 3348.5999999940395,
+      "maxDeltaMs": -339.1000000089407,
+      "maxDeltaPercent": -9.19543346825031
+    },
+    {
+      "model": "w1",
+      "width": 375,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 366,
+      "candidateMedianMs": 400.29999999701977,
+      "medianDeltaMs": 34.29999999701977,
+      "medianDeltaPercent": 9.37158469863928,
+      "baselineMaxMs": 411.09999999403954,
+      "candidateMaxMs": 664.7000000029802,
+      "maxDeltaMs": 253.6000000089407,
+      "maxDeltaPercent": 61.688153736953936
+    },
+    {
+      "model": "w1",
+      "width": 375,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3.7999999970197678,
+      "candidateMedianMs": 4.299999997019768,
+      "medianDeltaMs": 0.5,
+      "medianDeltaPercent": 13.15789474716147,
+      "baselineMaxMs": 4,
+      "candidateMaxMs": 58.900000005960464,
+      "maxDeltaMs": 54.900000005960464,
+      "maxDeltaPercent": 1372.5000001490116
+    },
+    {
+      "model": "w1",
+      "width": 375,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 213.30000001192093,
+      "candidateMedianMs": 189.79999999701977,
+      "medianDeltaMs": -23.50000001490116,
+      "medianDeltaPercent": -11.017346466754708,
+      "baselineMaxMs": 387.1000000089407,
+      "candidateMaxMs": 287.8999999910593,
+      "maxDeltaMs": -99.2000000178814,
+      "maxDeltaPercent": -25.626453116918164
+    },
+    {
+      "model": "w1",
+      "width": 375,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 65.70000000298023,
+      "candidateMedianMs": 50,
+      "medianDeltaMs": -15.700000002980232,
+      "medianDeltaPercent": -23.89649924241714,
+      "baselineMaxMs": 86.29999999701977,
+      "candidateMaxMs": 91.5,
+      "maxDeltaMs": 5.200000002980232,
+      "maxDeltaPercent": 6.025492471795835
+    },
+    {
+      "model": "w1",
+      "width": 375,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 367.5,
+      "candidateMedianMs": 367.80000001192093,
+      "medianDeltaMs": 0.30000001192092896,
+      "medianDeltaPercent": 0.08163265630501468,
+      "baselineMaxMs": 385,
+      "candidateMaxMs": 437.79999999701977,
+      "maxDeltaMs": 52.79999999701977,
+      "maxDeltaPercent": 13.714285713511629
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 285,
+      "candidateMedianMs": 290.80000001192093,
+      "medianDeltaMs": 5.800000011920929,
+      "medianDeltaPercent": 2.035087723481028,
+      "baselineMaxMs": 307.5,
+      "candidateMaxMs": 304.59999999403954,
+      "maxDeltaMs": -2.9000000059604645,
+      "maxDeltaPercent": -0.9430894328326713
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 358,
+      "candidateMedianMs": 341.5,
+      "medianDeltaMs": -16.5,
+      "medianDeltaPercent": -4.608938547486034,
+      "baselineMaxMs": 367.79999999701977,
+      "candidateMaxMs": 345.40000000596046,
+      "maxDeltaMs": -22.399999991059303,
+      "maxDeltaPercent": -6.090266446775641
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 4.5999999940395355,
+      "candidateMedianMs": 37.79999999701977,
+      "medianDeltaMs": 33.20000000298023,
+      "medianDeltaPercent": 721.739131434766,
+      "baselineMaxMs": 36.19999998807907,
+      "candidateMaxMs": 41,
+      "maxDeltaMs": 4.800000011920929,
+      "maxDeltaPercent": 13.259668545584544
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 465.90000000596046,
+      "candidateMedianMs": 466.40000000596046,
+      "medianDeltaMs": 0.5,
+      "medianDeltaPercent": 0.10731916720188953,
+      "baselineMaxMs": 539.5,
+      "candidateMaxMs": 493.3999999910593,
+      "maxDeltaMs": -46.1000000089407,
+      "maxDeltaPercent": -8.544949028533958
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 36.099999994039536,
+      "candidateMedianMs": 37.099999994039536,
+      "medianDeltaMs": 1,
+      "medianDeltaPercent": 2.770083102950443,
+      "baselineMaxMs": 36.29999999701977,
+      "candidateMaxMs": 43.400000005960464,
+      "maxDeltaMs": 7.100000008940697,
+      "maxDeltaPercent": 19.559228676373575
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 374.8999999910593,
+      "candidateMedianMs": 480.70000000298023,
+      "medianDeltaMs": 105.80000001192093,
+      "medianDeltaPercent": 28.220858899558298,
+      "baselineMaxMs": 480.3999999910593,
+      "candidateMaxMs": 489.90000000596046,
+      "maxDeltaMs": 9.500000014901161,
+      "maxDeltaPercent": 1.9775187375266374
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 527.5,
+      "candidateMedianMs": 535.9000000059605,
+      "medianDeltaMs": 8.400000005960464,
+      "medianDeltaPercent": 1.5924170627413203,
+      "baselineMaxMs": 531.8999999910593,
+      "candidateMaxMs": 726.5,
+      "maxDeltaMs": 194.6000000089407,
+      "maxDeltaPercent": 36.58582440537915
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 508.19999998807907,
+      "candidateMedianMs": 522.5,
+      "medianDeltaMs": 14.300000011920929,
+      "medianDeltaPercent": 2.813852816264535,
+      "baselineMaxMs": 509.70000000298023,
+      "candidateMaxMs": 590.7000000029802,
+      "maxDeltaMs": 81,
+      "maxDeltaPercent": 15.891701000495662
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 6.799999997019768,
+      "candidateMedianMs": 26.80000001192093,
+      "medianDeltaMs": 20.00000001490116,
+      "medianDeltaPercent": 294.117647406861,
+      "baselineMaxMs": 71.20000000298023,
+      "candidateMaxMs": 73.59999999403954,
+      "maxDeltaMs": 2.3999999910593033,
+      "maxDeltaPercent": 3.3707865041556824
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 212.5,
+      "candidateMedianMs": 246.69999998807907,
+      "medianDeltaMs": 34.19999998807907,
+      "medianDeltaPercent": 16.094117641448975,
+      "baselineMaxMs": 603.1000000089407,
+      "candidateMaxMs": 737.7999999970198,
+      "maxDeltaMs": 134.69999998807907,
+      "maxDeltaPercent": 22.334604540885792
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 41.599999994039536,
+      "candidateMedianMs": 40.20000000298023,
+      "medianDeltaMs": -1.3999999910593033,
+      "medianDeltaPercent": -3.36538459437475,
+      "baselineMaxMs": 78.70000000298023,
+      "candidateMaxMs": 53.20000000298023,
+      "maxDeltaMs": -25.5,
+      "maxDeltaPercent": -32.40152477640961
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 544.5,
+      "candidateMedianMs": 568.2999999970198,
+      "medianDeltaMs": 23.799999997019768,
+      "medianDeltaPercent": 4.370982552253401,
+      "baselineMaxMs": 650.4000000059605,
+      "candidateMaxMs": 624.1999999880791,
+      "maxDeltaMs": -26.200000017881393,
+      "maxDeltaPercent": -4.028290285615204
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 339.79999999701977,
+      "candidateMedianMs": 309.29999999701977,
+      "medianDeltaMs": -30.5,
+      "medianDeltaPercent": -8.97586815781857,
+      "baselineMaxMs": 358,
+      "candidateMaxMs": 328.79999999701977,
+      "maxDeltaMs": -29.200000002980232,
+      "maxDeltaPercent": -8.156424581838055
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 320,
+      "candidateMedianMs": 350.59999999403954,
+      "medianDeltaMs": 30.599999994039536,
+      "medianDeltaPercent": 9.562499998137355,
+      "baselineMaxMs": 336.40000000596046,
+      "candidateMaxMs": 354.5,
+      "maxDeltaMs": 18.099999994039536,
+      "maxDeltaPercent": 5.3804994036025064
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 5.100000008940697,
+      "candidateMedianMs": 35,
+      "medianDeltaMs": 29.899999991059303,
+      "medianDeltaPercent": 586.274508600829,
+      "baselineMaxMs": 6.399999991059303,
+      "candidateMaxMs": 56.70000000298023,
+      "maxDeltaMs": 50.30000001192093,
+      "maxDeltaPercent": 785.9375012842065
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 273.40000000596046,
+      "candidateMedianMs": 456,
+      "medianDeltaMs": 182.59999999403954,
+      "medianDeltaPercent": 66.7885881455957,
+      "baselineMaxMs": 289.20000000298023,
+      "candidateMaxMs": 472.8999999910593,
+      "maxDeltaMs": 183.69999998807907,
+      "maxDeltaPercent": 63.52005532025796
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 35.79999999701977,
+      "candidateMedianMs": 36.79999999701977,
+      "medianDeltaMs": 1,
+      "medianDeltaPercent": 2.7932960896180075,
+      "baselineMaxMs": 36.599999994039536,
+      "candidateMaxMs": 39.70000000298023,
+      "maxDeltaMs": 3.1000000089406967,
+      "maxDeltaPercent": 8.469945380998755
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 423.70000000298023,
+      "candidateMedianMs": 406.79999999701977,
+      "medianDeltaMs": -16.900000005960464,
+      "medianDeltaPercent": -3.9886712310223253,
+      "baselineMaxMs": 445.5,
+      "candidateMaxMs": 421.69999998807907,
+      "maxDeltaMs": -23.80000001192093,
+      "maxDeltaPercent": -5.3423120116545295
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 367.20000000298023,
+      "candidateMedianMs": 343.70000000298023,
+      "medianDeltaMs": -23.5,
+      "medianDeltaPercent": -6.399782135024311,
+      "baselineMaxMs": 393.1000000089407,
+      "candidateMaxMs": 350.20000000298023,
+      "maxDeltaMs": -42.900000005960464,
+      "maxDeltaPercent": -10.91325362629986
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 403.5,
+      "candidateMedianMs": 467.79999999701977,
+      "medianDeltaMs": 64.29999999701977,
+      "medianDeltaPercent": 15.935563815866113,
+      "baselineMaxMs": 421.8999999910593,
+      "candidateMaxMs": 489.3999999910593,
+      "maxDeltaMs": 67.5,
+      "maxDeltaPercent": 15.999051908374124
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 2.9000000059604645,
+      "candidateMedianMs": 72.90000000596046,
+      "medianDeltaMs": 70,
+      "medianDeltaPercent": 2413.793098487128,
+      "baselineMaxMs": 3.1000000089406967,
+      "candidateMaxMs": 76.70000000298023,
+      "maxDeltaMs": 73.59999999403954,
+      "maxDeltaPercent": 2374.1935413474225
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 202.40000000596046,
+      "candidateMedianMs": 202.5,
+      "medianDeltaMs": 0.09999999403953552,
+      "medianDeltaPercent": 0.04940711167815742,
+      "baselineMaxMs": 204.30000001192093,
+      "candidateMaxMs": 281.70000000298023,
+      "maxDeltaMs": 77.3999999910593,
+      "maxDeltaPercent": 37.8854625484792
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 34.70000000298023,
+      "candidateMedianMs": 71.3999999910593,
+      "medianDeltaMs": 36.69999998807907,
+      "medianDeltaPercent": 105.76368871736908,
+      "baselineMaxMs": 75.3999999910593,
+      "candidateMaxMs": 78,
+      "maxDeltaMs": 2.6000000089406967,
+      "maxDeltaPercent": 3.4482758743355393
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 248.70000000298023,
+      "candidateMedianMs": 255,
+      "medianDeltaMs": 6.299999997019768,
+      "medianDeltaPercent": 2.5331724957556387,
+      "baselineMaxMs": 353.70000000298023,
+      "candidateMaxMs": 342.29999999701977,
+      "maxDeltaMs": -11.400000005960464,
+      "maxDeltaPercent": -3.2230704003009354
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 436.80000001192093,
+      "candidateMedianMs": 409,
+      "medianDeltaMs": -27.80000001192093,
+      "medianDeltaPercent": -6.364468867024319,
+      "baselineMaxMs": 440.8999999910593,
+      "candidateMaxMs": 418,
+      "maxDeltaMs": -22.899999991059303,
+      "maxDeltaPercent": -5.193921522232632
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 563.4000000059605,
+      "candidateMedianMs": 698.5999999940395,
+      "medianDeltaMs": 135.19999998807907,
+      "medianDeltaPercent": 23.997160097026754,
+      "baselineMaxMs": 571,
+      "candidateMaxMs": 704.3999999910593,
+      "maxDeltaMs": 133.3999999910593,
+      "maxDeltaPercent": 23.362521889852765
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3,
+      "candidateMedianMs": 147,
+      "medianDeltaMs": 144,
+      "medianDeltaPercent": 4800,
+      "baselineMaxMs": 91.29999999701977,
+      "candidateMaxMs": 226.79999999701977,
+      "maxDeltaMs": 135.5,
+      "maxDeltaPercent": 148.41182913956519
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 911.4000000059605,
+      "candidateMedianMs": 773.8999999910593,
+      "medianDeltaMs": -137.50000001490116,
+      "medianDeltaPercent": -15.086679834759922,
+      "baselineMaxMs": 954.8000000119209,
+      "candidateMaxMs": 825.5,
+      "maxDeltaMs": -129.30000001192093,
+      "maxDeltaPercent": -13.54210305931154
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 33.5,
+      "candidateMedianMs": 33,
+      "medianDeltaMs": -0.5,
+      "medianDeltaPercent": -1.4925373134328357,
+      "baselineMaxMs": 35,
+      "candidateMaxMs": 33.70000000298023,
+      "maxDeltaMs": -1.2999999970197678,
+      "maxDeltaPercent": -3.7142857057707652
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 748.7999999970198,
+      "candidateMedianMs": 755.2000000029802,
+      "medianDeltaMs": 6.4000000059604645,
+      "medianDeltaPercent": 0.8547008555002585,
+      "baselineMaxMs": 791.3000000119209,
+      "candidateMaxMs": 866.3999999910593,
+      "maxDeltaMs": 75.09999997913837,
+      "maxDeltaPercent": 9.490711484646404
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 324.6000000089407,
+      "candidateMedianMs": 310.1000000089407,
+      "medianDeltaMs": -14.5,
+      "medianDeltaPercent": -4.467036352310726,
+      "baselineMaxMs": 333.1000000089407,
+      "candidateMaxMs": 334.29999999701977,
+      "maxDeltaMs": 1.199999988079071,
+      "maxDeltaPercent": 0.36025217293511314
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 309.6000000089407,
+      "candidateMedianMs": 340.69999998807907,
+      "medianDeltaMs": 31.099999979138374,
+      "medianDeltaPercent": 10.045219631214556,
+      "baselineMaxMs": 310.79999999701977,
+      "candidateMaxMs": 365.19999998807907,
+      "maxDeltaMs": 54.3999999910593,
+      "maxDeltaPercent": 17.503217500508665
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3.2999999970197678,
+      "candidateMedianMs": 22.100000008940697,
+      "medianDeltaMs": 18.80000001192093,
+      "medianDeltaPercent": 569.6969705727037,
+      "baselineMaxMs": 10.099999994039536,
+      "candidateMaxMs": 60.400000005960464,
+      "maxDeltaMs": 50.30000001192093,
+      "maxDeltaPercent": 498.0198023921309
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 165.5,
+      "candidateMedianMs": 159,
+      "medianDeltaMs": -6.5,
+      "medianDeltaPercent": -3.927492447129909,
+      "baselineMaxMs": 182.5,
+      "candidateMaxMs": 175,
+      "maxDeltaMs": -7.5,
+      "maxDeltaPercent": -4.10958904109589
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 65,
+      "candidateMedianMs": 74.1000000089407,
+      "medianDeltaMs": 9.100000008940697,
+      "medianDeltaPercent": 14.000000013754917,
+      "baselineMaxMs": 76.40000000596046,
+      "candidateMaxMs": 75.8999999910593,
+      "maxDeltaMs": -0.5000000149011612,
+      "maxDeltaPercent": -0.6544502812331845
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 154.79999999701977,
+      "candidateMedianMs": 185.09999999403954,
+      "medianDeltaMs": 30.299999997019768,
+      "medianDeltaPercent": 19.573643409304335,
+      "baselineMaxMs": 182,
+      "candidateMaxMs": 194.40000000596046,
+      "maxDeltaMs": 12.400000005960464,
+      "maxDeltaPercent": 6.813186816461794
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 315.29999999701977,
+      "candidateMedianMs": 313.79999999701977,
+      "medianDeltaMs": -1.5,
+      "medianDeltaPercent": -0.47573739296358325,
+      "baselineMaxMs": 333.1000000089407,
+      "candidateMaxMs": 324.80000001192093,
+      "maxDeltaMs": -8.299999997019768,
+      "maxDeltaPercent": -2.491744219993092
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 287.09999999403954,
+      "candidateMedianMs": 342,
+      "medianDeltaMs": 54.900000005960464,
+      "medianDeltaPercent": 19.122257055764624,
+      "baselineMaxMs": 310.29999999701977,
+      "candidateMaxMs": 430.09999999403954,
+      "maxDeltaMs": 119.79999999701977,
+      "maxDeltaPercent": 38.60779890369655
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3.1000000089406967,
+      "candidateMedianMs": 16.700000002980232,
+      "medianDeltaMs": 13.599999994039536,
+      "medianDeltaPercent": 438.70967596180105,
+      "baselineMaxMs": 6,
+      "candidateMaxMs": 99.70000000298023,
+      "maxDeltaMs": 93.70000000298023,
+      "maxDeltaPercent": 1561.6666667163372
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 110.1000000089407,
+      "candidateMedianMs": 136.8999999910593,
+      "medianDeltaMs": 26.799999982118607,
+      "medianDeltaPercent": 24.34150770203661,
+      "baselineMaxMs": 127.40000000596046,
+      "candidateMaxMs": 145.1000000089407,
+      "maxDeltaMs": 17.700000002980232,
+      "maxDeltaPercent": 13.893249609224592
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 35.6000000089407,
+      "candidateMedianMs": 39.5,
+      "medianDeltaMs": 3.8999999910593033,
+      "medianDeltaPercent": 10.955056151909677,
+      "baselineMaxMs": 38.5,
+      "candidateMaxMs": 65.1000000089407,
+      "maxDeltaMs": 26.600000008940697,
+      "maxDeltaPercent": 69.09090911413168
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 121.6000000089407,
+      "candidateMedianMs": 127.6000000089407,
+      "medianDeltaMs": 6,
+      "medianDeltaPercent": 4.934210525953,
+      "baselineMaxMs": 138.20000000298023,
+      "candidateMaxMs": 148.30000001192093,
+      "maxDeltaMs": 10.100000008940697,
+      "maxDeltaPercent": 7.308248920928288
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 494.20000000298023,
+      "candidateMedianMs": 496.09999999403954,
+      "medianDeltaMs": 1.8999999910593033,
+      "medianDeltaPercent": 0.3844597310902156,
+      "baselineMaxMs": 566.8999999910593,
+      "candidateMaxMs": 655,
+      "maxDeltaMs": 88.1000000089407,
+      "maxDeltaPercent": 15.540659730169368
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 553.5,
+      "candidateMedianMs": 754.7999999970198,
+      "medianDeltaMs": 201.29999999701977,
+      "medianDeltaPercent": 36.36856368509842,
+      "baselineMaxMs": 554.5999999940395,
+      "candidateMaxMs": 1078.0999999940395,
+      "maxDeltaMs": 523.5,
+      "maxDeltaPercent": 94.39235485135706
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3.2000000029802322,
+      "candidateMedianMs": 3.2000000029802322,
+      "medianDeltaMs": 0,
+      "medianDeltaPercent": 0,
+      "baselineMaxMs": 3.2000000029802322,
+      "candidateMaxMs": 6.200000002980232,
+      "maxDeltaMs": 3,
+      "maxDeltaPercent": 93.74999991268851
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 952.5,
+      "candidateMedianMs": 1188.8999999910593,
+      "medianDeltaMs": 236.3999999910593,
+      "medianDeltaPercent": 24.818897636856622,
+      "baselineMaxMs": 1063.2000000029802,
+      "candidateMaxMs": 1314.0999999940395,
+      "maxDeltaMs": 250.8999999910593,
+      "maxDeltaPercent": 23.598570352742286
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 52.8999999910593,
+      "candidateMedianMs": 55.5,
+      "medianDeltaMs": 2.6000000089406967,
+      "medianDeltaPercent": 4.914933855160919,
+      "baselineMaxMs": 88.79999999701977,
+      "candidateMaxMs": 115,
+      "maxDeltaMs": 26.200000002980232,
+      "maxDeltaPercent": 29.504504508850825
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 915.7999999970198,
+      "candidateMedianMs": 1047.1000000089407,
+      "medianDeltaMs": 131.30000001192093,
+      "medianDeltaPercent": 14.337191527882531,
+      "baselineMaxMs": 986.2999999970198,
+      "candidateMaxMs": 2519.2999999970198,
+      "maxDeltaMs": 1533,
+      "maxDeltaPercent": 155.42938254127873
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 305.20000000298023,
+      "candidateMedianMs": 372.90000000596046,
+      "medianDeltaMs": 67.70000000298023,
+      "medianDeltaPercent": 22.182175623302474,
+      "baselineMaxMs": 344.79999999701977,
+      "candidateMaxMs": 438.20000000298023,
+      "maxDeltaMs": 93.40000000596046,
+      "maxDeltaPercent": 27.088167055327073
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 480,
+      "candidateMedianMs": 628.7000000029802,
+      "medianDeltaMs": 148.70000000298023,
+      "medianDeltaPercent": 30.97916666728755,
+      "baselineMaxMs": 512.9000000059605,
+      "candidateMaxMs": 673.1999999880791,
+      "maxDeltaMs": 160.2999999821186,
+      "maxDeltaPercent": 31.253655679519543
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 4.5,
+      "candidateMedianMs": 4.800000011920929,
+      "medianDeltaMs": 0.30000001192092896,
+      "medianDeltaPercent": 6.666666931576199,
+      "baselineMaxMs": 4.800000011920929,
+      "candidateMaxMs": 6.699999988079071,
+      "maxDeltaMs": 1.899999976158142,
+      "maxDeltaPercent": 39.583332738321694
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 1091.5999999940395,
+      "candidateMedianMs": 1223.7999999970198,
+      "medianDeltaMs": 132.20000000298023,
+      "medianDeltaPercent": 12.110663246949622,
+      "baselineMaxMs": 1131.2999999970198,
+      "candidateMaxMs": 1355.2000000029802,
+      "maxDeltaMs": 223.90000000596046,
+      "maxDeltaPercent": 19.79139043636085
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 40.79999999701977,
+      "candidateMedianMs": 45.1000000089407,
+      "medianDeltaMs": 4.300000011920929,
+      "medianDeltaPercent": 10.53921571626231,
+      "baselineMaxMs": 42.29999999701977,
+      "candidateMaxMs": 46.70000000298023,
+      "maxDeltaMs": 4.4000000059604645,
+      "maxDeltaPercent": 10.401891267778877
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 967.1000000089407,
+      "candidateMedianMs": 1109.7999999970198,
+      "medianDeltaMs": 142.69999998807907,
+      "medianDeltaPercent": 14.755454450083738,
+      "baselineMaxMs": 1020.7000000029802,
+      "candidateMaxMs": 1213.5,
+      "maxDeltaMs": 192.79999999701977,
+      "maxDeltaPercent": 18.888997746297328
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 659.8999999910593,
+      "candidateMedianMs": 799.1999999880791,
+      "medianDeltaMs": 139.29999999701977,
+      "medianDeltaPercent": 21.10925897846751,
+      "baselineMaxMs": 762.7000000029802,
+      "candidateMaxMs": 852.9000000059605,
+      "maxDeltaMs": 90.20000000298023,
+      "maxDeltaPercent": 11.826406188885247
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 716.2999999970198,
+      "candidateMedianMs": 717.0999999940395,
+      "medianDeltaMs": 0.7999999970197678,
+      "medianDeltaPercent": 0.11168504774858247,
+      "baselineMaxMs": 732.2999999970198,
+      "candidateMaxMs": 788.3999999910593,
+      "maxDeltaMs": 56.099999994039536,
+      "maxDeltaPercent": 7.660794755464679
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 7.5,
+      "candidateMedianMs": 7.800000011920929,
+      "medianDeltaMs": 0.30000001192092896,
+      "medianDeltaPercent": 4.000000158945719,
+      "baselineMaxMs": 7.600000008940697,
+      "candidateMaxMs": 8.5,
+      "maxDeltaMs": 0.8999999910593033,
+      "maxDeltaPercent": 11.842105131586008
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 1308.7999999970198,
+      "candidateMedianMs": 1364.5,
+      "medianDeltaMs": 55.70000000298023,
+      "medianDeltaPercent": 4.255806846203168,
+      "baselineMaxMs": 1322.9000000059605,
+      "candidateMaxMs": 1402.7000000029802,
+      "maxDeltaMs": 79.79999999701977,
+      "maxDeltaPercent": 6.032201980244933
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 44.20000000298023,
+      "candidateMedianMs": 47.29999999701977,
+      "medianDeltaMs": 3.0999999940395355,
+      "medianDeltaPercent": 7.013574646675373,
+      "baselineMaxMs": 49.099999994039536,
+      "candidateMaxMs": 50.30000001192093,
+      "maxDeltaMs": 1.2000000178813934,
+      "maxDeltaPercent": 2.4439918900754924
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 1343.8999999910593,
+      "candidateMedianMs": 1405.0999999940395,
+      "medianDeltaMs": 61.20000000298023,
+      "medianDeltaPercent": 4.553910261432204,
+      "baselineMaxMs": 1688.9000000059605,
+      "candidateMaxMs": 1521.7000000029802,
+      "maxDeltaMs": -167.20000000298023,
+      "maxDeltaPercent": -9.89993486899107
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 457.80000001192093,
+      "candidateMedianMs": 426,
+      "medianDeltaMs": -31.80000001192093,
+      "medianDeltaPercent": -6.946264746852964,
+      "baselineMaxMs": 480.70000000298023,
+      "candidateMaxMs": 446.70000000298023,
+      "maxDeltaMs": -34,
+      "maxDeltaPercent": -7.073018514622261
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 510,
+      "candidateMedianMs": 620.7999999970198,
+      "medianDeltaMs": 110.79999999701977,
+      "medianDeltaPercent": 21.72549019549407,
+      "baselineMaxMs": 540.7000000029802,
+      "candidateMaxMs": 632.7999999970198,
+      "maxDeltaMs": 92.09999999403954,
+      "maxDeltaPercent": 17.033475123641928
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 5.299999997019768,
+      "candidateMedianMs": 5.5,
+      "medianDeltaMs": 0.20000000298023224,
+      "medianDeltaPercent": 3.7735849640130916,
+      "baselineMaxMs": 5.5,
+      "candidateMaxMs": 5.5,
+      "maxDeltaMs": 0,
+      "maxDeltaPercent": 0
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 981.2000000029802,
+      "candidateMedianMs": 974,
+      "medianDeltaMs": -7.200000002980232,
+      "medianDeltaPercent": -0.733795352930938,
+      "baselineMaxMs": 1070.800000011921,
+      "candidateMaxMs": 1124.5999999940395,
+      "maxDeltaMs": 53.79999998211861,
+      "maxDeltaPercent": 5.024280909742218
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 41.900000005960464,
+      "candidateMedianMs": 43.5,
+      "medianDeltaMs": 1.5999999940395355,
+      "medianDeltaPercent": 3.8186157370213087,
+      "baselineMaxMs": 44.79999999701977,
+      "candidateMaxMs": 50.900000005960464,
+      "maxDeltaMs": 6.100000008940697,
+      "maxDeltaPercent": 13.616071449434122
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 903.7999999970198,
+      "candidateMedianMs": 967,
+      "medianDeltaMs": 63.20000000298023,
+      "medianDeltaPercent": 6.992697499799583,
+      "baselineMaxMs": 1075,
+      "candidateMaxMs": 1004.2000000029802,
+      "maxDeltaMs": -70.79999999701977,
+      "maxDeltaPercent": -6.586046511350677
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 494.40000000596046,
+      "candidateMedianMs": 469.1000000089407,
+      "medianDeltaMs": -25.299999997019768,
+      "medianDeltaPercent": -5.1173139151931135,
+      "baselineMaxMs": 526.7000000029802,
+      "candidateMaxMs": 496.1000000089407,
+      "maxDeltaMs": -30.599999994039536,
+      "maxDeltaPercent": -5.809758874855969
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 612,
+      "candidateMedianMs": 746.2999999970198,
+      "medianDeltaMs": 134.29999999701977,
+      "medianDeltaPercent": 21.94444444395748,
+      "baselineMaxMs": 656.1000000089407,
+      "candidateMaxMs": 771.5,
+      "maxDeltaMs": 115.3999999910593,
+      "maxDeltaPercent": 17.58878219623331
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3.5,
+      "candidateMedianMs": 3.5,
+      "medianDeltaMs": 0,
+      "medianDeltaPercent": 0,
+      "baselineMaxMs": 3.699999988079071,
+      "candidateMaxMs": 3.7000000029802322,
+      "maxDeltaMs": 1.4901161193847656e-8,
+      "maxDeltaPercent": 4.027340876177649e-7
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 715.4000000059605,
+      "candidateMedianMs": 762.5,
+      "medianDeltaMs": 47.099999994039536,
+      "medianDeltaPercent": 6.583729381275806,
+      "baselineMaxMs": 736,
+      "candidateMaxMs": 820.2000000029802,
+      "maxDeltaMs": 84.20000000298023,
+      "maxDeltaPercent": 11.44021739170927
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 39.70000000298023,
+      "candidateMedianMs": 42.29999999701977,
+      "medianDeltaMs": 2.5999999940395355,
+      "medianDeltaPercent": 6.549118372403921,
+      "baselineMaxMs": 76.80000001192093,
+      "candidateMaxMs": 87.29999999701977,
+      "maxDeltaMs": 10.499999985098839,
+      "maxDeltaPercent": 13.671874978475293
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 660.2999999970198,
+      "candidateMedianMs": 857.6000000089407,
+      "medianDeltaMs": 197.30000001192093,
+      "medianDeltaPercent": 29.88035741523723,
+      "baselineMaxMs": 747.2999999970198,
+      "candidateMaxMs": 918.3999999910593,
+      "maxDeltaMs": 171.09999999403954,
+      "maxDeltaPercent": 22.89575806165153
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 548.2000000029802,
+      "candidateMedianMs": 536.0999999940395,
+      "medianDeltaMs": -12.100000008940697,
+      "medianDeltaPercent": -2.207223642625851,
+      "baselineMaxMs": 590.5,
+      "candidateMaxMs": 589.7000000029802,
+      "maxDeltaMs": -0.7999999970197678,
+      "maxDeltaPercent": -0.1354784076240081
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 850.7999999970198,
+      "candidateMedianMs": 1108.9000000059605,
+      "medianDeltaMs": 258.1000000089407,
+      "medianDeltaPercent": 30.336154208961542,
+      "baselineMaxMs": 890.8000000119209,
+      "candidateMaxMs": 1166,
+      "maxDeltaMs": 275.19999998807907,
+      "maxDeltaPercent": 30.893578803816375
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3.5999999940395355,
+      "candidateMedianMs": 3.9000000059604645,
+      "medianDeltaMs": 0.30000001192092896,
+      "medianDeltaPercent": 8.333333678267621,
+      "baselineMaxMs": 3.7999999970197678,
+      "candidateMaxMs": 4.799999997019768,
+      "maxDeltaMs": 1,
+      "maxDeltaPercent": 26.31578949432294
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 1812.4000000059605,
+      "candidateMedianMs": 1871.800000011921,
+      "medianDeltaMs": 59.400000005960464,
+      "medianDeltaPercent": 3.2774222029223745,
+      "baselineMaxMs": 1934.9000000059605,
+      "candidateMaxMs": 2302.3999999910593,
+      "maxDeltaMs": 367.49999998509884,
+      "maxDeltaPercent": 18.993229623441355
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 39,
+      "candidateMedianMs": 42.29999999701977,
+      "medianDeltaMs": 3.2999999970197678,
+      "medianDeltaPercent": 8.46153845389684,
+      "baselineMaxMs": 40.20000000298023,
+      "candidateMaxMs": 51.5,
+      "maxDeltaMs": 11.299999997019768,
+      "maxDeltaPercent": 28.109452726821
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 1575.1000000089407,
+      "candidateMedianMs": 1861.0999999940395,
+      "medianDeltaMs": 285.99999998509884,
+      "medianDeltaPercent": 18.157577295630464,
+      "baselineMaxMs": 1603.2000000029802,
+      "candidateMaxMs": 2040.5,
+      "maxDeltaMs": 437.29999999701977,
+      "maxDeltaPercent": 27.276696606549827
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 451.30000001192093,
+      "candidateMedianMs": 367,
+      "medianDeltaMs": -84.30000001192093,
+      "medianDeltaPercent": -18.67937070899494,
+      "baselineMaxMs": 475.09999999403954,
+      "candidateMaxMs": 385.59999999403954,
+      "maxDeltaMs": -89.5,
+      "maxDeltaPercent": -18.838139339322847
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 515.1999999880791,
+      "candidateMedianMs": 576.5,
+      "medianDeltaMs": 61.30000001192093,
+      "medianDeltaPercent": 11.898291928054991,
+      "baselineMaxMs": 523.9000000059605,
+      "candidateMaxMs": 735.7999999970198,
+      "maxDeltaMs": 211.8999999910593,
+      "maxDeltaPercent": 40.44665012190275
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3.5,
+      "candidateMedianMs": 3.4000000059604645,
+      "medianDeltaMs": -0.09999999403953552,
+      "medianDeltaPercent": -2.857142686843872,
+      "baselineMaxMs": 3.6000000089406967,
+      "candidateMaxMs": 3.699999988079071,
+      "maxDeltaMs": 0.09999997913837433,
+      "maxDeltaPercent": 2.7777771913894913
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 657.6000000089407,
+      "candidateMedianMs": 699.1000000089407,
+      "medianDeltaMs": 41.5,
+      "medianDeltaPercent": 6.31082725052247,
+      "baselineMaxMs": 728.1999999880791,
+      "candidateMaxMs": 734.7000000029802,
+      "maxDeltaMs": 6.500000014901161,
+      "maxDeltaPercent": 0.8926119218631653
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 38.29999999701977,
+      "candidateMedianMs": 40.3999999910593,
+      "medianDeltaMs": 2.0999999940395355,
+      "medianDeltaPercent": 5.483028705490711,
+      "baselineMaxMs": 41.29999999701977,
+      "candidateMaxMs": 64.3999999910593,
+      "maxDeltaMs": 23.099999994039536,
+      "maxDeltaPercent": 55.93220337943448
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 637.6999999880791,
+      "candidateMedianMs": 621,
+      "medianDeltaMs": -16.69999998807907,
+      "medianDeltaPercent": -2.618786261312726,
+      "baselineMaxMs": 650.6000000089407,
+      "candidateMaxMs": 697.5,
+      "maxDeltaMs": 46.8999999910593,
+      "maxDeltaPercent": 7.208730401231908
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "scenario": "startup-fresh-context",
+      "count": 5,
+      "baselineMedianMs": 459,
+      "candidateMedianMs": 381.69999998807907,
+      "medianDeltaMs": -77.30000001192093,
+      "medianDeltaPercent": -16.84095860826164,
+      "baselineMaxMs": 497.70000000298023,
+      "candidateMaxMs": 395.70000000298023,
+      "maxDeltaMs": -102,
+      "maxDeltaPercent": -20.4942736587079
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "scenario": "startup-same-context-navigation",
+      "count": 5,
+      "baselineMedianMs": 479.90000000596046,
+      "candidateMedianMs": 553.4000000059605,
+      "medianDeltaMs": 73.5,
+      "medianDeltaPercent": 15.315690768719966,
+      "baselineMaxMs": 537.6999999880791,
+      "candidateMaxMs": 575,
+      "maxDeltaMs": 37.30000001192093,
+      "maxDeltaPercent": 6.936953694020436
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "scenario": "panel-colour",
+      "count": 5,
+      "baselineMedianMs": 3.3999999910593033,
+      "candidateMedianMs": 3.4000000059604645,
+      "medianDeltaMs": 1.4901161193847656e-8,
+      "medianDeltaPercent": 4.3826944803035287e-7,
+      "baselineMaxMs": 3.5,
+      "candidateMaxMs": 3.5,
+      "maxDeltaMs": 0,
+      "maxDeltaPercent": 0
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "scenario": "panel-text",
+      "count": 5,
+      "baselineMedianMs": 459,
+      "candidateMedianMs": 412.20000000298023,
+      "medianDeltaMs": -46.79999999701977,
+      "medianDeltaPercent": -10.196078430723261,
+      "baselineMaxMs": 472.40000000596046,
+      "candidateMaxMs": 439,
+      "maxDeltaMs": -33.400000005960464,
+      "maxDeltaPercent": -7.070279425389297
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "scenario": "complex-project-import",
+      "count": 5,
+      "baselineMedianMs": 38.79999999701977,
+      "candidateMedianMs": 39,
+      "medianDeltaMs": 0.20000000298023224,
+      "medianDeltaPercent": 0.515463925246377,
+      "baselineMaxMs": 40.70000000298023,
+      "candidateMaxMs": 39.79999999701977,
+      "maxDeltaMs": -0.9000000059604645,
+      "maxDeltaPercent": -2.211302225785166
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "scenario": "complex-scene-cached-redraw",
+      "count": 5,
+      "baselineMedianMs": 385.19999998807907,
+      "candidateMedianMs": 331.90000000596046,
+      "medianDeltaMs": -53.29999998211861,
+      "medianDeltaPercent": -13.836967804716538,
+      "baselineMaxMs": 427.90000000596046,
+      "candidateMaxMs": 404.20000000298023,
+      "maxDeltaMs": -23.700000002980232,
+      "maxDeltaPercent": -5.538677261661626
+    }
+  ],
+  "frames": [
+    {
+      "model": "w1",
+      "width": 375,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "8ff599f3e0f7faa815b1c55caa106839899f25c2457f41b15e21c7a376c12f8b"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "8ff599f3e0f7faa815b1c55caa106839899f25c2457f41b15e21c7a376c12f8b"
+      },
+      "identical": true
+    },
+    {
+      "model": "w1",
+      "width": 375,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "ec6b9ada91e0f4df205f12d6230871af1ee0e01d8670e59245954d60160b325a"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "ec6b9ada91e0f4df205f12d6230871af1ee0e01d8670e59245954d60160b325a"
+      },
+      "identical": true
+    },
+    {
+      "model": "w1",
+      "width": 375,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "2f0d76ad23019cae8f59d57203db59eac25005a8e683bdff22f976ae99dfd4fc"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "2f0d76ad23019cae8f59d57203db59eac25005a8e683bdff22f976ae99dfd4fc"
+      },
+      "identical": true
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "00abf36fe19df088ce4e8f4d91b4d71f9fac63661d0e10c60ec354653e617e28"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "00abf36fe19df088ce4e8f4d91b4d71f9fac63661d0e10c60ec354653e617e28"
+      },
+      "identical": true
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "a8035759b0cabddfabed5dd6502d0cc8dc673487c0e10b9b76d9a7f6206c4395"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "a8035759b0cabddfabed5dd6502d0cc8dc673487c0e10b9b76d9a7f6206c4395"
+      },
+      "identical": true
+    },
+    {
+      "model": "o1",
+      "width": 375,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "49b32a9f1b2d2b2e512fe0bc7732fb7bc93256e6e441882fb8b20df9d7a35e24"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "49b32a9f1b2d2b2e512fe0bc7732fb7bc93256e6e441882fb8b20df9d7a35e24"
+      },
+      "identical": true
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "6004c0e4c7e5c8268b61c45ad8a76202852941ceeefa9090edd790217a6eb0fe"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "6004c0e4c7e5c8268b61c45ad8a76202852941ceeefa9090edd790217a6eb0fe"
+      },
+      "identical": true
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "613e3e1ac6fd84d79972d81f2ac5a6e153f426b978dbfb048ca9b8e3a010e89e"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "613e3e1ac6fd84d79972d81f2ac5a6e153f426b978dbfb048ca9b8e3a010e89e"
+      },
+      "identical": true
+    },
+    {
+      "model": "p1",
+      "width": 375,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "e08f2b84cb719c784c94fdb6fa7933fa5f0cc72a9d7fe92ac2bd6c225bc246bb"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "e08f2b84cb719c784c94fdb6fa7933fa5f0cc72a9d7fe92ac2bd6c225bc246bb"
+      },
+      "identical": true
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "4d7cd002989e2eb1ec2abb29a8eaf2fd13cb253dfd6f84f17d25dbe98d92adc2"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "4d7cd002989e2eb1ec2abb29a8eaf2fd13cb253dfd6f84f17d25dbe98d92adc2"
+      },
+      "identical": true
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "d0afdd129abf5cb6d46bd30d019da6822c5c9af0640cd3136b8b1b257f19e645"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "d0afdd129abf5cb6d46bd30d019da6822c5c9af0640cd3136b8b1b257f19e645"
+      },
+      "identical": true
+    },
+    {
+      "model": "street15",
+      "width": 375,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "1c440c307a030e249ed28f87a95779237789e8500ac418f7761501dfbc8a2c94"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "1c440c307a030e249ed28f87a95779237789e8500ac418f7761501dfbc8a2c94"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "2ce197dc2feab367224cf2ace1c204a1e00a42d99f38e0f2b0accdc1754e0414"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "2ce197dc2feab367224cf2ace1c204a1e00a42d99f38e0f2b0accdc1754e0414"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "c91d0ecc1acad777a5fab595c2a8604a1d6748d356b564e508f15da724cca4e5"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "c91d0ecc1acad777a5fab595c2a8604a1d6748d356b564e508f15da724cca4e5"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 375,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "a9a325d14d0445154d1c6752781bfb215de33d674212c7d7dddd9b3f2886a2a5"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "a9a325d14d0445154d1c6752781bfb215de33d674212c7d7dddd9b3f2886a2a5"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "33503d5dc6613e834c1dfb124910215f5ee968dd1950cb2d1252c9b748dc226b"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "33503d5dc6613e834c1dfb124910215f5ee968dd1950cb2d1252c9b748dc226b"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "be909891d0f0fb164cbbe36711f58ad345f9b3a43f3de7886feda457dfaba30e"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "be909891d0f0fb164cbbe36711f58ad345f9b3a43f3de7886feda457dfaba30e"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 375,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "b233d9fd1357b62d7c4f82cfe23b4f61987d58f5c88f2363c9bfeb43d60cd201"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "b233d9fd1357b62d7c4f82cfe23b4f61987d58f5c88f2363c9bfeb43d60cd201"
+      },
+      "identical": true
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "38957d47eb294ac767186a1afebc9c66d256f5ffbd50c34f557d778ae391dc1f"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "38957d47eb294ac767186a1afebc9c66d256f5ffbd50c34f557d778ae391dc1f"
+      },
+      "identical": true
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "ecaefb9c09a71a385c9ee25c7a2b403d2e2b964d1fde807edae7c646997ca075"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "ecaefb9c09a71a385c9ee25c7a2b403d2e2b964d1fde807edae7c646997ca075"
+      },
+      "identical": true
+    },
+    {
+      "model": "street-field",
+      "width": 375,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "1f98865aacd5b86a8d631a19a74d26f1085045f5f307ade1ec02076dad44f646"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "1f98865aacd5b86a8d631a19a74d26f1085045f5f307ade1ec02076dad44f646"
+      },
+      "identical": true
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "9195f032c8f1ace337937b33d8dffe63f33a69966f25ef47832140adbcb993e6"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "9195f032c8f1ace337937b33d8dffe63f33a69966f25ef47832140adbcb993e6"
+      },
+      "identical": true
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "2c7e7d5a1df1ffb1c8225fcefaa2dff2c5da1acecc3269db31fc2ff874b8bdfb"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "2c7e7d5a1df1ffb1c8225fcefaa2dff2c5da1acecc3269db31fc2ff874b8bdfb"
+      },
+      "identical": true
+    },
+    {
+      "model": "octagon",
+      "width": 375,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "79c39aeb1d9ff920dbb1080caf368c126667fe354a3ee03f3d19e6686119bd9f"
+      },
+      "candidate": {
+        "pixelWidth": 375,
+        "pixelHeight": 211,
+        "sha256": "79c39aeb1d9ff920dbb1080caf368c126667fe354a3ee03f3d19e6686119bd9f"
+      },
+      "identical": true
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "418098c791622daf9ebbf51b3863db052e417fe396db40eed33a504c3a4c874b"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "418098c791622daf9ebbf51b3863db052e417fe396db40eed33a504c3a4c874b"
+      },
+      "identical": true
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "cfa732517af9c41c0233e8ec809af68421d95fcc3a4b1f1a6db4491af7828a71"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "cfa732517af9c41c0233e8ec809af68421d95fcc3a4b1f1a6db4491af7828a71"
+      },
+      "identical": true
+    },
+    {
+      "model": "w1",
+      "width": 1440,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "db5ba129c6f25b42b55429c4d1df0739805432991c4d4ef154509f2cfcfed877"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "db5ba129c6f25b42b55429c4d1df0739805432991c4d4ef154509f2cfcfed877"
+      },
+      "identical": true
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "30968eb9539fe01dc6c87cd85d54ff2223da2e0861e44b6aae7dc4bdf8e19ccf"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "30968eb9539fe01dc6c87cd85d54ff2223da2e0861e44b6aae7dc4bdf8e19ccf"
+      },
+      "identical": true
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "178393889db5a970de6eb970627eef30fac84ac45741155423d900afb141bd4b"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "178393889db5a970de6eb970627eef30fac84ac45741155423d900afb141bd4b"
+      },
+      "identical": true
+    },
+    {
+      "model": "o1",
+      "width": 1440,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "eda26a055daa62e3b636469d1f7b359f66260d9945afe21b8ecb8080fb2c0393"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "eda26a055daa62e3b636469d1f7b359f66260d9945afe21b8ecb8080fb2c0393"
+      },
+      "identical": true
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "fdcade3dc7717d7b0733057f21cfb2401712428602f583275420be841308f1de"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "fdcade3dc7717d7b0733057f21cfb2401712428602f583275420be841308f1de"
+      },
+      "identical": true
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "233645f529c579f15430b8b565a7df85b28497998e7319dad78369e5a74650c5"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "233645f529c579f15430b8b565a7df85b28497998e7319dad78369e5a74650c5"
+      },
+      "identical": true
+    },
+    {
+      "model": "p1",
+      "width": 1440,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "7908662f4d303b02eb4c6d2b23a0cc2fe1d1dbe394f2f239e6b7ad392d983143"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "7908662f4d303b02eb4c6d2b23a0cc2fe1d1dbe394f2f239e6b7ad392d983143"
+      },
+      "identical": true
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "27554509a1e6d1ed7ff369c18216312a208168e527f4ee6f103d24f6edba0483"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "27554509a1e6d1ed7ff369c18216312a208168e527f4ee6f103d24f6edba0483"
+      },
+      "identical": true
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "0ae2fbc653c0c3ea00a08c55883c35d70a2ecd65d41c3d1f1c012733a1179138"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "0ae2fbc653c0c3ea00a08c55883c35d70a2ecd65d41c3d1f1c012733a1179138"
+      },
+      "identical": true
+    },
+    {
+      "model": "street15",
+      "width": 1440,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "4bad98a662a61bdc26825fcf303b8258c066bffb1def65bee12574a741ae93f8"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "4bad98a662a61bdc26825fcf303b8258c066bffb1def65bee12574a741ae93f8"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "6437b2a3ec96238c7caa7a20de267979d8f550ff6909d6eb0b9d5207cc0efae5"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "6437b2a3ec96238c7caa7a20de267979d8f550ff6909d6eb0b9d5207cc0efae5"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "235491b3c664c6c1410c3873a911a344432444148a540f2e44832ee1b0ca4127"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "235491b3c664c6c1410c3873a911a344432444148a540f2e44832ee1b0ca4127"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-1",
+      "width": 1440,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "4e44cd77c1ee7028468c1feb584f5ba0cb8fb8a7d298eecb999482ef9d848828"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "4e44cd77c1ee7028468c1feb584f5ba0cb8fb8a7d298eecb999482ef9d848828"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "2fdedaa3a4527f847ac3db32108092f26ad0bfca68f1dabeeac2d6cbac6c866e"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "2fdedaa3a4527f847ac3db32108092f26ad0bfca68f1dabeeac2d6cbac6c866e"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "f966d24b2381597caf169e58a96053b99e79d76de44f7629065ff877bfd1e57d"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "f966d24b2381597caf169e58a96053b99e79d76de44f7629065ff877bfd1e57d"
+      },
+      "identical": true
+    },
+    {
+      "model": "circle-cage-2",
+      "width": 1440,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "86ff23d81357ef0d3d8e061a9dea1e2794ceae82b78ea74fafd97e9e094cadbd"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "86ff23d81357ef0d3d8e061a9dea1e2794ceae82b78ea74fafd97e9e094cadbd"
+      },
+      "identical": true
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "ecc19c061dae153ea6935dcdacfb398cd26e14d46feade054cc10ab9ce2418ef"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "ecc19c061dae153ea6935dcdacfb398cd26e14d46feade054cc10ab9ce2418ef"
+      },
+      "identical": true
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "3017d579dc4ba97d073c95bde3118264da20ba24a8204649ce957f7fa40defc3"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "3017d579dc4ba97d073c95bde3118264da20ba24a8204649ce957f7fa40defc3"
+      },
+      "identical": true
+    },
+    {
+      "model": "street-field",
+      "width": 1440,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "0ac24279dc314d85282c8541052a70278ce932d31fac68965d4c3416283f7c0d"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "0ac24279dc314d85282c8541052a70278ce932d31fac68965d4c3416283f7c0d"
+      },
+      "identical": true
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "camera": "Boczny",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "a1ac29fa3bd2debdca43a5b60f0eb8a9dd81f25aefc25a9e366702e52d9a30c1"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "a1ac29fa3bd2debdca43a5b60f0eb8a9dd81f25aefc25a9e366702e52d9a30c1"
+      },
+      "identical": true
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "camera": "Z góry",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "33ff6daaef1e6ca7bcb5237acbd7a2bae4ff3348935a66dd745f9a8ee8acbb6e"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "33ff6daaef1e6ca7bcb5237acbd7a2bae4ff3348935a66dd745f9a8ee8acbb6e"
+      },
+      "identical": true
+    },
+    {
+      "model": "octagon",
+      "width": 1440,
+      "camera": "Z boiska",
+      "baseline": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "446f81dab7017190ac47f79c09d8e511b3a46b20d23a26f20dc778203a3dbb16"
+      },
+      "candidate": {
+        "pixelWidth": 1107,
+        "pixelHeight": 461,
+        "sha256": "446f81dab7017190ac47f79c09d8e511b3a46b20d23a26f20dc778203a3dbb16"
+      },
+      "identical": true
+    }
+  ],
+  "errors": [],
+  "runtime": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "23.4.0",
+    "cpu": "Apple M1",
+    "flags": [
+      "--enable-webgl",
+      "--use-gl=angle",
+      "--use-angle=swiftshader"
+    ],
+    "browser": "149.0.7827.55",
+    "webgl": {
+      "dpr": 1,
+      "vendor": "Google Inc. (Google)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+      "version": "WebGL 1.0 (OpenGL ES 2.0 Chromium)"
+    }
+  },
+  "method": {
+    "repeats": 5,
+    "models": [
+      "w1",
+      "o1",
+      "p1",
+      "street15",
+      "circle-cage-1",
+      "circle-cage-2",
+      "street-field",
+      "octagon"
+    ],
+    "viewports": [
+      375,
+      1440
+    ],
+    "height": 1000,
+    "harnessCachePolicy": "Static dist/client files: Cache-Control public, max-age=3600. Worker HTML/API responses retain their original headers.",
+    "cold": "Fresh browser context, empty browser cache/storage; local server and OS cache not cold",
+    "warm": "Second navigation in the same context",
+    "edits": "Input event performance.now to current generation final draw timestamp; UI opening excluded",
+    "graphics": "One valid SVG image containing 500 paths; complex-project-import includes JSON validation, recovery backup and rendering; subsequent complex-scene-cached-redraw reuses floor texture",
+    "frameCapture": "Optional BENCH_CAPTURE=1: first repeat only; exact canvas RGBA SHA256 after three cameras, outside timed operations",
+    "startupByModel": {
+      "w1": "Legacy W1 fixed valid local draft seeded before navigation to /; W1 is not a public arena query option",
+      "o1": "Public /?arena=o1",
+      "p1": "Public /?arena=p1",
+      "street15": "Public /?arena=street15",
+      "circle-cage-1": "Public /?arena=circle-cage-1",
+      "circle-cage-2": "Public /?arena=circle-cage-2",
+      "street-field": "Public /?arena=street-field",
+      "octagon": "Public /?arena=octagon"
+    },
+    "fixture": {
+      "svgBytes": 22823,
+      "svgSha256": "1a1fda603652753a3b6ebd0141a92708b8ee36249acd3817ded9aad6e437d7de",
+      "pathCount": 500
+    }
+  },
+  "sources": {
+    "w1": {
+      "sourceRevision": "a81bfdec3013309db048d55e28700260bc835359237ca65aef70e15b641e203b",
+      "files": [
+        {
+          "path": "components/assets-blender/w1.json",
+          "sha256": "487fc6ae05448ae3fb6a7604dc5a524e0dc0f0be6d3f5db688436e9bcf314191"
+        },
+        {
+          "path": "public/arenas/boisko-w1.glb",
+          "sha256": "cae6c9dccf826d73e92816fe9a960e9849343a15cf0094087311d82886613a6f"
+        }
+      ]
+    },
+    "o1": {
+      "sourceRevision": "12d00e49dfad836ebbc7cde0b36528d9ac7b84fe6309786be99b6f3ad97ac581",
+      "files": [
+        {
+          "path": "components/assets-blender/o1.json",
+          "sha256": "cec7ae1f4b4c20eede64bd09e9e4f827aa8215bbc9476cb05bc634cfb826e72a"
+        }
+      ]
+    },
+    "p1": {
+      "sourceRevision": "4b5f694dc6067356875fcd791c9d26afef42d3022e382b88c4e4eaeb0982f84c",
+      "files": [
+        {
+          "path": "components/assets-blender/p1.json",
+          "sha256": "6725f91c6f0b7018149ec47eec2d8fe0119d60999965e1ecb2c50bb4b0c3f2c2"
+        },
+        {
+          "path": "components/assets-blender/p1-surface.json",
+          "sha256": "2748b094b3affdc5e9757c71558eadbe21cdcfeb1ea4f547b6fa15eec85627de"
+        }
+      ]
+    },
+    "street15": {
+      "sourceRevision": "5ea524e1717b39dd1d95ad9d222d2d0594b6eef6d848d3b3ecedfe848747e8be",
+      "files": [
+        {
+          "path": "public/arenas/street15.json",
+          "sha256": "176f3fd10a5b576155376ffccc914ea0d7fe34f714b34811986f681509999984"
+        }
+      ]
+    },
+    "circle-cage-1": {
+      "sourceRevision": "cd0cfc0551d42c616729abcc730ed809b09dcf87be82a2c33e02b6b0acc6e687",
+      "files": [
+        {
+          "path": "public/arenas/circle-cage-1.json",
+          "sha256": "d019703cc03557779e4d4d8df794d098aee86b14005f5ffbbd3a7b270721f5df"
+        }
+      ]
+    },
+    "circle-cage-2": {
+      "sourceRevision": "dd74af05a58f92649936f4f558ce0e9333ff01f7b9ec54a33c95bb4aa0eebc39",
+      "files": [
+        {
+          "path": "public/arenas/circle-cage-2.json",
+          "sha256": "897fc08a610b122d1962ea7cd7b7fc4351a2d279a1ea5d271a3d8243558d1339"
+        }
+      ]
+    },
+    "street-field": {
+      "sourceRevision": "ee0865e41f238c637b1e0d3078e31bc5adcb02c3d95f3851e146c86a145ee3f7",
+      "files": [
+        {
+          "path": "public/arenas/street-field.json",
+          "sha256": "cbd5b1944b2f6b085d312c9230291c733a9b40966174ab981e36ee8141c82846"
+        }
+      ]
+    },
+    "octagon": {
+      "sourceRevision": "5d204c44dc4e2a89727c30093a662a569aac2ebe5010fefed37d084a0f98242f",
+      "files": [
+        {
+          "path": "public/arenas/octagon.json",
+          "sha256": "d50e19df42fd154043de81a8723b320fc104b3ae9700288f0be1d8cc2317c877"
+        }
+      ]
+    }
+  }
+}

@@ -21,7 +21,7 @@ const report={schemaVersion:1,startedAt:new Date().toISOString(),status:'running
 for(const [model,g]of Object.entries(arenaGeometry)){report.sources[model]={sourceRevision:g.sourceRevision,files:[]};for(const f of g.sourceFiles??[]){const hash=createHash('sha256').update(await readFile(f.path)).digest('hex');assert.equal(hash,f.sha256,`Source hash mismatch: ${f.path}`);report.sources[model].files.push({path:f.path,sha256:hash});}}
 report.codeInputs={baseCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),state:'candidate',sha256:{}};
 for(const path of ['components/renderer.ts','components/blender-arena-preview.tsx','tests/renderer-baseline.mjs','package.json','pnpm-lock.yaml'])report.codeInputs.sha256[path]=createHash('sha256').update(await readFile(path)).digest('hex');
-try{report.codeInputs.sha256['lib/panel-artwork.ts']=createHash('sha256').update(await readFile('lib/panel-artwork.ts')).digest('hex')}catch(e){if(e.code!=='ENOENT')throw e}
+for(const path of ['lib/panel-artwork.ts','lib/circle-panel-sides.ts']){try{report.codeInputs.sha256[path]=createHash('sha256').update(await readFile(path)).digest('hex')}catch(e){if(e.code!=='ENOENT')throw e}}
 report.frames=[];report.method.frameCapture='Optional BENCH_CAPTURE=1: first repeat only; exact canvas RGBA SHA256 after three cameras, outside timed operations';
 const require=createRequire(import.meta.url),wranglerRequire=createRequire(require.resolve('wrangler/package.json'));
 const {Miniflare}=await import(wranglerRequire.resolve('miniflare'));

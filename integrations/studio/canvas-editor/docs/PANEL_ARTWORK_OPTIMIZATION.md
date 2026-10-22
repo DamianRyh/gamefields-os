@@ -65,3 +65,7 @@ Import W1/375 wzrósł w medianie48,8→65,7ms (+16,9ms). Podajemy zarówno ró�
 ## Bramki wydania
 
 PASS: TypeScript --noEmit, build, test:studio,84RGBA/cache/retry, renderer-comparison96komórek/48identycznychcanvasów, quote-engine, construction-pricing, pełne test:mobile96aren/48Street/16materiałów/JSON/Radar w375/390/430/1440 oraz Surface7viewport. Niezależne przeglądy receptury/cache, integracji i wyników PASS. Nie uruchamiano formularzy, zmian SQL ani podmiany geometrii.
+
+## Dalsza aktualizacja stron
+
+Wcześniejszy problem inner/outer CircleCage opisany powyżej naprawiono w następnym etapie jako kontrakt wizualizacji faset. Poprzedni opis granic wersji82 pozostaje historyczny. Szczegóły, dodatkowy koszt jednostronnych wrapperów i dowody: [CIRCLE_PANEL_SIDES](CIRCLE_PANEL_SIDES.md).
