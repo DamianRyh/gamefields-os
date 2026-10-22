@@ -1,3 +1,5 @@
+import './graphic-source-policy.mjs';
+import './graphic-boundaries.mjs';
 import './component-specification.mjs';
 import assert from 'node:assert/strict';
 import './inquiry-summary.mjs';

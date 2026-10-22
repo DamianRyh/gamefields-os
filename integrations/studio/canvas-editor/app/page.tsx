@@ -1,4 +1,5 @@
 "use client";
+import {graphicSourceError} from "@/lib/graphic-source-policy";
 import {useProjectRecovery} from "@/hooks/use-project-recovery";
 import {parseVaultProject} from "@/lib/project-vault";
 import {useProjectQuote} from "@/hooks/use-project-quote";
@@ -201,7 +202,7 @@ export default function Home(){
    }
  },[]);
  const uploadRef=useRef<HTMLInputElement>(null),importRef=useRef<HTMLInputElement>(null);
- async function importProject(file?:File){if(!file)return;if(file.size>12000000){toast.error("Plik projektu może mieć maksymalnie 12 MB.");return}let readyToReplace=false;try{const next=parseVaultProject(await file.text());readyToReplace=true;await recovery.preserveCurrent();finishDrag.current?.();history(p);setP(next);setSelectedId(null);setView("builder");toast.success("Wczytano projekt")}catch(error){toast.error(readyToReplace?(error as Error).message:"Nieprawidłowy plik projektu. Wybierz eksport JSON z edytora v0.5.")}}
+ async function importProject(file?:File){if(!file)return;if(file.size>12000000){toast.error("Plik projektu może mieć maksymalnie 12 MB.");return}let readyToReplace=false;try{const next=parseVaultProject(await file.text());readyToReplace=true;await recovery.preserveCurrent();finishDrag.current?.();history(p);setP(next);setSelectedId(null);setView("builder");toast.success("Wczytano projekt")}catch(error){const artworkIssue=(error as {issues?:{path:(string|number)[];message:string}[]}).issues?.find(issue=>issue.path.includes("src"));toast.error(readyToReplace?(error as Error).message:artworkIssue?"Nie można wczytać projektu: "+artworkIssue.message:"Nieprawidłowy plik projektu. Wybierz eksport JSON z edytora v0.5.")}}
  const dragStart=useRef<Project|null>(null);
  const finishDrag=useRef<(()=>void)|null>(null);
  const area=Math.round(courtArea(p)*100)/100;
@@ -275,7 +276,7 @@ export default function Home(){
    finishDrag.current=up;
    window.addEventListener("pointermove",move);window.addEventListener("pointerup",up);window.addEventListener("pointercancel",up)
  }
- function handleUploads(files:FileList|null){if(!files)return;[...files].forEach((f,i)=>{if(!["image/png","image/svg+xml"].includes(f.type)){toast.error("Obsługiwane są pliki PNG i SVG.");return}if(f.size>2000000){toast.error("Logo może mieć maksymalnie 2 MB.");return}const r=new FileReader();r.onerror=()=>toast.error("Nie udało się odczytać logo.");r.onload=()=>addObject(obj("image",f.name,300+i*25,300*p.width/p.length,{src:String(r.result),scale:90}));r.readAsDataURL(f)})}
+ function handleUploads(files:FileList|null){if(!files)return;[...files].forEach((f,i)=>{if(!["image/png","image/svg+xml"].includes(f.type)){toast.error(`${f.name}: obsługiwane są pliki PNG i statyczne SVG.`);return}if(f.size>2000000){toast.error(`${f.name}: logo może mieć maksymalnie 2 MB.`);return}const r=new FileReader();r.onerror=()=>toast.error(`${f.name}: nie udało się odczytać logo.`);r.onload=()=>{const src=String(r.result),error=graphicSourceError(src);if(error){toast.error(`${f.name}: ${error}`);return}addObject(obj("image",f.name,300+i*25,300*p.width/p.length,{src,scale:90}))};r.readAsDataURL(f)})}
  function addText(){const o=obj("text","Tekst",300,180,{text:"TWOJE MIASTO",color:"#ffffff",scale:100});addObject(o)}
  function addEquipment(name:string,x=300,y=180){addObject(obj("equipment",name,x,y,{scale:name==="Banda"?100:85}))}
  function applyPalette(id:string,track=true){const pal=getPatternPalette(id);update({patternPalette:id,base:pal.colors[4],zone:pal.colors[1]},track)}

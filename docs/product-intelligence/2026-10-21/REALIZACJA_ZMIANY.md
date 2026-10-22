@@ -37,12 +37,20 @@ Dane przechowywane są w przeglądarce/profilu/kontekście strony, nie w chmurze
 - **S4-04 PARTIAL:** eksport rozdziela swobodne obiekty od artykułów; nazwa dekoracji równa articleId nie daje jej statusu części konstrukcyjnej. Bez przebudowy starego Project JSON.
 - **S5-04 PARTIAL:** w Podsumowaniu dostępny eksport GF-PROJECT-SPECIFICATION-1 z pełnym projektem/grafikami, deterministycznym SHA256 konfiguracji, rewizją modelu/katalogu i ilością nawierzchni. technicalBill.rows=null, ponieważ Studio nie ma zatwierdzonych instancji. Dostępny katalog rodziny nie jest BOM wybranego boiska. Aktualnych cen nie utrwalamy jako wiążącej wyceny.
 
+## S3-02 — profil statycznych grafik
+
+**DONE w zakresie profilu statycznego SVG:** wspólny validator w upload i projectSchema; zasięg obejmuje import, szkic, warianty, szablony, kalkulację i specyfikację. Poprawne grafiki zachowują dokładne bajty. Niedozwolone źródła są odrzucane przed zmianą projektu; recovery chroni surowy zapis. Mieszana paczka poprawnego/aktywnego SVG i odrzucony import sprawdzone w przeglądarce.
+
+Profil odrzuca skrypty, zdarzenia, DTD/encje, animację, zewnętrzne odwołania i nieobsługiwane konstrukcje; do2MB UTF8/base64,10000tokenów,głębokość64. `use`, filtry, obrazy osadzone, arkusze style i metadane edytorów wymagają innego eksportu/PNG. Dotychczasowy kontrakt PNG zachowano; nie deklarujemy nowej walidacji sygnatur PNG ani gwarancji kosztu renderowania ścieżek/wzorów. Nie stwierdzono i nie deklarujemy wykazanego wcześniejszego XSS. Kontrakt opisuje ograniczenia.
+
+Pracował prowadzący wdrożenie i trzech ekspertów: profil SVG, mapowanie komponentów OS i kolejność prac. Niezależny przegląd źródeł i testów nie znalazł blokującego obejścia ograniczonego profilu. Zweryfikowano także zgodność13 aktywnych GLB OS F05/F06/F07 z rejestrem poSHA; nie zmieniono konfiguracji OS ani modeli.
+
 ## Kolejność dalszej pracy
 
-1. Potwierdzić docelowe rewizje i obrysy produktów oraz techniczne połączenia, rozstawy i dane artykułów. R02 nadal nie jest wydaniem. Cyfrowy rejestr nie zastępuje zatwierdzenia wykonawczego.
-2. Po potwierdzeniu danych spiąć istniejące instancje OS z rejestrem articleId/family/revision/unit, następnie ze Studio. Ilości BOM muszą wynikać z instancji; nie wolno dopasowywać ich po swobodnych nazwach dekoracji ani uznawać listy katalogowej za skład modelu.
-3. Uzupełnić komercyjne stawki nawierzchni, montażu, transportu oraz warunki podatkowe/ofertowe. Rozszerzyć eksport o techniczny BOM i aktualną wycenę dopiero po powiązaniu ich z tą samą konfiguracją. Aktywne orientacyjne ceny konstrukcji pozostają.
-4. S3-02/S6: polityka przyjmowania grafik z bezpiecznymi i wrogimi przypadkami SVG, powtarzalne pomiary renderera; odrębnie urządzenia fizyczne, czytnik ekranu i badania z klientami. Zadania zależne od danych nie są oznaczone DONE.
+1. **Następny etap możliwy bez zatwierdzenia wykonawczego:** oddzielny inspektor cyfrowej konfiguracji OS. Ściśle walidować kopertę GF-OWNED-ASSEMBLY-1, użyć config, ponownie wygenerować instancje istniejącym silnikiem i zignorować dołączone bom. Powiązać alias+family z articleId/revision/sourceRevision. Nie przypisywać tych ilości do innej konfiguracji Studio.
+2. **S2-04/S6:** ustalić powtarzalny scenariusz i zmierzyć start/aktualizację renderera, w tym złożone grafiki; dopiero potem określić budżet i optymalizować. Oddzielić testy automatyczne od telefonu fizycznego/czytnika ekranu/badań z klientami. Głębsza kontrola rastrów jest osobnym zakresem zgodności.
+3. **Dane wykonawcze:** potwierdzić docelowe rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po jawnym powiązaniu instancji z projektem Studio rozszerzyć techniczny BOM; brak danych pozostaje rows=null, nie zero.
+4. **Dane komercyjne:** uzupełnić nawierzchnię, montaż, transport i warunki podatkowe/ofertowe; związać aktualną wycenę i BOM z tą samą konfiguracją. Nie zmieniać aktywnych orientacyjnych cen konstrukcji na podstawie dawnych zaleceń.
 
 Pozostałe zależności WordPress: instalacja i osobista aktywacja WPCode przez właściciela, potwierdzone fakty prywatności, odbiór wcześniejszego pojedynczego testu poczty. Nie wysyłać kolejnych testów bez nowej instrukcji.
 
@@ -68,3 +76,12 @@ PASS: TypeScript, build, test:studio (w tym project-vault/draft-write), quote-en
 PASS: TypeScript, build, test:studio, component-specification, weryfikacja56 źródeł, quote-engine, construction-pricing i pełne test:mobile (96aren,48Street,16materiałów,JSON,Radar;375/390/430/1440). Rzeczywisty pobrany eksport ma poprawny kod GF-CT-008, powierzchnię29,823379m², pełny projekt i SHA zgodny z niezależnym odtworzeniem. Na375px brak przepełnienia, przycisk50px i tekst16px. Brak testu fizycznego urządzenia i czytnika ekranu. Bez wysyłania formularzy, zmian SQL, podmiany R02 lub stawek.
 
 Kontrakt i ograniczenia: [COMPONENT_SPECIFICATION](../../../integrations/studio/canvas-editor/docs/COMPONENT_SPECIFICATION.md). Rejestr cyfrowy i gotowy adapter nie oznaczają wdrożonego technicznego BOM. Jego status pozostaje PARTIAL; rows=null w specyfikacji jest celowe.
+
+
+## Wydanie profilu grafik — Studio79
+
+22.10.2026: źródło `6064726a56ee7f67de8dea67e8ebf535a6968ef1`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_38006ef1d96081918b36e73454fd0ba8`, deployment `appgdep_6ad9aaf1e1288191bdc0aeb4d418280a` — **succeeded**, środowisko revision3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka SHA256 `0993fcf376a91fc718280fb20440c068276fdde287bdd306b9b86b5f7edd1f32`.
+
+PASS: TypeScript/build/test:studio, graphic-source-policy, graphic-boundaries, quote-engine/construction-pricing, pełne test:mobile oraz Surface7viewport. Ręcznie: mieszana paczka dodała poprawne SVG i odrzuciła aktywne; eksport zachował dokładne bajty poprawnego SVG i nie zawierał odrzuconego obiektu. Nieprawidłowy import pozostawił konfigurację dokładnie bez zmian; poprawny import potwierdzono nazwą. Na375px brak przepełnienia, tekst informacji14px. Bez testu fizycznego telefonu, gwarancji kosztu renderowania lub pełnej walidacji PNG.
+
+Kontrakt: [GRAPHIC_SOURCE_POLICY](../../../integrations/studio/canvas-editor/docs/GRAPHIC_SOURCE_POLICY.md). Nie zmieniono modeli R02, stawek ani SQL; nie wysłano formularza. Dane produkcyjne nie otrzymały testowych grafik.

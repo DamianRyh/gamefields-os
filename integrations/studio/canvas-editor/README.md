@@ -150,3 +150,7 @@ Pliki projektu zawierają ochronę uszkodzonego szkicu, poprzednią kopię i do 
 ## Specyfikacja i cyfrowe artykuły — 22.10.2026
 
 Podsumowanie eksportuje pełną konfigurację z SHA256 i rewizją modelu. Rejestr 56 cyfrowych elementów i adapter jednej rodziny przygotowują dalszą integrację BOM. Połączenia i artykuły wykonawcze pozostają niezatwierdzone. Kontrakt: [COMPONENT_SPECIFICATION](docs/COMPONENT_SPECIFICATION.md).
+
+## Statyczne grafiki — 22.10.2026
+
+Wspólny profil statycznego SVG chroni upload, import i odczyt projektów. Poprawne źródła zachowują bajty, odrzucone pliki mają czytelny komunikat; odzyskiwanie nie nadpisuje niezgodnego szkicu. PNG zachowuje poprzedni kontrakt. Zakres i ograniczenia: [GRAPHIC_SOURCE_POLICY](docs/GRAPHIC_SOURCE_POLICY.md).

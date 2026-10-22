@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-22",
+  "version": 79,
+  "sourceCommit": "6064726a56ee7f67de8dea67e8ebf535a6968ef1",
+  "deployment": "appgdep_6ad9aaf1e1288191bdc0aeb4d418280a",
+  "status": "succeeded",
+  "envSetRevision": 3,
+  "checks": [
+    "typescript",
+    "build",
+    "studio-scope",
+    "graphic-source-policy",
+    "graphic-boundaries",
+    "quote-engine",
+    "construction-pricing",
+    "studio-mobile-goals",
+    "studio-surface-readability"
+  ],
+  "browser": {
+    "mixedUploadAccepted": 1,
+    "mixedUploadRejected": 1,
+    "safeSvgExactBytes": true,
+    "hostileImportProjectUnchanged": true,
+    "safeImportRenamedProject": true,
+    "documentWidth375": 375,
+    "hintFontPx": 14
+  },
+  "limits": [
+    "Conservative static SVG subset",
+    "PNG signature contract unchanged",
+    "Rendering cost not bounded universally",
+    "No physical-device test"
+  ],
+  "experts": [
+    "SVG policy",
+    "OS mapping and independent review",
+    "roadmap acceptance"
+  ]
+}

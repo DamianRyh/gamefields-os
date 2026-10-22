@@ -150,3 +150,10 @@ Continue existing Product Intelligence plan with geometry, UX and progress agent
 - DONE: inwentaryzacja 56 cyfrowych artykułów i izolowany adapter jednej rodziny; źródła/revizje/ilości walidowane.
 - DONE: eksport specyfikacji konfiguracji z pełnym Project i SHA256 w istniejącym Podsumowaniu.
 - PENDING: zatwierdzenie artykułów i połączeń; spięcie instancji OS/Studio w techniczny BOM. Rejestr cyfrowy i lista dostępnych elementów nie stanowią BOM wybranego modelu.
+
+## Aktualizacja S3-02 — 22.10.2026
+
+- DONE (ograniczony profil): statyczne SVG, wspólny upload/schema, wrogie przypadki, zachowane bajty, ochrona odrzuconego importu i surowego szkicu.
+- NEXT: powtarzalny pomiar renderera i kosztów złożonych grafik; głębsza walidacja rastrów wymaga osobnego zakresu zgodności PNG.
+- Mapowanie13 aktywnych GLB F05/F06/F07 do rejestru potwierdzone po SHA. Następny niezależny etap cyfrowego BOM może użyć oddzielnego inspektora konfiguracji OS; nie wolno przypisać jego ilości do innego projektu Studio bez wiązania konfiguracji.
+- Nadal wymagane dane: połączenia/artykuły wykonawcze i wybór rewizji R02, ceny pozostałych zakresów, urządzenia i badania z klientami.
