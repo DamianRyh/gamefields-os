@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-22",
+  "sourceCommit": "d770de1a5fcb4e10c77ac80a6ff697d0d3e1b185",
+  "checks": {
+    "typescript": "PASS",
+    "build": "PASS",
+    "studioScope": "PASS",
+    "projectVault": "PASS",
+    "draftWrite": "PASS",
+    "quoteEngine": "PASS",
+    "constructionPricing": "PASS",
+    "mobileRegression": "PASS"
+  },
+  "mobile": {
+    "widths": [
+      375,
+      390,
+      430,
+      1440
+    ],
+    "arenaScenes": 96,
+    "streetScenes": 48,
+    "materialSwitches": 16,
+    "jsonAndRadar": "PASS"
+  },
+  "manualBuiltWorker": {
+    "corruptRawPreserved": "PASS",
+    "recoverPrevious": "PASS",
+    "saveNamedAandB": "PASS",
+    "compareWithDifferentTextObjects": "PASS",
+    "fullJsonExport": "PASS",
+    "restoreAndUndoExactCanonicalValues": "PASS",
+    "reloadPersistsLibrary": "PASS",
+    "undoLastDeletionAfterReload": "PASS",
+    "mobile375DocumentWidth": 375,
+    "comparisonHeadingTop": 419
+  },
+  "limits": [
+    "Browser-local storage only",
+    "No production QA variants created",
+    "No physical device or screen-reader test",
+    "R02 candidates not deployed",
+    "Local archive blocked by ENOSPC; remote-build publication used"
+  ],
+  "publication": {
+    "version": 77,
+    "deployment": "appgdep_6ad99e344664819188ef8ec2e456a076",
+    "status": "succeeded",
+    "envSetRevision": 3,
+    "publicSectionsConfirmed": true,
+    "pricingStillActive": true
+  }
+}

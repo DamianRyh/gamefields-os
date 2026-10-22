@@ -1,6 +1,23 @@
 # Gamefields — realizacja zaleceń po audycie
 
-## Aktualny stan — wersja 76, realizacja zmiany.txt
+## Wersja 77 — odzyskiwanie i warianty, 22.10.2026
+
+Źródło `d770de1a5fcb4e10c77ac80a6ff697d0d3e1b185`. Zapisana wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_cbf02b25e8bc819196b71b437ff67ccd`. Publikacja: `appgdep_6ad99e344664819188ef8ec2e456a076` — **succeeded**, środowisko revision3, [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Na produkcji potwierdzono sekcje odzyskiwania i pustej biblioteki wariantów oraz działającą kalkulację Panna Octa. Nie dodawano testowych wariantów do magazynu produkcyjnego.
+
+- S3-01: zgodny adapter Project, kopia przed zastąpieniem, ochrona uszkodzonego szkicu i błędów pamięci, pobranie surowych danych oraz jawne wznowienie. Format starych JSON i nazwy własne zachowane.
+- S3-03: sześć nazwanych pełnych wariantów w istniejących Plikach projektu. Porównanie dwóch planów 2D i parametrów; przywrócenie z Cofnij i kontrolą rewizji. Cofnięcie ostatniego usunięcia działa po odświeżeniu.
+- Dane pozostają w przeglądarce/profilu/kontekście strony; to nie kopia w chmurze. Porównanie nie udaje aktualnej wyceny: cena odświeża się po przywróceniu.
+- Rejestr rewizji: 42 pliki zweryfikowane, sześć różnic obrysu, wszyscy kandydaci R02 z releaseEligible=false. Pełne wewnętrzne raporty zachowane lokalnie; do publicznego repozytorium trafia wyłącznie status. Bez podmiany modeli, zmiany cen i zapisów SQL.
+
+PASS: TypeScript, build, test:studio, project-vault, draft-write, quote-engine, construction-pricing, pełne test:mobile (375/390/430/1440; 96 scen aren, 48 Street, 16 materiałów, JSON i Radar). Ręczna kontrola zbudowanego Workera potwierdziła odzyskanie, zapis A/B z odmiennymi obiektami, porównanie, eksport, dokładne przywrócenie/Cofnij oraz cofnięcie usunięcia po odświeżeniu. Widok375px bez przepełnienia; poprawiono odstęp nagłówka porównania od przyklejonego paska.
+
+Lokalne pakowanie przerwał ENOSPC po zapisaniu i wypchnięciu źródła. Skorzystano z obsługiwanego budowania serwerowego tej samej zapisanej wersji. Nie usuwano modeli ani projektów klienta. Nie wysyłano formularzy ani wiadomości.
+
+Następne zależności: docelowe rewizje i techniczne dane konstrukcji, zatwierdzony rejestr artykułów/kompatybilności i BOM, pozostałe stawki oraz specyfikacja z rewizją. Odrębnie: bezpieczne/wrogie grafiki, pomiary renderera, fizyczne urządzenia i badania z ludźmi. [Aktualna kolejność prac](../../../product-intelligence/2026-10-21/REALIZACJA_ZMIANY.md).
+
+---
+
+## Historia — wersja 76, realizacja zmiany.txt
 
 **21.10.2026:** [Studio](https://gamefields-studio.ryhfs90.chatgpt.site) wersja **76**, commit `0e5000edf7d3c955518e8140af9d2dd10276885c`, deployment `appgdep_6ad920a463148191967a841c4190ba77` — **succeeded**, revision środowiska 3. Kontynuacja planu Product Intelligence z udziałem prowadzącego wdrożenie i trzech agentów: geometria, UX i stan sprintów. Dokument właściciela urywa się w Sprincie6; nie dopowiadano brakującej części.
 
@@ -133,3 +150,4 @@ PASS: TypeScript, produkcyjny build, test:studio (300wzorów/19palet), studio-us
 ![Wysłany jeden test formularza](06-form-test-sent.png)
 
 Podejście do odraczania ciężkiego osadzenia: [Google Chrome — third-party facades](https://developer.chrome.com/docs/lighthouse/performance/third-party-facades). Czcionka i licencja: [oficjalne repozytorium Google Fonts](https://github.com/google/fonts/tree/main/ofl/spacegrotesk).
+

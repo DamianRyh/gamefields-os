@@ -153,3 +153,7 @@ S5-03 now waits for an origin/source/request/length-matched WordPress acknowledg
 ## Brief zmiany.txt — geometry slice, 2026-10-21
 
 Continue existing Product Intelligence plan with geometry, UX and progress agents. Shared generated metadata for eight live models now supplies both quote area and dimension presentation. Stored reference dimensions, floor bounds/top-face area and construction-with-goals envelope are separate. Legacy project fields, source meshes, current rate card and exact quote areas are unchanged; clearance and module pitch stay unknown. No R02 source rollout or engineering approval. See docs/PROJECT_DIMENSIONS.md and tests/project-dimensions.mjs. Full roadmap status is recorded separately; this slice does not complete every sprint.
+
+## Odzyskiwanie i warianty — 22.10.2026
+
+S3-01/S3-03 wykonane w zakresie lokalnym: kopia przed zastąpieniem, ochrona uszkodzonego szkicu i błędów pamięci, sześć pełnych wariantów, porównanie dwóch planów/parametrów, przywrócenie i Cofnij, kontrola rewizji. Testy domenowe, TypeScript, build i pełny mobile PASS. Szczegóły w PROJECT_RECOVERY_VARIANTS.md. Rejestr 42 plików live/R02 zweryfikowany osobno; kandydaci R02 nadal nieprzeznaczeni do publikacji. Nie zmieniono modeli ani stawek.

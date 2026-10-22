@@ -1,4 +1,6 @@
 "use client";
+import {useProjectRecovery} from "@/hooks/use-project-recovery";
+import {parseVaultProject} from "@/lib/project-vault";
 import {useProjectQuote} from "@/hooks/use-project-quote";
 import {nextProjectName} from "@/lib/studio-ux.mjs";
 /* eslint-disable @next/next/no-html-link-for-pages */
@@ -176,29 +178,14 @@ export default function Home(){
  const templateRequest=useRef(0);
  async function loadTemplates(page=1){const request=++templateRequest.current;setTemplatesLoading(true);setTemplateError("");try{const r=await fetch("/api/templates?page="+page,{cache:"no-store"});if(!r.ok)throw new Error();const data=await r.json() as {items:TemplateCard[];pages:number};if(request!==templateRequest.current)return;setTemplates(data.items);setTemplatePage(page);setTemplateTotal(data.pages)}catch{if(request===templateRequest.current)setTemplateError("Nie udało się pobrać katalogu. Spróbuj ponownie.")}finally{if(request===templateRequest.current)setTemplatesLoading(false)}}
  function showTemplates(){setView("templates");void loadTemplates(1)}
- async function openTemplate(item:TemplateCard){if(openingTemplate!==null)return;setOpeningTemplate(item.id);try{const r=await fetch("/api/templates?id="+item.id,{cache:"no-store"});if(!r.ok)throw new Error();const data=await r.json() as {project:unknown};const original=projectSchema.parse(data.project);const copy={...original,id:"GF-"+uid(),name:item.title.slice(0,190)+" — kopia",objects:original.objects.map(o=>({...o,id:uid()}))};finishDrag.current?.();history(p);setP(copy);setSelectedId(null);setView("builder");toast.success("Otworzono kopię wzoru. Oryginał pozostaje bez zmian.")}catch{toast.error("Ten wzór nie ma poprawnego pliku projektu lub został wycofany.")}finally{setOpeningTemplate(null)}}
+ async function openTemplate(item:TemplateCard){if(openingTemplate!==null)return;setOpeningTemplate(item.id);let readyToReplace=false;try{const r=await fetch("/api/templates?id="+item.id,{cache:"no-store"});if(!r.ok)throw new Error();const data=await r.json() as {project:unknown};const original=projectSchema.parse(data.project);const copy={...original,id:"GF-"+uid(),name:item.title.slice(0,190)+" — kopia",objects:original.objects.map(o=>({...o,id:uid()}))};readyToReplace=true;await recovery.preserveCurrent();finishDrag.current?.();history(p);setP(copy);setSelectedId(null);setView("builder");toast.success("Otworzono kopię wzoru. Oryginał pozostaje bez zmian.")}catch(error){toast.error(readyToReplace?(error as Error).message:"Ten wzór nie ma poprawnego pliku projektu lub został wycofany.")}finally{setOpeningTemplate(null)}}
  useEffect(()=>{if(new URLSearchParams(window.location.search).get("view")==="templates"){setView("templates");void loadTemplates(1)}},[]);
 
  const [homeEmbed,setHomeEmbed]=useState(false);
  useEffect(()=>{const embedded=new URLSearchParams(window.location.search).get("home")==="1";setHomeEmbed(embedded);if(embedded)setView("builder")},[]);
  const [p,setP]=useState<Project>(initial),[view,setView]=useState("builder"),[module,setModule]=useState(0),[iso,setIso]=useState(false),[previewMode,setPreviewMode]=useState<"realistic"|"aerial"|"ground">("realistic"),[previewLocation,setPreviewLocation]=useState<RealisticLocation>("park"),[selectedId,setSelectedId]=useState<string|null>(null),[undoStack,setUndo]=useState<Project[]>([]),[redoStack,setRedo]=useState<Project[]>([]);
- const [draftReady,setDraftReady]=useState(false),[saveStatus,setSaveStatus]=useState("Wczytywanie szkicu…");
- useEffect(()=>{
-  const params=new URLSearchParams(window.location.search);
-  if(!["arena","sport","pattern","view"].some(key=>params.has(key))){
-   try{const raw=localStorage.getItem("gamefields-studio-draft-v1");if(raw){const draft=projectSchema.parse(JSON.parse(raw));setP(draft)}}catch{setSaveStatus("Nie udało się odczytać szkicu")}
-  }
-  setDraftReady(true);
- },[]);
- useEffect(()=>{
-  if(!draftReady)return;
-  setSaveStatus("Zapisywanie…");
-  const timer=window.setTimeout(()=>{
-   try{projectSchema.parse(p);localStorage.setItem("gamefields-studio-draft-v1",JSON.stringify(p));setSaveStatus("Zapisano w tej przeglądarce")}
-   catch{setSaveStatus("Pobierz projekt, aby zachować zmiany")}
-  },350);
-  return()=>window.clearTimeout(timer);
- },[p,draftReady,homeEmbed]);
+ const recovery=useProjectRecovery(p,setP);
+ const saveStatus=recovery.saveStatus;
  useEffect(()=>{if(!REALISTIC_LOCATIONS.some(location=>location.id===previewLocation&&location.enabled))setPreviewLocation("park")},[previewLocation]);
  useEffect(()=>{
    const params=new URLSearchParams(window.location.search);
@@ -214,7 +201,7 @@ export default function Home(){
    }
  },[]);
  const uploadRef=useRef<HTMLInputElement>(null),importRef=useRef<HTMLInputElement>(null);
- async function importProject(file?:File){if(!file)return;if(file.size>12000000){toast.error("Plik projektu może mieć maksymalnie 12 MB.");return}try{const next=projectSchema.parse(JSON.parse(await file.text()));if(new Set(next.objects.map(o=>o.id)).size!==next.objects.length)throw new Error("ids");history(p);setP(next);setSelectedId(null);setView("builder");toast.success("Wczytano projekt")}catch{toast.error("Nieprawidłowy plik projektu. Wybierz eksport JSON z edytora v0.5.")}}
+ async function importProject(file?:File){if(!file)return;if(file.size>12000000){toast.error("Plik projektu może mieć maksymalnie 12 MB.");return}let readyToReplace=false;try{const next=parseVaultProject(await file.text());readyToReplace=true;await recovery.preserveCurrent();finishDrag.current?.();history(p);setP(next);setSelectedId(null);setView("builder");toast.success("Wczytano projekt")}catch(error){toast.error(readyToReplace?(error as Error).message:"Nieprawidłowy plik projektu. Wybierz eksport JSON z edytora v0.5.")}}
  const dragStart=useRef<Project|null>(null);
  const finishDrag=useRef<(()=>void)|null>(null);
  const area=Math.round(courtArea(p)*100)/100;
@@ -319,7 +306,7 @@ export default function Home(){
  <section className="entry-workspace" aria-label={"Podgląd boiska "+getSportProfile(p.sport,p.arenaModel).label}><div className="entry-preview-head"><span><i/> {p.sport==="Piłka nożna 1×1"?"TWÓJ PROJEKT PANNA 1×1":homeEmbed?"TWÓJ PROJEKT BOISKA 3 NA 3":"PODGLĄD TWOJEGO BOISKA"}</span><span>{p.sport==="Piłka nożna 1×1"?"1 × 1 / PANNA":homeEmbed?"PARK / WIDOK BOCZNY":"3 × 3 / FOOTBALL"}</span></div><div className={hasLiveCompositor?"entry-realistic":"entry-court"}>{hasLiveCompositor?<RealisticPreviewComponent project={p} view="perspective" location="park"/>:<Court p={p}/>}</div><div className="entry-preview-meta"><span>{courtDimensions(p)} · {p.surface}</span><span>{getPatternFamily(p.patternFamily).name}</span></div><div className="entry-directions"><span>{homeEmbed?"WYBIERZ STYL SWOJEGO BOISKA":"WYBIERZ PIERWSZY KIERUNEK"}</span><div>{signaturePresets.slice(0,3).map(preset=><button key={preset.id} aria-pressed={p.patternFamily===preset.familyId&&p.patternVariant===preset.variant} onClick={()=>applyDesignDirection(preset.familyId,preset.variant,preset.paletteId)}><span className="entry-swatches">{getPatternPalette(preset.paletteId).colors.slice(0,3).map((color,i)=><i key={i} style={{background:color}}/>)}</span><b>{preset.name}</b><span className="entry-direction-mark">{p.patternFamily===preset.familyId&&p.patternVariant===preset.variant?"✓":"↗"}</span></button>)}</div></div></section>
  </main>:null}
  {view==="builder"?<StudioWorkspace
-  project={p} quote={quote} saveStatus={saveStatus} selected={selected} canUndo={!!undoStack.length} canRedo={!!redoStack.length}
+  project={p} recovery={recovery} restoreProject={next=>{const restored=parseVaultProject(next);finishDrag.current?.();history(p);setP(restored);setSelectedId(null)}} downloadProject={project=>download(project)} quote={quote} saveStatus={saveStatus} selected={selected} canUndo={!!undoStack.length} canRedo={!!redoStack.length}
   previewMode={previewMode} location={previewLocation} hasLivePreview={hasRealisticPreview}
   update={update} selectSport={selectSport} setPreviewMode={setPreviewMode} setLocation={setPreviewLocation}
   undo={undo} redo={redo} download={()=>download(p)} importProject={file=>{void importProject(file)}}

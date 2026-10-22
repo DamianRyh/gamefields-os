@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import './inquiry-summary.mjs';
 import './inquiry-transport.mjs';
 import './project-dimensions.mjs';
+import './project-vault.mjs';
+import './draft-write.mjs';
 import {readFile,readdir,access} from 'node:fs/promises';
 import {resolve} from 'node:path';
 const root=resolve(import.meta.dirname,'..');

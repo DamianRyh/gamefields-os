@@ -7,6 +7,8 @@ import type {QuoteState} from "@/hooks/use-project-quote";
 import type {Project,EditorObject,Target} from "@/lib/project";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 import {getPatternFamily,getPatternPalette,patternPalettes,signaturePresets,variants} from "@/lib/pattern-library";
+import type {useProjectRecovery} from "@/hooks/use-project-recovery";
+import {ProjectVariants} from "@/components/project-variants";
 import {ProjectDimensions} from "@/components/project-dimensions";
 import {courtDimensions} from "@/lib/court-geometry";
 import {surfaceLabel} from "@/lib/surface-materials";
@@ -19,6 +21,7 @@ import {inquirySummary} from "@/lib/inquiry-summary.mjs";
 import {productCodes} from "@/lib/product-names.mjs";
 
 type Props={
+ recovery:ReturnType<typeof useProjectRecovery>;restoreProject:(p:Project)=>void;downloadProject:(p:Project)=>void;
  quote:QuoteState;project:Project;saveStatus:string;selected:EditorObject|null;canUndo:boolean;canRedo:boolean;
  previewMode:"realistic"|"aerial"|"ground";location:RealisticLocation;hasLivePreview:boolean;
  update:(patch:Partial<Project>,track?:boolean)=>void;selectSport:(profile:SportProfile,enter?:boolean)=>void;
@@ -38,6 +41,8 @@ export function StudioWorkspace(props:Props){
  const [patternsOpen,setPatternsOpen]=useState(false),[summaryOpen,setSummaryOpen]=useState(false),[editPlan,setEditPlan]=useState(false),[zoom,setZoom]=useState(props.previewMode==="aerial"?170:100);
  const [activeTool,setActiveTool]=useState<StudioTool>("surface"),[materialOpen,setMaterialOpen]=useState(false),[advancedOpen,setAdvancedOpen]=useState(false);
  const [inquiryError,setInquiryError]=useState("");
+ const [fileError,setFileError]=useState("");
+ const fileAction=async(action:()=>Promise<void>|void)=>{setFileError("");try{await action()}catch(error){setFileError((error as Error).message)}};
  const [inquiryState,setInquiryState]=useState<InquiryState>("idle"),[inquiryMessage,setInquiryMessage]=useState("");
  const inquiryTransport=useRef<ReturnType<typeof createInquiryTransport>|null>(null);
  const modalTrigger=useRef<HTMLElement|null>(null);
@@ -105,7 +110,7 @@ export function StudioWorkspace(props:Props){
   <header className="studio-topbar">
    <a href="https://www.gamefields.eu/" target="_top" className="studio-logo" aria-label="Gamefields — strona główna">gamefields <span>studio</span></a>
    <input aria-label="Nazwa projektu" maxLength={200} value={p.name} onChange={e=>update({name:e.target.value},false)} className="studio-project-name"/>
-   <span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span><div className="studio-top-actions"><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={props.download}><Download size={18}/><span>Pobierz projekt</span></button><QuoteBadge quote={props.quote} onClick={showSummary}/></div>
+   {props.recovery.blocked?<button className="studio-save studio-recovery-status" aria-label="Otwórz odzyskiwanie projektu" onClick={()=>openTool("files")}>{props.saveStatus}</button>:<span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span>}<div className="studio-top-actions"><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={props.download}><Download size={18}/><span>Pobierz projekt</span></button><QuoteBadge quote={props.quote} onClick={showSummary}/></div>
   </header>
   <div className="studio-screen">
    <nav className="studio-tool-rail" aria-label="Narzędzia edycji">{([[
@@ -150,6 +155,9 @@ export function StudioWorkspace(props:Props){
     {activeTool==="construction"?<div className="studio-construction-content"><ProjectDimensions project={p} collapsed/>{p.arenaModel?<ArenaSettings project={p} onChange={update}/>:<p>Wybierz model konstrukcji, aby edytować jej kolory.</p>}<button className="studio-change-model" onClick={openModel}>Zmień boisko <ArrowRight size={15}/></button></div>:null}
     {props.selected?<section className="studio-object-editor"><div><h2>{props.selected.name}</h2><button aria-label="Zamknij edycję elementu" onClick={()=>props.selectObject(null)}><Minus size={17}/></button></div>{props.selected.kind==="text"||props.selected.kind==="sponsor"?<label>Treść<input value={props.selected.text||""} onChange={e=>props.updateObject(props.selected!.id,{text:e.target.value})}/></label>:null}<label>Miejsce<select value={props.selected.target} onChange={e=>props.updateObject(props.selected!.id,{target:e.target.value as Target})}>{Object.entries(targetNames).map(([key,value])=><option key={key} value={key}>{value}</option>)}</select></label>{props.selected.kind!=="equipment"?<label>Kolor<input type="color" value={props.selected.color} onChange={e=>props.updateObject(props.selected!.id,{color:e.target.value})}/></label>:null}{([["scale","Rozmiar",20,220],["rotation","Obrót",-180,180],["opacity","Widoczność",0,100]] as const).map(([key,label,min,max])=><label className="studio-range" key={key}><span>{label}<b>{props.selected![key]}{key==="rotation"?"°":"%"}</b></span><input type="range" min={min} max={max} value={props.selected![key]} onChange={e=>props.updateObject(props.selected!.id,{[key]:Number(e.target.value)})}/></label>)}<button className="studio-delete" onClick={()=>props.removeObject(props.selected!.id)}><Trash2 size={15}/> Usuń element</button></section>:null}
     {activeTool==="files"?<p className="studio-file-help">Szkic zapisuje się automatycznie tylko w tej przeglądarce. Pobierz plik JSON, aby mieć kopię lub kontynuować na innym urządzeniu. Wczytanie pliku zastąpi bieżący widok projektu.</p>:null}<div className="studio-panel-actions" hidden={activeTool!=="files"}><button onClick={props.download}><Download size={18}/> Pobierz projekt</button><button onClick={()=>importRef.current?.click()}><FolderOpen size={17}/> Wczytaj projekt JSON</button><input hidden ref={importRef} type="file" accept=".json,.txt,application/json,text/plain" onChange={e=>{props.importProject(e.target.files?.[0]);e.target.value=""}}/></div>
+    {activeTool==="files"?<section className="studio-recovery"><h2>Odzyskiwanie szkicu</h2>{props.recovery.message?<p role="alert">{props.recovery.message}</p>:null}<p>Poprzednia poprawna kopia pozostaje w tej przeglądarce. Przywrócenie zastąpi bieżący widok; możesz je cofnąć.</p><button disabled={!props.recovery.previousAvailable} onClick={()=>void fileAction(async()=>props.restoreProject(await props.recovery.recoverPrevious()))}>Przywróć poprzedni szkic</button>{props.recovery.blocked?<><button onClick={()=>void fileAction(props.recovery.downloadOriginal)}>Pobierz zachowane dane szkicu</button><button onClick={()=>void fileAction(props.recovery.authorizeReplacement)}>Kontynuuj z bieżącym projektem</button><p>Kontynuacja zachowa dotychczasowe dane przed wznowieniem zapisu. Jeśli pamięć jest niedostępna, pobierz JSON.</p></>:null}{fileError?<p role="alert">{fileError}</p>:null}</section>:null}
+    {activeTool==="files"?<ProjectVariants project={p} onRestore={async next=>{await props.recovery.preserveCurrent();props.restoreProject(next)}} renderCourt={props.renderCourt} downloadProject={props.downloadProject}/>:null}
+
    </aside>
   </div>
   </div>

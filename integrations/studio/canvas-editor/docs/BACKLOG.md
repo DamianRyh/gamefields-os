@@ -138,3 +138,9 @@ S5-03 now waits for an origin/source/request/length-matched WordPress acknowledg
 ## Brief zmiany.txt — geometry slice, 2026-10-21
 
 Continue existing Product Intelligence plan with geometry, UX and progress agents. Shared generated metadata for eight live models now supplies both quote area and dimension presentation. Stored reference dimensions, floor bounds/top-face area and construction-with-goals envelope are separate. Legacy project fields, source meshes, current rate card and exact quote areas are unchanged; clearance and module pitch stay unknown. No R02 source rollout or engineering approval. See docs/PROJECT_DIMENSIONS.md and tests/project-dimensions.mjs. Full roadmap status is recorded separately; this slice does not complete every sprint.
+
+## Aktualizacja 22.10.2026
+
+- DONE (lokalny zakres S3): odzyskanie poprzedniego szkicu, ochrona danych, nazwane warianty max6, porównanie dwóch i przywrócenie z Cofnij. Kontrakt: PROJECT_RECOVERY_VARIANTS.md.
+- Zweryfikowano integralność 42 plików live/R02. Adopcja R02 nadal wymaga rozstrzygnięcia różnic geometrii i danych technicznych.
+- Następnie: zatwierdzony rejestr artykułów/kompatybilności i techniczny BOM; brakujące stawki nawierzchni/montażu/transportu; specyfikacja z rewizją. Synchronizacja w chmurze i porównanie 3D/cen nie są częścią ukończonego lokalnego zakresu.

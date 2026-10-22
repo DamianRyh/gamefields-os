@@ -1,0 +1,80 @@
+{
+  "schema": "GF-MODEL-REVISION-STATUS-1",
+  "date": "2026-10-22",
+  "verifiedFileCount": 42,
+  "deployedCandidates": false,
+  "records": [
+    {
+      "productCode": "GF-CT-001",
+      "arenaId": "w1",
+      "name": "Panna Ring",
+      "liveSourceRevision": "a81bfdec3013309db048d55e28700260bc835359237ca65aef70e15b641e203b",
+      "candidateBoundsChanged": true,
+      "geometryEquivalenceVerified": false,
+      "releaseEligible": false
+    },
+    {
+      "productCode": "GF-CT-002",
+      "arenaId": "o1",
+      "name": "Panna Play",
+      "liveSourceRevision": "12d00e49dfad836ebbc7cde0b36528d9ac7b84fe6309786be99b6f3ad97ac581",
+      "candidateBoundsChanged": true,
+      "geometryEquivalenceVerified": false,
+      "releaseEligible": false
+    },
+    {
+      "productCode": "GF-CT-003",
+      "arenaId": "p1",
+      "name": "Panna Court",
+      "liveSourceRevision": "4b5f694dc6067356875fcd791c9d26afef42d3022e382b88c4e4eaeb0982f84c",
+      "candidateBoundsChanged": true,
+      "geometryEquivalenceVerified": false,
+      "releaseEligible": false
+    },
+    {
+      "productCode": "GF-CT-004",
+      "arenaId": "street15",
+      "name": "Street Arena 15",
+      "liveSourceRevision": "5ea524e1717b39dd1d95ad9d222d2d0594b6eef6d848d3b3ecedfe848747e8be",
+      "candidateBoundsChanged": true,
+      "geometryEquivalenceVerified": false,
+      "releaseEligible": false
+    },
+    {
+      "productCode": "GF-CT-005",
+      "arenaId": "circle-cage-1",
+      "name": "Panna Cage 90",
+      "liveSourceRevision": "cd0cfc0551d42c616729abcc730ed809b09dcf87be82a2c33e02b6b0acc6e687",
+      "candidateBoundsChanged": true,
+      "geometryEquivalenceVerified": false,
+      "releaseEligible": false
+    },
+    {
+      "productCode": "GF-CT-006",
+      "arenaId": "circle-cage-2",
+      "name": "Panna Cage 180",
+      "liveSourceRevision": "dd74af05a58f92649936f4f558ce0e9333ff01f7b9ec54a33c95bb4aa0eebc39",
+      "candidateBoundsChanged": true,
+      "geometryEquivalenceVerified": false,
+      "releaseEligible": false
+    },
+    {
+      "productCode": "GF-CT-007",
+      "arenaId": "street-field",
+      "name": "Panna Grid",
+      "liveSourceRevision": "ee0865e41f238c637b1e0d3078e31bc5adcb02c3d95f3851e146c86a145ee3f7",
+      "candidateBoundsChanged": false,
+      "geometryEquivalenceVerified": false,
+      "releaseEligible": false
+    },
+    {
+      "productCode": "GF-CT-008",
+      "arenaId": "octagon",
+      "name": "Panna Octa",
+      "liveSourceRevision": "5d204c44dc4e2a89727c30093a662a569aac2ebe5010fefed37d084a0f98242f",
+      "candidateBoundsChanged": false,
+      "geometryEquivalenceVerified": false,
+      "releaseEligible": false
+    }
+  ]
+}
