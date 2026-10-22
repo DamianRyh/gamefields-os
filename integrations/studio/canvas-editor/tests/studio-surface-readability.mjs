@@ -83,7 +83,7 @@ try{
   };
   const project=await exported();assertState(project);
   await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();
-  await page.locator('input[type=file][accept*="application/json"]').setInputFiles({name:'surface-roundtrip.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});
+  await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'surface-roundtrip.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});
   for(const view of ['Boczny','Z góry','Z boiska']){
    const camera=page.getByRole('button',{name:view,exact:true});
    await reachable(camera,view);await camera.click();await ready();

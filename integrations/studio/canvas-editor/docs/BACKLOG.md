@@ -157,3 +157,9 @@ Continue existing Product Intelligence plan with geometry, UX and progress agent
 - NEXT: powtarzalny pomiar renderera i kosztów złożonych grafik; głębsza walidacja rastrów wymaga osobnego zakresu zgodności PNG.
 - Mapowanie13 aktywnych GLB F05/F06/F07 do rejestru potwierdzone po SHA. Następny niezależny etap cyfrowego BOM może użyć oddzielnego inspektora konfiguracji OS; nie wolno przypisać jego ilości do innego projektu Studio bez wiązania konfiguracji.
 - Nadal wymagane dane: połączenia/artykuły wykonawcze i wybór rewizji R02, ceny pozostałych zakresów, urządzenia i badania z klientami.
+
+## Inspektor OS — 22.10.2026
+
+- DONE — cyfrowy zakres: niezależny import natywnej koperty OS, ścisły config, ponowne wygenerowanie instancji, mapowanie artykułów i eksport z rewizjami. Brak zaufania do wejściowego bom.
+- NEXT: odtwarzalny scenariusz i pomiary renderera przed budżetem/zmianami wydajności.
+- PENDING: jawne związanie konfiguracji OS z Project Studio i zatwierdzone dane połączeń/artykułów przed technicznym BOM oraz pełną wyceną. Nie przypisywać wyników po nazwie/rodzinie.

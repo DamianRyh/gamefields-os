@@ -154,3 +154,7 @@ Podsumowanie eksportuje pełną konfigurację z SHA256 i rewizją modelu. Rejest
 ## Statyczne grafiki — 22.10.2026
 
 Wspólny profil statycznego SVG chroni upload, import i odczyt projektów. Poprawne źródła zachowują bajty, odrzucone pliki mają czytelny komunikat; odzyskiwanie nie nadpisuje niezgodnego szkicu. PNG zachowuje poprzedni kontrakt. Zakres i ograniczenia: [GRAPHIC_SOURCE_POLICY](docs/GRAPHIC_SOURCE_POLICY.md).
+
+## Inspektor OS — 22.10.2026
+
+Pliki projektu zawierają niezależną kontrolę konfiguracji Systemu modułowego. Ilości są odtwarzane z config, załączone bom pomijane, wynik ma przypięte rewizje i osobny eksport. Projekt Studio i jego cena pozostają niezależne. Kontrakt: [OWNED_CONFIGURATION_INSPECTOR](docs/OWNED_CONFIGURATION_INSPECTOR.md).

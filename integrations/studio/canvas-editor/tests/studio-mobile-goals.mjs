@@ -25,7 +25,7 @@ try{
    await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();
    await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#1d7056');await page.getByLabel('Tekst na bandach',{exact:true}).fill(arena.toUpperCase());await ready();
    const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const project=JSON.parse(await readFile(await(await event).path(),'utf8'));assert.equal(project.arenaModel,arena);
-   await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.locator('input[type=file][accept*="application/json"]').setInputFiles({name:'arena.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});await ready();
+   await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'arena.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});await ready();
    if(arena==='p1'){
     await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();
     await page.locator('.studio-material-trigger').click();

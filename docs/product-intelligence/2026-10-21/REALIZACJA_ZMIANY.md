@@ -13,7 +13,7 @@ W tej kontynuacji pracowały równolegle cztery role wykonawcze: agent prowadzą
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
 | S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Istnieją testy scen, kamer i materiałów; w tym etapie renderer niezmieniony. Brak zatwierdzonego budżetu pomiarowego startu/aktualizacji renderera. |
 | S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
-| S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej zgodnej rodziny w OS. Zweryfikowano rejestr56 cyfrowych artykułów i adapter jednej rodziny; eksport oznacza swobodne obiekty jako koncepcyjne. Zatwierdzenie połączeń i integracja technicznych instancji/BOM nadal wymagają danych. |
+| S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje i eksportuje ilości z rewizjami. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
 | S5-03: przekazanie zapytania | DONE — dołączenie do formularza | Kompletne ograniczone JSON, pominięcie plików graficznych, potwierdzenie domeny/okna/próby/długości, timeout i ponowienie. Oba tryby przeglądarki sprawdzone w wersji75; nie potwierdza to odbioru e-maila. |
 | S5-04: podsumowanie i eksport | PARTIAL | Edytowalne grupy i JSON istnieją. Eksport konfiguracji z pełnym Project, SHA256 i rewizją modelu/katalogu gotowy. Techniczna specyfikacja wykonawcza z BOM nadal pozostaje do wykonania. |
@@ -45,12 +45,22 @@ Profil odrzuca skrypty, zdarzenia, DTD/encje, animację, zewnętrzne odwołania 
 
 Pracował prowadzący wdrożenie i trzech ekspertów: profil SVG, mapowanie komponentów OS i kolejność prac. Niezależny przegląd źródeł i testów nie znalazł blokującego obejścia ograniczonego profilu. Zweryfikowano także zgodność13 aktywnych GLB OS F05/F06/F07 z rejestrem poSHA; nie zmieniono konfiguracji OS ani modeli.
 
+## Inspektor cyfrowej konfiguracji OS
+
+**DONE — niezależny zakres cyfrowy:** w istniejących Plikach projektu dodano zwijaną sekcję kontroli natywnego eksportu GF-OWNED-ASSEMBLY-1. Ściśle sprawdzany pełny config generuje instancje przez przypiętą kopię istniejącego silnika; dołączone bom jest ignorowane. Mapowanie family+alias wiąże articleId/revision/sourceRevision.25 aktywnych zasobów sprawdzono poSHA; eksport zawiera rewizję silnika, katalogu i rejestru.
+
+Testy obejmują594 konstrukcje i25 pojedynczych komponentów oraz4 odmowy całości SOURCE. Rodziny p1/o1/w1/street15 nie mają potwierdzonego rozbicia całości w tym silniku; ich skład nie jest zgadywany z katalogu. F01/F02/F03 umożliwiają dostępne pojedyncze części, street15 nie udostępnia trybu komponentu.
+
+Wynik GF-OWNED-INSPECTION-1 pozostaje osobnym dokumentem: DIGITAL_INSTANCES_ONLY, manufacturingReady=false. UI nie otrzymuje setterów Project ani kalkulacji. Ręcznie potwierdzono28 instancji mimo fałszywego wejściowego bom999999, poprawny eksport i dokładną niezmienność projektu Studio po sukcesie/pobraniu/czyszczeniu/błędzie. Błąd usuwa poprzedni wynik. Wynik nie jest zapisywany w bibliotece ani do technicznego BOM Studio.
+
+Prace prowadzono z ekspertami kontraktu/mapowania i UX/akceptacji; testy domenowe powstały niezależnie od adaptera. Natywny plik OS nie przypina historycznych zasobów: wynik używa źródeł sprawdzonych przy wydaniu inspektora i nie potwierdza zgodności dawnej wizualizacji.
+
 ## Kolejność dalszej pracy
 
-1. **Następny etap możliwy bez zatwierdzenia wykonawczego:** oddzielny inspektor cyfrowej konfiguracji OS. Ściśle walidować kopertę GF-OWNED-ASSEMBLY-1, użyć config, ponownie wygenerować instancje istniejącym silnikiem i zignorować dołączone bom. Powiązać alias+family z articleId/revision/sourceRevision. Nie przypisywać tych ilości do innej konfiguracji Studio.
-2. **S2-04/S6:** ustalić powtarzalny scenariusz i zmierzyć start/aktualizację renderera, w tym złożone grafiki; dopiero potem określić budżet i optymalizować. Oddzielić testy automatyczne od telefonu fizycznego/czytnika ekranu/badań z klientami. Głębsza kontrola rastrów jest osobnym zakresem zgodności.
-3. **Dane wykonawcze:** potwierdzić docelowe rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po jawnym powiązaniu instancji z projektem Studio rozszerzyć techniczny BOM; brak danych pozostaje rows=null, nie zero.
-4. **Dane komercyjne:** uzupełnić nawierzchnię, montaż, transport i warunki podatkowe/ofertowe; związać aktualną wycenę i BOM z tą samą konfiguracją. Nie zmieniać aktywnych orientacyjnych cen konstrukcji na podstawie dawnych zaleceń.
+1. **S2-04/S6 — następny etap pomiarowy:** zdefiniować stałe sceny ośmiu modeli, rozmiary ekranu, profil przeglądarki/cache i operacje. Zmierzyć start oraz aktualizację renderera, w tym złożone grafiki, i dopiero na wynikach ustalić budżet oraz optymalizację. Nie deklarować uniwersalnego FPS ani testu fizycznego urządzenia.
+2. **Powiązanie konfiguracji:** określić jawny kontrakt między stanem OS a Project Studio i rewizją geometrii. Ta sama rodzina/nazwa nie oznacza identycznej konfiguracji. Nie dopisywać niezależnych ilości inspektora do aktywnego technicalBill.
+3. **Dane wykonawcze:** potwierdzić docelowe rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po potwierdzeniu oraz wiązaniu instancji rozszerzyć techniczny BOM; do tego czasu rows=null i UNCONFIRMED.
+4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport i warunki podatkowe/ofertowe; wycena powiązana z tą samą konfiguracją. Odrębnie głębsza kontrola rastrów, fizyczne urządzenia, czytnik ekranu i badania z klientami. Aktywne orientacyjne ceny konstrukcji zachowane.
 
 Pozostałe zależności WordPress: instalacja i osobista aktywacja WPCode przez właściciela, potwierdzone fakty prywatności, odbiór wcześniejszego pojedynczego testu poczty. Nie wysyłać kolejnych testów bez nowej instrukcji.
 
@@ -85,3 +95,14 @@ Kontrakt i ograniczenia: [COMPONENT_SPECIFICATION](../../../integrations/studio/
 PASS: TypeScript/build/test:studio, graphic-source-policy, graphic-boundaries, quote-engine/construction-pricing, pełne test:mobile oraz Surface7viewport. Ręcznie: mieszana paczka dodała poprawne SVG i odrzuciła aktywne; eksport zachował dokładne bajty poprawnego SVG i nie zawierał odrzuconego obiektu. Nieprawidłowy import pozostawił konfigurację dokładnie bez zmian; poprawny import potwierdzono nazwą. Na375px brak przepełnienia, tekst informacji14px. Bez testu fizycznego telefonu, gwarancji kosztu renderowania lub pełnej walidacji PNG.
 
 Kontrakt: [GRAPHIC_SOURCE_POLICY](../../../integrations/studio/canvas-editor/docs/GRAPHIC_SOURCE_POLICY.md). Nie zmieniono modeli R02, stawek ani SQL; nie wysłano formularza. Dane produkcyjne nie otrzymały testowych grafik.
+
+
+## Wydanie inspektora OS — Studio80
+
+22.10.2026: źródło `3a75f940c647312fb9f562ef0175a6eb858bf652`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_e459c0510a0c8191802e879a0fea8c00`, deployment `appgdep_6ad9b14bfc408191a821a28a737fad34` — **succeeded**, środowisko revision3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka SHA256 `ed0dd62684b94b79af9be470e582e72c7972e2e72b544e8c4efc8486662585de`.
+
+PASS: TypeScript/build/test:studio,594 konfiguracje konstrukcji+25 części, walidacje negatywne i4 odmowy SOURCE,25 hashy runtime, quote-engine/construction-pricing, pełne test:mobile i Surface7viewport. Pierwszy test mobilny zatrzymał niejednoznaczny selektor dwóch pól JSON; pola nazwano osobno, selektory doprecyzowano i pełną regresję powtórzono z wynikiemPASS.
+
+Ręczny test zbudowanego Workera: fałszywe bom999999 pominięte, wynik28 instancji, eksport manufacturingReady=false. Aktywny Project dokładnie niezmieniony po inspekcji/pobraniu/czyszczeniu/błędzie; wynik po odświeżeniu nie jest zachowywany.375px bez przepełnienia, tabela325px/tekst16px, przycisk46px. Bez deklaracji fizycznego urządzenia lub zatwierdzenia wykonawczego.
+
+Kontrakt: [OWNED_CONFIGURATION_INSPECTOR](../../../integrations/studio/canvas-editor/docs/OWNED_CONFIGURATION_INSPECTOR.md). Nie zmieniono R02, stawek, SQL ani silnika aktywnego OS; nie wysyłano formularzy. Na potrzeby paczki usunięto jedynie odtwarzalne archiwa już opublikowanych wydań78/79, zachowując źródła i raporty.

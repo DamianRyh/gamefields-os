@@ -1,0 +1,185 @@
+{
+  "schema": "GF-OWNED-ENGINE-EVIDENCE-1",
+  "verifiedAt": "2026-10-22",
+  "sourcePath": "components/gamefields/owned-modular/engine.mjs",
+  "engineRevision": "492af823b06f689d8421cf310978234a261d3e3a35ec65e74aebcde685a61715",
+  "catalogRevision": "967fc81272c1a0a22d38c5301261a78085118ebe1f7b7ec99d6a83814a0abbd2",
+  "registryRevision": "95f5c1397a2ae5574091cffbc25cbc344e2d70477c815279d2c7fec012672dac",
+  "checkedRuntimeAssets": [
+    {
+      "family": "street-field",
+      "alias": "sf-long",
+      "articleId": "GF-F06-PN-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/sf-long.glb",
+      "sourceRevision": "35a8f7814cd6dadcc76f11d1fb4227ad71a0057f7cb41511a377b37d5968d7a4"
+    },
+    {
+      "family": "street-field",
+      "alias": "sf-short",
+      "articleId": "GF-F06-PN-002",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/sf-short.glb",
+      "sourceRevision": "c7f5440ed436868da03a4703a730e2f14a1c5480faca79baf3ef8a491fdb75cc"
+    },
+    {
+      "family": "street-field",
+      "alias": "sf-goal",
+      "articleId": "GF-F06-GL-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/sf-goal.glb",
+      "sourceRevision": "5ba8c0b4cde58b9d2621b58669428bb4bc5a0e9e6e2c6915bf190107cf393b15"
+    },
+    {
+      "family": "street-field",
+      "alias": "sf-entry",
+      "articleId": "GF-F06-EN-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/sf-entry.glb",
+      "sourceRevision": "8959281a9e1b674e53ba19f62e12976f9fd006d37236115803cbb483f655dde5"
+    },
+    {
+      "family": "street-field",
+      "alias": "sf-post",
+      "articleId": "GF-F06-PS-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/sf-post.glb",
+      "sourceRevision": "f970e72da05c75e8af854f707d70954f3dcb7ebb81fad07569d1ede0fed13f34"
+    },
+    {
+      "family": "octagon",
+      "alias": "oct-standard",
+      "articleId": "GF-F07-PN-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/oct-standard.glb",
+      "sourceRevision": "1e72827d28e9350641c903124d7b29907d32c34f7dfb72c93a534f614629c7a7"
+    },
+    {
+      "family": "octagon",
+      "alias": "oct-goal",
+      "articleId": "GF-F07-GL-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/oct-goal.glb",
+      "sourceRevision": "05a92a77ee639cab9d62eb39c60c6d350f935cacd2c08b6135d61b8fd496acf7"
+    },
+    {
+      "family": "octagon",
+      "alias": "oct-entry",
+      "articleId": "GF-F07-EN-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/oct-entry.glb",
+      "sourceRevision": "d3c11214bef4ca02ddad6a69bc91059f1a3a68eb3160343aac264ef6188abe46"
+    },
+    {
+      "family": "octagon",
+      "alias": "oct-post",
+      "articleId": "GF-F07-PS-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/oct-post.glb",
+      "sourceRevision": "4aad5d66089b5e39872bd4a54396f0e43b4ae5415493aeef2c766e5ccf8ccdee"
+    },
+    {
+      "family": "circle-cage",
+      "alias": "cc-standard",
+      "articleId": "GF-F05-PN-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/cc-standard.glb",
+      "sourceRevision": "2e0831a92264bb09680cc57c869c2c03eab89ac291323b838a2e8a645f489490"
+    },
+    {
+      "family": "circle-cage",
+      "alias": "cc-goal",
+      "articleId": "GF-F05-GL-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/cc-goal.glb",
+      "sourceRevision": "097d8dad568a4d61ddbf0ee87c710d04b6cb9534e72084504e268ca9835f4492"
+    },
+    {
+      "family": "circle-cage",
+      "alias": "cc-entry",
+      "articleId": "GF-F05-EN-001",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/cc-entry.glb",
+      "sourceRevision": "21b8b0f3b15be6f5751cb4e4cc66e954264f1e96787c19743ef36bb80b416f58"
+    },
+    {
+      "family": "circle-cage",
+      "alias": "cc-upper-entry",
+      "articleId": "GF-F05-EN-002",
+      "runtimePath": "public/models/gamefields/owned-modular/assets/cc-upper-entry.glb",
+      "sourceRevision": "431e7e0b8e5e4d45146f556013b2400f2d9db23116c163e9a5671779e678e0e0"
+    },
+    {
+      "family": "p1",
+      "alias": "k1",
+      "articleId": "GF-F01-PN-001",
+      "runtimePath": "public/models/gamefields/components/k1.glb",
+      "sourceRevision": "d664906caab40c5869846aca1deca2e744666d81d4d6d46c8a543e19a7346ab0"
+    },
+    {
+      "family": "p1",
+      "alias": "k2",
+      "articleId": "GF-F01-PN-002",
+      "runtimePath": "public/models/gamefields/components/k2.glb",
+      "sourceRevision": "145ae4d25bd731e6f5631c7b5fd7057b3e68a28d24ffbaf0662b18ed5835dd5e"
+    },
+    {
+      "family": "p1",
+      "alias": "k3",
+      "articleId": "GF-F01-PN-003",
+      "runtimePath": "public/models/gamefields/components/k3.glb",
+      "sourceRevision": "4797ffa28003ac868610a3cacdb65c6a76d80a8b0d37c755e837389a825f562e"
+    },
+    {
+      "family": "p1",
+      "alias": "k4",
+      "articleId": "GF-F01-PN-004",
+      "runtimePath": "public/models/gamefields/components/k4.glb",
+      "sourceRevision": "b0ebf7d17448c0c437b79faf8e80c7a276c8ccae25423a00765f98d9c7b08007"
+    },
+    {
+      "family": "p1",
+      "alias": "s1",
+      "articleId": "GF-F01-PS-001",
+      "runtimePath": "public/models/gamefields/components/s1.glb",
+      "sourceRevision": "f3e74b07c1cdf9ac9f12e4abb5ab876b91fa061352b61807d7cfcf9c58ed6783"
+    },
+    {
+      "family": "o1",
+      "alias": "po1",
+      "articleId": "GF-F02-PN-001",
+      "runtimePath": "public/models/gamefields/components/po1.glb",
+      "sourceRevision": "8279d6a25a11b69d9d2bfbf11a6657ad90de530fdbae4ae3ec999b3e80b5ae18"
+    },
+    {
+      "family": "o1",
+      "alias": "po2",
+      "articleId": "GF-F02-PN-002",
+      "runtimePath": "public/models/gamefields/components/po2.glb",
+      "sourceRevision": "c11f29617d52414248b6383e720c583218fa8f746c9e355f14cda17d49e182af"
+    },
+    {
+      "family": "o1",
+      "alias": "po3",
+      "articleId": "GF-F02-PN-003",
+      "runtimePath": "public/models/gamefields/components/po3.glb",
+      "sourceRevision": "f56922e908c092ad638a028e15611a5b682e61fd2c7ac73fea0a6a49d25ba01e"
+    },
+    {
+      "family": "w1",
+      "alias": "rw1",
+      "articleId": "GF-F03-PN-001",
+      "runtimePath": "public/models/gamefields/components/rw1.glb",
+      "sourceRevision": "a1dafc50de3eeede08e52725524846c14cfe7d82b8f8471e50c8149477171284"
+    },
+    {
+      "family": "w1",
+      "alias": "rw2",
+      "articleId": "GF-F03-PN-002",
+      "runtimePath": "public/models/gamefields/components/rw2.glb",
+      "sourceRevision": "3d2b089eba5526fca390386f97d045a3da9c979258438cdcbed2324a7411e5f4"
+    },
+    {
+      "family": "w1",
+      "alias": "st1",
+      "articleId": "GF-F03-CN-001",
+      "runtimePath": "public/models/gamefields/components/st1.glb",
+      "sourceRevision": "40941d7a0f57e897b0c94be6412deeb6afc75d814cdd6cc79ad4dc239631c17c"
+    },
+    {
+      "family": "w1",
+      "alias": "e1",
+      "articleId": "GF-F03-CN-002",
+      "runtimePath": "public/models/gamefields/components/e1.glb",
+      "sourceRevision": "8b547b04718b48292897d8d78b17e5ada81670c1ac808eb5f3fd2f01685286c2"
+    }
+  ]
+}

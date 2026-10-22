@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-22",
+  "version": 80,
+  "sourceCommit": "3a75f940c647312fb9f562ef0175a6eb858bf652",
+  "deployment": "appgdep_6ad9b14bfc408191a821a28a737fad34",
+  "status": "succeeded",
+  "envSetRevision": 3,
+  "tests": {
+    "assemblies": 594,
+    "parts": 25,
+    "sourceAssemblyRejections": 4,
+    "runtimeHashes": 25,
+    "typescript": "PASS",
+    "build": "PASS",
+    "studio": "PASS",
+    "quote": "PASS",
+    "constructionPricing": "PASS",
+    "mobile": "PASS",
+    "surfaceSevenViewports": "PASS"
+  },
+  "browser": {
+    "tamperedBomIgnored": true,
+    "regeneratedInstanceCount": 28,
+    "downloadedManufacturingReady": false,
+    "activeProjectUnchanged": true,
+    "invalidFileClearsResult": true,
+    "resultTemporary": true,
+    "documentWidth375": 375,
+    "tableWidth375": 325,
+    "fontPx": 16,
+    "buttonHeightPx": 46
+  },
+  "technicalBillBoundToProject": false,
+  "engineeringApproved": false
+}

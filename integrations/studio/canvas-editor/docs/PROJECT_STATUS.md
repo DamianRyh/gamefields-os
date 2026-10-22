@@ -167,3 +167,7 @@ Bramki etapu rejestru/eksportu: TypeScript/build/test:studio/quote/construction-
 ## S3-02 — 22.10.2026
 
 Wdrożono wspólny ograniczony profil statycznego SVG w upload i projectSchema; dotyczy także importu, szkiców, wariantów, szablonów i specyfikacji. Bez cichej sanitizacji; oryginalne dane niezgodnego szkicu chroni recovery. Mieszany upload i brak zmiany projektu po odrzuceniu importu potwierdzone w przeglądarce. TypeScript/build/studio/mobile oraz Surface7viewport PASS. PNG i tor paneli zachowane, bez nowej walidacji sygnatur PNG i bez gwarancji kosztu renderowania ścieżek. Szczegóły: GRAPHIC_SOURCE_POLICY.md.
+
+## Inspektor OS — 22.10.2026
+
+Oddzielny inspektor w Plikach odtwarza cyfrowe ilości z konfiguracji OS przez istniejący przypięty silnik.594konstrukcje+25części i negatywne przypadki PASS;25hashy runtime zweryfikowanych. UI/export sprawdzone ręcznie; pełny Project pozostał identyczny po poprawnych i błędnych działaniach. Brak powiązania z technicznym BOM Studio jest celowy; manufacturingReady=false. TypeScript/build/studio/quote/construction-pricing i pełne mobile PASS po rozróżnieniu selektorów inputów. Surface7viewport również PASS. Szczegóły: OWNED_CONFIGURATION_INSPECTOR.md.

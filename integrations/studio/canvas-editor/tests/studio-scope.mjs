@@ -1,3 +1,4 @@
+import './owned-configuration.mjs';
 import './graphic-source-policy.mjs';
 import './graphic-boundaries.mjs';
 import './component-specification.mjs';
