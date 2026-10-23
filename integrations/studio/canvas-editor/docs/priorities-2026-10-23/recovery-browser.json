@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "case": "render-watchdog-stalled-logo-late-retry",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "case": "o1-normal-navigation",
+      "navigations": 10,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "case": "stalled-floor-timeout-retry-late-work-context-loss",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "case": "model-fetch-timeout-manual-retry",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "case": "material-timeout-cache-eviction-retry",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "case": "render-watchdog-stalled-logo-late-retry",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "case": "o1-normal-navigation",
+      "navigations": 10,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "case": "stalled-floor-timeout-retry-late-work-context-loss",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "case": "model-fetch-timeout-manual-retry",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "case": "material-timeout-cache-eviction-retry",
+      "status": "passed"
+    }
+  ],
+  "errors": []
+}

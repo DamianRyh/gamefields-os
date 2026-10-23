@@ -1,0 +1,146 @@
+{
+  "schema": "GF-INSTRUMENTED-STREETFIELD-COMPARISON-2",
+  "status": "passed",
+  "scope": "Five sequential instrumented repeats each, baseline then candidate; not ABBA, no GPU/FPS or universal speed claim",
+  "harnessSha256": "b1a1644d0359e7a2a84a04cdd5d9d65a5302fa487104ac255e23a499edabb1f3",
+  "provenance": {
+    "baseline": {
+      "version": "88",
+      "buildRole": "retained-published-baseline",
+      "sourceCommit": "6ca9dad641b981c3119db98833a3756376ac18b2",
+      "sourceAttribution": "Explicit caller-provided source commit; actual built bundle hashes independently recorded"
+    },
+    "candidate": {
+      "version": "candidate",
+      "buildRole": "final-candidate",
+      "sourceCommit": "b4da8bcdd172c8bfb4ea01d8f7c4433e78c54a42",
+      "sourceAttribution": "Explicit caller-provided source commit; actual built bundle hashes independently recorded"
+    },
+    "baselineBundleSetSha256": "dcb873f1c04669d36a38ec8dd052fc1ab08ef3290767865079d1574137962b46",
+    "candidateBundleSetSha256": "650a75f46ecb1843dd9bd2d4bfaa1cc41c35b67448d43b00816d932437be3854",
+    "archive": {
+      "path": "/Users/mac/Documents/Gamefields/outputs/studio89.tar.gz",
+      "localArchiveSha256": "3f9d5f98c6f9d5a603091121c7bb2c93fc2e4cc9dee4d0d777424d706590dd7a",
+      "verifiedBundleCount": 84,
+      "candidateBundlesMatch": true
+    }
+  },
+  "frames": [
+    {
+      "camera": "Boczny",
+      "sha256": "ecc19c061dae153ea6935dcdacfb398cd26e14d46feade054cc10ab9ce2418ef",
+      "pixelWidth": 1107,
+      "pixelHeight": 461
+    },
+    {
+      "camera": "Z góry",
+      "sha256": "3017d579dc4ba97d073c95bde3118264da20ba24a8204649ce957f7fa40defc3",
+      "pixelWidth": 1107,
+      "pixelHeight": 461
+    },
+    {
+      "camera": "Z boiska",
+      "sha256": "0ac24279dc314d85282c8541052a70278ce932d31fac68965d4c3416283f7c0d",
+      "pixelWidth": 1107,
+      "pixelHeight": 461
+    }
+  ],
+  "deterministicCounts": {
+    "allTenProfiles": true,
+    "pngEncode": 4,
+    "fillText": 4,
+    "pngImageLoads": 4,
+    "textureUploads": 14,
+    "drawArrays": 135,
+    "uniformLookups": {
+      "before": 1374,
+      "after": 0
+    },
+    "attributeLookups": {
+      "before": 405,
+      "after": 0
+    }
+  },
+  "summaries": [
+    {
+      "scenario": "panel-text",
+      "before": {
+        "model": "street-field",
+        "width": 1440,
+        "scenario": "panel-text",
+        "count": 5,
+        "medianMs": 491.79999999701977,
+        "maxMs": 599.7000000029802,
+        "minMs": 391,
+        "rawMs": [
+          391,
+          413.5,
+          491.79999999701977,
+          536.3000000119209,
+          599.7000000029802
+        ]
+      },
+      "after": {
+        "model": "street-field",
+        "width": 1440,
+        "scenario": "panel-text",
+        "count": 5,
+        "medianMs": 410.59999999403954,
+        "maxMs": 584.4000000059605,
+        "minMs": 304.5,
+        "rawMs": [
+          410.59999999403954,
+          304.5,
+          371.70000000298023,
+          584.4000000059605,
+          550.6000000089407
+        ]
+      },
+      "observedMedianDirection": "lower"
+    },
+    {
+      "scenario": "complex-scene-cached-redraw",
+      "before": {
+        "model": "street-field",
+        "width": 1440,
+        "scenario": "complex-scene-cached-redraw",
+        "count": 5,
+        "medianMs": 327.20000000298023,
+        "maxMs": 423.80000001192093,
+        "minMs": 305.79999999701977,
+        "rawMs": [
+          310.79999999701977,
+          305.79999999701977,
+          423.80000001192093,
+          353.29999999701977,
+          327.20000000298023
+        ]
+      },
+      "after": {
+        "model": "street-field",
+        "width": 1440,
+        "scenario": "complex-scene-cached-redraw",
+        "count": 5,
+        "medianMs": 329.3999999910593,
+        "maxMs": 379.1000000089407,
+        "minMs": 284.40000000596046,
+        "rawMs": [
+          293.29999999701977,
+          329.3999999910593,
+          284.40000000596046,
+          379.1000000089407,
+          355.29999999701977
+        ]
+      },
+      "observedMedianDirection": "higher"
+    }
+  ],
+  "limitations": [
+    "Instrumented wrappers add overhead; no direct comparison to historical ABBA or uninstrumented timings.",
+    "Five baseline repeats followed by five candidate repeats do not control order effects, thermal state or OS/GPU cache.",
+    "Image load waits overlap and include scheduling; their sums are not additive phase wall time.",
+    "texImage2D/drawArrays durations measure synchronous CPU submission, not GPU completion.",
+    "Three camera RGBA equality checks cover this fixed StreetField fixture, not all products/materials.",
+    "Source commits are explicit caller receipts; actual archive-to-profile binding is independently checked across all84 built JavaScript bundles."
+  ]
+}

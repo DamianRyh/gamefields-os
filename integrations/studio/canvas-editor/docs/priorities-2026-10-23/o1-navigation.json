@@ -1,0 +1,206 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "navigation": 0,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 1,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 2,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 3,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 4,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 5,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 6,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 7,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 8,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 9,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 10,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 11,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 12,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 13,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 14,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 15,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 16,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 17,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 18,
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "navigation": 19,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 0,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 1,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 2,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 3,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 4,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 5,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 6,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 7,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 8,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 9,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 10,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 11,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 12,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 13,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 14,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 15,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 16,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 17,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 18,
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "navigation": 19,
+      "status": "passed"
+    }
+  ],
+  "errors": []
+}

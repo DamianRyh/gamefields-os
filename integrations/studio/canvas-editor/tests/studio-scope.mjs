@@ -1,3 +1,4 @@
+import './load-image.mjs';
 import './circle-panel-sides.mjs';
 import './project-owned-reference.mjs';
 import './renderer-texture-jobs.mjs';

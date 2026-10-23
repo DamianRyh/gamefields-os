@@ -1,0 +1,105 @@
+{
+  "status": "passed",
+  "browser": "149.0.7827.55",
+  "coverage": {
+    "o1": {
+      "panels": 24,
+      "widths": [
+        547,
+        1101,
+        2048
+      ]
+    },
+    "p1": {
+      "panels": 20,
+      "widths": [
+        121,
+        1021,
+        1098,
+        1801,
+        2048
+      ]
+    },
+    "circle-cage-1": {
+      "panels": 8,
+      "widths": [
+        2048
+      ]
+    },
+    "circle-cage-2": {
+      "panels": 16,
+      "widths": [
+        2048
+      ]
+    },
+    "street15": {
+      "panels": 24,
+      "widths": [
+        741,
+        1308,
+        1309,
+        1378,
+        1414,
+        1750,
+        1947
+      ]
+    },
+    "street-field": {
+      "panels": 14,
+      "widths": [
+        983,
+        1173,
+        1200,
+        1239
+      ]
+    },
+    "octagon": {
+      "panels": 8,
+      "widths": [
+        1349,
+        2048
+      ]
+    },
+    "w1": {
+      "panels": 24,
+      "widths": [
+        201,
+        1521,
+        2048
+      ]
+    }
+  },
+  "uniqueWidths": [
+    121,
+    201,
+    547,
+    741,
+    983,
+    1021,
+    1098,
+    1101,
+    1173,
+    1200,
+    1239,
+    1308,
+    1309,
+    1349,
+    1378,
+    1414,
+    1521,
+    1750,
+    1801,
+    1947,
+    2048
+  ],
+  "fixtures": [
+    "empty",
+    "text",
+    "logo",
+    "both"
+  ],
+  "pixelComparisons": 84,
+  "concurrentPanels": 16,
+  "concurrentEncodes": 1,
+  "retryPassed": true
+}

@@ -32,3 +32,5 @@ for(const [id,{area,source}] of Object.entries(arenaSurfaceQuantities)){
  assert(Math.abs(area-measured)<.000001,`${id}: quantity must match source floor mesh`);
 }
 console.log('PASS: quantity/source mesh, dimension/material/complexity/line/equipment changes, included goals, VAT/cents, partial/unknown rates, invalid rate cards. Fixture rates are not commercial.');
+
+const working=parseRateCard(JSON.stringify({version:'TEST-WORKING',currency:'PLN',workingAssumptions:true,arenaNet:{octagon:10}}));assert.equal(calculateProjectQuote({...p,arenaModel:'octagon'},working,1).workingAssumptions,true);assert.throws(()=>parseRateCard(JSON.stringify({version:'TEST-WORKING',currency:'PLN',workingAssumptions:'approved'})));

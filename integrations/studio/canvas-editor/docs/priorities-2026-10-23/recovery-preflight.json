@@ -1,0 +1,13 @@
+{
+  "status": "failed",
+  "cases": [
+    {
+      "width": 375,
+      "case": "render-watchdog-stalled-logo-late-retry",
+      "status": "passed"
+    }
+  ],
+  "errors": [
+    "TimeoutError: page.waitForFunction: Timeout 30000ms exceeded."
+  ]
+}

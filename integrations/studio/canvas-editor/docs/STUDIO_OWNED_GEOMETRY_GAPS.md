@@ -18,7 +18,7 @@ The audit recomputes the Studio measurements with the existing `measureArenaGeom
 
 It verifies the pinned engine bytes, catalog bytes and component registry revision against `lib/vendor/owned-modular/evidence.json`. With a local OS checkout it also verifies the original engine and all 25 referenced runtime component GLBs at their exact canonical paths. A mismatched file fails the audit; an absent file remains explicitly unavailable. Original evidence date `2026-10-22` is retained as provenance, separately from this audit date.
 
-Execution with the existing local OS checkout on 2026-10-23: all Studio revisions matched; pinned and OS source engine matched; **25/25 OS runtime assets matched**. Two consecutive executions produced byte-identical JSON with SHA-256 `9bc4dfd3420a87d7d04bd5be1c5e4e12e848326d6ebee0b18ab7ceae986ed1ae`.
+Execution with the existing local OS checkout on 2026-10-23: all Studio revisions matched; pinned and OS source engine matched; **25/25 OS runtime assets matched**. Two consecutive executions produced byte-identical JSON with SHA-256 `e47ae0f8244d1375e9c7e124ae0ee8fc9019cc4659c415ac90649aa86565efef`.
 
 Pinned engine SHA-256: `492af823b06f689d8421cf310978234a261d3e3a35ec65e74aebcde685a61715`. Per-file Studio and OS SHA-256 values are included in the JSON rather than shortened here.
 
@@ -31,7 +31,7 @@ Lengths are **metres**. Bounds below are ordered **X × Z × Y**, not commercial
 | w1 | 5.09 × 5.831395 × 1 | 4.99 × 4.99 × 0 | 19.553002 | Unavailable: source-only family |
 | o1 | 6.002 × 6.62306 × 1.516 | 5.902 × 5.902 × 0 | 27.353366 | Unavailable: source-only family |
 | p1 | 5.653 × 7.93938 × 1.22399 | 5.571602 × 7.137828 × 0.000845 | 39.251386 | Unavailable: source-only family |
-| street15 | 16.650002 × 10.104 × 1.325 | 15 × 10 × 0.2 | 149.155 | Unavailable: source-only family; no parts registered |
+| street15 | 16.650002 × 10.104 × 1.325 | 15 × 10 × 0.2 | 149.155 | Unavailable: source-only family; 26 registered F04 articles, no confirmed assembly |
 | circle-cage-1 | 6.722908 × 6.12 × 0.91 | 6 × 6 × 0.2 | 28.26298 | Circle family, `levels:1`, 8 digital instances |
 | circle-cage-2 | 6.722908 × 6.12 × 1.81 | 6 × 6 × 0.2 | 28.26298 | Circle family, `levels:2`, 16 digital instances |
 | street-field | 7.024 × 4.984 × 1.091 | 7.3 × 5.3 × 0.2 | 38.69 | Rectangle, 28 digital instances |
@@ -55,7 +55,7 @@ For source-only W1/O1/P1/Street15, OS reference dimensions, assembly floor, asse
 ## Data required before a Studio-derived BOM
 
 1. An approved mapping from each exact Studio mesh revision to named component instances, including positions, rotations, scale convention, source revisions and stable instance IDs. Same family or same bounds is insufficient.
-2. Component decomposition and assembly rules for the four source-only families; Street Arena 15 additionally lacks registered component articles in this engine.
+2. Component decomposition, instance-to-article mapping and confirmed assembly rules for the four source-only families. Street Arena 15 has 26 registered F04 component articles; article registration does not establish a confirmed OS assembly or installed quantities.
 3. Confirmed mating interfaces, pitches, allowed combinations, corner/goal/entry substitutions, stacking rules and tolerances. Existing OS digital placement rules are not manufacturing sign-off.
 4. Separate playing-field, surface/slab, construction and required-clearance outlines with explicit coordinate/height datums. Octagon's actual OS floor mesh and orientation must be pinned before geometric floor comparison.
 5. Approved connection, fastener, anchor and foundation quantities; installation assumptions and exclusions; revision approval by the responsible constructor/manufacturer.

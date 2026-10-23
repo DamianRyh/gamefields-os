@@ -729,7 +729,7 @@
   "blockingData": [
     "Approved transform and instance-to-Studio-mesh mapping for each of the eight exact model revisions.",
     "Verified assembly component placements, orientations, joining interfaces and permitted module pitches; bounding boxes are insufficient.",
-    "Source-only family instance decomposition and source assets, including Street Arena 15 with no registered parts.",
+    "Source-only family instance decomposition, instance-to-article mapping and confirmed assembly rules; Street Arena 15 has 26 registered F04 articles, but no confirmed OS assembly.",
     "Explicit surface, playing-field, construction and clearance outlines; octagon OS floor mesh/orientation is not pinned here.",
     "Approved article/connection/fastener/anchor quantities, installation and foundation scope, tolerances and manufacturing revision sign-off."
   ]

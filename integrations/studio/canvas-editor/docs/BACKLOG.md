@@ -228,3 +228,14 @@ W Plikach projektu dwa wybrane warianty mają niezależne bieżące kalkulacje b
 PASS: TypeScript, build, test:studio, quote-engine/construction-pricing, pełne test:mobile (96scen aren/48Street/16materiałów/JSON/Radar,375/390/430/1440) i Surface7rozmiarów. Nowy test375/1440: różne wyniki z jawnymi fixture TEST-NOT-FOR-SALE, błąd/retry, stara rewizja, spóźniona odpowiedź, dokładna niezmienność Project i biblioteki, reflow. Nie zmieniono stawek komercyjnych, silnika renderera, modeli, Project JSON, SQL lub BOM; nie wysyłano formularzy. Nie powtarzano ABBA niezmienionego renderera.
 
 Następne: osobny profil Street Field1440tekst i timeout O1, odzyskiwanie błędów3D, porównanie3D z pełnym zakresem personalizacji. Geometria/R02, zatwierdzone połączenia/BOM, brakujące stawki i fizyczne urządzenia pozostająPARTIAL/PENDING. Publikację potwierdza centralny raport wydania i receipt poza checkoutem.
+
+
+## 23.10.2026 — priorytety po88: renderer,3D i robocze stawki
+
+Zrealizowano programowy zakres [priorytetów](PRIORITIES_2026_10_23.md): profil Street Field i cache lokalizacji GL/wymiaru panelu; granice czasu obrazu/modelu/generacji, utrata WebGL i ręczne retry, token ABA; opcjonalne porównanie3D A/B z jedną dodatkową sceną i wspólną kamerą; bieżące ceny i jawne pokrycie obiektów2D/3D. Cache materiałów usuwa nieudane lub wygasłe wczytania, aby kolejna próba nie odziedziczyła nieskończonego oczekiwania.
+
+Właściciel potwierdził brak danych i polecił podstawić wartości: osobna robocza karta6nawierzchni/29typów wyposażenia/montażu/transportu/personalizacji, oznaczeniaAPI/UIworkingAssumptions, bez zatwierdzonego VAT;8cen konstrukcji zachowano. [Założenia i kwoty](WORKING_RATES.md). Nieznane dodatki nadalpartial.
+
+Zaktualizowano audyt8modeli/25zasobów oraz F04(26artykułów), zachowując niezatwierdzone statusy. [Checklista](ENGINEERING_COMMERCIAL_GAPS.md) i szablon danych przypinają rewizje. technicalBill.rows=null; nie dobrano fikcyjnych kotew lub fundamentów. Pełne3Dswobodnego wyposażenia wymaga własnych modeli; obecne pominięcia jawne obok planu2D. Fizyczne urządzenia i pełny budżet wydajności pozostają otwarte.
+
+Kontrola wydania obejmuje TypeScript/build/domain,40nawigacjiO1, fault-injection375/1440,3D/quote375/1440, pełne mobile+Surface+nowe areny,58przypadków Circle,84rastery i60stanów tekstur. Raporty wdocs/priorities-2026-10-23; końcowy profil i receipt publikowane obok centralnego raportu. Czasy profilowane nie sąABBA/GPU/FPS i nie dowodzą ogólnego przyspieszenia. Wewnętrzne arkusze produkcyjne pozostają poza publicznym repo. Stawki robocze nie zatwierdzają geometrii lub finalnej oferty.

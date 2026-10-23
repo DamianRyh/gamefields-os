@@ -1,8 +1,9 @@
 import {surfaceImage,type SurfaceFinish} from '@/lib/p1-surface';
+import {loadImage} from '@/lib/load-image';
 export type Mesh={normals?:number[][];perforated?:boolean;id:string;label:string;group:string;v:number[][];f:number[][];uv:number[][];artwork:boolean};
 export type Appearance={color:string;finish:string;visible:boolean;text:string;image?:string;u:number;v:number;scale:number;rotation:number};
 type SurfaceMaps=[WebGLTexture,WebGLTexture,WebGLTexture];
-type Item={mesh:Mesh;buffer:WebGLBuffer;count:number;texture:WebGLTexture;key:string;whiteTexture:boolean;surfaceKey?:string;surface?:SurfaceFinish;maps?:SurfaceMaps};
+type Item={mesh:Mesh;buffer:WebGLBuffer;count:number;texture:WebGLTexture;key:string;whiteTexture:boolean;textureToken?:object;surfaceKey?:string;surface?:SurfaceFinish;maps?:SurfaceMaps};
 const fragment=`precision highp float;
 varying vec3 n;varying vec2 tex;varying vec3 point;
 uniform float perforated;uniform sampler2D image;uniform vec3 color;uniform vec3 pickColor;
@@ -38,6 +39,7 @@ void main(){
 }`;
 export class Renderer{
  gl:WebGLRenderingContext;program:WebGLProgram;items:Item[]=[];yaw=.38;pitch=.48;zoom=1;selected='';gray=false;placement:{cx:number;cy:number;scale:number}|null=null;dead=false;pending=0;
+ private uniformLocations=new Map<string,WebGLUniformLocation|null>();private attributeLocations=new Map<string,number>();
  private textureJobs=new Map<string,{key:string;promise:Promise<void>}>();
  private materialCache=new Map<string,Promise<SurfaceMaps>>();private materialTextures=new Set<WebGLTexture>();
  constructor(public canvas:HTMLCanvasElement,meshes:Mesh[]){
@@ -50,9 +52,9 @@ export class Renderer{
  }
  appearances:Record<string,Appearance>={};
  draw(picking=false){if(this.dead)return;const gl=this.gl,W=this.canvas.clientWidth,H=this.canvas.clientHeight,dpr=Math.min(devicePixelRatio,2);if(!W||!H)return;if(this.canvas.width!==Math.round(W*dpr)||this.canvas.height!==Math.round(H*dpr)){this.canvas.width=Math.round(W*dpr);this.canvas.height=Math.round(H*dpr);}gl.viewport(0,0,this.canvas.width,this.canvas.height);gl.clearColor(...(picking?[0,0,0,1]:[0,0,0,0]) as [number,number,number,number]);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(this.program);
- const loc=(n:string)=>gl.getUniformLocation(this.program,n);const place=this.placement;gl.uniform3f(loc('view'),this.yaw,this.pitch,(place?place.scale*W/1672:Math.min(W/8.5,H/5.8))*this.zoom);gl.uniform2f(loc('offset'),place?(place.cx/1672*2-1):0,place?(1-place.cy/941*2):0);gl.uniform2f(loc('size'),W,H);gl.uniform1f(loc('picking'),picking?1:0);gl.uniform1i(loc('image'),0);
+ const loc=(n:string)=>{if(!this.uniformLocations.has(n))this.uniformLocations.set(n,gl.getUniformLocation(this.program,n));return this.uniformLocations.get(n)!};const place=this.placement;gl.uniform3f(loc('view'),this.yaw,this.pitch,(place?place.scale*W/1672:Math.min(W/8.5,H/5.8))*this.zoom);gl.uniform2f(loc('offset'),place?(place.cx/1672*2-1):0,place?(1-place.cy/941*2):0);gl.uniform2f(loc('size'),W,H);gl.uniform1f(loc('picking'),picking?1:0);gl.uniform1i(loc('image'),0);
  for(const [i,name] of ['surfaceColor','surfaceNormal','surfaceOrm'].entries())gl.uniform1i(loc(name),i+1);
- this.items.forEach((item,i)=>{const a=this.appearances[item.mesh.id];if(!a||!a.visible)return;gl.bindBuffer(gl.ARRAY_BUFFER,item.buffer);for(const [name,count,off] of [['position',3,0],['normal',3,12],['uv',2,24]] as const){const att=gl.getAttribLocation(this.program,name);gl.enableVertexAttribArray(att);gl.vertexAttribPointer(att,count,gl.FLOAT,false,32,off);}let rgb=(item.key||item.mesh.group==='floor')?[1,1,1]:[1,3,5].map(k=>parseInt(a.color.slice(k,k+2),16)/255);if(this.gray)rgb=[.75,.77,.79];gl.uniform3fv(loc('color'),rgb);gl.uniform1f(loc('perforated'),item.mesh.perforated?1:0);gl.uniform1f(loc('selected'),item.mesh.id===this.selected?1:0);gl.uniform1f(loc('finish'),a.finish==='metal'?1:a.finish==='gloss'?.65:0);const id=i+1;gl.uniform3f(loc('pickColor'),(id&255)/255,((id>>8)&255)/255,0);
+ this.items.forEach((item,i)=>{const a=this.appearances[item.mesh.id];if(!a||!a.visible)return;gl.bindBuffer(gl.ARRAY_BUFFER,item.buffer);for(const [name,count,off] of [['position',3,0],['normal',3,12],['uv',2,24]] as const){let att=this.attributeLocations.get(name);if(att===undefined){att=gl.getAttribLocation(this.program,name);this.attributeLocations.set(name,att)}gl.enableVertexAttribArray(att);gl.vertexAttribPointer(att,count,gl.FLOAT,false,32,off);}let rgb=(item.key||item.mesh.group==='floor')?[1,1,1]:[1,3,5].map(k=>parseInt(a.color.slice(k,k+2),16)/255);if(this.gray)rgb=[.75,.77,.79];gl.uniform3fv(loc('color'),rgb);gl.uniform1f(loc('perforated'),item.mesh.perforated?1:0);gl.uniform1f(loc('selected'),item.mesh.id===this.selected?1:0);gl.uniform1f(loc('finish'),a.finish==='metal'?1:a.finish==='gloss'?.65:0);const id=i+1;gl.uniform3f(loc('pickColor'),(id&255)/255,((id>>8)&255)/255,0);
  const surface=item.maps&&item.surface;gl.uniform1f(loc('hasSurface'),surface?1:0);gl.uniform1f(loc('tileSize'),surface?.tileSize||1);gl.uniform3fv(loc('referenceColor'),surface?.reference||[1,1,1]);gl.uniform1f(loc('turf'),surface?.turf?1:0);gl.uniform1f(loc('detail'),surface?.detail?1:0);
  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,item.texture);for(let j=0;j<3;j++){gl.activeTexture(gl.TEXTURE0+j+1);gl.bindTexture(gl.TEXTURE_2D,item.maps?.[j]||item.texture)}gl.drawArrays(gl.TRIANGLES,0,item.count);});gl.activeTexture(gl.TEXTURE0);
  }
@@ -61,8 +63,8 @@ export class Renderer{
  async texture(id:string,source:string|(()=>Promise<string>),key:string,decode?:(source:string)=>Promise<HTMLImageElement>,options:{drawAfterUpload?:boolean}={}){
   const item=this.items.find(x=>x.mesh.id===id);const running=this.textureJobs.get(id);if(item?.key===key&&running?.key===key)return running.promise;
   if(!item||item.key===key)return;
-  const drawAfterUpload=options.drawAfterUpload!==false;item.key=key;this.pending++;
-  const promise=(async()=>{try{const resolved=typeof source==='function'?await source():source;let img:HTMLImageElement;if(decode)img=await decode(resolved);else{img=new Image();await new Promise<void>((ok,no)=>{img.onload=()=>ok();img.onerror=()=>no(Error('Nie można wczytać grafiki'));img.src=resolved})}if(this.dead||item.key!==key)return;const gl=this.gl;gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,item.texture);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,1);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);item.whiteTexture=false;if(drawAfterUpload)this.draw()}catch(e){if(item.key===key)item.key='';throw e}finally{this.pending--}})();
+  const drawAfterUpload=options.drawAfterUpload!==false;item.key=key;const token={};item.textureToken=token;this.pending++;
+  const promise:Promise<void>=(async()=>{try{const resolved=typeof source==='function'?await source():source;let img:HTMLImageElement;if(decode)img=await decode(resolved);else img=await loadImage(resolved);if(this.dead||item.key!==key||item.textureToken!==token)return;const gl=this.gl;gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,item.texture);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,1);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);item.whiteTexture=false;if(drawAfterUpload)this.draw()}catch(e){if(item.key===key&&item.textureToken===token)item.key='';throw e}finally{this.pending--}})();
   const job={key,promise};this.textureJobs.set(id,job);const clear=()=>{if(this.textureJobs.get(id)===job)this.textureJobs.delete(id)};void promise.then(clear,clear);return promise;
  }
  async surface(id:string,finish:SurfaceFinish){
@@ -77,6 +79,6 @@ export class Renderer{
    const textures=await maps;if(this.dead||item.surfaceKey!==key)return;item.maps=textures;item.surface=finish;this.draw();
   }finally{this.pending--}
  }
- clearTexture(id:string){const item=this.items.find(x=>x.mesh.id===id);if(!item)return;item.key='';if(item.whiteTexture===true)return;const gl=this.gl;gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,item.texture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([255,255,255,255]));item.whiteTexture=true;}
+ clearTexture(id:string){if(this.dead)return;const item=this.items.find(x=>x.mesh.id===id);if(!item)return;item.key='';item.textureToken=undefined;if(item.whiteTexture===true)return;const gl=this.gl;gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,item.texture);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([255,255,255,255]));item.whiteTexture=true;}
  dispose(){this.dead=true;for(const i of this.items){this.gl.deleteBuffer(i.buffer);this.gl.deleteTexture(i.texture)}for(const t of this.materialTextures)this.gl.deleteTexture(t);this.materialTextures.clear();this.materialCache.clear();this.gl.deleteProgram(this.program);}
 }

@@ -1,0 +1,97 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "status": "passed",
+      "states": [
+        {
+          "view": "perspective",
+          "a": {
+            "width": 303,
+            "height": 171,
+            "hash": "f3687290975a1973f8e98328339ab98b3517514c590930c1f00586f9261f5dfb"
+          }
+        },
+        {
+          "view": "aerial",
+          "a": {
+            "width": 303,
+            "height": 171,
+            "hash": "68cee1f6119ea1d54098d764ceb959a5945f39e059ad0eaca77ea1e0920c3f61"
+          }
+        },
+        {
+          "view": "ground",
+          "a": {
+            "width": 303,
+            "height": 171,
+            "hash": "903784e0fb9f3b0270d0a6a468f2189efee466916349cb4d7cb5cd88639b224f"
+          }
+        }
+      ],
+      "scope": [
+        "explicit opt-in",
+        "one canvas",
+        "A/B source model",
+        "shared three cameras",
+        "actual panel paint text/logo/colour",
+        "full snapshot surface/design preserved",
+        "old revision guard",
+        "accurate omitted list",
+        "unmount",
+        "immutable active Project and IndexedDB",
+        "no overflow",
+        "native modal focus and Escape"
+      ],
+      "manufacturingApproved": false
+    },
+    {
+      "width": 1440,
+      "status": "passed",
+      "states": [
+        {
+          "view": "perspective",
+          "a": {
+            "width": 860,
+            "height": 484,
+            "hash": "4d1b0da5b1060688307adedc52426c029b6d879ea9efe36bf006e6a8b91e5ee3"
+          }
+        },
+        {
+          "view": "aerial",
+          "a": {
+            "width": 860,
+            "height": 484,
+            "hash": "2b4ea9feec14c5f8739949aa2e0a9521ad717c847b7eda00f4d062811ae9ff57"
+          }
+        },
+        {
+          "view": "ground",
+          "a": {
+            "width": 860,
+            "height": 484,
+            "hash": "95ff1b81f84e5ee8caa8dcec7497d6987770252733b7df6232ff69803fcede7d"
+          }
+        }
+      ],
+      "scope": [
+        "explicit opt-in",
+        "one canvas",
+        "A/B source model",
+        "shared three cameras",
+        "actual panel paint text/logo/colour",
+        "full snapshot surface/design preserved",
+        "old revision guard",
+        "accurate omitted list",
+        "unmount",
+        "immutable active Project and IndexedDB",
+        "no overflow",
+        "native modal focus and Escape"
+      ],
+      "manufacturingApproved": false
+    }
+  ],
+  "errors": [],
+  "manufacturingApproved": false
+}

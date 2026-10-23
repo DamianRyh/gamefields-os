@@ -40,3 +40,14 @@ DONE oznacza wyłącznie wskazany zakres, PARTIAL nie oznacza ukończenia całeg
 5. Uzupełnić stawki komercyjne, warunki podatkowe i obsługę leadów, następnie testy fizycznych urządzeń, czytnika ekranu i klientów. Nie wprowadzać fikcyjnych cen lub certyfikacji.
 
 Zamknięcie całego dokumentu wymaga tych zależności. Nie nadano całym sprintom statusuDONE na podstawie pojedynczej funkcji.
+
+
+## Aktualizacja po realizacji priorytetów
+
+- Dodano ograniczone czasy oczekiwania obrazu/modelu/generacji, utratęWebGL i ręczne ponowienie, blokadę późnych zadań/ABA oraz usuwanie uszkodzonego cache materiałów. PierwotnegoABBAtimeoutu nie uznano za w pełni wyjaśniony na podstawie innego obserwatora.
+- Dodano porównanie3D A/B ze wspólną kamerą i kontrolą rewizji. To bieżący renderer konstrukcji/nawierzchni; elementy bez własnej reprezentacji3D są jawnie wskazane i zachowane na planie2D. Pełna reprezentacja każdego swobodnego akcesorium nadal wymaga zasobów.
+- Street Field ma profil etapów i deterministyczną redukcję lookupówGL, z zachowanymi obrazami. Nie jest to obietnica wszystkich krótszych czasów lub zakończoneSLA.
+- Na polecenie właściciela przygotowano robocze wartości6nawierzchni/29typów wyposażenia/montażu/transportu/personalizacji, z flagąAPI/UI i bezVAT. Nie jest to zatwierdzony cennik; nieznane dodatki pozostająpartial.
+- Skorygowano F04(26artykułów), ponowiono audyt8rewizji/25zasobów, dodano checklistę i przypięty szablon danych technicznych. Statuszatwierdzeń i technicalBill.rows=null pozostają bez zmiany. Kotew/fundamentów nie dobrano przykładowymi liczbami.
+
+Szczegółowy zakres i dowody: [PRIORITIES_2026_10_23.md](PRIORITIES_2026_10_23.md). Aktualny receipt publikacji jest w centralnym raporcie realizacji. Nadal otwarte: zatwierdzenie techniczne, własne modele akcesoriów, potwierdzenie stawek/podatku, fizyczne urządzenia i pełna walidacja dostępności.

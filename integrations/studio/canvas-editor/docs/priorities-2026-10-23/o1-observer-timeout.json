@@ -1,0 +1,50 @@
+{
+  "status": "failed",
+  "cases": [
+    {
+      "width": 375,
+      "navigation": 0,
+      "status": "failed",
+      "diagnostics": {
+        "images": [
+          {
+            "type": "data:image/svg+xml;charset=utf-8,%3",
+            "length": 5310,
+            "start": 5265.70000000298,
+            "loaded": 5423.600000008941,
+            "size": [
+              1024,
+              1024
+            ]
+          }
+        ],
+        "stages": [
+          {
+            "attributes": {
+              "class": "panna-studio-model",
+              "data-model": "o1",
+              "data-render-request": "1",
+              "data-render-complete": "1",
+              "data-render-model": "o1",
+              "data-render-complete-at": "5423.300000011921",
+              "data-ready": "true",
+              "aria-label": "Panna Play · Ø zewn. 6,00 m · wysokość 0,55–1,52 m · Park"
+            },
+            "text": "Park · podgląd modelu 3DWIZUALIZACJA KONCEPCYJNAPanna Play · Ø zewn. 6,00 m · wysokość 0,55–1,52 m · ParkKonstrukcja · bandy, rama i bramkiNawierzchnia poglądowa: Malowana",
+            "contextLost": false
+          }
+        ],
+        "body": "Wybrano Panna Play. Przywrócono ustawienia modelu. Możesz użyć Cofnij.\ngamefields\nZapisywanie…\nPodsumowanie\nPrzeliczam…\nKonstrukcja\nNawierzchnia\nGrafika\nWyposażenie\nBoczny\nZ góry\nZ boiska\nPanna Play · Ø 5.902 m · Malowana\nZmień boisko\nPlan edycji obiektów\nRadar · mapa\nNawierzchnia\nOrganic Flow\nZmień wzór\nPole gry\nStrefy\nOtoczenie\nLinie\nWłączone\nMalowana\nZmień materiał\nPalety kolorów\nKolor linii\nZaawansowane: skala i logo"
+      },
+      "warnings": [
+        "[.WebGL-0x12c00819600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+        "[.WebGL-0x12c00819600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+        "[.WebGL-0x12c00819600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+        "[.WebGL-0x12c00819600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+      ]
+    }
+  ],
+  "errors": [
+    "TimeoutError: page.waitForFunction: Timeout 35000ms exceeded."
+  ]
+}

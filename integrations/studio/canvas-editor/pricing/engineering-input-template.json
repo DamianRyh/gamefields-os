@@ -1,0 +1,153 @@
+{
+  "schema": "GF-ENGINEERING-INPUT-WORKING-1",
+  "approved": false,
+  "manufacturingReady": false,
+  "status": "AWAITING_ENGINEER_INPUT",
+  "units": {
+    "position": "metres",
+    "rotation": "radians",
+    "scale": "dimensionless"
+  },
+  "models": [
+    {
+      "arenaModel": "w1",
+      "sourceRevision": "a81bfdec3013309db048d55e28700260bc835359237ca65aef70e15b641e203b",
+      "approved": false,
+      "instances": null,
+      "joins": null,
+      "anchors": null,
+      "foundations": null,
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    {
+      "arenaModel": "o1",
+      "sourceRevision": "12d00e49dfad836ebbc7cde0b36528d9ac7b84fe6309786be99b6f3ad97ac581",
+      "approved": false,
+      "instances": null,
+      "joins": null,
+      "anchors": null,
+      "foundations": null,
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    {
+      "arenaModel": "p1",
+      "sourceRevision": "4b5f694dc6067356875fcd791c9d26afef42d3022e382b88c4e4eaeb0982f84c",
+      "approved": false,
+      "instances": null,
+      "joins": null,
+      "anchors": null,
+      "foundations": null,
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    {
+      "arenaModel": "street15",
+      "sourceRevision": "5ea524e1717b39dd1d95ad9d222d2d0594b6eef6d848d3b3ecedfe848747e8be",
+      "approved": false,
+      "instances": null,
+      "joins": null,
+      "anchors": null,
+      "foundations": null,
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    {
+      "arenaModel": "circle-cage-1",
+      "sourceRevision": "cd0cfc0551d42c616729abcc730ed809b09dcf87be82a2c33e02b6b0acc6e687",
+      "approved": false,
+      "instances": null,
+      "joins": null,
+      "anchors": null,
+      "foundations": null,
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    {
+      "arenaModel": "circle-cage-2",
+      "sourceRevision": "dd74af05a58f92649936f4f558ce0e9333ff01f7b9ec54a33c95bb4aa0eebc39",
+      "approved": false,
+      "instances": null,
+      "joins": null,
+      "anchors": null,
+      "foundations": null,
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    {
+      "arenaModel": "street-field",
+      "sourceRevision": "ee0865e41f238c637b1e0d3078e31bc5adcb02c3d95f3851e146c86a145ee3f7",
+      "approved": false,
+      "instances": null,
+      "joins": null,
+      "anchors": null,
+      "foundations": null,
+      "approvedBy": null,
+      "approvedAt": null
+    },
+    {
+      "arenaModel": "octagon",
+      "sourceRevision": "5d204c44dc4e2a89727c30093a662a569aac2ebe5010fefed37d084a0f98242f",
+      "approved": false,
+      "instances": null,
+      "joins": null,
+      "anchors": null,
+      "foundations": null,
+      "approvedBy": null,
+      "approvedAt": null
+    }
+  ],
+  "formatExample": {
+    "enabled": false,
+    "exampleOnly": true,
+    "notForAssembly": true,
+    "instance": {
+      "id": "EXAMPLE-DO-NOT-INSTALL",
+      "articleId": "REPLACE_WITH_APPROVED_ARTICLE",
+      "revision": null,
+      "sourceRevision": null,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "join": {
+      "id": "EXAMPLE-DO-NOT-INSTALL",
+      "instanceIds": [
+        "EXAMPLE-A",
+        "EXAMPLE-B"
+      ],
+      "interfaceRevision": null,
+      "approvedConnectionSpecification": null
+    },
+    "anchor": {
+      "id": "EXAMPLE-DO-NOT-INSTALL",
+      "supportInstanceId": null,
+      "approvedAnchorSpecification": null,
+      "quantity": null
+    },
+    "foundation": {
+      "id": "EXAMPLE-DO-NOT-INSTALL",
+      "approvedDesignReference": null,
+      "geometry": null,
+      "materialSpecification": null
+    }
+  },
+  "instructions": [
+    "No example is an approved placement or design.",
+    "Do not infer bolts, anchors or foundations from panel/post counts.",
+    "A competent designer must supply load, ground, interface and installation assumptions before approval."
+  ]
+}
