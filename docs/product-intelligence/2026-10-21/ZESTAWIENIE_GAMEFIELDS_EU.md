@@ -1,5 +1,16 @@
 # Zestawienie Gamefields.eu.txt z realizacją — 23.10.2026
 
+## 23.10.2026 — odczyt projektu konstrukcji, bez zmiany wdrożenia90
+
+Przejrzano dostarczony 30-stronicowy projekt konstrukcji:24rysunki i opis trzech rodzin P1/F01,O1/F02,W1/F03. Pozostałych pięciu modeli Studio nie obejmuje. W bibliotece wewnętrznej zapisano20wierszy odczytanych ze złożeń, kandydatów mapowania articleId oraz rozbieżności dokumentu. Nie zastępują instancji aktualnego modelu Studio.
+
+Korekta stanu braków: dane materiałowe, przekroje, część detali połączeń i stop znajdują się w projekcie. Opis wymienia kotwy mechaniczne lub szpilki wbijane dla P1/O1, lecz brak kompletnego doboru kotwienia do lokalizacji. Obecność otworów w stopie nie zatwierdza typu lub ilości kotew. Fundamenty, parametry zakupowe i zatwierdzenie współczesnej rewizji nadal niepotwierdzone. Dokument opisuje W1 jako konstrukcję do wnętrz; nie rozszerzono tego na deklarację użytkowania na zewnątrz.
+
+Znaleziono sprzeczności w tabelach mas, datowaniu i oznaczeniach rysunków oraz rozbieżność gabarytu P1 wobec aktualnego modelu. Nie wybrano arbitralnie mas do automatycznej wyceny/kg. source evidence nie zmienia manufacturingApproved=false, connectionApproval=UNCONFIRMED ani technicalBill.rows=null dla aktualnego Studio.
+
+Na polecenie właściciela przygotowano wewnętrzny model roboczego kosztu i marży, z jasno opisanym wyprowadzeniem kosztu z cen referencyjnych; nie jest to oferta producenta lub dowód rentowności. Pełny PDF, szczegółowy BOM i koszty nie są publikowane. Publiczne modele, osiem cen konstrukcji, środowisko i Studio90 pozostają bez zmian. Kolejny krok: wyjaśnienie sprzeczności źródła, mapowanie konkretnych rewizji oraz zatwierdzenie rzeczywistych kosztów i kotwienia.
+
+
 ## Aktualizacja — Studio90, 23.10.2026
 
 Porównano pełny dostarczony Gamefields.eu.txt (kończący się na „Testy regres” w Sprincie6) z kodem i stanem Studio89. [Zestawienie wszystkich etapów i braków](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/GAMEFIELDS_EU_RECONCILIATION_2026_10_23.md).
