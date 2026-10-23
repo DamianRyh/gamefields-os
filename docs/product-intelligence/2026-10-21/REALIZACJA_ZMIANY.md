@@ -1,6 +1,6 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
-Aktualny etap: **Studio 87 opublikowane** — usunięte zbędne białe uploady,60 zgodnych stanów oraz odtwarzalny audyt8 modeli/25 komponentów. Równoważność geometrii i techniczny BOM nadal niezatwierdzone.
+Aktualny etap: **Studio87 pozostaje opublikowane; lokalne pomiary85–87 ukończone** —1920próbek/96komórek/48identycznych zestawów obrazów. Wyniki mieszane; priorytetem profil Street Field1440 i nierozpoznany timeout nawigacji O1. Geometria i techniczny BOM nadal niezatwierdzone.
 
 Dokument właściciela jest planem rozwoju istniejącego Studio. Nie zastępuje bieżących decyzji właściciela ani nie oznacza startu nowej aplikacji. Kończy się w połowie pozycji „Testy regres” w Sprincie6; brakującej części nie odtworzono z domysłów.
 
@@ -13,7 +13,7 @@ We wcześniejszym etapie pracowały równolegle cztery role wykonawcze: agent pr
 | S1: narzędzia, czytelność i nawigacja | PARTIAL | Cztery narzędzia, Nawierzchnia, klawiatura, fokus i testy reflow istnieją. Nie oznacza to pełnego badania wszystkich 12 odpowiedzialności ani certyfikacji. |
 | S2-01: semantyka wymiarów | PARTIAL | Wspólny adapter ośmiu modeli: zapisane wymiary, nawierzchnia i obrys konstrukcji rozdzielone. Pole gry, rozstaw modułów i strefy bezpieczeństwa wymagają potwierdzonych danych technicznych. |
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
-| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio87: zbędne białe resetowania pomijane; jednostronny Circle2 uploady32→16,60identycznych stanów. Wcześniejsze cache i batch draw zachowane. Serie czasu/rozrzutu, GPU i budżet nadal wymagają pracy. |
+| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio87 i lokalne ABBA85/87:1920próbek/96komórek/48identycznych obrazów;35niższych/4wyższe/57nakładających się zakresów median. Street Field1440tekst i timeout O1 wymagają diagnostyki; fizyczne urządzenia i budżet nadal PENDING. |
 | S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
 | S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje. Studio84 jawnie wiąże dwa snapshoty z SHA i rewizjami; nie potwierdza geometrii. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
@@ -58,10 +58,10 @@ Wynik GF-OWNED-INSPECTION-1 pozostaje osobnym dokumentem: DIGITAL_INSTANCES_ONLY
 Prace prowadzono z ekspertami kontraktu/mapowania i UX/akceptacji; testy domenowe powstały niezależnie od adaptera. Natywny plik OS nie przypina historycznych zasobów: wynik używa źródeł sprawdzonych przy wydaniu inspektora i nie potwierdza zgodności dawnej wizualizacji.
 
 ## Kolejność dalszej pracy
-1. **Czas i rozrzut:** wykonać porównywalne powtórzone serie dla aktualnego renderera i fizycznych urządzeń przed budżetem SLA. Cache PNG/Image, końcowy draw paneli i pomijanie białych resetów są wykonane w opisanym zakresie; uploady PNG pozostają osobne.
-2. **Zgodność geometrii OS–Studio:** skrypt i inwentaryzacja8 modeli/25 komponentów gotowe. Następnie zatwierdzić mapowanie instancji/transformacji i wspólne definicje obrysów; porównać pełne złożenia. Rodzina lub podobny obrys nie wystarczają. Wskazane braki i różnice opisuje STUDIO_OWNED_GEOMETRY_GAPS.md.
-3. **Dane wykonawcze:** potwierdzić rewizje R02, połączenia, rozstawy, części montażowe i fundamenty. Cztery rodziny źródłowe nadal wymagają dekompozycji. Dopiero potem techniczny BOM; obecnie rows=null i UNCONFIRMED.
-4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport, warunki podatkowe i wycena tej samej konfiguracji; osobno rastry, fizyczne urządzenia, czytnik ekranu i badania z klientami. Orientacyjne ceny konstrukcji pozostają aktywne.
+1. **Street Field1440 i stabilność:** ukierunkowane naprzemienne powtórzenia85/87 dla tekstu paneli; osobny profil PNG/decode/upload/draw/longtasks, bez mieszania instrumentowanych czasów z ABBA. Odtworzyć timeout O1 z diagnostyką generacji/obrazów/WebGL. Nie deklarować przyczyny lub braku regresji bez dowodów.
+2. **Urządzenia i budżet:** lokalne ABBA ukończone w opisanym zakresie. Następnie rzeczywiste telefony/komputery, przeglądarki i metryki prezentacji/interakcji przed SLA. Mniejsza liczba uploadów/draw nie zastępuje pomiarów latencji.
+3. **Zgodność geometrii OS–Studio:** skrypt8modeli/25komponentów gotowy. Zatwierdzić mapowanie instancji/transformacji i definicje obrysów; porównać pełne złożenia. Rozstrzygnąć Circle/Grid i podłoże Octagon. Rodzina lub podobny obrys nie wystarczają; STUDIO_OWNED_GEOMETRY_GAPS.md opisuje braki.
+4. **Dane wykonawcze i komercyjne:** zatwierdzić R02, połączenia, rozstawy, części montażowe/fundamenty i dekompozycję czterech rodzin przed technicznym BOM; rows=null i UNCONFIRMED. Uzupełnić nawierzchnię/montaż/transport i warunki podatkowe. Osobno czytniki ekranu i badania z klientami; ceny konstrukcji pozostają aktywne i częściowe.
 
 Pozostałe zależności WordPress: instalacja i osobista aktywacja WPCode przez właściciela, potwierdzone fakty prywatności, odbiór wcześniejszego pojedynczego testu poczty. Nie wysyłać kolejnych testów bez nowej instrukcji.
 
@@ -292,3 +292,18 @@ Nadal geometryCorrespondence=UNCONFIRMED i manufacturingApproved=false dla wszys
 PASS: TypeScript, build, test:studio (w tym błędy/clear/retry/stale), quote-engine/construction-pricing,60 porównań, dwa scenariusze błędów/wyścigów, pełne test:mobile96aren/48Street/16materiałów/JSON/Radar, Surface7rozmiarów i58przypadków stron paneli. Eksperci przygotowali kod, scenariusz oraz audyt; prowadzący niezależnie porównał60par, hashe paczki86 i dwa odtworzenia audytu.
 
 [Resety tekstur](../../../integrations/studio/canvas-editor/docs/WHITE_TEXTURE_RESETS.md), [60 porównań](../../../integrations/studio/canvas-editor/docs/white-texture-resets-2026-10-23/comparison.json), [audyt8 modeli](../../../integrations/studio/canvas-editor/docs/STUDIO_OWNED_GEOMETRY_GAPS.md), [źródłowy JSON](../../../integrations/studio/canvas-editor/docs/studio-owned-geometry-gaps-2026-10-23.json).
+
+
+## Powtarzane pomiary Studio85–87 — 23.10.2026
+
+**DONE — lokalny zakres ABBA:** opublikowane pakiety85/87, kolejność85→87→87→85,1920próbek w96komórkach. Wszystkie48zestawów obrazów z trzech kamer identyczne RGBA we wszystkich czterech seriach. Analyzer i niezależne przeliczenie potwierdziły surowe dane, mediany/maksima, hashe i kolejność. Wspólne źródła geometrii i84pakiety JS każdej wersji sprawdzone; bez przypisywania bieżącego renderera do starego buildu.
+
+**Wyniki mieszane:**35komórek ma obie mediany87 niższe,4wyższe,57nakładające się zakresy. Złożone przerysowanie ma niższe obie mediany w16/16komórkach, ale nie wszystkie maksima są niższe. Street Field1440tekst:85mediany474,9–480,0ms,87mediany502,2–764,8ms; maksima721,1→1775,3ms. To priorytet osobnego profilowania, nie potwierdzenie przyczyny lub braku regresji. Circle2tekst1440 pozostaje mieszany. Raport wymienia wszystkie cztery wyższe zakresy i wolne próbki.
+
+Pierwsze ABBA przerwano po timeout45s O1/375 przy drugiej nawigacji. Zachowano pełną bazę i częściowego kandydata; cały eksperyment wyłączono z porównania. Osobna diagnostyka60operacji PASS. Dodano wyłącznie diagnostykę błędu i ponowiono wszystkie cztery serie na jednym hashu harnessu, bez zmiany aplikacji lub timeoutu. Przyczyna przerwania nadal nieustalona; późniejsze PASS nie dowodzą naprawy.
+
+Środowisko: Apple M1, Chromium149/SwiftShader, DPR1,375/1440×1000. Mierzono zgłoszenie końcowego draw, nie prezentację GPU, FPS, sieć produkcyjną lub telefon. Dwie serie po5próbek nie wyznaczają p95, istotności lub SLA. Porównanie obejmuje łączny wpływ86+87 ponad85, nie izoluje zmian; nie łączymy wyników z historycznym81/82. Domyślne obie strony paneli. **S2-04 i S6 nadal PARTIAL.**
+
+Publiczna aplikacja pozostaje **Studio87**, źródło `46dec70f4af0e0dc0ed3c2a95193a602ae5f3ff8`; nie utworzono88 ani nowego wdrożenia runtime. Nie powtarzano TypeScript/build/mobile dla samej dokumentacji i narzędzi; wcześniejsze bramki87 pozostają historycznym dowodem. Modele/R02, ceny, Project, SQL i BOM pozostają bez zmian. GeometryCorrespondence=UNCONFIRMED, technicalBill.rows=null.
+
+[Wyniki i ograniczenia](../../../tools/renderer-measurements-2026-10-23/RESULTS.md) · [protokół i odtworzenie](../../../tools/renderer-measurements-2026-10-23/README.md) · [surowa analiza](../../../tools/renderer-measurements-2026-10-23/results/analysis.json) · [kolejne kroki](../../../tools/renderer-measurements-2026-10-23/NEXT_STEPS.md).

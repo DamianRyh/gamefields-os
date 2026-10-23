@@ -1,0 +1,8 @@
+# Kolejność po pomiarach
+
+1. **Street Field i stabilność nawigacji.** Priorytetem jest tekst paneli Street Field przy1440px:87 ma mediany502,2–764,8ms wobec474,9–480,0ms w85 i maksimum1775,3ms. Wykonać ukierunkowane naprzemienne powtórzenia85/87 oraz osobny profil PNG/decode/upload/draw/longtasks. Profilowane czasy nie są porównywalne z nieinstrumentowanym ABBA. Zachować przerwany przebieg i diagnostykę; odtworzyć timeout O1 bez automatycznych ponowień, z obserwacją generacji, błędów obrazów i WebGL. Ustalić przyczyny przed deklaracją zamknięcia stabilności lub braku regresji. Następną optymalizację wybierać z kosztów poszczególnych scen, nie z samej liczby uploadów.
+2. **Fizyczne urządzenia i budżety.** Uzgodnić telefony/komputery, przeglądarki i scenariusze docelowe. Mierzyć rzeczywistą prezentację i interakcję; lokalny SwiftShader nie zastępuje urządzeń klientów. Dopiero z tych danych przyjąć budżety i kryteria regresji. Pięć próbek na serię nie wyznacza p95 ani SLA.
+3. **Geometria Studio–OS.** Przypiąć dokładne rewizje i transformacje złożeń, wspólne definicje podłoża/obrysu i mapowanie paneli. Rozstrzygnąć wskazane różnice Circle/Grid i dane podłoża Octagon; cztery rodziny źródłowe wymagają rozbicia na instancje. Nie uznawać podobnych nazw lub wymiarów za równoważność.
+4. **BOM i oferta.** Zatwierdzić połączenia, rozstawy, kotwy, fundamenty i rewizje R02 przed włączeniem technicznych ilości do Project/wyceny. Uzupełnić stawki nawierzchni, montażu i transportu oraz warunki podatkowe. Obecne ceny konstrukcji pozostają orientacyjne i częściowe.
+
+W tej iteracji publikowane są narzędzia, dowody pomiarowe i dokumentacja. Publiczna aplikacja pozostaje Studio87. Nie jest to nowe wydanie runtime ani zatwierdzenie dokumentacji wykonawczej.

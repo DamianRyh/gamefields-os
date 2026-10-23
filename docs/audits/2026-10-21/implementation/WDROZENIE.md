@@ -1,5 +1,18 @@
 # Gamefields — realizacja zaleceń po audycie
 
+## Powtarzane pomiary Studio85–87 — 23.10.2026
+
+**DONE — lokalny zakres ABBA:** opublikowane pakiety85/87, kolejność85→87→87→85,1920próbek w96komórkach. Wszystkie48zestawów obrazów z trzech kamer identyczne RGBA we wszystkich czterech seriach. Analyzer i niezależne przeliczenie potwierdziły surowe dane, mediany/maksima, hashe i kolejność. Wspólne źródła geometrii i84pakiety JS każdej wersji sprawdzone; bez przypisywania bieżącego renderera do starego buildu.
+
+**Wyniki mieszane:**35komórek ma obie mediany87 niższe,4wyższe,57nakładające się zakresy. Złożone przerysowanie ma niższe obie mediany w16/16komórkach, ale nie wszystkie maksima są niższe. Street Field1440tekst:85mediany474,9–480,0ms,87mediany502,2–764,8ms; maksima721,1→1775,3ms. To priorytet osobnego profilowania, nie potwierdzenie przyczyny lub braku regresji. Circle2tekst1440 pozostaje mieszany. Raport wymienia wszystkie cztery wyższe zakresy i wolne próbki.
+
+Pierwsze ABBA przerwano po timeout45s O1/375 przy drugiej nawigacji. Zachowano pełną bazę i częściowego kandydata; cały eksperyment wyłączono z porównania. Osobna diagnostyka60operacji PASS. Dodano wyłącznie diagnostykę błędu i ponowiono wszystkie cztery serie na jednym hashu harnessu, bez zmiany aplikacji lub timeoutu. Przyczyna przerwania nadal nieustalona; późniejsze PASS nie dowodzą naprawy.
+
+Środowisko: Apple M1, Chromium149/SwiftShader, DPR1,375/1440×1000. Mierzono zgłoszenie końcowego draw, nie prezentację GPU, FPS, sieć produkcyjną lub telefon. Dwie serie po5próbek nie wyznaczają p95, istotności lub SLA. Porównanie obejmuje łączny wpływ86+87 ponad85, nie izoluje zmian; nie łączymy wyników z historycznym81/82. Domyślne obie strony paneli. **S2-04 i S6 nadal PARTIAL.**
+
+Publiczna aplikacja pozostaje **Studio87**, źródło `46dec70f4af0e0dc0ed3c2a95193a602ae5f3ff8`; nie utworzono88 ani nowego wdrożenia runtime. Nie powtarzano TypeScript/build/mobile dla samej dokumentacji i narzędzi; wcześniejsze bramki87 pozostają historycznym dowodem. Modele/R02, ceny, Project, SQL i BOM pozostają bez zmian. GeometryCorrespondence=UNCONFIRMED, technicalBill.rows=null.
+
+[Wyniki i ograniczenia](../../../../tools/renderer-measurements-2026-10-23/RESULTS.md) · [protokół i odtworzenie](../../../../tools/renderer-measurements-2026-10-23/README.md) · [surowa analiza](../../../../tools/renderer-measurements-2026-10-23/results/analysis.json) · [kolejne kroki](../../../../tools/renderer-measurements-2026-10-23/NEXT_STEPS.md).
 
 ## Puste tekstury i audyt geometrii — Studio 87
 
