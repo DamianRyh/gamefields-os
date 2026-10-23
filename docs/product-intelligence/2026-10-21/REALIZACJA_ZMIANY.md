@@ -1,6 +1,6 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
-Aktualny etap: **Studio 84 opublikowane** — jawne powiązanie pełnych wersji Studio i OS z kontrolą SHA256 oraz rewizji. Zgodność geometryczna i techniczny BOM nadal wymagają potwierdzenia.
+Aktualny etap: **Studio 85 opublikowane** — identyczne grafiki paneli współdzielą wczytany obraz w jednej generacji;48stanów Circle Cage zgodnych pikselowo. Pozostałe koszty renderowania, zgodność geometryczna OS–Studio i techniczny BOM nadal wymagają pracy.
 
 Dokument właściciela jest planem rozwoju istniejącego Studio. Nie zastępuje bieżących decyzji właściciela ani nie oznacza startu nowej aplikacji. Kończy się w połowie pozycji „Testy regres” w Sprincie6; brakującej części nie odtworzono z domysłów.
 
@@ -13,7 +13,7 @@ We wcześniejszym etapie pracowały równolegle cztery role wykonawcze: agent pr
 | S1: narzędzia, czytelność i nawigacja | PARTIAL | Cztery narzędzia, Nawierzchnia, klawiatura, fokus i testy reflow istnieją. Nie oznacza to pełnego badania wszystkich 12 odpowiedzialności ani certyfikacji. |
 | S2-01: semantyka wymiarów | PARTIAL | Wspólny adapter ośmiu modeli: zapisane wymiary, nawierzchnia i obrys konstrukcji rozdzielone. Pole gry, rozstaw modułów i strefy bezpieczeństwa wymagają potwierdzonych danych technicznych. |
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
-| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio 83: strony grafiki Circle Cage poprawione; both zachowuje obraz wersji 82. Profil PNG i baza porównawcza gotowe. Pozostały koszt upload/draw i budżet czasowy nadal wymagają pracy. |
+| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio85: współdzielony Image dla identycznych PNG w generacji;8/16→1load i48zgodnych stanów Circle Cage. Wcześniejsze cache PNG i strony paneli zachowane. Upload/draw, rozrzut i budżet czasowy nadal wymagają pracy. |
 | S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
 | S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje. Studio84 jawnie wiąże dwa snapshoty z SHA i rewizjami; nie potwierdza geometrii. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
@@ -59,7 +59,7 @@ Prace prowadzono z ekspertami kontraktu/mapowania i UX/akceptacji; testy domenow
 
 ## Kolejność dalszej pracy
 
-1. **Pozostały koszt renderowania:** osobno profilować dekodowanie, upload i draw oraz koszt jednostronnych podzbiorów; zachować anulowanie i zgodność obrazu. Zebrać rozrzut porównywalnych serii przed budżetem czasowym. PNG16→1 oraz wybór stron Circle Cage są już wykonane w opisanym zakresie.
+1. **Pozostały koszt renderowania:** osobno profilować dekodowanie, upload i draw oraz koszt jednostronnych podzbiorów; zachować anulowanie i zgodność obrazu. Zebrać rozrzut porównywalnych serii przed budżetem czasowym. Kodowanie PNG16→1, Image load8/16→1 oraz wybór stron Circle Cage są już wykonane w opisanym zakresie. Wczytywanie Image nie jest bezpośrednim pomiarem wewnętrznego dekodera CPU; nie uznano całego S2-04 za DONE.
 2. **Zgodność geometrii OS–Project:** zapis referencyjny dwóch wersji jest wykonany w Studio84. Następnie porównać pełne złożenia, transformacje i obrysy, udokumentować rozbieżności oraz zatwierdzić mapowanie. Ta sama rodzina lub nazwa nie oznacza identycznego boiska; ilości OS nadal nie trafiają do technicalBill.
 3. **Dane wykonawcze:** potwierdzić rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po potwierdzeniu oraz wiązaniu instancji rozszerzyć techniczny BOM; obecnie rows=null i UNCONFIRMED.
 4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport i warunki podatkowe; wycena tej samej konfiguracji. Osobno kontrola rastrów, fizyczne urządzenia, czytnik ekranu i badania z klientami. Orientacyjne ceny konstrukcji pozostają aktywne.
@@ -239,3 +239,18 @@ PASS: TypeScript, build, test:studio (nowe testy kontraktu), quote-engine/constr
 Pracowali prowadzący i eksperci kontraktu, geometrii oraz regresji przeglądarkowej. Zachowane modele, cennik, SQL, format Project oraz wcześniejsze poprawki renderera; nie wysyłano formularzy. Nie powtarzano macierzy czasowej renderera, którego kod nie był zmieniany.
 
 [Kontrakt](../../../integrations/studio/canvas-editor/docs/PROJECT_OWNED_REFERENCE.md), [10 przypadków przeglądarkowych](../../../integrations/studio/canvas-editor/docs/project-owned-reference-2026-10-23/browser.json).
+
+
+## Współdzielenie obrazów paneli — Studio 85
+
+23.10.2026: źródło `caa36c932f55228d06174b9c4883953e0cb0c48f`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_01d3cd93d208819190c828951ce77e69`, deployment `appgdep_6adaee70b7e88191883143bb8c43be4b` — **succeeded**, środowisko revision 3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka `sha256:75489be91390827a600a083b56152e8bbbf78b34d7c35b9f9b563dc753090043`.
+
+**DONE — ograniczony zakres wczytywania identycznych PNG.** Każda generacja ma własny cache Promise<HTMLImageElement> po dokładnym źródle obrazu. Panele współdzielą wczytany Image, a odrzucona Promise jest usuwana do ponowienia. Zachowane osobne tekstury GPU, uploady i draw, klucze zadań mesha, oczekiwanie drugiego konsumenta i odrzucanie starej/zniszczonej pracy. Podłoże, materiały, shader i geometria pozostają bez zmian.
+
+Porównanie ze zbudowaną wersją84: **48/48 stanów identycznych pikselowo**, także bufory Float32, UV, winding, kolory i eksport design. Dwa Circle Cage ×375/1440px ×both/inner/outer ×tekst/kolor/logo/usunięcie. Przy grafice liczba panelowych Image load wynosi **8→1 oraz16→1**, uploady nadal8/16. Wszystkie liczniki uploadów, clear i drawArrays identyczne; jednostronne podzbiory pozostają droższe. Surowe raporty mają hashe uruchomionych paczek, nie przypisują zmienianych źródeł do wcześniejszego buildu. W bazie doprecyzowano metadane szerokości viewport/canvas bez zmiany wyników.
+
+Image load liczy zdarzenia przeglądarki, nie pracę wewnętrznego dekodera CPU. **Nie deklarujemy FPS, czasu GPU ani uniwersalnego przyspieszenia.** Nie powtarzano historycznej macierzy480czasów; pomiar rozrzutu i budżet SLA pozostają PENDING. Następny etap wydajności: profil upload/draw i ewentualna osobna, zweryfikowana zmiana batchowania.
+
+PASS: TypeScript, build, test:studio (dekoder i per-mesh jobs; sekwencyjne stuby Image), quote-engine/construction-pricing, pełne test:mobile (96scen aren/48Street/16materiałów, JSON i Radar,375/390/430/1440), Surface7rozmiarów oraz58przypadków stron paneli. Eksperci przygotowali kod, porównanie przeglądarkowe i niezależny przegląd; prowadzący osobno sprawdził wszystkie48par i SHA raportów. Bez podmiany modeli/R02, cen, SQL, formatu Project ani technicznego BOM; nie wysyłano formularzy.
+
+[Kontrakt](../../../integrations/studio/canvas-editor/docs/DECODED_PANEL_IMAGES.md), [48porównań](../../../integrations/studio/canvas-editor/docs/decoded-panel-images-2026-10-23/comparison.json), [baza84](../../../integrations/studio/canvas-editor/docs/decoded-panel-images-2026-10-23/baseline.json), [kandydat](../../../integrations/studio/canvas-editor/docs/decoded-panel-images-2026-10-23/candidate.json).

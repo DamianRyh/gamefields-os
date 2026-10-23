@@ -193,3 +193,13 @@ NEXT: profil pozostałych kosztów upload/draw i rozrzutu czasów. Przed technic
 
 
 Bramki publikacji23.10: TypeScript/build/test:studio/quote-engine/construction-pricing PASS;10przypadków przeglądarkowych375/1440 z pełnym SVG, statusami i ochroną spóźnionego odczytu PASS; Surface7rozmiarów PASS; pełne test:mobile PASS (96scen aren,48Street,16zmian materiałów, JSON i Radar,375/390/430/1440).
+
+
+## Wczytywanie grafik paneli — 23.10.2026
+
+Wspólny Image dla identycznego źródła PNG w jednej generacji. Osobne tekstury GPU, uploady i draw zachowane; cache błędów pozwala ponowić próbę, a stare/zniszczone zadania nie nadpisują aktualnych. Podłoże i materiały bez zmian. Kontrakt i wyniki: [DECODED_PANEL_IMAGES](DECODED_PANEL_IMAGES.md). Liczba load nie jest pomiarem dekodera CPU ani FPS.
+
+NEXT: profil pozostałego kosztu upload/draw i rozrzutu czasów. Zgodność geometrii OS–Studio oraz zatwierdzenia danych wykonawczych nadal wymagane przed technicznym BOM.
+
+
+Bramki wydania23.10: TypeScript/build/test:studio/quote-engine/construction-pricing PASS;48/48stanów Circle Cage identycznych pikselowo z wersją84, bufory/kolory/design i upload/draw zgodne; pełne test:mobile96aren/48Street/16materiałów/JSON/Radar PASS; Surface7rozmiarów PASS; niezależny oracle stron paneli58przypadków PASS. Surowe raporty i SHA w decoded-panel-images-2026-10-23.

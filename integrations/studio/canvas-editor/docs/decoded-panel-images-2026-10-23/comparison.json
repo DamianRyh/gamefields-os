@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "cases": 48,
+  "exactPixelMatches": 48,
+  "exactGeometryColorDesignMatches": 48,
+  "unchangedUploadAndDrawCounts": 48,
+  "panelImageLoads": {
+    "circle1": {
+      "before": 8,
+      "after": 1
+    },
+    "circle2": {
+      "before": 16,
+      "after": 1
+    }
+  },
+  "scope": "HTMLImageElement source/load events; not direct browser decoder CPU work or GPU time",
+  "reports": {
+    "baseline": "9f45c1fd9e771d36aa2692af2ccf92c0772a8c51921977a66062a4952ec60add",
+    "candidate": "5c1e0b96788e46f11ffe030ff2e87b5fbc21764fcfd663354d1999383be1673f"
+  }
+}

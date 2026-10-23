@@ -175,3 +175,8 @@ DONE w zakresie wizualizacji Circle1/2: inner/outer według orientacji faset wzg
 ## Powiązanie wersji Studio i OS — 23.10.2026
 
 Pliki projektu zapisują i sprawdzają pełne snapshoty Studio i OS z SHA256 oraz rewizjami źródeł. Zmiana bieżącego projektu oznacza zapis historyczny. Powiązanie jednej rodziny nie potwierdza geometrii ani technicznego BOM i nie zmienia ceny. [Kontrakt](docs/PROJECT_OWNED_REFERENCE.md).
+
+
+## Wczytywanie grafik paneli — 23.10.2026
+
+Identyczne PNG paneli współdzielą wczytany Image w jednej aktualizacji podglądu. Tekstury i uploady GPU pozostają osobne, a cache nie przechodzi między generacjami. [Kontrakt i wyniki](docs/DECODED_PANEL_IMAGES.md).
