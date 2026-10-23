@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "failed": {
+        "ready": "false",
+        "request": 4,
+        "complete": 3
+      },
+      "retried": 6,
+      "completed": 8,
+      "plainSize": {
+        "width": 375,
+        "height": 211,
+        "clientWidth": 375,
+        "clientHeight": 211
+      },
+      "failedSize": {
+        "width": 375,
+        "height": 211,
+        "clientWidth": 375,
+        "clientHeight": 211
+      },
+      "plainPixelSha256": "2f166d6a174bfe6b7144bd4b139af7e3b4e70f8d0de4e79dc524205dff38db9c",
+      "failedPixelSha256": "2f166d6a174bfe6b7144bd4b139af7e3b4e70f8d0de4e79dc524205dff38db9c",
+      "explicitPlainPixelSha256": "2f166d6a174bfe6b7144bd4b139af7e3b4e70f8d0de4e79dc524205dff38db9c",
+      "finalPixelSha256": "28b7993941e8e884ca50476f937206a48e8501d84c4d037869d765cb7240200f",
+      "errorRecovery": true,
+      "failedGraphicClearedToPlain": true,
+      "staleDecodeIgnored": true
+    },
+    {
+      "width": 1440,
+      "failed": {
+        "ready": "false",
+        "request": 4,
+        "complete": 3
+      },
+      "retried": 6,
+      "completed": 8,
+      "plainSize": {
+        "width": 1107,
+        "height": 461,
+        "clientWidth": 1107,
+        "clientHeight": 461
+      },
+      "failedSize": {
+        "width": 1107,
+        "height": 461,
+        "clientWidth": 1107,
+        "clientHeight": 461
+      },
+      "plainPixelSha256": "7bfa5753cc08c426365dfee377ca6e67b4b52a66eb3a81ac8c28dc8ed1007777",
+      "failedPixelSha256": "7bfa5753cc08c426365dfee377ca6e67b4b52a66eb3a81ac8c28dc8ed1007777",
+      "explicitPlainPixelSha256": "7bfa5753cc08c426365dfee377ca6e67b4b52a66eb3a81ac8c28dc8ed1007777",
+      "finalPixelSha256": "9f2f991ed3b00d5a0a0b632297a166f6fcff7d896549c5da1a33910a64adbc03",
+      "errorRecovery": true,
+      "failedGraphicClearedToPlain": true,
+      "staleDecodeIgnored": true
+    }
+  ],
+  "errors": []
+}

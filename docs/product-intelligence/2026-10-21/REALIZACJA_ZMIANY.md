@@ -1,6 +1,6 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
-Aktualny etap: **Studio 86 opublikowane** — mniej pośrednich rysowań paneli;48stanów Circle Cage zgodnych pikselowo, błędy i spóźniona praca sprawdzone. Pozostałe uploady, rozrzut czasów i zgodność geometryczna OS–Studio nadal wymagają pracy.
+Aktualny etap: **Studio 87 opublikowane** — usunięte zbędne białe uploady,60 zgodnych stanów oraz odtwarzalny audyt8 modeli/25 komponentów. Równoważność geometrii i techniczny BOM nadal niezatwierdzone.
 
 Dokument właściciela jest planem rozwoju istniejącego Studio. Nie zastępuje bieżących decyzji właściciela ani nie oznacza startu nowej aplikacji. Kończy się w połowie pozycji „Testy regres” w Sprincie6; brakującej części nie odtworzono z domysłów.
 
@@ -13,7 +13,7 @@ We wcześniejszym etapie pracowały równolegle cztery role wykonawcze: agent pr
 | S1: narzędzia, czytelność i nawigacja | PARTIAL | Cztery narzędzia, Nawierzchnia, klawiatura, fokus i testy reflow istnieją. Nie oznacza to pełnego badania wszystkich 12 odpowiedzialności ani certyfikacji. |
 | S2-01: semantyka wymiarów | PARTIAL | Wspólny adapter ośmiu modeli: zapisane wymiary, nawierzchnia i obrys konstrukcji rozdzielone. Pole gry, rozstaw modułów i strefy bezpieczeństwa wymagają potwierdzonych danych technicznych. |
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
-| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio86: wspólny końcowy draw paneli; Circle2 tekst665→105drawArrays,48identycznych stanów. Cache PNG/Image i strony zachowane. Pozostałe uploady, rozrzut, czas GPU i budżet nadal wymagają pracy. |
+| S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio87: zbędne białe resetowania pomijane; jednostronny Circle2 uploady32→16,60identycznych stanów. Wcześniejsze cache i batch draw zachowane. Serie czasu/rozrzutu, GPU i budżet nadal wymagają pracy. |
 | S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
 | S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje. Studio84 jawnie wiąże dwa snapshoty z SHA i rewizjami; nie potwierdza geometrii. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
@@ -58,11 +58,10 @@ Wynik GF-OWNED-INSPECTION-1 pozostaje osobnym dokumentem: DIGITAL_INSTANCES_ONLY
 Prace prowadzono z ekspertami kontraktu/mapowania i UX/akceptacji; testy domenowe powstały niezależnie od adaptera. Natywny plik OS nie przypina historycznych zasobów: wynik używa źródeł sprawdzonych przy wydaniu inspektora i nie potwierdza zgodności dawnej wizualizacji.
 
 ## Kolejność dalszej pracy
-
-1. **Pozostały koszt renderowania:** osobno profilować dekodowanie, upload i draw oraz koszt jednostronnych podzbiorów; zachować anulowanie i zgodność obrazu. Zebrać rozrzut porównywalnych serii przed budżetem czasowym. Kodowanie PNG16→1, Image load8/16→1, wspólny końcowy draw paneli i wybór stron Circle Cage są już wykonane w opisanym zakresie. Dalsze batchowanie nie powinno naruszyć błędów/anulowania; uploady GPU pozostają osobne. Wczytywanie Image nie jest bezpośrednim pomiarem wewnętrznego dekodera CPU; nie uznano całego S2-04 za DONE.
-2. **Zgodność geometrii OS–Project:** zapis referencyjny dwóch wersji jest wykonany w Studio84. Następnie porównać pełne złożenia, transformacje i obrysy, udokumentować rozbieżności oraz zatwierdzić mapowanie. Ta sama rodzina lub nazwa nie oznacza identycznego boiska; ilości OS nadal nie trafiają do technicalBill.
-3. **Dane wykonawcze:** potwierdzić rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po potwierdzeniu oraz wiązaniu instancji rozszerzyć techniczny BOM; obecnie rows=null i UNCONFIRMED.
-4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport i warunki podatkowe; wycena tej samej konfiguracji. Osobno kontrola rastrów, fizyczne urządzenia, czytnik ekranu i badania z klientami. Orientacyjne ceny konstrukcji pozostają aktywne.
+1. **Czas i rozrzut:** wykonać porównywalne powtórzone serie dla aktualnego renderera i fizycznych urządzeń przed budżetem SLA. Cache PNG/Image, końcowy draw paneli i pomijanie białych resetów są wykonane w opisanym zakresie; uploady PNG pozostają osobne.
+2. **Zgodność geometrii OS–Studio:** skrypt i inwentaryzacja8 modeli/25 komponentów gotowe. Następnie zatwierdzić mapowanie instancji/transformacji i wspólne definicje obrysów; porównać pełne złożenia. Rodzina lub podobny obrys nie wystarczają. Wskazane braki i różnice opisuje STUDIO_OWNED_GEOMETRY_GAPS.md.
+3. **Dane wykonawcze:** potwierdzić rewizje R02, połączenia, rozstawy, części montażowe i fundamenty. Cztery rodziny źródłowe nadal wymagają dekompozycji. Dopiero potem techniczny BOM; obecnie rows=null i UNCONFIRMED.
+4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport, warunki podatkowe i wycena tej samej konfiguracji; osobno rastry, fizyczne urządzenia, czytnik ekranu i badania z klientami. Orientacyjne ceny konstrukcji pozostają aktywne.
 
 Pozostałe zależności WordPress: instalacja i osobista aktywacja WPCode przez właściciela, potwierdzone fakty prywatności, odbiór wcześniejszego pojedynczego testu poczty. Nie wysyłać kolejnych testów bez nowej instrukcji.
 
@@ -127,7 +126,7 @@ Następny krok po zwolnieniu min.1GB: hashe wejść pomiaru, build, smoke scenar
 
 ## S2-04/S6 — pierwsza baza pomiarowa renderera, 22.10.2026
 
-**DONE — scenariusz i pierwsza lokalna baza. PARTIAL — cały etap wydajności/budżetu.** Po zwolnieniu miejsca build i pomiary zostały ukończone. Pełna macierz8modeli ×2szerokości375/1440 ×5powtórzeń ×6operacji: **480próbek,96komórek,0błędów**. Niezależny ekspert odtworzył wszystkie mediany/maksima oraz sprawdził hashe wejść i geometrii.
+**DONE — scenariusz i pierwsza lokalna baza. PARTIAL — cały etap wydajności/budżetu.** Po zwolnieniu miejsca build i pomiary zostały ukończone. Pełna macierz8 modeli ×2szerokości375/1440 ×5powtórzeń ×6operacji: **480próbek,96komórek,0błędów**. Niezależny ekspert odtworzył wszystkie mediany/maksima oraz sprawdził hashe wejść i geometrii.
 
 | Operacja | Zakres median [ms] | Maksimum próbek [ms] |
 |---|---:|---:|
@@ -274,3 +273,22 @@ Liczniki oznaczają zgłoszenia aplikacji, **nie FPS lub czas GPU**. Nie wykonan
 
 
 Dodatkowa kontrola zastąpienia wcześniejszej poprawnej grafiki: obraz po błędzie jest identyczny z pustym panelem. Początkowy punkt odniesienia testu był pobierany przed ResizeObserver po otwarciu Konstrukcji na telefonie; poprawiono stabilizację i kontrolę wymiarów, bez zmian aplikacji. Trzy SHA i rozmiary zapisane w raporcie błędów.
+
+
+## Puste tekstury i audyt geometrii — Studio 87
+
+23.10.2026: źródło `46dec70f4af0e0dc0ed3c2a95193a602ae5f3ff8`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_9747874feea881918c54184f09b6c1b3`, deployment `appgdep_6adb36f5227c8191b0a596985cac5a5f` — **succeeded**, środowisko revision 3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka `sha256:6f7db90490f7c289501abdabcdbbe5bf19cf7333555dbc94fb1ab7fb6e2e9fc4`.
+
+**DONE — zbędne białe uploady.** Osobna flaga whiteTexture opisuje stan GPU niezależnie od klucza zadania. clearTexture zawsze najpierw unieważnia klucz, lecz pomija upload do już białej tekstury. Grafika i błąd pozostawiający wcześniejszy obraz nadal wymagają czyszczenia; flaga zmienia się dopiero po udanym uploadzie. Zachowane retry, stare/zniszczone zadania, cache PNG/Image i wspólne końcowe rysowanie.
+
+**60/60 stanów zgodnych pikselowo z wersją86**: oba Circle Cage ×375/1440 ×both/inner/outer ×tekst/kolor/logo/usunięcie/ponowny kolor pustych paneli. Bufory geometrii/normalnych/UV, kolory, eksport design, Image load, uploady PNG i clear/drawArrays identyczne. W44 stanach mniej białych resetów. Circle2 jednostronnie tekst/kolor/logo: wszystkie uploady **32→16** (16 PNG i0zbędnych białych); usunięcie grafiki nadal wykonuje16 wymaganych białych resetów. Kolejna zmiana koloru pustych paneli daje0 zamiast16/32. Circle1 analogicznie8 paneli. To liczba zgłoszeń aplikacji, nie FPS, czas GPU lub oszczędność pamięci.
+
+Początkowy odczyt liczników przechwycił dodatkową klatkę ResizeObserver tylko w jednej serii. Dodano stabilizację po dwóch klatkach i powtórzono obie serie: baza pochodzi z zachowanego archiwum86, a jej hashe paczek są identyczne z opublikowanym86. Nie osłabiono asercji. Pierwsza równoległa regresja mobilna zatrzymała się na kliknięciu kamery; pełne testy ponowiono sekwencyjnie. Ponowiony test błędu po wcześniejszej grafice, pustego wyglądu, retry i opóźnionego obrazu PASS375/1440.
+
+**DONE — inwentaryzacja zgodności, bez zatwierdzenia geometrii.** Nowy deterministyczny skrypt mierzy osiem aktualnych rewizji Studio i weryfikuje ich źródła, przypięty silnik/katalog/rejestr oraz25/25 komponentów OS. Dwa uruchomienia dały identyczny JSON SHA256 `9bc4dfd3420a87d7d04bd5be1c5e4e12e848326d6ebee0b18ab7ceae986ed1ae`. Cztery rodziny źródłowe nie mają potwierdzonego złożenia OS. Deskryptor Circle ma średnicę podłoża7,1m wobec6m Studio; Grid7,31×5,304 wobec7,3×5,3. Octagon wymaga przypiętego mesha/orientacji podłoża; porównanie jego pola i obrysu pozostaje null. Różne metody pomiaru i deskryptory nie dowodzą wady wykonawczej.
+
+Nadal geometryCorrespondence=UNCONFIRMED i manufacturingApproved=false dla wszystkich8 modeli. Do BOM wymagane zatwierdzone instancje i transformacje, mapowanie do dokładnej rewizji Studio, połączenia, rozstawy, obrysy/strefy, kotwy i fundamenty. Nie dopisano ilości OS do aktywnego Project ani ceny. Nie podmieniano modeli, R02, stawek, SQL lub formatu Project i nie wysyłano formularzy.
+
+PASS: TypeScript, build, test:studio (w tym błędy/clear/retry/stale), quote-engine/construction-pricing,60 porównań, dwa scenariusze błędów/wyścigów, pełne test:mobile96aren/48Street/16materiałów/JSON/Radar, Surface7rozmiarów i58przypadków stron paneli. Eksperci przygotowali kod, scenariusz oraz audyt; prowadzący niezależnie porównał60par, hashe paczki86 i dwa odtworzenia audytu.
+
+[Resety tekstur](../../../integrations/studio/canvas-editor/docs/WHITE_TEXTURE_RESETS.md), [60 porównań](../../../integrations/studio/canvas-editor/docs/white-texture-resets-2026-10-23/comparison.json), [audyt8 modeli](../../../integrations/studio/canvas-editor/docs/STUDIO_OWNED_GEOMETRY_GAPS.md), [źródłowy JSON](../../../integrations/studio/canvas-editor/docs/studio-owned-geometry-gaps-2026-10-23.json).

@@ -213,3 +213,15 @@ NEXT: pomiar rozrzutu i czasu na porównywalnych seriach oraz osobny profil uplo
 
 
 Bramki publikacji23.10: TypeScript/build/test:studio/quote-engine/construction-pricing PASS;48/48zgodnych stanów z wersją85 i mniejsza liczba rysowań w36stanach grafiki; dwa scenariusze rzeczywistych błędów/retry/starego wyniku PASS; pełne test:mobile96aren/48Street/16materiałów/JSON/Radar PASS; Surface7rozmiarów i58przypadków stron paneli PASS.
+
+
+## Resety tekstur i audyt geometrii — 23.10.2026
+
+Osobna flaga białej tekstury pozwala ominąć zbędny upload, zachowując unieważnienie oczekującej pracy oraz wymagane czyszczenie wcześniejszej grafiki po błędzie. Kontrakt: [WHITE_TEXTURE_RESETS](WHITE_TEXTURE_RESETS.md). Wyniki i bramki publikacji dopisywane po zakończeniu.
+
+Powstał również odtwarzalny [audyt8modeli Studio i OS](STUDIO_OWNED_GEOMETRY_GAPS.md), źródłowe SHA oraz opis brakujących danych. To ukończona inwentaryzacja, nie zatwierdzenie równoważności geometrii lub technicznego BOM. Cztery rodziny źródłowe nie mają potwierdzonego złożenia w OS; Circle/Grid mają różnice deskryptorów podłoża, a Octagon nadal wymaga przypiętego mesha/orientacji podłoża do porównania.
+
+NEXT: powtarzalne serie czasu/rozrzutu, pomiary na urządzeniach i zatwierdzone mapowanie instancji, połączeń oraz obrysów przed BOM.
+
+
+Bramki publikacji 23.10: TypeScript, build, test:studio, quote-engine i construction-pricing PASS. Ponowione sekwencyjnie test:mobile (96 scen aren,48 Street,16 materiałów, JSON i Radar), Surface w7rozmiarach oraz58przypadków stron paneli PASS. Porównanie60stanów i2scenariusze błędów/retry/starej pracy PASS. Audyt8rewizji Studio i25komponentów OS odtworzony dwukrotnie z identycznym SHA.

@@ -185,3 +185,8 @@ Identyczne PNG paneli współdzielą wczytany Image w jednej aktualizacji podgl�
 ## Końcowe rysowanie paneli — 23.10.2026
 
 Aktualizacja podglądu czeka na panelowe uploady i wykonuje wspólne końcowe rysowanie. Chronione błędy, retry i anulowanie; osobne tekstury GPU oraz format projektu zachowane. [Kontrakt i dowody](docs/PANEL_UPLOAD_BATCH.md).
+
+
+## Resety tekstur i zgodność modeli — 23.10.2026
+
+Puste panele nie wymagają kolejnych białych uploadów; rzeczywista grafika nadal jest czyszczona, także po błędzie. [Kontrakt](docs/WHITE_TEXTURE_RESETS.md). Osobny [audyt8modeli Studio/OS](docs/STUDIO_OWNED_GEOMETRY_GAPS.md) zapisuje rewizje i potwierdzone różnice; nie zatwierdza technicznego BOM.

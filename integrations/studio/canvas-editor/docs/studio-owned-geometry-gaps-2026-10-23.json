@@ -1,0 +1,736 @@
+{
+  "schema": "GF-STUDIO-OWNED-GEOMETRY-GAPS-1",
+  "auditDate": "2026-10-23",
+  "scope": "EVIDENCE_ONLY_NO_GEOMETRY_EQUIVALENCE",
+  "geometryCorrespondence": "UNCONFIRMED",
+  "manufacturingApproved": false,
+  "units": {
+    "length": "metres",
+    "area": "square metres"
+  },
+  "engine": {
+    "path": "lib/vendor/owned-modular/engine.mjs",
+    "sha256": "492af823b06f689d8421cf310978234a261d3e3a35ec65e74aebcde685a61715",
+    "pinnedStatus": "MATCH",
+    "sourceEngineStatus": "MATCH",
+    "catalogRevision": "967fc81272c1a0a22d38c5301261a78085118ebe1f7b7ec99d6a83814a0abbd2",
+    "registryRevision": "95f5c1397a2ae5574091cffbc25cbc344e2d70477c815279d2c7fec012672dac",
+    "originalEvidenceDate": "2026-10-22"
+  },
+  "osRuntimeAssets": [
+    {
+      "family": "street-field",
+      "alias": "sf-long",
+      "path": "public/models/gamefields/owned-modular/assets/sf-long.glb",
+      "pinnedSha256": "35a8f7814cd6dadcc76f11d1fb4227ad71a0057f7cb41511a377b37d5968d7a4",
+      "actualSha256": "35a8f7814cd6dadcc76f11d1fb4227ad71a0057f7cb41511a377b37d5968d7a4",
+      "status": "MATCH"
+    },
+    {
+      "family": "street-field",
+      "alias": "sf-short",
+      "path": "public/models/gamefields/owned-modular/assets/sf-short.glb",
+      "pinnedSha256": "c7f5440ed436868da03a4703a730e2f14a1c5480faca79baf3ef8a491fdb75cc",
+      "actualSha256": "c7f5440ed436868da03a4703a730e2f14a1c5480faca79baf3ef8a491fdb75cc",
+      "status": "MATCH"
+    },
+    {
+      "family": "street-field",
+      "alias": "sf-goal",
+      "path": "public/models/gamefields/owned-modular/assets/sf-goal.glb",
+      "pinnedSha256": "5ba8c0b4cde58b9d2621b58669428bb4bc5a0e9e6e2c6915bf190107cf393b15",
+      "actualSha256": "5ba8c0b4cde58b9d2621b58669428bb4bc5a0e9e6e2c6915bf190107cf393b15",
+      "status": "MATCH"
+    },
+    {
+      "family": "street-field",
+      "alias": "sf-entry",
+      "path": "public/models/gamefields/owned-modular/assets/sf-entry.glb",
+      "pinnedSha256": "8959281a9e1b674e53ba19f62e12976f9fd006d37236115803cbb483f655dde5",
+      "actualSha256": "8959281a9e1b674e53ba19f62e12976f9fd006d37236115803cbb483f655dde5",
+      "status": "MATCH"
+    },
+    {
+      "family": "street-field",
+      "alias": "sf-post",
+      "path": "public/models/gamefields/owned-modular/assets/sf-post.glb",
+      "pinnedSha256": "f970e72da05c75e8af854f707d70954f3dcb7ebb81fad07569d1ede0fed13f34",
+      "actualSha256": "f970e72da05c75e8af854f707d70954f3dcb7ebb81fad07569d1ede0fed13f34",
+      "status": "MATCH"
+    },
+    {
+      "family": "octagon",
+      "alias": "oct-standard",
+      "path": "public/models/gamefields/owned-modular/assets/oct-standard.glb",
+      "pinnedSha256": "1e72827d28e9350641c903124d7b29907d32c34f7dfb72c93a534f614629c7a7",
+      "actualSha256": "1e72827d28e9350641c903124d7b29907d32c34f7dfb72c93a534f614629c7a7",
+      "status": "MATCH"
+    },
+    {
+      "family": "octagon",
+      "alias": "oct-goal",
+      "path": "public/models/gamefields/owned-modular/assets/oct-goal.glb",
+      "pinnedSha256": "05a92a77ee639cab9d62eb39c60c6d350f935cacd2c08b6135d61b8fd496acf7",
+      "actualSha256": "05a92a77ee639cab9d62eb39c60c6d350f935cacd2c08b6135d61b8fd496acf7",
+      "status": "MATCH"
+    },
+    {
+      "family": "octagon",
+      "alias": "oct-entry",
+      "path": "public/models/gamefields/owned-modular/assets/oct-entry.glb",
+      "pinnedSha256": "d3c11214bef4ca02ddad6a69bc91059f1a3a68eb3160343aac264ef6188abe46",
+      "actualSha256": "d3c11214bef4ca02ddad6a69bc91059f1a3a68eb3160343aac264ef6188abe46",
+      "status": "MATCH"
+    },
+    {
+      "family": "octagon",
+      "alias": "oct-post",
+      "path": "public/models/gamefields/owned-modular/assets/oct-post.glb",
+      "pinnedSha256": "4aad5d66089b5e39872bd4a54396f0e43b4ae5415493aeef2c766e5ccf8ccdee",
+      "actualSha256": "4aad5d66089b5e39872bd4a54396f0e43b4ae5415493aeef2c766e5ccf8ccdee",
+      "status": "MATCH"
+    },
+    {
+      "family": "circle-cage",
+      "alias": "cc-standard",
+      "path": "public/models/gamefields/owned-modular/assets/cc-standard.glb",
+      "pinnedSha256": "2e0831a92264bb09680cc57c869c2c03eab89ac291323b838a2e8a645f489490",
+      "actualSha256": "2e0831a92264bb09680cc57c869c2c03eab89ac291323b838a2e8a645f489490",
+      "status": "MATCH"
+    },
+    {
+      "family": "circle-cage",
+      "alias": "cc-goal",
+      "path": "public/models/gamefields/owned-modular/assets/cc-goal.glb",
+      "pinnedSha256": "097d8dad568a4d61ddbf0ee87c710d04b6cb9534e72084504e268ca9835f4492",
+      "actualSha256": "097d8dad568a4d61ddbf0ee87c710d04b6cb9534e72084504e268ca9835f4492",
+      "status": "MATCH"
+    },
+    {
+      "family": "circle-cage",
+      "alias": "cc-entry",
+      "path": "public/models/gamefields/owned-modular/assets/cc-entry.glb",
+      "pinnedSha256": "21b8b0f3b15be6f5751cb4e4cc66e954264f1e96787c19743ef36bb80b416f58",
+      "actualSha256": "21b8b0f3b15be6f5751cb4e4cc66e954264f1e96787c19743ef36bb80b416f58",
+      "status": "MATCH"
+    },
+    {
+      "family": "circle-cage",
+      "alias": "cc-upper-entry",
+      "path": "public/models/gamefields/owned-modular/assets/cc-upper-entry.glb",
+      "pinnedSha256": "431e7e0b8e5e4d45146f556013b2400f2d9db23116c163e9a5671779e678e0e0",
+      "actualSha256": "431e7e0b8e5e4d45146f556013b2400f2d9db23116c163e9a5671779e678e0e0",
+      "status": "MATCH"
+    },
+    {
+      "family": "p1",
+      "alias": "k1",
+      "path": "public/models/gamefields/components/k1.glb",
+      "pinnedSha256": "d664906caab40c5869846aca1deca2e744666d81d4d6d46c8a543e19a7346ab0",
+      "actualSha256": "d664906caab40c5869846aca1deca2e744666d81d4d6d46c8a543e19a7346ab0",
+      "status": "MATCH"
+    },
+    {
+      "family": "p1",
+      "alias": "k2",
+      "path": "public/models/gamefields/components/k2.glb",
+      "pinnedSha256": "145ae4d25bd731e6f5631c7b5fd7057b3e68a28d24ffbaf0662b18ed5835dd5e",
+      "actualSha256": "145ae4d25bd731e6f5631c7b5fd7057b3e68a28d24ffbaf0662b18ed5835dd5e",
+      "status": "MATCH"
+    },
+    {
+      "family": "p1",
+      "alias": "k3",
+      "path": "public/models/gamefields/components/k3.glb",
+      "pinnedSha256": "4797ffa28003ac868610a3cacdb65c6a76d80a8b0d37c755e837389a825f562e",
+      "actualSha256": "4797ffa28003ac868610a3cacdb65c6a76d80a8b0d37c755e837389a825f562e",
+      "status": "MATCH"
+    },
+    {
+      "family": "p1",
+      "alias": "k4",
+      "path": "public/models/gamefields/components/k4.glb",
+      "pinnedSha256": "b0ebf7d17448c0c437b79faf8e80c7a276c8ccae25423a00765f98d9c7b08007",
+      "actualSha256": "b0ebf7d17448c0c437b79faf8e80c7a276c8ccae25423a00765f98d9c7b08007",
+      "status": "MATCH"
+    },
+    {
+      "family": "p1",
+      "alias": "s1",
+      "path": "public/models/gamefields/components/s1.glb",
+      "pinnedSha256": "f3e74b07c1cdf9ac9f12e4abb5ab876b91fa061352b61807d7cfcf9c58ed6783",
+      "actualSha256": "f3e74b07c1cdf9ac9f12e4abb5ab876b91fa061352b61807d7cfcf9c58ed6783",
+      "status": "MATCH"
+    },
+    {
+      "family": "o1",
+      "alias": "po1",
+      "path": "public/models/gamefields/components/po1.glb",
+      "pinnedSha256": "8279d6a25a11b69d9d2bfbf11a6657ad90de530fdbae4ae3ec999b3e80b5ae18",
+      "actualSha256": "8279d6a25a11b69d9d2bfbf11a6657ad90de530fdbae4ae3ec999b3e80b5ae18",
+      "status": "MATCH"
+    },
+    {
+      "family": "o1",
+      "alias": "po2",
+      "path": "public/models/gamefields/components/po2.glb",
+      "pinnedSha256": "c11f29617d52414248b6383e720c583218fa8f746c9e355f14cda17d49e182af",
+      "actualSha256": "c11f29617d52414248b6383e720c583218fa8f746c9e355f14cda17d49e182af",
+      "status": "MATCH"
+    },
+    {
+      "family": "o1",
+      "alias": "po3",
+      "path": "public/models/gamefields/components/po3.glb",
+      "pinnedSha256": "f56922e908c092ad638a028e15611a5b682e61fd2c7ac73fea0a6a49d25ba01e",
+      "actualSha256": "f56922e908c092ad638a028e15611a5b682e61fd2c7ac73fea0a6a49d25ba01e",
+      "status": "MATCH"
+    },
+    {
+      "family": "w1",
+      "alias": "rw1",
+      "path": "public/models/gamefields/components/rw1.glb",
+      "pinnedSha256": "a1dafc50de3eeede08e52725524846c14cfe7d82b8f8471e50c8149477171284",
+      "actualSha256": "a1dafc50de3eeede08e52725524846c14cfe7d82b8f8471e50c8149477171284",
+      "status": "MATCH"
+    },
+    {
+      "family": "w1",
+      "alias": "rw2",
+      "path": "public/models/gamefields/components/rw2.glb",
+      "pinnedSha256": "3d2b089eba5526fca390386f97d045a3da9c979258438cdcbed2324a7411e5f4",
+      "actualSha256": "3d2b089eba5526fca390386f97d045a3da9c979258438cdcbed2324a7411e5f4",
+      "status": "MATCH"
+    },
+    {
+      "family": "w1",
+      "alias": "st1",
+      "path": "public/models/gamefields/components/st1.glb",
+      "pinnedSha256": "40941d7a0f57e897b0c94be6412deeb6afc75d814cdd6cc79ad4dc239631c17c",
+      "actualSha256": "40941d7a0f57e897b0c94be6412deeb6afc75d814cdd6cc79ad4dc239631c17c",
+      "status": "MATCH"
+    },
+    {
+      "family": "w1",
+      "alias": "e1",
+      "path": "public/models/gamefields/components/e1.glb",
+      "pinnedSha256": "8b547b04718b48292897d8d78b17e5ada81670c1ac808eb5f3fd2f01685286c2",
+      "actualSha256": "8b547b04718b48292897d8d78b17e5ada81670c1ac808eb5f3fd2f01685286c2",
+      "status": "MATCH"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "w1",
+      "studio": {
+        "sourceRevision": "a81bfdec3013309db048d55e28700260bc835359237ca65aef70e15b641e203b",
+        "sourceFiles": [
+          {
+            "path": "components/assets-blender/w1.json",
+            "sha256": "487fc6ae05448ae3fb6a7604dc5a524e0dc0f0be6d3f5db688436e9bcf314191",
+            "actualSha256": "487fc6ae05448ae3fb6a7604dc5a524e0dc0f0be6d3f5db688436e9bcf314191",
+            "status": "MATCH"
+          },
+          {
+            "path": "public/arenas/boisko-w1.glb",
+            "sha256": "cae6c9dccf826d73e92816fe9a960e9849343a15cf0094087311d82886613a6f",
+            "actualSha256": "cae6c9dccf826d73e92816fe9a960e9849343a15cf0094087311d82886613a6f",
+            "status": "MATCH"
+          }
+        ],
+        "constructionBoundsMetres": {
+          "x": 5.09,
+          "z": 5.831395,
+          "y": 1
+        },
+        "surfaceBoundsMetres": {
+          "x": 4.99,
+          "z": 4.99,
+          "y": 0
+        },
+        "topTriangleAreaSquareMetres": 19.553002
+      },
+      "os": {
+        "family": "w1",
+        "kind": "source",
+        "defaultNormalizedConfig": {
+          "schema": "GF-OWNED-ASSEMBLY-1",
+          "family": "w1",
+          "mode": "assembly",
+          "part": "rw1",
+          "color": "#30363c",
+          "long": 4,
+          "short": 3,
+          "goals": 2,
+          "entries": 1,
+          "levels": 1
+        },
+        "assemblyAvailability": "SOURCE_ONLY_NO_CONFIRMED_ASSEMBLY",
+        "referenceDimensionsMetres": null,
+        "floorDescriptor": null,
+        "floorBoundsMetres": null,
+        "floorAnalyticAreaSquareMetres": null,
+        "floorBoundsMinusStudioSurfaceBoundsMetres": null,
+        "floorAreaMinusStudioTopTriangleAreaSquareMetres": null,
+        "instanceCount": null,
+        "transformedAssemblyMeshBoundsMetres": null
+      },
+      "geometryCorrespondence": "UNCONFIRMED",
+      "manufacturingApproved": false,
+      "notes": [
+        "OS exposes a whole source model; default assembly in the inspector is unavailable. No inferred component quantities."
+      ]
+    },
+    {
+      "id": "o1",
+      "studio": {
+        "sourceRevision": "12d00e49dfad836ebbc7cde0b36528d9ac7b84fe6309786be99b6f3ad97ac581",
+        "sourceFiles": [
+          {
+            "path": "components/assets-blender/o1.json",
+            "sha256": "cec7ae1f4b4c20eede64bd09e9e4f827aa8215bbc9476cb05bc634cfb826e72a",
+            "actualSha256": "cec7ae1f4b4c20eede64bd09e9e4f827aa8215bbc9476cb05bc634cfb826e72a",
+            "status": "MATCH"
+          }
+        ],
+        "constructionBoundsMetres": {
+          "x": 6.002,
+          "z": 6.62306,
+          "y": 1.516
+        },
+        "surfaceBoundsMetres": {
+          "x": 5.902,
+          "z": 5.902,
+          "y": 0
+        },
+        "topTriangleAreaSquareMetres": 27.353366
+      },
+      "os": {
+        "family": "o1",
+        "kind": "source",
+        "defaultNormalizedConfig": {
+          "schema": "GF-OWNED-ASSEMBLY-1",
+          "family": "o1",
+          "mode": "assembly",
+          "part": "po1",
+          "color": "#30363c",
+          "long": 4,
+          "short": 3,
+          "goals": 2,
+          "entries": 1,
+          "levels": 1
+        },
+        "assemblyAvailability": "SOURCE_ONLY_NO_CONFIRMED_ASSEMBLY",
+        "referenceDimensionsMetres": null,
+        "floorDescriptor": null,
+        "floorBoundsMetres": null,
+        "floorAnalyticAreaSquareMetres": null,
+        "floorBoundsMinusStudioSurfaceBoundsMetres": null,
+        "floorAreaMinusStudioTopTriangleAreaSquareMetres": null,
+        "instanceCount": null,
+        "transformedAssemblyMeshBoundsMetres": null
+      },
+      "geometryCorrespondence": "UNCONFIRMED",
+      "manufacturingApproved": false,
+      "notes": [
+        "OS exposes a whole source model; default assembly in the inspector is unavailable. No inferred component quantities."
+      ]
+    },
+    {
+      "id": "p1",
+      "studio": {
+        "sourceRevision": "4b5f694dc6067356875fcd791c9d26afef42d3022e382b88c4e4eaeb0982f84c",
+        "sourceFiles": [
+          {
+            "path": "components/assets-blender/p1.json",
+            "sha256": "6725f91c6f0b7018149ec47eec2d8fe0119d60999965e1ecb2c50bb4b0c3f2c2",
+            "actualSha256": "6725f91c6f0b7018149ec47eec2d8fe0119d60999965e1ecb2c50bb4b0c3f2c2",
+            "status": "MATCH"
+          },
+          {
+            "path": "components/assets-blender/p1-surface.json",
+            "sha256": "2748b094b3affdc5e9757c71558eadbe21cdcfeb1ea4f547b6fa15eec85627de",
+            "actualSha256": "2748b094b3affdc5e9757c71558eadbe21cdcfeb1ea4f547b6fa15eec85627de",
+            "status": "MATCH"
+          }
+        ],
+        "constructionBoundsMetres": {
+          "x": 5.653,
+          "z": 7.93938,
+          "y": 1.22399
+        },
+        "surfaceBoundsMetres": {
+          "x": 5.571602,
+          "z": 7.137828,
+          "y": 0.000845
+        },
+        "topTriangleAreaSquareMetres": 39.251386
+      },
+      "os": {
+        "family": "p1",
+        "kind": "source",
+        "defaultNormalizedConfig": {
+          "schema": "GF-OWNED-ASSEMBLY-1",
+          "family": "p1",
+          "mode": "assembly",
+          "part": "k1",
+          "color": "#30363c",
+          "long": 4,
+          "short": 3,
+          "goals": 2,
+          "entries": 1,
+          "levels": 1
+        },
+        "assemblyAvailability": "SOURCE_ONLY_NO_CONFIRMED_ASSEMBLY",
+        "referenceDimensionsMetres": null,
+        "floorDescriptor": null,
+        "floorBoundsMetres": null,
+        "floorAnalyticAreaSquareMetres": null,
+        "floorBoundsMinusStudioSurfaceBoundsMetres": null,
+        "floorAreaMinusStudioTopTriangleAreaSquareMetres": null,
+        "instanceCount": null,
+        "transformedAssemblyMeshBoundsMetres": null
+      },
+      "geometryCorrespondence": "UNCONFIRMED",
+      "manufacturingApproved": false,
+      "notes": [
+        "OS exposes a whole source model; default assembly in the inspector is unavailable. No inferred component quantities."
+      ]
+    },
+    {
+      "id": "street15",
+      "studio": {
+        "sourceRevision": "5ea524e1717b39dd1d95ad9d222d2d0594b6eef6d848d3b3ecedfe848747e8be",
+        "sourceFiles": [
+          {
+            "path": "public/arenas/street15.json",
+            "sha256": "176f3fd10a5b576155376ffccc914ea0d7fe34f714b34811986f681509999984",
+            "actualSha256": "176f3fd10a5b576155376ffccc914ea0d7fe34f714b34811986f681509999984",
+            "status": "MATCH"
+          }
+        ],
+        "constructionBoundsMetres": {
+          "x": 16.650002,
+          "z": 10.104,
+          "y": 1.325
+        },
+        "surfaceBoundsMetres": {
+          "x": 15,
+          "z": 10,
+          "y": 0.2
+        },
+        "topTriangleAreaSquareMetres": 149.155
+      },
+      "os": {
+        "family": "street15",
+        "kind": "source",
+        "defaultNormalizedConfig": {
+          "schema": "GF-OWNED-ASSEMBLY-1",
+          "family": "street15",
+          "mode": "assembly",
+          "part": "",
+          "color": "#30363c",
+          "long": 4,
+          "short": 3,
+          "goals": 2,
+          "entries": 1,
+          "levels": 1
+        },
+        "assemblyAvailability": "SOURCE_ONLY_NO_CONFIRMED_ASSEMBLY",
+        "referenceDimensionsMetres": null,
+        "floorDescriptor": null,
+        "floorBoundsMetres": null,
+        "floorAnalyticAreaSquareMetres": null,
+        "floorBoundsMinusStudioSurfaceBoundsMetres": null,
+        "floorAreaMinusStudioTopTriangleAreaSquareMetres": null,
+        "instanceCount": null,
+        "transformedAssemblyMeshBoundsMetres": null
+      },
+      "geometryCorrespondence": "UNCONFIRMED",
+      "manufacturingApproved": false,
+      "notes": [
+        "OS exposes a whole source model; default assembly in the inspector is unavailable. No inferred component quantities."
+      ]
+    },
+    {
+      "id": "circle-cage-1",
+      "studio": {
+        "sourceRevision": "cd0cfc0551d42c616729abcc730ed809b09dcf87be82a2c33e02b6b0acc6e687",
+        "sourceFiles": [
+          {
+            "path": "public/arenas/circle-cage-1.json",
+            "sha256": "d019703cc03557779e4d4d8df794d098aee86b14005f5ffbbd3a7b270721f5df",
+            "actualSha256": "d019703cc03557779e4d4d8df794d098aee86b14005f5ffbbd3a7b270721f5df",
+            "status": "MATCH"
+          }
+        ],
+        "constructionBoundsMetres": {
+          "x": 6.722908,
+          "z": 6.12,
+          "y": 0.91
+        },
+        "surfaceBoundsMetres": {
+          "x": 6,
+          "z": 6,
+          "y": 0.2
+        },
+        "topTriangleAreaSquareMetres": 28.26298
+      },
+      "os": {
+        "family": "circle-cage",
+        "kind": "circle",
+        "defaultNormalizedConfig": {
+          "schema": "GF-OWNED-ASSEMBLY-1",
+          "family": "circle-cage",
+          "mode": "assembly",
+          "part": "cc-standard",
+          "color": "#30363c",
+          "long": 4,
+          "short": 3,
+          "goals": 2,
+          "entries": 1,
+          "levels": 1
+        },
+        "assemblyAvailability": "SUPPORTED_DIGITAL_ASSEMBLY",
+        "referenceDimensionsMetres": [
+          6,
+          6
+        ],
+        "floorDescriptor": {
+          "kind": "circle",
+          "radius": 3.55,
+          "depth": 0.2
+        },
+        "floorBoundsMetres": {
+          "x": 7.1,
+          "z": 7.1,
+          "y": 0.2
+        },
+        "floorAnalyticAreaSquareMetres": 39.591921,
+        "floorBoundsMinusStudioSurfaceBoundsMetres": {
+          "x": 1.1,
+          "z": 1.1,
+          "y": 0
+        },
+        "floorAreaMinusStudioTopTriangleAreaSquareMetres": 11.328941,
+        "instanceCount": 8,
+        "transformedAssemblyMeshBoundsMetres": null
+      },
+      "geometryCorrespondence": "UNCONFIRMED",
+      "manufacturingApproved": false,
+      "notes": [
+        "OS reference dimensions, floor dimensions and Studio mesh bounds have different meanings. Numerical equality does not prove correspondence."
+      ]
+    },
+    {
+      "id": "circle-cage-2",
+      "studio": {
+        "sourceRevision": "dd74af05a58f92649936f4f558ce0e9333ff01f7b9ec54a33c95bb4aa0eebc39",
+        "sourceFiles": [
+          {
+            "path": "public/arenas/circle-cage-2.json",
+            "sha256": "897fc08a610b122d1962ea7cd7b7fc4351a2d279a1ea5d271a3d8243558d1339",
+            "actualSha256": "897fc08a610b122d1962ea7cd7b7fc4351a2d279a1ea5d271a3d8243558d1339",
+            "status": "MATCH"
+          }
+        ],
+        "constructionBoundsMetres": {
+          "x": 6.722908,
+          "z": 6.12,
+          "y": 1.81
+        },
+        "surfaceBoundsMetres": {
+          "x": 6,
+          "z": 6,
+          "y": 0.2
+        },
+        "topTriangleAreaSquareMetres": 28.26298
+      },
+      "os": {
+        "family": "circle-cage",
+        "kind": "circle",
+        "defaultNormalizedConfig": {
+          "schema": "GF-OWNED-ASSEMBLY-1",
+          "family": "circle-cage",
+          "mode": "assembly",
+          "part": "cc-standard",
+          "color": "#30363c",
+          "long": 4,
+          "short": 3,
+          "goals": 2,
+          "entries": 1,
+          "levels": 2
+        },
+        "assemblyAvailability": "SUPPORTED_DIGITAL_ASSEMBLY",
+        "referenceDimensionsMetres": [
+          6,
+          6
+        ],
+        "floorDescriptor": {
+          "kind": "circle",
+          "radius": 3.55,
+          "depth": 0.2
+        },
+        "floorBoundsMetres": {
+          "x": 7.1,
+          "z": 7.1,
+          "y": 0.2
+        },
+        "floorAnalyticAreaSquareMetres": 39.591921,
+        "floorBoundsMinusStudioSurfaceBoundsMetres": {
+          "x": 1.1,
+          "z": 1.1,
+          "y": 0
+        },
+        "floorAreaMinusStudioTopTriangleAreaSquareMetres": 11.328941,
+        "instanceCount": 16,
+        "transformedAssemblyMeshBoundsMetres": null
+      },
+      "geometryCorrespondence": "UNCONFIRMED",
+      "manufacturingApproved": false,
+      "notes": [
+        "OS reference dimensions, floor dimensions and Studio mesh bounds have different meanings. Numerical equality does not prove correspondence."
+      ]
+    },
+    {
+      "id": "street-field",
+      "studio": {
+        "sourceRevision": "ee0865e41f238c637b1e0d3078e31bc5adcb02c3d95f3851e146c86a145ee3f7",
+        "sourceFiles": [
+          {
+            "path": "public/arenas/street-field.json",
+            "sha256": "cbd5b1944b2f6b085d312c9230291c733a9b40966174ab981e36ee8141c82846",
+            "actualSha256": "cbd5b1944b2f6b085d312c9230291c733a9b40966174ab981e36ee8141c82846",
+            "status": "MATCH"
+          }
+        ],
+        "constructionBoundsMetres": {
+          "x": 7.024,
+          "z": 4.984,
+          "y": 1.091
+        },
+        "surfaceBoundsMetres": {
+          "x": 7.3,
+          "z": 5.3,
+          "y": 0.2
+        },
+        "topTriangleAreaSquareMetres": 38.69
+      },
+      "os": {
+        "family": "street-field",
+        "kind": "rectangle",
+        "defaultNormalizedConfig": {
+          "schema": "GF-OWNED-ASSEMBLY-1",
+          "family": "street-field",
+          "mode": "assembly",
+          "part": "sf-long",
+          "color": "#30363c",
+          "long": 4,
+          "short": 3,
+          "goals": 2,
+          "entries": 1,
+          "levels": 1
+        },
+        "assemblyAvailability": "SUPPORTED_DIGITAL_ASSEMBLY",
+        "referenceDimensionsMetres": [
+          6.214,
+          4.648000000000001
+        ],
+        "floorDescriptor": {
+          "kind": "rectangle",
+          "x": 7.3100000000000005,
+          "z": 5.304,
+          "depth": 0.2
+        },
+        "floorBoundsMetres": {
+          "x": 7.31,
+          "z": 5.304,
+          "y": 0.2
+        },
+        "floorAnalyticAreaSquareMetres": 38.77224,
+        "floorBoundsMinusStudioSurfaceBoundsMetres": {
+          "x": 0.01,
+          "z": 0.004,
+          "y": 0
+        },
+        "floorAreaMinusStudioTopTriangleAreaSquareMetres": 0.08224,
+        "instanceCount": 28,
+        "transformedAssemblyMeshBoundsMetres": null
+      },
+      "geometryCorrespondence": "UNCONFIRMED",
+      "manufacturingApproved": false,
+      "notes": [
+        "OS reference dimensions, floor dimensions and Studio mesh bounds have different meanings. Numerical equality does not prove correspondence."
+      ]
+    },
+    {
+      "id": "octagon",
+      "studio": {
+        "sourceRevision": "5d204c44dc4e2a89727c30093a662a569aac2ebe5010fefed37d084a0f98242f",
+        "sourceFiles": [
+          {
+            "path": "public/arenas/octagon.json",
+            "sha256": "d50e19df42fd154043de81a8723b320fc104b3ae9700288f0be1d8cc2317c877",
+            "actualSha256": "d50e19df42fd154043de81a8723b320fc104b3ae9700288f0be1d8cc2317c877",
+            "status": "MATCH"
+          }
+        ],
+        "constructionBoundsMetres": {
+          "x": 5.298,
+          "z": 5.642,
+          "y": 1.218
+        },
+        "surfaceBoundsMetres": {
+          "x": 6,
+          "z": 6,
+          "y": 0.2
+        },
+        "topTriangleAreaSquareMetres": 29.823379
+      },
+      "os": {
+        "family": "octagon",
+        "kind": "octagon",
+        "defaultNormalizedConfig": {
+          "schema": "GF-OWNED-ASSEMBLY-1",
+          "family": "octagon",
+          "mode": "assembly",
+          "part": "oct-standard",
+          "color": "#30363c",
+          "long": 4,
+          "short": 3,
+          "goals": 2,
+          "entries": 1,
+          "levels": 1
+        },
+        "assemblyAvailability": "SUPPORTED_DIGITAL_ASSEMBLY",
+        "referenceDimensionsMetres": [
+          4.962,
+          4.962
+        ],
+        "floorDescriptor": {
+          "kind": "octagon",
+          "radius": 3.247176600877182,
+          "depth": 0.2
+        },
+        "floorBoundsMetres": null,
+        "floorAnalyticAreaSquareMetres": null,
+        "floorBoundsMinusStudioSurfaceBoundsMetres": null,
+        "floorAreaMinusStudioTopTriangleAreaSquareMetres": null,
+        "instanceCount": 16,
+        "transformedAssemblyMeshBoundsMetres": null
+      },
+      "geometryCorrespondence": "UNCONFIRMED",
+      "manufacturingApproved": false,
+      "notes": [
+        "Octagon floor descriptor supplies radius, not a pinned floor mesh or its orientation. Floor bounds and area remain null."
+      ]
+    }
+  ],
+  "blockingData": [
+    "Approved transform and instance-to-Studio-mesh mapping for each of the eight exact model revisions.",
+    "Verified assembly component placements, orientations, joining interfaces and permitted module pitches; bounding boxes are insufficient.",
+    "Source-only family instance decomposition and source assets, including Street Arena 15 with no registered parts.",
+    "Explicit surface, playing-field, construction and clearance outlines; octagon OS floor mesh/orientation is not pinned here.",
+    "Approved article/connection/fastener/anchor quantities, installation and foundation scope, tolerances and manufacturing revision sign-off."
+  ]
+}

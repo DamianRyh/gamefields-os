@@ -1,0 +1,173 @@
+{
+  "status": "passed",
+  "cases": 60,
+  "exactPixelsGeometryColorsDesign": 60,
+  "unchangedImageLoadsPngUploadsAndDraws": 60,
+  "reducedWhiteUploadCases": 44,
+  "scope": "Submitted white reset operations only; no GPU/FPS/timing claim",
+  "baselineVersion": 86,
+  "baselineSource": "b7e51aa100bdc628aa3a0127dc77171a3fbf9b9a",
+  "baselineMatchesPublished86Bundles": true,
+  "negativeBrowserCases": 2,
+  "examples": [
+    {
+      "side": "both",
+      "scenario": "remove",
+      "before": {
+        "imageCreates": 0,
+        "panelImageLoads": 0,
+        "panelUploads": 0,
+        "allUploads": 16,
+        "whiteUploads": 16,
+        "clears": 3,
+        "drawArrays": 105
+      },
+      "after": {
+        "imageCreates": 0,
+        "panelImageLoads": 0,
+        "panelUploads": 0,
+        "allUploads": 16,
+        "whiteUploads": 16,
+        "clears": 3,
+        "drawArrays": 105
+      }
+    },
+    {
+      "side": "both",
+      "scenario": "blank-colour",
+      "before": {
+        "imageCreates": 0,
+        "panelImageLoads": 0,
+        "panelUploads": 0,
+        "allUploads": 16,
+        "whiteUploads": 16,
+        "clears": 3,
+        "drawArrays": 105
+      },
+      "after": {
+        "imageCreates": 0,
+        "panelImageLoads": 0,
+        "panelUploads": 0,
+        "allUploads": 0,
+        "whiteUploads": 0,
+        "clears": 3,
+        "drawArrays": 105
+      }
+    },
+    {
+      "side": "inner",
+      "scenario": "text",
+      "before": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 32,
+        "whiteUploads": 16,
+        "clears": 3,
+        "drawArrays": 153
+      },
+      "after": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 16,
+        "whiteUploads": 0,
+        "clears": 3,
+        "drawArrays": 153
+      }
+    },
+    {
+      "side": "inner",
+      "scenario": "colour",
+      "before": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 32,
+        "whiteUploads": 16,
+        "clears": 3,
+        "drawArrays": 153
+      },
+      "after": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 16,
+        "whiteUploads": 0,
+        "clears": 3,
+        "drawArrays": 153
+      }
+    },
+    {
+      "side": "inner",
+      "scenario": "logo",
+      "before": {
+        "imageCreates": 2,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 32,
+        "whiteUploads": 16,
+        "clears": 3,
+        "drawArrays": 153
+      },
+      "after": {
+        "imageCreates": 2,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 16,
+        "whiteUploads": 0,
+        "clears": 3,
+        "drawArrays": 153
+      }
+    },
+    {
+      "side": "inner",
+      "scenario": "remove",
+      "before": {
+        "imageCreates": 0,
+        "panelImageLoads": 0,
+        "panelUploads": 0,
+        "allUploads": 32,
+        "whiteUploads": 32,
+        "clears": 3,
+        "drawArrays": 153
+      },
+      "after": {
+        "imageCreates": 0,
+        "panelImageLoads": 0,
+        "panelUploads": 0,
+        "allUploads": 16,
+        "whiteUploads": 16,
+        "clears": 3,
+        "drawArrays": 153
+      }
+    },
+    {
+      "side": "inner",
+      "scenario": "blank-colour",
+      "before": {
+        "imageCreates": 0,
+        "panelImageLoads": 0,
+        "panelUploads": 0,
+        "allUploads": 32,
+        "whiteUploads": 32,
+        "clears": 3,
+        "drawArrays": 153
+      },
+      "after": {
+        "imageCreates": 0,
+        "panelImageLoads": 0,
+        "panelUploads": 0,
+        "allUploads": 0,
+        "whiteUploads": 0,
+        "clears": 3,
+        "drawArrays": 153
+      }
+    }
+  ],
+  "reports": {
+    "baseline": "b701084294f008a3ffcab40f0b7cecca2f8360dc568bbeed52a356de4d6f5d6d",
+    "candidate": "f8f6d43d77e1df1629c3a64ae7c4554117aeba2f977c11dd0b96b8bd797ba880",
+    "failure-browser": "4987af9697629b308c957b7ec0365da82bac129e7866175561b7c82895948cff"
+  }
+}
