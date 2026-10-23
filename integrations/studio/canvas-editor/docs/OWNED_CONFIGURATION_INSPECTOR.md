@@ -29,3 +29,8 @@ Ręcznie na zbudowanym Workerze: aktywna Octa i oddzielna konfiguracja Grid; wcz
 Niezależni eksperci zweryfikowali kontrakt/mapowanie oraz granice prezentacji i niezmienności projektu. Test domenowy powstał osobno od adaptera. Pierwsza regresja ujawniła niejednoznaczny selektor dwóch inputów JSON; nazwano pola osobno i poprawiono testy do jawnego wskazania importu Studio.
 
 Końcowe bramki: pełne test:mobile PASS (96aren,48Street,16materiałów,JSON/Radar na375/390/430/1440) i Surface7viewport PASS po doprecyzowaniu nazw inputów. Stawki i źródła geometrii pozostały bez zmian.
+
+
+## Rozszerzenie 23.10.2026: jawna referencja dwóch wersji
+
+Inspektor otrzymuje wyłącznie odczytywany Project, bez setterów. Na jawne żądanie zapisuje odrębny manifest z pełnymi snapshotami i rewizjami. Pozostaje bez wpływu na aktywny projekt, historię, cenę i BOM. Sam import OS nadal nie tworzy powiązania. Weryfikacja manifestu i status historyczny są opisane w [PROJECT_OWNED_REFERENCE.md](PROJECT_OWNED_REFERENCE.md). Nie jest to potwierdzenie zgodności geometrycznej.

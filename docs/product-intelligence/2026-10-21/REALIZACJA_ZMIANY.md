@@ -1,6 +1,6 @@
-# Realizacja dokumentu zmiany.txt — aktualizacja 22.10.2026
+# Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
-Aktualny etap: **Studio 83 opublikowane** — naprawiony wybór stron grafiki Circle Cage w zakresie wizualizacji; dalsze zależności pozostają jawne.
+Aktualny etap: **Studio 84 opublikowane** — jawne powiązanie pełnych wersji Studio i OS z kontrolą SHA256 oraz rewizji. Zgodność geometryczna i techniczny BOM nadal wymagają potwierdzenia.
 
 Dokument właściciela jest planem rozwoju istniejącego Studio. Nie zastępuje bieżących decyzji właściciela ani nie oznacza startu nowej aplikacji. Kończy się w połowie pozycji „Testy regres” w Sprincie6; brakującej części nie odtworzono z domysłów.
 
@@ -15,7 +15,7 @@ We wcześniejszym etapie pracowały równolegle cztery role wykonawcze: agent pr
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
 | S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio 83: strony grafiki Circle Cage poprawione; both zachowuje obraz wersji 82. Profil PNG i baza porównawcza gotowe. Pozostały koszt upload/draw i budżet czasowy nadal wymagają pracy. |
 | S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
-| S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje i eksportuje ilości z rewizjami. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
+| S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje. Studio84 jawnie wiąże dwa snapshoty z SHA i rewizjami; nie potwierdza geometrii. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
 | S5-03: przekazanie zapytania | DONE — dołączenie do formularza | Kompletne ograniczone JSON, pominięcie plików graficznych, potwierdzenie domeny/okna/próby/długości, timeout i ponowienie. Oba tryby przeglądarki sprawdzone w wersji75; nie potwierdza to odbioru e-maila. |
 | S5-04: podsumowanie i eksport | PARTIAL | Edytowalne grupy i JSON istnieją. Eksport konfiguracji z pełnym Project, SHA256 i rewizją modelu/katalogu gotowy. Techniczna specyfikacja wykonawcza z BOM nadal pozostaje do wykonania. |
@@ -60,7 +60,7 @@ Prace prowadzono z ekspertami kontraktu/mapowania i UX/akceptacji; testy domenow
 ## Kolejność dalszej pracy
 
 1. **Pozostały koszt renderowania:** osobno profilować dekodowanie, upload i draw oraz koszt jednostronnych podzbiorów; zachować anulowanie i zgodność obrazu. Zebrać rozrzut porównywalnych serii przed budżetem czasowym. PNG16→1 oraz wybór stron Circle Cage są już wykonane w opisanym zakresie.
-2. **Powiązanie OS–Project:** jawny kontrakt konfiguracji i rewizji geometrii. Ta sama rodzina lub nazwa nie oznacza identycznego boiska. Nie dopisywać niezależnych ilości inspektora do aktywnego technicalBill.
+2. **Zgodność geometrii OS–Project:** zapis referencyjny dwóch wersji jest wykonany w Studio84. Następnie porównać pełne złożenia, transformacje i obrysy, udokumentować rozbieżności oraz zatwierdzić mapowanie. Ta sama rodzina lub nazwa nie oznacza identycznego boiska; ilości OS nadal nie trafiają do technicalBill.
 3. **Dane wykonawcze:** potwierdzić rewizje/obrysy R02, połączenia, rozstawy i artykuły. Dopiero po potwierdzeniu oraz wiązaniu instancji rozszerzyć techniczny BOM; obecnie rows=null i UNCONFIRMED.
 4. **Dane komercyjne i badania:** nawierzchnia, montaż, transport i warunki podatkowe; wycena tej samej konfiguracji. Osobno kontrola rastrów, fizyczne urządzenia, czytnik ekranu i badania z klientami. Orientacyjne ceny konstrukcji pozostają aktywne.
 
@@ -222,3 +222,20 @@ PASS: TypeScript, build, test:studio (w tym circle-panel-sides), quote-engine/co
 Bez podmiany modeli, R02, cen, SQL lub Project JSON. Nie zmieniono rejestru artykułów ani nie utworzono technicznego BOM. Nie wysłano formularzy i nie zmieniono polityki otwierania projektu z parametru arena.
 
 Publiczny odczyt po publikacji: zachowany szkic Panna Octa, częściowa cena 15 300 zł, model octagon gotowy, zgodne żądanie/zakończenie generacji 2/2. Nie dodawano grafiki QA do projektu użytkownika.
+
+
+## Powiązanie wersji Studio i OS — Studio 84
+
+23.10.2026: źródło `ac6bd265b1f8e04f93d2c191f199775153f82dd4`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_b18ffed4eb488191998622b059a37538`, deployment `appgdep_6adaeab01168819191c9c8a745a6f643` — **succeeded**, środowisko revision 3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka `sha256:7ebac865de864c129348a3d52c2547bb0d39056ee40bfbf6891ea8af96033fc5`.
+
+**DONE — referencja dwóch wersji danych.** W Plikach projektu użytkownik jawnie tworzy i pobiera `GF-PROJECT-OWNED-REFERENCE-1`: pełny Project z grafikami i nazwami, znormalizowany config OS, SHA256 projektu/config/odtworzonego wyniku oraz rewizje modelu, silnika, katalogu i rejestru. Import ponownie waliduje dane i odtwarza instancje; nie ufa wejściowemu bom. Wymagana jedna zgodna rodzina i właściwa liczba poziomów Circle. Pojedynczy komponent nie jest referencją całego boiska.
+
+Zmiana aktywnego Project oznacza zapis historyczny, powrót do identycznego projektu przywraca status zgodny. Nowy plik lub błąd usuwa wcześniejszy sukces; tokeny operacji chronią przed spóźnionym odczytem. Limit 13 000 000 bajtów, pełne grafiki bez cichego pomijania. Manifest nie zmienia projektu, szkicu, historii lub wyceny. SHA jest kontrolą integralności, nie podpisem autora.
+
+**PARTIAL pozostaje integracja techniczna:** geometryCorrespondence=UNCONFIRMED, manufacturingReady=false, technicalBill.rows=null, pricing=NOT_INCLUDED. Circle OS ma podłoże7,1m wobec6m w Studio; Grid ma różnice obrysu. Zgodny wymiar referencyjny Octagon nie dowodzi zgodności trójkątów/transformacji. Nie dopisujemy ilości OS do kosztorysu Studio. Nadal wymagane zatwierdzone geometria, połączenia, rozstawy, R02 i artykuły wykonawcze.
+
+PASS: TypeScript, build, test:studio (nowe testy kontraktu), quote-engine/construction-pricing, pełne test:mobile (96 scen aren,48Street,16zmian materiałów, JSON i Radar na375/390/430/1440) i Surface7rozmiarów. Dodatkowe10scenariuszy375/1440 sprawdza rzeczywisty download z SVG, import, status zgodny/historyczny/powrót, odrzucenie zmienionego pliku/rodziny, spóźniony odczyt oraz brak zmiany pełnego Project i ceny. Pierwsze rozszerzenie harnessu wymagało oczekiwania na opóźnioną wycenę celowo importowanej grafiki; poprawiono synchronizację testu, bez zmian aplikacji.
+
+Pracowali prowadzący i eksperci kontraktu, geometrii oraz regresji przeglądarkowej. Zachowane modele, cennik, SQL, format Project oraz wcześniejsze poprawki renderera; nie wysyłano formularzy. Nie powtarzano macierzy czasowej renderera, którego kod nie był zmieniany.
+
+[Kontrakt](../../../integrations/studio/canvas-editor/docs/PROJECT_OWNED_REFERENCE.md), [10 przypadków przeglądarkowych](../../../integrations/studio/canvas-editor/docs/project-owned-reference-2026-10-23/browser.json).

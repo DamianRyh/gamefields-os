@@ -1,4 +1,5 @@
 import './circle-panel-sides.mjs';
+import './project-owned-reference.mjs';
 import './renderer-texture-jobs.mjs';
 import './owned-configuration.mjs';
 import './graphic-source-policy.mjs';

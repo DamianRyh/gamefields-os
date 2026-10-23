@@ -183,3 +183,13 @@ DONE w ograniczonym zakresie: raster PNG współdzielony w jednej generacji po d
 ## Strony paneli Circle Cage — 22.10.2026
 
 DONE w zakresie wizualizacji Circle1/2: inner/outer według orientacji faset względem środka; niewybrane powierzchnie zachowują kolor panelu. Both oraz inne modele zachowują oryginalne meshe.58przypadków WebGL/JSON/odtwarzania/switch PASS;480próbek i48identycznychcanvasów both względemStudio82. Wyłącznie runtimeadapter, bez podmiany źródeł i bez potwierdzenia technologii nadruku. Szczegóły: docs/CIRCLE_PANEL_SIDES.md. Następne: pozostały upload/draw i budżet czasowy; kontrakt OS–Project i dane wykonawcze.
+
+
+## Powiązanie wersji Studio i OS — 23.10.2026
+
+DONE w zakresie referencyjnym: pełny Project z grafikami i znormalizowany config OS zapisane w jednym pliku GF-PROJECT-OWNED-REFERENCE-1. Ponowny import odtwarza ilości i kontroluje SHA oraz przypięte rewizje. Wymagana zgodna rodzina i poziomy Circle; komponent nie staje się całym boiskiem. Zmiana projektu daje status historyczny, spóźniony odczyt nie zastępuje nowszego wyniku. Projekt i cena pozostają niezależne. Zgodność geometryczna UNCONFIRMED, technicalBill.rows=null; brak zatwierdzenia produkcyjnego. Kontrakt: [PROJECT_OWNED_REFERENCE](PROJECT_OWNED_REFERENCE.md).
+
+NEXT: profil pozostałych kosztów upload/draw i rozrzutu czasów. Przed technicznym BOM wymagane potwierdzenie geometrii Studio–OS, R02, połączeń, rozstawów i artykułów wykonawczych. Powiązanie snapshotów nie zamyka tego zadania.
+
+
+Bramki publikacji23.10: TypeScript/build/test:studio/quote-engine/construction-pricing PASS;10przypadków przeglądarkowych375/1440 z pełnym SVG, statusami i ochroną spóźnionego odczytu PASS; Surface7rozmiarów PASS; pełne test:mobile PASS (96scen aren,48Street,16zmian materiałów, JSON i Radar,375/390/430/1440).

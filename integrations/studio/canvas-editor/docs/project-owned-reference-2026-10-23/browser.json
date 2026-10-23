@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "scenario": "create-export-current",
+      "schema": "GF-PROJECT-OWNED-REFERENCE-1"
+    },
+    {
+      "width": 375,
+      "scenario": "project-change-stale-and-return"
+    },
+    {
+      "width": 375,
+      "scenario": "tampered-clears-success"
+    },
+    {
+      "width": 375,
+      "scenario": "wrong-family-rejected-project-quote-preserved"
+    },
+    {
+      "width": 375,
+      "scenario": "late-file-read-cannot-replace-newer-failure"
+    },
+    {
+      "width": 1440,
+      "scenario": "create-export-current",
+      "schema": "GF-PROJECT-OWNED-REFERENCE-1"
+    },
+    {
+      "width": 1440,
+      "scenario": "project-change-stale-and-return"
+    },
+    {
+      "width": 1440,
+      "scenario": "tampered-clears-success"
+    },
+    {
+      "width": 1440,
+      "scenario": "wrong-family-rejected-project-quote-preserved"
+    },
+    {
+      "width": 1440,
+      "scenario": "late-file-read-cannot-replace-newer-failure"
+    }
+  ],
+  "errors": []
+}

@@ -170,3 +170,8 @@ DONE w ograniczonym zakresie: raster PNG współdzielony w jednej generacji po d
 ## Strony paneli Circle Cage — 22.10.2026
 
 DONE w zakresie wizualizacji Circle1/2: inner/outer według orientacji faset względem środka; niewybrane powierzchnie zachowują kolor panelu. Both oraz inne modele zachowują oryginalne meshe.58przypadków WebGL/JSON/odtwarzania/switch PASS;480próbek i48identycznychcanvasów both względemStudio82. Wyłącznie runtimeadapter, bez podmiany źródeł i bez potwierdzenia technologii nadruku. Szczegóły: docs/CIRCLE_PANEL_SIDES.md. Następne: pozostały upload/draw i budżet czasowy; kontrakt OS–Project i dane wykonawcze.
+
+
+## Powiązanie wersji Studio i OS — 23.10.2026
+
+Pliki projektu zapisują i sprawdzają pełne snapshoty Studio i OS z SHA256 oraz rewizjami źródeł. Zmiana bieżącego projektu oznacza zapis historyczny. Powiązanie jednej rodziny nie potwierdza geometrii ani technicznego BOM i nie zmienia ceny. [Kontrakt](docs/PROJECT_OWNED_REFERENCE.md).
