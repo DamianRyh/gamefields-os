@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "cases": 48,
+  "exactPixelsGeometryColorsDesign": 48,
+  "unchangedImageLoadsAndUploads": 48,
+  "reducedDrawCases": 36,
+  "scope": "Counts of submitted application work, not GPU/FPS/timing",
+  "examples": [
+    {
+      "side": "both",
+      "before": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 16,
+        "clears": 19,
+        "drawArrays": 665
+      },
+      "after": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 16,
+        "clears": 3,
+        "drawArrays": 105
+      }
+    },
+    {
+      "side": "inner",
+      "before": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 32,
+        "clears": 19,
+        "drawArrays": 969
+      },
+      "after": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 32,
+        "clears": 3,
+        "drawArrays": 153
+      }
+    },
+    {
+      "side": "outer",
+      "before": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 32,
+        "clears": 19,
+        "drawArrays": 969
+      },
+      "after": {
+        "imageCreates": 1,
+        "panelImageLoads": 1,
+        "panelUploads": 16,
+        "allUploads": 32,
+        "clears": 3,
+        "drawArrays": 153
+      }
+    }
+  ],
+  "reports": {
+    "baseline": "2312d830bf98158140336ee5ab1353ccfa85a99630b9d4b6863bd1447f67c575",
+    "candidate": "6aaaeadd7a0f9eb7c2f35aed106347037f158bb8cec766b77cefcd1b89082856",
+    "failureBrowser": "4987af9697629b308c957b7ec0365da82bac129e7866175561b7c82895948cff"
+  },
+  "negativeBrowserCases": 2
+}

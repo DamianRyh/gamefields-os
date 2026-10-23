@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import ts from 'typescript';
 import {createDecodedImage} from '../lib/decoded-image.ts';
+import {runPanelUploadBatch} from '../lib/panel-upload-batch.ts';
 const source=(await readFile(new URL('../components/renderer.ts',import.meta.url),'utf8')).replace('@/lib/p1-surface',new URL('../lib/p1-surface.ts',import.meta.url).href);
 const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
 const {Renderer}=await import('data:text/javascript;base64,'+Buffer.from(compiled).toString('base64'));
@@ -21,7 +22,14 @@ try{
  const bad1=shared.texture('floor','shared-bad','bad1',decode),bad2=shared.texture('second-panel','shared-bad','bad2',decode),badResults=Promise.allSettled([bad1,bad2]);assert.equal(images.length,1);images.shift().onerror();assert((await badResults).every(x=>x.status==='rejected'));assert.equal(shared.pending,0);assert(shared.items.every(x=>x.key===''));
  const recovered=shared.texture('floor','shared-bad','bad1',decode);images.shift().onload();await recovered;assert.equal(shared.uploads.at(-1),'shared-bad');
  const dead1=shared.texture('floor','shared-dead','dead1',decode),dead2=shared.texture('second-panel','shared-dead','dead2',decode);assert.equal(images.length,1);shared.dead=true;images.shift().onload();await Promise.all([dead1,dead2]);assert.equal(shared.pending,0);assert(!shared.uploads.includes('shared-dead'));
+ const batch=renderer();batch.items.push({mesh:{id:'second-panel'},key:'',texture:{}});const batchDecode=createDecodedImage();
+ const job1=batch.texture('floor','batch-png','batch1',batchDecode,{drawAfterUpload:false}),job2=batch.texture('second-panel','batch-png','batch2',batchDecode,{drawAfterUpload:false});const finished=runPanelUploadBatch([job1,job2],()=>!batch.dead,index=>batch.clearTexture(batch.items[index].mesh.id),()=>batch.draw());assert.equal(images.length,1);images.shift().onload();await Promise.all([job1,job2]);assert.equal(await finished,true);assert.deepEqual(batch.uploads,['batch-png','batch-png']);assert.equal(batch.draws,1,'Two uploads produce one owner final draw');
+ const quietFirst=batch.texture('floor','quiet-first','quiet',undefined,{drawAfterUpload:false}),normalJoin=batch.texture('floor','quiet-first','quiet');images.shift().onload();await Promise.all([quietFirst,normalJoin]);assert.equal(batch.draws,1,'Joining default consumer retains first pending job suppression policy');
+ const normalFirst=batch.texture('floor','normal-first','normal'),quietJoin=batch.texture('floor','normal-first','normal',undefined,{drawAfterUpload:false});images.shift().onload();await Promise.all([normalFirst,quietJoin]);assert.equal(batch.draws,2,'Joining deferred consumer retains first pending job default policy');
+ const oldQuiet=batch.texture('floor','quiet-obsolete','old-quiet',undefined,{drawAfterUpload:false}),newQuiet=batch.texture('floor','quiet-current','new-quiet',undefined,{drawAfterUpload:false});const oldQuietImage=images.shift(),newQuietImage=images.shift();newQuietImage.onload();await newQuiet;oldQuietImage.onload();await oldQuiet;assert(!batch.uploads.includes('quiet-obsolete'));assert.equal(batch.draws,2,'Suppressed stale/current jobs never draw themselves');
+ const badQuiet=batch.texture('floor','quiet-bad','bad-quiet',undefined,{drawAfterUpload:false}),slowQuiet=batch.texture('second-panel','quiet-slow','slow-quiet',undefined,{drawAfterUpload:false});const finalFailure=runPanelUploadBatch([badQuiet,slowQuiet],()=>true,index=>batch.clearTexture(batch.items[index].mesh.id),()=>batch.draw()).then(()=>null,e=>e);images.shift().onerror();await Promise.resolve();assert.equal(batch.draws,2);images.shift().onload();assert(await finalFailure instanceof Error);assert.equal(batch.items[0].key,'');assert.equal(batch.uploads.at(-1),undefined,'Failed panel reset uploads white bytes, not old artwork');assert.equal(batch.draws,3);assert.equal(batch.pending,0);
  console.log('PASS: per-item texture jobs retain default decode compatibility; generation decoder shares images across meshes without sharing GPU uploads/draws; stale/dead guards, rejection and retry retained.');
 }finally{globalThis.Image=originalImage}
 // Both suites stub Image; run serially before the shared global is changed again.
 await import('./decoded-image.mjs');
+await import('./panel-upload-batch.mjs');

@@ -57,11 +57,12 @@ export class Renderer{
  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,item.texture);for(let j=0;j<3;j++){gl.activeTexture(gl.TEXTURE0+j+1);gl.bindTexture(gl.TEXTURE_2D,item.maps?.[j]||item.texture)}gl.drawArrays(gl.TRIANGLES,0,item.count);});gl.activeTexture(gl.TEXTURE0);
  }
  pick(x:number,y:number){this.draw(true);const rect=this.canvas.getBoundingClientRect(),pixel=new Uint8Array(4);this.gl.readPixels(Math.floor((x-rect.left)*this.canvas.width/rect.width),Math.floor((rect.bottom-y)*this.canvas.height/rect.height),1,1,this.gl.RGBA,this.gl.UNSIGNED_BYTE,pixel);const i=pixel[0]+pixel[1]*256-1;this.draw();return this.items[i]?.mesh.id;}
- async texture(id:string,source:string|(()=>Promise<string>),key:string,decode?:(source:string)=>Promise<HTMLImageElement>){
+ // Pending consumers share the first job's upload/draw policy; defaults retain immediate drawing.
+ async texture(id:string,source:string|(()=>Promise<string>),key:string,decode?:(source:string)=>Promise<HTMLImageElement>,options:{drawAfterUpload?:boolean}={}){
   const item=this.items.find(x=>x.mesh.id===id);const running=this.textureJobs.get(id);if(item?.key===key&&running?.key===key)return running.promise;
   if(!item||item.key===key)return;
-  item.key=key;this.pending++;
-  const promise=(async()=>{try{const resolved=typeof source==='function'?await source():source;let img:HTMLImageElement;if(decode)img=await decode(resolved);else{img=new Image();await new Promise<void>((ok,no)=>{img.onload=()=>ok();img.onerror=()=>no(Error('Nie można wczytać grafiki'));img.src=resolved})}if(this.dead||item.key!==key)return;const gl=this.gl;gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,item.texture);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,1);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);this.draw()}catch(e){if(item.key===key)item.key='';throw e}finally{this.pending--}})();
+  const drawAfterUpload=options.drawAfterUpload!==false;item.key=key;this.pending++;
+  const promise=(async()=>{try{const resolved=typeof source==='function'?await source():source;let img:HTMLImageElement;if(decode)img=await decode(resolved);else{img=new Image();await new Promise<void>((ok,no)=>{img.onload=()=>ok();img.onerror=()=>no(Error('Nie można wczytać grafiki'));img.src=resolved})}if(this.dead||item.key!==key)return;const gl=this.gl;gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,item.texture);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,1);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);if(drawAfterUpload)this.draw()}catch(e){if(item.key===key)item.key='';throw e}finally{this.pending--}})();
   const job={key,promise};this.textureJobs.set(id,job);const clear=()=>{if(this.textureJobs.get(id)===job)this.textureJobs.delete(id)};void promise.then(clear,clear);return promise;
  }
  async surface(id:string,finish:SurfaceFinish){

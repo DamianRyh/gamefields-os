@@ -180,3 +180,8 @@ Pliki projektu zapisują i sprawdzają pełne snapshoty Studio i OS z SHA256 ora
 ## Wczytywanie grafik paneli — 23.10.2026
 
 Identyczne PNG paneli współdzielą wczytany Image w jednej aktualizacji podglądu. Tekstury i uploady GPU pozostają osobne, a cache nie przechodzi między generacjami. [Kontrakt i wyniki](docs/DECODED_PANEL_IMAGES.md).
+
+
+## Końcowe rysowanie paneli — 23.10.2026
+
+Aktualizacja podglądu czeka na panelowe uploady i wykonuje wspólne końcowe rysowanie. Chronione błędy, retry i anulowanie; osobne tekstury GPU oraz format projektu zachowane. [Kontrakt i dowody](docs/PANEL_UPLOAD_BATCH.md).

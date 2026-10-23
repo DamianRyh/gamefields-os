@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {runPanelUploadBatch} from '../lib/panel-upload-batch.ts';
+const deferred=()=>{let resolve,reject;const promise=new Promise((a,b)=>{resolve=a;reject=b});return {promise,resolve,reject}};
+const events=[];const slow=deferred();let settled=false;
+const failure=Error('failed panel');const partial=runPanelUploadBatch([Promise.reject(failure),slow.promise],()=>true,index=>events.push('clear:'+index),()=>events.push('draw')).then(()=>{settled=true;return null},e=>{settled=true;return e});
+await Promise.resolve();await Promise.resolve();assert.equal(settled,false,'An early panel failure must not finish while another panel is pending');assert.deepEqual(events,[],'No clearing or final draw before all uploads settle');
+slow.resolve();assert.equal(await partial,failure);assert.deepEqual(events,['clear:0','draw'],'Failed texture reset happens before the one final draw');
+events.length=0;const a=deferred(),b=deferred();const success=runPanelUploadBatch([a.promise,b.promise],()=>true,i=>events.push('unexpected:'+i),()=>events.push('draw'));a.resolve();await Promise.resolve();assert.deepEqual(events,[]);b.resolve();assert.equal(await success,true);assert.deepEqual(events,['draw']);
+events.length=0;let active=true;const pending=deferred();const cancelled=runPanelUploadBatch([pending.promise],()=>active,i=>events.push('clear:'+i),()=>events.push('draw'));active=false;pending.reject(Error('obsolete generation'));assert.equal(await cancelled,false);assert.deepEqual(events,[],'Cancelled work neither clears current texture nor draws/publishes completion');
+assert.equal(await runPanelUploadBatch([Promise.resolve()],()=>true,()=>events.push('unexpected'),()=>events.push('retry-draw')),true);assert.deepEqual(events,['retry-draw'],'A new generation can retry independently');
+let completions=0;await runPanelUploadBatch([Promise.reject(Error('fail'))],()=>true,()=>{},()=>{}).then(done=>{if(done)completions++},()=>{});assert.equal(completions,0,'Failure never reaches the success completion marker');
+console.log('PASS panel upload batch: all jobs settle before active final draw; failed textures clear first; cancellation skips clearing/drawing; failures never complete; independent retry works.');

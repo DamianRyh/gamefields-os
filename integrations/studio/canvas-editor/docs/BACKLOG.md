@@ -195,3 +195,13 @@ NEXT: profil pozostałego kosztu upload/draw i rozrzutu czasów. Zgodność geom
 
 
 Bramki wydania23.10: TypeScript/build/test:studio/quote-engine/construction-pricing PASS;48/48stanów Circle Cage identycznych pikselowo z wersją84, bufory/kolory/design i upload/draw zgodne; pełne test:mobile96aren/48Street/16materiałów/JSON/Radar PASS; Surface7rozmiarów PASS; niezależny oracle stron paneli58przypadków PASS. Surowe raporty i SHA w decoded-panel-images-2026-10-23.
+
+
+## Końcowe rysowanie paneli — 23.10.2026
+
+Panelowe uploady wyłączają pośredni draw całego boiska. Aktywna generacja czeka na wszystkie zadania, czyści nieudane tekstury i rysuje raz. Błąd/anulowanie nie publikuje ukończenia. Domyślna ścieżka Renderer, podłoże, materiały i resize zachowane; nie ma globalnego batchowania ani gwarancji atomowego widoku podczas resize. Kontrakt: [PANEL_UPLOAD_BATCH](PANEL_UPLOAD_BATCH.md). Licznik wywołań nie jest FPS lub czasem GPU.
+
+NEXT: pomiar rozrzutu i czasu na porównywalnych seriach oraz osobny profil uploadów. Zgodność geometryczna OS–Studio i dane wykonawcze pozostają zależnościami technicznego BOM.
+
+
+Bramki publikacji23.10: TypeScript/build/test:studio/quote-engine/construction-pricing PASS;48/48zgodnych stanów z wersją85 i mniejsza liczba rysowań w36stanach grafiki; dwa scenariusze rzeczywistych błędów/retry/starego wyniku PASS; pełne test:mobile96aren/48Street/16materiałów/JSON/Radar PASS; Surface7rozmiarów i58przypadków stron paneli PASS.
