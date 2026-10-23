@@ -7,6 +7,8 @@ import {projectDimensions,formatArea,formatBounds} from '@/lib/project-dimension
 import {getPatternFamily,getPatternPalette} from '@/lib/pattern-library';
 import {productNames,productCodes} from '@/lib/product-names.mjs';
 import {getSportProfile} from '@/lib/sport-profiles';
+import {useProjectQuote} from '@/hooks/use-project-quote';
+import {ProjectQuote} from '@/components/project-quote';
 import '@/app/project-variants.css';
 
 type Props={project:Project;onRestore:(project:Project)=>void|Promise<void>;renderCourt:(project:Project,editing?:boolean)=>ReactNode;downloadProject:(project:Project)=>void};
@@ -34,8 +36,16 @@ export function ProjectVariants({project,onRestore,renderCourt,downloadProject}:
   <ul className="project-variants-list">{items.map(item=><li key={item.id}><h3>{item.name}</h3><p><time dateTime={item.createdAt}>{new Date(item.createdAt).toLocaleString('pl-PL')}</time></p><label className="project-variants-select"><input type="checkbox" checked={selected.includes(item.id)} disabled={busy||(!selected.includes(item.id)&&selected.length>=2)} onChange={()=>select(item.id)}/>Porównaj: {item.name}</label><div className="project-variants-actions"><button disabled={busy} onClick={()=>void restore(item)}>Przywróć: {item.name}</button><button onClick={()=>downloadProject(item.project)}>Pobierz JSON: {item.name}</button><button disabled={busy} onClick={()=>void remove(item)}>Usuń: {item.name}</button></div></li>)}</ul>
   {deleted?<button disabled={busy||!ready} onClick={()=>void undoDelete()}>Cofnij usunięcie: {deleted.name}</button>:null}
   {items.length?<p>Wybierz dwa zapisy do porównania. Przywrócenie zastąpi bieżący widok; możesz je cofnąć przyciskiem Cofnij.</p>:null}
-  {compared.length===2?<><button onClick={()=>{comparison.current?.scrollIntoView({behavior:"smooth",block:"start"});comparison.current?.focus({preventScroll:true})}}>Pokaż porównanie dwóch wariantów</button><section ref={comparison} tabIndex={-1} aria-labelledby="project-variants-comparison"><h3 id="project-variants-comparison">Porównanie dwóch wariantów</h3><p>Poglądowy plan 2D zachowuje wszystkie elementy projektu. Aktualną cenę sprawdzisz po przywróceniu wariantu.</p><div className="project-variants-comparison">{compared.map(item=><article key={item.id}><h4>{item.name}</h4><div className="project-variant-plan" aria-label={`Plan: ${item.name}`}>{renderCourt(item.project,false)}</div><VariantDetails project={item.project} modelRevision={item.modelRevision}/><button disabled={busy} onClick={()=>void restore(item)}>Przywróć: {item.name}</button></article>)}</div></section></>:null}
+  {compared.length===2?<><button onClick={()=>{comparison.current?.scrollIntoView({behavior:"smooth",block:"start"});comparison.current?.focus({preventScroll:true})}}>Pokaż porównanie dwóch wariantów</button><section ref={comparison} tabIndex={-1} aria-labelledby="project-variants-comparison"><h3 id="project-variants-comparison">Porównanie dwóch wariantów</h3><p>Porównaj plany 2D, parametry i bieżące kalkulacje bez przywracania zapisów. Ceny obejmują tylko wycenione pozycje; zakres do ustalenia sprawdź osobno dla każdego wariantu.</p><div className="project-variants-comparison">{compared.map(item=><article key={item.id}><h4>{item.name}</h4><div className="project-variant-plan" aria-label={`Plan: ${item.name}`}>{renderCourt(item.project,false)}</div><VariantPricing item={item}/><VariantDetails project={item.project} modelRevision={item.modelRevision}/><button disabled={busy} onClick={()=>void restore(item)}>Przywróć: {item.name}</button></article>)}</div></section></>:null}
  </section>;
+}
+function VariantPricing({item}:{item:Snapshot}){
+ const compatible=(projectDimensions(item.project).model?.sourceRevision??null)===item.modelRevision;
+ return compatible?<CurrentVariantQuote project={item.project} name={item.name}/>:<section aria-label={`Kalkulacja wariantu: ${item.name}`}><h5>Bieżąca kalkulacja wariantu</h5><p>Rewizja modelu zmieniła się. Nie przeliczamy historycznego wariantu według innej geometrii. Sprawdź model przed przygotowaniem wyceny.</p></section>;
+}
+function CurrentVariantQuote({project,name}:{project:Project;name:string}){
+ const quote=useProjectQuote(project);
+ return <ProjectQuote quote={quote} title="Bieżąca kalkulacja wariantu" label={`Kalkulacja wariantu: ${name}`} headingLevel={5}/>;
 }
 function VariantDetails({project:p,modelRevision}:{project:Project;modelRevision:string|null}){
  const current=projectDimensions(p),compatible=(current.model?.sourceRevision??null)===modelRevision;

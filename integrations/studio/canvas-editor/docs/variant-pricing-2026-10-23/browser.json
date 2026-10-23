@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "status": "passed",
+      "scope": [
+        "two independent current quotes",
+        "partial totals and unknowns",
+        "isolated error/retry",
+        "revision guard",
+        "late response after deselection",
+        "Project and library immutable",
+        "reflow"
+      ]
+    },
+    {
+      "width": 1440,
+      "status": "passed",
+      "scope": [
+        "two independent current quotes",
+        "partial totals and unknowns",
+        "isolated error/retry",
+        "revision guard",
+        "late response after deselection",
+        "Project and library immutable",
+        "reflow"
+      ]
+    }
+  ],
+  "errors": []
+}

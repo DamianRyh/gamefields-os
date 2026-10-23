@@ -2,3 +2,6 @@
 
 .studio-recovery{font-size:14px;line-height:1.5;margin-bottom:24px}.studio-recovery h2{font-size:19px}.studio-recovery button{display:block;min-height:44px;margin-block:8px;padding:10px 14px;border:1px solid #cfc4cf;border-radius:8px;text-align:left;max-width:100%;overflow-wrap:anywhere}.studio-recovery button:disabled{opacity:.5}.studio-recovery-status{border:1px solid currentColor;border-radius:6px;min-height:44px;padding:6px 10px;text-align:left}
 .project-variants > section[aria-labelledby="project-variants-comparison"]{scroll-margin-top:82px}
+.project-variants-comparison .studio-project-quote{margin:16px 0;padding:16px;background:#f8f6f2;border:1px solid #ded5dd;border-radius:8px}
+.project-variants-comparison h5{font-size:18px;line-height:1.4;margin:0 0 12px}
+.project-variants-comparison .studio-quote-total strong{font-size:24px;line-height:1.3}

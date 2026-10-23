@@ -1,5 +1,19 @@
 # Gamefields — realizacja zaleceń po audycie
 
+## Zestawienie Gamefields.eu.txt i porównanie cen — Studio88
+
+23.10.2026: źródło `6ca9dad641b981c3119db98833a3756376ac18b2`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_d70a0f1f38488191bce2578c2e8e1643`, deployment `appgdep_6adb72c25e748191ba77524f9a03b716` — **succeeded**, środowisko revision3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka `sha256:513768cca99c65b09845afa68cd6b7437d0b8e3dfc7f5a23d21ec3ff5d25c984`.
+
+**Porównano cały zakres załącznika:** etap0–4 oraz sprinty0–6, z rozdzieleniem działających funkcji, częściowych prac i brakujących danych. Dokument źródłowy ma SHA256 `af77fb6ee8bbc79d305fac5ec0bd0e139c976041343d62cc3d6d58f9750f91d2` i urywa się na „Testy regres”; nie dopisano końcówki. [Tabela zgodności](../../../product-intelligence/2026-10-21/ZESTAWIENIE_GAMEFIELDS_EU.md). Nie jest to nowy pełny benchmark konkurencji ani audyt WordPress.
+
+**DONE — lokalne porównanie bieżących kalkulacji wariantów.** W Plikach projektu dwa zaznaczone zapisy pokazują plan2D, parametry i osobne aktualne kalkulacje, bez przywracania. Wspólny hook/API, osobny retry, zakres i pozycje Do ustalenia; stara rewizja modelu nie dostaje ceny dla nowej geometrii. Odznaczenie anuluje zapytanie, a spóźniona odpowiedź nie przywraca karty. Nie utrwalamy ceny jako oferty ani nie odejmujemy niepełnych sum jako oszczędności. Pełny Project i biblioteka niezmienione.
+
+PASS: TypeScript, build, test:studio, quote-engine/construction-pricing, pełne test:mobile96aren/48Street/16materiałów/JSON/Radar na375/390/430/1440 i Surface7rozmiarów. Nowy test375/1440 sprawdza różne wyniki,503/retry, blokadę rewizji bez własnego zapytania, spóźnioną odpowiedź, dokładną niezmienność Project/IndexedDB i reflow. Oczekiwane kwoty z niezależnych zapytań API z jawnym testowym cennikiem TEST-NOT-FOR-SALE; fixture nie trafia do produkcji. Pierwszy test lokalny miał unpriced z braku cennika w izolowanym Workerze; dodano fixture. Poprawiono także lokalną ścieżkę uruchomienia harnessu i przechwycenie widocznego kadru. Bez zmian silnika/stawek.
+
+**Pozostaje PARTIAL:** interaktywne porównanie3D i pełne odwzorowanie personalizacji3D, profil Street Field1440tekst i timeout O1, odzyskiwanie błędów3D, fizyczne urządzenia/dostępność, zgodność geometrii/R02, połączenia i techniczny BOM, brakujące stawki realizacji i potwierdzone leady. Nie zmieniono modeli, cennika komercyjnego, renderera, ProjectJSON, SQL lub BOM; nie wysyłano formularzy. ABBA niezmienionego renderera pozostaje dowodem historycznym85/87, nie nowym pomiarem88.
+
+[Kontrakt](../../../../integrations/studio/canvas-editor/docs/VARIANT_PRICING.md) · [test przeglądarkowy](../../../../integrations/studio/canvas-editor/docs/variant-pricing-2026-10-23/browser.json).
+
 ## Powtarzane pomiary Studio85–87 — 23.10.2026
 
 **DONE — lokalny zakres ABBA:** opublikowane pakiety85/87, kolejność85→87→87→85,1920próbek w96komórkach. Wszystkie48zestawów obrazów z trzech kamer identyczne RGBA we wszystkich czterech seriach. Analyzer i niezależne przeliczenie potwierdziły surowe dane, mediany/maksima, hashe i kolejność. Wspólne źródła geometrii i84pakiety JS każdej wersji sprawdzone; bez przypisywania bieżącego renderera do starego buildu.

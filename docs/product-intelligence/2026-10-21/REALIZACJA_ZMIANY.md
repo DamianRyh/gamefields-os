@@ -1,6 +1,6 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
-Aktualny etap: **Studio87 pozostaje opublikowane; lokalne pomiary85–87 ukończone** —1920próbek/96komórek/48identycznych zestawów obrazów. Wyniki mieszane; priorytetem profil Street Field1440 i nierozpoznany timeout nawigacji O1. Geometria i techniczny BOM nadal niezatwierdzone.
+Aktualny etap: **Studio88 opublikowane — porównanie bieżących kalkulacji wariantów i zestawienie Gamefields.eu.txt**. Pomiary85–87 pozostają mieszane; Street Field1440 i timeout O1 otwarte. Geometria i techniczny BOM nadal niezatwierdzone.
 
 Dokument właściciela jest planem rozwoju istniejącego Studio. Nie zastępuje bieżących decyzji właściciela ani nie oznacza startu nowej aplikacji. Kończy się w połowie pozycji „Testy regres” w Sprincie6; brakującej części nie odtworzono z domysłów.
 
@@ -14,7 +14,7 @@ We wcześniejszym etapie pracowały równolegle cztery role wykonawcze: agent pr
 | S2-01: semantyka wymiarów | PARTIAL | Wspólny adapter ośmiu modeli: zapisane wymiary, nawierzchnia i obrys konstrukcji rozdzielone. Pole gry, rozstaw modułów i strefy bezpieczeństwa wymagają potwierdzonych danych technicznych. |
 | S2-02: powierzchnie aktualnych modeli | DONE — zakres cyfrowych modeli | Wspólne pole górnych trójkątów dla kalkulacji i podsumowania; Octagon ma29,823379m², a nie pole prostokąta. Nie jest to zatwierdzenie projektu budowlanego ani przyszłych rewizji. |
 | S2-03/04: wizualizacja i wydajność renderera | PARTIAL | Studio87 i lokalne ABBA85/87:1920próbek/96komórek/48identycznych obrazów;35niższych/4wyższe/57nakładających się zakresów median. Street Field1440tekst i timeout O1 wymagają diagnostyki; fizyczne urządzenia i budżet nadal PENDING. |
-| S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; synchronizacja konta i porównywanie cen/3D nie są wdrożone. |
+| S3: personalizacja, zapis i warianty | PARTIAL | 300 wzorów,19 palet, obiekty, undo/redo, lokalny szkic i JSON działają. S3-01 i S3-03 ukończone w zakresie lokalnym opisanym niżej; Studio88 dodaje bieżące kalkulacje dwóch wariantów; synchronizacja konta i interaktywne porównanie3D nie są wdrożone. |
 | S4: komponenty i BOM | PARTIAL | Istnieją reguły jednej rodziny i rejestr56 cyfrowych artykułów. Niezależny inspektor OS regeneruje cyfrowe instancje. Studio84 jawnie wiąże dwa snapshoty z SHA i rewizjami; nie potwierdza geometrii. Zatwierdzenie połączeń i powiązanie technicznego BOM z Project nadal wymagają danych. |
 | S5-01/02: kalkulacja | PARTIAL | Wersjonowany cennik ośmiu konstrukcji, retry, anulowanie i ochrona przed spóźnioną wyceną. Ceny nawierzchni, montażu, transportu i pełny łańcuch technicznego BOM nadal niekompletne. |
 | S5-03: przekazanie zapytania | DONE — dołączenie do formularza | Kompletne ograniczone JSON, pominięcie plików graficznych, potwierdzenie domeny/okna/próby/długości, timeout i ponowienie. Oba tryby przeglądarki sprawdzone w wersji75; nie potwierdza to odbioru e-maila. |
@@ -307,3 +307,18 @@ Pierwsze ABBA przerwano po timeout45s O1/375 przy drugiej nawigacji. Zachowano p
 Publiczna aplikacja pozostaje **Studio87**, źródło `46dec70f4af0e0dc0ed3c2a95193a602ae5f3ff8`; nie utworzono88 ani nowego wdrożenia runtime. Nie powtarzano TypeScript/build/mobile dla samej dokumentacji i narzędzi; wcześniejsze bramki87 pozostają historycznym dowodem. Modele/R02, ceny, Project, SQL i BOM pozostają bez zmian. GeometryCorrespondence=UNCONFIRMED, technicalBill.rows=null.
 
 [Wyniki i ograniczenia](../../../tools/renderer-measurements-2026-10-23/RESULTS.md) · [protokół i odtworzenie](../../../tools/renderer-measurements-2026-10-23/README.md) · [surowa analiza](../../../tools/renderer-measurements-2026-10-23/results/analysis.json) · [kolejne kroki](../../../tools/renderer-measurements-2026-10-23/NEXT_STEPS.md).
+
+
+## Zestawienie Gamefields.eu.txt i porównanie cen — Studio88
+
+23.10.2026: źródło `6ca9dad641b981c3119db98833a3756376ac18b2`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_d70a0f1f38488191bce2578c2e8e1643`, deployment `appgdep_6adb72c25e748191ba77524f9a03b716` — **succeeded**, środowisko revision3. [Studio](https://gamefields-studio.ryhfs90.chatgpt.site). Paczka `sha256:513768cca99c65b09845afa68cd6b7437d0b8e3dfc7f5a23d21ec3ff5d25c984`.
+
+**Porównano cały zakres załącznika:** etap0–4 oraz sprinty0–6, z rozdzieleniem działających funkcji, częściowych prac i brakujących danych. Dokument źródłowy ma SHA256 `af77fb6ee8bbc79d305fac5ec0bd0e139c976041343d62cc3d6d58f9750f91d2` i urywa się na „Testy regres”; nie dopisano końcówki. [Tabela zgodności](ZESTAWIENIE_GAMEFIELDS_EU.md). Nie jest to nowy pełny benchmark konkurencji ani audyt WordPress.
+
+**DONE — lokalne porównanie bieżących kalkulacji wariantów.** W Plikach projektu dwa zaznaczone zapisy pokazują plan2D, parametry i osobne aktualne kalkulacje, bez przywracania. Wspólny hook/API, osobny retry, zakres i pozycje Do ustalenia; stara rewizja modelu nie dostaje ceny dla nowej geometrii. Odznaczenie anuluje zapytanie, a spóźniona odpowiedź nie przywraca karty. Nie utrwalamy ceny jako oferty ani nie odejmujemy niepełnych sum jako oszczędności. Pełny Project i biblioteka niezmienione.
+
+PASS: TypeScript, build, test:studio, quote-engine/construction-pricing, pełne test:mobile96aren/48Street/16materiałów/JSON/Radar na375/390/430/1440 i Surface7rozmiarów. Nowy test375/1440 sprawdza różne wyniki,503/retry, blokadę rewizji bez własnego zapytania, spóźnioną odpowiedź, dokładną niezmienność Project/IndexedDB i reflow. Oczekiwane kwoty z niezależnych zapytań API z jawnym testowym cennikiem TEST-NOT-FOR-SALE; fixture nie trafia do produkcji. Pierwszy test lokalny miał unpriced z braku cennika w izolowanym Workerze; dodano fixture. Poprawiono także lokalną ścieżkę uruchomienia harnessu i przechwycenie widocznego kadru. Bez zmian silnika/stawek.
+
+**Pozostaje PARTIAL:** interaktywne porównanie3D i pełne odwzorowanie personalizacji3D, profil Street Field1440tekst i timeout O1, odzyskiwanie błędów3D, fizyczne urządzenia/dostępność, zgodność geometrii/R02, połączenia i techniczny BOM, brakujące stawki realizacji i potwierdzone leady. Nie zmieniono modeli, cennika komercyjnego, renderera, ProjectJSON, SQL lub BOM; nie wysyłano formularzy. ABBA niezmienionego renderera pozostaje dowodem historycznym85/87, nie nowym pomiarem88.
+
+[Kontrakt](../../../integrations/studio/canvas-editor/docs/VARIANT_PRICING.md) · [test przeglądarkowy](../../../integrations/studio/canvas-editor/docs/variant-pricing-2026-10-23/browser.json).
