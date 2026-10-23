@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "status": "passed",
+      "lower": 24873,
+      "higher": 25022.1,
+      "delta": 149.1
+    },
+    {
+      "width": 1440,
+      "status": "passed",
+      "lower": 24873,
+      "higher": 25022.1,
+      "delta": 149.1
+    }
+  ],
+  "errors": []
+}

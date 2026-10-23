@@ -1,5 +1,18 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
+## Aktualizacja — Studio90, 23.10.2026
+
+Porównano pełny dostarczony Gamefields.eu.txt (kończący się na „Testy regres” w Sprincie6) z kodem i stanem Studio89. [Zestawienie wszystkich etapów i braków](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/GAMEFIELDS_EU_RECONCILIATION_2026_10_23.md).
+
+Zamknięty zakres programistyczny z4.4: opcjonalny budżet liczby kolorów palety. Nowa karta GF-WORKING-2026-10-23-v2 zachowuje stawki v1 i8cen konstrukcji; dodaje roboczo2kolory w pakiecie i5PLN/m² za dodatkowy kolor. To unikalne wejścia wybranej palety, nie pomiar widocznych pikseli ani receptura farb. UI objaśnia zależność i pokazuje osobną pozycję. Stare karty nie zmieniają wyników; Project/IndexedDB/SQL i modele zachowano. Grafika wyłączona, trawa i piasek nie dostają tej dopłaty. Otoczenie nie zwiększa budżetu warstwy Blender; linie i branding są oddzielne.
+
+PASS: TypeScript, build, test:studio, quote-engine, stara karta192kombinacje, nowa polityka kolorów, interfejs375/1440 oraz pełna regresja96O1/P1+48Street+16materiałów, JSON/szkic i Radar na4szerokościach. TestUI potwierdził149,10PLN różnicy za dodatkowy kolor dla29,82m². Produkcyjny POST /api/quote: HTTP200, pełna zgodność z lokalnym silnikiem, netto25022,10PLN dla utrwalonej konfiguracji, brutto/VATnull i workingAssumptions=true. Bez formularza, e-maila lub zapisuDB. [Dowód API](https://github.com/DamianRyh/gamefields-os/blob/main/tools/palette-pricing-2026-10-23/production-palette-smoke.json).
+
+Źródło Sites: 0d87047e000e312fe52e003c3dfb475ae29e247c. Wersja90: appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_5af87237bde481919fe96f9d910c303f. Deployment appgdep_6adbb5cdd4f48191852f8968834bb444 succeeded, env5. Hash natywny sha256:d6994ef414de9776215bfc2ff907445e6ec88c87cd4ad11873690b79654ce45e. Istniejący iframe /konfigurator-boisk/ wskazuje to samo Studio, więc publikacja jest dostępna na gamefields.eu; nie utworzono nowej strony ani nie przebudowano odrębnego OS.
+
+Dalsza kolejność: zatwierdzone rewizje/instancje/połączenia i fundamenty; własne modele brakujących akcesoriów; potwierdzony cennik/receptury/VAT/warunki lokalizacji; fizyczne urządzenia/czytniki/badania i budżetSLA. Konto/chmura nadal poza obecnym lokalnym zapisem. Zależności WordPress/WPCode, fakty prywatności i odbiór poprzedniego testu poczty nie zostały ponownie potwierdzone. Cały plan pozostaje PARTIAL; poniższe wydania są historią.
+
+
 ## Aktualny etap — Studio89, 23.10.2026
 
 Źródło `b4da8bcdd172c8bfb4ea01d8f7c4433e78c54a42`, wersja `appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_8fc4a915fc608191866f088151097a3b`, deployment `appgdep_6adbb1cf0b4081918c2af2091da68b77` — **succeeded**, środowisko revision4. Paczka natywna `sha256:8223cbeeac4d5741336e8c8d3d9444fa6c151f941f9868464aef4609e94d2d70`.

@@ -239,3 +239,8 @@ Właściciel potwierdził brak danych i polecił podstawić wartości: osobna ro
 Zaktualizowano audyt8modeli/25zasobów oraz F04(26artykułów), zachowując niezatwierdzone statusy. [Checklista](ENGINEERING_COMMERCIAL_GAPS.md) i szablon danych przypinają rewizje. technicalBill.rows=null; nie dobrano fikcyjnych kotew lub fundamentów. Pełne3Dswobodnego wyposażenia wymaga własnych modeli; obecne pominięcia jawne obok planu2D. Fizyczne urządzenia i pełny budżet wydajności pozostają otwarte.
 
 Kontrola wydania obejmuje TypeScript/build/domain,40nawigacjiO1, fault-injection375/1440,3D/quote375/1440, pełne mobile+Surface+nowe areny,58przypadków Circle,84rastery i60stanów tekstur. Raporty wdocs/priorities-2026-10-23; końcowy profil i receipt publikowane obok centralnego raportu. Czasy profilowane nie sąABBA/GPU/FPS i nie dowodzą ogólnego przyspieszenia. Wewnętrzne arkusze produkcyjne pozostają poza publicznym repo. Stawki robocze nie zatwierdzają geometrii lub finalnej oferty.
+
+
+## 23.10.2026 — zgodność Gamefields.eu.txt i budżet palety
+
+Opcjonalna polityka kolorów w nowej karcie roboczej v2; stare karty zachowują wyniki. Hook zachowuje kolory i paletę; Podsumowanie rozdziela dopłatę od złożoności wzoru. To budżet wybranych kolorów, nie zatwierdzona receptura farb. Szczegóły: [zestawienie](GAMEFIELDS_EU_RECONCILIATION_2026_10_23.md). Testy i publikacja odnotowane w centralnym raporcie. Nadal wymagane dane konstruktora, własne modele akcesoriów, zatwierdzone ceny/VAT i badania na urządzeniach.

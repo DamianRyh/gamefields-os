@@ -1,0 +1,258 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-10-23T19:31:04.279Z",
+  "scope": "One stateless quote calculation only; no form, email or database save",
+  "url": "https://gamefields-studio.ryhfs90.chatgpt.site/api/quote",
+  "rateCardSha256": "70ef79fa7290f71de2897d368e08d56f4430de8d9e248988244e5161d680e3c4",
+  "request": {
+    "arenaModel": "octagon",
+    "id": "PRODUCTION-COMPUTATION-SMOKE",
+    "name": "Kontrola kalkulacji roboczej",
+    "length": 4.962,
+    "width": 4.962,
+    "sport": "Piłka nożna 1×1",
+    "surface": "Akryl sportowy",
+    "base": "#123456",
+    "zone": "#234567",
+    "outside": "#345678",
+    "lineColor": "#ffffff",
+    "lines": false,
+    "pattern": "Organic Flow",
+    "patternFamily": "organic-flow",
+    "patternVariant": 1,
+    "graphicOpacity": 100,
+    "graphicScale": 100,
+    "graphicRotation": 0,
+    "scene": "day",
+    "objects": [],
+    "type": "Nowe boisko",
+    "status": "Szkic",
+    "date": ""
+  },
+  "expected": {
+    "workingAssumptions": true,
+    "constructionPrices": {
+      "w1": 13100,
+      "o1": 10500,
+      "p1": 22300,
+      "street15": 26200,
+      "circle-cage-1": 14000,
+      "circle-cage-2": 22700,
+      "street-field": 16600,
+      "octagon": 15300
+    },
+    "notice": "ROBOCZE / NIEZWERYFIKOWANE: wartości przyjęte do symulacji na polecenie właściciela, nie zatwierdzony cennik ani oferta producenta. Kwoty umownie netto; podstawa VAT niepotwierdzona, brutto nie jest wyliczane. Transport i montaż to założenia zakresu, nie wycena lokalizacji.",
+    "schemaVersion": 2,
+    "status": "estimated",
+    "currency": "PLN",
+    "rateVersion": "GF-WORKING-2026-10-23-v2",
+    "priceNet": 25022.1,
+    "priceGross": null,
+    "vatRate": null,
+    "knownSubtotalNet": 25022.1,
+    "area": 29.823379,
+    "areaLabel": "Powierzchnia nawierzchni z modelu",
+    "items": [
+      {
+        "id": "surface",
+        "label": "Materiał nawierzchni",
+        "quantity": 29.82,
+        "unit": "m²",
+        "unitNet": 65,
+        "totalNet": 1938.3
+      },
+      {
+        "id": "installation",
+        "label": "Ułożenie nawierzchni",
+        "quantity": 29.82,
+        "unit": "m²",
+        "unitNet": 35,
+        "totalNet": 1043.7
+      },
+      {
+        "id": "pattern",
+        "label": "Grafika nawierzchni · wykonanie 3/4",
+        "quantity": 29.82,
+        "unit": "m²",
+        "unitNet": 40,
+        "totalNet": 1192.8
+      },
+      {
+        "id": "palette-colors",
+        "label": "Paleta projektu · 5 kolorów · 3 ponad pakiet",
+        "quantity": 29.82,
+        "unit": "m²",
+        "unitNet": 15,
+        "totalNet": 447.3,
+        "note": "Budżet wybranej palety, nie pomiar widocznych kolorów ani receptura farb. Pakiet: 2; każdy dodatkowy kolor: 5 PLN/m². Linie, logo, napisy, gradienty i cienie rozliczane lub weryfikowane oddzielnie."
+      },
+      {
+        "id": "arena",
+        "label": "Konstrukcja z bramkami",
+        "quantity": 1,
+        "unit": "kpl.",
+        "unitNet": 15300,
+        "totalNet": 15300,
+        "note": "Cena modelu bazowego; obejmuje wbudowane bramki."
+      },
+      {
+        "id": "arena-installation",
+        "label": "Montaż konstrukcji",
+        "quantity": 1,
+        "unit": "kpl.",
+        "unitNet": 2400,
+        "totalNet": 2400
+      },
+      {
+        "id": "design",
+        "label": "Przygotowanie projektu",
+        "quantity": 1,
+        "unit": "kpl.",
+        "unitNet": 1200,
+        "totalNet": 1200
+      },
+      {
+        "id": "transport",
+        "label": "Transport",
+        "quantity": 1,
+        "unit": "kpl.",
+        "unitNet": 1500,
+        "totalNet": 1500,
+        "note": "Założenie transportowe wymaga potwierdzenia lokalizacji."
+      }
+    ],
+    "assumptions": [
+      "Orientacyjny koszt wybranego zakresu; cena końcowa po sprawdzeniu lokalizacji i podłoża.",
+      "Zmiana odcienia przy tej samej liczbie kolorów nie zmienia dopłaty. Liczymy unikalne kolory wybranej palety, nie widoczne piksele; projekt wykonawczy może wymagać innego budżetu. Sceneria oraz pozycja wyposażenia nie zmieniają ceny.",
+      "Ilość nawierzchni z obrysu warstwy w modelu Blender, wraz z zapasem pod konstrukcją. Grubość wizualnej warstwy nie określa technologii wykonania.",
+      "Standardowe kolory konstrukcji w cenie bazowej; wykończenie specjalne i montaż są osobnymi pozycjami."
+    ],
+    "exclusions": [
+      "Przygotowanie terenu, podbudowa, fundamenty, przyłącza i formalności nie są ujęte w tej kalkulacji.",
+      "Przeliczenie referencyjne: 1 EUR = 4.3641 PLN; NBP 205/A/NBP/2026, 2026-10-21. Kurs jest zamrożonym założeniem budżetowym, nie ceną sprzedaży waluty.",
+      "Oferta źródłowa nie określa zawartości cen ani podstawy VAT. W Gamefields wyceniamy tu wyłącznie konstrukcję bazową; cena końcowa po potwierdzeniu specyfikacji.",
+      "Ceny są propozycją orientacyjną, a nie potwierdzonym kosztem produkcji. Różnice materiałów, połączeń, bramek i liczby modułów wymagają indywidualnej weryfikacji.",
+      "Wszystkie uzupełnione stawki są niezweryfikowanymi założeniami do symulacji, nie ofertą wykonawcy.",
+      "Nawierzchnie zakładają przygotowane, odpowiednie podłoże; bez robót ziemnych, podbudowy, fundamentów, odwodnienia i przyłączy.",
+      "Wyposażenie wyceniane za obiekt edytora, bez potwierdzenia wymiaru, artykułu i kompletności; banda, szkło i piłkochwyt nie oznaczają całego obwodu.",
+      "Montaż to założenie złożenia bazowej konstrukcji na przygotowanym terenie, bez doboru kotew, fundamentów ani sprzętu specjalnego.",
+      "Transport 1500 PLN to umowny budżet jednego kursu, bez określonej trasy, rozładunku i gwarancji ceny.",
+      "Założenia robocze nie mają potwierdzonej minimalnej wartości realizacji, grubości, odpadów, dostępności ani terminu ważności.",
+      "Dopłata za paletę jest robocza: 2 kolory w pakiecie, 5 PLN/m² za każdy dodatkowy kolor wybranej palety. To nie liczba farb ani pomiar widocznego rastra; gradienty, cienie i grafiki wymagają oceny wykonawcy."
+    ]
+  },
+  "httpStatus": 200,
+  "cacheControl": "no-store",
+  "actual": {
+    "workingAssumptions": true,
+    "constructionPrices": {
+      "w1": 13100,
+      "o1": 10500,
+      "p1": 22300,
+      "street15": 26200,
+      "circle-cage-1": 14000,
+      "circle-cage-2": 22700,
+      "street-field": 16600,
+      "octagon": 15300
+    },
+    "notice": "ROBOCZE / NIEZWERYFIKOWANE: wartości przyjęte do symulacji na polecenie właściciela, nie zatwierdzony cennik ani oferta producenta. Kwoty umownie netto; podstawa VAT niepotwierdzona, brutto nie jest wyliczane. Transport i montaż to założenia zakresu, nie wycena lokalizacji.",
+    "schemaVersion": 2,
+    "status": "estimated",
+    "currency": "PLN",
+    "rateVersion": "GF-WORKING-2026-10-23-v2",
+    "priceNet": 25022.1,
+    "priceGross": null,
+    "vatRate": null,
+    "knownSubtotalNet": 25022.1,
+    "area": 29.823379,
+    "areaLabel": "Powierzchnia nawierzchni z modelu",
+    "items": [
+      {
+        "id": "surface",
+        "label": "Materiał nawierzchni",
+        "quantity": 29.82,
+        "unit": "m²",
+        "unitNet": 65,
+        "totalNet": 1938.3
+      },
+      {
+        "id": "installation",
+        "label": "Ułożenie nawierzchni",
+        "quantity": 29.82,
+        "unit": "m²",
+        "unitNet": 35,
+        "totalNet": 1043.7
+      },
+      {
+        "id": "pattern",
+        "label": "Grafika nawierzchni · wykonanie 3/4",
+        "quantity": 29.82,
+        "unit": "m²",
+        "unitNet": 40,
+        "totalNet": 1192.8
+      },
+      {
+        "id": "palette-colors",
+        "label": "Paleta projektu · 5 kolorów · 3 ponad pakiet",
+        "quantity": 29.82,
+        "unit": "m²",
+        "unitNet": 15,
+        "totalNet": 447.3,
+        "note": "Budżet wybranej palety, nie pomiar widocznych kolorów ani receptura farb. Pakiet: 2; każdy dodatkowy kolor: 5 PLN/m². Linie, logo, napisy, gradienty i cienie rozliczane lub weryfikowane oddzielnie."
+      },
+      {
+        "id": "arena",
+        "label": "Konstrukcja z bramkami",
+        "quantity": 1,
+        "unit": "kpl.",
+        "unitNet": 15300,
+        "totalNet": 15300,
+        "note": "Cena modelu bazowego; obejmuje wbudowane bramki."
+      },
+      {
+        "id": "arena-installation",
+        "label": "Montaż konstrukcji",
+        "quantity": 1,
+        "unit": "kpl.",
+        "unitNet": 2400,
+        "totalNet": 2400
+      },
+      {
+        "id": "design",
+        "label": "Przygotowanie projektu",
+        "quantity": 1,
+        "unit": "kpl.",
+        "unitNet": 1200,
+        "totalNet": 1200
+      },
+      {
+        "id": "transport",
+        "label": "Transport",
+        "quantity": 1,
+        "unit": "kpl.",
+        "unitNet": 1500,
+        "totalNet": 1500,
+        "note": "Założenie transportowe wymaga potwierdzenia lokalizacji."
+      }
+    ],
+    "assumptions": [
+      "Orientacyjny koszt wybranego zakresu; cena końcowa po sprawdzeniu lokalizacji i podłoża.",
+      "Zmiana odcienia przy tej samej liczbie kolorów nie zmienia dopłaty. Liczymy unikalne kolory wybranej palety, nie widoczne piksele; projekt wykonawczy może wymagać innego budżetu. Sceneria oraz pozycja wyposażenia nie zmieniają ceny.",
+      "Ilość nawierzchni z obrysu warstwy w modelu Blender, wraz z zapasem pod konstrukcją. Grubość wizualnej warstwy nie określa technologii wykonania.",
+      "Standardowe kolory konstrukcji w cenie bazowej; wykończenie specjalne i montaż są osobnymi pozycjami."
+    ],
+    "exclusions": [
+      "Przygotowanie terenu, podbudowa, fundamenty, przyłącza i formalności nie są ujęte w tej kalkulacji.",
+      "Przeliczenie referencyjne: 1 EUR = 4.3641 PLN; NBP 205/A/NBP/2026, 2026-10-21. Kurs jest zamrożonym założeniem budżetowym, nie ceną sprzedaży waluty.",
+      "Oferta źródłowa nie określa zawartości cen ani podstawy VAT. W Gamefields wyceniamy tu wyłącznie konstrukcję bazową; cena końcowa po potwierdzeniu specyfikacji.",
+      "Ceny są propozycją orientacyjną, a nie potwierdzonym kosztem produkcji. Różnice materiałów, połączeń, bramek i liczby modułów wymagają indywidualnej weryfikacji.",
+      "Wszystkie uzupełnione stawki są niezweryfikowanymi założeniami do symulacji, nie ofertą wykonawcy.",
+      "Nawierzchnie zakładają przygotowane, odpowiednie podłoże; bez robót ziemnych, podbudowy, fundamentów, odwodnienia i przyłączy.",
+      "Wyposażenie wyceniane za obiekt edytora, bez potwierdzenia wymiaru, artykułu i kompletności; banda, szkło i piłkochwyt nie oznaczają całego obwodu.",
+      "Montaż to założenie złożenia bazowej konstrukcji na przygotowanym terenie, bez doboru kotew, fundamentów ani sprzętu specjalnego.",
+      "Transport 1500 PLN to umowny budżet jednego kursu, bez określonej trasy, rozładunku i gwarancji ceny.",
+      "Założenia robocze nie mają potwierdzonej minimalnej wartości realizacji, grubości, odpadów, dostępności ani terminu ważności.",
+      "Dopłata za paletę jest robocza: 2 kolory w pakiecie, 5 PLN/m² za każdy dodatkowy kolor wybranej palety. To nie liczba farb ani pomiar widocznego rastra; gradienty, cienie i grafiki wymagają oceny wykonawcy."
+    ]
+  }
+}
