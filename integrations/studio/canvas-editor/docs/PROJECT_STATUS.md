@@ -1,5 +1,16 @@
 # Gamefields — stan projektu
 
+## Wspólny edytor modułów i kolorów — 2026-10-24 (zastępuje osobny edytor Studio93)
+
+- Budowanie modułowe działa w panelu Konstrukcja na tym samym obracanym modelu, razem z kolorami band/ramy/bramek, tekstem/logo oraz nawierzchnią i grafikami. Nie otwiera modalu ani iframe.
+- Naprawiono znaki obrotu komponentów: panele Panna Octa są styczne do obrysu i dochodzą do sąsiednich słupków; bramki Panna Grid oraz Panna Octa wystają na zewnątrz. Źródłowe GLB zachowano bez deformacji (1:1).
+- Parametry są częścią Project.modular z rewizją GF-STUDIO-MODULAR-2: wspólne Cofnij/Ponów, szkic, JSON, specyfikacja, warianty i podgląd A/B. Zmiana produktu czyści niezgodne moduły. Jedna rodzina na boisko; P1/O1/W1/Street15 bez potwierdzonego układu modułów nadal mają model bazowy.
+- Panna Grid rośnie całymi panelami na długość/szerokość; Panna Cage 90/180 obsługuje poziomy; Panna Octa ma stały obrys. Bramki i wejścia 0–2. Obrys oraz ilość nawierzchni wynikają z konfiguracji; warstwa ma 20 cm. Kolory i grafiki nie znikają przy rozbudowie.
+- Cena konstrukcji i montażu modułowego: do ustalenia; nie podstawiamy ceny bazowego produktu. Nawierzchnię wyceniamy według aktualnego obrysu. Koszty produkcji pozostają wyłącznie na serwerze. BOM wykonawczy/połączenia/kotwy nadal niezatwierdzone.
+- Historyczny silnik inspektora OS i manifesty zachowane bez zmian. Poprawiony adapter Studio ma oddzielną rewizję i hashe komponentów. Starsza trasa /modular zachowana z poprawionymi obrotami; stare szkice nie są usuwane.
+- Sprawdzenie: 243 układy (bramki na zewnątrz, dojście końców Octagonu do słupków, rodzina/skala), hashe źródeł, walidacja modułów, JSON i rewizje wariantów, faktyczna powierzchnia i częściowa kalkulacja. Przeglądarka: 4 modele × 390/1440 px, kolory + nawierzchnia + moduły, obrót bez utraty pozycji, Cofnij/Ponów, import/eksport, zmiana poziomów i brak ceny bazowej.
+- Regeneracja metadanych po zmianie geometrii: node scripts/build-studio-modular-sources.mjs; test node tests/studio-modular-geometry.mjs. Bundle historycznej trasy: node scripts/build-studio-modular.mjs z Three.js 0.180.0 w NODE_PATH.
+
 ## Studio — wspólne kolory, jeden podgląd 3D i budowanie modułowe (2026-10-24)
 
 - Konstrukcja używa tych samych kontrolek `.studio-color` co nawierzchnia: Bandy, Rama, Bramki. Usunięto osobne presety.

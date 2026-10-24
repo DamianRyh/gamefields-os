@@ -1,5 +1,17 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
+## 24.10.2026 — Studio94: naprawiona geometria i wspólny edytor
+
+Zastępuje oddzielny edytor ze Studio93. Rozbudowa odbywa się w panelu Konstrukcja przy tym samym modelu 3D co kolory band/ramy/bramek, logo/tekst i grafiki nawierzchni. Parametry są zapisane w Project.modular (GF-STUDIO-MODULAR-2): wspólny szkic, Cofnij/Ponów, JSON, specyfikacja, warianty i A/B. Studio nie otwiera dodatkowego okna ani iframe.
+
+Poprawiono znak obrotu paneli Panna Octa oraz krótkich paneli i bramek Panna Grid. Panele Octagonu dochodzą do słupków; bramki wystają na zewnątrz. Oryginalne GLB zachowują wymiary 1:1. Jedna rodzina na konfigurację. Panna Grid zwiększa długość/szerokość; Panna Cage 90/180 zmienia poziomy; Panna Octa ma stały obrys. P1/O1/W1/Street15 pozostają modelami bazowymi bez niepotwierdzonego układu modułów.
+
+Nawierzchnia 20 cm i jej ilość wynikają z aktualnego obrysu modułów. Konstrukcja oraz jej montaż pozostają do wyceny; cena modelu bazowego nie jest stosowana do konfiguracji modułowej. Koszty produkcji pozostają sekretami serwera. BOM wykonawczy, połączenia i kotwienie nadal niezatwierdzone. Stary silnik inspektora OS i dane historyczne zachowano; adapter Studio ma własną przypiętą rewizję źródeł.
+
+Walidacja: 243 układy (orientacja bramek, końce paneli Octagonu przy słupkach, rodzina/skala), hashe GLB i kodu, schemat/JSON/rewizje wariantów, powierzchnia i częściowa wycena; tsc, test:studio, build, test:mobile (4 szerokości i Radar), API sales-only. Przeglądarka: cztery modele × 390/1440 px (moduły + kolory + nawierzchnia, obrót, Cofnij/Ponów, szkic po ponownym otwarciu, JSON i brak ceny bazowej). Modułowe A/B 375/1440 px z logo/tekstem i ochroną starej rewizji.
+
+Publikacja: Studio94; źródło `587c16ecd1d586a48d823c73d8db8f03de868e5b`; wdrożenie `appgdep_6adc5a61c3d48191a82616861eefa2b5` succeeded, env revision 6. Dalszy zakres: zatwierdzone połączenia/BOM/kotwienie i stawki konkretnych modułów, nie nowe miejsca edytora.
+
 ## 24.10.2026 — Studio93: spójne kolory i edytor modułów
 
 Opublikowano jeden obracany podgląd 3D (również A/B), bez przycisków Boczny/Z góry. Bandy, Rama i Bramki używają kontrolek i typografii nawierzchni. Przycisk Budowanie modułowe otwiera w Studio lokalny silnik OS z oryginalnymi GLB: Panna Grid (Street Field) zwiększa długość/szerokość, Circle Cage zmienia poziomy, Octagon ma stały obrys. Konfiguracja pozostaje w jednej rodzinie i zachowuje skalę części 1:1.

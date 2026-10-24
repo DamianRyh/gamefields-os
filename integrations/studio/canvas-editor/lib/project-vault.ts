@@ -1,5 +1,5 @@
 import {projectSchema,type Project} from './project.ts';
-import {arenaGeometry} from './arena-geometry-data.mjs';
+import {projectDimensions} from './project-dimensions.ts';
 export const DRAFT_KEY='gamefields-studio-draft-v1';
 export const PREVIOUS_KEY='previous-draft';
 export const UNREADABLE_KEY='unreadable-draft';
@@ -11,7 +11,7 @@ export function parseVaultProject(value:unknown):Project{
  if(new Set(project.objects.map(o=>o.id)).size!==project.objects.length)throw Error('Powtórzone identyfikatory elementów projektu.');
  return project;
 }
-const revision=(p:Project)=>p.arenaModel?(arenaGeometry as Record<string,{sourceRevision:string}>)[p.arenaModel]?.sourceRevision??null:null;
+const revision=(p:Project)=>projectDimensions(p).model?.sourceRevision??null;
 export function createSnapshot(project:Project,name:string,id:string,createdAt:string):Snapshot{
  const label=name.trim();if(!label||label.length>80)throw Error('Podaj nazwę wariantu (do 80 znaków).');
  const copy=parseVaultProject(JSON.stringify(project));

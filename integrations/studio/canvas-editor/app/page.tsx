@@ -1,4 +1,5 @@
 "use client";
+import {modularGeometry} from "@/lib/studio-modular";
 import {graphicSourceError} from "@/lib/graphic-source-policy";
 import {useProjectRecovery} from "@/hooks/use-project-recovery";
 import {parseVaultProject} from "@/lib/project-vault";
@@ -20,7 +21,7 @@ import {SurfaceMaterialPicker,SurfaceAppearance} from "@/components/surface-mate
 import {isTurf} from "@/lib/surface-materials";
 import {StreetFootballRealisticPreview,REALISTIC_LOCATIONS,type RealisticLocation} from "@/components/street-football-realistic-preview";
 import {PannaStudioPreview as PannaRealisticPreview,ArenaSettings,SurfaceOrderOptions} from "@/components/blender-arena-preview";
-import {isRoundCourt,courtArea,courtDimensions,clampToCircle,roundBandPosition} from "@/lib/court-geometry";
+import {isRoundCourt,courtArea,courtAspect,courtDimensions,clampToCircle,roundBandPosition} from "@/lib/court-geometry";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 
 const uid=()=>Math.random().toString(36).slice(2,9);
@@ -124,7 +125,8 @@ function EventScene({h}:{h:number}){
  </g>;
 }
 export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,onDropEquipment}:{p:Project;iso?:boolean;small?:boolean;selectedId?:string|null;onSelect?:(id:string|null)=>void;onDragStart?:(e:React.PointerEvent<SVGElement>,id:string,mode?:"move"|"scale"|"rotate")=>void;onDropEquipment?:(name:string,x:number,y:number)=>void}){
- const round=isRoundCourt(p),w=600,h=600*p.width/p.length;
+ const moduleSurface=modularGeometry(p)?.surfaceBounds;
+ const round=isRoundCourt(p),w=600,h=600*courtAspect(p);
  const svgRef=useRef<SVGSVGElement>(null);
  const patternId=useId(),clipId=useId();
  function drop(e:React.DragEvent<SVGSVGElement>){if(!onDropEquipment)return;e.preventDefault();const name=e.dataTransfer.getData("gamefields/equipment");if(!name)return;const svg=svgRef.current;if(!svg)return;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const ctm=svg.getScreenCTM();if(!ctm)return;const loc=pt.matrixTransform(ctm.inverse());onDropEquipment(name,Math.max(0,Math.min(600,loc.x)),Math.max(0,Math.min(h,loc.y)))}
@@ -140,7 +142,7 @@ export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,o
   {p.sport==="Teqball"?<rect x="240" y={Math.max(10,h/2-70)} width="120" height="140" rx="18" fill={p.zone} opacity=".34"/>:null}
   {p.sport==="Skate"?<path d={"M50 "+h*.18+"H250L320 "+h*.42+"H550V"+h*.72+"H350L280 "+h*.55+"H50Z"} fill={p.zone} opacity=".32"/>:null}
   {p.sport==="Street Workout"?<><rect x="70" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".32"/><rect x="350" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".22"/></>:null}
-  <g clipPath={"url(#"+clipId+")"}>{!p.sport.includes("Piłka nożna")||!isTurf(p.surface)?<PatternArt p={p} h={h}/>:null}{p.sport.includes("Piłka nożna")?<SurfaceAppearance surface={p.surface} id={patternId.replace(/:/g,"")} height={h} length={p.length}/>:null}</g>
+  <g clipPath={"url(#"+clipId+")"}>{!p.sport.includes("Piłka nożna")||!isTurf(p.surface)?<PatternArt p={p} h={h}/>:null}{p.sport.includes("Piłka nożna")?<SurfaceAppearance surface={p.surface} id={patternId.replace(/:/g,"")} height={h} length={moduleSurface?.x??p.length}/>:null}</g>
   {p.lines?<g fill="none" stroke={p.lineColor} strokeWidth="2.5">
    {round?<circle cx="300" cy="300" r="290"/>:<rect x="10" y="10" width="580" height={h-20}/>}
    {!round&&(p.sport.includes("Piłka nożna")||p.sport==="Wielofunkcyjne")?<><path d={"M300 10V"+(h-10)}/><circle cx="300" cy={h/2} r={Math.min(48,h*.18)}/><path d={"M10 "+h*.25+"H100V"+h*.75+"H10 M590 "+h*.25+"H500V"+h*.75+"H590"}/><circle cx="68" cy={h/2} r="2"/><circle cx="532" cy={h/2} r="2"/></>:null}
@@ -166,7 +168,7 @@ export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,o
   </g>:null}
   {p.scene==="event"?<EventScene h={h}/>:null}
   {p.objects.filter(o=>o.kind!=="equipment").map(o=><g key={o.id} clipPath={round&&o.target==="court"&&o.kind!=="equipment"?"url(#"+clipId+")":undefined}><EditorObjectView o={o} h={h} round={round} selected={o.id===selectedId} onPointerDown={onDragStart||(()=>{})}/></g>)}
-  {!small?<g fill={p.scene==="night"?"#d7e1dc":"#66736d"} fontSize="13"><text x="300" y="-68" textAnchor="middle">{round?courtDimensions(p):p.length+" m"}</text><text x="670" y={h/2} textAnchor="middle">{round?"Panna 1×1":p.width+" m"}</text></g>:null}
+  {!small?<g fill={p.scene==="night"?"#d7e1dc":"#66736d"} fontSize="13"><text x="300" y="-68" textAnchor="middle">{round?courtDimensions(p):(moduleSurface?.x??p.length).toFixed(3)+" m"}</text><text x="670" y={h/2} textAnchor="middle">{round?"Panna 1×1":(moduleSurface?.z??p.width).toFixed(3)+" m"}</text></g>:null}
  </svg>;
 }
 
@@ -230,7 +232,7 @@ export default function Home(){
   finishDrag.current?.();history(p);
   const h=600*profile.width/profile.length;
   const objects:EditorObject[]=[];
-  setP(v=>({...v,name:nextProjectName(v.name,getSportProfile(v.sport,v.arenaModel).label,profile.label),arenaModel:profile.arenaModel,sport:profile.sport,courtShape:profile.courtShape,diameter:profile.diameter,arenaDesign:profile.arenaModel?{panelColor:"#b90f35",frameColor:"#30363c",goalColor:"#30363c",finish:"matte",text:"",side:"both"}:undefined,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,lines:!["circle-cage-1","circle-cage-2","street-field","octagon","street15"].includes(profile.arenaModel||"")&&!["Skate","Street Workout"].includes(profile.sport),objects}));
+  setP(v=>({...v,name:nextProjectName(v.name,getSportProfile(v.sport,v.arenaModel).label,profile.label),arenaModel:profile.arenaModel,modular:undefined,sport:profile.sport,courtShape:profile.courtShape,diameter:profile.diameter,arenaDesign:profile.arenaModel?{panelColor:"#b90f35",frameColor:"#30363c",goalColor:"#30363c",finish:"matte",text:"",side:"both"}:undefined,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,lines:!["circle-cage-1","circle-cage-2","street-field","octagon","street15"].includes(profile.arenaModel||"")&&!["Skate","Street Workout"].includes(profile.sport),objects}));
   setModule(0);if(enterBuilder)setView("builder");setSelectedId(null);toast.success("Wybrano "+profile.label+". Przywrócono ustawienia modelu. Możesz użyć Cofnij.");
  }
  function updateObject(id:string,patch:Partial<EditorObject>,track=true){if(track)history(p);setP(v=>({...v,objects:v.objects.map(o=>o.id===id?{...o,...patch}:o)}))}
@@ -248,7 +250,7 @@ export default function Home(){
    const startProject=p,startObj=p.objects.find(o=>o.id===id);if(!startObj)return;
    dragStart.current=startProject;
    const svg=e.currentTarget.ownerSVGElement;if(!svg)return;
-   const h=600*p.width/p.length;
+   const h=600*courtAspect(p);
    const center=isRoundCourt(p)&&startObj.target!=="court"?roundBandPosition(startObj):{x:startObj.target==="band-left"?-22:startObj.target==="band-right"?622:startObj.x,y:startObj.target==="band-top"?-22:startObj.target==="band-bottom"?h+22:startObj.y};
    const point=(clientX:number,clientY:number)=>{const pt=svg.createSVGPoint();pt.x=clientX;pt.y=clientY;const ctm=svg.getScreenCTM();return ctm?pt.matrixTransform(ctm.inverse()):null};
    const first=point(e.clientX,e.clientY);if(!first)return;

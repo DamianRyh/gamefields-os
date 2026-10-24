@@ -19,21 +19,29 @@ try{
 
 
  for(const width of [390,1440]){
- const context=await browser.newContext({viewport:{width,height:1000},acceptDownloads:true});const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
- await page.goto(base+'/?arena=p1');await page.locator('.studio-orbit-canvas').waitFor();
- assert.equal(await page.getByRole('button',{name:'Boczny',exact:true}).count(),0);assert.equal(await page.getByRole('button',{name:'Z góry',exact:true}).count(),0);
- await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();assert.equal(await page.locator('.studio-construction-colors .studio-color').count(),3);
- await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#224466');
- await page.getByRole('button',{name:'Budowanie modułowe',exact:true}).click();const frame=page.frameLocator('iframe[title="Edytor zgodnych modułów konstrukcji"]');
- await frame.locator('canvas[data-ready=true]').waitFor({timeout:30000});assert.equal(await frame.locator('#family option').count(),3);assert.equal(await frame.locator('canvas').getAttribute('data-family'),'street-field');const count=Number(await frame.locator('canvas').getAttribute('data-instance-count'));
- await frame.getByLabel('Moduły na długości',{exact:true}).fill('6');await frame.locator('canvas[data-ready=true]').waitFor();assert(Number(await frame.locator('canvas').getAttribute('data-instance-count'))>count);assert.equal(await frame.locator('canvas').getAttribute('data-scales'),'1,1,1');
- const event=page.waitForEvent('download');await frame.getByRole('button',{name:'Pobierz projekt',exact:true}).click();const saved=JSON.parse(await readFile(await(await event).path(),'utf8'));assert.equal(saved.config.long,6);assert.equal(saved.config.family,'street-field');
- await frame.locator('#family').selectOption('circle-cage');await frame.locator('canvas[data-family="circle-cage"][data-ready=true]').waitFor();await frame.getByLabel('Poziomy paneli',{exact:true}).fill('2');await frame.locator('canvas[data-ready=true]').waitFor();assert.equal(await frame.locator('canvas').getAttribute('data-instance-count'),'16');
- await frame.locator('#family').selectOption('octagon');await frame.locator('canvas[data-family="octagon"][data-ready=true]').waitFor();assert.equal(await frame.getByLabel('Moduły na długości',{exact:true}).count(),0);
- await frame.locator('#import').setInputFiles({name:'config.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(saved))});await frame.locator('canvas[data-family="street-field"][data-ready=true]').waitFor();assert.equal(await frame.getByLabel('Moduły na długości',{exact:true}).inputValue(),'6');
- await page.screenshot({path:`outputs/studio-ux/modular-${width}.png`});await page.getByRole('button',{name:'Wróć do modelu 3D',exact:true}).click();await page.getByRole('button',{name:'Budowanie modułowe',exact:true}).click();await frame.locator('canvas[data-ready=true]').waitFor();assert.equal(await frame.getByLabel('Moduły na długości',{exact:true}).inputValue(),'6');await page.getByRole('button',{name:'Wróć do modelu 3D',exact:true}).click();assert.equal(await page.getByLabel('Kolor: Bandy',{exact:true}).inputValue(),'#224466');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
- report.cases.push({width,status:'passed',families:3,growth:6,exportImport:true,recovery:true});await context.close();
+ const context=await browser.newContext({viewport:{width,height:1100},acceptDownloads:true});const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
+ const download=async()=>{const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();return JSON.parse(await readFile(await(await event).path(),'utf8'))};
+ const ready=()=>page.locator('.panna-studio-model[data-ready=true]').waitFor({timeout:30000});
+ for(const model of ['street-field','octagon','circle-cage-1','circle-cage-2']){
+ await page.goto(base+'/?arena='+model);await ready();await page.getByRole('button',{name:'Budowanie modułowe',exact:true}).click();assert.equal(await page.locator('iframe').count(),0);await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#224466');await page.getByLabel('Kolor: Rama',{exact:true}).fill('#775533');await page.getByLabel('Kolor: Bramki',{exact:true}).fill('#ff6633');await page.getByLabel('Tekst na bandach',{exact:true}).fill('GAMEFIELDS QA');
+ await page.getByRole('button',{name:'Włącz budowanie modułowe',exact:true}).click();await page.locator('.panna-studio-model[data-modular][data-ready=true]').waitFor({timeout:30000});let p=await download();assert(p.modular);assert.equal(p.arenaDesign.panelColor,'#224466');
+ const canvas=page.locator('.studio-orbit-canvas');await canvas.focus();await page.keyboard.press('ArrowRight');await page.waitForFunction(()=>Number(document.querySelector('.studio-orbit-canvas')?.dataset.orbitYaw)!==-.55);const yaw=await canvas.getAttribute('data-orbit-yaw');assert(yaw);
+ if(model==='street-field'){
+ await page.getByRole('button',{name:'Zwiększ: Moduły na długości',exact:true}).click();await page.waitForFunction(()=>{const e=document.querySelector('.panna-studio-model');return e?.dataset.ready==='true'&&JSON.parse(e.dataset.modular||'{}').long===5});p=await download();assert.equal(p.modular.long,5);assert.equal(await canvas.getAttribute('data-orbit-yaw'),yaw);
+ await page.getByRole('button',{name:'Cofnij',exact:true}).click();await ready();assert.equal((await download()).modular.long,4);await page.getByRole('button',{name:'Ponów',exact:true}).click();await ready();assert.equal((await download()).modular.long,5);
+ }
+ await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByLabel('Kolor: Pole gry',{exact:true}).fill('#337755');await ready();const edited=await download();assert.equal(edited.base,'#337755');assert(edited.modular);assert.equal(edited.arenaDesign.goalColor,'#ff6633');assert.equal(await canvas.getAttribute('data-orbit-yaw'),yaw);
+ const quote=await(await page.request.post(base+'/api/quote',{data:edited})).json();assert.equal(quote.priceNet,null);assert.equal(quote.items.find(i=>i.id==='arena').totalNet,null);assert.equal(quote.items.find(i=>i.id==='arena-installation').totalNet,null);assert(quote.area>0);
+ await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'module.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(edited))});await ready();assert.deepEqual(await download(),edited);
+ if(model==='street-field'){await page.waitForFunction(()=>document.querySelector('.studio-save')?.textContent==='Zapisano w tej przeglądarce');await page.goto(base+'/');await ready();assert.deepEqual((await download()).modular,edited.modular);}
+ await page.getByRole('button',{name:'Budowanie modułowe',exact:true}).click();
+ if(model==='circle-cage-1'){await page.getByRole('button',{name:'Zwiększ: Poziomy paneli',exact:true}).click();await page.locator('.panna-studio-model[data-model="circle-cage-2"][data-ready=true]').waitFor();assert.equal((await download()).modular.levels,2);}
+ await page.screenshot({path:`outputs/studio-ux/integrated-${model}-${width}.png`});
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
+ report.cases.push({width,model,integrated:true,json:true,priceGuard:true});
+ }
+ await context.close();
  }
  assert.deepEqual(report.errors,[]);report.status='passed';console.log(JSON.stringify(report));
 }catch(error){report.status='failed';report.error=String(error);throw error;}
-finally{await writeFile('outputs/studio-ux/modular-browser.json',JSON.stringify(report,null,2));await browser?.close();await new Promise(r=>server?.close(r));await mf.dispose();}
+finally{await writeFile('outputs/studio-ux/integrated-browser.json',JSON.stringify(report,null,2));await browser?.close();await new Promise(r=>server?.close(r));await mf.dispose();}
