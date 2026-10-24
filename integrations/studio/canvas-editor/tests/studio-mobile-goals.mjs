@@ -23,7 +23,7 @@ try{
    await page.goto(base+'/?arena='+arena);
    const ready=()=>page.locator('[data-model="'+arena+'"][data-ready="true"]').waitFor({timeout:30000});await ready();
    await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();
-   await page.locator('.studio-current-model img').waitFor();assert.equal(await page.locator('.studio-visual').getByRole('button',{name:'Zmień boisko',exact:true}).count(),0);assert.equal(await page.locator('.studio-project-chip').evaluate(e=>e.tagName),'DIV');assert.equal(await page.locator('.studio-construction-bar .studio-color').count(),3);assert.equal(await page.getByRole('button',{name:'Zmień boisko',exact:true}).count(),1);await page.locator('.studio-panel').screenshot({path:`outputs/mobile/construction-panel-${arena}-${width}.png`});
+   await page.getByRole('button',{name:'Zmień boisko',exact:true}).locator('img').waitFor();assert.equal(await page.locator('.studio-visual').getByRole('button',{name:'Zmień boisko',exact:true}).count(),0);assert.equal(await page.locator('.studio-project-chip').evaluate(e=>e.tagName),'DIV');assert.equal(await page.locator('.studio-construction-bar .studio-color').count(),3);assert.equal(await page.getByRole('button',{name:'Zmień boisko',exact:true}).count(),1);await page.locator('.studio-panel').screenshot({path:`outputs/mobile/construction-panel-${arena}-${width}.png`});
    await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#1d7056');await page.getByLabel('Tekst na bandach',{exact:true}).fill(arena.toUpperCase());await ready();
    const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const project=JSON.parse(await readFile(await(await event).path(),'utf8'));assert.equal(project.arenaModel,arena);
    await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'arena.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});await ready();
@@ -49,29 +49,20 @@ try{
    for(const view of ['Model 3D']){await page.getByRole('button',{name:view,exact:true}).click();await ready();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);}
    assert.equal(await page.locator('.panna-stage').count(),0);
   }
-  await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();const cards=page.locator('.studio-models button');assert.equal(await cards.count(),8);for(const img of await page.locator('.studio-models img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(async e=>{await e.decode();if(!e.naturalWidth)throw Error('Missing model thumbnail')});}await page.locator('.studio-panel').evaluate(e=>e.scrollTo(0,0));await page.locator('.studio-panel').screenshot({path:`outputs/mobile/model-picker-thumbnails-${width}.png`});await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
+  await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();const cards=page.locator('.studio-models button');assert.equal(await cards.count(),7);for(const img of await page.locator('.studio-models img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(async e=>{await e.decode();if(!e.naturalWidth)throw Error('Missing model thumbnail')});}await page.locator('.studio-panel').evaluate(e=>e.scrollTo(0,0));await page.locator('.studio-panel').screenshot({path:`outputs/mobile/model-picker-thumbnails-${width}.png`});await page.getByRole('button',{name:'Wróć do konstrukcji',exact:true}).click();await page.getByRole('button',{name:'Zmień nawierzchnię sportową',exact:true}).click();await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Header overflow');
-  for(const view of ['perspective']){
-    await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
-    const result=await page.evaluate(()=>{
-     const scene=document.querySelector('.green-screen-scene'),canvas=scene.querySelector('canvas'),goals=scene.querySelector('.realistic-goals');
-     const a=canvas.getBoundingClientRect(),b=goals.getBoundingClientRect(),r=scene.getBoundingClientRect();
-     return {delta:Math.max(Math.abs(a.x-b.x),Math.abs(a.y-b.y),Math.abs(a.width-b.width),Math.abs(a.height-b.height)),ratio:r.width/r.height,goalCount:goals.querySelectorAll('.goal-frame').length,overflow:document.documentElement.scrollWidth>innerWidth+1};
-    });
-    assert.ok(result.delta<1,`${width} neutral ${view}: misaligned layers`);
-    assert.equal(result.goalCount,2);assert.equal(result.overflow,false,`${width} neutral ${view}: horizontal overflow`);
-    if(width<=760)assert.ok(Math.abs(result.ratio-1672/941)<.01,'Mobile scene must preserve the entire calibrated image');
-  }
-  assert.equal(await page.getByRole('button',{name:'Model 3D',exact:true}).isDisabled(),true);
+  await page.locator('.panna-studio-model[data-surface-model="street-football-3x3"][data-ready="true"]').waitFor({timeout:30000});
+  assert.equal(await page.getByRole('button',{name:'Model 3D',exact:true}).isDisabled(),false);
+  assert.equal(await page.locator('.panna-studio-model').getAttribute('data-slab-thickness'),'0.20');
   await page.getByLabel('Nazwa projektu',{exact:true}).fill('CI — zachowany szkic');
   await page.waitForFunction(()=>document.querySelector('.studio-save')?.textContent==='Zapisano w tej przeglądarce');
   await page.goto(base+'/');
   await page.waitForFunction(()=>document.querySelector('[aria-label="Nazwa projektu"]')?.value==='CI — zachowany szkic');
   assert.equal(await page.getByLabel('Nazwa projektu',{exact:true}).inputValue(),'CI — zachowany szkic','Browser draft must survive a reload');
   await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();
-  await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
+  await page.getByRole('button',{name:'Wróć do konstrukcji',exact:true}).click();await page.getByRole('button',{name:'Zmień nawierzchnię sportową',exact:true}).click();await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
   assert.equal(await page.getByLabel('Nazwa projektu',{exact:true}).inputValue(),'CI — zachowany szkic','Selecting the current model must not reset the draft');
-  await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
+  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:30000});
   await page.screenshot({path:`outputs/mobile/studio-${width}.jpg`,type:'jpeg',quality:85});
   await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('link',{name:'Radar · mapa',exact:true}).click();
   await page.waitForURL('**/radar');
@@ -82,12 +73,12 @@ try{
   await page.waitForURL('**/radar');
   await page.getByRole('link',{name:'Boiska',exact:true}).click();
   await page.waitForURL(base+'/');
-  await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
+  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:30000});
   if(await page.locator('button.entry-start').isVisible())await page.locator('button.entry-start').click();
   await page.getByRole('button',{name:'Podsumowanie',exact:true}).click();
   await page.getByRole('button',{name:'Wróć do edycji',exact:true}).click();
-  await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
+  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:30000});
   await page.close();
  }
- assert.deepEqual(errors,[]);console.log('PASS: 8 O-1/P-1 interactive views and 4 neutral Street Football views, 16 P-1 material switches with visible WebGL output and preserved JSON colours, aligned layers, no overflow/runtime errors; Radar filter/project/back navigation on all four viewports.');
+ assert.deepEqual(errors,[]);console.log('PASS: 8 O-1/P-1 interactive views and 4 independent Street Football 20 cm slab views, 16 P-1 material switches with visible WebGL output and preserved JSON colours, aligned layers, no overflow/runtime errors; Radar filter/project/back navigation on all four viewports.');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

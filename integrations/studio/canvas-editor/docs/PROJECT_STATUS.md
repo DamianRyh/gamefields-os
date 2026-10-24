@@ -1,4 +1,9 @@
 # Gamefields — stan projektu
+## Osiem niezależnych nawierzchni 20 cm — 2026-10-24
+
+Street Football 3×3 przeniesiono do osobnego katalogu nawierzchni wraz z koszykówką 3×3 i pełną, tenisem, padlem, siatkówką, pickleball i futsalem. Osobne modele Blender/GLB, miniatury, pole gry versus cała płyta, obrót 3D, JSON i wycena powierzchni. Street Football może dołączyć/odłączyć samą Street Arena 15. Pozostałe formaty wskazują brak zgodnej konstrukcji; nie skalujemy istniejących boisk. Stare projekty zachowane. [Wymiary, zgodność i ograniczenia](SPORT_SURFACES_2026_10_24.md). Dalsze: dedykowane konstrukcje i zatwierdzenie technologii/stref dla lokalizacji.
+
+
 
 ## Miniatury konstrukcji w wyborze boiska — 2026-10-24
 

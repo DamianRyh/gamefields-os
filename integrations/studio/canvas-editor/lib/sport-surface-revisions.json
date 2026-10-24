@@ -1,0 +1,34 @@
+{
+  "street-football-3x3": {
+    "standalone": "4bc752e1c32cf1fc50b4d04b698483d4d0bf4aa4b592a255c636bcb21d592deb",
+    "street15": "5e64776f95d021b6456993efb29e22c18040cc0e169e28c59c4975ad10521656"
+  },
+  "basketball-3x3": {
+    "standalone": "00e38abe78dae127dbf319e07d2d744b5b41ea8972f3af8347f31135101c2f28",
+    "street15": "3ba6ddec9bad719228ca216240b994f8e01eadd8c00bb8a7d5148d946ee9beec"
+  },
+  "basketball-full": {
+    "standalone": "358bad1c41e5b1b91b69965d0f1d00b2cc576833d2c0e7ab67e6887f576955fd",
+    "street15": "499a7147bd1f694e7c15f613802cbf4579a6bddb0fbaed22e01d9becc0612751"
+  },
+  "tennis": {
+    "standalone": "4b37ce0c7599998c2ae9339722810c37e575ddd962017fd7d9208435134414f4",
+    "street15": "328c758498fc1592c5c075684151e1b144de09f8d6959999c012d47eb4122901"
+  },
+  "padel": {
+    "standalone": "69f4123ac7950c227f384f4158db353c5741f619f51ffac04e5a0ab502a8a71e",
+    "street15": "790b176948b836d1d1bb264c3c1573b0f272bbb19f0b1d63c9c9207bf86fd803"
+  },
+  "volleyball": {
+    "standalone": "50c8687f6001c8507d3b4b6fbb585bf3b5babfd4e4a23e9af4e3b398e704efd0",
+    "street15": "4de066c84eb1f761381013ce07a26a86a0f1d68343d6557a480108c1669ac8b7"
+  },
+  "pickleball": {
+    "standalone": "db9f7dbc7374a53e68198f9ba183bc297150188b18c4cd5a5c88d46ac2bbaaa6",
+    "street15": "be10036af79afcfd775de56b0ac259a80249198ac9fe97f85d131cd0c8e2f33a"
+  },
+  "futsal": {
+    "standalone": "dbdad55bcb838bb9f842a06965ae1cb68aff99aaa809c3bb0eee2fc61fd17c30",
+    "street15": "c0f2b63ca7a75924e14055ae2f4ffe5da8a9d2704c6d59a1829a4edf50f302d1"
+  }
+}

@@ -19,7 +19,7 @@ export function Variant3DComparison({items}:{items:Snapshot[]}){
    <div className="variant-3d-options" role="group" aria-label="Wariant w podglądzie 3D">{items.map((value,index)=><button key={value.id} type="button" aria-pressed={value.id===item.id} onClick={()=>setActive(value.id)}>{index===0?'A':'B'}: {value.name}</button>)}</div>
 
    <h4>3D — {item.name}</h4>
-   {!compatible?<p role="status">Rewizja modelu zmieniła się. Podgląd historycznej geometrii jest niedostępny; sprawdź plan i zapis JSON.</p>:!p.arenaModel?<p role="status">Ten projekt nie ma modelu konstrukcji 3D. Porównaj pełne plany 2D poniżej.</p>:<div className="variant-3d-stage"><PannaStudioPreview project={previewProject} view="perspective" interactive studio/></div>}
+   {!compatible?<p role="status">Rewizja modelu zmieniła się. Podgląd historycznej geometrii jest niedostępny; sprawdź plan i zapis JSON.</p>:!p.arenaModel&&!p.surfaceModel?<p role="status">Ten projekt nie ma modelu konstrukcji 3D. Porównaj pełne plany 2D poniżej.</p>:<div className="variant-3d-stage"><PannaStudioPreview project={previewProject} view="perspective" interactive studio/></div>}
    <p>Konstrukcja, kolory i oznaczenia paneli oraz nawierzchnia korzystają z bieżącego modelu 3D. Wizualizacja jest koncepcyjna.</p>
    {omitted.length?<div className="variant-3d-coverage" role="note"><b>Elementy widoczne tylko na planie 2D ({omitted.length})</b><ul>{omitted.map(object=><li key={object.id}>{object.name} — {object.kind==='equipment'?'wyposażenie poglądowe':'grafika poza nawierzchnią'}</li>)}</ul></div>:null}
   </dialog>:null}

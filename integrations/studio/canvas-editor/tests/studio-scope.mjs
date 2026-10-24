@@ -1,3 +1,4 @@
+import './sport-surfaces.mjs';
 import './load-image.mjs';
 import './circle-panel-sides.mjs';
 import './project-owned-reference.mjs';

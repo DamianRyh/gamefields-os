@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "surfaces": 8,
+  "attachment": true,
+  "detachment": true,
+  "files": [
+    {
+      "path": "/sport-surfaces/catalog.json",
+      "status": 200,
+      "bytes": 3420
+    },
+    {
+      "path": "/sport-surfaces/sport-surfaces-20cm.blend",
+      "status": 200,
+      "bytes": 503572
+    },
+    {
+      "path": "/sport-surfaces/street-football-3x3.glb",
+      "status": 200,
+      "bytes": 2856
+    }
+  ],
+  "errors": []
+}

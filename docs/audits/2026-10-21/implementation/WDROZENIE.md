@@ -1,5 +1,16 @@
 # Gamefields — realizacja zaleceń po audycie
 
+## 24.10.2026 — Studio97: osiem niezależnych nawierzchni 20 cm
+
+Właściciel zatwierdził zestaw: Street Football 3×3, koszykówka 3×3 i pełna, tenis, padel, siatkówka, pickleball, futsal. Powstało osiem modeli GLB i osiem scen Blender, osobne od konstrukcji, z UV góry i neutralnymi krawędziami. W Konstrukcji jest odrębny katalog nawierzchni z miniaturami; dotychczasowy wybór konstrukcji ma siedem kart. Street Football 3×3 przeniesiono do nawierzchni. Pole gry i cały obrys z przyjętymi wybiegami pokazano oddzielnie. Wspólny model 3D pozwala zmieniać wzór, kolory i linie.
+
+Street Football 3×3 dołącza/odłącza samą Street Arena 15 bez starej murawy/fundamentu wizualnego. Pozostałe formaty jawnie wskazują brak dopasowanej konstrukcji; nie skalujemy obcych części. Stare projekty bez surfaceModel zachowują swoją geometrię. Nowe pole jest objęte walidacją, JSON, odzyskiwaniem, rewizjami wariantów i specyfikacją; ilość nawierzchni liczy całą płytę, bez ceny konstrukcji przy samej nawierzchni. Koszty i marża pozostają sekretami serwera.
+
+PASS: tsc, build, test:studio, geometria/izolacja GLB i grubość wszystkich ośmiu modeli, niezgodne wymiary/rodziny/moduły, ceny powierzchni, rewizje, 16 przypadków 3D (8 sportów ×390/1440), dołączanie/odłączanie, kolory, JSON i odzyskanie Futsalu, mobile375/390/430/1440 z O1/P1/materiałami/Radarem, API sales-only. Kontrola wizualna poprawiła dopasowanie tekstur do podłużnych płyt. Modele 20 cm są koncepcyjne; nie zatwierdzają technologii, stref konkretnej ligi, obudowy padla ani BOM wykonawczego. Dalsze: własne dedykowane konstrukcje dla pozostałych sportów oraz zatwierdzenie technologii i lokalizacji.
+
+Publikacja: Studio97; źródło `05742e11417ce81c07b141fc8c8955564a3834a2`; wdrożenie `appgdep_6adc9a1434ac819189a14f5c498ca80a` succeeded, env6. Paczka `sha256:69856207b54e14d6b65e193b784d35bb49c55e9a62abae0f2994d781e1647e7b`. [Wymiary, źródła i ograniczenia](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/SPORT_SURFACES_2026_10_24.md). Pliki modeli: integrations/studio/canvas-editor/public/sport-surfaces/. Nie powstało nowe miejsce edytora.
+
+
 ## 24.10.2026 — Studio96: miniatury konstrukcji w kartach wyboru
 
 Karty „Wybierz boisko” pokazują nad nazwą, ceną i wymiarami rendery siedmiu własnych konstrukcji. Obrazy WebP 640×400 w tej samej perspektywie ważą łącznie około 130 kB; karty nie tworzą dodatkowych kontekstów WebGL. Generic Street Football 3×3 ma odrębną ilustrację i opis „Projekt nawierzchni”. Zachowano osiem kart, aktywne zaznaczenie, ceny sprzedaży i powrót do Konstrukcji po wyborze.

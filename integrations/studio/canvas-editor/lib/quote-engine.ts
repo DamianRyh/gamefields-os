@@ -1,7 +1,8 @@
+import {sportSurface} from './sport-surfaces.ts';
 import {modularGeometry} from './studio-modular.ts';
 /** Commercial rates are supplied by the owner, never inferred from preview colours or scene. */
 export type RateCard={workingAssumptions?:boolean;notice?:string;version:string;currency:"PLN";vatRate?:number;surfaces:Record<string,{materialNetPerM2:number;installationNetPerM2:number}>;patternNetPerM2:Record<string,number>;colorPolicy?:{includedColors:number;additionalColorNetPerM2:number};linesNet:number;brandingNetPerItem:number;arenaNet:Record<string,number>;arenaInstallationNet?:Record<string,number>;finishNet?:Record<string,number>;equipmentNet:Record<string,number>;designNet:number;transportNet:number;exclusions:string[]};
-export type QuoteInput={modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string}[]};
+export type QuoteInput={surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string}[]};
 export type QuoteItem={id:string;label:string;quantity:number;unit:string;unitNet:number|null;totalNet:number|null;note?:string};
 export type ProjectQuote={workingAssumptions?:boolean;constructionPrices?:Record<string,number>;notice?:string;schemaVersion:2;status:"estimated"|"partial"|"unpriced";currency:"PLN";rateVersion:string|null;priceNet:number|null;priceGross:number|null;vatRate:number|null;knownSubtotalNet:number|null;area:number;areaLabel:string;items:QuoteItem[];exclusions:string[];assumptions:string[]};
 // Shared source-derived geometry; keep this re-export for existing consumers.
@@ -25,7 +26,8 @@ export function parseRateCard(raw:string|undefined):RateCard|null{
  return {...c,surfaces:c.surfaces||{},arenaNet:c.arenaNet||{},equipmentNet:c.equipmentNet||{},patternNetPerM2:c.patternNetPerM2||{},exclusions:c.exclusions||[]};
 }
 export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:number):ProjectQuote{
- const area=modularGeometry({arenaModel:p.arenaModel as import("./project").Project["arenaModel"],modular:p.modular})?.area??(p.arenaModel&&arenaSurfaceQuantities[p.arenaModel]?arenaSurfaceQuantities[p.arenaModel].area:p.courtShape==="circle"?Math.PI*(p.diameter??p.length)**2/4:p.length*p.width);
+ const selectedSurface=sportSurface(p.surfaceModel);
+ const area=selectedSurface?selectedSurface.length*selectedSurface.width:modularGeometry({arenaModel:p.arenaModel as import("./project").Project["arenaModel"],modular:p.modular})?.area??(p.arenaModel&&arenaSurfaceQuantities[p.arenaModel]?arenaSurfaceQuantities[p.arenaModel].area:p.courtShape==="circle"?Math.PI*(p.diameter??p.length)**2/4:p.length*p.width);
  if(!Number.isFinite(area)||area<=0||area>2400)throw Error("Invalid quantity");
  const items:QuoteItem[]=[];
  function add(id:string,label:string,quantity:number,unit:string,value:unknown,note?:string){const r=rate(value)?value:null;items.push({id,label,quantity,unit,unitNet:r,totalNet:r===null?null:money(quantity*r),...(note?{note}:{} )});}
@@ -51,16 +53,17 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
   equipment.set(o.name,(equipment.get(o.name)||0)+1);
  }
  for(const [name,quantity] of equipment)add(`equipment:${name}`,name,quantity,"szt.",Object.hasOwn(c?.equipmentNet||{},name)?c?.equipmentNet[name]:undefined);
- const branding=p.objects.filter(o=>o.kind!=="equipment").length+(p.arenaDesign?.text?1:0)+(p.arenaDesign?.src?1:0);
+ const branding=p.objects.filter(o=>o.kind!=="equipment").length+(!p.surfaceModel||p.arenaModel?((p.arenaDesign?.text?1:0)+(p.arenaDesign?.src?1:0)):0);
  if(branding)add("branding","Logo i napisy",branding,"element",c?.brandingNetPerItem);
- if(p.arenaDesign&&p.arenaDesign.finish!=="matte")add("finish","Dopłata za wykończenie konstrukcji",1,"kpl.",c?.finishNet?.[p.arenaDesign.finish],"Dopłata do wykończenia bazowego matowego.");
+ if((!p.surfaceModel||p.arenaModel)&&p.arenaDesign&&p.arenaDesign.finish!=="matte")add("finish","Dopłata za wykończenie konstrukcji",1,"kpl.",c?.finishNet?.[p.arenaDesign.finish],"Dopłata do wykończenia bazowego matowego.");
  add("design","Przygotowanie projektu",1,"kpl.",c?.designNet);
  add("transport","Transport",1,"kpl.",c?.transportNet,"Założenie transportowe wymaga potwierdzenia lokalizacji.");
  const known=items.filter(i=>i.totalNet!==null);const missing=items.length-known.length;
  const subtotal=known.length?money(known.reduce((sum,i)=>sum+i.totalNet!,0)):null;
  const priceNet=missing?null:subtotal;
  const assumptions=["Orientacyjny koszt wybranego zakresu; cena końcowa po sprawdzeniu lokalizacji i podłoża.",c?.colorPolicy?"Zmiana odcienia przy tej samej liczbie kolorów nie zmienia dopłaty. Liczymy unikalne kolory wybranej palety, nie widoczne piksele; projekt wykonawczy może wymagać innego budżetu. Sceneria oraz pozycja wyposażenia nie zmieniają ceny.":"Kolor i sceneria podglądu nie zmieniają ceny. Skala i pozycja wyposażenia nie zmieniają liczby sztuk."];
+ if(p.surfaceModel)assumptions.push("Ilość materiału obejmuje całą niezależną płytę wraz z przyjętymi wybiegami. Wizualna grubość 20 cm nie określa technologii wykonania ani kosztu podbudowy.");
  if(p.modular)assumptions.push("Układ modułowy: konstrukcja i montaż wymagają osobnej wyceny. Ceny modelu bazowego nie są sumą tego wariantu.");
- if(p.arenaModel)assumptions.push("Ilość nawierzchni z obrysu warstwy w modelu Blender, wraz z zapasem pod konstrukcją. Grubość wizualnej warstwy nie określa technologii wykonania.","Standardowe kolory konstrukcji w cenie bazowej; wykończenie specjalne i montaż są osobnymi pozycjami.");
- return {...(c?.workingAssumptions?{workingAssumptions:true}:{}),...(c?{constructionPrices:{...c.arenaNet}}:{}),...(c?.notice?{notice:c.notice}:{}),schemaVersion:2,status:missing?(known.length?"partial":"unpriced"):"estimated",currency:"PLN",rateVersion:c?.version||null,priceNet,priceGross:priceNet!==null&&c?.vatRate!==undefined?money(priceNet*(1+c.vatRate)):null,vatRate:c?.vatRate??null,knownSubtotalNet:subtotal,area,areaLabel:p.modular?"Powierzchnia nawierzchni konfiguracji modułowej":p.arenaModel?"Powierzchnia nawierzchni z modelu":"Powierzchnia projektu",items,assumptions,exclusions:["Przygotowanie terenu, podbudowa, fundamenty, przyłącza i formalności nie są ujęte w tej kalkulacji.",...(c?.exclusions||[])]};
+ if(p.arenaModel&&!p.surfaceModel)assumptions.push("Ilość nawierzchni z obrysu warstwy w modelu Blender, wraz z zapasem pod konstrukcją. Grubość wizualnej warstwy nie określa technologii wykonania.","Standardowe kolory konstrukcji w cenie bazowej; wykończenie specjalne i montaż są osobnymi pozycjami.");
+ return {...(c?.workingAssumptions?{workingAssumptions:true}:{}),...(c?{constructionPrices:{...c.arenaNet}}:{}),...(c?.notice?{notice:c.notice}:{}),schemaVersion:2,status:missing?(known.length?"partial":"unpriced"):"estimated",currency:"PLN",rateVersion:c?.version||null,priceNet,priceGross:priceNet!==null&&c?.vatRate!==undefined?money(priceNet*(1+c.vatRate)):null,vatRate:c?.vatRate??null,knownSubtotalNet:subtotal,area,areaLabel:p.surfaceModel?"Powierzchnia niezależnej nawierzchni 20 cm":p.modular?"Powierzchnia nawierzchni konfiguracji modułowej":p.arenaModel?"Powierzchnia nawierzchni z modelu":"Powierzchnia projektu",items,assumptions,exclusions:["Przygotowanie terenu, podbudowa, fundamenty, przyłącza i formalności nie są ujęte w tej kalkulacji.",...(c?.exclusions||[])]};
 }

@@ -1,7 +1,9 @@
+import revisions from './sport-surface-revisions.json' with {type:'json'};
+import {surfaceGeometry} from './sport-surfaces.ts';
 import {modularGeometry,modularPlan} from './studio-modular.ts';
 import {arenaGeometry} from './arena-geometry-data.mjs';
 import type {Project} from './project';
-type GeometryInput=Pick<Project,'length'|'width'|'courtShape'|'diameter'|'arenaModel'|'modular'>;
+type GeometryInput=Pick<Project,'length'|'width'|'courtShape'|'diameter'|'arenaModel'|'modular'|'surfaceModel'>;
 type Bounds={x:number;z:number;y:number};
 type ModelGeometry={area:number;source:string;surfaceBounds:Bounds;constructionBounds:Bounds;sourceRevision:string;sourceFiles:{path:string;sha256:string}[];clearance:null;modulePitch:null};
 const models:Record<string,ModelGeometry>=arenaGeometry;
@@ -12,6 +14,7 @@ export const formatBounds=(bounds:Bounds)=>`${metres.format(Math.max(bounds.x,bo
 export function projectDimensions(p:GeometryInput){
  const plan=modularPlan(p);
  const reference=plan?.dimensions?plan.dimensions.map(v=>metres.format(v)).join(" × ")+" m":p.courtShape==='circle'?`Ø ${metres.format(p.diameter??p.length)} m`:`${metres.format(p.length)} × ${metres.format(p.width)} m`;
- const model=modularGeometry(p)||(p.arenaModel?models[p.arenaModel]:undefined);
+ const model=(p.surfaceModel?surfaceGeometry(p.surfaceModel):null)||modularGeometry(p)||(p.arenaModel?models[p.arenaModel]:undefined);
+ if(p.surfaceModel&&model){model.sourceRevision=revisions[p.surfaceModel][p.arenaModel?"street15":"standalone"];if(p.arenaModel)model.constructionBounds=models[p.arenaModel].constructionBounds;}
  return {reference,model:model||null,area:model?.area??(p.arenaModel?null:p.courtShape==='circle'?Math.PI*(p.diameter??p.length)**2/4:p.length*p.width)};
 }

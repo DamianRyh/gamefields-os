@@ -1,0 +1,113 @@
+{
+  "schema": "GF-SPORT-SURFACE-MODELS-1",
+  "units": "m",
+  "thickness": 0.2,
+  "catalogHash": "138440480bdfee9b932347817b0d57f6143e3dd1cc158c3af7f60e8caa7bc725",
+  "blendHash": "92d8dc577c8ee00a3c319dceb010e10dc7259387231814882dc36cddf3a320b8",
+  "models": [
+    {
+      "id": "street-football-3x3",
+      "dimensions": [
+        15,
+        10,
+        0.2
+      ],
+      "area": 150,
+      "files": {
+        "json": "853c1424d5e2f4c1e25a7ce19f0c5ed287a2f9158f5b64a080c0c8d1bf20c499",
+        "glb": "cf7cbdcdf880e92b0da44933eabd4b3ef8a827c47dc8995e2051693bb2660be0"
+      }
+    },
+    {
+      "id": "basketball-3x3",
+      "dimensions": [
+        18,
+        14,
+        0.2
+      ],
+      "area": 252,
+      "files": {
+        "json": "590373bf59407693eeec5f80021e084986ece3e2f4ef22f5c7c2724df73264b9",
+        "glb": "8b373c89d5899d3e87b6eaa4b447ff88b485493e05fbe5cc9089707cfabf3e99"
+      }
+    },
+    {
+      "id": "basketball-full",
+      "dimensions": [
+        32,
+        19,
+        0.2
+      ],
+      "area": 608,
+      "files": {
+        "json": "fb9ae443f8bcf4d949f50a35eb3e83fbc227de71770fbb9627c13aec0dc6e952",
+        "glb": "3195de2b3facb1158c151b8c16d90d82fe25a6cc4ece88686caf15240ae8db66"
+      }
+    },
+    {
+      "id": "tennis",
+      "dimensions": [
+        36.57,
+        18.29,
+        0.2
+      ],
+      "area": 668.8652999999999,
+      "files": {
+        "json": "d236e0036eed7ca36fdf3a029d6a39631bd82b18b0391c87959604f26099db2b",
+        "glb": "eecb1ed7ed2bd5fa057915e2eab3d719490fc61b858b8877d92c18ae4d784196"
+      }
+    },
+    {
+      "id": "padel",
+      "dimensions": [
+        20,
+        10,
+        0.2
+      ],
+      "area": 200,
+      "files": {
+        "json": "e1f0aa2030ce9983cd80b796b8aad271ea1940374ef725e2864be64588995225",
+        "glb": "6a8eca307974b6281ed82ade02e4bb296cf882c4f0e63009bf8704bc0a0e6b68"
+      }
+    },
+    {
+      "id": "volleyball",
+      "dimensions": [
+        24,
+        15,
+        0.2
+      ],
+      "area": 360,
+      "files": {
+        "json": "b1c4ba3dbe9e8133d11f1d50ff504b9ea2882df39309f352aa94c083508d6605",
+        "glb": "a7858a65ecc37de9750f917a969513bd3f9adaa196ca67957e85570ff982fc26"
+      }
+    },
+    {
+      "id": "pickleball",
+      "dimensions": [
+        18.288,
+        9.144,
+        0.2
+      ],
+      "area": 167.225472,
+      "files": {
+        "json": "97f269790b476122af00e7dc481eb2142a058bfc630318b798e57ea2101127e8",
+        "glb": "cb35961d96681459e52ee29b2f13771df8a81aa84379e023f0bb0a104d019961"
+      }
+    },
+    {
+      "id": "futsal",
+      "dimensions": [
+        44,
+        24,
+        0.2
+      ],
+      "area": 1056,
+      "files": {
+        "json": "3b4659544985ebe27cd7df8558f5daccc7b301908b16426b700e68c915125e69",
+        "glb": "c4229606f9554857934bcd710d6c943e766e47c488c15fa820b40ce30db2acc7"
+      }
+    }
+  ]
+}
