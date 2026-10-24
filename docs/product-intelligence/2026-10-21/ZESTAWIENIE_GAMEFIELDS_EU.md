@@ -1,5 +1,13 @@
 # Zestawienie Gamefields.eu.txt z realizacją — 23.10.2026
 
+## 24.10.2026 — Studio93: spójne kolory i edytor modułów
+
+Opublikowano jeden obracany podgląd 3D (również A/B), bez przycisków Boczny/Z góry. Bandy, Rama i Bramki używają kontrolek i typografii nawierzchni. Przycisk Budowanie modułowe otwiera w Studio lokalny silnik OS z oryginalnymi GLB: Panna Grid (Street Field) zwiększa długość/szerokość, Circle Cage zmienia poziomy, Octagon ma stały obrys. Konfiguracja pozostaje w jednej rodzinie i zachowuje skalę części 1:1.
+
+Edytor modułowy ma osobny szkic w przeglądarce, import/eksport GF-OWNED-ASSEMBLY-1 i osobną wycenę. Nie modyfikuje projektu, nawierzchni ani wyceny Studio. Integracja jego geometrii z grafiką i kalkulacją Studio pozostaje dalszym etapem. Nie rozszerzono P1 bez potwierdzonego podziału modułów. Nie potwierdzono BOM wykonawczego, kotew ani fundamentów. Koszty produkcji nadal pozostają tajne po stronie serwera.
+
+Walidacja: tsc, test:studio, build, test:mobile (4 szerokości, materiały/import/Radar), orbitowanie 8 modeli × 2 szerokości, porównanie A/B 375/1440, edytor modułowy 390/1440 (3 rodziny, wzrost instancji, skala 1:1, eksport/import/odzyskiwanie). Publikacja: Studio93, źródło `75937b2f5c08116049871111a3f4900e3d0b68ca`, wdrożenie `appgdep_6adc529484c081919ed37fc45f982b1a` succeeded, env revision 6. 
+
 ## 24.10.2026 — Studio92, uproszczony edytor
 
 Wdrożono cztery korekty wskazane przez właściciela: wyposażenie wyłączone; czytelniejsze grupy kolorów Bandy/Rama/Bramki; Boczny/Z góry/obracany Model3D zamiast Z boiska; brak selektora scenerii i neutralne tło w Studio. Modele i zdjęcia do wykorzystania poza Studio zachowano; nie dodawano teraz nowej sekcji strony głównej.

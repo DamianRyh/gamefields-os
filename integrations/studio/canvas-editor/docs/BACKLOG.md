@@ -1,5 +1,14 @@
 # Gamefields — backlog
 
+## Studio — wspólne kolory, jeden podgląd 3D i budowanie modułowe (2026-10-24)
+
+- Konstrukcja używa tych samych kontrolek `.studio-color` co nawierzchnia: Bandy, Rama, Bramki. Usunięto osobne presety.
+- Własne modele oraz porównanie wariantów mają jeden obracany podgląd 3D. Boczny i Z góry usunięte. Historyczne dane kamer/projektów pozostają czytelne.
+- „Budowanie modułowe” otwiera w Studio zachowany silnik OS, lokalne komponenty GLB i osobny zapis GF-OWNED-ASSEMBLY-1. Street Field zwiększa długość/szerokość pełnymi modułami; Circle Cage zmienia poziomy; Octagon zachowuje stały obrys. Jedna rodzina na konfigurację, skala części 1:1. P1 nie otrzymał niepotwierdzonego układu modułów.
+- Edytor modułowy ma niezależny lokalny szkic, import/eksport i osobną wycenę. Nie zmienia projektu Studio, jego nawierzchni ani ceny bazowej. Brak zatwierdzonego BOM wykonawczego i kotwienia. Koszty produkcji nadal wyłącznie po stronie serwera.
+- Źródło OS zachowane w components/gamefields/owned-modular; silnik bez zmian względem lib/vendor/owned-modular. Publiczny bundle zawiera Three.js 0.180.0, lokalne GLB i deklarację MIT. Opcjonalna regeneracja: NODE_PATH wskazujący instalację Three.js 0.180.0, node scripts/build-studio-modular.mjs (esbuild 0.28.0). Główny build korzysta z zachowanego bundla.
+- Weryfikacja: tsc, test:studio i build; test przeglądarkowy modułów 390/1440 px: 3 rodziny, wzrost instancji, skala 1:1, zapis/import/odzyskiwanie, zachowanie koloru Studio. Dodatkowe testy mobilne i orbitowania zapisują wyniki w outputs.
+
 Zakres od 2026-10-08: boiska, wzornictwo, nawierzchnie i mapa lokalizacji. PLAY nie jest rozwijany.
 
 ## P0

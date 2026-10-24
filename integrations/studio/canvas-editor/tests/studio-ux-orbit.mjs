@@ -36,7 +36,7 @@ try{
    const yaw=await canvas.getAttribute('data-orbit-yaw');const imageBeforeEdit=await pixels();assert.deepEqual(await download(),before,'Camera must not mutate project');
    await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();
    if(model==='p1')await page.screenshot({path:`outputs/studio-construction-${width}.png`,fullPage:true});
-   for(const label of ['Bandy','Rama','Bramki']){const font=await page.locator('.technical-color-card b').filter({hasText:label}).evaluate(e=>parseFloat(getComputedStyle(e).fontSize));assert(font>=22);}
+   for(const label of ['Bandy','Rama','Bramki']){const font=await page.locator('.studio-construction-colors .studio-color>span').filter({hasText:label}).evaluate(e=>parseFloat(getComputedStyle(e).fontSize));assert(font>=18);}
    await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#2266bb');await page.getByLabel('Tekst na bandach',{exact:true}).fill('ORBIT QA');await ready();
    await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByLabel('Kolor: Pole gry',{exact:true}).fill('#773355');await ready();
    assert.equal(await canvas.getAttribute('data-orbit-yaw'),yaw,'Project edits preserve orbit');assert.notEqual(await pixels(),imageBeforeEdit);const changed=await download();assert.equal(changed.base,'#773355');assert.equal(changed.arenaDesign.text,'ORBIT QA');

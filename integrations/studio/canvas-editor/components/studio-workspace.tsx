@@ -1,4 +1,5 @@
 "use client";
+import {ModularBuilder} from "@/components/modular-builder";
 
 import {useEffect,useRef,useState,type ReactNode} from "react";
 import {ArrowRight,ArrowUpRight,Check,ChevronDown,Download,FolderOpen,Grid2X2,Goal,MapPin,Minus,Palette,Plus,SlidersHorizontal,Type,Undo2,Redo2,Upload,Trash2,Layers,Camera,Move,Eye,Box,Droplets,X} from "lucide-react";
@@ -42,6 +43,7 @@ export function StudioWorkspace(props:Props){
  const {project:p,update}=props;
  const [patternsOpen,setPatternsOpen]=useState(false),[summaryOpen,setSummaryOpen]=useState(false),[editPlan,setEditPlan]=useState(false),[zoom,setZoom]=useState(props.previewMode==="aerial"?170:100);
  const [activeTool,setActiveTool]=useState<StudioTool>("surface"),[materialOpen,setMaterialOpen]=useState(false),[advancedOpen,setAdvancedOpen]=useState(false);
+ const [modularOpen,setModularOpen]=useState(false);
  const [inquiryError,setInquiryError]=useState("");
  const [fileError,setFileError]=useState("");
  const fileAction=async(action:()=>Promise<void>|void)=>{setFileError("");try{await action()}catch(error){setFileError((error as Error).message)}};
@@ -121,7 +123,7 @@ export function StudioWorkspace(props:Props){
    <section className="studio-visual" aria-label="Podgląd projektu">
     <div className="studio-toolbar">
      <div className="studio-history"><button aria-label="Cofnij" onClick={props.undo} disabled={!props.canUndo}><Undo2 size={18}/><span>Cofnij</span></button><button aria-label="Ponów" onClick={props.redo} disabled={!props.canRedo}><Redo2 size={18}/><span>Ponów</span></button></div>
-     <div className="studio-cameras" role="group" aria-label="Perspektywa wizualizacji">{([["realistic","Boczny"],["aerial","Z góry"],["ground","Model 3D"]] as const).map(([mode,label])=><button key={mode} aria-pressed={!editPlan&&props.previewMode===mode} disabled={!props.hasLivePreview||(mode==="ground"&&!p.arenaModel)} title={mode==="ground"&&!p.arenaModel?"Wybierz model konstrukcji, aby obracać go w 3D":undefined} onClick={()=>readyView(mode)}>{mode==="aerial"?<Grid2X2 size={18}/>:mode==="ground"?<Box size={18}/>:<Camera size={18}/>}<span>{label}</span></button>)}</div>
+     <div className="studio-cameras" role="group" aria-label="Tryb projektowania"><button aria-pressed={!modularOpen&&!editPlan} disabled={!p.arenaModel} onClick={()=>{setModularOpen(false);readyView("ground")}}><Box size={18}/><span>Model 3D</span></button><button aria-pressed={modularOpen} onClick={()=>{setModularOpen(true);setEditPlan(false);modalTrigger.current=document.activeElement as HTMLElement}}><Grid2X2 size={18}/><span>Budowanie modułowe</span></button></div>
 
     </div>
     <div className={"studio-stage "+(editPlan?"is-plan":"is-preview")}>
@@ -160,6 +162,7 @@ export function StudioWorkspace(props:Props){
 
    </aside>
   </div>
+  {modularOpen?<ModularBuilder initialFamily={p.arenaModel} onClose={()=>{setModularOpen(false);modalTrigger.current?.focus()}}/>:null}
   </div>
   {patternsOpen?<div className="studio-modal-backdrop" onClick={()=>setPatternsOpen(false)}><section className="studio-modal" role="dialog" aria-modal="true" aria-label="Wybierz wzór" onClick={e=>e.stopPropagation()}><div className="studio-modal-head"><div><span>GAMEFIELDS DESIGN ENGINE</span><h2>Wybierz charakter boiska</h2></div><button autoFocus onClick={()=>setPatternsOpen(false)}>Zamknij</button></div><div className="studio-direction-grid">{signaturePresets.map(item=>{const q={...p,patternFamily:item.familyId,patternVariant:item.variant,patternPalette:item.paletteId,base:getPatternPalette(item.paletteId).colors[4],zone:getPatternPalette(item.paletteId).colors[1]};const active=isSignaturePresetActive(p,item,getPatternPalette(item.paletteId));return <button key={item.id} aria-pressed={active} onClick={()=>{props.applyDirection(item.familyId,item.variant,item.paletteId);setPatternsOpen(false)}}><span>{thumb(q)}</span><b>{item.name}{active?<Check size={17}/>:null}</b><small>{item.useCase}</small></button>})}</div><button className="studio-primary" onClick={()=>{setPatternsOpen(false);props.openPatterns()}}>Wszystkie 300 wzorów <ArrowRight size={18}/></button></section></div>:null}
   {summaryOpen?<div className="studio-modal-backdrop" onClick={()=>setSummaryOpen(false)}><section className="studio-modal studio-summary" role="dialog" aria-modal="true" aria-label="Podsumowanie projektu" onClick={e=>e.stopPropagation()}><div className="studio-modal-head"><div><span>TWÓJ PROJEKT</span><h2>Sprawdź swój projekt</h2></div><button autoFocus onClick={()=>setSummaryOpen(false)}>Wróć do edycji</button></div><p className="studio-summary-name">{p.name}</p><ProjectQuote quote={props.quote}/>

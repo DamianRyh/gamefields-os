@@ -45,13 +45,12 @@ try{
    }
    assert.equal(await page.getByLabel('Miejsce wizualizacji',{exact:true}).count(),0);
    assert.equal(await page.getByRole('button',{name:'Wyposażenie',exact:true}).count(),0);
-   for(const view of ['Boczny','Z góry','Model 3D']){await page.getByRole('button',{name:view,exact:true}).click();await ready();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);}
+   for(const view of ['Model 3D']){await page.getByRole('button',{name:view,exact:true}).click();await ready();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);}
    assert.equal(await page.locator('.panna-stage').count(),0);
   }
   await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Header overflow');
-  for(const view of ['Boczny','Z góry']){
-    await page.getByRole('button',{name:view,exact:true}).click();
+  for(const view of ['perspective']){
     await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
     const result=await page.evaluate(()=>{
      const scene=document.querySelector('.green-screen-scene'),canvas=scene.querySelector('canvas'),goals=scene.querySelector('.realistic-goals');
@@ -89,5 +88,5 @@ try{
   await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
   await page.close();
  }
- assert.deepEqual(errors,[]);console.log('PASS: 24 O-1/P-1 view combinations and 8 neutral Street Football views, 16 P-1 material switches with visible WebGL output and preserved JSON colours, aligned layers, no overflow/runtime errors; Radar filter/project/back navigation on all four viewports.');
+ assert.deepEqual(errors,[]);console.log('PASS: 8 O-1/P-1 interactive views and 4 neutral Street Football views, 16 P-1 material switches with visible WebGL output and preserved JSON colours, aligned layers, no overflow/runtime errors; Radar filter/project/back navigation on all four viewports.');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

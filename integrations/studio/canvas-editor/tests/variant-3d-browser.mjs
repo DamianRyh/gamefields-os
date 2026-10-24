@@ -67,10 +67,10 @@ try{
     assert.equal(await note.locator('li').count(),1);assert.equal((await note.innerText()).includes('Sprzęt '+item.id),false);assert.ok((await note.innerText()).includes('Napis poza nawierzchnią '+item.id));assert.equal((await note.innerText()).includes('Napis nawierzchni '+item.id),false,'Court graphics are not labelled omitted');
    };
    await page.evaluate(()=>window.variantQA.reset());await comparison.getByRole('button',{name:'Włącz porównanie 3D',exact:true}).click();await ready('octagon','perspective');await verifyPaint(a);
-   const views=[['Boczny','perspective'],['Z góry','aerial'],['Model 3D','perspective']],states=[];
+   const views=[['Model 3D','perspective']],states=[];
    for(const [label,view]of views){
-    const camera=comparison.getByRole('group',{name:'Kamera porównania'}).getByRole('button',{name:label,exact:true});await camera.click();await ready('octagon',view);const first=await pixels();
-    await page.evaluate(()=>window.variantQA.reset());await comparison.getByRole('button',{name:'B: Circle B',exact:true}).click();await ready('circle-cage-1',view);await verifyPaint(b);assert.equal(await camera.getAttribute('aria-pressed'),'true','Camera stays common across A/B');
+    assert.equal(await comparison.getByRole('group',{name:'Kamera porównania'}).count(),0);await ready('octagon',view);const first=await pixels();
+    await page.evaluate(()=>window.variantQA.reset());await comparison.getByRole('button',{name:'B: Circle B',exact:true}).click();await ready('circle-cage-1',view);await verifyPaint(b);
     await page.evaluate(()=>window.variantQA.reset());await comparison.getByRole('button',{name:'A: Octa A',exact:true}).click();await ready('octagon',view);await verifyPaint(a);assert.deepEqual(await pixels(),first,'A state returns exactly in the shared camera');states.push({view,a:first});
    }
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Comparison has no horizontal document overflow');
