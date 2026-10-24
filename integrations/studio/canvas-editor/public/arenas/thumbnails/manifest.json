@@ -1,0 +1,95 @@
+{
+  "schema": "GF-CONSTRUCTION-THUMBNAILS-1",
+  "width": 640,
+  "height": 400,
+  "yaw": -0.55,
+  "pitch": 0.365,
+  "scope": "BASE_CONSTRUCTION_ONLY",
+  "rendererRevision": "99cfd6e925be095736cfb7111f64d0c8f134a2eacaf86447cfa710be546e3467",
+  "models": [
+    {
+      "model": "o1",
+      "meshCount": 196,
+      "source": {
+        "path": "components/assets-blender/o1.json",
+        "sha256": "cec7ae1f4b4c20eede64bd09e9e4f827aa8215bbc9476cb05bc634cfb826e72a"
+      },
+      "thumbnail": {
+        "path": "public/arenas/thumbnails/o1.webp",
+        "sha256": "fb57a65468e54430afed44d656e488e3580a27218a2cb0cfbb6354937331c30a"
+      }
+    },
+    {
+      "model": "p1",
+      "meshCount": 378,
+      "source": {
+        "path": "components/assets-blender/p1.json",
+        "sha256": "6725f91c6f0b7018149ec47eec2d8fe0119d60999965e1ecb2c50bb4b0c3f2c2"
+      },
+      "thumbnail": {
+        "path": "public/arenas/thumbnails/p1.webp",
+        "sha256": "136c78fe909946f8e5f556e989837d53959e0e4290e05e3cbde0fb6aafb2388a"
+      }
+    },
+    {
+      "model": "circle-cage-1",
+      "meshCount": 18,
+      "source": {
+        "path": "public/arenas/circle-cage-1.json",
+        "sha256": "d019703cc03557779e4d4d8df794d098aee86b14005f5ffbbd3a7b270721f5df"
+      },
+      "thumbnail": {
+        "path": "public/arenas/thumbnails/circle-cage-1.webp",
+        "sha256": "e3c940b6e2ee7011eba2f7b690e389ad982c8547d29314fb270955a154321996"
+      }
+    },
+    {
+      "model": "circle-cage-2",
+      "meshCount": 34,
+      "source": {
+        "path": "public/arenas/circle-cage-2.json",
+        "sha256": "897fc08a610b122d1962ea7cd7b7fc4351a2d279a1ea5d271a3d8243558d1339"
+      },
+      "thumbnail": {
+        "path": "public/arenas/thumbnails/circle-cage-2.webp",
+        "sha256": "12b3b75f65dfa6e951fdbd8e296011faa7bd411c865beba8662c9b0103a08b33"
+      }
+    },
+    {
+      "model": "octagon",
+      "meshCount": 26,
+      "source": {
+        "path": "public/arenas/octagon.json",
+        "sha256": "d50e19df42fd154043de81a8723b320fc104b3ae9700288f0be1d8cc2317c877"
+      },
+      "thumbnail": {
+        "path": "public/arenas/thumbnails/octagon.webp",
+        "sha256": "24ac300b9577c1e4d586d5c9ffd0adbe76859b1a21e045a0f679b4a8f7b245c1"
+      }
+    },
+    {
+      "model": "street-field",
+      "meshCount": 44,
+      "source": {
+        "path": "public/arenas/street-field.json",
+        "sha256": "cbd5b1944b2f6b085d312c9230291c733a9b40966174ab981e36ee8141c82846"
+      },
+      "thumbnail": {
+        "path": "public/arenas/thumbnails/street-field.webp",
+        "sha256": "908fb2ee7f6367568f792b6e7000aca959179539a1a8fffb9e5147e6e4202793"
+      }
+    },
+    {
+      "model": "street15",
+      "meshCount": 249,
+      "source": {
+        "path": "public/arenas/street15.json",
+        "sha256": "176f3fd10a5b576155376ffccc914ea0d7fe34f714b34811986f681509999984"
+      },
+      "thumbnail": {
+        "path": "public/arenas/thumbnails/street15.webp",
+        "sha256": "38fba04c55ce1489c161e47d3326c3ce9d535ef74aa08ce257d63a7087949da2"
+      }
+    }
+  ]
+}

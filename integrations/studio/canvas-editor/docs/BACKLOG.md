@@ -1,5 +1,11 @@
 # Gamefields — backlog
 
+## Miniatury konstrukcji w wyborze boiska — 2026-10-24
+
+Karty „Wybierz boisko” pokazują nad nazwą i ceną statyczne rendery siedmiu własnych konstrukcji, w jednej perspektywie, bez nawierzchni i oznaczeń. Pliki WebP 640×400 mają łącznie około 130 kB i nie uruchamiają dodatkowych kontekstów WebGL. Street Football 3×3, będący projektem nawierzchni bez własnego modelu konstrukcji, ma osobną ilustrację i etykietę „Projekt nawierzchni”. Zachowano nazwy, ceny sprzedaży, wymiary, zaznaczenie i powrót do Konstrukcji.
+
+Źródła i hashe renderów: public/arenas/thumbnails/manifest.json; odtworzenie: node scripts/build-construction-thumbnails.mjs (lokalny Chromium). Test mobilny sprawdza osiem załadowanych miniatur i wybór modelu na czterech szerokościach. Panel wyboru ma więcej miejsca na porównanie kart. Geometria i dane projektów nie zmienione.
+
 ## Panel Konstrukcja jak Nawierzchnia — 2026-10-24
 
 Górny rząd Konstrukcji używa układu Nawierzchni: miniatura bieżącego modelu 3D, nazwa boiska i jedyne „Zmień boisko”, obok Bandy/Rama/Bramki. Miniatura pochodzi z istniejącego canvasu, bez kolejnego WebGL ani zapisu do projektu. Usunięto „Zmień boisko” spod podglądu i działanie kliknięcia etykiety modelu na scenie. Wybór modelu i anulowanie wracają do Konstrukcji. Moduły pozostają w tym panelu w rozwijanej sekcji; przycisk Budowanie modułowe otwiera ją bezpośrednio. Geometria, kolory, nawierzchnie, zapis projektów i prywatność kosztów zachowane.

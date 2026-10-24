@@ -1,5 +1,13 @@
 # Gamefields — realizacja zaleceń po audycie
 
+## 24.10.2026 — Studio96: miniatury konstrukcji w kartach wyboru
+
+Karty „Wybierz boisko” pokazują nad nazwą, ceną i wymiarami rendery siedmiu własnych konstrukcji. Obrazy WebP 640×400 w tej samej perspektywie ważą łącznie około 130 kB; karty nie tworzą dodatkowych kontekstów WebGL. Generic Street Football 3×3 ma odrębną ilustrację i opis „Projekt nawierzchni”. Zachowano osiem kart, aktywne zaznaczenie, ceny sprzedaży i powrót do Konstrukcji po wyborze.
+
+Źródła i hashe: `public/arenas/thumbnails/manifest.json`. Odtworzenie: `node scripts/build-construction-thumbnails.mjs`. Panel wyboru ma większy obszar na komputerze, bez nakładania się na podgląd. Geometria, modele, szkice, moduły i prywatność kosztów pozostają bez zmian.
+
+Walidacja: tsc, test:studio, build i test:mobile; wszystkie osiem miniatur dekoduje się na 375/390/430/1440 px, wybór boiska działa, brak dodatkowych canvasów w kartach i poziomego przewijania. Publikacja Studio96: źródło `49295e03d22aee00080b11c38a4e0266d14eed1a`; wdrożenie `appgdep_6adc718e760081918411d06d07ec297e` succeeded, env revision 6.
+
 ## 24.10.2026 — Studio95: Konstrukcja jak Nawierzchnia
 
 Panel Konstrukcja ma wspólny z Nawierzchnią układ: miniatura bieżącego modelu 3D, nazwa boiska i „Zmień boisko”, obok kolory Bandy/Rama/Bramki. Miniatura korzysta z istniejącego canvasu, bez dodatkowego WebGL i bez zmiany danych projektu. Wybór modelu i anulowanie wracają do Konstrukcji. Rozbudowa pozostaje w tym panelu, w rozwijanej sekcji otwieranej także przyciskiem Budowanie modułowe.

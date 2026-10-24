@@ -128,3 +128,6 @@ body:has(.studio-canvas-editor) [data-sonner-toast]{pointer-events:none}
 .studio-dimension-source p { font-size:14px; line-height:1.5; }
 .studio-dimension-source code { overflow-wrap:anywhere; font-size:12px; }
 @media(max-width:420px){ .studio-dimension-values > div { display:block; } .studio-dimension-values dd { text-align:left; margin-top:5px; } }
+
+/* Give the visual model catalogue its own editing row without overlaying the preview. */
+@media(min-width:801px) and (min-height:601px){.studio-canvas-editor[data-tool=model] .studio-screen{grid-template-rows:minmax(180px,28%) minmax(0,1fr)}.studio-canvas-editor[data-tool=model] .studio-panel{max-height:none}}
