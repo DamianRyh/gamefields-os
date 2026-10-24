@@ -1,6 +1,6 @@
 # Niezależne nawierzchnie sportowe — 24.10.2026
 
-Osiem zatwierdzonych przez właściciela formatów oddzielono od katalogu konstrukcji. `Project.surfaceModel` jest opcjonalny: stare projekty bez tego pola zachowują oryginalną geometrię. Nowy projekt rozpoczyna się od Street Football 3×3. W panelu Konstrukcja dostępny jest osobny wybór ośmiu nawierzchni z miniaturami. Nawierzchnia zachowuje wzór, grafikę i własną nazwę; wybór nowego formatu odłącza konstrukcję i można go cofnąć.
+Osiem zatwierdzonych przez właściciela formatów oddzielono od katalogu konstrukcji. `Project.surfaceModel` jest opcjonalny: stare projekty bez tego pola zachowują oryginalną geometrię. Nowy projekt rozpoczyna się od Street Football 3×3. W panelu Nawierzchnia dostępny jest osobny wybór ośmiu nawierzchni z miniaturami. Konstrukcja skupia wybór stalowych modeli, ich kolory i rozbudowę. Nawierzchnia zachowuje wzór, grafikę i własną nazwę; wybór nowego formatu odłącza konstrukcję i można go cofnąć.
 
 | Format | Pole gry (m) | Cała płyta (m) |
 |---|---|---|

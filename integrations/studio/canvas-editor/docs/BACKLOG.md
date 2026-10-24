@@ -1,4 +1,9 @@
 # Gamefields — backlog
+## Rozdzielenie narzędzi: stal i nawierzchnie — 24.10.2026
+
+Wybór ośmiu nawierzchni sportowych, ich wymiary i pliki przeniesiono do Nawierzchni, przed wzorem, kolorami, liniami i materiałem. Wybór oraz zamknięcie katalogu wracają do Nawierzchni; przycisk tego narzędzia pozostaje zaznaczony w katalogu. Konstrukcja pokazuje wyłącznie wybór stalowego modelu, zgodne dołączanie/odłączanie, kolory i rozbudowę. Nie zmieniono geometrii, danych projektu ani cen. Naprawiono dostęp do kolorów przyciskiem Panele także po dołączeniu konstrukcji do osobnej nawierzchni. Stałe formaty sportowe nie pokazują niezgodnych pól ręcznej zmiany wymiarów w katalogu konstrukcji.
+
+
 ## Osiem niezależnych nawierzchni 20 cm — 2026-10-24
 
 Street Football 3×3 przeniesiono do osobnego katalogu nawierzchni wraz z koszykówką 3×3 i pełną, tenisem, padlem, siatkówką, pickleball i futsalem. Osobne modele Blender/GLB, miniatury, pole gry versus cała płyta, obrót 3D, JSON i wycena powierzchni. Street Football może dołączyć/odłączyć samą Street Arena 15. Pozostałe formaty wskazują brak zgodnej konstrukcji; nie skalujemy istniejących boisk. Stare projekty zachowane. [Wymiary, zgodność i ograniczenia](SPORT_SURFACES_2026_10_24.md). Dalsze: dedykowane konstrukcje i zatwierdzenie technologii/stref dla lokalizacji.

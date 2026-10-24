@@ -1,5 +1,12 @@
 # Zestawienie Gamefields.eu.txt z realizacją — 23.10.2026
 
+## 24.10.2026 — Studio98: nawierzchnie w Nawierzchni, konstrukcje stalowe w Konstrukcji
+
+Na polecenie właściciela przeniesiono katalog ośmiu nawierzchni sportowych, ich wymiary oraz pliki Blender/GLB do panelu Nawierzchnia, przed wzorem, kolorami, liniami i materiałem. Wybór formatu i zamknięcie katalogu wracają do Nawierzchni; nawigacja utrzymuje aktywne narzędzie. Konstrukcja zawiera wybór siedmiu stalowych modeli, zgodne dołączanie/odłączanie, kolory i rozbudowę. Usunięto z niej selektor nawierzchni. Stałe formaty nie pokazują ręcznej zmiany niezgodnych wymiarów w katalogu konstrukcji. Przycisk Panele działa także przy konstrukcji dołączonej do osobnej nawierzchni.
+
+PASS: TypeScript, test:studio, build, test:mobile375/390/430/1440 z materiałami/JSON/Radarem oraz 16 przypadków nawierzchni (8 sportów ×390/1440) z kontrolą właściwego panelu po wyborze i braku selektora w Konstrukcji. Geometria, formaty Project, ceny i prywatność kosztów pozostają bez zmian. Publikacja Studio98: źródło `329b40cd513adc6a772f19007da1386bee5cbc4e`, wdrożenie `appgdep_6adcae5a0ed48191a025e749d1ba0ab3` succeeded, env6.
+
+
 ## 24.10.2026 — Studio97: osiem niezależnych nawierzchni 20 cm
 
 Właściciel zatwierdził zestaw: Street Football 3×3, koszykówka 3×3 i pełna, tenis, padel, siatkówka, pickleball, futsal. Powstało osiem modeli GLB i osiem scen Blender, osobne od konstrukcji, z UV góry i neutralnymi krawędziami. W Konstrukcji jest odrębny katalog nawierzchni z miniaturami; dotychczasowy wybór konstrukcji ma siedem kart. Street Football 3×3 przeniesiono do nawierzchni. Pole gry i cały obrys z przyjętymi wybiegami pokazano oddzielnie. Wspólny model 3D pozwala zmieniać wzór, kolory i linie.
