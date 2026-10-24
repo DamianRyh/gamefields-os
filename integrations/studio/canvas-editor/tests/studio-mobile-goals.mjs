@@ -23,6 +23,7 @@ try{
    await page.goto(base+'/?arena='+arena);
    const ready=()=>page.locator('[data-model="'+arena+'"][data-ready="true"]').waitFor({timeout:30000});await ready();
    await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();
+   await page.locator('.studio-current-model img').waitFor();assert.equal(await page.locator('.studio-visual').getByRole('button',{name:'Zmień boisko',exact:true}).count(),0);assert.equal(await page.locator('.studio-project-chip').evaluate(e=>e.tagName),'DIV');assert.equal(await page.locator('.studio-construction-bar .studio-color').count(),3);assert.equal(await page.getByRole('button',{name:'Zmień boisko',exact:true}).count(),1);await page.locator('.studio-panel').screenshot({path:`outputs/mobile/construction-panel-${arena}-${width}.png`});
    await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#1d7056');await page.getByLabel('Tekst na bandach',{exact:true}).fill(arena.toUpperCase());await ready();
    const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const project=JSON.parse(await readFile(await(await event).path(),'utf8'));assert.equal(project.arenaModel,arena);
    await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'arena.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});await ready();
@@ -48,7 +49,7 @@ try{
    for(const view of ['Model 3D']){await page.getByRole('button',{name:view,exact:true}).click();await ready();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);}
    assert.equal(await page.locator('.panna-stage').count(),0);
   }
-  await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
+  await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Header overflow');
   for(const view of ['perspective']){
     await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
@@ -67,7 +68,7 @@ try{
   await page.goto(base+'/');
   await page.waitForFunction(()=>document.querySelector('[aria-label="Nazwa projektu"]')?.value==='CI — zachowany szkic');
   assert.equal(await page.getByLabel('Nazwa projektu',{exact:true}).inputValue(),'CI — zachowany szkic','Browser draft must survive a reload');
-  await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();
+  await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();
   await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
   assert.equal(await page.getByLabel('Nazwa projektu',{exact:true}).inputValue(),'CI — zachowany szkic','Selecting the current model must not reset the draft');
   await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});

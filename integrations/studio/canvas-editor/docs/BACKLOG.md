@@ -1,5 +1,11 @@
 # Gamefields — backlog
 
+## Panel Konstrukcja jak Nawierzchnia — 2026-10-24
+
+Górny rząd Konstrukcji używa układu Nawierzchni: miniatura bieżącego modelu 3D, nazwa boiska i jedyne „Zmień boisko”, obok Bandy/Rama/Bramki. Miniatura pochodzi z istniejącego canvasu, bez kolejnego WebGL ani zapisu do projektu. Usunięto „Zmień boisko” spod podglądu i działanie kliknięcia etykiety modelu na scenie. Wybór modelu i anulowanie wracają do Konstrukcji. Moduły pozostają w tym panelu w rozwijanej sekcji; przycisk Budowanie modułowe otwiera ją bezpośrednio. Geometria, kolory, nawierzchnie, zapis projektów i prywatność kosztów zachowane.
+
+Sprawdzenie: tsc, build, test:studio i wymagany test:mobile; osiem przypadków panelu (P1/O1 × 4 szerokości) sprawdza miniaturę, trzy kolory, jedną zmianę modelu w panelu i brak aktywnego wyboru na scenie.
+
 ## Wspólny edytor modułów i kolorów — 2026-10-24 (zastępuje osobny edytor Studio93)
 
 - Budowanie modułowe działa w panelu Konstrukcja na tym samym obracanym modelu, razem z kolorami band/ramy/bramek, tekstem/logo oraz nawierzchnią i grafikami. Nie otwiera modalu ani iframe.

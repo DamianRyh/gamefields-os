@@ -1,5 +1,13 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
+## 24.10.2026 — Studio95: Konstrukcja jak Nawierzchnia
+
+Panel Konstrukcja ma wspólny z Nawierzchnią układ: miniatura bieżącego modelu 3D, nazwa boiska i „Zmień boisko”, obok kolory Bandy/Rama/Bramki. Miniatura korzysta z istniejącego canvasu, bez dodatkowego WebGL i bez zmiany danych projektu. Wybór modelu i anulowanie wracają do Konstrukcji. Rozbudowa pozostaje w tym panelu, w rozwijanej sekcji otwieranej także przyciskiem Budowanie modułowe.
+
+Usunięto przycisk zmiany boiska spod sceny. Etykieta modelu na podglądzie jest nieklikalna. W Studio jedyne „Zmień boisko” znajduje się w Konstrukcji. Zachowano moduły, kolory, nawierzchnie, grafikę, szkice i prywatność kosztów.
+
+Sprawdzenie: tsc, test:studio, build, test:mobile (4 szerokości, materiały/JSON/Radar), 8 przypadków panelu P1/O1 × 4 szerokości (miniatura, trzy kolory, jedyny wybór w panelu), 8 przypadków wspólnego edytora modułów. Publikacja Studio95: źródło `f3136d8cbb0924adcc51baff227527167b2f64be`, wdrożenie `appgdep_6adc5f1d348881919a0e4c6f85a39023` succeeded, env revision 6.
+
 ## 24.10.2026 — Studio94: naprawiona geometria i wspólny edytor
 
 Zastępuje oddzielny edytor ze Studio93. Rozbudowa odbywa się w panelu Konstrukcja przy tym samym modelu 3D co kolory band/ramy/bramek, logo/tekst i grafiki nawierzchni. Parametry są zapisane w Project.modular (GF-STUDIO-MODULAR-2): wspólny szkic, Cofnij/Ponów, JSON, specyfikacja, warianty i A/B. Studio nie otwiera dodatkowego okna ani iframe.

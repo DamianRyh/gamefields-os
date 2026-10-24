@@ -46,7 +46,7 @@ try{
     const visible=await page.locator('.panna-model-overlay').evaluate(canvas=>{const gl=canvas.getContext('webgl'),p=new Uint8Array(canvas.width*canvas.height*4);gl.readPixels(0,0,canvas.width,canvas.height,gl.RGBA,gl.UNSIGNED_BYTE,p);return p.filter((v,i)=>i%4===3&&v>0).length});assert.ok(visible>100);
    }
    await page.locator('[data-model="'+arena+'"]').screenshot({path:'outputs/new-arenas/'+arena+'-'+width+'.png'});
-   await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();
+   await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();
    assert.ok(await page.getByRole('button',{name:'Panna Cage 180',exact:false}).count());
   }
   await page.close();

@@ -41,7 +41,7 @@ try{
   await undo.click();await ready();assert.equal(await lines.isChecked(),false,'Undo restores line setting');
   await redo.click();await ready();assert.equal(await lines.isChecked(),true,'Redo restores line setting');
   await page.getByLabel('Nazwa projektu',{exact:true}).fill('Boisko szkoły — własna nazwa');
-  await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();
+  await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();
   await page.getByRole('button',{name:'Panna Grid',exact:true}).click();await ready();
   assert.equal(await page.getByLabel('Nazwa projektu',{exact:true}).inputValue(),'Boisko szkoły — własna nazwa');
   await undo.click();await ready();
