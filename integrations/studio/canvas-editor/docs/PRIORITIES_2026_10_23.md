@@ -32,7 +32,7 @@ Powtórzono generator8rewizji/25zasobów dwa razy; JSON identyczny SHA256`e47ae0
 
 Właściciel potwierdził brak danych i polecił „podłóż wartości”. Osobna kartaGF-WORKING-2026-10-23-v1 ma6nawierzchni,29typów wyposażenia z UI, montaż8konstrukcji,4poziomy grafiki, linie, branding, wykończenie, projekt i transport. Osiem dotychczasowych cen konstrukcji zachowano. API i UI jawnie oznaczają workingAssumptions; brutto/VAT pozostaje niepotwierdzone, a nieznane dodatki nadal dają wynikpartial. To roboczy budżet, nie oferta lub zatwierdzony koszt wykonania.
 
-Dokładne kwoty i zakres: [WORKING_RATES.md](WORKING_RATES.md). Test192kombinacji oraz niezależnie sprawdzony przykładOcta23829,30netto potwierdzają arytmetykę, nie ceny rynkowe. Referencje dostawców służą kontroli rzędu wielkości; podział kosztów jest przyjętym założeniem. Środowisko produkcyjne otrzymuje kartę przez natywne narzędzieSites, nie przez hosting.json; poprzednia karta jest zachowana.
+Dokładne kwoty i zakres: [WORKING_RATES.md](WORKING_RATES.md). Test192kombinacji oraz niezależnie sprawdzony przykładOcta[kwota archiwalna]netto potwierdzają arytmetykę, nie ceny rynkowe. Referencje dostawców służą kontroli rzędu wielkości; podział kosztów jest przyjętym założeniem. Środowisko produkcyjne otrzymuje kartę przez natywne narzędzieSites, nie przez hosting.json; poprzednia karta jest zachowana.
 
 ## Kontrola wydania
 

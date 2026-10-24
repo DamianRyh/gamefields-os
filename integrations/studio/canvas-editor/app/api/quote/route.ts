@@ -1,6 +1,7 @@
 import {projectSchema} from "@/lib/project";
 import {patternComplexity,patternFamilies} from "@/lib/pattern-library";
 import {calculateProjectQuote,parseRateCard} from "@/lib/quote-engine";
+import {salesRateCard} from "@/lib/sales-rate-card";
 const json=(data:unknown,status=200)=>Response.json(data,{status,headers:{"Cache-Control":"no-store"}});
 export async function POST(request:Request){
  try{
@@ -10,7 +11,7 @@ export async function POST(request:Request){
   const parsed=projectSchema.safeParse(body);if(!parsed.success)return json({error:"Invalid project"},400);
   const p=parsed.data;
   if(p.patternFamily&&!patternFamilies.some(f=>f.id===p.patternFamily))return json({error:"Unknown pattern"},400);
-  const card=parseRateCard(process.env.QUOTE_RATE_CARD);
+  const card=salesRateCard(parseRateCard(process.env.INTERNAL_COST_CARD),process.env.SALES_MARGIN);
   return json(calculateProjectQuote(p,card,patternComplexity(p.patternFamily||"organic-flow",p.patternVariant||1)));
  }catch{return json({error:"Quote temporarily unavailable"},503)}
 }

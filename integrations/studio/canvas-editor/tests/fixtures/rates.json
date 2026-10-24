@@ -1,0 +1,104 @@
+{
+  "version": "TEST-NOT-FOR-SALE",
+  "currency": "PLN",
+  "notice": "TEST_ONLY",
+  "surfaces": {
+    "Akryl sportowy": {
+      "materialNetPerM2": 10,
+      "installationNetPerM2": 10
+    },
+    "EPDM": {
+      "materialNetPerM2": 10,
+      "installationNetPerM2": 10
+    },
+    "Moduły sportowe": {
+      "materialNetPerM2": 10,
+      "installationNetPerM2": 10
+    },
+    "Sztuczna trawa 60 mm": {
+      "materialNetPerM2": 10,
+      "installationNetPerM2": 10
+    },
+    "Piasek sportowy": {
+      "materialNetPerM2": 10,
+      "installationNetPerM2": 10
+    },
+    "Beton sportowy": {
+      "materialNetPerM2": 10,
+      "installationNetPerM2": 10
+    }
+  },
+  "patternNetPerM2": {
+    "1": 10,
+    "2": 10,
+    "3": 10,
+    "4": 10
+  },
+  "arenaNet": {
+    "w1": 10,
+    "o1": 10,
+    "p1": 10,
+    "street15": 10,
+    "circle-cage-1": 10,
+    "circle-cage-2": 10,
+    "street-field": 10,
+    "octagon": 10
+  },
+  "arenaInstallationNet": {
+    "w1": 10,
+    "o1": 10,
+    "p1": 10,
+    "street15": 10,
+    "circle-cage-1": 10,
+    "circle-cage-2": 10,
+    "street-field": 10,
+    "octagon": 10
+  },
+  "finishNet": {
+    "matte": 10,
+    "gloss": 10,
+    "metal": 10
+  },
+  "equipmentNet": {
+    "Bramka": 10,
+    "Banda": 10,
+    "Piłkochwyt": 10,
+    "Lampa": 10,
+    "Ławka": 10,
+    "DJ booth": 10,
+    "Kosz": 10,
+    "Trybuna": 10,
+    "Siatka": 10,
+    "Słupki tenisowe": 10,
+    "Krzesło sędziowskie": 10,
+    "Szkło padel": 10,
+    "Bramka futsal": 10,
+    "Siatka badminton": 10,
+    "Słupki badmintonowe": 10,
+    "Siatka beach": 10,
+    "Słupki beach": 10,
+    "Stół Teqball": 10,
+    "Quarter pipe": 10,
+    "Funbox": 10,
+    "Rail skate": 10,
+    "Ledge": 10,
+    "Bank": 10,
+    "Totem": 10,
+    "Drążki": 10,
+    "Poręcze": 10,
+    "Monkey bars": 10,
+    "Box treningowy": 10,
+    "Kółka treningowe": 10
+  },
+  "exclusions": [],
+  "workingAssumptions": true,
+  "commerciallyApproved": false,
+  "linesNet": 10,
+  "brandingNetPerItem": 10,
+  "designNet": 10,
+  "transportNet": 10,
+  "colorPolicy": {
+    "includedColors": 2,
+    "additionalColorNetPerM2": 10
+  }
+}

@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {salesRateCard} from '../lib/sales-rate-card.ts';
+import {calculateProjectQuote,parseRateCard} from '../lib/quote-engine.ts';
+const c=parseRateCard(JSON.stringify({version:'CONFIDENTIAL_TEST_COST',currency:'PLN',notice:'CONFIDENTIAL_TEST_NOTICE',exclusions:['CONFIDENTIAL_TEST_EXCLUSION'],surfaces:{EPDM:{materialNetPerM2:80,installationNetPerM2:40}},arenaNet:{octagon:800},arenaInstallationNet:{octagon:80},equipmentNet:{Ławka:40},patternNetPerM2:{1:8},finishNet:{gloss:40},linesNet:40,brandingNetPerItem:20,designNet:80,transportNet:40,colorPolicy:{includedColors:2,additionalColorNetPerM2:4},untrustedSecret:'CONFIDENTIAL_TEST_EXTRA'}));
+const before=JSON.stringify(c),s=salesRateCard(c,'0.20');
+assert.equal(s.arenaNet.octagon,1000);assert.equal(s.surfaces.EPDM.materialNetPerM2,100);assert.equal(s.colorPolicy.additionalColorNetPerM2,5);assert.equal(s.vatRate,undefined);assert.equal(JSON.stringify(c),before);assert(!JSON.stringify(s).includes('CONFIDENTIAL_TEST'));assert(!Object.hasOwn(s,'untrustedSecret'));assert(!Object.hasOwn(s,'margin'));assert.equal(s.version,'GF-SALES-2026-10-23-v1');
+assert.equal(salesRateCard(c,'0').arenaNet.octagon,800);assert.equal(salesRateCard(null,undefined),null);
+for(const m of [undefined,'','bad','-1','1','.95','NaN'])assert.throws(()=>salesRateCard(c,m));
+const p={length:10,width:10,surface:'EPDM',lines:false,graphicOpacity:0,objects:[]};const q=calculateProjectQuote(p,s,1);assert.equal(q.priceNet,15150);assert.equal(q.priceGross,null);assert(!JSON.stringify(q).includes('CONFIDENTIAL_TEST'));
+assert.equal(calculateProjectQuote({...p,objects:[{kind:'equipment',name:'Unknown'}]},s,1).priceNet,null);
+console.log('PASS: margin versus markup, all scalar/maps/surfaces/palette, immutable cost, metadata allow-list, invalid/missing margin fail closed, unknown items partial, no VAT inference. Artificial rates only.');

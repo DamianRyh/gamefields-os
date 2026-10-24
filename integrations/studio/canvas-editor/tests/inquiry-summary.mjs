@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {inquirySummary,MAX_INQUIRY_CHARS} from '../lib/inquiry-summary.mjs';
 const project={name:'Pełny projekt',arenaDesign:{src:'data:image/png;base64,'+'A'.repeat(1400000),text:'Panel',panelColor:'#ff0000'},objects:Array.from({length:200},(_,i)=>({id:String(i),name:'N'.repeat(200),kind:i%2?'image':'text',text:'ą😀'.repeat(166),src:'data:image/png;base64,AAAA',x:i,y:-i,rotation:45}))};
-const estimate={status:'partial',rateCardVersion:'test',items:[{code:'construction',subtotal:15300}],notice:'Pozostałe koszty nieznane'};
+const estimate={status:'partial',rateCardVersion:'test',items:[{code:'construction',subtotal:1234}],notice:'Pozostałe koszty nieznane'};
 const summary=inquirySummary(project,estimate),parsed=JSON.parse(summary);
 assert.ok(summary.length>18000&&summary.length<MAX_INQUIRY_CHARS);
 assert.equal(parsed.objects.length,200);assert.equal(parsed.objects[199].text,project.objects[199].text);assert.equal(parsed.objects[199].x,199);

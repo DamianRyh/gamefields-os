@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-10-24T05:08:02.674Z",
+  "httpStatus": 200,
+  "rateVersion": "GF-SALES-2026-10-23-v1",
+  "fullSalesResponseMatchesLocal": true,
+  "allEightConstructionPricesAreSalesNotCosts": true,
+  "noCostVersionOrInternalFields": true,
+  "noVatInference": true,
+  "cacheControl": "no-store",
+  "operation": "One stateless quote calculation; no form, email or project database save",
+  "amountsIntentionallyOmitted": true
+}

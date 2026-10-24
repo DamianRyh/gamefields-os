@@ -16,7 +16,7 @@
 
 ## Wdrożenie tego etapu
 
-Luka: kolor był usuwany z żądania wyceny i nie wpływał na cenę. Opcjonalna polityka colorPolicy nie zmienia wyników starych kart. Nowa osobna karta GF-WORKING-2026-10-23-v2 zachowuje wszystkie stawki v1 i8cen konstrukcji, dodając roboczo2kolory w pakiecie i5PLN/m² za każdy dodatkowy.
+Luka: kolor był usuwany z żądania wyceny i nie wpływał na cenę. Opcjonalna polityka colorPolicy nie zmienia wyników starych kart. Nowa osobna karta GF-WORKING-2026-10-23-v2 zachowuje wszystkie stawki v1 i8cen konstrukcji, dodając roboczo2kolory w pakiecie i[stawka archiwalna] za każdy dodatkowy.
 
 Liczone są unikalne, nierozróżniające wielkości liter kolory wejściowe wybranej palety: base, zone oraz pola0/2/3 biblioteki PatternArt. Dla swobodnego boiska dodatkowo outside; otoczenie nie zwiększa palety warstwy Blender. To budżet wybranej palety, nie analiza widocznych pikseli: poszczególne wzory, skala i kadrowanie mogą ukrywać część pól. Logo, napisy, linie, gradienty/cienie i ostateczna liczba farb wymagają oddzielnej oceny. Przy wyłączonej grafice, trawie i piasku dopłaty brak. Ta sama liczba kolorów przy innych odcieniach daje ten sam budżet.
 
@@ -34,4 +34,4 @@ Publikacja: istniejący Sites i osadzenie WordPress /konfigurator-boisk/. Read-o
 
 ## Dowody kontroli tego etapu
 
-TypeScript, build, test:studio, quote-engine, zachowana karta v1 (192kombinacje) oraz testy nowej polityki palety PASS. Test interfejsu375/1440px PASS: rzeczywista zmiana koloru wyzwala nowy POST, powtórzony kolor zmniejsza budżet, dodatkowy unikalny kolor zwiększa go o149,10PLN dla29,82m²; pozycja widoczna w Podsumowaniu, brak poziomego przepełnienia i błędów strony. To test arytmetyki i przepływu, nie zatwierdzenie cen rynkowych.
+TypeScript, build, test:studio, quote-engine, zachowana karta v1 (192kombinacje) oraz testy nowej polityki palety PASS. Test interfejsu375/1440px PASS: rzeczywista zmiana koloru wyzwala nowy POST, powtórzony kolor zmniejsza budżet, dodatkowy unikalny kolor zwiększa go o[kwota archiwalna] dla29,82m²; pozycja widoczna w Podsumowaniu, brak poziomego przepełnienia i błędów strony. To test arytmetyki i przepływu, nie zatwierdzenie cen rynkowych.

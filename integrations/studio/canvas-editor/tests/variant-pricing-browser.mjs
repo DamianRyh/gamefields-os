@@ -7,7 +7,7 @@ import {chromium} from 'playwright';
 const require=createRequire(import.meta.url),wranglerRequire=createRequire(require.resolve('wrangler/package.json'));
 const {Miniflare}=await import(wranglerRequire.resolve('miniflare'));
 const files=(await readdir('dist/server',{recursive:true})).filter(f=>/\.m?js$/.test(f));
-const mf=new Miniflare({modules:['index.js',...files.filter(f=>f!=='index.js')].map(f=>({type:'ESModule',path:resolve('dist/server',f)})),modulesRoot:resolve('dist/server'),compatibilityDate:'2026-05-15',compatibilityFlags:['nodejs_compat'],d1Databases:['DB'],bindings:{QUOTE_RATE_CARD:JSON.stringify({version:'TEST-VARIANTS-NOT-FOR-SALE',currency:'PLN',workingAssumptions:true,arenaNet:{octagon:1234,'circle-cage-1':2345}})}});
+const mf=new Miniflare({modules:['index.js',...files.filter(f=>f!=='index.js')].map(f=>({type:'ESModule',path:resolve('dist/server',f)})),modulesRoot:resolve('dist/server'),compatibilityDate:'2026-05-15',compatibilityFlags:['nodejs_compat'],d1Databases:['DB'],bindings:{SALES_MARGIN:'0',INTERNAL_COST_CARD:JSON.stringify({version:'TEST-VARIANTS-NOT-FOR-SALE',currency:'PLN',workingAssumptions:true,arenaNet:{octagon:1234,'circle-cage-1':2345}})}});
 let browser,server;const report={status:'running',cases:[],errors:[]};
 try{
  const mime={'.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.woff2':'font/woff2'};
@@ -41,7 +41,7 @@ try{
    await page.route('**/api/quote',async route=>{const body=route.request().postDataJSON();bodies.push(body);if(body.arenaModel==='circle-cage-1'&&failed){failed=false;await route.fulfill({status:503,body:'unavailable'});return}await route.continue()});
    await variants.getByLabel('Porównaj: Circle B',{exact:true}).check();
    const a=page.getByRole('region',{name:'Kalkulacja wariantu: Octa A',exact:true}),b=page.getByRole('region',{name:'Kalkulacja wariantu: Circle B',exact:true});
-   await a.locator('.studio-quote-total').waitFor();assert.ok(await a.getByText('Stawki robocze — do potwierdzenia',{exact:true}).isVisible());await b.getByRole('button',{name:'Spróbuj ponownie',exact:true}).waitFor();
+   await a.locator('.studio-quote-total').waitFor();assert.ok(await a.getByText('Cena sprzedaży — do potwierdzenia',{exact:true}).isVisible());await b.getByRole('button',{name:'Spróbuj ponownie',exact:true}).waitFor();
    const money=n=>new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',maximumFractionDigits:2}).format(n);
    assert.equal(await a.locator('.studio-quote-total strong').textContent(),money(expectedA.knownSubtotalNet));
    assert.ok(await a.getByText('Pozycje „Do ustalenia” nie są wliczone. Pełną cenę otrzymasz po ich wycenie.',{exact:true}).isVisible());
