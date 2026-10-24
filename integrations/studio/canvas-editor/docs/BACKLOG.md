@@ -249,3 +249,8 @@ Opcjonalna polityka kolorów w nowej karcie roboczej v2; stare karty zachowują 
 ## 24.10.2026 — koszty wewnętrzne, ceny sprzedaży
 
 Wcześniejsze stawki są kosztami produkcji zgodnie z decyzją właściciela. Klient otrzymuje wyłącznie ceny sprzedaży przeliczone na serwerze. Tabele przeniesiono do biblioteki wewnętrznej; nowe źródło i testy nie publikują kosztów. [Zakres i ograniczenia](SALES_PRICE_PRIVACY.md). Dawne rewizje mogą nadal zachowywać wcześniej publiczne dane.
+
+
+## 24.10.2026 — skupione Studio i obracany model
+
+Wyposażenie i wybór scenerii wyłączone w Studio; większe grupy kolorów konstrukcji; Boczny/Z góry/Model3D z obrotem i bieżącymi teksturami. Starsze dane pozostają w JSON, ale niedostępne wyposażenie nie jest prezentowane ani wyceniane. [Zakres i testy](STUDIO_UX_2026_10_24.md). Ceny sprzedaży nadal są przeliczane na serwerze, koszty ukryte.

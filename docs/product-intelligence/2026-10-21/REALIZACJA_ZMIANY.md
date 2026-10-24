@@ -1,5 +1,18 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
+## 24.10.2026 — Studio92, uproszczony edytor
+
+Wdrożono cztery korekty wskazane przez właściciela: wyposażenie wyłączone; czytelniejsze grupy kolorów Bandy/Rama/Bramki; Boczny/Z góry/obracany Model3D zamiast Z boiska; brak selektora scenerii i neutralne tło w Studio. Modele i zdjęcia do wykorzystania poza Studio zachowano; nie dodawano teraz nowej sekcji strony głównej.
+
+Dostępne narzędzia: Konstrukcja, Nawierzchnia, Grafika. Starsze wyposażenie pozostaje w pełnym JSON/IndexedDB, lecz jest pomijane w podglądzie, aktywnym zapytaniu/specyfikacji i wycenie (również w API). Bramki stanowiące część własnej konstrukcji pozostają. Nowe projekty nie otrzymują swobodnego wyposażenia.
+
+Model3D obraca się myszą, dotykiem lub strzałkami; Home/przycisk resetuje kąt. Zmiany nawierzchni, materiałów i oznaczeń zachowują obrót. Kamera nie zmienia Project ani nie regeneruje tekstur podczas drag. Kadr dopasowuje się do gabarytów i proporcji canvasu. W1 nadal tylko jako archiwalny import; projekt bez własnej geometrii zachowuje Boczny/Z góry, a obrót3D jest niedostępny z objaśnieniem. A/B używa tych samych trybów i neutralnego tła.
+
+PASS: TypeScript/build, test:studio, test API (brak opłaty za wyłączone wyposażenie, koszty nadal ukryte),80kombinacji kadru;16przypadków obrotu8modeli przy375/1440px; rzeczywisty emulowany gest dotykowy390px; warianty A/B375/1440;24widokiO1/P1+8neutralnychStreet+16materiałówP1, JSON/szkic i Radar na4szerokościach. Nie utrzymujemy historycznej liczby96scen po celowym usunięciu scenerii. Zrzuty375/1440/390 obejrzano; poprawiono pozostałość tła i mobilną podpowiedź. Kontrola produkcyjna również PASS. [Szczegóły](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/STUDIO_UX_2026_10_24.md), dowody tools/studio-ux-2026-10-24/.
+
+Źródło c299cbb7b7ddcf5212641f574b9b6bb0db45044a; wersja92 appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_aeccdbffbdb0819187716289ffd49f0b; deployment appgdep_6adc4c0eeb4081919ff69c835a1ce973 succeeded, env6 bez zmian. Hash natywny sha256:3751e89430e249c4385dbf6f1c3e6671422a7f22dd545bb5efdd397ec28c65db. Publikacja w dotychczasowym osadzeniu konfiguratora; nie powstało nowe miejsce. Ceny sprzedaży, sekrety kosztowe, geometria, schemat Project i SQL zachowane. Dane wykonawcze i testy na fizycznych urządzeniach mają wcześniejsze ograniczenia.
+
+
 ## 24.10.2026 — Studio91, koszty wewnętrzne i ceny sprzedaży
 
 Decyzja właściciela: dotychczasowe kwoty są kosztami produkcji i nie mogą być przedstawiane klientowi jako cena sprzedaży. Zastępuje wcześniejsze wyprowadzenie kosztu z ceny referencyjnej. Koszt i parametr marży są sekretami serwera, a odpowiedź API jest budowana z nowej, ograniczonej karty sprzedaży. Nie kopiuje kosztowych opisów, identyfikatora cennika, marży ani nieznanych metadanych. Brak poprawnej konfiguracji nie uruchamia fallbacku na koszt. Klient/porównanie/zapytanie otrzymują wyłącznie kwoty sprzedażowe.

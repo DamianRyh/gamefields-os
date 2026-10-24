@@ -5,7 +5,7 @@ import type {ProjectQuote} from "@/lib/quote-engine";
 export type QuoteState={data:ProjectQuote|null;loading:boolean;error:boolean;retry:()=>void};
 export function useProjectQuote(p:Project):QuoteState{
  // Preserve palette inputs for optional colour pricing; exclude artwork bytes and spatial-only edits.
- const body=JSON.stringify({...p,id:"quote",name:"Kalkulacja",date:"",status:"Szkic",lineColor:"#000000",scene:"day",patternDensity:undefined,shadowIntensity:undefined,graphicScale:100,graphicRotation:0,arenaDesign:p.arenaDesign?{...p.arenaDesign,src:p.arenaDesign.src?"data:image/png;base64,AA==":undefined,panelColor:"#000000",frameColor:"#000000",goalColor:"#000000",text:p.arenaDesign.text?"Napis":""}:undefined,objects:p.objects.map(o=>({...o,id:"item",x:0,y:0,rotation:0,scale:100,opacity:100,color:"#000000",src:undefined,text:o.text?"Napis":undefined}))});
+ const body=JSON.stringify({...p,id:"quote",name:"Kalkulacja",date:"",status:"Szkic",lineColor:"#000000",scene:"day",patternDensity:undefined,shadowIntensity:undefined,graphicScale:100,graphicRotation:0,arenaDesign:p.arenaDesign?{...p.arenaDesign,src:p.arenaDesign.src?"data:image/png;base64,AA==":undefined,panelColor:"#000000",frameColor:"#000000",goalColor:"#000000",text:p.arenaDesign.text?"Napis":""}:undefined,objects:p.objects.filter(o=>o.kind!=="equipment").map(o=>({...o,id:"item",x:0,y:0,rotation:0,scale:100,opacity:100,color:"#000000",src:undefined,text:o.text?"Napis":undefined}))});
  const [attempt,setAttempt]=useState(0);
  const [state,setState]=useState<{key:string;data:ProjectQuote|null;loading:boolean;error:boolean}>({key:"",data:null,loading:true,error:false});
  const key=useMemo(()=>`${attempt}:${body}`,[attempt,body]);

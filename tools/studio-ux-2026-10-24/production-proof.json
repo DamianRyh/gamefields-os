@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "checkedAt": "2026-10-24T06:12:36.996Z",
+  "site": "https://gamefields-studio.ryhfs90.chatgpt.site",
+  "equipmentToolAbsent": true,
+  "locationSelectorAbsent": true,
+  "groundViewAbsent": true,
+  "interactiveOrbit": true,
+  "constructionLabelsReadable": true,
+  "customerProjectOrFormSaved": false
+}

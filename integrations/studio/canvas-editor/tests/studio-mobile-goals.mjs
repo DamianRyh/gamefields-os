@@ -43,16 +43,14 @@ try{
     await page.getByRole('button',{name:/^Granulat —/}).click();await ready();
     await page.locator('.studio-material-trigger').click();
    }
-   if(width<=800)await page.getByRole('button',{name:'Wybierz miejsce',exact:true}).click();
-   for(const location of ['Park','Szkoła','Podwórko','Warszawa · Pałac Kultury i Nauki']){if(width<=800)await page.getByRole('button',{name:location,exact:true}).click();else await page.getByLabel('Miejsce wizualizacji',{exact:true}).selectOption({label:location.startsWith('Warszawa')?'Warszawa':location});for(const view of ['Boczny','Z góry','Z boiska']){await page.getByRole('button',{name:view,exact:true}).click();await ready();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);}}
+   assert.equal(await page.getByLabel('Miejsce wizualizacji',{exact:true}).count(),0);
+   assert.equal(await page.getByRole('button',{name:'Wyposażenie',exact:true}).count(),0);
+   for(const view of ['Boczny','Z góry','Model 3D']){await page.getByRole('button',{name:view,exact:true}).click();await ready();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);}
    assert.equal(await page.locator('.panna-stage').count(),0);
   }
   await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('button',{name:'Zmień boisko',exact:true}).click();await page.getByRole('button',{name:'Street Football 3×3',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Header overflow');
-  if(width<=800)await page.getByRole('button',{name:'Wybierz miejsce',exact:true}).click();
-  for(const location of ['Park','Szkoła','Podwórko','Warszawa · Pałac Kultury i Nauki']){
-   if(width<=800)await page.getByRole('button',{name:location,exact:true}).click();else await page.getByLabel('Miejsce wizualizacji',{exact:true}).selectOption({label:location.startsWith('Warszawa')?'Warszawa':location});
-   for(const view of ['Boczny','Z góry','Z boiska']){
+  for(const view of ['Boczny','Z góry']){
     await page.getByRole('button',{name:view,exact:true}).click();
     await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
     const result=await page.evaluate(()=>{
@@ -60,11 +58,11 @@ try{
      const a=canvas.getBoundingClientRect(),b=goals.getBoundingClientRect(),r=scene.getBoundingClientRect();
      return {delta:Math.max(Math.abs(a.x-b.x),Math.abs(a.y-b.y),Math.abs(a.width-b.width),Math.abs(a.height-b.height)),ratio:r.width/r.height,goalCount:goals.querySelectorAll('.goal-frame').length,overflow:document.documentElement.scrollWidth>innerWidth+1};
     });
-    assert.ok(result.delta<1,`${width} ${location} ${view}: misaligned layers`);
-    assert.equal(result.goalCount,2);assert.equal(result.overflow,false,`${width} ${location} ${view}: horizontal overflow`);
+    assert.ok(result.delta<1,`${width} neutral ${view}: misaligned layers`);
+    assert.equal(result.goalCount,2);assert.equal(result.overflow,false,`${width} neutral ${view}: horizontal overflow`);
     if(width<=760)assert.ok(Math.abs(result.ratio-1672/941)<.01,'Mobile scene must preserve the entire calibrated image');
-   }
   }
+  assert.equal(await page.getByRole('button',{name:'Model 3D',exact:true}).isDisabled(),true);
   await page.getByLabel('Nazwa projektu',{exact:true}).fill('CI — zachowany szkic');
   await page.waitForFunction(()=>document.querySelector('.studio-save')?.textContent==='Zapisano w tej przeglądarce');
   await page.goto(base+'/');
@@ -91,5 +89,5 @@ try{
   await page.locator('.green-screen-stage[data-ready="true"]').waitFor({timeout:20000});
   await page.close();
  }
- assert.deepEqual(errors,[]);console.log('PASS: 96 O-1/P-1 and 48 Street Football scene combinations, 16 P-1 material switches with visible WebGL output and preserved JSON colours, aligned layers, no overflow/runtime errors; Radar filter/project/back navigation on all four viewports.');
+ assert.deepEqual(errors,[]);console.log('PASS: 24 O-1/P-1 view combinations and 8 neutral Street Football views, 16 P-1 material switches with visible WebGL output and preserved JSON colours, aligned layers, no overflow/runtime errors; Radar filter/project/back navigation on all four viewports.');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

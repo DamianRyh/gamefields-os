@@ -63,11 +63,11 @@ try{
     const detail=variants.locator('.project-variants-comparison>article').filter({has:page.getByRole('heading',{name:item.name,exact:true})});
     assert.ok((await detail.innerText()).includes(item.project.surface));
 
-    const note=comparison.locator('.variant-3d-coverage');assert.ok((await note.innerText()).includes('(2)'));
-    assert.equal(await note.locator('li').count(),2);assert.ok((await note.innerText()).includes('Sprzęt '+item.id));assert.ok((await note.innerText()).includes('Napis poza nawierzchnią '+item.id));assert.equal((await note.innerText()).includes('Napis nawierzchni '+item.id),false,'Court graphics are not labelled omitted');
+    const note=comparison.locator('.variant-3d-coverage');assert.ok((await note.innerText()).includes('(1)'));
+    assert.equal(await note.locator('li').count(),1);assert.equal((await note.innerText()).includes('Sprzęt '+item.id),false);assert.ok((await note.innerText()).includes('Napis poza nawierzchnią '+item.id));assert.equal((await note.innerText()).includes('Napis nawierzchni '+item.id),false,'Court graphics are not labelled omitted');
    };
    await page.evaluate(()=>window.variantQA.reset());await comparison.getByRole('button',{name:'Włącz porównanie 3D',exact:true}).click();await ready('octagon','perspective');await verifyPaint(a);
-   const views=[['Boczny','perspective'],['Z góry','aerial'],['Z boiska','ground']],states=[];
+   const views=[['Boczny','perspective'],['Z góry','aerial'],['Model 3D','perspective']],states=[];
    for(const [label,view]of views){
     const camera=comparison.getByRole('group',{name:'Kamera porównania'}).getByRole('button',{name:label,exact:true});await camera.click();await ready('octagon',view);const first=await pixels();
     await page.evaluate(()=>window.variantQA.reset());await comparison.getByRole('button',{name:'B: Circle B',exact:true}).click();await ready('circle-cage-1',view);await verifyPaint(b);assert.equal(await camera.getAttribute('aria-pressed'),'true','Camera stays common across A/B');
@@ -79,7 +79,7 @@ try{
    await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
    await page.screenshot({path:`outputs/variant3d-${width}.png`});
    await comparison.getByRole('button',{name:'Zamknij porównanie 3D',exact:true}).click();await comparison.locator('canvas').waitFor({state:'detached'});assert.equal(await comparison.locator('canvas').count(),0,'Close unmounts canvas');
-   await comparison.getByRole('button',{name:'Włącz porównanie 3D',exact:true}).click();await ready('octagon','ground');
+   await comparison.getByRole('button',{name:'Włącz porównanie 3D',exact:true}).click();await ready('octagon','perspective');
    await page.keyboard.press('Escape');await page.waitForFunction(()=>!document.querySelector('dialog.variant-3d-dialog'));assert.ok(await comparison.getByRole('button',{name:'Włącz porównanie 3D',exact:true}).evaluate(e=>e===document.activeElement),'Escape restores opening control');await variants.getByLabel('Porównaj: Circle B',{exact:true}).uncheck();assert.equal(await comparison.count(),0,'Deselect removes comparison and its canvas');
    await variants.getByLabel('Porównaj: Stara rewizja',{exact:true}).check();await comparison.getByRole('button',{name:'Włącz porównanie 3D',exact:true}).click();await ready('octagon','perspective');
    await comparison.getByRole('button',{name:'B: Stara rewizja',exact:true}).click();await comparison.getByRole('status').filter({hasText:'Rewizja modelu zmieniła się.'}).waitFor();assert.equal(await comparison.locator('canvas').count(),0,'Old revision cannot use current geometry');
@@ -91,4 +91,4 @@ try{
   }finally{await context.close()}
  }
  assert.deepEqual(report.errors,[]);report.status='passed';report.manufacturingApproved=false;
-}catch(e){report.status='failed';report.errors.push(String(e));throw e;}finally{await mkdir('docs/priorities-2026-10-23',{recursive:true});await writeFile('docs/priorities-2026-10-23/variant3d-browser.json',JSON.stringify(report,null,2)+'\n');await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose()}
+}catch(e){report.status='failed';report.errors.push(String(e));throw e;}finally{await mkdir('docs/priorities-2026-10-23',{recursive:true});await writeFile('outputs/studio-ux/variant3d.json',JSON.stringify(report,null,2)+'\n');await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose()}

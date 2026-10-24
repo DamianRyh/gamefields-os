@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 390,
+      "model": "octagon",
+      "touchDrag": true,
+      "noOverflow": true
+    }
+  ],
+  "errors": []
+}

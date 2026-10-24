@@ -87,3 +87,41 @@
  .studio-canvas-editor .studio-cameras button{padding:8px 7px}
 }
 @media(max-width:800px){.studio-canvas-editor:not([data-tool=surface]) .studio-render>.panna-studio-model,.studio-canvas-editor:has(.studio-panel.is-expanded) .studio-render>.panna-studio-model{width:100%}}
+
+/* Focused Studio: owned construction, surface and graphics. */
+.studio-canvas-editor .studio-tool-rail{width:108px}
+.studio-canvas-editor .studio-tool-rail button{font-size:14px!important;min-height:80px}
+.studio-canvas-editor .arena-colors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px!important}
+.studio-canvas-editor .arena-color-option{border-radius:14px;background:#fff;padding:18px;border:1px solid #d8cfd3;overflow:visible}
+.studio-canvas-editor .arena-color-option .technical-color-card{display:flex;align-items:center;gap:14px;padding:0 0 16px;min-height:78px}
+.studio-canvas-editor .arena-color-option .technical-color-card b{display:block;font-size:24px;line-height:1.25}
+.studio-canvas-editor .arena-color-option .technical-color-card small{display:block;font-size:13px;line-height:1.5;margin-top:5px}
+.studio-canvas-editor .arena-color-option .technical-color-swatch{width:48px;height:48px;flex-shrink:0;border-radius:10px}
+.studio-canvas-editor .arena-color-option input[type=color]{margin-left:auto;width:46px;height:46px;flex-shrink:0}
+.studio-canvas-editor .arena-color-presets{padding:0;gap:10px;flex-wrap:wrap}
+.studio-canvas-editor .arena-color-presets button{width:44px;height:44px;flex:0 0 44px}
+.studio-neutral-preview .blender-clean-scene{background:linear-gradient(180deg,#f2f1ed,#e6e5df)!important}
+.studio-neutral-preview .blender-ground{background:none!important;opacity:.18}
+.studio-neutral-preview .realistic-badge,.studio-neutral-preview .realistic-disclaimer{display:none}
+.studio-orbit-canvas{pointer-events:auto!important;touch-action:none;cursor:grab;outline-offset:-4px}
+.studio-orbit-canvas:active{cursor:grabbing}
+.studio-orbit-canvas:focus-visible{outline:3px solid #6336f5}
+.studio-orbit-hint{position:absolute;bottom:20%;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:12px;align-items:center;padding:9px 14px;border-radius:12px;background:#ffffffed;color:#4a122b;font-size:13px;white-space:nowrap}
+.studio-orbit-hint button{padding:8px 10px;min-height:40px;border:1px solid #d8cfd3;border-radius:7px;background:white;color:inherit}
+.studio-visual:has(.studio-orbit-canvas) .studio-hotspots{display:none}
+@media(max-width:800px){
+ .studio-canvas-editor .studio-tool-rail{width:100%}.studio-canvas-editor .studio-tool-rail button{font-size:13px!important;min-height:64px}
+ .studio-canvas-editor .arena-colors{grid-template-columns:1fr!important}
+ .studio-canvas-editor .arena-color-option .technical-color-card b{font-size:22px}
+ .studio-canvas-editor .studio-cameras{margin-left:30px}
+ .studio-canvas-editor .studio-cameras button{font-size:12px;padding:8px}
+ .studio-orbit-hint{bottom:23%;font-size:11px;white-space:normal;max-width:90%;width:max-content;padding:6px 9px;gap:8px}
+}
+@media(max-width:800px){.studio-canvas-editor .studio-tool-rail{width:auto;grid-template-columns:repeat(3,minmax(0,1fr))}}
+.studio-canvas-editor .studio-stage:before{background:#eeede8!important}
+.studio-canvas-editor .arena-color-option .technical-color-card{flex-direction:row;text-align:left}
+.studio-canvas-editor .studio-render:has(.studio-orbit-canvas){padding:0!important;width:100%!important;height:100%!important}
+.studio-canvas-editor .studio-render>.panna-studio-model[data-interactive=true]{width:100%!important;height:100%!important;aspect-ratio:auto;overflow:hidden}
+.studio-canvas-editor .studio-orbit-hint{bottom:90px;width:max-content;max-width:calc(100% - 24px);font-size:12px;white-space:normal}
+.studio-orbit-hint span{min-width:0;flex:1}.studio-orbit-hint button{flex:none}
+@media(max-width:800px){.studio-canvas-editor .studio-orbit-hint{bottom:92px;font-size:11px;gap:6px;padding:5px 8px}.studio-orbit-hint button{padding:5px 7px;font-size:11px}.studio-canvas-editor:not([data-tool=surface]) .studio-orbit-hint,.studio-canvas-editor:has(.studio-panel.is-expanded) .studio-orbit-hint{display:none}}

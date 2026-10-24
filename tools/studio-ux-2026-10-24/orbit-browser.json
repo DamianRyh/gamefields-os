@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "model": "w1",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "model": "o1",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "model": "p1",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "model": "street15",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "model": "circle-cage-1",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "model": "circle-cage-2",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "model": "street-field",
+      "status": "passed"
+    },
+    {
+      "width": 375,
+      "model": "octagon",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "model": "w1",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "model": "o1",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "model": "p1",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "model": "street15",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "model": "circle-cage-1",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "model": "circle-cage-2",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "model": "street-field",
+      "status": "passed"
+    },
+    {
+      "width": 1440,
+      "model": "octagon",
+      "status": "passed"
+    }
+  ],
+  "errors": []
+}
