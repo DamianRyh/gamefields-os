@@ -131,3 +131,10 @@ body:has(.studio-canvas-editor) [data-sonner-toast]{pointer-events:none}
 
 /* Give the visual model catalogue its own editing row without overlaying the preview. */
 @media(min-width:801px) and (min-height:601px){.studio-canvas-editor[data-tool=model] .studio-screen{grid-template-rows:minmax(180px,28%) minmax(0,1fr)}.studio-canvas-editor[data-tool=model] .studio-panel{max-height:none}}
+
+/* Construction keeps the main 3D court above the scrolling controls. */
+@media(max-width:800px) and (min-height:601px){
+ .studio-canvas-editor[data-tool=construction] .studio-screen{grid-template-rows:clamp(280px,42dvh,420px) 74px minmax(0,1fr)}
+ .studio-canvas-editor[data-tool=construction] .studio-render{padding:84px 0 14px!important}
+ .studio-canvas-editor[data-tool=construction] .studio-construction-preview-note{top:66px}
+}

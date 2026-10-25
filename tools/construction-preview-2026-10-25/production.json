@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "results": [
+    {
+      "width": 390,
+      "main3D": true,
+      "thumbnail": true,
+      "previewUnchanged": true,
+      "modelSelection": true,
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "main3D": true,
+      "thumbnail": true,
+      "previewUnchanged": true,
+      "modelSelection": true,
+      "errors": []
+    }
+  ]
+}

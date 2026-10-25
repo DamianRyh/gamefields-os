@@ -1,0 +1,166 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 390,
+      "surface": "street-football-3x3",
+      "webgl": {
+        "error": 0,
+        "visible": 16832
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 390,
+      "surface": "basketball-3x3",
+      "webgl": {
+        "error": 0,
+        "visible": 17902
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 390,
+      "surface": "basketball-full",
+      "webgl": {
+        "error": 0,
+        "visible": 15372
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 390,
+      "surface": "tennis",
+      "webgl": {
+        "error": 0,
+        "visible": 13876
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 390,
+      "surface": "padel",
+      "webgl": {
+        "error": 0,
+        "visible": 14240
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 390,
+      "surface": "volleyball",
+      "webgl": {
+        "error": 0,
+        "visible": 15946
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 390,
+      "surface": "pickleball",
+      "webgl": {
+        "error": 0,
+        "visible": 14302
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 390,
+      "surface": "futsal",
+      "webgl": {
+        "error": 0,
+        "visible": 14526
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "street-football-3x3",
+      "webgl": {
+        "error": 0,
+        "visible": 190398
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "basketball-3x3",
+      "webgl": {
+        "error": 0,
+        "visible": 202606
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "basketball-full",
+      "webgl": {
+        "error": 0,
+        "visible": 173522
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "tennis",
+      "webgl": {
+        "error": 0,
+        "visible": 156702
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "padel",
+      "webgl": {
+        "error": 0,
+        "visible": 160698
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "volleyball",
+      "webgl": {
+        "error": 0,
+        "visible": 180164
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "pickleball",
+      "webgl": {
+        "error": 0,
+        "visible": 161466
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "futsal",
+      "webgl": {
+        "error": 0,
+        "visible": 164068
+      },
+      "json": true,
+      "priceArea": true
+    }
+  ],
+  "errors": []
+}

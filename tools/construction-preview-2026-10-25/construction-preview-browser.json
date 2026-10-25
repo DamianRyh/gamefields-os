@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 390,
+      "surface": "street-football-3x3",
+      "webgl": {
+        "error": 0,
+        "visible": 16832
+      },
+      "json": true,
+      "priceArea": true
+    },
+    {
+      "width": 1440,
+      "surface": "street-football-3x3",
+      "webgl": {
+        "error": 0,
+        "visible": 190398
+      },
+      "json": true,
+      "priceArea": true
+    }
+  ],
+  "errors": []
+}

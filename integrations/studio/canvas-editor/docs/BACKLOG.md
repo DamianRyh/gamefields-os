@@ -1,4 +1,9 @@
 # Gamefields — backlog
+## Podgląd konstrukcji po kliknięciu menu — 25.10.2026
+
+Wejście w Konstrukcję lub wybór boiska zamyka plan edycji i przywraca główny model 3D. Przycisk zmiany konstrukcji ma natychmiastową miniaturę stalowego modelu z katalogu, bez oczekiwania na zrzut canvasu (archiwalny W1 zachowuje zrzut). Gdy projekt zawiera tylko nawierzchnię, panel pokazuje wyraźnie oznaczony podgląd Street Arena 15. Podgląd nie dodaje konstrukcji, nie zmienia JSON ani ceny; właściwe dołączenie zgodnego modelu lub wybór innego boiska pozostaje jawne. Powrót do Nawierzchni przywraca rzeczywisty projekt. Na telefonach Konstrukcja rezerwuje osobny większy obszar na pełny model 3D nad przewijanym panelem ustawień.
+
+
 ## Rozdzielenie narzędzi: stal i nawierzchnie — 24.10.2026
 
 Wybór ośmiu nawierzchni sportowych, ich wymiary i pliki przeniesiono do Nawierzchni, przed wzorem, kolorami, liniami i materiałem. Wybór oraz zamknięcie katalogu wracają do Nawierzchni; przycisk tego narzędzia pozostaje zaznaczony w katalogu. Konstrukcja pokazuje wyłącznie wybór stalowego modelu, zgodne dołączanie/odłączanie, kolory i rozbudowę. Nie zmieniono geometrii, danych projektu ani cen. Naprawiono dostęp do kolorów przyciskiem Panele także po dołączeniu konstrukcji do osobnej nawierzchni. Stałe formaty sportowe nie pokazują niezgodnych pól ręcznej zmiany wymiarów w katalogu konstrukcji.

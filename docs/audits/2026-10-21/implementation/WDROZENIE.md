@@ -1,5 +1,14 @@
 # Gamefields — realizacja zaleceń po audycie
 
+## 25.10.2026 — Studio99: główny podgląd i miniatura konstrukcji
+
+Wejście w Konstrukcję lub katalog boisk zamyka plan edycji i przywraca model 3D. Przycisk Zmień boisko pokazuje od razu miniaturę stalowej konstrukcji z katalogu, bez czekania na zrzut canvasu; archiwalny W1 zachowuje swój zrzut. Dla samej nawierzchni wyświetla się oznaczony podgląd Street Arena 15 (15 ×10 m), bez automatycznego przypisania konstrukcji do JSON lub ceny. Dodanie zgodnej konstrukcji lub wybór kompletnego boiska pozostaje jawny. Powrót do Nawierzchni pokazuje rzeczywisty projekt.
+
+Na telefonie Konstrukcja ma większy główny obszar modelu nad przewijanym panelem. Obejrzano zrzuty390/1440 i poprawiono konflikt wcześniejszego układu198px w studio-readability.css. PASS: TypeScript, test:studio, build, mobile375/390/430/1440 (materiały, JSON, Radar, powrót plan→Konstrukcja),16 przypadków nawierzchni z kontrolą niezmienności projektu przy podglądzie oraz końcowa kontrola kadru390/1440. Pierwszy nowy test klikał ukryty mobilny przycisk planu w Konstrukcji; poprawiono scenariusz na otwarcie planu z Nawierzchni. Bez zmian geometrii, cen lub sekretów kosztowych.
+
+Publikacja Studio99: źródło `8a983243ed5afdb2a55ea44eb87778d1c3f5e222`, wdrożenie `appgdep_6addff05a23c8191ad1d26212f03fb05` succeeded, env6. 
+
+
 ## 24.10.2026 — Studio98: nawierzchnie w Nawierzchni, konstrukcje stalowe w Konstrukcji
 
 Na polecenie właściciela przeniesiono katalog ośmiu nawierzchni sportowych, ich wymiary oraz pliki Blender/GLB do panelu Nawierzchnia, przed wzorem, kolorami, liniami i materiałem. Wybór formatu i zamknięcie katalogu wracają do Nawierzchni; nawigacja utrzymuje aktywne narzędzie. Konstrukcja zawiera wybór siedmiu stalowych modeli, zgodne dołączanie/odłączanie, kolory i rozbudowę. Usunięto z niej selektor nawierzchni. Stałe formaty nie pokazują ręcznej zmiany niezgodnych wymiarów w katalogu konstrukcji. Przycisk Panele działa także przy konstrukcji dołączonej do osobnej nawierzchni.
