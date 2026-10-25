@@ -7,6 +7,7 @@ import "./studio-canvas.css";
 import "./studio-usability.css";
 import "./studio-readability.css";
 import "./studio-pricing.css";
+import "./studio-mobile.css";
 
 export const metadata: Metadata = {
   title: {

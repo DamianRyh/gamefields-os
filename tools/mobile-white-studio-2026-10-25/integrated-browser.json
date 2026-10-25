@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 390,
+      "model": "street-field",
+      "integrated": true,
+      "json": true,
+      "priceGuard": true
+    },
+    {
+      "width": 390,
+      "model": "octagon",
+      "integrated": true,
+      "json": true,
+      "priceGuard": true
+    },
+    {
+      "width": 390,
+      "model": "circle-cage-1",
+      "integrated": true,
+      "json": true,
+      "priceGuard": true
+    },
+    {
+      "width": 390,
+      "model": "circle-cage-2",
+      "integrated": true,
+      "json": true,
+      "priceGuard": true
+    },
+    {
+      "width": 1440,
+      "model": "street-field",
+      "integrated": true,
+      "json": true,
+      "priceGuard": true
+    },
+    {
+      "width": 1440,
+      "model": "octagon",
+      "integrated": true,
+      "json": true,
+      "priceGuard": true
+    },
+    {
+      "width": 1440,
+      "model": "circle-cage-1",
+      "integrated": true,
+      "json": true,
+      "priceGuard": true
+    },
+    {
+      "width": 1440,
+      "model": "circle-cage-2",
+      "integrated": true,
+      "json": true,
+      "priceGuard": true
+    }
+  ],
+  "errors": []
+}

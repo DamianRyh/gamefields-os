@@ -96,9 +96,10 @@ export function StudioWorkspace(props:Props){
   }
  };
  useEffect(()=>{
-  if(window.parent===window)return;
-  const send=()=>{if(window.innerWidth<800)window.parent.postMessage({type:"gf-height",height:document.querySelector(".studio-shell")?.scrollHeight||1800},"https://www.gamefields.eu")};
-  const observer=new ResizeObserver(send);const shell=document.querySelector(".studio-shell");if(shell)observer.observe(shell);send();return()=>observer.disconnect();
+  const root=document.documentElement;
+  const fit=()=>{const height=Math.round(Math.min(window.innerHeight,window.visualViewport?.height||Infinity,window.screen.availHeight||Infinity));if(height>0)root.style.setProperty("--studio-viewport-height",`${height}px`)};
+  fit();window.addEventListener("resize",fit);window.visualViewport?.addEventListener("resize",fit);
+  return()=>{window.removeEventListener("resize",fit);window.visualViewport?.removeEventListener("resize",fit);root.style.removeProperty("--studio-viewport-height")};
  },[]);
  const selectedSurface=sportSurface(p.surfaceModel);
  const baseProfile=getSportProfile(p.sport,p.arenaModel),profile=selectedSurface&&!p.arenaModel?{...baseProfile,label:selectedSurface.name}:baseProfile,family=getPatternFamily(p.patternFamily),location=REALISTIC_LOCATIONS.find(l=>l.id===props.location);

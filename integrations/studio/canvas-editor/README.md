@@ -1,4 +1,9 @@
 # Gamefields — Studio i Radar
+## Białe tło i mobilne Studio na jednym ekranie — 25.10.2026
+
+Modele3D i budowanie modułowe korzystają z białego tła bez zdjęcia, gradientu i dekoracyjnej płaszczyzny. Mobilna wysokość jest ograniczona dostępnym viewportem; nagłówek układa się według treści. Przewija się tylko panel ustawień, a model pozostaje na miejscu. W poziomie model i ustawienia stoją obok siebie. Usunięto raportowanie scrollHeight do rodzica iframe. Nie zmieniono modeli, Project, cen ani danych. Szczegóły: MOBILE_WHITE_STUDIO_2026_10_25.md.
+
+
 ## Podgląd konstrukcji po kliknięciu menu — 25.10.2026
 
 Wejście w Konstrukcję lub wybór boiska zamyka plan edycji i przywraca główny model 3D. Przycisk zmiany konstrukcji ma natychmiastową miniaturę stalowego modelu z katalogu, bez oczekiwania na zrzut canvasu (archiwalny W1 zachowuje zrzut). Gdy projekt zawiera tylko nawierzchnię, panel pokazuje wyraźnie oznaczony podgląd Street Arena 15. Podgląd nie dodaje konstrukcji, nie zmienia JSON ani ceny; właściwe dołączenie zgodnego modelu lub wybór innego boiska pozostaje jawne. Powrót do Nawierzchni przywraca rzeczywisty projekt. Na telefonach Konstrukcja rezerwuje osobny większy obszar na pełny model 3D nad przewijanym panelem ustawień.

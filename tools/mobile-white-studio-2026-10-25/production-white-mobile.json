@@ -1,0 +1,83 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 375,
+      "height": 812,
+      "initial": {
+        "height": 812,
+        "viewport": 812,
+        "document": 812,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "panelHeight": 335
+      },
+      "after": {
+        "height": 812,
+        "viewport": 812,
+        "document": 812,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "panelHeight": 320
+      },
+      "parent": {
+        "height": 812,
+        "document": 900,
+        "iframe": 812
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "initial": {
+        "height": 844,
+        "viewport": 844,
+        "document": 844,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "panelHeight": 353
+      },
+      "after": {
+        "height": 844,
+        "viewport": 844,
+        "document": 844,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "panelHeight": 338
+      },
+      "parent": {
+        "height": 844,
+        "document": 932,
+        "iframe": 844
+      },
+      "errors": []
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "initial": {
+        "height": 390,
+        "viewport": 390,
+        "document": 390,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "panelHeight": 242
+      },
+      "after": {
+        "height": 390,
+        "viewport": 390,
+        "document": 390,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "panelHeight": 232
+      },
+      "parent": {
+        "height": 390,
+        "document": 454,
+        "iframe": 390
+      },
+      "errors": []
+    }
+  ]
+}

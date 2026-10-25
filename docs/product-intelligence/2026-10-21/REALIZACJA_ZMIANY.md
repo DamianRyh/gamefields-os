@@ -1,5 +1,16 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
+## 25.10.2026 — Studio100: białe tło i mobilny układ bez rozciągania
+
+Model3D i budowanie modułowe mają białe tło, bez gradientu, zdjęcia placu i dekoracyjnej płaszczyzny. Mobilne Studio jest ograniczone dostępnym viewportem, z nagłówkiem dopasowanym do treści. Model pozostaje na miejscu, a przewija się tylko panel ustawień. W krótkim poziomym widoku model i ustawienia są obok siebie. Zastąpiono nakładające się reguły 100dvh i tryb długiej strony; usunięto wysyłanie scrollHeight do rodzica iframe. Dostępne pozostają Cofnij/Ponów. Geometria, Project, ceny i sekrety nie zmienione.
+
+PASS: tsc, test:studio, build, mobile4 z materiałami/JSON/Radarem;5 formatów320×568/375×812/390×844/430×932/844×390 z ograniczeniem wysokości dokumentu, białą sceną modułową, rzeczywistymi emulowanymi gestami dotykowymi przewijającymi tylko panel, stałym kadrem i obrotem modelu; przejście pion/poziom/pion;4 rodziny modułowe ×390/1440 z kolorem, Cofnij/Ponów, zapisem i ochroną wyceny. Test modułów wykrył schowane mobilne Ponów — przywrócono przycisk i powtórzono kontrolę. Sprawdzenie początkowe publicznego osadzenia390×844 nie odtworzyło wielokrotnego wzrostu (Studio844px, rodzic932px); nie deklarujemy ustalonej przyczyny na konkretnym telefonie. Walidacja to Chromium/mobile/touch, nie fizyczny Safari.
+
+Publikacja Studio100: źródło `2fa3fc981046a128b0fa47ef218eb98312f012f2`, deployment `appgdep_6ade03f472a8819188b39220d553b93c` succeeded, env6. [Opis i granice](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/MOBILE_WHITE_STUDIO_2026_10_25.md). Dowody: tools/mobile-white-studio-2026-10-25/.
+
+Kontrola publicznego WordPress PASS375×812/390×844/844×390: Studio i iframe zachowują wysokość812/844/390px, tło białe także po włączeniu modułów i przewijaniu ustawień; brak błędów runtime. Rodzic ma dodatkowe88/88/64px nawigacji strony, nie kilka ekranów aplikacji.
+
+
 ## 25.10.2026 — Studio99: główny podgląd i miniatura konstrukcji
 
 Wejście w Konstrukcję lub katalog boisk zamyka plan edycji i przywraca model 3D. Przycisk Zmień boisko pokazuje od razu miniaturę stalowej konstrukcji z katalogu, bez czekania na zrzut canvasu; archiwalny W1 zachowuje swój zrzut. Dla samej nawierzchni wyświetla się oznaczony podgląd Street Arena 15 (15 ×10 m), bez automatycznego przypisania konstrukcji do JSON lub ceny. Dodanie zgodnej konstrukcji lub wybór kompletnego boiska pozostaje jawny. Powrót do Nawierzchni pokazuje rzeczywisty projekt.
