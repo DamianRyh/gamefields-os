@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {decorativeLineStyles} from '../lib/creative-lines.ts';
 import {calculateProjectQuote,parseRateCard,arenaSurfaceQuantities} from '../lib/quote-engine.ts';
 // Deliberately artificial fixture prices, not a commercial Gamefields rate card.
 const card=parseRateCard(JSON.stringify({version:'TEST-NOT-FOR-SALE',currency:'PLN',vatRate:.23,surfaces:{EPDM:{materialNetPerM2:100,installationNetPerM2:20}},patternNetPerM2:{1:10,2:20,3:30,4:40},linesNet:200,brandingNetPerItem:50,arenaNet:{octagon:10000},arenaInstallationNet:{octagon:500},equipmentNet:{Bramka:1000,Ławka:200},designNet:300,transportNet:400}));
@@ -8,6 +9,18 @@ let q=calculateProjectQuote(p,card,1);
 assert.equal(q.priceNet,20200);assert.equal(q.priceGross,24846);assert.equal(q.status,'estimated');
 assert.equal(calculateProjectQuote({...p,width:20},card,1).priceNet,39700);
 assert.equal(calculateProjectQuote({...p,lines:true},card,1).priceNet,20400);
+// Preview-only decorative artwork is not an approved paint-execution price.
+assert.deepEqual(calculateProjectQuote({...p,decorativeLineStyle:'none'},card,1),calculateProjectQuote(p,card,1),'None preserves the complete legacy quote');
+for(const style of decorativeLineStyles.filter(style=>style!=='none'))for(const lines of [false,true]){
+ const decorated=calculateProjectQuote({...p,lines,decorativeLineStyle:style},card,1);
+ assert.equal(decorated.status,'partial');assert.equal(decorated.priceNet,null);assert.equal(decorated.priceGross,null);
+ assert.equal(decorated.knownSubtotalNet,lines?20400:20200,'Decoration cannot silently receive the sport-line rate');
+ const item=decorated.items.find(item=>item.id==='decorative-lines');
+ assert(item);assert.equal(item.quantity,1);assert.equal(item.unitNet,null);assert.equal(item.totalNet,null);assert.match(item.note,/indywidualnej wyceny/);
+ assert.equal(decorated.items.some(item=>item.id==='lines'),lines,'Sport markings remain independently priced');
+}
+const unpricedDecoration=calculateProjectQuote({...p,decorativeLineStyle:'petals'},null,1);
+assert.equal(unpricedDecoration.status,'unpriced');assert.equal(unpricedDecoration.knownSubtotalNet,null);assert(unpricedDecoration.items.every(item=>item.totalNet===null));
 assert.equal(calculateProjectQuote(p,card,4).priceNet,24700);
 assert.equal(calculateProjectQuote({...p,objects:[{kind:'equipment',name:'Ławka'}]},card,1).priceNet,20400);
 assert.equal(calculateProjectQuote({...p,objects:[{kind:'image',name:'Logo'}]},card,1).priceNet,20250);

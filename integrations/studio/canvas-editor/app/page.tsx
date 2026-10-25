@@ -1,4 +1,5 @@
 "use client";
+import {CreativeCourtLines} from '@/components/creative-court-lines';
 import {modularGeometry} from "@/lib/studio-modular";
 import {graphicSourceError} from "@/lib/graphic-source-policy";
 import {useProjectRecovery} from "@/hooks/use-project-recovery";
@@ -145,6 +146,7 @@ export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,o
   {p.sport==="Skate"?<path d={"M50 "+h*.18+"H250L320 "+h*.42+"H550V"+h*.72+"H350L280 "+h*.55+"H50Z"} fill={p.zone} opacity=".32"/>:null}
   {p.sport==="Street Workout"?<><rect x="70" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".32"/><rect x="350" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".22"/></>:null}
   <g clipPath={"url(#"+clipId+")"}>{!p.sport.includes("Piłka nożna")||!isTurf(p.surface)?<PatternArt p={p} h={h}/>:null}{p.sport.includes("Piłka nożna")?<SurfaceAppearance surface={p.surface} id={patternId.replace(/:/g,"")} height={h} length={moduleSurface?.x??p.length}/>:null}</g>
+  <g clipPath={"url(#"+clipId+")"}><CreativeCourtLines project={p} height={h}/></g>
   {p.lines?<g fill="none" stroke={p.lineColor} strokeWidth="2.5">
    {round?<circle cx="300" cy="300" r="290"/>:<rect x="10" y="10" width="580" height={h-20}/>}
    {!round&&(p.sport.includes("Piłka nożna")||p.sport==="Wielofunkcyjne")?<><path d={"M300 10V"+(h-10)}/><circle cx="300" cy={h/2} r={Math.min(48,h*.18)}/><path d={"M10 "+h*.25+"H100V"+h*.75+"H10 M590 "+h*.25+"H500V"+h*.75+"H590"}/><circle cx="68" cy={h/2} r="2"/><circle cx="532" cy={h/2} r="2"/></>:null}

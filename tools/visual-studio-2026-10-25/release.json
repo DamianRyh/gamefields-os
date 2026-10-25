@@ -1,0 +1,85 @@
+{
+  "version": 101,
+  "commit_sha": "4925f02fe4467ef448b73ddff9fab282fa2d3668",
+  "saved": {
+    "id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_590298cce4ec8191877f1273850b41a9",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "version_number": 101,
+    "source": {
+      "commit_sha": "4925f02fe4467ef448b73ddff9fab282fa2d3668"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000013448210825b9adec885f06e",
+      "content_hash": "sha256:5f00c6d1732790c7e8da9ba4d381ad2da3c6b6030716a73f8ff7a8b2f034a4e8",
+      "size_bytes": 120944640,
+      "file_count": 243
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6ade117108d48191bb8d1011a5af32e2",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "title": "Gamefields Studio",
+    "version_id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_590298cce4ec8191877f1273850b41a9",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gamefields-studio.ryhfs90.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abbd0ba26f0819197701343bf156f1b",
+    "failure_message": null,
+    "env_set_revision": 6,
+    "updated_at": "2026-10-25T14:26:15.477829+00:00"
+  },
+  "checks": {
+    "tsc": "PASS",
+    "build": "PASS",
+    "studio": "PASS",
+    "mobile": [
+      375,
+      390,
+      430,
+      1440
+    ],
+    "modular": {
+      "models": 4,
+      "widths": [
+        390,
+        1440
+      ]
+    },
+    "whiteLayout": [
+      [
+        320,
+        568
+      ],
+      [
+        375,
+        812
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "visualCarousel": [
+      390,
+      1440
+    ]
+  },
+  "limits": [
+    "Chromium mobile emulation, not physical Safari",
+    "Decorative execution requires individual pricing",
+    "Existing build chunk/Leaflet warnings remain"
+  ]
+}

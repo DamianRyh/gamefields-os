@@ -1,3 +1,4 @@
+import {CreativeCourtLines} from '@/components/creative-court-lines';
 import type {Project} from '@/lib/project';
 import {sportSurface} from '@/lib/sport-surfaces';
 import {PatternArt} from './pattern-art';
@@ -20,4 +21,4 @@ export function SportSurfaceLines({project:p}:{project:Project}){
  {['street-football-3x3','futsal'].includes(s.id)?<>{line(L/2,0,L/2,W)}{circle(L/2,W/2,s.id==='futsal'?3:1.5)}{[false,true].map(reverse=><g key={String(reverse)} transform={reverse?`translate(${L} ${W}) rotate(180)`:undefined}>{s.id==='futsal'?<path d={`M0 ${W/2-7.5} A6 6 0 0 1 6 ${W/2-1.5}V${W/2+1.5} A6 6 0 0 1 0 ${W/2+7.5}`}/>:<rect x={0} y={W/2-2} width={2.5} height={4}/>}</g>)}</>:null}
  </g>;
 }
-export function SportSurfaceArt({project:p,plan=false}:{project:Project;plan?:boolean}){const s=sportSurface(p.surfaceModel);if(!s)return null;const h=600*s.width/s.length;return <svg xmlns="http://www.w3.org/2000/svg" width={plan?600:1024} height={plan?h:1024} preserveAspectRatio="none" viewBox={`0 0 600 ${h}`}><rect width={600} height={h} fill={p.base}/><PatternArt p={p} h={h}/><SurfaceAppearance surface={p.surface} id="sport-floor" height={h} length={s.length}/><SportSurfaceLines project={p}/><PannaSurfaceObjects project={p}/></svg>}
+export function SportSurfaceArt({project:p,plan=false}:{project:Project;plan?:boolean}){const s=sportSurface(p.surfaceModel);if(!s)return null;const h=600*s.width/s.length;return <svg xmlns="http://www.w3.org/2000/svg" width={plan?600:1024} height={plan?h:1024} preserveAspectRatio="none" viewBox={`0 0 600 ${h}`}><rect width={600} height={h} fill={p.base}/><PatternArt p={p} h={h}/><SurfaceAppearance surface={p.surface} id="sport-floor" height={h} length={s.length}/><CreativeCourtLines project={p} height={h}/><SportSurfaceLines project={p}/><PannaSurfaceObjects project={p}/></svg>}

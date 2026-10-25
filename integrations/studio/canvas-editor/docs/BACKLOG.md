@@ -1,4 +1,8 @@
 # Gamefields — backlog
+## Wizualne Studio — 25.10.2026
+
+Karuzele rzeczywistych konstrukcji, ośmiu nawierzchni sportowych,25rodzin/12kompozycji i czterech faktur materiałów; wspólny wybór kolorów konstrukcji i nawierzchni. Nawierzchnia ma krótkie zakładki Wzór/Kolory/Materiał/Sport. Numery kompozycji zastąpiono grafikami. Swipe, kliknięcie, strzałki i klawiatura zmieniają wspólny projekt3D; bez autoplay i dodatkowych scenWebGL. Pięć dekoracji linii niezależnie od oznaczeń sportowych, zapis JSON i częściowa wycena wykonania. Białe mobilne Studio zachowuje ograniczony viewport. [Audyt, źródła i ograniczenia](visual-studio-2026-10-25/AUDYT_I_WDROZENIE.md).
+
 ## Białe tło i mobilne Studio na jednym ekranie — 25.10.2026
 
 Modele3D i budowanie modułowe korzystają z białego tła bez zdjęcia, gradientu i dekoracyjnej płaszczyzny. Mobilna wysokość jest ograniczona dostępnym viewportem; nagłówek układa się według treści. Przewija się tylko panel ustawień, a model pozostaje na miejscu. W poziomie model i ustawienia stoją obok siebie. Usunięto raportowanie scrollHeight do rodzica iframe. Nie zmieniono modeli, Project, cen ani danych. Szczegóły: MOBILE_WHITE_STUDIO_2026_10_25.md.

@@ -1,5 +1,16 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
+## 25.10.2026 — Studio101: wybór przez obraz i kreatywne linie
+
+Wdrożono w istniejącym Studio: karuzele siedmiu stalowych konstrukcji, ośmiu sportowych nawierzchni,25rodzin wzorów/12kompozycji i czterech materiałów z istniejącymi renderami i fakturami. Numery1–12 zastąpiono rzeczywistymi miniaturami. Nawierzchnia ma krótkie zakładki Wzór/Kolory/Materiał/Sport; konstrukcja i nawierzchnia używają wspólnego wizualnego wyboru kolorów. Detale techniczne, logo i pliki są rozwijane. Biała scena i ograniczenie mobilnego viewportu zachowane.
+
+Wybór dotykiem/kliknięciem, strzałkami, klawiaturą lub zakończonym poziomym swipe zmienia wspólny Project i główny model3D. Brak autoplay i dodatkowych scenWebGL. Natywny test dotykowy wykrył pointercancel bez wyboru; poprawiono touchmove. Jedno Cofnij odwraca przesunięcie, ruch pionowy nie wybiera produktu. Pięć niezależnych dekoracji: Fale/Płatki/Pętle/Orbity/Kontury. Opcjonalne decorativeLineStyle ma walidację i zapisJSON; brak/none zachowuje stare wyniki. Nie zastępuje oznaczeń sportowych; wykonanie dekoracji to osobna nieznana pozycja i częściowa kalkulacja, bez wymyślonych stawek. Koszty/marża nadal wyłącznie na serwerze.
+
+PASS: tsc, test:studio, build, mobile375/390/430/1440 z materiałami/JSON/Radarem;4rodziny modułowe×390/1440;5mobilnych formatów320×568–844×390 z dotykowym przewijaniem panelu, bielą i obrotem; nowy test wizualny390/1440 z12różnymi podglądami, swipe/Cofnij, zmianą modelu, koloru, materiału oraz dekoracją wJSON i pikselach3D. Ręcznie obejrzano działające Studio i zrzuty390/1440. To emulacjaChromium, nie fizycznySafari lub badanie konwersji.
+
+Publikacja101: źródło `4925f02fe4467ef448b73ddff9fab282fa2d3668`, deployment `appgdep_6ade117108d48191bb8d1011a5af32e2` **succeeded**, env6. [Audyt, benchmarki i kontrakt](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/visual-studio-2026-10-25/AUDYT_I_WDROZENIE.md). Dowody: tools/visual-studio-2026-10-25/. Pozostałe zależności techniczne/BOM i badania na urządzeniach nie są oznaczane jako zakończone.
+
+
 ## 25.10.2026 — Studio100: białe tło i mobilny układ bez rozciągania
 
 Model3D i budowanie modułowe mają białe tło, bez gradientu, zdjęcia placu i dekoracyjnej płaszczyzny. Mobilne Studio jest ograniczone dostępnym viewportem, z nagłówkiem dopasowanym do treści. Model pozostaje na miejscu, a przewija się tylko panel ustawień. W krótkim poziomym widoku model i ustawienia są obok siebie. Zastąpiono nakładające się reguły 100dvh i tryb długiej strony; usunięto wysyłanie scrollHeight do rodzica iframe. Dostępne pozostają Cofnij/Ponów. Geometria, Project, ceny i sekrety nie zmienione.

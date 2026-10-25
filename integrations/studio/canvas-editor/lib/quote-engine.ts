@@ -1,8 +1,9 @@
 import {sportSurface} from './sport-surfaces.ts';
 import {modularGeometry} from './studio-modular.ts';
+import {creativeLineOptions,type DecorativeLineStyle} from './creative-lines.ts';
 /** Commercial rates are supplied by the owner, never inferred from preview colours or scene. */
 export type RateCard={workingAssumptions?:boolean;notice?:string;version:string;currency:"PLN";vatRate?:number;surfaces:Record<string,{materialNetPerM2:number;installationNetPerM2:number}>;patternNetPerM2:Record<string,number>;colorPolicy?:{includedColors:number;additionalColorNetPerM2:number};linesNet:number;brandingNetPerItem:number;arenaNet:Record<string,number>;arenaInstallationNet?:Record<string,number>;finishNet?:Record<string,number>;equipmentNet:Record<string,number>;designNet:number;transportNet:number;exclusions:string[]};
-export type QuoteInput={surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string}[]};
+export type QuoteInput={decorativeLineStyle?:DecorativeLineStyle;surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string}[]};
 export type QuoteItem={id:string;label:string;quantity:number;unit:string;unitNet:number|null;totalNet:number|null;note?:string};
 export type ProjectQuote={workingAssumptions?:boolean;constructionPrices?:Record<string,number>;notice?:string;schemaVersion:2;status:"estimated"|"partial"|"unpriced";currency:"PLN";rateVersion:string|null;priceNet:number|null;priceGross:number|null;vatRate:number|null;knownSubtotalNet:number|null;area:number;areaLabel:string;items:QuoteItem[];exclusions:string[];assumptions:string[]};
 // Shared source-derived geometry; keep this re-export for existing consumers.
@@ -46,6 +47,11 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
   add("palette-colors",`Paleta projektu · ${colors.size} kolorów · ${extra} ponad pakiet`,billableArea,"m²",money(extra*c.colorPolicy.additionalColorNetPerM2),`Budżet wybranej palety, nie pomiar widocznych kolorów ani receptura farb. Pakiet: ${c.colorPolicy.includedColors}; każdy dodatkowy kolor: ${c.colorPolicy.additionalColorNetPerM2} PLN/m². Linie, logo, napisy, gradienty i cienie rozliczane lub weryfikowane oddzielnie.`);
  }
  if(p.lines)add("lines","Linie sportowe",1,"kpl.",c?.linesNet);
+ // Decorative strokes have no approved execution rate; never treat the sport-line price as their price.
+ if(p.decorativeLineStyle&&p.decorativeLineStyle!=="none"){
+  const name=creativeLineOptions.find(option=>option.id===p.decorativeLineStyle)?.name||"Wzór indywidualny";
+  add("decorative-lines",`Linie dekoracyjne · ${name}`,1,"kpl.",undefined,"Wykonanie dekoracyjnych linii wymaga indywidualnej wyceny. Nie jest ujęte w cenie standardowych linii sportowych ani grafiki nawierzchni.");
+ }
  if(p.arenaModel){add("arena","Konstrukcja z bramkami",1,"kpl.",p.modular?undefined:c?.arenaNet[p.arenaModel],p.modular?"Konstrukcja modułowa wymaga wyceny z liczby komponentów.":"Cena modelu bazowego; obejmuje wbudowane bramki.");add("arena-installation","Montaż konstrukcji",1,"kpl.",p.modular?undefined:c?.arenaInstallationNet?.[p.arenaModel]);}
  const equipment=new Map<string,number>();let bundledGoals=p.arenaModel?2:0;
  for(const o of p.objects.filter(o=>o.kind==="equipment")){
