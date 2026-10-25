@@ -11,13 +11,16 @@
 .studio-canvas-editor .studio-color-parts{display:flex;gap:12px;justify-content:space-between;margin:4px 0 18px}
 .studio-canvas-editor .studio-color-part{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;border:1px solid transparent;border-radius:14px;padding:12px 4px;background:#fff}
 .studio-canvas-editor .studio-color-part[data-active=true]{background:#faf8ff;border-color:#d5c5ff}
-.studio-canvas-editor .studio-color-part input{width:48px;height:48px;padding:0;border:0;border-radius:50%;overflow:hidden;background:none;cursor:pointer}
-.studio-canvas-editor .studio-color-part input::-webkit-color-swatch-wrapper{padding:2px}
-.studio-canvas-editor .studio-color-part input::-webkit-color-swatch{border-radius:50%;border:1px solid #ddd}
-.studio-canvas-editor .studio-color-part button{font-size:16px;font-weight:600;border:0;background:none;padding:6px;min-height:44px}
-.studio-canvas-editor .studio-color-presets{display:flex;gap:10px;flex-wrap:wrap}
-.studio-canvas-editor .studio-color-presets button{width:44px;height:44px;border:1px solid #ccc;border-radius:50%;color:white;font-size:20px;text-shadow:0 1px 3px #000}
-.studio-canvas-editor .studio-color-presets button[aria-pressed=true]{outline:2px solid #6432ff;outline-offset:3px}
+.studio-canvas-editor .studio-color-part input{width:100%;height:70px;min-height:44px;padding:0;border:0;border-radius:10px;overflow:hidden;background:none;cursor:pointer}
+.studio-canvas-editor .studio-color-part input::-webkit-color-swatch-wrapper{padding:0}
+.studio-canvas-editor .studio-color-part input::-webkit-color-swatch{border-radius:10px;border:1px solid #ddd}
+.studio-canvas-editor .studio-color-part input::-moz-color-swatch{border-radius:10px;border:1px solid #ddd}
+.studio-canvas-editor .studio-color-part button{font-size:16px;font-weight:600;border:0;background:none;padding:6px;min-height:44px;width:100%}
+.studio-canvas-editor .studio-solid-sample{display:block;width:100%;height:100%;min-height:80px}
+.studio-canvas-editor .studio-visual-colors .studio-visual-carousel-media{aspect-ratio:1.6}
+.studio-canvas-editor .studio-color-part{padding:6px;gap:2px;min-width:0}
+.studio-canvas-editor .studio-color-part input:focus-visible{outline:3px solid #6432ff;outline-offset:3px}
+.studio-canvas-editor .studio-color-part[data-active=true]{border-color:#6432ff;box-shadow:inset 0 0 0 1px #6432ff}
 .studio-canvas-editor .studio-palette-sample{display:flex;width:100%;height:100%;min-height:72px;overflow:hidden}
 .studio-canvas-editor .studio-palette-sample i{flex:1}
 .studio-canvas-editor .studio-construction-bar{display:block}
@@ -26,7 +29,17 @@
 .studio-canvas-editor .studio-technical{border-top:1px solid #e8e3e9;margin-top:16px}
 .studio-canvas-editor .studio-dock-heading h1{font-size:22px}
 .studio-canvas-editor .studio-visual-carousel-heading{margin-bottom:8px}
-.studio-canvas-editor .studio-visual-carousel-name{font-size:14px;line-height:1.4}
+.studio-canvas-editor .studio-visual-carousel-name{font-size:15px;line-height:1.4}
 .studio-canvas-editor .studio-current-model{margin-top:8px}
 @media(max-width:700px){.studio-canvas-editor .studio-panel{padding:14px 16px!important}.studio-canvas-editor .studio-dock-heading{padding-bottom:10px;margin-bottom:8px}.studio-canvas-editor .studio-dock-heading h1{font-size:21px}.studio-canvas-editor .studio-visual-tabs{gap:4px;padding-bottom:10px}.studio-canvas-editor .studio-visual-tabs button{font-size:13px;padding:7px 10px}.studio-canvas-editor .studio-color-part button{font-size:15px}.studio-canvas-editor .studio-color-parts{gap:4px}.studio-canvas-editor .studio-stage,.studio-canvas-editor .studio-visual,.studio-canvas-editor .studio-render{background:#fff!important}}
 @media(prefers-reduced-motion:reduce){.studio-canvas-editor *{scroll-behavior:auto!important}}
+
+/* Keep the image and its name together in the bounded editing window. */
+.studio-canvas-editor .studio-panel{padding:14px 20px!important}
+.studio-canvas-editor .studio-dock-heading{padding:0 0 6px;margin:0 0 8px;min-height:44px;top:-14px}
+.studio-canvas-editor .studio-visual-tabs{padding:0 0 6px}
+.studio-canvas-editor .studio-visual-carousel-media{aspect-ratio:1.6}
+@media(max-width:700px){.studio-canvas-editor .studio-dock-heading{padding:0 0 6px;margin:0 0 8px;min-height:44px;top:-14px}.studio-canvas-editor .studio-visual-tabs{padding-bottom:6px}}
+.studio-canvas-editor .studio-dock-heading{padding-top:14px;margin-top:-14px}
+/* A scrolling panel heading must not cover card names on short screens. */
+.studio-shell.studio-canvas-editor .studio-dock-heading{position:relative!important;top:auto!important;margin-top:0;padding-top:0}

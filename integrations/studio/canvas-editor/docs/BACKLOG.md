@@ -1,4 +1,8 @@
 # Gamefields — backlog
+## Duże karty kolorów i realistyczne materiały — 25.10.2026
+
+Odcienie i części mają nazwane prostokątne karty zamiast małych kółek. Konstrukcja i nawierzchnia korzystają ze wspólnego wzorca wyboru. Trzy nowe makrografikiAI pokazują granulat, ażurowe płytki i sztuczną murawę; Malowana pokazuje aktualny wzór. Szczegóły próbek wyjaśniają ilustracyjne pochodzenie. Wspólny model3D, kolory, zapis i Cofnij zachowane. [Zakres, prompty i kontrola](visual-studio-2026-10-25/KARTY_KOLOROW_I_MATERIALOW.md).
+
 ## Wizualne Studio — 25.10.2026
 
 Karuzele rzeczywistych konstrukcji, ośmiu nawierzchni sportowych,25rodzin/12kompozycji i czterech faktur materiałów; wspólny wybór kolorów konstrukcji i nawierzchni. Nawierzchnia ma krótkie zakładki Wzór/Kolory/Materiał/Sport. Numery kompozycji zastąpiono grafikami. Swipe, kliknięcie, strzałki i klawiatura zmieniają wspólny projekt3D; bez autoplay i dodatkowych scenWebGL. Pięć dekoracji linii niezależnie od oznaczeń sportowych, zapis JSON i częściowa wycena wykonania. Białe mobilne Studio zachowuje ograniczony viewport. [Audyt, źródła i ograniczenia](visual-studio-2026-10-25/AUDYT_I_WDROZENIE.md).

@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-25",
+  "source": "Built-in image_gen; AI-generated illustrative material macro images, not manufacturer product photographs",
+  "items": [
+    {
+      "id": "granulat",
+      "asset": "granulat-macro.webp",
+      "sha256": "a9be18a2263b8f611d731f6991fbaedfcd95dfaba36b771496812d205ed24919",
+      "bytes": 494480
+    },
+    {
+      "id": "plytki",
+      "asset": "plytki-macro.webp",
+      "sha256": "b6c1025211a9ab3273fb1f5abbd79dc81c5e4ec350bd6dfb3f4f6e4fad6d735e",
+      "bytes": 311232
+    },
+    {
+      "id": "trawa",
+      "asset": "trawa-macro.webp",
+      "sha256": "5698acf617bf8ef46716650a9f66e140dff2bbae96f234991a7d5b138b9fc76f",
+      "bytes": 395960
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "version": 102,
+  "source": "9a8cb2a1d0f1b0f2139fde0d164ad918ffa491da",
+  "saved": {
+    "id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_4a85d79519e88191815b0f6b43aa8314",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "version_number": 102,
+    "source": {
+      "commit_sha": "9a8cb2a1d0f1b0f2139fde0d164ad918ffa491da"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000607c820cbf1f78f805e9079a",
+      "content_hash": "sha256:524716c0344dfb8a7d5b75e858d5a8de2ef7f3e3c04e7bc1965d8540fa95542f",
+      "size_bytes": 122152960,
+      "file_count": 247
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6ade1cdb0e608191b845ed6cd4899e73",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "title": "Gamefields Studio",
+    "version_id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_4a85d79519e88191815b0f6b43aa8314",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gamefields-studio.ryhfs90.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abbd0ba26f0819197701343bf156f1b",
+    "failure_message": null,
+    "env_set_revision": 6,
+    "updated_at": "2026-10-25T15:15:05.478847+00:00"
+  },
+  "checks": {
+    "tsc": "PASS",
+    "studio": "PASS",
+    "build": "PASS",
+    "mobile": [
+      375,
+      390,
+      430,
+      1440
+    ],
+    "visual": [
+      390,
+      1440
+    ],
+    "whiteLayout": [
+      [
+        320,
+        568
+      ],
+      [
+        375,
+        812
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ],
+      [
+        844,
+        390
+      ]
+    ]
+  },
+  "assets": "public/surfaces/catalogue/manifest.json",
+  "notes": [
+    "AI material illustrations, not manufacturer photographs",
+    "Painted card renders actual current PatternArt",
+    "Project schema, models and commercial rates unchanged",
+    "Physical Safari not tested"
+  ]
+}

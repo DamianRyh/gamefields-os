@@ -1,5 +1,16 @@
 # Zestawienie Gamefields.eu.txt z realizacją — 23.10.2026
 
+## 25.10.2026 — Studio102: duże karty kolorów i realistyczne materiały
+
+Wspólny edytor konstrukcji i nawierzchni ma prostokątne próbki części oraz duże karty odcieni z nazwami, w tej samej karuzeli co wzory i sporty. Zachowano własny kolor, kliknięcie/swipe/strzałki/klawiaturę, wspólny3D i Cofnij/Ponów. Dopasowano proporcje grafik i odstępy, aby nazwa materiału mieściła się razem z obrazem. Nagłówek przewija się razem z panelem, bez zasłaniania kart.
+
+Wygenerowano trzy ilustracyjne makrofaktury: granulatuEPDM, ażurowych płytek modułowych i włókien sztucznej murawy. Malowana pokazuje bieżący wzór i kolory z PatternArt. Grafiki nie są fotografiami produktu wskazanego producenta; pochodzenie objaśnia sekcja próbek. Modele, materiałyPBR3D, schematProject i stawki nie zostały zmienione. Manifest plików zSHA256: integrations/studio/canvas-editor/public/surfaces/catalogue/manifest.json.
+
+PASS: tsc, test:studio, build, mobile375/390/430/1440 (16zmian materiałów, kolory, JSON, Radar); rozszerzony wizualny390/1440 (nazwane karty≥126×100px, trzy dekodujące się grafiki, SVGMalowanej, nazwa materiału w obrębie panelu, swipe/Cofnij, reakcja3D); biały mobilny układ5formatów. Obejrzano zrzuty i lokalne działające materiały. EmulacjaChromium, bez deklaracji testu na fizycznymSafari.
+
+Publikacja102: źródło `9a8cb2a1d0f1b0f2139fde0d164ad918ffa491da`, deployment `appgdep_6ade1cdb0e608191b845ed6cd4899e73` **succeeded**, env6. [Opis, prompty i kontrola](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/visual-studio-2026-10-25/KARTY_KOLOROW_I_MATERIALOW.md). Dowody: tools/material-cards-2026-10-25/. Istniejące ograniczenia techniczne/BOM i badania z użytkownikami pozostają.
+
+
 ## 25.10.2026 — Studio101: wybór przez obraz i kreatywne linie
 
 Wdrożono w istniejącym Studio: karuzele siedmiu stalowych konstrukcji, ośmiu sportowych nawierzchni,25rodzin wzorów/12kompozycji i czterech materiałów z istniejącymi renderami i fakturami. Numery1–12 zastąpiono rzeczywistymi miniaturami. Nawierzchnia ma krótkie zakładki Wzór/Kolory/Materiał/Sport; konstrukcja i nawierzchnia używają wspólnego wizualnego wyboru kolorów. Detale techniczne, logo i pliki są rozwijane. Biała scena i ograniczenie mobilnego viewportu zachowane.
