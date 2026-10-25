@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 390,
+      "compositionPreviews": 12,
+      "swipedVariant": 3,
+      "swipeUndo": true,
+      "verticalGestureSafe": true,
+      "construction": "street15",
+      "material": "EPDM",
+      "decorative": "petals",
+      "white": true
+    },
+    {
+      "width": 1440,
+      "compositionPreviews": 12,
+      "swipedVariant": 3,
+      "swipeUndo": true,
+      "verticalGestureSafe": true,
+      "construction": "street15",
+      "material": "EPDM",
+      "decorative": "petals",
+      "white": true
+    }
+  ],
+  "errors": []
+}

@@ -1,4 +1,8 @@
 # Gamefields — Studio i Radar
+## Proste Studio: większy model i progresywna grafika — 25.10.2026
+
+Dwie równe części przestrzeni roboczej: model/wybór, pionowo na telefonie i obok siebie na szerokim ekranie. Usunięto przełącznikModel3D, Plan edycji, Radar i powtarzane nagłówki. Nazwa na scenie, większe kwadratowe karty i model. Rozbudowa obsługiwanych rodzin bez aktywacji; zmiana dopiero przy świadomym kroku. Grafika ma Linie/Logo/Tekst, warstwy i położenie na żywym3D, centrowanie, duplikację i Cofnij. [Kontrakt, zakres i testy](docs/visual-studio-2026-10-25/PROSTY_PODZIAL_I_GRAFIKA.md).
+
 ## Duże karty kolorów i realistyczne materiały — 25.10.2026
 
 Odcienie i części mają nazwane prostokątne karty zamiast małych kółek. Konstrukcja i nawierzchnia korzystają ze wspólnego wzorca wyboru. Trzy nowe makrografikiAI pokazują granulat, ażurowe płytki i sztuczną murawę; Malowana pokazuje aktualny wzór. Szczegóły próbek wyjaśniają ilustracyjne pochodzenie. Wspólny model3D, kolory, zapis i Cofnij zachowane. [Zakres, prompty i kontrola](docs/visual-studio-2026-10-25/KARTY_KOLOROW_I_MATERIALOW.md).

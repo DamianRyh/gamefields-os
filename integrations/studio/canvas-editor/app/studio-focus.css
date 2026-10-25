@@ -1,0 +1,69 @@
+/* One live scene and one visual editor; no competing camera or navigation modes. */
+body:has(.studio-canvas-editor){overflow:hidden;background:#fff}
+.studio-shell.studio-canvas-editor{height:var(--studio-viewport-height,100dvh)!important;min-height:0!important;max-height:var(--studio-viewport-height,100dvh)!important;overflow:hidden!important}
+.studio-shell.studio-canvas-editor .studio-workspace-content{height:100%!important;min-height:0!important;display:grid!important;grid-template-rows:auto minmax(0,1fr)!important;overflow:hidden}
+.studio-shell.studio-canvas-editor .studio-topbar{height:60px!important;min-height:60px!important;padding:6px 16px!important;display:flex!important;gap:12px;align-items:center}
+.studio-shell.studio-canvas-editor .studio-top-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+.studio-shell.studio-canvas-editor .studio-top-actions>button:not(.studio-primary){height:44px;min-width:44px;border:1px solid #e6e0e7;border-radius:12px;display:flex;align-items:center;justify-content:center;background:white;padding:8px}
+.studio-shell.studio-canvas-editor .studio-save{margin-left:auto;font-size:12px;max-width:180px}
+.studio-shell.studio-canvas-editor .studio-screen{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:56px minmax(0,1fr)!important;height:100%!important;min-height:0!important;padding:0!important;gap:0;overflow:hidden}
+.studio-shell.studio-canvas-editor .studio-visual{position:relative!important;inset:auto!important;grid-column:1!important;grid-row:1/-1!important;height:100%!important;min-height:0!important;width:100%;overflow:hidden;border-right:1px solid #eee8ef;display:flex;align-items:center;justify-content:center}
+.studio-shell.studio-canvas-editor .studio-stage{position:relative;height:100%!important;min-height:0!important;width:100%;aspect-ratio:auto!important;overflow:hidden}
+.studio-shell.studio-canvas-editor .studio-render{height:100%!important;width:100%!important;min-height:0!important;padding:0!important;transform:none!important}
+.studio-shell.studio-canvas-editor .studio-render>.panna-studio-model{width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
+.studio-shell.studio-canvas-editor .studio-scene-name{position:absolute!important;z-index:4;top:14px;left:12px;right:12px;width:calc(100% - 24px)!important;min-height:44px;max-height:52px;padding:8px 12px!important;text-align:center!important;font-size:clamp(16px,1.5vw,23px)!important;font-weight:650;background:#ffffffdb;border:1px solid transparent;border-radius:12px;box-shadow:none}
+.studio-shell.studio-canvas-editor .studio-scene-name:focus{border-color:#6432ff;background:white;outline:2px solid #d5c5ff}
+.studio-shell.studio-canvas-editor .studio-toolbar{position:absolute;z-index:5;top:auto!important;bottom:12px;left:12px!important;right:12px!important;display:flex!important;justify-content:space-between;align-items:center;gap:8px;padding:0}
+.studio-shell.studio-canvas-editor .studio-history{position:static!important;display:flex!important;width:88px!important;gap:0;background:#ffffffed;border:1px solid #e8e2ec;border-radius:12px;overflow:hidden}
+.studio-shell.studio-canvas-editor .studio-history button{width:44px!important;min-width:44px!important;height:44px;min-height:44px;padding:8px!important}
+.studio-shell.studio-canvas-editor .studio-history button+button{display:flex!important}
+.studio-shell.studio-canvas-editor .studio-modular-standard{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;font-size:13px;border:1px solid #e2d8f5;border-radius:12px;background:#f6f2ff;color:#4a122b}
+.studio-shell.studio-canvas-editor .studio-tool-rail{position:relative!important;inset:auto!important;grid-column:2!important;grid-row:1!important;height:56px!important;min-height:56px!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));width:auto!important;margin:0!important;border:0;border-bottom:1px solid #e8e2ec;border-radius:0;overflow:hidden}
+.studio-shell.studio-canvas-editor .studio-tool-rail button{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;min-height:56px!important;padding:8px;font-size:14px!important}
+.studio-shell.studio-canvas-editor .studio-tool-rail svg{width:20px;height:20px}
+.studio-shell.studio-canvas-editor .studio-panel{position:relative!important;inset:auto!important;grid-column:2!important;grid-row:2!important;height:auto!important;min-height:0!important;max-height:none!important;padding:14px 18px!important;margin:0!important;border:0;border-radius:0;box-shadow:none;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scroll-padding:12px;touch-action:pan-y}
+.studio-shell.studio-canvas-editor .studio-visual-carousel{position:relative;margin:8px 0 18px}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-heading{position:absolute;right:8px;top:8px;z-index:2;margin:0}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-heading>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-controls{gap:4px}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-controls button{background:#ffffffed;box-shadow:0 2px 7px #2b0d2110;width:44px;height:44px}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-rail{padding-top:2px;gap:16px}
+.studio-shell.studio-canvas-editor .studio-visual-carousel .studio-visual-carousel-card{flex-basis:clamp(210px,27vw,360px);border-radius:20px;padding:7px 7px 14px}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-media{aspect-ratio:1;border-radius:14px}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-name{font-size:17px;padding:10px 8px 2px}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-caption{font-size:14px;padding:0 8px}
+.studio-shell.studio-canvas-editor .studio-visual-carousel-check{top:auto;bottom:10px;right:10px;width:28px;height:28px}
+.studio-shell.studio-canvas-editor .studio-stage-footer,.studio-shell.studio-canvas-editor .studio-orbit-hint,.studio-shell.studio-canvas-editor .studio-selected-model-label{display:none!important}
+.studio-shell.studio-canvas-editor .studio-construction-preview-note{top:64px!important;font-size:11px;left:12px;right:12px;padding:4px 8px;background:#ffffffdc}
+.studio-shell.studio-canvas-editor .studio-modular-controls>h2{display:none}
+.studio-shell.studio-canvas-editor .studio-object-list img{object-fit:contain;background:#faf8fc;border-radius:8px}
+.studio-shell.studio-canvas-editor .studio-object-list>div>button:first-child{display:flex;gap:12px;align-items:center;min-height:56px}
+.studio-shell.studio-canvas-editor .studio-object-list button[aria-pressed=true]{border:2px solid #6432ff;border-radius:10px}
+@media(max-width:800px){
+ .studio-shell.studio-canvas-editor .studio-topbar{height:56px!important;min-height:56px!important;padding:4px 10px!important;gap:6px}
+ .studio-shell.studio-canvas-editor .studio-logo{font-size:20px!important}
+ .studio-shell.studio-canvas-editor .studio-save:not(.studio-recovery-status){display:none!important}
+ .studio-shell.studio-canvas-editor .studio-save-project{width:44px!important;min-width:44px!important}
+ .studio-shell.studio-canvas-editor .studio-top-actions{gap:5px}
+ .studio-shell.studio-canvas-editor .studio-top-actions>button:not(.studio-primary){min-width:40px;width:40px;padding:6px}
+ .studio-shell.studio-canvas-editor .studio-quote-badge{max-width:132px;min-height:44px;padding:5px 7px!important}
+ .studio-shell.studio-canvas-editor .studio-screen{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) 56px minmax(0,1fr)!important}
+ .studio-shell.studio-canvas-editor .studio-visual{grid-column:1!important;grid-row:1!important;border-right:0}
+ .studio-shell.studio-canvas-editor .studio-tool-rail{grid-column:1!important;grid-row:2!important}
+ .studio-shell.studio-canvas-editor .studio-panel{grid-column:1!important;grid-row:3!important;padding:10px 12px!important}
+ .studio-shell.studio-canvas-editor .studio-scene-name{top:4px;left:8px;right:8px;width:calc(100% - 16px)!important;font-size:16px!important}
+ .studio-shell.studio-canvas-editor .studio-toolbar{bottom:6px;left:8px!important;right:8px!important}
+ .studio-shell.studio-canvas-editor .studio-modular-standard{font-size:12px;padding:6px 9px;gap:5px}
+ .studio-shell.studio-canvas-editor .studio-visual-carousel .studio-visual-carousel-card{flex-basis:clamp(205px,64vw,320px)}
+ .studio-shell.studio-canvas-editor .studio-visual-tabs{padding-bottom:6px}
+ .studio-shell.studio-canvas-editor .studio-tool-rail button{font-size:12px!important;gap:5px}
+}
+@media(max-height:500px) and (min-width:601px){
+ .studio-shell.studio-canvas-editor .studio-screen{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:56px minmax(0,1fr)!important}
+ .studio-shell.studio-canvas-editor .studio-visual{grid-column:1!important;grid-row:1/-1!important}
+ .studio-shell.studio-canvas-editor .studio-tool-rail{grid-column:2!important;grid-row:1!important}
+ .studio-shell.studio-canvas-editor .studio-panel{grid-column:2!important;grid-row:2!important}
+}
+@media(max-width:360px){.studio-shell.studio-canvas-editor .studio-logo{font-size:17px!important}.studio-shell.studio-canvas-editor .studio-top-actions{gap:3px}.studio-shell.studio-canvas-editor .studio-top-actions>button:not(.studio-primary){width:36px;min-width:36px}.studio-shell.studio-canvas-editor .studio-quote-badge{max-width:120px}}
+/* Remove the older desktop zoom so the larger fitted model stays inside its canvas. */
+.studio-shell.studio-canvas-editor .studio-render>.panna-studio-model{transform:none!important}

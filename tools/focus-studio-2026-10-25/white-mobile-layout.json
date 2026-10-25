@@ -1,0 +1,451 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 320,
+      "height": 568,
+      "before": {
+        "viewport": 568,
+        "root": 568,
+        "document": 568,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 56,
+          "width": 320,
+          "height": 228,
+          "top": 56,
+          "right": 320,
+          "bottom": 284,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 340,
+          "width": 320,
+          "height": 228,
+          "top": 340,
+          "right": 320,
+          "bottom": 568,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 320,
+          "height": 228,
+          "top": 56,
+          "right": 320,
+          "bottom": 284,
+          "left": 0
+        },
+        "panelScroll": 0,
+        "panelContent": 592,
+        "panelHeight": 228
+      },
+      "after": {
+        "viewport": 568,
+        "root": 568,
+        "document": 568,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 56,
+          "width": 320,
+          "height": 228,
+          "top": 56,
+          "right": 320,
+          "bottom": 284,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 340,
+          "width": 320,
+          "height": 228,
+          "top": 340,
+          "right": 320,
+          "bottom": 568,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 320,
+          "height": 228,
+          "top": 56,
+          "right": 320,
+          "bottom": 284,
+          "left": 0
+        },
+        "panelScroll": 173,
+        "panelContent": 592,
+        "panelHeight": 228
+      },
+      "touchScroll": true,
+      "orbit": true,
+      "modularWhite": true
+    },
+    {
+      "width": 375,
+      "height": 812,
+      "before": {
+        "viewport": 812,
+        "root": 812,
+        "document": 812,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 56,
+          "width": 375,
+          "height": 350,
+          "top": 56,
+          "right": 375,
+          "bottom": 406,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 462,
+          "width": 375,
+          "height": 350,
+          "top": 462,
+          "right": 375,
+          "bottom": 812,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 375,
+          "height": 350,
+          "top": 56,
+          "right": 375,
+          "bottom": 406,
+          "left": 0
+        },
+        "panelScroll": 0,
+        "panelContent": 553,
+        "panelHeight": 350
+      },
+      "after": {
+        "viewport": 812,
+        "root": 812,
+        "document": 812,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 56,
+          "width": 375,
+          "height": 350,
+          "top": 56,
+          "right": 375,
+          "bottom": 406,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 462,
+          "width": 375,
+          "height": 350,
+          "top": 462,
+          "right": 375,
+          "bottom": 812,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 375,
+          "height": 350,
+          "top": 56,
+          "right": 375,
+          "bottom": 406,
+          "left": 0
+        },
+        "panelScroll": 203,
+        "panelContent": 553,
+        "panelHeight": 350
+      },
+      "touchScroll": true,
+      "orbit": true,
+      "modularWhite": true
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "before": {
+        "viewport": 844,
+        "root": 844,
+        "document": 844,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 56,
+          "width": 390,
+          "height": 366,
+          "top": 56,
+          "right": 390,
+          "bottom": 422,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 478,
+          "width": 390,
+          "height": 366,
+          "top": 478,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 390,
+          "height": 366,
+          "top": 56,
+          "right": 390,
+          "bottom": 422,
+          "left": 0
+        },
+        "panelScroll": 0,
+        "panelContent": 553,
+        "panelHeight": 366
+      },
+      "after": {
+        "viewport": 844,
+        "root": 844,
+        "document": 844,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 56,
+          "width": 390,
+          "height": 366,
+          "top": 56,
+          "right": 390,
+          "bottom": 422,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 478,
+          "width": 390,
+          "height": 366,
+          "top": 478,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 390,
+          "height": 366,
+          "top": 56,
+          "right": 390,
+          "bottom": 422,
+          "left": 0
+        },
+        "panelScroll": 187,
+        "panelContent": 553,
+        "panelHeight": 366
+      },
+      "touchScroll": true,
+      "orbit": true,
+      "modularWhite": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "before": {
+        "viewport": 932,
+        "root": 932,
+        "document": 932,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 56,
+          "width": 430,
+          "height": 410,
+          "top": 56,
+          "right": 430,
+          "bottom": 466,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 522,
+          "width": 430,
+          "height": 410,
+          "top": 522,
+          "right": 430,
+          "bottom": 932,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 430,
+          "height": 410,
+          "top": 56,
+          "right": 430,
+          "bottom": 466,
+          "left": 0
+        },
+        "panelScroll": 0,
+        "panelContent": 553,
+        "panelHeight": 410
+      },
+      "after": {
+        "viewport": 932,
+        "root": 932,
+        "document": 932,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 56,
+          "width": 430,
+          "height": 410,
+          "top": 56,
+          "right": 430,
+          "bottom": 466,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 522,
+          "width": 430,
+          "height": 410,
+          "top": 522,
+          "right": 430,
+          "bottom": 932,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 430,
+          "height": 410,
+          "top": 56,
+          "right": 430,
+          "bottom": 466,
+          "left": 0
+        },
+        "panelScroll": 143,
+        "panelContent": 553,
+        "panelHeight": 410
+      },
+      "touchScroll": true,
+      "orbit": true,
+      "modularWhite": true
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "before": {
+        "viewport": 390,
+        "root": 390,
+        "document": 390,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 60,
+          "width": 422,
+          "height": 330,
+          "top": 60,
+          "right": 422,
+          "bottom": 390,
+          "left": 0
+        },
+        "panel": {
+          "x": 422,
+          "y": 116,
+          "width": 422,
+          "height": 274,
+          "top": 116,
+          "right": 844,
+          "bottom": 390,
+          "left": 422
+        },
+        "canvas": {
+          "x": 0,
+          "y": 60,
+          "width": 421,
+          "height": 330,
+          "top": 60,
+          "right": 421,
+          "bottom": 390,
+          "left": 0
+        },
+        "panelScroll": 0,
+        "panelContent": 561,
+        "panelHeight": 274
+      },
+      "after": {
+        "viewport": 390,
+        "root": 390,
+        "document": 390,
+        "scroll": 0,
+        "white": "rgb(255, 255, 255)",
+        "scene": "rgb(255, 255, 255)",
+        "visual": {
+          "x": 0,
+          "y": 60,
+          "width": 422,
+          "height": 330,
+          "top": 60,
+          "right": 422,
+          "bottom": 390,
+          "left": 0
+        },
+        "panel": {
+          "x": 422,
+          "y": 116,
+          "width": 422,
+          "height": 274,
+          "top": 116,
+          "right": 844,
+          "bottom": 390,
+          "left": 422
+        },
+        "canvas": {
+          "x": 0,
+          "y": 60,
+          "width": 421,
+          "height": 330,
+          "top": 60,
+          "right": 421,
+          "bottom": 390,
+          "left": 0
+        },
+        "panelScroll": 232,
+        "panelContent": 561,
+        "panelHeight": 274
+      },
+      "touchScroll": true,
+      "orbit": true,
+      "modularWhite": true
+    }
+  ],
+  "errors": []
+}

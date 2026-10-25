@@ -47,15 +47,15 @@ export function StudioVisualCarousel({items,value,onChange,label,className="",co
  };
  const settle=()=>{
   clearSettle();
-  if(programmatic.current||!horizontalIntent.current)return;
+  if(programmatic.current||!horizontalIntent.current||pointer.current)return;
   timer.current=setTimeout(()=>{
-   if(programmatic.current||!horizontalIntent.current||!rail.current)return;
+   if(programmatic.current||!horizontalIntent.current||pointer.current||!rail.current)return;
    horizontalIntent.current=false;
    const bounds=rail.current.getBoundingClientRect(),center=bounds.left+bounds.width/2;
    let nearest:string|undefined,distance=Infinity;
    for(const item of latest.current.items){const node=buttons.current.get(item.id);if(!node)continue;const rect=node.getBoundingClientRect();const next=Math.abs(rect.left+rect.width/2-center);if(next<distance){distance=next;nearest=item.id;}}
    if(nearest&&nearest!==latest.current.value)latest.current.onChange(nearest);
-  },180);
+  },350);
  };
  return <section className={`studio-visual-carousel ${compact?"is-compact":""} ${className}`} aria-label={label} aria-roledescription="karuzela" data-visual-carousel={label}>
   <div className="studio-visual-carousel-heading"><span>{label}</span><div className="studio-visual-carousel-controls"><button type="button" aria-label={`Poprzednia opcja: ${label}`} disabled={index<=0} onClick={()=>choose(items[Math.max(0,index-1)].id)}>←</button><button type="button" aria-label={`Następna opcja: ${label}`} disabled={index>=items.length-1||!items.length} onClick={()=>choose(items[Math.min(items.length-1,index+1)].id)}>→</button></div></div>

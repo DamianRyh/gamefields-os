@@ -11,7 +11,7 @@ import {sportSurfaces} from '@/lib/sport-surfaces';
 import {sportProfiles} from '@/lib/sport-profiles';
 import '@/app/studio-visual.css';
 
-export function PatternSwatch({project}:{project:Project}){return <svg viewBox="0 0 600 400" aria-hidden="true"><rect width={600} height={400} fill={project.base}/><PatternArt p={project} h={400}/></svg>}
+export function PatternSwatch({project}:{project:Project}){return <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width={600} height={400} fill={project.base}/><PatternArt p={project} h={400}/></svg>}
 export function StudioDesignChoices({project:p,update}:{project:Project;update:(patch:Partial<Project>)=>void}){return <>
  <StudioVisualCarousel label="Kierunek wzoru" value={p.patternFamily||patternFamilies[0].id} onChange={id=>update({patternFamily:id,pattern:patternFamilies.find(f=>f.id===id)!.name})} items={patternFamilies.map(f=>({id:f.id,label:f.name,media:<PatternSwatch project={{...p,patternFamily:f.id,patternVariant:1}}/>}))}/>
  <StudioVisualCarousel compact label="Kompozycja" value={String(p.patternVariant||1)} onChange={id=>update({patternVariant:Number(id)})} items={variants.map(v=>({id:String(v.variant),label:patternVariantName(p.patternFamily||patternFamilies[0].id,v.variant),media:<PatternSwatch project={{...p,patternVariant:v.variant}}/>}))}/>

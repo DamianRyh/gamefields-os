@@ -1,5 +1,18 @@
 # Zestawienie Gamefields.eu.txt z realizacją — 23.10.2026
 
+## 25.10.2026 — Studio103: większa scena, prosty wybór i progresywna grafika
+
+Na podstawie oznaczonego zrzutu właściciela usunięto Model3D jako przełącznik, globalny Plan edycji obiektów, skrót Radar·mapa i powtarzane tytuły paneli/karuzel. Konstrukcja/Nawierzchnia/Grafika pozostają w nawigacji; etykiety karuzel zachowane dla technologii asystujących. Nazwa projektu jest na scenie; pliki pod ikoną folderu. Radar pozostaje samodzielną trasą.
+
+Przestrzeń robocza dzieli się równo na scenę i edytor po odjęciu nagłówka/nawigacji: telefon pionowo, szeroki lub krótki poziomy ekran obok siebie. To nie dwie połowy fizycznego ekranu z chromem przeglądarki. Duże kwadratowe karty, większy model i zachowana biel; stary CSSzoom1.12 usunięto, żeby model nie był obcinany. Swipe zatwierdza dopiero po zakończeniu aktywnego dotyku i350ms spokoju przewijania; test wykrył wcześniej podwójne zatwierdzanie podczas dużych gestów.
+
+Rozbudowa zgodnych rodzin ma parametry dostępne bez Włącz budowanie. Samo otwarcie nie zmienia szkicu/ceny; pierwszy świadomy krok zapisuje moduły, Cofnij przywraca bazę. Jedna rodzina i części1:1, rodziny bez potwierdzonych modułów bez fikcyjnej rozbudowy. Grafika ma Linie/Logo/Tekst oraz warstwy: bezpieczny upload, treść, kolor, X/Y, rozmiar, obrót, widoczność, centrowanie, duplikacja i usuwanie na żywym3D. Archiwalne dane band pozostają wJSON. Schemat, geometria, stawki i prywatność kosztów zachowane.
+
+PASS: tsc, build, test:studio,160przypadków kamery; mobile375/390/430/1440 z materiałami/JSON/Radarem; moduły4rodziny×390/1440, biały układ5formatów i obrót; karuzele390/1440 z realnym emulowanym swipe/Cofnij. Nowy focus-browser320/390/1440: pomiar równych części, kwadratów i nazwy, brak usuniętych kontrolek, brak niezamówionej zmiany modułów, pierwszy krok/Cofnij, logo/tekst/duplikacja/położenie iJSON, canvas w obrębie sceny. Obejrzano zrzuty. Próba ręcznego podglądu przeglądarki przekroczyła czas podłączenia; testy automatyczne i screenshotQA ukończono. FizycznySafari i badanie z klientami nadalPENDING.
+
+Publikacja103: źródło `924865a3d1e353f9e8b4fd137fcddb2af09862c3`, deployment `appgdep_6ade483606208191847981eef6466825` **succeeded**, env6. [Opis i ograniczenia](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/visual-studio-2026-10-25/PROSTY_PODZIAL_I_GRAFIKA.md). Dowody: tools/focus-studio-2026-10-25/. Nie oznacza zamknięcia technicznegoBOM lub brakujących zatwierdzeń.
+
+
 ## 25.10.2026 — Studio102: duże karty kolorów i realistyczne materiały
 
 Wspólny edytor konstrukcji i nawierzchni ma prostokątne próbki części oraz duże karty odcieni z nazwami, w tej samej karuzeli co wzory i sporty. Zachowano własny kolor, kliknięcie/swipe/strzałki/klawiaturę, wspólny3D i Cofnij/Ponów. Dopasowano proporcje grafik i odstępy, aby nazwa materiału mieściła się razem z obrazem. Nagłówek przewija się razem z panelem, bez zasłaniania kart.

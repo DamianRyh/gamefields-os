@@ -1,0 +1,66 @@
+{
+  "version": 103,
+  "source": "924865a3d1e353f9e8b4fd137fcddb2af09862c3",
+  "saved": {
+    "id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_b76ca4e4b2308191b879cc83832762a8",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "version_number": 103,
+    "source": {
+      "commit_sha": "924865a3d1e353f9e8b4fd137fcddb2af09862c3"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000003b10821091918b24beb71aa6",
+      "content_hash": "sha256:9cae95bb79107947b0d61cfcfab904a35d5733b6cae17bb33fe298f56c118190",
+      "size_bytes": 122163200,
+      "file_count": 247
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6ade483606208191847981eef6466825",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "title": "Gamefields Studio",
+    "version_id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_b76ca4e4b2308191b879cc83832762a8",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gamefields-studio.ryhfs90.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abbd0ba26f0819197701343bf156f1b",
+    "failure_message": null,
+    "env_set_revision": 6,
+    "updated_at": "2026-10-25T18:19:56.632752+00:00"
+  },
+  "checks": {
+    "tsc": "PASS",
+    "build": "PASS",
+    "domain": "PASS",
+    "orbitCases": 160,
+    "mobileWidths": [
+      375,
+      390,
+      430,
+      1440
+    ],
+    "focusWidths": [
+      320,
+      390,
+      1440
+    ],
+    "visualWidths": [
+      390,
+      1440
+    ],
+    "modularFamilies": 4,
+    "whiteMobileFormats": 5
+  },
+  "limits": [
+    "Equal usable workspace halves after header/navigation, not physical screen/browser chrome",
+    "Modular parameters available without activation; persisted only on deliberate edit",
+    "Unsupported construction families retain existing base models",
+    "Chromium emulation; physicalSafari pending",
+    "Manual browser attach timed out; screenshots and automated browser QA completed"
+  ]
+}

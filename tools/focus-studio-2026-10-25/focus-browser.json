@@ -1,0 +1,162 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 320,
+      "split": {
+        "scene": {
+          "x": 0,
+          "y": 56,
+          "width": 320,
+          "height": 366,
+          "top": 56,
+          "right": 320,
+          "bottom": 422,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 478,
+          "width": 320,
+          "height": 366,
+          "top": 478,
+          "right": 320,
+          "bottom": 844,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 320,
+          "height": 366,
+          "top": 56,
+          "right": 320,
+          "bottom": 422,
+          "left": 0
+        },
+        "name": {
+          "x": 8,
+          "y": 60,
+          "width": 304,
+          "height": 44,
+          "top": 60,
+          "right": 312,
+          "bottom": 104,
+          "left": 8
+        },
+        "height": 844,
+        "width": 320
+      },
+      "largeSquare": true,
+      "noRemovedControls": true,
+      "modularWithoutActivation": true,
+      "graphicsTextLogo": true,
+      "json": true
+    },
+    {
+      "width": 390,
+      "split": {
+        "scene": {
+          "x": 0,
+          "y": 56,
+          "width": 390,
+          "height": 366,
+          "top": 56,
+          "right": 390,
+          "bottom": 422,
+          "left": 0
+        },
+        "panel": {
+          "x": 0,
+          "y": 478,
+          "width": 390,
+          "height": 366,
+          "top": 478,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "canvas": {
+          "x": 0,
+          "y": 56,
+          "width": 390,
+          "height": 366,
+          "top": 56,
+          "right": 390,
+          "bottom": 422,
+          "left": 0
+        },
+        "name": {
+          "x": 8,
+          "y": 60,
+          "width": 374,
+          "height": 44,
+          "top": 60,
+          "right": 382,
+          "bottom": 104,
+          "left": 8
+        },
+        "height": 844,
+        "width": 390
+      },
+      "largeSquare": true,
+      "noRemovedControls": true,
+      "modularWithoutActivation": true,
+      "graphicsTextLogo": true,
+      "json": true
+    },
+    {
+      "width": 1440,
+      "split": {
+        "scene": {
+          "x": 0,
+          "y": 60,
+          "width": 720,
+          "height": 940,
+          "top": 60,
+          "right": 720,
+          "bottom": 1000,
+          "left": 0
+        },
+        "panel": {
+          "x": 720,
+          "y": 116,
+          "width": 720,
+          "height": 884,
+          "top": 116,
+          "right": 1440,
+          "bottom": 1000,
+          "left": 720
+        },
+        "canvas": {
+          "x": 0,
+          "y": 60,
+          "width": 719,
+          "height": 940,
+          "top": 60,
+          "right": 719,
+          "bottom": 1000,
+          "left": 0
+        },
+        "name": {
+          "x": 12,
+          "y": 74,
+          "width": 695,
+          "height": 44,
+          "top": 74,
+          "right": 707,
+          "bottom": 118,
+          "left": 12
+        },
+        "height": 1000,
+        "width": 1440
+      },
+      "largeSquare": true,
+      "noRemovedControls": true,
+      "modularWithoutActivation": true,
+      "graphicsTextLogo": true,
+      "json": true
+    }
+  ],
+  "errors": []
+}
