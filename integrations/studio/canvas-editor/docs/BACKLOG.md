@@ -1,4 +1,8 @@
 # Gamefields — backlog
+## Kolekcje przed wariantami — 26.10.2026
+
+Nawierzchnia→Wzór rozpoczyna się od25kolekcji. Dopiero kolejny krok odsłania12kompozycji wybranej rodziny. Jedna karuzela naraz, widok wszystkich kolekcji, łatwy powrót, losowanie innego wariantu i przejście do kolorów. Samo przeglądanie nie zmieniaProject; ponowny wybór tej samej rodziny zachowuje kompozycję. Modele,300wzorów i19palet zachowane. [Kontrakt i kontrola](visual-studio-2026-10-25/KOLEKCJE_I_WARIANTY.md).
+
 ## Proste Studio: większy model i progresywna grafika — 25.10.2026
 
 Dwie równe części przestrzeni roboczej: model/wybór, pionowo na telefonie i obok siebie na szerokim ekranie. Usunięto przełącznikModel3D, Plan edycji, Radar i powtarzane nagłówki. Nazwa na scenie, większe kwadratowe karty i model. Rozbudowa obsługiwanych rodzin bez aktywacji; zmiana dopiero przy świadomym kroku. Grafika ma Linie/Logo/Tekst, warstwy i położenie na żywym3D, centrowanie, duplikację i Cofnij. [Kontrakt, zakres i testy](visual-studio-2026-10-25/PROSTY_PODZIAL_I_GRAFIKA.md).

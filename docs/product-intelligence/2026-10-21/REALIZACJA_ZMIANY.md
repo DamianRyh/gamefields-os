@@ -1,5 +1,16 @@
 # Realizacja dokumentu zmiany.txt — aktualizacja 23.10.2026
 
+## 26.10.2026 — Studio104: kolekcje przed wariantami
+
+Nawierzchnia→Wzór rozpoczyna się od25kolekcji, z przełącznikiem widoku wszystkich. Dopiero Warianty/Dopasuj pokazuje12kompozycji wybranej rodziny; jedna karuzela na krok. Warianty mają kontekst kolekcji, powrót, Zaskocz mnie i Dobierz kolory. Zwarta nawigacja, duże obrazy i dostępna klawiatura/swipe pozostają. InspiracjeSignature i pełne300wzorów/19palet zachowane.
+
+Samo przechodzenie między krokami i powrót nie zmieniająProject. Nowa rodzina wybiera wariant1 zgodny z miniaturą; ponowny wybór tej samej zachowuje kompozycję. Losowanie wybiera jeden z11pozostałych wariantów tej rodziny i cofa się pojedynczym krokiem. Kontynuacja do kolorów zachowuje wzór. Nie zmienionoJSON, geometrii, cenników ani prywatnych kosztów.
+
+PASS: tsc, build, test:studio, mobile375/390/430/1440 z materiałami/JSON/Radarem, karuzele390/1440 z emulowanym swipe/Cofnij; nowy test kolekcji390/1440 (25rodzin/12różnych wariantów, niezmienność przy przeglądaniu, zmiana rodziny, zachowanie tej samej, losowanie/Cofnij, kolory, brak overflow). Pierwsze próby kończyły się timeoutem testera; diagnostyka wskazała data-ready=true i zakończoną generację bez błędówJS/HTTP. Powtórzenie w aktywnie oczekującej sesji przeszło bez zmiany kodu aplikacji. Nie jest to deklaracja poprawy wydajności. FizycznySafari i badania z klientami pozostająPENDING.
+
+Publikacja104: źródło `58fb60d6a844ee66ed5486e8023a66d46bbdaf01`, deployment `appgdep_6adf0db7daa48191b638eda899dd2123` **succeeded**, env6. [Kontrakt i kontrola](https://github.com/DamianRyh/gamefields-os/blob/main/integrations/studio/canvas-editor/docs/visual-studio-2026-10-25/KOLEKCJE_I_WARIANTY.md). Dowody: tools/collections-first-2026-10-26/. Nie oznacza zamknięcia pozostałych zależności technicznych/BOM.
+
+
 ## 25.10.2026 — Studio103: większa scena, prosty wybór i progresywna grafika
 
 Na podstawie oznaczonego zrzutu właściciela usunięto Model3D jako przełącznik, globalny Plan edycji obiektów, skrót Radar·mapa i powtarzane tytuły paneli/karuzel. Konstrukcja/Nawierzchnia/Grafika pozostają w nawigacji; etykiety karuzel zachowane dla technologii asystujących. Nazwa projektu jest na scenie; pliki pod ikoną folderu. Radar pozostaje samodzielną trasą.

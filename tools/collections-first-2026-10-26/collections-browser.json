@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "width": 390,
+      "collections": 25,
+      "variants": 12,
+      "progressive": true,
+      "openingImmutable": true,
+      "selectFamily": true,
+      "sameFamilyPreserved": true,
+      "randomUndo": true,
+      "colorsContinuation": true
+    },
+    {
+      "width": 1440,
+      "collections": 25,
+      "variants": 12,
+      "progressive": true,
+      "openingImmutable": true,
+      "selectFamily": true,
+      "sameFamilyPreserved": true,
+      "randomUndo": true,
+      "colorsContinuation": true
+    }
+  ],
+  "errors": []
+}

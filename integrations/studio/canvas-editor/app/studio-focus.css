@@ -67,3 +67,36 @@ body:has(.studio-canvas-editor){overflow:hidden;background:#fff}
 @media(max-width:360px){.studio-shell.studio-canvas-editor .studio-logo{font-size:17px!important}.studio-shell.studio-canvas-editor .studio-top-actions{gap:3px}.studio-shell.studio-canvas-editor .studio-top-actions>button:not(.studio-primary){width:36px;min-width:36px}.studio-shell.studio-canvas-editor .studio-quote-badge{max-width:120px}}
 /* Remove the older desktop zoom so the larger fitted model stays inside its canvas. */
 .studio-shell.studio-canvas-editor .studio-render>.panna-studio-model{transform:none!important}
+/* Collections first, then one chosen design: keep only one image rail visible. */
+.studio-shell.studio-canvas-editor .studio-design-flow{padding:2px 0 8px}
+.studio-design-steps{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px;padding:4px;border:1px solid #ece7ef;background:#faf9fc;border-radius:16px}
+.studio-design-steps button{border:0;background:transparent;border-radius:12px;min-height:46px;padding:7px 12px;font-size:15px;color:#7a6875;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.studio-design-steps button[aria-pressed=true]{background:white;color:#4a122b;box-shadow:0 2px 8px #3011270c;font-weight:650}
+.studio-design-steps button span{font-size:11px;color:#8b7c88;max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.studio-collection-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 2px;color:#8b7c88;font-size:12px}
+.studio-collection-tools button{border:0;background:none;min-height:44px;padding:6px 0 6px 12px;color:#6432ff;font-size:13px}
+.studio-design-next{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;padding:12px 16px;border:1px solid #ded2f9;background:#f6f2ff;border-radius:14px;color:#4a122b;font-size:15px;font-weight:600}
+.studio-design-actions{display:flex;gap:10px;flex-wrap:wrap}
+.studio-design-actions button{flex:1;min-height:46px;padding:10px 14px;border:1px solid #e6e0ed;border-radius:14px;background:#fff;font-size:14px;color:#4a122b}
+.studio-design-actions button+button{background:#f6f2ff;border-color:#ded2f9;color:#6432ff}
+.studio-collection-context{padding:12px 0 0}
+.studio-collection-context button{display:flex;align-items:center;gap:10px;background:white;border:0;min-height:54px;width:100%;text-align:left;padding:0;color:#4a122b;font-weight:600;font-size:14px}
+.studio-collection-context small{display:block;margin-top:2px;font-size:12px;color:#8b7c88;font-weight:400}
+.studio-collection-context button>span:last-child{margin-left:auto}
+.studio-collection-mini{width:48px;height:48px;flex:none;border-radius:10px;overflow:hidden}
+.studio-collection-mini svg{width:100%;height:100%;display:block}
+.studio-collection-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:4px 0 12px}
+.studio-collection-grid button{position:relative;display:flex;flex-direction:column;gap:8px;min-width:0;padding:5px 5px 12px;border:1px solid #e9e3ed;border-radius:16px;background:#fff;text-align:left;color:#4a122b}
+.studio-collection-grid button[aria-pressed=true]{border:2px solid #6432ff;padding:4px 4px 11px;background:#faf8ff}
+.studio-collection-grid button>span{display:block;aspect-ratio:1;overflow:hidden;border-radius:11px}
+.studio-collection-grid svg{display:block;width:100%;height:100%}
+.studio-collection-grid b{font-size:14px;padding:0 6px;font-weight:600}
+.studio-collection-grid i{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#6432ff;color:white;font-style:normal}
+.studio-design-flow button:focus-visible{outline:3px solid #6432ff;outline-offset:3px}
+@media(max-width:800px){.studio-design-steps button{font-size:14px;padding:6px;gap:3px}.studio-design-steps button span{font-size:10px;max-width:115px}.studio-collection-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.studio-collection-tools{padding-top:2px;padding-bottom:0}.studio-shell.studio-canvas-editor .studio-design-flow .studio-visual-carousel .studio-visual-carousel-card{flex-basis:clamp(190px,57vw,285px)}}
+.studio-design-topline{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.studio-design-topline .studio-design-steps{flex:1;min-width:0;padding:0;border:0;border-radius:12px}
+.studio-design-topline .studio-design-steps button{min-height:44px;padding:5px 10px;white-space:nowrap;flex-wrap:nowrap}
+.studio-collection-view{display:grid;place-items:center;width:44px;height:44px;flex:none;border:1px solid #e8e2ee;border-radius:12px;background:white;color:#705b70}
+.studio-shell.studio-canvas-editor .studio-design-flow .studio-visual-carousel{margin:4px 0 8px}
+@media(max-width:800px){.studio-design-steps button span{display:none}.studio-shell.studio-canvas-editor .studio-design-flow .studio-visual-carousel .studio-visual-carousel-card{flex-basis:clamp(198px,50vw,270px);padding-bottom:10px}.studio-shell.studio-canvas-editor .studio-design-flow .studio-visual-carousel-name{font-size:16px;padding-top:8px}}

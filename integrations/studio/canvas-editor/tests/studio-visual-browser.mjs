@@ -31,6 +31,7 @@ try{
   const tool=name=>page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name,exact:true});
   await tool('Nawierzchnia').click();await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Wzór',exact:true}).click();
   await page.waitForFunction(()=>!document.querySelector('[data-sonner-toast]'),{},{timeout:10000});await page.locator('.studio-panel').evaluate(e=>e.scrollTop=0);await page.screenshot({path:`outputs/studio-ux/visual-design-${width}.png`});
+  await page.getByRole('navigation',{name:'Etapy wzoru'}).getByRole('button',{name:/^Warianty/}).click();
   const composition=page.locator('[data-visual-carousel="Kompozycja"]'),options=composition.locator('[data-carousel-option]');assert.equal(await options.count(),12);
   assert.equal(await options.locator('svg').evaluateAll(nodes=>new Set(nodes.map(n=>n.innerHTML)).size),12,'All composition cards must show a different composition');
   const current=async()=>Number(await composition.locator('[aria-pressed=true][data-carousel-option]').getAttribute('data-carousel-option'));

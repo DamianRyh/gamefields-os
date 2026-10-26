@@ -1,21 +1,33 @@
 "use client";
 import {useState} from 'react';
+import {Grid2X2,List} from 'lucide-react';
 import type {Project} from '@/lib/project';
 import {StudioVisualCarousel} from './studio-visual-carousel';
 import {PatternArt} from './pattern-art';
 import {CreativeCourtLines} from './creative-court-lines';
 import {creativeLineOptions,type DecorativeLineStyle} from '@/lib/creative-lines';
-import {patternFamilies,patternPalettes,patternVariantName,variants} from '@/lib/pattern-library';
+import {getPatternFamily,patternFamilies,patternPalettes,patternVariantName,variants} from '@/lib/pattern-library';
 import {surfaceMaterials} from '@/lib/surface-materials';
 import {sportSurfaces} from '@/lib/sport-surfaces';
 import {sportProfiles} from '@/lib/sport-profiles';
 import '@/app/studio-visual.css';
 
 export function PatternSwatch({project}:{project:Project}){return <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width={600} height={400} fill={project.base}/><PatternArt p={project} h={400}/></svg>}
-export function StudioDesignChoices({project:p,update}:{project:Project;update:(patch:Partial<Project>)=>void}){return <>
- <StudioVisualCarousel label="Kierunek wzoru" value={p.patternFamily||patternFamilies[0].id} onChange={id=>update({patternFamily:id,pattern:patternFamilies.find(f=>f.id===id)!.name})} items={patternFamilies.map(f=>({id:f.id,label:f.name,media:<PatternSwatch project={{...p,patternFamily:f.id,patternVariant:1}}/>}))}/>
- <StudioVisualCarousel compact label="Kompozycja" value={String(p.patternVariant||1)} onChange={id=>update({patternVariant:Number(id)})} items={variants.map(v=>({id:String(v.variant),label:patternVariantName(p.patternFamily||patternFamilies[0].id,v.variant),media:<PatternSwatch project={{...p,patternVariant:v.variant}}/>}))}/>
- </>}
+export function StudioDesignChoices({project:p,update,onColors}:{project:Project;update:(patch:Partial<Project>)=>void;onColors?:()=>void}){
+ const [step,setStep]=useState<'collections'|'variants'>('collections'),[showAll,setShowAll]=useState(false);
+ const family=getPatternFamily(p.patternFamily);
+ const chooseFamily=(id:string)=>{if(id!==p.patternFamily)update({patternFamily:id,pattern:getPatternFamily(id).name,patternVariant:1});};
+ return <section className="studio-design-flow" data-design-step={step} aria-label="Projektowanie wzoru">
+  <div className="studio-design-topline"><nav className="studio-design-steps" aria-label="Etapy wzoru"><button aria-pressed={step==='collections'} onClick={()=>setStep('collections')}>Kolekcje</button><button aria-pressed={step==='variants'} onClick={()=>{setShowAll(false);setStep('variants')}}>Warianty <span>{family.name}</span></button></nav>{step==='collections'?<button className="studio-collection-view" aria-label={showAll?'Wróć do karuzeli':'Pokaż wszystkie'} title="Wszystkie 25 kolekcji" aria-expanded={showAll} onClick={()=>setShowAll(!showAll)}>{showAll?<List size={20}/>:<Grid2X2 size={20}/>}</button>:null}</div>
+  {step==='collections'?<>
+   {showAll?<div className="studio-collection-grid" aria-label="Wszystkie kolekcje">{patternFamilies.map(f=><button key={f.id} aria-label={`Kolekcja: ${f.name}`} aria-pressed={f.id===family.id} onClick={()=>{chooseFamily(f.id);setShowAll(false);setStep('variants')}}><span><PatternSwatch project={{...p,patternFamily:f.id,patternVariant:1}}/></span><b>{f.name}</b>{f.id===family.id?<i aria-hidden="true">✓</i>:null}</button>)}</div>:<><StudioVisualCarousel label="Kierunek wzoru" value={family.id} onChange={chooseFamily} items={patternFamilies.map(f=>({id:f.id,label:f.name,media:<PatternSwatch project={{...p,patternFamily:f.id,patternVariant:1}}/>}))}/><button className="studio-design-next" onClick={()=>setStep('variants')}>Dopasuj {family.name} <span aria-hidden="true">→</span></button></>}
+  </>:<>
+   <div className="studio-collection-context"><button aria-label="Zmień kolekcję" onClick={()=>setStep('collections')}><span className="studio-collection-mini"><PatternSwatch project={{...p,patternVariant:1}}/></span><span>{family.name}<small>Zmień kolekcję</small></span><span aria-hidden="true">↗</span></button></div>
+   <StudioVisualCarousel compact label="Kompozycja" value={String(p.patternVariant||1)} onChange={id=>update({patternVariant:Number(id)})} items={variants.map(v=>({id:String(v.variant),label:patternVariantName(family.id,v.variant),media:<PatternSwatch project={{...p,patternVariant:v.variant}}/>}))}/>
+   <div className="studio-design-actions"><button onClick={()=>update({patternVariant:((p.patternVariant||1)+Math.floor(Math.random()*11))%12+1})}>Zaskocz mnie</button>{onColors?<button onClick={onColors}>Dobierz kolory <span aria-hidden="true">→</span></button>:null}</div>
+  </>}
+ </section>;
+}
 const materialImages=['','granulat','plytki','trawa'];
 export function StudioMaterialChoices({project:p,update}:{project:Project;update:(patch:Partial<Project>)=>void}){return <><StudioVisualCarousel label="Materiał nawierzchni" value={p.surface} onChange={surface=>update({surface})} items={surfaceMaterials.map((m,i)=>({id:m.value,label:m.label,media:i===0?<PatternSwatch project={p}/>:<img src={`/surfaces/catalogue/${materialImages[i]}-macro.webp`} alt="" width={640} height={480} loading="lazy"/>}))}/><p className="studio-visual-note">{surfaceMaterials.find(m=>m.value===p.surface)?.detail}</p><details className="studio-technical"><summary>O próbkach materiałów</summary><p className="studio-visual-note">Zbliżenia granulatu, płytek i murawy są wygenerowanymi ilustracjami faktury. Nie są zdjęciami produktu konkretnego producenta. Malowana pokazuje Twój bieżący wzór.</p></details></>}
 export function StudioSurfaceChoices({project:p,onChange}:{project:Project;onChange:(id:string)=>void}){return <StudioVisualCarousel label="Sport i format" value={p.surfaceModel||''} onChange={onChange} items={sportSurfaces.map(s=>({id:s.id,label:s.name,caption:`${s.fieldLength} × ${s.fieldWidth} m`,media:<img src={`/sport-surfaces/${s.id}.webp`} alt="" loading="lazy"/>}))}/>}

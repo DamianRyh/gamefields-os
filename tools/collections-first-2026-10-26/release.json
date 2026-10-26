@@ -1,0 +1,61 @@
+{
+  "version": 104,
+  "source": "58fb60d6a844ee66ed5486e8023a66d46bbdaf01",
+  "saved": {
+    "id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_c17b0675188c81919fd00dd928552969",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "version_number": 104,
+    "source": {
+      "commit_sha": "58fb60d6a844ee66ed5486e8023a66d46bbdaf01"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000a0d48210b9d0171bd4474a1b",
+      "content_hash": "sha256:4a67ed6d097453fb0e88d3f334f40536cf3e304622a46d7038ff6dc63f856aac",
+      "size_bytes": 122173440,
+      "file_count": 247
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6adf0db7daa48191b638eda899dd2123",
+    "project_id": "appgprj_6abbd0ba26f0819197701343bf156f1b",
+    "title": "Gamefields Studio",
+    "version_id": "appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_c17b0675188c81919fd00dd928552969",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://gamefields-studio.ryhfs90.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abbd0ba26f0819197701343bf156f1b",
+    "failure_message": null,
+    "env_set_revision": 6,
+    "updated_at": "2026-10-26T08:22:39.752362+00:00"
+  },
+  "checks": {
+    "tsc": "PASS",
+    "build": "PASS",
+    "studio": "PASS",
+    "collections": [
+      390,
+      1440
+    ],
+    "visual": [
+      390,
+      1440
+    ],
+    "mobile": [
+      375,
+      390,
+      430,
+      1440
+    ]
+  },
+  "notes": [
+    "25 collections then12variants;300patterns/19palettes retained",
+    "Browsing steps immutable; family change resets variant1; samefamily preserves composition",
+    "Initial tester timeouts; renderer diagnostics ready/completed; active-session rerun passed without app changes",
+    "Chromium emulation, physicalSafari pending"
+  ]
+}
