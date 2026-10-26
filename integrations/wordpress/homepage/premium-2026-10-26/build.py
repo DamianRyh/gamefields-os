@@ -52,7 +52,8 @@ for name,file in materials:
  url=S+'/surfaces/catalogue/'+file
  out+=f'<button type="button" class="gh-material" data-material-src="{url}" data-material-name="{name}">{image(url,name+" — faktura z bliska")}<strong>{name}</strong></button>'
 out+=f'''<button type="button" class="gh-material" data-material-src="{painted}" data-material-name="Malowana">{image(painted,'Fragment wzoru na nawierzchni malowanej')}<strong>Malowana</strong></button></div></div></section>
-<section class="gh-section gh-wrap" id="projekty">{image('https://www.gamefields.eu/wp-content/uploads/2026/10/court.webp','Koncepcja kolorowego boiska w przestrzeni miejskiej','gh-context')}<h2>Zaprojektowane dla miejsca.<br>Stworzone dla ludzi.</h2><p class="gh-caption">Koncepcja przestrzeni miejskiej · ilustracja, nie dokumentacja realizacji.</p><div class="gh-audiences">{a('Miasto i park','/dla-miast/')}{a('Szkoła i osiedle','#kontakt')}{a('Marka i wydarzenie','/aktywacje-sportowe-dla-marek/')}</div><div class="gh-services">{a('Budowa boisk','/budowa-boisk-sportowych/')}{a('Renowacja','/renowacja-boisk/')}{a('Projekt i malowanie','/malowanie-boisk/')}</div></section>'''
+'''
+out+=(root/'collaboration.html').read_text()
 contact=(root/'contact-template.html').read_text()
 contact=contact.replace('<h2>Masz miejsce?<br>Porozmawiajmy.</h2>','<h2>Masz miejsce?<br>Zróbmy miejsce do gry.</h2>')
 out+=contact+'<p id="gc-direction-status" hidden></p></main><footer class="gh-wrap gh-footer"><a class="gh-logo" href="/">gamefields.</a><a href="mailto:info@gamefields.eu">info@gamefields.eu</a><a href="/konfigurator-boisk/">Studio</a><a href="/kontakt/">Kontakt</a><a href="/polityka-prywatnosci/">Polityka prywatności</a></footer>'
