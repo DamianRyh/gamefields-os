@@ -1,0 +1,23 @@
+{
+  "live": false,
+  "cases": [
+    {
+      "width": 390,
+      "colour": true,
+      "lazyVideo": true,
+      "pause": true,
+      "gallery": true,
+      "catalogue": 8
+    },
+    {
+      "width": 1440,
+      "colour": true,
+      "lazyVideo": true,
+      "pause": true,
+      "gallery": true,
+      "catalogue": 8
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}
