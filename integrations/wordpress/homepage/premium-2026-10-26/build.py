@@ -53,6 +53,7 @@ for name,file in materials:
  out+=f'<button type="button" class="gh-material" data-material-src="{url}" data-material-name="{name}">{image(url,name+" — faktura z bliska")}<strong>{name}</strong></button>'
 out+=f'''<button type="button" class="gh-material" data-material-src="{painted}" data-material-name="Malowana">{image(painted,'Fragment wzoru na nawierzchni malowanej')}<strong>Malowana</strong></button></div></div></section>
 '''
+out+=(root/'workshop.html').read_text()
 out+=(root/'collaboration.html').read_text()
 contact=(root/'contact-template.html').read_text()
 contact=contact.replace('<h2>Masz miejsce?<br>Porozmawiajmy.</h2>','<h2>Masz miejsce?<br>Zróbmy miejsce do gry.</h2>')
@@ -60,6 +61,7 @@ out+=contact+'<p id="gc-direction-status" hidden></p></main><footer class="gh-wr
 out+='''<dialog class="gh-dialog" id="gh-dialog" aria-labelledby="gh-dialog-title"><div class="gh-dialog-head"><h2 id="gh-dialog-title">Poznaj boisko</h2><button type="button" class="gh-btn" data-close-dialog aria-label="Zamknij podgląd">Zamknij ×</button></div><div id="gh-dialog-body"></div></dialog></div>'''
 data={'models':models,'modelMedia':model_media,'names':names,'modelOrder':list(names),'defaultModel':'o1','studio':S,'painted':painted}
 out+='<script type="application/json" id="gh-data">'+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+'</script><script>'+(root/'script.js').read_text()+'</script>'
+out+='<script>'+(root/'workshop.js').read_text()+'</script>'
 # Keep the existing selected-product query and review/remove behavior, with the same contact field IDs.
 for script in (root/'contact-existing.js').read_text().splitlines():out+='<script>'+script+'</script>'
 out+='\n<!-- /wp:html -->'

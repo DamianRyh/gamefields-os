@@ -1,0 +1,45 @@
+{
+  "title": "Gamefields — Warsztat społeczności",
+  "locale": "pl_PL",
+  "form": "<div class=\"gh-workshop-form-grid\"><label>Nazwa projektu (wymagane)\n[text* workshop-title maxlength:100]</label><label>Pseudonim autora (opcjonalnie)\n[text workshop-author maxlength:60]</label><label>E-mail do kontaktu (nie będzie publiczny, wymagane)\n[email* your-email]</label><label>Plik ze Studia — JSON lub TXT, do 2 MB (wymagane)\n[file* workshop-project filetypes:json|txt limit:2mb]</label><label>Podgląd projektu — JPG, PNG lub WebP, do 2 MB (wymagane)\n[file* workshop-preview filetypes:jpg|jpeg|png|webp limit:2mb]</label></div><label>Co było Twoją inspiracją? (opcjonalnie)\n[textarea workshop-note maxlength:600]</label><div class=\"gh-workshop-consent\">[acceptance workshop-consent] Chcę zgłosić projekt do publicznego Warsztatu Gamefields. Zgadzam się na publikację podanej nazwy, pseudonimu, podglądu i konfiguracji projektu po akceptacji Gamefields. Potwierdzam, że mogę udostępnić użyte materiały. Mój e-mail pozostanie prywatny. [/acceptance]</div><p class=\"gh-caption\">Sprawdź plik przed wysłaniem i usuń dane osobowe. Zgłoszenie nie publikuje projektu automatycznie. Informacje o przetwarzaniu danych: <a href=\"/polityka-prywatnosci/\">polityka prywatności</a>. Prośbę o usunięcie opublikowanego projektu prześlij na info@gamefields.eu.</p>[submit \"Zgłoś projekt do Warsztatu\"]",
+  "mail": {
+    "active": true,
+    "subject": "[Gamefields Warsztat] Projekt do akceptacji — [workshop-title]",
+    "sender": "Gamefields <wordpress@gamefields.eu>",
+    "recipient": "info@gamefields.eu",
+    "additional_headers": "Reply-To: [your-email]",
+    "attachments": "[workshop-project]\n[workshop-preview]",
+    "use_html": false,
+    "exclude_blank": true,
+    "body": "ZGŁOSZENIE DO WARSZTATU — NIE PUBLIKOWAĆ BEZ WERYFIKACJI\n\nNazwa: [workshop-title]\nPubliczny pseudonim: [workshop-author]\nE-mail prywatny: [your-email]\nInspiracja: [workshop-note]\nZgoda na publikację: [workshop-consent]\nData otrzymania: [_date] [_time]\nŹródło: [_url]\n\nZałączniki: JSON/TXT projektu i podgląd. Sprawdź poprawność projektu, zgodność podglądu, prawa do grafik, zgodę i brak danych osobowych przed publikacją. E-mail i oryginalne dane zgłoszenia nie mogą trafić do wpisu publicznego."
+  },
+  "mail_2": {
+    "active": false
+  },
+  "messages": {
+    "mail_sent_ok": "Dziękujemy! Zgłoszenie zostało wysłane do sprawdzenia. Projekt pojawi się w Warsztacie po akceptacji Gamefields.",
+    "mail_sent_ng": "Nie udało się wysłać zgłoszenia. Spróbuj ponownie lub napisz na info@gamefields.eu.",
+    "validation_error": "Sprawdź oznaczone pola i spróbuj ponownie.",
+    "spam": "Nie udało się wysłać zapytania. Spróbuj ponownie lub napisz na info@gamefields.eu.",
+    "accept_terms": "Musisz wyrazić zgodę na powyższe zapisy, aby móc wysłać formularz.",
+    "invalid_required": "Uzupełnij to pole.",
+    "invalid_too_long": "Skróć wpisany tekst.",
+    "invalid_too_short": "Uzupełnij wpisany tekst.",
+    "upload_failed": "Podczas wgrywania pliku wystąpił nieznany błąd.",
+    "upload_file_type_invalid": "Nie możesz wgrywać plików tego typu.",
+    "upload_file_too_large": "Przesłany plik jest za duży.",
+    "upload_failed_php_error": "Wystąpił błąd podczas wgrywania pliku.",
+    "invalid_date": "Wprowadź datę w formacie RRRR-MM-DD.",
+    "date_too_early": "Data wybrana w tym polu jest zbyt wczesna.",
+    "date_too_late": "Data wybrana w tym polu jest zbyt późna.",
+    "invalid_number": "Wprowadź liczbę.",
+    "number_too_small": "Za mała liczba.",
+    "number_too_large": "Za duża liczba.",
+    "quiz_answer_not_correct": "Odpowiedź w quizie jest nieprawidłowa.",
+    "captcha_not_match": "Wpisany kod jest nieprawidłowy.",
+    "invalid_email": "Wpisz poprawny adres e-mail.",
+    "invalid_url": "Proszę wprowadzić adres URL.",
+    "invalid_tel": "Wpisz poprawny numer telefonu."
+  },
+  "additional_settings": ""
+}

@@ -1,0 +1,25 @@
+{
+  "live": true,
+  "cases": [
+    {
+      "width": 390,
+      "empty": true,
+      "tenProjects": true,
+      "date": true,
+      "retry": true,
+      "moderationForm": true,
+      "noSubmissionSent": true
+    },
+    {
+      "width": 1440,
+      "empty": true,
+      "tenProjects": true,
+      "date": true,
+      "retry": true,
+      "moderationForm": true,
+      "noSubmissionSent": true
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

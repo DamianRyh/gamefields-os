@@ -59,3 +59,13 @@ Replaced the generic city-court image/claim at `#projekty` with the owner's firs
 The existing homepage position now contains an accessible four-button image selector, full-board links, partner/design/location credits and an invitation to institutions, clubs and artists via the existing contact section. All source boards remain intact. No new page or modal, form submission, Studio or product-order change. `collaboration.html` is the editable content source.
 
 Draft and public checks passed at 390/768/1440 px: all four boards decode and switch the main image/full-size URL, exactly one selected thumbnail, credits/concept label/contact CTA, 12 surface projects and eight constructions retained, no horizontal overflow or JS exceptions. Proof: `collaboration-draft-verification.json` and `collaboration-live-verification.json`. Previous stable WordPress revision: 4147.
+
+## Community Workshop — 26.10.2026
+
+Published homepage revision 4163, rollback point 4158. `#warsztat` appears before the Warsaw FC collaboration. New WordPress category 643 is the approved-project feed; new CF7 form 4159 accepts a named project, optional public pseudonym, private contact email, JSON/TXT project file and preview (2 MB each), with an unchecked required publication acceptance. Creation used the plugin REST save context, with no CF7 configuration errors. No submission was sent.
+
+The public gallery reads only published posts in category 643, latest ten by publication date, with verified local image/project URLs and versioned metadata. Cards display thumbnail, title, pseudonym, date, “Stwórz podobny” and project download. Exact custom colours are retained through JSON download/import; the quick link only transfers supported family/model/palette parameters. Older accepted posts remain archived. Initial state is honestly empty; no seed clients or fake dates.
+
+This is a moderated mail-to-editor workflow, not automatic cloud saving or a public write API: CF7 emails the submission and attachments to the existing company inbox; owner reviews and creates/publishes an approved WordPress post. Source/public-data shape and publication instructions are in `MODERACJA_WARSZTATU.md`. CF7 is not used as a submission-storage database.
+
+Draft/live browser tests at 390/1440 passed empty/data/error/retry/form states, 10-card cap, dates, query parameters, consent default, no runtime errors/overflow. Populated cases use intercepted browser-only fixture data; no records were published. Public category was independently confirmed empty. Delivery to mailbox was not tested. Sources: `workshop.html`, `workshop.js`, `workshop-form.json`, `verify-workshop.mjs`.
