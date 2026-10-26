@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 const require=createRequire('/Users/mac/Documents/Gamefields/work/studio-street15/package.json');
 const {chromium}=require('playwright');
 const dir='/Users/mac/Documents/Gamefields/integrations/wordpress/homepage/premium-2026-10-26';
-const out='/Users/mac/Documents/Gamefields/outputs/homepage-live-2026-10-26';
+const out='/Users/mac/Documents/Gamefields/outputs/homepage-panna-priority-2026-10-26';
 const report={cases:[],errors:[]};let browser,server;
 try{
 await mkdir(out,{recursive:true});const content=await readFile(dir+'/preview.html','utf8');
@@ -18,7 +18,7 @@ assert.equal(await p.locator('h1').count(),1);assert.equal(await p.locator('ifra
 assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Horizontal overflow '+width);
 await p.locator('[data-select-model="octagon"]').click();assert.equal(await p.locator('#gh-model-name').textContent(),'Panna Octa');
 assert((await p.locator('[data-current-studio]').first().getAttribute('href')).includes('arena=octagon'));
-await p.locator('[data-catalog]').click();assert.equal(await p.locator('.gh-catalog article').count(),8);await p.keyboard.press('Escape');assert.equal(await p.locator('#gh-dialog').evaluate(n=>n.open),false);
+await p.locator('[data-catalog]').click();assert.equal(await p.locator('.gh-catalog article').count(),8);assert.deepEqual(await p.locator('.gh-catalog h3').allTextContents(),['Panna Play','Panna Court','Panna Cage 90','Panna Cage 180','Panna Octa','Panna Grid','Panna Ring','Street Arena 15']);await p.keyboard.press('Escape');assert.equal(await p.locator('#gh-dialog').evaluate(n=>n.open),false);
 await p.locator('[data-detail="street15"]').click();assert.equal(await p.locator('#gh-dialog-title').textContent(),'Street Arena 15');await p.locator('[data-close-dialog]').click();
 await p.locator('[data-material-name="Granulat"]').click();await p.locator('#gh-dialog-body img').evaluate(n=>n.decode());await p.keyboard.press('Escape');
 await p.locator('[data-layer="surface"]').click();assert((await p.locator('.gh-system-image img').getAttribute('src')).includes('street-football-3x3'));
@@ -28,7 +28,7 @@ assert.equal(await p.locator('[name="your-email"]').count(),1);assert.equal(awai
 await p.goto(`http://localhost:${server.address().port}/?gf_product=octagon#kontakt`,{waitUntil:'networkidle'});
 assert((await p.locator('[name="project-details"]').inputValue()).includes('Panna Octa'));
 await p.locator('#gc-project-review summary').click();await p.locator('#gc-clear-project').click();assert.equal(await p.locator('[name="project-details"]').inputValue(),'');
-await p.locator('[data-select-model="street15"]').click();await p.evaluate(()=>scrollTo(0,0));
+await p.locator('[data-select-model="o1"]').click();await p.evaluate(()=>scrollTo(0,0));
 await p.locator('.gh-hero-image').evaluate(n=>n.decode());
 await p.screenshot({path:out+`/preview-${width}.png`,fullPage:true});
 assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);

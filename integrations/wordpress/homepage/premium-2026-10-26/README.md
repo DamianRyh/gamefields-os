@@ -31,3 +31,9 @@ WordPress converted an inline `&&` to an HTML entity during draft rendering. The
 `verify.mjs`: passed at 375, 390, 430, 768 and 1440 px; one H1; no horizontal overflow; model selection and links; eight-item catalogue; dialogs; material image decode; layer selection; mobile menu; contact fields; project query and removal; no JS exceptions.
 
 `verify-live.mjs`: passed against the public WordPress page at 390 and 1440 px, including theme interaction, all image decodes, lazy iframe creation/removal and selected-model routing. Visual checks compared the mobile/desktop top sections with the Figma reference. No test inquiry was sent; email delivery is not reverified by this release. Three-dimensional rendering is provided by the existing Studio rather than a new renderer on the marketing page.
+
+## Panna collection priority — 26.10.2026
+
+Published to page 3462 at `2026-10-26T14:10:31`. Hero defaults to Panna Play and offers six priority families in a compact swipe selector. Product carousel and full catalogue use one explicit order: Panna Play, Panna Court, Panna Cage 90, Panna Cage 180, Panna Octa, Panna Grid, Panna Ring, Street Arena 15. Street Arena 15 is last in both collections and absent from hero shortcuts. Category artwork features Panna Court; modular-system artwork features Panna Grid. Concept presets open Panna Court.
+
+Draft checks passed at five widths; public checks passed at 390/1440 px, including catalogue order, image decoding, 3D selection and contact-field preservation, with no JS errors. Previous production revision 4104 is the rollback point for this update. Results: `verification.json` and `live-verification.json`.
