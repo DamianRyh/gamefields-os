@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 const require=createRequire('/Users/mac/Documents/Gamefields/work/studio-street15/package.json');
 const {chromium}=require('playwright');
 const dir='/Users/mac/Documents/Gamefields/integrations/wordpress/homepage/premium-2026-10-26';
-const out='/Users/mac/Documents/Gamefields/outputs/homepage-panna-priority-2026-10-26';
+const out='/Users/mac/Documents/Gamefields/outputs/homepage-surface-offers-2026-10-26';
 const report={cases:[],errors:[]};let browser,server;
 try{
 await mkdir(out,{recursive:true});const content=await readFile(dir+'/preview.html','utf8');

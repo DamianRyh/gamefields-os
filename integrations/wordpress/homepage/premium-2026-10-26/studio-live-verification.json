@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "width": 390,
+      "inlineOffers": 12,
+      "projectExport": true,
+      "noDialogs": true
+    },
+    {
+      "width": 1440,
+      "inlineOffers": 12,
+      "projectExport": true,
+      "noDialogs": true
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

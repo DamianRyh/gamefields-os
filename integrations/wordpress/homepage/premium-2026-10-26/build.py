@@ -14,7 +14,7 @@ def b(label,attrs='',primary=False):return f'<button type="button" class="gh-btn
 rows=[('o1','Panna Play','Kompaktowa forma · wspólna gra'),('p1','Panna Court','Prostokątna forma · własny charakter'),('circle-cage-1','Panna Cage 90','Okrągła konstrukcja · 90'),('circle-cage-2','Panna Cage 180','Okrągła konstrukcja · 180'),('octagon','Panna Octa','Gra w ośmioboku · rodzina modułowa'),('street-field','Panna Grid','Prostokątna konstrukcja · rodzina modułowa'),('w1','Panna Ring','Okrągła forma gry'),('street15','Street Arena 15','Street football · 15 × 10 m')]
 names={key:name for key,name,meta in rows}
 hero_choices=''.join(b(name,f'data-select-model="{key}" aria-pressed="'+('true' if key=='o1' else 'false')+'"',key=='o1') for key,name,meta in rows[:6])
-concepts=[('organic-flow','Organic Flow','organic-flow-park.webp'),('urban-contrast','Urban Contrast','urban-contrast-park.webp'),('classic-lines','Classic Lines','classic-lines-park.webp')]
+concepts=json.loads((root/'surface-projects.json').read_text())
 materials=[('Granulat','granulat-macro.webp'),('Płytki modułowe','plytki-macro.webp'),('Sztuczna trawa','trawa-macro.webp')]
 painted='https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-probka-nawierzchni-malowanej.svg'
 css=(root/'style.css').read_text()
@@ -34,9 +34,12 @@ for key,name,meta in rows:
  out+=f'<article class="gh-product">{image(models[key],name+" — render konstrukcji")}<h3>{name}</h3><p>{meta}</p>{b("Poznaj konstrukcję",f"data-detail=\"{key}\"")}{a("Konfiguruj",studio(key),False,"class-replace=\"product\"")}</article>'
 out+='</div>'+b('Zobacz wszystkie konstrukcje','data-catalog')+'</section>'
 out+=f'''<section class="gh-section gh-soft" id="system"><div class="gh-wrap"><h2>Jeden system.<br>Twój układ.</h2><p>Konstrukcja, nawierzchnia i grafika tworzą wspólny projekt. Zacznij od jednego elementu.</p><div class="gh-system-image">{image(models['street-field'],'Panna Grid — konstrukcja jako pierwsza warstwa projektu','',False)}</div><div class="gh-system-tabs" role="group" aria-label="Warstwy projektu">{b('01 · Konstrukcja','data-layer="structure" aria-pressed="true"',True)}{b('02 · Nawierzchnia','data-layer="surface" aria-pressed="false"')}{b('03 · Twój charakter','data-layer="design" aria-pressed="false"')}</div><p class="gh-caption" id="gh-layer-status" role="status">Konstrukcja stalowa. Rozbudowa wykorzystuje komponenty zgodnej rodziny.</p></div></section>
-<section class="gh-section gh-wrap" id="kierunki"><h2>Jedno miejsce.<br>Wiele charakterów.</h2><p>Wybierz punkt wyjścia i zmień go po swojemu w Studio.</p><div class="gh-concept-grid">'''
-for family,name,file in concepts:
- out+=f'<article>{image(S+"/studio/"+file,name+" — wizualizacja koncepcyjna nawierzchni")}<p class="gh-eyebrow">WIZUALIZACJA KONCEPCYJNA</p><h3>{name}</h3>{a("Dostosuj w Studio",studio(arena="p1",pattern=family,palette="court-culture",variant=1))}</article>'
+<section class="gh-section gh-wrap" id="kierunki"><h2>Jedno miejsce.<br>Wiele charakterów.</h2><p>Autorskie projekty nawierzchni. Najedź lub wybierz „W otoczeniu”, a potem dopasuj projekt w Studio.</p><div class="gh-concept-grid" tabindex="0" aria-label="Projekty nawierzchni — przewijana kolekcja">'''
+for concept in concepts:
+ from urllib.parse import urlencode
+ key,name=concept['id'],concept['name']
+ href='/konfigurator-boisk/?'+urlencode({'surface':'street-football-3x3','pattern':concept['familyId'],'palette':concept['paletteId'],'variant':concept['variant']})
+ out+=f'<article class="gh-surface-offer" data-surface-offer="{key}"><div class="gh-surface-pair">{image(S+"/surface-projects/"+key+".svg",name+" — samodzielny projekt nawierzchni","gh-surface-bare")}{image(S+"/surface-projects/"+key+"-park.webp",name+" — wizualizacja koncepcyjna w parku","gh-surface-context")}<button type="button" class="gh-btn gh-context-toggle" data-toggle-context aria-pressed="false" aria-label="{name}: pokaż w otoczeniu">W otoczeniu ↗</button></div><p class="gh-eyebrow">PROJEKT NAWIERZCHNI · WIZUALIZACJA KONCEPCYJNA</p><h3>{name}</h3>{a("Dostosuj w Studio",href)}</article>'
 out+='</div></section><section class="gh-section gh-tinted" id="materialy"><div class="gh-wrap"><h2>Poczuj różnicę.</h2><p>Granulat, płytki, trawa lub malowana nawierzchnia. Zobacz fakturę z bliska.</p><div class="gh-materials">'
 for name,file in materials:
  url=S+'/surfaces/catalogue/'+file

@@ -1,3 +1,7 @@
+## 2026-10-26 — oferta projektów nawierzchni, wdrożone
+
+Studio v105: 12 projektów Signature jako pierwsza karuzela Nawierzchnia → Wzór; następnie 25 kierunków i 12 wariantów w tym samym panelu, bez nowego okna. Wybór zachowuje konstrukcję, sport i obiekty; obsługuje cofanie. Oferta główna: 12 samodzielnych nawierzchni, odpowiadające im wizualizacje w parku na hover/fokus/przycisk dotykowy i dokładne linki do projektu. Źródła witryny: `integrations/wordpress/homepage/premium-2026-10-26`; mirror Studia: `integrations/studio/canvas-editor`. Wersja 105, źródło Sites `1fb829c56aaea1cd3eb15618f5543e5012549e65`, wdrożenie `appgdep_6adf92fb2f9881919793560dfd9c619a` succeeded. WordPress rewizja 4111. TSC, test:studio, build, test:mobile, preset/undo/link 390/1440 oraz publiczne Studio i homepage: PASS. Nie wysłano formularza. Wizualizacje są koncepcyjne. Priorytet modeli Panna i Street Arena 15 na końcu zachowany.
+
 # Studio — wersja 73
 
 https://gamefields-studio.ryhfs90.chatgpt.site/

@@ -23,7 +23,7 @@ import {isTurf} from "@/lib/surface-materials";
 import {StreetFootballRealisticPreview,REALISTIC_LOCATIONS,type RealisticLocation} from "@/components/street-football-realistic-preview";
 import {PannaStudioPreview as PannaRealisticPreview,ArenaSettings,SurfaceOrderOptions} from "@/components/blender-arena-preview";
 import {isRoundCourt,courtArea,courtAspect,courtDimensions,clampToCircle,roundBandPosition} from "@/lib/court-geometry";
-import {selectSurface} from "@/lib/sport-surfaces";
+import {selectSurface,sportSurface,type SurfaceModel} from "@/lib/sport-surfaces";
 import {SportSurfaceArt} from "@/components/sport-surface-art";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 
@@ -200,6 +200,7 @@ export default function Home(){
    const familyId=params.get("pattern"),paletteId=params.get("palette"),sport=params.get("sport"),shadowRaw=Number(params.get("shadow"));
    const variantRaw=Number(params.get("variant")||"1");
    const arena=params.get("arena");if(arena&&["o1","p1","circle-cage-1","circle-cage-2","street-field","octagon","street15"].includes(arena))selectSport(getSportProfile(undefined,arena),params.get("home")!=="1");else if(sport==="Piłka nożna 1×1")selectSport(getSportProfile(sport),params.get("home")!=="1");
+   const offeredSurface=sportSurface(params.get("surface")||undefined);if(offeredSurface){setP(v=>({...v,...selectSurface(v,offeredSurface.id as SurfaceModel)}));if(params.get("home")!=="1")setView("builder");}
    if(familyId&&patternFamilies.some(x=>x.id===familyId)){
      const family=getPatternFamily(familyId);
      const variant=Math.max(1,Math.min(12,Number.isFinite(variantRaw)?variantRaw:1));
