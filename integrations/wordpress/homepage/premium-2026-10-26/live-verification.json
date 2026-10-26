@@ -1,0 +1,25 @@
+{
+  "url": "https://www.gamefields.eu/",
+  "cases": [
+    {
+      "width": 390,
+      "status": "passed",
+      "images": true,
+      "lazy3D": true,
+      "selectedModel": true,
+      "catalogue": 8,
+      "contact": true
+    },
+    {
+      "width": 1440,
+      "status": "passed",
+      "images": true,
+      "lazy3D": true,
+      "selectedModel": true,
+      "catalogue": 8,
+      "contact": true
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

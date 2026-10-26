@@ -1,0 +1,51 @@
+{
+  "cases": [
+    {
+      "width": 375,
+      "status": "passed",
+      "modelSelection": true,
+      "catalogue": 8,
+      "materials": true,
+      "contactPreserved": true,
+      "projectRemoval": true
+    },
+    {
+      "width": 390,
+      "status": "passed",
+      "modelSelection": true,
+      "catalogue": 8,
+      "materials": true,
+      "contactPreserved": true,
+      "projectRemoval": true
+    },
+    {
+      "width": 430,
+      "status": "passed",
+      "modelSelection": true,
+      "catalogue": 8,
+      "materials": true,
+      "contactPreserved": true,
+      "projectRemoval": true
+    },
+    {
+      "width": 768,
+      "status": "passed",
+      "modelSelection": true,
+      "catalogue": 8,
+      "materials": true,
+      "contactPreserved": true,
+      "projectRemoval": true
+    },
+    {
+      "width": 1440,
+      "status": "passed",
+      "modelSelection": true,
+      "catalogue": 8,
+      "materials": true,
+      "contactPreserved": true,
+      "projectRemoval": true
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}
