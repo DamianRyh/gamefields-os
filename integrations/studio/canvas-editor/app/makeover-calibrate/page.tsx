@@ -41,13 +41,18 @@ export default function MakeoverCalibrationLab() {
     let composited = false;
     if (points.length === 4 && artwork.current && validateCalibrationQuad(points, c.width, c.height)) {
       try {
+        const layer = document.createElement("canvas");
+        layer.width = c.width; layer.height = c.height;
+        const layerContext = layer.getContext("2d");
+        if (!layerContext) throw Error("Canvas 2D unavailable");
+        drawCalibratedSurface(layerContext, artwork.current, artwork.current.naturalWidth, artwork.current.naturalHeight, points);
         ctx.save();
         ctx.globalAlpha = overlayOpacity / 100;
-        drawCalibratedSurface(ctx, artwork.current, artwork.current.naturalWidth, artwork.current.naturalHeight, points);
+        ctx.drawImage(layer, 0, 0);
         ctx.restore();
         composited = true;
       } catch {
-        ctx.restore();
+        setStatus("Nie udało się wyrenderować perspektywy. Popraw punkty.");
       }
     }
     if (showPoints) {
@@ -148,10 +153,15 @@ export default function MakeoverCalibrationLab() {
     const out = output.getContext("2d");
     if (!out) return;
     out.drawImage(photo.current, 0, 0, c.width, c.height);
-    out.globalAlpha = overlayOpacity / 100;
     if (!validateCalibrationQuad(points, c.width, c.height)) return;
-    try { drawCalibratedSurface(out, artwork.current, artwork.current.naturalWidth, artwork.current.naturalHeight, points); }
+    const layer = document.createElement("canvas");
+    layer.width = c.width; layer.height = c.height;
+    const layerContext = layer.getContext("2d");
+    if (!layerContext) return;
+    try { drawCalibratedSurface(layerContext, artwork.current, artwork.current.naturalWidth, artwork.current.naturalHeight, points); }
     catch { setStatus("Eksport nie powiódł się. Sprawdź kalibrację."); return; }
+    out.globalAlpha = overlayOpacity / 100;
+    out.drawImage(layer, 0, 0);
     output.toBlob(blob => {
       if (!blob) { setStatus("Nie udało się wygenerować PNG."); return; }
       const url = URL.createObjectURL(blob), a = document.createElement("a");
