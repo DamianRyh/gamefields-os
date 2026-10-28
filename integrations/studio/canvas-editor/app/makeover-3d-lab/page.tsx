@@ -12,6 +12,7 @@ export default function Makeover3DLab() {
   const model = useRef<HTMLImageElement | null>(null);
   const frame = useRef<HTMLIFrameElement>(null);
   const photoUrl = useRef<string | null>(null);
+  const uploadSequence = useRef(0);
   const [draft, setDraft] = useState("");
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,8 +31,18 @@ export default function Makeover3DLab() {
   }, []);
 
   useEffect(() => () => {
+    uploadSequence.current++;
     if (photoUrl.current) URL.revokeObjectURL(photoUrl.current);
   }, []);
+
+  useEffect(() => {
+    if (!loading) return;
+    const timer = window.setTimeout(() => {
+      setLoading(false);
+      setStatus("Upłynął limit czasu renderowania 3D. Spróbuj ponownie lub wybierz inny projekt.");
+    }, 35000);
+    return () => window.clearTimeout(timer);
+  }, [loading, id]);
 
   useEffect(() => {
     if (!id) return;
@@ -78,8 +89,10 @@ export default function Makeover3DLab() {
       setStatus("Zdjęcie musi mieć format JPG, PNG lub WebP i maksymalnie 8 MB.");
       event.currentTarget.value = ""; return;
     }
+    const seq = ++uploadSequence.current;
     const url = URL.createObjectURL(file), image = new Image();
     image.onload = () => {
+      if (seq !== uploadSequence.current) { URL.revokeObjectURL(url); return; }
       if (photoUrl.current) URL.revokeObjectURL(photoUrl.current);
       photoUrl.current = url; photo.current = image;
       const factor = Math.min(1, 1800 / Math.max(image.naturalWidth, image.naturalHeight));
@@ -89,7 +102,7 @@ export default function Makeover3DLab() {
       }
       setPhotoLoaded(true); setStatus("Zdjęcie pozostało lokalnie na urządzeniu.");
     };
-    image.onerror = () => { URL.revokeObjectURL(url); setStatus("Nie udało się odczytać zdjęcia."); };
+    image.onerror = () => { URL.revokeObjectURL(url); if (seq === uploadSequence.current) setStatus("Nie udało się odczytać zdjęcia."); };
     image.src = url;
   }
 
