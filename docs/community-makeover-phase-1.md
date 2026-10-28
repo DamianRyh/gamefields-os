@@ -43,3 +43,11 @@ Przykładowe użycie po przygotowaniu zgodnych obrazów:
 - **Faza 5:** testy Playwright 390/768/1440, accessibility, przypadki błędów ładowania i prawa do mediów; dopiero potem rozważać integrację w UI.
 
 Nie uruchomiono builda i testów CI z tego środowiska. Brak publikacji.
+
+## Faza 2 — eksperymentalna kalibracja czteropunktowa (29.10.2026)
+
+Dodano `lib/makeover-calibration.ts` i route `/makeover-calibrate` w mirrorze Studio. Użytkownik lokalnie wczytuje JPG/PNG/WebP (do 8 MB), wyznacza cztery narożniki płaskiej nawierzchni w kolejności TL → TR → BR → BL, a narzędzie oblicza homografię i nakłada publiczną miniaturę SVG rzeczywiście zapisanej konfiguracji Workshop (`/api/workshop?id=...&format=svg`). Wynik można pobrać do PNG. Zdjęcie nie jest wysyłane na serwer, a praca nie jest publikowana.
+
+Kontrole wstępne: skończone współrzędne, narożniki w obrębie kadru, wypukły czworokąt, brak kolinearności, minimalne długości krawędzi, obrazy maksymalnie 1800 px na dłuższym boku. Algorytm używa podziału na trójkąty i przekształceń afinicznych do aproksymacji homografii.
+
+**Granice:** to wizualizacja nawierzchni (2D), nie osadzenie konstrukcji 3D w fotografii; nie odtwarza przesłonięć, cieni ani rzeczywistej geometrii działki. Cztery punkty nie zapewniają metrów w świecie rzeczywistym. Przy obiektywie szerokokątnym oraz nierównej powierzchni potrzebna jest dodatkowa korekta. Widok nie jest połączony z publiczną nawigacją ani z formularzami. Brak builda i testów przeglądarkowych w tym środowisku; przed integracją należy wykonać TypeScript, build, E2E na 390/768/1440, kontrolę perspektywy na zdjęciach testowych i przegląd dostępności.
