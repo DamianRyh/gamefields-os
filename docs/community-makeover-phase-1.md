@@ -51,3 +51,14 @@ Dodano `lib/makeover-calibration.ts` i route `/makeover-calibrate` w mirrorze St
 Kontrole wstępne: skończone współrzędne, narożniki w obrębie kadru, wypukły czworokąt, brak kolinearności, minimalne długości krawędzi, obrazy maksymalnie 1800 px na dłuższym boku. Algorytm używa podziału na trójkąty i przekształceń afinicznych do aproksymacji homografii.
 
 **Granice:** to wizualizacja nawierzchni (2D), nie osadzenie konstrukcji 3D w fotografii; nie odtwarza przesłonięć, cieni ani rzeczywistej geometrii działki. Cztery punkty nie zapewniają metrów w świecie rzeczywistym. Przy obiektywie szerokokątnym oraz nierównej powierzchni potrzebna jest dodatkowa korekta. Widok nie jest połączony z publiczną nawigacją ani z formularzami. Brak builda i testów przeglądarkowych w tym środowisku; przed integracją należy wykonać TypeScript, build, E2E na 390/768/1440, kontrolę perspektywy na zdjęciach testowych i przegląd dostępności.
+
+
+## Faza 3 — izolowany cutout 3D i ręczne osadzenie (28.10.2026)
+
+- `app/workshop-cutout`: read-only render istniejącej konfiguracji, oparty o `PannaStudioPreview`; z przezroczystego canvas WebGL pobierany jest rzeczywisty obrys alfa i wysyłany jako PNG (do 2,8 mln znaków base64) wyłącznie do zweryfikowanego `parentOrigin`. Nie dodaje białego tła.
+- `app/makeover-3d-lab`: lokalne zdjęcie JPG/PNG/WebP, nakładka autentycznego renderu 3D, ręczna korekta położenia, rozmiaru, obrotu i przezroczystości, eksport PNG.
+- Użyte istniejące formaty, renderer, endpoint odczytu Workshop i walidacja projektu. Brak nowego GLB, brak drugiego silnika i brak mutacji w D1.
+
+**Ważne:** to nie jest jeszcze fotogrametryczna kalibracja pełnego modelu 3D. Ortograficzny renderer i cztery narożniki płaskiej nawierzchni nie wystarczają do odzyskania wszystkich parametrów kamery telefonu; brak też obsługi obiektów przesłaniających, światła i cieni. Suwaki w /makeover-3d-lab służą tylko do poglądowego ustawienia. Nie używać do ofert z wymiarem ani dokumentacji wykonawczej.
+
+Przed merge: potwierdzić transparentne piksele na prawdziwych scenach w Chrome/Safari i mobilnie; sprawdzić brak białych elementów od tekstur, rozmiary payloadów, zgodność identyfikatorów, brak race-condition przy zmianie projektu, testy TS/build/Playwright, dostępność. Dodać timeout przy renderingu i komunikat o błędzie iframe. Dopiero po tym wdrażać wspólną kalibrację kamery dla 3D (minimum dopasowanie orientacji i skali na znanych wymiarach oraz test obrazowy).
