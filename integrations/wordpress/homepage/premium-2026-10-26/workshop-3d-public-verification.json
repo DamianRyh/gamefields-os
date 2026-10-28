@@ -1,0 +1,21 @@
+{
+  "errors": [],
+  "cases": [
+    {
+      "width": 390,
+      "rendered3D": true,
+      "interactive": true,
+      "model": "p1",
+      "singleFrame": true
+    },
+    {
+      "width": 1440,
+      "rendered3D": true,
+      "interactive": true,
+      "model": "p1",
+      "singleFrame": true
+    }
+  ],
+  "status": "passed",
+  "cleanupStatus": 200
+}

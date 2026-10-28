@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "width": 390,
+      "snapshot3D": true,
+      "interactive": true,
+      "oneFrame": true,
+      "readOnly": true,
+      "models": [
+        "p1",
+        "o1",
+        "street-field-modular"
+      ]
+    },
+    {
+      "width": 1440,
+      "snapshot3D": true,
+      "interactive": true,
+      "oneFrame": true,
+      "readOnly": true,
+      "models": [
+        "p1",
+        "o1",
+        "street-field-modular"
+      ]
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}
