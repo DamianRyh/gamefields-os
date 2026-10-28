@@ -44,7 +44,7 @@ Przykładowe użycie po przygotowaniu zgodnych obrazów:
 
 Nie uruchomiono builda i testów CI z tego środowiska. Brak publikacji.
 
-## Faza 2 — eksperymentalna kalibracja czteropunktowa (29.10.2026)
+## Faza 2 — eksperymentalna kalibracja czteropunktowa (28.10.2026)
 
 Dodano `lib/makeover-calibration.ts` i route `/makeover-calibrate` w mirrorze Studio. Użytkownik lokalnie wczytuje JPG/PNG/WebP (do 8 MB), wyznacza cztery narożniki płaskiej nawierzchni w kolejności TL → TR → BR → BL, a narzędzie oblicza homografię i nakłada publiczną miniaturę SVG rzeczywiście zapisanej konfiguracji Workshop (`/api/workshop?id=...&format=svg`). Wynik można pobrać do PNG. Zdjęcie nie jest wysyłane na serwer, a praca nie jest publikowana.
 
