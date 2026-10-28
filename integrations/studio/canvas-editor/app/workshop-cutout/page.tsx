@@ -37,6 +37,15 @@ export default function WorkshopCutout() {
   }, []);
 
   useEffect(() => {
+    if (!error || !targetOrigin.current || !idRef.current) return;
+    window.parent.postMessage({
+      type: "gf-workshop-cutout-error",
+      id: idRef.current,
+      error: "Podgląd 3D jest niedostępny. Sprawdź projekt i spróbuj ponownie.",
+    }, targetOrigin.current);
+  }, [error]);
+
+  useEffect(() => {
     if (!project || !root.current) return;
     let frame = 0;
     const capture = () => {
