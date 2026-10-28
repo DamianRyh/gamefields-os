@@ -12,6 +12,7 @@ export default function MakeoverCalibrationLab() {
   const photo = useRef<HTMLImageElement | null>(null);
   const artwork = useRef<HTMLImageElement | null>(null);
   const photoUrl = useRef<string | null>(null);
+  const uploadSequence = useRef(0);
   const [draftId, setDraftId] = useState("");
   const [id, setId] = useState("");
   const [points, setPoints] = useState<CalibrationPoint[]>([]);
@@ -91,9 +92,11 @@ export default function MakeoverCalibrationLab() {
       event.currentTarget.value = "";
       return;
     }
+    const seq = ++uploadSequence.current;
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => {
+      if (seq !== uploadSequence.current) { URL.revokeObjectURL(url); return; }
       if (photoUrl.current) URL.revokeObjectURL(photoUrl.current);
       photoUrl.current = url;
       photo.current = img;
@@ -103,7 +106,7 @@ export default function MakeoverCalibrationLab() {
       setPoints([]); setPhotoReady(true);
       setStatus("Wybierz narożniki po kolei: lewy górny → prawy górny → prawy dolny → lewy dolny.");
     };
-    img.onerror = () => { URL.revokeObjectURL(url); setStatus("Nie można odczytać zdjęcia."); };
+    img.onerror = () => { URL.revokeObjectURL(url); if (seq === uploadSequence.current) setStatus("Nie można odczytać zdjęcia."); };
     img.src = url;
   }
 
