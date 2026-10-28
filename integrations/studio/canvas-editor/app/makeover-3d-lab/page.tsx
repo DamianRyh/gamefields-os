@@ -49,6 +49,11 @@ export default function Makeover3DLab() {
     function onMessage(event: MessageEvent) {
       if (event.origin !== location.origin || event.source !== frame.current?.contentWindow) return;
       const data = event.data;
+      if (data?.type === "gf-workshop-cutout-error" && data.id === id) {
+        setLoading(false);
+        setStatus("Nie udało się wyrenderować konstrukcji. Sprawdź projekt lub spróbuj ponownie.");
+        return;
+      }
       if (!data || data.type !== "gf-workshop-cutout" || data.id !== id ||
           data.mode !== "uncalibrated-3d-concept" || typeof data.image !== "string" ||
           data.image.length > 2_800_000 || !/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(data.image)) return;
