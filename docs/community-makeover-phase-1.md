@@ -62,3 +62,30 @@ Kontrole wstępne: skończone współrzędne, narożniki w obrębie kadru, wypuk
 **Ważne:** to nie jest jeszcze fotogrametryczna kalibracja pełnego modelu 3D. Ortograficzny renderer i cztery narożniki płaskiej nawierzchni nie wystarczają do odzyskania wszystkich parametrów kamery telefonu; brak też obsługi obiektów przesłaniających, światła i cieni. Suwaki w /makeover-3d-lab służą tylko do poglądowego ustawienia. Nie używać do ofert z wymiarem ani dokumentacji wykonawczej.
 
 Przed merge: potwierdzić transparentne piksele na prawdziwych scenach w Chrome/Safari i mobilnie; sprawdzić brak białych elementów od tekstur, rozmiary payloadów, zgodność identyfikatorów, brak race-condition przy zmianie projektu, testy TS/build/Playwright, dostępność. Dodać timeout przy renderingu i komunikat o błędzie iframe. Dopiero po tym wdrażać wspólną kalibrację kamery dla 3D (minimum dopasowanie orientacji i skali na znanych wymiarach oraz test obrazowy).
+
+
+## Faza 4 — solver perspektywicznej kamery i review eksperckie (28.10.2026)
+
+Dwóch niezależnych recenzentów przeanalizowało matematykę i kod poprzednich etapów. Kluczowy wniosek: dotychczasowy `Renderer` rysuje ortograficznie (stałe clip-W=1), więc czteropunktowej homografii nie wolno stosować do gotowego PNG 3D — zniekształcałoby to wysokości. Poprawna metoda wymaga osobnego trybu perspektywicznego i kalibracji osi modelu.
+
+Nowy moduł `lib/makeover-perspective-camera.ts`:
+
+- Buduje homografię z rzeczywistych wymiarów L × W (metry) do czterech narożników (piksele).
+- Przy znanym parametrze `focalPx` używa go w macierzy K; bez niego wyznacza ograniczoną estymację i zawsze oznacza ją jako przybliżoną.
+- Dekomponuje kolumny K^-1 H, ortonormalizuje osie i wyznacza translację, sprawdzając dodatnią głębokość.
+- Zwraca błąd reprojekcji RMS i maksimum w pikselach oraz flagę `quality`, nigdy nie deklaruje certyfikowanej dokładności.
+- Dołącza `tests/makeover-perspective-camera.mjs` z syntetyczną kamerą, rzutem narożników, znanym/estymowanym f i degenerate-case. Test jest przygotowany, lecz nie został uruchomiony w tym środowisku.
+
+Poprawki z review wdrożone w poprzednich modułach:
+- Warp wzoru powstaje na osobnym canvas, a alfa jest stosowana raz — bez ciemnych szwów w zachodzących trójkątach.
+- Wczytywanie zdjęć używa generacji/tokenu, aby opóźniony wynik nie nadpisał nowszego pliku.
+- Cutout raportuje błędy do weryfikowanego parent iframe, a 3D lab ma timeout.
+
+**Blokady przed integracją 3D:**
+1. Testy solvera, stabilności reprojekcji i poprawnej osi +Y w syntetycznych kadrach.
+2. Opcjonalna projekcja perspektywiczna w rendererze bez modyfikacji domyślnego trybu Studio.
+3. Per-model ground-anchor transform: różne GLB/JSON mają odmienne układy lokalne.
+4. Przypadki szerokokątnych obiektywów, dystorsja, przesłonięcia, cienie i skala.
+5. Testy TS/build/Playwright/Chrome/Safari/mobile oraz alternatywne wprowadzanie punktów dla klawiatury.
+
+Gałąź nadal eksperymentalna, bez merge i bez publikacji.
