@@ -1,0 +1,10 @@
+{
+  "errors": [],
+  "initialStatus": 200,
+  "publish": true,
+  "feed": true,
+  "exactCopy": true,
+  "svg": true,
+  "status": "passed",
+  "cleanupStatus": 200
+}

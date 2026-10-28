@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "width": 390,
+      "oneClick": true,
+      "withdraw": true,
+      "exactCopy": true,
+      "privateFieldsRemoved": true
+    },
+    {
+      "width": 1440,
+      "oneClick": true,
+      "withdraw": true,
+      "exactCopy": true,
+      "privateFieldsRemoved": true
+    }
+  ],
+  "errors": [],
+  "status": "passed",
+  "api": {
+    "dedupe": true,
+    "rateLimit": true,
+    "latestTen": true,
+    "originGuard": true,
+    "deleteGuard": true,
+    "svg": true
+  }
+}

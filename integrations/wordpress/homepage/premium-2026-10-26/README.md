@@ -69,3 +69,11 @@ The public gallery reads only published posts in category 643, latest ten by pub
 This is a moderated mail-to-editor workflow, not automatic cloud saving or a public write API: CF7 emails the submission and attachments to the existing company inbox; owner reviews and creates/publishes an approved WordPress post. Source/public-data shape and publication instructions are in `MODERACJA_WARSZTATU.md`. CF7 is not used as a submission-storage database.
 
 Draft/live browser tests at 390/1440 passed empty/data/error/retry/form states, 10-card cap, dates, query parameters, consent default, no runtime errors/overflow. Populated cases use intercepted browser-only fixture data; no records were published. Public category was independently confirmed empty. Delivery to mailbox was not tested. Sources: `workshop.html`, `workshop.js`, `workshop-form.json`, `verify-workshop.mjs`.
+
+## One-click Workshop — 28.10.2026, supersedes moderated mail workflow
+
+Studio version 108 / source c47985ec0a1d29a4bef7c8fe8ba91f4b948af1e0 / deployment appgdep_6ae1c87698d48191a4d82eb8dcd640b9 succeeded. WordPress revision 4173 replaces the submission form with a single Studio entry and a live public D1 feed. Users click “Zapisz dla innych”; the validated public layout/colours appear immediately. No form, login, attachments, email or editorial approval. Names, texts, logos, objects, contact data and estimates are omitted server-side. API limits, deduplication and capability-based withdrawal are enforced server-side.
+
+“Zrób swoją wersję” opens the exact public configuration, including individual colours and modular layout, with previous-draft backup. Thumbnails show pattern/colour layouts; the full 3D model is in Studio. Source migration 0011 is additive; historical SQL is unchanged. The previous category 643 and CF7 4159 are retained but unused. See MODERACJA_WARSZTATU.md for current behaviour.
+
+The concurrent Panna Court v6 source was merged before deployment, and its existing WordPress runtime/media override is preserved as panna-court-v6-runtime.js so rebuilding the homepage does not regress it. TSC, scope/build/mobile, v6 source checks, local database/API/UI and public end-to-end publish/copy/withdraw all passed. The temporary public test record was removed; no fake gallery seeds. Homepage CORS read passed. No email was sent.

@@ -1,39 +1,34 @@
-# Warsztat Gamefields — struktura i publikacja
+# Warsztat — zapis jednym kliknięciem
 
-## Przepływ
+Aktualizacja 28.10.2026 zastępuje wcześniejszy formularz i ręczną publikację. Publiczna galeria nie czyta już kategorii WordPress 643. Formularz CF7 4159 pozostaje nieużywany, aby nie niszczyć historii poprzedniego rozwiązania.
 
-1. Użytkownik projektuje w Studio i wybiera **Pobierz projekt**. Zachowuje własny plik JSON oraz wykonuje podgląd JPG/PNG/WebP.
-2. Na homepage otwiera **Zgłoś do Warsztatu**. Formularz CF7 **4159** wymaga nazwy, prywatnego e-maila, pliku JSON/TXT do 2 MB, podglądu do 2 MB i osobnej zgody na publiczną publikację. Pseudonim oraz inspiracja są opcjonalne.
-3. Zgłoszenie z plikami trafia na istniejący adres `info@gamefields.eu`. Nie publikuje się automatycznie. CF7 nie jest bazą archiwum zgłoszeń; wiadomość i pliki należy zachować w firmowej skrzynce / wewnętrznym archiwum. Na tym etapie nie dodano zapisu w chmurze ani nowego endpointu Studia.
-4. Właściciel sprawdza zgodę, materiały, podgląd i poprawność konfiguracji. W WordPress → Wpisy tworzy szkic w kategorii **Warsztat Gamefields (643)**, dodaje nazwę projektu, sprawdzony podgląd jako obrazek wyróżniający i poniższe publiczne metadane. Nie dodaje danych kontaktowych do publicznego wpisu.
-5. Po akceptacji publikuje wpis. Galeria czyta tylko `status=publish`, kategorię 643, 10 najnowszych wpisów malejąco po dacie. Data na karcie jest datą publikacji, nie prywatną datą otrzymania zgłoszenia. Starsze wpisy pozostają w WordPressie.
-6. Cofnięcie publikacji do szkicu usuwa pracę z feedu przy kolejnym odświeżeniu. Prośby o usunięcie można kierować na info@gamefields.eu.
+## Dla użytkownika
 
-## Dane wpisu
+1. Zaprojektuj boisko w Studio.
+2. Kliknij **Zapisz dla innych**. Kliknięcie świadomie publikuje układ, materiał, wzór i kolory. Nie wymaga konta, danych kontaktowych, pliku ani wcześniejszej akceptacji.
+3. Projekt od razu trafia do publicznego Warsztatu na stronie głównej. Inni klikają **Zrób swoją wersję**, aby otworzyć pełną kopię z indywidualnymi kolorami w Studio.
+4. Po publikacji autor widzi **Wycofaj**. Losowy klucz do wycofania jest zwracany tylko publikującemu i zachowany na tym urządzeniu. Nie jest częścią publicznego feedu. Najprościej wycofać projekt bezpośrednio po zapisie; utrata pamięci przeglądarki oznacza utratę tego klucza.
 
-- `post_title`: publiczna nazwa pracy, do 100 znaków.
-- `post_status`: `draft` przed weryfikacją, `publish` po akceptacji.
-- `categories`: `[643]`.
-- `featured_media`: zweryfikowany podgląd JPG/PNG/WebP z lokalnych mediów WordPressa.
-- `date_gmt`: data publikacji nadawana przez WordPress.
-- W bloku Własny HTML w treści wpisu:
+## Publiczne dane
 
-```html
-<script type="application/json" data-gf-workshop>
-{"version":1,"author":"Publiczny pseudonim","projectFile":"https://www.gamefields.eu/wp-content/uploads/RRRR/MM/zaakceptowany-projekt.txt","studio":{"arena":"p1","pattern":"organic-flow","palette":"warsaw","variant":6}}
-</script>
-```
+Serwer waliduje przez `projectSchema`, usuwa własną nazwę, identyfikator, wycenę, datę, teksty, obrazy i obiekty autora. Generuje tytuł z katalogowych nazw modelu i wzoru. Nie przyjmuje przesyłanych obrazków do automatycznej publikacji. Miniaturę wzoru i kolorów generuje ze zweryfikowanych parametrów; pełny model jest dostępny w kopii otwieranej w Studio.
 
-To jest **przykład struktury**, nie opublikowany projekt klienta. `projectFile` musi wskazywać lokalny plik JSON albo TXT zawierający zatwierdzony projekt. Dla osobnej nawierzchni `studio.surface` zastępuje `studio.arena`, np. `street-football-3x3`. Pozostałe parametry są opcjonalne.
+Nowa addytywna migracja `0011_studio_workshop` tworzy tabelę D1 `studio_workshop_designs`; wcześniejsze migracje pozostają niezmienione. Rekord zawiera konfigurację, tytuł i datę serwera oraz niepubliczne skróty do deduplikacji, limitu i wycofania. Nie przechowuje surowego IP: dzienny skrót służy ograniczeniu nowych zapisów. Feed zwraca wyłącznie identyfikator, tytuł i datę 10 najnowszych prac. Starsze rekordy nie są automatycznie usuwane.
 
-Karta zawiera obrazek, tytuł, publiczny pseudonim, datę, „Stwórz podobny” (rodzina/wariant/paleta/model) i „Pobierz projekt”. Aby zachować **wszystkie indywidualne kolory**, użytkownik pobiera plik i wczytuje go w istniejącym Studio. Nie udajemy, że skrócony link kopiuje każdy parametr. Puste/nieprawidłowe metadane, obcy host pliku/obrazu, nieprawidłowa data i nieopublikowane wpisy nie są renderowane.
+## API Studia
 
-## Przygotowanie publicznego pliku
+- `GET /api/workshop`: ostatnie 10 rekordów.
+- `GET /api/workshop?id=UUID`: pełna publiczna konfiguracja.
+- `GET /api/workshop?id=UUID&format=svg`: miniatura wzoru i kolorów, wygenerowana po stronie serwera.
+- `POST /api/workshop`: publikacja zweryfikowanego projektu. Zapis wymaga źródła odpowiadającego Studio; żądanie do 32 KB; atomowy limit 3 nowych konfiguracji na 10 minut dla dziennego skrótu źródła. Ponowienie tej samej konfiguracji nie tworzy kolejnej pracy.
+- `DELETE /api/workshop`: wycofanie jednego rekordu po UUID i losowym kluczu. Klucz jest sprawdzany przez skrót; nigdy nie jest zwracany w publicznym odczycie.
 
-Sprawdź plik przez walidowany import w Studio. Utwórz osobną kopię publiczną: pozostaw geometrię, rodzinę, sport, powierzchnię, wzór i kolory; usuń prywatne dane kontaktowe, wyceny (`estimate`), komentarze i metadane zgłoszenia. Początkowo nie publikuj własnych logo, napisów i innych obiektów autora: `objects: []`; w `arenaDesign` usuń `src` i ustaw `text: ""`. Ustaw publiczną nazwę, nowy identyfikator kopii i datę. Ponownie sprawdź import oraz zgodność miniatury z tą kopią. Oryginał zostaje wewnętrzny, nie jest nadpisywany.
+Widok główny odczytuje feed bez poświadczeń; CORS pozwala na odczyt publicznych projektów. W zapisie nie ma kluczy ani kont WordPressa. Kopia zachowuje całą publiczną konfigurację i przed zastąpieniem bieżącego szkicu korzysta z istniejącego mechanizmu zachowania poprzedniego projektu.
 
-## Dostęp i testy
+## Weryfikacja i wydanie
 
-Anonimowy odwiedzający ma tylko odczyt opublikowanego feedu. Nie otrzymuje WordPress credentials ani możliwości publikacji. Formularz korzysta z walidacji i limitów Contact Form 7, nie zapisuje przez publiczne REST posts. Nie instalowano wtyczek ani nowego PHP. Zgłoszeń testowych nie wysłano. Doręczanie wiadomości ze skrzynki nie było testowane w tym zadaniu.
+Studio Sites **108**, source `c47985ec0a1d29a4bef7c8fe8ba91f4b948af1e0`, deployment `appgdep_6ae1c87698d48191a4d82eb8dcd640b9`: succeeded. WordPress **4173**. Równoległa aktualizacja modelu Panna Court v6 została scalona i zachowana; jej podmiana mediów na homepage została przeniesiona do odtwarzalnych źródeł `panna-court-v6-runtime.js`.
 
-Nie seedujemy galerii fikcyjnymi klientami. W pustej galerii pokazujemy zaproszenie do pierwszego zgłoszenia. Testy 10 wpisów używają wyłącznie przechwyconej odpowiedzi w przeglądarce — nie tworzą żadnych publicznych rekordów.
+TypeScript, test:studio, build, test:mobile, test modelu v6 oraz D1/API/UI 390/1440: PASS. Publiczny test zapisał własną nietypową konfigurację, potwierdził feed, SVG i otwarcie dokładnej kopii, po czym wycofał wyłącznie własny rekord z wynikiem 200. Żadna testowa praca nie pozostała w galerii. Publiczny odczyt feedu z domeny WordPressa również przeszedł.
+
+To rozwiązanie nie wysyła zgłoszeń e-mailem. Nie publikuje szkiców z przeglądarki bez naciśnięcia przycisku.

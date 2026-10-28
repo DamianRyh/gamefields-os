@@ -59,8 +59,9 @@ contact=(root/'contact-template.html').read_text()
 contact=contact.replace('<h2>Masz miejsce?<br>Porozmawiajmy.</h2>','<h2>Masz miejsce?<br>Zróbmy miejsce do gry.</h2>')
 out+=contact+'<p id="gc-direction-status" hidden></p></main><footer class="gh-wrap gh-footer"><a class="gh-logo" href="/">gamefields.</a><a href="mailto:info@gamefields.eu">info@gamefields.eu</a><a href="/konfigurator-boisk/">Studio</a><a href="/kontakt/">Kontakt</a><a href="/polityka-prywatnosci/">Polityka prywatności</a></footer>'
 out+='''<dialog class="gh-dialog" id="gh-dialog" aria-labelledby="gh-dialog-title"><div class="gh-dialog-head"><h2 id="gh-dialog-title">Poznaj boisko</h2><button type="button" class="gh-btn" data-close-dialog aria-label="Zamknij podgląd">Zamknij ×</button></div><div id="gh-dialog-body"></div></dialog></div>'''
+runtime=(root/'script.js').read_text().replace('\nconst studio=', '\n'+(root/'panna-court-v6-runtime.js').read_text()+'\nconst studio=',1)
 data={'models':models,'modelMedia':model_media,'names':names,'modelOrder':list(names),'defaultModel':'o1','studio':S,'painted':painted}
-out+='<script type="application/json" id="gh-data">'+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+'</script><script>'+(root/'script.js').read_text()+'</script>'
+out+='<script type="application/json" id="gh-data">'+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+'</script><script>'+runtime+'</script>'
 out+='<script>'+(root/'workshop.js').read_text()+'</script>'
 # Keep the existing selected-product query and review/remove behavior, with the same contact field IDs.
 for script in (root/'contact-existing.js').read_text().splitlines():out+='<script>'+script+'</script>'

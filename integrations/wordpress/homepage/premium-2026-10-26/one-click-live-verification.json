@@ -1,0 +1,21 @@
+{
+  "live": true,
+  "cases": [
+    {
+      "width": 390,
+      "noForm": true,
+      "latestTen": true,
+      "date": true,
+      "copyLink": true
+    },
+    {
+      "width": 1440,
+      "noForm": true,
+      "latestTen": true,
+      "date": true,
+      "copyLink": true
+    }
+  ],
+  "errors": [],
+  "status": "passed"
+}

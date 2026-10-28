@@ -194,6 +194,9 @@ export default function Home(){
  const [p,setP]=useState<Project>(initial),[view,setView]=useState("builder"),[module,setModule]=useState(0),[iso,setIso]=useState(false),[previewMode,setPreviewMode]=useState<"realistic"|"aerial"|"ground">("ground"),[previewLocation,setPreviewLocation]=useState<RealisticLocation>("park"),[selectedId,setSelectedId]=useState<string|null>(null),[undoStack,setUndo]=useState<Project[]>([]),[redoStack,setRedo]=useState<Project[]>([]);
  const recovery=useProjectRecovery(p,setP);
  const saveStatus=recovery.saveStatus;
+ const workshopRecovery=useRef(recovery);workshopRecovery.current=recovery;
+ useEffect(()=>{const id=new URLSearchParams(window.location.search).get('workshop');if(!id||!/^[0-9a-f-]{36}$/.test(id))return;let cancelled=false;void(async()=>{try{const response=await fetch('/api/workshop?id='+encodeURIComponent(id));if(!response.ok)throw Error('Ten projekt został wycofany lub jest niedostępny.');const data=await response.json(),copy=projectSchema.parse(data.project);if(cancelled)return;await workshopRecovery.current.preserveCurrent();if(cancelled)return;setP({...copy,id:'GF-'+uid(),name:copy.name+' — moja wersja'});setSelectedId(null);setView('builder');toast.success('Otworzono kopię. Zmieniaj ją po swojemu.');}catch(error){if(!cancelled)toast.error((error as Error).message)}})();return()=>{cancelled=true}},[]);
+
  useEffect(()=>{if(!REALISTIC_LOCATIONS.some(location=>location.id===previewLocation&&location.enabled))setPreviewLocation("park")},[previewLocation]);
  useEffect(()=>{
    const params=new URLSearchParams(window.location.search);

@@ -1,4 +1,5 @@
 "use client";
+import {WorkshopSave} from "@/components/workshop-save";
 import {sportSurfaces,sportSurface,selectSurface,type SurfaceModel} from "@/lib/sport-surfaces";
 import {StudioDesignChoices,StudioMaterialChoices,StudioSurfaceChoices,StudioConstructionChoices,StudioCreativeLines,StudioColorEditor,StudioPaletteChoices} from "@/components/studio-visual-tools";
 import {StudioModelThumbnail} from "@/components/studio-model-thumbnail";
@@ -130,6 +131,7 @@ export function StudioWorkspace(props:Props){
    <a href="https://www.gamefields.eu/" target="_top" className="studio-logo" aria-label="Gamefields — strona główna">gamefields <span>studio</span></a>
    {props.recovery.blocked?<button className="studio-save studio-recovery-status" aria-label="Otwórz odzyskiwanie projektu" onClick={()=>openTool("files")}>{props.saveStatus}</button>:<span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span>}<div className="studio-top-actions"><button aria-label="Pliki projektu" onClick={()=>openTool("files")}><FolderOpen size={18}/></button><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={props.download}><Download size={18}/><span>Pobierz projekt</span></button><QuoteBadge quote={props.quote} onClick={showSummary}/></div>
   </header>
+  <WorkshopSave project={p}/>
   <div className="studio-screen">
    <nav className="studio-tool-rail" aria-label="Narzędzia edycji">{([[
     "construction","Konstrukcja",Box],["surface","Nawierzchnia",Droplets],["graphics","Grafika",Palette]
