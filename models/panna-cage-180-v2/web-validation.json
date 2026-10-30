@@ -1,0 +1,124 @@
+{
+  "product": "Panna Cage 180",
+  "revision": "C180-CAD-2",
+  "bounds": {
+    "min": [
+      -3.3613,
+      0,
+      -3.06
+    ],
+    "max": [
+      3.3613,
+      1.8,
+      3.06
+    ]
+  },
+  "triangles": 593282,
+  "parts": 46,
+  "groups": {
+    "frame": 28,
+    "panels": 16,
+    "goals": 2
+  },
+  "GLBAttributesFinite": true,
+  "surfaceUnchanged": true,
+  "CAD": {
+    "product": "Panna Cage 180",
+    "revision": 2,
+    "CAD": "FreeCAD 1.1.4",
+    "units": "mm in CAD, m in tessellation",
+    "assembly": {
+      "Panel 01": 12,
+      "Panel 02": 2,
+      "Panel 03": 2
+    },
+    "documented": {
+      "innerDiameter_m": 6,
+      "height_m": 1.8,
+      "profiles_mm": [
+        40,
+        60,
+        3
+      ],
+      "wireDiameter_mm": 3,
+      "sleeve_mm": [
+        20,
+        12,
+        40
+      ],
+      "sleeveChamfer_mm": 1,
+      "goalWidth_mm": 1088,
+      "goalRearHeight_mm": 315,
+      "goalOverallLength_mm": 6722.51,
+      "entryWidth_mm": 575,
+      "levels": 2,
+      "levelHeight_m": 0.9,
+      "upperEntry": "Panel 03 mirrored vertically; opening remains in sector 2",
+      "goals": "lower sectors 1 and 5, outward"
+    },
+    "visualAssumptions": [
+      "50 mm wire pitch retained from previous visual interpretation; drawing dimension not confirmed",
+      "1.2 mm profile edge fillet is a presentation finish; production corner radius not specified",
+      "Sleeve top/bottom arc angular placement interpreted from 0.5\u00b0/14\u00b0 detail; no bolt or anchor specification inferred",
+      "Adjacent upright profiles positioned inside each module end plane to eliminate duplicate overlapping posts",
+      "No foundations, anchors, threaded bolt details or certified weld geometry inferred",
+      "Newer Panel 02 rear goal height 315 mm retained instead of older assembly 472 mm, consistent with Cage 90 CAD r2"
+    ],
+    "parts": 8,
+    "triangles_per_templates": 268522,
+    "web_triangles_per_templates": 95656,
+    "stepVolume_mm3": 82488110.5142775,
+    "sources": [
+      {
+        "name": "Boisko 03 28112023 (1).pdf",
+        "sha256": "a57553720ab9eb12529b8f2fd103a60dfb1f9a066f871497fbeaccf095e2f3d4"
+      },
+      {
+        "name": "Panel 01.pdf",
+        "sha256": "111e93413aaa01650188269c4abf84454809a41959b0d0897765977c11f58003"
+      },
+      {
+        "name": "Profil ST 002.pdf",
+        "sha256": "b78a397c7ec23227ab6db023052012e7cb121765dbf027c5ce2523a7b8687197"
+      },
+      {
+        "name": "Profil ST 004.pdf",
+        "sha256": "ab3921356caac75a3e6e8de722e7aa00a0001b7a8c3a30ebc93fff81c64d4e7d"
+      },
+      {
+        "name": "Tuleja 001.pdf",
+        "sha256": "1fef62f2e8029e2606938a8a82fe93fa56085fa6f355fd459bae74d67e1420b2"
+      },
+      {
+        "name": "Profil ST 021.pdf",
+        "sha256": "28cc2d56bd5e5d1fe459987a3992546e2c89261a9e45b98f9b681d57c8fc8dc9"
+      },
+      {
+        "name": "Boisko 03-H.pdf",
+        "sha256": "8875814adb97e2c8828e87d5867e8d22e1f503d3860ea5658522a86970b04745"
+      }
+    ],
+    "baseCAD": {
+      "file": "../panna-cage-90-v2/panna-cage-90-v2.FCStd",
+      "sha256": "42d06f81a4bbd00b84a0c8b68c5351e7bfde05e9deee1c1ed3c808da8f9d5e53"
+    }
+  },
+  "files": {
+    "studio-mesh.json": {
+      "bytes": 25609439,
+      "sha256": "a09cc64aee9055f5934087c71d031cd4be0fe9e1c300f8d97e178ecd9e26e295"
+    },
+    "panna-cage-180-v2.glb": {
+      "bytes": 17050504,
+      "sha256": "b73302df3519f2304987e7f16892d5f90ad224714f946025d3da6e5ceb71fd03"
+    },
+    "panna-cage-180-v2.blend": {
+      "bytes": 5849402,
+      "sha256": "1cdbc71eaaac00074a5a536e8d0711210c0024105615a4c74d9c2b9494a3143a"
+    },
+    "panna-cage-180-surface-20cm.glb": {
+      "bytes": 28820,
+      "sha256": "57a595145396ee7508ad96a7fc94adbd8cff326dd0e961b356963ff208389699"
+    }
+  }
+}
