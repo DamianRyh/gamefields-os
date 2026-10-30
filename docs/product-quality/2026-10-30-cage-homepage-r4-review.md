@@ -1,0 +1,9 @@
+# Cage homepage render refinement — R4
+
+Published on homepage 3462 after independent art-direction and visual-quality review. R3 was not accepted by the owner: gray coating was washed out, shadow was too broad, and the tall product occupied too little of its frame. Both expert reviews identified over-balanced lighting and excess world fill; a separate product/receiver composition and lower Cage180 camera were developed and checked in three proof renders before the full series.
+
+Unchanged CAD r2 geometry. Same four real coating hexes and the existing colour/3D interactions. R4 gray opaque median RGB is136/141/143 for Cage90 and132/137/139 for Cage180, compared with about211/214/215 inR3. The scene retains white ground bounce while product alpha is independent from receiver shadow strength. Foreground shows a full construction arc; the entry is moved to the rear by camera azimuth only. Cage180 uses camera z4.8. Product sampling is up to128 adaptive samples, receiver32; native Metal with a background-validation CPU fallback. One corrupted Metal frame was rejected and replaced before publication. No generated-image substitution or geometry modification.
+
+All eight Full HD WebP images are in models/cage-hero-r4 with renderer and source/hash manifest. Native WordPress copies are declared in asset-override.js. Static gray card posters also updated. R3 images remain available for rollback. The existing decoded-image swap and shared selected colour remain intact; no Studio deployment or price/model mutation.
+
+Independent final review accepted the gray Cage90 and green Cage180 at actual page size. Public and preview browser checks passed at390 and1440px: both products, all four decoded1920×1080 images, keyboard arrows, selection retention back to Play, no overflow or page JavaScript errors. Gray and green screenshots were visually inspected. Evidence: outputs/cage-hero-r4/live-verification.json and live[-gray]-circle-cage-{1,2}-{390,1440}.png.

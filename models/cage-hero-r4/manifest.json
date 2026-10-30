@@ -359,7 +359,7 @@
       "alpha": true
     }
   ],
-  "renderer": "Blender 3.6.5 Cycles Metal",
+  "renderer": "Blender 3.6.5 Cycles Metal with validated CPU fallback",
   "productSamplesMax": 128,
   "shadowSamples": 32,
   "colourManagement": "Filmic Medium High Contrast / exposure -0.3",
