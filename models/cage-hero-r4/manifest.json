@@ -1,0 +1,368 @@
+{
+  "revision": "CAGE-HERO-4",
+  "dimensions": [
+    1920,
+    1080
+  ],
+  "transparent": true,
+  "shadow_catcher": true,
+  "separateProductShadowLayers": true,
+  "shadowStrength": 0.48,
+  "exposure": -0.30000001192092896,
+  "samples": 128,
+  "device": "GPU",
+  "renders": [
+    {
+      "product": "Panna Cage 90",
+      "coat": "gray",
+      "hex": "#929696",
+      "source": "models/panna-cage-90-v2/panna-cage-90-v2.blend",
+      "source_sha256": "4c66f3b35d2a42c2f4567567aba9773b3f4a58f676432e32f0f38eae29b20bfd",
+      "geometry_unchanged": true,
+      "camera_matrix": [
+        [
+          0.6689646244049072,
+          -0.28780490159988403,
+          0.6853135228157043,
+          9.973469734191895
+        ],
+        [
+          0.7432942390441895,
+          0.25902435183525085,
+          -0.616782009601593,
+          -8.976115226745605
+        ],
+        [
+          -1.0084135304566644e-08,
+          0.9219949841499329,
+          0.38720184564590454,
+          6.085003852844238
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image": "cage-90-gray.png",
+      "renderDevice": "METAL",
+      "CPUFallback": false
+    },
+    {
+      "product": "Panna Cage 90",
+      "coat": "red",
+      "hex": "#D3152B",
+      "source": "models/panna-cage-90-v2/panna-cage-90-v2.blend",
+      "source_sha256": "4c66f3b35d2a42c2f4567567aba9773b3f4a58f676432e32f0f38eae29b20bfd",
+      "geometry_unchanged": true,
+      "camera_matrix": [
+        [
+          0.6689646244049072,
+          -0.28780490159988403,
+          0.6853135228157043,
+          9.973469734191895
+        ],
+        [
+          0.7432942390441895,
+          0.25902435183525085,
+          -0.616782009601593,
+          -8.976115226745605
+        ],
+        [
+          -1.0084135304566644e-08,
+          0.9219949841499329,
+          0.38720184564590454,
+          6.085003852844238
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image": "cage-90-red.png",
+      "renderDevice": "METAL",
+      "CPUFallback": false
+    },
+    {
+      "product": "Panna Cage 90",
+      "coat": "blue",
+      "hex": "#2469A6",
+      "source": "models/panna-cage-90-v2/panna-cage-90-v2.blend",
+      "source_sha256": "4c66f3b35d2a42c2f4567567aba9773b3f4a58f676432e32f0f38eae29b20bfd",
+      "geometry_unchanged": true,
+      "camera_matrix": [
+        [
+          0.6689646244049072,
+          -0.28780490159988403,
+          0.6853135228157043,
+          9.973469734191895
+        ],
+        [
+          0.7432942390441895,
+          0.25902435183525085,
+          -0.616782009601593,
+          -8.976115226745605
+        ],
+        [
+          -1.0084135304566644e-08,
+          0.9219949841499329,
+          0.38720184564590454,
+          6.085003852844238
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image": "cage-90-blue.png",
+      "renderDevice": "METAL",
+      "CPUFallback": false
+    },
+    {
+      "product": "Panna Cage 90",
+      "coat": "green",
+      "hex": "#667451",
+      "source": "models/panna-cage-90-v2/panna-cage-90-v2.blend",
+      "source_sha256": "4c66f3b35d2a42c2f4567567aba9773b3f4a58f676432e32f0f38eae29b20bfd",
+      "geometry_unchanged": true,
+      "camera_matrix": [
+        [
+          0.6689646244049072,
+          -0.28780490159988403,
+          0.6853135228157043,
+          9.973469734191895
+        ],
+        [
+          0.7432942390441895,
+          0.25902435183525085,
+          -0.616782009601593,
+          -8.976115226745605
+        ],
+        [
+          -1.0084135304566644e-08,
+          0.9219949841499329,
+          0.38720184564590454,
+          6.085003852844238
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image": "cage-90-green.png",
+      "renderDevice": "METAL",
+      "CPUFallback": false
+    },
+    {
+      "product": "Panna Cage 180",
+      "coat": "gray",
+      "hex": "#929696",
+      "source": "models/panna-cage-180-v2/panna-cage-180-v2.blend",
+      "source_sha256": "1cdbc71eaaac00074a5a536e8d0711210c0024105615a4c74d9c2b9494a3143a",
+      "geometry_unchanged": true,
+      "camera_matrix": [
+        [
+          0.668964684009552,
+          -0.21909493207931519,
+          0.71027010679245,
+          9.947662353515625
+        ],
+        [
+          0.7432941794395447,
+          0.19718532264232635,
+          -0.6392430663108826,
+          -8.95289134979248
+        ],
+        [
+          8.10584523947e-08,
+          0.9555706977844238,
+          0.2947620153427124,
+          5.02827787399292
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image": "cage-180-gray.png",
+      "renderDevice": "METAL",
+      "CPUFallback": false
+    },
+    {
+      "product": "Panna Cage 180",
+      "coat": "red",
+      "hex": "#D3152B",
+      "source": "models/panna-cage-180-v2/panna-cage-180-v2.blend",
+      "source_sha256": "1cdbc71eaaac00074a5a536e8d0711210c0024105615a4c74d9c2b9494a3143a",
+      "geometry_unchanged": true,
+      "camera_matrix": [
+        [
+          0.668964684009552,
+          -0.21909493207931519,
+          0.71027010679245,
+          9.947662353515625
+        ],
+        [
+          0.7432941794395447,
+          0.19718532264232635,
+          -0.6392430663108826,
+          -8.95289134979248
+        ],
+        [
+          8.10584523947e-08,
+          0.9555706977844238,
+          0.2947620153427124,
+          5.02827787399292
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image": "cage-180-red.png",
+      "renderDevice": "METAL",
+      "CPUFallback": false
+    },
+    {
+      "product": "Panna Cage 180",
+      "coat": "blue",
+      "hex": "#2469A6",
+      "source": "models/panna-cage-180-v2/panna-cage-180-v2.blend",
+      "source_sha256": "1cdbc71eaaac00074a5a536e8d0711210c0024105615a4c74d9c2b9494a3143a",
+      "geometry_unchanged": true,
+      "camera_matrix": [
+        [
+          0.668964684009552,
+          -0.21909493207931519,
+          0.71027010679245,
+          9.947662353515625
+        ],
+        [
+          0.7432941794395447,
+          0.19718532264232635,
+          -0.6392430663108826,
+          -8.95289134979248
+        ],
+        [
+          8.10584523947e-08,
+          0.9555706977844238,
+          0.2947620153427124,
+          5.02827787399292
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image": "cage-180-blue.png",
+      "renderDevice": "METAL",
+      "CPUFallback": false
+    },
+    {
+      "product": "Panna Cage 180",
+      "coat": "green",
+      "hex": "#667451",
+      "source": "models/panna-cage-180-v2/panna-cage-180-v2.blend",
+      "source_sha256": "1cdbc71eaaac00074a5a536e8d0711210c0024105615a4c74d9c2b9494a3143a",
+      "geometry_unchanged": true,
+      "camera_matrix": [
+        [
+          0.668964684009552,
+          -0.21909493207931519,
+          0.71027010679245,
+          9.947662353515625
+        ],
+        [
+          0.7432941794395447,
+          0.19718532264232635,
+          -0.6392430663108826,
+          -8.95289134979248
+        ],
+        [
+          8.10584523947e-08,
+          0.9555706977844238,
+          0.2947620153427124,
+          5.02827787399292
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "image": "cage-180-green.png",
+      "renderDevice": "CPU",
+      "CPUFallback": true
+    }
+  ],
+  "exports": [
+    {
+      "file": "cage-90-gray.webp",
+      "bytes": 761208,
+      "sha256": "33391038f32d294175cc5d9085f20ff33909693842a6c45c83a8b24fa14963cd",
+      "alpha": true
+    },
+    {
+      "file": "cage-90-red.webp",
+      "bytes": 807966,
+      "sha256": "83eafe032d3310b72d023aa28aacd7bd541e101a5d02c3fe611b7a3864f8d662",
+      "alpha": true
+    },
+    {
+      "file": "cage-90-blue.webp",
+      "bytes": 818380,
+      "sha256": "5bdb690cc65693807b3c1779ee8bf3b229fca1b130f8874680fe6129d4b7f07f",
+      "alpha": true
+    },
+    {
+      "file": "cage-90-green.webp",
+      "bytes": 780524,
+      "sha256": "a5ba60ac67539b0188f38678ef4d820ac3c630d88667d6c05c39eec8cdd04ecf",
+      "alpha": true
+    },
+    {
+      "file": "cage-180-gray.webp",
+      "bytes": 1123054,
+      "sha256": "546a179bb27c894766e1e731d374318c8672ae075aa483551e246d444fd600b3",
+      "alpha": true
+    },
+    {
+      "file": "cage-180-red.webp",
+      "bytes": 1169592,
+      "sha256": "d2aed0b7ab202684b379a0b657f6a6ca2be455f2942b7f6dea80d5d9e0cffa66",
+      "alpha": true
+    },
+    {
+      "file": "cage-180-blue.webp",
+      "bytes": 1197298,
+      "sha256": "a0bc807e92700277bdcda9b2073320f9098f5bf3dfba3ecfc0abfec85b281403",
+      "alpha": true
+    },
+    {
+      "file": "cage-180-green.webp",
+      "bytes": 1144128,
+      "sha256": "501306b11986d659bc95eef50aadfedefc4f196e942f2007b03828ba2c7d9601",
+      "alpha": true
+    }
+  ],
+  "renderer": "Blender 3.6.5 Cycles Metal",
+  "productSamplesMax": 128,
+  "shadowSamples": 32,
+  "colourManagement": "Filmic Medium High Contrast / exposure -0.3",
+  "review": "Independent art and visual QA; three proofs before full render",
+  "backgroundValidation": "All eight files passed border-alpha/RGB check; one Metal artifact replaced by CPU render"
+}
