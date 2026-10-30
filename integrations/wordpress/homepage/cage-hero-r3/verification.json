@@ -1,0 +1,30 @@
+[
+  {
+    "width": 390,
+    "key": "circle-cage-1",
+    "fourColours": true,
+    "keyboard": true,
+    "fullHD": true
+  },
+  {
+    "width": 390,
+    "key": "circle-cage-2",
+    "fourColours": true,
+    "keyboard": true,
+    "fullHD": true
+  },
+  {
+    "width": 1440,
+    "key": "circle-cage-1",
+    "fourColours": true,
+    "keyboard": true,
+    "fullHD": true
+  },
+  {
+    "width": 1440,
+    "key": "circle-cage-2",
+    "fourColours": true,
+    "keyboard": true,
+    "fullHD": true
+  }
+]
