@@ -1,0 +1,225 @@
+<title>Nawierzchnie Pro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap">
+<style>
+/* Layout: the court is the hero — a large live preview beside a compact control rail; curated collection and research follow as plain sections. */
+:root{
+  --paper:#F4F1EE;--card:#FFFFFF;--ink:#47132D;--muted:#6F5A66;--rule:#DCD2D6;--chip:#CDBFC6;--violet:#6336F5;--lime:#D8F24A;--stage:#E8E2DC;
+  --display:Inter,"Helvetica Neue",Arial,sans-serif;--body:Inter,"Helvetica Neue",Arial,sans-serif;
+  --s1:12px;--s2:14px;--s3:16px;--s4:20px;--s5:28px;--s6:44px;--s7:clamp(44px,7vw,92px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1A0B12;--card:#24111A;--ink:#F4ECEF;--muted:#BBA8B1;--rule:#3E2531;--chip:#5A3A49;--violet:#8E6BFF;--lime:#D8F24A;--stage:#2C1620;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#1A0B12;--card:#24111A;--ink:#F4ECEF;--muted:#BBA8B1;--rule:#3E2531;--chip:#5A3A49;--violet:#8E6BFF;--lime:#D8F24A;--stage:#2C1620;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:var(--s3);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+p{margin:0}
+.m{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+button{font:inherit;color:inherit;cursor:pointer}
+
+header.top{padding-block:28px 20px;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:end;justify-content:space-between;border-bottom:1px solid var(--rule)}
+header.top h1{font-size:var(--s7);font-weight:800;letter-spacing:-.055em;line-height:.88}
+header.top .lede{max-width:520px;color:var(--muted)}
+.facts{display:flex;gap:28px;flex-wrap:wrap}
+.facts b{display:block;font-size:var(--s5);font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+/* ---------- lab ---------- */
+.lab{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;padding-block:24px}
+@media (max-width:960px){.lab{grid-template-columns:1fr}}
+.stage{background:var(--stage);border-radius:4px;padding:clamp(16px,3.4vw,44px);display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0;perspective:1400px;align-self:start;position:sticky;top:max(16px,env(safe-area-inset-top,0px))}
+@media (max-width:960px){.stage{position:relative;top:auto}}
+.court{width:100%;max-width:900px;aspect-ratio:3/2;transition:transform .6s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d;box-shadow:0 30px 60px -36px rgba(28,9,18,.55)}
+.court svg{display:block;width:100%;height:100%}
+.stage[data-view="persp"] .court{transform:rotateX(52deg) rotateZ(-14deg) scale(.86)}
+.stage .tag{align-self:flex-start}
+.rail{display:flex;flex-direction:column;gap:20px;min-width:0}
+.rail h2{font-size:34px;font-weight:800;letter-spacing:-.045em;line-height:1}
+.rail .insp{color:var(--muted);font-size:var(--s2)}
+.group{display:flex;flex-direction:column;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:36px;padding:0 14px;border-radius:999px;border:1.5px solid var(--chip);background:transparent;font-size:13px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chip:hover{border-color:var(--ink)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.var{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.var button{min-height:34px;border-radius:4px;border:1.5px solid var(--chip);background:transparent;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;padding:0}
+.var button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pals{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.pal{border:1.5px solid var(--chip);border-radius:4px;background:transparent;padding:5px;display:flex;flex-direction:column;gap:4px;text-align:left}
+.pal span{display:flex;height:16px;border-radius:2px;overflow:hidden}
+.pal span i{flex:1}
+.pal small{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pal[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.pill{min-height:48px;padding:0 22px;border-radius:999px;border:0;background:var(--violet);color:#fff;font-weight:600}
+.pill.ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.spec div{background:var(--card);padding:10px 12px}
+.spec b{display:block;font-size:20px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.code{font:600 12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:10px 12px;overflow-x:auto;white-space:pre;color:var(--ink)}
+
+/* ---------- sections ---------- */
+section.block{padding-block:48px;border-top:1px solid var(--rule)}
+.block-head{display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:space-between;align-items:end;margin-bottom:24px}
+.block-head h2{font-size:clamp(32px,4.4vw,56px);font-weight:800;letter-spacing:-.05em;line-height:.92}
+.block-head p{max-width:520px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:transparent;border:0;padding:0;text-align:left;display:flex;flex-direction:column;gap:8px}
+.card .thumb{aspect-ratio:3/2;border-radius:3px;overflow:hidden;transition:transform .25s ease;max-width:100%}
+.card .thumb svg{display:block;width:100%;height:100%}
+.card:hover .thumb{transform:translateY(-3px)}
+.card h3{font-size:20px;font-weight:800;letter-spacing:-.03em}
+.card p{color:var(--muted);font-size:var(--s2)}
+.cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.case{background:var(--paper);padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.case h3{font-size:19px;font-weight:800;letter-spacing:-.03em}
+.case p{font-size:var(--s2);color:var(--muted)}
+.case .take{color:var(--ink);font-weight:600}
+.case a{font-size:13px;font-weight:600;text-underline-offset:3px}
+.rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.rule h3{font-size:22px;font-weight:800;letter-spacing:-.035em;margin-bottom:6px}
+.rule p{color:var(--muted);font-size:var(--s2)}
+.rule .k{font-size:44px;font-weight:800;letter-spacing:-.06em;color:var(--violet);line-height:1}
+footer{padding-block:32px 48px;color:var(--muted);font-size:13px;border-top:1px solid var(--rule)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="m">Gamefields Studio · silnik nawierzchni 2026-11</p>
+      <h1>Nawierzchnie<br>Pro</h1>
+    </div>
+    <p class="lede">Nowy silnik wzorów do konfiguratora nawierzchni. Zaprojektowany na podstawie najlepszych boisk-dzieł sztuki ostatniej dekady. Każdy wzór to płaskie, malowalne pola koloru: działa jako tekstura 3D i jako plan szablonów dla wykonawcy.</p>
+    <div class="facts">
+      <div><b>16</b><span class="m">rodzin</span></div>
+      <div><b>192</b><span class="m">kompozycje</span></div>
+      <div><b>12</b><span class="m">palet</span></div>
+    </div>
+  </header>
+
+  <div class="lab" id="lab">
+    <div class="stage" id="stage" data-view="top">
+      <div class="court" id="court" role="img" aria-label="Podgląd nawierzchni"></div>
+      <span class="tag m" id="stageTag">15 × 10 m · widok z góry</span>
+    </div>
+    <aside class="rail">
+      <div>
+        <p class="m" id="famGroup">Rodzina</p>
+        <h2 id="famName">Duperré Fade</h2>
+        <p class="insp" id="famDesc"></p>
+      </div>
+      <div class="group"><span class="m">Rodzina wzoru</span><div class="chips" id="fams"></div></div>
+      <div class="group"><span class="m">Kompozycja</span><div class="var" id="vars"></div></div>
+      <div class="group"><span class="m">Paleta</span><div class="pals" id="pals"></div></div>
+      <div class="group"><span class="m">Linie boiska</span>
+        <div class="chips" id="lines">
+          <button class="chip" data-line="auto" aria-pressed="true">Auto</button>
+          <button class="chip" data-line="#FFFFFF" aria-pressed="false">Białe</button>
+          <button class="chip" data-line="#111111" aria-pressed="false">Czarne</button>
+          <button class="chip" data-line="#D8F24A" aria-pressed="false">Limonka</button>
+          <button class="chip" data-line="none" aria-pressed="false">Bez linii</button>
+        </div>
+      </div>
+      <div class="row">
+        <button class="pill" id="shuffle" type="button">Losuj kompozycję</button>
+        <button class="pill ghost" id="view" type="button" aria-pressed="false">Widok 3D</button>
+      </div>
+      <div class="spec">
+        <div><span class="m">Kolory farby</span><b id="specColors">–</b></div>
+        <div><span class="m">Maskowanie</span><b id="specMask">–</b></div>
+      </div>
+      <div class="group"><span class="m">Kod do Studia</span><div class="code" id="code"></div></div>
+    </aside>
+  </div>
+
+  <section class="block" id="signature">
+    <div class="block-head">
+      <h2>Signature Pro</h2>
+      <p>16 gotowych projektów zamiast obecnych 12. Każdy ma własny charakter, zastosowanie i źródło inspiracji. Kliknij, aby otworzyć go w konfiguratorze powyżej.</p>
+    </div>
+    <div class="grid" id="sig"></div>
+  </section>
+
+  <section class="block" id="research">
+    <div class="block-head">
+      <h2>Co robią najlepsi</h2>
+      <p>Boiska, które stały się ikonami: marki, studia i artyści. Przy każdym zapisałem, co z niego przejmuje silnik.</p>
+    </div>
+    <div class="cases">
+      <article class="case"><span class="m">Paryż · 2015 / 2017 · Ill-Studio, Pigalle, Nike</span><h3>Pigalle Duperré</h3><p>Boisko wciśnięte między kamienice. Najpierw bloki czerwieni, żółci i błękitu z obrazu Malewicza „Sportowcy”, potem gradient: błękit przy koszach, róż na środku.</p><p class="take">→ Duperré Fade, Suprematist</p><a href="https://www.dezeen.com/2015/08/12/pigalle-duperre-ill-studio-paris-basketball-court-multicoloured-installation/" target="_blank" rel="noopener">Dezeen ↗</a></article>
+      <article class="case"><span class="m">St Louis · 2017 · William LaChance, Project Backboard</span><h3>Kinloch Park</h3><p>Trzy boiska jako „gobelin pól koloru” na podstawie pięciu obrazów olejnych. Białe linie gry leżą na wierzchu barwnych pól.</p><p class="take">→ Colour Field</p><a href="https://www.dezeen.com/2017/09/06/william-lachance-st-louis-basketball-courts-tapestry-of-colour-mural-project-backboard/" target="_blank" rel="noopener">Dezeen ↗</a></article>
+      <article class="case"><span class="m">Nowy Jork · 2016 · KAWS × Nike</span><h3>Stanton Street</h3><p>Dwa sąsiednie boiska z postaciami artysty. Marka oddaje nawierzchnię artyście, a boisko staje się nośnikiem kampanii.</p><p class="take">→ model współpracy marka × artysta</p><a href="https://www.dezeen.com/?p=1006766" target="_blank" rel="noopener">Dezeen ↗</a></article>
+      <article class="case"><span class="m">Londyn · 2021 · Yinka Ilori</span><h3>Bank Street Park</h3><p>Geometryczne motywy w żywych kolorach na płytkach z druku 3D. Wzór przechodzi na ogrodzenie i tablice.</p><p class="take">→ Textile, Mosaic</p><a href="https://www.dezeen.com/2021/05/26/canary-wharf-basketball-court-yink-ilori/amp/" target="_blank" rel="noopener">Dezeen ↗</a></article>
+      <article class="case"><span class="m">Aalst · Katrien Vanderlinden</span><h3>Ezelsplein / Hypercourt</h3><p>Trójkąty, koła i prostokąty jak klocki logiczne, w duchu Memphis, projektowane pod widok z drona. Linie gry zostają, a między nimi powstają pola do własnych zabaw.</p><p class="take">→ Memphis Play, Iso Blocks</p><a href="https://www.dezeen.com/?p=1136189" target="_blank" rel="noopener">Dezeen ↗</a></article>
+      <article class="case"><span class="m">Meksyk · 2018 · All Arquitectura</span><h3>La Doce</h3><p>Rozciągnięta, pochylona szachownica w dwóch odcieniach błękitu na boisku do piłki i koszykówki.</p><p class="take">→ Stretched Checker</p><a href="https://www.dezeen.com/2021/08/03/ten-colourful-basketball-courts-from-around-the-world/amp/" target="_blank" rel="noopener">Dezeen ↗</a></article>
+      <article class="case"><span class="m">Los Angeles · 2020 · Victor Solomon</span><h3>Kintsugi Court</h3><p>Złote żywiczne linie biegną przez spękany beton. Naprawa staje się ozdobą.</p><p class="take">→ Kintsugi</p><a href="https://www.dezeen.com/2021/08/03/ten-colourful-basketball-courts-from-around-the-world/amp/" target="_blank" rel="noopener">Dezeen ↗</a></article>
+      <article class="case"><span class="m">Paryż, Bondy · Nike · laisné roussel, Midori Hasuike</span><h3>Bondy pitch</h3><p>Boisko jako „pojemnik energii” w kolorze miasta (zieleń Bondy). Abstrakcyjny kamuflaż wychodzi z murawy na otoczenie.</p><p class="take">→ Camo Pro</p><a href="https://www.designboom.com/architecture/nike-bondy-football-pitch-paris-laisne-roussel-midori-hasuike-01-09-2018/" target="_blank" rel="noopener">designboom ↗</a></article>
+      <article class="case"><span class="m">Amsterdam · Daily Paper × adidas × Ajax</span><h3>Adidasplein</h3><p>Ogrodzenie w romby z afrykańskich ozdób z koralików, ten sam motyw co koszulka treningowa Ajaxu. Boisko i kolekcja mówią jednym językiem.</p><p class="take">→ Textile, wzór pod kolekcję marki</p><a href="https://www.nss-sports.com/en/lifestyle/43504/daily-paper-adidas-adidasplein-amsterdam-ajax-kit" target="_blank" rel="noopener">NSS ↗</a></article>
+      <article class="case"><span class="m">Walencja · 2026 · MRKA, Casa Axis, Lacoste</span><h3>Casa Axis International Open</h3><p>Luźne, ręcznie rysowane białe linie na głębokiej czerwieni. Kort jako medium artystyczne, nie tylko pole gry.</p><p class="take">→ Freehand</p><a href="https://hypebeast.com/2026/6/casa-axis-international-open-announcement" target="_blank" rel="noopener">Hypebeast ↗</a></article>
+    </div>
+  </section>
+
+  <section class="block" id="zasady">
+    <div class="block-head">
+      <h2>Zasady silnika</h2>
+      <p>Wspólne cechy boisk z researchu, zamienione na reguły, które każdy wzór spełnia automatycznie.</p>
+    </div>
+    <div class="rules">
+      <div class="rule"><div class="k">01</div><h3>Projekt pod drona</h3><p>Boisko ogląda się z góry, na zdjęciach i w sieci. Kompozycje są czytelne w całości, a nie tylko z poziomu gracza.</p></div>
+      <div class="rule"><div class="k">02</div><h3>Geometria gry jako szkielet</h3><p>Wzory budują się od koła środkowego, linii środkowej i bramek, z symetrią lustrzaną. Linie gry stają się częścią obrazu.</p></div>
+      <div class="rule"><div class="k">03</div><h3>Gradient w schodkach</h3><p>Farby nie da się płynnie przelać, więc przejścia to pasy w przestrzeni OKLab. Dają równą, malowalną gradację.</p></div>
+      <div class="rule"><div class="k">04</div><h3>Kontrast linii liczony</h3><p>Kolor linii (biały, czarny albo limonkowy) dobierany jest automatycznie: wybierany jest ten z najlepszym kontrastem do najsłabszego koloru wzoru.</p></div>
+      <div class="rule"><div class="k">05</div><h3>Wykonalność w liczbach</h3><p>Każdy wzór podaje liczbę kolorów farby i poziom maskowania. To dane do wyceny, nie tylko obrazek.</p></div>
+      <div class="rule"><div class="k">06</div><h3>Odniesienie, nie kopia</h3><p>Rodziny przejmują technikę (gradient, pola koloru, op-art), nie konkretne dzieło. Każda kompozycja jest generowana od nowa.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Gamefields · studio boisk miejskich, Warszawa. Silnik: <code>court-art-pro.mjs</code> w repozytorium gamefields-os, gałąź studio-skin-2026-11. Podglądy są koncepcyjne; kolory farb i zakres potwierdzamy przy projekcie.</p>
+  </footer>
+</div>
+
+<script>
+/*ENGINE*/
+var SIG = /*SIG*/;
+(function(){
+  var st = { fam: 'pro-fade', v: 2, pal: 'duperre', line: 'auto', persp: false, seed: 0 };
+  var $ = function(s){ return document.querySelector(s); };
+  var famById = {}; PRO_FAMILIES.forEach(function(x){ famById[x.id] = x; });
+  var palById = {}; PRO_PALETTES.forEach(function(x){ palById[x.id] = x; });
+  var GROUP = { premium:'Premium', geometric:'Geometria', street:'Street', play:'Zabawa', brand:'Marka', organic:'Organiczne' };
+  function svgFor(fam, v, pal, line, seed, uid){
+    var c = palById[pal].colors; var lc = line === 'auto' ? recommendLineColor(c) : line;
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice">' + renderPro(fam, v, 400, c, { seed: seed, uid: uid }) + (line === 'none' ? '' : courtLines(400, lc)) + '</svg>';
+  }
+  function build(){
+    var fams = $('#fams'); PRO_FAMILIES.forEach(function(x){ var b = document.createElement('button'); b.className = 'chip'; b.type = 'button'; b.textContent = x.name; b.dataset.fam = x.id; b.addEventListener('click', function(){ st.fam = x.id; st.seed = 0; draw(); }); fams.appendChild(b); });
+    var vars = $('#vars'); for (var i = 1; i <= 12; i++) (function(i){ var b = document.createElement('button'); b.type = 'button'; b.textContent = String(i); b.setAttribute('aria-label', 'Kompozycja ' + i); b.addEventListener('click', function(){ st.v = i; st.seed = 0; draw(); }); vars.appendChild(b); })(i);
+    var pals = $('#pals'); PRO_PALETTES.forEach(function(p){ var b = document.createElement('button'); b.type = 'button'; b.className = 'pal'; b.dataset.pal = p.id; b.innerHTML = '<span>' + p.colors.map(function(c){ return '<i style="background:' + c + '"></i>'; }).join('') + '</span><small>' + p.name + '</small>'; b.addEventListener('click', function(){ st.pal = p.id; draw(); }); pals.appendChild(b); });
+    document.querySelectorAll('#lines button').forEach(function(b){ b.addEventListener('click', function(){ st.line = b.dataset.line; draw(); }); });
+    $('#shuffle').addEventListener('click', function(){ st.seed = Math.floor(Math.random() * 1e6) + 1; draw(); });
+    $('#view').addEventListener('click', function(){ st.persp = !st.persp; draw(); });
+    var sig = $('#sig'); SIG.forEach(function(s, k){ var b = document.createElement('button'); b.type = 'button'; b.className = 'card'; b.innerHTML = '<div class="thumb">' + svgFor(s.familyId, s.variant, s.paletteId, 'auto', 0, 'sg' + k) + '</div><span class="m">' + famById[s.familyId].name + ' · ' + s.useCase + '</span><h3>' + s.name + '</h3><p>' + s.note + '</p>'; b.addEventListener('click', function(){ st.fam = s.familyId; st.v = s.variant; st.pal = s.paletteId; st.seed = 0; draw(); document.getElementById('lab').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }); sig.appendChild(b); });
+  }
+  function draw(){
+    var fam = famById[st.fam], pal = palById[st.pal];
+    $('#court').innerHTML = svgFor(st.fam, st.v, st.pal, st.line, st.seed, 'lab');
+    $('#famName').textContent = fam.name; $('#famGroup').textContent = GROUP[fam.group] + ' · ' + fam.short;
+    $('#famDesc').textContent = fam.description + ' Inspiracja: ' + fam.inspiration + '.';
+    document.querySelectorAll('#fams button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.fam === st.fam)); });
+    document.querySelectorAll('#vars button').forEach(function(b, i){ b.setAttribute('aria-pressed', String(i + 1 === st.v)); });
+    document.querySelectorAll('#pals button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.pal === st.pal)); });
+    document.querySelectorAll('#lines button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.line === st.line)); });
+    $('#stage').dataset.view = st.persp ? 'persp' : 'top'; $('#view').setAttribute('aria-pressed', String(st.persp)); $('#view').textContent = st.persp ? 'Widok z góry' : 'Widok 3D';
+    $('#stageTag').textContent = '15 × 10 m · ' + (st.persp ? 'perspektywa' : 'widok z góry');
+    var ex = proExecution(st.fam, st.v, 400, pal.colors);
+    $('#specColors').textContent = String(ex.colors); $('#specMask').textContent = ex.masking;
+    $('#code').textContent = JSON.stringify({ patternFamily: st.fam, patternVariant: st.v, patternPalette: st.pal, seed: st.seed || undefined });
+  }
+  build(); draw();
+})();
+</script>
