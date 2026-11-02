@@ -1,0 +1,12 @@
+{
+  "page_id": 3462,
+  "url": "https://www.gamefields.eu/",
+  "published_modified": "2026-11-02T11:14:26",
+  "source_commit": "0afdd1649b6fab3d76923d0cb25a6718a474e116",
+  "asset_commit": "02f3a62c4d9c71608dc827e6f30066d50a523f58",
+  "previous_modified": "2026-10-31T09:45:17",
+  "previous_sha256": "a547ffa40ce44ea9f91bec785179d92a006aa59e25ac46193e5e76ca904be6f8",
+  "rollback_copy_page_id": 4268,
+  "draft_page_id": 4276,
+  "checks": "Draft and public page at 1440 and 375 px: 3D model loads and recolours (Octa materials verified), 8 tiles, CF7 a71dc3a present, poster order fills project-details and focuses e-mail, workshop feed loads, all images decode, no console errors. No inquiry was submitted. Mobile horizontal overflow of 13 px comes from the logged-in WordPress admin bar only (same on the previous page)."
+}

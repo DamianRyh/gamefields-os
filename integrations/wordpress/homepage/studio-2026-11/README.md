@@ -29,3 +29,7 @@ Modele 3D (`public/models/gamefields/source/*.glb`, `assets/panna-octa.glb`) i p
 ## Wdrożenie i cofnięcie
 
 Przed wdrożeniem zapisano prywatną kopię obecnej treści jako stronę WordPress **4268** (treść identyczna, sha256 `a547ffa4…f6f8`). Szkic do odbioru: osobna strona robocza. Publikacja zmienia wyłącznie pole `content` strony 3462. Cofnięcie: wersje WordPressa albo treść strony 4268.
+
+## Wdrożenie 2026-11-02
+
+Opublikowano na stronie 3462 o `2026-11-02T11:14:26` (źródło `0afdd16`). Przed zapisem sprawdzono, że strona nie była zmieniana od `2026-10-31T09:45:17` i jest identyczna z kopią 4268; zapisana treść jest identyczna ze szkicem 4276. Szczegóły i wyniki sprawdzeń: `deployment.json`. Szkic 4276 pozostaje w WordPressie jako wersja robocza.
