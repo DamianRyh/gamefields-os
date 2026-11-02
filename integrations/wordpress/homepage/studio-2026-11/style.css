@@ -10,6 +10,9 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs a:hover{color:var(--violet)}
 .gfs img{max-width:100%;display:block}
 .gfs h1,.gfs h2,.gfs h3,.gfs p{margin:0}
+/* the theme colours headings and text globally; inside .gfs colour always comes from the section */
+.gfs :is(h1,h2,h3,h4,p,dt,dd,li,span,label,figcaption,b,strong,summary){color:inherit}
+.gfs :is(h1,h2,h3,h4){font-family:inherit;text-transform:none}
 .gfs button{font-family:inherit}
 .gfs :focus-visible{outline:3px solid var(--violet);outline-offset:3px}
 .gfs [hidden]{display:none!important}
