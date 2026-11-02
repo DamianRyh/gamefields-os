@@ -46,12 +46,15 @@ def main():
         1,
     )
 
-    # Portrait Signature posters (about 12 KB in total) are embedded: jsDelivr refuses to serve
-    # uncached files from this repository because it is larger than its 50 MB package limit.
-    posters = {f.stem: f.read_text(encoding="utf-8") for f in sorted((HERE / "assets" / "posters").glob("*.svg"))}
-    posters_js = "window.GFS_POSTERS = " + json.dumps(posters, ensure_ascii=False) + ";"
-    if "&" in posters_js or "</script" in posters_js:
-        sys.exit("poster SVGs contain characters WordPress or the HTML parser would break")
+    # Court Art Pro engine for the poster lab. It contains double ampersands, which WordPress would break,
+    # so it ships base64-encoded and is decoded in the browser into window.GFPRO.
+    eng = (HERE.parent.parent.parent / "studio" / "surface-pro-2026-11" / "court-art-pro.mjs").read_text(encoding="utf-8").replace("\nexport ", "\n")
+    sig = (HERE.parent.parent.parent / "studio" / "surface-pro-2026-11" / "signature-pro.json").read_text(encoding="utf-8")
+    eng = eng.replace("export ", "", 1) if eng.startswith("export ") else eng
+    eng = "(function(){" + eng + "\nwindow.GFPRO={renderPro:renderPro,courtLines:courtLines,recommendLineColor:recommendLineColor,lightness:lightness,mix:mix,PRO_FAMILIES:PRO_FAMILIES.map(function(f){return {id:f.id,name:f.name,short:f.short,group:f.group,description:f.description,inspiration:f.inspiration,masking:f.masking}}),PRO_PALETTES:PRO_PALETTES,SIG:" + sig.strip() + "};})();"
+    eng_b64 = base64.b64encode(eng.encode("utf-8")).decode("ascii")
+    loader = ('<script>(function(){try{var b=atob("' + eng_b64 + '"),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);'
+              '(0,eval)(new TextDecoder().decode(u));}catch(e){console.warn("GFPRO",e)}})();</script>')
 
     font = base64.b64encode(FONT.read_bytes()).decode("ascii")
     font_face = ("@font-face{font-family:GHInter;font-style:normal;font-weight:100 900;font-display:swap;"
@@ -62,7 +65,7 @@ def main():
         "<!-- Gamefields homepage studio-2026-11 · source: integrations/wordpress/homepage/studio-2026-11 · Inter SIL OFL: https://rsms.me/inter/ -->",
         f"<style>{font_face}\n{style}</style>",
         body.strip(),
-        f"<script>{posters_js}</script>",
+        loader,
         f"<script>\n{script.strip()}\n</script>",
         contact_scripts.strip(),
         "<!-- /wp:html -->",

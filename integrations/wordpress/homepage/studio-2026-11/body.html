@@ -122,45 +122,77 @@
   </div>
 </section>
 
-<!-- PRINT STUDIO -->
+<!-- POSTER LAB -->
 <section id="plakaty" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-print">
   <div class="head">
     <h2 class="d" id="gfs-print">Boisko na ścianę.</h2>
-    <div class="side"><p>Każdy projekt nawierzchni to też plakat: rysunek techniczny boiska z góry, z liniami gry. Wybierz wzór Signature albo wygeneruj własny, podpisz go nazwą swojego miejsca i zamów print. Każdy zakup wspiera rozwój projektu Gamefields.</p></div>
+    <div class="side"><p>Zaprojektuj plakat z własnym boiskiem. 16 kierunków artystycznych, 192 kompozycje, każdy kolor i każdy napis do zmiany. Druk na papierze archiwalnym, numerowana edycja. Każdy zakup wspiera rozwój Gamefields.</p></div>
   </div>
-  <div class="print">
-    <div class="wall2" data-wall2>
-      <div class="shelf"></div>
-      <div class="poster" data-poster>
-        <div class="poster-in" data-poster-in></div>
-        <div class="cap"><b data-poster-cap>Mój plac</b><span data-poster-no>S01 · Signature</span></div>
+  <div class="pl">
+    <div class="pl-stage">
+      <div class="pl-wall" data-pl-wall data-view="wall">
+        <div class="pl-floor" aria-hidden="true"></div>
+        <div class="pl-frame" data-pl-frame><div class="pl-sheet" data-pl-sheet role="img" aria-label="Podgląd plakatu"></div></div>
+        <span class="pl-tag m" data-pl-tag>50 × 70 cm · ściana ok. 1,6 m</span>
       </div>
-      <span class="walltag m" data-walltag>50 × 70 cm · ściana ok. 1,6 m</span>
+      <div class="pl-quick">
+        <button type="button" class="chip" data-pl-random>Losuj wszystko</button>
+        <button type="button" class="chip" data-pl-shift>Przetasuj kolory</button>
+        <button type="button" class="chip" data-pl-view aria-pressed="false">Sam plakat</button>
+      </div>
     </div>
-    <div>
-      <div class="opt">
-        <div class="opt-h"><b>Wzór</b><span data-print-name>City Fluid</span></div>
-        <div class="pthumbs" role="group" aria-label="Wzór plakatu" data-pthumbs></div>
+    <div class="pl-ed">
+      <div class="pl-tabs" role="tablist" aria-label="Edycja plakatu">
+        <button type="button" role="tab" id="pl-t-art" aria-controls="pl-p-art" aria-selected="true">Wzór</button>
+        <button type="button" role="tab" id="pl-t-col" aria-controls="pl-p-col" aria-selected="false" tabindex="-1">Kolory</button>
+        <button type="button" role="tab" id="pl-t-txt" aria-controls="pl-p-txt" aria-selected="false" tabindex="-1">Tekst</button>
+        <button type="button" role="tab" id="pl-t-lay" aria-controls="pl-p-lay" aria-selected="false" tabindex="-1">Układ</button>
+        <button type="button" role="tab" id="pl-t-prn" aria-controls="pl-p-prn" aria-selected="false" tabindex="-1">Druk</button>
       </div>
-      <div class="opt">
-        <div class="opt-h"><b>Podpis na plakacie</b><span>do 24 znaków</span></div>
-        <input id="gfs-caption" class="input" maxlength="24" value="Mój plac" aria-label="Podpis na plakacie">
+      <div class="pl-panel" role="tabpanel" id="pl-p-art" aria-labelledby="pl-t-art">
+        <div class="pl-h"><b>Signature Pro</b><span data-pl-famname>Duperré Fade</span></div>
+        <div class="pl-sig" data-pl-sig role="group" aria-label="Gotowe projekty"></div>
+        <div class="pl-h"><b>Kierunek</b><span data-pl-insp></span></div>
+        <div class="chips" data-pl-fams role="group" aria-label="Kierunek artystyczny"></div>
+        <div class="pl-h"><b>Kompozycja</b><span>1–12, albo losuj</span></div>
+        <div class="pl-vars" data-pl-vars role="group" aria-label="Kompozycja"></div>
+        <button type="button" class="chip" data-pl-seed>Nowa wersja tej kompozycji</button>
       </div>
-      <div class="opt">
-        <div class="opt-h"><b>Format</b><span>cenę potwierdzę mailowo</span></div>
-        <div class="chips" role="group" aria-label="Format" data-formats></div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-col" aria-labelledby="pl-t-col" hidden>
+        <div class="pl-h"><b>Paleta</b><span data-pl-palname>Duperré</span></div>
+        <div class="pl-pals" data-pl-pals role="group" aria-label="Paleta"></div>
+        <div class="pl-h"><b>Twoje kolory</b><span>kliknij, aby zmienić</span></div>
+        <div class="pl-colors" data-pl-colors></div>
+        <div class="pl-h"><b>Linie boiska</b></div>
+        <div class="chips" data-pl-lines role="group" aria-label="Linie boiska"></div>
+        <div class="pl-h"><b>Papier</b></div>
+        <div class="chips" data-pl-papers role="group" aria-label="Kolor papieru"></div>
       </div>
-      <div class="opt">
-        <div class="opt-h"><b>Rama</b><span data-frame-name>Czarna</span></div>
-        <div class="chips" role="group" aria-label="Rama" data-frames></div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-txt" aria-labelledby="pl-t-txt" hidden>
+        <label class="pl-field"><span>Tytuł</span><input class="input" id="pl-title" maxlength="28" value="Mój plac"></label>
+        <label class="pl-field"><span>Miejsce</span><input class="input" id="pl-sub" maxlength="34" value="Warszawa · Praga-Północ"></label>
+        <label class="pl-field"><span>Dopisek</span><input class="input" id="pl-note" maxlength="34" value="Gramy od 2026"></label>
+        <p class="pl-hint">Nazwa podwórka, drużyny, ulicy, data meczu albo dedykacja. Numer edycji nadajemy automatycznie.</p>
       </div>
-      <div class="opt">
-        <div class="opt-h"><b>Kolor ściany</b><span>podgląd</span></div>
-        <div class="chips" role="group" aria-label="Kolor ściany" data-walls></div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-lay" aria-labelledby="pl-t-lay" hidden>
+        <div class="pl-h"><b>Układ plakatu</b><span data-pl-layname>Galeria</span></div>
+        <div class="pl-lays" data-pl-lays role="group" aria-label="Układ plakatu"></div>
       </div>
-      <div class="opt" style="border-top:2px solid var(--ink)">
-        <button type="button" class="pill" data-print-order style="background:var(--violet);color:#fff">Zamów print <span aria-hidden="true">→</span></button>
-        <span class="m" style="color:var(--muted)">Zamówienie trafi do formularza poniżej · cenę i wysyłkę potwierdzę mailowo</span>
+      <div class="pl-panel" role="tabpanel" id="pl-p-prn" aria-labelledby="pl-t-prn" hidden>
+        <div class="pl-h"><b>Format</b><span>cenę potwierdzę mailowo</span></div>
+        <div class="chips" data-pl-formats role="group" aria-label="Format"></div>
+        <div class="pl-h"><b>Rama</b><span data-pl-framename>Czarna</span></div>
+        <div class="chips" data-pl-frames role="group" aria-label="Rama"></div>
+        <div class="pl-h"><b>Ściana w podglądzie</b></div>
+        <div class="chips" data-pl-walls role="group" aria-label="Kolor ściany"></div>
+      </div>
+      <div class="pl-order">
+        <div class="pl-sum" data-pl-sum>Duperré Fade · 50 × 70 cm · rama czarna</div>
+        <div class="pl-actions">
+          <button type="button" class="pill" data-print-order style="background:var(--violet);color:#fff">Zamów print <span aria-hidden="true">→</span></button>
+          <button type="button" class="chip" data-pl-share>Kopiuj link do projektu</button>
+        </div>
+        <span class="m pl-status" data-pl-status role="status">Zamówienie trafi do formularza poniżej · cenę i wysyłkę potwierdzę mailowo</span>
       </div>
     </div>
   </div>
