@@ -1,6 +1,7 @@
 /* Gamefields Studio skin 2026-11: same language as the homepage (boisko jako plakat).
    Loaded LAST. Every rule is anchored at html body .studio-shell.studio-canvas-editor so it outranks
    the earlier layered !important overrides without touching component code. Inter only. */
+@font-face{font-family:Inter;font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/InterVariable.woff2) format('woff2')}
 html body .studio-shell.studio-canvas-editor{
   --ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--paper2:#ECE6E1;--violet:#6336F5;--lime:#D8F24A;--plum:#1C0912;--rule:#D9CFD4;--chip:#CDBFC6;
   --studio-bg:var(--paper);--studio-panel:#FFFFFF;--studio-line:var(--rule);--studio-muted:var(--muted);--studio-accent:var(--violet);
