@@ -61,8 +61,6 @@ html body .studio-shell.studio-canvas-editor .studio-panel :is(img,canvas){borde
 html body .studio-shell.studio-canvas-editor .studio-panel [class*="card"]{border-radius:4px!important;box-shadow:none!important}
 
 /* lavender helper cards and links become neutral paper */
-html body .studio-shell.studio-canvas-editor .studio-panel :is([class*="preset"],[class*="entry"],[class*="collections"]) > button:not([aria-pressed="true"]),
-html body .studio-shell.studio-canvas-editor .studio-panel button:has(> svg + span, > svg + div):not([aria-pressed="true"]):not(.scene-mobile-palette-toggle){background:var(--paper)!important;border-color:var(--rule)!important;box-shadow:none!important}
 html body .studio-shell.studio-canvas-editor .gf-crew,html body .studio-shell.studio-canvas-editor .gf-crew *{--gf-crew-bg:var(--plum)}
 html body .studio-shell.studio-canvas-editor aside.gf-crew :is(.gf-crew-popover,.gf-crew-heads){background:var(--plum)!important;border-radius:999px!important;border:0!important;box-shadow:none!important}
 html body .studio-shell.studio-canvas-editor .studio-panel .studio-template-launch{background:var(--paper)!important;border:1px solid var(--rule)!important;border-radius:4px!important;box-shadow:none!important;color:var(--ink)!important}
