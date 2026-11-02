@@ -123,3 +123,10 @@ html body .studio-modal-backdrop .studio-modal :is(button,a).studio-primary:hove
   html body .studio-shell.studio-canvas-editor .studio-panel-tool-tabs{position:sticky!important;top:-4px!important;z-index:40!important;background:#fff!important;width:100%!important;isolation:isolate}
   html body .studio-shell.studio-canvas-editor .studio-panel > *{max-width:100%!important}
 }
+
+/* template library cards: rectangles, not pills (cards are buttons inside .studio-direction-grid) */
+html body .studio-modal-backdrop .studio-modal .studio-direction-grid button{border-radius:6px!important;border:1px solid #D9CFD4!important;background:#fff!important;padding:0 0 12px!important;overflow:hidden;text-align:left;display:flex!important;flex-direction:column;align-items:stretch;gap:6px;min-height:0!important}
+html body .studio-modal-backdrop .studio-modal .studio-direction-grid button > span:first-child{display:block;line-height:0;border-radius:0!important}
+html body .studio-modal-backdrop .studio-modal .studio-direction-grid button :is(b,small){padding:0 12px!important}
+html body .studio-modal-backdrop .studio-modal .studio-direction-grid button[aria-pressed="true"]{border-color:#47132D!important;box-shadow:inset 0 0 0 1.5px #47132D!important}
+html body .studio-modal-backdrop .studio-modal .studio-direction-grid button:hover{border-color:#47132D!important}
