@@ -138,7 +138,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .pl-sheet svg{display:block;width:100%;height:auto}
 .gfs .pl-wall[data-view="flat"]{background:#E4DED8}
 .gfs .pl-wall[data-view="flat"] .pl-floor{display:none}
-.gfs .pl-wall[data-view="flat"] .pl-frame{width:min(58%,420px)!important;margin:0;border-width:0;box-shadow:0 22px 40px -28px rgba(20,4,12,.45)}
+.gfs .pl-wall[data-view="flat"] .pl-frame{margin:0;border-width:0;box-shadow:0 22px 40px -28px rgba(20,4,12,.45)}
 .gfs .pl-tag{position:absolute;left:16px;bottom:14px;color:var(--muted)}
 .gfs .pl-quick{display:flex;flex-wrap:wrap;gap:8px}
 .gfs .pl-ed{min-width:0;display:grid;gap:4px}

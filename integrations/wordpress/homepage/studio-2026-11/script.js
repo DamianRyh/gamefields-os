@@ -335,7 +335,7 @@
       sheet.innerHTML = posterSvg(st, 'pl', { no: no });
       frame.dataset.frame = FRAMES[st.frame][0];
       frame.style.borderColor = FRAMES[st.frame][2] || 'transparent';
-      frame.style.width = (parseFloat(FORMATS[st.fmt].wall) * (window.innerWidth < 700 ? 1.4 : 1)) + '%';
+      sizeFrame();
       wall.style.backgroundColor = flat ? '' : WALLS[st.wall][0];
       wall.dataset.view = flat ? 'flat' : 'wall';
       viewBtn.setAttribute('aria-pressed', String(flat)); viewBtn.textContent = flat ? 'Na ścianie' : 'Sam plakat';
@@ -363,6 +363,13 @@
       $('[data-pl-sum]').textContent = summary();
       drawLayoutThumbs();
     }
+    function sizeFrame() {
+      var F = FORMATS[st.fmt], ww = wall.clientWidth, wh = wall.clientHeight;
+      var pct = parseFloat(F.wall) * (window.innerWidth < 700 ? 1.4 : 1) / 100;
+      var w = flat ? Math.min(ww * 0.62, (wh - 40) / F.ratio) : Math.min(ww * pct, (wh * 0.74) / F.ratio);
+      frame.style.width = Math.round(Math.max(80, w)) + 'px';
+    }
+    window.addEventListener('resize', sizeFrame);
     var layKey = '';
     function drawLayoutThumbs() {
       var key = [st.fam, st.v, st.colors.join(''), st.seed, st.line, st.paper, st.title, st.sub, st.note, st.fmt].join('|');
