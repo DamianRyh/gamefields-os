@@ -226,46 +226,109 @@
 <section id="pilka" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-ball">
   <div class="head">
     <h2 class="d" id="gfs-ball">Piłka do kompletu.</h2>
-    <div class="side"><p>Ten sam wzór na boisku, na plakacie i na piłce. 32 prawdziwe panele, każdy do przemalowania, własny napis. Zaprojektuj piłkę na otwarcie boiska, dla drużyny albo na prezent. Zamówienie przyjmuję przez formularz; cenę, minimalną ilość i termin potwierdzę mailowo.</p></div>
+    <div class="side"><p>Ten sam wzór na boisku, na plakacie i na piłce. 32 prawdziwe panele, druk na całej piłce albo osobno na każdym panelu, gotowe układy kolorów, Twój napis, numer i logo. Zamówienie przyjmuję przez formularz; cenę, minimalną ilość i termin potwierdzę mailowo.</p></div>
   </div>
   <div class="bl">
-    <div class="bl-stage" data-bl-stage aria-label="Model 3D piłki. Przeciągnij, aby obrócić. Kliknij panel, aby go pomalować." role="img">
-      <span class="bl-load m" data-bl-load>Wczytuję model 3D…</span>
-      <span class="bl-tag m" data-bl-tag>Rozmiar 5 · Ø ok. 22 cm</span>
-      <span class="bl-hint m">Przeciągnij · kliknij panel, aby pomalować</span>
+    <div class="bl-side">
+      <div class="bl-stage" data-bl-stage aria-label="Model 3D piłki. Przeciągnij, aby obrócić. Kliknij panel, aby go pomalować." role="img">
+        <span class="bl-load m" data-bl-load>Wczytuję model 3D…</span>
+        <span class="bl-tag m" data-bl-tag>Rozmiar 5 · Ø ok. 22 cm</span>
+        <span class="bl-hint m">Przeciągnij · kliknij panel, aby pomalować</span>
+      </div>
+      <div class="pl-quick">
+        <button type="button" class="chip" data-bl-random>Losuj piłkę</button>
+        <button type="button" class="chip" data-bl-frompl>Weź wzór z mojego plakatu</button>
+        <button type="button" class="chip" data-bl-scene aria-pressed="false">Na boisku</button>
+        <button type="button" class="chip" data-bl-spin aria-pressed="true">Obrót</button>
+      </div>
     </div>
     <div class="bl-ed">
-      <div class="pl-h"><b>Styl piłki</b></div>
-      <div class="chips" data-bl-modes role="group" aria-label="Styl piłki">
-        <button type="button" class="chip" data-mode="full" aria-pressed="true">Wzór na całej piłce</button>
-        <button type="button" class="chip" data-mode="mix" aria-pressed="false">Wzór + pięciokąty</button>
-        <button type="button" class="chip" data-mode="panels" aria-pressed="false">Klasyczne panele</button>
+      <div class="pl-tabs" role="tablist" aria-label="Edycja piłki">
+        <button type="button" role="tab" id="bl-t-art" aria-controls="bl-p-art" aria-selected="true">Wzór</button>
+        <button type="button" role="tab" id="bl-t-pan" aria-controls="bl-p-pan" aria-selected="false" tabindex="-1">Panele</button>
+        <button type="button" role="tab" id="bl-t-txt" aria-controls="bl-p-txt" aria-selected="false" tabindex="-1">Nadruk</button>
+        <button type="button" role="tab" id="bl-t-fin" aria-controls="bl-p-fin" aria-selected="false" tabindex="-1">Wykończenie</button>
       </div>
-      <div class="pl-h"><b>Wzór</b><span data-bl-famname>Textile</span></div>
-      <button type="button" class="chip" data-bl-frompl>Weź wzór z mojego plakatu</button>
-      <div class="chips" data-bl-fams role="group" aria-label="Wzór piłki"></div>
-      <div class="pl-vars" data-bl-vars role="group" aria-label="Kompozycja"></div>
-      <div class="pl-h"><b>Paleta</b><span data-bl-palname>Lagos</span></div>
-      <div class="pl-pals" data-bl-pals role="group" aria-label="Paleta"></div>
-      <div class="pl-h"><b>Kolory paneli</b><span>pędzel: kliknij panel na piłce</span></div>
-      <div class="pl-colors bl-cols">
-        <label>Pięciokąty<input type="color" id="bl-pent" value="#1C0912"></label>
-        <label>Sześciokąty<input type="color" id="bl-hex" value="#F4F1EE"></label>
-        <label>Pędzel<input type="color" id="bl-brush" value="#D8F24A"></label>
+      <div class="pl-panel" role="tabpanel" id="bl-p-art" aria-labelledby="bl-t-art">
+        <div class="pl-h"><b>Styl piłki</b></div>
+        <div class="chips" data-bl-modes role="group" aria-label="Styl piłki">
+          <button type="button" class="chip" data-mode="full" aria-pressed="true">Wzór na całej piłce</button>
+          <button type="button" class="chip" data-mode="mix" aria-pressed="false">Wzór + pięciokąty</button>
+          <button type="button" class="chip" data-mode="panels" aria-pressed="false">Kolorowe panele</button>
+        </div>
+        <div class="pl-h"><b>Druk wzoru</b><span>panel po panelu = bez rozciągania</span></div>
+        <div class="chips" data-bl-maps role="group" aria-label="Sposób druku">
+          <button type="button" class="chip" data-map="sphere" aria-pressed="true">Jeden ciągły druk</button>
+          <button type="button" class="chip" data-map="panel" aria-pressed="false">Osobno na każdym panelu</button>
+        </div>
+        <div class="pl-h"><b>Wzór</b><span data-bl-famname>Textile</span></div>
+        <div class="chips" data-bl-fams role="group" aria-label="Wzór piłki"></div>
+        <div class="pl-vars" data-bl-vars role="group" aria-label="Kompozycja"></div>
+        <button type="button" class="chip" data-bl-seed>Nowa wersja tej kompozycji</button>
+        <div class="pl-h"><b>Paleta</b><span data-bl-palname>Lagos</span></div>
+        <div class="pl-pals" data-bl-pals role="group" aria-label="Paleta"></div>
+        <div class="pl-h"><b>Akcent na wzorze</b></div>
+        <div class="chips" data-bl-decos role="group" aria-label="Akcent">
+          <button type="button" class="chip" data-deco="none" aria-pressed="true">Bez</button>
+          <button type="button" class="chip" data-deco="band" aria-pressed="false">Pas</button>
+          <button type="button" class="chip" data-deco="poles" aria-pressed="false">Czapy</button>
+          <button type="button" class="chip" data-deco="spiral" aria-pressed="false">Spirala</button>
+        </div>
       </div>
-      <button type="button" class="chip" data-bl-clear>Wyczyść malowanie paneli</button>
-      <label class="pl-field"><span>Napis na piłce</span><input class="input" id="bl-label" maxlength="16" value="MÓJ PLAC"></label>
-      <div class="pl-h"><b>Rozmiar</b></div>
-      <div class="chips" data-bl-sizes role="group" aria-label="Rozmiar">
-        <button type="button" class="chip" data-size="3" aria-pressed="false">3 · dzieci</button>
-        <button type="button" class="chip" data-size="4" aria-pressed="false">4 · juniorzy</button>
-        <button type="button" class="chip" data-size="5" aria-pressed="true">5 · mecz</button>
+      <div class="pl-panel" role="tabpanel" id="bl-p-pan" aria-labelledby="bl-t-pan" hidden>
+        <div class="pl-h"><b>Układ kolorów paneli</b><span>dla stylu „Kolorowe panele”</span></div>
+        <div class="chips" data-bl-schemes role="group" aria-label="Układ kolorów">
+          <button type="button" class="chip" data-scheme="classic" aria-pressed="true">Klasyczny</button>
+          <button type="button" class="chip" data-scheme="mosaic" aria-pressed="false">Mozaika</button>
+          <button type="button" class="chip" data-scheme="gradient" aria-pressed="false">Gradient</button>
+          <button type="button" class="chip" data-scheme="half" aria-pressed="false">Pół na pół</button>
+          <button type="button" class="chip" data-scheme="band" aria-pressed="false">Pas</button>
+          <button type="button" class="chip" data-scheme="star" aria-pressed="false">Gwiazdy</button>
+        </div>
+        <div class="pl-colors bl-cols">
+          <label>Pięciokąty<input type="color" id="bl-pent" value="#1C0912"></label>
+          <label>Sześciokąty<input type="color" id="bl-hex" value="#F4F1EE"></label>
+          <label>Pędzel<input type="color" id="bl-brush" value="#D8F24A"></label>
+        </div>
+        <div class="pl-h"><b>Pędzel z palety</b><span>potem kliknij panel na piłce</span></div>
+        <div class="chips" data-bl-brushes></div>
+        <div class="chips"><button type="button" class="chip" data-bl-fillpent>Pędzlem: wszystkie pięciokąty</button><button type="button" class="chip" data-bl-clear>Wyczyść malowanie</button></div>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="bl-p-txt" aria-labelledby="bl-t-txt" hidden>
+        <label class="pl-field"><span>Napis (z przodu)</span><input class="input" id="bl-label" maxlength="16" value="MÓJ PLAC"></label>
+        <label class="pl-field"><span>Numer albo drugi napis (z tyłu)</span><input class="input" id="bl-number" maxlength="10" value="10"></label>
+        <div class="pl-h"><b>Wielkość napisu</b></div>
+        <div class="chips" data-bl-tsize role="group" aria-label="Wielkość napisu">
+          <button type="button" class="chip" data-ts="0.8" aria-pressed="false">Mały</button>
+          <button type="button" class="chip" data-ts="1" aria-pressed="true">Średni</button>
+          <button type="button" class="chip" data-ts="1.3" aria-pressed="false">Duży</button>
+        </div>
+        <label class="pl-field"><span>Logo (PNG, JPG albo SVG, z tyłu piłki)</span><input type="file" id="bl-logo" accept="image/png,image/jpeg,image/svg+xml"></label>
+        <button type="button" class="chip" data-bl-nologo hidden>Usuń logo</button>
+        <p class="pl-hint">Logo zostaje w Twojej przeglądarce. Do zamówienia dołącz plik w mailu, a przygotuję go do druku.</p>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="bl-p-fin" aria-labelledby="bl-t-fin" hidden>
+        <div class="pl-h"><b>Powierzchnia</b></div>
+        <div class="chips" data-bl-finish role="group" aria-label="Powierzchnia">
+          <button type="button" class="chip" data-fin="matte" aria-pressed="false">Mat</button>
+          <button type="button" class="chip" data-fin="satin" aria-pressed="true">Satyna</button>
+          <button type="button" class="chip" data-fin="gloss" aria-pressed="false">Połysk</button>
+        </div>
+        <div class="pl-h"><b>Szwy</b></div>
+        <div class="chips" data-bl-seams role="group" aria-label="Kolor szwów"></div>
+        <div class="pl-h"><b>Rozmiar</b></div>
+        <div class="chips" data-bl-sizes role="group" aria-label="Rozmiar">
+          <button type="button" class="chip" data-size="3" aria-pressed="false">3 · dzieci</button>
+          <button type="button" class="chip" data-size="4" aria-pressed="false">4 · juniorzy</button>
+          <button type="button" class="chip" data-size="5" aria-pressed="true">5 · mecz</button>
+        </div>
       </div>
       <div class="pl-order">
         <div class="pl-sum" data-bl-sum></div>
         <div class="pl-actions">
           <button type="button" class="pill" data-bl-order style="background:var(--violet);color:#fff">Zamów piłki <span aria-hidden="true">→</span></button>
-          <button type="button" class="chip" data-bl-spin aria-pressed="true">Obrót automatyczny</button>
+          <button type="button" class="chip" data-bl-share>Kopiuj link do piłki</button>
+          <button type="button" class="chip" data-bl-png>Pobierz podgląd PNG</button>
         </div>
         <span class="m pl-status" data-bl-status role="status">Projekt piłki trafi do formularza poniżej · cenę, ilość i termin potwierdzę mailowo</span>
       </div>

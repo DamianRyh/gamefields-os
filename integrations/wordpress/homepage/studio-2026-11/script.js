@@ -500,74 +500,170 @@
     draw();
   })();
 
-  /* ---------- BALL: 32-panel 3D ball on the Court Art Pro engine (three.js loaded on demand) ---------- */
+  /* ---------- BALL v2: 32-panel 3D ball on the Court Art Pro engine (three.js loaded on demand) ---------- */
   (function () {
     var sec = $('#pilka'); if (!sec) return; if (!G) return;
     var FAM = {}; G.PRO_FAMILIES.forEach(function (f) { FAM[f.id] = f; });
     var PAL = {}; G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
-    var bs = { mode: 'full', fam: 'pro-textile', v: 1, pal: 'lagos', colors: PAL.lagos.colors.slice(), pent: '#1C0912', hex: '#F4F1EE', paint: {}, label: 'MÓJ PLAC', size: 5, spin: !reduced };
-    var stage = $('[data-bl-stage]'), ball = null, canvas = document.createElement('canvas'); canvas.width = 2048; canvas.height = 1024;
+    var HEXRE = /^#[0-9A-Fa-f]{6}$/;
+    var MODES = { full: 'wzór na całej piłce', mix: 'wzór + pięciokąty', panels: 'kolorowe panele' };
+    var SCHEMES = { classic: 'klasyczny', mosaic: 'mozaika', gradient: 'gradient', half: 'pół na pół', band: 'pas', star: 'gwiazdy' };
+    var DECOS = { none: '', band: 'pas', poles: 'czapy', spiral: 'spirala' };
+    var FINS = { matte: 'mat', satin: 'satyna', gloss: 'połysk' };
+    var SEAMS = [['#15090F', 'Ciemne'], ['#F4F1EE', 'Jasne'], ['#D8F24A', 'Limonka'], ['pal', 'Z palety']];
     var SIZES = { 3: 'Ø ok. 19 cm', 4: 'Ø ok. 20,5 cm', 5: 'Ø ok. 22 cm' };
+    var bs = { mode: 'full', map: 'sphere', fam: 'pro-textile', v: 1, seed: 0, pal: 'lagos', colors: PAL.lagos.colors.slice(), pent: '#1C0912', hex: '#F4F1EE', scheme: 'classic', paint: {}, deco: 'none', label: 'MÓJ PLAC', number: '10', ts: 1, finish: 'satin', seam: 0, size: 5, spin: !reduced, scene: false };
+    var logo = null, logoName = '';
+    var stage = $('[data-bl-stage]'), ball = null;
+    var cSphere = document.createElement('canvas'), cAtlas = document.createElement('canvas'), cCourt = document.createElement('canvas');
+    cSphere.width = 2048; cSphere.height = 1024; cAtlas.width = 2048; cAtlas.height = 1024; cCourt.width = 1200; cCourt.height = 800;
+    function sorted() { return bs.colors.slice().sort(function (a, b) { return G.lightness(a) - G.lightness(b); }); }
+    function seamHex() { var s = SEAMS[bs.seam][0]; return s === 'pal' ? sorted()[2] : s; }
     function press(sel, test) { $$(sel + ' [aria-pressed]').forEach(function (b, i) { b.setAttribute('aria-pressed', String(test(b, i))); }); }
+    function chipsFrom(sel, attr, key, cast, retex) { $$(sel + ' button').forEach(function (b) { b.addEventListener('click', function () { bs[key] = cast ? cast(b.dataset[attr]) : b.dataset[attr]; update(retex); }); }); }
+
+    /* controls */
     var famBox = $('[data-bl-fams]');
-    G.PRO_FAMILIES.forEach(function (f) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(f.name)); b.dataset.f = f.id; b.addEventListener('click', function () { bs.fam = f.id; update(true); }); famBox.appendChild(b); });
+    G.PRO_FAMILIES.forEach(function (f) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(f.name)); b.dataset.f = f.id; b.addEventListener('click', function () { bs.fam = f.id; bs.seed = 0; update(true); }); famBox.appendChild(b); });
     var varBox = $('[data-bl-vars]');
-    for (var i = 1; i <= 12; i++) (function (n) { var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Kompozycja ' + n }, String(n)); b.addEventListener('click', function () { bs.v = n; update(true); }); varBox.appendChild(b); })(i);
+    for (var i = 1; i <= 12; i++) (function (n) { var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Kompozycja ' + n }, String(n)); b.addEventListener('click', function () { bs.v = n; bs.seed = 0; update(true); }); varBox.appendChild(b); })(i);
+    $('[data-bl-seed]').addEventListener('click', function () { bs.seed = 1 + Math.floor(Math.random() * 999999); update(true); });
     var palBox = $('[data-bl-pals]');
+    function setPalette(id) { var p = PAL[id]; bs.pal = id; bs.colors = p.colors.slice(); var L = sorted(); bs.pent = L[0]; bs.hex = L[4]; }
     G.PRO_PALETTES.forEach(function (p) {
       var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Paleta ' + p.name }, '<i>' + p.colors.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join('') + '</i><small>' + esc(p.name) + '</small>');
-      b.dataset.p = p.id;
-      b.addEventListener('click', function () { bs.pal = p.id; bs.colors = p.colors.slice(); var L = p.colors.slice().sort(function (a, c) { return G.lightness(a) - G.lightness(c); }); bs.pent = L[0]; bs.hex = L[4]; $('#bl-pent').value = bs.pent; $('#bl-hex').value = bs.hex; update(true); });
-      palBox.appendChild(b);
+      b.dataset.p = p.id; b.addEventListener('click', function () { setPalette(p.id); update(true); }); palBox.appendChild(b);
     });
-    $$('[data-bl-modes] button').forEach(function (b) { b.addEventListener('click', function () { bs.mode = b.dataset.mode; update(false); }); });
-    $$('[data-bl-sizes] button').forEach(function (b) { b.addEventListener('click', function () { bs.size = +b.dataset.size; update(false); }); });
+    chipsFrom('[data-bl-modes]', 'mode', 'mode', null, false);
+    chipsFrom('[data-bl-maps]', 'map', 'map', null, true);
+    chipsFrom('[data-bl-decos]', 'deco', 'deco', null, true);
+    chipsFrom('[data-bl-schemes]', 'scheme', 'scheme', null, false);
+    chipsFrom('[data-bl-finish]', 'fin', 'finish', null, false);
+    chipsFrom('[data-bl-sizes]', 'size', 'size', function (x) { return +x; }, false);
+    chipsFrom('[data-bl-tsize]', 'ts', 'ts', function (x) { return +x; }, true);
+    $$('[data-bl-schemes] button').forEach(function (b) { b.addEventListener('click', function () { if (bs.mode !== 'panels') { bs.mode = 'panels'; update(false); } }); });
+    var seamBox = $('[data-bl-seams]');
+    SEAMS.forEach(function (s, k) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(s[1])); b.addEventListener('click', function () { bs.seam = k; update(false); }); seamBox.appendChild(b); });
+    var brushBox = $('[data-bl-brushes]');
+    function paintBrushes() { brushBox.innerHTML = ''; bs.colors.concat(['#FFFFFF', '#111111']).forEach(function (c) { var b = el('button', { type: 'button', class: 'sw2', 'aria-label': 'Pędzel ' + c }, ''); b.style.background = c; b.addEventListener('click', function () { $('#bl-brush').value = c; $$('[data-bl-brushes] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); brushBox.appendChild(b); }); }
     $('#bl-pent').addEventListener('input', function () { bs.pent = this.value.toUpperCase(); update(false); });
     $('#bl-hex').addEventListener('input', function () { bs.hex = this.value.toUpperCase(); update(false); });
     $('[data-bl-clear]').addEventListener('click', function () { bs.paint = {}; update(false); });
-    var labelTimer = 0;
-    $('#bl-label').addEventListener('input', function () { bs.label = this.value.toUpperCase(); clearTimeout(labelTimer); labelTimer = setTimeout(function () { update(true); }, 180); });
+    $('[data-bl-fillpent]').addEventListener('click', function () { if (!ball) return; var c = $('#bl-brush').value.toUpperCase(); ball.obj.panels.forEach(function (p) { if (p.type === 'pent') bs.paint[p.index] = c; }); update(false); });
+    var tTimer = 0;
+    function textInput() { bs.label = $('#bl-label').value.toUpperCase(); bs.number = $('#bl-number').value.toUpperCase(); clearTimeout(tTimer); tTimer = setTimeout(function () { update(true); }, 180); }
+    $('#bl-label').addEventListener('input', textInput); $('#bl-number').addEventListener('input', textInput);
+    $('#bl-logo').addEventListener('change', function () {
+      var f = this.files[0]; if (!f) return; if (f.size > 3000000) { $('[data-bl-status]').textContent = 'Logo jest większe niż 3 MB. Wybierz mniejszy plik.'; return; }
+      var rd = new FileReader(); rd.onload = function () { var im = new Image(); im.onload = function () { logo = im; logoName = f.name; $('[data-bl-nologo]').hidden = false; update(true); }; im.src = rd.result; }; rd.readAsDataURL(f);
+    });
+    $('[data-bl-nologo]').addEventListener('click', function () { logo = null; logoName = ''; $('#bl-logo').value = ''; this.hidden = true; update(true); });
     $('[data-bl-spin]').addEventListener('click', function () { bs.spin = !bs.spin; update(false); });
+    $('[data-bl-scene]').addEventListener('click', function () { bs.scene = !bs.scene; update(true); });
     $('[data-bl-frompl]').addEventListener('click', function () {
-      if (!PL.get) return; var s = PL.get(); bs.fam = s.fam; bs.v = s.v; bs.colors = s.colors.slice(); bs.pal = PAL[s.pal] ? s.pal : 'custom'; update(true);
+      if (!PL.get) return; var s = PL.get(); bs.fam = s.fam; bs.v = s.v; bs.seed = 0; bs.colors = s.colors.slice(); bs.pal = PAL[s.pal] ? s.pal : 'custom'; var L = sorted(); bs.pent = L[0]; bs.hex = L[4]; update(true);
       $('[data-bl-status]').textContent = 'Wzór i kolory przeniesione z plakatu.';
     });
-    function summary() {
-      var n = Object.keys(bs.paint).length, palName = bs.pal === 'custom' ? 'własne kolory (' + bs.colors.join(' ') + ')' : PAL[bs.pal].name;
-      return FAM[bs.fam].name + ' ' + bs.v + ' · paleta ' + palName + ' · ' + (bs.mode === 'full' ? 'wzór na całej piłce' : (bs.mode === 'mix' ? 'wzór + pięciokąty ' + bs.pent : 'panele ' + bs.pent + ' / ' + bs.hex)) + (n ? ' · pomalowane panele: ' + Object.keys(bs.paint).map(function (k) { return k + '=' + bs.paint[k]; }).join(', ') : '') + ' · napis „' + (bs.label || '-') + '” · rozmiar ' + bs.size;
+    $('[data-bl-random]').addEventListener('click', function () {
+      var r = function (a) { return a[Math.floor(Math.random() * a.length)]; };
+      bs.fam = r(G.PRO_FAMILIES).id; bs.v = 1 + Math.floor(Math.random() * 12); bs.seed = Math.floor(Math.random() * 999999); setPalette(r(G.PRO_PALETTES).id);
+      bs.mode = r(['full', 'full', 'mix', 'panels']); bs.map = r(['sphere', 'panel']); bs.deco = r(['none', 'none', 'band', 'poles', 'spiral']); bs.scheme = r(Object.keys(SCHEMES)); bs.paint = {}; update(true);
+    });
+    /* tabs */
+    var tabs = $$('#pilka .pl-tabs [role="tab"]');
+    function selectTab(t) { tabs.forEach(function (b) { var on = b === t; b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1; $('#' + b.getAttribute('aria-controls')).hidden = !on; }); }
+    tabs.forEach(function (t, k) { t.addEventListener('click', function () { selectTab(t); }); t.addEventListener('keydown', function (e) { var d = e.key === 'ArrowRight' ? 1 : (e.key === 'ArrowLeft' ? -1 : 0); if (!d) return; e.preventDefault(); var n = tabs[(k + d + tabs.length) % tabs.length]; selectTab(n); n.focus(); }); });
+
+    /* summary, share, order */
+    function cfg() { return { m: bs.mode, mp: bs.map, f: bs.fam, v: bs.v, s: bs.seed, p: bs.pal, c: bs.colors, pe: bs.pent, he: bs.hex, sc: bs.scheme, pa: bs.paint, d: bs.deco, l: bs.label, n: bs.number, ts: bs.ts, fi: bs.finish, se: bs.seam, z: bs.size }; }
+    function shareUrl() { var code = btoa(unescape(encodeURIComponent(JSON.stringify(cfg())))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); return location.origin + location.pathname + '?pilka=' + code + '#pilka'; }
+    function loadShared() {
+      var m = /[?]pilka=([A-Za-z0-9_-]+)/.exec(location.search); if (!m) return false;
+      try {
+        var b64 = m[1].replace(/-/g, '+').replace(/_/g, '/'); while (b64.length % 4) b64 += '=';
+        var c = JSON.parse(decodeURIComponent(escape(atob(b64))));
+        if (MODES[c.m]) bs.mode = c.m; if (c.mp === 'panel') bs.map = 'panel'; if (FAM[c.f]) bs.fam = c.f;
+        if (c.v >= 1) { if (c.v <= 12) bs.v = Math.round(c.v); } if (typeof c.s === 'number') bs.seed = Math.max(0, Math.min(999999, Math.round(c.s)));
+        if (Array.isArray(c.c)) { if (c.c.length === 5) { if (c.c.every(function (h) { return HEXRE.test(h); })) bs.colors = c.c.map(function (h) { return h.toUpperCase(); }); } }
+        bs.pal = PAL[c.p] ? c.p : 'custom';
+        if (HEXRE.test(c.pe || '')) bs.pent = c.pe.toUpperCase(); if (HEXRE.test(c.he || '')) bs.hex = c.he.toUpperCase();
+        if (SCHEMES[c.sc]) bs.scheme = c.sc; if (DECOS[c.d] != null) bs.deco = c.d; if (FINS[c.fi]) bs.finish = c.fi; if (SEAMS[c.se]) bs.seam = c.se; if (SIZES[c.z]) bs.size = c.z; if ([0.8, 1, 1.3].indexOf(c.ts) > -1) bs.ts = c.ts;
+        bs.paint = {}; if (c.pa) Object.keys(c.pa).forEach(function (k) { var n = +k; if (n >= 0) { if (n < 32) { if (HEXRE.test(c.pa[k])) bs.paint[n] = c.pa[k].toUpperCase(); } } });
+        if (typeof c.l === 'string') bs.label = c.l.slice(0, 16).toUpperCase(); if (typeof c.n === 'string') bs.number = c.n.slice(0, 10).toUpperCase();
+        $('#bl-label').value = bs.label; $('#bl-number').value = bs.number;
+        return true;
+      } catch (e) { return false; }
     }
-    function update(tex) {
+    function summary() {
+      var n = Object.keys(bs.paint), palName = bs.pal === 'custom' ? 'własne kolory (' + bs.colors.join(' ') + ')' : PAL[bs.pal].name;
+      var look = bs.mode === 'panels' ? 'kolorowe panele, układ ' + SCHEMES[bs.scheme] : MODES[bs.mode] + (bs.map === 'panel' ? ', druk na każdym panelu' : ', ciągły druk') + (bs.deco !== 'none' ? ', akcent: ' + DECOS[bs.deco] : '');
+      return FAM[bs.fam].name + ' ' + bs.v + (bs.seed ? '.' + bs.seed : '') + ' · paleta ' + palName + ' · ' + look + (n.length ? ' · pomalowane panele: ' + n.length : '') + ' · napis „' + (bs.label || '-') + '”' + (bs.number ? ', numer „' + bs.number + '”' : '') + (logo ? ', logo: ' + logoName : '') + ' · ' + FINS[bs.finish] + ', szwy ' + SEAMS[bs.seam][1].toLowerCase() + ' · rozmiar ' + bs.size;
+    }
+    var status = $('[data-bl-status]');
+    $('[data-bl-share]').addEventListener('click', function () { var url = shareUrl(); var done = function () { status.textContent = 'Link skopiowany. Otwiera dokładnie tę piłkę (bez logo).'; }; if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { status.textContent = url; }); else status.textContent = url; });
+    $('[data-bl-order]').addEventListener('click', function () {
+      setLine('Zamówienie piłki: ', summary() + ' · ilość: do ustalenia · link: ' + shareUrl());
+      var att = $('#gc-attached'); if (att) { att.textContent = 'Projekt piłki dołączony do zapytania. Wpisz e-mail i ilość' + (logo ? ', a plik logo dołącz w odpowiedzi na mojego maila' : '') + '. Potwierdzę cenę i termin.'; att.hidden = false; }
+      goContact();
+    });
+
+    /* render */
+    function update(retex) {
       press('[data-bl-fams]', function (b) { return b.dataset.f === bs.fam; });
-      press('[data-bl-vars]', function (b, i) { return i + 1 === bs.v; });
+      press('[data-bl-vars]', function (b, k) { return k + 1 === bs.v; });
       press('[data-bl-pals]', function (b) { return b.dataset.p === bs.pal; });
       press('[data-bl-modes]', function (b) { return b.dataset.mode === bs.mode; });
+      press('[data-bl-maps]', function (b) { return b.dataset.map === bs.map; });
+      press('[data-bl-decos]', function (b) { return b.dataset.deco === bs.deco; });
+      press('[data-bl-schemes]', function (b) { return b.dataset.scheme === bs.scheme; });
+      press('[data-bl-finish]', function (b) { return b.dataset.fin === bs.finish; });
       press('[data-bl-sizes]', function (b) { return +b.dataset.size === bs.size; });
-      $('[data-bl-spin]').setAttribute('aria-pressed', String(bs.spin));
+      press('[data-bl-tsize]', function (b) { return +b.dataset.ts === bs.ts; });
+      press('[data-bl-seams]', function (b, k) { return k === bs.seam; });
+      $('[data-bl-spin]').setAttribute('aria-pressed', String(bs.spin)); $('[data-bl-scene]').setAttribute('aria-pressed', String(bs.scene));
+      $('#bl-pent').value = bs.pent; $('#bl-hex').value = bs.hex;
       $('[data-bl-famname]').textContent = FAM[bs.fam].name;
       $('[data-bl-palname]').textContent = bs.pal === 'custom' ? 'Własne kolory' : PAL[bs.pal].name;
       $('[data-bl-tag]').textContent = 'Rozmiar ' + bs.size + ' · ' + SIZES[bs.size];
       $('[data-bl-sum]').textContent = summary();
+      stage.dataset.scene = bs.scene ? 'court' : 'studio';
+      if (retex) paintBrushes();
       if (!ball) return;
-      var sc = { 3: 0.86, 4: 0.93, 5: 1 }[bs.size]; ball.obj.group.scale.set(sc, sc, sc);
-      if (tex) window.GFBall.paintTexture(canvas, G, bs.fam, bs.v, bs.colors, bs.label, function () { apply(); });
-      else apply();
+      var sc = { 3: 0.86, 4: 0.93, 5: 1 }[bs.size]; ball.obj.group.scale.set(sc, sc, sc); ball.obj.group.position.y = bs.scene ? sc - 1 : 0;
+      ball.setScene(bs.scene);
+      if (!retex) { apply(); return; }
+      var L = sorted(), o = { fam: bs.fam, variant: bs.v, colors: bs.colors, seed: bs.seed, label: bs.label, number: bs.number, logo: logo, deco: bs.deco, decoColor: L[2], textSize: bs.ts,
+        labelPanel: ball.obj.frontPanel(new window.THREE.Vector3(0, 0, 1), 'hex'), numberPanel: ball.obj.frontPanel(new window.THREE.Vector3(0, 0, -1), 'hex') };
+      var pending = 2, fin = function () { pending -= 1; if (!pending) apply(); };
+      window.GFBall.paintTexture(cSphere, G, o, fin);
+      window.GFBall.paintAtlas(cAtlas, G, ball.obj, o, fin);
+      if (bs.scene) ball.paintCourt();
     }
-    function apply() { ball.obj.setState({ mode: bs.mode, pent: bs.pent, hex: bs.hex, paint: bs.paint, textureCanvas: canvas }); }
-    $('[data-bl-order]').addEventListener('click', function () {
-      setLine('Zamówienie piłki: ', summary() + ' · ilość: do ustalenia');
-      var att = $('#gc-attached'); if (att) { att.textContent = 'Projekt piłki dołączony do zapytania. Wpisz e-mail i ilość, a potwierdzę cenę i termin.'; att.hidden = false; }
-      goContact();
-    });
+    function apply() {
+      var base = window.GFBall.schemes(ball.obj, bs.scheme, bs.colors, bs.pent, bs.hex, G.mix);
+      ball.obj.setState({ mode: bs.mode, mapping: bs.map, pent: bs.pent, hex: bs.hex, base: bs.mode === 'panels' ? base : null, paint: bs.paint, seam: seamHex(), finish: bs.finish, textureCanvas: bs.map === 'panel' ? cAtlas : cSphere });
+    }
 
     function start() {
       if (!window.THREE) { $('[data-bl-load]').textContent = 'Nie udało się wczytać modelu 3D.'; return; }
-      var T = window.THREE, renderer = new T.WebGLRenderer({ antialias: true, alpha: true });
+      var T = window.THREE, renderer = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
       renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); stage.insertBefore(renderer.domElement, stage.firstChild);
-      var scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, 0.1, 50); cam.position.set(0, 0, 4.6);
+      var scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, 0.1, 50);
       scene.add(new T.HemisphereLight(0xffffff, 0x8a7a80, 0.9)); var key = new T.DirectionalLight(0xffffff, 0.85); key.position.set(2.5, 3, 4); scene.add(key); var rim = new T.DirectionalLight(0xffffff, 0.35); rim.position.set(-3, -1, -2); scene.add(rim);
       var obj = window.GFBall.create(T, { detail: 9 }); obj.group.rotation.set(0.35, 0.6, 0); scene.add(obj.group);
       var sh = new T.Mesh(new T.CircleGeometry(0.9, 48), new T.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.16 })); sh.rotation.x = -Math.PI / 2; sh.position.y = -1.18; scene.add(sh);
-      ball = { obj: obj };
+      var courtTex = new T.CanvasTexture(cCourt); if (T.SRGBColorSpace) courtTex.colorSpace = T.SRGBColorSpace;
+      var court = new T.Mesh(new T.PlaneGeometry(12, 8), new T.MeshLambertMaterial({ map: courtTex })); court.rotation.x = -Math.PI / 2; court.position.y = -1.001; court.visible = false; scene.add(court);
+      var cshadow = new T.Mesh(new T.CircleGeometry(0.95, 48), new T.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.28 })); cshadow.rotation.x = -Math.PI / 2; cshadow.position.y = -0.995; cshadow.visible = false; scene.add(cshadow);
+      function paintCourt() {
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="1200" height="800">' + G.renderPro(bs.fam, bs.v, 400, bs.colors, { uid: 'bcourt', seed: bs.seed }) + G.courtLines(400, G.recommendLineColor(bs.colors)) + '</svg>';
+        var im = new Image(); im.onload = function () { var cx = cCourt.getContext('2d'); cx.drawImage(im, 0, 0, 1200, 800); courtTex.needsUpdate = true; }; im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      }
+      function setScene(on) {
+        court.visible = on; cshadow.visible = on; sh.visible = !on;
+        if (on) { cam.position.set(0, 4.4, 9.6); cam.lookAt(0, -0.6, 0); } else { cam.position.set(0, 0, 4.6); cam.lookAt(0, 0, 0); }
+      }
+      ball = { obj: obj, setScene: setScene, paintCourt: paintCourt }; stage.gfBall = obj;
       function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
       window.addEventListener('resize', resize); resize();
       var drag = null, moved = 0, vel = { x: 0, y: 0 }, visible = true;
@@ -581,6 +677,10 @@
         ray.setFromCamera(mv, cam); var pi = obj.pick(ray); if (pi < 0) return;
         bs.paint[pi] = $('#bl-brush').value.toUpperCase(); update(false);
       });
+      $('[data-bl-png]').addEventListener('click', function () {
+        renderer.render(scene, cam);
+        renderer.domElement.toBlob(function (blob) { if (!blob) return; var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'pilka-gamefields.png'; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000); status.textContent = 'Podgląd zapisany jako pilka-gamefields.png.'; }, 'image/png');
+      });
       if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(stage);
       (function loop() { requestAnimationFrame(loop); if (!visible) return; if (!drag) { if (bs.spin) rot(0, 0.004); else { vel.x *= 0.92; vel.y *= 0.92; if (Math.abs(vel.x) + Math.abs(vel.y) > 0.0004) rot(vel.x, vel.y); } } renderer.render(scene, cam); })();
       $('[data-bl-load]').hidden = true;
@@ -590,7 +690,8 @@
       if (window.THREE) { start(); return; }
       var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'; sc.onload = function () { if (window.THREE) start(); else setTimeout(start, 300); }; sc.onerror = function () { $('[data-bl-load]').textContent = 'Nie udało się wczytać modelu 3D.'; }; document.head.appendChild(sc);
     }
-    update(false);
+    var shared = loadShared();
+    update(true);
     var asked = false;
     function want() { if (asked) return; asked = true; window.removeEventListener('scroll', near); loadThree(); }
     function near() { var r = sec.getBoundingClientRect(); if (r.top < window.innerHeight + 500) { if (r.bottom > -500) want(); } }
@@ -598,6 +699,7 @@
     if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); want(); } }, { rootMargin: '500px 0px' }); io.observe(sec); }
     near();
     if (location.hash === '#pilka') want();
+    if (shared) { want(); setTimeout(function () { sec.scrollIntoView({ behavior: 'auto' }); }, 300); }
     setTimeout(want, 6000);
   })();
 
