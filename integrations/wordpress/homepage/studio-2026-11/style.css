@@ -330,3 +330,13 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .pn-pill.no{background:#EFE7EA;color:var(--muted)}
 .gfs .pn-go{margin-top:14px}
 @media (max-width:900px){.gfs .pn{grid-template-columns:minmax(0,1fr)}}
+/* ---------- ball ---------- */
+.gfs .bl{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:start}
+.gfs .bl-stage{position:sticky;top:16px;aspect-ratio:1/1;max-height:80vh;width:100%;background:#E9E3DD;overflow:hidden;touch-action:none;cursor:grab}
+.gfs .bl-stage canvas{display:block;width:100%!important;height:100%!important}
+.gfs .bl-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.gfs .bl-tag{position:absolute;left:14px;bottom:12px;color:var(--muted)}
+.gfs .bl-hint{position:absolute;right:14px;bottom:12px;color:var(--muted)}
+.gfs .bl-ed{display:grid;gap:10px;min-width:0;align-content:start}
+.gfs .bl-cols{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.gfs .bl{grid-template-columns:minmax(0,1fr)}.gfs .bl-stage{position:relative;top:auto}.gfs .bl-hint{display:none}}

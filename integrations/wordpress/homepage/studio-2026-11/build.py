@@ -66,6 +66,7 @@ def main():
         f"<style>{font_face}\n{style}</style>",
         body.strip(),
         loader,
+        "<script>" + (HERE.parent.parent.parent / "studio" / "ball-2026-11" / "ball-core.js").read_text(encoding="utf-8").strip() + "</script>",
         f"<script>\n{script.strip()}\n</script>",
         contact_scripts.strip(),
         "<!-- /wp:html -->",

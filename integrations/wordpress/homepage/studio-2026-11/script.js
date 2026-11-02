@@ -419,6 +419,7 @@
     });
 
     PL.ready = true;
+    PL.get = function () { return { fam: st.fam, v: st.v, pal: st.pal, colors: st.colors.slice() }; };
     PL.order = function () { return { name: st.title || 'bez tytułu', text: summary() + ' · No. ' + edition() + ' · link: ' + shareUrl() }; };
     var shared = loadShared();
     draw();
@@ -497,6 +498,101 @@
       go.appendChild(a); go.appendChild(add); list.appendChild(go);
     }
     draw();
+  })();
+
+  /* ---------- BALL: 32-panel 3D ball on the Court Art Pro engine (three.js loaded on demand) ---------- */
+  (function () {
+    var sec = $('#pilka'); if (!sec) return; if (!G) return;
+    var FAM = {}; G.PRO_FAMILIES.forEach(function (f) { FAM[f.id] = f; });
+    var PAL = {}; G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
+    var bs = { mode: 'full', fam: 'pro-textile', v: 1, pal: 'lagos', colors: PAL.lagos.colors.slice(), pent: '#1C0912', hex: '#F4F1EE', paint: {}, label: 'MÓJ PLAC', size: 5, spin: !reduced };
+    var stage = $('[data-bl-stage]'), ball = null, canvas = document.createElement('canvas'); canvas.width = 2048; canvas.height = 1024;
+    var SIZES = { 3: 'Ø ok. 19 cm', 4: 'Ø ok. 20,5 cm', 5: 'Ø ok. 22 cm' };
+    function press(sel, test) { $$(sel + ' [aria-pressed]').forEach(function (b, i) { b.setAttribute('aria-pressed', String(test(b, i))); }); }
+    var famBox = $('[data-bl-fams]');
+    G.PRO_FAMILIES.forEach(function (f) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(f.name)); b.dataset.f = f.id; b.addEventListener('click', function () { bs.fam = f.id; update(true); }); famBox.appendChild(b); });
+    var varBox = $('[data-bl-vars]');
+    for (var i = 1; i <= 12; i++) (function (n) { var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Kompozycja ' + n }, String(n)); b.addEventListener('click', function () { bs.v = n; update(true); }); varBox.appendChild(b); })(i);
+    var palBox = $('[data-bl-pals]');
+    G.PRO_PALETTES.forEach(function (p) {
+      var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Paleta ' + p.name }, '<i>' + p.colors.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join('') + '</i><small>' + esc(p.name) + '</small>');
+      b.dataset.p = p.id;
+      b.addEventListener('click', function () { bs.pal = p.id; bs.colors = p.colors.slice(); var L = p.colors.slice().sort(function (a, c) { return G.lightness(a) - G.lightness(c); }); bs.pent = L[0]; bs.hex = L[4]; $('#bl-pent').value = bs.pent; $('#bl-hex').value = bs.hex; update(true); });
+      palBox.appendChild(b);
+    });
+    $$('[data-bl-modes] button').forEach(function (b) { b.addEventListener('click', function () { bs.mode = b.dataset.mode; update(false); }); });
+    $$('[data-bl-sizes] button').forEach(function (b) { b.addEventListener('click', function () { bs.size = +b.dataset.size; update(false); }); });
+    $('#bl-pent').addEventListener('input', function () { bs.pent = this.value.toUpperCase(); update(false); });
+    $('#bl-hex').addEventListener('input', function () { bs.hex = this.value.toUpperCase(); update(false); });
+    $('[data-bl-clear]').addEventListener('click', function () { bs.paint = {}; update(false); });
+    var labelTimer = 0;
+    $('#bl-label').addEventListener('input', function () { bs.label = this.value.toUpperCase(); clearTimeout(labelTimer); labelTimer = setTimeout(function () { update(true); }, 180); });
+    $('[data-bl-spin]').addEventListener('click', function () { bs.spin = !bs.spin; update(false); });
+    $('[data-bl-frompl]').addEventListener('click', function () {
+      if (!PL.get) return; var s = PL.get(); bs.fam = s.fam; bs.v = s.v; bs.colors = s.colors.slice(); bs.pal = PAL[s.pal] ? s.pal : 'custom'; update(true);
+      $('[data-bl-status]').textContent = 'Wzór i kolory przeniesione z plakatu.';
+    });
+    function summary() {
+      var n = Object.keys(bs.paint).length, palName = bs.pal === 'custom' ? 'własne kolory (' + bs.colors.join(' ') + ')' : PAL[bs.pal].name;
+      return FAM[bs.fam].name + ' ' + bs.v + ' · paleta ' + palName + ' · ' + (bs.mode === 'full' ? 'wzór na całej piłce' : (bs.mode === 'mix' ? 'wzór + pięciokąty ' + bs.pent : 'panele ' + bs.pent + ' / ' + bs.hex)) + (n ? ' · pomalowane panele: ' + Object.keys(bs.paint).map(function (k) { return k + '=' + bs.paint[k]; }).join(', ') : '') + ' · napis „' + (bs.label || '-') + '” · rozmiar ' + bs.size;
+    }
+    function update(tex) {
+      press('[data-bl-fams]', function (b) { return b.dataset.f === bs.fam; });
+      press('[data-bl-vars]', function (b, i) { return i + 1 === bs.v; });
+      press('[data-bl-pals]', function (b) { return b.dataset.p === bs.pal; });
+      press('[data-bl-modes]', function (b) { return b.dataset.mode === bs.mode; });
+      press('[data-bl-sizes]', function (b) { return +b.dataset.size === bs.size; });
+      $('[data-bl-spin]').setAttribute('aria-pressed', String(bs.spin));
+      $('[data-bl-famname]').textContent = FAM[bs.fam].name;
+      $('[data-bl-palname]').textContent = bs.pal === 'custom' ? 'Własne kolory' : PAL[bs.pal].name;
+      $('[data-bl-tag]').textContent = 'Rozmiar ' + bs.size + ' · ' + SIZES[bs.size];
+      $('[data-bl-sum]').textContent = summary();
+      if (!ball) return;
+      var sc = { 3: 0.86, 4: 0.93, 5: 1 }[bs.size]; ball.obj.group.scale.set(sc, sc, sc);
+      if (tex) window.GFBall.paintTexture(canvas, G, bs.fam, bs.v, bs.colors, bs.label, function () { apply(); });
+      else apply();
+    }
+    function apply() { ball.obj.setState({ mode: bs.mode, pent: bs.pent, hex: bs.hex, paint: bs.paint, textureCanvas: canvas }); }
+    $('[data-bl-order]').addEventListener('click', function () {
+      setLine('Zamówienie piłki: ', summary() + ' · ilość: do ustalenia');
+      var att = $('#gc-attached'); if (att) { att.textContent = 'Projekt piłki dołączony do zapytania. Wpisz e-mail i ilość, a potwierdzę cenę i termin.'; att.hidden = false; }
+      goContact();
+    });
+
+    function start() {
+      if (!window.THREE) { $('[data-bl-load]').textContent = 'Nie udało się wczytać modelu 3D.'; return; }
+      var T = window.THREE, renderer = new T.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); stage.insertBefore(renderer.domElement, stage.firstChild);
+      var scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, 0.1, 50); cam.position.set(0, 0, 4.6);
+      scene.add(new T.HemisphereLight(0xffffff, 0x8a7a80, 0.9)); var key = new T.DirectionalLight(0xffffff, 0.85); key.position.set(2.5, 3, 4); scene.add(key); var rim = new T.DirectionalLight(0xffffff, 0.35); rim.position.set(-3, -1, -2); scene.add(rim);
+      var obj = window.GFBall.create(T, { detail: 9 }); obj.group.rotation.set(0.35, 0.6, 0); scene.add(obj.group);
+      var sh = new T.Mesh(new T.CircleGeometry(0.9, 48), new T.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.16 })); sh.rotation.x = -Math.PI / 2; sh.position.y = -1.18; scene.add(sh);
+      ball = { obj: obj };
+      function resize() { var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+      window.addEventListener('resize', resize); resize();
+      var drag = null, moved = 0, vel = { x: 0, y: 0 }, visible = true;
+      function rot(ax, ay) { obj.group.quaternion.premultiply(new T.Quaternion().setFromEuler(new T.Euler(ax, ay, 0, 'XYZ'))); }
+      stage.addEventListener('pointerdown', function (e) { drag = { x: e.clientX, y: e.clientY }; moved = 0; stage.setPointerCapture(e.pointerId); });
+      stage.addEventListener('pointermove', function (e) { if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y; moved += Math.abs(dx) + Math.abs(dy); drag = { x: e.clientX, y: e.clientY }; vel = { x: dy * 0.006, y: dx * 0.006 }; rot(vel.x, vel.y); });
+      var ray = new T.Raycaster(), mv = new T.Vector2();
+      stage.addEventListener('pointerup', function (e) {
+        var was = drag; drag = null; if (!was) return; if (moved > 6) return;
+        var r = stage.getBoundingClientRect(); mv.x = ((e.clientX - r.left) / r.width) * 2 - 1; mv.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+        ray.setFromCamera(mv, cam); var pi = obj.pick(ray); if (pi < 0) return;
+        bs.paint[pi] = $('#bl-brush').value.toUpperCase(); update(false);
+      });
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(stage);
+      (function loop() { requestAnimationFrame(loop); if (!visible) return; if (!drag) { if (bs.spin) rot(0, 0.004); else { vel.x *= 0.92; vel.y *= 0.92; if (Math.abs(vel.x) + Math.abs(vel.y) > 0.0004) rot(vel.x, vel.y); } } renderer.render(scene, cam); })();
+      $('[data-bl-load]').hidden = true;
+      update(true);
+    }
+    function loadThree() {
+      if (window.THREE) { start(); return; }
+      var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'; sc.onload = start; sc.onerror = function () { $('[data-bl-load]').textContent = 'Nie udało się wczytać modelu 3D.'; }; document.head.appendChild(sc);
+    }
+    update(false);
+    if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); loadThree(); } }, { rootMargin: '400px 0px' }); io.observe(sec); }
+    else loadThree();
   })();
 
   /* ---------- PROJECT-DETAILS helper (CF7 field) ---------- */
