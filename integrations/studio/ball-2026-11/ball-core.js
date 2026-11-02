@@ -67,10 +67,11 @@
     group.add(mesh);
     group.add(new THREE.Mesh(new THREE.SphereGeometry(0.988, 48, 32), new THREE.MeshPhongMaterial({ color: 0x15090f, shininess: 5 })));
 
-    function rgb(h) { h = String(h || '#ffffff').replace('#', ''); return [parseInt(h.slice(0, 2), 16) / 255, parseInt(h.slice(2, 4), 16) / 255, parseInt(h.slice(4, 6), 16) / 255]; }
+    // THREE.Color converts sRGB hex to the renderer's working space (linear in r152+, unchanged in r128)
+    function rgb(h) { var c = new THREE.Color(String(h || '#ffffff')); return [c.r, c.g, c.b]; }
     function setState(st) {
       if (st.textureCanvas) {
-        if (!tex) { tex = new THREE.CanvasTexture(st.textureCanvas); tex.wrapS = THREE.RepeatWrapping; tex.anisotropy = 4; matPat.map = tex; matPat.needsUpdate = true; }
+        if (!tex) { tex = new THREE.CanvasTexture(st.textureCanvas); tex.wrapS = THREE.RepeatWrapping; tex.anisotropy = 4; if (THREE.SRGBColorSpace) tex.colorSpace = THREE.SRGBColorSpace; matPat.map = tex; matPat.needsUpdate = true; }
         tex.needsUpdate = true;
       }
       var colA = geo.getAttribute('color'), paint = st.paint || {};
