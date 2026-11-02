@@ -482,7 +482,7 @@
       plan.innerHTML = o + '</svg>';
       cap.textContent = m.name + (f.ok ? ' mieści się' + (f.rot ? ' po obróceniu' : '') + '; zostaje ' + nf(f.spare) + ' m w najwęższym miejscu.' : ' nie mieści się; brakuje ' + nf(-f.spare) + ' m.') + ' Kratka = 1 m, kropka w rogu = człowiek z góry. Linia przerywana = Twój zapas.' + (m.approx ? ' Średnica modelu przybliżona.' : '');
       // ranked list
-      var rows = PLAN.map(function (x) { return { m: x, f: fit(x, L, Wd, r) }; }).sort(function (p, q) { return (q.f.ok - p.f.ok) || (p.m.a * p.m.b - q.m.a * q.m.b) * (p.f.ok ? -1 : 1); });
+      var rows = PLAN.map(function (x) { return { m: x, f: fit(x, L, Wd, r) }; }).sort(function (p, q) { if (p.f.ok !== q.f.ok) return p.f.ok ? -1 : 1; return p.f.ok ? (q.m.a * q.m.b - p.m.a * p.m.b) : (q.f.spare - p.f.spare); });
       list.innerHTML = '';
       rows.forEach(function (row) {
         var b = el('button', { type: 'button', class: 'pn-it', role: 'listitem', 'aria-pressed': String(row.m.k === sel) },
