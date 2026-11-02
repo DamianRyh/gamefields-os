@@ -588,11 +588,17 @@
     }
     function loadThree() {
       if (window.THREE) { start(); return; }
-      var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'; sc.onload = start; sc.onerror = function () { $('[data-bl-load]').textContent = 'Nie udało się wczytać modelu 3D.'; }; document.head.appendChild(sc);
+      var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'; sc.onload = function () { if (window.THREE) start(); else setTimeout(start, 300); }; sc.onerror = function () { $('[data-bl-load]').textContent = 'Nie udało się wczytać modelu 3D.'; }; document.head.appendChild(sc);
     }
     update(false);
-    if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); loadThree(); } }, { rootMargin: '400px 0px' }); io.observe(sec); }
-    else loadThree();
+    var asked = false;
+    function want() { if (asked) return; asked = true; window.removeEventListener('scroll', near); loadThree(); }
+    function near() { var r = sec.getBoundingClientRect(); if (r.top < window.innerHeight + 500) { if (r.bottom > -500) want(); } }
+    window.addEventListener('scroll', near, { passive: true });
+    if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { io.disconnect(); want(); } }, { rootMargin: '500px 0px' }); io.observe(sec); }
+    near();
+    if (location.hash === '#pilka') want();
+    setTimeout(want, 6000);
   })();
 
   /* ---------- PROJECT-DETAILS helper (CF7 field) ---------- */
