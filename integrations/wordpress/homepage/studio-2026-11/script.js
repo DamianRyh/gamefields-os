@@ -426,6 +426,79 @@
     if (shared) setTimeout(function () { $('#plakaty').scrollIntoView({ behavior: 'auto' }); }, 300);
   })();
 
+  /* ---------- SITE PLANNER: real model footprints, user plot, chosen reserve ---------- */
+  (function () {
+    var box = $('#planer'); if (!box) return;
+    // footprints in metres from the catalogue; "approx" marks diameters given as ~
+    var PLAN = [
+      { k: 'circle-cage-1', name: 'Panna Cage 90', shape: 'circle', a: 6, b: 6, approx: true, meta: 'Ø ~6 m · wys. 0,90 m' },
+      { k: 'circle-cage-2', name: 'Panna Cage 180', shape: 'circle', a: 6, b: 6, approx: true, meta: 'Ø ~6 m · wys. 1,80 m' },
+      { k: 'o1', name: 'Panna Play', shape: 'circle', a: 6, b: 6, approx: true, meta: 'Ø ~6 m · wys. do 1,52 m · 1 na 1' },
+      { k: 'p1', name: 'Panna Court', shape: 'rect', a: 7.14, b: 5.57, meta: '7,14 × 5,57 m · wys. do 1,22 m · 1 na 1' },
+      { k: 'octagon', name: 'Panna Octa', shape: 'oct', a: 4.96 / Math.cos(Math.PI / 8), b: 4.96 / Math.cos(Math.PI / 8), flats: 4.96, meta: '4,96 m między bokami · wys. 1,22 m · 1 na 1' },
+      { k: 'street-field', name: 'Panna Grid', shape: 'rect', a: 6.21, b: 4.65, meta: '6,21 × 4,65 m' },
+      { k: 'w1', name: 'Panna Ring', shape: 'circle', a: 5, b: 5, approx: true, meta: 'Ø ~5 m · wys. 1 m · 1 na 1', noArena: true },
+      { k: 'street15', name: 'Street Arena 15', shape: 'rect', a: 15, b: 10, meta: '15 × 10 m · 3 na 3' }
+    ];
+    var PRESETS = [['Podwórko 10 × 8', 10, 8], ['Kąt parku 8 × 6', 8, 6], ['Plac szkolny 20 × 15', 20, 15], ['Dach / taras 7 × 7', 7, 7]];
+    var inL = $('#pn-l'), inW = $('#pn-w'), inM = $('#pn-m'), plan = $('[data-pn-plan]'), list = $('[data-pn-list]'), cap = $('[data-pn-cap]');
+    var sel = 'p1';
+    var nf = function (v) { return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); };
+    function num(inp, d) { var v = parseFloat(String(inp.value).replace(',', '.')); return isFinite(v) ? Math.max(1, Math.min(80, v)) : d; }
+    function fit(m, L, Wd, r) { // returns {ok, spare, rot}
+      var a = m.a + 2 * r, b = m.b + 2 * r;
+      var s1 = Math.min(L - a, Wd - b), s2 = Math.min(L - b, Wd - a);
+      var rot = s2 > s1, spare = Math.max(s1, s2);
+      return { ok: spare >= 0, spare: spare, rot: rot };
+    }
+    var presetBox = $('[data-pn-presets]');
+    PRESETS.forEach(function (p) { var b = el('button', { type: 'button', class: 'chip' }, esc(p[0])); b.addEventListener('click', function () { inL.value = p[1]; inW.value = p[2]; draw(); }); presetBox.appendChild(b); });
+    [inL, inW, inM].forEach(function (i) { i.addEventListener('input', draw); });
+    function footprint(m, cx, cy, s, rot, fill, stroke, dash) {
+      var a = (rot ? m.b : m.a) * s, b = (rot ? m.a : m.b) * s, d = dash ? ' stroke-dasharray="6 5"' : '';
+      if (m.shape === 'circle') return '<circle cx="' + cx + '" cy="' + cy + '" r="' + (a / 2) + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2"' + d + '/>';
+      if (m.shape === 'oct') { var R = a / 2, pts = []; for (var i = 0; i < 8; i++) { var ang = Math.PI / 8 + i * Math.PI / 4; pts.push((cx + Math.cos(ang) * R).toFixed(1) + ',' + (cy + Math.sin(ang) * R).toFixed(1)); } return '<polygon points="' + pts.join(' ') + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2"' + d + '/>'; }
+      return '<rect x="' + (cx - a / 2) + '" y="' + (cy - b / 2) + '" width="' + a + '" height="' + b + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2"' + d + '/>';
+    }
+    function draw() {
+      var L = num(inL, 12), Wd = num(inW, 9), r = parseFloat(inM.value) || 0;
+      $('[data-pn-mv]').textContent = nf(r) + ' m';
+      var m = PLAN.filter(function (x) { return x.k === sel; })[0];
+      var f = fit(m, L, Wd, r);
+      // draw plot to scale inside 600 x 400, with metre grid
+      var VW = 600, VH = 400, pad = 30, s = Math.min((VW - 2 * pad) / Math.max(L, (f.rot ? m.b : m.a) + 2 * r), (VH - 2 * pad) / Math.max(Wd, (f.rot ? m.a : m.b) + 2 * r));
+      var pw = L * s, ph = Wd * s, ox = (VW - pw) / 2, oy = (VH - ph) / 2, cx = VW / 2, cy = VH / 2, g = '';
+      for (var gx = 1; gx < L; gx++) g += '<line x1="' + (ox + gx * s) + '" y1="' + oy + '" x2="' + (ox + gx * s) + '" y2="' + (oy + ph) + '" stroke="#E9E1E4" stroke-width="1"/>';
+      for (var gy = 1; gy < Wd; gy++) g += '<line x1="' + ox + '" y1="' + (oy + gy * s) + '" x2="' + (ox + pw) + '" y2="' + (oy + gy * s) + '" stroke="#E9E1E4" stroke-width="1"/>';
+      var res = { a: m.a + 2 * r, b: m.b + 2 * r, shape: m.shape === 'circle' ? 'circle' : (m.shape === 'oct' ? 'oct' : 'rect') };
+      var o = '<svg viewBox="0 0 ' + VW + ' ' + VH + '" xmlns="http://www.w3.org/2000/svg">';
+      o += '<rect x="' + ox + '" y="' + oy + '" width="' + pw + '" height="' + ph + '" fill="#F4F1EE" stroke="#47132D" stroke-width="2.5"/>' + g;
+      if (r > 0) o += footprint(res, cx, cy, s, f.rot, 'none', f.ok ? '#6336F5' : '#E0402B', true);
+      o += footprint(m, cx, cy, s, f.rot, f.ok ? 'rgba(99,54,245,.22)' : 'rgba(224,64,43,.22)', f.ok ? '#6336F5' : '#E0402B', false);
+      o += '<text x="' + (ox + pw / 2) + '" y="' + (oy - 10) + '" text-anchor="middle" font-family="GHInter,Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#47132D">' + nf(L) + ' m</text>';
+      o += '<text x="' + (ox - 10) + '" y="' + (oy + ph / 2) + '" text-anchor="middle" font-family="GHInter,Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#47132D" transform="rotate(-90 ' + (ox - 10) + ' ' + (oy + ph / 2) + ')">' + nf(Wd) + ' m</text>';
+      // 1.8 m person for scale, standing in the corner of the plot
+      var ph2 = Math.max(6, 0.5 * s); o += '<circle cx="' + (ox + 10 + ph2 / 2) + '" cy="' + (oy + ph - 10 - ph2 / 2) + '" r="' + (ph2 / 2) + '" fill="#47132D"/>';
+      plan.innerHTML = o + '</svg>';
+      cap.textContent = m.name + (f.ok ? ' mieści się' + (f.rot ? ' po obróceniu' : '') + '; zostaje ' + nf(f.spare) + ' m w najwęższym miejscu.' : ' nie mieści się; brakuje ' + nf(-f.spare) + ' m.') + ' Kratka = 1 m, kropka w rogu = człowiek z góry. Linia przerywana = Twój zapas.' + (m.approx ? ' Średnica modelu przybliżona.' : '');
+      // ranked list
+      var rows = PLAN.map(function (x) { return { m: x, f: fit(x, L, Wd, r) }; }).sort(function (p, q) { return (q.f.ok - p.f.ok) || (p.m.a * p.m.b - q.m.a * q.m.b) * (p.f.ok ? -1 : 1); });
+      list.innerHTML = '';
+      rows.forEach(function (row) {
+        var b = el('button', { type: 'button', class: 'pn-it', role: 'listitem', 'aria-pressed': String(row.m.k === sel) },
+          '<b>' + esc(row.m.name) + '</b><span class="pn-pill ' + (row.f.ok ? 'ok' : 'no') + '">' + (row.f.ok ? 'mieści się · +' + nf(row.f.spare) + ' m' : 'brakuje ' + nf(-row.f.spare) + ' m') + '</span><small>' + esc(row.m.meta) + '</small>');
+        b.addEventListener('click', function () { sel = row.m.k; draw(); });
+        list.appendChild(b);
+      });
+      var go = el('div', { class: 'pn-go chips' }, '');
+      var a = el('a', { class: 'pill', href: STUDIO + (m.noArena ? '' : '?arena=' + m.k), style: 'background:var(--violet);color:#fff' }, 'Zaprojektuj ' + esc(m.name) + ' <span aria-hidden="true">→</span>');
+      var add = el('button', { type: 'button', class: 'chip' }, 'Dodaj wymiary placu do zapytania');
+      add.addEventListener('click', function () { setLine('Wymiary placu: ', nf(L) + ' × ' + nf(Wd) + ' m, zapas ' + nf(r) + ' m · wybrany model: ' + m.name + (f.ok ? ' (mieści się)' : ' (do sprawdzenia)')); goContact(); });
+      go.appendChild(a); go.appendChild(add); list.appendChild(go);
+    }
+    draw();
+  })();
+
   /* ---------- PROJECT-DETAILS helper (CF7 field) ---------- */
   function setLine(prefix, text) {
     var field = root.querySelector('[name="project-details"]');

@@ -309,6 +309,30 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   .gfs .gh-workshop-rail{grid-auto-columns:82%}
 }
 @media (prefers-reduced-motion:reduce){.gfs .ticker-track{animation:none}.gfs *{transition:none!important}}
+
+/* ---------- site planner ---------- */
+.gfs .pn{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:start}
+.gfs .pn-in{display:grid;gap:14px;min-width:0}
+.gfs .pn-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gfs .pn-f{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.gfs .pn-f b{color:var(--ink);font-variant-numeric:tabular-nums}
+.gfs .pn-num{position:relative;display:block}
+.gfs .pn-num input{padding-right:34px;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.gfs .pn-num i{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-style:normal;color:var(--muted)}
+.gfs .pn input[type=range]{width:100%;accent-color:var(--violet)}
+.gfs .pn-plan{background:#fff;border:1px solid var(--line);aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:12px}
+.gfs .pn-plan svg{width:100%;height:100%;display:block}
+.gfs .pn-cap{color:var(--muted);font-size:14px}
+.gfs .pn-list{display:grid;gap:0;border-top:1px solid var(--line)}
+.gfs .pn-it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 10px;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
+.gfs .pn-it[aria-pressed="true"]{background:rgba(99,54,245,.06);box-shadow:inset 3px 0 0 var(--violet)}
+.gfs .pn-it b{font-size:16px}
+.gfs .pn-it small{grid-column:1;color:var(--muted);font-size:13px}
+.gfs .pn-pill{grid-row:1 / span 2;grid-column:2;font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.gfs .pn-pill.ok{background:#D8F24A;color:#1C0912}
+.gfs .pn-pill.no{background:#EFE7EA;color:var(--muted)}
+.gfs .pn-go{margin-top:14px}
+@media (max-width:900px){.gfs .pn{grid-template-columns:minmax(0,1fr)}}
 </style>
 <div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/">
 <a class="skip" href="#gfs-main">Przejdź do treści</a>
@@ -370,6 +394,27 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
     </div>
   </div>
   <div class="wall" data-wall></div>
+</section>
+
+<!-- SITE PLANNER: does it fit? -->
+<section id="planer" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-plan">
+  <div class="head">
+    <h2 class="d" id="gfs-plan">Zmieści się?</h2>
+    <div class="side"><p>Wpisz wymiary swojego placu. Narysuję go w skali i pokażę, które boiska się zmieszczą razem z zapasem wokół. Wymiary modeli są rzeczywiste; strefę bezpieczeństwa dla Twojej lokalizacji potwierdzimy przy projekcie.</p></div>
+  </div>
+  <div class="pn">
+    <div class="pn-in">
+      <div class="pn-row">
+        <label class="pn-f"><span>Długość placu</span><span class="pn-num"><input id="pn-l" class="input" type="number" inputmode="decimal" min="3" max="60" step="0.5" value="12"><i>m</i></span></label>
+        <label class="pn-f"><span>Szerokość placu</span><span class="pn-num"><input id="pn-w" class="input" type="number" inputmode="decimal" min="3" max="60" step="0.5" value="9"><i>m</i></span></label>
+      </div>
+      <label class="pn-f"><span>Zapas wokół boiska <b data-pn-mv>1,0 m</b></span><input id="pn-m" type="range" min="0" max="3" step="0.25" value="1"></label>
+      <div class="chips" data-pn-presets role="group" aria-label="Przykładowe place"></div>
+      <div class="pn-plan" data-pn-plan role="img" aria-label="Plan placu w skali"></div>
+      <p class="pn-cap" data-pn-cap></p>
+    </div>
+    <div class="pn-list" data-pn-list role="list" aria-label="Boiska i dopasowanie do placu"></div>
+  </div>
 </section>
 
 <!-- STUDIO -->
@@ -1052,6 +1097,79 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     draw();
     (window.requestIdleCallback || function (fn) { return setTimeout(fn, 400); })(paintThumbs);
     if (shared) setTimeout(function () { $('#plakaty').scrollIntoView({ behavior: 'auto' }); }, 300);
+  })();
+
+  /* ---------- SITE PLANNER: real model footprints, user plot, chosen reserve ---------- */
+  (function () {
+    var box = $('#planer'); if (!box) return;
+    // footprints in metres from the catalogue; "approx" marks diameters given as ~
+    var PLAN = [
+      { k: 'circle-cage-1', name: 'Panna Cage 90', shape: 'circle', a: 6, b: 6, approx: true, meta: 'Ø ~6 m · wys. 0,90 m' },
+      { k: 'circle-cage-2', name: 'Panna Cage 180', shape: 'circle', a: 6, b: 6, approx: true, meta: 'Ø ~6 m · wys. 1,80 m' },
+      { k: 'o1', name: 'Panna Play', shape: 'circle', a: 6, b: 6, approx: true, meta: 'Ø ~6 m · wys. do 1,52 m · 1 na 1' },
+      { k: 'p1', name: 'Panna Court', shape: 'rect', a: 7.14, b: 5.57, meta: '7,14 × 5,57 m · wys. do 1,22 m · 1 na 1' },
+      { k: 'octagon', name: 'Panna Octa', shape: 'oct', a: 4.96 / Math.cos(Math.PI / 8), b: 4.96 / Math.cos(Math.PI / 8), flats: 4.96, meta: '4,96 m między bokami · wys. 1,22 m · 1 na 1' },
+      { k: 'street-field', name: 'Panna Grid', shape: 'rect', a: 6.21, b: 4.65, meta: '6,21 × 4,65 m' },
+      { k: 'w1', name: 'Panna Ring', shape: 'circle', a: 5, b: 5, approx: true, meta: 'Ø ~5 m · wys. 1 m · 1 na 1', noArena: true },
+      { k: 'street15', name: 'Street Arena 15', shape: 'rect', a: 15, b: 10, meta: '15 × 10 m · 3 na 3' }
+    ];
+    var PRESETS = [['Podwórko 10 × 8', 10, 8], ['Kąt parku 8 × 6', 8, 6], ['Plac szkolny 20 × 15', 20, 15], ['Dach / taras 7 × 7', 7, 7]];
+    var inL = $('#pn-l'), inW = $('#pn-w'), inM = $('#pn-m'), plan = $('[data-pn-plan]'), list = $('[data-pn-list]'), cap = $('[data-pn-cap]');
+    var sel = 'p1';
+    var nf = function (v) { return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); };
+    function num(inp, d) { var v = parseFloat(String(inp.value).replace(',', '.')); return isFinite(v) ? Math.max(1, Math.min(80, v)) : d; }
+    function fit(m, L, Wd, r) { // returns {ok, spare, rot}
+      var a = m.a + 2 * r, b = m.b + 2 * r;
+      var s1 = Math.min(L - a, Wd - b), s2 = Math.min(L - b, Wd - a);
+      var rot = s2 > s1, spare = Math.max(s1, s2);
+      return { ok: spare >= 0, spare: spare, rot: rot };
+    }
+    var presetBox = $('[data-pn-presets]');
+    PRESETS.forEach(function (p) { var b = el('button', { type: 'button', class: 'chip' }, esc(p[0])); b.addEventListener('click', function () { inL.value = p[1]; inW.value = p[2]; draw(); }); presetBox.appendChild(b); });
+    [inL, inW, inM].forEach(function (i) { i.addEventListener('input', draw); });
+    function footprint(m, cx, cy, s, rot, fill, stroke, dash) {
+      var a = (rot ? m.b : m.a) * s, b = (rot ? m.a : m.b) * s, d = dash ? ' stroke-dasharray="6 5"' : '';
+      if (m.shape === 'circle') return '<circle cx="' + cx + '" cy="' + cy + '" r="' + (a / 2) + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2"' + d + '/>';
+      if (m.shape === 'oct') { var R = a / 2, pts = []; for (var i = 0; i < 8; i++) { var ang = Math.PI / 8 + i * Math.PI / 4; pts.push((cx + Math.cos(ang) * R).toFixed(1) + ',' + (cy + Math.sin(ang) * R).toFixed(1)); } return '<polygon points="' + pts.join(' ') + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2"' + d + '/>'; }
+      return '<rect x="' + (cx - a / 2) + '" y="' + (cy - b / 2) + '" width="' + a + '" height="' + b + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2"' + d + '/>';
+    }
+    function draw() {
+      var L = num(inL, 12), Wd = num(inW, 9), r = parseFloat(inM.value) || 0;
+      $('[data-pn-mv]').textContent = nf(r) + ' m';
+      var m = PLAN.filter(function (x) { return x.k === sel; })[0];
+      var f = fit(m, L, Wd, r);
+      // draw plot to scale inside 600 x 400, with metre grid
+      var VW = 600, VH = 400, pad = 30, s = Math.min((VW - 2 * pad) / Math.max(L, (f.rot ? m.b : m.a) + 2 * r), (VH - 2 * pad) / Math.max(Wd, (f.rot ? m.a : m.b) + 2 * r));
+      var pw = L * s, ph = Wd * s, ox = (VW - pw) / 2, oy = (VH - ph) / 2, cx = VW / 2, cy = VH / 2, g = '';
+      for (var gx = 1; gx < L; gx++) g += '<line x1="' + (ox + gx * s) + '" y1="' + oy + '" x2="' + (ox + gx * s) + '" y2="' + (oy + ph) + '" stroke="#E9E1E4" stroke-width="1"/>';
+      for (var gy = 1; gy < Wd; gy++) g += '<line x1="' + ox + '" y1="' + (oy + gy * s) + '" x2="' + (ox + pw) + '" y2="' + (oy + gy * s) + '" stroke="#E9E1E4" stroke-width="1"/>';
+      var res = { a: m.a + 2 * r, b: m.b + 2 * r, shape: m.shape === 'circle' ? 'circle' : (m.shape === 'oct' ? 'oct' : 'rect') };
+      var o = '<svg viewBox="0 0 ' + VW + ' ' + VH + '" xmlns="http://www.w3.org/2000/svg">';
+      o += '<rect x="' + ox + '" y="' + oy + '" width="' + pw + '" height="' + ph + '" fill="#F4F1EE" stroke="#47132D" stroke-width="2.5"/>' + g;
+      if (r > 0) o += footprint(res, cx, cy, s, f.rot, 'none', f.ok ? '#6336F5' : '#E0402B', true);
+      o += footprint(m, cx, cy, s, f.rot, f.ok ? 'rgba(99,54,245,.22)' : 'rgba(224,64,43,.22)', f.ok ? '#6336F5' : '#E0402B', false);
+      o += '<text x="' + (ox + pw / 2) + '" y="' + (oy - 10) + '" text-anchor="middle" font-family="GHInter,Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#47132D">' + nf(L) + ' m</text>';
+      o += '<text x="' + (ox - 10) + '" y="' + (oy + ph / 2) + '" text-anchor="middle" font-family="GHInter,Inter,Arial,sans-serif" font-size="13" font-weight="700" fill="#47132D" transform="rotate(-90 ' + (ox - 10) + ' ' + (oy + ph / 2) + ')">' + nf(Wd) + ' m</text>';
+      // 1.8 m person for scale, standing in the corner of the plot
+      var ph2 = Math.max(6, 0.5 * s); o += '<circle cx="' + (ox + 10 + ph2 / 2) + '" cy="' + (oy + ph - 10 - ph2 / 2) + '" r="' + (ph2 / 2) + '" fill="#47132D"/>';
+      plan.innerHTML = o + '</svg>';
+      cap.textContent = m.name + (f.ok ? ' mieści się' + (f.rot ? ' po obróceniu' : '') + '; zostaje ' + nf(f.spare) + ' m w najwęższym miejscu.' : ' nie mieści się; brakuje ' + nf(-f.spare) + ' m.') + ' Kratka = 1 m, kropka w rogu = człowiek z góry. Linia przerywana = Twój zapas.' + (m.approx ? ' Średnica modelu przybliżona.' : '');
+      // ranked list
+      var rows = PLAN.map(function (x) { return { m: x, f: fit(x, L, Wd, r) }; }).sort(function (p, q) { return (q.f.ok - p.f.ok) || (p.m.a * p.m.b - q.m.a * q.m.b) * (p.f.ok ? -1 : 1); });
+      list.innerHTML = '';
+      rows.forEach(function (row) {
+        var b = el('button', { type: 'button', class: 'pn-it', role: 'listitem', 'aria-pressed': String(row.m.k === sel) },
+          '<b>' + esc(row.m.name) + '</b><span class="pn-pill ' + (row.f.ok ? 'ok' : 'no') + '">' + (row.f.ok ? 'mieści się · +' + nf(row.f.spare) + ' m' : 'brakuje ' + nf(-row.f.spare) + ' m') + '</span><small>' + esc(row.m.meta) + '</small>');
+        b.addEventListener('click', function () { sel = row.m.k; draw(); });
+        list.appendChild(b);
+      });
+      var go = el('div', { class: 'pn-go chips' }, '');
+      var a = el('a', { class: 'pill', href: STUDIO + (m.noArena ? '' : '?arena=' + m.k), style: 'background:var(--violet);color:#fff' }, 'Zaprojektuj ' + esc(m.name) + ' <span aria-hidden="true">→</span>');
+      var add = el('button', { type: 'button', class: 'chip' }, 'Dodaj wymiary placu do zapytania');
+      add.addEventListener('click', function () { setLine('Wymiary placu: ', nf(L) + ' × ' + nf(Wd) + ' m, zapas ' + nf(r) + ' m · wybrany model: ' + m.name + (f.ok ? ' (mieści się)' : ' (do sprawdzenia)')); goContact(); });
+      go.appendChild(a); go.appendChild(add); list.appendChild(go);
+    }
+    draw();
   })();
 
   /* ---------- PROJECT-DETAILS helper (CF7 field) ---------- */

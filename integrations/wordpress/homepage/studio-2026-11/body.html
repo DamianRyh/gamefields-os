@@ -60,6 +60,27 @@
   <div class="wall" data-wall></div>
 </section>
 
+<!-- SITE PLANNER: does it fit? -->
+<section id="planer" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-plan">
+  <div class="head">
+    <h2 class="d" id="gfs-plan">Zmieści się?</h2>
+    <div class="side"><p>Wpisz wymiary swojego placu. Narysuję go w skali i pokażę, które boiska się zmieszczą razem z zapasem wokół. Wymiary modeli są rzeczywiste; strefę bezpieczeństwa dla Twojej lokalizacji potwierdzimy przy projekcie.</p></div>
+  </div>
+  <div class="pn">
+    <div class="pn-in">
+      <div class="pn-row">
+        <label class="pn-f"><span>Długość placu</span><span class="pn-num"><input id="pn-l" class="input" type="number" inputmode="decimal" min="3" max="60" step="0.5" value="12"><i>m</i></span></label>
+        <label class="pn-f"><span>Szerokość placu</span><span class="pn-num"><input id="pn-w" class="input" type="number" inputmode="decimal" min="3" max="60" step="0.5" value="9"><i>m</i></span></label>
+      </div>
+      <label class="pn-f"><span>Zapas wokół boiska <b data-pn-mv>1,0 m</b></span><input id="pn-m" type="range" min="0" max="3" step="0.25" value="1"></label>
+      <div class="chips" data-pn-presets role="group" aria-label="Przykładowe place"></div>
+      <div class="pn-plan" data-pn-plan role="img" aria-label="Plan placu w skali"></div>
+      <p class="pn-cap" data-pn-cap></p>
+    </div>
+    <div class="pn-list" data-pn-list role="list" aria-label="Boiska i dopasowanie do placu"></div>
+  </div>
+</section>
+
 <!-- STUDIO -->
 <section id="studio" class="studio sec" aria-labelledby="gfs-studio">
   <div class="wrap studio-grid">

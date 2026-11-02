@@ -306,3 +306,27 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   .gfs .gh-workshop-rail{grid-auto-columns:82%}
 }
 @media (prefers-reduced-motion:reduce){.gfs .ticker-track{animation:none}.gfs *{transition:none!important}}
+
+/* ---------- site planner ---------- */
+.gfs .pn{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:start}
+.gfs .pn-in{display:grid;gap:14px;min-width:0}
+.gfs .pn-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gfs .pn-f{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.gfs .pn-f b{color:var(--ink);font-variant-numeric:tabular-nums}
+.gfs .pn-num{position:relative;display:block}
+.gfs .pn-num input{padding-right:34px;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.gfs .pn-num i{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-style:normal;color:var(--muted)}
+.gfs .pn input[type=range]{width:100%;accent-color:var(--violet)}
+.gfs .pn-plan{background:#fff;border:1px solid var(--line);aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:12px}
+.gfs .pn-plan svg{width:100%;height:100%;display:block}
+.gfs .pn-cap{color:var(--muted);font-size:14px}
+.gfs .pn-list{display:grid;gap:0;border-top:1px solid var(--line)}
+.gfs .pn-it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 10px;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
+.gfs .pn-it[aria-pressed="true"]{background:rgba(99,54,245,.06);box-shadow:inset 3px 0 0 var(--violet)}
+.gfs .pn-it b{font-size:16px}
+.gfs .pn-it small{grid-column:1;color:var(--muted);font-size:13px}
+.gfs .pn-pill{grid-row:1 / span 2;grid-column:2;font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.gfs .pn-pill.ok{background:#D8F24A;color:#1C0912}
+.gfs .pn-pill.no{background:#EFE7EA;color:var(--muted)}
+.gfs .pn-go{margin-top:14px}
+@media (max-width:900px){.gfs .pn{grid-template-columns:minmax(0,1fr)}}
