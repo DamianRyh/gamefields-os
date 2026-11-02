@@ -164,10 +164,12 @@
   /* ---------- PRINT STUDIO ---------- */
   var SIG = [['city-fluid', 'City Fluid'], ['riviera-court', 'Riviera Court'], ['club-heritage', 'Club Heritage'], ['urban-camo', 'Urban Camo'], ['metro-lines', 'Metro Lines'], ['night-signal', 'Night Signal'], ['brand-stage', 'Brand Stage'], ['earth-motion', 'Earth Motion'], ['play-system', 'Play System'], ['raw-architecture', 'Raw Architecture'], ['local-lettering', 'Local Lettering'], ['festival-art', 'Festival Art']];
   var FMT = [['A3 · 29,7 × 42 cm', '30%'], ['50 × 70 cm', '40%'], ['70 × 100 cm', '54%']];
-  var FRM = [['Bez ramy', '0', 'none', 'transparent'], ['Czarna', '5%', '10px solid #161013', '#FFFFFF'], ['Dąb', '5%', '10px solid #B98A5B', '#FFFFFF'], ['Biała', '5%', '10px solid #F7F5F2', '#FFFFFF']];
+  var FRM = [['Bez ramy', '5% 5% 4%', 'none', '#FFFFFF'], ['Czarna', '5% 5% 4%', '10px solid #161013', '#FFFFFF'], ['Dąb', '5% 5% 4%', '10px solid #B98A5B', '#FFFFFF'], ['Biała', '5% 5% 4%', '10px solid #F7F5F2', '#FFFFFF']];
   var WALLS = [['Ciepła biel', '#EFEAE4'], ['Beton', '#C9C4BE'], ['Szałwia', '#B7C1A9'], ['Śliwka', '#47132D']];
   var PAL = ['#6336F5', '#E0402B', '#D8F24A', '#FFB3C8', '#2457D6', '#47132D', '#F4F1EE', '#1F2A6B'];
   var DARK = ['#6336F5', '#E0402B', '#2457D6', '#47132D', '#1F2A6B'];
+  var pbEl = document.querySelector('[data-poster-base]'), PB = pbEl ? pbEl.getAttribute('data-poster-base') : '';
+  var PLINES = '<svg class="plines" viewBox="0 0 425 600" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"><rect x="15" y="15" width="395" height="570"/><path d="M15 300H410M137.5 15v70h150v-70M137.5 585v-70h150v70"/><circle cx="212.5" cy="300" r="45"/></g></svg>';
   var pr = { src: 'sig', sig: 0, seed: 2026, fmt: 1, frame: 1, wall: 0 };
   var poster = $('[data-poster]'), pin = $('[data-poster-in]'), cap = $('#gfs-caption');
   function rng(seed) { var a = seed >>> 0; return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
@@ -175,7 +177,7 @@
     pin.replaceChildren();
     if (pr.src === 'sig') {
       pin.style.background = '#E6E0DA';
-      pin.appendChild(el('img', { class: 'pimg', src: SP + SIG[pr.sig][0] + '.svg', alt: 'Rysunek techniczny nawierzchni ' + SIG[pr.sig][1] }));
+      pin.appendChild(el('img', { class: 'pimg', src: (PB || SP) + SIG[pr.sig][0] + '.svg', alt: 'Rysunek techniczny nawierzchni ' + SIG[pr.sig][1] }));
       $('[data-print-name]').textContent = SIG[pr.sig][1];
       $('[data-poster-no]').textContent = 'S' + String(pr.sig + 1).padStart(2, '0') + ' · Signature';
     } else {
@@ -187,7 +189,7 @@
         var kind = Math.floor(r() * 3), size = 25 + Math.floor(r() * 60);
         pin.appendChild(el('div', { class: 'shape', style: 'left:' + Math.round(r() * 100 - size / 2) + '%;top:' + Math.round(r() * 100 - size / 2) + '%;width:' + size + '%;height:' + (kind === 2 ? Math.round(size * 0.28) : Math.round(size * 0.714)) + '%;background:' + pick(pal2) + ';border-radius:' + (kind === 0 ? '50%' : (kind === 1 ? '50% 50% 0 0' : '0')) + ';transform:rotate(' + (Math.round(r() * 4) * 45) + 'deg)' }));
       }
-      pin.appendChild(el('div', { class: 'court', style: '--ln:' + (DARK.indexOf(bg) > -1 ? 'rgba(255,255,255,.55)' : 'rgba(71,19,45,.35)') }, '<i></i><i></i>'));
+      pin.insertAdjacentHTML('beforeend', PLINES); pin.lastChild.style.color = DARK.indexOf(bg) > -1 ? 'rgba(255,255,255,.6)' : 'rgba(71,19,45,.4)';
       $('[data-print-name]').textContent = 'Wzór generowany';
       $('[data-poster-no]').textContent = 'No. ' + String(pr.seed % 10000).padStart(4, '0');
     }

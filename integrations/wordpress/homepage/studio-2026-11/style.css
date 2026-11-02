@@ -133,12 +133,12 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .wall2{position:relative;aspect-ratio:4/3.3;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:background-color .4s;background:#EFEAE4}
 .gfs .wall2 .shelf{position:absolute;left:0;right:0;bottom:12%;border-top:10px solid rgba(71,19,45,.12)}
 .gfs .wall2 .walltag{position:absolute;left:18px;bottom:18px;color:var(--muted)}
-.gfs .poster{position:relative;aspect-ratio:5/7;width:40%;margin-bottom:6%;box-shadow:0 30px 50px -20px rgba(20,4,12,.45),0 4px 10px rgba(20,4,12,.15);transition:width .35s ease,padding .3s,border-color .3s;background:#fff;padding:5%;border:10px solid #161013}
-.gfs .poster-in{position:relative;width:100%;height:100%;overflow:hidden;background:#E6E0DA}
-.gfs .poster-in .pimg{position:absolute;left:50%;top:50%;width:140%;height:71.43%;max-width:none;transform:translate(-50%,-50%) rotate(90deg);object-fit:cover}
+.gfs .poster{position:relative;width:40%;margin-bottom:6%;box-shadow:0 30px 50px -20px rgba(20,4,12,.45),0 4px 10px rgba(20,4,12,.15);transition:width .35s ease,padding .3s,border-color .3s;background:#fff;padding:5%;border:10px solid #161013}
+.gfs .poster-in{position:relative;width:100%;aspect-ratio:425/600;overflow:hidden;background:#E6E0DA}
+.gfs .poster-in .pimg{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;display:block}
 .gfs .poster-in .shape{position:absolute}
-.gfs .poster-in .court{inset:7%;--cr:38%}
-.gfs .poster .cap{position:absolute;left:5%;right:5%;bottom:4%;display:flex;justify-content:space-between;gap:8px;align-items:flex-end;background:rgba(244,241,238,.94);color:var(--ink);padding:8px 10px}
+.gfs .poster-in .plines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.gfs .poster .cap{position:relative;display:flex;justify-content:space-between;gap:8px;align-items:baseline;color:var(--ink);padding:5% 0 0;line-height:1}
 .gfs .poster .cap b{font-size:clamp(14px,1.6vw,24px);line-height:1;font-weight:800;letter-spacing:-.02em}
 .gfs .poster .cap span{font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
 .gfs .opt{padding:18px 0;border-top:1px solid var(--line);display:grid;gap:12px}

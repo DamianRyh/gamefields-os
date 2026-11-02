@@ -136,12 +136,12 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .wall2{position:relative;aspect-ratio:4/3.3;overflow:hidden;display:flex;align-items:center;justify-content:center;transition:background-color .4s;background:#EFEAE4}
 .gfs .wall2 .shelf{position:absolute;left:0;right:0;bottom:12%;border-top:10px solid rgba(71,19,45,.12)}
 .gfs .wall2 .walltag{position:absolute;left:18px;bottom:18px;color:var(--muted)}
-.gfs .poster{position:relative;aspect-ratio:5/7;width:40%;margin-bottom:6%;box-shadow:0 30px 50px -20px rgba(20,4,12,.45),0 4px 10px rgba(20,4,12,.15);transition:width .35s ease,padding .3s,border-color .3s;background:#fff;padding:5%;border:10px solid #161013}
-.gfs .poster-in{position:relative;width:100%;height:100%;overflow:hidden;background:#E6E0DA}
-.gfs .poster-in .pimg{position:absolute;left:50%;top:50%;width:140%;height:71.43%;max-width:none;transform:translate(-50%,-50%) rotate(90deg);object-fit:cover}
+.gfs .poster{position:relative;width:40%;margin-bottom:6%;box-shadow:0 30px 50px -20px rgba(20,4,12,.45),0 4px 10px rgba(20,4,12,.15);transition:width .35s ease,padding .3s,border-color .3s;background:#fff;padding:5%;border:10px solid #161013}
+.gfs .poster-in{position:relative;width:100%;aspect-ratio:425/600;overflow:hidden;background:#E6E0DA}
+.gfs .poster-in .pimg{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;display:block}
 .gfs .poster-in .shape{position:absolute}
-.gfs .poster-in .court{inset:7%;--cr:38%}
-.gfs .poster .cap{position:absolute;left:5%;right:5%;bottom:4%;display:flex;justify-content:space-between;gap:8px;align-items:flex-end;background:rgba(244,241,238,.94);color:var(--ink);padding:8px 10px}
+.gfs .poster-in .plines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.gfs .poster .cap{position:relative;display:flex;justify-content:space-between;gap:8px;align-items:baseline;color:var(--ink);padding:5% 0 0;line-height:1}
 .gfs .poster .cap b{font-size:clamp(14px,1.6vw,24px);line-height:1;font-weight:800;letter-spacing:-.02em}
 .gfs .poster .cap span{font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
 .gfs .opt{padding:18px 0;border-top:1px solid var(--line);display:grid;gap:12px}
@@ -278,7 +278,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 }
 @media (prefers-reduced-motion:reduce){.gfs .ticker-track{animation:none}.gfs *{transition:none!important}}
 </style>
-<div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/">
+<div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/" data-poster-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@e3478331c46ed46ede938d227186fc35ef387b51/integrations/wordpress/homepage/studio-2026-11/assets/posters/">
 <a class="skip" href="#gfs-main">Przejdź do treści</a>
 
 <header class="wrap nav" id="gfs-nav">
@@ -726,10 +726,12 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
   /* ---------- PRINT STUDIO ---------- */
   var SIG = [['city-fluid', 'City Fluid'], ['riviera-court', 'Riviera Court'], ['club-heritage', 'Club Heritage'], ['urban-camo', 'Urban Camo'], ['metro-lines', 'Metro Lines'], ['night-signal', 'Night Signal'], ['brand-stage', 'Brand Stage'], ['earth-motion', 'Earth Motion'], ['play-system', 'Play System'], ['raw-architecture', 'Raw Architecture'], ['local-lettering', 'Local Lettering'], ['festival-art', 'Festival Art']];
   var FMT = [['A3 · 29,7 × 42 cm', '30%'], ['50 × 70 cm', '40%'], ['70 × 100 cm', '54%']];
-  var FRM = [['Bez ramy', '0', 'none', 'transparent'], ['Czarna', '5%', '10px solid #161013', '#FFFFFF'], ['Dąb', '5%', '10px solid #B98A5B', '#FFFFFF'], ['Biała', '5%', '10px solid #F7F5F2', '#FFFFFF']];
+  var FRM = [['Bez ramy', '5% 5% 4%', 'none', '#FFFFFF'], ['Czarna', '5% 5% 4%', '10px solid #161013', '#FFFFFF'], ['Dąb', '5% 5% 4%', '10px solid #B98A5B', '#FFFFFF'], ['Biała', '5% 5% 4%', '10px solid #F7F5F2', '#FFFFFF']];
   var WALLS = [['Ciepła biel', '#EFEAE4'], ['Beton', '#C9C4BE'], ['Szałwia', '#B7C1A9'], ['Śliwka', '#47132D']];
   var PAL = ['#6336F5', '#E0402B', '#D8F24A', '#FFB3C8', '#2457D6', '#47132D', '#F4F1EE', '#1F2A6B'];
   var DARK = ['#6336F5', '#E0402B', '#2457D6', '#47132D', '#1F2A6B'];
+  var pbEl = document.querySelector('[data-poster-base]'), PB = pbEl ? pbEl.getAttribute('data-poster-base') : '';
+  var PLINES = '<svg class="plines" viewBox="0 0 425 600" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"><rect x="15" y="15" width="395" height="570"/><path d="M15 300H410M137.5 15v70h150v-70M137.5 585v-70h150v70"/><circle cx="212.5" cy="300" r="45"/></g></svg>';
   var pr = { src: 'sig', sig: 0, seed: 2026, fmt: 1, frame: 1, wall: 0 };
   var poster = $('[data-poster]'), pin = $('[data-poster-in]'), cap = $('#gfs-caption');
   function rng(seed) { var a = seed >>> 0; return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
@@ -737,7 +739,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     pin.replaceChildren();
     if (pr.src === 'sig') {
       pin.style.background = '#E6E0DA';
-      pin.appendChild(el('img', { class: 'pimg', src: SP + SIG[pr.sig][0] + '.svg', alt: 'Rysunek techniczny nawierzchni ' + SIG[pr.sig][1] }));
+      pin.appendChild(el('img', { class: 'pimg', src: (PB || SP) + SIG[pr.sig][0] + '.svg', alt: 'Rysunek techniczny nawierzchni ' + SIG[pr.sig][1] }));
       $('[data-print-name]').textContent = SIG[pr.sig][1];
       $('[data-poster-no]').textContent = 'S' + String(pr.sig + 1).padStart(2, '0') + ' · Signature';
     } else {
@@ -749,7 +751,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
         var kind = Math.floor(r() * 3), size = 25 + Math.floor(r() * 60);
         pin.appendChild(el('div', { class: 'shape', style: 'left:' + Math.round(r() * 100 - size / 2) + '%;top:' + Math.round(r() * 100 - size / 2) + '%;width:' + size + '%;height:' + (kind === 2 ? Math.round(size * 0.28) : Math.round(size * 0.714)) + '%;background:' + pick(pal2) + ';border-radius:' + (kind === 0 ? '50%' : (kind === 1 ? '50% 50% 0 0' : '0')) + ';transform:rotate(' + (Math.round(r() * 4) * 45) + 'deg)' }));
       }
-      pin.appendChild(el('div', { class: 'court', style: '--ln:' + (DARK.indexOf(bg) > -1 ? 'rgba(255,255,255,.55)' : 'rgba(71,19,45,.35)') }, '<i></i><i></i>'));
+      pin.insertAdjacentHTML('beforeend', PLINES); pin.lastChild.style.color = DARK.indexOf(bg) > -1 ? 'rgba(255,255,255,.6)' : 'rgba(71,19,45,.4)';
       $('[data-print-name]').textContent = 'Wzór generowany';
       $('[data-poster-no]').textContent = 'No. ' + String(pr.seed % 10000).padStart(4, '0');
     }
