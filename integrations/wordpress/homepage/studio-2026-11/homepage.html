@@ -896,7 +896,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     var group = new THREE.Group();
     group.add(mesh);
     group.add(new THREE.Mesh(new THREE.SphereGeometry(0.988, 48, 32), seamMat));
-    var FIN = { matte: [6, 0x0a0a0a], satin: [22, 0x1e1e1e], gloss: [55, 0x3a3a3a] };
+    var FIN = { matte: [6, 0x0a0a0a], satin: [22, 0x1e1e1e], gloss: [40, 0x2a2a2a] };
 
     // THREE.Color converts sRGB hex to the renderer's working space (linear in r152+, unchanged in r128)
     function rgb(h) { var c = new THREE.Color(String(h || '#ffffff')); return [c.r, c.g, c.b]; }
