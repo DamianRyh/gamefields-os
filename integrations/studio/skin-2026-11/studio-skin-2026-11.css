@@ -1,0 +1,97 @@
+/* Gamefields Studio skin 2026-11: same language as the homepage (boisko jako plakat).
+   Loaded LAST. Every rule is anchored at html body .studio-shell.studio-canvas-editor so it outranks
+   the earlier layered !important overrides without touching component code. Inter only. */
+html body .studio-shell.studio-canvas-editor{
+  --ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--paper2:#ECE6E1;--violet:#6336F5;--lime:#D8F24A;--plum:#1C0912;--rule:#D9CFD4;--chip:#CDBFC6;
+  --studio-bg:var(--paper);--studio-panel:#FFFFFF;--studio-line:var(--rule);--studio-muted:var(--muted);--studio-accent:var(--violet);
+  font-family:Inter,GHInter,GamefieldsSans,Arial,sans-serif!important;color:var(--ink)!important;background:var(--paper)!important;
+  font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased}
+html body .studio-shell.studio-canvas-editor :is(button,input,select,textarea,summary,small,b,span,p,h1,h2,h3){font-family:inherit!important}
+
+/* ---------- top bar ---------- */
+html body .studio-shell.studio-canvas-editor .studio-topbar{background:var(--paper)!important;border-bottom:1px solid var(--rule)!important;box-shadow:none!important}
+html body .studio-shell.studio-canvas-editor .studio-logo{font-weight:800!important;letter-spacing:-.055em!important;color:var(--ink)!important}
+html body .studio-shell.studio-canvas-editor .studio-logo span{font-size:11.5px!important;font-weight:600!important;letter-spacing:.08em!important;text-transform:uppercase;border-color:var(--rule)!important;color:var(--muted)!important}
+html body .studio-shell.studio-canvas-editor .studio-save{font-size:11.5px!important;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--muted)!important}
+html body .studio-shell.studio-canvas-editor .studio-top-actions > button:not(.studio-primary){border-radius:999px!important;border:1.5px solid var(--chip)!important;background:transparent!important;color:var(--ink)!important;box-shadow:none!important;min-height:44px}
+html body .studio-shell.studio-canvas-editor .studio-top-actions > button:not(.studio-primary):hover{border-color:var(--ink)!important;background:transparent!important}
+html body .studio-shell.studio-canvas-editor .studio-quote-badge{border-radius:999px!important;background:var(--ink)!important;border-color:var(--ink)!important;color:var(--paper)!important;box-shadow:none!important;padding:6px 22px!important}
+html body .studio-shell.studio-canvas-editor .studio-quote-badge:hover:not(:disabled){background:var(--violet)!important;border-color:var(--violet)!important}
+html body .studio-shell.studio-canvas-editor .studio-quote-badge span{font-weight:700!important;letter-spacing:-.01em}
+html body .studio-shell.studio-canvas-editor .studio-quote-badge b{font-size:10.5px!important;font-weight:600!important;letter-spacing:.06em;text-transform:uppercase;opacity:.8;font-variant-numeric:tabular-nums}
+html body .studio-shell.studio-canvas-editor .gf-crew .gf-crew-popover{background:var(--plum)!important;border-radius:999px!important;box-shadow:none!important;border:0!important}
+
+/* "Zapisz dla innych" strip */
+html body .studio-shell.studio-canvas-editor .studio-workshop-save{background:var(--paper)!important;border-bottom:1px solid var(--rule)!important;box-shadow:none!important}
+html body .studio-shell.studio-canvas-editor .studio-workshop-publish{border-radius:999px!important;background:var(--violet)!important;color:#fff!important;font-weight:600!important;border:0!important;box-shadow:none!important;padding:0 20px!important}
+html body .studio-shell.studio-canvas-editor .studio-workshop-publish:hover:not(:disabled){background:var(--ink)!important;color:var(--paper)!important}
+html body .studio-shell.studio-canvas-editor .studio-workshop-note{color:var(--muted)!important;font-size:12px!important}
+
+/* ---------- stage: flat paper, no blobs ---------- */
+html body .studio-shell.studio-canvas-editor :is(.studio-visual,.studio-stage){background:var(--paper)!important}
+html body .studio-shell.studio-canvas-editor .studio-stage::before{display:none!important}
+html body .studio-shell.studio-canvas-editor .studio-two-worlds-background{opacity:0!important}
+html body .studio-shell.studio-canvas-editor .studio-stage::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:56px 56px;opacity:.45;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 55%,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse at 50% 55%,#000 30%,transparent 75%)}
+html body .studio-shell.studio-canvas-editor .studio-render{position:relative;z-index:1}
+html body .studio-shell.studio-canvas-editor .studio-scene-name{font-weight:800!important;letter-spacing:-.03em!important;color:var(--ink)!important;background:transparent!important;box-shadow:none!important;border:0!important}
+
+/* ---------- edit panel ---------- */
+html body .studio-shell.studio-canvas-editor .studio-panel{background:#FFFFFF!important;border:1px solid var(--rule)!important;border-radius:6px!important;box-shadow:0 1px 0 var(--rule),0 24px 48px -32px rgba(28,9,18,.35)!important;backdrop-filter:none!important;color:var(--ink)!important}
+html body .studio-shell.studio-canvas-editor .studio-panel-tool-tabs{background:transparent!important;border:0!important;border-bottom:1px solid var(--rule)!important;border-radius:0!important;padding:0!important;gap:0!important;box-shadow:none!important}
+html body .studio-shell.studio-canvas-editor .studio-panel-tool-tabs button{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:var(--muted)!important;font-weight:600!important;border-bottom:2px solid transparent!important;margin-bottom:-1px}
+html body .studio-shell.studio-canvas-editor .studio-panel-tool-tabs button:is([aria-pressed="true"],[aria-selected="true"],.active,.is-active){color:var(--ink)!important;border-bottom-color:var(--ink)!important}
+html body .studio-shell.studio-canvas-editor .studio-panel-tool-tabs button:hover:not(:disabled){color:var(--ink)!important;background:transparent!important}
+html body .studio-shell.studio-canvas-editor .studio-panel-context span{color:var(--violet)!important;font-size:11.5px!important;font-weight:600!important;letter-spacing:.08em!important}
+html body .studio-shell.studio-canvas-editor .studio-panel-context p{color:var(--muted)!important}
+
+/* every option button in the panel reads like a homepage chip */
+html body .studio-shell.studio-canvas-editor .studio-panel :is(.scene-paint-parts button,.studio-visual-tabs button){border-radius:999px!important;border:1.5px solid var(--chip)!important;background:transparent!important;box-shadow:none!important;color:var(--ink)!important;font-weight:600!important}
+html body .studio-shell.studio-canvas-editor .studio-panel :is(.scene-paint-parts button,.studio-visual-tabs button):is([aria-pressed="true"],[aria-selected="true"],.selected,.is-active){background:var(--ink)!important;border-color:var(--ink)!important;color:var(--paper)!important}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-visual-tabs{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-visual-tabs button svg{display:none}
+html body .studio-shell.studio-canvas-editor .studio-panel button[aria-pressed="true"]{background:var(--ink)!important;border-color:var(--ink)!important;color:var(--paper)!important}
+html body .studio-shell.studio-canvas-editor .studio-panel button[aria-pressed="true"] *{color:inherit!important}
+html body .studio-shell.studio-canvas-editor .studio-panel .scene-mobile-palette-toggle{border-radius:999px!important;border:1.5px solid var(--ink)!important;background:transparent!important;color:var(--ink)!important;font-weight:600!important;font-size:15px!important;box-shadow:none!important}
+html body .studio-shell.studio-canvas-editor .studio-panel :is(a,summary,.scene-paint-advanced > summary){color:var(--ink)!important}
+html body .studio-shell.studio-canvas-editor .studio-panel :is(.studio-primary,button.is-next,[class*="next"] button){border-radius:999px!important;background:var(--violet)!important;border-color:var(--violet)!important;color:#fff!important}
+html body .studio-shell.studio-canvas-editor .studio-panel :is(img,canvas){border-radius:2px}
+html body .studio-shell.studio-canvas-editor .studio-panel [class*="card"]{border-radius:4px!important;box-shadow:none!important}
+
+/* ---------- floating controls on the stage ---------- */
+html body .studio-shell.studio-canvas-editor :is(.studio-history button,.studio-modular-standard,.studio-showroom-arrow,.studio-showroom-surface){border-radius:999px!important;border:1.5px solid var(--chip)!important;background:var(--paper)!important;color:var(--ink)!important;box-shadow:none!important;backdrop-filter:none!important}
+html body .studio-shell.studio-canvas-editor .studio-history{gap:6px!important;background:transparent!important;border:0!important;box-shadow:none!important}
+html body .studio-shell.studio-canvas-editor .studio-showroom-current{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
+html body .studio-shell.studio-canvas-editor .studio-showroom-current span{font-size:11px!important;font-weight:600!important;letter-spacing:.08em!important;color:var(--muted)!important}
+html body .studio-shell.studio-canvas-editor .studio-showroom-current b{font-weight:800!important;letter-spacing:-.03em!important;color:var(--ink)!important}
+html body .studio-shell.studio-canvas-editor .studio-showroom-arrow:hover:not(:disabled){background:var(--ink)!important;color:var(--paper)!important;border-color:var(--ink)!important}
+html body .scene-paint-palette.is-popover{background:#fff!important;border:1px solid var(--rule,#D9CFD4)!important;border-radius:6px!important;box-shadow:0 24px 48px -32px rgba(28,9,18,.35)!important;backdrop-filter:none!important;font-family:Inter,GHInter,GamefieldsSans,Arial,sans-serif!important}
+
+/* ---------- phones: header in two clean rows, model on top, panel as a sheet ---------- */
+@media (max-width:800px){
+  html body .studio-shell.studio-canvas-editor{overflow-x:clip}
+  html body .studio-shell.studio-canvas-editor .studio-workspace-content{display:flex!important;flex-direction:column!important;height:100dvh!important;overflow:hidden!important}
+  html body .studio-shell.studio-canvas-editor .studio-topbar{position:relative!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;width:100%!important;height:56px!important;min-height:56px!important;padding:0 12px!important;flex:0 0 56px}
+  html body .studio-shell.studio-canvas-editor .studio-logo{font-size:22px!important;flex:0 0 auto}
+  html body .studio-shell.studio-canvas-editor .studio-top-actions{position:static!important;margin:0!important;gap:6px!important;flex-wrap:nowrap!important;width:auto!important}
+  html body .studio-shell.studio-canvas-editor .studio-top-actions > button:not(.studio-primary){width:40px!important;min-width:40px!important;height:40px!important;min-height:40px!important;padding:0!important}
+  html body .studio-shell.studio-canvas-editor .studio-quote-badge{min-height:40px!important;height:40px!important;padding:0 14px!important}
+  html body .studio-shell.studio-canvas-editor .studio-quote-badge b{display:none!important}
+  html body .studio-shell.studio-canvas-editor .gf-crew{display:none!important}
+  html body .studio-shell.studio-canvas-editor .studio-workshop-save{display:flex!important;align-items:center!important;gap:10px!important;width:100%!important;height:52px!important;min-height:52px!important;padding:0 12px!important;flex:0 0 52px}
+  html body .studio-shell.studio-canvas-editor .studio-workshop-publish{min-height:38px!important;height:38px!important;font-size:14px!important}
+  html body .studio-shell.studio-canvas-editor .studio-workshop-note{font-size:11px!important;line-height:1.3!important;max-width:none!important}
+  html body .studio-shell.studio-canvas-editor .studio-screen{position:relative!important;flex:1 1 auto!important;width:100%!important;height:auto!important;min-height:0!important;padding:0!important;display:block!important}
+  html body .studio-shell.studio-canvas-editor .studio-visual{position:absolute!important;inset:0 0 auto 0!important;height:42%!important;min-height:0!important;width:100%!important}
+  html body .studio-shell.studio-canvas-editor .studio-stage{height:100%!important;width:100%!important}
+  html body .studio-shell.studio-canvas-editor .studio-scene-name{font-size:15px!important;left:12px!important;right:12px!important;width:auto!important;text-align:left!important}
+  html body .studio-shell.studio-canvas-editor .studio-toolbar{left:8px!important;bottom:8px!important;top:auto!important}
+  html body .studio-shell.studio-canvas-editor .studio-toolbar .studio-modular-standard{display:none!important}
+  html body .studio-shell.studio-canvas-editor .studio-showroom-nav{position:absolute!important;z-index:9!important;top:calc(42% - 54px)!important;bottom:auto!important;left:auto!important;right:8px!important;width:auto!important;height:46px!important;display:flex!important;gap:6px!important;align-items:center!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+  html body .studio-shell.studio-canvas-editor .studio-showroom-current,html body .studio-shell.studio-canvas-editor .studio-showroom-surface{display:none!important}
+  html body .studio-shell.studio-canvas-editor .studio-showroom-arrow{width:40px!important;height:40px!important;min-height:40px!important}
+  html body .studio-shell.studio-canvas-editor .studio-panel{position:absolute!important;inset:42% 0 0 0!important;width:auto!important;height:auto!important;max-height:none!important;margin:0!important;border-radius:14px 14px 0 0!important;border-width:1px 0 0!important;padding:4px 14px 24px!important;overflow-y:auto!important;box-shadow:0 -12px 32px -24px rgba(28,9,18,.4)!important}
+  html body .studio-shell.studio-canvas-editor .studio-panel-tool-tabs{position:sticky!important;top:-4px!important;z-index:2!important;background:#fff!important;width:100%!important}
+  html body .studio-shell.studio-canvas-editor .studio-panel > *{max-width:100%!important}
+}
