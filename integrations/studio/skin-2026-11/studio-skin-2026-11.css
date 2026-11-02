@@ -64,7 +64,10 @@ html body .studio-shell.studio-canvas-editor .studio-panel [class*="card"]{borde
 html body .studio-shell.studio-canvas-editor .studio-panel :is([class*="preset"],[class*="entry"],[class*="collections"]) > button:not([aria-pressed="true"]),
 html body .studio-shell.studio-canvas-editor .studio-panel button:has(> svg + span, > svg + div):not([aria-pressed="true"]):not(.scene-mobile-palette-toggle){background:var(--paper)!important;border-color:var(--rule)!important;box-shadow:none!important}
 html body .studio-shell.studio-canvas-editor .gf-crew,html body .studio-shell.studio-canvas-editor .gf-crew *{--gf-crew-bg:var(--plum)}
-html body .studio-shell.studio-canvas-editor aside.gf-crew > div{background:var(--plum)!important;border-radius:999px!important;border:0!important}
+html body .studio-shell.studio-canvas-editor aside.gf-crew :is(.gf-crew-popover,.gf-crew-heads){background:var(--plum)!important;border-radius:999px!important;border:0!important;box-shadow:none!important}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-template-launch{background:var(--paper)!important;border:1px solid var(--rule)!important;border-radius:4px!important;box-shadow:none!important;color:var(--ink)!important}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-template-launch:hover:not(:disabled){border-color:var(--ink)!important;background:var(--paper)!important}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-template-launch svg{color:var(--violet)!important}
 
 /* ---------- floating controls on the stage ---------- */
 html body .studio-shell.studio-canvas-editor :is(.studio-history button,.studio-modular-standard,.studio-showroom-arrow,.studio-showroom-surface){border-radius:999px!important;border:1.5px solid var(--chip)!important;background:var(--paper)!important;color:var(--ink)!important;box-shadow:none!important;backdrop-filter:none!important}
