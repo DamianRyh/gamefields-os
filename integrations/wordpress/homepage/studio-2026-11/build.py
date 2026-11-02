@@ -9,6 +9,7 @@ The 3D models and the sample photo are served by jsDelivr from this repository, 
 so the published page never changes when the branch moves.
 """
 import base64
+import json
 import pathlib
 import sys
 
@@ -16,8 +17,6 @@ HERE = pathlib.Path(__file__).resolve().parent
 ASSET_COMMIT = "02f3a62c4d9c71608dc827e6f30066d50a523f58"
 REPO_BASE = f"https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@{ASSET_COMMIT}/"
 ASSET_BASE = REPO_BASE + "integrations/wordpress/homepage/studio-2026-11/assets/"
-POSTER_COMMIT = "e3478331c46ed46ede938d227186fc35ef387b51"
-POSTER_BASE = f"https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@{POSTER_COMMIT}/integrations/wordpress/homepage/studio-2026-11/assets/posters/"
 FONT = HERE.parent / "premium-2026-10-26" / "assets" / "InterVariable.woff2"
 
 
@@ -43,9 +42,16 @@ def main():
     body = body.replace("{{KEPT_FAQ}}", faq.strip())
     body = body.replace(
         'data-homepage-version="studio-2026-11"',
-        f'data-homepage-version="studio-2026-11" data-asset-base="{ASSET_BASE}" data-repo-base="{REPO_BASE}" data-poster-base="{POSTER_BASE}"',
+        f'data-homepage-version="studio-2026-11" data-asset-base="{ASSET_BASE}" data-repo-base="{REPO_BASE}"',
         1,
     )
+
+    # Portrait Signature posters (about 12 KB in total) are embedded: jsDelivr refuses to serve
+    # uncached files from this repository because it is larger than its 50 MB package limit.
+    posters = {f.stem: f.read_text(encoding="utf-8") for f in sorted((HERE / "assets" / "posters").glob("*.svg"))}
+    posters_js = "window.GFS_POSTERS = " + json.dumps(posters, ensure_ascii=False) + ";"
+    if "&" in posters_js or "</script" in posters_js:
+        sys.exit("poster SVGs contain characters WordPress or the HTML parser would break")
 
     font = base64.b64encode(FONT.read_bytes()).decode("ascii")
     font_face = ("@font-face{font-family:GHInter;font-style:normal;font-weight:100 900;font-display:swap;"
@@ -56,6 +62,7 @@ def main():
         "<!-- Gamefields homepage studio-2026-11 · source: integrations/wordpress/homepage/studio-2026-11 · Inter SIL OFL: https://rsms.me/inter/ -->",
         f"<style>{font_face}\n{style}</style>",
         body.strip(),
+        f"<script>{posters_js}</script>",
         f"<script>\n{script.strip()}\n</script>",
         contact_scripts.strip(),
         "<!-- /wp:html -->",
@@ -67,7 +74,6 @@ def main():
                 '<p><label>Szczegóły projektu<textarea name="project-details" rows="3"></textarea></label></p>'
                 '<p><input type="submit" value="Wyślij zapytanie"></p></form>')
     preview = block.replace('[contact-form-7 id="a71dc3a" title="Gamefields — zapytanie o projekt"]', stand_in)
-    preview = preview.replace(POSTER_BASE, "assets/posters/")
     preview = preview.replace("<!-- wp:html -->", "").replace("<!-- /wp:html -->", "")
     (HERE / "index.html").write_text(
         '<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'

@@ -168,7 +168,8 @@
   var WALLS = [['Ciepła biel', '#EFEAE4'], ['Beton', '#C9C4BE'], ['Szałwia', '#B7C1A9'], ['Śliwka', '#47132D']];
   var PAL = ['#6336F5', '#E0402B', '#D8F24A', '#FFB3C8', '#2457D6', '#47132D', '#F4F1EE', '#1F2A6B'];
   var DARK = ['#6336F5', '#E0402B', '#2457D6', '#47132D', '#1F2A6B'];
-  var pbEl = document.querySelector('[data-poster-base]'), PB = pbEl ? pbEl.getAttribute('data-poster-base') : '';
+  var POSTERS = window.GFS_POSTERS || {};
+  function posterSrc(name) { return POSTERS[name] ? 'data:image/svg+xml,' + encodeURIComponent(POSTERS[name]) : SP + name + '.svg'; }
   var PLINES = '<svg class="plines" viewBox="0 0 425 600" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"><rect x="15" y="15" width="395" height="570"/><path d="M15 300H410M137.5 15v70h150v-70M137.5 585v-70h150v70"/><circle cx="212.5" cy="300" r="45"/></g></svg>';
   var pr = { src: 'sig', sig: 0, seed: 2026, fmt: 1, frame: 1, wall: 0 };
   var poster = $('[data-poster]'), pin = $('[data-poster-in]'), cap = $('#gfs-caption');
@@ -177,7 +178,7 @@
     pin.replaceChildren();
     if (pr.src === 'sig') {
       pin.style.background = '#E6E0DA';
-      pin.appendChild(el('img', { class: 'pimg', src: (PB || SP) + SIG[pr.sig][0] + '.svg', alt: 'Rysunek techniczny nawierzchni ' + SIG[pr.sig][1] }));
+      pin.appendChild(el('img', { class: 'pimg', src: posterSrc(SIG[pr.sig][0]), alt: 'Rysunek techniczny nawierzchni ' + SIG[pr.sig][1] }));
       $('[data-print-name]').textContent = SIG[pr.sig][1];
       $('[data-poster-no]').textContent = 'S' + String(pr.sig + 1).padStart(2, '0') + ' · Signature';
     } else {
