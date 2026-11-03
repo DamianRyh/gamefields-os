@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import GamefieldsCrew from "../components/gamefields/gamefields-crew";
 
 export const metadata: Metadata = {
   title: {
@@ -40,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className="antialiased">
+        <GamefieldsCrew />
         {children}
       </body>
     </html>
