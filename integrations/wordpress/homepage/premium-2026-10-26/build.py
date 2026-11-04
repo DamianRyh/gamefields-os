@@ -25,11 +25,20 @@ concepts=json.loads((root/'surface-projects.json').read_text())
 materials=[('Granulat','granulat-macro.webp'),('Płytki modułowe','plytki-macro.webp'),('Sztuczna trawa','trawa-macro.webp')]
 painted='https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-probka-nawierzchni-malowanej.svg'
 css=(root/'style.css').read_text()
-font=base64.b64encode((root/'assets/InterVariable.woff2').read_bytes()).decode()
-css="@font-face{font-family:GHInter;font-style:normal;font-weight:100 900;font-display:swap;src:url(data:font/woff2;base64,"+font+") format('woff2')}"+css
+# The font is served as a cached file (upload assets/InterVariable.woff2 to FONT_URL once).
+# GF_INLINE_FONT=1 restores the old base64 copy, which added ~460 KB to every page view.
+import os
+FONT_URL=os.environ.get('GF_FONT_URL','/wp-content/uploads/gamefields-fonts/InterVariable.woff2')
+if os.environ.get('GF_INLINE_FONT')=='1':
+ font_src="data:font/woff2;base64,"+base64.b64encode((root/'assets/InterVariable.woff2').read_bytes()).decode()
+ font_preload=''
+else:
+ font_src=FONT_URL
+ font_preload=f'<link rel="preload" href="{FONT_URL}" as="font" type="font/woff2" crossorigin>'
+css="@font-face{font-family:GHInter;font-style:normal;font-weight:100 900;font-display:swap;src:url("+font_src+") format('woff2')}"+css
 out=f'''<!-- wp:html -->
 <!-- Gamefields homepage 2026-10-26 · Inter SIL OFL: https://rsms.me/inter/ -->
-<style>{css}</style><div class="gf-premium" id="gf-culture" data-homepage-version="2026-10-26">
+{font_preload}<style>{css}</style><div class="gf-premium" id="gf-culture" data-homepage-version="2026-10-26">
 <a class="gh-skip" href="#gh-main">Przejdź do treści</a>
 <header class="gh-nav gh-wrap"><a href="/" class="gh-logo" aria-label="Gamefields — strona główna">gamefields.</a><button type="button" class="gh-btn gh-menu" aria-expanded="false" aria-controls="gh-nav-links">Menu</button><nav id="gh-nav-links" aria-label="Główna nawigacja">{a('Boiska','#boiska')}{a('Nawierzchnie','#nawierzchnie')}{a('Inspiracje','#kierunki')}{a('Projektuj w Studio',studio(),True,'data-current-studio')}</nav></header>
 <main id="gh-main"><section class="gh-hero gh-wrap" aria-labelledby="gh-title"><div class="gh-hero-grid"><div class="gh-copy"><p class="gh-eyebrow">MODUŁOWE BOISKA · AUTORSKI DESIGN</p><h1 id="gh-title">Gra zmienia<br>miejsce.</h1><p>Ty nadajesz charakter.<br>My pomagamy stworzyć miejsce do gry.</p><div class="gh-actions gh-desktop-actions">{a('Zaprojektuj swoje',studio(),True,'data-current-studio')}{a('Poznaj modele','#boiska')}</div></div><div class="gh-model-stage">{model_view('o1','Panna Play',True)}</div></div>

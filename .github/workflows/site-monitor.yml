@@ -1,0 +1,43 @@
+name: Kontrola strony gamefields.eu
+# Weekly check of the live site (roadmap phase 1, gate A): health, phone layout, page weight, Lighthouse mobile.
+# Warnings never block anything; the run fails only when the homepage does not answer 200.
+on:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+    inputs:
+      base:
+        description: "Adres strony"
+        default: "https://www.gamefields.eu"
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Kontrola stron
+        run: node scripts/check-live-site.mjs --base "${{ github.event.inputs.base || 'https://www.gamefields.eu' }}"
+      - name: Lighthouse mobile
+        if: always()
+        run: npx --yes @lhci/cli@0.14.0 autorun --config=lighthouserc.json
+      - name: Podsumowanie
+        if: always()
+        run: cat outputs/site-monitor/report.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: site-monitor
+          path: |
+            outputs/site-monitor
+            outputs/lighthouse
+          retention-days: 30
