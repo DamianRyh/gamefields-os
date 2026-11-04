@@ -10,13 +10,14 @@ Ta gałąź (`roadmap/faza-1-fundamenty`) zawiera wszystko, co da się przygotow
 
 | Zadanie | Co jest gotowe w repo | Co zostało na stronie | Kto |
 | --- | --- | --- | --- |
-| Pomiar | `scripts/check-live-site.mjs`, `lighthouserc.json`, workflow `site-monitor.yml` (co poniedziałek + ręcznie). Wtyczka zgód i GA4 `integrations/wordpress/consent-analytics/` | Założyć usługę GA4, wpisać `GF_GA4_ID` w wp-config.php, wgrać wtyczkę do mu-plugins | Właściciel + wykonawca |
+| Pomiar | `scripts/check-live-site.mjs`, `lighthouserc.json`, workflow `site-monitor.yml` (co poniedziałek + ręcznie) | Założyć usługę GA4 i skonfigurować zgody w zainstalowanej już wtyczce Complianz (kroki niżej) | Właściciel + wykonawca |
 | Formularz dochodzi | Kontrola obecności formularza w raporcie tygodniowym | SPF i DKIM dla gamefields.eu (panel hostingu poczty), wtyczka SMTP, wysyłka testowa po każdym wydaniu | Wykonawca |
 | Szybkość | `build.py` ładuje czcionkę jako plik (strona z repo: 539 KB → 81 KB HTML). `tools/wordpress/font-diet.mjs` robi to samo na aktualnej treści strony. `tools/wordpress/convert-videos.sh` zamienia MOV na MP4 i WebM | Wgrać czcionkę i zamienić treść strony głównej (kroki niżej), przekonwertować filmy | Wykonawca |
 | Jedno źródło Studio | `tools/studio/source-diff.mjs` porównuje produkcję z kopią | Wyeksportować źródło Studio z Sites, uruchomić porównanie, zsynchronizować kopię | Wykonawca z dostępem do Sites |
 | Studio pod domeną | Bramka WordPress (`gamefields-play.php`) obsługuje już /studio i /play | Wgrać bramkę do mu-plugins według `integrations/wordpress/README.md` | Wykonawca |
 | Nowe hero | Paczka `gamefields-hero-wdrozenie.zip` | Wdrożenie według instrukcji z paczki | Wykonawca |
-| Dane firmy i prywatność | Wtyczka zgód ma skrót `[gf_zmien_zgode]` do strony prywatności | Właściciel podaje dane firmy; uzupełnić politykę o GA4, Studio, PLAY i formularze | Właściciel |
+| Dane firmy i prywatność | Gotowe akapity do polityki: `docs/roadmap/prywatnosc-uzupelnienia.md` | Właściciel podaje dane firmy; wklejenie akapitów po przeglądzie prawnym | Właściciel |
+| Stare strony demo | Lista 10 opublikowanych stron z motywu (sekcja niżej) | Przenieść do szkiców albo przekierować 301 | Właściciel decyduje, wykonawca wdraża |
 
 ## Szybkość strony głównej krok po kroku
 
@@ -32,14 +33,18 @@ Narzędzie zmienia wyłącznie źródła `@font-face` zapisane jako base64. Resz
 
 ## Pomiar krok po kroku
 
-1. W Google Analytics utwórz usługę GA4 dla gamefields.eu i skopiuj identyfikator `G-…`.
-2. W `wp-config.php` dodaj `define('GF_GA4_ID', 'G-…');`
-3. Wgraj `gamefields-consent-analytics.php` do `wp-content/mu-plugins/`.
-4. Na stronie prywatności dodaj skrót `[gf_zmien_zgode]` i opis pomiaru.
-5. Sprawdź: baner pokazuje się przy pierwszej wizycie, bez zgody GA4 nie zapisuje danych, po zgodzie w GA4 (Raporty → Czas rzeczywisty) widać wizytę.
-6. Search Console: dodaj domenę gamefields.eu (weryfikacja przez DNS).
+Na stronie jest już zainstalowana wtyczka zgód Complianz (audyt z 21.10: aktywna, bez zapisanego banera). Nie dokładamy drugiego mechanizmu zgód, tylko kończymy konfigurację Complianz.
 
-Cofnięcie wtyczki: zmień nazwę pliku na `.disabled`.
+1. W Google Analytics utwórz usługę GA4 dla gamefields.eu. Ustaw przechowywanie danych zdarzeń na 14 miesięcy i skopiuj identyfikator `G-…`.
+2. WordPress → Complianz → Kreator: region UE (RODO), statystyki „Google Analytics”, wklej identyfikator GA4, włącz Google Consent Mode v2. Dodaj YouTube i Instagram, które Complianz już wykrył.
+3. Kreator → Dokumenty: nie generuj nowej polityki prywatności. Zostaje obecna strona `/polityka-prywatnosci/` (ID 4087) z akapitami z `prywatnosc-uzupelnienia.md`. Dodaj tylko politykę cookies, jeśli Complianz jej wymaga.
+4. Opublikuj baner. Sprawdź w oknie prywatnym:
+   - baner pojawia się przy pierwszej wizycie,
+   - przed zgodą żądania do `google-analytics.com` mają `gcs=G100` (brak zgody),
+   - po zgodzie w GA4 (Raporty → Czas rzeczywisty) widać wizytę.
+5. Search Console: dodaj domenę gamefields.eu (weryfikacja przez DNS) i połącz z GA4.
+
+Cofnięcie: wyłączenie statystyk w Complianz. Strona działa dalej, tylko bez pomiaru.
 
 ## Jedno źródło Studio krok po kroku
 
@@ -59,3 +64,23 @@ Cofnięcie wtyczki: zmień nazwę pliku na `.disabled`.
 - [ ] Kopia Studio w repo równa produkcji (raport `source-diff` bez różnic)
 - [ ] Studio dostępne pod adresem w domenie gamefields.eu
 - [ ] Dane firmy i pełna polityka prywatności opublikowane
+- [ ] Stare strony demo nie są opublikowane albo przekierowują na właściwe strony
+
+## Stare strony demo
+
+Audyt z 21.10 znalazł opublikowane strony z motywu i starsze wersje oferty. Mają noindex w Yoast, ale dalej są dostępne pod adresem i psują wrażenie przy przypadkowym wejściu.
+
+| ID | Adres | Treść | Proponowane działanie |
+| --- | --- | --- | --- |
+| 2 | /sample-page/ | Przykładowa strona WordPress | Do kosza |
+| 981 | /placeholder/ | Instrukcja demo motywu | Do kosza |
+| 980 | /placeholder-portfolio/ | Demo portfolio (yoursite.com) | Do kosza |
+| 393 | /elements/ | Pusty rodzic stron demo | Do kosza |
+| 441 | /elements/google-maps/ | Mapa demo (Zurych) | Do kosza |
+| 460 | /elements/video-player/ | Wideo demo | Do kosza |
+| 339 | /home-transparent-header/ | Demo oferty zegarów | Do kosza |
+| 1065 | /home-fullscreen-banner/ | Demo oferty mebli | Do kosza |
+| 327 | /home-categories-grid/ | Starsze kategorie usług Gamefields | Przekierowanie 301 na stronę główną |
+| 757 | /gamefields-boiska-panna-i-street-football/ | Starsza oferta boisk | Przekierowanie 301 na /#boiska |
+
+Przed usunięciem: sprawdź w Search Console i logach, czy któraś ma wejścia. Przekierowania ustaw w Yoast (Przekierowania) albo wtyczce Redirection.
