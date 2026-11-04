@@ -1,0 +1,28 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "https://www.gamefields.eu/",
+        "https://www.gamefields.eu/konfigurator-boisk/"
+      ],
+      "numberOfRuns": 3,
+      "settings": {
+        "formFactor": "mobile",
+        "screenEmulation": {"mobile": true, "width": 390, "height": 844, "deviceScaleFactor": 3, "disabled": false}
+      }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["warn", {"minScore": 0.85}],
+        "categories:accessibility": ["warn", {"minScore": 0.95}],
+        "categories:seo": ["warn", {"minScore": 0.95}],
+        "largest-contentful-paint": ["warn", {"maxNumericValue": 2500}],
+        "total-byte-weight": ["warn", {"maxNumericValue": 2500000}]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "outputs/lighthouse"
+    }
+  }
+}
