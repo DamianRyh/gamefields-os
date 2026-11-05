@@ -1,0 +1,15 @@
+{
+  "patterns": [
+    "round",
+    "square",
+    "hex",
+    "wave",
+    "leaves",
+    "slots"
+  ],
+  "background": "transparent",
+  "camera": "same fixed orthographic macro for every sample",
+  "scope": "conceptual perforation previews; original court models unchanged",
+  "reference": "https://vip.mevaco.com/en-US/individual-design",
+  "reference_use": "general pattern-selection concept; no copied product imagery or branded ornaments"
+}

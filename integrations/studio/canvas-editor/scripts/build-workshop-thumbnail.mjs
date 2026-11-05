@@ -1,4 +1,5 @@
-import {build} from 'esbuild';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url),{build}=createRequire(require.resolve('wrangler/package.json'))('esbuild');
 import {mkdir,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('../',import.meta.url));await mkdir(root+'lib/generated',{recursive:true});

@@ -1,3 +1,4 @@
+import {requiredSportEquipment} from './primary-sports.ts';
 import {sportSurface} from './sport-surfaces.ts';
 import {parseVaultProject} from './project-vault.ts';
 import {projectDimensions} from './project-dimensions.ts';
@@ -18,6 +19,7 @@ export async function projectSpecification(input:Project){
   surface:project.surfaceModel?{id:project.surfaceModel,name:sportSurface(project.surfaceModel)!.name,thickness:.2,field:[sportSurface(project.surfaceModel)!.fieldLength,sportSurface(project.surfaceModel)!.fieldWidth],footprint:[project.length,project.width]}:null,
   product:{id:project.arenaModel??null,name:project.arenaModel?productNames[project.arenaModel]:project.sport,code:project.arenaModel?productCodes[project.arenaModel]:null,family,modelSourceRevision:dimensions.model?.sourceRevision??null},
   quantities:{referenceDimensions:dimensions.reference,surfaceAreaM2:dimensions.area,surfaceBounds:dimensions.model?.surfaceBounds??null,constructionBounds:project.surfaceModel&&!project.arenaModel?null:dimensions.model?.constructionBounds??null,clearance:null,modulePitch:null},
+  sportEquipment:{status:'CONCEPT_ONLY',items:requiredSportEquipment(project).map(item=>({name:item.name,quantity:item.quantity,asset:item.asset})),manufacturingReady:false},
   componentRegistry:{schema:componentRegistry.schema,revision:componentRegistry.revision,availableFamilyArticleIds:family?componentRegistry.articles.filter(a=>a.family===family).map(a=>a.articleId):[],status:'DIGITAL_SOURCE_INVENTORY'},
   technicalBill:{status:'UNCONFIRMED',manufacturingReady:false,rows:null,reason:'Projekt Studio nie zawiera zatwierdzonych instancji artykułów. Katalog rodziny nie oznacza elementów użytych w tym boisku.'},
   freeObjects:project.objects.map(o=>({id:o.id,name:o.name,kind:o.kind,classification:'DECORATIVE_OR_CONCEPTUAL',technicalArticleId:null})),

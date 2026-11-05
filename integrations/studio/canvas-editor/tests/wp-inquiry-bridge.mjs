@@ -4,13 +4,16 @@ import vm from 'node:vm';
 const html=await readFile(process.argv[2],'utf8');
 const script=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m=>m[1]).find(s=>s.includes('gf-contact-ready'));
 assert.ok(script,'public homepage bridge must be present');
-const compiled=new vm.Script(script); // Test the rendered bytes, including WordPress text filters.
+new vm.Script(script); // Parse the complete live script, then isolate its message handler from unrelated carousel DOM.
+const start=script.indexOf("window.addEventListener('message',event=>{if(event.origin!==data.studio)");
+assert(start>=0);
+const compiled=new vm.Script(script.slice(start,script.indexOf('if(window.opener)',start))); // Test the rendered bytes, including WordPress text filters.
 const replies=[];const source={postMessage:(data,origin)=>replies.push({data,origin})};
 const field={value:'unchanged',dispatchEvent:()=>{}};
 const frame={contentWindow:source,style:{}};
 const nodes={'.gc-menu':{addEventListener:()=>{}},'#gc-nav':{querySelectorAll:()=>[]},'#gc-studio-frame':frame,'[name="project-details"]':field,'#gc-attached':{hidden:true},'#kontakt':{scrollIntoView:()=>{}},'[name="your-email"]':{focus:()=>{}}};
 let handler;
-compiled.runInNewContext({document:{getElementById:()=>({querySelector:s=>nodes[s]}),querySelector:()=>null},window:{opener:null,innerWidth:1280,addEventListener:(type,callback)=>{if(type==='message')handler=callback}},Event:class{}});
+compiled.runInNewContext({root:{querySelector:s=>nodes[s]},frame,data:{studio:'https://gamefields-studio.ryhfs90.chatgpt.site'},dialog:{open:false},matchMedia:()=>({matches:true}),window:{opener:null,addEventListener:(type,callback)=>{if(type==='message')handler=callback}},Event:class{}});
 const summary=JSON.stringify({name:'Pełny projekt',objects:Array.from({length:200},(_,id)=>({id,text:'ą😀'.repeat(166)}))});
 const message={type:'gf-inquiry',requestId:'regression-1',summary};
 const dispatch=(data=message,origin='https://gamefields-studio.ryhfs90.chatgpt.site',sender=source)=>handler({origin,source:sender,data});

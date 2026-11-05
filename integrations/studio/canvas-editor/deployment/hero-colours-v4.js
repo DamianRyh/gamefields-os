@@ -1,0 +1,17 @@
+/* GF fixed-camera colour preview v4 */
+let heroColour='gray';
+const coatOptions=[['gray','Szary','#929696'],['red','Czerwony','#D3152B'],['blue','Niebieski','#2469A6'],['green','Zielony','#667451']];
+const colourCourtOriginal=pannaCourtMedia;
+pannaCourtMedia=function(hero=false){return hero?colourHero('p1'):colourCourtOriginal(hero)};
+function colourHero(key){
+ const wrap=node('div',{className:'gh-model-media gh-hero-media gh-colour-preview is-color'});wrap.dataset.modelMedia=key;
+ const label=key==='o1'?'Panna Play':'Panna Court';
+ const source=colour=>'https://gamefields-studio.ryhfs90.chatgpt.site/product-presentation/v4/'+key+'-'+colour+'.webp';
+ const img=node('img',{src:source(heroColour),alt:label+' — '+coatOptions.find(c=>c[0]===heroColour)[1]+', perforowane panele i rama',className:'gh-media-poster gh-hero-image'});img.decoding='async';img.loading='eager';
+ const choices=node('div',{className:'gh-coat-options'});choices.setAttribute('role','radiogroup');choices.setAttribute('aria-label','Kolor boiska '+label);
+ let request=0;
+ const select=async colour=>{const token=++request;const preload=new Image();preload.src=source(colour);wrap.setAttribute('aria-busy','true');try{await preload.decode();if(token!==request||!wrap.isConnected)return;heroColour=colour;img.src=preload.src;img.alt=label+' — '+coatOptions.find(c=>c[0]===colour)[1]+', perforowane panele i rama';buttons.forEach((button,i)=>{const active=coatOptions[i][0]===colour;button.setAttribute('aria-checked',String(active));button.tabIndex=active?0:-1});}catch(e){/* Keep the last loaded product visible. */}finally{if(token===request)wrap.removeAttribute('aria-busy')}};
+ const buttons=coatOptions.map(([colour,name,hex],index)=>{const button=node('button',{type:'button',className:'gh-coat-dot'});button.title=name;button.setAttribute('role','radio');button.setAttribute('aria-label',name);button.setAttribute('aria-checked',String(colour===heroColour));button.tabIndex=colour===heroColour?0:-1;button.style.setProperty('--coat',key==='p1'&&colour==='red'?'#C81726':hex);button.addEventListener('click',()=>select(colour));button.addEventListener('keydown',event=>{let next=index;if(['ArrowRight','ArrowDown'].includes(event.key))next=(index+1)%4;else if(['ArrowLeft','ArrowUp'].includes(event.key))next=(index+3)%4;else if(event.key==='Home')next=0;else if(event.key==='End')next=3;else return;event.preventDefault();buttons[next].focus();select(coatOptions[next][0])});choices.append(button);return button});
+ wrap.append(img,choices);return wrap;
+}
+if(!document.getElementById('gf-coat-style')){const style=document.createElement('style');style.id='gf-coat-style';style.textContent='.gh-colour-preview{position:relative}.gh-coat-options{position:absolute;right:12px;bottom:8px;display:flex;gap:5px;padding:4px;border-radius:99px;background:rgba(255,255,255,.94)}.gh-coat-dot{display:grid!important;place-items:center;width:32px!important;height:32px!important;min-width:32px!important;padding:0!important;border:1px solid transparent!important;border-radius:50%!important;background:transparent!important;cursor:pointer}.gh-coat-dot:before{content:"";width:19px;height:19px;border-radius:50%;background:var(--coat);box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}.gh-coat-dot[aria-checked="true"]{border-color:#49142f!important}.gh-coat-dot:focus-visible{outline:2px solid #6633ff;outline-offset:3px}';document.head.append(style)}

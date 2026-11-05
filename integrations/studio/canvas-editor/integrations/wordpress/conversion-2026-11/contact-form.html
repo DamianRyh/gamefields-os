@@ -1,0 +1,29 @@
+<div class="gf-lead-steps" data-gf-lead>
+<nav class="gf-lead-progress" aria-label="Etapy zapytania"><button type="button" data-gf-go="0">1. Potrzeba</button><button type="button" data-gf-go="1">2. Miejsce</button><button type="button" data-gf-go="2">3. Kontakt</button></nav>
+<fieldset class="gf-lead-step" data-gf-step="0"><legend>Co chcesz zrobić?</legend>
+<div class="gf-lead-field"><label>Rodzaj potrzeby
+[select project-type "Jeszcze nie wiem" "Budowa nowego boiska" "Renowacja lub malowanie boiska" "Wynajem boiska i event" "Aktywacja marki" "Plakat lub piłka"]</label></div>
+<p>Możesz zacząć bez wybranego modelu i bez gotowego projektu.</p>
+<button type="button" data-gf-next>Dalej: miejsce</button></fieldset>
+<fieldset class="gf-lead-step" data-gf-step="1"><legend>Pokaż miejsce</legend>
+<div class="gf-lead-field"><label>Miasto / miejsce (opcjonalnie)
+[text project-location maxlength:250 placeholder "Miasto, adres lub link do mapy"]</label></div>
+<div class="gf-lead-field"><label>Orientacyjne wymiary (opcjonalnie)
+[text project-area maxlength:100 placeholder "Np. 12 × 9 m albo jeszcze nie wiem"]</label></div>
+<div class="gf-lead-field"><label>Zdjęcie miejsca (opcjonalnie)
+[file project-photo limit:5mb filetypes:jpg|jpeg|png|webp]</label><small>JPG, PNG lub WebP do 5 MB. Zdjęcie dołączymy do Twojego zapytania.</small></div>
+<button type="button" data-gf-prev>Wstecz</button> <button type="button" data-gf-next>Dalej: kontakt</button></fieldset>
+<fieldset class="gf-lead-step" data-gf-step="2"><legend>Jak się skontaktować?</legend>
+<div class="gf-lead-field"><label>E-mail (wymagane)
+[email* your-email autocomplete:email]</label></div>
+<div class="gf-lead-field"><label>Imię lub organizacja (opcjonalnie)
+[text your-name autocomplete:name maxlength:160]</label></div>
+<div class="gf-lead-field"><label>Telefon (opcjonalnie)
+[tel your-phone autocomplete:tel]</label></div>
+<div class="gf-lead-field"><label>Wiadomość (opcjonalnie)
+[textarea your-message maxlength:4000 placeholder "Opisz krótko swój pomysł. Budżet możesz podać, jeśli go znasz."]</label></div>
+<p class="gf-lead-note">Po wysłaniu otrzymasz potwierdzenie na stronie. Sprawdzimy miejsce i konfigurację, a następnie skontaktujemy się, by ustalić kolejny krok. Kalkulacja ze Studio jest orientacyjna; indywidualną ofertę potwierdzimy po sprawdzeniu zakresu.</p>
+<p class="gf-lead-note">Dane wykorzystamy do odpowiedzi na zapytanie. Nie zapisujesz się do newslettera. <a href="/polityka-prywatnosci/">Polityka prywatności</a>.</p>
+<button type="button" data-gf-prev>Wstecz</button> [submit "Wyślij zapytanie"]</fieldset>
+<div hidden>[textarea project-details maxlength:500000]</div>
+</div>

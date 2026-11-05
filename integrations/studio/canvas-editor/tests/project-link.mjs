@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {projectLinkPatch,projectLink} from '../lib/project-link.ts';
+import {projectSchema} from '../lib/project.ts';
+import {renderPro} from '../lib/court-art-pro.mjs';
+assert.deepEqual(projectLinkPatch(new URLSearchParams('base=12abEF&zone=000000&outside=abcdef&line=ffffff&seed=999999')),{base:'#12abEF',zone:'#000000',outside:'#abcdef',lineColor:'#ffffff',patternSeed:999999});
+for(const seed of ['-1','1000000','1.2','NaN','1e3'])assert.deepEqual(projectLinkPatch(new URLSearchParams({seed})),{});
+for(const base of ['#ffffff','fff','abcdef0','red','ffffff"'])assert.deepEqual(projectLinkPatch(new URLSearchParams({base})),{});
+const legacy={id:'test',name:'Test',sport:'Piłka nożna 3×3',length:15,width:10,surface:'EPDM',base:'#123456',zone:'#234567',outside:'#345678',lineColor:'#ffffff',lines:true,pattern:'Organic Flow',graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:'day',objects:[]};
+assert.ok(projectSchema.safeParse(legacy).success);
+assert.equal(projectSchema.parse({...legacy,patternSeed:42}).patternSeed,42);
+assert.equal(projectSchema.safeParse({...legacy,patternSeed:1000000}).success,false);
+const url=new URL(projectLink({...legacy,patternSeed:42},'https://example.com',{id:'shared-id',url:'https://example.com/shared?id=shared-id#secret'}));
+assert.equal(url.searchParams.get('shared'),'shared-id');assert.equal(url.hash,'#secret');assert.equal(url.searchParams.get('base'),'123456');assert.equal(url.searchParams.get('seed'),'42');
+const colors=['#123456','#234567','#345678','#456789','#567890'];
+assert.equal(renderPro('pro-fields',3,400,colors),renderPro('pro-fields',3,400,colors,{seed:0}));
+assert.notEqual(renderPro('pro-fields',3,400,colors,{seed:0}),renderPro('pro-fields',3,400,colors,{seed:42}));
+console.log('PASS project links: strict HEX/seed bounds, legacy schema, full snapshot URL and deterministic seed.');

@@ -1,0 +1,12 @@
+{
+  "source_sha256": "9b72415570768522148db756c054e560e13dc211ef6e4e159f351add200430e9",
+  "camera": "DETAIL_CORNER",
+  "geometry_unchanged": true,
+  "same_camera_for_all_colours": true,
+  "palette": {
+    "gray": "#929696",
+    "red": "#C81726",
+    "blue": "#2469A6",
+    "green": "#667451"
+  }
+}

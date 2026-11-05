@@ -1,0 +1,13 @@
+{
+  "status": "PREPARED_NOT_APPLIED",
+  "site_url": "https://www.gamefields.eu",
+  "post_id": 3462,
+  "field": "post_content",
+  "requires": "Publish and verify matching Studio version first; refresh content/search anchors before each surgical content/edit. Do not apply a whole-page rewrite.",
+  "edits": [
+    {
+      "old_content": "const data=JSON.parse(document.getElementById('gh-data').textContent),dialog=root.querySelector('#gh-dialog'),body=root.querySelector('#gh-dialog-body'),title=root.querySelector('#gh-dialog-title');let model=data.defaultModel||'o1',trigger=null,frame=null,timeout=null;",
+      "new_content": "const data=JSON.parse(document.getElementById('gh-data').textContent),dialog=root.querySelector('#gh-dialog'),body=root.querySelector('#gh-dialog-body'),title=root.querySelector('#gh-dialog-title');let model=data.defaultModel||'o1',trigger=null,frame=null,timeout=null;\nconst p1Asset=suffix=>\"https://gamefields-studio.ryhfs90.chatgpt.site/arenas/panna-court-v6-\"+suffix+'.webp';data.models.p1=p1Asset('default');data.modelMedia.p1={poster:data.models.p1,images:['default','hover','detail-corner-inside','detail-corner','detail-goal'].map(key=>({url:p1Asset(key)})),videos:[]};\nfunction pannaCourtMedia(hero=false){\n const wrap=node('div',{className:'gh-model-media'+(hero?' gh-hero-media':'')});wrap.dataset.modelMedia='p1';\n const img=node('img',{src:p1Asset('default'),alt:'Panna Court — konstrukcja bez podłoża',className:'gh-media-poster'+(hero?' gh-hero-image':'')});img.decoding='async';\n const toggle=node('button',{type:'button',className:'gh-media-toggle'},'Drugi widok ↗');toggle.setAttribute('aria-label','Panna Court: przełącz widok');toggle.setAttribute('aria-pressed','false');let pinned=false;\n const show=on=>{img.src=p1Asset(on?'hover':'default');};wrap.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')show(true)});wrap.addEventListener('pointerleave',()=>show(pinned));toggle.addEventListener('focus',()=>show(true));toggle.addEventListener('blur',()=>show(pinned));toggle.addEventListener('click',()=>{pinned=!pinned;toggle.setAttribute('aria-pressed',String(pinned));show(pinned)});wrap.append(img,toggle);return wrap;\n}\n\nconst originalModelMedia=modelMedia,originalBindModelMedia=bindModelMedia;\nmodelMedia=function(key,hero=false){return key==='p1'?pannaCourtMedia(hero):originalModelMedia(key,hero)};\nbindModelMedia=function(wrap){if(wrap.dataset.modelMedia==='p1')wrap.replaceWith(pannaCourtMedia(wrap.classList.contains('gh-hero-media')));else originalBindModelMedia(wrap)};\n"
+    }
+  ]
+}

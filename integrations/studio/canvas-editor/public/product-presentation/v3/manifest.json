@@ -1,0 +1,174 @@
+{
+  "lights": [
+    [
+      "Key",
+      [
+        1,
+        -4,
+        9
+      ],
+      1800,
+      7
+    ],
+    [
+      "Fill",
+      [
+        -5,
+        -1,
+        5
+      ],
+      1100,
+      6
+    ],
+    [
+      "Rim",
+      [
+        3,
+        6,
+        6
+      ],
+      2300,
+      5
+    ]
+  ],
+  "aspect_ratio": "16:9",
+  "shadow_edge_guard": "feathered outer shadow tail only; no product cropping",
+  "renders": [
+    {
+      "product": "o1",
+      "view": "DEFAULT",
+      "source_blend_sha256": "29f22b21b7e506801540f20d257abf15d22e991ee749094244d2480eaf45d2fa",
+      "camera_rotation": [
+        1.142032504081726,
+        -1.0805733552388119e-07,
+        2.3036115169525146
+      ],
+      "ortho_scale": 8.282618522644043,
+      "size": [
+        1920,
+        1080
+      ],
+      "shadow_plane_z": -0.04,
+      "geometry_unchanged": true,
+      "image": "o1_DEFAULT.png"
+    },
+    {
+      "product": "o1",
+      "view": "HOVER",
+      "source_blend_sha256": "29f22b21b7e506801540f20d257abf15d22e991ee749094244d2480eaf45d2fa",
+      "camera_rotation": [
+        0.9987978339195251,
+        2.268931886817427e-08,
+        0.6857295036315918
+      ],
+      "ortho_scale": 9.372228622436523,
+      "size": [
+        1920,
+        1080
+      ],
+      "shadow_plane_z": -0.04,
+      "geometry_unchanged": true,
+      "image": "o1_HOVER.png"
+    },
+    {
+      "product": "p1",
+      "view": "DEFAULT",
+      "source_blend_sha256": "9b72415570768522148db756c054e560e13dc211ef6e4e159f351add200430e9",
+      "camera_rotation": [
+        1.142032504081726,
+        -1.0805733552388119e-07,
+        2.3036115169525146
+      ],
+      "ortho_scale": 10.343422889709473,
+      "size": [
+        1920,
+        1080
+      ],
+      "shadow_plane_z": -0.04,
+      "geometry_unchanged": true,
+      "image": "p1_DEFAULT.png"
+    },
+    {
+      "product": "p1",
+      "view": "HOVER",
+      "source_blend_sha256": "9b72415570768522148db756c054e560e13dc211ef6e4e159f351add200430e9",
+      "camera_rotation": [
+        0.9987978339195251,
+        2.268931886817427e-08,
+        0.6857295036315918
+      ],
+      "ortho_scale": 11.413689613342285,
+      "size": [
+        1920,
+        1080
+      ],
+      "shadow_plane_z": -0.04,
+      "geometry_unchanged": true,
+      "image": "p1_HOVER.png"
+    }
+  ],
+  "imageQA": [
+    {
+      "product": "o1",
+      "view": "DEFAULT",
+      "edgeAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "opaqueProductRGBMaxChange": 1,
+      "opaqueProductAlphaPreserved": true,
+      "sha256": "b5fa72517bed4860fc958385a19e09e581a330ec86280fc0abeb005701796c29",
+      "bytes": 858430
+    },
+    {
+      "product": "o1",
+      "view": "HOVER",
+      "edgeAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "opaqueProductRGBMaxChange": 1,
+      "opaqueProductAlphaPreserved": true,
+      "sha256": "fbdd712098751aff59c0f81127d7fb7577582494e6a7fcefffc7b2529fac06e0",
+      "bytes": 656408
+    },
+    {
+      "product": "p1",
+      "view": "DEFAULT",
+      "edgeAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "opaqueProductRGBMaxChange": 1,
+      "opaqueProductAlphaPreserved": true,
+      "sha256": "08e0c9eec00e2c5b76bf2c971dd41188d75581d5900d88387b61264482b6bec0",
+      "bytes": 729072
+    },
+    {
+      "product": "p1",
+      "view": "HOVER",
+      "edgeAlpha": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "opaqueProductRGBMaxChange": 1,
+      "opaqueProductAlphaPreserved": true,
+      "sha256": "c5d4e82a74306810c8a51a295b7b37111489fe9372550055f74b13d3a8b16178",
+      "bytes": 619334
+    }
+  ],
+  "shadow_refinement": {
+    "method": "native Blender compositor, product-alpha-protected contour fade",
+    "core_alpha_threshold": 0.96,
+    "dilation_pixels": 32,
+    "gaussian_pixels": 64
+  }
+}

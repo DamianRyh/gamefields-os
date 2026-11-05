@@ -1,8 +1,9 @@
 "use client";
+import {LazyMedia} from "./lazy-media";
 import {useEffect,useRef,type ReactNode,type KeyboardEvent} from "react";
 import "@/app/studio-visual-carousel.css";
 
-export type StudioVisualCarouselItem={id:string;label:string;ariaLabel?:string;caption?:string;media:ReactNode};
+export type StudioVisualCarouselItem={id:string;label:string;ariaLabel?:string;caption?:string;media:ReactNode;price?:ReactNode};
 type Props={items:StudioVisualCarouselItem[];value:string;onChange:(id:string)=>void;label:string;className?:string;compact?:boolean};
 
 /** Native scrolling stays local to the rail; only a deliberate horizontal gesture commits a preview. */
@@ -69,8 +70,8 @@ export function StudioVisualCarousel({items,value,onChange,label,className="",co
    onPointerCancel={()=>{/* Native touch scrolling cancels pointer events; touchmove still records direction. */}}
    onWheel={event=>{if(Math.abs(event.deltaX)>Math.abs(event.deltaY)&&Math.abs(event.deltaX)>1){programmatic.current=false;horizontalIntent.current=true;}}}>
    {items.map(item=><button type="button" key={item.id} ref={node=>{if(node)buttons.current.set(item.id,node);else buttons.current.delete(item.id);}} className="studio-visual-carousel-card" data-carousel-option={item.id} aria-label={item.ariaLabel||item.label} aria-pressed={item.id===value} tabIndex={item.id===value||(index<0&&items[0]?.id===item.id)?0:-1} onClick={()=>{if(!dragged.current)choose(item.id);}}>
-    <span className="studio-visual-carousel-media" aria-hidden="true">{item.media}<span className="studio-visual-carousel-check">✓</span></span>
-    <span className="studio-visual-carousel-name">{item.label}</span>{item.caption&&<span className="studio-visual-carousel-caption">{item.caption}</span>}
+    <span className="studio-visual-carousel-media" aria-hidden="true"><LazyMedia>{item.media}</LazyMedia><span className="studio-visual-carousel-check">✓</span></span>
+    <span className="studio-visual-carousel-name">{item.label}</span>{item.caption&&<span className="studio-visual-carousel-caption">{item.caption}</span>}{item.price}
    </button>)}
   </div>
   <span className="studio-visual-carousel-status" aria-live="polite" aria-atomic="true">{selected?`Wybrano: ${selected.label}`:""}</span>

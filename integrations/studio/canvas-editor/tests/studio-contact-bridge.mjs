@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import vm from 'node:vm';
+const script=await readFile('integrations/wordpress/conversion-2026-11/studio-contact-bridge.js','utf8');
+let receive,opened=0;const replies=[],source={postMessage:(data,origin)=>replies.push({data,origin})};
+const field={value:'previous',dispatchEvent(){}},status={},review={},controls={'[name="project-details"]':field,'[data-attachment-status]':status,'[data-attachment-review]':review,'[data-close]':{addEventListener(){}},'[data-clear]':{addEventListener(){}},'[name="your-email"]':{focus(){}}};
+const dialog={open:false,querySelector:k=>controls[k],showModal(){opened++;this.open=true}},frame={contentWindow:source};
+vm.runInNewContext(script,{document:{getElementById:id=>id==='studio'?frame:dialog},window:{addEventListener:(type,fn)=>{if(type==='message')receive=fn}},Event:class{}});
+const summary=JSON.stringify({arenaModel:'p1',objects:Array.from({length:200},(_,i)=>({id:i,text:'ą😀'.repeat(160)})),estimate:{priceNet:123}});
+const message={type:'gf-inquiry',requestId:'qa-1',summary};const dispatch=(data=message,origin='https://gamefields-studio.ryhfs90.chatgpt.site',sender=source)=>receive({data,origin,source:sender});
+dispatch(message,'https://evil.example');dispatch(message,undefined,{});assert.equal(field.value,'previous');assert.equal(opened,0);
+dispatch();assert.equal(field.value,summary);assert.equal(JSON.parse(review.textContent).objects.length,200);assert.equal(opened,1);assert.equal(replies.at(-1).data.type,'gf-inquiry-attached');assert.equal(replies.at(-1).data.summaryLength,summary.length);
+dispatch({...message,summary:'{broken'});assert.equal(field.value,summary);assert.equal(replies.at(-1).data.type,'gf-inquiry-rejected');
+dispatch({...message,summary:'null'});assert.equal(replies.at(-1).data.type,'gf-inquiry-rejected');
+const count=replies.length;dispatch({...message,summary:'x'.repeat(500001)});assert.equal(replies.length,count);
+console.log('PASS Studio contact: exact 200-object payload and budget, source/origin guards, malformed/null rejection, size bound, modal and acknowledgement.');

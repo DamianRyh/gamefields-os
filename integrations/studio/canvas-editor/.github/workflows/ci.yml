@@ -1,0 +1,31 @@
+name: Gamefields Studio CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm build
+      - run: pnpm test:studio
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:mobile
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: studio-mobile-screens
+          path: outputs/mobile
+          retention-days: 7

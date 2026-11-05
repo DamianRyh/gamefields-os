@@ -4,12 +4,12 @@
     "street15": "5e64776f95d021b6456993efb29e22c18040cc0e169e28c59c4975ad10521656"
   },
   "basketball-3x3": {
-    "standalone": "00e38abe78dae127dbf319e07d2d744b5b41ea8972f3af8347f31135101c2f28",
-    "street15": "3ba6ddec9bad719228ca216240b994f8e01eadd8c00bb8a7d5148d946ee9beec"
+    "standalone": "f1d36133bcbba969054ec1c69b466249d0231c8fa390ec3ea888491e297318d1",
+    "street15": "2003f5c00e29121596c2438e392570e76d43c629fafa7920f5fa429e649c5b14"
   },
   "basketball-full": {
-    "standalone": "358bad1c41e5b1b91b69965d0f1d00b2cc576833d2c0e7ab67e6887f576955fd",
-    "street15": "499a7147bd1f694e7c15f613802cbf4579a6bddb0fbaed22e01d9becc0612751"
+    "standalone": "2ee539c176abca152eacd15abb78e3bcaf0b96683f8b7dda6445f791aa1b41d4",
+    "street15": "c601e68f3451af5558248157f784d60d7daf5012306e24eda1f11e1434fa51f2"
   },
   "tennis": {
     "standalone": "4b37ce0c7599998c2ae9339722810c37e575ddd962017fd7d9208435134414f4",
@@ -30,5 +30,9 @@
   "futsal": {
     "standalone": "dbdad55bcb838bb9f842a06965ae1cb68aff99aaa809c3bb0eee2fc61fd17c30",
     "street15": "c0f2b63ca7a75924e14055ae2f4ffe5da8a9d2704c6d59a1829a4edf50f302d1"
+  },
+  "teqball": {
+    "standalone": "ed8d6ec1a5c9faacb2b2b7be9aa3b2cd9cc85f3f11a4ad5c2d760f45539af463",
+    "street15": "94e262d322d4e0bee637cee24c27513d9c7d7a2fb247c2667a675c5033123c41"
   }
 }

@@ -1,0 +1,198 @@
+{
+  "view": "orthographic exterior elevation",
+  "geometry": "complete existing native objects; no panel slicing",
+  "renders": [
+    {
+      "arena": "o1",
+      "coat": "gray",
+      "yaw": "0",
+      "goalCount": 1,
+      "sourceMeshes": 23,
+      "file": "public/product-goals/v14/o1-gray.png"
+    },
+    {
+      "arena": "o1",
+      "coat": "red",
+      "yaw": "0",
+      "goalCount": 1,
+      "sourceMeshes": 23,
+      "file": "public/product-goals/v14/o1-red.png"
+    },
+    {
+      "arena": "o1",
+      "coat": "blue",
+      "yaw": "0",
+      "goalCount": 1,
+      "sourceMeshes": 23,
+      "file": "public/product-goals/v14/o1-blue.png"
+    },
+    {
+      "arena": "o1",
+      "coat": "green",
+      "yaw": "0",
+      "goalCount": 1,
+      "sourceMeshes": 23,
+      "file": "public/product-goals/v14/o1-green.png"
+    },
+    {
+      "arena": "p1",
+      "coat": "gray",
+      "yaw": "0",
+      "goalCount": 1,
+      "sourceMeshes": 49,
+      "file": "public/product-goals/v14/p1-gray.png"
+    },
+    {
+      "arena": "p1",
+      "coat": "red",
+      "yaw": "0",
+      "goalCount": 1,
+      "sourceMeshes": 49,
+      "file": "public/product-goals/v14/p1-red.png"
+    },
+    {
+      "arena": "p1",
+      "coat": "blue",
+      "yaw": "0",
+      "goalCount": 1,
+      "sourceMeshes": 49,
+      "file": "public/product-goals/v14/p1-blue.png"
+    },
+    {
+      "arena": "p1",
+      "coat": "green",
+      "yaw": "0",
+      "goalCount": 1,
+      "sourceMeshes": 49,
+      "file": "public/product-goals/v14/p1-green.png"
+    },
+    {
+      "arena": "circle-cage-1",
+      "coat": "gray",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 3,
+      "file": "public/product-goals/v14/circle-cage-1-gray.png"
+    },
+    {
+      "arena": "circle-cage-1",
+      "coat": "red",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 3,
+      "file": "public/product-goals/v14/circle-cage-1-red.png"
+    },
+    {
+      "arena": "circle-cage-1",
+      "coat": "blue",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 3,
+      "file": "public/product-goals/v14/circle-cage-1-blue.png"
+    },
+    {
+      "arena": "circle-cage-1",
+      "coat": "green",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 3,
+      "file": "public/product-goals/v14/circle-cage-1-green.png"
+    },
+    {
+      "arena": "circle-cage-2",
+      "coat": "gray",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 5,
+      "file": "public/product-goals/v14/circle-cage-2-gray.png"
+    },
+    {
+      "arena": "circle-cage-2",
+      "coat": "red",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 5,
+      "file": "public/product-goals/v14/circle-cage-2-red.png"
+    },
+    {
+      "arena": "circle-cage-2",
+      "coat": "blue",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 5,
+      "file": "public/product-goals/v14/circle-cage-2-blue.png"
+    },
+    {
+      "arena": "circle-cage-2",
+      "coat": "green",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 5,
+      "file": "public/product-goals/v14/circle-cage-2-green.png"
+    },
+    {
+      "arena": "octagon",
+      "coat": "gray",
+      "yaw": "3.141592653589793",
+      "goalCount": 1,
+      "sourceMeshes": 5,
+      "file": "public/product-goals/v14/octagon-gray.png"
+    },
+    {
+      "arena": "octagon",
+      "coat": "red",
+      "yaw": "3.141592653589793",
+      "goalCount": 1,
+      "sourceMeshes": 5,
+      "file": "public/product-goals/v14/octagon-red.png"
+    },
+    {
+      "arena": "octagon",
+      "coat": "blue",
+      "yaw": "3.141592653589793",
+      "goalCount": 1,
+      "sourceMeshes": 5,
+      "file": "public/product-goals/v14/octagon-blue.png"
+    },
+    {
+      "arena": "octagon",
+      "coat": "green",
+      "yaw": "3.141592653589793",
+      "goalCount": 1,
+      "sourceMeshes": 5,
+      "file": "public/product-goals/v14/octagon-green.png"
+    },
+    {
+      "arena": "street-field",
+      "coat": "gray",
+      "yaw": "-1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 11,
+      "file": "public/product-goals/v14/street-field-gray.png"
+    },
+    {
+      "arena": "street-field",
+      "coat": "red",
+      "yaw": "-1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 11,
+      "file": "public/product-goals/v14/street-field-red.png"
+    },
+    {
+      "arena": "street-field",
+      "coat": "blue",
+      "yaw": "-1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 11,
+      "file": "public/product-goals/v14/street-field-blue.png"
+    },
+    {
+      "arena": "street-field",
+      "coat": "green",
+      "yaw": "-1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 11,
+      "file": "public/product-goals/v14/street-field-green.png"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import {requiredSportEquipment} from './primary-sports.ts';
 import {sportSurface} from './sport-surfaces.ts';
 import {modularGeometry} from './studio-modular.ts';
 import {creativeLineOptions,type DecorativeLineStyle} from './creative-lines.ts';
@@ -53,7 +54,7 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
   add("decorative-lines",`Linie dekoracyjne · ${name}`,1,"kpl.",undefined,"Wykonanie dekoracyjnych linii wymaga indywidualnej wyceny. Nie jest ujęte w cenie standardowych linii sportowych ani grafiki nawierzchni.");
  }
  if(p.arenaModel){add("arena","Konstrukcja z bramkami",1,"kpl.",p.modular?undefined:c?.arenaNet[p.arenaModel],p.modular?"Konstrukcja modułowa wymaga wyceny z liczby komponentów.":"Cena modelu bazowego; obejmuje wbudowane bramki.");add("arena-installation","Montaż konstrukcji",1,"kpl.",p.modular?undefined:c?.arenaInstallationNet?.[p.arenaModel]);}
- const equipment=new Map<string,number>();let bundledGoals=p.arenaModel?2:0;
+ const equipment=new Map<string,number>(requiredSportEquipment(p).map(item=>[item.name,item.quantity]));let bundledGoals=p.arenaModel?2:0;
  for(const o of p.objects.filter(o=>o.kind==="equipment")){
   if(o.name==="Bramka"&&bundledGoals>0){bundledGoals--;continue;}
   equipment.set(o.name,(equipment.get(o.name)||0)+1);

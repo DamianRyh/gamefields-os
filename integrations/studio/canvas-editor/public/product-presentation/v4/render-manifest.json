@@ -1,0 +1,264 @@
+{
+  "palette": {
+    "gray": {
+      "label": "Szary",
+      "hex": "#929696"
+    },
+    "blue": {
+      "label": "Niebieski",
+      "hex": "#2469A6",
+      "source_palette": "Miami"
+    },
+    "green": {
+      "label": "Zielony",
+      "hex": "#667451",
+      "source_palette": "Earth"
+    }
+  },
+  "renders": [
+    {
+      "product": "o1",
+      "colour": "gray",
+      "label": "Szary",
+      "hex": "#929696",
+      "native_red": "#D3152B",
+      "paint_materials": [
+        "O1_Powder_red",
+        "RV5_8_perforated_steel"
+      ],
+      "geometry_unchanged": true,
+      "camera_unchanged": true,
+      "camera_matrix": [
+        [
+          -0.6689648032188416,
+          -0.30902209877967834,
+          0.6760114431381226,
+          9.924995422363281
+        ],
+        [
+          0.7432940602302551,
+          -0.2781200706958771,
+          0.6084102988243103,
+          8.932496070861816
+        ],
+        [
+          1.0805733552388119e-07,
+          0.9094803929328918,
+          0.4157468378543854,
+          6.7207441329956055
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_hash": "49d49dd624357c1cef4289fadf1f2bc7e4c88f6b5c1b1db9f08151ef3d048eff"
+    },
+    {
+      "product": "o1",
+      "colour": "blue",
+      "label": "Niebieski",
+      "hex": "#2469A6",
+      "source_palette": "Miami",
+      "native_red": "#D3152B",
+      "paint_materials": [
+        "O1_Powder_red",
+        "RV5_8_perforated_steel"
+      ],
+      "geometry_unchanged": true,
+      "camera_unchanged": true,
+      "camera_matrix": [
+        [
+          -0.6689648032188416,
+          -0.30902209877967834,
+          0.6760114431381226,
+          9.924995422363281
+        ],
+        [
+          0.7432940602302551,
+          -0.2781200706958771,
+          0.6084102988243103,
+          8.932496070861816
+        ],
+        [
+          1.0805733552388119e-07,
+          0.9094803929328918,
+          0.4157468378543854,
+          6.7207441329956055
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_hash": "49d49dd624357c1cef4289fadf1f2bc7e4c88f6b5c1b1db9f08151ef3d048eff"
+    },
+    {
+      "product": "o1",
+      "colour": "green",
+      "label": "Zielony",
+      "hex": "#667451",
+      "source_palette": "Earth",
+      "native_red": "#D3152B",
+      "paint_materials": [
+        "O1_Powder_red",
+        "RV5_8_perforated_steel"
+      ],
+      "geometry_unchanged": true,
+      "camera_unchanged": true,
+      "camera_matrix": [
+        [
+          -0.6689648032188416,
+          -0.30902209877967834,
+          0.6760114431381226,
+          9.924995422363281
+        ],
+        [
+          0.7432940602302551,
+          -0.2781200706958771,
+          0.6084102988243103,
+          8.932496070861816
+        ],
+        [
+          1.0805733552388119e-07,
+          0.9094803929328918,
+          0.4157468378543854,
+          6.7207441329956055
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_hash": "49d49dd624357c1cef4289fadf1f2bc7e4c88f6b5c1b1db9f08151ef3d048eff"
+    },
+    {
+      "product": "p1",
+      "colour": "gray",
+      "label": "Szary",
+      "hex": "#929696",
+      "native_red": "#C81726",
+      "paint_materials": [
+        "Powder_coat_graphite",
+        "RV5_8_perforated_steel"
+      ],
+      "geometry_unchanged": true,
+      "camera_unchanged": true,
+      "camera_matrix": [
+        [
+          -0.6689648032188416,
+          -0.30902209877967834,
+          0.6760114431381226,
+          10.003849983215332
+        ],
+        [
+          0.7432940602302551,
+          -0.2781200706958771,
+          0.6084102988243103,
+          9.003464698791504
+        ],
+        [
+          1.0805733552388119e-07,
+          0.9094803929328918,
+          0.4157468378543854,
+          6.4886698722839355
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_hash": "fecbfb079bdface12e3fe2783f2716dffbe3bc957a5beedb17fcfd43feb904e0"
+    },
+    {
+      "product": "p1",
+      "colour": "blue",
+      "label": "Niebieski",
+      "hex": "#2469A6",
+      "source_palette": "Miami",
+      "native_red": "#C81726",
+      "paint_materials": [
+        "Powder_coat_graphite",
+        "RV5_8_perforated_steel"
+      ],
+      "geometry_unchanged": true,
+      "camera_unchanged": true,
+      "camera_matrix": [
+        [
+          -0.6689648032188416,
+          -0.30902209877967834,
+          0.6760114431381226,
+          10.003849983215332
+        ],
+        [
+          0.7432940602302551,
+          -0.2781200706958771,
+          0.6084102988243103,
+          9.003464698791504
+        ],
+        [
+          1.0805733552388119e-07,
+          0.9094803929328918,
+          0.4157468378543854,
+          6.4886698722839355
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_hash": "fecbfb079bdface12e3fe2783f2716dffbe3bc957a5beedb17fcfd43feb904e0"
+    },
+    {
+      "product": "p1",
+      "colour": "green",
+      "label": "Zielony",
+      "hex": "#667451",
+      "source_palette": "Earth",
+      "native_red": "#C81726",
+      "paint_materials": [
+        "Powder_coat_graphite",
+        "RV5_8_perforated_steel"
+      ],
+      "geometry_unchanged": true,
+      "camera_unchanged": true,
+      "camera_matrix": [
+        [
+          -0.6689648032188416,
+          -0.30902209877967834,
+          0.6760114431381226,
+          10.003849983215332
+        ],
+        [
+          0.7432940602302551,
+          -0.2781200706958771,
+          0.6084102988243103,
+          9.003464698791504
+        ],
+        [
+          1.0805733552388119e-07,
+          0.9094803929328918,
+          0.4157468378543854,
+          6.4886698722839355
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "source_hash": "fecbfb079bdface12e3fe2783f2716dffbe3bc957a5beedb17fcfd43feb904e0"
+    }
+  ]
+}
