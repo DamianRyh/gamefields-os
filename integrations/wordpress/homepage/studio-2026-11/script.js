@@ -197,9 +197,9 @@
     var PAL = {}; G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
     var SIGP = G.SIG;
     var FORMATS = [
-      { name: 'A3', size: '29,7 × 42 cm', ratio: 42 / 29.7, wall: '32%' },
-      { name: '50 × 70', size: '50 × 70 cm', ratio: 1.4, wall: '44%' },
-      { name: '70 × 100', size: '70 × 100 cm', ratio: 100 / 70, wall: '58%' }
+      { name: '30 × 40', size: '30 × 40 cm', ratio: 40 / 30, wall: '30%', price: 99 },
+      { name: '50 × 70', size: '50 × 70 cm', ratio: 1.4, wall: '44%', price: 149 },
+      { name: '70 × 100', size: '70 × 100 cm', ratio: 100 / 70, wall: '58%', price: 199 }
     ];
     var FRAMES = [['none', 'Bez ramy', ''], ['black', 'Czarna', '#161013'], ['oak', 'Dąb', '#B98A5B'], ['white', 'Biała', '#F7F5F2'], ['alu', 'Aluminium', '#A8A8A4']];
     var PAPERS = [['#FFFFFF', 'Biały'], ['#F4F1EE', 'Kremowy'], ['#161013', 'Czarny'], ['#47132D', 'Śliwka']];
@@ -208,7 +208,7 @@
     var LINES = [['auto', 'Auto'], ['#FFFFFF', 'Białe'], ['#111111', 'Czarne'], ['#D8F24A', 'Limonka'], ['none', 'Bez linii']];
     var HEX = /^#[0-9A-Fa-f]{6}$/;
     var basePal = 'duperre';
-    var st = { fam: 'pro-fade', v: 2, pal: 'duperre', colors: PAL.duperre.colors.slice(), seed: 0, line: 'auto', layout: 'gallery', paper: 0, title: 'Mój plac', sub: 'Warszawa · Praga-Północ', note: 'Gramy od 2026', fmt: 1, frame: 0, wall: 0 };
+    var st = { fam: 'pro-fade', v: 2, pal: 'duperre', colors: PAL.duperre.colors.slice(), seed: 0, line: 'auto', layout: 'gallery', paper: 0, title: 'Mój plac', sub: 'Warszawa · Praga-Północ', note: 'Gramy od 2026', fmt: 0, frame: 0, wall: 0 };
     var flat = false;
 
     var sheet = $('[data-pl-sheet]'), frame = $('[data-pl-frame]'), wall = $('[data-pl-wall]');
@@ -332,8 +332,7 @@
       b.addEventListener('click', function () { st.layout = l[0]; draw(); });
       laysBox.appendChild(b);
     });
-    var fmtBox = chipList('[data-pl-formats]', FORMATS.map(function (f) { return [f.name, f.size]; }), function (i) { st.fmt = i; draw(); });
-    var frBox = chipList('[data-pl-frames]', FRAMES, function (i) { st.frame = i; draw(); });
+    var fmtBox = chipList('[data-pl-formats]', FORMATS.map(function (f) { return [f.name, f.size + ' · ' + f.price + ' zł']; }), function (i) { st.fmt = i; draw(); });
     var wallBox = chipList('[data-pl-walls]', WALLS, function (i) { st.wall = i; draw(); }, true);
     [inTitle, inSub, inNote].forEach(function (inp) { inp.addEventListener('input', function () { st.title = inTitle.value; st.sub = inSub.value; st.note = inNote.value; schedule(); }); });
     $('[data-pl-random]').addEventListener('click', function () {
@@ -357,7 +356,7 @@
     function schedule() { if (pending) return; pending = true; requestAnimationFrame(function () { pending = false; draw(); }); }
     function summary() {
       var palName = st.pal === 'custom' ? 'własne kolory (' + st.colors.join(' ') + ')' : PAL[st.pal].name;
-      return FAM[st.fam].name + ' ' + st.v + (st.seed ? '.' + st.seed : '') + ' · paleta ' + palName + ' · układ ' + LAYOUTS.filter(function (l) { return l[0] === st.layout; })[0][1] + ' · ' + FORMATS[st.fmt].size + ' · rama: ' + FRAMES[st.frame][1].toLowerCase();
+      return FAM[st.fam].name + ' ' + st.v + (st.seed ? '.' + st.seed : '') + ' · paleta ' + palName + ' · układ ' + LAYOUTS.filter(function (l) { return l[0] === st.layout; })[0][1] + ' · ' + FORMATS[st.fmt].size + ' · sam print, bez ramy';
     }
     function draw() {
       var no = edition();
@@ -374,7 +373,6 @@
       $('[data-pl-insp]').textContent = f.inspiration;
       $('[data-pl-palname]').textContent = st.pal === 'custom' ? 'Własne kolory' : PAL[st.pal].name;
       $('[data-pl-layname]').textContent = LAYOUTS.filter(function (l) { return l[0] === st.layout; })[0][1];
-      $('[data-pl-framename]').textContent = FRAMES[st.frame][1];
       press(sigBox, function (b, i) { var s = SIGP[i]; return s.familyId === st.fam ? (s.variant === st.v ? (s.paletteId === st.pal ? !st.seed : false) : false) : false; });
       press(famsBox, function (b, i) { return G.PRO_FAMILIES[i].id === st.fam; });
       press(varsBox, function (b, i) { return i + 1 === st.v; });
@@ -382,7 +380,6 @@
       press(linesBox, function (b, i) { return LINES[i][0] === st.line; });
       press(papersBox, function (b, i) { return i === st.paper; });
       press(fmtBox, function (b, i) { return i === st.fmt; });
-      press(frBox, function (b, i) { return i === st.frame; });
       press(wallBox, function (b, i) { return i === st.wall; });
       press(laysBox, function (b, i) { return LAYOUTS[i][0] === st.layout; });
       colInputs.forEach(function (inp, k) { if (document.activeElement !== inp) inp.value = st.colors[k]; });
@@ -434,7 +431,7 @@
         if (typeof c.u === 'string') st.sub = c.u.slice(0, 34);
         if (typeof c.n === 'string') st.note = c.n.slice(0, 34);
         if (FORMATS[c.fm]) st.fmt = c.fm;
-        if (FRAMES[c.fr]) st.frame = c.fr;
+        st.frame = 0; // prints ship without a frame
         return true;
       } catch (e) { return false; }
     }
@@ -449,7 +446,8 @@
     PL.ready = true;
     PL.get = function () { return { fam: st.fam, v: st.v, pal: st.pal, colors: st.colors.slice() }; };
     PL.order = function () { return { name: st.title || 'bez tytułu', text: summary() + ' · No. ' + edition() + ' · link: ' + shareUrl() }; };
-    PL.frame = function () { return FRAMES[st.frame][0]; };
+    PL.size = function () { return FORMATS[st.fmt].size; };
+    PL.price = function () { var s = window.GF_SHOP, f = s ? (s.poster ? (s.poster.formats ? s.poster.formats[FORMATS[st.fmt].size] : null) : null) : null; return f ? f[1] : FORMATS[st.fmt].price; };
     PL.link = shareUrl;
     PL.note = function () { return '„' + (st.title || 'bez tytułu') + '” · ' + summary() + ' · No. ' + edition(); };
     var shared = loadShared();
@@ -753,10 +751,10 @@
   }
   $('[data-print-order]').addEventListener('click', function () {
     if (!PL.ready) { goContact(); return; }
-    var q = qtyOf('pl'), u1 = unitPrice('pl'), framed = PL.frame() !== 'none';
+    var q = qtyOf('pl'), u1 = unitPrice('pl');
     if (canBuy('pl')) { toCart('pl', PL.link(), PL.note()); return; }
     var o = PL.order();
-    setLine('Zamówienie plakatu: ', '„' + o.name + '” · ' + o.text + ' · ilość: ' + q + ' · cena: ' + zl(u1) + ' brutto/szt., razem ' + zl(q * u1) + (framed ? ' + rama (wycena indywidualna)' : ''));
+    setLine('Zamówienie plakatu: ', '„' + o.name + '” · ' + o.text + ' · ilość: ' + q + ' · cena: ' + zl(u1) + ' brutto/szt., razem ' + zl(q * u1) + ' · sam print, bez ramy');
     var att = $('#gc-attached'); if (att) { att.textContent = 'Plakat z ceną dołączony do zapytania razem z linkiem do projektu. Wpisz e-mail, a potwierdzę zamówienie i wysyłkę.'; att.hidden = false; }
     goContact();
   });
@@ -864,7 +862,7 @@
 
   /* ---------- PRICES and CART: poster 99 zł, ball 999 zł brutto per piece ---------- */
   function shop() { return window.GF_SHOP || {}; }
-  function unitPrice(key) { var s = shop(), p = key === 'pl' ? s.poster : s.ball; return p ? p.price : (key === 'pl' ? 99 : 999); }
+  function unitPrice(key) { if (key === 'pl') return PL.price ? PL.price() : 99; var b = shop().ball; return b ? b.price : 999; }
   function zl(v) { return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0zł'; }
   function qtyOf(key) {
     var i = $('[data-qty="' + key + '"]'); if (!i) return 1;
@@ -873,19 +871,20 @@
   function canBuy(key) {
     var s = shop(); if (!s.pay) return false;
     if (!(key === 'pl' ? s.poster : s.ball)) return false;
-    if (key === 'pl') { if (PL.frame) { if (PL.frame() !== 'none') return false; } }
+    if (key === 'pl') { var f = s.poster.formats; if (!f) return false; if (!PL.size) return false; if (!f[PL.size()]) return false; }
     return true;
   }
   function priceUi(key) {
-    var q = qtyOf(key), u1 = unitPrice(key), framed = key === 'pl' ? (PL.frame ? PL.frame() !== 'none' : false) : false;
+    var q = qtyOf(key), u1 = unitPrice(key), free = q * u1 >= 299;
     var tot = $('[data-total="' + key + '"]'), note = $('[data-price-note="' + key + '"]'), btn = $(key === 'pl' ? '[data-print-order]' : '[data-bl-order]');
-    if (tot) tot.textContent = zl(q * u1) + (framed ? ' + rama' : '');
-    if (note) note.textContent = zl(u1) + ' brutto / szt.' + (framed ? ' · rama: wycena indywidualna' : '') + (key === 'bl' ? ' · logo prześlesz mailem' : '');
+    if (tot) tot.textContent = zl(q * u1);
+    if (note) note.textContent = zl(u1) + ' brutto / szt. · ' + (free ? 'wysyłka gratis' : 'wysyłka 19 zł, od 299 zł gratis');
     if (btn) btn.innerHTML = (canBuy(key) ? 'Do koszyka · ' : 'Zamów · ') + zl(q * u1) + ' <span aria-hidden="true">→</span>';
   }
   function toCart(key, link, note) {
     var s = shop(), p = key === 'pl' ? s.poster : s.ball;
     var qs = new URLSearchParams({ 'add-to-cart': p.id, quantity: qtyOf(key), gf_config: link, gf_note: String(note).slice(0, 700) });
+    if (key === 'pl') { qs.set('variation_id', p.formats[PL.size()][0]); qs.set('attribute_format', PL.size()); }
     location.href = s.cart + (s.cart.indexOf('?') > -1 ? String.fromCharCode(38) : '?') + qs.toString();
   }
   ['pl', 'bl'].forEach(function (key) {
@@ -895,7 +894,8 @@
     var inp = $('[data-qty="' + key + '"]'); if (inp) { inp.addEventListener('change', function () { priceUi(key); }); inp.addEventListener('input', function () { if (inp.value) priceUi(key); }); }
     priceUi(key);
   });
-  var frBox = $('[data-pl-frames]'); if (frBox) frBox.addEventListener('click', function () { setTimeout(function () { priceUi('pl'); }, 0); });
+  var fmBox = $('[data-pl-formats]'); if (fmBox) fmBox.addEventListener('click', function () { setTimeout(function () { priceUi('pl'); }, 0); });
+  window.addEventListener('popstate', function () { priceUi('pl'); });
 
   /* ---------- Phones: the poster and ball editors start folded under their previews ---------- */
   var phone = matchMedia('(max-width: 700px)');

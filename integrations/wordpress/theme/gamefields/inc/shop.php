@@ -51,6 +51,17 @@ add_action( 'wp_head', function () {
 		$product = $id ? wc_get_product( $id ) : null;
 		if ( $product && 'publish' === $product->get_status() && $product->is_purchasable() ) {
 			$data[ $k ] = array( 'id' => $id, 'price' => (float) $product->get_price(), 'url' => get_permalink( $id ) );
+			// poster formats: "30 × 40 cm" => [variation id, price]
+			if ( $product->is_type( 'variable' ) ) {
+				$formats = array();
+				foreach ( $product->get_available_variations( 'objects' ) as $v ) {
+					$attr = $v->get_attribute( 'format' );
+					if ( $attr && $v->is_purchasable() ) {
+						$formats[ $attr ] = array( $v->get_id(), (float) $v->get_price() );
+					}
+				}
+				$data[ $k ]['formats'] = $formats;
+			}
 		}
 	}
 	echo '<script id="gft-shop">window.GF_SHOP=' . wp_json_encode( $data ) . ";</script>\n";
@@ -111,4 +122,19 @@ add_action( 'woocommerce_checkout_create_order_line_item', function ( $item, $ke
 add_filter( 'woocommerce_add_to_cart_redirect', function ( $url ) {
 	// phpcs:ignore WordPress.Security.NonceVerification
 	return isset( $_REQUEST['gf_config'] ) ? wc_get_cart_url() : $url;
+} );
+
+/* Free shipping (from 299 zł) replaces the paid option instead of appearing next to it. */
+add_filter( 'woocommerce_package_rates', function ( $rates ) {
+	$free = array_filter( $rates, function ( $r ) {
+		return 'free_shipping' === $r->get_method_id();
+	} );
+	return $free ? $free : $rates;
+}, 20 );
+
+/* Product data changes (prices, variations) must reach the cached homepage. */
+add_action( 'woocommerce_update_product', function ( $id ) {
+	if ( in_array( (int) $id, array( gft_shop_product_id( 'poster' ), gft_shop_product_id( 'ball' ) ), true ) ) {
+		do_action( 'litespeed_purge_all' );
+	}
 } );
