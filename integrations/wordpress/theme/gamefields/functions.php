@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.3' );
+define( 'GFT_VERSION', '1.0.4' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -158,10 +158,24 @@ function gft_content_has_h1( $post = null ) {
 	return false !== strpos( $el, '"header_size":"h1"' ) || false !== stripos( $el, '<h1' ) || false !== stripos( $el, '\\u003ch1' );
 }
 
-/* Product descriptions sometimes use H1 for their own headings; the product title is the only H1. */
+/* One H1 per page: product descriptions use H1 for their own headings (the product title is the H1),
+   and some older posts carry a second H1 in their content (the first one stays, the rest become H2). */
+function gft_h1_to_h2( $html ) {
+	return preg_replace( '/<(\/?)h1([\s>])/i', '<$1h2$2', $html );
+}
+add_filter( 'woocommerce_short_description', 'gft_h1_to_h2', 20 );
 add_filter( 'the_content', function ( $content ) {
-	if ( function_exists( 'is_product' ) && is_product() && in_the_loop() ) {
-		$content = preg_replace( '/<(\/?)h1([\s>])/i', '<$1h2$2', $content );
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		return gft_h1_to_h2( $content );
+	}
+	if ( is_singular( 'post' ) ) {
+		$seen = 0;
+		$content = preg_replace_callback( '/<(\/?)h1([\s>])/i', function ( $m ) use ( &$seen ) {
+			if ( '' === $m[1] ) {
+				$seen++;
+			}
+			return $seen > 1 ? '<' . $m[1] . 'h2' . $m[2] : $m[0];
+		}, $content );
 	}
 	return $content;
 }, 20 );
