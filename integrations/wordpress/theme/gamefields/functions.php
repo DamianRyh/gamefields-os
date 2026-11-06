@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.1' );
+define( 'GFT_VERSION', '1.0.2' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -31,10 +31,8 @@ add_action( 'after_setup_theme', function () {
 	add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
-	// own location names, so WordPress does not carry Savoy's old menu over automatically
-	register_nav_menus( array(
-		'gft-primary' => 'Gamefields: menu główne',
-	) );
+	// No menu locations on purpose: WordPress would map Savoy's old menu onto them on switch.
+	// The navigation lives in gft_nav_items() so it always matches the homepage.
 } );
 
 /* ---------- assets ---------- */
@@ -117,10 +115,6 @@ function gft_is_current( $slug ) {
 }
 
 function gft_primary_nav() {
-	if ( has_nav_menu( 'gft-primary' ) ) {
-		wp_nav_menu( array( 'theme_location' => 'gft-primary', 'container' => false, 'items_wrap' => '%3$s', 'depth' => 1, 'fallback_cb' => false ) );
-		return;
-	}
 	foreach ( gft_nav_items() as $item ) {
 		printf(
 			'<a href="%s"%s>%s</a>',

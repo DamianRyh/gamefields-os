@@ -8,4 +8,4 @@ Lekki motyw Gamefields zastępujący Savoy.
 - Dodatkowy CSS zapisany przy Savoy jest dalej drukowany (od sekcji City: City, baner cookies, poprawki nagłówków),
   dopóki nowy motyw nie ma własnego.
 - WooCommerce: domyślne szablony, styl Gamefields, „Cena na zapytanie” i „Zapytaj o wycenę” dla produktów bez ceny.
-- Menu: Wygląd → Menu (lokalizacje „Menu główne” i „Menu w stopce”); bez przypisanego menu działa menu wbudowane.
+- Menu jest wbudowane w motyw (gft_nav_items w functions.php), tak samo jak na stronie głównej.
