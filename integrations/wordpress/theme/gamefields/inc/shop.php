@@ -182,8 +182,8 @@ function gft_shop_product_data( $key, $attr ) {
 		$row['variants'] = array();
 		foreach ( $product->get_children() as $vid ) {
 			$v = wc_get_product( $vid );
-			if ( $v && $v->is_purchasable() ) {
-				$row['variants'][] = array( 'id' => $vid, 'value' => $v->get_attribute( $attr ), 'price' => (float) $v->get_price() );
+			if ( $v ) {
+				$row['variants'][] = array( 'id' => $vid, 'value' => $v->get_attribute( $attr ), 'price' => (float) $v->get_price(), 'buy' => $v->is_purchasable() );
 			}
 		}
 		$row['attribute'] = $attr;
