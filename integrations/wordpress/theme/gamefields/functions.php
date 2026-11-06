@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.2' );
+define( 'GFT_VERSION', '1.0.3' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -144,8 +144,24 @@ function gft_cart_link() {
 /* Pages whose content already has its own hero and H1 get no theme title. */
 function gft_content_has_h1( $post = null ) {
 	$post = get_post( $post );
-	return $post ? (bool) preg_match( '/<h1[\s>]/i', (string) $post->post_content ) : false;
+	if ( ! $post ) {
+		return false;
+	}
+	if ( preg_match( '/<h1[\s>]/i', (string) $post->post_content ) ) {
+		return true;
+	}
+	// Elementor keeps the real layout in post meta; a heading widget set to H1 or an H1 inside a text widget
+	$el = (string) get_post_meta( $post->ID, '_elementor_data', true );
+	return '' !== $el && (bool) preg_match( '/"header_size":"h1"|<h1[\s>]|\\u003Ch1|\\\/h1>/i', $el );
 }
+
+/* Product descriptions sometimes use H1 for their own headings; the product title is the only H1. */
+add_filter( 'the_content', function ( $content ) {
+	if ( function_exists( 'is_product' ) && is_product() && in_the_loop() ) {
+		$content = preg_replace( '/<(\/?)h1([\s>])/i', '<$1h2$2', $content );
+	}
+	return $content;
+}, 20 );
 
 /* Custom HTML pages (gf* templates: Studio, OS, Radar, privacy, ...) are printed edge to edge. */
 function gft_is_custom_html( $post = null ) {

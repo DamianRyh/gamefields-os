@@ -83,3 +83,15 @@ body.gft .gf-privacy :is(h1,h2){color:var(--gf-ink)}
   body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .btn{min-height:48px;padding:0 20px!important;font-size:15px!important}
   body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero:not([style*="background-image"])::after{width:52vw}
 }
+
+/* ---------- Gamefields City project posts (inline-styled data cards) ---------- */
+body.gft .gft-post .gft-prose > section[style]{max-width:860px!important;background:var(--gf-plum)!important;border-radius:0!important}
+body.gft .gft-post .gft-prose > section[style] [style*="#ff8b3d"]{color:var(--gf-lime)!important}
+body.gft .gft-post .gft-prose > section[style] h1{font-weight:800;letter-spacing:-.045em;color:#F4F1EE}
+body.gft .gft-post .gft-prose > section[style] a{color:var(--gf-lime)}
+@media (max-width:600px){
+  body.gft .gft-post .gft-prose > section[style]{padding:20px!important;margin:16px 0!important}
+  body.gft .gft-post .gft-prose > section[style] [style*="grid-template-columns"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.gft .gft-post .gft-prose > section[style] h1{font-size:34px!important}
+}
+body.gft .gft-prose{overflow-wrap:break-word}
