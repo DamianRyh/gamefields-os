@@ -11,7 +11,7 @@ a{color:inherit}
 a:hover{color:var(--gf-violet)}
 :focus-visible{outline:3px solid var(--gf-violet);outline-offset:3px}
 .gft-wrap{max-width:var(--gf-max);margin:0 auto;padding-left:var(--gf-gutter);padding-right:var(--gf-gutter)}
-.gft-skip{position:absolute;left:-9999px}
+.gft-skip,.screen-reader-text{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
 .gft-skip:focus{left:16px;top:16px;z-index:200;background:#fff;padding:10px 14px}
 .gft-kicker{margin:0;font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gf-violet)}
 .gft-kicker a{text-decoration:none}
@@ -27,7 +27,7 @@ a:hover{color:var(--gf-violet)}
 .gft-nav.stuck .gft-logo{font-size:22px}
 .gft-tag{font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gf-muted);white-space:nowrap}
 .gft-links{display:flex;gap:24px;margin-left:auto;font-size:15px;font-weight:500}
-.gft-links a{position:relative;text-decoration:none;padding-block:6px;color:var(--gf-ink)}
+.gft-links li{list-style:none}.gft-links a{position:relative;text-decoration:none;padding-block:6px;color:var(--gf-ink)}
 .gft-links a[aria-current],.gft-links .current-menu-item>a{color:var(--gf-violet)}
 .gft-links a[aria-current]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:currentColor}
 .gft-cta{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;background:var(--gf-ink);color:var(--gf-paper);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}

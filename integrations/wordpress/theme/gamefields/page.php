@@ -3,9 +3,12 @@
 get_header();
 while ( have_posts() ) :
 	the_post();
-	if ( gft_content_has_h1() ) :
+	if ( gft_content_has_h1() || gft_is_custom_html() ) :
 		?>
-		<div <?php post_class( 'gft-raw' ); ?>><?php the_content(); ?></div>
+		<div <?php post_class( 'gft-raw' ); ?>>
+			<?php if ( ! gft_content_has_h1() ) : ?><h1 class="screen-reader-text"><?php the_title(); ?></h1><?php endif; ?>
+			<?php the_content(); ?>
+		</div>
 		<?php
 	else :
 		?>
