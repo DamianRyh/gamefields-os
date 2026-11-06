@@ -1,12 +1,23 @@
 {
   "page_id": 3462,
   "url": "https://www.gamefields.eu/",
-  "published_modified": "2026-11-06T06:15:42",
-  "source_commit": "743b2abf1f8ce12c10b65c995d62022b5c9220b2",
+  "published_modified": "2026-11-06T06:21:03",
+  "source_commit": "d44428c8de0a7ae1e9197132318974f97f0f8e48",
   "asset_commit": "02f3a62c4d9c71608dc827e6f30066d50a523f58",
   "previous_modified": "2026-11-02",
   "previous_sha256": "a547ffa40ce44ea9f91bec785179d92a006aa59e25ac46193e5e76ca904be6f8",
   "rollback_copy_page_id": 4325,
   "draft_page_id": 4276,
-  "checks": "Public page 2026-11-06: guest HTML 545 KB (was ~900 KB), JSON-LD ProfessionalService+FAQPage present, subset font renders Polish glyphs, mobile 375 px: model 3D loads under the headline in the first screen, no horizontal overflow; posters, ball v2 (three.js), planner, 8 tiles, CF7 with aria-label present. No inquiry submitted."
+  "checks": "Public page 2026-11-06: guest HTML 545 KB (was ~900 KB), JSON-LD ProfessionalService+FAQPage present, subset font renders Polish glyphs, mobile 375 px: model 3D loads under the headline in the first screen, no horizontal overflow; posters, ball v2 (three.js), planner, 8 tiles, CF7 with aria-label present. No inquiry submitted.",
+  "wp_config_2026_11_06": {
+    "file_upload_types": "installed+active, custom type .glb (model/gltf-binary, application/octet-stream)",
+    "glb_media_ids": [
+      4327,
+      4328,
+      4329,
+      4330
+    ],
+    "savoy_custom_js": "viewport rewrite to width=device-width, initial-scale=1 (pinch zoom)",
+    "litespeed_cache": "activated (was installed, inactive); subpages HIT ~100 ms; homepage not cached because Polylang browser-language detection defines DONOTCACHEPAGE (single language PL) - owner decision pending"
+  }
 }
