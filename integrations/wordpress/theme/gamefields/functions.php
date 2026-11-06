@@ -152,7 +152,10 @@ function gft_content_has_h1( $post = null ) {
 	}
 	// Elementor keeps the real layout in post meta; a heading widget set to H1 or an H1 inside a text widget
 	$el = (string) get_post_meta( $post->ID, '_elementor_data', true );
-	return '' !== $el && (bool) preg_match( '/"header_size":"h1"|<h1[\s>]|\\u003Ch1|\\\/h1>/i', $el );
+	if ( '' === $el ) {
+		return false;
+	}
+	return false !== strpos( $el, '"header_size":"h1"' ) || false !== stripos( $el, '<h1' ) || false !== stripos( $el, '\\u003ch1' );
 }
 
 /* Product descriptions sometimes use H1 for their own headings; the product title is the only H1. */
