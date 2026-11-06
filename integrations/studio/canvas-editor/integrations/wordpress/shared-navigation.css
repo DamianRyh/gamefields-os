@@ -1,0 +1,15 @@
+/* GAMEFIELDS_SHARED_NAV_2026_10_08 */
+html body .gf2 .topbar,html body .gf-studio-page .gf-appbar{background:#fff!important;color:#282828!important;border-bottom:1px solid #e5e5e5!important;backdrop-filter:none}
+html body .gf2 .topbar-in{min-height:78px;height:auto!important;padding-top:12px;padding-bottom:12px;gap:24px}
+html body .gf2 .nav{gap:8px;flex-wrap:wrap;overflow:visible!important}
+html body .gf2 .nav a,html body .gf-studio-page .gf-nav a{display:inline-flex!important;align-items:center;min-height:44px;padding:10px 12px!important;color:#555!important;opacity:1!important;font-size:14px!important;line-height:1.3!important;letter-spacing:0!important;text-transform:none!important;font-weight:600!important;border-radius:6px;text-decoration:none}
+html body .gf2 .nav a:hover,html body .gf-studio-page .gf-nav a:hover{background:#f0f0f0;color:#222!important}
+html body .gf2 .nav .nav-cta,html body .gf-studio-page .gf-library-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 18px!important;background:#282828!important;color:#fff!important;border:1px solid #282828!important;border-radius:6px!important;font-size:14px!important;font-weight:600;line-height:1.3!important;letter-spacing:0!important;text-decoration:none}
+html body .gf-studio-page .gf-appbar{grid-template-columns:auto 1fr auto!important;min-height:78px;gap:24px}
+html body .gf-studio-page .gf-nav{display:flex!important;justify-content:flex-end;flex-wrap:wrap;gap:8px!important}
+html body #nm-main-menu-ul .gf-radar-menu>a,html body #nm-mobile-menu .gf-radar-menu>a{font-weight:700;color:#282828}
+html body #nm-main-menu-ul .gf-project-menu>a{background:#282828;color:#fff!important;border-radius:6px;padding:0 14px}
+html body .gf2 .nav a:focus-visible,html body .gf-studio-page .gf-appbar a:focus-visible{outline:3px solid #777;outline-offset:3px}
+@media(max-width:980px){html body .gf2 .topbar-in{gap:8px;padding-top:10px;padding-bottom:10px}html body .gf2 .nav{width:100%;justify-content:flex-start;gap:4px}html body .gf-studio-page .gf-appbar{grid-template-columns:1fr auto!important;gap:8px 12px;padding:10px 16px!important}html body .gf-studio-page .gf-nav{grid-column:1/-1;grid-row:2;justify-content:center}html body .gf-studio-page .gf-library-link{grid-column:2;grid-row:1}}
+@media(max-width:560px){html body .gf2 .nav a{font-size:13px!important;padding:10px 8px!important}html body .gf2 .nav .nav-cta{flex-basis:100%;margin-top:4px}html body .gf-studio-page .gf-library-link{font-size:13px!important;padding:10px 12px!important}}
+/* END_GAMEFIELDS_SHARED_NAV */

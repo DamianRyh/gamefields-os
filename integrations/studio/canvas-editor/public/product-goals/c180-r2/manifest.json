@@ -1,0 +1,38 @@
+{
+  "view": "orthographic exterior elevation",
+  "geometry": "complete existing native objects; no panel slicing",
+  "renders": [
+    {
+      "arena": "circle-cage-2",
+      "coat": "gray",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 6,
+      "file": "public/product-goals/c180-r2/circle-cage-2-gray.png"
+    },
+    {
+      "arena": "circle-cage-2",
+      "coat": "red",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 6,
+      "file": "public/product-goals/c180-r2/circle-cage-2-red.png"
+    },
+    {
+      "arena": "circle-cage-2",
+      "coat": "blue",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 6,
+      "file": "public/product-goals/c180-r2/circle-cage-2-blue.png"
+    },
+    {
+      "arena": "circle-cage-2",
+      "coat": "green",
+      "yaw": "1.5707963267948966",
+      "goalCount": 1,
+      "sourceMeshes": 6,
+      "file": "public/product-goals/c180-r2/circle-cage-2-green.png"
+    }
+  ]
+}

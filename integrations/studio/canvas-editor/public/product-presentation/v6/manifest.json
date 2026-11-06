@@ -1,0 +1,15 @@
+{
+  "perforation_diameter_mm": 5,
+  "pitch_mm": 8,
+  "thickness_mm": 1.5,
+  "thickness_note": "visualisation assumption",
+  "palette": {
+    "gray": "#929696",
+    "red": "#C81726",
+    "blue": "#2469A6",
+    "green": "#667451"
+  },
+  "camera_fixed": true,
+  "background": "transparent",
+  "no_frames_posts_or_other_court_parts": true
+}

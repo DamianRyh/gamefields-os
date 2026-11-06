@@ -7,11 +7,12 @@ import {PannaSurfaceObjects} from './panna-realistic-preview';
 /** Coordinates in metres, including the free area outside the playing field. */
 export function SportSurfaceLines({project:p}:{project:Project}){
  const s=sportSurface(p.surfaceModel);if(!s||!p.lines)return null;
- const L=s.fieldLength,W=s.fieldWidth,x=(s.length-L)/2,y=(s.width-W)/2;
+ const L=s.fieldLength,W=s.fieldWidth,x=(s.length-L)/2,y=('fieldOffsetY' in s&&typeof s.fieldOffsetY==='number')?s.fieldOffsetY:(s.width-W)/2;
  const line=(x1:number,y1:number,x2:number,y2:number)=><line x1={x1} y1={y1} x2={x2} y2={y2}/>;
  const circle=(cx:number,cy:number,r:number)=><circle cx={cx} cy={cy} r={r}/>;
- return <g transform={`scale(${600/s.length}) translate(${x} ${y})`} stroke={p.lineColor} strokeWidth={.05} fill="none" strokeLinejoin="round">
+ return <g data-sport-lines={s.id} transform={`scale(${600/s.length}) translate(${x} ${y})`} stroke={p.lineColor} strokeWidth={.05} fill="none" strokeLinejoin="round">
  <rect x={.025} y={.025} width={L-.05} height={W-.05}/>
+ {s.id==='teqball'?<>{line(L/2,0,L/2,W)}{line(L/2-3.5,0,L/2-3.5,W)}{line(L/2+3.5,0,L/2+3.5,W)}</>:null}
  {s.id==='tennis'?<>{line(L/2,0,L/2,W)}{line(0,1.37,L,1.37)}{line(0,W-1.37,L,W-1.37)}{line(L/2-6.4,1.37,L/2-6.4,W-1.37)}{line(L/2+6.4,1.37,L/2+6.4,W-1.37)}{line(L/2-6.4,W/2,L/2+6.4,W/2)}</>:null}
  {s.id==='padel'?<>{line(10,0,10,W)}{line(3.05,0,3.05,W)}{line(16.95,0,16.95,W)}{line(3.05,5,16.95,5)}</>:null}
  {s.id==='volleyball'?<>{line(9,0,9,W)}{line(6,0,6,W)}{line(12,0,12,W)}</>:null}

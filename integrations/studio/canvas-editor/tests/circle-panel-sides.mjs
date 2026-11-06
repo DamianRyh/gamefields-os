@@ -22,6 +22,6 @@ assert.throws(()=>classifyCirclePanelFace(box,[0,1]),/expected a triangle/);
 const origin=mesh('origin',[[-1,0,0],[1,0,0],[0,1,0]],[[0,1,2]]);assert.throws(()=>classifyCirclePanelFace(origin,origin.f[0]),/radial origin/);
 assert.throws(()=>circlePanelSides([box,{...box,id:box.id+'--artwork-inner'}],'circle-cage-1','inner'),/duplicate runtime side ID/);
 const reports={};for(const model of ['circle-cage-1','circle-cage-2']){const meshes=JSON.parse(await readFile(`public/arenas/${model}.json`,'utf8')),before=JSON.stringify(meshes),counts={inner:0,outer:0,edge:0};for(const m of meshes.filter(m=>m.group==='panels'))for(const f of m.f)counts[classifyCirclePanelFace(m,f)]++;reports[model]={panels:meshes.filter(m=>m.group==='panels').length,counts,...verify(meshes,model)};assert.equal(JSON.stringify(meshes),before,'Source mutation');}
-assert.deepEqual(reports['circle-cage-1'].counts,{inner:13560,outer:13568,edge:11632});
-assert.deepEqual(reports['circle-cage-2'].counts,{inner:28304,outer:28312,edge:24456});
+assert.deepEqual(reports['circle-cage-1'].counts,{inner:70680,outer:70216,edge:23512});
+assert.deepEqual(reports['circle-cage-2'].counts,{inner:85340,outer:86920,edge:47980});
 console.log('PASS Circle Cage visual panel sides',JSON.stringify(reports));

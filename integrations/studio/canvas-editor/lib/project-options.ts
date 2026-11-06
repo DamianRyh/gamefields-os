@@ -1,0 +1,4 @@
+import type {Project} from './project';
+import {getSportProfile,type SportProfile} from './sport-profiles.ts';
+import {nextProjectName} from './studio-ux.mjs';
+export function constructionProject(p:Project,profile:SportProfile):Project{return {...p,name:nextProjectName(p.name,getSportProfile(p.sport,p.arenaModel).label,profile.label),surfaceModel:undefined,arenaModel:profile.arenaModel,modular:undefined,sport:profile.sport,courtShape:profile.courtShape,diameter:profile.diameter,arenaDesign:profile.arenaModel?{panelColor:'#b90f35',frameColor:'#30363c',goalColor:'#30363c',finish:'matte',text:'',side:'both'}:undefined,length:profile.length,width:profile.width,surface:profile.surface,base:profile.base,zone:profile.zone,outside:profile.outside,lineColor:profile.lineColor,lines:!['circle-cage-1','circle-cage-2','street-field','octagon','street15'].includes(profile.arenaModel||'')&&!['Skate','Street Workout'].includes(profile.sport),objects:[]}}

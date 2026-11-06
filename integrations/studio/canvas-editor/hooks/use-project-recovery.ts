@@ -14,7 +14,7 @@ export function useProjectRecovery(project:Project,onLoad:(p:Project)=>void){
   mounted.current=true;
   try{
    const raw=localStorage.getItem(DRAFT_KEY);expected.current=raw;
-   if(raw!==null){const parsed=parseVaultProject(raw);const params=new URLSearchParams(window.location.search);if(!['arena','sport','pattern','view'].some(key=>params.has(key)))onLoad(parsed)}
+   if(raw!==null){const parsed=parseVaultProject(raw);const params=new URLSearchParams(window.location.search);if(!['arena','surface','sport','pattern','base','zone','outside','line','seed','shared','workshop'].some(key=>params.has(key)))onLoad(parsed)}
    setEnabled(true);
   }catch{setBlocked(true);setSaveStatus('Zapis wstrzymany — odzyskaj szkic');setMessage('Nie udało się odczytać szkicu. Jego dane nie zostały nadpisane. Otwórz Pliki projektu, aby wybrać sposób odzyskania.')}
   setReady(true);

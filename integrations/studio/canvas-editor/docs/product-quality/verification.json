@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-29",
+  "scope": [
+    "Panna Play o1",
+    "Panna Court p1"
+  ],
+  "reference": "approved-reference.png",
+  "status": "first PBR implementation; visual equivalence to reference not claimed",
+  "checks": {
+    "typescript": "pass",
+    "build": "pass",
+    "studio_scope": "pass",
+    "panna_court_v6_geometry": "pass",
+    "product_quality_fixture": "pass",
+    "mobile_studio_json_materials_radar": "pass at 375,390,430,1440",
+    "workshop_preview": "pass at 390,1440",
+    "realism_materials_text_finish_idle_fallback": "pass at 390/1440; toolbar help opens/closes without obstructing controls",
+    "panna_play_o1_geometry": "pass approved source hash and orientation"
+  },
+  "known_limits": [
+    "Contact AO is a bounded approximation, not full global illumination",
+    "Only o1/p1 use new PBR renderer",
+    "Visual tuning against reference remains a product review step"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "revision": 2,
+  "product": "Panna Play",
+  "key": "o1",
+  "sourceSha256": "280d6ae80365ac4909326aea1df4990c820adbf004b601ef16bee34b62b68b30",
+  "constructionObjects": 58,
+  "singleInnerSheets": 12,
+  "triangles": 288522,
+  "ground": false,
+  "source": "Approved existing O1 detail revision 2; no regenerated layout",
+  "files": {
+    "panna-play-o1-v2-default.webp": {
+      "bytes": 978620,
+      "sha256": "8c56b7ba3a83a81a3a0697f13e8ec7199af43a0bdcf5489032f92269cfbb7b91"
+    },
+    "panna-play-o1-v2-detail-goal.webp": {
+      "bytes": 750644,
+      "sha256": "86401caf8b85a93430928ae8ff7af5e4f22dfaf233cba80bdcaf453a03dac745"
+    },
+    "panna-play-o1-v2-detail-inside.webp": {
+      "bytes": 1027336,
+      "sha256": "16be46ed635c0c300f4fbed7c9804633af153c715d08e522569382e22c025736"
+    },
+    "panna-play-o1-v2-detail-outside.webp": {
+      "bytes": 937726,
+      "sha256": "9aa1b3a1a6f0384a94d31a8c7bea0049971129913fc7fe28ba6d97df733e7c21"
+    },
+    "panna-play-o1-v2-hover.webp": {
+      "bytes": 923042,
+      "sha256": "588b5dedb089da0f8ae76cb6a9066e60104ea8fd0de0186edf35a8a3e378052b"
+    },
+    "panna-play-o1-v2.glb": {
+      "bytes": 22187040,
+      "sha256": "280d6ae80365ac4909326aea1df4990c820adbf004b601ef16bee34b62b68b30"
+    }
+  }
+}

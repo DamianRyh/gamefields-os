@@ -1,0 +1,7 @@
+{
+  "name": "Octagon",
+  "assembly": "sources/Boisko 01.PDF",
+  "sha256": "045e62d3a6e285c1e74f9104818a916e87e7272da549350b7cb326169b34f90b",
+  "shared_components": "../street-field/sources",
+  "component_folder": "https://drive.google.com/drive/folders/1cuvdc0-tmQoq_ZafYSxdXozMN3N-RGli"
+}

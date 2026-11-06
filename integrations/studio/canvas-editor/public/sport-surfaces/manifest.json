@@ -2,8 +2,14 @@
   "schema": "GF-SPORT-SURFACE-MODELS-1",
   "units": "m",
   "thickness": 0.2,
-  "catalogHash": "138440480bdfee9b932347817b0d57f6143e3dd1cc158c3af7f60e8caa7bc725",
+  "catalogHash": "95472d52820a6136f23b1669a8c5dab6208e107c03f0459b6487aece44d3a985",
   "blendHash": "92d8dc577c8ee00a3c319dceb010e10dc7259387231814882dc36cddf3a320b8",
+  "extensions": [
+    {
+      "path": "teqball-20cm.blend",
+      "sha256": "d851b5bb98d6fcca42029eab7796dc9d4dad98b36249f7724b1eb16a67459bd3"
+    }
+  ],
   "models": [
     {
       "id": "street-football-3x3",
@@ -107,6 +113,19 @@
       "files": {
         "json": "3b4659544985ebe27cd7df8558f5daccc7b301908b16426b700e68c915125e69",
         "glb": "c4229606f9554857934bcd710d6c943e766e47c488c15fa820b40ce30db2acc7"
+      }
+    },
+    {
+      "id": "teqball",
+      "dimensions": [
+        16,
+        12,
+        0.2
+      ],
+      "area": 192,
+      "files": {
+        "json": "4b7af66575ccf56b03994c06c5a9613c2610a34efeb019893e0582dfad878fa0",
+        "glb": "885a51f97990b23af02adfdd9fc7c5eb30be4fefc064d9d9f64d158881a0f78d"
       }
     }
   ]

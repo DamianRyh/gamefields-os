@@ -1,0 +1,12 @@
+{
+  "source": "Panna_Play_P1 v6",
+  "camera": "DETAIL_CORNER",
+  "scale": 2.2,
+  "palette": {
+    "gray": "#929696",
+    "red": "#C81726",
+    "blue": "#2469A6",
+    "green": "#667451"
+  },
+  "geometry_unchanged": true
+}

@@ -8,6 +8,8 @@ import "./studio-usability.css";
 import "./studio-readability.css";
 import "./studio-pricing.css";
 import "./studio-mobile.css";
+import "./studio-skin-2026-11.css";
+import {GamefieldsCrew} from "@/components/gamefields-crew";
 
 export const metadata: Metadata = {
   title: {
@@ -48,6 +50,7 @@ export default function RootLayout({
     <html lang="pl">
       <body className="antialiased">
         {children}
+        <GamefieldsCrew />
       </body>
     </html>
   );
