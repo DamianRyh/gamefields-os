@@ -1076,10 +1076,10 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     { k: 'green', n: 'Szałwia', c: '#6B7C4F', gl: [0.39, 0.51, 0.31], ground: '#FFB3C8', ink: '#47132D', line: 'rgba(71,19,45,.3)', cta: ['#47132D', '#FFFFFF'] }
   ];
   var MODELS3D = [
-    { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: 'public/models/gamefields/source/panna-kids-o1.glb', still: UP + 'Gamefields-Panna-Play-wide-v3-default.webp', orbit: '30deg 62deg 105%' },
-    { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: 'public/models/gamefields/source/boisko-p1.glb', still: UP + 'Gamefields-Panna-Court-wide-v3-default.webp', orbit: '30deg 62deg 105%' },
-    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø ~5 m · 1 m · 1 na 1', glb: 'public/models/gamefields/source/boisko-w1.glb', still: UP + 'W-1-—-GF-CT-001.webp', orbit: '30deg 62deg 105%' },
-    { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: 'integrations/wordpress/homepage/studio-2026-11/assets/panna-octa.glb', still: UP + 'GF-CT-008-octagon.webp', orbit: '30deg 64deg 105%' }
+    { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-play-o1.glb', still: UP + 'Gamefields-Panna-Play-wide-v3-default.webp', orbit: '30deg 62deg 105%' },
+    { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-court-p1.glb', still: UP + 'Gamefields-Panna-Court-wide-v3-default.webp', orbit: '30deg 62deg 105%' },
+    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø ~5 m · 1 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-ring-w1.glb', still: UP + 'W-1-—-GF-CT-001.webp', orbit: '30deg 62deg 105%' },
+    { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-octa.glb', still: UP + 'GF-CT-008-octagon.webp', orbit: '30deg 64deg 105%' }
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
   var cur = { coat: COATS[0], model: MODELS3D[0] }, mv = null, mvReady = false;
@@ -1125,7 +1125,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
       hero3d.classList.remove('ready');
       mv.setAttribute('alt', cur.model.full + ', model 3D. Przeciągnij, aby obrócić.');
       mv.setAttribute('camera-orbit', cur.model.orbit);
-      mv.setAttribute('src', REPO + cur.model.glb);
+      mv.setAttribute('src', (cur.model.glb.indexOf('https://') === 0 ? '' : REPO) + cur.model.glb);
     });
   }
   var heroModels = $('[data-hero-models]'), heroDots = $('[data-hero-dots]');
