@@ -471,3 +471,14 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   .gfs .band-dark .tool-toggle{background:var(--lime);color:var(--plum)}
   .gfs :is(.pl,.bl).tool-closed :is(.pl-ed,.bl-ed){display:none}
 }
+
+/* ---------- 2026-11-06 · prices in the poster and ball creators ---------- */
+.gfs .price-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:14px 0 16px;flex-wrap:wrap}
+.gfs .qty{display:inline-flex;align-items:center;border:1.5px solid #CDBFC6;border-radius:999px}
+.gfs .band-dark .qty{border-color:var(--line)}
+.gfs .qty button{width:44px;height:44px;border:0;background:none;color:inherit;font:600 20px/1 inherit;cursor:pointer;border-radius:999px}
+.gfs .qty input{width:52px;height:44px;border:0;background:transparent;color:inherit;text-align:center;font:600 17px inherit;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
+.gfs .qty input::-webkit-inner-spin-button,.gfs .qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.gfs .price{text-align:right}
+.gfs .price b{display:block;font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.gfs .price small{display:block;color:var(--muted);font-size:13px;margin-top:2px}

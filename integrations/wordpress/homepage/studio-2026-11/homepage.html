@@ -473,7 +473,18 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   .gfs .tool-toggle{display:inline-flex;width:100%;margin-top:12px;background:var(--ink);color:var(--paper)}
   .gfs .band-dark .tool-toggle{background:var(--lime);color:var(--plum)}
   .gfs :is(.pl,.bl).tool-closed :is(.pl-ed,.bl-ed){display:none}
-}</style>
+}
+
+/* ---------- 2026-11-06 · prices in the poster and ball creators ---------- */
+.gfs .price-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:14px 0 16px;flex-wrap:wrap}
+.gfs .qty{display:inline-flex;align-items:center;border:1.5px solid #CDBFC6;border-radius:999px}
+.gfs .band-dark .qty{border-color:var(--line)}
+.gfs .qty button{width:44px;height:44px;border:0;background:none;color:inherit;font:600 20px/1 inherit;cursor:pointer;border-radius:999px}
+.gfs .qty input{width:52px;height:44px;border:0;background:transparent;color:inherit;text-align:center;font:600 17px inherit;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
+.gfs .qty input::-webkit-inner-spin-button,.gfs .qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.gfs .price{text-align:right}
+.gfs .price b{display:block;font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.gfs .price small{display:block;color:var(--muted);font-size:13px;margin-top:2px}</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","name":"Damian Gawrych"},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Piłki we wzorze boiska","description":"Projekt piłki w tym samym wzorze i kolorach co nawierzchnia.","provider":{"@id":"https://www.gamefields.eu/#studio"}}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. Zobacz wzory Signature."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. Napisz do nas, aby ustalić zakres oferty. Co wpływa na budżet, opisujemy w poradniku „Ile kosztuje budowa boiska sportowego?”."}}]}]}</script>
 <div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/">
 <a class="skip" href="#gfs-main">Przejdź do treści</a>
@@ -716,13 +727,21 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
         <div class="chips" data-pl-walls role="group" aria-label="Kolor ściany"></div>
       </div>
       <div class="pl-order">
-        <div class="pl-sum" data-pl-sum>Duperré Fade · 50 × 70 cm · rama czarna</div>
+        <div class="pl-sum" data-pl-sum>Duperré Fade · 50 × 70 cm</div>
+        <div class="price-row">
+          <div class="qty" role="group" aria-label="Ilość">
+            <button type="button" data-qty-step="pl" data-d="-1" aria-label="Mniej">−</button>
+            <input type="number" inputmode="numeric" min="1" max="999" value="1" data-qty="pl" aria-label="Liczba plakatów">
+            <button type="button" data-qty-step="pl" data-d="1" aria-label="Więcej">+</button>
+          </div>
+          <div class="price"><b data-total="pl">99 zł</b><small data-price-note="pl">99 zł brutto / szt.</small></div>
+        </div>
         <div class="pl-actions">
           <button type="button" class="pill" data-print-order style="background:var(--violet);color:#fff">Zamów print <span aria-hidden="true">→</span></button>
           <button type="button" class="chip" data-pl-share>Kopiuj link do projektu</button>
           <a class="chip" data-pl-court href="/konfigurator-boisk/">Zobacz ten wzór na boisku 3D ↗</a>
         </div>
-        <span class="m pl-status" data-pl-status role="status">Zamówienie trafi do formularza poniżej · cenę i wysyłkę potwierdzę mailowo</span>
+        <span class="m pl-status" data-pl-status role="status">Cena 99 zł brutto za sztukę · wysyłkę potwierdzę mailowo</span>
       </div>
     </div>
   </div>
@@ -832,12 +851,20 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
       </div>
       <div class="pl-order">
         <div class="pl-sum" data-bl-sum></div>
+        <div class="price-row">
+          <div class="qty" role="group" aria-label="Ilość">
+            <button type="button" data-qty-step="bl" data-d="-1" aria-label="Mniej">−</button>
+            <input type="number" inputmode="numeric" min="1" max="999" value="1" data-qty="bl" aria-label="Liczba piłek">
+            <button type="button" data-qty-step="bl" data-d="1" aria-label="Więcej">+</button>
+          </div>
+          <div class="price"><b data-total="bl">999 zł</b><small data-price-note="bl">999 zł brutto / szt.</small></div>
+        </div>
         <div class="pl-actions">
           <button type="button" class="pill" data-bl-order style="background:var(--violet);color:#fff">Zamów piłki <span aria-hidden="true">→</span></button>
           <button type="button" class="chip" data-bl-share>Kopiuj link do piłki</button>
           <button type="button" class="chip" data-bl-png>Pobierz podgląd PNG</button>
         </div>
-        <span class="m pl-status" data-bl-status role="status">Projekt piłki trafi do formularza poniżej · cenę, ilość i termin potwierdzę mailowo</span>
+        <span class="m pl-status" data-bl-status role="status">Cena 999 zł brutto za sztukę · termin potwierdzę mailowo</span>
       </div>
     </div>
   </div>
@@ -1361,7 +1388,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     var LINES = [['auto', 'Auto'], ['#FFFFFF', 'Białe'], ['#111111', 'Czarne'], ['#D8F24A', 'Limonka'], ['none', 'Bez linii']];
     var HEX = /^#[0-9A-Fa-f]{6}$/;
     var basePal = 'duperre';
-    var st = { fam: 'pro-fade', v: 2, pal: 'duperre', colors: PAL.duperre.colors.slice(), seed: 0, line: 'auto', layout: 'gallery', paper: 0, title: 'Mój plac', sub: 'Warszawa · Praga-Północ', note: 'Gramy od 2026', fmt: 1, frame: 1, wall: 0 };
+    var st = { fam: 'pro-fade', v: 2, pal: 'duperre', colors: PAL.duperre.colors.slice(), seed: 0, line: 'auto', layout: 'gallery', paper: 0, title: 'Mój plac', sub: 'Warszawa · Praga-Północ', note: 'Gramy od 2026', fmt: 1, frame: 0, wall: 0 };
     var flat = false;
 
     var sheet = $('[data-pl-sheet]'), frame = $('[data-pl-frame]'), wall = $('[data-pl-wall]');
@@ -1602,6 +1629,9 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     PL.ready = true;
     PL.get = function () { return { fam: st.fam, v: st.v, pal: st.pal, colors: st.colors.slice() }; };
     PL.order = function () { return { name: st.title || 'bez tytułu', text: summary() + ' · No. ' + edition() + ' · link: ' + shareUrl() }; };
+    PL.frame = function () { return FRAMES[st.frame][0]; };
+    PL.link = shareUrl;
+    PL.note = function () { return '„' + (st.title || 'bez tytułu') + '” · ' + summary() + ' · No. ' + edition(); };
     var shared = loadShared();
     draw();
     (window.requestIdleCallback || function (fn) { return setTimeout(fn, 400); })(paintThumbs);
@@ -1783,8 +1813,10 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     var status = $('[data-bl-status]');
     $('[data-bl-share]').addEventListener('click', function () { var url = shareUrl(); var done = function () { status.textContent = 'Link skopiowany. Otwiera dokładnie tę piłkę (bez logo).'; }; if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { status.textContent = url; }); else status.textContent = url; });
     $('[data-bl-order]').addEventListener('click', function () {
-      setLine('Zamówienie piłki: ', summary() + ' · ilość: do ustalenia · link: ' + shareUrl());
-      var att = $('#gc-attached'); if (att) { att.textContent = 'Projekt piłki dołączony do zapytania. Wpisz e-mail i ilość' + (logo ? ', a plik logo dołącz w odpowiedzi na mojego maila' : '') + '. Potwierdzę cenę i termin.'; att.hidden = false; }
+      var q = qtyOf('bl'), u1 = unitPrice('bl');
+      if (canBuy('bl')) { toCart('bl', shareUrl(), summary() + (logo ? ' · logo: ' + logoName + ' (prześlę mailem)' : '')); return; }
+      setLine('Zamówienie piłki: ', summary() + ' · ilość: ' + q + ' · cena: ' + zl(u1) + ' brutto/szt., razem ' + zl(q * u1) + ' · link: ' + shareUrl());
+      var att = $('#gc-attached'); if (att) { att.textContent = 'Projekt piłki z ceną dołączony do zapytania. Wpisz e-mail' + (logo ? ', a plik logo dołącz w odpowiedzi na mojego maila' : '') + '. Potwierdzę zamówienie i termin.'; att.hidden = false; }
       goContact();
     });
 
@@ -1901,9 +1933,11 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
   }
   $('[data-print-order]').addEventListener('click', function () {
     if (!PL.ready) { goContact(); return; }
+    var q = qtyOf('pl'), u1 = unitPrice('pl'), framed = PL.frame() !== 'none';
+    if (canBuy('pl')) { toCart('pl', PL.link(), PL.note()); return; }
     var o = PL.order();
-    setLine('Zamówienie plakatu: ', '„' + o.name + '” · ' + o.text);
-    var att = $('#gc-attached'); if (att) { att.textContent = 'Plakat dołączony do zapytania razem z linkiem do projektu. Wpisz e-mail, a potwierdzę cenę i wysyłkę.'; att.hidden = false; }
+    setLine('Zamówienie plakatu: ', '„' + o.name + '” · ' + o.text + ' · ilość: ' + q + ' · cena: ' + zl(u1) + ' brutto/szt., razem ' + zl(q * u1) + (framed ? ' + rama (wycena indywidualna)' : ''));
+    var att = $('#gc-attached'); if (att) { att.textContent = 'Plakat z ceną dołączony do zapytania razem z linkiem do projektu. Wpisz e-mail, a potwierdzę zamówienie i wysyłkę.'; att.hidden = false; }
     goContact();
   });
 
@@ -2007,6 +2041,41 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     });
   }
   nameField('textarea[name="project-details"]', 'Szczegóły projektu');
+
+  /* ---------- PRICES and CART: poster 99 zł, ball 999 zł brutto per piece ---------- */
+  function shop() { return window.GF_SHOP || {}; }
+  function unitPrice(key) { var s = shop(), p = key === 'pl' ? s.poster : s.ball; return p ? p.price : (key === 'pl' ? 99 : 999); }
+  function zl(v) { return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0zł'; }
+  function qtyOf(key) {
+    var i = $('[data-qty="' + key + '"]'); if (!i) return 1;
+    var q = Math.max(1, Math.min(999, parseInt(i.value, 10) || 1)); i.value = q; return q;
+  }
+  function canBuy(key) {
+    var s = shop(); if (!s.pay) return false;
+    if (!(key === 'pl' ? s.poster : s.ball)) return false;
+    if (key === 'pl') { if (PL.frame) { if (PL.frame() !== 'none') return false; } }
+    return true;
+  }
+  function priceUi(key) {
+    var q = qtyOf(key), u1 = unitPrice(key), framed = key === 'pl' ? (PL.frame ? PL.frame() !== 'none' : false) : false;
+    var tot = $('[data-total="' + key + '"]'), note = $('[data-price-note="' + key + '"]'), btn = $(key === 'pl' ? '[data-print-order]' : '[data-bl-order]');
+    if (tot) tot.textContent = zl(q * u1) + (framed ? ' + rama' : '');
+    if (note) note.textContent = zl(u1) + ' brutto / szt.' + (framed ? ' · rama: wycena indywidualna' : '') + (key === 'bl' ? ' · logo prześlesz mailem' : '');
+    if (btn) btn.innerHTML = (canBuy(key) ? 'Do koszyka · ' : 'Zamów · ') + zl(q * u1) + ' <span aria-hidden="true">→</span>';
+  }
+  function toCart(key, link, note) {
+    var s = shop(), p = key === 'pl' ? s.poster : s.ball;
+    var qs = new URLSearchParams({ 'add-to-cart': p.id, quantity: qtyOf(key), gf_config: link, gf_note: String(note).slice(0, 700) });
+    location.href = s.cart + (s.cart.indexOf('?') > -1 ? String.fromCharCode(38) : '?') + qs.toString();
+  }
+  ['pl', 'bl'].forEach(function (key) {
+    $$('[data-qty-step="' + key + '"]', root).forEach(function (b) {
+      b.addEventListener('click', function () { var i = $('[data-qty="' + key + '"]'); i.value = (parseInt(i.value, 10) || 1) + Number(b.dataset.d); priceUi(key); });
+    });
+    var inp = $('[data-qty="' + key + '"]'); if (inp) { inp.addEventListener('change', function () { priceUi(key); }); inp.addEventListener('input', function () { if (inp.value) priceUi(key); }); }
+    priceUi(key);
+  });
+  var frBox = $('[data-pl-frames]'); if (frBox) frBox.addEventListener('click', function () { setTimeout(function () { priceUi('pl'); }, 0); });
 
   /* ---------- Phones: the poster and ball editors start folded under their previews ---------- */
   var phone = matchMedia('(max-width: 700px)');

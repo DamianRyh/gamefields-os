@@ -208,7 +208,7 @@
     var LINES = [['auto', 'Auto'], ['#FFFFFF', 'Białe'], ['#111111', 'Czarne'], ['#D8F24A', 'Limonka'], ['none', 'Bez linii']];
     var HEX = /^#[0-9A-Fa-f]{6}$/;
     var basePal = 'duperre';
-    var st = { fam: 'pro-fade', v: 2, pal: 'duperre', colors: PAL.duperre.colors.slice(), seed: 0, line: 'auto', layout: 'gallery', paper: 0, title: 'Mój plac', sub: 'Warszawa · Praga-Północ', note: 'Gramy od 2026', fmt: 1, frame: 1, wall: 0 };
+    var st = { fam: 'pro-fade', v: 2, pal: 'duperre', colors: PAL.duperre.colors.slice(), seed: 0, line: 'auto', layout: 'gallery', paper: 0, title: 'Mój plac', sub: 'Warszawa · Praga-Północ', note: 'Gramy od 2026', fmt: 1, frame: 0, wall: 0 };
     var flat = false;
 
     var sheet = $('[data-pl-sheet]'), frame = $('[data-pl-frame]'), wall = $('[data-pl-wall]');
@@ -449,6 +449,9 @@
     PL.ready = true;
     PL.get = function () { return { fam: st.fam, v: st.v, pal: st.pal, colors: st.colors.slice() }; };
     PL.order = function () { return { name: st.title || 'bez tytułu', text: summary() + ' · No. ' + edition() + ' · link: ' + shareUrl() }; };
+    PL.frame = function () { return FRAMES[st.frame][0]; };
+    PL.link = shareUrl;
+    PL.note = function () { return '„' + (st.title || 'bez tytułu') + '” · ' + summary() + ' · No. ' + edition(); };
     var shared = loadShared();
     draw();
     (window.requestIdleCallback || function (fn) { return setTimeout(fn, 400); })(paintThumbs);
@@ -630,8 +633,10 @@
     var status = $('[data-bl-status]');
     $('[data-bl-share]').addEventListener('click', function () { var url = shareUrl(); var done = function () { status.textContent = 'Link skopiowany. Otwiera dokładnie tę piłkę (bez logo).'; }; if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { status.textContent = url; }); else status.textContent = url; });
     $('[data-bl-order]').addEventListener('click', function () {
-      setLine('Zamówienie piłki: ', summary() + ' · ilość: do ustalenia · link: ' + shareUrl());
-      var att = $('#gc-attached'); if (att) { att.textContent = 'Projekt piłki dołączony do zapytania. Wpisz e-mail i ilość' + (logo ? ', a plik logo dołącz w odpowiedzi na mojego maila' : '') + '. Potwierdzę cenę i termin.'; att.hidden = false; }
+      var q = qtyOf('bl'), u1 = unitPrice('bl');
+      if (canBuy('bl')) { toCart('bl', shareUrl(), summary() + (logo ? ' · logo: ' + logoName + ' (prześlę mailem)' : '')); return; }
+      setLine('Zamówienie piłki: ', summary() + ' · ilość: ' + q + ' · cena: ' + zl(u1) + ' brutto/szt., razem ' + zl(q * u1) + ' · link: ' + shareUrl());
+      var att = $('#gc-attached'); if (att) { att.textContent = 'Projekt piłki z ceną dołączony do zapytania. Wpisz e-mail' + (logo ? ', a plik logo dołącz w odpowiedzi na mojego maila' : '') + '. Potwierdzę zamówienie i termin.'; att.hidden = false; }
       goContact();
     });
 
@@ -748,9 +753,11 @@
   }
   $('[data-print-order]').addEventListener('click', function () {
     if (!PL.ready) { goContact(); return; }
+    var q = qtyOf('pl'), u1 = unitPrice('pl'), framed = PL.frame() !== 'none';
+    if (canBuy('pl')) { toCart('pl', PL.link(), PL.note()); return; }
     var o = PL.order();
-    setLine('Zamówienie plakatu: ', '„' + o.name + '” · ' + o.text);
-    var att = $('#gc-attached'); if (att) { att.textContent = 'Plakat dołączony do zapytania razem z linkiem do projektu. Wpisz e-mail, a potwierdzę cenę i wysyłkę.'; att.hidden = false; }
+    setLine('Zamówienie plakatu: ', '„' + o.name + '” · ' + o.text + ' · ilość: ' + q + ' · cena: ' + zl(u1) + ' brutto/szt., razem ' + zl(q * u1) + (framed ? ' + rama (wycena indywidualna)' : ''));
+    var att = $('#gc-attached'); if (att) { att.textContent = 'Plakat z ceną dołączony do zapytania razem z linkiem do projektu. Wpisz e-mail, a potwierdzę zamówienie i wysyłkę.'; att.hidden = false; }
     goContact();
   });
 
@@ -854,6 +861,41 @@
     });
   }
   nameField('textarea[name="project-details"]', 'Szczegóły projektu');
+
+  /* ---------- PRICES and CART: poster 99 zł, ball 999 zł brutto per piece ---------- */
+  function shop() { return window.GF_SHOP || {}; }
+  function unitPrice(key) { var s = shop(), p = key === 'pl' ? s.poster : s.ball; return p ? p.price : (key === 'pl' ? 99 : 999); }
+  function zl(v) { return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0zł'; }
+  function qtyOf(key) {
+    var i = $('[data-qty="' + key + '"]'); if (!i) return 1;
+    var q = Math.max(1, Math.min(999, parseInt(i.value, 10) || 1)); i.value = q; return q;
+  }
+  function canBuy(key) {
+    var s = shop(); if (!s.pay) return false;
+    if (!(key === 'pl' ? s.poster : s.ball)) return false;
+    if (key === 'pl') { if (PL.frame) { if (PL.frame() !== 'none') return false; } }
+    return true;
+  }
+  function priceUi(key) {
+    var q = qtyOf(key), u1 = unitPrice(key), framed = key === 'pl' ? (PL.frame ? PL.frame() !== 'none' : false) : false;
+    var tot = $('[data-total="' + key + '"]'), note = $('[data-price-note="' + key + '"]'), btn = $(key === 'pl' ? '[data-print-order]' : '[data-bl-order]');
+    if (tot) tot.textContent = zl(q * u1) + (framed ? ' + rama' : '');
+    if (note) note.textContent = zl(u1) + ' brutto / szt.' + (framed ? ' · rama: wycena indywidualna' : '') + (key === 'bl' ? ' · logo prześlesz mailem' : '');
+    if (btn) btn.innerHTML = (canBuy(key) ? 'Do koszyka · ' : 'Zamów · ') + zl(q * u1) + ' <span aria-hidden="true">→</span>';
+  }
+  function toCart(key, link, note) {
+    var s = shop(), p = key === 'pl' ? s.poster : s.ball;
+    var qs = new URLSearchParams({ 'add-to-cart': p.id, quantity: qtyOf(key), gf_config: link, gf_note: String(note).slice(0, 700) });
+    location.href = s.cart + (s.cart.indexOf('?') > -1 ? String.fromCharCode(38) : '?') + qs.toString();
+  }
+  ['pl', 'bl'].forEach(function (key) {
+    $$('[data-qty-step="' + key + '"]', root).forEach(function (b) {
+      b.addEventListener('click', function () { var i = $('[data-qty="' + key + '"]'); i.value = (parseInt(i.value, 10) || 1) + Number(b.dataset.d); priceUi(key); });
+    });
+    var inp = $('[data-qty="' + key + '"]'); if (inp) { inp.addEventListener('change', function () { priceUi(key); }); inp.addEventListener('input', function () { if (inp.value) priceUi(key); }); }
+    priceUi(key);
+  });
+  var frBox = $('[data-pl-frames]'); if (frBox) frBox.addEventListener('click', function () { setTimeout(function () { priceUi('pl'); }, 0); });
 
   /* ---------- Phones: the poster and ball editors start folded under their previews ---------- */
   var phone = matchMedia('(max-width: 700px)');

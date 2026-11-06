@@ -239,13 +239,21 @@
         <div class="chips" data-pl-walls role="group" aria-label="Kolor ściany"></div>
       </div>
       <div class="pl-order">
-        <div class="pl-sum" data-pl-sum>Duperré Fade · 50 × 70 cm · rama czarna</div>
+        <div class="pl-sum" data-pl-sum>Duperré Fade · 50 × 70 cm</div>
+        <div class="price-row">
+          <div class="qty" role="group" aria-label="Ilość">
+            <button type="button" data-qty-step="pl" data-d="-1" aria-label="Mniej">−</button>
+            <input type="number" inputmode="numeric" min="1" max="999" value="1" data-qty="pl" aria-label="Liczba plakatów">
+            <button type="button" data-qty-step="pl" data-d="1" aria-label="Więcej">+</button>
+          </div>
+          <div class="price"><b data-total="pl">99 zł</b><small data-price-note="pl">99 zł brutto / szt.</small></div>
+        </div>
         <div class="pl-actions">
           <button type="button" class="pill" data-print-order style="background:var(--violet);color:#fff">Zamów print <span aria-hidden="true">→</span></button>
           <button type="button" class="chip" data-pl-share>Kopiuj link do projektu</button>
           <a class="chip" data-pl-court href="/konfigurator-boisk/">Zobacz ten wzór na boisku 3D ↗</a>
         </div>
-        <span class="m pl-status" data-pl-status role="status">Zamówienie trafi do formularza poniżej · cenę i wysyłkę potwierdzę mailowo</span>
+        <span class="m pl-status" data-pl-status role="status">Cena 99 zł brutto za sztukę · wysyłkę potwierdzę mailowo</span>
       </div>
     </div>
   </div>
@@ -355,12 +363,20 @@
       </div>
       <div class="pl-order">
         <div class="pl-sum" data-bl-sum></div>
+        <div class="price-row">
+          <div class="qty" role="group" aria-label="Ilość">
+            <button type="button" data-qty-step="bl" data-d="-1" aria-label="Mniej">−</button>
+            <input type="number" inputmode="numeric" min="1" max="999" value="1" data-qty="bl" aria-label="Liczba piłek">
+            <button type="button" data-qty-step="bl" data-d="1" aria-label="Więcej">+</button>
+          </div>
+          <div class="price"><b data-total="bl">999 zł</b><small data-price-note="bl">999 zł brutto / szt.</small></div>
+        </div>
         <div class="pl-actions">
           <button type="button" class="pill" data-bl-order style="background:var(--violet);color:#fff">Zamów piłki <span aria-hidden="true">→</span></button>
           <button type="button" class="chip" data-bl-share>Kopiuj link do piłki</button>
           <button type="button" class="chip" data-bl-png>Pobierz podgląd PNG</button>
         </div>
-        <span class="m pl-status" data-bl-status role="status">Projekt piłki trafi do formularza poniżej · cenę, ilość i termin potwierdzę mailowo</span>
+        <span class="m pl-status" data-bl-status role="status">Cena 999 zł brutto za sztukę · termin potwierdzę mailowo</span>
       </div>
     </div>
   </div>
