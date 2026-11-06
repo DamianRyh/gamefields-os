@@ -222,6 +222,9 @@ export default function Home(){
    if(!params.has("workshop")&&arena&&previewArenas.includes(arena as PreviewArena)&&previewCoats.includes(coat as PreviewCoat)){
      const paint=previewPaint(coat as PreviewCoat,arena);setP(v=>v.arenaModel===arena?{...v,arenaDesign:{...(v.arenaDesign||defaultArena),panelColor:paint,frameColor:paint}}:v);
    }
+   /* Homepage hero: ?arena=o1&panel=D9142B&frame=2B2226 carries the two colours picked on gamefields.eu (frame also paints the goals). */
+   const hex6=(k:string)=>{const x=params.get(k);return x&&/^[0-9A-Fa-f]{6}$/.test(x)?'#'+x.toLowerCase():null},panelHex=hex6("panel"),frameHex=hex6("frame");
+   if(!params.has("workshop")&&arena&&(panelHex||frameHex))setP(v=>v.arenaModel===arena?{...v,arenaDesign:{...(v.arenaDesign||defaultArena),...(panelHex?{panelColor:panelHex}:{}),...(frameHex?{frameColor:frameHex,goalColor:frameHex}:{})}}:v);
    if(familyId&&patternFamilies.some(x=>x.id===familyId)){
      const family=getPatternFamily(familyId);
      const variant=Math.max(1,Math.min(12,Number.isFinite(variantRaw)?variantRaw:1));
