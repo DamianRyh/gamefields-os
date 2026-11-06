@@ -95,3 +95,23 @@ body.gft .gft-post .gft-prose > section[style] a{color:var(--gf-lime)}
   body.gft .gft-post .gft-prose > section[style] h1{font-size:34px!important}
 }
 body.gft .gft-prose{overflow-wrap:break-word}
+
+/* ---------- Gamefields City (#g20 map, #gfc2 concept, #gfc-alerts, #gfc-b2b) ---------- */
+/* light pages: paper, plum ink, violet actions */
+body.gft :is(#g20,#gfc2){--bg:#F4F1EE;--ink:#47132D;--text:#47132D;--muted:#6F5A66;--orange:#6336F5;--accent:#6336F5;--line:#D9CFD4;--panel:#fff;--card:#fff;
+  background:var(--gf-paper)!important;color:var(--gf-ink)!important}
+/* dark pages: plum band like the homepage ball section, lime actions */
+body.gft :is(#gfc-alerts,#gfc-b2b){--bg:#1C0912;--panel:#2A1220;--line:rgba(244,241,238,.18);--muted:#BBA8B1;--text:#F4F1EE;--accent:#D8F24A;
+  background:var(--gf-plum)!important;color:#F4F1EE!important}
+body.gft :is(#g20,#gfc2,#gfc-alerts,#gfc-b2b) :is(h1,h2,h3){font-family:var(--gf-font)!important;font-weight:800!important;letter-spacing:-.045em!important;line-height:.98!important;text-transform:none!important}
+body.gft :is(#g20,#gfc2,#gfc-alerts,#gfc-b2b) h1{font-size:clamp(40px,6.4vw,96px)!important;letter-spacing:-.055em!important;line-height:.92!important}
+body.gft :is(#g20,#gfc2,#gfc-alerts,#gfc-b2b) h1 em{font-style:normal;color:var(--gf-violet)}
+body.gft :is(#gfc-alerts,#gfc-b2b) h1 em{color:var(--gf-lime)}
+body.gft :is(#g20,#gfc2,#gfc-alerts,#gfc-b2b) :is(.btn,.c2-btn,button[class*="btn"],a[class*="btn"]){border-radius:999px!important;font-family:var(--gf-font)!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;min-height:44px}
+body.gft :is(#g20,#gfc2) :is(.btn.orange,.c2-btn.orange,.c2-btn.primary){background:var(--gf-violet)!important;color:#fff!important;border-color:var(--gf-violet)!important}
+body.gft :is(#g20,#gfc2) :is(.btn.dark,.c2-btn.dark){background:var(--gf-ink)!important;color:var(--gf-paper)!important}
+body.gft :is(#gfc-alerts,#gfc-b2b) :is(button,.ga-btn,.gb-btn,a[class*="btn"]){background:var(--gf-lime)!important;color:var(--gf-ink)!important;border-color:var(--gf-lime)!important}
+body.gft :is(#g20,#gfc2,#gfc-alerts,#gfc-b2b) :is(input,select,textarea){border-radius:12px!important;font-family:var(--gf-font)!important}
+/* the City bars become a sub-navigation under the site header, not a second sticky header */
+body.gft:not(.elementor-template-canvas) :is(#g20 > .g20 > .nav,#gfc2 .c2-nav,#gfc-b2b .gb-top){position:relative!important;top:auto!important}
+body.gft :is(#g20 .brand,#gfc2 .c2-brand){font-weight:800!important;letter-spacing:-.02em!important}

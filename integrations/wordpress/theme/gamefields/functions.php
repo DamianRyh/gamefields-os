@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.4' );
+define( 'GFT_VERSION', '1.0.5' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -61,9 +61,9 @@ add_action( 'wp_head', function () {
 		return; // the theme has its own Additional CSS now
 	}
 	$legacy = wp_get_custom_css( 'savoy' );
-	// The monochrome "Minimal v2" identity and its GamefieldsSans font are replaced by gft-standard.css;
-	// keep the City templates, the cookie banner and the headline fixes that follow it.
-	$cut = strpos( (string) $legacy, '/* Minimal identity for City' );
+	// The monochrome "Minimal v2" identity (incl. City) and its GamefieldsSans font are replaced by
+	// gft-standard.css; keep only the cookie banner and headline fixes written on 2026-11-06.
+	$cut = strpos( (string) $legacy, '/* Gamefields 2026-11-06: cookie banner' );
 	if ( false !== $cut ) {
 		$legacy = substr( $legacy, $cut );
 	}
