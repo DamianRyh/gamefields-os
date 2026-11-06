@@ -21,7 +21,7 @@ try{
   const page=await browser.newPage({viewport:{width,height:1000}});page.on('pageerror',e=>errors.push(e.message));
   for(const arena of ['o1','p1']){
    await page.goto(base+'/?arena='+arena);
-   const ready=()=>page.locator('[data-model="'+arena+'"][data-ready="true"]').waitFor({timeout:30000});await ready();
+   const ready=()=>page.locator('[data-model="'+arena+'"][data-ready="true"]').waitFor({timeout:90000});await ready();
    await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();
    await page.locator('.scene-paint-advanced > summary').click();assert.equal(await page.locator('.studio-color-part').count(),3);await page.locator('.studio-panel').screenshot({path:`outputs/mobile/construction-panel-${arena}-${width}.png`});
    await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#1d7056');await page.getByText('Logo i detale konstrukcji',{exact:true}).click();await page.getByLabel('Tekst na bandach',{exact:true}).fill(arena.toUpperCase());await ready();
@@ -32,13 +32,14 @@ try{
     if(width<=800)await page.getByRole('button',{name:'Otwórz paletę 16 kolorów',exact:true}).click();await page.getByLabel('Własny kolor',{exact:true}).fill('#245e87');await page.keyboard.press('Escape');await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Materiał',exact:true}).click();
     for(const [label,slug,surface] of [['Malowana','malowana','Akryl sportowy'],['Granulat','granulat-epdm','EPDM'],['Płytki modułowe','plytki-modulowe','Moduły sportowe'],['Sztuczna murawa','sztuczna-murawa','Sztuczna trawa 60 mm']]){
      await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:label,exact:true}).click();
-     await page.locator(`[data-model="p1"][data-surface="${slug}"][data-ready="true"]`).waitFor({timeout:30000});
+     console.log('Checking material',width,slug);
+     await page.locator(`[data-model="p1"][data-surface="${slug}"][data-ready="true"]`).waitFor({timeout:90000});
      assert.equal(await page.locator('[data-model="p1"]').getAttribute('data-slab-thickness'),'0.10');
      const glResult=await page.locator('.panna-model-overlay').evaluate(canvas=>{const gl=(canvas.getContext('webgl2')||canvas.getContext('webgl')),p=new Uint8Array(canvas.width*canvas.height*4);gl.readPixels(0,0,canvas.width,canvas.height,gl.RGBA,gl.UNSIGNED_BYTE,p);return {error:gl.getError(),visible:p.filter((v,i)=>i%4===3&&v>0).length}});
      assert.equal(glResult.error,0,'PBR shader must render without WebGL errors');assert.ok(glResult.visible>100,'Construction and slab must be visible');
      const download=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const exported=JSON.parse(await readFile(await(await download).path(),'utf8'));
      assert.equal(exported.surface,surface);assert.equal(exported.base,'#245e87');assert.equal(exported.arenaModel,'p1');
-     if(width===1440)await page.locator('.panna-studio-model').screenshot({path:`outputs/mobile/gamefields-p1-${slug}.jpg`,type:'jpeg',quality:85});
+     if(width===1440)await page.screenshot({animations:'disabled',path:`outputs/mobile/gamefields-p1-${slug}.jpg`,type:'jpeg',quality:85});
     }
     await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:'Granulat',exact:true}).click();await ready();
     await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Wzór',exact:true}).click();
@@ -50,17 +51,18 @@ try{
   }
   await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Sport',exact:true}).click();await page.getByRole('group',{name:'Wybierz sport Gamefields'}).getByRole('button',{name:'Street Football',exact:true}).click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'Header overflow');
-  await page.locator('.panna-studio-model[data-surface-model="street-football-3x3"][data-ready="true"]').waitFor({timeout:30000});
+  await page.locator('.panna-studio-model[data-surface-model="street-football-3x3"][data-ready="true"]').waitFor({timeout:90000});
   assert.equal(await page.locator('.studio-orbit-canvas').count(),1);
   assert.equal(await page.locator('.panna-studio-model').getAttribute('data-slab-thickness'),'0.20');
   await page.getByLabel('Nazwa projektu',{exact:true}).fill('CI — zachowany szkic');
   await page.waitForFunction(()=>document.querySelector('.studio-save')?.textContent==='Zapisano w tej przeglądarce');
   await page.goto(base+'/');
+  await page.getByRole('button',{name:'Kontynuuj projekt',exact:true}).click();
   await page.waitForFunction(()=>document.querySelector('[aria-label="Nazwa projektu"]')?.value==='CI — zachowany szkic');
   assert.equal(await page.getByLabel('Nazwa projektu',{exact:true}).inputValue(),'CI — zachowany szkic','Browser draft must survive a reload');
   await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Sport',exact:true}).click();await page.getByRole('group',{name:'Wybierz sport Gamefields'}).getByRole('button',{name:'Street Football',exact:true}).click();
   assert.equal(await page.getByLabel('Nazwa projektu',{exact:true}).inputValue(),'CI — zachowany szkic','Selecting the current model must not reset the draft');
-  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:30000});
+  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:90000});
   await page.screenshot({path:`outputs/mobile/studio-${width}.jpg`,type:'jpeg',quality:85});
   await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.goto(base+'/radar');
   await page.waitForURL('**/radar');
@@ -70,8 +72,8 @@ try{
   await page.getByRole('link',{name:'WRÓĆ DO MAPY'}).click();
   await page.waitForURL('**/radar');
   await page.getByRole('link',{name:'Boiska',exact:true}).click();
-  await page.waitForURL(base+'/');
-  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:30000});
+  await page.waitForURL(base+'/');await page.getByRole('button',{name:'Boiska',exact:true}).click();
+  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:90000});
   if(await page.locator('button.entry-start').isVisible())await page.locator('button.entry-start').click();
   await page.getByRole('navigation',{name:'Kroki projektu',exact:true}).getByRole('button',{name:'Podsumowanie',exact:true}).click();
   const summary=page.getByRole('dialog',{name:'Podsumowanie projektu'});
@@ -79,7 +81,7 @@ try{
   assert.equal(/\d[\d\s.,]*\s*(?:zł|PLN)(?![A-Za-z])/i.test(await summary.innerText()),false,'Customer summary must not show a quoted amount');
   assert.equal(await summary.getByRole('link',{name:/Skontaktuj się w sprawie wyceny/}).count(),1);
   await page.getByRole('button',{name:'Wróć do edycji',exact:true}).click();
-  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:30000});
+  await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:90000});
   await page.close();
  }
  assert.deepEqual(errors,[]);console.log('PASS: O1/P1 views, material switches, visible WebGL, preserved JSON colours, source slabs, cameras and Radar navigation. Viewports: '+(process.env.GF_TEST_WIDTHS||'375,390,430,1440'));

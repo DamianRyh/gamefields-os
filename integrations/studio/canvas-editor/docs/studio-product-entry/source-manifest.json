@@ -1,0 +1,15 @@
+{
+  "source": "https://www.gamefields.eu/",
+  "date": "2026-11-06",
+  "reuse": "GFBall v2 geometry/panel printing; pure poster SVG functions; existing lib/court-art-pro.mjs shared with Studio",
+  "files": [
+    {
+      "file": "module-13.js",
+      "sha256": "58855795df2fb77ddd4b9b8aad3cf6d86baec43b1186e8892789ede0b2d46f64"
+    },
+    {
+      "file": "module-14.js",
+      "sha256": "98f066cc1c72aad51bf402462ae2dc9ab3311971a125545c8e9ac546781c7fd6"
+    }
+  ]
+}

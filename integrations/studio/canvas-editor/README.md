@@ -471,3 +471,9 @@ Testy aktualnego WordPress przy 390 i 1440 px: PASS, bez wysyłania kolejnych wi
 
 ### Wycena indywidualna
 Studio pokazuje kontakt do wyceny zamiast kwot i różnic cenowych. Podsumowanie i pakiet do zapytania przekazują konfigurację bez automatycznej kalkulacji; obowiązujące stawki i mechanizm obliczeń pozostają bez zmian.
+
+## Koszulka 3D Blender — 2026-11-06
+Dodano narzędzie Koszulki do wspólnego Studio: oryginalny model GLB, wzory i kolory, numery, herb, nazwiska, skład i rozmiary, dekolt okrągły/V, Cofnij i zapis Project.kit/JSON. Pakiet zapytania pomija obraz logo; publiczny Warsztat i prywatnościowe linki usuwają dane drużyny. Zachowano bieżącą indywidualną wycenę i wszystkie modele boisk. Model neutralny korzysta z referencji wyłącznie do kroju. GLB, TypeScript, test:studio i produkcyjna kompilacja PASS. Test koszulek na 390/1440: wzory, kolory, dekolt, logo, skład, Cofnij, reload, JSON, zapytanie bez obrazu logo i powrót do boisk PASS. Publikacja potwierdzana oddzielnym receipt.
+
+## Wspólne wejście do Studio — 2026-11-06
+Ekran wyboru pięciu produktów w istniejącej aplikacji; bez nowego Studia, koszyka czy odrębnego zapisu. Plakaty i piłki używają renderera plakatów oraz rdzenia GFBall v2 ze strony głównej i wspólnego silnika Signature Pro. Te same panele, Cofnij, JSON, historia, szkic i indywidualna wycena. Modele boisk i nawierzchni bez zmian. Miniatury korzystają z rzeczywistych modeli/wzorów; dodatkowy samodzielny eksperyment 3-szablonowych edytorów wycofano. TypeScript i kontrakt 32 paneli/960 plakatów/prywatności PASS; publikacja i kontrola UI w osobnym potwierdzeniu.

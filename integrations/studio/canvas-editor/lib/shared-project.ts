@@ -6,7 +6,7 @@ export const SHARE_LIFETIME=30*24*60*60*1000;
 export function shareProject(raw:unknown,includePrivate=false):Project{
  const p=parseVaultProject(raw);
  if(includePrivate)return p;
- return parseVaultProject({...p,id:'GF-SHARED',name:'Projekt Gamefields',date:'',objects:p.objects.filter(o=>o.kind==='equipment'),arenaDesign:p.arenaDesign?{...p.arenaDesign,text:'',src:undefined}:undefined});
+ return parseVaultProject({...p,kit:undefined,printDesign:undefined,id:'GF-SHARED',name:'Projekt Gamefields',date:'',objects:p.objects.filter(o=>o.kind==='equipment'),arenaDesign:p.arenaDesign?{...p.arenaDesign,text:'',src:undefined}:undefined});
 }
 export const validShareId=(id:string)=>/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(id);
 export const validShareKey=(key:string)=>/^[0-9a-f]{64}$/.test(key);

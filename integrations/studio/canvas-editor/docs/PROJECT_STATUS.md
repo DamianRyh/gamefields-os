@@ -498,3 +498,11 @@ Testy aktualnego WordPress przy 390 i 1440 px: PASS, bez wysyłania kolejnych wi
 
 ## Indywidualna wycena — przygotowanie do wydania
 W kartach wyboru, podsumowaniu i porównaniu wariantów nie pokazujemy gotowych kwot. Kontakt prowadzi do indywidualnej wyceny, a pakiet do zapytania nie zawiera kalkulacji. Nie zmieniono stawek ani silnika cen. Wynik wdrożenia zapisujemy w DEPLOYMENT.md.
+
+## Koszulka 3D Blender — 2026-11-06
+Dodano narzędzie Koszulki do wspólnego Studio: oryginalny model GLB, wzory i kolory, numery, herb, nazwiska, skład i rozmiary, dekolt okrągły/V, Cofnij i zapis Project.kit/JSON. Pakiet zapytania pomija obraz logo; publiczny Warsztat i prywatnościowe linki usuwają dane drużyny. Zachowano bieżącą indywidualną wycenę i wszystkie modele boisk. Model neutralny korzysta z referencji wyłącznie do kroju. GLB, TypeScript, test:studio i produkcyjna kompilacja PASS. Test koszulek na 390/1440: wzory, kolory, dekolt, logo, skład, Cofnij, reload, JSON, zapytanie bez obrazu logo i powrót do boisk PASS. Publikacja potwierdzana oddzielnym receipt.
+
+Pakiet produkcyjny przekroczył 256 MiB po dodaniu koszulek. Powtarzalny build pomija wyłącznie dwie nieużywane kopie źródeł `.blend` w dist/client/arenas; oryginały, GLB, manifesty i wszystkie grafiki pozostają zachowane. Testowe zrzuty desktopu przechwytują viewport zamiast czekać na stabilność animowanego modelu; asercje WebGL i projektu pozostają bez zmian.
+
+## Wspólne wejście do Studio — 2026-11-06
+Ekran wyboru pięciu produktów w istniejącej aplikacji; bez nowego Studia, koszyka czy odrębnego zapisu. Plakaty i piłki używają renderera plakatów oraz rdzenia GFBall v2 ze strony głównej i wspólnego silnika Signature Pro. Te same panele, Cofnij, JSON, historia, szkic i indywidualna wycena. Modele boisk i nawierzchni bez zmian. Miniatury korzystają z rzeczywistych modeli/wzorów; dodatkowy samodzielny eksperyment 3-szablonowych edytorów wycofano. TypeScript i kontrakt 32 paneli/960 plakatów/prywatności PASS; publikacja i kontrola UI w osobnym potwierdzeniu.

@@ -1,0 +1,64 @@
+/* Koszulki in Studio. Colours follow gamefields.eu: plum #47132d, violet #6336f5, line #e8e3e6, soft #f1ecff. */
+@font-face{font-family:"Bebas Neue";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/kit/bebas-neue-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Bebas Neue";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/kit/bebas-neue-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+.studio-kit-3d{position:relative;width:min(100%,640px);aspect-ratio:1;margin:auto;touch-action:pan-y;cursor:grab}
+.studio-kit-3d:active{cursor:grabbing}
+.studio-kit-3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.studio-kit-3d.is-failed{display:grid;place-items:center;text-align:center;padding:24px;color:#74656d;cursor:default}
+.studio-kit-turn{position:absolute;right:0;top:0;display:flex;gap:4px;border:1px solid #e8e3e6;border-radius:12px;padding:3px;background:#fff}
+.studio-kit-turn button{border:0;background:none;border-radius:9px;padding:6px 12px;font:inherit;font-size:13px;color:#47132d;cursor:pointer}
+.studio-kit-turn button:hover{background:#f1ecff}
+.studio-kit-hint{position:absolute;left:50%;bottom:4px;transform:translateX(-50%);font-size:12px;color:#74656d;white-space:nowrap;pointer-events:none;transition:opacity .4s}
+.studio-kit-3d.is-touched .studio-kit-hint{opacity:0}
+
+.studio-kit-panel{display:grid;gap:14px;align-content:start}
+.studio-kit-match{border:1px solid #c2afff;background:#f1ecff;color:#47132d;border-radius:12px;padding:12px 14px;text-align:left;font:inherit;font-size:14px;cursor:pointer}
+.studio-kit-presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.studio-kit-presets button{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;border:1px solid #e8e3e6;background:#fff;border-radius:12px;padding:10px;text-align:left;font:inherit;font-size:14px;color:#47132d;cursor:pointer;min-height:48px}
+.studio-kit-presets button[aria-pressed="true"]{border-color:#6336f5;box-shadow:inset 0 0 0 1px #6336f5;background:#f1ecff}
+.studio-kit-swatch{display:flex;gap:2px}
+.studio-kit-swatch i{width:10px;height:26px;border-radius:3px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.studio-kit-presets b{font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.studio-kit-colors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.studio-kit-colors label{display:grid;gap:6px;font-size:12px;color:#74656d}
+.studio-kit-colors input{width:100%;height:44px;border:1px solid #e8e3e6;border-radius:10px;padding:3px;background:#fff;cursor:pointer}
+.studio-kit-link{justify-self:start;border:0;background:none;color:#6336f5;font:inherit;font-size:14px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0}
+.studio-kit-row{display:flex;flex-wrap:wrap;gap:8px}
+.studio-kit-seg{display:inline-flex;gap:4px;border:1px solid #e8e3e6;border-radius:14px;padding:4px}
+.studio-kit-seg button{border:0;background:none;border-radius:10px;padding:8px 14px;font:inherit;font-size:14px;color:#47132d;cursor:pointer;min-height:40px}
+.studio-kit-seg button[aria-pressed="true"]{background:#6336f5;color:#fff}
+.studio-kit-field{display:grid;gap:6px;font-size:13px;font-weight:600;color:#47132d}
+.studio-kit-field :is(input,select){min-height:46px;border:1px solid #d5c8cf;border-radius:10px;padding:10px 12px;font:inherit;font-size:16px;font-weight:400;background:#fff;color:#47132d}
+.studio-kit-logo{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.studio-kit-logo img,.studio-kit-logo-empty{width:56px;height:56px;border-radius:12px;border:1px dashed #cfc5d0;object-fit:contain;background:#faf9f8}
+.studio-kit-logo button{display:inline-flex;align-items:center;gap:6px;border:1px solid #e8e3e6;background:#fff;border-radius:10px;min-height:40px;padding:0 12px;font:inherit;font-size:14px;color:#47132d;cursor:pointer}
+.studio-kit-warn{color:#a30032;font-size:13px;margin:0}
+.studio-kit-roster{border:1px solid #e8e3e6;border-radius:12px;overflow:auto;max-height:340px}
+.studio-kit-roster table{width:100%;border-collapse:collapse;font-size:14px}
+.studio-kit-roster th{position:sticky;top:0;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;color:#74656d;padding:10px 8px;background:#faf9f8;border-bottom:1px solid #e8e3e6}
+.studio-kit-roster td{padding:3px 4px;border-bottom:1px solid #e8e3e6}
+.studio-kit-roster tr:last-child td{border-bottom:0}
+.studio-kit-roster tr.is-selected td{background:#f1ecff}
+.studio-kit-roster :is(input,select){width:100%;min-width:0;border:1px solid transparent;border-radius:8px;padding:8px 6px;background:transparent;font:inherit;font-size:15px;color:#47132d}
+.studio-kit-roster :is(input,select):focus{border-color:#6336f5;outline:none;background:#fff}
+.studio-kit-roster .is-number{width:64px}
+.studio-kit-roster .is-size{width:88px}
+.studio-kit-roster .is-remove{width:40px;text-align:center}
+.studio-kit-roster .is-remove button{border:0;background:none;color:#74656d;width:32px;height:32px;border-radius:8px;cursor:pointer}
+.studio-kit-roster .is-remove button:hover:not(:disabled){color:#a30032;background:#fff}
+.studio-kit-roster tr.is-duplicate .is-number input{color:#a30032;font-weight:700}
+.studio-kit-add{justify-self:start;display:inline-flex;align-items:center;gap:6px;border:1px solid #e8e3e6;background:#fff;border-radius:10px;min-height:40px;padding:0 12px;font:inherit;font-size:14px;color:#47132d;cursor:pointer}
+.studio-kit-summary{display:grid;gap:8px;margin:0;border:1px solid #e8e3e6;border-radius:12px;padding:14px;background:#faf9f8}
+.studio-kit-summary div{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.studio-kit-summary dt{color:#74656d}
+.studio-kit-summary dd{margin:0;font-weight:600;text-align:right}
+.studio-kit-panel .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(max-width:420px){.studio-kit-presets{grid-template-columns:minmax(0,1fr)}.studio-kit-colors{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Four editing areas, including Koszulki, in the visible navigation. */
+.studio-panel-tool-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
+.studio-shell[data-tool="kit"] .studio-render>.studio-kit-3d{height:100%;width:auto;max-width:100%;aspect-ratio:1;margin:auto}
+.studio-shell[data-tool="kit"] :is(.studio-showroom-nav,.studio-bottom-dock,.studio-modular-standard,.studio-construction-preview-note,.studio-plan-note,.studio-stage-footer){display:none!important}
+.studio-kit-presets{grid-template-columns:minmax(0,1fr)}
+.studio-shell[data-tool="kit"] .studio-kit-turn{top:40px;z-index:2}
