@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.5' );
+define( 'GFT_VERSION', '1.0.6' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -225,3 +225,6 @@ add_filter( 'woocommerce_breadcrumb_defaults', function ( $d ) {
 	$d['home']        = 'Gamefields';
 	return $d;
 } );
+
+/* Gamefields City forms (anonymous submissions held for moderation, e-mail to the owner, /gfc/v1/lead). */
+require_once get_template_directory() . '/inc/city.php';

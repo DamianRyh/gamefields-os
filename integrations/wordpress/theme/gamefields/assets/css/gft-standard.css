@@ -115,3 +115,14 @@ body.gft :is(#g20,#gfc2,#gfc-alerts,#gfc-b2b) :is(input,select,textarea){border-
 /* the City bars become a sub-navigation under the site header, not a second sticky header */
 body.gft:not(.elementor-template-canvas) :is(#g20 > .g20 > .nav,#gfc2 .c2-nav,#gfc-b2b .gb-top){position:relative!important;top:auto!important}
 body.gft :is(#g20 .brand,#gfc2 .c2-brand){font-weight:800!important;letter-spacing:-.02em!important}
+
+/* City map page: list of projects until the map is allowed */
+body.gft #g20Map{position:relative}
+body.gft .gft-city-fallback{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;gap:12px;padding:clamp(18px,3vw,32px);background:var(--gf-paper);overflow:auto}
+body.gft .gft-city-fallback ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+body.gft .gft-city-fallback a{display:grid;gap:4px;padding:14px 16px;background:#fff;border:1px solid var(--gf-line);text-decoration:none;color:var(--gf-ink)}
+body.gft .gft-city-fallback a:hover{border-color:var(--gf-violet)}
+body.gft .gft-city-fallback b{font-size:17px;letter-spacing:-.02em}
+body.gft .gft-city-fallback span{font-size:13px;color:var(--gf-muted)}
+body.gft .gft-city-note{margin:auto 0 0;font-size:14px;color:var(--gf-muted)}
+body.gft .gft-city-consent{margin-left:6px;min-height:40px;padding:0 16px;border:1.5px solid var(--gf-ink);border-radius:999px;background:transparent;color:var(--gf-ink);font:600 14px var(--gf-font);cursor:pointer}
