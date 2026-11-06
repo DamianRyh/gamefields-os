@@ -64,10 +64,11 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .ball::after{content:"";position:absolute;inset:10px;border-radius:50%;background:var(--ink);opacity:.85}
 .gfs .hero-foot{grid-column:1/-1;grid-row:3;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
 .gfs .ctrl{display:grid;gap:12px}
-.gfs .dots{display:flex;gap:12px;align-items:center}
-.gfs .dot{width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;padding:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18);transition:transform .2s;outline-offset:4px}
+.gfs .dots{display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:min(100%,560px)}
+.gfs .dot{width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;padding:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);transition:transform .2s;outline-offset:4px}
 .gfs .dot:hover{transform:scale(1.1)}
 .gfs .dot[aria-pressed="true"]{outline:2px solid currentColor}
+.gfs .hero .dot[aria-pressed="true"]{outline:3px solid #FFFFFF;outline-offset:3px}
 
 .gfs .ticker{overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--paper);padding-block:22px}
 .gfs .ticker-track{display:inline-flex;gap:48px;animation:gfsticker 38s linear infinite;padding-left:48px}

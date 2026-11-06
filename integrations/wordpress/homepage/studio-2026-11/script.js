@@ -55,11 +55,19 @@
   }
 
   /* ---------- HERO: 3D model + court colour ---------- */
+  /* The hero keeps one navy ground (owner, 2026-11-06); only the model and its colour change. */
+  var HERO = { ground: '#1F2A6B', ink: '#FFFFFF', line: 'rgba(255,255,255,.4)', cta: ['#D8F24A', '#1F2A6B'] };
   var COATS = [
-    { k: 'gray', n: 'Szary stalowy', c: '#8F9493', gl: [0.62, 0.65, 0.64], ground: '#6336F5', ink: '#FFFFFF', line: 'rgba(255,255,255,.45)', cta: ['#FFFFFF', '#47132D'] },
-    { k: 'red', n: 'Czerwień sygnałowa', c: '#D9142B', gl: [0.76, 0.06, 0.10], ground: '#1F2A6B', ink: '#FFFFFF', line: 'rgba(255,255,255,.4)', cta: ['#D8F24A', '#1F2A6B'] },
-    { k: 'blue', n: 'Niebieski kort', c: '#2C6FB0', gl: [0.10, 0.39, 0.73], ground: '#D8F24A', ink: '#1F2A6B', line: 'rgba(31,42,107,.35)', cta: ['#1F2A6B', '#FFFFFF'] },
-    { k: 'green', n: 'Szałwia', c: '#6B7C4F', gl: [0.39, 0.51, 0.31], ground: '#FFB3C8', ink: '#47132D', line: 'rgba(71,19,45,.3)', cta: ['#47132D', '#FFFFFF'] }
+    { k: 'gray', n: 'Szary stalowy', c: '#8F9493', gl: [0.53, 0.55, 0.55] },
+    { k: 'red', n: 'Czerwień sygnałowa', c: '#D9142B', gl: [0.81, 0.07, 0.16] },
+    { k: 'orange', n: 'Pomarańcz sygnałowy', c: '#F2711C', gl: [0.90, 0.42, 0.10] },
+    { k: 'yellow', n: 'Żółty sygnałowy', c: '#F5C400', gl: [0.91, 0.73, 0.00] },
+    { k: 'lime', n: 'Limonka', c: '#D8F24A', gl: [0.80, 0.90, 0.28] },
+    { k: 'green', n: 'Szałwia', c: '#6B7C4F', gl: [0.40, 0.46, 0.29] },
+    { k: 'blue', n: 'Niebieski kort', c: '#2C6FB0', gl: [0.16, 0.41, 0.66] },
+    { k: 'pink', n: 'Róż Duperré', c: '#FF6FAE', gl: [0.95, 0.41, 0.65] },
+    { k: 'white', n: 'Biel', c: '#F4F1EE', gl: [0.91, 0.90, 0.89] },
+    { k: 'graphite', n: 'Grafit', c: '#2B2226', gl: [0.16, 0.13, 0.14] }
   ];
   var MODELS3D = [
     { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-play-o1.glb', still: UP + 'Gamefields-Panna-Play-wide-v3-default.webp', orbit: '30deg 62deg 105%' },
@@ -68,14 +76,14 @@
     { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-octa.glb', still: UP + 'GF-CT-008-octagon.webp', orbit: '30deg 64deg 105%' }
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
-  var cur = { coat: COATS[0], model: MODELS3D[0] }, mv = null, mvReady = false;
+  var cur = { coat: COATS[1], model: MODELS3D[0] }, mv = null, mvReady = false;
   var REPO = root.getAttribute('data-repo-base') || '';
 
   function paintHero() {
     var c = cur.coat;
-    hero.style.background = c.ground; hero.style.color = c.ink;
-    court.style.setProperty('--ln', c.line);
-    var cta = $('[data-hero-cta]'); cta.style.background = c.cta[0]; cta.style.color = c.cta[1];
+    hero.style.background = HERO.ground; hero.style.color = HERO.ink;
+    court.style.setProperty('--ln', HERO.line);
+    var cta = $('[data-hero-cta]'); cta.style.background = HERO.cta[0]; cta.style.color = HERO.cta[1];
     cta.href = STUDIO + '?' + new URLSearchParams({ arena: cur.model.k }).toString();
     $('[data-hero-colorname]').textContent = 'Kolor ramy · ' + c.n;
     $('[data-hero-code]').textContent = cur.model.code + ' · ' + cur.model.full + ' · model 3D';
@@ -121,7 +129,7 @@
     heroModels.appendChild(b);
   });
   COATS.forEach(function (c, i) {
-    var b = el('button', { type: 'button', class: 'dot', 'aria-label': c.n, 'aria-pressed': String(i === 0), style: 'background:' + c.c });
+    var b = el('button', { type: 'button', class: 'dot', 'aria-label': c.n, 'aria-pressed': String(c === cur.coat), style: 'background:' + c.c });
     b.addEventListener('click', function () { cur.coat = c; pressGroup(heroDots, b); paintHero(); });
     heroDots.appendChild(b);
   });
