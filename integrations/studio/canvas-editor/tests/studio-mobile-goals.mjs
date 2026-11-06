@@ -74,6 +74,10 @@ try{
   await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:30000});
   if(await page.locator('button.entry-start').isVisible())await page.locator('button.entry-start').click();
   await page.getByRole('navigation',{name:'Kroki projektu',exact:true}).getByRole('button',{name:'Podsumowanie',exact:true}).click();
+  const summary=page.getByRole('dialog',{name:'Podsumowanie projektu'});
+  assert.match(await summary.innerText(),/indywidualn.{0,4} wycen/i);
+  assert.equal(/\d[\d\s.,]*\s*(?:zł|PLN)(?![A-Za-z])/i.test(await summary.innerText()),false,'Customer summary must not show a quoted amount');
+  assert.equal(await summary.getByRole('link',{name:/Skontaktuj się w sprawie wyceny/}).count(),1);
   await page.getByRole('button',{name:'Wróć do edycji',exact:true}).click();
   await page.locator('.panna-studio-model[data-ready="true"]').waitFor({timeout:30000});
   await page.close();

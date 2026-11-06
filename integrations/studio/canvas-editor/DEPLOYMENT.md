@@ -162,3 +162,50 @@ Dodatkowa poprawka c12d9d6 ogłasza przez aria-live także zmianę wycenionej cz
 Ten wpis został dodany po potwierdzeniu publikacji i wysłany jako osobna zmiana dokumentacyjna. Nie tworzy nowej wersji runtime.
 
 Cofnięcie całości: ponownie opublikować poprzednią zapisaną wersję 157 (appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_de9e8b8dbcd48191933ef4861ad3ea7d). Żadna migracja ani stawka nie wymaga cofania. W celu utrwalenia cofnięcia w źródłach przygotować nowe commity revert, bez przepisywania historii.
+
+
+# Konwersja / WordPress i Studio — 2026-11-04
+
+Publikacja Sites: **v159**, status succeeded, URL https://gamefields-studio.ryhfs90.chatgpt.site, potwierdzenie 2026-11-04T05:23:53Z (06:23 Europe/Warsaw).
+
+- Źródła otwarto z bieżącego Sites v158, HEAD ad2edab01909cd38ab596207803dbd053a905e06; nie używano starego published-studio.
+- Opublikowany commit: 7cd578a56cf5c66d5f3eb6bf9a0d0fcc2640c3e5.
+- Saved version: appgprj_6abbd0ba26f0819197701343bf156f1b~appgver_121c36c60958819181733c39c79559ad.
+- Deployment: appgdep_6aeac156867881918db6d41f49933bd3.
+- Paczka zaakceptowana: 268216320 bajtów / 487 plików.
+
+## Zmiany
+
+Studio: pobieranie PNG z istniejącego renderera SVG — koncepcyjny widok z góry z kolorami i grafiką — oraz czytelniejszy przycisk „Wyślij projekt do wyceny”. WordPress 3462: sygnał gf-contact-ready naprawia samodzielne okno zapytania, FAQ odróżnia budżet orientacyjny od oferty, drugi CTA do opisania miejsca, trzy obejrzane autentyczne fotografie z mediów 3108/3105/3112, kroki wspólnego formularza i leniwe ładowanie modelu piłki bez timera 6 s.
+
+WordPress 3644: formularz CF7 w dialogu nad iframe Studio, dokładne potwierdzenie dołączenia danych po weryfikacji origin i window.source, podgląd/usunięcie parametrów, powrót do projektu; dodatkowe kolory, seed, surface i workshop w przekazywanych parametrach. Formularz CF7 3758 / a71dc3a: potrzeba → miejsce → kontakt, opcjonalne zdjęcie JPG/PNG/WebP do 5 MB, jedynie e-mail wymagany, załącznik project-photo w mailu, bez obietnicy czasu odpowiedzi. Ten sam formularz dodano na /kontakt/ (3716).
+
+Stara prezentacja sklepu (Elementor 757): usunięto cztery ręcznie wpisane ceny promocyjne, obietnicę 48h / montażu tego samego dnia, niedokończony link i martwe CTA; wprowadzono opis indywidualnej oferty i właściwe odnośniki. Nie zmieniono cen produktów WooCommerce ani stawek Studio. Po wyraźnej akceptacji użytkownika menu 3734 kieruje na zweryfikowaną mapę /radar w Studio zamiast nieistniejącego #radar.
+
+Nie zmieniono modeli, migracji ani 492 wzorów. Role przy archiwalnych projektach i referencje dużych marek nie zostały dopisane do nowych kart bez potwierdzenia.
+
+## Kontrole i dowody
+
+- pnpm exec tsc --noEmit: PASS.
+- pnpm build: PASS.
+- pnpm test:studio: PASS, w tym nowy test dokładnego 200-elementowego payloadu, kwoty, origin/source, limitu, odrzucania niepoprawnego JSON i ACK formularza.
+- pnpm test:mobile: PASS osobno dla 375, 390, 430 i 1440 px; Chromium headless-shell 149.0.7827.55.
+- Aktualny WordPress w Chromium przy 390 i 1440 px: PASS — jeden widoczny krok, wybór zdjęcia, walidacja e-maila, trzy realne fotografie, model p1, kolor #123456, seed 237 i estimate dołączone do osadzonego formularza, zamknięcie dialogu i brak przewijania w bok. Bez wysyłania zapytań w automatycznym QA.
+- PNG pobrany (129327 bajtów), poprawna sygnatura, obraz obejrzany.
+- Jeden zaakceptowany przez użytkownika test formularza na info@gamefields.eu: komunikat „Dziękujemy. Twoje zapytanie zostało wysłane.”, data-status=sent. Nie potwierdzono niezależnie dostarczenia w skrzynce. Nie wysłano dodatkowego testu ani załącznika testowego.
+- Google PageSpeed: próba zakończona limitem 55 s, bez wiarygodnej oceny punktowej; bez ponawiania tej samej strony.
+
+Zrzuty, backupy, checks.json, PNG i raport: /Users/mac/Documents/Gamefields/outputs/conversion-2026-11-04. Logi Studio: outputs/conversion-qa. Źródła JS/CSS/formularza: integrations/wordpress/conversion-2026-11.
+
+Wariant pełnego Chrome for Testing zamykał się przy tworzeniu strony (SIGSEGV); po zgodzie użytkownika i przejściu na zainstalowany headless-shell testy przeszły. Przeglądarka w aplikacji ignorowała viewport 390 px, więc wczesny plik 06-contact-desktop-intermediate.jpg nie jest dowodem mobilnym.
+
+Automatyczny przegląd początkowo odrzucił szeroki zapis całej strony Elementor dla jednego linku; zastosowano dopuszczoną wąską poprawkę match-once. Zmiana menu była blokowana do uzyskania wyraźnej zgody użytkownika, po której została wykonana.
+
+## Ograniczenia i cofnięcie
+
+Brak badania fizycznego telefonu i Safari. Załącznik zdjęciowy skonfigurowano i przetestowano wybór pliku; nie potwierdzono dostarczenia załącznika przez e-mail. Konfiguracja zawiera parametry grafiki, ale binarne logo/obrazy nadal przekazuje się osobno; pełne dane są w kopii JSON i PNG. Ceny właściwych produktów WooCommerce, opisy historycznych współprac, referencje i działanie dodatkowej skrzynki kontakt@ wymagają osobnego potwierdzenia właściciela. Nowe karty opisują wyłącznie to, co widać na zdjęciach i istniejące podpisy lokalizacji.
+
+Studio można cofnąć przez ponowne opublikowanie zapisanej v158. WordPress: backup pełnego homepage, stron 3644/3716, właściwości CF7 i Elementor 757 znajduje się w katalogu dowodów; treści stron mają też zwykłe rewizje. Odtwarzanie CF7 przez jego API wymaga context=save. Poprzedni link menu 3734: https://www.gamefields.eu/#radar. Żadna migracja ani stawka nie wymaga cofania.
+
+
+Końcowy smoke test po publikacji: PASS — opublikowana v159 otwiera samodzielny formularz WordPress i otrzymuje dokładne potwierdzenie dołączenia modelu p1. Model piłki nadal ładuje się przy wejściu do sekcji #pilka. Dowód: outputs/conversion-qa/final.log; studio-v159.jpg i studio-standalone-attached.jpg w katalogu dowodów. Ostatni zapis źródeł po publikacji obejmuje wyłącznie ten raport i aktualizację nazw kontrolek w pomocniczym teście P2; nie tworzy nowej wersji runtime.

@@ -468,3 +468,6 @@ Homepage otrzymał trzy obejrzane autentyczne zdjęcia z istniejących mediów, 
 Testy aktualnego WordPress przy 390 i 1440 px: PASS, bez wysyłania kolejnych wiadomości. Potwierdzono pełne parametry modelu/base/seed/estimate, formularz, walidację e-maila, wybór syntetycznego zdjęcia, trzy fotografie, powrót do edytora i brak przepełnienia. PNG pobrany i obejrzany. Jeden test mailowy, wyraźnie zaakceptowany przez użytkownika, zakończył się komunikatem WordPress „wysłane”; odbioru w skrzynce nie sprawdzono niezależnie. Zewnętrzny PageSpeed przekroczył limit 55 s — brak wiarygodnego wyniku punktowego.
 
 Źródła integracji: integrations/wordpress/conversion-2026-11. Backupy, zrzuty i logi: /Users/mac/Documents/Gamefields/outputs/conversion-2026-11-04. Końcowe kontrole i publikacja: DEPLOYMENT.md. Nie zmieniono migracji, modeli, stawek ani 492 wzorów.
+
+### Wycena indywidualna
+Studio pokazuje kontakt do wyceny zamiast kwot i różnic cenowych. Podsumowanie i pakiet do zapytania przekazują konfigurację bez automatycznej kalkulacji; obowiązujące stawki i mechanizm obliczeń pozostają bez zmian.
