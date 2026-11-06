@@ -463,3 +463,11 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 }
 /* anchors land below the sticky header */
 .gfs :is(section,nav,div)[id]{scroll-margin-top:72px}
+
+/* ---------- 2026-11-06 · phones: poster and ball editors fold under their previews ---------- */
+.gfs .tool-toggle{display:none}
+@media (max-width:700px){
+  .gfs .tool-toggle{display:inline-flex;width:100%;margin-top:12px;background:var(--ink);color:var(--paper)}
+  .gfs .band-dark .tool-toggle{background:var(--lime);color:var(--plum)}
+  .gfs :is(.pl,.bl).tool-closed :is(.pl-ed,.bl-ed){display:none}
+}

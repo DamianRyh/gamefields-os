@@ -24,4 +24,4 @@
 	</div>
 </header>
 <?php endif; ?>
-<main id="gft-main" class="gft-main">
+<?php /* the homepage content has its own <main> */ echo is_front_page() ? '<div id="gft-main" class="gft-main">' : '<main id="gft-main" class="gft-main">'; ?>

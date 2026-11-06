@@ -854,6 +854,26 @@
     });
   }
   nameField('textarea[name="project-details"]', 'Szczegóły projektu');
+
+  /* ---------- Phones: the poster and ball editors start folded under their previews ---------- */
+  var phone = matchMedia('(max-width: 700px)');
+  var shared = /[?]/.test(location.search) ? /(plakat|pilka)=/.test(location.search) : false;
+  $$('[data-tool-toggle]', root).forEach(function (btn) {
+    var key = btn.getAttribute('data-tool-toggle');
+    var box = $('.' + key, root);
+    var label = key === 'pl' ? 'Projektuj plakat' : 'Projektuj piłkę';
+    function set(open) {
+      box.classList.toggle('tool-closed', !open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.innerHTML = open ? 'Zwiń edycję <span aria-hidden="true">↑</span>' : label + ' <span aria-hidden="true">→</span>';
+    }
+    btn.addEventListener('click', function () {
+      var open = box.classList.contains('tool-closed');
+      set(open);
+      if (open) { var ed = $('#' + btn.getAttribute('aria-controls'), root); if (ed) ed.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); }
+    });
+    set(!phone.matches || shared);
+  });
   nameField('input[name="your-email"]', 'E-mail');
 
   /* ---------- Contact form: inline e-mail validation (on blur, positive feedback, error cleared while typing) ---------- */

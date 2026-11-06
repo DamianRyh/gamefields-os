@@ -1,8 +1,7 @@
 <?php
-/** Site footer. The homepage brings its own footer. */
+/** Site footer, the same on every page including the homepage. */
 ?>
-</main>
-<?php if ( ! is_front_page() ) : ?>
+<?php echo is_front_page() ? '</div>' : '</main>'; ?>
 <footer class="gft-foot">
 	<div class="gft-wrap">
 		<div class="gft-foot-top">
@@ -46,7 +45,6 @@
 		</div>
 	</div>
 </footer>
-<?php endif; ?>
 <?php wp_footer(); ?>
 </body>
 </html>

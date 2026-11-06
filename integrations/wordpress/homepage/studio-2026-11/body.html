@@ -191,8 +191,9 @@
         <button type="button" class="chip" data-pl-shift>Przetasuj kolory</button>
         <button type="button" class="chip" data-pl-view aria-pressed="false">Sam plakat</button>
       </div>
+      <button type="button" class="pill tool-toggle" data-tool-toggle="pl" aria-expanded="true" aria-controls="pl-editor">Projektuj plakat <span aria-hidden="true">→</span></button>
     </div>
-    <div class="pl-ed">
+    <div class="pl-ed" id="pl-editor">
       <div class="pl-tabs" role="tablist" aria-label="Edycja plakatu">
         <button type="button" role="tab" id="pl-t-art" aria-controls="pl-p-art" aria-selected="true">Wzór</button>
         <button type="button" role="tab" id="pl-t-col" aria-controls="pl-p-col" aria-selected="false" tabindex="-1">Kolory</button>
@@ -269,8 +270,9 @@
         <button type="button" class="chip" data-bl-scene aria-pressed="false">Na boisku</button>
         <button type="button" class="chip" data-bl-spin aria-pressed="true">Obrót</button>
       </div>
+      <button type="button" class="pill tool-toggle" data-tool-toggle="bl" aria-expanded="true" aria-controls="bl-editor">Projektuj piłkę <span aria-hidden="true">→</span></button>
     </div>
-    <div class="bl-ed">
+    <div class="bl-ed" id="bl-editor">
       <div class="pl-tabs" role="tablist" aria-label="Edycja piłki">
         <button type="button" role="tab" id="bl-t-art" aria-controls="bl-p-art" aria-selected="true">Wzór</button>
         <button type="button" role="tab" id="bl-t-pan" aria-controls="bl-p-pan" aria-selected="false" tabindex="-1">Panele</button>
@@ -452,9 +454,5 @@
 </section>
 </main>
 
-<footer class="wrap foot">
-  <span style="font-weight:800;font-size:22px;color:var(--ink);letter-spacing:-1px">gamefields.</span>
-  <span>© 2026 Gamefields · autorskie studio boisk Damiana Gawrycha · Warszawa</span>
-  <span><a href="/konfigurator-boisk/">Studio 3D</a> · <a href="mailto:info@gamefields.eu">info@gamefields.eu</a> · <a href="/polityka-prywatnosci/">Polityka prywatności</a></span>
-</footer>
+<!-- the site footer comes from the Gamefields theme (same on every page) -->
 </div>
