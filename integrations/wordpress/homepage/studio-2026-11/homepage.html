@@ -485,7 +485,12 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .qty input::-webkit-inner-spin-button,.gfs .qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .gfs .price{text-align:right}
 .gfs .price b{display:block;font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
-.gfs .price small{display:block;color:var(--muted);font-size:13px;margin-top:2px}</style>
+.gfs .price small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+/* hero: two colour rows (panels, frame and goals) */
+.gfs .ctrl-colors .dots+.m{margin-top:14px}
+@media (min-width:701px){.gfs .ctrl-colors .dot{width:34px;height:34px}.gfs .ctrl-colors .dots{gap:8px}}
+@media (max-width:700px){.gfs .ctrl-colors{max-width:100%;min-width:0}.gfs .ctrl-colors .dots{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding:6px 6px 8px;margin:-6px -6px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}.gfs .ctrl-colors .dots::-webkit-scrollbar{display:none}.gfs .ctrl-colors .dot{flex:0 0 40px;width:40px;height:40px}}
+</style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","name":"Damian Gawrych"},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Piłki we wzorze boiska","description":"Projekt piłki w tym samym wzorze i kolorach co nawierzchnia.","provider":{"@id":"https://www.gamefields.eu/#studio"}}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. Zobacz wzory Signature."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. Napisz do nas, aby ustalić zakres oferty. Co wpływa na budżet, opisujemy w poradniku „Ile kosztuje budowa boiska sportowego?”."}}]}]}</script>
 <div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/">
 <a class="skip" href="#gfs-main">Przejdź do treści</a>
@@ -526,9 +531,11 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
         <span class="m">Model</span>
         <div class="seg" role="group" aria-label="Model 3D" data-hero-models></div>
       </div>
-      <div class="ctrl">
-        <span class="m" data-hero-colorname>Kolor ramy · Czerwień sygnałowa</span>
-        <div class="dots" role="group" aria-label="Kolor ramy" data-hero-dots></div>
+      <div class="ctrl ctrl-colors">
+        <span class="m" data-hero-colorname="panel">Panele · Czerwień sygnałowa</span>
+        <div class="dots" role="group" aria-label="Kolor paneli" data-hero-dots="panel"></div>
+        <span class="m" data-hero-colorname="frame">Rama i bramki · Grafit</span>
+        <div class="dots" role="group" aria-label="Kolor ramy i bramek" data-hero-dots="frame"></div>
       </div>
       <p style="max-width:32ch;font-size:17px;line-height:1.45">Modułowe boiska do panny i street footballu. Projektuję konstrukcję, nawierzchnię i grafikę jako jeden przedmiot.</p>
       <a class="pill" data-hero-cta href="/konfigurator-boisk/?arena=o1" style="background:#D8F24A;color:#1F2A6B">Zaprojektuj swoje <span aria-hidden="true">→</span></a>
@@ -1255,16 +1262,23 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-octa.glb', still: UP + 'GF-CT-008-octagon.webp', orbit: '30deg 64deg 105%' }
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
-  var cur = { coat: COATS[1], model: MODELS3D[0] }, mv = null, mvReady = false;
+  var cur = { panel: COATS[1], frame: COATS[9], model: MODELS3D[0] }, mv = null, mvReady = false;
   var REPO = root.getAttribute('data-repo-base') || '';
 
   function paintHero() {
-    var c = cur.coat;
     hero.style.background = HERO.ground; hero.style.color = HERO.ink;
     court.style.setProperty('--ln', HERO.line);
     var cta = $('[data-hero-cta]'); cta.style.background = HERO.cta[0]; cta.style.color = HERO.cta[1];
-    cta.href = STUDIO + '?' + new URLSearchParams({ arena: cur.model.k }).toString();
-    $('[data-hero-colorname]').textContent = 'Kolor ramy · ' + c.n;
+    // Studio has Play, Court and Octa as 3D models (Ring only in the catalogue): those open with both colours, Ring goes to an inquiry.
+    if (STUDIO_ARENAS.indexOf(cur.model.k) > -1) {
+      cta.href = STUDIO + '?' + new URLSearchParams({ arena: cur.model.k, panel: cur.panel.c.slice(1), frame: cur.frame.c.slice(1) }).toString();
+      cta.firstChild.nodeValue = 'Zaprojektuj swoje ';
+    } else {
+      cta.href = '/kontakt/?' + new URLSearchParams({ produkt: cur.model.full + ' · panele: ' + cur.panel.n + ' · rama i bramki: ' + cur.frame.n }).toString();
+      cta.firstChild.nodeValue = 'Zapytaj o ten model ';
+    }
+    $('[data-hero-colorname="panel"]').textContent = 'Panele · ' + cur.panel.n;
+    $('[data-hero-colorname="frame"]').textContent = 'Rama i bramki · ' + cur.frame.n;
     $('[data-hero-code]').textContent = cur.model.code + ' · ' + cur.model.full + ' · model 3D';
     $('[data-hero-dim]').textContent = cur.model.dim;
     $('.still', hero3d).src = cur.model.still;
@@ -1274,7 +1288,8 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
     if (!mv) return; if (!mv.model) return;
     mv.model.materials.forEach(function (m) {
       var n = m.name || '';
-      if (/^(Rama|Panele|Wypelnienie|Bramki)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(cur.coat.gl.concat([1]));
+      if (/^(Panele|Wypelnienie)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(cur.panel.gl.concat([1]));
+      else if (/^(Rama|Bramki)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(cur.frame.gl.concat([1]));
     });
   }
   function loadModel() {
@@ -1301,16 +1316,19 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
       mv.setAttribute('src', (cur.model.glb.indexOf('https://') === 0 ? '' : REPO) + cur.model.glb);
     });
   }
-  var heroModels = $('[data-hero-models]'), heroDots = $('[data-hero-dots]');
+  var heroModels = $('[data-hero-models]'), STUDIO_ARENAS = ['o1', 'p1', 'octagon'];
   MODELS3D.forEach(function (m, i) {
     var b = el('button', { type: 'button', 'aria-pressed': String(i === 0) }, esc(m.n));
     b.addEventListener('click', function () { cur.model = m; pressGroup(heroModels, b); paintHero(); loadModel(); });
     heroModels.appendChild(b);
   });
-  COATS.forEach(function (c, i) {
-    var b = el('button', { type: 'button', class: 'dot', 'aria-label': c.n, 'aria-pressed': String(c === cur.coat), style: 'background:' + c.c });
-    b.addEventListener('click', function () { cur.coat = c; pressGroup(heroDots, b); paintHero(); });
-    heroDots.appendChild(b);
+  ['panel', 'frame'].forEach(function (part) {
+    var box = $('[data-hero-dots="' + part + '"]');
+    COATS.forEach(function (c) {
+      var b = el('button', { type: 'button', class: 'dot', 'aria-label': (part === 'panel' ? 'Panele: ' : 'Rama i bramki: ') + c.n, 'aria-pressed': String(c === cur[part]), style: 'background:' + c.c });
+      b.addEventListener('click', function () { cur[part] = c; pressGroup(box, b); paintHero(); });
+      box.appendChild(b);
+    });
   });
   paintHero();
   var mvStarted = false;

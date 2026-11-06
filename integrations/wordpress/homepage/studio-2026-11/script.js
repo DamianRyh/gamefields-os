@@ -76,16 +76,23 @@
     { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-octa.glb', still: UP + 'GF-CT-008-octagon.webp', orbit: '30deg 64deg 105%' }
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
-  var cur = { coat: COATS[1], model: MODELS3D[0] }, mv = null, mvReady = false;
+  var cur = { panel: COATS[1], frame: COATS[9], model: MODELS3D[0] }, mv = null, mvReady = false;
   var REPO = root.getAttribute('data-repo-base') || '';
 
   function paintHero() {
-    var c = cur.coat;
     hero.style.background = HERO.ground; hero.style.color = HERO.ink;
     court.style.setProperty('--ln', HERO.line);
     var cta = $('[data-hero-cta]'); cta.style.background = HERO.cta[0]; cta.style.color = HERO.cta[1];
-    cta.href = STUDIO + '?' + new URLSearchParams({ arena: cur.model.k }).toString();
-    $('[data-hero-colorname]').textContent = 'Kolor ramy · ' + c.n;
+    // Studio has Play, Court and Octa as 3D models (Ring only in the catalogue): those open with both colours, Ring goes to an inquiry.
+    if (STUDIO_ARENAS.indexOf(cur.model.k) > -1) {
+      cta.href = STUDIO + '?' + new URLSearchParams({ arena: cur.model.k, panel: cur.panel.c.slice(1), frame: cur.frame.c.slice(1) }).toString();
+      cta.firstChild.nodeValue = 'Zaprojektuj swoje ';
+    } else {
+      cta.href = '/kontakt/?' + new URLSearchParams({ produkt: cur.model.full + ' · panele: ' + cur.panel.n + ' · rama i bramki: ' + cur.frame.n }).toString();
+      cta.firstChild.nodeValue = 'Zapytaj o ten model ';
+    }
+    $('[data-hero-colorname="panel"]').textContent = 'Panele · ' + cur.panel.n;
+    $('[data-hero-colorname="frame"]').textContent = 'Rama i bramki · ' + cur.frame.n;
     $('[data-hero-code]').textContent = cur.model.code + ' · ' + cur.model.full + ' · model 3D';
     $('[data-hero-dim]').textContent = cur.model.dim;
     $('.still', hero3d).src = cur.model.still;
@@ -95,7 +102,8 @@
     if (!mv) return; if (!mv.model) return;
     mv.model.materials.forEach(function (m) {
       var n = m.name || '';
-      if (/^(Rama|Panele|Wypelnienie|Bramki)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(cur.coat.gl.concat([1]));
+      if (/^(Panele|Wypelnienie)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(cur.panel.gl.concat([1]));
+      else if (/^(Rama|Bramki)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(cur.frame.gl.concat([1]));
     });
   }
   function loadModel() {
@@ -122,16 +130,19 @@
       mv.setAttribute('src', (cur.model.glb.indexOf('https://') === 0 ? '' : REPO) + cur.model.glb);
     });
   }
-  var heroModels = $('[data-hero-models]'), heroDots = $('[data-hero-dots]');
+  var heroModels = $('[data-hero-models]'), STUDIO_ARENAS = ['o1', 'p1', 'octagon'];
   MODELS3D.forEach(function (m, i) {
     var b = el('button', { type: 'button', 'aria-pressed': String(i === 0) }, esc(m.n));
     b.addEventListener('click', function () { cur.model = m; pressGroup(heroModels, b); paintHero(); loadModel(); });
     heroModels.appendChild(b);
   });
-  COATS.forEach(function (c, i) {
-    var b = el('button', { type: 'button', class: 'dot', 'aria-label': c.n, 'aria-pressed': String(c === cur.coat), style: 'background:' + c.c });
-    b.addEventListener('click', function () { cur.coat = c; pressGroup(heroDots, b); paintHero(); });
-    heroDots.appendChild(b);
+  ['panel', 'frame'].forEach(function (part) {
+    var box = $('[data-hero-dots="' + part + '"]');
+    COATS.forEach(function (c) {
+      var b = el('button', { type: 'button', class: 'dot', 'aria-label': (part === 'panel' ? 'Panele: ' : 'Rama i bramki: ') + c.n, 'aria-pressed': String(c === cur[part]), style: 'background:' + c.c });
+      b.addEventListener('click', function () { cur[part] = c; pressGroup(box, b); paintHero(); });
+      box.appendChild(b);
+    });
   });
   paintHero();
   var mvStarted = false;
