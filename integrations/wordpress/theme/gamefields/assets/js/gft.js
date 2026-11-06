@@ -24,3 +24,13 @@
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
 })();
+
+/* Contact page: a product or order passed in the link (?produkt=...) lands in the message field. */
+(function () {
+  'use strict';
+  var q = new URLSearchParams(location.search).get('produkt');
+  if (!q) return;
+  var box = document.querySelector('textarea[name="your-message"]');
+  if (!box || box.value.trim()) return;
+  box.value = (q.length > 3500 ? q.slice(0, 3500) : q) + '\n\n';
+})();

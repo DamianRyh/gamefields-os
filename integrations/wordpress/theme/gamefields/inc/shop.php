@@ -28,6 +28,10 @@ function gft_shop_product_id( $key ) {
 	return $ids[ $key ];
 }
 
+function gft_shop_ids() {
+	return array_values( array_filter( array( gft_shop_product_id( 'poster' ), gft_shop_product_id( 'ball' ), gft_shop_product_id( 'shirt' ) ) ) );
+}
+
 function gft_shop_has_payments() {
 	if ( ! function_exists( 'WC' ) || ! WC()->payment_gateways() ) {
 		return false;
@@ -84,7 +88,7 @@ function gft_shop_clean_link( $raw ) {
 }
 
 add_filter( 'woocommerce_add_cart_item_data', function ( $data, $product_id ) {
-	if ( ! in_array( (int) $product_id, array( gft_shop_product_id( 'poster' ), gft_shop_product_id( 'ball' ) ), true ) ) {
+	if ( ! in_array( (int) $product_id, gft_shop_ids(), true ) ) {
 		return $data;
 	}
 	// phpcs:ignore WordPress.Security.NonceVerification -- public add-to-cart link, values are sanitised
@@ -138,3 +142,117 @@ add_action( 'woocommerce_update_product', function ( $id ) {
 		do_action( 'litespeed_purge_all' );
 	}
 } );
+
+/* ---------- Data for Gamefields Studio (separate app, reads it cross-origin) ---------- */
+function gft_shop_shipping() {
+	$out = array( 'cost' => null, 'free_from' => null );
+	if ( ! class_exists( 'WC_Shipping_Zones' ) ) {
+		return $out;
+	}
+	foreach ( WC_Shipping_Zones::get_zones() as $zone ) {
+		foreach ( $zone['shipping_methods'] as $m ) {
+			if ( 'yes' !== $m->enabled ) {
+				continue;
+			}
+			if ( 'flat_rate' === $m->id && null === $out['cost'] ) {
+				$out['cost'] = (float) $m->get_option( 'cost' );
+			}
+			if ( 'free_shipping' === $m->id && null === $out['free_from'] ) {
+				$out['free_from'] = (float) $m->get_option( 'min_amount' );
+			}
+		}
+	}
+	return $out;
+}
+
+function gft_shop_product_data( $key, $attr ) {
+	$id      = gft_shop_product_id( $key );
+	$product = $id && function_exists( 'wc_get_product' ) ? wc_get_product( $id ) : null;
+	if ( ! $product ) {
+		return null;
+	}
+	$row = array(
+		'id'        => $id,
+		'name'      => $product->get_name(),
+		'price'     => (float) $product->get_price(),
+		'url'       => get_permalink( $id ),
+		'published' => 'publish' === $product->get_status(),
+	);
+	if ( $attr && $product->is_type( 'variable' ) ) {
+		$row['variants'] = array();
+		foreach ( $product->get_children() as $vid ) {
+			$v = wc_get_product( $vid );
+			if ( $v && $v->is_purchasable() ) {
+				$row['variants'][] = array( 'id' => $vid, 'value' => $v->get_attribute( $attr ), 'price' => (float) $v->get_price() );
+			}
+		}
+		$row['attribute'] = $attr;
+	}
+	return $row;
+}
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'gfs/v1', '/shop', array(
+		'methods'             => 'GET',
+		'permission_callback' => '__return_true',
+		'callback'            => function () {
+			$data = array(
+				'currency' => 'PLN',
+				'gross'    => true,
+				'pay'      => gft_shop_has_payments(),
+				'cart'     => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : home_url( '/cart/' ),
+				'contact'  => home_url( '/kontakt/' ),
+				'shipping' => gft_shop_shipping(),
+				'poster'   => gft_shop_product_data( 'poster', 'format' ),
+				'ball'     => gft_shop_product_data( 'ball', '' ),
+				'shirt'    => gft_shop_product_data( 'shirt', 'rozmiar' ),
+				'notes'    => array( 'poster' => 'Sam print, bez ramy.', 'shirt' => 'Poliester, nadruk sublimacyjny.' ),
+			);
+			$res = rest_ensure_response( $data );
+			$res->header( 'Cache-Control', 'public, max-age=300' );
+			return $res;
+		},
+	) );
+} );
+
+/* Several lines in one link (Studio: e.g. a team of shirts in different sizes):
+   /cart/?gf_items=<base64url JSON [{"id":4395,"v":4406,"q":3}, ...]>&gf_note=...  */
+add_action( 'wp_loaded', function () {
+	// phpcs:ignore WordPress.Security.NonceVerification -- public add-to-cart link, every value is validated
+	if ( empty( $_GET['gf_items'] ) || ! function_exists( 'WC' ) || ! WC()->cart ) {
+		return;
+	}
+	$raw   = base64_decode( strtr( sanitize_text_field( wp_unslash( $_GET['gf_items'] ) ), '-_', '+/' ) );
+	$items = json_decode( (string) $raw, true );
+	$note  = isset( $_GET['gf_note'] ) ? mb_substr( sanitize_text_field( wp_unslash( $_GET['gf_note'] ) ), 0, 700 ) : '';
+	$added = 0;
+	if ( is_array( $items ) ) {
+		foreach ( array_slice( $items, 0, 30 ) as $it ) {
+			$pid = isset( $it['id'] ) ? (int) $it['id'] : 0;
+			$vid = isset( $it['v'] ) ? (int) $it['v'] : 0;
+			$qty = isset( $it['q'] ) ? max( 1, min( 999, (int) $it['q'] ) ) : 1;
+			if ( ! in_array( $pid, gft_shop_ids(), true ) ) {
+				continue;
+			}
+			$attrs = array();
+			if ( $vid ) {
+				$v = wc_get_product( $vid );
+				if ( ! $v || $v->get_parent_id() !== $pid ) {
+					continue;
+				}
+				foreach ( $v->get_variation_attributes() as $k => $val ) {
+					$attrs[ $k ] = $val;
+				}
+			}
+			$extra = $note ? array( 'gf_note' => $note ) : array();
+			if ( WC()->cart->add_to_cart( $pid, $qty, $vid, $attrs, $extra ) ) {
+				$added++;
+			}
+		}
+	}
+	if ( $added ) {
+		wc_add_notice( 'Projekt ze Studia jest w koszyku.', 'success' );
+	}
+	wp_safe_redirect( wc_get_cart_url() );
+	exit;
+}, 25 );
