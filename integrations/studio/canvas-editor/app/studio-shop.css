@@ -19,3 +19,42 @@
 .studio-shop-order .studio-shop-qty input{width:46px!important;min-width:0!important;height:44px;min-height:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
 .studio-shop-order .studio-shop-qty button{flex:0 0 44px;margin:0;padding:0;width:44px;min-height:0}
 .studio-shop-order .studio-shop-price{flex:1 1 auto;min-width:0}
+
+/* ---------- Usability pass 2026-11-06 (Baymard: price and the order button stay in view while customising) ---------- */
+.studio-product-panel .studio-shop-order,.studio-kit-panel .studio-shop-order{position:sticky;bottom:0;z-index:5;margin:16px -2px 0;box-shadow:0 -10px 24px -14px rgba(28,9,18,.35)}
+.studio-shop-order .studio-hint{margin:8px 0 0;font-size:12px;line-height:1.4}
+@media (max-width:700px){
+ .studio-product-panel .studio-shop-order,.studio-kit-panel .studio-shop-order{padding:10px 12px}
+ .studio-shop-order .studio-shop-note{margin:6px 0 8px;font-size:12px}
+ .studio-shop-order .studio-hint{display:none}
+ .studio-shop-price b{font-size:22px}
+}
+/* One primary action in the top bar: community sharing becomes a secondary button. */
+html body .studio-shell.studio-canvas-editor .studio-workshop-save .studio-workshop-publish{background:transparent!important;color:#47132d!important;border:1px solid #d9cfd4!important}
+html body .studio-shell.studio-canvas-editor .studio-workshop-save .studio-workshop-publish:hover:not(:disabled){background:#fff!important;color:#47132d!important;border-color:#47132d!important}
+
+/* Product chooser: price on every card; compact two-column cards on phones so the whole offer fits in about two screens. */
+.hub-card-price{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;background:#fff;color:#47132d;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+@media (max-width:700px){
+ .product-hub .product-hub-grid{gap:12px}
+ .product-hub .product-hub-card{display:grid;grid-template-columns:38% 1fr;align-items:stretch}
+ .product-hub .product-hub-card .hub-card-image{aspect-ratio:auto;height:100%;min-height:128px}
+ .product-hub .product-hub-card .hub-card-image img{width:100%;height:100%;object-fit:contain;padding:8px}
+ .product-hub .product-hub-card .hub-card-caption{padding:12px 12px 12px 14px;align-items:center}
+ .product-hub .product-hub-card h2{font-size:22px}
+ .product-hub .product-hub-card p{font-size:13px;line-height:1.35;margin-top:2px}
+ .product-hub .product-hub-steps{flex-wrap:wrap;justify-content:flex-start;row-gap:10px}
+}
+/* Product mode has no community-sharing row above the canvas (same grid as print mode). */
+html body .studio-shell.studio-canvas-editor[data-product-mode=true] .studio-workspace-content{grid-template-rows:auto minmax(0,1fr)!important}
+/* The sticky order block stays compact: the explanation lives in the summary. */
+.studio-product-panel .studio-shop-order .studio-hint,.studio-kit-panel .studio-shop-order .studio-hint{display:none}
+.studio-shop-price small{white-space:nowrap}
+/* Product tabs (Wzór, Kolory, Napisy, Układ i druk) wrap instead of being cut off in the narrow desktop panel. */
+.studio-product-panel .studio-visual-tabs,.studio-kit-panel .studio-visual-tabs{flex-wrap:wrap}
+/* Product chooser on phones: fixed image height, price label on one line, the how-it-works strip only on larger screens. */
+@media (max-width:700px){
+ .product-hub .product-hub-card .hub-card-image{height:128px;min-height:0}
+ .hub-card-price{white-space:nowrap;font-size:12px}
+ .product-hub .product-hub-steps{display:none}
+}
