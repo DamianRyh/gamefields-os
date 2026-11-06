@@ -374,3 +374,15 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .band-dark .head .kicker{color:var(--lime)}
 @media (max-width:900px){.gfs .head .hd{grid-column:1/-1}}
 .gfs section[aria-labelledby="gfs-kits"]{padding-top:clamp(56px,7vw,100px)}
+
+/* ---------- 2026-11-06 · mobile hero: the model sits right under the headline ---------- */
+@media (max-width:900px){
+  .gfs .hero-grid{display:contents}
+  .gfs .hero-top{order:1;flex-direction:row;flex-wrap:wrap;gap:2px 12px;padding:clamp(24px,7vw,40px) max(16px,3.4vw) 0;position:relative;z-index:2}
+  .gfs .h1a{order:2;padding-inline:max(16px,3.4vw);margin-top:10px!important;font-size:clamp(48px,14.6vw,96px)!important;position:relative;z-index:2}
+  .gfs .h1b{order:3;padding-inline:max(16px,3.4vw);margin-top:-.08em!important;font-size:clamp(48px,14.6vw,96px)!important;position:relative;z-index:2}
+  .gfs .hero-3d{order:4;height:min(64vw,420px);margin:6px 0 0}
+  .gfs .hero-foot{order:5;padding:8px max(16px,3.4vw) clamp(32px,9vw,52px);flex-direction:column;align-items:flex-start;gap:18px;position:relative;z-index:2}
+  .gfs .hero .court{opacity:.5}
+  .gfs .nav .menu-btn{align-items:center;line-height:1}
+}

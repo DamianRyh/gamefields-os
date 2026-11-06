@@ -9,6 +9,8 @@ The 3D models and the sample photo are served by jsDelivr from this repository, 
 so the published page never changes when the branch moves.
 """
 import base64
+import html as htmllib
+import re
 import json
 import pathlib
 import sys
@@ -17,11 +19,59 @@ HERE = pathlib.Path(__file__).resolve().parent
 ASSET_COMMIT = "02f3a62c4d9c71608dc827e6f30066d50a523f58"
 REPO_BASE = f"https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@{ASSET_COMMIT}/"
 ASSET_BASE = REPO_BASE + "integrations/wordpress/homepage/studio-2026-11/assets/"
-FONT = HERE.parent / "premium-2026-10-26" / "assets" / "InterVariable.woff2"
+FONT = HERE / "assets" / "fonts" / "GHInter-sub.woff2"  # InterVariable subset: Latin + Polish + arrows (pyftsubset), 63 KB instead of 352 KB
 
 
 def read(name):
     return (HERE / name).read_text(encoding="utf-8")
+
+
+def jsonld(faq_html):
+    """Structured data for the studio, its services and the FAQ. Facts only from the page itself, no prices."""
+    qa = []
+    for q, a in re.findall(r"<details><summary>(.*?)</summary><p>(.*?)</p></details>", faq_html, re.S):
+        text = htmllib.unescape(re.sub(r"<[^>]+>", "", a)).strip()
+        qa.append({"@type": "Question", "name": htmllib.unescape(q).strip(),
+                   "acceptedAnswer": {"@type": "Answer", "text": text}})
+    if len(qa) < 4:
+        sys.exit("FAQ parse failed")
+    site = "https://www.gamefields.eu/"
+    services = [
+        ("Projektowanie boisk miejskich", "Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot."),
+        ("Modułowe boiska do panny i street footballu", "Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15."),
+        ("Kolorowe nawierzchnie i grafika boisk", "Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D."),
+        ("Plakaty boisk", "Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce."),
+        ("Piłki we wzorze boiska", "Projekt piłki w tym samym wzorze i kolorach co nawierzchnia."),
+    ]
+    graph = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "ProfessionalService",
+                "@id": site + "#studio",
+                "name": "Gamefields",
+                "alternateName": "Gamefields — autorskie studio boisk miejskich",
+                "url": site,
+                "email": "info@gamefields.eu",
+                "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp",
+                "description": "Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.",
+                "founder": {"@type": "Person", "name": "Damian Gawrych"},
+                "address": {"@type": "PostalAddress", "addressLocality": "Warszawa", "addressCountry": "PL"},
+                "parentOrganization": {"@id": site + "#organization"},
+                "knowsAbout": ["boiska do panny", "street football", "boiska miejskie", "nawierzchnie sportowe", "projektowanie przestrzeni sportowych"],
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Usługi Gamefields",
+                    "itemListElement": [
+                        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": n, "description": d, "provider": {"@id": site + "#studio"}}}
+                        for n, d in services
+                    ],
+                },
+            },
+            {"@type": "FAQPage", "@id": site + "#pytania", "inLanguage": "pl-PL", "mainEntity": qa},
+        ],
+    }
+    return '<script type="application/ld+json">' + json.dumps(graph, ensure_ascii=False, separators=(",", ":")) + "</script>"
 
 
 def main():
@@ -64,6 +114,7 @@ def main():
         "<!-- wp:html -->",
         "<!-- Gamefields homepage studio-2026-11 · source: integrations/wordpress/homepage/studio-2026-11 · Inter SIL OFL: https://rsms.me/inter/ -->",
         f"<style>{font_face}\n{style}</style>",
+        jsonld(faq),
         body.strip(),
         loader,
         "<script>" + (HERE.parent.parent.parent / "studio" / "ball-2026-11" / "ball-core.js").read_text(encoding="utf-8").strip() + "</script>",

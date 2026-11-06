@@ -817,4 +817,14 @@
     var att = $('#gc-attached'); if (att) att.hidden = false;
     goContact();
   });
+
+  /* ---------- A11y: give a name to form fields that have no label (CF7 textarea) ---------- */
+  function nameField(sel, txt) {
+    $$(sel, root).forEach(function (f) {
+      if (f.labels) { if (f.labels.length) return; }
+      if (!f.getAttribute('aria-label')) f.setAttribute('aria-label', txt);
+    });
+  }
+  nameField('textarea[name="project-details"]', 'Szczegóły projektu');
+  nameField('input[name="your-email"]', 'E-mail');
 })();
