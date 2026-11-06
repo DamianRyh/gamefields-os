@@ -1,0 +1,85 @@
+/* Gamefields theme · identity layer for the subpages that are built as custom HTML.
+   Each subpage family (gfsilo, gfbrand, gfguide, gfseo, gfsub, gfcommercial, gfcatalog, gfp, gfp2) ships its own
+   inline CSS and its own header bar. Here: the in-content headers and footers give way to the site header and
+   footer, and colours, type, buttons and heroes follow the homepage. Loaded after everything else. */
+
+/* ---------- tokens and type ---------- */
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2){
+  --p:#F4F1EE;--i:#47132D;--a:#D8F24A;--l:rgba(71,19,45,.16);
+  font-family:var(--gf-font)!important;background:var(--gf-paper)!important;color:var(--gf-ink)!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2,.gf-os,.gf-privacy,.gf-radar-detail-page,.gf-studio-page,.gf-builder-page,.gfc-data) :is(button,input,select,textarea){font-family:inherit}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2,.gf-os,.gf-privacy,.gf-radar-detail-page,.gf-studio-page,.gfc-data){font-family:var(--gf-font)!important}
+body.gft :is(#g20,#gfc2,#gfc-alerts,#gfc-b2b),body.gft :is(#g20,#gfc2,#gfc-alerts,#gfc-b2b) *{font-family:var(--gf-font)!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2,.gf-os,.gf-privacy,.gf-radar-detail-page,.gf-studio-page,.gfc-data) :is(h1,h2,h3,h4){
+  font-family:var(--gf-font)!important;font-weight:800!important;text-transform:none!important;letter-spacing:-.045em!important;text-wrap:balance;color:inherit}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) h1{font-size:clamp(40px,6.4vw,96px)!important;line-height:.92!important;letter-spacing:-.055em!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) h2{font-size:clamp(30px,4vw,60px)!important;line-height:.98!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) h3{font-size:clamp(19px,1.6vw,23px)!important;line-height:1.2!important;letter-spacing:-.02em!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) p{line-height:1.6}
+
+/* ---------- the site header and footer replace the in-content ones ---------- */
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) > .bar,
+body.gft .gf-os > header:first-child,body.gft .rd-header,body.gft .gf-studio-top{display:none!important}
+body.gft .gf-os > footer:last-child,body.gft .rd-footer,body.gft .gf-studio-foot,body.gft .gf-product-footer{display:none!important}
+
+/* ---------- kicker (eye) ---------- */
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .eye{
+  font-weight:600!important;font-size:11.5px!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:var(--gf-violet)!important;opacity:1!important}
+
+/* ---------- hero: photo with a plum veil, or the violet court when there is no photo ---------- */
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero{position:relative;isolation:isolate;color:#fff!important;background-color:var(--gf-plum)!important;background-position:center!important;background-size:cover!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero[style*="background-image"]::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(100deg,rgba(28,9,18,.9) 0%,rgba(28,9,18,.7) 46%,rgba(28,9,18,.22) 100%)}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero:not([style*="background-image"]){background:var(--gf-violet)!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero:not([style*="background-image"])::before{content:"";position:absolute;inset:clamp(10px,1.6vw,22px);z-index:-1;pointer-events:none;
+  border:2px solid rgba(255,255,255,.32);background:linear-gradient(rgba(255,255,255,.32),rgba(255,255,255,.32)) center/2px 100% no-repeat}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero:not([style*="background-image"])::after{content:"";position:absolute;left:50%;top:50%;z-index:-1;pointer-events:none;
+  width:min(30vw,340px);aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid rgba(255,255,255,.32);border-radius:50%}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero :is(h1,h2,p,li,span,strong,small){color:#fff!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero p{color:rgba(255,255,255,.88)!important;font-size:clamp(17px,1.4vw,20px)}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero .eye{color:var(--gf-lime)!important}
+/* a stock photo that has nothing to do with sports courts is replaced by a Gamefields court */
+body.gft .hero[style*="hero-pic-wide"]{background-image:url(/wp-content/uploads/2026/10/Studio-Urban-Contrast.webp)!important}
+
+/* ---------- buttons: pills like the homepage ---------- */
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .btn{
+  display:inline-flex!important;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px!important;border-radius:999px!important;
+  background:var(--gf-ink)!important;color:var(--gf-paper)!important;border:0!important;font-weight:600!important;font-size:16px!important;letter-spacing:0!important;text-transform:none!important;text-decoration:none!important;transition:transform .2s ease}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .btn:hover{transform:translateY(-2px)}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) :is(.hero,.dark,.final) .btn{background:var(--gf-lime)!important;color:var(--gf-ink)!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .btn.ghost{background:transparent!important;color:inherit!important;box-shadow:inset 0 0 0 1.5px currentColor}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero .btn.ghost{color:#fff!important}
+
+/* ---------- section colours ---------- */
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .dark{background:var(--gf-plum)!important;color:#F4F1EE!important;--i:#F4F1EE;--l:rgba(244,241,238,.18)}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .dark :is(h2,h3,p,li,span,strong,a){color:inherit}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .dark .eye{color:var(--gf-lime)!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .lime{background:var(--gf-lime)!important;color:var(--gf-ink)!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .final{background:var(--gf-violet)!important;color:#fff!important;--i:#fff;--l:rgba(255,255,255,.3)}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .final :is(h2,p){color:#fff!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .acid{background:var(--gf-lime)!important;color:var(--gf-ink)!important}
+
+/* ---------- cards, rows, tables, callouts ---------- */
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) :is(.card,.fact,.proofcard,.project,.gf-owned-card,.spec,.use){border-radius:0!important;border-color:var(--l)!important}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) :not(.dark):not(.final) > .w :is(.card,.fact,.proofcard){background:#fff}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) :is(.row,.step){border-color:var(--l)!important}
+body.gft .gfguide :is(.answer,.callout){background:#fff!important;border:0!important;border-left:4px solid var(--gf-lime)!important;color:var(--gf-ink)!important}
+body.gft .gfguide table{border-collapse:collapse;width:100%}
+body.gft .gfguide :is(th,td){border-bottom:1px solid var(--l)!important;padding:12px 10px;text-align:left}
+body.gft .gfguide th{font-weight:700}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) :is(.related,.links) a{transition:color .2s}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) :is(.related,.links) a:hover{color:var(--gf-violet)}
+body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .faq :is(summary,dt,h3){font-weight:700!important}
+
+/* ---------- smaller templates ---------- */
+body.gft :is(.gf-os,.gf-privacy,.gf-radar-detail-page,.gf-studio-page,.gfc-data){color:var(--gf-ink)}
+body.gft .gf-privacy{max-width:860px;margin:0 auto;padding:clamp(24px,4vw,56px) var(--gf-gutter)}
+body.gft .gf-privacy :is(h1,h2){color:var(--gf-ink)}
+
+/* ---------- phones ---------- */
+@media (max-width:600px){
+  body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) h1{font-size:clamp(30px,9.4vw,46px)!important;line-height:1!important;overflow-wrap:break-word;hyphens:auto}
+  body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) h2{font-size:clamp(26px,7.6vw,38px)!important;overflow-wrap:break-word;hyphens:auto}
+  body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial,.gfcatalog,.gfp,.gfp2) .btn{min-height:48px;padding:0 20px!important;font-size:15px!important}
+  body.gft :is(.gfsilo,.gfbrand,.gfguide,.gfseo,.gfsub,.gfcommercial) .hero:not([style*="background-image"])::after{width:52vw}
+}
