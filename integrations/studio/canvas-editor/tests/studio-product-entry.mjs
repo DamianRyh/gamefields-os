@@ -34,7 +34,7 @@ try{
  await page.reload();await page.locator('[data-print-product="poster"]').waitFor();
  await page.getByRole('navigation',{name:'Ustawienia produktu'}).getByRole('button',{name:'Napisy',exact:true}).click();
  assert.equal(await page.getByLabel('Tytuł',{exact:true}).inputValue(),'MÓJ KLUB');
- await page.screenshot({path:`outputs/product-entry/poster-${width}.png`,fullPage:true});
+ await page.screenshot({path:`outputs/product-entry/poster-${width}.png`,fullPage:true});await page.locator('.studio-shop-order').first().screenshot({path:`outputs/product-entry/poster-order-${width}.png`});
  await page.getByRole('button',{name:/Produkty/}).click();
  await page.getByRole('button',{name:'Piłki',exact:true}).click();
  await page.locator('[data-print-product="ball"][data-ready="true"]').waitFor({timeout:45000});
@@ -49,7 +49,10 @@ try{
  await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'poster.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});
  await page.locator('[data-print-product="poster"]').waitFor();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
- await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();
+ assert.equal(await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).count(),0,'product mode shows only the product panel');
+ assert.match(await page.locator('.studio-shop-order').innerText(),/99\s*zł/);
+ assert.equal(await page.locator('[aria-label="Rama plakatu"]').count(),0);
+ await page.getByRole('button',{name:/Produkty/}).click();await page.getByRole('button',{name:'Boiska',exact:true}).click();
  assert.equal(await page.locator('[data-print-product]').count(),0);
  const legacyDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).click();
  assert.equal(JSON.parse(await readFile(await(await legacyDownload).path(),'utf8')).printDesign,undefined);

@@ -1,6 +1,6 @@
 "use client";
 import {StudioPrintPreview} from '@/components/studio-print-preview';
-import {StudioPrintPanel} from '@/components/studio-print-panel';
+import {StudioPrintPanel,printOrder} from '@/components/studio-print-panel';
 import {defaultStudioPrint,type StudioPrintDesign} from '@/lib/studio-print';
 import '@/app/studio-products.css';
 import "@/app/p2.css";
@@ -56,6 +56,10 @@ import {StudioKitPanel} from "@/components/studio-kit-panel";
 import {StudioKitPreview} from "@/components/studio-kit-preview";
 import {defaultKit,kitPresetForProject,kitPreset,kitSizeCounts} from "@/lib/kit";
 import "@/app/studio-kit.css";
+import {useShop,variantPrice,zl,shippingNote} from "@/lib/shop";
+import {StudioShopOrder} from "@/components/studio-shop-order";
+import {printFormats} from "@/lib/studio-print";
+import "@/app/studio-shop.css";
 import {graphicMotifs,motifCategories,motifDataUrl,type GraphicMotif,type MotifCategory} from "@/lib/graphic-motifs";
 
 type Props={entryTool?:string|null;onProducts?:()=>void;
@@ -107,6 +111,7 @@ function ScenePaintPanel({project,update,mode,applyPalette,initialSurfacePart='b
 
 export function StudioWorkspace(props:Props){
  const {project:p,update}=props;
+ const shop=useShop();
  const [kitPlayer,setKitPlayer]=useState(0),[printBrush,setPrintBrush]=useState<string|null>(null);
  const [patternsOpen,setPatternsOpen]=useState(false),[summaryOpen,setSummaryOpen]=useState(false),[editPlan,setEditPlan]=useState(false),[zoom,setZoom]=useState(props.previewMode==="aerial"?170:100);
  const [templateCategory,setTemplateCategory]=useState<"all"|"urban"|"sport"|"art"|"brand">("all");
@@ -197,13 +202,16 @@ export function StudioWorkspace(props:Props){
  const modelCode=p.arenaModel?productCodes[p.arenaModel]:undefined;
  const design=p.arenaDesign||{panelColor:"#b90f35",frameColor:"#30363c",goalColor:"#30363c",finish:"matte",text:"",side:"both",src:undefined};
  const summaryColor=(hex:string)=><span className="studio-summary-color"><i style={{background:hex}} aria-hidden="true"/>{hex.toUpperCase()}</span>;
+ const productMode=["kit","poster","ball"].includes(activeTool);
+ const printTotal=(d:StudioPrintDesign)=>{const q=d.qty||1,u=d.product==='poster'?variantPrice(shop.poster,printFormats[d.fmt]||printFormats[0],99):(shop.ball?.price??999);return `${zl(q*u)} brutto (${q} × ${zl(u)}) · ${shippingNote(shop,q*u)}`};
+ const productPrice=(activeTool==='poster'||activeTool==='ball')&&p.printDesign?(()=>{const d=p.printDesign!,q=d.qty||1,u=d.product==='poster'?variantPrice(shop.poster,printFormats[d.fmt]||printFormats[0],99):(shop.ball?.price??999);return zl(q*u)+' brutto'})():activeTool==='kit'&&p.kit?(p.kit.fit==='kids'?'Cena na zapytanie':zl(p.kit.players.length*variantPrice(shop.shirt,'M',599))+' brutto'):undefined;
  const summarySection=(title:string,tool:StudioTool,rows:[string,ReactNode][])=><section className="studio-summary-section"><header><h3>{title}</h3><button aria-label={`Edytuj: ${title}`} onClick={()=>{setSummaryOpen(false);openTool(tool)}}>Edytuj <ArrowRight size={14}/></button></header><dl>{rows.map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></section>;
  return <OptionPrices project={p} quote={props.quote}><main className="studio-shell studio-canvas-editor" data-tool={activeTool} data-print-mode={p.printDesign?"true":undefined} data-expanded={activeTool==="surface"&&(materialOpen||advancedOpen)}>
   <div className="studio-workspace-content" ref={workspaceRef} onChangeCapture={()=>{stepInteraction.current=true}} onClickCapture={()=>{stepInteraction.current=true}}>
   <header className="studio-topbar">
    {props.onProducts&&<button className="studio-product-switch" aria-label="Produkty" onClick={props.onProducts}><ArrowLeft size={16}/><span>Produkty</span></button>}
    <a href="https://www.gamefields.eu/" target="_top" className="studio-logo" aria-label="Gamefields — strona główna">gamefields <span>studio</span></a>
-   {props.recovery.blocked?<button className="studio-save studio-recovery-status" aria-label="Otwórz odzyskiwanie projektu" onClick={()=>openTool("files")}>{props.saveStatus}</button>:<span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span>}<div className="studio-top-actions"><button aria-label="Pliki projektu" onClick={()=>openTool("files")}><FolderOpen size={18}/></button><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={props.download}><Download size={18}/><span>Pobierz projekt</span></button>{!p.printDesign&&<ProjectLink project={p}/>}<QuoteBadge quote={props.quote} onClick={showSummary}/></div>
+   {props.recovery.blocked?<button className="studio-save studio-recovery-status" aria-label="Otwórz odzyskiwanie projektu" onClick={()=>openTool("files")}>{props.saveStatus}</button>:<span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span>}<div className="studio-top-actions"><button aria-label="Pliki projektu" onClick={()=>openTool("files")}><FolderOpen size={18}/></button><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={props.download}><Download size={18}/><span>Pobierz projekt</span></button>{!p.printDesign&&<ProjectLink project={p}/>}<QuoteBadge quote={props.quote} onClick={showSummary} label={productPrice}/></div>
   </header>
   {!p.printDesign&&<WorkshopSave project={p}/>}
   <div className="studio-screen">
@@ -226,7 +234,7 @@ export function StudioWorkspace(props:Props){
    </section>
    <aside id="studio-edit-panel" className={"studio-panel"+((materialOpen||advancedOpen)?" is-expanded":"")} aria-label="Ustawienia projektu" ref={panelRef} tabIndex={-1}>
     {!["kit","poster","ball"].includes(activeTool)?<ProjectSteps current={currentStep} done={completedSteps} onSelect={step=>{if(step==="summary")showSummary();else openTool(step)}}/>:null}
-    <nav className="studio-panel-tool-tabs" aria-label="Wybierz obszar edycji">{([["construction","Konstrukcja",Box],["surface","Nawierzchnia",Droplets],["graphics","Grafika",Palette],["kit","Koszulki",Shirt],["poster","Plakaty",Type],["ball","Piłki",Goal]] as const).map(([tool,label,Icon])=><button type="button" key={tool} aria-pressed={activeTool===tool} onClick={()=>openTool(tool)}><Icon size={17}/><span>{label}</span></button>)}</nav>
+    {productMode?null:<nav className="studio-panel-tool-tabs" aria-label="Wybierz obszar edycji">{([["construction","Konstrukcja",Box],["surface","Nawierzchnia",Droplets],["graphics","Grafika",Palette]] as const).map(([tool,label,Icon])=><button type="button" key={tool} aria-pressed={activeTool===tool} onClick={()=>openTool(tool)}><Icon size={17}/><span>{label}</span></button>)}</nav>}
     {(['construction','surface','graphics'] as const).includes(activeTool as 'construction'|'surface'|'graphics')?<div className="studio-panel-context" role="status"><span>{activeTool==='construction'?'01 / KONSTRUKCJA':activeTool==='surface'?'02 / NAWIERZCHNIA':'03 / GRAFIKA'}</span><p>{activeTool==='construction'?'Wybierz konstrukcję i dopasuj jej kolory.':activeTool==='surface'?'Wybierz materiał, sport i wygląd powierzchni.':'Dodawaj własne grafiki i edytuj niezależne warstwy.'}</p></div>:null}
     {((activeTool==='construction'&&p.arenaModel)||activeTool==='surface')&&!editPlan&&<ScenePaintPanel key={`${activeTool}:${p.arenaModel}`} mode={activeTool==='construction'?'construction':'surface'} project={p} update={update} applyPalette={props.applyPalette}/>}
     {activeTool==='files'||activeTool==='model'||activeTool==='surface-model'?<div className="studio-dock-heading"><h1>{toolLabels[activeTool]}</h1><button aria-label="Wróć do nawierzchni" onClick={()=>openTool('surface')}><X size={19}/></button></div>:null}
@@ -277,9 +285,9 @@ export function StudioWorkspace(props:Props){
    {summarySection("Nawierzchnia i grafika","surface",[["Materiał",surfaceLabel(p.surface)],["Wzór",`${family.name} · wariant ${p.patternVariant||1}`],["Paleta",getPatternPalette(p.patternPalette).name],["Pole gry",summaryColor(p.base)],["Strefy",summaryColor(p.zone)],["Otoczenie",summaryColor(p.outside)],["Linie",p.lines?summaryColor(p.lineColor):"Wyłączone"]])}
    {p.arenaModel?summarySection("Konstrukcja","construction",[["Kolor paneli",summaryColor(design.panelColor)],["Kolor ramy",summaryColor(design.frameColor)],["Kolor bramek",summaryColor(design.goalColor)],["Wykończenie",({matte:"Matowe",gloss:"Połysk",metal:"Metal lakierowany"})[design.finish]],["Napis na panelach",design.text||"Brak"],["Logo na panelach",design.src?"Dodane":"Brak"],...(design.text||design.src?[["Strona oznaczeń",({both:"Obie strony",inner:"Od wewnątrz",outer:"Na zewnątrz"})[design.side]] as [string,ReactNode]]:[]) ]):null}
    </>}
-   {p.printDesign&&summarySection(p.printDesign.product==='poster'?'Plakat':'Piłka',p.printDesign.product,[["Kierunek",p.printDesign.fam],["Kompozycja",String(p.printDesign.v)],["Tytuł / napis",p.printDesign.product==='poster'?p.printDesign.title:p.printDesign.label],["Wycena","Indywidualna"]])}
+   {p.printDesign&&summarySection(p.printDesign.product==='poster'?'Plakat':'Piłka',p.printDesign.product,[["Kierunek",p.printDesign.fam],["Kompozycja",String(p.printDesign.v)],["Tytuł / napis",p.printDesign.product==='poster'?p.printDesign.title:p.printDesign.label],...(p.printDesign.product==='poster'?[["Format",(printFormats[p.printDesign.fmt]||printFormats[0])+" · sam print, bez ramy"] as [string,ReactNode]]:[["Rozmiar piłki",p.printDesign.size] as [string,ReactNode]]),["Ilość",String(p.printDesign.qty||1)+" szt."],["Cena",printTotal(p.printDesign)]])}{p.printDesign&&(()=>{const o=printOrder(p.printDesign,shop);return o?<StudioShopOrder shop={shop} {...o}/>:null})()}
    {!p.printDesign&&summarySection("Grafiki i napisy","graphics",[["Elementy projektu",p.objects.filter(o=>o.kind!=="equipment").map(o=>o.name).join(", ")||"Brak dodatkowych grafik"]])}
-   {p.kit&&!p.printDesign?summarySection("Koszulki","kit",[["Wzór",kitPreset(p.kit.preset).name],["Liczba koszulek",String(p.kit.players.length)],["Rozmiary",kitSizeCounts(p.kit).map(([size,count])=>`${size} × ${count}`).join(", ")],["Napis z przodu",p.kit.sponsor||"Brak"],["Herb",p.kit.logo?"Dodany — plik przekazywany osobno":"Brak"],["Cena","Do ustalenia w wycenie"]]):null}
+   {p.kit&&!p.printDesign?summarySection("Koszulki","kit",[["Wzór",kitPreset(p.kit.preset).name],["Liczba koszulek",String(p.kit.players.length)],["Rozmiary",kitSizeCounts(p.kit).map(([size,count])=>`${size} × ${count}`).join(", ")],["Napis z przodu",p.kit.sponsor||"Brak"],["Herb",p.kit.logo?"Dodany — plik przekazywany osobno":"Brak"],["Materiał","Poliester, nadruk sublimacyjny"],["Cena",p.kit.fit==="kids"?"Rozmiary dziecięce: na zapytanie":`${zl(p.kit.players.length*variantPrice(shop.shirt,"M",599))} brutto (${p.kit.players.length} × ${zl(variantPrice(shop.shirt,"M",599))}) · ${shippingNote(shop,p.kit.players.length*variantPrice(shop.shirt,"M",599))}`]]):null}
    {!p.printDesign&&<ProjectImage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} renderCourt={props.renderCourt}/>}<InquiryPackage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} quote={props.quote}/>{!p.printDesign&&<StudioKnowledge project={p}/>}{!p.printDesign&&<ProjectSpecification project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}}/>}<p className="studio-hint">Parametry projektu dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}{inquiryState!=="idle"&&inquiryState!=="error"?<p role="status">{inquiryMessage}</p>:null}<button className="studio-primary" disabled={inquiryState==="waiting"} onClick={requestInquiry}>Wyślij projekt do wyceny <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
  </main></OptionPrices>;
 }
