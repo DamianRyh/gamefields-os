@@ -45,15 +45,8 @@ add_filter( 'comments_array', function ( $comments, $post_id ) {
 }, 10, 2 );
 
 /* E-mail to the site owner for every City submission. */
-add_action( 'comment_post', function ( $comment_id, $approved, $data ) {
-	$post_id = (int) ( $data['comment_post_ID'] ?? 0 );
-	if ( ! isset( GFT_CITY_PAGES[ $post_id ] ) ) {
-		return;
-	}
-	$raw = (string) ( $data['comment_content'] ?? '' );
-	if ( false === strpos( $raw, '"type":"GAMEFIELDS_CITY_' ) ) {
-		return;
-	}
+function gft_city_mail( $post_id, $data ) {
+	$raw    = (string) ( $data['comment_content'] ?? '' );
 	$fields = json_decode( $raw, true );
 	$lines  = array();
 	if ( is_array( $fields ) ) {
@@ -63,15 +56,23 @@ add_action( 'comment_post', function ( $comment_id, $approved, $data ) {
 			}
 		}
 	}
-	$lines[] = 'Nadawca: ' . wp_strip_all_tags( (string) ( $data['comment_author'] ?? '' ) ) . ' <' . sanitize_email( (string) ( $data['comment_author_email'] ?? '' ) ) . '>';
+	$email   = sanitize_email( (string) ( $data['comment_author_email'] ?? '' ) );
+	$lines[] = 'Nadawca: ' . wp_strip_all_tags( (string) ( $data['comment_author'] ?? '' ) ) . ' <' . $email . '>';
 	$lines[] = '';
 	$lines[] = 'Do weryfikacji w panelu: ' . admin_url( 'edit-comments.php?comment_status=moderated' );
 	wp_mail(
 		get_option( 'admin_email' ),
 		'Gamefields City: ' . GFT_CITY_PAGES[ $post_id ],
 		implode( "\n", $lines ),
-		array( 'Reply-To: ' . sanitize_email( (string) ( $data['comment_author_email'] ?? '' ) ) )
+		$email ? array( 'Reply-To: ' . $email ) : array()
 	);
+}
+
+add_action( 'comment_post', function ( $comment_id, $approved, $data ) {
+	$post_id = (int) ( $data['comment_post_ID'] ?? 0 );
+	if ( isset( GFT_CITY_PAGES[ $post_id ] ) && false !== strpos( (string) ( $data['comment_content'] ?? '' ), '"type":"GAMEFIELDS_CITY_' ) ) {
+		gft_city_mail( $post_id, $data );
+	}
 }, 10, 3 );
 
 /* The partner brief endpoint the B2B page calls first. */
@@ -103,16 +104,21 @@ add_action( 'rest_api_init', function () {
 				'message' => sanitize_textarea_field( (string) $req->get_param( 'message' ) ),
 				'source'  => 'gamefields-city-b2b',
 			);
-			$id = wp_new_comment( array(
+			// stored directly (held for moderation); WordPress comment flood rules do not apply to briefs
+			$data = array(
 				'comment_post_ID'      => 3750,
 				'comment_author'       => $name,
 				'comment_author_email' => $email,
+				'comment_author_IP'    => isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '',
 				'comment_content'      => wp_json_encode( $payload, JSON_UNESCAPED_UNICODE ),
 				'comment_type'         => 'comment',
-			), true );
-			if ( is_wp_error( $id ) ) {
+				'comment_approved'     => 0,
+			);
+			$id = wp_insert_comment( $data );
+			if ( ! $id ) {
 				return new WP_Error( 'gfc_save', 'Nie udało się zapisać briefu.', array( 'status' => 500 ) );
 			}
+			gft_city_mail( 3750, $data );
 			return array( 'ok' => true );
 		},
 	) );
