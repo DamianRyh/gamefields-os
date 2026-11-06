@@ -1,7 +1,7 @@
 import {z} from "zod";
 
 /* Sublimated kit designed next to the court: same Signature patterns, names, numbers and a team roster.
-   Stored as Project.kit; unpriced until the owner supplies a rate card. */
+   Stored as Project.kit. Adult sizes are sold in the gamefields.eu shop (599 zł gross per shirt, 2026-11-06); kids sizes go to an inquiry. */
 export const KIT_REVISION="GF-STUDIO-KIT-1" as const;
 
 export const kitPatterns=["blobs","halves","camo","contour","gradient","waves","stripes","solid"] as const;
@@ -21,7 +21,8 @@ export const kitPresets:KitPreset[]=[
  {id:"riviera-court",name:"Riviera Court",pattern:"waves",base:"#16404b",accent:"#a9ceb9",detail:"#6c938b",text:"#ffffff",family:"soft-blobs",palette:"lagoon",variant:9}
 ];
 
-export const kitAdultSizes=["XS","S","M","L","XL","XXL","3XL"] as const;
+export const kitAdultSizes=["XS","S","M","L","XL","XXL","XXXL"] as const;
+export const KIT_MATERIAL="Poliester, nadruk sublimacyjny";
 export const kitKidSizes=["116","128","140","152","164"] as const;
 const allSizes=[...kitAdultSizes,...kitKidSizes] as const;
 
@@ -42,7 +43,7 @@ export const kitSchema=z.object({
  collar:z.enum(["round","v"]),fit:z.enum(["adult","kids"]),font:z.enum(["block","modern"]),
  sponsor:z.string().max(16),
  logo:z.string().max(1500000).regex(/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/).optional(),
- players:z.array(z.object({name:z.string().max(14),number:z.string().regex(/^\d{0,2}$/),size:z.enum(allSizes)}).strict()).min(1).max(60)
+ players:z.array(z.object({name:z.string().max(14),number:z.string().regex(/^\d{0,2}$/),size:z.preprocess(v=>v==="3XL"?"XXXL":v,z.enum(allSizes))}).strict()).min(1).max(60)
 }).strict();
 
 export const kitSizes=(kit:Pick<KitDesign,"fit">)=>kit.fit==="kids"?[...kitKidSizes]:[...kitAdultSizes];
@@ -95,6 +96,7 @@ export function kitSummaryLines(kit:KitDesign){
  const L=[
   `Wzór: ${kitPreset(kit.preset).name}`,
   `Kolory: tło ${kit.base}, akcent ${kit.accent}, detal ${kit.detail}, napisy ${kit.text}`,
+  `Materiał: ${KIT_MATERIAL.toLowerCase()}`,
   `Krój: ${kit.collar==="v"?"dekolt w serek":"okrągły dekolt"}, ${kit.fit==="kids"?"dzieci":"dorośli"}; cyfry ${kit.font==="block"?"blokowe":"nowoczesne"}`,
   kit.sponsor?`Napis z przodu: ${kit.sponsor}`:"Napis z przodu: brak",
   `Herb: ${kit.logo?"tak":"brak"}`,

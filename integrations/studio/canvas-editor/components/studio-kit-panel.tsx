@@ -1,7 +1,9 @@
 "use client";
 import {useRef,useState} from "react";
 import {Check,Plus,Trash2,Upload,X} from "lucide-react";
-import {addKitPlayer,applyKitPreset,cleanKitNumber,duplicateKitNumbers,kitPreset,kitPresets,kitSizeCounts,kitSizes,setKitFit,type KitDesign,type KitPreset} from "@/lib/kit";
+import {addKitPlayer,applyKitPreset,cleanKitNumber,duplicateKitNumbers,kitPreset,kitPresets,kitSizeCounts,kitSizes,setKitFit,KIT_MATERIAL,type KitDesign,type KitPreset} from "@/lib/kit";
+import {inquiryLink,useShop,variantPrice,zl} from "@/lib/shop";
+import {StudioShopOrder} from "@/components/studio-shop-order";
 
 type Tab="design"|"lettering"|"team";
 const MAX_LOGO=1_000_000;
@@ -11,6 +13,10 @@ export function StudioKitPanel({kit,onChange,selected,onSelect,courtPreset}:{
  kit:KitDesign;onChange:(kit:KitDesign)=>void;selected:number;onSelect:(index:number)=>void;courtPreset?:KitPreset;
 }){
  const [tab,setTab]=useState<Tab>("design"),[logoError,setLogoError]=useState("");
+ const shop=useShop(),counts=kitSizeCounts(kit),sizeText=counts.map(([s,n])=>`${s} × ${n}`).join(", ");
+ const note=`Koszulki „${kitPreset(kit.preset).name}” · ${KIT_MATERIAL.toLowerCase()} · ${kit.collar==="v"?"dekolt w serek":"okrągły dekolt"}${kit.sponsor?" · napis "+kit.sponsor:""}${kit.logo?" · herb (plik prześlę mailem)":""} · rozmiary: ${sizeText} · skład: ${kit.players.map(p=>`${p.name||"-"} ${p.number||"-"} ${p.size}`).join("; ")}`;
+ const order=kit.fit==="kids"||!shop.shirt?<div className="studio-shop-order"><p className="studio-shop-note">Rozmiary dziecięce: cena na zapytanie.</p><a className="studio-primary studio-shop-cta" href={inquiryLink(shop,"Zapytanie ze Studia: "+note)} target="_top" rel="noopener">Zapytaj o wycenę</a></div>
+  :<StudioShopOrder shop={shop} note={note} extra={KIT_MATERIAL} lines={counts.map(([s,n])=>({product:shop.shirt!,value:s,qty:n,price:variantPrice(shop.shirt,s,599)}))}/>;
  const logoRef=useRef<HTMLInputElement>(null);
  const dups=duplicateKitNumbers(kit.players),sizes=kitSizes(kit);
  const setPlayer=(i:number,patch:Partial<KitDesign["players"][number]>)=>onChange({...kit,players:kit.players.map((p,k)=>k===i?{...p,...patch}:p)});
@@ -37,6 +43,7 @@ export function StudioKitPanel({kit,onChange,selected,onSelect,courtPreset}:{
     <div className="studio-kit-seg" role="group" aria-label="Dekolt">{([["round","Okrągły"],["v","W serek"]] as const).map(([v,l])=><button key={v} aria-pressed={kit.collar===v} onClick={()=>onChange({...kit,collar:v})}>{l}</button>)}</div>
     <div className="studio-kit-seg" role="group" aria-label="Rozmiary">{([["adult","Dorośli"],["kids","Dzieci"]] as const).map(([v,l])=><button key={v} aria-pressed={kit.fit===v} onClick={()=>onChange(setKitFit(kit,v))}>{l}</button>)}</div>
    </div>
+   <p className="studio-hint">{KIT_MATERIAL}. Rozmiary dorosłe XS–XXXL.</p>
   </>:null}
 
   {tab==="lettering"?<>
@@ -67,8 +74,9 @@ export function StudioKitPanel({kit,onChange,selected,onSelect,courtPreset}:{
    <dl className="studio-kit-summary">
     <div><dt>Koszulki</dt><dd>{kit.players.length}</dd></div>
     <div><dt>Rozmiary</dt><dd>{kitSizeCounts(kit).map(([s,n])=>`${s} × ${n}`).join(", ")}</dd></div>
-    <div><dt>Cena</dt><dd>do ustalenia w wycenie</dd></div>
+    <div><dt>Cena</dt><dd>{kit.fit==="kids"?"na zapytanie":`${zl(variantPrice(shop.shirt,"M",599))} brutto / szt.`}</dd></div>
    </dl>
   </>:null}
+  {order}
  </section>;
 }

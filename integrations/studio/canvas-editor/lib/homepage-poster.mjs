@@ -4,7 +4,7 @@ const FAM=Object.fromEntries(G.PRO_FAMILIES.map(f=>[f.id,f]));
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const x=esc;
     var FORMATS = [
-      { name: 'A3', size: '29,7 × 42 cm', ratio: 42 / 29.7, wall: '32%' },
+      { name: '30 × 40', size: '30 × 40 cm', ratio: 40 / 30, wall: '30%' },
       { name: '50 × 70', size: '50 × 70 cm', ratio: 1.4, wall: '44%' },
       { name: '70 × 100', size: '70 × 100 cm', ratio: 100 / 70, wall: '58%' }
     ];

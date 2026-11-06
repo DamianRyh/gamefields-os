@@ -1,0 +1,21 @@
+/* Price and order block of Studio products (plakat, piłka, koszulki). Colours follow gamefields.eu: plum #47132d, violet #6336f5, line #e8e3e6. */
+.studio-shop-order{margin:16px 0 8px;padding:14px;border:1px solid #e8e3e6;border-radius:12px;background:#fff;color:#47132d}
+.studio-shop-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.studio-shop-qty{display:inline-flex;align-items:center;border:1px solid #d9cfd4;border-radius:999px}
+.studio-shop-qty button{display:grid;place-items:center;width:44px;height:44px;border:0;background:none;color:inherit;border-radius:999px;cursor:pointer}
+.studio-shop-qty button:disabled{opacity:.35;cursor:default}
+.studio-shop-qty input{width:46px;height:44px;border:0;background:transparent;color:inherit;text-align:center;font:600 16px/1 inherit;font-variant-numeric:tabular-nums}
+.studio-shop-count{font-weight:600;font-variant-numeric:tabular-nums}
+.studio-shop-price{text-align:right}
+.studio-shop-price b{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.studio-shop-price small{display:block;color:#74656d;font-size:12px;margin-top:2px}
+.studio-shop-note{margin:10px 0 12px;color:#74656d;font-size:13px}
+.studio-shop-cta{display:flex!important;align-items:center;justify-content:center;gap:8px;width:100%!important;box-sizing:border-box;min-height:48px;border-radius:12px;background:#6336f5;color:#fff;font-weight:700;text-decoration:none}
+.studio-shop-cta:hover{background:#5226e0}
+.studio-shop-cta:focus-visible{outline:3px solid #47132d;outline-offset:2px}
+/* panel-wide input/label rules (studio-print.css, studio-kit.css) must not stretch the stepper */
+.studio-shop-order .studio-shop-row{flex-wrap:nowrap}
+.studio-shop-order .studio-shop-qty{flex:0 0 auto;width:auto;margin:0}
+.studio-shop-order .studio-shop-qty input{width:46px!important;min-width:0!important;height:44px;min-height:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.studio-shop-order .studio-shop-qty button{flex:0 0 44px;margin:0;padding:0;width:44px;min-height:0}
+.studio-shop-order .studio-shop-price{flex:1 1 auto;min-width:0}
