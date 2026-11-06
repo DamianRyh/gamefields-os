@@ -58,3 +58,19 @@ html body .studio-shell.studio-canvas-editor[data-product-mode=true] .studio-wor
  .hub-card-price{white-space:nowrap;font-size:12px}
  .product-hub .product-hub-steps{display:none}
 }
+
+/* ---------- One navigation for courts (Baymard: no duplicate navigation). The 1–4 steps replace the
+   Konstrukcja / Nawierzchnia / Grafika tabs, which repeated the first three steps. ---------- */
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;overflow:visible;padding:4px 0 10px;margin:0 0 6px;border-bottom:1px solid #e8e3e6}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:56px;padding:6px 2px;border:0;border-bottom:3px solid transparent;border-radius:8px 8px 0 0;background:transparent;color:#47132d;font-size:12.5px;font-weight:600;line-height:1.15;white-space:normal;text-align:center}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button>span:first-child{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid #cdbfc6;font-size:12px;font-weight:700}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button[aria-current=step]{border-bottom-color:#6336f5;font-weight:800}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button[aria-current=step]>span:first-child{background:#6336f5;border-color:#6336f5;color:#fff}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button:hover:not([aria-current=step]){background:#f1ecff}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button:focus-visible{outline:3px solid #6336f5;outline-offset:-3px}
+@media (max-width:420px){html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button{font-size:11.5px}}
+/* Narrow desktop panel (~280 px): columns follow the label length so the four steps never overlap. */
+@media (min-width:701px){
+ html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps{display:flex;justify-content:space-between;gap:2px}
+ html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button{flex:0 1 auto;padding:6px 3px;font-size:11px;letter-spacing:-.1px}
+}
