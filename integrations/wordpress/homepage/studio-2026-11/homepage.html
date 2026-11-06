@@ -388,18 +388,98 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   .gfs .hero-foot{order:5;padding:8px max(16px,3.4vw) clamp(32px,9vw,52px);flex-direction:column;align-items:flex-start;gap:18px;position:relative;z-index:2}
   .gfs .hero .court{opacity:.5}
   .gfs .nav .menu-btn{align-items:center;line-height:1}
-}</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","name":"Damian Gawrych"},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Piłki we wzorze boiska","description":"Projekt piłki w tym samym wzorze i kolorach co nawierzchnia.","provider":{"@id":"https://www.gamefields.eu/#studio"}}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. Zobacz wzory Signature."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. Napisz do nas, aby ustalić zakres oferty."}}]}]}</script>
+}
+
+/* ---------- 2026-11-06 · usability pass (Baymard: persistent header, current section, scope, hit areas, touch targets) ---------- */
+/* sticky header: becomes fixed and compact after the hero starts scrolling away */
+.gfs .nav-spacer{display:none}
+.gfs .nav.stuck{position:fixed;top:var(--wp-admin--admin-bar--height,0px);left:0;right:0;z-index:60;min-height:58px;background:var(--paper);
+  box-shadow:0 0 0 100vmax var(--paper),0 1px 0 100vmax var(--line);clip-path:inset(0 -100vmax -1px);animation:gfs-drop .22s ease-out}
+.gfs .nav.stuck + .nav-spacer{display:block}
+.gfs .nav.stuck .logo{font-size:22px}
+.gfs .nav.stuck .pill.cfg{min-height:40px!important}
+@keyframes gfs-drop{from{transform:translateY(-100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.gfs .nav.stuck{animation:none}}
+/* current section in the menu */
+.gfs .nav .links a{position:relative;padding-block:6px}
+.gfs .nav .links a[aria-current]{color:var(--violet)}
+.gfs .nav .links a[aria-current]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:currentColor;border-radius:2px}
+@media (max-width:1280px){.gfs .nav > .m{display:none}.gfs .nav .links{gap:18px}}
+/* quick inquiry button, phones only */
+.gfs .nav .ask{display:none}
+/* scope strip, phones and tablets only */
+.gfs .scope{display:none}
+/* audience paths */
+.gfs .who{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfs .who a{position:relative;display:grid;gap:8px;align-content:start;min-height:100%;padding:24px 56px 26px 24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s,transform .2s}
+.gfs .who a:hover{border-color:var(--violet);transform:translateY(-3px);color:inherit}
+.gfs .who a:hover b{color:var(--violet)}
+.gfs .who b{font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.gfs .who a > span:not(.m){color:var(--muted);font-size:15px;line-height:1.45}
+.gfs .who .m{color:var(--muted)}
+.gfs .who i{position:absolute;right:22px;top:22px;font-style:normal;font-size:22px;color:var(--violet)}
+/* guides under the FAQ */
+.gfs .gh-guides{margin-top:34px}
+.gfs .gh-guides ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.gfs .gh-guides a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none!important;font-weight:600;font-size:14px}
+.gfs .gh-guides a:hover{border-color:var(--violet)}
+/* collection tiles: the call to action is always visible on touch screens (no hover there) */
+@media (hover:none){.gfs .tile .go{opacity:1;transform:none}}
+/* touch targets: at least 44 px on coarse pointers */
+@media (pointer:coarse){
+  .gfs .chip,.gfs .seg button{min-height:44px}
+  .gfs :is([data-pl-vars],[data-bl-vars]) button{min-height:44px}
+  .gfs input[type=range]{min-height:44px}
+}
+/* inline e-mail validation (contact form) */
+.gfs .gf-ok{border-color:#2E8B57!important;box-shadow:0 0 0 1px #2E8B57 inset}
+.gfs .gf-bad{border-color:#C0262D!important;box-shadow:0 0 0 1px #C0262D inset}
+.gfs .gf-hint{display:block;margin-top:6px;font-size:13px;font-weight:600}
+.gfs .gf-hint.ok{color:#2E7D4F}.gfs .gf-hint.bad{color:#B3202A}
+
+@media (max-width:900px){
+  .gfs .nav.stuck{min-height:56px}
+  .gfs .nav .ask{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;margin-left:auto;border-radius:999px;border:1.5px solid var(--ink);font-weight:600;font-size:15px;text-decoration:none}
+  .gfs .nav .ask + .menu-btn{margin-left:8px}
+  .gfs .nav.stuck .links{top:56px}
+  .gfs .scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-block:18px 6px}
+  .gfs .scope a{display:grid;gap:2px;min-height:72px;padding:12px 14px;background:#fff;border:1px solid var(--line);text-decoration:none;align-content:center}
+  .gfs .scope b{font-size:16px;line-height:1.2}
+  .gfs .scope b::after{content:" →";color:var(--violet)}
+  .gfs .scope span{font-size:13px;line-height:1.3;color:var(--muted)}
+  .gfs .who{grid-template-columns:minmax(0,1fr);gap:8px}
+  .gfs .who a{padding:18px 52px 18px 18px}
+  .gfs .who b{font-size:19px}
+}
+@media (max-width:600px){
+  .gfs .nav.stuck{top:0}
+  /* collection: two columns instead of eight full-width posters */
+  .gfs .wall{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gfs .wall .tile{grid-column:span 1!important;min-height:216px!important}
+  .gfs .wall .tile .num{font-size:40px;right:12px;top:8px}
+  .gfs .wall .tile .go{left:12px;top:14px;font-size:13px}
+  .gfs .wall .tile img{width:92%;transform:translate(-50%,-58%)}
+  .gfs .wall .tile .bar{flex-direction:column;gap:0;padding:8px 10px;left:8px;right:8px;bottom:8px}
+  .gfs .wall .tile .bar b{font-size:14px}
+  .gfs .wall .tile .bar .m{font-size:10.5px;letter-spacing:.04em}
+  .gfs .wall .tile .court{inset:8px}
+}
+/* anchors land below the sticky header */
+.gfs :is(section,nav,div)[id]{scroll-margin-top:72px}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","name":"Damian Gawrych"},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Piłki we wzorze boiska","description":"Projekt piłki w tym samym wzorze i kolorach co nawierzchnia.","provider":{"@id":"https://www.gamefields.eu/#studio"}}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. Zobacz wzory Signature."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. Napisz do nas, aby ustalić zakres oferty. Co wpływa na budżet, opisujemy w poradniku „Ile kosztuje budowa boiska sportowego?”."}}]}]}</script>
 <div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/">
 <a class="skip" href="#gfs-main">Przejdź do treści</a>
 
 <header class="wrap nav" id="gfs-nav">
   <a href="/" class="logo" aria-label="Gamefields, strona główna">gamefields.</a>
   <span class="m" style="color:var(--muted)">Studio Damiana Gawrycha · Warszawa</span>
+  <a class="ask" href="#kontakt">Zapytanie</a>
   <button type="button" class="menu-btn" aria-expanded="false" aria-controls="gfs-links">Menu</button>
   <nav class="links" id="gfs-links" aria-label="Główna nawigacja">
     <a href="#boiska">Boiska</a>
     <a href="#planer">Zmieści się?</a>
+    <a href="#dla-kogo">Dla kogo</a>
     <a href="#studio">Studio</a>
     <a href="#plakaty">Plakaty</a>
     <a href="#pilka">Piłka</a>
@@ -442,6 +522,16 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   <span>Panna Ring</span><span><b>Panna Play</b></span><span>Panna Court</span><span><b>Cage 90</b></span><span>Cage 180</span><span><b>Panna Octa</b></span><span>Panna Grid</span><span><b>Street Arena 15</b></span>
 </div></div>
 
+<!-- SCOPE (mobile): the whole offer at a glance, Baymard: show catalogue scope on the homepage -->
+<nav class="wrap scope" aria-label="Na skróty">
+  <a href="#boiska"><b>8 boisk</b><span>Panna, Cage, Street Arena</span></a>
+  <a href="#planer"><b>Zmieści się?</b><span>Sprawdź na swoim placu</span></a>
+  <a href="/konfigurator-boisk/"><b>Studio 3D</b><span>Konstrukcja, nawierzchnia, grafika</span></a>
+  <a href="#dla-kogo"><b>Dla kogo</b><span>Szkoły, osiedla, kluby, marki</span></a>
+  <a href="#plakaty"><b>Plakaty i piłki</b><span>Twój wzór boiska</span></a>
+  <a href="#kontakt"><b>Zapytanie</b><span>Odpisuję osobiście</span></a>
+</nav>
+
 <!-- COLLECTION -->
 <section id="boiska" class="wrap sec" aria-labelledby="gfs-boiska">
   <div class="head">
@@ -476,6 +566,22 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 </section>
 
 <!-- STUDIO -->
+<!-- WHO: paths per audience, linked to the existing landing pages -->
+<section id="dla-kogo" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-who">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Dla kogo</p><h2 class="d" id="gfs-who">Wybierz swoją drogę.</h2></div>
+    <div class="side"><p>Każdy projekt zaczyna się od miejsca i ludzi, którzy będą na nim grać. Zobacz, jak pracuję z Twoim typem inwestycji.</p></div>
+  </div>
+  <ul class="who" role="list">
+    <li><a href="/boiska-dla-szkol/"><span class="m">01</span><b>Szkoły i gminy</b><span>Boiska wielofunkcyjne, modernizacje i małe strefy aktywności.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/boiska-dla-deweloperow/"><span class="m">02</span><b>Deweloperzy i osiedla</b><span>Kompaktowe boiska i strefy sportowe dla inwestycji mieszkaniowych.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/boiska-dla-klubow/"><span class="m">03</span><b>Kluby i akademie</b><span>Strefy treningowe 1 na 1 i 3 na 3, technika, nawierzchnie.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/aktywacje-sportowe-dla-marek/"><span class="m">04</span><b>Marki i agencje</b><span>Brandowane boiska, turnieje, pop-upy i aktywacje.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/wynajem-boisk-mobilnych/"><span class="m">05</span><b>Eventy i wynajem</b><span>Mobilne boiska panna i street football na turnieje.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/projektuj-i-wybuduj-boisko/"><span class="m">06</span><b>Pełna realizacja</b><span>Od analizy terenu po odbiór, z jednym partnerem.</span><i aria-hidden="true">→</i></a></li>
+  </ul>
+</section>
+
 <section id="studio" class="studio sec" aria-labelledby="gfs-studio">
   <div class="wrap studio-grid">
     <div class="elev tall2" data-elev aria-label="Schemat z boku: sylwetka obok paneli boiska, wysokości w skali 1:1">
@@ -808,7 +914,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
 </section>
 
 <!-- Kept from live page 3462 (revision of 2026-10-31): FAQ (link targets adapted to the new sections) and the CF7 project-details helpers, unchanged. -->
-<section class="gh-faq gh-section gh-wrap" id="pytania" aria-labelledby="gh-faq-title"><style>.gh-faq{padding:42px 20px 74px;max-width:1160px}.gh-faq-tag{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#7855e8}.gh-faq h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.04em;margin:12px 0 24px}.gh-faq-list{border-top:1px solid rgba(36,25,48,.2)}.gh-faq details{border-bottom:1px solid rgba(36,25,48,.2);padding:0}.gh-faq summary{display:flex;align-items:center;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}.gh-faq summary::-webkit-details-marker{display:none}.gh-faq summary::after{content:'+';font-size:24px;font-weight:400;color:#7855e8;flex-shrink:0}.gh-faq details[open] summary::after{content:'−'}.gh-faq details p{max-width:790px;margin:0;padding:0 4px 22px;font-size:15px;line-height:1.65;opacity:.8}.gh-faq a{text-decoration:underline;text-underline-offset:4px}@media(max-width:600px){.gh-faq{padding:28px 16px 48px}.gh-faq summary{font-size:16px;padding:16px 2px}.gh-faq details p{font-size:14px}}</style><p class="gh-faq-tag">Przed pierwszym projektem</p><h2 id="gh-faq-title">Krótkie odpowiedzi.</h2><div class="gh-faq-list"><details><summary>Ile miejsca potrzebuję na boisko?</summary><p>To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w <a href="#planer">planerze „Zmieści się?”</a> — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu.</p></details><details><summary>Czy mogę zmienić kolory i wzory?</summary><p>Tak. W <a href="/konfigurator-boisk/">GAMEFIELDS Studio</a> możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu.</p></details><details><summary>Czy wykonujecie również samą nawierzchnię?</summary><p>Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. <a href="#plakaty">Zobacz wzory Signature</a>.</p></details><details><summary>Czy mogę zacząć bez gotowego projektu?</summary><p>Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. <a href="#kontakt">Wyślij zapytanie</a>, aby omówić możliwości.</p></details><details><summary>Czy cena jest widoczna od razu?</summary><p>Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. <a href="#kontakt">Napisz do nas</a>, aby ustalić zakres oferty.</p></details></div></section>
+<section class="gh-faq gh-section gh-wrap" id="pytania" aria-labelledby="gh-faq-title"><style>.gh-faq{padding:42px 20px 74px;max-width:1160px}.gh-faq-tag{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#7855e8}.gh-faq h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.04em;margin:12px 0 24px}.gh-faq-list{border-top:1px solid rgba(36,25,48,.2)}.gh-faq details{border-bottom:1px solid rgba(36,25,48,.2);padding:0}.gh-faq summary{display:flex;align-items:center;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}.gh-faq summary::-webkit-details-marker{display:none}.gh-faq summary::after{content:'+';font-size:24px;font-weight:400;color:#7855e8;flex-shrink:0}.gh-faq details[open] summary::after{content:'−'}.gh-faq details p{max-width:790px;margin:0;padding:0 4px 22px;font-size:15px;line-height:1.65;opacity:.8}.gh-faq a{text-decoration:underline;text-underline-offset:4px}@media(max-width:600px){.gh-faq{padding:28px 16px 48px}.gh-faq summary{font-size:16px;padding:16px 2px}.gh-faq details p{font-size:14px}}</style><p class="gh-faq-tag">Przed pierwszym projektem</p><h2 id="gh-faq-title">Krótkie odpowiedzi.</h2><div class="gh-faq-list"><details><summary>Ile miejsca potrzebuję na boisko?</summary><p>To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w <a href="#planer">planerze „Zmieści się?”</a> — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu.</p></details><details><summary>Czy mogę zmienić kolory i wzory?</summary><p>Tak. W <a href="/konfigurator-boisk/">GAMEFIELDS Studio</a> możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu.</p></details><details><summary>Czy wykonujecie również samą nawierzchnię?</summary><p>Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. <a href="#plakaty">Zobacz wzory Signature</a>.</p></details><details><summary>Czy mogę zacząć bez gotowego projektu?</summary><p>Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. <a href="#kontakt">Wyślij zapytanie</a>, aby omówić możliwości.</p></details><details><summary>Czy cena jest widoczna od razu?</summary><p>Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. <a href="#kontakt">Napisz do nas</a>, aby ustalić zakres oferty. Co wpływa na budżet, opisujemy w poradniku <a href="/ile-kosztuje-budowa-boiska-sportowego/">„Ile kosztuje budowa boiska sportowego?”</a>.</p></details></div><nav class="gh-guides" aria-label="Poradniki"><p class="gh-faq-tag">Poradniki</p><ul><li><a href="/ile-kosztuje-budowa-boiska-sportowego/">Ile kosztuje budowa boiska?</a></li><li><a href="/jak-wybrac-nawierzchnie-sportowa/">Jak wybrać nawierzchnię?</a></li><li><a href="/budowa-boiska-krok-po-kroku/">Budowa boiska krok po kroku</a></li><li><a href="/wymiary-boiska-wielofunkcyjnego/">Wymiary boiska wielofunkcyjnego</a></li><li><a href="/renowacja-czy-budowa-nowego-boiska/">Renowacja czy budowa nowego?</a></li><li><a href="/baza-wiedzy/">Cała baza wiedzy →</a></li></ul></nav></section>
 
 <!-- CONTACT (existing CF7 form a71dc3a, field project-details) -->
 <section id="kontakt" class="contact sec" aria-labelledby="gfs-contact">
@@ -1067,6 +1173,34 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
   var nav = $('#gfs-nav'), menuBtn = $('.menu-btn', nav);
   menuBtn.addEventListener('click', function () { var o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', String(o)); });
   $$('.links a', nav).forEach(function (a) { a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
+
+  /* ---------- NAV: persistent compact header + current section (Baymard) ---------- */
+  var spacer = el('div', { class: 'nav-spacer', 'aria-hidden': 'true' });
+  nav.parentNode.insertBefore(spacer, nav.nextSibling);
+  var navStart = 0, navH = 72, stuckNow = false, ticking = false;
+  function measureNav() { if (!stuckNow) { navH = nav.offsetHeight; navStart = nav.getBoundingClientRect().top + window.scrollY; } spacer.style.height = navH + 'px'; }
+  function onScroll() {
+    ticking = false;
+    var want = window.scrollY > navStart + navH + 160;
+    if (want !== stuckNow) {
+      stuckNow = want; nav.classList.toggle('stuck', want);
+      if (!want) { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+    }
+  }
+  measureNav();
+  window.addEventListener('resize', measureNav);
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+  var spyLinks = $$('.links a[href^="#"]', nav);
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        spyLinks.forEach(function (l) { if (l.getAttribute('href') === '#' + e.target.id) l.setAttribute('aria-current', 'location'); else l.removeAttribute('aria-current'); });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    spyLinks.forEach(function (l) { var s = document.getElementById(l.getAttribute('href').slice(1)); if (s) spy.observe(s); });
+  }
 
   /* ---------- HERO: 3D model + court colour ---------- */
   var COATS = [
@@ -1869,6 +2003,22 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
   }
   nameField('textarea[name="project-details"]', 'Szczegóły projektu');
   nameField('input[name="your-email"]', 'E-mail');
+
+  /* ---------- Contact form: inline e-mail validation (on blur, positive feedback, error cleared while typing) ---------- */
+  var mail = root.querySelector('.wpcf7 input[type="email"]');
+  if (mail) {
+    var hint = el('span', { class: 'gf-hint', 'aria-live': 'polite' });
+    mail.parentNode.appendChild(hint);
+    var RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    var check = function (strict) {
+      var v = mail.value.trim();
+      if (!v) { mail.classList.remove('gf-ok', 'gf-bad'); hint.textContent = ''; hint.className = 'gf-hint'; mail.removeAttribute('aria-invalid'); return; }
+      if (RE.test(v)) { mail.classList.add('gf-ok'); mail.classList.remove('gf-bad'); hint.textContent = '✓ Adres wygląda dobrze'; hint.className = 'gf-hint ok'; mail.setAttribute('aria-invalid', 'false'); return; }
+      if (strict) { mail.classList.add('gf-bad'); mail.classList.remove('gf-ok'); hint.textContent = 'Sprawdź adres — brakuje „@” albo domeny, np. jan@firma.pl'; hint.className = 'gf-hint bad'; mail.setAttribute('aria-invalid', 'true'); }
+    };
+    mail.addEventListener('blur', function () { check(true); });
+    mail.addEventListener('input', function () { check(mail.classList.contains('gf-bad')); });
+  }
 })();
 </script>
 <script>(function(){const names={"w1":"Panna Ring","o1":"Panna Play","p1":"Panna Court","street15":"Street Arena 15","circle-cage-1":"Panna Cage 90","circle-cage-2":"Panna Cage 180","street-field":"Panna Grid","octagon":"Panna Octa","street-football-15x10":"Street Arena 15","panna-perfo-circle": "Panna Perfo-Circle", "panna-perfo-rect": "Panna Perfo-Rect", "panna-net-rect": "Panna Net-Rect", "panna-solid-circle": "Panna Solid-Circle", "panna-net-circle": "Panna Net-Circle", "panna-high-net-circle": "Panna High Net-Circle", "panna-steel-octaground": "Panna Steel OctaGround"};const key=new URLSearchParams(window.location.search).get('gf_product');if(!Object.prototype.hasOwnProperty.call(names,key))return;const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]');if(!field)return;const name=names[key],summary='Wybrany model: '+name+'. Proszę o dobór konfiguracji i wycenę dla mojej lokalizacji.';root.dataset.gfProductName=name;field.addEventListener('input',function(){if(!field.value.includes(summary))delete root.dataset.gfProductName});field.value=summary+(field.value.trim()?'\n\n'+field.value.trim():'');field.dispatchEvent(new Event('input',{bubbles:true}));const attached=root.querySelector('#gc-attached');if(attached){attached.textContent='Wybrany model: '+name+'. Opisz miejsce i sposób użytkowania — model został dołączony do zapytania.';attached.hidden=false;}if(window.location.hash==='#kontakt'){root.querySelector('#kontakt')?.scrollIntoView({behavior:'auto'});root.querySelector('[name="your-email"]')?.focus({preventScroll:true});}})();</script>

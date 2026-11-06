@@ -26,6 +26,34 @@
   menuBtn.addEventListener('click', function () { var o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', String(o)); });
   $$('.links a', nav).forEach(function (a) { a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
 
+  /* ---------- NAV: persistent compact header + current section (Baymard) ---------- */
+  var spacer = el('div', { class: 'nav-spacer', 'aria-hidden': 'true' });
+  nav.parentNode.insertBefore(spacer, nav.nextSibling);
+  var navStart = 0, navH = 72, stuckNow = false, ticking = false;
+  function measureNav() { if (!stuckNow) { navH = nav.offsetHeight; navStart = nav.getBoundingClientRect().top + window.scrollY; } spacer.style.height = navH + 'px'; }
+  function onScroll() {
+    ticking = false;
+    var want = window.scrollY > navStart + navH + 160;
+    if (want !== stuckNow) {
+      stuckNow = want; nav.classList.toggle('stuck', want);
+      if (!want) { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+    }
+  }
+  measureNav();
+  window.addEventListener('resize', measureNav);
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+  var spyLinks = $$('.links a[href^="#"]', nav);
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        spyLinks.forEach(function (l) { if (l.getAttribute('href') === '#' + e.target.id) l.setAttribute('aria-current', 'location'); else l.removeAttribute('aria-current'); });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    spyLinks.forEach(function (l) { var s = document.getElementById(l.getAttribute('href').slice(1)); if (s) spy.observe(s); });
+  }
+
   /* ---------- HERO: 3D model + court colour ---------- */
   var COATS = [
     { k: 'gray', n: 'Szary stalowy', c: '#8F9493', gl: [0.62, 0.65, 0.64], ground: '#6336F5', ink: '#FFFFFF', line: 'rgba(255,255,255,.45)', cta: ['#FFFFFF', '#47132D'] },
@@ -827,4 +855,20 @@
   }
   nameField('textarea[name="project-details"]', 'Szczegóły projektu');
   nameField('input[name="your-email"]', 'E-mail');
+
+  /* ---------- Contact form: inline e-mail validation (on blur, positive feedback, error cleared while typing) ---------- */
+  var mail = root.querySelector('.wpcf7 input[type="email"]');
+  if (mail) {
+    var hint = el('span', { class: 'gf-hint', 'aria-live': 'polite' });
+    mail.parentNode.appendChild(hint);
+    var RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    var check = function (strict) {
+      var v = mail.value.trim();
+      if (!v) { mail.classList.remove('gf-ok', 'gf-bad'); hint.textContent = ''; hint.className = 'gf-hint'; mail.removeAttribute('aria-invalid'); return; }
+      if (RE.test(v)) { mail.classList.add('gf-ok'); mail.classList.remove('gf-bad'); hint.textContent = '✓ Adres wygląda dobrze'; hint.className = 'gf-hint ok'; mail.setAttribute('aria-invalid', 'false'); return; }
+      if (strict) { mail.classList.add('gf-bad'); mail.classList.remove('gf-ok'); hint.textContent = 'Sprawdź adres — brakuje „@” albo domeny, np. jan@firma.pl'; hint.className = 'gf-hint bad'; mail.setAttribute('aria-invalid', 'true'); }
+    };
+    mail.addEventListener('blur', function () { check(true); });
+    mail.addEventListener('input', function () { check(mail.classList.contains('gf-bad')); });
+  }
 })();

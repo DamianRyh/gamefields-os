@@ -386,3 +386,80 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   .gfs .hero .court{opacity:.5}
   .gfs .nav .menu-btn{align-items:center;line-height:1}
 }
+
+/* ---------- 2026-11-06 · usability pass (Baymard: persistent header, current section, scope, hit areas, touch targets) ---------- */
+/* sticky header: becomes fixed and compact after the hero starts scrolling away */
+.gfs .nav-spacer{display:none}
+.gfs .nav.stuck{position:fixed;top:var(--wp-admin--admin-bar--height,0px);left:0;right:0;z-index:60;min-height:58px;background:var(--paper);
+  box-shadow:0 0 0 100vmax var(--paper),0 1px 0 100vmax var(--line);clip-path:inset(0 -100vmax -1px);animation:gfs-drop .22s ease-out}
+.gfs .nav.stuck + .nav-spacer{display:block}
+.gfs .nav.stuck .logo{font-size:22px}
+.gfs .nav.stuck .pill.cfg{min-height:40px!important}
+@keyframes gfs-drop{from{transform:translateY(-100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.gfs .nav.stuck{animation:none}}
+/* current section in the menu */
+.gfs .nav .links a{position:relative;padding-block:6px}
+.gfs .nav .links a[aria-current]{color:var(--violet)}
+.gfs .nav .links a[aria-current]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:currentColor;border-radius:2px}
+@media (max-width:1280px){.gfs .nav > .m{display:none}.gfs .nav .links{gap:18px}}
+/* quick inquiry button, phones only */
+.gfs .nav .ask{display:none}
+/* scope strip, phones and tablets only */
+.gfs .scope{display:none}
+/* audience paths */
+.gfs .who{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfs .who a{position:relative;display:grid;gap:8px;align-content:start;min-height:100%;padding:24px 56px 26px 24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s,transform .2s}
+.gfs .who a:hover{border-color:var(--violet);transform:translateY(-3px);color:inherit}
+.gfs .who a:hover b{color:var(--violet)}
+.gfs .who b{font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.gfs .who a > span:not(.m){color:var(--muted);font-size:15px;line-height:1.45}
+.gfs .who .m{color:var(--muted)}
+.gfs .who i{position:absolute;right:22px;top:22px;font-style:normal;font-size:22px;color:var(--violet)}
+/* guides under the FAQ */
+.gfs .gh-guides{margin-top:34px}
+.gfs .gh-guides ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.gfs .gh-guides a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none!important;font-weight:600;font-size:14px}
+.gfs .gh-guides a:hover{border-color:var(--violet)}
+/* collection tiles: the call to action is always visible on touch screens (no hover there) */
+@media (hover:none){.gfs .tile .go{opacity:1;transform:none}}
+/* touch targets: at least 44 px on coarse pointers */
+@media (pointer:coarse){
+  .gfs .chip,.gfs .seg button{min-height:44px}
+  .gfs :is([data-pl-vars],[data-bl-vars]) button{min-height:44px}
+  .gfs input[type=range]{min-height:44px}
+}
+/* inline e-mail validation (contact form) */
+.gfs .gf-ok{border-color:#2E8B57!important;box-shadow:0 0 0 1px #2E8B57 inset}
+.gfs .gf-bad{border-color:#C0262D!important;box-shadow:0 0 0 1px #C0262D inset}
+.gfs .gf-hint{display:block;margin-top:6px;font-size:13px;font-weight:600}
+.gfs .gf-hint.ok{color:#2E7D4F}.gfs .gf-hint.bad{color:#B3202A}
+
+@media (max-width:900px){
+  .gfs .nav.stuck{min-height:56px}
+  .gfs .nav .ask{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;margin-left:auto;border-radius:999px;border:1.5px solid var(--ink);font-weight:600;font-size:15px;text-decoration:none}
+  .gfs .nav .ask + .menu-btn{margin-left:8px}
+  .gfs .nav.stuck .links{top:56px}
+  .gfs .scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-block:18px 6px}
+  .gfs .scope a{display:grid;gap:2px;min-height:72px;padding:12px 14px;background:#fff;border:1px solid var(--line);text-decoration:none;align-content:center}
+  .gfs .scope b{font-size:16px;line-height:1.2}
+  .gfs .scope b::after{content:" →";color:var(--violet)}
+  .gfs .scope span{font-size:13px;line-height:1.3;color:var(--muted)}
+  .gfs .who{grid-template-columns:minmax(0,1fr);gap:8px}
+  .gfs .who a{padding:18px 52px 18px 18px}
+  .gfs .who b{font-size:19px}
+}
+@media (max-width:600px){
+  .gfs .nav.stuck{top:0}
+  /* collection: two columns instead of eight full-width posters */
+  .gfs .wall{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gfs .wall .tile{grid-column:span 1!important;min-height:216px!important}
+  .gfs .wall .tile .num{font-size:40px;right:12px;top:8px}
+  .gfs .wall .tile .go{left:12px;top:14px;font-size:13px}
+  .gfs .wall .tile img{width:92%;transform:translate(-50%,-58%)}
+  .gfs .wall .tile .bar{flex-direction:column;gap:0;padding:8px 10px;left:8px;right:8px;bottom:8px}
+  .gfs .wall .tile .bar b{font-size:14px}
+  .gfs .wall .tile .bar .m{font-size:10.5px;letter-spacing:.04em}
+  .gfs .wall .tile .court{inset:8px}
+}
+/* anchors land below the sticky header */
+.gfs :is(section,nav,div)[id]{scroll-margin-top:72px}
