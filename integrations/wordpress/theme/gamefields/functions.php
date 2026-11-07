@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.17' );
+define( 'GFT_VERSION', '1.0.18' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -268,3 +268,28 @@ add_filter( 'cmplz_cookiebanner_settings_front_end', function ( $output ) {
 	}
 	return $output;
 }, 20 );
+
+/* Retired pages from the old theme demo (moved to drafts on 2026-11-07): old links land on the right page. */
+add_action( 'template_redirect', function () {
+	$path = untrailingslashit( (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH ) );
+	$map  = array(
+		'/elements'                                  => '/',
+		'/banner-slider'                             => '/',
+		'/home-categories-grid'                      => '/',
+		'/team'                                      => '/o-nas/',
+		'/product-categories'                        => '/shop/',
+		'/wishlist'                                  => '/shop/',
+		'/order-tracking'                            => '/kontakt/',
+		'/blog'                                      => '/baza-wiedzy/',
+		'/faq'                                       => '/#pytania',
+		'/contact'                                   => '/kontakt/',
+		'/gamefields-boiska-panna-i-street-football' => '/#boiska',
+	);
+	if ( 0 === strpos( $path, '/elements/' ) ) {
+		$path = '/elements';
+	}
+	if ( isset( $map[ $path ] ) && ( is_404() || ! is_user_logged_in() ) ) {
+		wp_safe_redirect( home_url( $map[ $path ] ), 301 );
+		exit;
+	}
+}, 2 );
