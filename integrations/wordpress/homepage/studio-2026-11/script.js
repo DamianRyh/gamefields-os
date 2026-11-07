@@ -6,6 +6,10 @@
   if (!root) return;
   var A = root.getAttribute('data-asset-base') || '';
   var UP = 'https://www.gamefields.eu/wp-content/uploads/2026/10/';
+  /* Light copies (2026-11-07, Lighthouse): 720 px on phones, 1200 px elsewhere; the 1920 px originals stay in the media library. */
+  var OPT = { 'Gamefields-Panna-Play-wide-v3-default.webp': 'gf-play', 'Gamefields-Panna-Court-wide-v3-default.webp': 'gf-court', 'Cage-90-Hero-4-gray.webp': 'gf-cage90', 'Cage-180-Hero-4-gray.webp': 'gf-cage180' };
+  var OPT_W = window.innerWidth <= 700 ? 720 : 1200;
+  function up(name) { return OPT[name] ? 'https://www.gamefields.eu/wp-content/uploads/2026/11/' + OPT[name] + '-' + OPT_W + '.webp' : UP + name; }
   var SP = 'https://gamefields-studio.ryhfs90.chatgpt.site/surface-projects/';
   var STUDIO = '/studio/';
   var $ = function (s, r) { return (r || root).querySelector(s); };
@@ -70,10 +74,10 @@
     { k: 'graphite', n: 'Grafit', c: '#2B2226', gl: [0.16, 0.13, 0.14] }
   ];
   var MODELS3D = [
-    { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-play-o1.glb', still: UP + 'Gamefields-Panna-Play-wide-v3-default.webp', orbit: '30deg 62deg 105%' },
-    { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-court-p1.glb', still: UP + 'Gamefields-Panna-Court-wide-v3-default.webp', orbit: '30deg 62deg 105%' },
-    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø ~5 m · 1 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-ring-w1.glb', still: UP + 'W-1-—-GF-CT-001.webp', orbit: '30deg 62deg 105%' },
-    { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-octa.glb', still: UP + 'GF-CT-008-octagon.webp', orbit: '30deg 64deg 105%' }
+    { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-play-o1.glb', still: up('Gamefields-Panna-Play-wide-v3-default.webp'), orbit: '30deg 62deg 105%' },
+    { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-court-p1.glb', still: up('Gamefields-Panna-Court-wide-v3-default.webp'), orbit: '30deg 62deg 105%' },
+    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø ~5 m · 1 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-ring-w1.glb', still: up('W-1-—-GF-CT-001.webp'), orbit: '30deg 62deg 105%' },
+    { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-octa.glb', still: up('GF-CT-008-octagon.webp'), orbit: '30deg 64deg 105%' }
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
   var cur = { panel: COATS[1], frame: COATS[9], model: MODELS3D[0] }, mv = null, mvReady = false;
@@ -95,7 +99,8 @@
     $('[data-hero-colorname="frame"]').textContent = 'Rama i bramki · ' + cur.frame.n;
     $('[data-hero-code]').textContent = cur.model.code + ' · ' + cur.model.full + ' · model 3D';
     $('[data-hero-dim]').textContent = cur.model.dim;
-    $('.still', hero3d).src = cur.model.still;
+    var stillImg = $('.still', hero3d), stillSrc = stillImg.parentNode.tagName === 'PICTURE' ? $('source', stillImg.parentNode) : null;
+    stillImg.src = cur.model.still; if (stillSrc) stillSrc.srcset = cur.model.still;
     applyCoat();
   }
   function applyCoat() {
@@ -166,14 +171,14 @@
   /* ---------- COLLECTION WALL ---------- */
   var W = 'rgba(255,255,255,.5)', P = 'rgba(71,19,45,.28)';
   var ALL = [
-    { n: '01', k: 'circle-cage-1', shape: 'okrag', name: 'Panna Cage 90', dim: 'Ø ~6 m · 0,90 m', img: UP + 'Cage-90-Hero-4-gray.webp', bg: '#E0402B', ink: '#FFFFFF', line: W },
-    { n: '02', k: 'circle-cage-2', shape: 'okrag', name: 'Panna Cage 180', dim: 'Ø ~6 m · 1,80 m', img: UP + 'Cage-180-Hero-4-gray.webp', bg: '#D8F24A', ink: '#1F2A6B', line: 'rgba(31,42,107,.3)' },
-    { n: '03', k: 'o1', shape: 'okrag', name: 'Panna Play', dim: 'Ø ~6 m · do 1,52 m', img: UP + 'Gamefields-Panna-Play-wide-v3-default.webp', bg: '#2457D6', ink: '#FFFFFF', line: W },
-    { n: '04', k: 'p1', shape: 'prostokat', name: 'Panna Court', dim: '7,14 × 5,57 m', img: UP + 'Gamefields-Panna-Court-wide-v3-default.webp', bg: '#FFB3C8', ink: '#47132D', line: P },
-    { n: '05', k: 'octagon', shape: 'oktagon', name: 'Panna Octa', dim: '4,96 m · 1,22 m', img: UP + 'GF-CT-008-octagon.webp', bg: '#47132D', ink: '#F4F1EE', line: 'rgba(244,241,238,.35)' },
-    { n: '06', k: 'street-field', shape: 'prostokat', name: 'Panna Grid', dim: '6,21 × 4,65 m', img: UP + 'GF-CT-007-street-field.webp', bg: '#E8E1D8', ink: '#47132D', line: P },
-    { n: '07', k: 'w1', shape: 'okrag', name: 'Panna Ring', dim: 'Ø ~5 m · 1 m', img: UP + 'W-1-—-GF-CT-001.webp', bg: '#6336F5', ink: '#FFFFFF', line: W },
-    { n: '08', k: 'street15', shape: 'prostokat', name: 'Street Arena 15', dim: '15 × 10 m · 3 na 3', img: UP + 'GF-CT-004-street15.webp', bg: '#1F2A6B', ink: '#FFFFFF', line: W }
+    { n: '01', k: 'circle-cage-1', shape: 'okrag', name: 'Panna Cage 90', dim: 'Ø ~6 m · 0,90 m', img: up('Cage-90-Hero-4-gray.webp'), bg: '#E0402B', ink: '#FFFFFF', line: W },
+    { n: '02', k: 'circle-cage-2', shape: 'okrag', name: 'Panna Cage 180', dim: 'Ø ~6 m · 1,80 m', img: up('Cage-180-Hero-4-gray.webp'), bg: '#D8F24A', ink: '#1F2A6B', line: 'rgba(31,42,107,.3)' },
+    { n: '03', k: 'o1', shape: 'okrag', name: 'Panna Play', dim: 'Ø ~6 m · do 1,52 m', img: up('Gamefields-Panna-Play-wide-v3-default.webp'), bg: '#2457D6', ink: '#FFFFFF', line: W },
+    { n: '04', k: 'p1', shape: 'prostokat', name: 'Panna Court', dim: '7,14 × 5,57 m', img: up('Gamefields-Panna-Court-wide-v3-default.webp'), bg: '#FFB3C8', ink: '#47132D', line: P },
+    { n: '05', k: 'octagon', shape: 'oktagon', name: 'Panna Octa', dim: '4,96 m · 1,22 m', img: up('GF-CT-008-octagon.webp'), bg: '#47132D', ink: '#F4F1EE', line: 'rgba(244,241,238,.35)' },
+    { n: '06', k: 'street-field', shape: 'prostokat', name: 'Panna Grid', dim: '6,21 × 4,65 m', img: up('GF-CT-007-street-field.webp'), bg: '#E8E1D8', ink: '#47132D', line: P },
+    { n: '07', k: 'w1', shape: 'okrag', name: 'Panna Ring', dim: 'Ø ~5 m · 1 m', img: up('W-1-—-GF-CT-001.webp'), bg: '#6336F5', ink: '#FFFFFF', line: W },
+    { n: '08', k: 'street15', shape: 'prostokat', name: 'Street Arena 15', dim: '15 × 10 m · 3 na 3', img: up('GF-CT-004-street15.webp'), bg: '#1F2A6B', ink: '#FFFFFF', line: W }
   ];
   var LAYOUT = { 8: ['s7 tall', 's5 tall', 's4', 's4', 's4', 's5', 's3', 's4'], 5: ['s7 tall', 's5 tall', 's4', 's4', 's4'], 3: ['s4 tall', 's4 tall', 's4 tall'], 1: ['s12 tall'] };
   var wall = $('[data-wall]'), filters = $('[data-filters]');
@@ -780,11 +785,11 @@
 
   /* ---------- KITS ---------- */
   var KITS = [
-    { seg: 'Miasto', pitch: 'Mała arena jako punkt spotkań w parku. Komplet materiałów do budżetu obywatelskiego.', arena: 'circle-cage-1', model: 'Panna Cage 90', img: UP + 'Cage-90-Hero-4-gray.webp', surf: 'city-fluid', surfName: 'City Fluid', space: 'park, skwer, plac', bg: '#E0402B', ink: '#FFFFFF' },
-    { seg: 'Szkoła', pitch: 'Czytelna, bezpieczna arena na przerwę i WF. Przyjazne kolory dla dzieci.', arena: 'o1', model: 'Panna Play', img: UP + 'Gamefields-Panna-Play-wide-v3-default.webp', surf: 'play-system', surfName: 'Play System', space: 'boisko szkolne, dziedziniec', bg: '#D8F24A', ink: '#1F2A6B' },
-    { seg: 'Osiedle', pitch: 'Wyróżnik inwestycji wpisany w zieleń. Mieści się na placu o boku 5–7 m.', arena: 'p1', model: 'Panna Court', img: UP + 'Gamefields-Panna-Court-wide-v3-default.webp', surf: 'earth-motion', surfName: 'Earth Motion', space: 'dziedziniec, zieleń osiedlowa', bg: '#FFB3C8', ink: '#47132D' },
-    { seg: 'Klub', pitch: 'Trening 1 na 1 przez cały rok. Barwy klubu i partnera na nawierzchni.', arena: 'circle-cage-2', model: 'Panna Cage 180', img: UP + 'Cage-180-Hero-4-gray.webp', surf: 'club-heritage', surfName: 'Club Heritage', space: 'akademia, ośrodek treningowy', bg: '#2457D6', ink: '#FFFFFF' },
-    { seg: 'Marka', pitch: 'Boisko jako nośnik kampanii. Turniej, logo i treści z wydarzenia.', arena: 'street15', model: 'Street Arena 15', img: UP + 'GF-CT-004-street15.webp', surf: 'brand-stage', surfName: 'Brand Stage', space: 'event, galeria, festiwal', bg: '#47132D', ink: '#F4F1EE' }
+    { seg: 'Miasto', pitch: 'Mała arena jako punkt spotkań w parku. Komplet materiałów do budżetu obywatelskiego.', arena: 'circle-cage-1', model: 'Panna Cage 90', img: up('Cage-90-Hero-4-gray.webp'), surf: 'city-fluid', surfName: 'City Fluid', space: 'park, skwer, plac', bg: '#E0402B', ink: '#FFFFFF' },
+    { seg: 'Szkoła', pitch: 'Czytelna, bezpieczna arena na przerwę i WF. Przyjazne kolory dla dzieci.', arena: 'o1', model: 'Panna Play', img: up('Gamefields-Panna-Play-wide-v3-default.webp'), surf: 'play-system', surfName: 'Play System', space: 'boisko szkolne, dziedziniec', bg: '#D8F24A', ink: '#1F2A6B' },
+    { seg: 'Osiedle', pitch: 'Wyróżnik inwestycji wpisany w zieleń. Mieści się na placu o boku 5–7 m.', arena: 'p1', model: 'Panna Court', img: up('Gamefields-Panna-Court-wide-v3-default.webp'), surf: 'earth-motion', surfName: 'Earth Motion', space: 'dziedziniec, zieleń osiedlowa', bg: '#FFB3C8', ink: '#47132D' },
+    { seg: 'Klub', pitch: 'Trening 1 na 1 przez cały rok. Barwy klubu i partnera na nawierzchni.', arena: 'circle-cage-2', model: 'Panna Cage 180', img: up('Cage-180-Hero-4-gray.webp'), surf: 'club-heritage', surfName: 'Club Heritage', space: 'akademia, ośrodek treningowy', bg: '#2457D6', ink: '#FFFFFF' },
+    { seg: 'Marka', pitch: 'Boisko jako nośnik kampanii. Turniej, logo i treści z wydarzenia.', arena: 'street15', model: 'Street Arena 15', img: up('GF-CT-004-street15.webp'), surf: 'brand-stage', surfName: 'Brand Stage', space: 'event, galeria, festiwal', bg: '#47132D', ink: '#F4F1EE' }
   ];
   var kitsBox = $('[data-kits]'), openKit = -1;
   function renderKits() {

@@ -110,10 +110,14 @@ def main():
     font_face = ("@font-face{font-family:GHInter;font-style:normal;font-weight:100 900;font-display:swap;"
                  f"src:url(data:font/woff2;base64,{font}) format('woff2')}}")
 
+    # On WordPress the Gamefields theme already serves (and preloads) the same subset as a cached file,
+    # so the page links that file instead of carrying 84 KB of base64. The local preview keeps the inline font.
+    THEME_FONT_FACE = ("@font-face{font-family:GHInter;font-style:normal;font-weight:100 900;font-display:swap;"
+                       "src:url(/wp-content/themes/gamefields/assets/fonts/GHInter-sub.woff2) format('woff2')}")
     block = "\n".join([
         "<!-- wp:html -->",
         "<!-- Gamefields homepage studio-2026-11 · source: integrations/wordpress/homepage/studio-2026-11 · Inter SIL OFL: https://rsms.me/inter/ -->",
-        f"<style>{font_face}\n{style}</style>",
+        f"<style>{THEME_FONT_FACE}\n{style}</style>",
         jsonld(faq),
         body.strip(),
         loader,
@@ -128,7 +132,7 @@ def main():
                 '<p><label>E-mail<input type="email" name="your-email"></label></p>'
                 '<p><label>Szczegóły projektu<textarea name="project-details" rows="3"></textarea></label></p>'
                 '<p><input type="submit" value="Wyślij zapytanie"></p></form>')
-    preview = block.replace('[contact-form-7 id="a71dc3a" title="Gamefields — zapytanie o projekt"]', stand_in)
+    preview = block.replace(THEME_FONT_FACE, font_face).replace('[contact-form-7 id="a71dc3a" title="Gamefields — zapytanie o projekt"]', stand_in)
     preview = preview.replace("<!-- wp:html -->", "").replace("<!-- /wp:html -->", "")
     (HERE / "index.html").write_text(
         '<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
