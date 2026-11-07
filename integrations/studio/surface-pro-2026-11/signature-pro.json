@@ -1,0 +1,18 @@
+[
+ {"id":"duperre-fade","name":"Duperré Fade","familyId":"pro-fade","variant":2,"paletteId":"duperre","useCase":"miasto / ikona dzielnicy","note":"Gradient od bramek do środka. Boisko, które ludzie fotografują z góry."},
+ {"id":"colour-field","name":"Colour Field","familyId":"pro-fields","variant":3,"paletteId":"kinloch","useCase":"park / sztuka publiczna","note":"Malarskie pola koloru — boisko jak obraz, każde pole inne."},
+ {"id":"suprematist","name":"Suprematist","familyId":"pro-suprem","variant":1,"paletteId":"malevich","useCase":"kultura / muzeum / festiwal","note":"Awangarda w ruchu: belki, płaszczyzny i koło na osiach gry."},
+ {"id":"op-rings","name":"Op Rings","familyId":"pro-rings","variant":1,"paletteId":"riley","useCase":"street / content","note":"Optyczne pierścienie od bramek spotykają się na linii środkowej."},
+ {"id":"la-doce","name":"La Doce","familyId":"pro-checker","variant":1,"paletteId":"reindorf","useCase":"klub / kibice","note":"Rozciągnięta szachownica — klasyk stadionowy w dynamicznej perspektywie."},
+ {"id":"hypercube","name":"Hypercube","familyId":"pro-iso","variant":2,"paletteId":"aalst","useCase":"szkoła / młodzież","note":"Izometryczne bloki dające złudzenie 3D z drona."},
+ {"id":"weave","name":"Weave","familyId":"pro-textile","variant":1,"paletteId":"lagos","useCase":"społeczność / wielokulturowość","note":"Pasy tkane jak kente — wzór z historią i rytmem."},
+ {"id":"memphis-play","name":"Memphis Play","familyId":"pro-memphis","variant":3,"paletteId":"aalst","useCase":"dzieci / place zabaw","note":"Formy i zygzaki między liniami — miejsce na własne gry."},
+ {"id":"kintsugi","name":"Kintsugi","familyId":"pro-kintsugi","variant":8,"paletteId":"kintsugi","useCase":"premium / hotel / rewitalizacja","note":"Szlachetny beton łączony złotem — naprawa jako ozdoba."},
+ {"id":"freehand","name":"Freehand","familyId":"pro-freehand","variant":5,"paletteId":"casa","useCase":"marka / event / moda","note":"Ręcznie rysowane echa linii na głębokiej czerwieni."},
+ {"id":"sunrise","name":"Sunrise","familyId":"pro-sunburst","variant":5,"paletteId":"malevich","useCase":"turniej / aktywacja","note":"Promienie wschodzące od bramki — energia startu."},
+ {"id":"halftone-wave","name":"Halftone Wave","familyId":"pro-halftone","variant":2,"paletteId":"riley","useCase":"street / brand","note":"Raster punktów tworzący falę ruchu."},
+ {"id":"topo-glow","name":"Topo Glow","familyId":"pro-topo","variant":1,"paletteId":"nightshift","useCase":"nocne boisko / oświetlenie","note":"Warstwice świecące jak mapa ciepła gry."},
+ {"id":"bondy-camo","name":"Bondy Camo","familyId":"pro-camo","variant":3,"paletteId":"bondy","useCase":"street / youth","note":"Czterowarstwowy kamuflaż w kolorze miasta."},
+ {"id":"mosaic","name":"Mosaic","familyId":"pro-mosaic","variant":1,"paletteId":"lagos","useCase":"plac / rynek","note":"Mozaika płytek z fugą, kolor płynie od środka."},
+ {"id":"big-number","name":"Big Number","familyId":"pro-numbers","variant":4,"paletteId":"gamefields","useCase":"klub / sponsor","note":"Numer jako supergrafika — klub, rok założenia, kod dzielnicy."}
+]

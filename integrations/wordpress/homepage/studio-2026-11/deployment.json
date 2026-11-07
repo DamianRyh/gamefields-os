@@ -1,0 +1,23 @@
+{
+  "page_id": 3462,
+  "url": "https://www.gamefields.eu/",
+  "published_modified": "2026-11-06T07:11:23",
+  "source_commit": "7c0c76e9a70f31886552a60c79dd238369a87a80",
+  "asset_commit": "02f3a62c4d9c71608dc827e6f30066d50a523f58",
+  "previous_modified": "2026-11-02",
+  "previous_sha256": "a547ffa40ce44ea9f91bec785179d92a006aa59e25ac46193e5e76ca904be6f8",
+  "rollback_copy_page_id": 4338,
+  "draft_page_id": 4276,
+  "checks": "2026-11-06 08:11 CET: guest HTML 447 KB; 13 internal links (Dla kogo, Na skróty, poradniki) return 200; JSON-LD, GLB from WP media, sticky header + current section, poster engine, ball, 8 tiles, CF7 with inline e-mail hint verified. No inquiry submitted.",
+  "wp_config_2026_11_06": {
+    "file_upload_types": "installed+active, custom type .glb (model/gltf-binary, application/octet-stream)",
+    "glb_media_ids": [
+      4327,
+      4328,
+      4329,
+      4330
+    ],
+    "savoy_custom_js": "viewport rewrite to width=device-width, initial-scale=1 (pinch zoom)",
+    "litespeed_cache": "activated (was installed, inactive); subpages HIT ~100 ms; homepage not cached because Polylang browser-language detection defines DONOTCACHEPAGE (single language PL) - owner decision pending"
+  }
+}
