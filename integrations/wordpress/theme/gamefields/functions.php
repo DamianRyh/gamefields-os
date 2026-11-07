@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.14' );
+define( 'GFT_VERSION', '1.0.15' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -53,6 +53,16 @@ add_action( 'wp_head', function () {
 		'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
 		esc_url( get_template_directory_uri() . '/assets/fonts/GHInter-sub.woff2' )
 	);
+}, 1 );
+
+/* Homepage LCP: the hero still (720 px on phones, 1200 px elsewhere) starts downloading with the HTML head. */
+add_action( 'wp_head', function () {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	$up = content_url( '/uploads/2026/11/' );
+	printf( '<link rel="preload" as="image" href="%s" media="(max-width: 700px)" fetchpriority="high">' . "\n", esc_url( $up . 'gf-play-720.webp' ) );
+	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 701px)" fetchpriority="high">' . "\n", esc_url( $up . 'gf-play-1200.webp' ) );
 }, 1 );
 
 /* The Additional CSS written under Savoy (cookie banner, subpage fixes, City templates) stays in effect. */
