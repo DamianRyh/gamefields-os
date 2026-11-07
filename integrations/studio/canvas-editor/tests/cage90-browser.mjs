@@ -25,7 +25,7 @@ try{
  const info=await canvas.evaluate(c=>{const g=(c.getContext('webgl2')||c.getContext('webgl')),pixels=new Uint8Array(c.width*c.height*4);g.readPixels(0,0,c.width,c.height,g.RGBA,g.UNSIGNED_BYTE,pixels);return {error:g.getError(),stencil:g.getContextAttributes().stencil,visible:pixels.filter((v,i)=>i%4===3&&v>0).length}});assert.equal(info.error,0);assert.ok(info.visible>100);
  await page.locator('.studio-orbit-canvas').focus();await page.keyboard.press('ArrowRight');await page.waitForTimeout(300);
  await stage.screenshot({path:`outputs/cage90/${model}-${width}.png`});
- await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Konstrukcja',exact:true}).click();await page.locator('.scene-paint-advanced>summary').click();
+ await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Konstrukcja/}).click();await page.locator('.scene-paint-advanced>summary').click();
  await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#245e87');await page.waitForTimeout(300);
  assert.equal(await canvas.evaluate(c=>(c.getContext('webgl2')||c.getContext('webgl')).getError()),0);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
  await page.getByText('Logo i detale konstrukcji',{exact:true}).click();await page.getByLabel('Tekst na bandach',{exact:true}).fill('QA — Gamefields');await page.waitForFunction(()=>{const e=document.querySelector('.panna-studio-model');return e?.getAttribute('data-render-complete')===e?.getAttribute('data-render-request')});
@@ -33,7 +33,7 @@ try{
  const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const exported=JSON.parse(await readFile(await(await event).path(),'utf8'));assert.equal(exported.arenaModel,model);assert.equal(exported.arenaDesign.panelColor,'#245e87');
  await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'cage90.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(exported))});await stage.waitFor();
  assert(assets.includes('/arenas/panna-cage-90-v2.glb'));assert(!assets.includes('/arenas/circle-cage-1.json'),'Cage90 runtime uses the smaller binary GLB');
- await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();
+ await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Nawierzchnia/}).click();
  await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Materiał',exact:true}).click();
  for(const material of ['Granulat','Płytki modułowe','Sztuczna murawa','Malowana']){
   await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:material,exact:true}).click();

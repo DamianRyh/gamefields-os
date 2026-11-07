@@ -56,6 +56,9 @@ try{
  assert.equal(await page.locator('[data-print-product]').count(),0);
  const legacyDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).click();
  assert.equal(JSON.parse(await readFile(await(await legacyDownload).path(),'utf8')).printDesign,undefined);
+ await page.goto(base+'/?arena=o1&panel=D8F24A&frame=2C6FB0');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).waitFor();await page.waitForTimeout(800);
+ const colorDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).click();
+ const colored=JSON.parse(await readFile(await(await colorDownload).path(),'utf8'));assert.equal(colored.arenaModel,'o1');assert.equal(colored.arenaDesign.panelColor,'#d8f24a');assert.equal(colored.arenaDesign.frameColor,'#2c6fb0');assert.equal(colored.arenaDesign.goalColor,'#2c6fb0');
  await page.close();
  }
  assert.deepEqual(errors,[]);console.log('PASS: five products, poster editing and JSON, reload, real 32-panel ball, options, cross-product import, mobile and desktop.');

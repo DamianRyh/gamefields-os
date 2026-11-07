@@ -23,7 +23,7 @@ try{
   const ready=()=>page.locator('.panna-studio-model[data-ready=true]').waitFor({timeout:45000});
   const download=async()=>{const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();return JSON.parse(await readFile(await(await event).path(),'utf8'))};
   await page.goto(base+'/?surface=street-football-3x3');await ready();
-  await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Sport',exact:true}).click();
+  await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Nawierzchnia/}).click();await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Sport',exact:true}).click();
   const choices=page.getByRole('group',{name:'Wybierz sport Gamefields',exact:true});assert.equal(await choices.getByRole('button').count(),5);
   for(const [name,surface,arena,equipment]of [['Teqball','teqball',undefined,6],['Street Football','street-football-3x3','street15',0],['Panna',undefined,'o1',0],['Koszykówka 3×3','basketball-3x3',undefined,21],['Koszykówka','basketball-full',undefined,42]]){
    await choices.getByRole('button',{name,exact:true}).click();await ready();
@@ -36,7 +36,7 @@ try{
    if(equipment){const text=await page.locator('.studio-quote-items').innerText();assert(text.includes(name==='Teqball'?'Stół Teqball':'Kosz'));assert(text.includes('Do ustalenia'));}
    await page.getByRole('button',{name:'Wróć do edycji',exact:true}).click();
    await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'sport.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(p))});await ready();assert.deepEqual(await download(),p);
-   await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Sport',exact:true}).click();
+   await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Nawierzchnia/}).click();await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Sport',exact:true}).click();
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);assert.ok(await choices.getByRole('button').evaluateAll(buttons=>buttons.every(b=>{const r=b.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1})), 'Sport cards must fit inside viewport, not merely be clipped');
    await page.screenshot({path:`outputs/primary-sports/${surface||arena}-${width}.png`});
    report.cases.push({width,name,surface,arena,equipment,webgl:image.pixels,json:true,quote:true});console.log('PASS primary sport '+name+' '+width);
