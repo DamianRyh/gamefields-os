@@ -1,0 +1,24 @@
+{
+  "source": {
+    "bytes": 476792,
+    "sha256": "00f7fe6535109e87674072858f81d41677d25be9bcb02ccac113551c70aba97f",
+    "triangles": 8092
+  },
+  "structure": {
+    "bytes": 3234152,
+    "sha256": "55317ab22f16a8f6a51534cef63d4bf75e395e9952a74bde91c0af533bc03794",
+    "triangles": 56832
+  },
+  "surface": {
+    "bytes": 16624,
+    "sha256": "30b5b0c1cc642e75d34f26405657e3bb335cf1c92bf3d90a52e2b394cbefbb5b",
+    "triangles": 220
+  },
+  "hero": {
+    "bytes": 485620,
+    "sha256": "b8ea83db53e6252d8e060d9fc59809c610098e24eec11222e8f68b14c17cebf9",
+    "triangles": 56832
+  },
+  "max_bounds_delta_m": 0.0004141764754215238,
+  "status": "PASS"
+}
