@@ -7,7 +7,7 @@
   var A = root.getAttribute('data-asset-base') || '';
   var UP = 'https://www.gamefields.eu/wp-content/uploads/2026/10/';
   var SP = 'https://gamefields-studio.ryhfs90.chatgpt.site/surface-projects/';
-  var STUDIO = '/konfigurator-boisk/';
+  var STUDIO = '/studio/';
   var $ = function (s, r) { return (r || root).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || root).querySelectorAll(s)); };
   var el = function (tag, attrs, html) {

@@ -20,7 +20,7 @@
 		<?php gft_cart_link(); ?>
 		<a class="gft-ask" href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>">Zapytanie</a>
 		<button type="button" class="gft-menu" aria-expanded="false" aria-controls="gft-links">Menu</button>
-		<a class="gft-cta" href="<?php echo esc_url( home_url( '/konfigurator-boisk/' ) ); ?>">Studio 3D <span aria-hidden="true">↗</span></a>
+		<a class="gft-cta" href="<?php echo esc_url( home_url( '/studio/' ) ); ?>">Studio 3D <span aria-hidden="true">↗</span></a>
 	</div>
 </header>
 <?php endif; ?>

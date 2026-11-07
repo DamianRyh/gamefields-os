@@ -10,7 +10,7 @@ get_header();
 		<div class="gft-chips">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Strona główna</a>
 			<a href="<?php echo esc_url( home_url( '/#boiska' ) ); ?>">Boiska</a>
-			<a href="<?php echo esc_url( home_url( '/konfigurator-boisk/' ) ); ?>">Studio 3D</a>
+			<a href="<?php echo esc_url( home_url( '/studio/' ) ); ?>">Studio 3D</a>
 			<a href="<?php echo esc_url( home_url( '/baza-wiedzy/' ) ); ?>">Baza wiedzy</a>
 			<a href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>">Kontakt</a>
 		</div>

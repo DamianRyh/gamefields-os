@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.12' );
+define( 'GFT_VERSION', '1.0.13' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -231,3 +231,15 @@ require_once get_template_directory() . '/inc/city.php';
 
 /* Shop: designs from the homepage creators in the cart and the order, payment flag for the homepage. */
 require_once get_template_directory() . '/inc/shop.php';
+
+/* Studio lives at /studio/ (roadmap: Studio pod domeną gamefields.eu). The old address keeps working:
+   301 with the query string, so links carrying ?arena=…&panel=…&frame=… still open the right model and colours. */
+add_action( 'template_redirect', function () {
+	$path = (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH );
+	if ( '/konfigurator-boisk' !== untrailingslashit( $path ) ) {
+		return;
+	}
+	$query = isset( $_SERVER['QUERY_STRING'] ) ? (string) wp_unslash( $_SERVER['QUERY_STRING'] ) : '';
+	wp_safe_redirect( home_url( '/studio/' ) . ( '' !== $query ? '?' . $query : '' ), 301 );
+	exit;
+}, 1 );
