@@ -157,7 +157,13 @@
     s.src = 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js';
     document.head.appendChild(s); loadModel();
   }
-  if ('requestIdleCallback' in window) requestIdleCallback(startMV, { timeout: 1500 }); else setTimeout(startMV, 600);
+  /* The 3D model (1.2 MB + 200 KB library) starts only when someone reaches for it: a touch, hover or focus on the hero,
+     or the first scroll/key. Until then the hero shows the same model as a light still (Lighthouse, 2026-11-07). */
+  var startEvents = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
+  function startOnce() { startEvents.forEach(function (ev) { window.removeEventListener(ev, startOnce, true); }); startMV(); }
+  startEvents.forEach(function (ev) { window.addEventListener(ev, startOnce, { capture: true, passive: true }); });
+  ['pointerenter', 'focusin'].forEach(function (ev) { hero3d.addEventListener(ev, startOnce, { once: true }); });
+  window.addEventListener('scroll', function onFirstScroll() { if (window.scrollY > 40) { window.removeEventListener('scroll', onFirstScroll); startOnce(); } }, { passive: true });
 
   // the cursor is the ball
   var ball = $('[data-ball]');
@@ -187,7 +193,7 @@
     var lay = LAYOUT[list.length] || LAYOUT[8];
     wall.replaceChildren.apply(wall, list.map(function (m, i) {
       var a = el('a', { class: 'tile ' + lay[i], href: STUDIO + '?' + new URLSearchParams({ arena: m.k }).toString(), style: 'background:' + m.bg + ';color:' + m.ink, 'aria-label': m.name + ', ' + m.dim + '. Otwórz w Studio.' });
-      a.innerHTML = '<div class="court" style="--ln:' + m.line + ';--cr:30%"><i></i><i></i></div><span class="go">Konfiguruj →</span><span class="num d">' + m.n + '</span><img src="' + m.img + '" alt="" loading="lazy" decoding="async"><div class="bar"><b>' + esc(m.name) + '</b><span class="m">' + esc(m.dim) + '</span></div>';
+      a.innerHTML = '<div class="court" style="--ln:' + m.line + ';--cr:30%"><i></i><i></i></div><span class="go">Konfiguruj →</span><span class="num d">' + m.n + '</span><img loading="lazy" decoding="async" src="' + m.img + '" alt="" loading="lazy" decoding="async"><div class="bar"><b>' + esc(m.name) + '</b><span class="m">' + esc(m.dim) + '</span></div>';
       return a;
     }));
   }
@@ -796,13 +802,13 @@
     kitsBox.replaceChildren.apply(kitsBox, KITS.map(function (k, i) {
       var wrap = el('div', { style: 'background:' + k.bg + ';color:' + k.ink });
       var btn = el('button', { type: 'button', class: 'stripe', 'aria-expanded': String(openKit === i), 'aria-controls': 'gfs-kit-' + i },
-        '<span class="d w">' + esc(k.seg) + '</span><span class="p">' + esc(k.pitch) + '</span><span class="combo"><img src="' + k.img + '" alt=""><img class="s" src="' + SP + k.surf + '.svg" alt=""></span><span class="m meta">' + (openKit === i ? 'Zwiń −' : 'Zobacz zestaw +') + '</span>');
+        '<span class="d w">' + esc(k.seg) + '</span><span class="p">' + esc(k.pitch) + '</span><span class="combo"><img loading="lazy" src="' + k.img + '" alt=""><img loading="lazy" class="s" src="' + SP + k.surf + '.svg" alt=""></span><span class="m meta">' + (openKit === i ? 'Zwiń −' : 'Zobacz zestaw +') + '</span>');
       btn.addEventListener('click', function () { openKit = openKit === i ? -1 : i; renderKits(); });
       wrap.appendChild(btn);
       if (openKit === i) {
         var href = STUDIO + '?' + new URLSearchParams({ arena: k.arena, pattern: k.surf }).toString();
         wrap.appendChild(el('div', { class: 'kit-open', id: 'gfs-kit-' + i },
-          '<div class="big"><img class="surf" src="' + SP + k.surf + '.svg" alt=""><img class="model" src="' + k.img + '" alt="' + esc(k.model) + ' na nawierzchni ' + esc(k.surfName) + '"></div>' +
+          '<div class="big"><img loading="lazy" class="surf" src="' + SP + k.surf + '.svg" alt=""><img loading="lazy" class="model" src="' + k.img + '" alt="' + esc(k.model) + ' na nawierzchni ' + esc(k.surfName) + '"></div>' +
           '<div style="display:grid;gap:22px;align-content:center"><ul><li><span class="m">Boisko</span><b>' + esc(k.model) + '</b></li><li><span class="m">Nawierzchnia</span><b>' + esc(k.surfName) + '</b></li><li><span class="m">Miejsce</span><b>' + esc(k.space) + '</b></li></ul>' +
           '<a class="pill" href="' + href + '" style="background:' + k.ink + ';color:' + k.bg + ';justify-self:start">Otwórz zestaw w Studio <span aria-hidden="true">→</span></a></div>'));
       }
