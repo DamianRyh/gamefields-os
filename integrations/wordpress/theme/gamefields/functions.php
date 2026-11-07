@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.13' );
+define( 'GFT_VERSION', '1.0.14' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -243,3 +243,18 @@ add_action( 'template_redirect', function () {
 	wp_safe_redirect( home_url( '/studio/' ) . ( '' !== $query ? '?' . $query : '' ), 301 );
 	exit;
 }, 1 );
+
+/* Complianz: the cookie policy is part of the privacy policy (roadmap phase 1: no second generated document).
+   The banner kept an old stored address for the "cookie-statement" link (it pointed at the Studio page);
+   both links now lead to the privacy policy page. */
+add_filter( 'cmplz_cookiebanner_settings_front_end', function ( $output ) {
+	$privacy = get_privacy_policy_url() ? get_privacy_policy_url() : home_url( '/polityka-prywatnosci/' );
+	if ( is_array( $output ) && isset( $output['page_links'] ) && is_array( $output['page_links'] ) ) {
+		foreach ( $output['page_links'] as $region => $links ) {
+			if ( is_array( $links ) && isset( $links['cookie-statement'] ) ) {
+				$output['page_links'][ $region ]['cookie-statement'] = array( 'title' => 'Polityka cookies', 'url' => $privacy );
+			}
+		}
+	}
+	return $output;
+}, 20 );
