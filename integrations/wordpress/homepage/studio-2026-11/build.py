@@ -9,6 +9,7 @@ The 3D models and the sample photo are served by jsDelivr from this repository, 
 so the published page never changes when the branch moves.
 """
 import base64
+import hashlib
 import html as htmllib
 import re
 import json
@@ -114,25 +115,35 @@ def main():
     # so the page links that file instead of carrying 84 KB of base64. The local preview keeps the inline font.
     THEME_FONT_FACE = ("@font-face{font-family:GHInter;font-style:normal;font-weight:100 900;font-display:swap;"
                        "src:url(/wp-content/themes/gamefields/assets/fonts/GHInter-sub.woff2) format('woff2')}")
-    block = "\n".join([
+    ball_core = (HERE.parent.parent.parent / "studio" / "ball-2026-11" / "ball-core.js").read_text(encoding="utf-8").strip()
+    # On WordPress the three big scripts are cached files in the Gamefields theme, loaded with `defer` in this order
+    # (pattern engine -> ball core -> page script); a file is not touched by WordPress, so no base64 wrapper is needed.
+    # The theme must be uploaded before the page content that points at a new hash.
+    jsdir = HERE.parent.parent / "theme" / "gamefields" / "assets" / "js" / "home"
+    jsdir.mkdir(parents=True, exist_ok=True)
+    files = [("gf-pro.js", eng), ("gf-ball-core.js", ball_core), ("gf-home.js", script.strip())]
+    tags = []
+    for name, code in files:
+        (jsdir / name).write_text(code + "\n", encoding="utf-8")
+        ver = hashlib.sha1(code.encode("utf-8")).hexdigest()[:10]
+        tags.append(f'<script defer src="/wp-content/themes/gamefields/assets/js/home/{name}?v={ver}"></script>')
+    head = [
         "<!-- wp:html -->",
         "<!-- Gamefields homepage studio-2026-11 · source: integrations/wordpress/homepage/studio-2026-11 · Inter SIL OFL: https://rsms.me/inter/ -->",
         f"<style>{THEME_FONT_FACE}\n{style}</style>",
         jsonld(faq),
         body.strip(),
-        loader,
-        "<script>" + (HERE.parent.parent.parent / "studio" / "ball-2026-11" / "ball-core.js").read_text(encoding="utf-8").strip() + "</script>",
-        f"<script>\n{script.strip()}\n</script>",
-        contact_scripts.strip(),
-        "<!-- /wp:html -->",
-    ]) + "\n"
+    ]
+    tail = [contact_scripts.strip(), "<!-- /wp:html -->"]
+    block = "\n".join(head + tags + tail) + "\n"
+    inline_block = "\n".join(head + [loader, "<script>" + ball_core + "</script>", f"<script>\n{script.strip()}\n</script>"] + tail) + "\n"
     (HERE / "homepage.html").write_text(block, encoding="utf-8")
 
     stand_in = ('<form class="wpcf7-form" onsubmit="event.preventDefault()">'
                 '<p><label>E-mail<input type="email" name="your-email"></label></p>'
                 '<p><label>Szczegóły projektu<textarea name="project-details" rows="3"></textarea></label></p>'
                 '<p><input type="submit" value="Wyślij zapytanie"></p></form>')
-    preview = block.replace(THEME_FONT_FACE, font_face).replace('[contact-form-7 id="a71dc3a" title="Gamefields — zapytanie o projekt"]', stand_in)
+    preview = inline_block.replace(THEME_FONT_FACE, font_face).replace('[contact-form-7 id="a71dc3a" title="Gamefields — zapytanie o projekt"]', stand_in)
     preview = preview.replace("<!-- wp:html -->", "").replace("<!-- /wp:html -->", "")
     (HERE / "index.html").write_text(
         '<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
