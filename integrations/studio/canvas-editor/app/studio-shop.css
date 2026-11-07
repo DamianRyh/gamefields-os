@@ -1,0 +1,76 @@
+/* Price and order block of Studio products (plakat, piłka, koszulki). Colours follow gamefields.eu: plum #47132d, violet #6336f5, line #e8e3e6. */
+.studio-shop-order{margin:16px 0 8px;padding:14px;border:1px solid #e8e3e6;border-radius:12px;background:#fff;color:#47132d}
+.studio-shop-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.studio-shop-qty{display:inline-flex;align-items:center;border:1px solid #d9cfd4;border-radius:999px}
+.studio-shop-qty button{display:grid;place-items:center;width:44px;height:44px;border:0;background:none;color:inherit;border-radius:999px;cursor:pointer}
+.studio-shop-qty button:disabled{opacity:.35;cursor:default}
+.studio-shop-qty input{width:46px;height:44px;border:0;background:transparent;color:inherit;text-align:center;font:600 16px/1 inherit;font-variant-numeric:tabular-nums}
+.studio-shop-count{font-weight:600;font-variant-numeric:tabular-nums}
+.studio-shop-price{text-align:right}
+.studio-shop-price b{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.studio-shop-price small{display:block;color:#74656d;font-size:12px;margin-top:2px}
+.studio-shop-note{margin:10px 0 12px;color:#74656d;font-size:13px}
+.studio-shop-cta{display:flex!important;align-items:center;justify-content:center;gap:8px;width:100%!important;box-sizing:border-box;min-height:48px;border-radius:12px;background:#6336f5;color:#fff;font-weight:700;text-decoration:none}
+.studio-shop-cta:hover{background:#5226e0}
+.studio-shop-cta:focus-visible{outline:3px solid #47132d;outline-offset:2px}
+/* panel-wide input/label rules (studio-print.css, studio-kit.css) must not stretch the stepper */
+.studio-shop-order .studio-shop-row{flex-wrap:nowrap}
+.studio-shop-order .studio-shop-qty{flex:0 0 auto;width:auto;margin:0}
+.studio-shop-order .studio-shop-qty input{width:46px!important;min-width:0!important;height:44px;min-height:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.studio-shop-order .studio-shop-qty button{flex:0 0 44px;margin:0;padding:0;width:44px;min-height:0}
+.studio-shop-order .studio-shop-price{flex:1 1 auto;min-width:0}
+
+/* ---------- Usability pass 2026-11-06 (Baymard: price and the order button stay in view while customising) ---------- */
+.studio-product-panel .studio-shop-order,.studio-kit-panel .studio-shop-order{position:sticky;bottom:0;z-index:5;margin:16px -2px 0;box-shadow:0 -10px 24px -14px rgba(28,9,18,.35)}
+.studio-shop-order .studio-hint{margin:8px 0 0;font-size:12px;line-height:1.4}
+@media (max-width:700px){
+ .studio-product-panel .studio-shop-order,.studio-kit-panel .studio-shop-order{padding:10px 12px}
+ .studio-shop-order .studio-shop-note{margin:6px 0 8px;font-size:12px}
+ .studio-shop-order .studio-hint{display:none}
+ .studio-shop-price b{font-size:22px}
+}
+/* One primary action in the top bar: community sharing becomes a secondary button. */
+html body .studio-shell.studio-canvas-editor .studio-workshop-save .studio-workshop-publish{background:transparent!important;color:#47132d!important;border:1px solid #d9cfd4!important}
+html body .studio-shell.studio-canvas-editor .studio-workshop-save .studio-workshop-publish:hover:not(:disabled){background:#fff!important;color:#47132d!important;border-color:#47132d!important}
+
+/* Product chooser: price on every card; compact two-column cards on phones so the whole offer fits in about two screens. */
+.hub-card-price{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;background:#fff;color:#47132d;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+@media (max-width:700px){
+ .product-hub .product-hub-grid{gap:12px}
+ .product-hub .product-hub-card{display:grid;grid-template-columns:38% 1fr;align-items:stretch}
+ .product-hub .product-hub-card .hub-card-image{aspect-ratio:auto;height:100%;min-height:128px}
+ .product-hub .product-hub-card .hub-card-image img{width:100%;height:100%;object-fit:contain;padding:8px}
+ .product-hub .product-hub-card .hub-card-caption{padding:12px 12px 12px 14px;align-items:center}
+ .product-hub .product-hub-card h2{font-size:22px}
+ .product-hub .product-hub-card p{font-size:13px;line-height:1.35;margin-top:2px}
+ .product-hub .product-hub-steps{flex-wrap:wrap;justify-content:flex-start;row-gap:10px}
+}
+/* Product mode has no community-sharing row above the canvas (same grid as print mode). */
+html body .studio-shell.studio-canvas-editor[data-product-mode=true] .studio-workspace-content{grid-template-rows:auto minmax(0,1fr)!important}
+/* The sticky order block stays compact: the explanation lives in the summary. */
+.studio-product-panel .studio-shop-order .studio-hint,.studio-kit-panel .studio-shop-order .studio-hint{display:none}
+.studio-shop-price small{white-space:nowrap}
+/* Product tabs (Wzór, Kolory, Napisy, Układ i druk) wrap instead of being cut off in the narrow desktop panel. */
+.studio-product-panel .studio-visual-tabs,.studio-kit-panel .studio-visual-tabs{flex-wrap:wrap}
+/* Product chooser on phones: fixed image height, price label on one line, the how-it-works strip only on larger screens. */
+@media (max-width:700px){
+ .product-hub .product-hub-card .hub-card-image{height:128px;min-height:0}
+ .hub-card-price{white-space:nowrap;font-size:12px}
+ .product-hub .product-hub-steps{display:none}
+}
+
+/* ---------- One navigation for courts (Baymard: no duplicate navigation). The 1–4 steps replace the
+   Konstrukcja / Nawierzchnia / Grafika tabs, which repeated the first three steps. ---------- */
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;overflow:visible;padding:4px 0 10px;margin:0 0 6px;border-bottom:1px solid #e8e3e6}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:56px;padding:6px 2px;border:0;border-bottom:3px solid transparent;border-radius:8px 8px 0 0;background:transparent;color:#47132d;font-size:12.5px;font-weight:600;line-height:1.15;white-space:normal;text-align:center}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button>span:first-child{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid #cdbfc6;font-size:12px;font-weight:700}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button[aria-current=step]{border-bottom-color:#6336f5;font-weight:800}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button[aria-current=step]>span:first-child{background:#6336f5;border-color:#6336f5;color:#fff}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button:hover:not([aria-current=step]){background:#f1ecff}
+html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button:focus-visible{outline:3px solid #6336f5;outline-offset:-3px}
+@media (max-width:420px){html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button{font-size:11.5px}}
+/* Narrow desktop panel (~280 px): columns follow the label length so the four steps never overlap. */
+@media (min-width:701px){
+ html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps{display:flex;justify-content:space-between;gap:2px}
+ html body .studio-shell.studio-canvas-editor .studio-panel .studio-project-steps button{flex:0 1 auto;padding:6px 3px;font-size:11px;letter-spacing:-.1px}
+}

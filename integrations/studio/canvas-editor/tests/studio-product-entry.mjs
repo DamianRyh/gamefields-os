@@ -1,0 +1,65 @@
+import assert from 'node:assert/strict';
+import {readFile,readdir,mkdir} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {resolve,extname} from 'node:path';
+import {createServer} from 'node:http';
+import {chromium} from 'playwright';
+const require=createRequire(import.meta.url),wranglerRequire=createRequire(require.resolve('wrangler/package.json'));
+const {Miniflare}=await import(wranglerRequire.resolve('miniflare'));
+const files=(await readdir('dist/server',{recursive:true})).filter(f=>/\.m?js$/.test(f));
+const mf=new Miniflare({modules:['index.js',...files.filter(f=>f!=='index.js')].map(f=>({type:'ESModule',path:resolve('dist/server',f)})),modulesRoot:resolve('dist/server'),compatibilityDate:'2026-05-15',compatibilityFlags:['nodejs_compat'],d1Databases:['DB']});
+let browser,server;
+try{
+ const mime={'.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webmanifest':'application/manifest+json','.woff2':'font/woff2'};
+ server=createServer(async(req,res)=>{try{const path=new URL(req.url,'http://localhost').pathname,file=resolve('dist/client','.'+path),root=resolve('dist/client')+'/';if(file.startsWith(root)&&!path.startsWith('/api/')){try{const bytes=await readFile(file);res.setHeader('Content-Type',mime[extname(file)]||'application/octet-stream');res.end(bytes);return;}catch{}}
+ const chunks=[];for await(const c of req)chunks.push(c);const response=await mf.dispatchFetch(`http://${req.headers.host}${req.url}`,{method:req.method,headers:req.headers,body:chunks.length?Buffer.concat(chunks):undefined});res.statusCode=response.status;for(const [k,v]of response.headers)if(k!=='set-cookie')res.setHeader(k,v);const cookies=response.headers.getSetCookie();if(cookies.length)res.setHeader('Set-Cookie',cookies);res.end(Buffer.from(await response.arrayBuffer()));}catch(e){res.statusCode=500;res.end(String(e));}});
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const base=`http://localhost:${server.address().port}`;
+ browser=await chromium.launch({headless:true,args:["--enable-webgl","--use-gl=angle","--use-angle=swiftshader"],...(process.env.PLAYWRIGHT_EXECUTABLE_PATH?{executablePath:process.env.PLAYWRIGHT_EXECUTABLE_PATH}:{})});
+ await mkdir('outputs/product-entry',{recursive:true});
+ const errors=[];
+ for(const width of [390,1487]){
+ const page=await browser.newPage({viewport:{width,height:1058}});page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base+'/');await page.locator('[data-product-hub]').waitFor();
+ assert.equal(await page.locator('.product-hub-card').count(),5);
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
+ await page.screenshot({path:`outputs/product-entry/hub-${width}.png`,fullPage:true});
+ await page.getByRole('button',{name:'Plakaty',exact:true}).click();
+ await page.locator('[data-print-product="poster"]').waitFor();
+ assert.ok(await page.getByRole('button',{name:'Podsumowanie',exact:true}).evaluate(e=>e.getBoundingClientRect().right<=innerWidth),'Summary must fit on screen');
+ await page.getByRole('navigation',{name:'Ustawienia produktu'}).getByRole('button',{name:'Napisy',exact:true}).click();
+ await page.getByLabel('Tytuł',{exact:true}).fill('MÓJ KLUB');
+ const download=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).click();
+ const project=JSON.parse(await readFile(await(await download).path(),'utf8'));assert.equal(project.printDesign.title,'MÓJ KLUB');
+ await page.waitForFunction(()=>document.querySelector('.studio-save')?.textContent==='Zapisano w tej przeglądarce');
+ await page.reload();await page.locator('[data-print-product="poster"]').waitFor();
+ await page.getByRole('navigation',{name:'Ustawienia produktu'}).getByRole('button',{name:'Napisy',exact:true}).click();
+ assert.equal(await page.getByLabel('Tytuł',{exact:true}).inputValue(),'MÓJ KLUB');
+ await page.screenshot({path:`outputs/product-entry/poster-${width}.png`,fullPage:true});await page.locator('.studio-shop-order').first().screenshot({path:`outputs/product-entry/poster-order-${width}.png`});
+ await page.getByRole('button',{name:/Produkty/}).click();
+ await page.getByRole('button',{name:'Piłki',exact:true}).click();
+ await page.locator('[data-print-product="ball"][data-ready="true"]').waitFor({timeout:45000});
+ assert.equal(await page.locator('[data-print-product="ball"]').getAttribute('data-panel-count'),'32');
+ await page.getByRole('navigation',{name:'Ustawienia produktu'}).getByRole('button',{name:'Panele',exact:true}).click();
+ await page.getByLabel('Styl piłki',{exact:true}).selectOption('mix');
+ await page.getByLabel('Rozmiar piłki',{exact:true}).selectOption('4');
+ const ballDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).click();
+ const ball=JSON.parse(await readFile(await(await ballDownload).path(),'utf8'));assert.equal(ball.printDesign.size,'4');assert.equal(ball.printDesign.mode,'mix');
+ await page.screenshot({path:`outputs/product-entry/ball-${width}.png`,fullPage:true});
+ await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();
+ await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'poster.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});
+ await page.locator('[data-print-product="poster"]').waitFor();
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
+ assert.equal(await page.getByRole('navigation',{name:'Wybierz obszar edycji'}).count(),0,'product mode shows only the product panel');
+ assert.match(await page.locator('.studio-shop-order').innerText(),/99\s*zł/);
+ assert.equal(await page.locator('[aria-label="Rama plakatu"]').count(),0);
+ await page.getByRole('button',{name:/Produkty/}).click();await page.getByRole('button',{name:'Boiska',exact:true}).click();
+ assert.equal(await page.locator('[data-print-product]').count(),0);
+ const legacyDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).click();
+ assert.equal(JSON.parse(await readFile(await(await legacyDownload).path(),'utf8')).printDesign,undefined);
+ await page.goto(base+'/?arena=o1&panel=D8F24A&frame=2C6FB0');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).waitFor();await page.waitForTimeout(800);
+ const colorDownload=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).click();
+ const colored=JSON.parse(await readFile(await(await colorDownload).path(),'utf8'));assert.equal(colored.arenaModel,'o1');assert.equal(colored.arenaDesign.panelColor,'#d8f24a');assert.equal(colored.arenaDesign.frameColor,'#2c6fb0');assert.equal(colored.arenaDesign.goalColor,'#2c6fb0');
+ await page.close();
+ }
+ assert.deepEqual(errors,[]);console.log('PASS: five products, poster editing and JSON, reload, real 32-panel ball, options, cross-product import, mobile and desktop.');
+}finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}
