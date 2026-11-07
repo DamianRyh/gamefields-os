@@ -272,7 +272,7 @@ function gft_shop_inquiry_url( $product ) {
 	$text = $product->get_name();
 	$price = $product->get_price();
 	if ( '' !== $price ) {
-		$text .= ' · cena: ' . ( $product->is_type( 'variable' ) ? 'od ' : '' ) . wp_strip_all_tags( wc_price( $product->is_type( 'variable' ) ? $product->get_variation_price( 'min' ) : $price ) ) . ' brutto';
+		$text .= ' · cena: ' . ( $product->is_type( 'variable' ) ? 'od ' : '' ) . str_replace( "\xC2\xA0", ' ', html_entity_decode( wp_strip_all_tags( wc_price( $product->is_type( 'variable' ) ? $product->get_variation_price( 'min' ) : $price ) ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) . ' brutto';
 	}
 	return home_url( '/kontakt/?produkt=' . rawurlencode( 'Zamówienie: ' . $text ) );
 }
