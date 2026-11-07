@@ -587,7 +587,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
       <div class="pn-plan" data-pn-plan role="img" aria-label="Plan placu w skali"></div>
       <p class="pn-cap" data-pn-cap></p>
     </div>
-    <div class="pn-list" data-pn-list role="list" aria-label="Boiska i dopasowanie do placu"></div>
+    <div class="pn-list" data-pn-list role="group" aria-label="Boiska i dopasowanie do placu"></div>
   </div>
 </section>
 
@@ -907,7 +907,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 </section>
 
 <!-- Kept from live page 3462 (revision of 2026-10-31): community workshop feed, unchanged markup and script. -->
-<section class="gh-section gh-tinted gh-workshop" id="warsztat" aria-labelledby="gh-workshop-title"><div class="gh-wrap"><div class="gh-workshop-heading"><div><p class="gh-eyebrow">ZAPROJEKTUJ · ZAPISZ · ZAINSPIRUJ</p><h2 id="gh-workshop-title">Warsztat.<br>Wasze pomysły.</h2></div><div><p>Zaprojektuj boisko i kliknij w Studio <strong>„Zapisz dla innych”</strong>. Twój układ i kolory od razu pojawią się tutaj.</p><div class="gh-actions"><a class="gh-btn gh-primary" href="/studio/">Zaprojektuj i pokaż innym ↗</a></div></div></div><div class="gh-workshop-bar"><span data-workshop-count>10 ostatnich projektów</span><button type="button" class="gh-btn" data-workshop-refresh>Odśwież</button></div><p class="gh-caption" role="status" data-workshop-status>Wczytujemy projekty…</p><div class="gh-workshop-rail" data-workshop-projects aria-label="Najnowsze projekty społeczności"></div><div class="gh-workshop-empty" data-workshop-empty hidden><div class="gh-workshop-placeholder" aria-hidden="true"><span>+</span></div><div><h3>Twój projekt może być pierwszy.</h3><p>Wybierz kolory. Kliknij „Zapisz dla innych”. Gotowe.</p><a class="gh-btn" href="/studio/">Otwórz Studio ↗</a></div></div><p class="gh-caption">Projekty społeczności · koncepcje. Publikujemy układ, wzór i kolory bez prywatnych nazw, własnych napisów i logo. Zapisany projekt możesz wycofać przyciskiem w Studio.</p><noscript><p><a href="/studio/">Przejdź do Studia</a>, aby zaprojektować własne boisko.</p></noscript></div></section>
+<section class="gh-section gh-tinted gh-workshop" id="warsztat" aria-labelledby="gh-workshop-title"><div class="gh-wrap"><div class="gh-workshop-heading"><div><p class="gh-eyebrow">ZAPROJEKTUJ · ZAPISZ · ZAINSPIRUJ</p><h2 id="gh-workshop-title">Warsztat.<br>Wasze pomysły.</h2></div><div><p>Zaprojektuj boisko i kliknij w Studio <strong>„Zapisz dla innych”</strong>. Twój układ i kolory od razu pojawią się tutaj.</p><div class="gh-actions"><a class="gh-btn gh-primary" href="/studio/">Zaprojektuj i pokaż innym ↗</a></div></div></div><div class="gh-workshop-bar"><span data-workshop-count>10 ostatnich projektów</span><button type="button" class="gh-btn" data-workshop-refresh>Odśwież</button></div><p class="gh-caption" role="status" data-workshop-status>Wczytujemy projekty…</p><div class="gh-workshop-rail" data-workshop-projects role="region" aria-label="Najnowsze projekty społeczności"></div><div class="gh-workshop-empty" data-workshop-empty hidden><div class="gh-workshop-placeholder" aria-hidden="true"><span>+</span></div><div><h3>Twój projekt może być pierwszy.</h3><p>Wybierz kolory. Kliknij „Zapisz dla innych”. Gotowe.</p><a class="gh-btn" href="/studio/">Otwórz Studio ↗</a></div></div><p class="gh-caption">Projekty społeczności · koncepcje. Publikujemy układ, wzór i kolory bez prywatnych nazw, własnych napisów i logo. Zapisany projekt możesz wycofać przyciskiem w Studio.</p><noscript><p><a href="/studio/">Przejdź do Studia</a>, aby zaprojektować własne boisko.</p></noscript></div></section>
 <script>(function(){'use strict';
 const root=document.querySelector('#warsztat');if(!root)return;
 const api='https://gamefields-studio.ryhfs90.chatgpt.site/api/workshop',studio='/studio/',rail=root.querySelector('[data-workshop-projects]'),empty=root.querySelector('[data-workshop-empty]'),status=root.querySelector('[data-workshop-status]'),count=root.querySelector('[data-workshop-count]'),refresh=root.querySelector('[data-workshop-refresh]');let controller=null;
@@ -1363,7 +1363,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
   /* ---------- COLLECTION WALL ---------- */
   var W = 'rgba(255,255,255,.5)', P = 'rgba(71,19,45,.28)';
   var ALL = [
-    { n: '01', k: 'circle-cage-1', shape: 'okrag', name: 'Panna Cage 90', dim: 'Ø ~6 m · 0,90 m', img: up('Cage-90-Hero-4-gray.webp'), bg: '#E0402B', ink: '#FFFFFF', line: W },
+    { n: '01', k: 'circle-cage-1', shape: 'okrag', name: 'Panna Cage 90', dim: 'Ø ~6 m · 0,90 m', img: up('Cage-90-Hero-4-gray.webp'), bg: '#D23A26', ink: '#FFFFFF', line: W },
     { n: '02', k: 'circle-cage-2', shape: 'okrag', name: 'Panna Cage 180', dim: 'Ø ~6 m · 1,80 m', img: up('Cage-180-Hero-4-gray.webp'), bg: '#D8F24A', ink: '#1F2A6B', line: 'rgba(31,42,107,.3)' },
     { n: '03', k: 'o1', shape: 'okrag', name: 'Panna Play', dim: 'Ø ~6 m · do 1,52 m', img: up('Gamefields-Panna-Play-wide-v3-default.webp'), bg: '#2457D6', ink: '#FFFFFF', line: W },
     { n: '04', k: 'p1', shape: 'prostokat', name: 'Panna Court', dim: '7,14 × 5,57 m', img: up('Gamefields-Panna-Court-wide-v3-default.webp'), bg: '#FFB3C8', ink: '#47132D', line: P },
@@ -1731,7 +1731,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
       var rows = PLAN.map(function (x) { return { m: x, f: fit(x, L, Wd, r) }; }).sort(function (p, q) { if (p.f.ok !== q.f.ok) return p.f.ok ? -1 : 1; return p.f.ok ? (q.m.a * q.m.b - p.m.a * p.m.b) : (q.f.spare - p.f.spare); });
       list.innerHTML = '';
       rows.forEach(function (row) {
-        var b = el('button', { type: 'button', class: 'pn-it', role: 'listitem', 'aria-pressed': String(row.m.k === sel) },
+        var b = el('button', { type: 'button', class: 'pn-it', 'aria-pressed': String(row.m.k === sel) },
           '<b>' + esc(row.m.name) + '</b><span class="pn-pill ' + (row.f.ok ? 'ok' : 'no') + '">' + (row.f.ok ? 'mieści się · +' + nf(row.f.spare) + ' m' : 'brakuje ' + nf(-row.f.spare) + ' m') + '</span><small>' + esc(row.m.meta) + '</small>');
         b.addEventListener('click', function () { sel = row.m.k; draw(); });
         list.appendChild(b);
@@ -1977,7 +1977,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
 
   /* ---------- KITS ---------- */
   var KITS = [
-    { seg: 'Miasto', pitch: 'Mała arena jako punkt spotkań w parku. Komplet materiałów do budżetu obywatelskiego.', arena: 'circle-cage-1', model: 'Panna Cage 90', img: up('Cage-90-Hero-4-gray.webp'), surf: 'city-fluid', surfName: 'City Fluid', space: 'park, skwer, plac', bg: '#E0402B', ink: '#FFFFFF' },
+    { seg: 'Miasto', pitch: 'Mała arena jako punkt spotkań w parku. Komplet materiałów do budżetu obywatelskiego.', arena: 'circle-cage-1', model: 'Panna Cage 90', img: up('Cage-90-Hero-4-gray.webp'), surf: 'city-fluid', surfName: 'City Fluid', space: 'park, skwer, plac', bg: '#D23A26', ink: '#FFFFFF' },
     { seg: 'Szkoła', pitch: 'Czytelna, bezpieczna arena na przerwę i WF. Przyjazne kolory dla dzieci.', arena: 'o1', model: 'Panna Play', img: up('Gamefields-Panna-Play-wide-v3-default.webp'), surf: 'play-system', surfName: 'Play System', space: 'boisko szkolne, dziedziniec', bg: '#D8F24A', ink: '#1F2A6B' },
     { seg: 'Osiedle', pitch: 'Wyróżnik inwestycji wpisany w zieleń. Mieści się na placu o boku 5–7 m.', arena: 'p1', model: 'Panna Court', img: up('Gamefields-Panna-Court-wide-v3-default.webp'), surf: 'earth-motion', surfName: 'Earth Motion', space: 'dziedziniec, zieleń osiedlowa', bg: '#FFB3C8', ink: '#47132D' },
     { seg: 'Klub', pitch: 'Trening 1 na 1 przez cały rok. Barwy klubu i partnera na nawierzchni.', arena: 'circle-cage-2', model: 'Panna Cage 180', img: up('Cage-180-Hero-4-gray.webp'), surf: 'club-heritage', surfName: 'Club Heritage', space: 'akademia, ośrodek treningowy', bg: '#2457D6', ink: '#FFFFFF' },
