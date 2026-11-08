@@ -32,7 +32,8 @@ import {createPanelArtwork} from '@/lib/panel-artwork';
 import {circlePanelSides} from '@/lib/circle-panel-sides';
 const catalog={w1};
 const titles={octagon:productNames["octagon"]+' · 4,962 × 4,962 m · wysokość 1,218 m','street-field':productNames["street-field"]+' · 6,214 × 4,648 m · wysokość 1,091 m','circle-cage-1':productNames["circle-cage-1"]+' · Ø 6 m · wysokość 0,9 m','circle-cage-2':productNames["circle-cage-2"]+' · Ø 6 m · wysokość 1,8 m',street15:productNames["street15"]+' · bandy 1 m',w1:productNames["w1"]+' · Ø zewn. 5,09 m · wysokość 1 m',o1:productNames["o1"]+' · Ø nominalne 6,00 m · wysokość 0,55–1,52 m',p1:productNames["p1"]+' · 7,19 × 5,57 m · wysokość do 1,22 m'};
-export const defaultArena:ArenaDesign={panelColor:'#b90f35',frameColor:'#30363c',goalColor:'#30363c',finish:'matte',text:'',side:'both'};
+import {defaultArena} from '@/lib/default-arena';
+export {defaultArena};
 export function floorSvg(project:Project){
  if(project.surfaceModel)return renderToStaticMarkup(<SportSurfaceArt project={project}/>);
  const modulePlan=modularPlan(project);

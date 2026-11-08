@@ -41,11 +41,8 @@ try{
    await page.screenshot({path:`outputs/primary-sports/${surface||arena}-${width}.png`});
    report.cases.push({width,name,surface,arena,equipment,webgl:image.pixels,json:true,quote:true});console.log('PASS primary sport '+name+' '+width);
   }
-  // No stale reply from a previous guide may appear under a newly selected expert.
-  await page.route('**/api/crew',async route=>{if(route.request().method()==='GET')return route.fulfill({json:{enabled:true}});return route.fulfill({json:{answer:'TEST-ANSWER'}})});
-  await page.goto(base+'/');await ready();await page.getByRole('button',{name:'Wybierz przewodnika Ola: Technologia',exact:true}).click();
-  const contextText=await page.getByRole('region',{name:'Podpowiedzi: Ola',exact:true}).innerText();assert(contextText.includes('608'),'CREW must use source-derived 32 x 19 court area');
-  await page.getByRole('button',{name:'Zamknij dymek',exact:true}).click();
+  // Gamefields Crew is off for the launch (2026-11-08): the guide bubble must not render.
+  await page.goto(base+'/');await ready();assert.equal(await page.getByRole('button',{name:/Wybierz przewodnika/}).count(),0,'CREW must stay hidden for the launch');
   await context.close();
  }
  assert.deepEqual(report.errors,[]);await (await import('node:fs/promises')).writeFile('outputs/primary-sports/verification.json',JSON.stringify({...report,status:'passed'},null,2));console.log('PASS primary sports browser acceptance');

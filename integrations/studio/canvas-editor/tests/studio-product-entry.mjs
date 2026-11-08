@@ -19,7 +19,8 @@ try{
  const errors=[];
  for(const width of [390,1487]){
  const page=await browser.newPage({viewport:{width,height:1058}});page.on('pageerror',e=>errors.push(e.message));
- await page.goto(base+'/');await page.locator('[data-product-hub]').waitFor();
+ await page.goto(base+'/');await page.locator('[data-product-hub]').waitFor();assert.equal(await page.locator('.product-hub-card').count(),3,'launch hub: courts, surfaces, posters');
+ await page.goto(base+'/?all=1');await page.locator('[data-product-hub]').waitFor();
  assert.equal(await page.locator('.product-hub-card').count(),5);
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
  await page.screenshot({path:`outputs/product-entry/hub-${width}.png`,fullPage:true});
