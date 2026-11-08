@@ -319,3 +319,8 @@ add_filter( 'woocommerce_get_price_html', function ( $html, $product ) {
 	}
 	return $html . ' <span class="gft-quote-note">· wycena indywidualna</span>';
 }, 20, 2 );
+
+/* The launch offer fits one page (12 products on 2026-11-08): no "page 2" in the shop. */
+add_filter( 'loop_shop_per_page', function () {
+	return 24;
+}, 20 );
