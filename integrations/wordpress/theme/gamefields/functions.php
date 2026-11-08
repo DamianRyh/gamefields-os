@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.19' );
+define( 'GFT_VERSION', '1.0.20' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -293,3 +293,44 @@ add_action( 'template_redirect', function () {
 		exit;
 	}
 }, 2 );
+
+/* ---------- Sharing and search previews (launch 2026-11-07) ----------
+   One 1200x630 JPG (media 4498) for link previews: WebP is not shown by LinkedIn and some messengers. */
+define( 'GFT_SHARE_IMAGE_ID', 4498 );
+function gft_share_image_url() {
+	$src = wp_get_attachment_image_url( GFT_SHARE_IMAGE_ID, 'full' );
+	return $src ? $src : '';
+}
+add_filter( 'wpseo_opengraph_image', function ( $url ) {
+	return ( is_front_page() || ( $url && preg_match( '/\.webp(\?|$)/i', $url ) ) ) && gft_share_image_url() ? gft_share_image_url() : $url;
+} );
+add_filter( 'wpseo_twitter_image', function ( $url ) {
+	return ( is_front_page() || ! $url || preg_match( '/\.webp(\?|$)/i', (string) $url ) ) && gft_share_image_url() ? gft_share_image_url() : $url;
+} );
+add_action( 'wpseo_add_opengraph_images', function ( $images ) {
+	if ( method_exists( $images, 'has_images' ) && ! $images->has_images() ) {
+		$images->add_image_by_id( GFT_SHARE_IMAGE_ID );
+	}
+} );
+
+/* Search description for the shop and for products that have none of their own. */
+function gft_shop_description() {
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		return 'Plakaty i piłki z wzorami boisk Gamefields oraz modułowe boiska Panna. Ceny brutto, zamówienie przez zapytanie, wysyłka 19 zł, od 299 zł gratis.';
+	}
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		$product = wc_get_product( get_queried_object_id() );
+		if ( $product ) {
+			$text = wp_strip_all_tags( $product->get_short_description() ? $product->get_short_description() : $product->get_description() );
+			$text = trim( preg_replace( '/\s+/', ' ', $text ) );
+			return $text ? mb_substr( $text, 0, 155 ) : '';
+		}
+	}
+	return '';
+}
+add_filter( 'wpseo_metadesc', function ( $desc ) {
+	return $desc ? $desc : gft_shop_description();
+} );
+add_filter( 'wpseo_opengraph_desc', function ( $desc ) {
+	return $desc ? $desc : gft_shop_description();
+} );
