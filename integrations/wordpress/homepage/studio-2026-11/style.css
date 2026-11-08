@@ -487,3 +487,13 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .ctrl-colors .dots+.m{margin-top:14px}
 @media (min-width:701px){.gfs .ctrl-colors .dot{width:34px;height:34px}.gfs .ctrl-colors .dots{gap:8px}}
 @media (max-width:700px){.gfs .ctrl-colors{max-width:100%;min-width:0}.gfs .ctrl-colors .dots{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding:6px 6px 8px;margin:-6px -6px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}.gfs .ctrl-colors .dots::-webkit-scrollbar{display:none}.gfs .ctrl-colors .dot{flex:0 0 40px;width:40px;height:40px}}
+
+/* Opinie klientów (2026-11-08) */
+.gfs .ops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfs .ops figure{margin:0;height:100%;display:grid;grid-template-rows:1fr auto;gap:22px;padding:28px 28px 26px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--violet)}
+.gfs .ops blockquote{margin:0}
+.gfs .ops blockquote p{margin:0;font-size:clamp(19px,1.7vw,23px);line-height:1.4;letter-spacing:-.01em;color:var(--ink)}
+.gfs .ops figcaption{display:grid;gap:2px;font-size:15px;line-height:1.4;color:var(--muted)}
+.gfs .ops figcaption b{color:var(--ink);font-size:16px}
+.gfs .ops figcaption .m{margin-top:6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+@media (max-width:900px){.gfs .ops{grid-template-columns:minmax(0,1fr);gap:8px}.gfs .ops figure{padding:22px 20px}}
