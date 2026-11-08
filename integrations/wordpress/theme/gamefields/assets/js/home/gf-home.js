@@ -561,7 +561,7 @@
 
   /* ---------- BALL v2: 32-panel 3D ball on the Court Art Pro engine (three.js loaded on demand) ---------- */
   (function () {
-    var sec = $('#pilka'); if (!sec) return; if (!G) return;
+    var sec = $('#pilka'); if (!sec || sec.hidden) return; if (!G) return;
     var FAM = {}; G.PRO_FAMILIES.forEach(function (f) { FAM[f.id] = f; });
     var PAL = {}; G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
     var HEXRE = /^#[0-9A-Fa-f]{6}$/;

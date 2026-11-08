@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.21' );
+define( 'GFT_VERSION', '1.0.22' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -290,6 +290,19 @@ add_action( 'template_redirect', function () {
 	}
 	if ( isset( $map[ $path ] ) && ( is_404() || ! is_user_logged_in() ) ) {
 		wp_safe_redirect( home_url( $map[ $path ] ), 301 );
+		exit;
+	}
+}, 2 );
+
+/* Ball and t-shirt are hidden for the launch (owner, 2026-11-08) and return later: a temporary redirect to the posters,
+   so old links still land on something to buy. Logged-in editors still see the drafts. */
+add_action( 'template_redirect', function () {
+	if ( is_user_logged_in() ) {
+		return;
+	}
+	$path = untrailingslashit( (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH ) );
+	if ( in_array( $path, array( '/product/pilka-z-twoim-wzorem', '/product/koszulka-gamefields' ), true ) ) {
+		wp_safe_redirect( home_url( '/#plakaty' ), 302 );
 		exit;
 	}
 }, 2 );
