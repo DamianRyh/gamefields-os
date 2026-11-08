@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "diameterOutside_m": 5.09,
+  "diameterInside_m": 4.99,
+  "height_m": 1,
+  "counts": {
+    "frame": 104,
+    "panels": 24,
+    "goals": 22,
+    "hardware": 80
+  },
+  "heroBytes": 837228,
+  "sourceBytes": 2792100,
+  "heroSHA256": "ea462890c553b1b3d0efb6bf901f1a93388a5bab669cb55f84b83b89b65d3068",
+  "sourceSHA256": "3c20e4a1fd9b7e4496e7e3680d707bd0778c4d082ce93c64b36d8089c780e247"
+}

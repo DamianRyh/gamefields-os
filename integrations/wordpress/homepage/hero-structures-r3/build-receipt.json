@@ -1,0 +1,54 @@
+{
+  "play": {
+    "source": "panna-play-o1-v2.glb",
+    "sourceSha256": "280d6ae80365ac4909326aea1df4990c820adbf004b601ef16bee34b62b68b30",
+    "parts": {
+      "panels": 12,
+      "frame": 20,
+      "goals": 2,
+      "hardware": 24
+    },
+    "height_m": 1.51601,
+    "bytes": 3350352,
+    "glbSha256": "c1be153cee8198d5edcd3fac2db9cf3d888ac3c9370c2887b3ea5b761bca6860"
+  },
+  "court": {
+    "source": "panna-court-v6.glb",
+    "sourceSha256": "acae658cf9338ae0f7e539f7f83e087f8a21c1e81e97befcb2bb33f9209379c3",
+    "parts": {
+      "panels": 16,
+      "frame": 28,
+      "goals": 2,
+      "hardware": 64
+    },
+    "height_m": 1.22341,
+    "bytes": 1532664,
+    "glbSha256": "eccb3e853559cf5577275057132e734c250d506ee6b54a423710a46e94b9bc56"
+  },
+  "ring": {
+    "source": "boisko-w1.glb",
+    "sourceSha256": "cae6c9dccf826d73e92816fe9a960e9849343a15cf0094087311d82886613a6f",
+    "parts": {
+      "panels": 12,
+      "frame": 84,
+      "goals": 22,
+      "hardware": 0
+    },
+    "height_m": 1.0,
+    "bytes": 231128,
+    "glbSha256": "169148f283283287de5ea4123117644878ba801562f8d795c4ebb87355ced919"
+  },
+  "octa": {
+    "source": "gamefields-panna-octa-r2.glb",
+    "sourceSha256": "55317ab22f16a8f6a51534cef63d4bf75e395e9952a74bde91c0af533bc03794",
+    "parts": {
+      "panels": 8,
+      "frame": 16,
+      "goals": 2,
+      "hardware": 0
+    },
+    "height_m": 1.218,
+    "bytes": 391984,
+    "glbSha256": "633a403743fd1d67936ed61bb26cbb4cfa5946996d79d960c4ad3340869b9080"
+  }
+}

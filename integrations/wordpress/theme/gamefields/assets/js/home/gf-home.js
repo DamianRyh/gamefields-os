@@ -62,26 +62,33 @@
   /* The hero keeps one navy ground (owner, 2026-11-06); only the model and its colour change. */
   var HERO = { ground: '#1F2A6B', ink: '#FFFFFF', line: 'rgba(255,255,255,.4)', cta: ['#D8F24A', '#1F2A6B'] };
   var COATS = [
-    { k: 'gray', n: 'Szary stalowy', c: '#8F9493', gl: [0.53, 0.55, 0.55] },
-    { k: 'red', n: 'Czerwień sygnałowa', c: '#D9142B', gl: [0.81, 0.07, 0.16] },
-    { k: 'orange', n: 'Pomarańcz sygnałowy', c: '#F2711C', gl: [0.90, 0.42, 0.10] },
-    { k: 'yellow', n: 'Żółty sygnałowy', c: '#F5C400', gl: [0.91, 0.73, 0.00] },
-    { k: 'lime', n: 'Limonka', c: '#D8F24A', gl: [0.80, 0.90, 0.28] },
-    { k: 'green', n: 'Szałwia', c: '#6B7C4F', gl: [0.40, 0.46, 0.29] },
-    { k: 'blue', n: 'Niebieski kort', c: '#2C6FB0', gl: [0.16, 0.41, 0.66] },
-    { k: 'pink', n: 'Róż Duperré', c: '#FF6FAE', gl: [0.95, 0.41, 0.65] },
-    { k: 'white', n: 'Biel', c: '#F4F1EE', gl: [0.91, 0.90, 0.89] },
-    { k: 'graphite', n: 'Grafit', c: '#2B2226', gl: [0.16, 0.13, 0.14] }
+    { k: 'gray', n: 'Szary stalowy', c: '#8F9493' },
+    { k: 'red', n: 'Czerwień sygnałowa', c: '#D9142B' },
+    { k: 'orange', n: 'Pomarańcz sygnałowy', c: '#F2711C' },
+    { k: 'yellow', n: 'Żółty sygnałowy', c: '#F5C400' },
+    { k: 'lime', n: 'Limonka', c: '#D8F24A' },
+    { k: 'green', n: 'Szałwia', c: '#6B7C4F' },
+    { k: 'blue', n: 'Niebieski kort', c: '#2C6FB0' },
+    { k: 'pink', n: 'Róż Duperré', c: '#FF6FAE' },
+    { k: 'white', n: 'Biel', c: '#F4F1EE' },
+    { k: 'graphite', n: 'Grafit', c: '#2B2226' }
   ];
+  var heroAssets = new URL('hero-r3/', document.currentScript.src);
+  function heroAsset(name) { return new URL(name, heroAssets).href; }
+  function colorFactor(hex) {
+    return [1, 3, 5].map(function (index) {
+      var c = parseInt(hex.slice(index, index + 2), 16) / 255;
+      return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    }).concat([1]);
+  }
   var MODELS3D = [
-    { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-play-o1.glb', still: up('Gamefields-Panna-Play-wide-v3-default.webp'), orbit: '30deg 62deg 105%' },
-    { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-court-p1.glb', still: up('Gamefields-Panna-Court-wide-v3-default.webp'), orbit: '30deg 62deg 105%' },
-    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø ~5 m · 1 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-ring-w1.glb', still: up('W-1-—-GF-CT-001.webp'), orbit: '30deg 62deg 105%' },
-    { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: 'https://www.gamefields.eu/wp-content/uploads/2026/11/gamefields-panna-octa.glb', still: up('GF-CT-008-octagon.webp'), orbit: '30deg 64deg 105%' }
+    { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: heroAsset('panna-play.glb'), still: 'panna-play', orbit: '35deg 61deg 106%' },
+    { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: heroAsset('panna-court.glb'), still: 'panna-court', orbit: '35deg 61deg 106%' },
+    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø zewn. 5,09 m · 1 m · 1 na 1', glb: heroAsset('panna-ring.glb'), still: 'panna-ring', orbit: '35deg 61deg 106%' },
+    { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: heroAsset('panna-octa.glb'), still: 'panna-octa', orbit: '35deg 61deg 106%' }
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
-  var cur = { panel: COATS[1], frame: COATS[9], model: MODELS3D[0] }, mv = null, mvReady = false;
-  var REPO = root.getAttribute('data-repo-base') || '';
+  var cur = { panel: COATS[1], frame: COATS[9], model: MODELS3D[0] }, mv = null;
 
   function paintHero() {
     hero.style.background = HERO.ground; hero.style.color = HERO.ink;
@@ -100,15 +107,20 @@
     $('[data-hero-code]').textContent = cur.model.code + ' · ' + cur.model.full + ' · model 3D';
     $('[data-hero-dim]').textContent = cur.model.dim;
     var stillImg = $('.still', hero3d), stillSrc = stillImg.parentNode.tagName === 'PICTURE' ? $('source', stillImg.parentNode) : null;
-    stillImg.src = cur.model.still; if (stillSrc) stillSrc.srcset = cur.model.still;
+    var desktopPoster = heroAsset(cur.model.still + '-1200.webp');
+    var mobilePoster = heroAsset(cur.model.still + '-720.webp');
+    if (stillImg.src !== desktopPoster) stillImg.src = desktopPoster;
+    if (stillSrc) {
+      if (stillSrc.srcset !== mobilePoster) stillSrc.srcset = mobilePoster;
+    }
     applyCoat();
   }
   function applyCoat() {
     if (!mv) return; if (!mv.model) return;
     mv.model.materials.forEach(function (m) {
       var n = m.name || '';
-      if (/^(Panele|Wypelnienie)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(cur.panel.gl.concat([1]));
-      else if (/^(Rama|Bramki)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(cur.frame.gl.concat([1]));
+      if (/^(Panele|Wypelnienie)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(colorFactor(cur.panel.c));
+      else if (/^(Rama|Bramki)/.test(n)) m.pbrMetallicRoughness.setBaseColorFactor(colorFactor(cur.frame.c));
     });
   }
   function loadModel() {
@@ -116,23 +128,34 @@
     customElements.whenDefined('model-viewer').then(function () {
       if (!mv) {
         mv = document.createElement('model-viewer');
-        ['camera-controls', 'disable-zoom', 'auto-rotate', 'ar'].forEach(function (a) { mv.setAttribute(a, ''); });
+        ['camera-controls', 'disable-zoom', 'ar'].forEach(function (a) { mv.setAttribute(a, ''); });
         mv.setAttribute('touch-action', 'pan-y');
         mv.setAttribute('interaction-prompt', 'none');
+        if (!reduced) mv.setAttribute('auto-rotate', '');
         mv.setAttribute('auto-rotate-delay', '800');
         mv.setAttribute('rotation-per-second', reduced ? '0deg' : '14deg');
-        mv.setAttribute('shadow-intensity', '1.1');
+        mv.setAttribute('shadow-intensity', '0.52');
         mv.setAttribute('shadow-softness', '0.8');
-        mv.setAttribute('exposure', '1.05');
+        mv.setAttribute('exposure', '1.0');
+        mv.style.setProperty('--progress-bar-height', '0px');
         mv.setAttribute('field-of-view', '28deg');
         mv.setAttribute('ar-modes', 'webxr scene-viewer quick-look');
-        mv.addEventListener('load', function () { mvReady = true; hero3d.classList.add('ready'); applyCoat(); });
+        mv.addEventListener('load', function (event) {
+          if (event.detail) {
+            if (event.detail.url) {
+              if (new URL(event.detail.url, document.baseURI).href !== cur.model.glb) return;
+            }
+          }
+          applyCoat();
+          hero3d.classList.add('ready');
+        });
         hero3d.insertBefore(mv, hero3d.firstChild);
       }
+      if (mv.getAttribute('src') === cur.model.glb) return;
       hero3d.classList.remove('ready');
       mv.setAttribute('alt', cur.model.full + ', model 3D. Przeciągnij, aby obrócić.');
       mv.setAttribute('camera-orbit', cur.model.orbit);
-      mv.setAttribute('src', (cur.model.glb.indexOf('https://') === 0 ? '' : REPO) + cur.model.glb);
+      mv.setAttribute('src', cur.model.glb);
     });
   }
   var heroModels = $('[data-hero-models]'), STUDIO_ARENAS = ['o1', 'p1', 'octagon'];
@@ -561,7 +584,7 @@
 
   /* ---------- BALL v2: 32-panel 3D ball on the Court Art Pro engine (three.js loaded on demand) ---------- */
   (function () {
-    var sec = $('#pilka'); if (!sec) return; if (!G) return;
+    var sec = $('#pilka'); if (!sec || sec.hidden) return; if (!G) return;
     var FAM = {}; G.PRO_FAMILIES.forEach(function (f) { FAM[f.id] = f; });
     var PAL = {}; G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
     var HEXRE = /^#[0-9A-Fa-f]{6}$/;
