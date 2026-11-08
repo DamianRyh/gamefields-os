@@ -519,6 +519,18 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .gh-workshop-3d{aspect-ratio:1/1}
 .gfs .gh-workshop-3d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:6%}
 @media (min-width:701px) and (max-width:1199px){.gfs .mats{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .mat{aspect-ratio:4/3}}
+
+/* Realizacje rail (2026-11-08) */
+.gfs .reals{list-style:none;margin:0;padding:0 0 12px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,23%);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.gfs .reals li{scroll-snap-align:start}
+.gfs .reals figure{margin:0;display:grid;gap:10px}
+.gfs .reals img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#E6E0DA}
+.gfs .reals figcaption{display:grid;gap:2px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfs .reals figcaption b{color:var(--ink);font-size:16px}
+.gfs #realizacje .side a{color:var(--violet);font-weight:700;text-decoration:none;white-space:nowrap}
+@media (max-width:700px){.gfs .reals{grid-auto-columns:72%}}
+/* Kits: the flat surface fills its window */
+.gfs .stripe .combo img.s{object-fit:cover;background:none}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","name":"Damian Gawrych"},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. Zobacz wzory Signature."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. Napisz do nas, aby ustalić zakres oferty. Co wpływa na budżet, opisujemy w poradniku „Ile kosztuje budowa boiska sportowego?”."}}]}]}</script>
 <div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/">
@@ -638,6 +650,28 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   </ul>
 </section>
 <!-- Opinie klientów: przeniesione na strony boisk w sklepie (2026-11-08). -->
+
+<!-- REALIZACJE: zdjęcia z biblioteki mediów, podpisy właściciela (2026-11-08) -->
+<section id="realizacje" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-real">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Realizacje</p><h2 class="d" id="gfs-real">Z boiska.</h2></div>
+    <div class="side"><p>Areny Gamefields w miastach, na turniejach i eventach marek. <a href="/realizacje-gamefields/">Wszystkie realizacje →</a></p></div>
+  </div>
+  <ul class="reals" role="list">
+    <li><figure><img src="/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Taras w Parku Świętokrzyskim</b><span>Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Złote Tarasy, Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/1-768x576.jpg" alt="Event Head &amp; Shoulders, Stadion, Gdańsk" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Stadion, Gdańsk</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa, Kutno" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa</b><span>Kutno</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/12-3-768x768.jpg" alt="Panna Octa Cage 180, Wake For Friends, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Wake For Friends, Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Street Soccer 2017</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/10-3-768x768.jpg" alt="Puchar Polski, Żerków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Puchar Polski</b><span>Żerków</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/22-768x432.jpg" alt="Mistrzostwa Świata Superball, Liberec" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Superball</b><span>Liberec</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/13-3-768x768.jpg" alt="Panna Ring, Nowy Świat, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Nowy Świat, Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/5-3-768x768.jpg" alt="Mistrzostwa Polski, Street Mekka, Łódź" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Polski, Street Mekka</b><span>Łódź</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/15-3-768x768.jpg" alt="Panna Octa Cage 180, Kraków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Kraków</span></figcaption></figure></li>
+  </ul>
+</section>
 
 <section id="studio" class="studio sec" aria-labelledby="gfs-studio">
   <div class="wrap studio-grid">
@@ -1016,6 +1050,9 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
 
 <!-- the site footer comes from the Gamefields theme (same on every page) -->
 </div>
+
+<!-- Flat surfaces in the audience kits (2026-11-08): the Studio SVGs are drawn in perspective on white, these fill the whole window. -->
+<script>(function(){var F={'city-fluid':1,'play-system':1,'earth-motion':1,'club-heritage':1,'brand-stage':1};function fix(){var list=document.querySelectorAll('img[src*="/surface-projects/"]');for(var i=0;i<list.length;i++){var m=list[i].getAttribute('src').match(/surface-projects\/([a-z-]+)\.svg/);if(m){if(F[m[1]]){list[i].src='/wp-content/uploads/2026/11/gf-surf-'+m[1]+'.webp';}}}}new MutationObserver(fix).observe(document.documentElement,{childList:true,subtree:true});fix();})();</script>
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-pro.js?v=81274c9b16"></script>
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-ball-core.js?v=0dff1b42a9"></script>
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-home.js?v=b4d45abaa3"></script>
