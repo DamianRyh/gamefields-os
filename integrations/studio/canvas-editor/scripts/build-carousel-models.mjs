@@ -9,7 +9,7 @@ const sources=[
  ['circle-cage-2','circle-cage-2.json'],
  ['octagon','octagon.json'],
  ['street-field','street-field.json'],
- ['street15','street15.json'],
+ ['street15','street15-r2.json'],
 ];
 
 function fromJson(file){
@@ -55,11 +55,15 @@ function shrink(groups,maxFaces=10000){
  }
  return out;
 }
-const output={version:1,models:{}};
+const target=process.argv[2];
+const outputPath=path.join(root,'carousel-models.json');
+const output=target?JSON.parse(fs.readFileSync(outputPath,'utf8')):{version:1,models:{}};
+if(target&&!sources.some(([key])=>key===target))throw Error('Unknown carousel model: '+target);
 for(const [key,name] of sources){
+ if(target&&key!==target)continue;
  const file=path.join(root,name),meshes=name.endsWith('.glb')?fromGlb(file):fromJson(file);
  output.models[key]=shrink(meshes);
  const faces=output.models[key].reduce((n,m)=>n+m.p.length/9,0);
  process.stdout.write(`${key}: ${meshes.length} meshes, ${faces} preview triangles\n`);
 }
-fs.writeFileSync(path.join(root,'carousel-models.json'),JSON.stringify(output));
+fs.writeFileSync(outputPath,JSON.stringify(output));

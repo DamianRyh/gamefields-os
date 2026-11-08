@@ -16,3 +16,6 @@ html body .studio-shell.studio-canvas-editor .studio-panel-tool-tabs{grid-templa
  html body .studio-shell.studio-canvas-editor[data-print-mode=true] .studio-scene-name{top:0!important;min-height:30px;max-height:30px;font-size:12px!important;padding:3px 8px!important}
  html body .studio-shell.studio-canvas-editor[data-print-mode=true] .studio-print-preview.is-poster{padding-top:32px}
 }
+
+/* Keep the product inside the space beside the existing floating inspector. */
+@media(min-width:801px) and (min-height:601px){html body .studio-shell.studio-canvas-editor .studio-render{width:calc(100% - min(292px,29vw) - 36px)!important;margin:0 auto 0 12px!important}}

@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 const root=resolve(fileURLToPath(new URL('..',import.meta.url)));
-const sources={w1:['components/assets-blender/w1.json','public/arenas/boisko-w1.glb'],o1:['components/assets-blender/o1-surface.json','public/arenas/panna-play-o1-v2.glb'],p1:['public/arenas/p1.json','components/assets-blender/p1-surface.json'],street15:['public/arenas/street15.json'],'circle-cage-1':['public/arenas/circle-cage-1.json','public/arenas/panna-cage-90-v2.glb'],'circle-cage-2':['public/arenas/circle-cage-2.json','public/arenas/panna-cage-180-v2.glb'],'street-field':['public/arenas/street-field.json'],octagon:['public/arenas/octagon.json']};
+const sources={w1:['components/assets-blender/w1.json','public/arenas/boisko-w1.glb'],o1:['components/assets-blender/o1-surface.json','public/arenas/panna-play-o1-v2.glb'],p1:['public/arenas/p1.json','components/assets-blender/p1-surface.json'],street15:['public/arenas/street15-r2.json'],'circle-cage-1':['public/arenas/circle-cage-1.json','public/arenas/panna-cage-90-v2.glb'],'circle-cage-2':['public/arenas/circle-cage-2.json','public/arenas/panna-cage-180-v2.glb'],'street-field':['public/arenas/street-field.json'],octagon:['public/arenas/octagon.json']};
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const rounded=n=>Math.round(n*1e6)/1e6;
 function bounds(vertices){
@@ -40,7 +40,7 @@ export async function measureArenaGeometry(){
   const floorFile=id==='p1'?files[1]:files[0],floor=JSON.parse(floorFile.bytes).filter(m=>m.group==='floor');
   let area=0;
   for(const mesh of floor){const top=Math.max(...mesh.v.map(v=>v[1]));for(const face of mesh.f){if(face.length!==3)throw Error('Triangulate source floor');const [a,b,c]=face.map(i=>mesh.v[i]);if([a,b,c].every(v=>Math.abs(v[1]-top)<1e-4))area+=Math.abs((b[0]-a[0])*(c[2]-a[2])-(c[0]-a[0])*(b[2]-a[2]))/2}}
-  const construction=id==='o1'?parseO1Glb(files[1].bytes.buffer.slice(files[1].bytes.byteOffset,files[1].bytes.byteOffset+files[1].bytes.byteLength)).flatMap(m=>m.v):id==='w1'?glbVertices(files[1].bytes):JSON.parse(files[0].bytes).filter(m=>m.group!=='floor').flatMap(m=>m.v);
+  const construction=id==='o1'?parseO1Glb(files[1].bytes.buffer.slice(files[1].bytes.byteOffset,files[1].bytes.byteOffset+files[1].bytes.byteLength)).flatMap(m=>m.v):id==='w1'?glbVertices(files[1].bytes):JSON.parse(files[0].bytes).filter(m=>m.group!=='floor'&&(id!=='street15'||m.group!=='surface-edge')).flatMap(m=>m.v);
   const sourceFiles=files.map(({path,sha256})=>({path,sha256}));
   catalog[id]={area:rounded(area),source:floorFile.path,surfaceBounds:bounds(floor.flatMap(m=>m.v)),constructionBounds:bounds(construction),sourceFiles,sourceRevision:hash(JSON.stringify(sourceFiles)),clearance:null,modulePitch:null};
  }

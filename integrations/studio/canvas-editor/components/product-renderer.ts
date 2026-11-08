@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {productGeometry} from '@/lib/product-geometry';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {loadImage} from '@/lib/load-image';
 import {surfaceImage,type SurfaceFinish} from '@/lib/p1-surface';
@@ -17,15 +18,12 @@ export class ProductRenderer implements ArenaRenderer{
  constructor(public canvas:HTMLCanvasElement,meshes:Mesh[]){
   this.renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,preserveDrawingBuffer:true,powerPreference:'default'});
   this.gl=this.renderer.getContext();this.renderer.setClearColor(0xffffff,0);this.renderer.outputColorSpace=THREE.SRGBColorSpace;
-  this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=.96;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFShadowMap;this.renderer.shadowMap.autoUpdate=false;this.renderer.shadowMap.needsUpdate=true;
-  const room=new RoomEnvironment(),pmrem=new THREE.PMREMGenerator(this.renderer);this.environment=pmrem.fromScene(room,.05);this.scene.environment=this.environment.texture;this.scene.environmentIntensity=.55;pmrem.dispose();room.dispose();
+  this.renderer.toneMapping=THREE.NeutralToneMapping;this.renderer.toneMappingExposure=1;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFShadowMap;this.renderer.shadowMap.autoUpdate=false;this.renderer.shadowMap.needsUpdate=true;
+  const room=new RoomEnvironment(),pmrem=new THREE.PMREMGenerator(this.renderer);this.environment=pmrem.fromScene(room,.05);this.scene.environment=this.environment.texture;this.scene.environmentIntensity=.65;pmrem.dispose();room.dispose();
   const hemi=new THREE.HemisphereLight(0xf6f8ff,0xc5c3bf,.8);this.scene.add(hemi);
   const bounds=new THREE.Box3();
   for(const source of meshes){
-   const geometry=new THREE.BufferGeometry(),positions:number[]=[],normals:number[]=[],uv:number[]=[];
-   for(const f of source.f){if(f.length!==3)continue;const [a,b,c]=f.map(i=>new THREE.Vector3(...source.v[i] as [number,number,number]));const n=new THREE.Vector3().subVectors(b,a).cross(new THREE.Vector3().subVectors(c,a)).normalize();
-    for(const i of f){positions.push(...source.v[i]);normals.push(...(source.normals?.[i]||n.toArray()));uv.push(...(source.uv?.[i]||[0,0]));}}
-   geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));geometry.computeBoundingBox();bounds.union(geometry.boundingBox!);
+   const geometry=productGeometry(source);bounds.union(geometry.boundingBox!);
    const material=new THREE.MeshPhysicalMaterial({color:0x30363c,roughness:.56,metalness:.16,clearcoat:.16,clearcoatRoughness:.45,side:THREE.DoubleSide});
    const mesh=new THREE.Mesh(geometry,material);mesh.name=source.id;mesh.castShadow=source.group!=='floor';mesh.receiveShadow=true;this.scene.add(mesh);
    const part:Part={source,mesh,key:''};this.parts.push(part);
@@ -58,7 +56,7 @@ export class ProductRenderer implements ArenaRenderer{
   ink.filter='blur(7px)';ink.drawImage(foot,0,0);ink.filter='blur(2px)';ink.globalAlpha=.45;ink.drawImage(foot,0,0);
   const ao=new THREE.CanvasTexture(mask);this.textures.add(ao);this.contact=new THREE.Mesh(new THREE.PlaneGeometry(sx,sz),new THREE.MeshBasicMaterial({map:ao,transparent:true,opacity:.24,depthWrite:false,toneMapped:false}));
   this.contact.rotation.x=-Math.PI/2;this.contact.position.set(center.x,ground-.01,center.z);this.contact.renderOrder=2;this.scene.add(this.contact);
-  canvas.dataset.productRenderer='three-pbr';canvas.dataset.studioRealism='physical-steel';
+  canvas.dataset.geometryBytes=String(this.parts.reduce((sum,p)=>sum+Object.values(p.mesh.geometry.attributes).reduce((n,a)=>n+a.array.byteLength,0)+(p.mesh.geometry.index?.array.byteLength||0),0));canvas.dataset.productRenderer='three-pbr';canvas.dataset.studioRealism='physical-steel';
  }
  draw(){if(this.dead)return;clearTimeout(this.idle);const now=performance.now(),moving=now-this.lastDraw<90;this.lastDraw=now;
   this.render(moving?1:Math.min(devicePixelRatio,1.75));
@@ -72,7 +70,7 @@ export class ProductRenderer implements ArenaRenderer{
   const target=right.multiplyScalar(place?(W/2-place.cx*W/1672)/ppu:0).add(up.multiplyScalar(place?(place.cy*H/941-H/2)/ppu:0));
   this.camera.position.copy(target).add(new THREE.Vector3(Math.sin(this.yaw)*Math.cos(this.pitch),Math.sin(this.pitch),Math.cos(this.yaw)*Math.cos(this.pitch)).multiplyScalar(50));this.camera.up.set(0,1,0);this.camera.lookAt(target);
   for(const part of this.parts){const a=this.appearances[part.source.id];part.mesh.visible=!!a?.visible;if(!a)continue;
-   const mat=part.mesh.material;mat.color.set(part.source.group==='floor'||part.key?'#ffffff':a.color);mat.roughness=part.source.group==='floor'?.94:a.finish==='metal'?.34:a.finish==='gloss'?.28:.56;mat.envMapIntensity=part.source.group==='floor'?.22:.85;mat.metalness=part.source.group==='floor'?0:a.finish==='metal'?.35:.12;mat.clearcoat=part.source.group==='floor'?0:a.finish==='matte'?.12:.35;
+   const mat=part.mesh.material;mat.color.set(part.source.group==='floor'||part.key?'#ffffff':a.color);mat.roughness=part.source.group==='floor'?.94:a.finish==='metal'?.34:a.finish==='gloss'?.28:.56;mat.envMapIntensity=part.source.group==='floor'?.22:.85;mat.metalness=part.source.group==='floor'?0:a.finish==='metal'?.92:0;mat.clearcoat=part.source.group==='floor'?0:a.finish==='matte'?.12:.35;
   }
   this.renderer.render(this.scene,this.camera);this.canvas.dataset.renderFrames=String(++this.frames);
  }
