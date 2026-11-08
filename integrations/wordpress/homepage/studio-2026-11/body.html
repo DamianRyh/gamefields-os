@@ -12,7 +12,7 @@
     <a href="#dla-kogo">Dla kogo</a>
     <a href="#studio">Studio</a>
     <a href="#plakaty">Plakaty</a>
-    <a href="#pilka">Piłka</a>
+    <!-- Piłka: ukryta na start (2026-11-08), wraca po starcie -->
     <a href="#warsztat">Warsztat</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
@@ -49,10 +49,11 @@
   </div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track d">
-  <span>Panna Ring</span><span><b>Panna Play</b></span><span>Panna Court</span><span><b>Cage 90</b></span><span>Cage 180</span><span><b>Panna Octa</b></span><span>Panna Grid</span><span><b>Street Arena 15</b></span>
-  <span>Panna Ring</span><span><b>Panna Play</b></span><span>Panna Court</span><span><b>Cage 90</b></span><span>Cage 180</span><span><b>Panna Octa</b></span><span>Panna Grid</span><span><b>Street Arena 15</b></span>
-</div></div>
+<!-- TICKER: one line per model, each opens the model in Studio (2026-11-08) -->
+<nav class="ticker" aria-label="Modele boisk"><div class="ticker-track">
+  <div class="ticker-set"><a href="/studio/?arena=w1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field">Panna Grid</a><i aria-hidden="true">•</i></div>
+  <div class="ticker-set" aria-hidden="true"><a href="/studio/?arena=w1" tabindex="-1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1" tabindex="-1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1" tabindex="-1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1" tabindex="-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2" tabindex="-1">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon" tabindex="-1">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field" tabindex="-1">Panna Grid</a><i aria-hidden="true">•</i></div>
+</div></nav>
 
 <!-- SCOPE (mobile): the whole offer at a glance, Baymard: show catalogue scope on the homepage -->
 <nav class="wrap scope" aria-label="Na skróty">
@@ -60,7 +61,7 @@
   <a href="#planer"><b>Zmieści się?</b><span>Sprawdź na swoim placu</span></a>
   <a href="/studio/"><b>Studio 3D</b><span>Konstrukcja, nawierzchnia, grafika</span></a>
   <a href="#dla-kogo"><b>Dla kogo</b><span>Szkoły, osiedla, kluby, marki</span></a>
-  <a href="#plakaty"><b>Plakaty i piłki</b><span>Twój wzór boiska</span></a>
+  <a href="#plakaty"><b>Plakaty</b><span>Twój wzór boiska</span></a>
   <a href="#kontakt"><b>Zapytanie</b><span>Odpisuję osobiście</span></a>
 </nav>
 
@@ -111,6 +112,24 @@
     <li><a href="/aktywacje-sportowe-dla-marek/"><span class="m">04</span><b>Marki i agencje</b><span>Brandowane boiska, turnieje, pop-upy i aktywacje.</span><i aria-hidden="true">→</i></a></li>
     <li><a href="/wynajem-boisk-mobilnych/"><span class="m">05</span><b>Eventy i wynajem</b><span>Mobilne boiska panna i street football na turnieje.</span><i aria-hidden="true">→</i></a></li>
     <li><a href="/projektuj-i-wybuduj-boisko/"><span class="m">06</span><b>Pełna realizacja</b><span>Od analizy terenu po odbiór, z jednym partnerem.</span><i aria-hidden="true">→</i></a></li>
+  </ul>
+</section>
+
+<!-- OPINIE: opinie klientów podane przez właściciela 2026-11-08 -->
+<section id="opinie" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-ops">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Opinie</p><h2 class="d" id="gfs-ops">Sprawdzone w miastach.</h2></div>
+    <div class="side"><p>Boiska Gamefields działają w miastach, parkach i na obiektach sportowych, gdzie gra się codziennie.</p></div>
+  </div>
+  <ul class="ops" role="list">
+    <li><figure><blockquote><p>Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</p></blockquote>
+      <figcaption><b>Mariusz Smysło</b><span>Dyrektor OSiR Grodzisk Mazowiecki</span><span class="m">Panna Ring · Orlik, Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><blockquote><p>Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.</p></blockquote>
+      <figcaption><b>Beata Rafalska</b><span>Urząd Miasta Kutno, ds. inwestycji</span><span class="m">Panna Octa · pasaż sportowy, Kutno</span></figcaption></figure></li>
+      <li><figure><blockquote><p>Boisko Panna Cage 180 świetnie wpisało się w naszą potrzebę poszerzenia oferty parku o dyscypliny inne niż wakeboard. Sprawdza się na co dzień i podczas wydarzeń, które organizujemy: urodzin dzieci, wieczorów kawalerskich i półkolonii.</p></blockquote>
+      <figcaption><b>Piotr Wiśniewski</b><span>Właściciel, Wake For Friends</span><span class="m">Panna Cage 180 · park wakeboardowy</span></figcaption></figure></li>
+    <li><figure><blockquote><p>Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży. Taras stał się jednym z najpopularniejszych miejsc spotkań młodych warszawiaków, a po wybuchu wojny w Ukrainie także ukraińskiej młodzieży, o czym pisał m.in. New York Times.</p></blockquote>
+      <figcaption><b>Grzegorz Gądek</b><span>Prezes Fundacji Skwery Sportów Miejskich</span><span class="m">Taras w Parku Świętokrzyskim, Warszawa · inwestor: Zarząd Zieleni m.st. Warszawy · proj. Michał Sikorski, Marcin Kwietowicz</span></figcaption></figure></li>
   </ul>
 </section>
 
@@ -260,7 +279,7 @@
 </section>
 
 <!-- BALL -->
-<section id="pilka" class="wrap sec band-dark" aria-labelledby="gfs-ball">
+<section id="pilka" class="wrap sec band-dark" aria-labelledby="gfs-ball" hidden>
   <div class="head">
     <div class="hd"><p class="kicker m">Piłka</p><h2 class="d" id="gfs-ball">Piłka do kompletu.</h2></div>
     <div class="side"><p>Ten sam wzór na boisku, na plakacie i na piłce. 32 prawdziwe panele, druk na całej piłce albo osobno na każdym panelu, gotowe układy kolorów, Twój napis, numer i logo. Zamówienie przyjmuję przez formularz; cenę, minimalną ilość i termin potwierdzę mailowo.</p></div>

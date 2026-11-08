@@ -144,3 +144,5 @@ a:hover{color:var(--gf-violet)}
 .wp-block-woocommerce-cart,.wp-block-woocommerce-checkout{font-family:var(--gf-font)}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* inquiry mode */
+.gft-inquiry{margin:8px 0 16px}.gft-inquiry .button{min-height:48px}.gft-inquiry-note{font-size:14px;color:#6F5A66;max-width:46ch}.gft-quote-note{font-size:.8em;font-weight:500;color:#6F5A66}

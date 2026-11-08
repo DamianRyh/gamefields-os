@@ -7,7 +7,7 @@
   var A = root.getAttribute('data-asset-base') || '';
   var UP = 'https://www.gamefields.eu/wp-content/uploads/2026/10/';
   /* Light copies (2026-11-07, Lighthouse): 720 px on phones, 1200 px elsewhere; the 1920 px originals stay in the media library. */
-  var OPT = { 'Gamefields-Panna-Play-wide-v3-default.webp': 'gf-play', 'Gamefields-Panna-Court-wide-v3-default.webp': 'gf-court', 'Cage-90-Hero-4-gray.webp': 'gf-cage90', 'Cage-180-Hero-4-gray.webp': 'gf-cage180' };
+  var OPT = { 'Gamefields-Panna-Play-wide-v3-default.webp': 'gf-play', 'Gamefields-Panna-Court-wide-v3-default.webp': 'gf-court', 'Cage-90-Hero-4-gray.webp': 'gf-cage90', 'Cage-180-Hero-4-gray.webp': 'gf-cage180', 'GF-CT-008-octagon.webp': 'gf-octa', 'GF-CT-007-street-field.webp': 'gf-grid', 'W-1-—-GF-CT-001.webp': 'gf-ring', 'GF-CT-004-street15.webp': 'gf-street15' };
   var OPT_W = window.innerWidth <= 700 ? 720 : 1200;
   function up(name) { return OPT[name] ? 'https://www.gamefields.eu/wp-content/uploads/2026/11/' + OPT[name] + '-' + OPT_W + '.webp' : UP + name; }
   var SP = 'https://gamefields-studio.ryhfs90.chatgpt.site/surface-projects/';
@@ -561,7 +561,7 @@
 
   /* ---------- BALL v2: 32-panel 3D ball on the Court Art Pro engine (three.js loaded on demand) ---------- */
   (function () {
-    var sec = $('#pilka'); if (!sec) return; if (!G) return;
+    var sec = $('#pilka'); if (!sec || sec.hidden) return; if (!G) return;
     var FAM = {}; G.PRO_FAMILIES.forEach(function (f) { FAM[f.id] = f; });
     var PAL = {}; G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
     var HEXRE = /^#[0-9A-Fa-f]{6}$/;

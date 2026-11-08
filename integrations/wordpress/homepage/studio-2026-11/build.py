@@ -42,7 +42,7 @@ def jsonld(faq_html):
         ("Modułowe boiska do panny i street footballu", "Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15."),
         ("Kolorowe nawierzchnie i grafika boisk", "Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D."),
         ("Plakaty boisk", "Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce."),
-        ("Piłki we wzorze boiska", "Projekt piłki w tym samym wzorze i kolorach co nawierzchnia."),
+        # ("Piłki we wzorze boiska", ...) — ukryte na start 2026-11-08, wraca razem z sekcją #pilka
     ]
     graph = {
         "@context": "https://schema.org",

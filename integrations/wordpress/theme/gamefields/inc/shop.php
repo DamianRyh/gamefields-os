@@ -53,14 +53,14 @@ add_action( 'wp_head', function () {
 	foreach ( array( 'poster', 'ball' ) as $k ) {
 		$id      = gft_shop_product_id( $k );
 		$product = $id ? wc_get_product( $id ) : null;
-		if ( $product && 'publish' === $product->get_status() && $product->is_purchasable() ) {
+		if ( $product && 'publish' === $product->get_status() && '' !== $product->get_price() ) {
 			$data[ $k ] = array( 'id' => $id, 'price' => (float) $product->get_price(), 'url' => get_permalink( $id ) );
 			// poster formats: "30 × 40 cm" => [variation id, price]
 			if ( $product->is_type( 'variable' ) ) {
 				$formats = array();
 				foreach ( $product->get_available_variations( 'objects' ) as $v ) {
 					$attr = $v->get_attribute( 'format' );
-					if ( $attr && $v->is_purchasable() ) {
+					if ( $attr && '' !== $v->get_price() ) {
 						$formats[ $attr ] = array( $v->get_id(), (float) $v->get_price() );
 					}
 				}
@@ -256,3 +256,66 @@ add_action( 'wp_loaded', function () {
 	wp_safe_redirect( wc_get_cart_url() );
 	exit;
 }, 25 );
+
+/* ---------- Inquiry mode (launch 2026-11-07): while no payment method is enabled, nothing goes to a cart that
+   cannot be paid. Every product offers "Zamów przez zapytanie" with its name and price filled into the contact form.
+   Enabling a gateway (e.g. Stripe) switches the shop back to the cart automatically. ---------- */
+function gft_shop_inquiry_mode() {
+	static $mode = null;
+	if ( null === $mode ) {
+		$mode = function_exists( 'WC' ) && ! gft_shop_has_payments();
+	}
+	return $mode;
+}
+
+function gft_shop_inquiry_url( $product ) {
+	$text = $product->get_name();
+	$price = $product->get_price();
+	if ( '' !== $price ) {
+		$text .= ' · cena: ' . ( $product->is_type( 'variable' ) ? 'od ' : '' ) . str_replace( "\xC2\xA0", ' ', html_entity_decode( wp_strip_all_tags( wc_price( $product->is_type( 'variable' ) ? $product->get_variation_price( 'min' ) : $price ) ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) . ' brutto';
+	}
+	return home_url( '/kontakt/?produkt=' . rawurlencode( 'Zamówienie: ' . $text ) );
+}
+
+add_filter( 'woocommerce_is_purchasable', function ( $purchasable ) {
+	return gft_shop_inquiry_mode() ? false : $purchasable;
+}, 20 );
+add_filter( 'woocommerce_variation_is_purchasable', function ( $purchasable ) {
+	return gft_shop_inquiry_mode() ? false : $purchasable;
+}, 20 );
+
+add_filter( 'woocommerce_loop_add_to_cart_link', function ( $link, $product ) {
+	if ( ! gft_shop_inquiry_mode() ) {
+		return $link;
+	}
+	return sprintf( '<a class="button gft-ask-btn" href="%s">Zamów przez zapytanie</a>', esc_url( gft_shop_inquiry_url( $product ) ) );
+}, 30, 2 );
+
+add_action( 'woocommerce_before_single_product', function () {
+	if ( gft_shop_inquiry_mode() ) {
+		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+	}
+} );
+
+add_action( 'woocommerce_single_product_summary', function () {
+	global $product;
+	if ( ! gft_shop_inquiry_mode() || ! $product || '' === $product->get_price() ) {
+		return; // products without a price already show "Zapytaj o wycenę" (functions.php)
+	}
+	$creator = array( gft_shop_product_id( 'poster' ) => '/#plakaty', gft_shop_product_id( 'ball' ) => '/#pilka' );
+	echo '<div class="gft-inquiry">';
+	printf( '<p><a class="button gft-ask-btn" href="%s">Zamów przez zapytanie</a></p>', esc_url( gft_shop_inquiry_url( $product ) ) );
+	if ( isset( $creator[ $product->get_id() ] ) ) {
+		printf( '<p><a href="%s">Najpierw zaprojektuj w kreatorze →</a></p>', esc_url( home_url( $creator[ $product->get_id() ] ) ) );
+	}
+	echo '<p class="gft-inquiry-note">Płatność online uruchomimy wkrótce. Teraz zamówienie potwierdzamy mailowo: projekt, termin i wysyłkę.</p>';
+	echo '</div>';
+}, 31 );
+
+/* Courts and other made-to-order products: the listed price is a starting point, not a checkout price. */
+add_filter( 'woocommerce_get_price_html', function ( $html, $product ) {
+	if ( '' === $product->get_price() || in_array( (int) ( $product->get_parent_id() ? $product->get_parent_id() : $product->get_id() ), gft_shop_ids(), true ) ) {
+		return $html;
+	}
+	return $html . ' <span class="gft-quote-note">· wycena indywidualna</span>';
+}, 20, 2 );

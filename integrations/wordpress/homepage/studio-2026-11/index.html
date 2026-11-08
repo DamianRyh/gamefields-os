@@ -73,11 +73,16 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .dot[aria-pressed="true"]{outline:2px solid currentColor}
 .gfs .hero .dot[aria-pressed="true"]{outline:3px solid #FFFFFF;outline-offset:3px}
 
-.gfs .ticker{overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--paper);padding-block:22px}
-.gfs .ticker-track{display:inline-flex;gap:48px;animation:gfsticker 38s linear infinite;padding-left:48px}
-.gfs .ticker:hover .ticker-track{animation-play-state:paused}
-.gfs .ticker span{font-size:clamp(40px,5.4vw,84px)}
-.gfs .ticker b{font-weight:800;color:transparent;-webkit-text-stroke:2px var(--paper)}
+.gfs .ticker{overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--paper);padding-block:clamp(18px,2.4vw,30px);border-block:1px solid rgba(244,241,238,.12)}
+.gfs .ticker-track{display:flex;width:max-content;animation:gfsticker 42s linear infinite}
+.gfs .ticker:hover .ticker-track,.gfs .ticker:focus-within .ticker-track{animation-play-state:paused}
+.gfs .ticker-set{display:flex;align-items:center;flex:none}
+.gfs .ticker a,.gfs .ticker i{flex:none;white-space:nowrap;font-weight:800;font-size:clamp(34px,4.6vw,72px);line-height:1;letter-spacing:-.045em;text-decoration:none;color:var(--paper);font-style:normal}
+.gfs .ticker a{padding-inline:clamp(14px,1.6vw,26px);transition:color .2s,-webkit-text-stroke-color .2s}
+.gfs .ticker a.o{color:transparent;-webkit-text-stroke:1.5px var(--lime)}
+.gfs .ticker a:hover,.gfs .ticker a:focus-visible{color:var(--lime);-webkit-text-stroke-color:var(--lime);outline:none}
+.gfs .ticker a.o:hover,.gfs .ticker a.o:focus-visible{color:var(--lime)}
+.gfs .ticker i{color:var(--violet);font-size:clamp(20px,2.4vw,36px)}
 @keyframes gfsticker{to{transform:translateX(-50%)}}
 
 .gfs .sec{padding-block:clamp(72px,9vw,140px)}
@@ -490,8 +495,18 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .ctrl-colors .dots+.m{margin-top:14px}
 @media (min-width:701px){.gfs .ctrl-colors .dot{width:34px;height:34px}.gfs .ctrl-colors .dots{gap:8px}}
 @media (max-width:700px){.gfs .ctrl-colors{max-width:100%;min-width:0}.gfs .ctrl-colors .dots{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding:6px 6px 8px;margin:-6px -6px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}.gfs .ctrl-colors .dots::-webkit-scrollbar{display:none}.gfs .ctrl-colors .dot{flex:0 0 40px;width:40px;height:40px}}
+
+/* Opinie klientów (2026-11-08) */
+.gfs .ops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfs .ops figure{margin:0;height:100%;display:grid;grid-template-rows:1fr auto;gap:22px;padding:28px 28px 26px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--violet)}
+.gfs .ops blockquote{margin:0}
+.gfs .ops blockquote p{margin:0;font-size:clamp(19px,1.7vw,23px);line-height:1.4;letter-spacing:-.01em;color:var(--ink)}
+.gfs .ops figcaption{display:grid;gap:2px;font-size:15px;line-height:1.4;color:var(--muted)}
+.gfs .ops figcaption b{color:var(--ink);font-size:16px}
+.gfs .ops figcaption .m{margin-top:6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+@media (max-width:900px){.gfs .ops{grid-template-columns:minmax(0,1fr);gap:8px}.gfs .ops figure{padding:22px 20px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","name":"Damian Gawrych"},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Piłki we wzorze boiska","description":"Projekt piłki w tym samym wzorze i kolorach co nawierzchnia.","provider":{"@id":"https://www.gamefields.eu/#studio"}}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. Zobacz wzory Signature."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. Napisz do nas, aby ustalić zakres oferty. Co wpływa na budżet, opisujemy w poradniku „Ile kosztuje budowa boiska sportowego?”."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","name":"Damian Gawrych"},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. Zobacz wzory Signature."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. Napisz do nas, aby ustalić zakres oferty. Co wpływa na budżet, opisujemy w poradniku „Ile kosztuje budowa boiska sportowego?”."}}]}]}</script>
 <div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/">
 <a class="skip" href="#gfs-main">Przejdź do treści</a>
 
@@ -506,7 +521,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
     <a href="#dla-kogo">Dla kogo</a>
     <a href="#studio">Studio</a>
     <a href="#plakaty">Plakaty</a>
-    <a href="#pilka">Piłka</a>
+    <!-- Piłka: ukryta na start (2026-11-08), wraca po starcie -->
     <a href="#warsztat">Warsztat</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
@@ -543,10 +558,11 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   </div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track d">
-  <span>Panna Ring</span><span><b>Panna Play</b></span><span>Panna Court</span><span><b>Cage 90</b></span><span>Cage 180</span><span><b>Panna Octa</b></span><span>Panna Grid</span><span><b>Street Arena 15</b></span>
-  <span>Panna Ring</span><span><b>Panna Play</b></span><span>Panna Court</span><span><b>Cage 90</b></span><span>Cage 180</span><span><b>Panna Octa</b></span><span>Panna Grid</span><span><b>Street Arena 15</b></span>
-</div></div>
+<!-- TICKER: one line per model, each opens the model in Studio (2026-11-08) -->
+<nav class="ticker" aria-label="Modele boisk"><div class="ticker-track">
+  <div class="ticker-set"><a href="/studio/?arena=w1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field">Panna Grid</a><i aria-hidden="true">•</i></div>
+  <div class="ticker-set" aria-hidden="true"><a href="/studio/?arena=w1" tabindex="-1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1" tabindex="-1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1" tabindex="-1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1" tabindex="-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2" tabindex="-1">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon" tabindex="-1">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field" tabindex="-1">Panna Grid</a><i aria-hidden="true">•</i></div>
+</div></nav>
 
 <!-- SCOPE (mobile): the whole offer at a glance, Baymard: show catalogue scope on the homepage -->
 <nav class="wrap scope" aria-label="Na skróty">
@@ -554,7 +570,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   <a href="#planer"><b>Zmieści się?</b><span>Sprawdź na swoim placu</span></a>
   <a href="/studio/"><b>Studio 3D</b><span>Konstrukcja, nawierzchnia, grafika</span></a>
   <a href="#dla-kogo"><b>Dla kogo</b><span>Szkoły, osiedla, kluby, marki</span></a>
-  <a href="#plakaty"><b>Plakaty i piłki</b><span>Twój wzór boiska</span></a>
+  <a href="#plakaty"><b>Plakaty</b><span>Twój wzór boiska</span></a>
   <a href="#kontakt"><b>Zapytanie</b><span>Odpisuję osobiście</span></a>
 </nav>
 
@@ -605,6 +621,24 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
     <li><a href="/aktywacje-sportowe-dla-marek/"><span class="m">04</span><b>Marki i agencje</b><span>Brandowane boiska, turnieje, pop-upy i aktywacje.</span><i aria-hidden="true">→</i></a></li>
     <li><a href="/wynajem-boisk-mobilnych/"><span class="m">05</span><b>Eventy i wynajem</b><span>Mobilne boiska panna i street football na turnieje.</span><i aria-hidden="true">→</i></a></li>
     <li><a href="/projektuj-i-wybuduj-boisko/"><span class="m">06</span><b>Pełna realizacja</b><span>Od analizy terenu po odbiór, z jednym partnerem.</span><i aria-hidden="true">→</i></a></li>
+  </ul>
+</section>
+
+<!-- OPINIE: opinie klientów podane przez właściciela 2026-11-08 -->
+<section id="opinie" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-ops">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Opinie</p><h2 class="d" id="gfs-ops">Sprawdzone w miastach.</h2></div>
+    <div class="side"><p>Boiska Gamefields działają w miastach, parkach i na obiektach sportowych, gdzie gra się codziennie.</p></div>
+  </div>
+  <ul class="ops" role="list">
+    <li><figure><blockquote><p>Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</p></blockquote>
+      <figcaption><b>Mariusz Smysło</b><span>Dyrektor OSiR Grodzisk Mazowiecki</span><span class="m">Panna Ring · Orlik, Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><blockquote><p>Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.</p></blockquote>
+      <figcaption><b>Beata Rafalska</b><span>Urząd Miasta Kutno, ds. inwestycji</span><span class="m">Panna Octa · pasaż sportowy, Kutno</span></figcaption></figure></li>
+      <li><figure><blockquote><p>Boisko Panna Cage 180 świetnie wpisało się w naszą potrzebę poszerzenia oferty parku o dyscypliny inne niż wakeboard. Sprawdza się na co dzień i podczas wydarzeń, które organizujemy: urodzin dzieci, wieczorów kawalerskich i półkolonii.</p></blockquote>
+      <figcaption><b>Piotr Wiśniewski</b><span>Właściciel, Wake For Friends</span><span class="m">Panna Cage 180 · park wakeboardowy</span></figcaption></figure></li>
+    <li><figure><blockquote><p>Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży. Taras stał się jednym z najpopularniejszych miejsc spotkań młodych warszawiaków, a po wybuchu wojny w Ukrainie także ukraińskiej młodzieży, o czym pisał m.in. New York Times.</p></blockquote>
+      <figcaption><b>Grzegorz Gądek</b><span>Prezes Fundacji Skwery Sportów Miejskich</span><span class="m">Taras w Parku Świętokrzyskim, Warszawa · inwestor: Zarząd Zieleni m.st. Warszawy · proj. Michał Sikorski, Marcin Kwietowicz</span></figcaption></figure></li>
   </ul>
 </section>
 
@@ -754,7 +788,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 </section>
 
 <!-- BALL -->
-<section id="pilka" class="wrap sec band-dark" aria-labelledby="gfs-ball">
+<section id="pilka" class="wrap sec band-dark" aria-labelledby="gfs-ball" hidden>
   <div class="head">
     <div class="hd"><p class="kicker m">Piłka</p><h2 class="d" id="gfs-ball">Piłka do kompletu.</h2></div>
     <div class="side"><p>Ten sam wzór na boisku, na plakacie i na piłce. 32 prawdziwe panele, druk na całej piłce albo osobno na każdym panelu, gotowe układy kolorów, Twój napis, numer i logo. Zamówienie przyjmuję przez formularz; cenę, minimalną ilość i termin potwierdzę mailowo.</p></div>
@@ -1193,7 +1227,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
   var A = root.getAttribute('data-asset-base') || '';
   var UP = 'https://www.gamefields.eu/wp-content/uploads/2026/10/';
   /* Light copies (2026-11-07, Lighthouse): 720 px on phones, 1200 px elsewhere; the 1920 px originals stay in the media library. */
-  var OPT = { 'Gamefields-Panna-Play-wide-v3-default.webp': 'gf-play', 'Gamefields-Panna-Court-wide-v3-default.webp': 'gf-court', 'Cage-90-Hero-4-gray.webp': 'gf-cage90', 'Cage-180-Hero-4-gray.webp': 'gf-cage180' };
+  var OPT = { 'Gamefields-Panna-Play-wide-v3-default.webp': 'gf-play', 'Gamefields-Panna-Court-wide-v3-default.webp': 'gf-court', 'Cage-90-Hero-4-gray.webp': 'gf-cage90', 'Cage-180-Hero-4-gray.webp': 'gf-cage180', 'GF-CT-008-octagon.webp': 'gf-octa', 'GF-CT-007-street-field.webp': 'gf-grid', 'W-1-—-GF-CT-001.webp': 'gf-ring', 'GF-CT-004-street15.webp': 'gf-street15' };
   var OPT_W = window.innerWidth <= 700 ? 720 : 1200;
   function up(name) { return OPT[name] ? 'https://www.gamefields.eu/wp-content/uploads/2026/11/' + OPT[name] + '-' + OPT_W + '.webp' : UP + name; }
   var SP = 'https://gamefields-studio.ryhfs90.chatgpt.site/surface-projects/';
@@ -1747,7 +1781,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
 
   /* ---------- BALL v2: 32-panel 3D ball on the Court Art Pro engine (three.js loaded on demand) ---------- */
   (function () {
-    var sec = $('#pilka'); if (!sec) return; if (!G) return;
+    var sec = $('#pilka'); if (!sec || sec.hidden) return; if (!G) return;
     var FAM = {}; G.PRO_FAMILIES.forEach(function (f) { FAM[f.id] = f; });
     var PAL = {}; G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
     var HEXRE = /^#[0-9A-Fa-f]{6}$/;
