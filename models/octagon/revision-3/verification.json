@@ -1,0 +1,15 @@
+{
+  "removedRailsPerGoal": 2,
+  "goals": 2,
+  "railCenterHeight_m": 0.391,
+  "studioRemovedTrianglesPerGoal": 64,
+  "allOtherStudioMeshesIdentical": true,
+  "heroHasSurface": false,
+  "files": {
+    "panna-octa-r3.glb": "0360403c0fc89404fd507130744ad8936f3002023bf082b83e53f3d1be3fccab",
+    "panna-octa-r3-hero.glb": "e38e5575da8b3f86f6ef399ffb33494adc75b4cd3f33cd69bcade38d1a0f83a2",
+    "panna-octa-r3.blend": "233e2ffdcbfe65c57dd39b3369df3a66a72f01e7ca4e069f137af3e419f6ee9d",
+    "octagon.json": "633bd24ccf8e5c23002bf3be8b045701031292d3fab10398f6b57e10a1e9ee6d",
+    "oct-goal.glb": "d1e0c138189fd32e7f42a9c082cbe538273961b8a504a07b61413977e1e017ce"
+  }
+}
