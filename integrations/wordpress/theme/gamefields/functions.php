@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.22' );
+define( 'GFT_VERSION', '1.0.23' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -284,6 +284,10 @@ add_action( 'template_redirect', function () {
 		'/faq'                                       => '/#pytania',
 		'/contact'                                   => '/kontakt/',
 		'/gamefields-boiska-panna-i-street-football' => '/#boiska',
+		// Products hidden for the launch (owner, 2026-11-08): English duplicates -> Polish pages; Air-Rect had only demo text.
+		'/product/en-panna-kids-perfo-circle-court'   => '/product/boisko-panna-kids-perfo-circle/',
+		'/product/en-panna-football-perfo-rect-court' => '/product/boisko-panna-football-perfo-rect/',
+		'/product/panna-football-air-rect-field'      => '/shop/',
 	);
 	if ( 0 === strpos( $path, '/elements/' ) ) {
 		$path = '/elements';
