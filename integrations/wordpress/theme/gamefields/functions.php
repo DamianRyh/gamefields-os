@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.23' );
+define( 'GFT_VERSION', '1.0.24' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -308,6 +308,28 @@ add_action( 'template_redirect', function () {
 	if ( in_array( $path, array( '/product/pilka-z-twoim-wzorem', '/product/koszulka-gamefields' ), true ) ) {
 		wp_safe_redirect( home_url( '/#plakaty' ), 302 );
 		exit;
+	}
+	// Services are off the shop for the launch (owner, 2026-11-08: courts, surfaces and posters only).
+	$services = array(
+		'/product/wynajem-boisk-do-pilki-ulicznej'  => '/wynajem-boisk-mobilnych/',
+		'/product/turnieje-integracyjne-dla-firm'   => '/eventy-sportowe/',
+		'/product/turnieje-firmowe'                 => '/eventy-sportowe/',
+		'/product/turnieje-pilkarskie'              => '/eventy-sportowe/',
+		'/product/urodziny-pilkarskie'              => '/eventy-sportowe/',
+		'/product/pokaz-freestyle-football'         => '/eventy-sportowe/',
+		'/product/treningi-techniki-pilkarskiej'    => '/eventy-sportowe/',
+	);
+	if ( isset( $services[ $path ] ) ) {
+		wp_safe_redirect( home_url( $services[ $path ] ), 302 );
+		exit;
+	}
+	// A product category with nothing on sale goes to the shop instead of an empty list.
+	if ( function_exists( 'is_product_category' ) && is_product_category() ) {
+		global $wp_query;
+		if ( 0 === (int) $wp_query->found_posts ) {
+			wp_safe_redirect( home_url( '/shop/' ), 302 );
+			exit;
+		}
 	}
 }, 2 );
 
