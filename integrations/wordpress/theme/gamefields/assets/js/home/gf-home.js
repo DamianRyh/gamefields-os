@@ -84,7 +84,7 @@
   var MODELS3D = [
     { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: heroAsset('panna-play.glb'), still: 'panna-play', orbit: '35deg 61deg 106%' },
     { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: heroAsset('panna-court.glb'), still: 'panna-court', orbit: '35deg 61deg 106%' },
-    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø ~5 m · 1 m · 1 na 1', glb: heroAsset('panna-ring.glb'), still: 'panna-ring', orbit: '35deg 61deg 106%' },
+    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø zewn. 5,09 m · 1 m · 1 na 1', glb: heroAsset('panna-ring.glb'), still: 'panna-ring', orbit: '35deg 61deg 106%' },
     { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: heroAsset('panna-octa.glb'), still: 'panna-octa', orbit: '35deg 61deg 106%' }
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
@@ -584,7 +584,7 @@
 
   /* ---------- BALL v2: 32-panel 3D ball on the Court Art Pro engine (three.js loaded on demand) ---------- */
   (function () {
-    var sec = $('#pilka'); if (!sec) return; if (!G) return;
+    var sec = $('#pilka'); if (!sec || sec.hidden) return; if (!G) return;
     var FAM = {}; G.PRO_FAMILIES.forEach(function (f) { FAM[f.id] = f; });
     var PAL = {}; G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
     var HEXRE = /^#[0-9A-Fa-f]{6}$/;
