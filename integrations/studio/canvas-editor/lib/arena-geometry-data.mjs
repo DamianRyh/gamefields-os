@@ -83,24 +83,24 @@ export const arenaGeometry = {
   },
   "street15": {
     "area": 149.155,
-    "source": "public/arenas/street15-r2.json",
+    "source": "public/arenas/street15-r3.json",
     "surfaceBounds": {
       "x": 15,
       "z": 10,
       "y": 0.065
     },
     "constructionBounds": {
-      "x": 16.649892,
+      "x": 16.64195,
       "z": 10.2016,
-      "y": 1.125
+      "y": 1.123748
     },
     "sourceFiles": [
       {
-        "path": "public/arenas/street15-r2.json",
-        "sha256": "8866dd994f75a27cb98c710379a275e70c8c982fa508a716eda1a3d070ed731a"
+        "path": "public/arenas/street15-r3.json",
+        "sha256": "2a039cd2705bdcb1960a979030690226388572985755f1411839c0e6f07f59e2"
       }
     ],
-    "sourceRevision": "fe737656637bda61a79ac23135e7c9a6951a13b6ffef38dcdc837f7c1a6c430e",
+    "sourceRevision": "e95bddeb10b3bec6aec36f4c0ce07c7b1b0d720db582d85e29645a5a4a15b4ff",
     "clearance": null,
     "modulePitch": null
   },
@@ -197,10 +197,10 @@ export const arenaGeometry = {
     "sourceFiles": [
       {
         "path": "public/arenas/octagon.json",
-        "sha256": "d50e19df42fd154043de81a8723b320fc104b3ae9700288f0be1d8cc2317c877"
+        "sha256": "633bd24ccf8e5c23002bf3be8b045701031292d3fab10398f6b57e10a1e9ee6d"
       }
     ],
-    "sourceRevision": "5d204c44dc4e2a89727c30093a662a569aac2ebe5010fefed37d084a0f98242f",
+    "sourceRevision": "c30dc5654bc74fb06ec19b3764ef4d9a4202dcbb3da9c1c83f896bf47f7eb72a",
     "clearance": null,
     "modulePitch": null
   }

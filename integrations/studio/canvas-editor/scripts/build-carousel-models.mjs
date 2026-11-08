@@ -9,7 +9,7 @@ const sources=[
  ['circle-cage-2','circle-cage-2.json'],
  ['octagon','octagon.json'],
  ['street-field','street-field.json'],
- ['street15','street15-r2.json'],
+ ['street15','street15-r3.json'],
 ];
 
 function fromJson(file){
