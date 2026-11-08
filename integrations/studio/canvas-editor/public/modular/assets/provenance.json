@@ -120,7 +120,8 @@
         1,
         1
       ],
-      "sha256": "05a92a77ee639cab9d62eb39c60c6d350f935cacd2c08b6135d61b8fd496acf7"
+      "sha256": "d1e0c138189fd32e7f42a9c082cbe538273961b8a504a07b61413977e1e017ce",
+      "adjustment": "Removed two horizontal side rails from the goal mesh"
     },
     {
       "id": "oct-post",
