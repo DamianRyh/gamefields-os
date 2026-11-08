@@ -73,11 +73,16 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .dot[aria-pressed="true"]{outline:2px solid currentColor}
 .gfs .hero .dot[aria-pressed="true"]{outline:3px solid #FFFFFF;outline-offset:3px}
 
-.gfs .ticker{overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--paper);padding-block:22px}
-.gfs .ticker-track{display:inline-flex;gap:48px;animation:gfsticker 38s linear infinite;padding-left:48px}
-.gfs .ticker:hover .ticker-track{animation-play-state:paused}
-.gfs .ticker span{font-size:clamp(40px,5.4vw,84px)}
-.gfs .ticker b{font-weight:800;color:transparent;-webkit-text-stroke:2px var(--paper)}
+.gfs .ticker{overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--paper);padding-block:clamp(18px,2.4vw,30px);border-block:1px solid rgba(244,241,238,.12)}
+.gfs .ticker-track{display:flex;width:max-content;animation:gfsticker 42s linear infinite}
+.gfs .ticker:hover .ticker-track,.gfs .ticker:focus-within .ticker-track{animation-play-state:paused}
+.gfs .ticker-set{display:flex;align-items:center;flex:none}
+.gfs .ticker a,.gfs .ticker i{flex:none;white-space:nowrap;font-weight:800;font-size:clamp(34px,4.6vw,72px);line-height:1;letter-spacing:-.045em;text-decoration:none;color:var(--paper);font-style:normal}
+.gfs .ticker a{padding-inline:clamp(14px,1.6vw,26px);transition:color .2s,-webkit-text-stroke-color .2s}
+.gfs .ticker a.o{color:transparent;-webkit-text-stroke:1.5px var(--lime)}
+.gfs .ticker a:hover,.gfs .ticker a:focus-visible{color:var(--lime);-webkit-text-stroke-color:var(--lime);outline:none}
+.gfs .ticker a.o:hover,.gfs .ticker a.o:focus-visible{color:var(--lime)}
+.gfs .ticker i{color:var(--violet);font-size:clamp(20px,2.4vw,36px)}
 @keyframes gfsticker{to{transform:translateX(-50%)}}
 
 .gfs .sec{padding-block:clamp(72px,9vw,140px)}
@@ -553,10 +558,11 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   </div>
 </section>
 
-<div class="ticker" aria-hidden="true"><div class="ticker-track d">
-  <span>Panna Ring</span><span><b>Panna Play</b></span><span>Panna Court</span><span><b>Cage 90</b></span><span>Cage 180</span><span><b>Panna Octa</b></span><span>Panna Grid</span><span><b>Street Arena 15</b></span>
-  <span>Panna Ring</span><span><b>Panna Play</b></span><span>Panna Court</span><span><b>Cage 90</b></span><span>Cage 180</span><span><b>Panna Octa</b></span><span>Panna Grid</span><span><b>Street Arena 15</b></span>
-</div></div>
+<!-- TICKER: one line per model, each opens the model in Studio (2026-11-08) -->
+<nav class="ticker" aria-label="Modele boisk"><div class="ticker-track">
+  <div class="ticker-set"><a href="/studio/?arena=w1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field">Panna Grid</a><i aria-hidden="true">•</i></div>
+  <div class="ticker-set" aria-hidden="true"><a href="/studio/?arena=w1" tabindex="-1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1" tabindex="-1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1" tabindex="-1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1" tabindex="-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2" tabindex="-1">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon" tabindex="-1">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field" tabindex="-1">Panna Grid</a><i aria-hidden="true">•</i></div>
+</div></nav>
 
 <!-- SCOPE (mobile): the whole offer at a glance, Baymard: show catalogue scope on the homepage -->
 <nav class="wrap scope" aria-label="Na skróty">
@@ -1221,7 +1227,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
   var A = root.getAttribute('data-asset-base') || '';
   var UP = 'https://www.gamefields.eu/wp-content/uploads/2026/10/';
   /* Light copies (2026-11-07, Lighthouse): 720 px on phones, 1200 px elsewhere; the 1920 px originals stay in the media library. */
-  var OPT = { 'Gamefields-Panna-Play-wide-v3-default.webp': 'gf-play', 'Gamefields-Panna-Court-wide-v3-default.webp': 'gf-court', 'Cage-90-Hero-4-gray.webp': 'gf-cage90', 'Cage-180-Hero-4-gray.webp': 'gf-cage180' };
+  var OPT = { 'Gamefields-Panna-Play-wide-v3-default.webp': 'gf-play', 'Gamefields-Panna-Court-wide-v3-default.webp': 'gf-court', 'Cage-90-Hero-4-gray.webp': 'gf-cage90', 'Cage-180-Hero-4-gray.webp': 'gf-cage180', 'GF-CT-008-octagon.webp': 'gf-octa', 'GF-CT-007-street-field.webp': 'gf-grid', 'W-1-—-GF-CT-001.webp': 'gf-ring', 'GF-CT-004-street15.webp': 'gf-street15' };
   var OPT_W = window.innerWidth <= 700 ? 720 : 1200;
   function up(name) { return OPT[name] ? 'https://www.gamefields.eu/wp-content/uploads/2026/11/' + OPT[name] + '-' + OPT_W + '.webp' : UP + name; }
   var SP = 'https://gamefields-studio.ryhfs90.chatgpt.site/surface-projects/';
