@@ -502,3 +502,17 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .ops figcaption b{color:var(--ink);font-size:16px}
 .gfs .ops figcaption .m{margin-top:6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
 @media (max-width:900px){.gfs .ops{grid-template-columns:minmax(0,1fr);gap:8px}.gfs .ops figure{padding:22px 20px}}
+
+/* Readability pass 2026-11-08 */
+.gfs figure.mat{margin:0}
+.gfs .mats{gap:clamp(10px,1.4vw,18px)}
+.gfs .mat .bar{flex-direction:column;align-items:flex-start;gap:2px;padding:12px 14px}
+.gfs .mat .bar b{font-size:clamp(16px,1.4vw,20px)}
+.gfs .mat .bar .m{white-space:normal}
+/* Larger poster preview: the frame keeps its size per format, the whole frame is scaled up. */
+.gfs .pl-wall:not([data-view="flat"]) .pl-frame{transform:scale(1.35);transform-origin:50% 50%}
+.gfs .pl-wall[data-view="flat"] .pl-frame{transform:scale(1.18)}
+/* Community projects: square tiles, the white snapshot background melts into the tile. */
+.gfs .gh-workshop-3d{aspect-ratio:1/1}
+.gfs .gh-workshop-3d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:6%}
+@media (min-width:701px) and (max-width:1199px){.gfs .mats{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .mat{aspect-ratio:4/3}}

@@ -505,6 +505,20 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .ops figcaption b{color:var(--ink);font-size:16px}
 .gfs .ops figcaption .m{margin-top:6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
 @media (max-width:900px){.gfs .ops{grid-template-columns:minmax(0,1fr);gap:8px}.gfs .ops figure{padding:22px 20px}}
+
+/* Readability pass 2026-11-08 */
+.gfs figure.mat{margin:0}
+.gfs .mats{gap:clamp(10px,1.4vw,18px)}
+.gfs .mat .bar{flex-direction:column;align-items:flex-start;gap:2px;padding:12px 14px}
+.gfs .mat .bar b{font-size:clamp(16px,1.4vw,20px)}
+.gfs .mat .bar .m{white-space:normal}
+/* Larger poster preview: the frame keeps its size per format, the whole frame is scaled up. */
+.gfs .pl-wall:not([data-view="flat"]) .pl-frame{transform:scale(1.35);transform-origin:50% 50%}
+.gfs .pl-wall[data-view="flat"] .pl-frame{transform:scale(1.18)}
+/* Community projects: square tiles, the white snapshot background melts into the tile. */
+.gfs .gh-workshop-3d{aspect-ratio:1/1}
+.gfs .gh-workshop-3d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:6%}
+@media (min-width:701px) and (max-width:1199px){.gfs .mats{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .mat{aspect-ratio:4/3}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","name":"Damian Gawrych"},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak, GAMEFIELDS zajmuje się zarówno nawierzchniami i ich projektowaniem, jak i konstrukcjami boisk. Zobacz wzory Signature."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Na obecnym etapie cena zależy od wybranego zakresu, podłoża, konstrukcji i montażu. Nie publikujemy automatycznej wyceny bez potwierdzonych danych. Napisz do nas, aby ustalić zakres oferty. Co wpływa na budżet, opisujemy w poradniku „Ile kosztuje budowa boiska sportowego?”."}}]}]}</script>
 <div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@02f3a62c4d9c71608dc827e6f30066d50a523f58/">
@@ -623,24 +637,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
     <li><a href="/projektuj-i-wybuduj-boisko/"><span class="m">06</span><b>Pełna realizacja</b><span>Od analizy terenu po odbiór, z jednym partnerem.</span><i aria-hidden="true">→</i></a></li>
   </ul>
 </section>
-
-<!-- OPINIE: opinie klientów podane przez właściciela 2026-11-08 -->
-<section id="opinie" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-ops">
-  <div class="head">
-    <div class="hd"><p class="kicker m">Opinie</p><h2 class="d" id="gfs-ops">Sprawdzone w miastach.</h2></div>
-    <div class="side"><p>Boiska Gamefields działają w miastach, parkach i na obiektach sportowych, gdzie gra się codziennie.</p></div>
-  </div>
-  <ul class="ops" role="list">
-    <li><figure><blockquote><p>Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</p></blockquote>
-      <figcaption><b>Mariusz Smysło</b><span>Dyrektor OSiR Grodzisk Mazowiecki</span><span class="m">Panna Ring · Orlik, Grodzisk Mazowiecki</span></figcaption></figure></li>
-    <li><figure><blockquote><p>Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.</p></blockquote>
-      <figcaption><b>Beata Rafalska</b><span>Urząd Miasta Kutno, ds. inwestycji</span><span class="m">Panna Octa · pasaż sportowy, Kutno</span></figcaption></figure></li>
-      <li><figure><blockquote><p>Boisko Panna Cage 180 świetnie wpisało się w naszą potrzebę poszerzenia oferty parku o dyscypliny inne niż wakeboard. Sprawdza się na co dzień i podczas wydarzeń, które organizujemy: urodzin dzieci, wieczorów kawalerskich i półkolonii.</p></blockquote>
-      <figcaption><b>Piotr Wiśniewski</b><span>Właściciel, Wake For Friends</span><span class="m">Panna Cage 180 · park wakeboardowy</span></figcaption></figure></li>
-    <li><figure><blockquote><p>Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży. Taras stał się jednym z najpopularniejszych miejsc spotkań młodych warszawiaków, a po wybuchu wojny w Ukrainie także ukraińskiej młodzieży, o czym pisał m.in. New York Times.</p></blockquote>
-      <figcaption><b>Grzegorz Gądek</b><span>Prezes Fundacji Skwery Sportów Miejskich</span><span class="m">Taras w Parku Świętokrzyskim, Warszawa · inwestor: Zarząd Zieleni m.st. Warszawy · proj. Michał Sikorski, Marcin Kwietowicz</span></figcaption></figure></li>
-  </ul>
-</section>
+<!-- Opinie klientów: przeniesione na strony boisk w sklepie (2026-11-08). -->
 
 <section id="studio" class="studio sec" aria-labelledby="gfs-studio">
   <div class="wrap studio-grid">
