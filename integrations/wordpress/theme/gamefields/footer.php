@@ -33,7 +33,6 @@
 				<a href="<?php echo esc_url( home_url( '/realizacje-gamefields/' ) ); ?>">Realizacje</a>
 				<a href="<?php echo esc_url( home_url( '/baza-wiedzy/' ) ); ?>">Baza wiedzy</a>
 				<a href="<?php echo esc_url( home_url( '/ile-kosztuje-budowa-boiska-sportowego/' ) ); ?>">Ile kosztuje boisko?</a>
-				<a href="<?php echo esc_url( home_url( '/gamefields-city/' ) ); ?>">Gamefields City</a>
 				<a href="<?php echo esc_url( home_url( '/o-nas/' ) ); ?>">O nas</a>
 				<a href="<?php echo esc_url( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ); ?>">Sklep</a>
 			</nav>

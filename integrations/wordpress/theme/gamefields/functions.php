@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.20' );
+define( 'GFT_VERSION', '1.0.21' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -334,3 +334,17 @@ add_filter( 'wpseo_metadesc', function ( $desc ) {
 add_filter( 'wpseo_opengraph_desc', function ( $desc ) {
 	return $desc ? $desc : gft_shop_description();
 } );
+
+/* Gamefields City is switched off for the launch (owner, 2026-11-08): its 4 pages and 4 project posts are drafts;
+   old links go to the offer for cities. inc/city.php stays loaded but has nothing published to act on. */
+add_action( 'template_redirect', function () {
+	if ( is_user_logged_in() && ! is_404() ) {
+		return;
+	}
+	$path  = untrailingslashit( rawurldecode( (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH ) ) );
+	$posts = array( '/2026/10/03/mokotow-·-dolna', '/2026/10/03/praga-poludnie-·-saska', '/2026/10/03/wola-·-mlynow', '/2026/10/03/wawer-·-falenica' );
+	if ( 0 === strpos( $path, '/gamefields-city' ) || in_array( $path, $posts, true ) ) {
+		wp_safe_redirect( home_url( '/dla-miast/' ), 301 );
+		exit;
+	}
+}, 3 );
