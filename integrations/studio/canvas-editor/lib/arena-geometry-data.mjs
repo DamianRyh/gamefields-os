@@ -83,24 +83,24 @@ export const arenaGeometry = {
   },
   "street15": {
     "area": 149.155,
-    "source": "public/arenas/street15.json",
+    "source": "public/arenas/street15-r2.json",
     "surfaceBounds": {
       "x": 15,
       "z": 10,
-      "y": 0.2
+      "y": 0.065
     },
     "constructionBounds": {
-      "x": 16.650002,
-      "z": 10.104,
-      "y": 1.325
+      "x": 16.649892,
+      "z": 10.2016,
+      "y": 1.125
     },
     "sourceFiles": [
       {
-        "path": "public/arenas/street15.json",
-        "sha256": "176f3fd10a5b576155376ffccc914ea0d7fe34f714b34811986f681509999984"
+        "path": "public/arenas/street15-r2.json",
+        "sha256": "8866dd994f75a27cb98c710379a275e70c8c982fa508a716eda1a3d070ed731a"
       }
     ],
-    "sourceRevision": "5ea524e1717b39dd1d95ad9d222d2d0594b6eef6d848d3b3ecedfe848747e8be",
+    "sourceRevision": "fe737656637bda61a79ac23135e7c9a6951a13b6ffef38dcdc837f7c1a6c430e",
     "clearance": null,
     "modulePitch": null
   },

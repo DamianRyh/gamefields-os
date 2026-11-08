@@ -1,6 +1,7 @@
 "use client";
 import {useEffect,useRef,useState} from "react";
 import * as THREE from "three";
+import {productLighting,productRelief} from '@/lib/product-lighting';
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader.js";
 import type {KitDesign,KitPlayer} from "@/lib/kit";
 import {KIT_NUMBER_FONT,drawKitTexture} from "@/lib/kit-texture";
@@ -25,12 +26,13 @@ export function StudioKitPreview({kit,player}:{kit:KitDesign;player:KitPlayer}){
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   const sc=new THREE.Scene(),camera=new THREE.PerspectiveCamera(30,1,0.1,100);
   camera.position.set(0,0.2,10.2);
-  sc.add(new THREE.HemisphereLight(0xffffff,0xd9d0d6,2.6));
-  const key=new THREE.DirectionalLight(0xffffff,2.4);key.position.set(3,4,6);sc.add(key);
-  const rim=new THREE.DirectionalLight(0xffffff,1.4);rim.position.set(-4,2,-5);sc.add(rim);
+  sc.add(new THREE.HemisphereLight(0xffffff,0xd9d0d6,.7));
+  const key=new THREE.DirectionalLight(0xffffff,2);key.position.set(3,4,6);sc.add(key);
+  const rim=new THREE.DirectionalLight(0xffffff,.65);rim.position.set(-4,2,-5);sc.add(rim);
 
+  const disposeLighting=productLighting(renderer,sc),fabric=productRelief('fabric');
   const group=new THREE.Group();sc.add(group);
-  const mat=()=>new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.86,metalness:0,side:THREE.DoubleSide,visible:false});
+  const mat=()=>new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.82,metalness:0,bumpMap:fabric,bumpScale:.0005,side:THREE.DoubleSide,visible:false});
   const frontMat=mat(),backMat=mat(),side=mat(),trim=mat();side.visible=trim.visible=true;
   let disposed=false;
   const materialSet=new Set<THREE.Material>([frontMat,backMat,side,trim]);
@@ -73,7 +75,7 @@ export function StudioKitPreview({kit,player}:{kit:KitDesign;player:KitPlayer}){
   scene.current={front:frontMat,back:backMat,side,trim,group,
    turnTo:to=>{const turns=Math.round(group.rotation.y/(Math.PI*2));target=turns*Math.PI*2+(to==="back"?Math.PI:0);idleAt=performance.now();setTouched(true);},
    dispose:()=>{
-    disposed=true;cancelAnimationFrame(frame);ro.disconnect();
+    disposed=true;disposeLighting();fabric.dispose();cancelAnimationFrame(frame);ro.disconnect();
     el.removeEventListener("pointerdown",down);el.removeEventListener("pointermove",move);el.removeEventListener("pointerup",up);el.removeEventListener("pointercancel",up);
     sc.traverse(o=>{if(o instanceof THREE.Mesh){o.geometry.dispose();(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>materialSet.add(m));}});
     materialSet.forEach(m=>{(m as THREE.MeshStandardMaterial).map?.dispose();m.dispose();});

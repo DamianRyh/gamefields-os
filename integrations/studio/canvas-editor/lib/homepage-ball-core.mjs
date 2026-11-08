@@ -1,4 +1,4 @@
-// Reused verbatim from gamefields.eu ball core v2, 2026-11-06. Only the global wrapper was adapted to ESM.
+// Derived from gamefields.eu ball core v2, 2026-11-06. ESM wrapper and opt-in physical materials for Studio; original panel layout retained.
 /* Gamefields ball core v2: 32-panel football (truncated icosahedron) for three.js r128+.
    GFBall.create(THREE, opts) -> { group, mesh, setState(state), pick(raycaster), panels, frontPanel(dir) }
    state = {
@@ -90,8 +90,8 @@ const root = {};
     groups.forEach(function (g) { for (var i = g.start / 3; i < (g.start + g.count) / 3; i++) triPanel[i] = g.pi; });
 
     var tex = null, texCanvas = null, mapping = 'sphere';
-    var matPat = new THREE.MeshPhongMaterial({ vertexColors: true, shininess: 22, specular: 0x1e1e1e });
-    var matCol = new THREE.MeshPhongMaterial({ vertexColors: true, shininess: 22, specular: 0x1e1e1e });
+    var matPat = opts.physical ? new THREE.MeshPhysicalMaterial({vertexColors:true,roughness:.55,metalness:0,clearcoat:.16}) : new THREE.MeshPhongMaterial({ vertexColors: true, shininess: 22, specular: 0x1e1e1e });
+    var matCol = opts.physical ? new THREE.MeshPhysicalMaterial({vertexColors:true,roughness:.55,metalness:0,clearcoat:.16}) : new THREE.MeshPhongMaterial({ vertexColors: true, shininess: 22, specular: 0x1e1e1e });
     var seamMat = new THREE.MeshPhongMaterial({ color: 0x15090f, shininess: 5 });
     var mesh = new THREE.Mesh(geo, [matPat, matCol]);
     var group = new THREE.Group();
@@ -110,7 +110,7 @@ const root = {};
         tex.needsUpdate = true;
       }
       var f = FIN[st.finish] || FIN.satin;
-      [matPat, matCol].forEach(function (m) { m.shininess = f[0]; m.specular.setHex(f[1]); });
+      [matPat, matCol].forEach(function (m) { if(opts.physical){m.roughness=st.finish==='gloss'?.29:st.finish==='matte'?.8:.55;m.clearcoat=st.finish==='gloss'?.35:.12;}else{m.shininess = f[0]; m.specular.setHex(f[1]);} });
       if (st.seam) seamMat.color.set(st.seam);
       var colA = geo.getAttribute('color'), paint = st.paint || {}, base = st.base || {};
       groups.forEach(function (g, gi) {

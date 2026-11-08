@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "groups": {
+    "panels": 24,
+    "frame": 220,
+    "goals": 56,
+    "floor": 1,
+    "surface-edge": 1
+  },
+  "triangles": 29292,
+  "playing_envelope_m": [
+    15,
+    10
+  ],
+  "panel_height_m": 1,
+  "surface_display_edge_m": 0.065,
+  "sha256": {
+    "street15-r2.blend": "427de92c963bc78720a7cb2592784172c7c8933e79be08afb874a6e986450adb",
+    "street15-r2.glb": "1f4dc36e09e37df66d4c66d1ead103f4510621648bc90b2015d37e884e30ad35",
+    "street15-r2.json": "8866dd994f75a27cb98c710379a275e70c8c982fa508a716eda1a3d070ed731a"
+  }
+}
