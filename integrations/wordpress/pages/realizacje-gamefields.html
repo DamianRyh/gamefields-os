@@ -1,0 +1,87 @@
+<!-- wp:html -->
+<style>
+.gfr{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--navy:#1F2A6B;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5}
+.gfr *{box-sizing:border-box}
+.gfr .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfr h1,.gfr h2,.gfr h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfr .d{font-weight:800;letter-spacing:-.055em;line-height:.9}
+.gfr-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfr-hero h1{font-size:clamp(56px,10vw,160px)}
+.gfr-hero p{max-width:40rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfr-jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;padding:0;list-style:none}
+.gfr-jump a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:700;font-size:15px}
+.gfr-jump a:hover{border-color:var(--ink)}
+.gfr-case{padding:clamp(36px,5vw,72px) 0;border-top:1px solid var(--line)}
+.gfr-case .w{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:start}
+.gfr-case:nth-of-type(even) .gfr-media{order:2}
+.gfr-media{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gfr-media img{display:block;width:100%;height:auto;object-fit:cover;background:#E6E0DA}
+.gfr-media .main{grid-column:1/-1;aspect-ratio:4/3}
+.gfr-media img:not(.main){aspect-ratio:1/1}
+.gfr-text .place{margin:0 0 10px;color:var(--violet);font-weight:700;font-size:15px}
+.gfr-text h2{font-size:clamp(38px,4.6vw,72px)}
+.gfr-text .lead{font-size:clamp(17px,1.4vw,20px);margin:18px 0 10px}
+.gfr-text .body{color:var(--muted);margin:0 0 20px}
+.gfr-facts{display:grid;margin:0 0 24px;border-top:1px solid var(--line)}
+.gfr-facts div{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.gfr-facts dt{color:var(--muted)}
+.gfr-facts dd{margin:0;font-weight:700;text-align:right}
+.gfr-quote{margin:0;padding:22px 22px 20px;background:#fff;border-top:4px solid var(--violet)}
+.gfr-quote blockquote{margin:0;padding:0;border:0;font-style:normal}
+.gfr-quote p{margin:0 0 12px;font-size:17px;line-height:1.5}
+.gfr-quote figcaption{font-size:14px;color:var(--muted)}
+.gfr-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfr-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfr-band h2,.gfr-more h2{font-size:clamp(40px,5.6vw,88px)}
+.gfr-band .sub,.gfr-more .sub{max-width:36rem;margin:14px 0 28px;font-size:18px;opacity:.85}
+.gfr-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfr-grid figure{margin:0;display:grid;gap:8px}
+.gfr-grid img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#2A1220}
+.gfr-grid figcaption{font-size:14px;line-height:1.35;opacity:.8}
+.gfr-grid figcaption b{display:block;font-size:16px;opacity:1}
+.gfr-more{padding:clamp(40px,5vw,80px) 0}
+.gfr-more .gfr-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.gfr-more .gfr-grid img{background:#E6E0DA}
+.gfr-more figcaption{color:var(--muted)}
+.gfr-more figcaption b{color:var(--ink)}
+.gfr-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfr-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfr-cta h2{font-size:clamp(40px,5.6vw,88px);max-width:12ch}
+.gfr-btns{display:flex;flex-wrap:wrap;gap:10px}
+.gfr-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;font-weight:800;text-decoration:none;background:var(--violet);color:#fff}
+.gfr-btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.gfr a:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+@media (max-width:900px){
+ .gfr-case .w{grid-template-columns:1fr}
+ .gfr-case:nth-of-type(even) .gfr-media{order:0}
+ .gfr-grid,.gfr-more .gfr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+<div class="gfr">
+<section class="gfr-hero"><div class="w"><h1 class="d">Realizacje.</h1><p>Boiska Gamefields w miastach, parkach i na obiektach sportowych. Zdjęcia z miejsc i słowa osób, które je zamówiły.</p><ul class="gfr-jump" role="list"><li><a href="#taras">Taras w Parku Świętokrzyskim</a></li><li><a href="#kutno">Panna Octa w Kutnie</a></li><li><a href="#wake">Wake For Friends</a></li><li><a href="#orlik">Panna Ring na Orliku</a></li></ul></div></section>
+<section class="gfr-case" id="taras" aria-labelledby="gfr-taras"><div class="w">
+<div class="gfr-media"><img src="/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" width="768" height="576" alt="Taras w Parku Świętokrzyskim w Warszawie, areny panna" decoding="async" class="main"><img src="/wp-content/uploads/2024/12/11-1-768x432.jpg" width="768" height="432" alt="Areny panna na Tarasie w Parku Świętokrzyskim, widok na centrum Warszawy" loading="lazy" decoding="async"><img src="/wp-content/uploads/2024/12/2-4-768x768.jpg" width="768" height="768" alt="Arena panna na Tarasie w Parku Świętokrzyskim" loading="lazy" decoding="async"><img src="/wp-content/uploads/2024/12/6-2-768x768.jpg" width="768" height="768" alt="Gra na arenie panna, Taras w Parku Świętokrzyskim" loading="lazy" decoding="async"></div>
+<div class="gfr-text"><p class="place">Warszawa, Park Świętokrzyski</p><h2 class="d" id="gfr-taras">Taras w Parku Świętokrzyskim</h2><p class="lead">Wielofunkcyjna przestrzeń rekreacji dla osób w każdym wieku: trzy boiska połączone z tarasem i rampą do skateboardingu, tuż obok skrzyżowania linii metra, przy Pałacu Kultury i Nauki.</p><p class="body">Taras stał się jednym z najpopularniejszych miejsc spotkań warszawskiej młodzieży. Po wybuchu wojny w Ukrainie był też ważnym miejscem spotkań ukraińskiej młodzieży, o czym pisał m.in. New York Times. To inwestycja tymczasowa, która zapowiada dalsze zmiany wokół Pałacu Kultury i Nauki.</p>
+<dl class="gfr-facts"><div><dt>Boiska</dt><dd>Panna Ring, trzy areny</dd></div><div><dt>Inwestor</dt><dd>Zarząd Zieleni m.st. Warszawy</dd></div><div><dt>Projekt</dt><dd>Michał Sikorski, Marcin Kwietowicz</dd></div></dl>
+<figure class="gfr-quote"><blockquote><p>Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży.</p></blockquote><figcaption><b>Grzegorz Gądek</b>Prezes Fundacji Skwery Sportów Miejskich</figcaption></figure></div>
+</div></section><section class="gfr-case" id="kutno" aria-labelledby="gfr-kutno"><div class="w">
+<div class="gfr-media"><img src="/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" width="768" height="696" alt="Boisko Panna Octa w Kutnie, dzieci na boisku" loading="lazy" decoding="async" class="main"><img src="/wp-content/uploads/2024/12/1-5-768x768.jpg" width="768" height="768" alt="Boisko Panna Octa w Kutnie" loading="lazy" decoding="async"><img src="/wp-content/uploads/2024/12/2-5-768x768.jpg" width="768" height="768" alt="Gra na boisku Panna Octa w Kutnie" loading="lazy" decoding="async"><img src="/wp-content/uploads/2024/12/3-5-768x768.jpg" width="768" height="768" alt="Panna Octa na pasażu sportowym w Kutnie" loading="lazy" decoding="async"></div>
+<div class="gfr-text"><p class="place">Kutno, pasaż sportowy</p><h2 class="d" id="gfr-kutno">Panna Octa w Kutnie</h2><p class="lead">Ośmiokątna arena na miejskim pasażu sportowym, zamówiona przez Urząd Miasta Kutno.</p><p class="body">Realizacja przebiegła bez zastrzeżeń, a boisko cieszy się dużą popularnością wśród młodzieży.</p>
+<dl class="gfr-facts"><div><dt>Boisko</dt><dd>Panna Octa</dd></div><div><dt>Zamawiający</dt><dd>Urząd Miasta Kutno</dd></div><div><dt>Miejsce</dt><dd>pasaż sportowy</dd></div></dl>
+<figure class="gfr-quote"><blockquote><p>Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.</p></blockquote><figcaption><b>Beata Rafalska</b>Urząd Miasta Kutno, ds. inwestycji</figcaption></figure></div>
+</div></section><section class="gfr-case" id="wake" aria-labelledby="gfr-wake"><div class="w">
+<div class="gfr-media"><img src="/wp-content/uploads/2024/12/12-3-768x768.jpg" width="768" height="768" alt="Boisko Panna Octa Cage 180 w parku Wake For Friends, Grodzisk Mazowiecki" loading="lazy" decoding="async" class="main"><img src="/wp-content/uploads/2024/12/11-3-768x768.jpg" width="768" height="768" alt="Panna Octa Cage 180, Wake For Friends" loading="lazy" decoding="async"><img src="/wp-content/uploads/2024/12/7-4-768x768.jpg" width="768" height="768" alt="Arena Cage 180 w parku Wake For Friends" loading="lazy" decoding="async"><img src="/wp-content/uploads/2024/12/16-768x432.jpg" width="768" height="432" alt="Nawierzchnia ze sztucznej trawy w arenie Cage 180, Wake For Friends" loading="lazy" decoding="async"></div>
+<div class="gfr-text"><p class="place">Grodzisk Mazowiecki, park wakeboardowy</p><h2 class="d" id="gfr-wake">Wake For Friends</h2><p class="lead">Boisko w parku wakeboardowym, które poszerzyło ofertę o dyscypliny inne niż wakeboard.</p><p class="body">Arena działa na co dzień i podczas wydarzeń organizowanych w parku: urodzin dzieci, wieczorów kawalerskich i półkolonii. Nawierzchnia to sztuczna trawa.</p>
+<dl class="gfr-facts"><div><dt>Boisko</dt><dd>Panna Octa Cage 180</dd></div><div><dt>Nawierzchnia</dt><dd>sztuczna trawa</dd></div><div><dt>Zamawiający</dt><dd>Wake For Friends</dd></div></dl>
+<figure class="gfr-quote"><blockquote><p>Boisko Panna Cage 180 świetnie wpisało się w naszą potrzebę poszerzenia oferty parku o dyscypliny inne niż wakeboard. Sprawdza się na co dzień i podczas wydarzeń, które organizujemy.</p></blockquote><figcaption><b>Piotr Wiśniewski</b>Właściciel, Wake For Friends</figcaption></figure></div>
+</div></section><section class="gfr-case" id="orlik" aria-labelledby="gfr-orlik"><div class="w">
+<div class="gfr-media"><img src="/wp-content/uploads/2024/12/9-768x432.jpg" width="768" height="432" alt="Boisko Panna Ring, Grodzisk Mazowiecki" loading="lazy" decoding="async" class="main"><img src="/wp-content/uploads/2024/12/15-768x432.jpg" width="768" height="432" alt="Arena Panna Ring na Orliku" loading="lazy" decoding="async"></div>
+<div class="gfr-text"><p class="place">Grodzisk Mazowiecki, Orlik</p><h2 class="d" id="gfr-orlik">Panna Ring na Orliku</h2><p class="lead">Arena panna na obiekcie Orlik prowadzonym przez OSiR Grodzisk Mazowiecki.</p><p class="body">Boisko stoi na obiekcie od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</p>
+<dl class="gfr-facts"><div><dt>Boisko</dt><dd>Panna Ring</dd></div><div><dt>Zamawiający</dt><dd>OSiR Grodzisk Mazowiecki</dd></div><div><dt>W użyciu</dt><dd>10 lat</dd></div></dl>
+<figure class="gfr-quote"><blockquote><p>Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</p></blockquote><figcaption><b>Mariusz Smysło</b>Dyrektor OSiR Grodzisk Mazowiecki</figcaption></figure></div>
+</div></section>
+<section class="gfr-band" aria-labelledby="gfr-ev"><div class="w"><h2 class="d" id="gfr-ev">Turnieje i eventy.</h2><p class="sub">Mobilne areny panna na mistrzostwach, turniejach i eventach marek.</p><ul class="gfr-grid" role="list"><li><figure><img src="/wp-content/uploads/2026/11/12-768x574.jpg" width="768" height="574" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b>Złote Tarasy, Warszawa</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2026/11/1-768x576.jpg" width="768" height="576" alt="Event Head &amp; Shoulders, Stadion, Gdańsk" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b>Stadion, Gdańsk</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/10-768x432.jpg" width="768" height="432" alt="Turniej Head &amp; Shoulders, Legia Warszawa" loading="lazy" decoding="async"><figcaption><b>Turniej Head &amp; Shoulders</b>Legia Warszawa</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/1-4-768x768.jpg" width="768" height="768" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Street Soccer 2017</b>Grodzisk Mazowiecki</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/22-768x432.jpg" width="768" height="432" alt="Mistrzostwa Świata Superball, Liberec" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Superball</b>Liberec</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/13-768x432.jpg" width="768" height="432" alt="UEFA Champions League, event z areną panna" loading="lazy" decoding="async"><figcaption><b>UEFA Champions League</b>event z areną panna</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/3-1-768x432.jpg" width="768" height="432" alt="Mistrzostwa Polski, Żerków" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Polski</b>Żerków</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/10-3-768x768.jpg" width="768" height="768" alt="Puchar Polski, Żerków" loading="lazy" decoding="async"><figcaption><b>Puchar Polski</b>Żerków</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/5-3-768x768.jpg" width="768" height="768" alt="Mistrzostwa Polski, Street Mekka, Łódź" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Polski, Street Mekka</b>Łódź</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/7-768x432.jpg" width="768" height="432" alt="Turniej szkolny, Warszawa" loading="lazy" decoding="async"><figcaption><b>Turniej szkolny</b>Warszawa</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/8-3-768x768.jpg" width="768" height="768" alt="Turniej Szoła, Panna Ring" loading="lazy" decoding="async"><figcaption><b>Turniej Szoła</b>Panna Ring</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/6-3-768x768.jpg" width="768" height="768" alt="Trenuj z Krzychem, Panna Octa Cage 180" loading="lazy" decoding="async"><figcaption><b>Trenuj z Krzychem</b>Panna Octa Cage 180</figcaption></figure></li></ul></div></section>
+<section class="gfr-more" aria-labelledby="gfr-mo"><div class="w"><h2 class="d" id="gfr-mo">Więcej boisk.</h2><p class="sub">Kolejne miejsca, w których stoją nasze areny.</p><ul class="gfr-grid" role="list"><li><figure><img src="/wp-content/uploads/2024/12/13-3-768x768.jpg" width="768" height="768" alt="Panna Ring, Nowy Świat, Warszawa" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b>Nowy Świat, Warszawa</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/15-3-768x768.jpg" width="768" height="768" alt="Panna Octa Cage 180, Kraków" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b>Kraków</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/4-4-768x768.jpg" width="768" height="768" alt="Panna Octa Cage 90, Kraków" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 90</b>Kraków</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/14-768x432.jpg" width="768" height="432" alt="Panna Octa Cage 90, Grodzisk Mazowiecki" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 90</b>Grodzisk Mazowiecki</figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/14-3-768x768.jpg" width="768" height="768" alt="Panna Ring, plaża" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b>plaża</figcaption></figure></li></ul></div></section>
+<section class="gfr-cta" aria-labelledby="gfr-cta"><div class="w"><h2 class="d" id="gfr-cta">Chcesz podobne miejsce?</h2><div class="gfr-btns"><a class="gfr-btn" href="/studio/">Zaprojektuj w Studio</a><a class="gfr-btn alt" href="/kontakt/">Wyślij zapytanie</a></div></div></section>
+</div>
+<!-- /wp:html -->
