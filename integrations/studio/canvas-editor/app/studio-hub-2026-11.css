@@ -8,7 +8,7 @@
 .hub26 .hub26-intro h1{margin:0;font-weight:800;font-size:clamp(44px,6.4vw,96px);line-height:.9;letter-spacing:-.055em}
 .hub26 .hub26-intro p{margin:0;font-size:clamp(16px,1.3vw,19px);line-height:1.45;color:#6F5A66}
 
-.hub26 .hub26-wall.product-hub-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:minmax(clamp(250px,24vw,330px),auto);gap:clamp(10px,1vw,16px)}
+.hub26 .hub26-wall.product-hub-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:minmax(clamp(220px,19vw,280px),auto) minmax(clamp(300px,28vw,420px),auto);grid-auto-rows:minmax(clamp(250px,24vw,330px),auto);gap:clamp(10px,1vw,16px)}
 
 .hub26 .product-hub-card.hub26-tile{position:relative;display:block;grid-column:span 6;grid-row:auto;min-height:0;padding:0;border:0;border-radius:0;overflow:hidden;text-align:left;color:#fff;background:var(--violet);isolation:isolate;transform:none;transition:none;box-shadow:none}
 .hub26 .product-hub-card.hub26-court{grid-column:1/span 7;grid-row:span 2}
@@ -31,8 +31,8 @@
 .hub26 .hub26-art{position:absolute;z-index:2;pointer-events:none;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 .hub26 .hub26-court .hub26-art{left:50%;top:50%;width:min(80%,700px);transform:translate(-50%,-46%);filter:drop-shadow(0 28px 28px rgba(20,4,40,.35))}
 .hub26 .hub26-court:hover .hub26-art{transform:translate(-50%,-49%) scale(1.02)}
-.hub26 .hub26-poster .hub26-art{right:clamp(30px,3.6vw,56px);top:42%;height:62%;width:auto;transform:translateY(-50%) rotate(3deg);box-shadow:0 26px 40px -18px rgba(0,0,0,.6)}
-.hub26 .hub26-poster:hover .hub26-art{transform:translateY(-52%) rotate(0deg)}
+.hub26 .hub26-poster .hub26-art{right:clamp(24px,3vw,44px);top:50%;height:min(84%,330px);width:auto;transform:translateY(-50%);box-shadow:0 24px 44px -20px rgba(0,0,0,.65)}
+.hub26 .hub26-poster:hover .hub26-art{transform:translateY(-52%)}
 .hub26 .hub26-ball .hub26-art,.hub26 .hub26-kit .hub26-art{right:4%;top:46%;height:70%;width:auto;transform:translateY(-50%)}
 
 .hub26 .hub26-fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -43,7 +43,9 @@
 .hub26 .hub26-name{font-weight:800;font-size:clamp(40px,4.2vw,72px);line-height:.92;letter-spacing:-.05em}
 .hub26 .hub26-court .hub26-name{font-size:clamp(52px,6.4vw,112px)}
 .hub26 .hub26-desc{font-size:clamp(14px,1.05vw,16px);line-height:1.4;opacity:.9}
-.hub26 .hub26-poster .hub26-text{max-width:min(24ch,46%)}
+.hub26 .hub26-poster .hub26-text{max-width:min(22ch,42%)}
+.hub26 .hub26-poster .hub26-name{font-size:clamp(40px,3.8vw,60px)}
+.hub26 .hub26-poster .hub26-foot{right:auto;max-width:42%;flex-direction:column;align-items:flex-start;gap:14px}
 .hub26 .hub26-surface .hub26-text{top:auto;bottom:clamp(80px,6.4vw,96px);max-width:min(34ch,80%)}
 
 .hub26 .hub26-foot{position:absolute;z-index:3;left:clamp(26px,2.6vw,40px);right:clamp(26px,2.6vw,40px);bottom:clamp(22px,2.2vw,34px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -53,20 +55,27 @@
 .hub26 .hub26-ball .hub26-go{background:var(--navy);color:#fff}
 
 /* Phones and narrow tablets: one column, each field stacks its parts instead of layering them. */
-@media (max-width:900px){
+@media (max-width:1023px){
  .hub26 .hub26-intro{grid-template-columns:1fr}
- .hub26 .hub26-wall.product-hub-grid{grid-template-columns:1fr;grid-auto-rows:auto}
+ .hub26 .hub26-wall.product-hub-grid{grid-template-columns:1fr;grid-template-rows:none;grid-auto-rows:auto}
  .hub26 .product-hub-card.hub26-tile{grid-column:1/-1;grid-row:auto;display:flex;flex-direction:column;gap:14px;padding:26px 24px 24px;min-height:0}
  .hub26 .hub26-lines{inset:12px}
- .hub26 .hub26-text,.hub26 .hub26-foot{position:relative;left:auto;right:auto;top:auto;bottom:auto;max-width:none}
+ .hub26 .hub26-text,.hub26 .hub26-foot,.hub26 .hub26-poster .hub26-foot{position:relative;left:auto;right:auto;top:auto;bottom:auto;max-width:none}
+ .hub26 .hub26-poster .hub26-foot{flex-direction:row;align-items:center}
  .hub26 .hub26-poster .hub26-text,.hub26 .hub26-surface .hub26-text{max-width:none;top:auto;bottom:auto}
  .hub26 .hub26-name,.hub26 .hub26-court .hub26-name{font-size:clamp(40px,12vw,56px)}
  .hub26 .hub26-art,.hub26 .hub26-court .hub26-art,.hub26 .hub26-poster .hub26-art,.hub26 .hub26-ball .hub26-art,.hub26 .hub26-kit .hub26-art{position:relative;left:auto;right:auto;top:auto;transform:none;align-self:center}
  .hub26 .hub26-court .hub26-art{width:100%;max-width:520px;margin:-6px 0}
- .hub26 .hub26-poster .hub26-art{height:auto;width:46%;max-width:220px;transform:rotate(3deg);margin:4px 0 6px}
+ .hub26 .product-hub-card.hub26-poster{padding-top:28px}
+ .hub26 .hub26-poster .hub26-art{order:-1;height:auto;width:min(82%,340px);max-width:none;transform:none;margin:0 0 10px;box-shadow:0 22px 40px -18px rgba(0,0,0,.6)}
  .hub26 .hub26-ball .hub26-art,.hub26 .hub26-kit .hub26-art{height:auto;width:70%}
  .hub26 .hub26-court:hover .hub26-art,.hub26 .hub26-poster:hover .hub26-art{transform:none}
  .hub26 .product-hub-card.hub26-surface{padding-top:150px}
  .hub26 .hub26-surface::after{background:linear-gradient(180deg,rgba(31,42,107,0) 0,rgba(31,42,107,.92) 62%)}
 }
 @media (prefers-reduced-motion:reduce){.hub26 *{transition:none!important}}
+@media (min-width:1024px) and (max-width:1399px){
+ .hub26 .hub26-poster .hub26-art{height:70%;right:18px}
+ .hub26 .hub26-poster .hub26-text,.hub26 .hub26-poster .hub26-foot{max-width:50%}
+ .hub26 .hub26-poster .hub26-go{padding:0 16px;font-size:14px}
+}

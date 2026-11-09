@@ -36,7 +36,7 @@ export function StudioProductHub({onSelect,onProjects,onContinue}:{onSelect:(kin
    <section className="hub26-wall product-hub-grid" aria-label="Wybierz produkt">
     {list.map(p=><button key={p.id} type="button" aria-label={p.name} aria-describedby={'hub-desc-'+p.id+' hub-price-'+p.id} className={'product-hub-card hub26-tile hub26-'+p.id} onClick={()=>onSelect(p.id)}>
      {p.id==='surface'?<img className="hub26-fill" src={p.image} alt="" width={1200} height={800} decoding="async"/>:null}
-     {p.id!=='surface'?<CourtLines/>:null}
+     {p.id!=='surface'&&p.id!=='poster'?<CourtLines/>:null}
      {p.id!=='surface'?<img className="hub26-art" src={p.image} alt="" width={960} height={540} decoding="async" loading={p.id==='ball'||p.id==='kit'?'lazy':undefined} fetchPriority={p.id==='court'?'high':undefined}/>:null}
      <span className="hub26-text"><span className="hub26-name">{p.name}</span><span className="hub26-desc" id={'hub-desc-'+p.id}>{p.description}</span></span>
      <span className="hub26-foot"><span className="hub26-price" id={'hub-price-'+p.id} data-card-price>{cardPrice(p.id,shop)}</span><span className="hub26-go" aria-hidden="true">{p.cta}</span></span>
