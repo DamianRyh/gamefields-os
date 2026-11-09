@@ -123,8 +123,14 @@ def main():
     jsdir.mkdir(parents=True, exist_ok=True)
     files = [("gf-pro.js", eng), ("gf-ball-core.js", ball_core), ("gf-home.js", script.strip())]
     tags = []
+    # gf-home.js is owned by the theme since hero R3 (PR #63, 2026-11-08): the hero code lives only there, so the build
+    # no longer overwrites it and versions the theme file as it is. script.js stays as the historical source.
+    THEME_OWNED = {"gf-home.js"}
     for name, code in files:
-        (jsdir / name).write_text(code + "\n", encoding="utf-8")
+        if name in THEME_OWNED and (jsdir / name).exists():
+            code = (jsdir / name).read_text(encoding="utf-8").rstrip("\n")
+        else:
+            (jsdir / name).write_text(code + "\n", encoding="utf-8")
         ver = hashlib.sha1(code.encode("utf-8")).hexdigest()[:10]
         tags.append(f'<script defer src="/wp-content/themes/gamefields/assets/js/home/{name}?v={ver}"></script>')
     head = [
