@@ -7,13 +7,12 @@
   <a class="ask" href="#kontakt">Zapytanie</a>
   <button type="button" class="menu-btn" aria-expanded="false" aria-controls="gfs-links">Menu</button>
   <nav class="links" id="gfs-links" aria-label="Główna nawigacja">
+    <!-- Same menu as every other page (theme gft_nav_items), 2026-11-09 -->
     <a href="#boiska">Boiska</a>
-    <a href="#planer">Zmieści się?</a>
     <a href="#dla-kogo">Dla kogo</a>
-    <a href="#studio">Studio</a>
-    <a href="#plakaty">Plakaty</a>
-    <!-- Piłka: ukryta na start (2026-11-08), wraca po starcie -->
-    <a href="#warsztat">Warsztat</a>
+    <a href="/realizacje-gamefields/">Realizacje</a>
+    <a href="/baza-wiedzy/">Wiedza</a>
+    <a href="/shop/">Sklep</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
   <a class="pill cfg" href="/studio/" style="background:var(--ink);color:var(--paper);min-height:44px;padding:0 20px;font-size:15px">Studio 3D ↗</a>
@@ -24,7 +23,7 @@
 <section class="hero" id="gfs-hero" style="background:#1F2A6B;color:#fff" aria-labelledby="gfs-h1">
   <div class="court" data-hero-court style="--ln:rgba(255,255,255,.45);--cr:36%"><i></i><i></i></div>
   <div class="hero-3d" data-hero-3d>
-    <picture><source media="(max-width:700px)" srcset="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-play-720.webp"><img class="still" src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-play-1200.webp" alt="" aria-hidden="true" width="1200" height="675" fetchpriority="high" decoding="async"></picture>
+    <picture><source media="(max-width:700px)" srcset="/wp-content/themes/gamefields/assets/js/home/hero-r3/panna-play-720.webp"><img class="still" src="/wp-content/themes/gamefields/assets/js/home/hero-r3/panna-play-1200.webp" alt="" aria-hidden="true" width="1200" height="675" fetchpriority="high" decoding="async"></picture>
     <span class="drag m">↻ Przeciągnij, aby obrócić</span>
   </div>
   <div class="ball" data-ball aria-hidden="true"></div>
@@ -114,22 +113,27 @@
     <li><a href="/projektuj-i-wybuduj-boisko/"><span class="m">06</span><b>Pełna realizacja</b><span>Od analizy terenu po odbiór, z jednym partnerem.</span><i aria-hidden="true">→</i></a></li>
   </ul>
 </section>
+<!-- Opinie klientów: przeniesione na strony boisk w sklepie (2026-11-08). -->
 
-<!-- OPINIE: opinie klientów podane przez właściciela 2026-11-08 -->
-<section id="opinie" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-ops">
+<!-- REALIZACJE: zdjęcia z biblioteki mediów, podpisy właściciela (2026-11-08) -->
+<section id="realizacje" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-real">
   <div class="head">
-    <div class="hd"><p class="kicker m">Opinie</p><h2 class="d" id="gfs-ops">Sprawdzone w miastach.</h2></div>
-    <div class="side"><p>Boiska Gamefields działają w miastach, parkach i na obiektach sportowych, gdzie gra się codziennie.</p></div>
+    <div class="hd"><p class="kicker m">Realizacje</p><h2 class="d" id="gfs-real">Z boiska.</h2></div>
+    <div class="side"><p>Areny Gamefields w miastach, na turniejach i eventach marek. <a href="/realizacje-gamefields/">Wszystkie realizacje →</a></p></div>
   </div>
-  <ul class="ops" role="list">
-    <li><figure><blockquote><p>Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</p></blockquote>
-      <figcaption><b>Mariusz Smysło</b><span>Dyrektor OSiR Grodzisk Mazowiecki</span><span class="m">Panna Ring · Orlik, Grodzisk Mazowiecki</span></figcaption></figure></li>
-    <li><figure><blockquote><p>Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.</p></blockquote>
-      <figcaption><b>Beata Rafalska</b><span>Urząd Miasta Kutno, ds. inwestycji</span><span class="m">Panna Octa · pasaż sportowy, Kutno</span></figcaption></figure></li>
-      <li><figure><blockquote><p>Boisko Panna Cage 180 świetnie wpisało się w naszą potrzebę poszerzenia oferty parku o dyscypliny inne niż wakeboard. Sprawdza się na co dzień i podczas wydarzeń, które organizujemy: urodzin dzieci, wieczorów kawalerskich i półkolonii.</p></blockquote>
-      <figcaption><b>Piotr Wiśniewski</b><span>Właściciel, Wake For Friends</span><span class="m">Panna Cage 180 · park wakeboardowy</span></figcaption></figure></li>
-    <li><figure><blockquote><p>Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży. Taras stał się jednym z najpopularniejszych miejsc spotkań młodych warszawiaków, a po wybuchu wojny w Ukrainie także ukraińskiej młodzieży, o czym pisał m.in. New York Times.</p></blockquote>
-      <figcaption><b>Grzegorz Gądek</b><span>Prezes Fundacji Skwery Sportów Miejskich</span><span class="m">Taras w Parku Świętokrzyskim, Warszawa · inwestor: Zarząd Zieleni m.st. Warszawy · proj. Michał Sikorski, Marcin Kwietowicz</span></figcaption></figure></li>
+  <ul class="reals" role="list">
+    <li><figure><img src="/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Taras w Parku Świętokrzyskim</b><span>Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Złote Tarasy, Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/1-768x576.jpg" alt="Event Head &amp; Shoulders, Stadion, Gdańsk" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Stadion, Gdańsk</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa, Kutno" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa</b><span>Kutno</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/12-3-768x768.jpg" alt="Panna Octa Cage 180, Wake For Friends, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Wake For Friends, Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Street Soccer 2017</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/10-3-768x768.jpg" alt="Puchar Polski, Żerków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Puchar Polski</b><span>Żerków</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/22-768x432.jpg" alt="Mistrzostwa Świata Superball, Liberec" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Superball</b><span>Liberec</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/13-3-768x768.jpg" alt="Panna Ring, Nowy Świat, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Nowy Świat, Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/5-3-768x768.jpg" alt="Mistrzostwa Polski, Street Mekka, Łódź" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Polski, Street Mekka</b><span>Łódź</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/15-3-768x768.jpg" alt="Panna Octa Cage 180, Kraków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Kraków</span></figcaption></figure></li>
   </ul>
 </section>
 
@@ -491,3 +495,6 @@
 
 <!-- the site footer comes from the Gamefields theme (same on every page) -->
 </div>
+
+<!-- Flat surfaces in the audience kits (2026-11-08): the Studio SVGs are drawn in perspective on white, these fill the whole window. -->
+<script>(function(){var F={'city-fluid':1,'play-system':1,'earth-motion':1,'club-heritage':1,'brand-stage':1};function fix(){var list=document.querySelectorAll('img[src*="/surface-projects/"]');for(var i=0;i<list.length;i++){var m=list[i].getAttribute('src').match(/surface-projects\/([a-z-]+)\.svg/);if(m){if(F[m[1]]){list[i].src='/wp-content/uploads/2026/11/gf-surf-'+m[1]+'.webp';}}}}new MutationObserver(fix).observe(document.documentElement,{childList:true,subtree:true});fix();})();</script>

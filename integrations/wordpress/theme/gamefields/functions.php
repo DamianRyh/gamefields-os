@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.25' );
+define( 'GFT_VERSION', '1.0.27' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -61,8 +61,8 @@ add_action( 'wp_head', function () {
 		return;
 	}
 	$up = content_url( '/uploads/2026/11/' );
-	printf( '<link rel="preload" as="image" href="%s" media="(max-width: 700px)" fetchpriority="high">' . "\n", esc_url( $up . 'gf-play-720.webp' ) );
-	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 701px)" fetchpriority="high">' . "\n", esc_url( $up . 'gf-play-1200.webp' ) );
+	printf( '<link rel="preload" as="image" href="%s" media="(max-width: 700px)" fetchpriority="high">' . "\n", esc_url( get_template_directory_uri() . '/assets/js/home/hero-r3/panna-play-720.webp' ) );
+	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 701px)" fetchpriority="high">' . "\n", esc_url( get_template_directory_uri() . '/assets/js/home/hero-r3/panna-play-1200.webp' ) );
 }, 1 );
 
 /* The Additional CSS written under Savoy (cookie banner, subpage fixes, City templates) stays in effect. */
@@ -332,6 +332,11 @@ add_action( 'template_redirect', function () {
 		}
 	}
 }, 2 );
+
+/* The shop page is indexable for the launch (Yoast had it on noindex); products keep their own settings. */
+add_filter( 'wpseo_robots', function ( $robots ) {
+	return ( function_exists( 'is_shop' ) && is_shop() ) ? 'index, follow, max-image-preview:large' : $robots;
+} );
 
 /* ---------- Sharing and search previews (launch 2026-11-07) ----------
    One 1200x630 JPG (media 4498) for link previews: WebP is not shown by LinkedIn and some messengers. */
