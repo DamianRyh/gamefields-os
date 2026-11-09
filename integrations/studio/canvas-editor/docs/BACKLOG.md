@@ -524,5 +524,11 @@ Usunięto zakładki Konstrukcja / Nawierzchnia / Grafika (nav „Wybierz obszar 
 
 - [x] Street Arena 15 R2 w istniejącym wyborze konstrukcji i podglądzie nawierzchni. Zachowano identyfikatory paneli i pole gry. Uaktualniono obwiednię i karuzelę.
 
+- [x] Street Arena 15 R3 z dwiema bramkami o pochylonym tyle i niezależnym wyglądem plecionej siatki.
+
 ## Szybkość wejścia do Studio — 2026-11-07
 Ekran wyboru produktu (`/studio/` na gamefields.eu, Lighthouse mobile 0,53–0,83, 4,6 MB) nie ładuje już edytora: `StudioWorkspace` i podgląd 3D (`blender-arena-preview` z geometrią modeli, three.js) są wczytywane przez `React.lazy` po wyborze produktu; stała `defaultArena` przeniesiona do `lib/default-arena.ts`. Obrazy kart i dekoracja nagłówka jako WebP w rozmiarze wyświetlania (hub-court 711→129 KB, hub-ball 633→45 KB, hub-kit 474→9 KB, header-corner 1068→3 KB), karty poniżej pierwszego ekranu z `loading=lazy`. Ekran wyboru: 5,3 MB → 1,65 MB (przed kompresją), 36 → 30 żądań. Testy: tsc, test:studio, build, print-contract, product-entry, kit, workshop, test:mobile PASS.
+
+### Panna Octa R3
+
+Usunięto dwa poziome profile boczne z każdej bramki Octa. Zachowano obwiednię, podział części i identyfikatory paneli.

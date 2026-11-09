@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 const root=resolve(fileURLToPath(new URL('..',import.meta.url)));
-const sources={w1:['components/assets-blender/w1.json','public/arenas/boisko-w1.glb'],o1:['components/assets-blender/o1-surface.json','public/arenas/panna-play-o1-v2.glb'],p1:['public/arenas/p1.json','components/assets-blender/p1-surface.json'],street15:['public/arenas/street15-r2.json'],'circle-cage-1':['public/arenas/circle-cage-1.json','public/arenas/panna-cage-90-v2.glb'],'circle-cage-2':['public/arenas/circle-cage-2.json','public/arenas/panna-cage-180-v2.glb'],'street-field':['public/arenas/street-field.json'],octagon:['public/arenas/octagon.json']};
+const sources={w1:['components/assets-blender/w1.json','public/arenas/boisko-w1.glb'],o1:['components/assets-blender/o1-surface.json','public/arenas/panna-play-o1-v2.glb'],p1:['public/arenas/p1.json','components/assets-blender/p1-surface.json'],street15:['public/arenas/street15-r3.json'],'circle-cage-1':['public/arenas/circle-cage-1.json','public/arenas/panna-cage-90-v2.glb'],'circle-cage-2':['public/arenas/circle-cage-2.json','public/arenas/panna-cage-180-v2.glb'],'street-field':['public/arenas/street-field.json'],octagon:['public/arenas/octagon.json']};
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const rounded=n=>Math.round(n*1e6)/1e6;
 function bounds(vertices){
