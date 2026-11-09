@@ -60,7 +60,9 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .h1b{grid-column:6/13;grid-row:2;align-self:end;justify-self:end;text-align:right;font-size:clamp(64px,12.5vw,200px);margin-bottom:clamp(8px,2vw,28px)}
 .gfs .hero-3d{position:absolute;left:50%;top:52%;width:min(64vw,940px);height:min(52vw,660px);transform:translate(-50%,-50%);z-index:1}
 .gfs .hero-3d model-viewer{width:100%;height:100%;--poster-color:transparent;background:transparent;cursor:grab}
-.gfs .hero-3d .still{position:absolute;left:50%;top:50%;width:84%;transform:translate(-50%,-50%);filter:drop-shadow(0 40px 40px rgba(20,4,12,.28))}
+/* The still is a model-viewer render framed by height, exactly like the 3D view: fill the box, centre, no extra shadow. */
+.gfs .hero-3d .still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform:none;filter:none;pointer-events:none}
+.gfs .hero-3d picture{position:absolute;inset:0;pointer-events:none}
 .gfs .hero-3d.ready .still{display:none}
 .gfs .drag{position:absolute;left:50%;top:1%;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:rgba(244,241,238,.92);color:var(--ink);pointer-events:none;white-space:nowrap}
 .gfs .ball{position:absolute;z-index:3;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 10px 18px rgba(0,0,0,.25);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .2s}
@@ -558,7 +560,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 <section class="hero" id="gfs-hero" style="background:#1F2A6B;color:#fff" aria-labelledby="gfs-h1">
   <div class="court" data-hero-court style="--ln:rgba(255,255,255,.45);--cr:36%"><i></i><i></i></div>
   <div class="hero-3d" data-hero-3d>
-    <picture><source media="(max-width:700px)" srcset="/wp-content/themes/gamefields/assets/js/home/hero-r3/panna-play-720.webp"><img class="still" src="/wp-content/themes/gamefields/assets/js/home/hero-r3/panna-play-1200.webp" alt="" aria-hidden="true" width="1200" height="675" fetchpriority="high" decoding="async"></picture>
+    <picture><source media="(max-width:700px)" srcset="/wp-content/themes/gamefields/assets/js/home/hero-r3/panna-play-mv-720.webp"><img class="still" src="/wp-content/themes/gamefields/assets/js/home/hero-r3/panna-play-mv-1200.webp" alt="" aria-hidden="true" width="2376" height="990" fetchpriority="high" decoding="async"></picture>
     <span class="drag m">↻ Przeciągnij, aby obrócić</span>
   </div>
   <div class="ball" data-ball aria-hidden="true"></div>

@@ -19,6 +19,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: node scripts/sync-wordpress-product-design.mjs --check
+      - run: node tools/wordpress/check-hero-stills.mjs
       - run: pnpm exec tsc --noEmit
       - run: pnpm test:modular
       - run: pnpm test:panna-kids

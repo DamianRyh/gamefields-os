@@ -73,6 +73,10 @@
     { k: 'white', n: 'Biel', c: '#F4F1EE' },
     { k: 'graphite', n: 'Grafit', c: '#2B2226' }
   ];
+  /* Hero stills are rendered by model-viewer itself (same GLB, camera, light, shadow and default colours) and fill the
+     whole box like the 3D view, so the switch from still to 3D is invisible. Never point them at other renders:
+     the owner asked many times that the courts must not jump to another version (2026-11-09).
+     Check: tools/wordpress/check-hero-stills.mjs */
   var heroAssets = new URL('hero-r3/', document.currentScript.src);
   function heroAsset(name) { return new URL(name, heroAssets).href; }
   function colorFactor(hex) {
@@ -82,10 +86,10 @@
     }).concat([1]);
   }
   var MODELS3D = [
-    { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: heroAsset('panna-play.glb'), still: 'panna-play', orbit: '35deg 61deg 106%' },
-    { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: heroAsset('panna-court.glb'), still: 'panna-court', orbit: '35deg 61deg 106%' },
-    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø zewn. 5,09 m · 1 m · 1 na 1', glb: heroAsset('panna-ring.glb'), still: 'panna-ring', orbit: '35deg 61deg 106%' },
-    { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: heroAsset('panna-octa.glb'), still: 'panna-octa', orbit: '35deg 61deg 106%' }
+    { k: 'o1', n: 'Play', full: 'Panna Play', code: 'GF-CT-002', dim: 'Ø ~6 m · do 1,52 m · 1 na 1', glb: heroAsset('panna-play.glb'), still: 'panna-play-mv', orbit: '35deg 61deg 106%' },
+    { k: 'p1', n: 'Court', full: 'Panna Court', code: 'GF-CT-003', dim: '7,14 × 5,57 m · do 1,22 m · 1 na 1', glb: heroAsset('panna-court.glb'), still: 'panna-court-mv', orbit: '35deg 61deg 106%' },
+    { k: 'w1', n: 'Ring', full: 'Panna Ring', code: 'GF-CT-001', dim: 'Ø zewn. 5,09 m · 1 m · 1 na 1', glb: heroAsset('panna-ring.glb'), still: 'panna-ring-mv', orbit: '35deg 61deg 106%' },
+    { k: 'octagon', n: 'Octa', full: 'Panna Octa', code: 'GF-CT-008', dim: '4,96 m między bokami · 1,22 m · 1 na 1', glb: heroAsset('panna-octa.glb'), still: 'panna-octa-mv', orbit: '35deg 61deg 106%' }
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
   var cur = { panel: COATS[1], frame: COATS[9], model: MODELS3D[0] }, mv = null;
