@@ -1,11 +1,17 @@
 import assert from 'node:assert/strict';
-import {surfaceAssets,assetCategories,assetLayouts,assetDataUrl,placeLayout,fittedState,scaleFor,defaultAssetColors,getAsset} from '../lib/surface-assets.ts';
+import {surfaceAssets,assetCategories,assetLayouts,assetDataUrl,placeLayout,fittedState,scaleFor,defaultAssetColors,getAsset,stateFromOptions} from '../lib/surface-assets.ts';
 import {graphicSourceError} from '../lib/graphic-source-policy.ts';
 import {projectSchema} from '../lib/project.ts';
 
 assert.equal(new Set(surfaceAssets.map(a=>a.id)).size,surfaceAssets.length,'unique asset ids');
 for(const c of assetCategories)assert.ok(surfaceAssets.some(a=>a.category===c.id),c.id+' has assets');
-assert.ok(surfaceAssets.filter(a=>a.category!=='decor').length>=30,'at least 30 new building blocks');
+assert.ok(surfaceAssets.filter(a=>a.category!=='decor').length>=40,'at least 40 new building blocks');
+assert.deepEqual(assetCategories.slice(0,4).map(c=>c.id),['dribble','passing','agility','course'],'football first');
+const football=surfaceAssets.filter(a=>['dribble','passing','agility','course'].includes(a.category));assert.ok(football.length>=20,'20+ football training elements');
+// parametric drills: size follows the settings in metres, every option renders
+for(const a of surfaceAssets.filter(a=>a.params)){for(const p of a.params)for(const v of [p.min,p.def,p.max]){const st=stateFromOptions(a,{[p.key]:v},['#FFFFFF','#D8F24A']);assert.ok(st.w>0&&st.h>0&&st.w<=60&&st.h<=60,`${a.id}.${p.key}=${v} size`);assert.equal(graphicSourceError(assetDataUrl(a,st)),null,`${a.id}.${p.key}=${v} SVG`);}}
+const sl=stateFromOptions(getAsset('tr-slalom'),{n:8,gap:2,mode:1,off:1.5},['#FFFFFF','#D8F24A']);assert.deepEqual([sl.w,sl.h],[14.3,1.8],'slalom 8 cones every 2 m, zig-zag 1.5 m');
+assert.deepEqual(stateFromOptions(getAsset('tr-slalom'),{n:99,gap:-1},['#FFFFFF']).opts.n,12,'settings clamped to their range');
 for(const a of surfaceAssets){
  assert.ok(a.w>0&&a.h>0&&a.min<=Math.max(a.w,a.h)&&Math.max(a.w,a.h)<=a.max,a.id+' default size inside its range');
  const url=assetDataUrl(a,{w:a.w,h:a.h,colors:defaultAssetColors(['#EF744E','#236F70','#F2C230','#6336F5'],'#47132D',a.slots)});

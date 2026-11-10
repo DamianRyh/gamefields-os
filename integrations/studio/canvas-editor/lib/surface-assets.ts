@@ -3,14 +3,19 @@
    playground games and decorative symbols. Each asset is drawn as a static SVG (1 unit = 1 cm) in up to four
    colours, so the same object renders in the 2D plan, in the 3D previews (as an image) and on print. */
 import {graphicMotifs,graphicMotifSvg,type GraphicMotif} from './graphic-motifs.ts';
+import {drills,drillDefaults,type DrillCategory,type ParamDef} from './football-drills.ts';
+export type {ParamDef} from './football-drills.ts';
 
-export type AssetCategory='zones'|'training'|'games'|'decor';
-export type SurfaceAsset={id:string;name:string;category:AssetCategory;w:number;h:number;slots:number;min:number;max:number;hint?:string;draw:(c:string[],w:number,h:number)=>string};
-export type AssetState={id:string;w:number;h:number;colors:string[]};
+export type AssetCategory=DrillCategory|'zones'|'games'|'decor';
+export type SurfaceAsset={id:string;name:string;category:AssetCategory;w:number;h:number;slots:number;min:number;max:number;hint?:string;params?:ParamDef[];size?:(o:Record<string,number>)=>[number,number];draw:(c:string[],w:number,h:number,o:Record<string,number>)=>string};
+export type AssetState={id:string;w:number;h:number;colors:string[];opts?:Record<string,number>};
 
 export const assetCategories:{id:AssetCategory;label:string;note:string}[]=[
+ {id:'dribble',label:'Prowadzenie i slalom',note:'Slalom, bramki, ósemka i pojedynek. Ustaw liczbę pachołków, odstępy i układ.'},
+ {id:'passing',label:'Podania i strzały',note:'Rondo, kwadrat i trójkąt podań, korytarz, łuk strzałów i tarcze.'},
+ {id:'agility',label:'Koordynacja',note:'Drabinka, T-test, gwiazda, sześciokąt, kropki i pole techniki.'},
+ {id:'course',label:'Tor przeszkód',note:'Numery stacji, strzałki, start i meta. Połącz je z innymi elementami w tor.'},
  {id:'zones',label:'Strefy i kształty',note:'Bloki koloru, z których składasz samą nawierzchnię.'},
- {id:'training',label:'Trening piłkarski',note:'Oznaczenia do ćwiczeń: celność, koordynacja, podania.'},
  {id:'games',label:'Gry podwórkowe',note:'Klasyczne gry malowane na nawierzchni.'},
  {id:'decor',label:'Symbole',note:'Pojedyncze dekoracje i znaki.'}
 ];
@@ -40,16 +45,11 @@ const zones:SurfaceAsset[]=[
  {id:'zone-stripes',name:'Pasy',category:'zones',w:4,h:2,slots:2,min:.8,max:30,draw:([a,b],w,h)=>Array.from({length:6},(_,i)=>rect(0,i*h/6,w,h/6+.5,i%2?b:a)).join('')}
 ];
 
-const training:SurfaceAsset[]=[
- {id:'tr-target',name:'Tarcza celności',category:'training',w:3,h:3,slots:3,min:1,max:8,hint:'Strzały i podania do celu.',draw:([a,b,c],w)=>[0,1,2,3].map(i=>circle(w/2,w/2,w/2*(1-i*.24),i===3?c:i%2?b:a)).join('')+txt(w/2,w/2,w*.12,inkOn(c),'10')},
- {id:'tr-grid9',name:'Strefy strzału 1–9',category:'training',w:3,h:3,slots:2,min:1.5,max:6,hint:'Trener woła numer, zawodnik trafia w strefę.',draw:([a,b],w)=>{const s=w/3;let o='';for(let i=0;i<9;i++){const x=i%3,y=Math.floor(i/3),f=(x+y)%2?b:a;o+=rect(x*s+2,y*s+2,s-4,s-4,f,' rx="4"')+txt(x*s+s/2,y*s+s/2,s*.45,inkOn(f),String(i+1));}return o}},
- {id:'tr-ladder',name:'Drabinka koordynacyjna',category:'training',w:4,h:.6,slots:1,min:2,max:8,hint:'Praca nóg i szybkość.',draw:([a],w,h)=>{const t=Math.max(5,h*.1);let o=rect(0,0,w,t,a)+rect(0,h-t,w,t,a);for(let i=0;i<=8;i++)o+=rect(i*(w-t)/8,0,t,h,a);return o}},
- {id:'tr-slalom',name:'Slalom',category:'training',w:5,h:.5,slots:1,min:2,max:12,hint:'Prowadzenie piłki między punktami.',draw:([a],w,h)=>Array.from({length:6},(_,i)=>circle(h/2+i*(w-h)/5,h/2,h/2,a)).join('')},
- {id:'tr-rondo',name:'Kwadrat rondo',category:'training',w:4,h:4,slots:2,min:2,max:10,hint:'Gra w dziadka: podania w kwadracie.',draw:([a,b],w)=>`<rect x="${w*.06}" y="${w*.06}" width="${w*.88}" height="${w*.88}"${stroke(a,w*.025)} stroke-dasharray="${w*.06} ${w*.04}"/>`+[[.06,.06],[.94,.06],[.94,.94],[.06,.94]].map(([x,y])=>circle(x*w,y*w,w*.06,b)).join('')},
- {id:'tr-triangle',name:'Trójkąt podań',category:'training',w:3,h:2.6,slots:2,min:1.5,max:8,draw:([a,b],w,h)=>{const P=[[w/2,h*.12],[w*.9,h*.88],[w*.1,h*.88]];return `<path d="M${P.map(p=>p.map(r1).join(' ')).join('L')}Z"${stroke(a,w*.025)} stroke-dasharray="${w*.05} ${w*.04}"/>`+P.map(([x,y])=>circle(x,y,w*.09,b)).join('')}},
- {id:'tr-duel',name:'Pole pojedynku',category:'training',w:3,h:3,slots:2,min:2,max:8,hint:'Koło do gry 1 na 1 z punktami startu.',draw:([a,b],w)=>`<circle cx="${w/2}" cy="${w/2}" r="${w*.46}"${stroke(a,w*.035)}/><path d="M${w/2} ${w*.04}V${w*.96}"${stroke(a,w*.02)}/>`+circle(w*.22,w/2,w*.06,b)+circle(w*.78,w/2,w*.06,b)},
- {id:'tr-start',name:'Linia startu',category:'training',w:4,h:.6,slots:2,min:1.5,max:15,draw:([a,b],w,h)=>{const n=Math.max(3,Math.round(w/h/1.6));return rect(0,0,w,h,a)+Array.from({length:n},(_,i)=>{const x=(i+.5)*w/n;return `<path d="M${r1(x-h*.25)} ${r1(h*.2)}L${r1(x+h*.15)} ${r1(h/2)}L${r1(x-h*.25)} ${r1(h*.8)}"${stroke(b,h*.12)}/>`}).join('')}}
+const targets:SurfaceAsset[]=[
+ {id:'tr-target',name:'Tarcza celności',category:'passing',w:3,h:3,slots:3,min:1,max:8,hint:'Strzały i podania do celu.',draw:([a,b,c],w)=>[0,1,2,3].map(i=>circle(w/2,w/2,w/2*(1-i*.24),i===3?c:i%2?b:a)).join('')+txt(w/2,w/2,w*.12,inkOn(c),'10')},
+ {id:'tr-grid9',name:'Strefy strzału 1–9',category:'passing',w:3,h:3,slots:2,min:1.5,max:6,hint:'Trener woła numer, zawodnik trafia w strefę.',draw:([a,b],w)=>{const s=w/3;let o='';for(let i=0;i<9;i++){const x=i%3,y=Math.floor(i/3),f=(x+y)%2?b:a;o+=rect(x*s+2,y*s+2,s-4,s-4,f,' rx="4"')+txt(x*s+s/2,y*s+s/2,s*.45,inkOn(f),String(i+1));}return o}},
 ];
+const drillAssets:SurfaceAsset[]=drills.map(d=>{const o=drillDefaults(d),[w,h]=d.size(o);return {id:d.id,name:d.name,category:d.category,w,h,slots:d.slots,min:.1,max:60,hint:d.hint,params:d.params,size:d.size,draw:d.draw}});
 
 const hopRows=[[1],[2],[3],[4,5],[6],[7,8],[9],[10]];
 const games:SurfaceAsset[]=[
@@ -67,14 +67,17 @@ const games:SurfaceAsset[]=[
 
 const decor:SurfaceAsset[]=graphicMotifs.map((m:GraphicMotif)=>({id:'decor-'+m.id,name:m.name,category:'decor' as const,w:1.5,h:1.5,slots:1,min:.4,max:10,draw:([a],w)=>{const inner=graphicMotifSvg(m,a).replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');return `<g transform="scale(${r1(w/120*100)/100})">${inner}</g>`}}));
 
-export const surfaceAssets:SurfaceAsset[]=[...zones,...training,...games,...decor];
+export const surfaceAssets:SurfaceAsset[]=[...drillAssets.filter(a=>a.category==='dribble'),...drillAssets.filter(a=>a.category==='passing'),...targets,...drillAssets.filter(a=>a.category!=='dribble'&&a.category!=='passing'),...zones,...games,...decor];
 export const getAsset=(id:string)=>surfaceAssets.find(a=>a.id===id);
 
-export function assetSvg(asset:SurfaceAsset,state:{w:number;h:number;colors:string[]}):string{
+export const assetOptions=(asset:SurfaceAsset,opts?:Record<string,number>)=>{if(!asset.params)return {};const o:Record<string,number>={};for(const p of asset.params){const v=opts?.[p.key];o[p.key]=typeof v==='number'&&Number.isFinite(v)?Math.min(p.max,Math.max(p.min,v)):p.def;}return o};
+export function assetSvg(asset:SurfaceAsset,state:{w:number;h:number;colors:string[];opts?:Record<string,number>}):string{
  const w=Math.round(state.w*100),h=Math.round(state.h*100);
- return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${asset.draw(state.colors,w,h)}</svg>`;
+ return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${asset.draw(state.colors,w,h,assetOptions(asset,state.opts))}</svg>`;
 }
-export function assetDataUrl(asset:SurfaceAsset,state:{w:number;h:number;colors:string[]}):string{
+/* Parametric assets: the size follows the settings (real metres), never a free scale. */
+export function stateFromOptions(asset:SurfaceAsset,opts:Record<string,number>|undefined,colors:string[]):AssetState{const o=assetOptions(asset,opts);const [w,h]=asset.size?asset.size(o):[asset.w,asset.h];return {id:asset.id,w,h,colors,opts:o}}
+export function assetDataUrl(asset:SurfaceAsset,state:{w:number;h:number;colors:string[];opts?:Record<string,number>}):string{
  const bytes=new TextEncoder().encode(assetSvg(asset,state));let binary='';for(const b of bytes)binary+=String.fromCharCode(b);
  return 'data:image/svg+xml;base64,'+btoa(binary);
 }
@@ -90,16 +93,25 @@ export function defaultAssetColors(projectColors:string[],base:string,n:number):
 export const fmtM=(n:number)=>new Intl.NumberFormat('pl-PL',{maximumFractionDigits:2}).format(n);
 
 /* Ready layouts: positions as a fraction of the court from its centre, sizes in metres (shrunk to fit). */
-export type AssetLayout={id:string;name:string;note:string;minLength:number;items:{asset:string;fx:number;fy:number;rot?:number;size?:number}[]};
+export type AssetLayout={id:string;name:string;note:string;minLength:number;maxLength?:number;items:{asset:string;fx:number;fy:number;rot?:number;size?:number;opts?:Record<string,number>}[]};
 export const assetLayouts:AssetLayout[]=[
+ {id:'ball-control-course',name:'Tor kontroli piłki',note:'Start, drabinka, slalom, ósemka, bramki i tarcza, z numerami stacji.',minLength:12,items:[
+  {asset:'tr-start',fx:-.45,fy:-.3,rot:90,opts:{len:2}},{asset:'tr-station',fx:-.38,fy:-.4,opts:{num:1,d:.7}},{asset:'tr-ladder',fx:-.24,fy:-.3,opts:{n:7}},{asset:'tr-arrow',fx:-.08,fy:-.3,opts:{len:1}},
+  {asset:'tr-station',fx:.02,fy:-.42,opts:{num:2,d:.7}},{asset:'tr-slalom',fx:.2,fy:-.3,opts:{n:6,gap:1.3,mode:0,route:1}},{asset:'tr-station',fx:.44,fy:-.12,opts:{num:3,d:.7}},
+  {asset:'tr-figure8',fx:.4,fy:.08,rot:90,opts:{gap:2.4}},{asset:'tr-arrow',fx:.4,fy:.34,rot:180,opts:{len:1}},
+  {asset:'tr-station',fx:.3,fy:.44,opts:{num:4,d:.7}},{asset:'tr-gates',fx:.06,fy:.24,opts:{n:4,gw:1,gap:2,mode:1}},{asset:'tr-arrow',fx:-.17,fy:.3,rot:180,opts:{len:1}},
+  {asset:'tr-station',fx:-.3,fy:.42,opts:{num:5,d:.7}},{asset:'tr-target',fx:-.34,fy:.26,size:2.2},{asset:'tr-finish',fx:-.47,fy:.26,rot:90,opts:{len:2}}]},
+ {id:'speed-zone',name:'Strefa szybkości',note:'T-test, gwiazda i slalom zygzakiem na zwinność.',minLength:12,items:[{asset:'tr-tdrill',fx:-.28,fy:0,rot:270,opts:{stem:4.5,bar:7}},{asset:'tr-star',fx:.06,fy:0,opts:{r:3}},{asset:'tr-slalom',fx:.36,fy:0,rot:90,opts:{n:5,gap:1.6,mode:1,off:1.5,route:1}}]},
+ {id:'technique-stations',name:'Stacje techniki',note:'Pole techniki, kropki, sześciokąt i drabinka.',minLength:8,items:[{asset:'tr-grid',fx:-.24,fy:-.18,opts:{cols:3,rows:2,s:1.5}},{asset:'tr-dots',fx:.12,fy:-.24,opts:{k:1.2}},{asset:'tr-hex',fx:.3,fy:-.22,opts:{side:.6}},{asset:'tr-ladder',fx:.08,fy:.3,opts:{n:8}}]},
+ {id:'passing-zone',name:'Strefa podań i strzałów',note:'Rondo, trójkąt podań i łuki strzałów przed bramkami.',minLength:12,items:[{asset:'tr-square',fx:0,fy:-.12,opts:{s:4,mode:0}},{asset:'tr-arc',fx:-.36,fy:0,rot:270,opts:{n:5,r:3.5,ang:120}},{asset:'tr-arc',fx:.36,fy:0,rot:90,opts:{n:5,r:3.5,ang:120}},{asset:'tr-triangle',fx:0,fy:.38,opts:{s:3}}]},
+ {id:'panna-skills',name:'Pojedynek na małej arenie',note:'Pole 1 na 1, slalom i kropki na boisko Panna.',minLength:4,maxLength:9,items:[{asset:'tr-duel',fx:0,fy:0,opts:{d:3.2}},{asset:'tr-slalom',fx:0,fy:-.38,opts:{n:4,gap:1,mode:0,route:1}},{asset:'tr-dots',fx:0,fy:.38,opts:{k:1}}]},
  {id:'colour-corners',name:'Kolorowe narożniki',note:'Cztery narożniki i koło na środku.',minLength:4,items:[{asset:'zone-quarter',fx:-.5,fy:-.5,rot:0,size:.3},{asset:'zone-quarter',fx:.5,fy:-.5,rot:90,size:.3},{asset:'zone-quarter',fx:.5,fy:.5,rot:180,size:.3},{asset:'zone-quarter',fx:-.5,fy:.5,rot:270,size:.3},{asset:'zone-circle',fx:0,fy:0,size:.36}]},
- {id:'accuracy',name:'Strefy celności',note:'Tarcze przy obu bramkach i linia startu na środku.',minLength:5,items:[{asset:'tr-target',fx:-.3,fy:0,size:.2},{asset:'tr-target',fx:.3,fy:0,size:.2},{asset:'tr-start',fx:0,fy:0,rot:90,size:.5}]},
- {id:'coordination',name:'Trening koordynacji',note:'Drabinka, slalom i kwadrat rondo.',minLength:10,items:[{asset:'tr-ladder',fx:-.22,fy:-.3,size:4},{asset:'tr-slalom',fx:.22,fy:.3,size:5},{asset:'tr-rondo',fx:0,fy:0,size:3}]},
  {id:'schoolyard',name:'Podwórko szkolne',note:'Klasy, twister, ślimak liczb i róża wiatrów.',minLength:10,items:[{asset:'g-hopscotch',fx:-.36,fy:0,size:4.4},{asset:'g-twister',fx:-.08,fy:-.24,size:2.4},{asset:'g-snail',fx:.2,fy:.12,size:3.4},{asset:'g-compass',fx:.4,fy:-.26,size:2.2}]}
 ];
 
 /* Fit an asset into the court: the longer side is clamped to the asset's range and to 90 % of the court's short side. */
 export function fittedState(asset:SurfaceAsset,longSide:number,court:{length:number;width:number},colors:string[]):AssetState{
+ if(asset.params)return stateFromOptions(asset,undefined,colors);
  const cap=Math.max(asset.min,.9*Math.min(court.length,court.width));const side=Math.min(Math.max(longSide,asset.min),asset.max,cap);const k=side/Math.max(asset.w,asset.h);
  return {id:asset.id,w:Math.round(asset.w*k*100)/100,h:Math.round(asset.h*k*100)/100,colors};
 }
@@ -109,7 +121,7 @@ export function placeLayout(layout:AssetLayout,court:{length:number;width:number
  const upm=unitsPerMetre(court.length),H=600*court.width/court.length,short=Math.min(court.length,court.width);
  return layout.items.flatMap(item=>{const asset=getAsset(item.asset);if(!asset)return [];
   const want=item.size===undefined?Math.max(asset.w,asset.h):item.size<=1?item.size*short:item.size;
-  const state=fittedState(asset,want,court,colorsFor(asset));const rot=item.rot??0,turned=rot%180!==0;
+  const state=asset.params?stateFromOptions(asset,item.opts,colorsFor(asset)):fittedState(asset,want,court,colorsFor(asset));const rot=item.rot??0,turned=rot%180!==0;
   const bw=(turned?state.h:state.w)*upm/2,bh=(turned?state.w:state.h)*upm/2;
   const x=Math.min(600-bw,Math.max(bw,300+item.fx*600)),y=Math.min(H-bh,Math.max(bh,H/2+item.fy*H));
   return [{asset,state,x:Math.round(x*10)/10,y:Math.round(y*10)/10,rotation:rot>180?rot-360:rot,scale:scaleFor(state,court.length)}];
