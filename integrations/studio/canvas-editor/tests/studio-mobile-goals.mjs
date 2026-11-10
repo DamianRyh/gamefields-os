@@ -23,13 +23,13 @@ try{
    await page.goto(base+'/?arena='+arena);
    const ready=()=>page.locator('[data-model="'+arena+'"][data-ready="true"]').waitFor({timeout:90000});await ready();
    await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Konstrukcja/}).click();
-   await page.locator('.scene-paint-advanced > summary').click();assert.equal(await page.locator('.studio-color-part').count(),3);await page.locator('.studio-panel').screenshot({path:`outputs/mobile/construction-panel-${arena}-${width}.png`});
+   assert.equal(await page.locator('.gfmp-card').count(),7,'all construction models listed');await page.getByRole('navigation',{name:'Ustawienia konstrukcji'}).getByRole('button',{name:'Kolory',exact:true}).click();await page.locator('.scene-paint-advanced > summary').click();assert.equal(await page.locator('.studio-color-part').count(),3);await page.locator('.studio-panel').screenshot({path:`outputs/mobile/construction-panel-${arena}-${width}.png`});
    await page.getByLabel('Kolor: Bandy',{exact:true}).fill('#1d7056');await page.getByText('Logo i detale konstrukcji',{exact:true}).click();await page.getByLabel('Tekst na bandach',{exact:true}).fill(arena.toUpperCase());await ready();
    const event=page.waitForEvent('download');await page.getByRole('button',{name:'Pobierz projekt',exact:true}).first().click();const project=JSON.parse(await readFile(await(await event).path(),'utf8'));assert.equal(project.arenaModel,arena);
    await page.getByRole('button',{name:'Pliki projektu',exact:true}).click();await page.getByLabel('Wczytaj projekt Studio JSON',{exact:true}).setInputFiles({name:'arena.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});await ready();
    if(arena==='p1'){
     await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Nawierzchnia/}).click();
-    if(width<=800)await page.getByRole('button',{name:'Otwórz paletę 16 kolorów',exact:true}).click();await page.getByLabel('Własny kolor',{exact:true}).fill('#245e87');await page.keyboard.press('Escape');await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Materiał',exact:true}).click();
+    await page.locator('.gfsd').getByLabel(/: własny kolor$/).fill('#245e87');await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Materiał',exact:true}).click();
     for(const [label,slug,surface] of [['Malowana','malowana','Akryl sportowy'],['Granulat','granulat-epdm','EPDM'],['Płytki modułowe','plytki-modulowe','Moduły sportowe'],['Sztuczna murawa','sztuczna-murawa','Sztuczna trawa 60 mm']]){
      await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:label,exact:true}).click();
      console.log('Checking material',width,slug);

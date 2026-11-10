@@ -13,7 +13,8 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "test:studio": "node tests/studio-scope.mjs",
     "test:mobile": "node tests/studio-mobile-goals.mjs",
-    "test:surface": "node tests/studio-surface-designer.mjs"
+    "test:surface": "node tests/studio-surface-designer.mjs",
+    "test:models": "node tests/studio-model-picker.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
