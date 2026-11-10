@@ -1,3 +1,24 @@
+## Studio — wybór modelu konstrukcji, 2026-11-10
+
+Karuzela „Konstrukcja stalowa” została zastąpiona listą produktów (`components/studio-model-picker.tsx`).
+
+**Lista modeli:**
+- Wszystkie 7 modeli widać naraz, w grupach „Panna 1 na 1” i „Street 3 na 3”.
+- Karta pokazuje miniaturę, kształt i pole gry oraz obrys z bramkami i wysokość, z danych modeli 3D (`arenaGeometry`).
+- Liczby mają polskie przecinki.
+- Tabela „Porównaj wymiary wszystkich modeli” zawiera pole gry, obrys, wysokość i powierzchnię.
+
+**Panel konstrukcji:**
+- Zakładki: Model, Kolory, Rozbudowa.
+- Kolory konstrukcji są w osobnej zakładce. Przycisk „Dalej: kolory konstrukcji” prowadzi do niej po wyborze modelu.
+- Panna na zakładce Sport używa tej samej listy.
+
+**Walidacja:**
+- tsc, build, test:studio, test:surface;
+- nowy `pnpm test:models` (390 i 1440 px): 7 kart, grupy, ładowanie miniatur, przecinki, zmiana na Panna Octa z zapisem w JSON, tabela, brak przewijania w bok, przejście do kolorów.
+
+`tests/studio-visual-browser.mjs` był nieaktualny już wcześniej: zatrzymuje się na usuniętym menu „Narzędzia edycji”.
+
 ## P2 — sporty i droga do zapytania, 2026-10-29
 
 Dodano Teqball, Street Football, Panna, koszykówkę 3×3 i pełną koszykówkę, wymagane wyposażenie w podglądzie i kalkulacji, udostępniane wersje z wycofaniem, wyszukiwanie/paginację Warsztatu, bibliotekę projektów oraz pakiet zapytania z wyceną. Zachowano najnowszy pływający edytor, karuzele i niezależne kolory konstrukcji; poprawiono mobilną paletę i hydratację. Zakres, testy, migracja i ograniczenia: [P2](P2_IMPLEMENTATION_2026_10_29.md). Produkcyjny CREW pozostaje zależny od poprawienia odrzuconego klucza OpenAI (502/AUTH); wyposażenie bez stawek wymaga indywidualnej wyceny.
