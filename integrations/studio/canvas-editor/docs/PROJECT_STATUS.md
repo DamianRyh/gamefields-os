@@ -1,3 +1,46 @@
+## Studio — Grafika: trening piłkarski, 2026-11-10 (druga część)
+
+Prośba właściciela: na start głównie elementy do treningu piłkarskiego (slalom, tor przeszkód do kontroli piłki), z których klient sam zbuduje przestrzeń.
+
+**Research ustawień ćwiczeń:**
+
+| Ćwiczenie | Typowe ustawienie |
+|---|---|
+| Slalom na kontrolę | 5–6 pachołków co ok. 1,4 m |
+| Zygzak na szybkość | co ok. 4,5 m |
+| T-test | 4,5 + 9 m |
+| Gwiazda, kwadrat | bok ok. 4,5 m |
+| Kropki | 0,6 × 0,9 m |
+| Kwadrat podań / 1 na 1 | ok. 9 × 9 m |
+| Trójkąt podań | 7–9 m |
+| Bramki z pachołków | do prowadzenia i podań |
+| Łuk strzałów | punkty łukiem przed celem |
+
+Źródła: SoccerXpert, Renderfoot, TMI Sports Medicine, Sport Session Planner, FIFA Training Centre, Otumoetai FC.
+
+**Wdrożone (`lib/football-drills.ts`):** 19 elementów z parametrami.
+- **Prowadzenie:**
+  - slalom: 4–12 pachołków, odstęp 0,8–5 m, prosto, zygzak lub wąż, trasa;
+  - bramki z pachołków: liczba, szerokość, odstęp, układ;
+  - ósemka;
+  - pole 1 na 1.
+- **Podania i strzały:** kwadrat treningowy (rondo, 1 na 1 z bramkami, podania ze środkiem), trójkąt, korytarz, łuk strzałów, tarcza, strefy 1–9.
+- **Koordynacja:** drabinka, T-test, gwiazda, sześciokąt, kropki, pole techniki.
+- **Tor przeszkód:** numer stacji, strzałka, start, meta.
+
+**Rozmiar i zapis:**
+- Rozmiar wynika z ustawień, w metrach, bez swobodnego skalowania.
+- Ustawienia zapisują się w `objects[].asset.opts`.
+
+**Gotowe układy:** Tor kontroli piłki, Strefa szybkości, Stacje techniki, Strefa podań i strzałów, Pojedynek na małej arenie (boiska do 9 m).
+
+**Walidacja:** `test:assets`.
+- Wszystkie ustawienia (min, domyślne, max) przechodzą politykę SVG.
+- Rozmiar slalomu się zgadza.
+- Wartości są przycinane do zakresu.
+- Układy mieszczą się na boisku.
+- Test przeglądarkowy: tor, slalom 8 × 2 m zygzakiem, JSON, 3D.
+
 ## Studio — Grafika: elementy nawierzchni, 2026-11-10
 
 **Research (2026-11-10):**
