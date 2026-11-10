@@ -309,19 +309,19 @@ export default function Home(){
  function handleUploads(files:FileList|null){if(!files)return;[...files].forEach((f,i)=>{if(!["image/png","image/svg+xml"].includes(f.type)){toast.error(`${f.name}: obsługiwane są pliki PNG i statyczne SVG.`);return}if(f.size>2000000){toast.error(`${f.name}: logo może mieć maksymalnie 2 MB.`);return}const r=new FileReader();r.onerror=()=>toast.error(`${f.name}: nie udało się odczytać logo.`);r.onload=()=>{const src=String(r.result),error=graphicSourceError(src);if(error){toast.error(`${f.name}: ${error}`);return}addObject(obj("image",f.name,300+i*25,300*p.width/p.length,{src,scale:90}))};r.readAsDataURL(f)})}
  function addText(){const o=obj("text","Tekst",300,180,{text:"TWOJE MIASTO",color:"#ffffff",scale:100});addObject(o)}
  function addEquipment(name:string,x=300,y=180){addObject(obj("equipment",name,x,y,{scale:name==="Banda"?100:85}))}
- function applyPalette(id:string,track=true){const pal=getPatternPalette(id);update({patternPalette:id,base:pal.colors[4],zone:pal.colors[1]},track)}
+ function applyPalette(id:string,track=true){const pal=getPatternPalette(id);update({patternPalette:id,base:pal.colors[4],zone:pal.colors[1],patternColors:undefined},track)}
  function applySignature(id:string){
    const preset=signaturePresets.find(x=>x.id===id);if(!preset)return;
    applyPattern(preset.familyId,preset.variant,preset.paletteId);
  }
  function applyPattern(familyId:string,variant=1,paletteId=p.patternPalette||"miami"){
    const family=getPatternFamily(familyId),pal=getPatternPalette(paletteId);
-   history(p);setP(v=>({...v,pattern:family.name,patternFamily:familyId,patternVariant:variant,patternPalette:paletteId,base:pal.colors[4],zone:pal.colors[1],graphicOpacity:100}));
+   history(p);setP(v=>({...v,pattern:family.name,patternFamily:familyId,patternVariant:variant,patternPalette:paletteId,base:pal.colors[4],zone:pal.colors[1],patternColors:undefined,graphicOpacity:100}));
    setView("builder");setModule(0);toast.success(patternCode(familyId,variant)+" zastosowany");
  }
  function applyDesignDirection(familyId:string,variant:number,paletteId:string){
    const family=getPatternFamily(familyId),pal=getPatternPalette(paletteId);
-   update({pattern:family.name,patternFamily:familyId,patternVariant:variant,patternPalette:paletteId,base:pal.colors[4],zone:pal.colors[1],graphicOpacity:100});
+   update({pattern:family.name,patternFamily:familyId,patternVariant:variant,patternPalette:paletteId,base:pal.colors[4],zone:pal.colors[1],patternColors:undefined,graphicOpacity:100});
  }
  function shufflePattern(similar=false){
    const source=similar?[getPatternFamily(p.patternFamily)]:patternFamilies;

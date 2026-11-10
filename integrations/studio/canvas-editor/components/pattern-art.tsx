@@ -1,7 +1,7 @@
 import {ProPatternArt} from "@/components/pro-pattern-art";
 import {useId,type ReactNode} from "react";
 import type {Project} from "@/lib/project";
-import {getPatternFamily,getPatternPalette} from "@/lib/pattern-library";
+import {getPatternFamily,projectPatternColors} from "@/lib/pattern-library";
 
 type C=[string,string,string,string,string];
 
@@ -471,10 +471,10 @@ function generic(renderer:string,v:number,h:number,[a,b,c,d,e]:C):ReactNode{
 }
 
 export function PatternArt({p,h}:{p:Project;h:number}){
- const family=getPatternFamily(p.patternFamily),palette=getPatternPalette(p.patternPalette),v=Math.max(1,Math.min(12,p.patternVariant||1));
+ const family=getPatternFamily(p.patternFamily),v=Math.max(1,Math.min(12,p.patternVariant||1));
  const opacity=p.graphicOpacity/100,scale=(p.graphicScale/100)*((p.patternDensity||100)/100);
  const uid=useId().replace(/:/g,"");
- const colors:C=[palette.colors[0],p.zone,palette.colors[2],palette.colors[3],p.base];
+ const colors:C=projectPatternColors(p);
  const shadow=Math.max(0,Math.min(100,p.shadowIntensity??0));
  const depthOn=shadow>0;
  const depthId=`gf-depth-${uid}`,shadeId=`gf-shade-${uid}`;
