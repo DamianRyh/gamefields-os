@@ -8,7 +8,7 @@ export type QuoteInput={decorativeLineStyle?:DecorativeLineStyle;surfaceModel?:i
 export type QuoteItem={id:string;label:string;quantity:number;unit:string;unitNet:number|null;totalNet:number|null;note?:string};
 export type ProjectQuote={workingAssumptions?:boolean;constructionPrices?:Record<string,number>;notice?:string;schemaVersion:2;status:"estimated"|"partial"|"unpriced";currency:"PLN";rateVersion:string|null;priceNet:number|null;priceGross:number|null;vatRate:number|null;knownSubtotalNet:number|null;area:number;areaLabel:string;items:QuoteItem[];exclusions:string[];assumptions:string[]};
 // Shared source-derived geometry; keep this re-export for existing consumers.
-import {getPatternPalette} from './pattern-library.ts';
+import {projectPatternColors} from './pattern-library.ts';
 import {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
 export {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
 const money=(n:number)=>Math.round((n+Number.EPSILON)*100)/100;
@@ -40,9 +40,9 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
  const painted=!["Sztuczna trawa 60 mm","Piasek sportowy"].includes(p.surface)&&p.graphicOpacity>0;
  if(painted)add("pattern",`Grafika nawierzchni · wykonanie ${complexity}/4`,billableArea,"m²",c?.patternNetPerM2[String(complexity)]);
  if(painted&&c?.colorPolicy){
-  const palette=getPatternPalette(p.patternPalette);
+  const own=projectPatternColors(p);
   // Budget selected palette, not visible pixel colours or an approved paint recipe.
-  const selected=[p.base,p.zone,palette.colors[0],palette.colors[2],palette.colors[3],...(!p.arenaModel?[p.outside]:[])];
+  const selected=[p.base,p.zone,own[0],own[2],own[3],...(!p.arenaModel?[p.outside]:[])];
   const colors=new Set(selected.filter((v):v is string=>typeof v==="string"&&/^#[0-9a-f]{6}$/i.test(v)).map(v=>v.toLowerCase()));
   const extra=Math.max(0,colors.size-c.colorPolicy.includedColors);
   add("palette-colors",`Paleta projektu · ${colors.size} kolorów · ${extra} ponad pakiet`,billableArea,"m²",money(extra*c.colorPolicy.additionalColorNetPerM2),`Budżet wybranej palety, nie pomiar widocznych kolorów ani receptura farb. Pakiet: ${c.colorPolicy.includedColors}; każdy dodatkowy kolor: ${c.colorPolicy.additionalColorNetPerM2} PLN/m². Linie, logo, napisy, gradienty i cienie rozliczane lub weryfikowane oddzielnie.`);

@@ -244,6 +244,14 @@ export function patternVariantName(familyId:string,variant:number){
 
 export function getPatternFamily(id?:string){return patternFamilies.find(x=>x.id===id)||patternFamilies[0]}
 export function getPatternPalette(id?:string){return patternPalettes.find(x=>x.id===id)||patternPalettes[0]}
+/* The five colours a pattern is painted with: [accent 1, zone, accent 2, accent 3, base].
+   Zone and base always come from the project; the three accents come from the customer's own colours (patternColors,
+   set in the surface designer) or, when there are none, from the chosen palette. */
+const HEX=/^#[0-9a-f]{6}$/i;
+export function projectPatternColors(p:{patternPalette?:string;patternColors?:string[];zone?:string;base?:string}):[string,string,string,string,string]{
+ const pal=getPatternPalette(p.patternPalette).colors,own=p.patternColors&&p.patternColors.length===5&&p.patternColors.every(c=>HEX.test(c))?p.patternColors:null;
+ return [own?own[0]:pal[0],p.zone??pal[1],own?own[2]:pal[2],own?own[3]:pal[3],p.base??pal[4]];
+}
 export function complexityLabel(level:number){
  return ["","prosty","standard","mural","art"][Math.max(1,Math.min(4,level))];
 }
