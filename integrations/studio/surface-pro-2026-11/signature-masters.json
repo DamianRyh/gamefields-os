@@ -1,0 +1,14 @@
+[
+ {"id":"swiss-grid","name":"Swiss Grid","familyId":"pro-swiss","variant":2,"paletteId":"swiss","useCase":"premium / architektura","note":"Siatka modułowa jak w szwajcarskim plakacie: każdy pas i koło na swoim miejscu."},
+ {"id":"homage-squares","name":"Homage Squares","familyId":"pro-homage","variant":1,"paletteId":"albers","useCase":"hotel / lifestyle","note":"Zagnieżdżone kwadraty w ciepłych tonach — spokojne z bliska, mocne z góry."},
+ {"id":"hard-edge","name":"Hard Edge","familyId":"pro-hardedge","variant":2,"paletteId":"hard-edge","useCase":"park / sztuka publiczna","note":"Dwa płaskie kolory i jedna krzywa. Najprostszy w malowaniu, najbardziej galeryjny."},
+ {"id":"dazzle-court","name":"Dazzle Court","familyId":"pro-dazzle","variant":6,"paletteId":"dazzle","useCase":"street / youth","note":"Pasiaste fasety jak kamuflaż okrętów — boisko, które wygląda świetnie na zdjęciach."},
+ {"id":"simultane","name":"Simultané","familyId":"pro-simultane","variant":1,"paletteId":"simultane","useCase":"plac / rynek","note":"Kolorowe tarcze w dwóch połowach boiska, rytm jak na awangardowej tkaninie."},
+ {"id":"cut-outs","name":"Cut-Outs","familyId":"pro-cutouts","variant":5,"paletteId":"gamefields","useCase":"szkoła / dzieci","note":"Wycinane gwiazdy i liście na kolorowych polach — radośnie, ale z klasą."},
+ {"id":"supergraphic","name":"Supergraphic","familyId":"pro-supergraphic","variant":1,"paletteId":"lagos","useCase":"miasto / ikona dzielnicy","note":"Wiązka pasów skręca przez całe boisko. Działa też na ścianach i ogrodzeniu."},
+ {"id":"truchet-loop","name":"Truchet Loop","familyId":"pro-truchet","variant":1,"paletteId":"nightshift","useCase":"młodzież / zabawa","note":"Meandry z kafli — wzór, w którym dzieci same wymyślają trasy i gry."},
+ {"id":"nihon-disc","name":"Nihon Disc","familyId":"pro-nihon","variant":4,"paletteId":"nihon","useCase":"marka / kampania","note":"Dwie tarcze cięte w pasy, dużo powietrza — czysty znak pod markę lub event."},
+ {"id":"loop-bands","name":"Loop Bands","familyId":"pro-loops","variant":2,"paletteId":"aalst","useCase":"event / festiwal","note":"Grube, falujące pętle wokół koła środkowego. Energia festiwalu na nawierzchni."},
+ {"id":"kinetic-stripes","name":"Kinetic Stripes","familyId":"pro-kinetic","variant":4,"paletteId":"cruz-diez","useCase":"klub / turniej","note":"Drobne pasy zmieniają kolor strefami — w biegu nawierzchnia zaczyna drgać."},
+ {"id":"housetop-quilt","name":"Housetop Quilt","familyId":"pro-quilt","variant":2,"paletteId":"gees-bend","useCase":"dzielnica / placemaking","note":"Improwizowane bloki jak ręcznie szyta kołdra — ciepłe, lokalne, sąsiedzkie."}
+]

@@ -59,3 +59,26 @@ Zgodność wsteczna: zapisane projekty używają `patternFamily`, `patternVarian
 ### Polecenie dla Codex / ChatGPT
 
 > W projekcie Sites Gamefields Studio wdroż silnik „Nawierzchnie Pro” według integrations/studio/surface-pro-2026-11/README.md z github.com/DamianRyh/gamefields-os (gałąź studio-skin-2026-11). Pracuj na aktualnych źródłach z Sites (v154), nie na lokalnych kopiach. Wykonaj kroki 1–7, nie zmieniaj schematu projektu, cen, migracji ani istniejących 300 wzorów. Uruchom tsc, build, test:studio i test:mobile, zrób zrzuty karuzeli wzorów przy 390 i 1440 px, opublikuj i dopisz wersję, commit i identyfikator wdrożenia do DEPLOYMENT.md. Jeśli `pattern-library.ts` lub `pattern-art.tsx` w v154 wygląda inaczej niż opisano, zatrzymaj się i zgłoś różnice.
+
+## Kolekcja Masters (2026-11-10)
+
+12 nowych rodzin w tym samym silniku (`pro-swiss` … `pro-quilt`), 8 palet i 12 projektów w `signature-masters.json`. Projekty Masters są pierwsze w edytorze nawierzchni, który ma też filtr „Inspiracje mistrzów”.
+
+Każdy kierunek przejmuje metodę szkoły lub artysty (siatkę, proporcję, logikę koloru albo wzoru), a nie konkretne dzieło:
+
+| Rodzina | Metoda |
+|---|---|
+| Swiss Grid | szkoła szwajcarska, siatka 12 kolumn |
+| Homage Squares | Josef Albers, zagnieżdżone kwadraty |
+| Hard Edge | Ellsworth Kelly, płaszczyzny i jedna krzywa |
+| Dazzle | kamuflaż dazzle 1917–18 |
+| Simultané | Sonia i Robert Delaunay, kontrast symultaniczny |
+| Cut-Outs | wycinanki Matisse’a |
+| Supergraphic | supergrafika architektoniczna lat 60. |
+| Truchet Loop | kafle Truchet |
+| Nihon Disc | japońska szkoła plakatu |
+| Loop Bands | późne wall drawings Sola LeWitta |
+| Kinetic Stripes | Carlos Cruz-Diez, Physichromie |
+| Housetop Quilt | kołdry z Gee’s Bend |
+
+Regeneracja: `node build-studio-files.mjs` zapisuje `studio/lib/*` oraz `../canvas-editor/lib/pattern-library-pro.ts` i `court-art-pro.mjs`. Razem jest 53 rodziny × 12 = 636 wzorów.
