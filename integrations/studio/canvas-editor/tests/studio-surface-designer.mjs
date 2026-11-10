@@ -26,9 +26,10 @@ try{
   assert.equal(await page.locator('.studio-design-flow').count(),0,'old carousels are gone');
   assert.equal(await page.locator('.scene-paint-palette').count(),0,'no colour popover over the court');
   assert.equal(await d.locator('.gfsd-card').count(),8,'first 8 ready projects');
-  await d.getByRole('button',{name:'Pokaż wszystkie projekty (28)',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),28,'all 28 projects: Signature Pro and the earlier library');
-  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Szkoła i dzieci',exact:true}).click();const school=await d.locator('.gfsd-card').count();assert(school>=2&&school<28,'filter by use');
-  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Wszystkie',exact:true}).click();await d.getByRole('button',{name:'Pokaż wszystkie projekty (28)',exact:true}).click();
+  await d.getByRole('button',{name:'Pokaż wszystkie projekty (40)',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),40,'all 40 projects: Masters, Signature Pro and the earlier library');
+  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Szkoła i dzieci',exact:true}).click();const school=await d.locator('.gfsd-card').count();assert(school>=2&&school<40,'filter by use');
+  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Inspiracje mistrzów',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),8,'Masters filter starts with 8');await d.getByRole('button',{name:'Pokaż wszystkie projekty (12)',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),12,'12 Masters projects');
+  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Wszystkie',exact:true}).click();await d.getByRole('button',{name:'Pokaż wszystkie projekty (40)',exact:true}).click();
   const before=await downloadProject(page);
   await d.getByRole('button',{name:/^City Fluid,/}).click();let p=await downloadProject(page);
   assert.equal(p.patternFamily,'organic-flow');assert.equal(p.patternVariant,6);assert.equal(p.patternPalette,'warsaw');assert.equal(p.base,'#8E1D23');assert.equal(p.patternColors,undefined);
@@ -44,11 +45,11 @@ try{
   assert.equal(await d.locator('.gfsd-colors>button[aria-pressed=true]').count(),1,'one colour marked');
   await d.getByRole('button',{name:'przywróć kolory palety',exact:true}).click();p=await downloadProject(page);assert.equal(p.patternColors,undefined);
   // all directions, collapsed until asked
-  assert.equal(await d.locator('.gfsd-more .gfsd-card').count(),0);await d.locator('.gfsd-more>summary').click();await d.locator('.gfsd-more .gfsd-card').first().waitFor();assert.equal(await d.locator('.gfsd-more .gfsd-card').count(),41);
+  assert.equal(await d.locator('.gfsd-more .gfsd-card').count(),0);await d.locator('.gfsd-more>summary').click();await d.locator('.gfsd-more .gfsd-card').first().waitFor();assert.equal(await d.locator('.gfsd-more .gfsd-card').count(),53);
   await d.locator('.gfsd-more').getByRole('button',{name:'Bauhaus',exact:true}).click();p=await downloadProject(page);assert.equal(p.patternFamily,'bauhaus');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'no sideways scroll');
   await d.screenshot({path:`outputs/studio-ux/surface-designer-${width}.png`});
-  report.cases.push({width,projects:28,directions:41,ownColours:true});await page.close();
+  report.cases.push({width,projects:40,directions:53,ownColours:true});await page.close();
  }
  report.status='passed';console.log(JSON.stringify(report));
 }catch(e){report.status='failed';report.error=String(e);console.error(e);process.exitCode=1;}finally{await writeFile('outputs/studio-ux/surface-offers-verification.json',JSON.stringify(report,null,2));await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

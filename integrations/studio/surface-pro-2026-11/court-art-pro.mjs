@@ -358,6 +358,171 @@ function numbers(R, v, h, c) {
   return s;
 }
 
+/* ---------------- Masters collection (2026-11-10) ---------------- */
+// Twelve directions after the great schools of graphic design and painting. Each one borrows a method
+// (grid, proportion, colour interaction, pattern logic), never a specific work. Same contract and flat geometry.
+const sector = (cx, cy, r0, r1, a0, a1, fill) => {
+  const p = (r, a) => f(cx + Math.cos(a) * r) + ' ' + f(cy + Math.sin(a) * r);
+  const large = a1 - a0 > Math.PI + 1e-6 ? 1 : 0;
+  if (r0 <= 0.5) return pathF('M' + f(cx) + ' ' + f(cy) + 'L' + p(r1, a0) + 'A' + f(r1) + ' ' + f(r1) + ' 0 ' + large + ' 1 ' + p(r1, a1) + 'Z', fill);
+  return pathF('M' + p(r1, a0) + 'A' + f(r1) + ' ' + f(r1) + ' 0 ' + large + ' 1 ' + p(r1, a1) + 'L' + p(r0, a1) + 'A' + f(r0) + ' ' + f(r0) + ' 0 ' + large + ' 0 ' + p(r0, a0) + 'Z', fill);
+};
+const others = (c, bg) => { const o = c.filter((x) => x.toUpperCase() !== bg.toUpperCase()); return o.length ? o : [byLight(c)[0]]; };
+const pick = (list, i) => list[((Math.floor(i) % list.length) + list.length) % list.length];
+const rot180 = (h, inner) => '<g transform="rotate(180 300 ' + f(h / 2) + ')">' + inner + '</g>';
+
+// 17 Swiss Grid — International Typographic Style: a 12-column module decides every size and position
+function swiss(R, v, h, c) {
+  const L = byLight(c); const bg = v % 4 === 3 ? L[0] : L[4]; const o = others(c, bg); const mode = v % 3; const u = W / 12; const rows = Math.max(4, Math.round(h / u));
+  let s = rect(0, 0, W, h, bg);
+  if (mode === 0) { // dot matrix: module circles grow toward a focus on the grid
+    const fx = u * (2 + (v % 5) * 2), fy = h * (v % 2 ? 0.3 : 0.7); const maxD = Math.hypot(W, h) * 0.62;
+    for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < 12; gx++) { const x = gx * u + u / 2, y = (gy + 0.5) * h / rows; const t = 1 - Math.min(1, Math.hypot(x - fx, y - fy) / maxD); s += circ(x, y, u * 0.47 * Math.pow(t, 1.3), pick(o, t > 0.55 ? v : v + 1)); }
+  } else if (mode === 1) { // quarter rings from two opposite corners, widths on the module
+    const k = 6 + (v % 3); [[0, h, -Math.PI / 2, 0], [W, 0, Math.PI / 2, Math.PI]].forEach(([cx, cy, a0, a1], side) => { for (let i = 0; i < k; i++) { const r0 = u * (1 + i * 0.75); s += sector(cx, cy, r0, r0 + u * 0.5, a0, a1, pick(o, i + side + v)); } });
+    s += rect(u * 6, h / 2 - u / 2, u, u, pick(o, v + 2));
+  } else { // ragged-right bars like set lines, flush to one axis, plus one large circle on a grid crossing
+    const axis = u * (v % 2 ? 3 : 2); const lh = h / rows; let y = lh * 0.5;
+    for (let i = 0; i < rows - 1; i++) { const len = u * (2 + Math.floor(R() * 8)); s += rect(axis, y, Math.min(len, W - axis - u), lh * (i % 3 === 0 ? 0.62 : 0.34), pick(o, i % 3 === 0 ? v : v + 1)); y += lh; }
+    s += circ(u * 9, h * 0.62, u * 2.5, pick(o, v + 2));
+  }
+  return s;
+}
+
+// 18 Homage Squares — Josef Albers: nested squares sunk toward the bottom edge (1.5 : 1 : 0.5 margins)
+function homage(R, v, h, c) {
+  const L = byLight(c); const order = v % 2 ? L : [...L].reverse(); const cols = [0, 1, 2, 3, 4].map((i) => order[(i + Math.floor(v / 4)) % 5]);
+  const n = 3 + (v % 2); const mode = v % 3; let s = rect(0, 0, W, h, cols[0]);
+  const nest = (x, y, w, hh, flip, shift) => { const ux = w / (2 * n + 2), uy = hh / (3 * n + 3); for (let i = 0; i < n; i++) { const top = i * 1.5 * uy, bot = i * 0.5 * uy; s += rect(x + i * ux, y + (flip ? bot : top), w - 2 * i * ux, hh - top - bot, cols[(i + 1 + shift) % 5]); } };
+  if (mode === 0) { const S = Math.min(280, h * 0.9); nest(150 - S / 2, h / 2 - S / 2, S, S, false, 0); nest(450 - S / 2, h / 2 - S / 2, S, S, true, 0); }
+  else if (mode === 1) nest(W * 0.04, h * 0.06, W * 0.92, h * 0.88, false, 0);
+  else { const S = Math.min(140, h * 0.44); [[150, h * 0.27], [450, h * 0.27], [150, h * 0.73], [450, h * 0.73]].forEach(([x, y], q) => nest(x - S / 2, y - S / 2, S, S, q > 1, q)); }
+  return s;
+}
+
+// 19 Hard Edge — Ellsworth Kelly: one or two flat colours meeting on a single decisive curve
+function hardEdge(R, v, h, c) {
+  const mode = v % 4; const A = c[v % 5]; const o = others(c, A); const B = pick(o, v), C = pick(o, v + 2); const cy = h / 2; let s = rect(0, 0, W, h, A);
+  if (mode === 0) { const r = W * 0.78; s += circ(W * 1.02, h * 1.1, r, B); if (v > 6) s += circ(-W * 0.02, -h * 0.1, r * 0.62, C); }
+  else if (mode === 1) { const k = 120 + (v % 3) * 50; s += pathF('M0 0H300C' + f(300 + k) + ' ' + f(h * 0.3) + ' ' + f(300 - k) + ' ' + f(h * 0.7) + ' 300 ' + f(h) + 'H0Z', B); }
+  else if (mode === 2) { s += pathF('M0 ' + f(h) + 'Q' + f(W * 0.12) + ' ' + f(h * 0.08) + ' ' + f(W) + ' 0V' + f(h) + 'Z', B); s += pathF('M' + f(W) + ' ' + f(h) + 'Q' + f(W * 0.82) + ' ' + f(h * 0.62) + ' ' + f(W * 0.45) + ' ' + f(h) + 'Z', C); }
+  else { const m = 5 + (v % 3); const pw = W / 2 / m; for (let i = 0; i < m; i++) { const col = pick(c, i + v); s += rect(i * pw, 0, pw + 0.5, h, col); s += rect(W - (i + 1) * pw, 0, pw + 0.5, h, col); } }
+  return s;
+}
+
+// 20 Dazzle — First World War dazzle camouflage: big facets, each striped in its own direction
+function dazzle(R, v, h, c) {
+  const L = byLight(c); const dark = L[0], light = L[4], acc = [L[1], L[2], L[3]]; const n = 6 + (v % 4) * 2; const mirror = v % 2 === 0;
+  let ptsList = []; for (let i = 0; i < n; i++) ptsList.push([R() * (mirror ? W / 2 : W), R() * h]); if (mirror) ptsList = ptsList.concat(ptsList.map((p) => [W - p[0], h - p[1]]));
+  const cells = voronoi(ptsList, -5, -5, W + 5, h + 5); let s = rect(0, 0, W, h, light);
+  const looks = cells.map((cell, i) => { const r = R(); return { a: R() * Math.PI, sw: 9 + R() * 15 + (v % 3) * 3, pair: r < 0.6 ? [dark, light] : r < 0.8 ? [acc[i % 3], dark] : [light, acc[(i + 1) % 3]] }; });
+  cells.forEach((cell, i) => {
+    if (cell.length < 3) return; const look = mirror && i >= n ? looks[i - n] : looks[i]; const nx = Math.cos(look.a), ny = Math.sin(look.a);
+    s += poly(cell, look.pair[0]); const pr = cell.map((p) => p[0] * nx + p[1] * ny); const lo = Math.min(...pr), hi = Math.max(...pr);
+    for (let d = lo + look.sw * 0.5; d < hi; d += look.sw * 2) { let band = clipHalf(cell, nx * (d + look.sw), ny * (d + look.sw), nx, ny); if (band.length >= 3) band = clipHalf(band, nx * d, ny * d, -nx, -ny); if (band.length >= 3) s += poly(band, look.pair[1]); }
+  });
+  return s;
+}
+
+// 21 Simultané — Sonia Delaunay: discs of rings split into quadrants, colours set against each other
+function simultane(R, v, h, c) {
+  const L = byLight(c); const bg = v % 2 ? L[4] : L[0]; const o = others(c, bg); const mode = v % 3; let s = rect(0, 0, W, h, bg);
+  const disc = (cx, cy, r, rings, quad, off) => { const w = r / rings; for (let i = 0; i < rings; i++) for (let q = 0; q < quad; q++) { const a0 = -Math.PI / 2 + (q * 2 * Math.PI) / quad; s += sector(cx, cy, r - (i + 1) * w, r - i * w, a0, a0 + (2 * Math.PI) / quad, pick(o, i + q * 2 + off + (i % 2 && q % 2 ? 1 : 0))); } };
+  if (mode === 0) { disc(300, h / 2, h * 0.46, 5, 4, v); [[0, 0], [W, 0], [0, h], [W, h]].forEach(([x, y], k) => disc(x, y, h * 0.3, 3, 4, v + k + 1)); }
+  else if (mode === 1) { const r = Math.min(140, h * 0.42); disc(150, h / 2, r, 4, 4, v); disc(450, h / 2, r, 4, 4, v + 1); disc(300, 0, h * 0.18, 2, 2, v + 2); disc(300, h, h * 0.18, 2, 2, v + 3); }
+  else { const cw = W / 4, rows = Math.max(2, Math.round(h / 150)), ch = h / rows; for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < 4; gx++) { s += rect(gx * cw, gy * ch, cw + 0.5, ch + 0.5, pick(o, gx + gy * 2 + v)); disc(gx * cw + cw / 2, gy * ch + ch / 2, Math.min(cw, ch) * 0.42, 3, (gx + gy) % 2 ? 2 : 4, gx + gy + v + 1); } }
+  return s;
+}
+
+// 22 Cut-Outs — Matisse gouache cut-outs: lobed stars, leaves and algae on one to three colour grounds
+function cutouts(R, v, h, c) {
+  const mode = v % 3; const panels = mode === 0 ? [[0, W, c[4]]] : mode === 1 ? [[0, W / 2, c[4]], [W / 2, W, c[1]]] : [[0, W / 3, c[1]], [W / 3, (2 * W) / 3, c[4]], [(2 * W) / 3, W, c[0]]];
+  let s = ''; panels.forEach(([x0, x1, col]) => { s += rect(x0, 0, x1 - x0 + 0.5, h, col); }); const groundAt = (x) => (panels.find((p) => x >= p[0] && x < p[1]) || panels[0])[2];
+  const placed = []; const n = 9 + (v % 4) * 2;
+  for (let i = 0, tries = 0; i < n && tries < 700; tries++) {
+    const r = 32 + R() * 42, x = 30 + R() * (W - 60), y = 30 + R() * (h - 60);
+    if (Math.hypot(x - 300, y - h / 2) < 55 + r * 0.6 || placed.some((p) => Math.hypot(p[0] - x, p[1] - y) < (p[2] + r) * 0.82)) continue; placed.push([x, y, r]); i++;
+    const cols = others(c, groundAt(x)); const col = pick(cols, R() * cols.length); const a = R() * Math.PI * 2; const k = (i + v) % 3;
+    if (k === 0) { const lobes = 5 + Math.floor(R() * 3), p = []; for (let j = 0; j < lobes * 2; j++) { const aa = a + (j * Math.PI) / lobes, rr = j % 2 ? r * (0.3 + R() * 0.12) : r * (0.85 + R() * 0.25); p.push([x + Math.cos(aa) * rr, y + Math.sin(aa) * rr]); } s += pathF(closedCurve(p), col); }
+    else if (k === 1) { const len = r * 1.2, top = [], bot = [], steps = 10; for (let j = 0; j <= steps; j++) { const t = j / steps, wd = r * 0.44 * Math.sin(Math.PI * t) * (0.7 + 0.5 * Math.abs(Math.sin(t * Math.PI * 3 + i))), ax = (t - 0.5) * 2 * len; top.push([ax, -wd]); bot.push([ax, wd]); } const pts = top.concat(bot.reverse().slice(1, -1)).map(([px, py]) => [x + px * Math.cos(a) - py * Math.sin(a), y + px * Math.sin(a) + py * Math.cos(a)]); s += pathF(closedCurve(pts), col); }
+    else s += pathF(blob(x, y, r * 0.72, R, 8, 0.42), col);
+  }
+  return s;
+}
+
+// 23 Supergraphic — 1960s environmental supergraphics: bundles of fat stripes that sweep and turn
+function supergraphic(R, v, h, c) {
+  const L = byLight(c); const bg = v % 2 ? L[4] : L[0]; const o = others(c, bg); const mode = v % 3; const sw = 18 + (v % 4) * 4, k = 4 + (v % 2); let s = rect(0, 0, W, h, bg);
+  if (mode === 0) { const r0 = h * 0.22; [[0, h, -Math.PI / 2, 0], [W, 0, Math.PI / 2, Math.PI]].forEach(([cx, cy, a0, a1], side) => { for (let i = 0; i < k; i++) s += sector(cx, cy, r0 + i * sw * 1.6, r0 + i * sw * 1.6 + sw, a0, a1, pick(o, i + side + v)); }); }
+  else if (mode === 1) { // a stripe bundle enters from a goal line, turns 90° and runs off the side line; mirrored
+    const tx = W * 0.22, ty = h * 0.64, rIn = h * 0.1; let g = '';
+    for (let i = 0; i < k; i++) { const r0 = rIn + i * sw * 1.5, col = pick(o, i + v); g += rect(-2, ty - r0 - sw, tx + 2, sw, col) + sector(tx, ty, r0, r0 + sw, -Math.PI / 2, 0, col) + rect(tx + r0, ty, sw, h - ty + 2, col); }
+    s += g + rot180(h, g);
+  } else { const ang = Math.atan2(h, W); const nx = -Math.sin(ang), ny = Math.cos(ang); const span = (k - 1) * sw * 1.5; for (let i = 0; i < k; i++) { const off = -span / 2 + i * sw * 1.5; const ox = 300 + nx * off, oy = h / 2 + ny * off, dx = Math.cos(ang) * 900, dy = Math.sin(ang) * 900; s += poly([[ox - dx, oy - dy], [ox + dx, oy + dy], [ox + dx + nx * sw, oy + dy + ny * sw], [ox - dx + nx * sw, oy - dy + ny * sw]], pick(o, i + v)); } [[0, -Math.PI / 2, Math.PI / 2], [W, Math.PI / 2, Math.PI * 1.5]].forEach(([x, a0, a1], side) => { for (let i = 0; i < 3; i++) s += sector(x, h / 2, h * 0.08 + i * sw * 1.5, h * 0.08 + i * sw * 1.5 + sw, a0, a1, pick(o, i + side + v + 1)); }); }
+  return s;
+}
+
+// 24 Truchet — Truchet tiles (1704): quarter-circle tiles that join into endless meanders
+function truchet(R, v, h, c) {
+  const L = byLight(c); const bg = v % 2 ? L[4] : L[0]; const o = others(c, bg); const t = [40, 50, 60][v % 3]; const cols = Math.ceil(W / t), rows = Math.ceil(h / t); const sym = v % 4 < 2; const lw = t * (0.24 + (v % 2) * 0.08); const fillQ = v % 3 === 0;
+  const ori = []; for (let y = 0; y < rows; y++) { ori.push([]); for (let x = 0; x < cols; x++) ori[y].push(R() > 0.5 ? 1 : 0); }
+  if (sym) for (let y = 0; y < rows; y++) for (let x = Math.ceil(cols / 2); x < cols; x++) ori[y][x] = ori[rows - 1 - y][cols - 1 - x];
+  let s = rect(0, 0, W, h, bg); const strokes = {}; const q = (cx, cy, r, a0) => 'M' + f(cx + Math.cos(a0) * r) + ' ' + f(cy + Math.sin(a0) * r) + 'A' + f(r) + ' ' + f(r) + ' 0 0 1 ' + f(cx + Math.cos(a0 + Math.PI / 2) * r) + ' ' + f(cy + Math.sin(a0 + Math.PI / 2) * r);
+  for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < cols; gx++) {
+    const x0 = gx * t, y0 = gy * t; const ring = Math.floor(Math.hypot(gx + 0.5 - cols / 2, (gy + 0.5 - rows / 2) * 1.4) / 2.2); const col = pick(o, ring + v);
+    const corners = ori[gy][gx] ? [[x0 + t, y0, Math.PI / 2], [x0, y0 + t, -Math.PI / 2]] : [[x0, y0, 0], [x0 + t, y0 + t, Math.PI]];
+    corners.forEach(([cx, cy, a0]) => { if (fillQ) s += sector(cx, cy, 0, t / 2 - lw / 2, a0, a0 + Math.PI / 2, pick(o, ring + v + 1)); strokes[col] = (strokes[col] || '') + q(cx, cy, t / 2, a0); });
+  }
+  for (const col in strokes) s += '<path d="' + strokes[col] + '" fill="none" stroke="' + col + '" stroke-width="' + f(lw) + '" stroke-linecap="butt"/>';
+  return s;
+}
+
+// 25 Nihon Disc — post-war Japanese poster school: one great disc, cut into bands, on a quiet ground
+function nihon(R, v, h, c) {
+  const L = byLight(c); const bg = v % 3 === 2 ? L[0] : L[4]; const o = others(c, bg); const sun = pick(o, v); const mode = v % 3; let s = rect(0, 0, W, h, bg);
+  const band = (cx, cy, r, ya, yb, col) => { const pts = []; const dx = (y) => Math.sqrt(Math.max(0, r * r - (y - cy) ** 2)); for (let j = 0; j <= 10; j++) { const y = ya + ((yb - ya) * j) / 10; pts.push([cx + dx(y), y]); } for (let j = 10; j >= 0; j--) { const y = ya + ((yb - ya) * j) / 10; pts.push([cx - dx(y), y]); } return poly(pts, col); };
+  const striped = (cx, cy, r, n, col, flip) => { const hs = [], gs = []; for (let i = 0; i < n; i++) { hs.push(1 - i / (n + 1)); gs.push(i ? (i / (n + 1)) * 0.9 : 0); } const tot = hs.reduce((a, b) => a + b, 0) + gs.reduce((a, b) => a + b, 0); const k = (2 * r) / tot; let y = 0, out = ''; for (let i = 0; i < n; i++) { y += gs[i] * k; const ya = y, yb = y + hs[i] * k; y = yb; out += flip ? band(cx, cy, r, cy + r - yb, cy + r - ya, col) : band(cx, cy, r, cy - r + ya, cy - r + yb, col); } return out; };
+  if (mode === 0) { s += striped(300, h * 0.47, h * 0.39, 8 + (v % 3), sun, false); s += rect(0, h * 0.92, W, h * 0.025, pick(o, v + 1)); }
+  else if (mode === 1) { const r = Math.min(135, h * 0.4); s += striped(150, h / 2, r, 7, sun, false) + striped(450, h / 2, r, 7, pick(o, v + 1), true); }
+  else { const u = W / 12, rows = Math.round(h / u); for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < 12; gx++) s += circ(gx * u + u / 2, (gy + 0.5) * h / rows, u * 0.16, pick(o, v + 1)); s += circ(W * 0.62, h * 0.46, h * 0.3, sun); s += rect(W * 0.08, h * 0.78, W * 0.36, h * 0.05, pick(o, v + 2)); }
+  return s;
+}
+
+// 26 Loop Bands — late Sol LeWitt wall drawings: fat undulating bands with a contrasting outline
+function loops(R, v, h, c) {
+  const L = byLight(c); const bg = v % 2 ? L[4] : L[1]; const ink = v % 2 ? L[0] : L[4]; const o = others(c, bg).filter((x) => x !== ink); const cols = o.length ? o : [L[2]]; const mode = v % 3; const bw = 34 + (v % 3) * 8; let s = rect(0, 0, W, h, bg);
+  if (mode !== 2) { const n = Math.ceil(h / (bw * 1.25)) + 2, amp = 20 + (v % 4) * 9, fr = ((mode === 0 ? 2 : 3) * Math.PI * 2) / W, ph = R() * 6.28; for (let i = -1; i < n; i++) { const y0 = i * bw * 1.25, p = []; for (let x = -40; x <= W + 40; x += 20) p.push([x, y0 + Math.sin(x * fr + ph + (mode === 1 ? i * 0.6 : 0)) * amp]); const d = openCurve(p); s += pathS(d, ink, bw) + pathS(d, pick(cols, i + v), bw - 10); } }
+  else { const ph = R() * 6.28, ph2 = R() * 6.28; for (let i = 9; i >= 1; i--) { const r = i * bw * 0.95; const ring = (rr) => { const p = []; for (let j = 0; j < 14; j++) { const a = (j / 14) * Math.PI * 2, m = 1 + 0.16 * Math.sin(2 * a + ph) + 0.09 * Math.sin(3 * a + ph2); p.push([300 + Math.cos(a) * rr * m * 1.45, h / 2 + Math.sin(a) * rr * m * 0.9]); } return closedCurve(p); }; s += pathF(ring(r + 5), ink) + pathF(ring(r), pick(cols, i + v)); } }
+  return s;
+}
+
+// 27 Kinetic Stripes — Carlos Cruz-Diez Physichromies: fine stripes whose colour pairs change by zone
+function kinetic(R, v, h, c) {
+  const mode = v % 3; const sw = [5, 7, 9][v % 3], pitch = sw * 2.2; const zones = 3 + (v % 3); const zw = W / 2 / zones; let s = '';
+  const zoneOf = (x, y) => { if (mode === 2) return Math.min(zones + 1, Math.floor(Math.hypot(x - 300, (y - h / 2) * 1.6) / (zw * 1.1))); const z = Math.floor(Math.min(x, W - x) / zw); return mode === 1 && y > h * 0.36 && y < h * 0.64 ? z + 1 : z; };
+  if (mode === 2) { s += rect(0, 0, W, h, pick(c, zones + 1 + v)); for (let z = zones + 1; z >= 0; z--) s += '<ellipse cx="300" cy="' + f(h / 2) + '" rx="' + f((z + 1) * zw * 1.1) + '" ry="' + f(((z + 1) * zw * 1.1) / 1.6) + '" fill="' + pick(c, z + v) + '"/>'; }
+  else { for (let z = 0; z < zones; z++) { s += rect(z * zw, 0, zw + 0.5, h, pick(c, z + v)); s += rect(W - (z + 1) * zw, 0, zw + 0.5, h, pick(c, z + v)); } if (mode === 1) for (let z = 0; z < zones; z++) { s += rect(z * zw, h * 0.36, zw + 0.5, h * 0.28, pick(c, z + 1 + v)); s += rect(W - (z + 1) * zw, h * 0.36, zw + 0.5, h * 0.28, pick(c, z + 1 + v)); } }
+  for (let i = 0, x = pitch / 2; x < W; x += pitch, i++) {
+    const breaks = [0, h]; if (mode === 1) breaks.push(h * 0.36, h * 0.64); if (mode === 2) for (let z = 1; z <= zones + 2; z++) { const r = z * zw * 1.1, dx = x + sw / 2 - 300; if (Math.abs(dx) < r) { const dy = Math.sqrt(r * r - dx * dx) / 1.6; breaks.push(h / 2 - dy, h / 2 + dy); } }
+    const ys = [...new Set(breaks.map((y) => clamp(y, 0, h)))].sort((a, b) => a - b);
+    for (let j = 0; j < ys.length - 1; j++) { const y0 = ys[j], y1 = ys[j + 1]; if (y1 - y0 < 0.5) continue; const z = zoneOf(x + sw / 2, (y0 + y1) / 2); s += rect(x, y0, sw, y1 - y0, pick(c, z + v + 2 + (i % 2))); }
+  }
+  return s;
+}
+
+// 28 Housetop Quilt — Gee's Bend quilts: improvised housetop and bar blocks, nothing quite square
+function quilt(R, v, h, c) {
+  const cols = v % 3 === 0 ? 3 : 4, rows = v % 3 === 2 ? 3 : 2, bw = W / cols, bh = h / rows; const mirror = cols === 4 && v % 2 === 0;
+  const block = (x, y, w, hh, kind, Rb) => { let out = '', last = -1; const next = () => { let ci = Math.floor(Rb() * 5); if (ci === last) ci = (ci + 1) % 5; last = ci; return c[ci]; };
+    if (kind === 0) { let cx = x, cy = y, cw = w, ch = hh; for (let i = 0; i < 6 && cw > 14 && ch > 14; i++) { out += rect(cx, cy, cw + 0.5, ch + 0.5, next()); const ins = Math.min(cw, ch) * (0.07 + Rb() * 0.09), ix = ins * (0.7 + Rb() * 0.6), iy = ins * (0.7 + Rb() * 0.6); cx += ix; cy += iy; cw -= ix * (1.6 + Rb() * 0.8); ch -= iy * (1.6 + Rb() * 0.8); } }
+    else if (kind === 1) { let cx = x; while (cx < x + w - 1) { const b = Math.min(x + w - cx, 10 + Rb() * 32); out += rect(cx, y, b + 0.5, hh + 0.5, next()); cx += b; } }
+    else { let cy = y; while (cy < y + hh - 1) { const b = Math.min(y + hh - cy, 9 + Rb() * 26); out += rect(x, cy, w + 0.5, b + 0.5, next()); cy += b; } }
+    return out; };
+  let s = rect(0, 0, W, h, c[4]); const seed = Math.floor(R() * 1e9); let half = '';
+  for (let gy = 0; gy < rows; gy++) for (let gx = 0; gx < (mirror ? cols / 2 : cols); gx++) { const kind = (gx + gy + v) % 3; half += block(gx * bw, gy * bh, bw, bh, kind, rng(seed + gy * 31 + gx)); }
+  return s + half + (mirror ? rot180(h, half) : '');
+}
+
 /* ---------------- catalogue ---------------- */
 export const PRO_FAMILIES = [
   { id: 'pro-fade', name: 'Duperré Fade', short: 'FADE', group: 'premium', renderer: fade, masking: 'wysoka', description: 'Schodkowy gradient od bramek do środka, symetryczny względem linii środkowej.', inspiration: 'Pigalle Duperré, Paryż (Ill-Studio, Pigalle, Nike, 2017)' },
@@ -376,6 +541,18 @@ export const PRO_FAMILIES = [
   { id: 'pro-camo', name: 'Camo Pro', short: 'CAMO', group: 'street', renderer: camo, masking: 'wysoka', description: 'Czterowarstwowy kamuflaż, także w wersji cyfrowej.', inspiration: 'Nike Bondy pitch, Paryż (laisné roussel, Midori Hasuike)' },
   { id: 'pro-mosaic', name: 'Mosaic', short: 'MOSAIC', group: 'play', renderer: mosaic, masking: 'bardzo wysoka', description: 'Mozaika płytek z fugą, kolor płynie po polu gry.', inspiration: 'Terrazzo, mozaika, Yinka Ilori (płytki 3D)' },
   { id: 'pro-numbers', name: 'Big Numbers', short: 'NUM', group: 'brand', renderer: numbers, masking: 'średnia', description: 'Ogromne cyfry blokowe jako supergrafika — numer klubu, kod dzielnicy, rok.', inspiration: 'Supergrafika, numery koszulek' },
+  { id: 'pro-swiss', name: 'Swiss Grid', short: 'GRID', group: 'geometric', renderer: swiss, masking: 'średnia', description: 'Moduł 12 kolumn decyduje o każdym kole, pasie i odstępie — porządek czytelny z drona.', inspiration: 'Szkoła szwajcarska (Josef Müller-Brockmann, Armin Hofmann)' },
+  { id: 'pro-homage', name: 'Homage Squares', short: 'ALBERS', group: 'premium', renderer: homage, masking: 'niska', description: 'Zagnieżdżone kwadraty osadzone ku dołowi; kolory zmieniają się nawzajem.', inspiration: 'Josef Albers, „Homage to the Square”, „Interaction of Color”' },
+  { id: 'pro-hardedge', name: 'Hard Edge', short: 'EDGE', group: 'premium', renderer: hardEdge, masking: 'niska', description: 'Dwa, trzy płaskie kolory i jedna zdecydowana krzywa albo panele widma.', inspiration: 'Ellsworth Kelly, malarstwo hard-edge' },
+  { id: 'pro-dazzle', name: 'Dazzle', short: 'DAZZ', group: 'street', renderer: dazzle, masking: 'bardzo wysoka', description: 'Wielkie fasety, każda pasiasta w innym kierunku — rozbija bryłę boiska.', inspiration: 'Kamuflaż dazzle 1917–18 (Norman Wilkinson, Edward Wadsworth)' },
+  { id: 'pro-simultane', name: 'Simultané', short: 'DISC', group: 'geometric', renderer: simultane, masking: 'wysoka', description: 'Tarcze z pierścieni dzielonych na ćwiartki; kolory grają kontrastem symultanicznym.', inspiration: 'Sonia i Robert Delaunay, orfizm' },
+  { id: 'pro-cutouts', name: 'Cut-Outs', short: 'CUT', group: 'organic', renderer: cutouts, masking: 'średnia', description: 'Wycinane gwiazdy, liście i algi na jednym do trzech polach koloru.', inspiration: 'Henri Matisse, wycinanki gwaszowe (1943–54)' },
+  { id: 'pro-supergraphic', name: 'Supergraphic', short: 'SUPER', group: 'brand', renderer: supergraphic, masking: 'średnia', description: 'Wiązki grubych pasów, które wchodzą od bramki, skręcają i wychodzą bokiem.', inspiration: 'Supergrafika architektoniczna lat 60. (Barbara Stauffacher Solomon)' },
+  { id: 'pro-truchet', name: 'Truchet Loop', short: 'LOOP', group: 'play', renderer: truchet, masking: 'wysoka', description: 'Kafle z ćwiartkami okręgu łączą się w niekończące się meandry.', inspiration: 'Kafle Truchet (1704), sztuka generatywna' },
+  { id: 'pro-nihon', name: 'Nihon Disc', short: 'NIHON', group: 'brand', renderer: nihon, masking: 'średnia', description: 'Jedna wielka tarcza cięta w pasy na spokojnym tle, z rytmem kropek.', inspiration: 'Japońska szkoła plakatu (Yusaku Kamekura, Ikko Tanaka)' },
+  { id: 'pro-loops', name: 'Loop Bands', short: 'WAVE', group: 'organic', renderer: loops, masking: 'wysoka', description: 'Grube, falujące pasy z konturem w kontrze — poziomo albo pętlami wokół środka.', inspiration: 'Sol LeWitt, późne „wall drawings”' },
+  { id: 'pro-kinetic', name: 'Kinetic Stripes', short: 'KINET', group: 'geometric', renderer: kinetic, masking: 'bardzo wysoka', description: 'Drobne pasy, których pary kolorów zmieniają się strefami — kolor „drga” w ruchu.', inspiration: 'Carlos Cruz-Diez, „Physichromie”, kolor kinetyczny' },
+  { id: 'pro-quilt', name: 'Housetop Quilt', short: 'QUILT', group: 'play', renderer: quilt, masking: 'wysoka', description: 'Improwizowane bloki „housetop” i pasy, nic idealnie równe — ciepło tkaniny.', inspiration: 'Kołdry z Gee’s Bend, Alabama' },
 ];
 
 export const PRO_PALETTES = [
@@ -391,6 +568,14 @@ export const PRO_PALETTES = [
   { id: 'reindorf', name: 'Harlem Sun', colors: ['#1A2A6C', '#F7B32B', '#E4572E', '#76B041', '#FDF0D5'], tone: 'słoneczna' },
   { id: 'aalst', name: 'Aalst Memphis', colors: ['#2F5DFF', '#FFD23F', '#FF7BAC', '#1BC5A3', '#FFF7EC'], tone: 'zabawowa' },
   { id: 'nightshift', name: 'Night Shift', colors: ['#0D0B1F', '#2A1F6B', '#7B3FF2', '#00E0C6', '#F5FF6B'], tone: 'nocna' },
+  { id: 'swiss', name: 'Swiss', colors: ['#E1251B', '#111111', '#F2C230', '#2F6BD8', '#F2EFE8'], tone: 'szwajcarska' },
+  { id: 'albers', name: 'Albers', colors: ['#F2B134', '#E86A1F', '#C2321F', '#7A1E1E', '#F6E6B8'], tone: 'ciepła' },
+  { id: 'hard-edge', name: 'Hard Edge', colors: ['#D7261E', '#1B4FA0', '#1F7A4A', '#F2C230', '#F4F1EA'], tone: 'czysta' },
+  { id: 'dazzle', name: 'Dazzle', colors: ['#101114', '#2D5C9E', '#9FB3C8', '#D9D6CE', '#F4F3EF'], tone: 'kontrastowa' },
+  { id: 'simultane', name: 'Simultané', colors: ['#D9822B', '#C4314B', '#2F5C8A', '#2E8C6E', '#F1E6D2'], tone: 'rytmiczna' },
+  { id: 'nihon', name: 'Nihon', colors: ['#D6342C', '#1D2A44', '#E9B44C', '#2F6F8F', '#F3EBDD'], tone: 'graficzna' },
+  { id: 'cruz-diez', name: 'Cruz-Diez', colors: ['#E63A2E', '#1D9E5A', '#2B5FD9', '#111111', '#F7F3EA'], tone: 'kinetyczna' },
+  { id: 'gees-bend', name: 'Gee’s Bend', colors: ['#2E4A7A', '#B5462F', '#E2C08D', '#6F7D3A', '#F1E9DA'], tone: 'tekstylna' },
 ];
 
 const FAM = Object.fromEntries(PRO_FAMILIES.map((x) => [x.id, x]));

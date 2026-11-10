@@ -208,6 +208,162 @@ export const proFamilies:PatternFamily[]=[
   ],
   "baseComplexity": 2,
   "renderer": "pro"
+ },
+ {
+  "id": "pro-swiss",
+  "name": "Swiss Grid",
+  "short": "GRID",
+  "group": "geometric",
+  "description": "Moduł 12 kolumn decyduje o każdym kole, pasie i odstępie — porządek czytelny z drona.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-homage",
+  "name": "Homage Squares",
+  "short": "ALBERS",
+  "group": "premium",
+  "description": "Zagnieżdżone kwadraty osadzone ku dołowi; kolory zmieniają się nawzajem.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-hardedge",
+  "name": "Hard Edge",
+  "short": "EDGE",
+  "group": "premium",
+  "description": "Dwa, trzy płaskie kolory i jedna zdecydowana krzywa albo panele widma.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-dazzle",
+  "name": "Dazzle",
+  "short": "DAZZ",
+  "group": "street",
+  "description": "Wielkie fasety, każda pasiasta w innym kierunku — rozbija bryłę boiska.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 4,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-simultane",
+  "name": "Simultané",
+  "short": "DISC",
+  "group": "geometric",
+  "description": "Tarcze z pierścieni dzielonych na ćwiartki; kolory grają kontrastem symultanicznym.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 3,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-cutouts",
+  "name": "Cut-Outs",
+  "short": "CUT",
+  "group": "organic",
+  "description": "Wycinane gwiazdy, liście i algi na jednym do trzech polach koloru.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-supergraphic",
+  "name": "Supergraphic",
+  "short": "SUPER",
+  "group": "brand",
+  "description": "Wiązki grubych pasów, które wchodzą od bramki, skręcają i wychodzą bokiem.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-truchet",
+  "name": "Truchet Loop",
+  "short": "LOOP",
+  "group": "play",
+  "description": "Kafle z ćwiartkami okręgu łączą się w niekończące się meandry.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 3,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-nihon",
+  "name": "Nihon Disc",
+  "short": "NIHON",
+  "group": "brand",
+  "description": "Jedna wielka tarcza cięta w pasy na spokojnym tle, z rytmem kropek.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-loops",
+  "name": "Loop Bands",
+  "short": "WAVE",
+  "group": "organic",
+  "description": "Grube, falujące pasy z konturem w kontrze — poziomo albo pętlami wokół środka.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 3,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-kinetic",
+  "name": "Kinetic Stripes",
+  "short": "KINET",
+  "group": "geometric",
+  "description": "Drobne pasy, których pary kolorów zmieniają się strefami — kolor „drga” w ruchu.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 4,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-quilt",
+  "name": "Housetop Quilt",
+  "short": "QUILT",
+  "group": "play",
+  "description": "Improwizowane bloki „housetop” i pasy, nic idealnie równe — ciepło tkaniny.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 3,
+  "renderer": "pro"
  }
 ];
 export const proPalettes:PatternPalette[]=[
@@ -354,6 +510,102 @@ export const proPalettes:PatternPalette[]=[
    "#F5FF6B"
   ],
   "tone": "nocna"
+ },
+ {
+  "id": "swiss",
+  "name": "Swiss",
+  "colors": [
+   "#E1251B",
+   "#111111",
+   "#F2C230",
+   "#2F6BD8",
+   "#F2EFE8"
+  ],
+  "tone": "szwajcarska"
+ },
+ {
+  "id": "albers",
+  "name": "Albers",
+  "colors": [
+   "#F2B134",
+   "#E86A1F",
+   "#C2321F",
+   "#7A1E1E",
+   "#F6E6B8"
+  ],
+  "tone": "ciepła"
+ },
+ {
+  "id": "hard-edge",
+  "name": "Hard Edge",
+  "colors": [
+   "#D7261E",
+   "#1B4FA0",
+   "#1F7A4A",
+   "#F2C230",
+   "#F4F1EA"
+  ],
+  "tone": "czysta"
+ },
+ {
+  "id": "dazzle",
+  "name": "Dazzle",
+  "colors": [
+   "#101114",
+   "#2D5C9E",
+   "#9FB3C8",
+   "#D9D6CE",
+   "#F4F3EF"
+  ],
+  "tone": "kontrastowa"
+ },
+ {
+  "id": "simultane",
+  "name": "Simultané",
+  "colors": [
+   "#D9822B",
+   "#C4314B",
+   "#2F5C8A",
+   "#2E8C6E",
+   "#F1E6D2"
+  ],
+  "tone": "rytmiczna"
+ },
+ {
+  "id": "nihon",
+  "name": "Nihon",
+  "colors": [
+   "#D6342C",
+   "#1D2A44",
+   "#E9B44C",
+   "#2F6F8F",
+   "#F3EBDD"
+  ],
+  "tone": "graficzna"
+ },
+ {
+  "id": "cruz-diez",
+  "name": "Cruz-Diez",
+  "colors": [
+   "#E63A2E",
+   "#1D9E5A",
+   "#2B5FD9",
+   "#111111",
+   "#F7F3EA"
+  ],
+  "tone": "kinetyczna"
+ },
+ {
+  "id": "gees-bend",
+  "name": "Gee’s Bend",
+  "colors": [
+   "#2E4A7A",
+   "#B5462F",
+   "#E2C08D",
+   "#6F7D3A",
+   "#F1E9DA"
+  ],
+  "tone": "tekstylna"
  }
 ] as PatternPalette[];
 export const proSignaturePresets:SignaturePreset[]=[
@@ -516,5 +768,127 @@ export const proSignaturePresets:SignaturePreset[]=[
   "paletteId": "gamefields",
   "useCase": "klub / sponsor",
   "note": "Numer jako supergrafika — klub, rok założenia, kod dzielnicy."
+ }
+];
+export const mastersSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "swiss-grid",
+  "name": "Swiss Grid",
+  "eyebrow": "MASTERS 01",
+  "familyId": "pro-swiss",
+  "variant": 2,
+  "paletteId": "swiss",
+  "useCase": "premium / architektura",
+  "note": "Siatka modułowa jak w szwajcarskim plakacie: każdy pas i koło na swoim miejscu."
+ },
+ {
+  "id": "homage-squares",
+  "name": "Homage Squares",
+  "eyebrow": "MASTERS 02",
+  "familyId": "pro-homage",
+  "variant": 1,
+  "paletteId": "albers",
+  "useCase": "hotel / lifestyle",
+  "note": "Zagnieżdżone kwadraty w ciepłych tonach — spokojne z bliska, mocne z góry."
+ },
+ {
+  "id": "hard-edge",
+  "name": "Hard Edge",
+  "eyebrow": "MASTERS 03",
+  "familyId": "pro-hardedge",
+  "variant": 2,
+  "paletteId": "hard-edge",
+  "useCase": "park / sztuka publiczna",
+  "note": "Dwa płaskie kolory i jedna krzywa. Najprostszy w malowaniu, najbardziej galeryjny."
+ },
+ {
+  "id": "dazzle-court",
+  "name": "Dazzle Court",
+  "eyebrow": "MASTERS 04",
+  "familyId": "pro-dazzle",
+  "variant": 6,
+  "paletteId": "dazzle",
+  "useCase": "street / youth",
+  "note": "Pasiaste fasety jak kamuflaż okrętów — boisko, które wygląda świetnie na zdjęciach."
+ },
+ {
+  "id": "simultane",
+  "name": "Simultané",
+  "eyebrow": "MASTERS 05",
+  "familyId": "pro-simultane",
+  "variant": 1,
+  "paletteId": "simultane",
+  "useCase": "plac / rynek",
+  "note": "Kolorowe tarcze w dwóch połowach boiska, rytm jak na awangardowej tkaninie."
+ },
+ {
+  "id": "cut-outs",
+  "name": "Cut-Outs",
+  "eyebrow": "MASTERS 06",
+  "familyId": "pro-cutouts",
+  "variant": 5,
+  "paletteId": "gamefields",
+  "useCase": "szkoła / dzieci",
+  "note": "Wycinane gwiazdy i liście na kolorowych polach — radośnie, ale z klasą."
+ },
+ {
+  "id": "supergraphic",
+  "name": "Supergraphic",
+  "eyebrow": "MASTERS 07",
+  "familyId": "pro-supergraphic",
+  "variant": 1,
+  "paletteId": "lagos",
+  "useCase": "miasto / ikona dzielnicy",
+  "note": "Wiązka pasów skręca przez całe boisko. Działa też na ścianach i ogrodzeniu."
+ },
+ {
+  "id": "truchet-loop",
+  "name": "Truchet Loop",
+  "eyebrow": "MASTERS 08",
+  "familyId": "pro-truchet",
+  "variant": 1,
+  "paletteId": "nightshift",
+  "useCase": "młodzież / zabawa",
+  "note": "Meandry z kafli — wzór, w którym dzieci same wymyślają trasy i gry."
+ },
+ {
+  "id": "nihon-disc",
+  "name": "Nihon Disc",
+  "eyebrow": "MASTERS 09",
+  "familyId": "pro-nihon",
+  "variant": 4,
+  "paletteId": "nihon",
+  "useCase": "marka / kampania",
+  "note": "Dwie tarcze cięte w pasy, dużo powietrza — czysty znak pod markę lub event."
+ },
+ {
+  "id": "loop-bands",
+  "name": "Loop Bands",
+  "eyebrow": "MASTERS 10",
+  "familyId": "pro-loops",
+  "variant": 2,
+  "paletteId": "aalst",
+  "useCase": "event / festiwal",
+  "note": "Grube, falujące pętle wokół koła środkowego. Energia festiwalu na nawierzchni."
+ },
+ {
+  "id": "kinetic-stripes",
+  "name": "Kinetic Stripes",
+  "eyebrow": "MASTERS 11",
+  "familyId": "pro-kinetic",
+  "variant": 4,
+  "paletteId": "cruz-diez",
+  "useCase": "klub / turniej",
+  "note": "Drobne pasy zmieniają kolor strefami — w biegu nawierzchnia zaczyna drgać."
+ },
+ {
+  "id": "housetop-quilt",
+  "name": "Housetop Quilt",
+  "eyebrow": "MASTERS 12",
+  "familyId": "pro-quilt",
+  "variant": 2,
+  "paletteId": "gees-bend",
+  "useCase": "dzielnica / placemaking",
+  "note": "Improwizowane bloki jak ręcznie szyta kołdra — ciepłe, lokalne, sąsiedzkie."
  }
 ];

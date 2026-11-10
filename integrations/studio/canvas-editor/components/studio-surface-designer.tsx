@@ -1,7 +1,7 @@
 "use client";
 /* Surface designer (2026-11-10). One place to build a painted surface: pick a ready project, change its variant,
    pick a palette or set each colour yourself. Merges the Signature Pro directions with the earlier Gamefields library:
-   28 ready projects (signaturePresets) and all 41 pattern directions. Replaces the three carousels and the colour popover. */
+   40 ready projects (12 Masters, 16 Signature Pro, 12 earlier) and all 53 pattern directions. Replaces the three carousels and the colour popover. */
 import {useMemo,useState} from 'react';
 import {ChevronLeft,ChevronRight,Shuffle,Check} from 'lucide-react';
 import type {Project} from '@/lib/project';
@@ -12,6 +12,7 @@ import '@/app/studio-surface-designer.css';
 type Patch=Partial<Project>;
 const CATEGORIES=[
  {id:'all',label:'Wszystkie',test:/./},
+ {id:'masters',label:'Inspiracje mistrzów',test:/./,eyebrow:'MASTERS'},
  {id:'city',label:'Miasto i park',test:/miast|park|plac|dzielnic|miejsk|eco|rynek|rewitaliz|sztuka publiczna/},
  {id:'school',label:'Szkoła i dzieci',test:/szkoł|dzieci|młodzież|zabaw/},
  {id:'club',label:'Klub i turniej',test:/klub|turniej|kibic|sponsor/},
@@ -34,7 +35,7 @@ export function StudioSurfaceDesigner({project:p,update}:{project:Project;update
  const activePreset=signaturePresets.find(x=>x.familyId===p.patternFamily&&x.variant===p.patternVariant&&x.paletteId===p.patternPalette);
  const family=getPatternFamily(p.patternFamily);
  const variant=Math.max(1,Math.min(12,p.patternVariant||1));
- const list=useMemo(()=>{const c=CATEGORIES.find(x=>x.id===cat)!;return signaturePresets.filter(x=>c.test.test(x.useCase.toLowerCase()))},[cat]);
+ const list=useMemo(()=>{const c=CATEGORIES.find(x=>x.id===cat)!;return signaturePresets.filter(x=>c.test.test(x.useCase.toLowerCase())&&(!('eyebrow' in c)||x.eyebrow.startsWith(c.eyebrow)))},[cat]);
  const ownColors=!!(p.patternColors&&p.patternColors.length===5);
  /* Colour parts in the order a customer reads the court: the ground first, then the pattern, then lines and surroundings. */
  const parts=[

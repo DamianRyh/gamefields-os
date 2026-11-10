@@ -1,16 +1,19 @@
 import assert from 'node:assert/strict';
 import {renderPro} from '../lib/court-art-pro.mjs';
-import {proFamilies,proPalettes,proSignaturePresets} from '../lib/pattern-library-pro.ts';
+import {proFamilies,proPalettes,proSignaturePresets,mastersSignaturePresets} from '../lib/pattern-library-pro.ts';
 import {patternFamilies,patternPalettes,signaturePresets} from '../lib/pattern-library.ts';
 
-assert.equal(proFamilies.length,16);
-assert.equal(proPalettes.length,12);
+assert.equal(proFamilies.length,28);
+assert.equal(proPalettes.length,20);
 assert.equal(proSignaturePresets.length,16);
+assert.equal(mastersSignaturePresets.length,12);
+assert.deepEqual(new Set(mastersSignaturePresets.map(p=>p.familyId)).size,12,'one Masters project per new direction');
 assert.equal(patternFamilies.filter(f=>!f.id.startsWith('pro-')).length,25);
-assert.deepEqual(signaturePresets.slice(0,16),proSignaturePresets);
-assert.equal(signaturePresets.slice(16).length,12);
+assert.deepEqual(signaturePresets.slice(0,12),mastersSignaturePresets);
+assert.deepEqual(signaturePresets.slice(12,28),proSignaturePresets);
+assert.equal(signaturePresets.slice(28).length,12);
 for(const rows of [patternFamilies,patternPalettes,signaturePresets])assert.equal(new Set(rows.map(row=>row.id)).size,rows.length,'Identifiers must remain unique');
-for(const preset of proSignaturePresets){
+for(const preset of [...mastersSignaturePresets,...proSignaturePresets]){
  assert.ok(proFamilies.some(f=>f.id===preset.familyId));
  assert.ok(proPalettes.some(p=>p.id===preset.paletteId));
  assert.ok(preset.variant>=1&&preset.variant<=12);

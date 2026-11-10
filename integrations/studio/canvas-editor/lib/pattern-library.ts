@@ -1,4 +1,4 @@
-import {proFamilies,proPalettes,proSignaturePresets} from "./pattern-library-pro.ts";
+import {proFamilies,proPalettes,proSignaturePresets,mastersSignaturePresets} from "./pattern-library-pro.ts";
 export type PatternGroup="organic"|"geometric"|"street"|"premium"|"brand"|"play";
 export type PatternFamily={
  id:string;
@@ -106,7 +106,7 @@ const baseSignaturePresets:SignaturePreset[]=[
  {id:"local-lettering",name:"Local Lettering",eyebrow:"SIGNATURE 11",familyId:"local-id",variant:12,paletteId:"warsaw",useCase:"dzielnica / placemaking",note:"Wzór budowany pod nazwę miejsca, dzielnicy lub lokalne hasło."},
  {id:"festival-art",name:"Festival Art",eyebrow:"SIGNATURE 12",familyId:"street-art",variant:5,paletteId:"sunset",useCase:"event / kultura",note:"Najbardziej ekspresyjny kierunek do realizacji muralowych i przestrzeni eventowych."}
 ];
-export const signaturePresets:SignaturePreset[]=[...proSignaturePresets,...baseSignaturePresets];
+export const signaturePresets:SignaturePreset[]=[...mastersSignaturePresets,...proSignaturePresets,...baseSignaturePresets];
 
 
 export const curatedPatterns:CuratedPattern[]=[
