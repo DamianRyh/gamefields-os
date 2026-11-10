@@ -1,3 +1,38 @@
+## Studio — Grafika: elementy nawierzchni, 2026-11-10
+
+**Research (2026-11-10):**
+- Konfiguratory nawierzchni (VersaCourt) dają kolory, linie gier i logo, bez własnej kompozycji.
+- Producenci malowań termoplastycznych (Start Safety: 41 gotowych wzorów, np. klasy, ślimak liczb, twister) sprzedają z katalogu. Planer drag & drop Magical Playground Markings działa tylko w UK, po zalogowaniu.
+- Playground Ideas ma ok. 150 elementów w 3D. Cemer ma prawdziwe wymiary i strefy bezpieczeństwa, ale nie ma grafiki na nawierzchni.
+
+Nikt nie łączy prawdziwej skali, gier i treningu na nawierzchni oraz podglądu 3D z wyceną.
+
+**Wdrożone:**
+- **Biblioteka `lib/surface-assets.ts`.** 30 nowych elementów w prawdziwej skali (metry), w kategoriach Strefy i kształty, Trening piłkarski oraz Gry podwórkowe. 24 dotychczasowe motywy trafiły do kategorii Symbole.
+  - Elementy mają 1–4 kolory, domyślnie z palety projektu, z kontrastem do tła.
+  - SVG przechodzi `graphic-source-policy`.
+- **4 gotowe układy**, dopasowane i przycięte do boiska.
+- **Zakładka Grafika:**
+  - zakładki Elementy, Linie, Logo i tekst;
+  - przełącznik Plan 2D / Podgląd 3D;
+  - edytor elementu: rozmiar w m, obrót 0/45/90/135/180°, kolory projektu i dodatkowe, lustrzana kopia (symetria względem środka), duplikat, wyśrodkowanie, kolejność warstw, dokładna pozycja w m.
+- **Plan 2D:**
+  - przyciąganie do siatki 25 cm i do osi boiska;
+  - obrót co 15°;
+  - uchwyt skali aktualizuje rozmiar w m;
+  - ramka zaznaczenia w proporcjach elementu.
+- **Schemat projektu:**
+  - nowe opcjonalne pole `objects[].asset {id,w,h,colors}`;
+  - zakres `scale` rozszerzony do 2–1500 (prawdziwa skala na boisku 15 m), czyli tylko poszerzony, więc stare projekty dalej przechodzą walidację.
+- **Poprawka 3D:** obiekty na prostokątnych płytach (`blender-arena-preview`) są mapowane tak jak linie boiska: 30–570 i proporcja długość/szerokość. Wcześniej grafiki na 15 × 10 m lądowały za wysoko i były spłaszczone.
+
+**Walidacja:**
+- tsc i build;
+- `pnpm test:assets`:
+  - test logiczny: 54 elementy, polityka SVG, skala, układy w granicach boiska, JSON;
+  - test przeglądarkowy 390 i 1440 px: zakładki, układ, element, rozmiar, kolor, obrót, lustrzana kopia, warstwy, zapis JSON, 3D, brak przewijania w bok;
+- test:studio, test:models, test:surface, graphic-boundaries, quote-engine, component-specification, project-owned-reference.
+
 ## Studio — wybór modelu konstrukcji, 2026-11-10
 
 Karuzela „Konstrukcja stalowa” została zastąpiona listą produktów (`components/studio-model-picker.tsx`).

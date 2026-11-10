@@ -45,7 +45,8 @@ export function floorSvg(project:Project){
    {!turf&&<PatternArt p={project} h={600}/>}
    {(!slab||['street-field','octagon'].includes(project.arenaModel||''))&&<SurfaceAppearance surface={project.surface} id="floor-6" height={600} length={project.length}/>}
    <CreativeCourtLines project={project} height={600}/>
-   <PannaSurfaceObjects project={project}/>
+   {/* plan objects: 600 units per court length; on rectangular slabs the court lines span 30–570 of the square texture */}
+   <g transform={slab?`${!project.modular&&project.arenaModel==='street-field'?`translate(${300*(1-6.214/7.3)} ${300*(1-4.648/5.3)}) scale(${6.214/7.3} ${4.648/5.3})`:!project.modular&&project.arenaModel==='octagon'?`translate(${300*(1-4.962/6)} ${300*(1-4.962/6)}) scale(${4.962/6})`:''} translate(30 30) scale(.9 ${.9*project.length/Math.max(.1,project.width)})`.trim():undefined}><PannaSurfaceObjects project={project}/></g>
    {project.lines&&(slab?<g fill="none" stroke={project.lineColor} strokeWidth="3" transform={!project.modular&&project.arenaModel==='street-field'?`translate(${300*(1-6.214/7.3)} ${300*(1-4.648/5.3)}) scale(${6.214/7.3} ${4.648/5.3})`:!project.modular&&project.arenaModel==='octagon'?`translate(${300*(1-4.962/6)} ${300*(1-4.962/6)}) scale(${4.962/6})`:undefined}>
     <path d={project.arenaModel==='octagon'?'M188 30H412L570 188V412L412 570H188L30 412V188Z':project.arenaModel==='street-field'?'M30 30H570V570H30Z':'M60 30H540L570 60V540L540 570H60L30 540V60Z'}/>
     <path d="M30 300H570"/>
