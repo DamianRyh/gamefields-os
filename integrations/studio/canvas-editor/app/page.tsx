@@ -36,6 +36,7 @@ import {isRoundCourt,courtArea,courtAspect,courtDimensions,clampToCircle,roundBa
 import {selectSurface,sportSurface,type SurfaceModel} from "@/lib/sport-surfaces";
 import {SportSurfaceArt} from "@/components/sport-surface-art";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
+import {getAsset,scaleFor} from "@/lib/surface-assets";
 
 const uid=()=>Math.random().toString(36).slice(2,9);
 const obj=(kind:ObjectKind,name:string,x:number,y:number,extra:Partial<EditorObject>={}):EditorObject=>({id:uid(),kind,name,x,y,scale:100,rotation:0,opacity:100,color:"#ffffff",target:"court",...extra});
@@ -112,16 +113,17 @@ function EditorObjectView({o,h,round=false,selected,onPointerDown}:{o:EditorObje
  if(o.target==="band-right"){x=622;rot+=90}
  if(round&&o.target!=="court"){const pos=roundBandPosition(o);x=pos.x;y=pos.y;rot=o.rotation+pos.rotation;}
  const tr="translate("+x+" "+y+") rotate("+rot+") scale("+o.scale/100+")";
+ const aw=o.asset?.w??1,ah=o.asset?.h??1,bx=o.asset?55*Math.min(1,aw/ah)+11:66,by=o.asset?55*Math.min(1,ah/aw)+11:66;
  return <g className={"editable-object "+(selected?"selected":"")} transform={tr} opacity={o.opacity/100} onPointerDown={e=>onPointerDown(e,o.id,"move")}>
    {o.kind==="image"&&o.src?<image href={o.src} x="-55" y="-55" width="110" height="110" preserveAspectRatio="xMidYMid meet"/>:null}
    {o.kind==="text"?<text textAnchor="middle" dominantBaseline="middle" fill={o.color} fontSize="34" fontWeight="800">{o.text||"TWÓJ TEKST"}</text>:null}
    {o.kind==="sponsor"?<g><rect x="-58" y="-22" width="116" height="44" rx="5" fill="#18221f" stroke={o.color} strokeWidth="2"/><text textAnchor="middle" dominantBaseline="middle" fill={o.color} fontSize="17" fontWeight="900" letterSpacing="1">{o.text||o.name}</text></g>:null}
    {o.kind==="equipment"?<EquipmentShape name={o.name}/>:null}
    {selected?<g className="transform-ui" opacity="1">
-     <rect x="-66" y="-66" width="132" height="132" rx="4" fill="none" stroke="#d8ff77" strokeWidth="3" strokeDasharray="7 5" vectorEffect="non-scaling-stroke"/>
-     <line x1="0" y1="-66" x2="0" y2="-87" stroke="#d8ff77" strokeWidth="2" vectorEffect="non-scaling-stroke"/>
-     <circle className="transform-handle rotate-handle" cx="0" cy="-94" r="8" fill="#20352c" stroke="#d8ff77" strokeWidth="3" vectorEffect="non-scaling-stroke" onPointerDown={e=>{e.stopPropagation();onPointerDown(e,o.id,"rotate")}}/>
-     <circle className="transform-handle scale-handle" cx="70" cy="70" r="9" fill="#d8ff77" stroke="#20352c" strokeWidth="3" vectorEffect="non-scaling-stroke" onPointerDown={e=>{e.stopPropagation();onPointerDown(e,o.id,"scale")}}/>
+     <rect x={-bx} y={-by} width={bx*2} height={by*2} rx="4" fill="none" stroke="#d8ff77" strokeWidth="3" strokeDasharray="7 5" vectorEffect="non-scaling-stroke"/>
+     <line x1="0" y1={-by} x2="0" y2={-by-21} stroke="#d8ff77" strokeWidth="2" vectorEffect="non-scaling-stroke"/>
+     <circle className="transform-handle rotate-handle" cx="0" cy={-by-28} r="8" fill="#20352c" stroke="#d8ff77" strokeWidth="3" vectorEffect="non-scaling-stroke" onPointerDown={e=>{e.stopPropagation();onPointerDown(e,o.id,"rotate")}}/>
+     <circle className="transform-handle scale-handle" cx={bx+4} cy={by+4} r="9" fill="#d8ff77" stroke="#20352c" strokeWidth="3" vectorEffect="non-scaling-stroke" onPointerDown={e=>{e.stopPropagation();onPointerDown(e,o.id,"scale")}}/>
    </g>:null}
  </g>;
 }
@@ -296,9 +298,10 @@ export default function Home(){
    const move=(ev:PointerEvent)=>{if(ev.pointerId!==e.pointerId)return;moved=true;const loc=point(ev.clientX,ev.clientY);if(!loc)return;
      setP(v=>({...v,objects:v.objects.map(o=>{
        if(o.id!==id)return o;
-       if(mode==="scale"){const dist=Math.hypot(loc.x-center.x,loc.y-center.y);return {...o,scale:Math.max(20,Math.min(220,Math.round(startObj.scale*dist/startDist)))}} 
-       if(mode==="rotate"){const angle=Math.atan2(loc.y-center.y,loc.x-center.x)*180/Math.PI;return {...o,rotation:((Math.round(startObj.rotation+(angle-startAngle))+540)%360)-180}}
+       if(mode==="scale"){const dist=Math.hypot(loc.x-center.x,loc.y-center.y);if(startObj.asset){const a=getAsset(startObj.asset.id),long=Math.max(startObj.asset.w,startObj.asset.h),cap=a?Math.min(a.max,Math.max(a.min,.95*Math.max(v.length,v.width))):long;const side=Math.round(Math.min(cap,Math.max(a?.min??.1,long*dist/startDist))*10)/10,k=side/long;const next={...startObj.asset,w:Math.round(startObj.asset.w*k*100)/100,h:Math.round(startObj.asset.h*k*100)/100};return {...o,asset:next,scale:scaleFor(next,v.length)}}return {...o,scale:Math.max(20,Math.min(220,Math.round(startObj.scale*dist/startDist)))}} 
+       if(mode==="rotate"){const angle=Math.atan2(loc.y-center.y,loc.x-center.x)*180/Math.PI;const raw=startObj.rotation+(angle-startAngle),r=startObj.asset?Math.round(raw/15)*15:Math.round(raw);return {...o,rotation:((r+540)%360)-180}}
        if(isRoundCourt(v)&&o.target==="court"&&o.kind!=="equipment")return {...o,...clampToCircle(startObj.x+loc.x-first.x,startObj.y+loc.y-first.y,280)};
+       if(startObj.asset){const H=600*v.width/v.length,g=600/v.length*.25,snap=(n:number,axis:number)=>Math.abs(n-axis)<g*.6?axis:Math.round(n/g)*g;return {...o,x:Math.round(Math.max(0,Math.min(600,snap(startObj.x+loc.x-first.x,300)))*10)/10,y:Math.round(Math.max(0,Math.min(H,snap(startObj.y+loc.y-first.y,H/2)))*10)/10}}
        return {...o,x:Math.max(-50,Math.min(650,startObj.x+loc.x-first.x)),y:Math.max(-60,Math.min(600*v.width/v.length+70,startObj.y+loc.y-first.y))}
      })}))
    };
