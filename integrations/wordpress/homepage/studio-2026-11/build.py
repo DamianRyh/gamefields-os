@@ -17,7 +17,7 @@ import pathlib
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
-ASSET_COMMIT = "02f3a62c4d9c71608dc827e6f30066d50a523f58"
+ASSET_COMMIT = "dc298dede4689c700ad901e78628a1938fd941b0"
 REPO_BASE = f"https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@{ASSET_COMMIT}/"
 ASSET_BASE = REPO_BASE + "integrations/wordpress/homepage/studio-2026-11/assets/"
 FONT = HERE / "assets" / "fonts" / "GHInter-sub.woff2"  # InterVariable subset: Latin + Polish + arrows (pyftsubset), 63 KB instead of 352 KB
@@ -41,6 +41,7 @@ def jsonld(faq_html):
         ("Projektowanie boisk miejskich", "Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot."),
         ("Modułowe boiska do panny i street footballu", "Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15."),
         ("Kolorowe nawierzchnie i grafika boisk", "Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D."),
+        ("Modernizacja betonowych placów w kolorowe boiska", "Naprawa i gruntowanie starego betonu lub asfaltu, elastyczne farby sportowe z granulatem gumowym, wzór i linie do piłki, koszykówki i gry 3 na 3."),
         ("Plakaty boisk", "Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce."),
         # ("Piłki we wzorze boiska", ...) — ukryte na start 2026-11-08, wraca razem z sekcją #pilka
     ]
@@ -59,7 +60,7 @@ def jsonld(faq_html):
                 "founder": {"@type": "Person", "name": "Damian Gawrych"},
                 "address": {"@type": "PostalAddress", "addressLocality": "Warszawa", "addressCountry": "PL"},
                 "parentOrganization": {"@id": site + "#organization"},
-                "knowsAbout": ["boiska do panny", "street football", "boiska miejskie", "nawierzchnie sportowe", "projektowanie przestrzeni sportowych"],
+                "knowsAbout": ["boiska do panny", "street football", "boiska miejskie", "nawierzchnie sportowe", "malowanie boisk", "renowacja boisk betonowych", "projektowanie przestrzeni sportowych"],
                 "hasOfferCatalog": {
                     "@type": "OfferCatalog",
                     "name": "Usługi Gamefields",
@@ -125,7 +126,8 @@ def main():
     tags = []
     # gf-home.js is owned by the theme since hero R3 (PR #63, 2026-11-08): the hero code lives only there, so the build
     # no longer overwrites it and versions the theme file as it is. script.js stays as the historical source.
-    THEME_OWNED = {"gf-home.js"}
+    # gf-pro.js likewise (2026-11-11): the deployed theme file is newer than surface-pro-2026-11, so the build keeps it as is.
+    THEME_OWNED = {"gf-home.js", "gf-pro.js"}
     for name, code in files:
         if name in THEME_OWNED and (jsdir / name).exists():
             code = (jsdir / name).read_text(encoding="utf-8").rstrip("\n")
