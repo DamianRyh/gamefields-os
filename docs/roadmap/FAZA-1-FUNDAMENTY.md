@@ -31,33 +31,13 @@ Na stronie działa wersja nowsza niż `premium-2026-10-26` w repo (fioletowe her
 
 Narzędzie zmienia wyłącznie źródła `@font-face` zapisane jako base64. Reszta treści zostaje bajt w bajt taka sama.
 
-## Pomiar krok po kroku
+## Pomiar
 
-Gamefields ma kontener Google Tag Manager **`GTM-W3BD5D9P`** (podany przez właściciela 4.11.2026). Na stronie jest też zainstalowana wtyczka zgód Complianz (audyt z 21.10: aktywna, bez banera). GTM wstawia Complianz, więc zgody RODO i Consent Mode v2 działają od pierwszej wizyty. Nie wklejamy kodu GTM ręcznie do motywu ani do bloków, bo wtedy ładowałby się dwa razy.
+Stan na 11.11.2026 (sprawdzone na żywej stronie): pomiar działa. Complianz ma baner zgody (`consenttype: optin`) i wstawia tag Google **`GT-M63DMWRD`** z Consent Mode (`analytics_storage` tylko po zgodzie). Kontenera Google Tag Manager `GTM-W3BD5D9P` nie ma na stronie i **nie dodajemy go**, bo podwoiłby pomiar. Gdyby kiedyś był potrzebny GTM, zastępuje on tag `GT-…` w ustawieniach Complianz, a nie działa obok niego.
 
-Skrypt podany przez właściciela (`gtm.js?id=GTM-W3BD5D9P` razem z `gtag('js', …)`) **nie jest poprawnym kodem GTM**: brakuje zdarzenia `gtm.start`, a `gtag` należy do innego narzędzia. Nie używamy go.
+Kontrola `check-live-site` sprawdza co tydzień, czy `GT-M63DMWRD` jest na każdej stronie i czy skrypty Google ładują się raz (`--tag` zmienia oczekiwany identyfikator).
 
-1. **Google Analytics 4:** w https://analytics.google.com/ utwórz usługę GA4 „gamefields.eu” (jeśli jeszcze nie istnieje). Ustaw przechowywanie danych zdarzeń na 14 miesięcy. Skopiuj identyfikator strumienia danych `G-…`.
-2. **GTM:** w https://tagmanager.google.com/ otwórz kontener `GTM-W3BD5D9P`:
-   - Tagi → Nowy → **Tag Google**, identyfikator `G-…` z punktu 1, reguła „Initialization – All Pages”.
-   - Ustawienia administracyjne kontenera → włącz **Przegląd zgody** (Consent Overview). Tag Google ma wbudowane sprawdzanie zgody `analytics_storage`, nie dodawaj mu własnych warunków.
-   - Sprawdź, czy w kontenerze nie ma starych tagów (Universal Analytics `UA-…`, piksele reklamowe bez zgody). Usuń albo wstrzymaj nieużywane.
-   - **Podgląd** (Tag Assistant) na gamefields.eu, potem **Opublikuj** z opisem „GA4 przez Complianz, Consent Mode v2”.
-3. **Complianz:** WordPress → Complianz → Kreator:
-   - region UE (RODO),
-   - Statystyki → **Google Tag Manager**, identyfikator `GTM-W3BD5D9P`,
-   - włącz **Google Consent Mode v2**,
-   - usługi zewnętrzne: YouTube i Instagram (już wykryte),
-   - Dokumenty: nie generuj nowej polityki prywatności (zostaje strona 4087 z akapitami z `prywatnosc-uzupelnienia.md`); politykę cookies tylko, jeśli Complianz jej wymaga.
-   - Opublikuj baner.
-4. **Sprawdzenie** w oknie prywatnym:
-   - baner pojawia się przy pierwszej wizycie,
-   - `gtm.js?id=GTM-W3BD5D9P` ładuje się raz (raport `check-live-site` pokazuje „1×”),
-   - przed zgodą żądania do `google-analytics.com` mają `gcs=G100`,
-   - po zgodzie GA4 → Raporty → Czas rzeczywisty pokazuje wizytę.
-5. **Search Console:** dodaj domenę gamefields.eu (weryfikacja przez DNS) i połącz z GA4.
-
-Cofnięcie: wyłączenie statystyk w Complianz albo wstrzymanie tagu w GTM. Strona działa dalej, tylko bez pomiaru.
+Do zrobienia: polityka prywatności nie opisuje jeszcze pomiaru ani sklepu (patrz `prywatnosc-uzupelnienia.md`). Search Console: potwierdzić, że domena jest zweryfikowana (mapa witryny `sitemap_index.xml` działa).
 
 ## Jedno źródło Studio krok po kroku
 
