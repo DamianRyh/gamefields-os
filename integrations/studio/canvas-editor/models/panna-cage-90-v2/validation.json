@@ -1,0 +1,40 @@
+{
+  "product": "Panna Cage 90",
+  "revision": "C90-CAD-2",
+  "CADTriangles": 777302,
+  "webTriangles": 346762,
+  "webMeshes": 23,
+  "modules": {
+    "Panel 01": 5,
+    "Panel 02": 2,
+    "Panel 03": 1
+  },
+  "surfaceUnchanged": true,
+  "floorIndependent": true,
+  "files": {
+    "panna-cage-90-v2.FCStd": {
+      "bytes": 888549,
+      "sha256": "42d06f81a4bbd00b84a0c8b68c5351e7bfde05e9deee1c1ed3c808da8f9d5e53"
+    },
+    "panna-cage-90-v2.step": {
+      "bytes": 7979877,
+      "sha256": "9fe5c262f5285020b33993b017eb03a4bd3fb12a29ede94e0ddfada39d560b97"
+    },
+    "panna-cage-90-v2.blend": {
+      "bytes": 17312193,
+      "sha256": "4c66f3b35d2a42c2f4567567aba9773b3f4a58f676432e32f0f38eae29b20bfd"
+    },
+    "panna-cage-90-v2.glb": {
+      "bytes": 10171632,
+      "sha256": "a6c9ef3ec68be9fec29b7603dd2c3f6c05cacca9d0b51ee58300a71b6e74427f"
+    },
+    "panna-cage-90-surface-20cm.glb": {
+      "bytes": 28820,
+      "sha256": "57a595145396ee7508ad96a7fc94adbd8cff326dd0e961b356963ff208389699"
+    },
+    "studio-mesh.json": {
+      "bytes": 20687785,
+      "sha256": "eb6eaca6cee735afb85cf0511bb371497fbd4e62079f011b247dc17fd776067f"
+    }
+  }
+}

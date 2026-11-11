@@ -1,0 +1,35 @@
+{
+  "name": "Panna Circle Cage 2.0",
+  "status": "ASSEMBLED_FROM_SOURCE",
+  "assembly": "Boisko 03-H (2).pdf",
+  "moduleCounts": {
+    "Panel 01": 12,
+    "Panel 02": 2,
+    "Panel 03": 2
+  },
+  "diameter_m": 6,
+  "height_m": 1.8,
+  "goal_total_length_m": 6.72251,
+  "surface_thickness_m": 0.2,
+  "entry": "Paired Panel 03, upper mirrored vertically, sector 2",
+  "goals": "Sectors 1 and 5, lower level",
+  "notes": [
+    "Goal rear height uses newer detailed Panel 02 sheet: 315 mm; older assembly labels 472 mm.",
+    "Mesh pitch 50 mm inferred visually; sleeve and weld details omitted.",
+    "Neutral surface slab is an additional Studio layer, absent from construction drawings."
+  ],
+  "artifacts": {
+    "panna-circle-cage-2.blend": {
+      "bytes": 926836,
+      "sha256": "6ee8b6403dba35fbc810a2ed4cfd48e825a23be20aa150e4feb1cf2549f41abd"
+    },
+    "panna-circle-cage-2.glb": {
+      "bytes": 4863840,
+      "sha256": "5b56201de1aa2b45b7ac7ef2b5815cd62a69b3f70c0ebbd79131e6ae8f5f013a"
+    },
+    "studio-mesh.json": {
+      "bytes": 13897726,
+      "sha256": "897fc08a610b122d1962ea7cd7b7fc4351a2d279a1ea5d271a3d8243558d1339"
+    }
+  }
+}

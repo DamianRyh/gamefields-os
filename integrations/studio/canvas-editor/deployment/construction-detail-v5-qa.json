@@ -1,0 +1,26 @@
+[
+  {
+    "width": 390,
+    "detail": true,
+    "fourColours": true,
+    "fixedCamera": true,
+    "keyboard": true,
+    "heroPreserved": true
+  },
+  {
+    "width": 744,
+    "detail": true,
+    "fourColours": true,
+    "fixedCamera": true,
+    "keyboard": true,
+    "heroPreserved": true
+  },
+  {
+    "width": 1440,
+    "detail": true,
+    "fourColours": true,
+    "fixedCamera": true,
+    "keyboard": true,
+    "heroPreserved": true
+  }
+]

@@ -5,7 +5,7 @@ import {projectSchema} from '../lib/project.ts';
 import {projectDimensions} from '../lib/project-dimensions.ts';
 import {calculateProjectQuote} from '../lib/quote-engine.ts';
 const base={id:'SURFACE-QA',name:'Moje boisko',type:'Szkic',sport:'Piłka nożna 3×3',length:15,width:10,surface:'EPDM',base:'#6336f5',zone:'#f3e68a',outside:'#4a122b',lineColor:'#ffffff',lines:true,pattern:'Organic Flow',graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:'day',objects:[],status:'Szkic',date:''};
-assert.equal(sportSurfaces.length,8);
+assert.equal(sportSurfaces.length,9);
 for(const s of sportSurfaces){
  const p={...base,...selectSurface(base,s.id)},meshes=JSON.parse(await readFile(`public/sport-surfaces/${s.id}.json`));
  assert(projectSchema.safeParse(p).success,s.id);assert.equal(projectDimensions(p).area,s.length*s.width);
@@ -17,4 +17,4 @@ for(const s of sportSurfaces){
  assert.deepEqual(projectSchema.parse(JSON.parse(JSON.stringify(p))),JSON.parse(JSON.stringify(p)));
  if(s.id==='street-football-3x3'){const attached={...p,arenaModel:'street15'};assert(projectSchema.safeParse(attached).success);assert.equal(calculateProjectQuote(attached,null,1).area,150);assert.notEqual(projectDimensions(attached).model.sourceRevision,projectDimensions(p).model.sourceRevision);}
 }
-console.log('PASS: 8 independent slabs / dimensions / GLB isolation / schema / pricing / revisions');
+console.log('PASS: 9 independent slabs / dimensions / GLB isolation / schema / pricing / revisions');

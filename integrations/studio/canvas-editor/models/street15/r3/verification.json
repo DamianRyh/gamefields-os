@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "changed": "both goals",
+  "unchanged_meshes": 246,
+  "goal_meshes": 32,
+  "net_meshes": 2,
+  "goal_triangles": 21656,
+  "sha256": {
+    "street15-r3.blend": "bdd9482a20025ab59e1a9a3e030abeacb9b4b1022147a26a017205e333dffddb",
+    "street15-r3.glb": "813e34a3336987781c16a6ff2086ee2ef6251d060a4e57ea2bf902afb8820565",
+    "street15-r3.json": "2a039cd2705bdcb1960a979030690226388572985755f1411839c0e6f07f59e2"
+  }
+}

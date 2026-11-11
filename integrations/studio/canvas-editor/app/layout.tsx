@@ -8,6 +8,7 @@ import "./studio-usability.css";
 import "./studio-readability.css";
 import "./studio-pricing.css";
 import "./studio-mobile.css";
+import "./studio-skin-2026-11.css";
 
 export const metadata: Metadata = {
   title: {
@@ -48,6 +49,7 @@ export default function RootLayout({
     <html lang="pl">
       <body className="antialiased">
         {children}
+        {/* Gamefields Crew (Marek, Kuba, Ola, Alex) is off for the launch (owner, 2026-11-08); the component stays in components/gamefields-crew.tsx. */}
       </body>
     </html>
   );

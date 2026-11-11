@@ -78,6 +78,20 @@
       "when": 1793042306311,
       "tag": "0011_studio_workshop",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1793210000000,
+      "tag": "0012_crew_knowledge",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1793273494954,
+      "tag": "0013_studio_shared_projects",
+      "breakpoints": true
     }
   ]
 }

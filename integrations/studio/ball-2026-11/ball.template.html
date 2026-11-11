@@ -1,0 +1,273 @@
+<title>Piłka Gamefields</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap">
+<style>
+/* Layout: the ball is the hero — a large rotating 3D stage beside a compact editor; production notes below. */
+:root{--paper:#F4F1EE;--card:#FFFFFF;--ink:#47132D;--muted:#6F5A66;--rule:#DCD2D6;--chip:#CDBFC6;--violet:#6336F5;--lime:#D8F24A;--stage:#E9E3DD;
+  --display:Inter,"Helvetica Neue",Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1A0B12;--card:#24111A;--ink:#F4ECEF;--muted:#BBA8B1;--rule:#3E2531;--chip:#5A3A49;--violet:#8E6BFF;--stage:#2A1720;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#1A0B12;--card:#24111A;--ink:#F4ECEF;--muted:#BBA8B1;--rule:#3E2531;--chip:#5A3A49;--violet:#8E6BFF;--stage:#2A1720;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+.m{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+button,input{font:inherit;color:inherit}
+header{padding-block:28px 18px;display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:space-between;align-items:end;border-bottom:1px solid var(--rule)}
+header h1{font-size:clamp(44px,7vw,92px);font-weight:800;letter-spacing:-.055em;line-height:.88}
+header p{max-width:520px;color:var(--muted)}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;padding-block:24px}
+@media (max-width:960px){.app{grid-template-columns:1fr}}
+.stage{position:relative;background:var(--stage);border-radius:4px;aspect-ratio:1/1;max-height:78vh;width:100%;overflow:hidden;touch-action:none;cursor:grab;align-self:start;position:sticky;top:16px}
+@media (max-width:960px){.stage{position:relative;top:auto;max-height:none}}
+.stage canvas{display:block;width:100%;height:100%}
+.stage .tag{position:absolute;left:14px;bottom:12px}
+.stage .hint{position:absolute;right:14px;bottom:12px}
+.rail{display:flex;flex-direction:column;gap:18px;min-width:0}
+.group{display:flex;flex-direction:column;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:36px;padding:0 14px;border-radius:999px;border:1.5px solid var(--chip);background:transparent;font-size:13px;font-weight:600;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.var{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.var button{min-height:32px;border-radius:4px;border:1.5px solid var(--chip);background:transparent;font-size:12px;font-weight:700;padding:0;cursor:pointer}
+.var button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pals{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.pal{border:1.5px solid var(--chip);border-radius:4px;background:transparent;padding:5px;display:flex;flex-direction:column;gap:4px;text-align:left;cursor:pointer}
+.pal span{display:flex;height:14px;border-radius:2px;overflow:hidden}
+.pal span i{flex:1}
+.pal small{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pal[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cols label{display:grid;gap:4px;font-size:11px;font-weight:600;color:var(--muted)}
+.cols input{width:100%;height:42px;border:1.5px solid var(--chip);border-radius:4px;padding:0;background:none;cursor:pointer}
+.txt{width:100%;min-height:44px;padding:0 12px;border:1.5px solid var(--chip);border-radius:4px;background:var(--card);font-weight:600}
+.note{font-size:13px;color:var(--muted)}
+section.block{padding-block:40px;border-top:1px solid var(--rule)}
+.block h2{font-size:clamp(30px,4vw,50px);font-weight:800;letter-spacing:-.05em;line-height:.95;margin-bottom:18px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td b{font-weight:700}
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-top:8px}
+.steps h3{font-size:19px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px}
+.steps p{font-size:14px;color:var(--muted)}
+footer{padding-block:28px 44px;color:var(--muted);font-size:13px;border-top:1px solid var(--rule)}
+a{color:inherit;text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div><p class="m">Gamefields Studio · prototyp 2026-11</p><h1>Piłka<br>Gamefields</h1></div>
+    <p>Piłka z tym samym wzorem co Twoje boisko. 32 prawdziwe panele: 12 pięciokątów i 20 sześciokątów. Wzory z silnika Nawierzchnie Pro, kolor każdego panelu do zmiany, własny napis. Obracaj piłkę myszką albo palcem.</p>
+  </header>
+
+  <div class="app">
+    <div class="stage" id="stage" aria-label="Model 3D piłki, przeciągnij, aby obrócić" role="img">
+      <span class="tag m" id="tag">Rozmiar 5 · Ø ok. 22 cm</span>
+      <span class="hint m">Przeciągnij · kliknij panel, aby go pomalować</span>
+    </div>
+    <aside class="rail">
+      <div class="group"><span class="m">Styl piłki</span>
+        <div class="chips" id="modes">
+          <button class="chip" data-mode="full" aria-pressed="true">Wzór na całej piłce</button>
+          <button class="chip" data-mode="mix" aria-pressed="false">Wzór + kolor pięciokątów</button>
+          <button class="chip" data-mode="panels" aria-pressed="false">Klasyczne panele</button>
+        </div>
+      </div>
+      <div class="group"><span class="m">Wzór z nawierzchni</span><div class="chips" id="fams"></div></div>
+      <div class="group"><span class="m">Kompozycja</span><div class="var" id="vars"></div></div>
+      <div class="group"><span class="m">Paleta</span><div class="pals" id="pals"></div></div>
+      <div class="group"><span class="m">Kolory paneli</span>
+        <div class="cols">
+          <label>Pięciokąty<input type="color" id="cPent" value="#1C0912"></label>
+          <label>Sześciokąty<input type="color" id="cHex" value="#F4F1EE"></label>
+          <label>Pędzel (klik w panel)<input type="color" id="cBrush" value="#D8F24A"></label>
+        </div>
+        <button class="chip" id="resetPanels" type="button">Wyczyść malowanie paneli</button>
+      </div>
+      <div class="group"><span class="m">Napis na piłce</span>
+        <input class="txt" id="label" maxlength="16" value="GAMEFIELDS" aria-label="Napis na piłce">
+      </div>
+      <div class="group"><span class="m">Rozmiar</span>
+        <div class="chips" id="sizes">
+          <button class="chip" data-size="3" aria-pressed="false">3 · dzieci</button>
+          <button class="chip" data-size="4" aria-pressed="false">4 · juniorzy</button>
+          <button class="chip" data-size="5" aria-pressed="true">5 · mecz</button>
+        </div>
+      </div>
+      <div class="chips"><button class="chip" id="spin" type="button" aria-pressed="true">Obrót automatyczny</button><button class="chip" id="random" type="button">Losuj</button></div>
+      <p class="note" id="sum"></p>
+    </aside>
+  </div>
+
+  <section class="block">
+    <h2>Czy da się to wyprodukować?</h2>
+    <p class="note" style="max-width:720px;margin-bottom:18px">Tak. Rynek oferuje dwa poziomy: pełny nadruk w małych ilościach (od 1 sztuki) i serie klubowe od kilkudziesięciu sztuk. Gamefields potrzebuje partnera produkcyjnego; projekt powstaje tutaj.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Dostawca</th><th>Minimalne zamówienie</th><th>Zakres projektu</th><th>Czas</th><th>Cena</th></tr></thead>
+      <tbody>
+        <tr><td><b>RAGE Custom</b> (Wielka Brytania)</td><td>1 piłka, bez opłat startowych</td><td>W pełni własny projekt, projektant 3D/2D, szablon do druku, próbny podgląd w 1–2 dni</td><td>zwykle 2–4 tygodnie</td><td>od 67,50 £ (rabaty od 3 sztuk)</td></tr>
+        <tr><td><b>FORZA</b> (Net World Sports)</td><td>50 sztuk na rozmiar; od 300 wiele wzorów</td><td>2 logo, do 3 kolorów trójkątów albo nadruk zamiast wzoru</td><td>8–10 tygodni</td><td>wg zapytania</td></tr>
+        <tr><td><b>Select</b></td><td>wg zapytania</td><td>Tampodruk logo albo piłka w pełni projektowana w fabryce</td><td>wg zapytania</td><td>wg zapytania</td></tr>
+      </tbody>
+    </table></div>
+    <div class="steps">
+      <div><h3>1 · Partner</h3><p>Wybrać dostawcę pełnego nadruku (pojedyncze sztuki, plakaty i prezenty) i fabrykę na serie klubowe.</p></div>
+      <div><h3>2 · Szablon</h3><p>Przenieść ten model na szablon paneli partnera (rozkładówka 32 paneli). Silnik generuje wzór jako wektor, więc nadaje się do druku.</p></div>
+      <div><h3>3 · Studio</h3><p>Dodać „Piłkę” jako czwarte narzędzie obok Konstrukcji, Nawierzchni i Grafiki: ten sam wzór i paleta co boisko, jednym kliknięciem.</p></div>
+      <div><h3>4 · Zestaw</h3><p>Sprzedawać razem: boisko + piłki w tym samym wzorze + plakat. Dla gmin i klubów: piłki na otwarcie boiska.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Prototyp koncepcyjny. Wzory: silnik Court Art Pro (Gamefields). Model: ścięty dwudziestościan (32 panele), generowany w przeglądarce. Dane o dostawcach z ich stron z 2026-11-02: <a href="https://www.ragecustom.com/shop/equipment/custom-football-soccer/" target="_blank" rel="noopener">RAGE Custom</a>, <a href="https://www.forza.com/ca/custom-forza-footballs" target="_blank" rel="noopener">FORZA</a>, <a href="https://us.select-sport.com/pages/custom-design" target="_blank" rel="noopener">Select</a>.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/*ENGINE*/
+(function(){
+  var stage=document.getElementById('stage');
+  if(!window.THREE){stage.insertAdjacentHTML('beforeend','<p class="note" style="padding:20px">Nie udało się wczytać silnika 3D.</p>');return;}
+  var palById={};PRO_PALETTES.forEach(function(p){palById[p.id]=p;});
+  var famById={};PRO_FAMILIES.forEach(function(f){famById[f.id]=f;});
+  var st={mode:'full',fam:'pro-textile',v:1,pal:'lagos',pent:'#1C0912',hex:'#F4F1EE',label:'GAMEFIELDS',size:5,spin:true,paint:{}};
+
+  /* ---------- truncated icosahedron ---------- */
+  var t=(1+Math.sqrt(5))/2;
+  var IV=[[-1,t,0],[1,t,0],[-1,-t,0],[1,-t,0],[0,-1,t],[0,1,t],[0,-1,-t],[0,1,-t],[t,0,-1],[t,0,1],[-t,0,-1],[-t,0,1]].map(function(v){return new THREE.Vector3(v[0],v[1],v[2]).normalize();});
+  var IF=[[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],[3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]];
+  function P(a,b){return IV[a].clone().multiplyScalar(2/3).add(IV[b].clone().multiplyScalar(1/3)).normalize();}
+  var panels=[];
+  IV.forEach(function(v,i){ // pentagons
+    var nb=[];IF.forEach(function(f){var k=f.indexOf(i);if(k>-1){nb.push(f[(k+1)%3]);nb.push(f[(k+2)%3]);}});
+    nb=nb.filter(function(x,j){return nb.indexOf(x)===j;});
+    var pts=nb.map(function(j){return P(i,j);});
+    var c=v.clone();var ax=new THREE.Vector3().crossVectors(c,Math.abs(c.y)<.9?new THREE.Vector3(0,1,0):new THREE.Vector3(1,0,0)).normalize();var ay=new THREE.Vector3().crossVectors(c,ax);
+    pts.sort(function(p,q){return Math.atan2(p.dot(ay),p.dot(ax))-Math.atan2(q.dot(ay),q.dot(ax));});
+    panels.push({type:'pent',c:c,pts:pts});
+  });
+  IF.forEach(function(f){var a=f[0],b=f[1],cc=f[2];var pts=[P(a,b),P(b,a),P(b,cc),P(cc,b),P(cc,a),P(a,cc)];var c=pts.reduce(function(s,p){return s.add(p);},new THREE.Vector3()).normalize();panels.push({type:'hex',c:c,pts:pts});});
+
+  /* ---------- geometry: domed panels with seams ---------- */
+  var N=10,GAP=.035;
+  var pos=[],nor=[],uv=[],col=[],groups=[];
+  function sph(dir){var u=.5-Math.atan2(dir.z,dir.x)/(2*Math.PI),v=.5-Math.asin(Math.max(-1,Math.min(1,dir.y)))/Math.PI;return[u,v];}
+  panels.forEach(function(pn,pi){
+    var start=pos.length/3;
+    for(var k=0;k<pn.pts.length;k++){
+      var A=pn.c,B=pn.pts[k],C=pn.pts[(k+1)%pn.pts.length];
+      // grid in triangle (A=center): rows i (0..N) from centre outward
+      var rowsV=[];
+      for(var i=0;i<=N;i++){var row=[];for(var j=0;j<=i;j++){var s=i/N,w=i?j/i:0;
+        var q=new THREE.Vector3().copy(A).multiplyScalar(1-s).add(new THREE.Vector3().copy(B).multiplyScalar(s*(1-w))).add(new THREE.Vector3().copy(C).multiplyScalar(s*w));
+        q=new THREE.Vector3().copy(A).multiplyScalar(1).lerp(q,1-GAP*s).normalize(); // inset toward centre for seam
+        var r=1+.009*Math.cos(s*Math.PI/2)-.007*Math.pow(s,6); // dome + rounded edge
+        row.push(q.multiplyScalar(r));}rowsV.push(row);}
+      for(var i2=0;i2<N;i2++)for(var j2=0;j2<=i2;j2++){
+        tri(rowsV[i2][j2],rowsV[i2+1][j2],rowsV[i2+1][j2+1]);
+        if(j2<i2)tri(rowsV[i2][j2],rowsV[i2+1][j2+1],rowsV[i2][j2+1]);
+      }
+    }
+    groups.push({start:start,count:pos.length/3-start,pi:pi});
+  });
+  function tri(a,b,c){
+    var us=[sph(a.clone().normalize()),sph(b.clone().normalize()),sph(c.clone().normalize())];
+    var mx=Math.max(us[0][0],us[1][0],us[2][0]),mn=Math.min(us[0][0],us[1][0],us[2][0]);
+    if(mx-mn>.5)us.forEach(function(x){if(x[0]<.5)x[0]+=1;});
+    [a,b,c].forEach(function(p,i){pos.push(p.x,p.y,p.z);uv.push(us[i][0],us[i][1]);col.push(1,1,1);});
+    var n=new THREE.Vector3().subVectors(b,a).cross(new THREE.Vector3().subVectors(c,a)).normalize();
+    [a,b,c].forEach(function(p){var nn=p.clone().normalize().lerp(n,.25).normalize();nor.push(nn.x,nn.y,nn.z);});
+  }
+  var geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
+  geo.setAttribute('normal',new THREE.Float32BufferAttribute(nor,3));
+  geo.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+  geo.setAttribute('color',new THREE.Float32BufferAttribute(col,3));
+  groups.forEach(function(g){geo.addGroup(g.start,g.count,0);});
+  var triPanel=new Int16Array(pos.length/9);groups.forEach(function(g){for(var i=g.start/3;i<(g.start+g.count)/3;i++)triPanel[i]=g.pi;});
+
+  /* ---------- texture from the surface engine ---------- */
+  var cv=document.createElement('canvas');cv.width=2048;cv.height=1024;var cx=cv.getContext('2d');
+  var tex=new THREE.CanvasTexture(cv);tex.wrapS=THREE.RepeatWrapping;tex.anisotropy=4;
+  var texVer=0;
+  function paintTexture(){
+    var my=++texVer,c=palById[st.pal].colors;
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="2048" height="1024" preserveAspectRatio="none">'+renderPro(st.fam,st.v,300,c,{uid:'ball'})+'</svg>';
+    var img=new Image();
+    img.onload=function(){ if(my!==texVer)return; cx.clearRect(0,0,2048,1024); cx.drawImage(img,0,0,2048,1024);
+      if(st.label){ var L=lightness(c[0]); cx.font='800 120px Inter, Arial, sans-serif'; cx.textAlign='center'; cx.textBaseline='middle';
+        var ink=recommendLineColor(c); cx.lineWidth=14; cx.strokeStyle=ink==='#111111'?'rgba(255,255,255,.85)':'rgba(0,0,0,.35)'; cx.fillStyle=ink;
+        [512,1536].forEach(function(x){cx.strokeText(st.label,x,512);cx.fillText(st.label,x,512);}); }
+      tex.needsUpdate=true; };
+    img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  }
+
+  /* ---------- scene ---------- */
+  var renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:false});
+  renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));stage.prepend(renderer.domElement);
+  var scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(30,1,.1,50);cam.position.set(0,0,4.6);
+  scene.add(new THREE.HemisphereLight(0xffffff,0x8a7a80,.9));var key=new THREE.DirectionalLight(0xffffff,.85);key.position.set(2.5,3,4);scene.add(key);var rim=new THREE.DirectionalLight(0xffffff,.35);rim.position.set(-3,-1,-2);scene.add(rim);
+  var matPat=new THREE.MeshPhongMaterial({map:tex,vertexColors:true,shininess:22,specular:0x1e1e1e});
+  var matCol=new THREE.MeshPhongMaterial({vertexColors:true,shininess:22,specular:0x1e1e1e});
+  var ball=new THREE.Group();var mesh=new THREE.Mesh(geo,[matPat,matCol]);ball.add(mesh);
+  ball.add(new THREE.Mesh(new THREE.SphereGeometry(.988,48,32),new THREE.MeshPhongMaterial({color:0x15090f,shininess:5}))); // seams
+  var shadow=new THREE.Mesh(new THREE.CircleGeometry(1,48),new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.18}));shadow.rotation.x=-Math.PI/2;shadow.position.y=-1.18;shadow.scale.set(.9,.9,.9);scene.add(shadow);
+  scene.add(ball);ball.rotation.set(.35,.6,0);
+
+  function hexToRgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16)/255,parseInt(h.slice(2,4),16)/255,parseInt(h.slice(4,6),16)/255];}
+  function applyPanels(){
+    var colA=geo.getAttribute('color');
+    groups.forEach(function(g,gi){var pn=panels[g.pi];var painted=st.paint[g.pi];
+      var usePattern=painted?false:(st.mode==='full'?true:(st.mode==='mix'?pn.type==='hex':false));
+      geo.groups[gi].materialIndex=usePattern?0:1;
+      var hex=painted||(pn.type==='pent'?st.pent:st.hex);var rgb=usePattern?[1,1,1]:hexToRgb(hex);
+      for(var i=g.start;i<g.start+g.count;i++)colA.setXYZ(i,rgb[0],rgb[1],rgb[2]);});
+    colA.needsUpdate=true;
+  }
+  function resize(){var w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+  window.addEventListener('resize',resize);resize();
+
+  /* drag to rotate, click to paint */
+  var drag=null,vel={x:0,y:0},moved=0;
+  stage.addEventListener('pointerdown',function(e){drag={x:e.clientX,y:e.clientY};moved=0;stage.setPointerCapture(e.pointerId);stage.style.cursor='grabbing';});
+  stage.addEventListener('pointermove',function(e){if(!drag)return;var dx=e.clientX-drag.x,dy=e.clientY-drag.y;moved+=Math.abs(dx)+Math.abs(dy);drag={x:e.clientX,y:e.clientY};vel={x:dy*.006,y:dx*.006};rot(vel.x,vel.y);});
+  stage.addEventListener('pointerup',function(e){stage.style.cursor='grab';var was=drag;drag=null;if(was)if(moved<6)paintAt(e);});
+  function rot(ax,ay){var q=new THREE.Quaternion().setFromEuler(new THREE.Euler(ax,ay,0,'XYZ'));ball.quaternion.premultiply(q);}
+  var ray=new THREE.Raycaster(),mv=new THREE.Vector2();
+  function paintAt(e){var r=stage.getBoundingClientRect();mv.x=((e.clientX-r.left)/r.width)*2-1;mv.y=-((e.clientY-r.top)/r.height)*2+1;ray.setFromCamera(mv,cam);var hit=ray.intersectObject(mesh)[0];if(!hit)return;var pi=triPanel[hit.faceIndex];st.paint[pi]=document.getElementById('cBrush').value;applyPanels();summary();}
+
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduce)st.spin=false;
+  (function loop(){requestAnimationFrame(loop);if(!drag){if(st.spin)rot(0,.004);else{vel.x*=.92;vel.y*=.92;if(Math.abs(vel.x)+Math.abs(vel.y)>.0004)rot(vel.x,vel.y);}}renderer.render(scene,cam);})();
+
+  /* ---------- UI ---------- */
+  function q(s){return document.querySelector(s);}
+  function pressAll(sel,test){document.querySelectorAll(sel).forEach(function(b,i){b.setAttribute('aria-pressed',String(test(b,i)));});}
+  var fams=q('#fams');PRO_FAMILIES.forEach(function(f){var b=document.createElement('button');b.className='chip';b.type='button';b.textContent=f.name;b.dataset.f=f.id;b.onclick=function(){st.fam=f.id;update(true);};fams.appendChild(b);});
+  var vars=q('#vars');for(var i=1;i<=12;i++)(function(n){var b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-label','Kompozycja '+n);b.onclick=function(){st.v=n;update(true);};vars.appendChild(b);})(i);
+  var pals=q('#pals');PRO_PALETTES.forEach(function(p){var b=document.createElement('button');b.type='button';b.className='pal';b.dataset.p=p.id;b.innerHTML='<span>'+p.colors.map(function(c){return '<i style="background:'+c+'"></i>';}).join('')+'</span><small>'+p.name+'</small>';b.onclick=function(){st.pal=p.id;var L=p.colors.slice().sort(function(a,b){return lightness(a)-lightness(b);});st.pent=L[0];st.hex=L[4];q('#cPent').value=st.pent;q('#cHex').value=st.hex;update(true);};pals.appendChild(b);});
+  document.querySelectorAll('#modes button').forEach(function(b){b.onclick=function(){st.mode=b.dataset.mode;update(false);};});
+  document.querySelectorAll('#sizes button').forEach(function(b){b.onclick=function(){st.size=+b.dataset.size;update(false);};});
+  q('#cPent').oninput=function(){st.pent=this.value;update(false);};
+  q('#cHex').oninput=function(){st.hex=this.value;update(false);};
+  q('#resetPanels').onclick=function(){st.paint={};update(false);};
+  q('#label').oninput=function(){st.label=this.value.toUpperCase();update(true);};
+  q('#spin').onclick=function(){st.spin=!st.spin;update(false);};
+  q('#random').onclick=function(){var f=PRO_FAMILIES[Math.floor(Math.random()*PRO_FAMILIES.length)],p=PRO_PALETTES[Math.floor(Math.random()*PRO_PALETTES.length)];st.fam=f.id;st.v=1+Math.floor(Math.random()*12);st.pal=p.id;st.paint={};update(true);};
+  var SIZES={3:'Ø ok. 19 cm',4:'Ø ok. 20,5 cm',5:'Ø ok. 22 cm'};
+  function summary(){var n=Object.keys(st.paint).length;q('#sum').textContent=famById[st.fam].name+' '+st.v+' · paleta '+palById[st.pal].name+' · '+(st.mode==='full'?'wzór na całej piłce':st.mode==='mix'?'wzór + kolor pięciokątów':'klasyczne panele')+(n?' · ręcznie pomalowane panele: '+n:'')+' · rozmiar '+st.size+'.';}
+  function update(tex){
+    pressAll('#fams button',function(b){return b.dataset.f===st.fam;});pressAll('#vars button',function(b,i){return i+1===st.v;});pressAll('#pals button',function(b){return b.dataset.p===st.pal;});
+    pressAll('#modes button',function(b){return b.dataset.mode===st.mode;});pressAll('#sizes button',function(b){return +b.dataset.size===st.size;});q('#spin').setAttribute('aria-pressed',String(st.spin));
+    q('#tag').textContent='Rozmiar '+st.size+' · '+SIZES[st.size];
+    var s={3:.86,4:.93,5:1}[st.size];ball.scale.set(s,s,s);shadow.scale.set(.9*s,.9*s,.9*s);
+    if(tex)paintTexture();applyPanels();summary();
+  }
+  update(true);
+})();
+</script>

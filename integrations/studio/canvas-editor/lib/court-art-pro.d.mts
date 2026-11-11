@@ -1,0 +1,12 @@
+export type ProFamily = { id: string; name: string; short: string; group: string; masking: string; description: string; inspiration: string };
+export type ProPalette = { id: string; name: string; colors: [string, string, string, string, string]; tone: string };
+export const PRO_FAMILIES: ProFamily[];
+export const PRO_PALETTES: ProPalette[];
+export function renderPro(familyId: string, variant: number, h?: number, colors?: string[], opts?: { uid?: string; seed?: number }): string;
+export function proExecution(familyId: string, variant: number, h: number, colors: string[]): { colors: number; masking: string };
+export function recommendLineColor(colors: string[]): string;
+export function courtLines(h?: number, color?: string): string;
+export function fullSvg(familyId: string, variant: number, colors: string[], opts?: { h?: number; lines?: boolean; lineColor?: string }): string;
+export function mix(a: string, b: string, t: number): string;
+export function lightness(hex: string): number;
+export function rng(seed: number): () => number;

@@ -1,0 +1,12 @@
+{
+  "source": "public/arenas/p1.json",
+  "sourceSha256": "d7712347d194df7ae0194b25659b3eb70d6d08ef8b39589abdc486a80dcbcb00",
+  "output": "public/arenas/panna-court-web.glb",
+  "sha256": "aa3abeff234ba6cd08dca4a656b4f36bebbee7c3df86b3ead1a5399ffbb6eb10",
+  "sourceBytes": 22371799,
+  "outputBytes": 9324620,
+  "parts": 142,
+  "triangles": 113961,
+  "sourceGeometryUnchanged": true,
+  "positionPrecision": "float32"
+}

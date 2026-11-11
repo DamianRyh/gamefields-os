@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import {readFile,readdir,mkdir} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {resolve,extname} from 'node:path';
+import {createServer} from 'node:http';
+import {chromium} from 'playwright';
+const require=createRequire(import.meta.url),wranglerRequire=createRequire(require.resolve('wrangler/package.json'));
+const {Miniflare}=await import(wranglerRequire.resolve('miniflare'));
+const files=(await readdir('dist/server',{recursive:true})).filter(f=>/\.m?js$/.test(f));
+const mf=new Miniflare({modules:['index.js',...files.filter(f=>f!=='index.js')].map(f=>({type:'ESModule',path:resolve('dist/server',f)})),modulesRoot:resolve('dist/server'),compatibilityDate:'2026-05-15',compatibilityFlags:['nodejs_compat'],d1Databases:['DB']});
+let browser,server;
+try{
+ const mime={'.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.json':'application/json','.woff2':'font/woff2'};
+ server=createServer(async(req,res)=>{try{const path=new URL(req.url,'http://localhost').pathname,file=resolve('dist/client','.'+path),root=resolve('dist/client')+'/';if(file.startsWith(root)&&!path.startsWith('/api/')){try{const bytes=await readFile(file);res.setHeader('Content-Type',mime[extname(file)]||'application/octet-stream');res.end(bytes);return;}catch{}}
+ const response=await mf.dispatchFetch(`http://${req.headers.host}${req.url}`,{method:req.method,headers:req.headers});res.statusCode=response.status;for(const [k,v]of response.headers)if(k!=='set-cookie')res.setHeader(k,v);res.end(Buffer.from(await response.arrayBuffer()));}catch(e){res.statusCode=500;res.end(String(e));}});
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const base=`http://localhost:${server.address().port}`;
+ browser=await chromium.launch({headless:true,...(process.env.PLAYWRIGHT_EXECUTABLE_PATH?{executablePath:process.env.PLAYWRIGHT_EXECUTABLE_PATH}:{}),args:['--enable-webgl','--use-gl=angle','--use-angle=swiftshader']});
+ const errors=[];
+ await mkdir('outputs/product-viewer',{recursive:true});let html=await readFile(process.env.GF_HOMEPAGE_FIXTURE||'outputs/p2-live-homepage-v16.html','utf8');assert(html.includes('GF synchronised construction colours v16'));html=html.replaceAll('https://gamefields-studio.ryhfs90.chatgpt.site',base).replace('<head>','<head><base href="https://www.gamefields.eu/">');
+ for(const [width,arena]of [[390,'o1'],[1280,'p1']]){
+ const page=await browser.newPage({viewport:{width,height:1000}});page.on('pageerror',e=>{if(!e.message.includes('wp is not defined'))errors.push(e.message)});await page.route(base+'/fixture',r=>r.fulfill({body:html,contentType:'text/html'}));await page.goto(base+'/fixture',{waitUntil:'domcontentloaded'});await page.locator('[data-select-model="'+arena+'"]').first().click();await page.getByRole('button',{name:'Zobacz model 3D',exact:true}).click();const main=page.frameLocator('.gh-product-viewer-frame');await main.locator('[data-ready="true"]').waitFor({timeout:60000});await main.locator('canvas').press('ArrowRight');await main.getByRole('button',{name:'Przybliż model',exact:true}).click();await page.waitForFunction(()=>Number(document.querySelector(".gh-product-viewer-frame").contentDocument.querySelector("canvas").dataset.zoom)>1);const canvas=main.locator('canvas');await canvas.evaluate(c=>c.dataset.identity='same');const yaw=await canvas.getAttribute('data-yaw'),zoom=await canvas.getAttribute('data-zoom');
+ for(const [part,name,coat]of [['side','Czerwony','red'],['end','Niebieski','blue'],['net','Zielony','green']]){
+ const child=page.frameLocator('.gh-part-frame[data-part="'+part+'"]');await page.locator('.gh-part-frame[data-part="'+part+'"]').scrollIntoViewIfNeeded();await child.locator('[data-ready="true"]').waitFor({timeout:60000});await child.getByRole('radio',{name,exact:true}).click();await page.waitForFunction(({part,coat})=>JSON.parse(document.querySelector('.gh-product-viewer-frame').contentDocument.querySelector('canvas').dataset.partCoats||'{}')[part]===coat,{part,coat},{timeout:15000});}
+ assert.equal(await canvas.getAttribute('data-identity'),'same');assert.equal(await canvas.getAttribute('data-yaw'),yaw);assert.equal(await canvas.getAttribute('data-zoom'),zoom);assert.deepEqual(JSON.parse(await canvas.getAttribute('data-part-coats')),{side:'red',end:'blue',net:'green'});await page.locator('.gh-product-viewer-frame').scrollIntoViewIfNeeded();await page.waitForTimeout(500);await page.screenshot({path:'outputs/product-viewer/synced-'+width+'.png'});await main.getByRole('radio',{name:'Szary',exact:true}).click();await page.waitForFunction(()=>Object.values(JSON.parse(document.querySelector('.gh-product-viewer-frame').contentDocument.querySelector('canvas').dataset.partCoats||'{}')).every(c=>c==='gray'));await page.locator('[data-close-dialog]').click();await page.waitForFunction(()=>document.querySelectorAll('#gh-dialog iframe').length===0);await page.close();console.log('PASS linked colours without reload or camera reset',width,arena);}
+ assert.deepEqual(errors,[]);
+}finally{await browser?.close();await new Promise(r=>server?server.close(r):r());await mf.dispose()}

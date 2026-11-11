@@ -1,0 +1,21 @@
+.perspective-lab .lab-layout{align-items:start;grid-template-columns:minmax(280px,360px) minmax(0,1fr)!important}
+.perspective-lab .lab-controls,.perspective-lab .lab-preview{border:1px solid #e9e6eb;box-shadow:0 8px 32px #32102a05}
+.perspective-lab .lab-preview{position:sticky;top:20px;min-width:0}
+.perspective-lab .lab-preview h2{font-size:22px;margin:0 0 10px}
+.perspective-lab .lab-point-guide{font-size:15px;line-height:1.5;color:#51404a;min-height:44px}
+.perspective-lab .lab-details{margin:16px 0;font-size:14px;line-height:1.6}
+.perspective-lab summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600}
+.perspective-lab summary::before{content:'+';margin-right:10px;color:#6333ff}
+.perspective-lab details[open]>summary::before{content:'−'}
+.perspective-lab button,.perspective-lab input,.perspective-lab select{font:inherit;min-height:44px}
+.perspective-lab button{border:1px solid #ded8e0;border-radius:10px;padding:10px 12px;background:white}
+.perspective-lab button:disabled{opacity:.5}
+.perspective-lab :focus-visible{outline:3px solid #6333ff;outline-offset:3px}
+.perspective-lab canvas{display:block}
+@media(max-width:760px){
+.perspective-lab .lab-layout{grid-template-columns:minmax(0,1fr)!important}
+.perspective-lab .lab-preview{grid-row:1;position:static;padding:14px!important}
+.perspective-lab .lab-controls{grid-row:2;padding:16px!important}
+.perspective-lab h1{font-size:28px!important}
+.perspective-lab .lab-preview>p:last-child{font-size:12px!important}
+}

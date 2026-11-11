@@ -29,24 +29,28 @@ export const arenaGeometry = {
   },
   "o1": {
     "area": 27.353366,
-    "source": "components/assets-blender/o1.json",
+    "source": "components/assets-blender/o1-surface.json",
     "surfaceBounds": {
       "x": 5.902,
       "z": 5.902,
       "y": 0
     },
     "constructionBounds": {
-      "x": 6.002,
-      "z": 6.62306,
-      "y": 1.516
+      "x": 6.049983,
+      "z": 6.829092,
+      "y": 1.51601
     },
     "sourceFiles": [
       {
-        "path": "components/assets-blender/o1.json",
-        "sha256": "cec7ae1f4b4c20eede64bd09e9e4f827aa8215bbc9476cb05bc634cfb826e72a"
+        "path": "components/assets-blender/o1-surface.json",
+        "sha256": "681ce50943bda67ffcc9eddb7e427d320b7e6d03322415e096e1360cf2d730aa"
+      },
+      {
+        "path": "public/arenas/panna-play-o1-v2.glb",
+        "sha256": "280d6ae80365ac4909326aea1df4990c820adbf004b601ef16bee34b62b68b30"
       }
     ],
-    "sourceRevision": "12d00e49dfad836ebbc7cde0b36528d9ac7b84fe6309786be99b6f3ad97ac581",
+    "sourceRevision": "9ed8471ca20a3d09b80711648c2b915e2bda1a345cae83a667924f6ece4b02c0",
     "clearance": null,
     "modulePitch": null
   },
@@ -59,44 +63,44 @@ export const arenaGeometry = {
       "y": 0.000845
     },
     "constructionBounds": {
-      "x": 5.653,
-      "z": 7.93938,
-      "y": 1.22399
+      "x": 5.73267,
+      "z": 8.09267,
+      "y": 1.223411
     },
     "sourceFiles": [
       {
-        "path": "components/assets-blender/p1.json",
-        "sha256": "6725f91c6f0b7018149ec47eec2d8fe0119d60999965e1ecb2c50bb4b0c3f2c2"
+        "path": "public/arenas/p1.json",
+        "sha256": "d7712347d194df7ae0194b25659b3eb70d6d08ef8b39589abdc486a80dcbcb00"
       },
       {
         "path": "components/assets-blender/p1-surface.json",
         "sha256": "2748b094b3affdc5e9757c71558eadbe21cdcfeb1ea4f547b6fa15eec85627de"
       }
     ],
-    "sourceRevision": "4b5f694dc6067356875fcd791c9d26afef42d3022e382b88c4e4eaeb0982f84c",
+    "sourceRevision": "8f09840f1e610a8569de9cbe568c3e35bf8d039d672018b775bc6d707cdf6633",
     "clearance": null,
     "modulePitch": null
   },
   "street15": {
     "area": 149.155,
-    "source": "public/arenas/street15.json",
+    "source": "public/arenas/street15-r3.json",
     "surfaceBounds": {
       "x": 15,
       "z": 10,
-      "y": 0.2
+      "y": 0.065
     },
     "constructionBounds": {
-      "x": 16.650002,
-      "z": 10.104,
-      "y": 1.325
+      "x": 16.64195,
+      "z": 10.2016,
+      "y": 1.123748
     },
     "sourceFiles": [
       {
-        "path": "public/arenas/street15.json",
-        "sha256": "176f3fd10a5b576155376ffccc914ea0d7fe34f714b34811986f681509999984"
+        "path": "public/arenas/street15-r3.json",
+        "sha256": "2a039cd2705bdcb1960a979030690226388572985755f1411839c0e6f07f59e2"
       }
     ],
-    "sourceRevision": "5ea524e1717b39dd1d95ad9d222d2d0594b6eef6d848d3b3ecedfe848747e8be",
+    "sourceRevision": "e95bddeb10b3bec6aec36f4c0ce07c7b1b0d720db582d85e29645a5a4a15b4ff",
     "clearance": null,
     "modulePitch": null
   },
@@ -109,17 +113,21 @@ export const arenaGeometry = {
       "y": 0.2
     },
     "constructionBounds": {
-      "x": 6.722908,
+      "x": 6.7225,
       "z": 6.12,
-      "y": 0.91
+      "y": 0.9
     },
     "sourceFiles": [
       {
         "path": "public/arenas/circle-cage-1.json",
-        "sha256": "d019703cc03557779e4d4d8df794d098aee86b14005f5ffbbd3a7b270721f5df"
+        "sha256": "eb6eaca6cee735afb85cf0511bb371497fbd4e62079f011b247dc17fd776067f"
+      },
+      {
+        "path": "public/arenas/panna-cage-90-v2.glb",
+        "sha256": "a6c9ef3ec68be9fec29b7603dd2c3f6c05cacca9d0b51ee58300a71b6e74427f"
       }
     ],
-    "sourceRevision": "cd0cfc0551d42c616729abcc730ed809b09dcf87be82a2c33e02b6b0acc6e687",
+    "sourceRevision": "4900844d2fe7420f0020ff40272116149873a0a44035064261e8b49ce6420b0e",
     "clearance": null,
     "modulePitch": null
   },
@@ -132,17 +140,21 @@ export const arenaGeometry = {
       "y": 0.2
     },
     "constructionBounds": {
-      "x": 6.722908,
+      "x": 6.7226,
       "z": 6.12,
-      "y": 1.81
+      "y": 1.8
     },
     "sourceFiles": [
       {
         "path": "public/arenas/circle-cage-2.json",
-        "sha256": "897fc08a610b122d1962ea7cd7b7fc4351a2d279a1ea5d271a3d8243558d1339"
+        "sha256": "a09cc64aee9055f5934087c71d031cd4be0fe9e1c300f8d97e178ecd9e26e295"
+      },
+      {
+        "path": "public/arenas/panna-cage-180-v2.glb",
+        "sha256": "b73302df3519f2304987e7f16892d5f90ad224714f946025d3da6e5ceb71fd03"
       }
     ],
-    "sourceRevision": "dd74af05a58f92649936f4f558ce0e9333ff01f7b9ec54a33c95bb4aa0eebc39",
+    "sourceRevision": "3cc77ea8bb777767295417f08823c99876f4f99c41be88332315ef186f157e6a",
     "clearance": null,
     "modulePitch": null
   },
@@ -185,10 +197,10 @@ export const arenaGeometry = {
     "sourceFiles": [
       {
         "path": "public/arenas/octagon.json",
-        "sha256": "d50e19df42fd154043de81a8723b320fc104b3ae9700288f0be1d8cc2317c877"
+        "sha256": "633bd24ccf8e5c23002bf3be8b045701031292d3fab10398f6b57e10a1e9ee6d"
       }
     ],
-    "sourceRevision": "5d204c44dc4e2a89727c30093a662a569aac2ebe5010fefed37d084a0f98242f",
+    "sourceRevision": "c30dc5654bc74fb06ec19b3764ef4d9a4202dcbb3da9c1c83f896bf47f7eb72a",
     "clearance": null,
     "modulePitch": null
   }

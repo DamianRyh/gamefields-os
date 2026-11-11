@@ -1,0 +1,16 @@
+{
+  "schema": "GF-SPORT-EQUIPMENT-1",
+  "conceptOnly": true,
+  "assets": {
+    "teq-table": {
+      "sha256": "5962a79e2a659426f2ee333eaaebd371da8286b22584f424ff66454fd6be1185",
+      "meshes": 6,
+      "triangles": 448
+    },
+    "basketball-hoop": {
+      "sha256": "1d9fca5942b25c7531f9cb07551998f966798ba605a1a1545be0ff7d0f0deb4f",
+      "meshes": 21,
+      "triangles": 1008
+    }
+  }
+}

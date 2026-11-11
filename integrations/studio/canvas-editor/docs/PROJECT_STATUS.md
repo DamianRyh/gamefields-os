@@ -1,3 +1,173 @@
+## Studio — grafiki zawsze na jednokolorowej nawierzchni, 2026-11-11
+
+Decyzja właściciela: grafiki (elementy z biblioteki Grafika) mają zawsze leżeć na czystej, jednokolorowej nawierzchni.
+
+**Reguła (`lib/plain-surface.ts`):** gdy na boisku jest choć jeden element z biblioteki (`objects[].asset`), Studio nie rysuje wzoru ani pól strefy w kolorze `zone`. Dotyczy to:
+- planu 2D;
+- `blender-arena-preview`;
+- `street-football-realistic-preview`;
+- `panna-realistic-preview`;
+- `sport-surface-art`.
+
+**Interfejs:**
+- Grafika → Elementy ma nową sekcję „Kolor nawierzchni” (kolory projektu, 15 dodatkowych, własny).
+- Zakładka Nawierzchnia → Wzór przy elementach na boisku pokazuje „Nawierzchnia jest jednokolorowa” i wybór koloru zamiast projektów wzorów.
+- Wzór wraca po usunięciu wszystkich elementów.
+
+**Wycena:**
+- Malowanie liczone jest na poziomie wykonania 1/4 (zamiast złożoności ukrytego wzoru).
+- Budżet kolorów obejmuje tło, kolory elementów i otoczenie.
+- Elementy, jak dotąd, liczą się jako pozycje „Logo i napisy”.
+- Stawki się nie zmieniają.
+
+**Wcześniejszy commit:** dołączony jest commit z treningiem piłkarskim (a6f803a), który nie wszedł do #74, bo PR został scalony przed jego wysłaniem.
+
+**Walidacja:**
+- `test:assets`: wzór jest widoczny przed dodaniem elementu, znika po dodaniu, kolor nawierzchni zapisuje się w JSON, zakładka Wzór wyjaśnia regułę;
+- budżet kolorów: 5 = tło + 3 kolory elementu + otoczenie;
+- tsc, build, test:studio, test:surface, test:models, quote-engine, quote-api, graphic-boundaries, component-specification, project-owned-reference, print-contract.
+
+## Studio — Grafika: trening piłkarski, 2026-11-10 (druga część)
+
+Prośba właściciela: na start głównie elementy do treningu piłkarskiego (slalom, tor przeszkód do kontroli piłki), z których klient sam zbuduje przestrzeń.
+
+**Research ustawień ćwiczeń:**
+
+| Ćwiczenie | Typowe ustawienie |
+|---|---|
+| Slalom na kontrolę | 5–6 pachołków co ok. 1,4 m |
+| Zygzak na szybkość | co ok. 4,5 m |
+| T-test | 4,5 + 9 m |
+| Gwiazda, kwadrat | bok ok. 4,5 m |
+| Kropki | 0,6 × 0,9 m |
+| Kwadrat podań / 1 na 1 | ok. 9 × 9 m |
+| Trójkąt podań | 7–9 m |
+| Bramki z pachołków | do prowadzenia i podań |
+| Łuk strzałów | punkty łukiem przed celem |
+
+Źródła: SoccerXpert, Renderfoot, TMI Sports Medicine, Sport Session Planner, FIFA Training Centre, Otumoetai FC.
+
+**Wdrożone (`lib/football-drills.ts`):** 19 elementów z parametrami.
+- **Prowadzenie:**
+  - slalom: 4–12 pachołków, odstęp 0,8–5 m, prosto, zygzak lub wąż, trasa;
+  - bramki z pachołków: liczba, szerokość, odstęp, układ;
+  - ósemka;
+  - pole 1 na 1.
+- **Podania i strzały:** kwadrat treningowy (rondo, 1 na 1 z bramkami, podania ze środkiem), trójkąt, korytarz, łuk strzałów, tarcza, strefy 1–9.
+- **Koordynacja:** drabinka, T-test, gwiazda, sześciokąt, kropki, pole techniki.
+- **Tor przeszkód:** numer stacji, strzałka, start, meta.
+
+**Rozmiar i zapis:**
+- Rozmiar wynika z ustawień, w metrach, bez swobodnego skalowania.
+- Ustawienia zapisują się w `objects[].asset.opts`.
+
+**Gotowe układy:** Tor kontroli piłki, Strefa szybkości, Stacje techniki, Strefa podań i strzałów, Pojedynek na małej arenie (boiska do 9 m).
+
+**Walidacja:** `test:assets`.
+- Wszystkie ustawienia (min, domyślne, max) przechodzą politykę SVG.
+- Rozmiar slalomu się zgadza.
+- Wartości są przycinane do zakresu.
+- Układy mieszczą się na boisku.
+- Test przeglądarkowy: tor, slalom 8 × 2 m zygzakiem, JSON, 3D.
+
+## Studio — Grafika: elementy nawierzchni, 2026-11-10
+
+**Research (2026-11-10):**
+- Konfiguratory nawierzchni (VersaCourt) dają kolory, linie gier i logo, bez własnej kompozycji.
+- Producenci malowań termoplastycznych (Start Safety: 41 gotowych wzorów, np. klasy, ślimak liczb, twister) sprzedają z katalogu. Planer drag & drop Magical Playground Markings działa tylko w UK, po zalogowaniu.
+- Playground Ideas ma ok. 150 elementów w 3D. Cemer ma prawdziwe wymiary i strefy bezpieczeństwa, ale nie ma grafiki na nawierzchni.
+
+Nikt nie łączy prawdziwej skali, gier i treningu na nawierzchni oraz podglądu 3D z wyceną.
+
+**Wdrożone:**
+- **Biblioteka `lib/surface-assets.ts`.** 30 nowych elementów w prawdziwej skali (metry), w kategoriach Strefy i kształty, Trening piłkarski oraz Gry podwórkowe. 24 dotychczasowe motywy trafiły do kategorii Symbole.
+  - Elementy mają 1–4 kolory, domyślnie z palety projektu, z kontrastem do tła.
+  - SVG przechodzi `graphic-source-policy`.
+- **4 gotowe układy**, dopasowane i przycięte do boiska.
+- **Zakładka Grafika:**
+  - zakładki Elementy, Linie, Logo i tekst;
+  - przełącznik Plan 2D / Podgląd 3D;
+  - edytor elementu: rozmiar w m, obrót 0/45/90/135/180°, kolory projektu i dodatkowe, lustrzana kopia (symetria względem środka), duplikat, wyśrodkowanie, kolejność warstw, dokładna pozycja w m.
+- **Plan 2D:**
+  - przyciąganie do siatki 25 cm i do osi boiska;
+  - obrót co 15°;
+  - uchwyt skali aktualizuje rozmiar w m;
+  - ramka zaznaczenia w proporcjach elementu.
+- **Schemat projektu:**
+  - nowe opcjonalne pole `objects[].asset {id,w,h,colors}`;
+  - zakres `scale` rozszerzony do 2–1500 (prawdziwa skala na boisku 15 m), czyli tylko poszerzony, więc stare projekty dalej przechodzą walidację.
+- **Poprawka 3D:** obiekty na prostokątnych płytach (`blender-arena-preview`) są mapowane tak jak linie boiska: 30–570 i proporcja długość/szerokość. Wcześniej grafiki na 15 × 10 m lądowały za wysoko i były spłaszczone.
+
+**Walidacja:**
+- tsc i build;
+- `pnpm test:assets`:
+  - test logiczny: 54 elementy, polityka SVG, skala, układy w granicach boiska, JSON;
+  - test przeglądarkowy 390 i 1440 px: zakładki, układ, element, rozmiar, kolor, obrót, lustrzana kopia, warstwy, zapis JSON, 3D, brak przewijania w bok;
+- test:studio, test:models, test:surface, graphic-boundaries, quote-engine, component-specification, project-owned-reference.
+
+## Studio — wybór modelu konstrukcji, 2026-11-10
+
+Karuzela „Konstrukcja stalowa” została zastąpiona listą produktów (`components/studio-model-picker.tsx`).
+
+**Lista modeli:**
+- Wszystkie 7 modeli widać naraz, w grupach „Panna 1 na 1” i „Street 3 na 3”.
+- Karta pokazuje miniaturę, kształt i pole gry oraz obrys z bramkami i wysokość, z danych modeli 3D (`arenaGeometry`).
+- Liczby mają polskie przecinki.
+- Tabela „Porównaj wymiary wszystkich modeli” zawiera pole gry, obrys, wysokość i powierzchnię.
+
+**Panel konstrukcji:**
+- Zakładki: Model, Kolory, Rozbudowa.
+- Kolory konstrukcji są w osobnej zakładce. Przycisk „Dalej: kolory konstrukcji” prowadzi do niej po wyborze modelu.
+- Panna na zakładce Sport używa tej samej listy.
+
+**Walidacja:**
+- tsc, build, test:studio, test:surface;
+- nowy `pnpm test:models` (390 i 1440 px): 7 kart, grupy, ładowanie miniatur, przecinki, zmiana na Panna Octa z zapisem w JSON, tabela, brak przewijania w bok, przejście do kolorów.
+
+`tests/studio-visual-browser.mjs` był nieaktualny już wcześniej: zatrzymuje się na usuniętym menu „Narzędzia edycji”.
+
+## P2 — sporty i droga do zapytania, 2026-10-29
+
+Dodano Teqball, Street Football, Panna, koszykówkę 3×3 i pełną koszykówkę, wymagane wyposażenie w podglądzie i kalkulacji, udostępniane wersje z wycofaniem, wyszukiwanie/paginację Warsztatu, bibliotekę projektów oraz pakiet zapytania z wyceną. Zachowano najnowszy pływający edytor, karuzele i niezależne kolory konstrukcji; poprawiono mobilną paletę i hydratację. Zakres, testy, migracja i ograniczenia: [P2](P2_IMPLEMENTATION_2026_10_29.md). Produkcyjny CREW pozostaje zależny od poprawienia odrzuconego klucza OpenAI (502/AUTH); wyposażenie bez stawek wymaga indywidualnej wyceny.
+
+## P1 - odporność 3D, zapis i wycena, 2026-10-29
+
+Limit czasu kalkulacji z walidacją odpowiedzi i ponowieniem, limit startu PBR z przejściem do istniejącego renderera standardowego oraz jawny wybór nawierzchni z linku przy odzyskiwaniu szkicu. Zachowano Project, modele, 300 wzorów, 19 palet, lokalne warianty i stawki. Punkt odniesienia, dowody i granice: [P1](P1_FOUNDATION_2026_10_29.md). TypeScript, test:studio, build, testy kalkulacji/API, awarii P1, PBR/WebGL1 oraz test:mobile 375/390/430/1440 PASS. Publikacja potwierdzana osobnym receipt Sites.
+
+## Standard jakości produktu — pierwszy etap PBR, 2026-10-29
+
+Panna Play / Panna Court: osobny, leniwie ładowany renderer Three.js z materiałami fizycznymi, oświetleniem studyjnym, odbiciami środowiska, cieniem i zacienieniem styku, mapami nawierzchni oraz filtrowaną perforacją. Obrót/kolory/tekst/logo zachowane. Jakość rośnie po zatrzymaniu, brak stałej pętli w idle; urządzenia bez WebGL2 wracają do starego podglądu. Warsztat czeka na finalną klatkę. Referencja właściciela i kryteria: `docs/PRODUCT_PRESENTATION_STANDARD.md`. Walidacja: TypeScript, build, test:studio, mobilny eksport JSON/materiały/Radar i Warsztat przeszły. Przyczyną wcześniejszej blokady eksportu był pasek CREW nad przyciskiem; pomoc jest teraz dokowana w nagłówku. Status: pierwszy etap do wizualnej oceny względem wzorca, nie deklaracja identycznego renderu.
+
+## Studio — materiały Panna Play / Panna Court, 2026-10-29
+
+Oba interaktywne modele otrzymały oświetlenie lakierowanej stali (światło główne i wypełniające, refleks zależny od kamery i wykończenia), cień z geometrii na poziomie nawierzchni oraz filtrowaną perforację zapobiegającą dużym smugom przy oddaleniu. Cień korzysta z istniejących buforów GPU i maski stencil, bez dodatkowego kontekstu WebGL. Panna Play korzysta teraz również z istniejących map nawierzchni PBR. Geometria/revizje/kolory użytkownika, logo, wzór i obrót pozostają obsługiwane. To render czasu rzeczywistego, nie identyczny obraz z przygotowanych renderów strony głównej.
+
+Walidacja: TypeScript, build, test:studio, test Panna Court v6, `tests/studio-realism.mjs` (o1/p1 × 390/1440 px, widoczny WebGL, stencil, brak błędów GPU, obrót i zmiana koloru). Dowody lokalne: `outputs/studio-realism/`. Znane ograniczenie poprzedniego wydania: szerszy test mobilny potrafi zatrzymać się przy pobieraniu JSON; nie jest dowodem przejścia całego flow eksportu.
+
+## Perspective Lab — światło i cień, 2026-10-29
+
+Dodano oświetlenie kierunkowe, delikatny refleks metalu i perforację paneli O-1/P-1. Miękki cień z geometrii jest rzutowany na płaskie podłoże tą samą kamerą; maska stencil zapobiega sumowaniu ciemności nakładających się elementów. Kierunek światła 0–360° i siła cienia 0–60% są dostępne w zaawansowanym dopasowaniu. Eksport PNG zawiera cień, tryb przed/po i krycie pozostają tanim kompozytowaniem gotowego renderu. Zasoby GPU są zwalniane także po błędzie.
+
+Testy: `tests/makeover-lab-optimization.mjs` — 390/1440 px, zmiany pikseli po zmianie siły/kierunku, eksport, zero ponownych uploadów geometrii dla krycia/przed-po, brak overflow. TypeScript, kompilacja, test kamery, test:studio i test:mobile. Dowody wizualne: `outputs/perspective-lab/shadow-390.png`, `shadow-1440.png`. Wizualizacja nadal koncepcyjna: brak przesłaniania przez obiekty na zdjęciu, kalibracji terenu i automatycznej analizy światła zdjęcia.
+
+## Perspective Lab — optymalizacja 2026-10-28
+
+Podgląd przed ustawieniami na mobile, białe tło, dotykowe punkty kalibracji, zaawansowane parametry w sekcjach rozwijanych. Zmiana modelu zachowuje narożniki. Krycie i przed/po kompozytują gotowy render bez ponownych uploadów geometrii; import zdjęcia nie koduje pośredniego PNG. Ustabilizowano lokalny zakres przeszukiwania ogniskowej. Zachowano eksport koncepcyjny i istniejące modele.
+
+Walidacja: TypeScript, build, test:studio, test kamery, `tests/makeover-lab-optimization.mjs` (390/1440 px: eksport, brak overflow, zachowane punkty, ponowne wczytanie zdjęcia; zero dodatkowych uploadów GPU przy kryciu i przed/po). Ograniczenia: nadal kalibracja przybliżona, bez przesłonięć i pomiaru terenu.
+
+## 2026-10-28 — podgląd 3D w Warsztacie
+
+Dodano lekki odczytowy podgląd /workshop-preview?id=UUID, który renderuje faktyczną zapisaną konfigurację przez ten sam silnik 3D co Studio. Nie zapisuje szkicu i nie zmienia projektu. Homepage kolejkuje widoczne karty, tworzy renderowane miniatury 3D i pozwala obracać wybraną pracę; utrzymuje maksymalnie jedną aktywną ramkę/WebGL naraz. Komunikaty miniatury sprawdzają źródło, origin, ID i limit obrazu. TypeScript, build, test:studio oraz test preview 390/1440 (P1/O1/układ modułowy, snapshot, obrót, brak zapisu szkicu, maks. jedna ramka) PASS. Publikacja jest następnym krokiem.
+
+## 2026-10-26 — jednoklikowy Warsztat
+
+Nowy przycisk „Zapisz dla innych” publikuje bez formularza i moderacji układ, wzór i kolory w nowej tabeli D1 studio_workshop_designs. Serwer usuwa prywatne nazwy, obiekty, napisy, logo i wyceny; tytuł nadaje z katalogu. Ostatnie 10 prac jest publiczne od razu, z datą i kopią otwieraną w Studio. Losowy klucz umożliwia autorowi wycofanie publikacji. Endpoint waliduje projekt, źródło żądania, wielkość i atomowy limit 3 nowych projektów / 10 min; deduplikacja konfiguracji, parametryzowany SQL, żadnych poświadczeń WP w kliencie. Migracja 0011 jest wyłącznie addytywna, historyczne migracje niezmienione. TypeScript, test:studio, build, test:mobile i test D1/API/UI 390/1440: PASS. Publikacja tego źródła jest następnym krokiem; jej wynik trafia do potwierdzenia wydania.
+
+## 2026-10-26 — projekty nawierzchni w ofercie
+
+12 gotowych projektów Signature jest pierwszą karuzelą w istniejącym Nawierzchnia → Wzór, przed 25 kierunkami i 12 kompozycjami. Wybór stosuje atomowo rodzinę, wariant i paletę bez zmiany konstrukcji, sportu, obiektów ani otwierania okna. Usunięto konieczność otwierania Signature w modalu; płaski układ zastępuje wycofany eksperyment kroków z v104. Strona główna pokazuje osobną nawierzchnię, a wizualizację koncepcyjną po najechaniu/fokusie lub przełączeniu na dotyku. TypeScript, test:studio, build, test:mobile i test wyboru ofert 390/1440 px: PASS. Publikacja tego źródła jest kolejnym krokiem; wynik wdrożenia zapisujemy w oddzielnym potwierdzeniu wydania.
+
 # Gamefields — stan projektu
 ## Kolekcje przed wariantami — 26.10.2026
 
@@ -330,3 +500,173 @@ Wcześniejsze stawki są kosztami produkcji zgodnie z decyzją właściciela. Kl
 ## 24.10.2026 — skupione Studio i obracany model
 
 Wyposażenie i wybór scenerii wyłączone w Studio; większe grupy kolorów konstrukcji; Boczny/Z góry/Model3D z obrotem i bieżącymi teksturami. Starsze dane pozostają w JSON, ale niedostępne wyposażenie nie jest prezentowane ani wyceniane. [Zakres i testy](STUDIO_UX_2026_10_24.md). Ceny sprzedaży nadal są przeliczane na serwerze, koszty ukryte.
+
+
+### Panna Court v6 — 2026-10-28
+
+Replaced `p1` with the approved CAD construction: 16 single inner sheets, external supports, no ground and planar perforation mapping. Optional Studio surface is unchanged. Added downloadable GLB, DEFAULT/HOVER/detail images, a rendered catalog thumbnail, reproducible conversion and geometry validation. Passed: TypeScript, Studio suite, build, mobile/desktop checks (375/390/430/1440), material switches, JSON roundtrip, camera and Radar navigation. Standalone WebGL check: 142 meshes, no browser/GL errors. WordPress integration edits are scoped to Panna Court on home page 3462; release workflow and checks are recorded in `deployment/PANNA_COURT_V6_STATUS.md`.
+
+Panna Court geometry is fetched separately from `/arenas/p1.json` to keep application bundles below the hosting asset-size limit. Base construction stays ground-free; the selected Studio surface is added separately.
+
+
+### Panna Play O1 detail revision 2 — 2026-10-28
+
+Replaced the previous O1 construction with the approved existing-model detail revision. The Studio loads the exact GLB separately (SHA-256 `280d6ae80365ac4909326aea1df4990c820adbf004b601ef16bee34b62b68b30`): 58 construction objects, 12 single inner sheets, 288,522 triangles, no ground. The adapter preserves every triangle, separates artwork sides and normalizes the curved panel UVs. Existing independent surface, project colours, patterns, Panna Court, Workshop and Radar are preserved. Added five product images and the updated O1 catalog thumbnail. Asset sizes remain below the hosting file limit.
+
+Passed TypeScript, Studio suite, exact GLB/adapter checks, build and mobile suite at 375/390/430/1440 widths, including colour/branding, camera, JSON roundtrip and Radar navigation. Thumbnail scripts resolve the existing Wrangler esbuild dependency so clean pnpm installs can build without an undeclared root package. WordPress changes are scoped to Panna Play on page 3462 and are applied only after this Site release is published; see deployment/wordpress-o1-v2-pending.json.
+## 2026-10-28 — Makeover / fotografia i model 3D
+
+Tryb DRAFT na osobnej ścieżce `/makeover-perspective-lab`, dostęp z nawigacji Studio. Zdjęcie lokalne JPG/PNG/WebP → cztery punkty podłoża → solver kamery z błędem reprojekcji → rzut prawdziwej siatki 3D W-1, Panna Circle lub P-1 przez WebGL → eksport PNG przy podstawowym sprawdzeniu. Rozmiary do transformacji pochodzą z granic faktycznego pliku siatki, nie z zatwierdzonej karty technicznej. TS/build/test matematyczny/test geometrii siatek PASS; test Chrome/telefon oczekuje na przeglądarkę. Brak automatycznych przesłonięć, cieni i korekty obiektywu.
+
+
+
+
+### Shared product presentation v3 — 2026-10-28
+
+Panna Play and Panna Court now have matching orthographic cameras and the same three-light/shadow rig. Added four 1920×1080 overview renders (DEFAULT/HOVER per model). The source CAD, GLB and model geometry are unchanged. Native compositor processing preserves opaque product pixels and fades only the shadow tail around the product silhouette; all image-edge alpha values are zero. The manifest records source hashes, camera rotations and image QA. Reproduction uses scripts/render-product-presentation-v3.py followed by scripts/refine-product-shadows-v3.py.
+
+WordPress rollout targets only the two product hero media blocks: responsive 16:9 width, larger desktop image column, updated overview/gallery URLs and matching colour-hover behaviour. Staged browser checks passed at 390/744/1440 px; the 744 px hero uses a 704×396 px image area, with no horizontal overflow. TypeScript, Studio, build and the existing mobile/desktop suite passed. Publish assets before the bounded WordPress edits and purge cache after them.
+
+Hosting integration check: the concurrent Makeover lab loads its existing Circle/P1 JSON meshes on selection, preserving their bytes and dimensions while keeping the JavaScript asset below the 25 MiB hosting limit. No model geometry or photo-upload handling changed.
+
+Post-merge verification: existing Makeover browser smoke passed in Chromium at 390/1440 px, including model loading and enabled PNG export. The route remains DRAFT; broader Safari/visual acceptance stays on the owner backlog. Largest deployed asset is below 25 MiB.
+
+
+### Fixed-camera colour preview v4 — 2026-10-28
+
+Homepage preview for Panna Play and Panna Court offers four small accessible colour swatches: native gray, red, Miami blue and Earth green. Both perforated sheet and painted frame use the selected material colour; original geometry, perforation, hardware, cameras and shadow rig are preserved. Hero interaction no longer swaps camera on pointer hover. Gallery alternate views remain available independently. Assets: public/product-presentation/v4; bounded WordPress insertion: deployment/hero-colours-v4.js.
+
+
+### Construction card detail v5 — 2026-10-28
+
+The steel-construction category card uses a close-up from outside the existing Panna Court v6 corner assembly. Four native material renders show gray/red/blue/green without changing camera, geometry or perforation. Compact accessible radio swatches replace alternate whole-court views in this card only; hero and product galleries retain their existing behaviour. Assets live in public/product-presentation/v5; bounded WordPress insertion is deployment/construction-detail-v5.js.
+GAMEFIELDS CREW (2026-10-28): Four persistent guide selectors, local choice persistence, Studio context events, and contextual tip panels are integrated without changing project serialization or underlying Studio tools. These are curated replies, not AI model responses; production avatar art and full conversational backend remain future work.
+
+CREW visibility follow-up (2026-10-29): Four guide heads are now directly visible in the Studio top-actions dock instead of hiding behind a help launcher; the selected guide's advice remains dismissible. The crew API reads `OPENAI_API_KEY` from the Cloudflare Worker runtime binding with a process-env fallback. Production inference still requires a live authenticated test and successful deployment.
+
+CREW inference diagnostics (2026-10-29): The server reports a non-secret upstream HTTP status and error category in Worker logs, and translates authentication, permission, quota, model and request failures into actionable Polish messages. Do not log credentials, payloads or full provider response bodies.
+
+CREW AI (2026-10-28): Four scoped expert prompts and a server-side Responses gateway are implemented. Live AI remains disabled until an API secret is configured; curated guidance continues to work without the secret. Conversational messages currently live in browser memory only.
+
+CREW specialized scope (2026-10-28): voice profiles tuned for Marek/Kuba/Ola/Alex, focus on street soccer = street football and panna football, with source-bound retrieval from a curated fact set. No autonomous publication of crawled claims or model self-training is active.
+
+CREW knowledge registry (2026-10-28): added D1 version/event schema, guarded admin publishing, deterministic source text verification, AI semantic verification, protected research endpoint and rollback/history API. Unattended scheduling and live inference are not yet enabled because the required API/administrator secrets and cloud writer verification are absent.
+
+
+
+### Perforated steel macro v6 — 2026-10-29
+
+Steel-construction category media now shows only an edge-to-edge macro of powder-coated perforated sheet: no posts, frames, court or background scene. Actual open RV5–8 geometry (5 mm holes / 8 mm staggered pitch), transparent holes, a fixed camera and four existing paint colours. Sample thickness is a 1.5 mm visualisation assumption; original product models remain unchanged. Colour controls and hero behaviour are preserved. Asset evidence: public/product-presentation/v6/manifest.json; widget: deployment/perforation-macro-v6.js.
+
+
+### Perforation-pattern preview v7 — 2026-10-29
+
+Prepared a category-card preview with six independent perforation choices (round, square, hexagon, wave, leaf and elongated oval), replacing this card's colour-only controls. Fixed native Blender camera, transparent holes and real open geometry; generic original sample patterns inspired by the interaction described on MEVACO Individual Design, without copying branded ornaments or images. Hero and product geometries remain unchanged. Standalone review: /product-presentation/v7/preview.html. Homepage insertion is prepared in deployment/perforation-patterns-v7-pending.json; WordPress publication awaits available API quota or an explicitly requested banked reset.
+
+
+### Product-only 3D preview v13 — 2026-10-29
+
+Added /product-viewer for the existing six homepage constructions. It loads the approved O1 GLB or existing arena meshes on demand, omits floor/slab geometry, retains the selected coating and provides orbit, zoom and reset without Studio editing controls or project persistence. O1/P1 reuse the current PBR renderer with WebGL1 recovery; failed loads can be retried. Closing the WordPress modal destroys the iframe and its renderer.
+
+The bounded homepage handoff opens this viewer first and offers a separate Personalizuj w Studio CTA. That explicit CTA carries an allowlisted arena/coat into Studio; saved Workshop imports are not recoloured. It uses the direct Studio origin because the existing WordPress Studio gateway does not forward coat; gateway source is unchanged. Original CAD/GLB geometry and other product experiences remain unchanged. Unit and browser evidence lives in tests/construction-preview*. Publish the viewer before applying deployment/product-viewer-modal-v13-pending.json to page 3462.
+
+
+### Goal-panel carousel and live preview colours v14 — 2026-10-29
+
+The product viewer adds four coating choices below the main 3D scene. Coating updates repaint the same renderer without refetching geometry or resetting orbit/zoom. A companion modal carousel provides six complete native goal-end assemblies viewed orthographically from outside, in all four coatings (24 transparent PNGs in public/product-goals/v14). Selecting a panel opens its isolated assembly in the main viewer; Całe boisko restores the complete construction. Source meshes are selected as whole objects and original CAD/GLB data remain unchanged.
+
+An origin/source/arena/view/nonce-checked message updates the Studio CTA and carousel thumbnails to the current viewer colour. Late messages from an earlier frame are ignored. Thumbnails are reproduced by scripts/build-goal-panel-thumbnails.mjs after building the viewer. WordPress handoff: deployment/goal-carousel-modal-v14-pending.json, applied only after the viewer and PNG assets are deployed. Existing Studio quote/recovery changes are retained.
+
+Product preview v15: three isolated native construction elements (side panel, goal panel, goal), each with independent live coating controls; full court selection remains independent.
+
+V16: independent element swatches update matching parts on the complete court without remounting the renderer or resetting camera. Parent bridge verifies origin, frame, arena and session nonce.
+
+
+### Panna Cage 90 — CAD r2, 2026-10-30
+
+Rebuilt Cage 90 from source-derived FreeCAD BRep templates, then exported a detailed Blender master and a separate web LOD from the same CAD. Studio and the existing product-only viewer now load the binary GLB with editable frame/panel/goal groups, PBR lighting and contact shadows. The original independent 20 cm surface is preserved exactly. Updated neutral/colour/goal renders and carousel metadata refer to this revision.
+
+Validation: finite GLB/JSON attributes, valid indices, 346,762 construction triangles, 6 m internal diameter, 0.9 m height and 6.72251 m total goal extent. Wire mesh is real geometry, not a perforated-sheet substitution. Visual assumptions and source hashes are in models/panna-cage-90-v2/cad-validation.json. CAD/STEP/Blender and generators are retained with the source. Shared modular-family components and Cage 180 await their own CAD revision.
+
+
+### Panna Cage 180 — CAD r2, 2026-10-30
+
+Source-defined two-level assembly now shares the Cage 90 CAD r2 templates: twelve standard modules, two lower goal modules and two vertically paired entry modules. Dedicated detailed Blender master uses linked mesh instances; binary GLB retains smooth normals and editable frame/panel/goal groups. Existing Studio and product viewer use the same revision with PBR lighting and contact shadow; independent 20 cm slab remains unchanged. CAD assumptions and source hashes are retained with the model. Shared F05 modular-family migration remains separate.
+
+Cage 180 validation: numeric CAD/GLB checks passed (593,282 triangles; 46 parts; 1.8 m height; original slab unchanged). TypeScript, full Studio scope suite and dedicated 390/1440 browser tests passed, including rotation, panel text, paint finishes, four surface materials, JSON roundtrip, binary GLB and no permanent idle loop. Four goal colour thumbnails are generated from the same GLB.
+
+The 390 px mobile regression suite also passed: O1/P1 materials, JSON colours/slabs, orbit and Radar navigation. Hosting packaging excludes the new 7.3 MB CAD source ZIP from public runtime assets to remain within the 256 MiB expanded archive limit. It remains in models/panna-cage-180-v2 for repository download; Blender and GLB remain public Studio assets.
+
+
+## 2026-11-02 - Nawierzchnie Pro
+
+Integracja z `DamianRyh/gamefields-os`, gałąź `studio-skin-2026-11`, pakiet `integrations/studio/surface-pro-2026-11/`. Baza pobrana z bieżącego repozytorium Sites: linia v154 -> v155 ze skórką. Dodano 16 rodzin (192 kompozycje), 12 palet i 16 Signature Pro przed 12 dotychczasowymi presetami: razem 41 rodzin, 492 wzory i 31 palet. Stare 25 rodzin i ich 300 renderów porównano z bazą v154: wynik identyczny. Zregenerowano SVG, WebP i katalog ofert oraz bundle miniatur warsztatu. Schemat projektu, modele, stawki i migracje pozostają bez zmian. Profil wykonania Pro korzysta z dotychczasowego fallbacku geometry; opcjonalnego profilu cenowego nie dodawano.
+
+Skórka `studio-skin-2026-11.css` i Inter są identyczne z pakietem GitHub i mają jeden import jako ostatni CSS. Rejestr publikacji: `DEPLOYMENT.md`.
+
+Limit paczki Sites: pierwsza próba zapisu została odrzucona przed utworzeniem wersji (limit 256 MiB po rozpakowaniu). Nowe podglądy Pro WebP są generowane jako karty 384 x 216 px (jakość 0,60); pełne 1672 x 941 zachowano lokalnie w outputs/surface-pro-qa/high-resolution. Wektory SVG pozostają pełne. Dodatkowo bezstratnie zoptymalizowano kodowanie 3 istniejących PNG scenerii, oszczędzając 695520 bajtów; sprawdzono identyczność rozmiaru, trybu i każdego piksela oraz zachowano oryginalne chunki metadanych PNG. Żadne zdjęcie, wzór ani model nie zostały usunięte. Raport: outputs/surface-pro-qa/lossless-compression.json.
+
+
+## 2026-11-02 — Studio: następne kroki 2026-11
+
+Wdrożono punkty 1–6 z `integrations/studio/next-2026-11/CODEX.md` (blob b69992b3358a6231cd8f5d6a60a39ac8de59e314) na źródłach Sites v157: link do pełnej wersji projektu z kolorami i opcjonalnym patternSeed (starsze JSON-y zachowują zgodność, brak pola oznacza 0), cztery kroki z postępem, różnice cen z dotychczasowego API wyceny, potwierdzany reset z kopią szkicu i Cofnij, miniatury IntersectionObserver i link do planera. Każdy punkt ma osobny commit; późniejsze poprawki QA są dodatkowymi commitami.
+
+CSS kart biblioteki pochodzi z aktualnej gałęzi GitHub `studio-skin-2026-11`, blob 1bfdff93912b617a913434f3aaf20cbb4d7449f4. Nie zmieniono rate card, migracji, modeli ani istniejących wzorów. Biblioteka nadal zawiera 492 wzory, w tym niezmienione 300 dawnych. Szczegóły kontroli, pomiarów i publikacji: DEPLOYMENT.md.
+
+
+## 2026-11-04 — Konwersja i przekazywanie projektu
+
+Na bieżących źródłach Sites v158 dodano pobieranie koncepcyjnego widoku z góry w PNG i przycisk „Wyślij projekt do wyceny”. WordPress: naprawiono sygnał gotowości odbiorcy w samodzielnym Studio oraz dodano formularz nad osadzonym edytorem, z weryfikacją origin/source i dokładnym ACK. Wspólny CF7 3758 ma kroki potrzeba → miejsce (opcjonalne zdjęcie do 5 MB) → kontakt; jedynym wymaganym polem jest e-mail. Formularz dostępny także na /kontakt/. Przekazywane są dodatkowe parametry kolorów i seed.
+
+Homepage otrzymał trzy obejrzane autentyczne zdjęcia z istniejących mediów, drugi CTA do opisania miejsca i poprawiony opis orientacyjnego budżetu. Stara prezentacja sklepu nie pokazuje czterech ręcznie wpisanych cen, obietnicy 48h ani niedokończonego linku; zachowano produkty i stawki. Referencje marek i ceny właściwych produktów WooCommerce nie zostały zweryfikowane i wymagają potwierdzenia właściciela. Link Radaru zmieniono dopiero po jego wyraźnej akceptacji. Usunięto automatyczne wczytywanie niewidocznej piłki po 6 s (pozostaje observer i scroll).
+
+Testy aktualnego WordPress przy 390 i 1440 px: PASS, bez wysyłania kolejnych wiadomości. Potwierdzono pełne parametry modelu/base/seed/estimate, formularz, walidację e-maila, wybór syntetycznego zdjęcia, trzy fotografie, powrót do edytora i brak przepełnienia. PNG pobrany i obejrzany. Jeden test mailowy, wyraźnie zaakceptowany przez użytkownika, zakończył się komunikatem WordPress „wysłane”; odbioru w skrzynce nie sprawdzono niezależnie. Zewnętrzny PageSpeed przekroczył limit 55 s — brak wiarygodnego wyniku punktowego.
+
+Źródła integracji: integrations/wordpress/conversion-2026-11. Backupy, zrzuty i logi: /Users/mac/Documents/Gamefields/outputs/conversion-2026-11-04. Końcowe kontrole i publikacja: DEPLOYMENT.md. Nie zmieniono migracji, modeli, stawek ani 492 wzorów.
+
+## Indywidualna wycena — przygotowanie do wydania
+W kartach wyboru, podsumowaniu i porównaniu wariantów nie pokazujemy gotowych kwot. Kontakt prowadzi do indywidualnej wyceny, a pakiet do zapytania nie zawiera kalkulacji. Nie zmieniono stawek ani silnika cen. Wynik wdrożenia zapisujemy w DEPLOYMENT.md.
+
+## Koszulka 3D Blender — 2026-11-06
+Dodano narzędzie Koszulki do wspólnego Studio: oryginalny model GLB, wzory i kolory, numery, herb, nazwiska, skład i rozmiary, dekolt okrągły/V, Cofnij i zapis Project.kit/JSON. Pakiet zapytania pomija obraz logo; publiczny Warsztat i prywatnościowe linki usuwają dane drużyny. Zachowano bieżącą indywidualną wycenę i wszystkie modele boisk. Model neutralny korzysta z referencji wyłącznie do kroju. GLB, TypeScript, test:studio i produkcyjna kompilacja PASS. Test koszulek na 390/1440: wzory, kolory, dekolt, logo, skład, Cofnij, reload, JSON, zapytanie bez obrazu logo i powrót do boisk PASS. Publikacja potwierdzana oddzielnym receipt.
+
+Pakiet produkcyjny przekroczył 256 MiB po dodaniu koszulek. Powtarzalny build pomija wyłącznie dwie nieużywane kopie źródeł `.blend` w dist/client/arenas; oryginały, GLB, manifesty i wszystkie grafiki pozostają zachowane. Testowe zrzuty desktopu przechwytują viewport zamiast czekać na stabilność animowanego modelu; asercje WebGL i projektu pozostają bez zmian.
+
+## Wspólne wejście do Studio — 2026-11-06
+Ekran wyboru pięciu produktów w istniejącej aplikacji; bez nowego Studia, koszyka czy odrębnego zapisu. Plakaty i piłki używają renderera plakatów oraz rdzenia GFBall v2 ze strony głównej i wspólnego silnika Signature Pro. Te same panele, Cofnij, JSON, historia, szkic i indywidualna wycena. Modele boisk i nawierzchni bez zmian. Miniatury korzystają z rzeczywistych modeli/wzorów; dodatkowy samodzielny eksperyment 3-szablonowych edytorów wycofano. TypeScript i kontrakt 32 paneli/960 plakatów/prywatności PASS; publikacja i kontrola UI w osobnym potwierdzeniu.
+
+
+## Ceny sklepu i panel produktu — 2026-11-06
+Plakat, piłka i koszulki mają ceny ze sklepu gamefields.eu (WooCommerce, `GET https://www.gamefields.eu/wp-json/gfs/v1/shop`, stałe zapasowe w `lib/shop.ts`): plakat 30 × 40 / 50 × 70 / 70 × 100 cm za 99 / 149 / 199 zł brutto, wysyłany jako sam print bez ramy (wybór ramy usunięty; `frame` zostaje w schemacie dla starych projektów); piłka 999 zł brutto; koszulka 599 zł brutto, poliester z nadrukiem sublimacyjnym, rozmiary XS–XXXL (stare `3XL` wczytuje się jako `XXXL`; rozmiary dziecięce: zapytanie). Wysyłka 19 zł, od 299 zł gratis. Nowy blok `StudioShopOrder`: ilość, suma, wysyłka i przycisk. Bez włączonej płatności „Zamów” otwiera formularz `/kontakt/?produkt=` z projektem, ilością i ceną; po włączeniu płatności „Do koszyka” dodaje wszystkie pozycje jednym linkiem `/cart/?gf_items=` (motyw Gamefields 1.0.12). Linki celują w `_top`, bo Studio działa w iframe. W trybie produktu panel pokazuje tylko ustawienia tego produktu (bez zakładek Konstrukcja/Nawierzchnia/Grafika); zmiana produktu przez „Produkty”. Podsumowanie i plakietka w nagłówku pokazują cenę produktu; boiska nadal mają indywidualną wycenę. Testy: tsc, test:studio, build, studio-print-contract, studio-product-entry, studio-kit (390/1440; dłuższe oczekiwanie na zapis szkicu przed przeładowaniem), test:mobile 375/390/430/1440: PASS.
+
+## Modele 3D — przygotowanie aktualizacji, 2026-11-06
+P1: web GLB 9 324 620 B, źródło 22 371 799 B, 142 części i 113 961 trójkątów. Test wszystkich ID, twarzy, UV, normalnych i pozycji do 1e-6 m PASS. GPU: P1 10 940 256 → 9 206 262 B; Cage 90 33 289 152 → 10 147 548 B; Cage 180 56 955 072 → 17 526 828 B, bez usunięcia trójkątów. Neutralne mapowanie tonów i PBR dla siedmiu konstrukcji; lakier oddzielony od metalu, niezależna mikrofaktura koszulki/piłki. Materiały nawierzchni i zapisane projekty zachowane. TypeScript, scope, kontrakt 32 paneli/960 plakatów i porównawcze rendery P1/O1 PASS. Publikacja i końcowe testy przeglądarkowe potwierdzane oddzielnie.
+
+Końcowa kontrola modeli: PBR i indeksowana geometria P1/Grid/Octa/Street15/Cage180 na 1440 px oraz P1 na 390 px PASS; koszulka na 390 i 1440 px PASS; plakat/piłka, JSON i przełączanie produktów na 390/1487 px PASS; test:mobile na 375/390/430/1440 px (materiały, kamery, szkic i Radar) PASS. Desktop i końcowa regresja wykonane z akceleracją Metal, bez twierdzenia o zmierzonej poprawie FPS.
+
+
+## Kolory z hero strony głównej — 2026-11-06
+Link wejścia przyjmuje `?arena=o1&panel=RRGGBB&frame=RRGGBB` (dowolny kolor 6 hex): `panel` ustawia panele, `frame` ramę i bramki. Hero gamefields.eu ma osobne kropki dla paneli oraz ramy i bramek i przekazuje oba kolory; strona `/konfigurator-boisk/` przepuszcza do ramki `panel`, `frame`, `coat` i `tool`. Panna Ring (w1) nie ma profilu 3D w Studio, więc z hero idzie do zapytania. Test: studio-product-entry sprawdza kolory z linku w pobranym projekcie (PASS); tsc, test:studio, build PASS.
+
+
+## Użyteczność (Baymard) — 2026-11-06
+Przegląd ekranów 390/1440 i poprawki: (1) cena, ilość i przycisk „Zamów”/„Do koszyka” przyklejone do dołu panelu plakatu, piłki i koszulek — zawsze widoczne podczas personalizacji; (2) ekran wyboru produktu pokazuje cenę na każdej karcie (od 99 zł / 999 zł / 599 zł; boiska i nawierzchnie: wycena indywidualna), na telefonie karty są poziome i cała oferta mieści się na ok. jednym ekranie; (3) automatyczna nazwa projektu podąża za produktem (Plakat/Piłka/Koszulki — mój projekt, powrót do boiska przywraca nazwę modelu), nazwy wpisane przez klienta się nie zmieniają; (4) w trybie produktu nie ma „Zapisz dla innych” i „Link do projektu” (dotyczą boisk); przy boiskach „Zapisz dla innych” jest przyciskiem drugorzędnym, by nie konkurować z „Podsumowaniem”; (5) zakładki produktu zawijają się zamiast ucinać („Układ i druk”). Do zrobienia: podwójna nawigacja boisk (kroki 1–4 i zakładki Konstrukcja/Nawierzchnia/Grafika) — wymaga zmiany testów kroków. Testy: tsc, test:studio, build, print-contract, product-entry, kit, workshop, test:mobile: PASS.
+
+
+## Jedna nawigacja boisk — 2026-11-06
+Usunięto zakładki Konstrukcja / Nawierzchnia / Grafika (nav „Wybierz obszar edycji”), które powtarzały kroki 1–3. Jedyną nawigacją jest pasek „Kroki projektu” (1 Konstrukcja, 2 Nawierzchnia, 3 Grafika, 4 Podsumowanie): numery w kółkach, aktywny krok fioletowy z podkreśleniem, odwiedzone z ✓; na telefonie 4 równe pola, na komputerze kolumny według długości etykiet. Testy przełączone na kroki: cage90, cage180, primary-sports, studio-mobile-goals. Wyniki: tsc, test:studio, build, test:mobile, product-entry, kit, workshop PASS. cage90/cage180 przechodzą nawigację, ale w tym środowisku (renderowanie programowe) przekraczają czas oczekiwania na przerysowanie 3D po zmianie materiału. primary-sports był nieaktualny już przed tą zmianą: czeka na `.studio-quote-total`, którego żaden komponent nie renderuje (boiska mają wycenę indywidualną).
+
+### Street Arena 15 R2
+
+Studio używa modelu z profilowaną ramą, wzmocnieniami i zaokrąglonymi koszami bramek. Pole 15 × 10 m, wysokość band 1 m, identyfikatory 24 paneli i mapowanie pola pod nadruk zachowano. Źródło Blender, osobny GLB konstrukcji i raport kontroli są w `models/street15/r2/`.
+
+### Street Arena 15 R3
+
+Bramki mają stalowe profile, pochylone podpory, płytki i siatkę 3D z osobnym matowym materiałem. Model oraz walidacja są w `models/street15/r3/`. Kontrola eksportu porównuje wszystkie elementy band i nawierzchni z R2.
+
+## Szybkość wejścia do Studio — 2026-11-07
+Ekran wyboru produktu (`/studio/` na gamefields.eu, Lighthouse mobile 0,53–0,83, 4,6 MB) nie ładuje już edytora: `StudioWorkspace` i podgląd 3D (`blender-arena-preview` z geometrią modeli, three.js) są wczytywane przez `React.lazy` po wyborze produktu; stała `defaultArena` przeniesiona do `lib/default-arena.ts`. Obrazy kart i dekoracja nagłówka jako WebP w rozmiarze wyświetlania (hub-court 711→129 KB, hub-ball 633→45 KB, hub-kit 474→9 KB, header-corner 1068→3 KB), karty poniżej pierwszego ekranu z `loading=lazy`. Ekran wyboru: 5,3 MB → 1,65 MB (przed kompresją), 36 → 30 żądań. Testy: tsc, test:studio, build, print-contract, product-entry, kit, workshop, test:mobile PASS.
+
+### Panna Octa R3
+
+Usunięto dwa poziome profile boczne z każdej bramki Octa. Zachowano obwiednię, podział części i identyfikatory paneli.

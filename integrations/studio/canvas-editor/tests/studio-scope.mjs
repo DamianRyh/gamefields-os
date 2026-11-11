@@ -1,3 +1,9 @@
+import './primary-sports.mjs';
+import './surface-pro.mjs';
+import './project-link.mjs';
+import './option-price.mjs';
+import './shared-project.mjs';
+import './construction-preview.mjs';
 import './creative-lines.mjs';
 import './sport-surfaces.mjs';
 import './load-image.mjs';
@@ -11,6 +17,7 @@ import './component-specification.mjs';
 import assert from 'node:assert/strict';
 import './inquiry-summary.mjs';
 import './inquiry-transport.mjs';
+import './studio-contact-bridge.mjs';
 import './project-dimensions.mjs';
 import './project-vault.mjs';
 import './draft-write.mjs';
@@ -19,7 +26,7 @@ import {resolve} from 'node:path';
 const root=resolve(import.meta.dirname,'..');
 const read=path=>readFile(resolve(root,path),'utf8');
 const {patternFamilies,patternPalettes,signaturePresets,variants,PATTERN_COUNT}=await import('../lib/pattern-library.ts');
-assert.equal(PATTERN_COUNT,300);assert.equal(patternFamilies.length,25);assert.equal(patternPalettes.length,19);assert.equal(signaturePresets.length,12);assert.equal(variants.length,12);
+assert.equal(PATTERN_COUNT,636);assert.equal(patternFamilies.length,53);assert.equal(patternPalettes.length,39);assert.equal(signaturePresets.length,40);assert.equal(variants.length,12);
 const home=await read('app/page.tsx');
 assert.ok(!home.includes('/api/projects'));assert.ok(!home.includes('/play'));assert.ok(!home.includes('Object.values(realisticPreviews).forEach'));
 assert.ok((await read('app/manifest.ts')).includes('start_url: "/"'));
@@ -29,6 +36,6 @@ for(const dir of ['app','components','lib']){
 const sources=await Promise.all(['app/page.tsx','components/street-football-realistic-preview.tsx','lib/radar-locations.ts'].map(read));
 for(const src of new Set(sources.join('\n').match(/\/(?:studio|radar)\/[^"'`\s]+\.(?:png|webp)/g)||[]))await access(resolve(root,'public'+src));
 assert.ok((await read('lib/realistic-locations.ts')).includes('enabled:false'));
-console.log('PASS: Studio/Radar scope, 300 patterns, 19 palettes, 12 Signature directions, assets present, Kraków hidden, no retired account calls.');
+console.log('PASS: Studio/Radar scope, 636 patterns, 39 palettes, 12 Masters + 16 Signature Pro + 12 legacy directions, assets present, Kraków hidden, no retired account calls.');
 
 for(const loc of ["park","school","courtyard","warsaw-pkin"])for(const view of ["perspective","aerial","ground"])await access(resolve(root,`public/studio/panna/${loc}-${view}.webp`));

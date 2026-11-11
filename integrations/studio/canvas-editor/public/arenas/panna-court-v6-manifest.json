@@ -1,0 +1,9 @@
+{
+  "sourceSha256": "acae658cf9338ae0f7e539f7f83e087f8a21c1e81e97befcb2bb33f9209379c3",
+  "sheets": 16,
+  "meshCount": 142,
+  "triangles": 113961,
+  "ground": false,
+  "orientation": "GLB to Studio: (-z,y,x)",
+  "outputSha256": "d7712347d194df7ae0194b25659b3eb70d6d08ef8b39589abdc486a80dcbcb00"
+}

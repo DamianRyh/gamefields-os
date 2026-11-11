@@ -4,14 +4,16 @@ import {sportSurface} from '@/lib/sport-surfaces';
 import {PatternArt} from './pattern-art';
 import {SurfaceAppearance} from './surface-material';
 import {PannaSurfaceObjects} from './panna-realistic-preview';
+import {hasSurfaceAssets} from "@/lib/plain-surface";
 /** Coordinates in metres, including the free area outside the playing field. */
 export function SportSurfaceLines({project:p}:{project:Project}){
  const s=sportSurface(p.surfaceModel);if(!s||!p.lines)return null;
- const L=s.fieldLength,W=s.fieldWidth,x=(s.length-L)/2,y=(s.width-W)/2;
+ const L=s.fieldLength,W=s.fieldWidth,x=(s.length-L)/2,y=('fieldOffsetY' in s&&typeof s.fieldOffsetY==='number')?s.fieldOffsetY:(s.width-W)/2;
  const line=(x1:number,y1:number,x2:number,y2:number)=><line x1={x1} y1={y1} x2={x2} y2={y2}/>;
  const circle=(cx:number,cy:number,r:number)=><circle cx={cx} cy={cy} r={r}/>;
- return <g transform={`scale(${600/s.length}) translate(${x} ${y})`} stroke={p.lineColor} strokeWidth={.05} fill="none" strokeLinejoin="round">
+ return <g data-sport-lines={s.id} transform={`scale(${600/s.length}) translate(${x} ${y})`} stroke={p.lineColor} strokeWidth={.05} fill="none" strokeLinejoin="round">
  <rect x={.025} y={.025} width={L-.05} height={W-.05}/>
+ {s.id==='teqball'?<>{line(L/2,0,L/2,W)}{line(L/2-3.5,0,L/2-3.5,W)}{line(L/2+3.5,0,L/2+3.5,W)}</>:null}
  {s.id==='tennis'?<>{line(L/2,0,L/2,W)}{line(0,1.37,L,1.37)}{line(0,W-1.37,L,W-1.37)}{line(L/2-6.4,1.37,L/2-6.4,W-1.37)}{line(L/2+6.4,1.37,L/2+6.4,W-1.37)}{line(L/2-6.4,W/2,L/2+6.4,W/2)}</>:null}
  {s.id==='padel'?<>{line(10,0,10,W)}{line(3.05,0,3.05,W)}{line(16.95,0,16.95,W)}{line(3.05,5,16.95,5)}</>:null}
  {s.id==='volleyball'?<>{line(9,0,9,W)}{line(6,0,6,W)}{line(12,0,12,W)}</>:null}
@@ -21,4 +23,4 @@ export function SportSurfaceLines({project:p}:{project:Project}){
  {['street-football-3x3','futsal'].includes(s.id)?<>{line(L/2,0,L/2,W)}{circle(L/2,W/2,s.id==='futsal'?3:1.5)}{[false,true].map(reverse=><g key={String(reverse)} transform={reverse?`translate(${L} ${W}) rotate(180)`:undefined}>{s.id==='futsal'?<path d={`M0 ${W/2-7.5} A6 6 0 0 1 6 ${W/2-1.5}V${W/2+1.5} A6 6 0 0 1 0 ${W/2+7.5}`}/>:<rect x={0} y={W/2-2} width={2.5} height={4}/>}</g>)}</>:null}
  </g>;
 }
-export function SportSurfaceArt({project:p,plan=false}:{project:Project;plan?:boolean}){const s=sportSurface(p.surfaceModel);if(!s)return null;const h=600*s.width/s.length;return <svg xmlns="http://www.w3.org/2000/svg" width={plan?600:1024} height={plan?h:1024} preserveAspectRatio="none" viewBox={`0 0 600 ${h}`}><rect width={600} height={h} fill={p.base}/><PatternArt p={p} h={h}/><SurfaceAppearance surface={p.surface} id="sport-floor" height={h} length={s.length}/><CreativeCourtLines project={p} height={h}/><SportSurfaceLines project={p}/><PannaSurfaceObjects project={p}/></svg>}
+export function SportSurfaceArt({project:p,plan=false}:{project:Project;plan?:boolean}){const s=sportSurface(p.surfaceModel);if(!s)return null;const h=600*s.width/s.length;return <svg xmlns="http://www.w3.org/2000/svg" width={plan?600:1024} height={plan?h:1024} preserveAspectRatio="none" viewBox={`0 0 600 ${h}`}><rect width={600} height={h} fill={p.base}/>{!hasSurfaceAssets(p)?<PatternArt p={p} h={h}/>:null}<SurfaceAppearance surface={p.surface} id="sport-floor" height={h} length={s.length}/><CreativeCourtLines project={p} height={h}/><SportSurfaceLines project={p}/><PannaSurfaceObjects project={p}/></svg>}
