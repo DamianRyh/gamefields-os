@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.27' );
+define( 'GFT_VERSION', '1.0.28' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -61,8 +61,8 @@ add_action( 'wp_head', function () {
 		return;
 	}
 	$up = content_url( '/uploads/2026/11/' );
-	printf( '<link rel="preload" as="image" href="%s" media="(max-width: 700px)" fetchpriority="high">' . "\n", esc_url( get_template_directory_uri() . '/assets/js/home/hero-r3/panna-play-720.webp' ) );
-	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 701px)" fetchpriority="high">' . "\n", esc_url( get_template_directory_uri() . '/assets/js/home/hero-r3/panna-play-1200.webp' ) );
+	printf( '<link rel="preload" as="image" href="%s" media="(max-width: 700px)" fetchpriority="high">' . "\n", esc_url( get_template_directory_uri() . '/assets/js/home/hero-r3/panna-play-mv-720.webp' ) );
+	printf( '<link rel="preload" as="image" href="%s" media="(min-width: 701px)" fetchpriority="high">' . "\n", esc_url( get_template_directory_uri() . '/assets/js/home/hero-r3/panna-play-mv-1200.webp' ) );
 }, 1 );
 
 /* The Additional CSS written under Savoy (cookie banner, subpage fixes, City templates) stays in effect. */
