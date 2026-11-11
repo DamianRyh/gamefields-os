@@ -39,3 +39,7 @@ Before activation:
 Rollback for the ordinary plugin: deactivate it in the Plugins panel. For the MU-plugin: rename its file as described above. Keep the previous deployment and database backup available; deactivating the gateway does not undo application migrations.
 
 If the upload option is missing or plugin installation is disabled, the administrator must use the hosting file manager/SFTP. `DISALLOW_FILE_EDIT` alone does not establish that plugin installation is disabled; the current site's permissions have not been verified.
+
+## mu-plugins/gamefields-content-fixes.php
+
+Podmienia w treści stron adresy trzech obrazów usuniętych z mediów (`uploads/2025/06/`) na istniejące rendery Gamefields, żeby 6 podstron nie miało tła nagłówka 404. Instalacja jak wyżej: plik do `wp-content/mu-plugins/`. Szczegóły i sprawdzenie: `docs/roadmap/PUBLIKACJA-2026-11.md`, zadanie A.
