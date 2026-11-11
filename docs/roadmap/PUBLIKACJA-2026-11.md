@@ -14,7 +14,7 @@ Sprawdzone automatycznie na żywej stronie (Playwright, 50 adresów z mapy stron
 | Teksty zastępcze (lorem, [pole], „Sample Page”) | brak |
 | LCP strony głównej, telefon (Pixel 5, bez dławienia) | ok. 1,4 s, obraz hero `panna-play-mv-720.webp` |
 | **Martwe obrazy** | **6 podstron ma tło nagłówka 404** → zadanie A |
-| **Sekcja „Stary beton. Nowe boisko.”** | **niewdrożona** → zadanie B |
+| **Sekcja „Stary beton. Nowe boisko.”** | **niewdrożona; zamiast niej stoi wersja „Stary plac. Nowa gra.” spoza repozytorium** → zadanie B |
 | **Polityka prywatności** | **nie opisuje Google Analytics, choć pomiar działa** → zadanie C |
 
 Zasady dla każdego zadania: kopia przed zmianą (numer wersji strony), podgląd, publikacja po akceptacji właściciela, na koniec wyczyszczenie cache LiteSpeed.
@@ -37,6 +37,8 @@ Rozwiązanie docelowe, gdy będzie czas: w edytorze każdej z 6 podstron podmien
 Pełna instrukcja z gotowym kodem: `docs/roadmap/WDROZENIE-stary-beton.md`
 (https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/WDROZENIE-stary-beton.md).
 Wstawiamy tylko fragmenty do aktualnej treści strony 3462, nie podmieniamy całości.
+
+**Ważne (stan z 11.11, 16:00):** na stronie jest już inna wersja tej sekcji, dodana bez repozytorium: `<section id="odnowa-placu">` z nagłówkiem „Stary plac. Nowa gra.”, poprzedzona komentarzem `<!-- Modernizacja placów · 2026-11-11 -->` i własnym blokiem `<style>` z regułami `.gfs .renov-…`. Przed krokiem 2 instrukcji usuń w całości: ten komentarz, ten blok `<style>` z regułami `.renov-…` i całą sekcję `#odnowa-placu` wraz z jej skryptem, jeśli ma osobny. Potem wstaw sekcję z instrukcji w to samo miejsce, po „Zmieści się?”. Na stronie ma zostać jedna sekcja o modernizacji placów, nie dwie.
 
 ## C. Polityka prywatności: pomiar odwiedzin (strona 4087)
 

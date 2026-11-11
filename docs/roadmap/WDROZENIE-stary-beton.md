@@ -13,6 +13,10 @@ Dla wykonawcy z dostępem do WordPressa gamefields.eu (Claude Code, Codex lub in
 
 Obrazy ładują się z jsDelivr (publiczne repozytorium, przypięty commit `dc298de`). Nie trzeba ich wgrywać do mediów. Jeśli wolisz media WordPress, pobierz 4 pliki z adresów poniżej, wgraj je i podmień adresy w sekcji.
 
+## Krok 0. Usuń wcześniejszą wersję sekcji
+
+Jeśli w treści strony jest `<section id="odnowa-placu">` („Stary plac. Nowa gra.”), usuń ją razem z komentarzem `<!-- Modernizacja placów · 2026-11-11 -->`, jej blokiem `<style>` (reguły `.gfs .renov-…`) i jej skryptem. Na stronie ma zostać jedna sekcja o modernizacji placów.
+
 ## Krok 1. Style (CSS)
 
 W treści strony znajdź pierwszy znacznik `<style>` z regułami `.gfs ...`. Wklej poniższy kod **na końcu tego bloku**, tuż przed zamykającym `</style>`.
