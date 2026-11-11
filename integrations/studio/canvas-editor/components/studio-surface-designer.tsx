@@ -8,6 +8,8 @@ import type {Project} from '@/lib/project';
 import {PatternArt} from './pattern-art';
 import {getPatternFamily,getPatternPalette,patternFamilies,patternPalettes,signaturePresets,patternVariantName,projectPatternColors} from '@/lib/pattern-library';
 import '@/app/studio-surface-designer.css';
+import {hasSurfaceAssets} from "@/lib/plain-surface";
+import {SurfaceBaseColor} from "@/components/studio-asset-library";
 
 type Patch=Partial<Project>;
 const CATEGORIES=[
@@ -53,6 +55,7 @@ export function StudioSurfaceDesigner({project:p,update}:{project:Project;update
   const next=[...colors];next[key==='c0'?0:key==='c2'?2:3]=hex;update({patternColors:next})
  }
  function stepVariant(d:number){update({patternVariant:((variant-1+d+12)%12)+1})}
+ if(hasSurfaceAssets(p))return <section className="gfsd" aria-label="Wzór i kolory nawierzchni"><div className="gfsd-plain" role="note"><b>Nawierzchnia jest jednokolorowa</b><p>Na boisku są elementy z zakładki Grafika, więc pod nimi zawsze leży jeden kolor. Wzór wróci, gdy usuniesz wszystkie elementy.</p></div><SurfaceBaseColor project={p} onBase={base=>update({base})} note="Wybierz kolor nawierzchni pod elementami."/></section>;
  return <section className="gfsd" aria-label="Wzór i kolory nawierzchni">
   <div className="gfsd-block">
    <h3 className="gfsd-h">Projekt</h3>

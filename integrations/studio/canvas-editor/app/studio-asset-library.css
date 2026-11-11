@@ -60,3 +60,11 @@
 .studio-shell .gfal-view button[aria-pressed=true]{background:#fff;box-shadow:0 1px 4px #2b0d211f;color:#47132D}
 .gfal-view button:focus-visible,.studio-plan-3d:focus-visible{outline:3px solid #6336F5;outline-offset:2px}
 .studio-shell .studio-plan-note .studio-plan-3d{margin-left:10px;min-height:28px;padding:0 12px;border:0;border-radius:999px;background:#47132D;color:#fff;font:inherit;font-size:12px;font-weight:700;cursor:pointer;pointer-events:auto}
+.gfae-params{display:grid;gap:12px}
+.gfae-seg-auto{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))!important}
+.gfal-base{display:grid;gap:8px;padding:12px;border:1px solid #E5DCE1;border-radius:12px;background:#fff}
+.gfsd-plain{display:grid;gap:4px;padding:12px 14px;border-radius:12px;background:#F4EEF1;color:#47132D;font-size:13px;line-height:1.4}
+.gfsd-plain p{margin:0;color:#6F5A66}
+.gfal-base .gfae-swatches button{display:grid;place-items:center;aspect-ratio:1;min-height:30px;padding:0;border:0;border-radius:50%;background:none!important;cursor:pointer}
+.gfal-base .gfae-swatches button:focus-visible{outline:3px solid #6336F5;outline-offset:2px}
+.gfal-base .gfae-swatches button[aria-pressed=true] i{outline:3px solid #6336F5;outline-offset:2px}

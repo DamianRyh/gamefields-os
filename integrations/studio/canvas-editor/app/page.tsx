@@ -37,6 +37,7 @@ import {selectSurface,sportSurface,type SurfaceModel} from "@/lib/sport-surfaces
 import {SportSurfaceArt} from "@/components/sport-surface-art";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 import {getAsset,scaleFor} from "@/lib/surface-assets";
+import {hasSurfaceAssets} from "@/lib/plain-surface";
 
 const uid=()=>Math.random().toString(36).slice(2,9);
 const obj=(kind:ObjectKind,name:string,x:number,y:number,extra:Partial<EditorObject>={}):EditorObject=>({id:uid(),kind,name,x,y,scale:100,rotation:0,opacity:100,color:"#ffffff",target:"court",...extra});
@@ -150,14 +151,14 @@ export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,o
   {p.surfaceModel?<SportSurfaceArt plan project={{...p,objects:[]}}/>:<>  {round?<circle cx="300" cy="300" r="340" fill={p.outside}/>:<rect x="-40" y="-40" width={w+80} height={h+80} rx="3" fill={p.outside}/>}
   {round?<circle cx="300" cy="300" r="300" fill={p.base}/>:<rect width={w} height={h} fill={p.base}/>}
   {p.surface.includes("trawa")?<rect width={w} height={h} fill={"url(#"+patternId+")"}/>:null}
-  {!round&&(p.sport.includes("Piłka nożna")||p.sport==="Futsal")?<path d={"M0 "+h*.25+"h100v"+h*.5+"H0Z M600 "+h*.25+"H500v"+h*.5+"h100Z"} fill={p.zone}/>:null}
-  {(p.sport==="Koszykówka"||p.sport==="Koszykówka 3×3")?<path d={p.sport==="Koszykówka 3×3"?"M0 "+(h/2-55)+"H130V"+(h/2+55)+"H0Z":"M0 "+(h/2-55)+"H125V"+(h/2+55)+"H0Z M600 "+(h/2-55)+"H475V"+(h/2+55)+"H600Z"} fill={p.zone}/>:null}
-  {["Tenis","Padel","Badminton","Pickleball"].includes(p.sport)?<rect x="175" y="10" width="250" height={h-20} fill={p.zone} opacity=".28"/>:null}
-  {(p.sport==="Siatkówka"||p.sport==="Siatkówka plażowa")?<rect x="200" y="10" width="200" height={h-20} fill={p.zone} opacity=".28"/>:null}
-  {p.sport==="Teqball"?<rect x="240" y={Math.max(10,h/2-70)} width="120" height="140" rx="18" fill={p.zone} opacity=".34"/>:null}
-  {p.sport==="Skate"?<path d={"M50 "+h*.18+"H250L320 "+h*.42+"H550V"+h*.72+"H350L280 "+h*.55+"H50Z"} fill={p.zone} opacity=".32"/>:null}
-  {p.sport==="Street Workout"?<><rect x="70" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".32"/><rect x="350" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".22"/></>:null}
-  <g clipPath={"url(#"+clipId+")"}>{!p.sport.includes("Piłka nożna")||!isTurf(p.surface)?<PatternArt p={p} h={h}/>:null}{p.sport.includes("Piłka nożna")?<SurfaceAppearance surface={p.surface} id={patternId.replace(/:/g,"")} height={h} length={moduleSurface?.x??p.length}/>:null}</g>
+  {!hasSurfaceAssets(p)&&!round&&(p.sport.includes("Piłka nożna")||p.sport==="Futsal")?<path d={"M0 "+h*.25+"h100v"+h*.5+"H0Z M600 "+h*.25+"H500v"+h*.5+"h100Z"} fill={p.zone}/>:null}
+  {!hasSurfaceAssets(p)&&(p.sport==="Koszykówka"||p.sport==="Koszykówka 3×3")?<path d={p.sport==="Koszykówka 3×3"?"M0 "+(h/2-55)+"H130V"+(h/2+55)+"H0Z":"M0 "+(h/2-55)+"H125V"+(h/2+55)+"H0Z M600 "+(h/2-55)+"H475V"+(h/2+55)+"H600Z"} fill={p.zone}/>:null}
+  {!hasSurfaceAssets(p)&&["Tenis","Padel","Badminton","Pickleball"].includes(p.sport)?<rect x="175" y="10" width="250" height={h-20} fill={p.zone} opacity=".28"/>:null}
+  {!hasSurfaceAssets(p)&&(p.sport==="Siatkówka"||p.sport==="Siatkówka plażowa")?<rect x="200" y="10" width="200" height={h-20} fill={p.zone} opacity=".28"/>:null}
+  {!hasSurfaceAssets(p)&&p.sport==="Teqball"?<rect x="240" y={Math.max(10,h/2-70)} width="120" height="140" rx="18" fill={p.zone} opacity=".34"/>:null}
+  {!hasSurfaceAssets(p)&&p.sport==="Skate"?<path d={"M50 "+h*.18+"H250L320 "+h*.42+"H550V"+h*.72+"H350L280 "+h*.55+"H50Z"} fill={p.zone} opacity=".32"/>:null}
+  {!hasSurfaceAssets(p)&&p.sport==="Street Workout"?<><rect x="70" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".32"/><rect x="350" y={h*.15} width="180" height={h*.7} rx="18" fill={p.zone} opacity=".22"/></>:null}
+  <g clipPath={"url(#"+clipId+")"}>{(!p.sport.includes("Piłka nożna")||!isTurf(p.surface))&&!hasSurfaceAssets(p)?<PatternArt p={p} h={h}/>:null}{p.sport.includes("Piłka nożna")?<SurfaceAppearance surface={p.surface} id={patternId.replace(/:/g,"")} height={h} length={moduleSurface?.x??p.length}/>:null}</g>
   <g clipPath={"url(#"+clipId+")"}><CreativeCourtLines project={p} height={h}/></g>
   {p.lines?<g fill="none" stroke={p.lineColor} strokeWidth="2.5">
    {round?<circle cx="300" cy="300" r="290"/>:<rect x="10" y="10" width="580" height={h-20}/>}
@@ -298,7 +299,7 @@ export default function Home(){
    const move=(ev:PointerEvent)=>{if(ev.pointerId!==e.pointerId)return;moved=true;const loc=point(ev.clientX,ev.clientY);if(!loc)return;
      setP(v=>({...v,objects:v.objects.map(o=>{
        if(o.id!==id)return o;
-       if(mode==="scale"){const dist=Math.hypot(loc.x-center.x,loc.y-center.y);if(startObj.asset){const a=getAsset(startObj.asset.id),long=Math.max(startObj.asset.w,startObj.asset.h),cap=a?Math.min(a.max,Math.max(a.min,.95*Math.max(v.length,v.width))):long;const side=Math.round(Math.min(cap,Math.max(a?.min??.1,long*dist/startDist))*10)/10,k=side/long;const next={...startObj.asset,w:Math.round(startObj.asset.w*k*100)/100,h:Math.round(startObj.asset.h*k*100)/100};return {...o,asset:next,scale:scaleFor(next,v.length)}}return {...o,scale:Math.max(20,Math.min(220,Math.round(startObj.scale*dist/startDist)))}} 
+       if(mode==="scale"){const dist=Math.hypot(loc.x-center.x,loc.y-center.y);if(startObj.asset&&getAsset(startObj.asset.id)?.params)return o;if(startObj.asset){const a=getAsset(startObj.asset.id),long=Math.max(startObj.asset.w,startObj.asset.h),cap=a?Math.min(a.max,Math.max(a.min,.95*Math.max(v.length,v.width))):long;const side=Math.round(Math.min(cap,Math.max(a?.min??.1,long*dist/startDist))*10)/10,k=side/long;const next={...startObj.asset,w:Math.round(startObj.asset.w*k*100)/100,h:Math.round(startObj.asset.h*k*100)/100};return {...o,asset:next,scale:scaleFor(next,v.length)}}return {...o,scale:Math.max(20,Math.min(220,Math.round(startObj.scale*dist/startDist)))}} 
        if(mode==="rotate"){const angle=Math.atan2(loc.y-center.y,loc.x-center.x)*180/Math.PI;const raw=startObj.rotation+(angle-startAngle),r=startObj.asset?Math.round(raw/15)*15:Math.round(raw);return {...o,rotation:((r+540)%360)-180}}
        if(isRoundCourt(v)&&o.target==="court"&&o.kind!=="equipment")return {...o,...clampToCircle(startObj.x+loc.x-first.x,startObj.y+loc.y-first.y,280)};
        if(startObj.asset){const H=600*v.width/v.length,g=600/v.length*.25,snap=(n:number,axis:number)=>Math.abs(n-axis)<g*.6?axis:Math.round(n/g)*g;return {...o,x:Math.round(Math.max(0,Math.min(600,snap(startObj.x+loc.x-first.x,300)))*10)/10,y:Math.round(Math.max(0,Math.min(H,snap(startObj.y+loc.y-first.y,H/2)))*10)/10}}

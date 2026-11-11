@@ -5,7 +5,7 @@ import {useMemo,useState} from "react";
 import {AlignCenter,ArrowDown,ArrowUp,Copy,FlipHorizontal2,Trash2,X} from "lucide-react";
 import type {EditorObject,Project} from "@/lib/project";
 import {projectPatternColors} from "@/lib/pattern-library";
-import {assetCategories,assetDataUrl,assetLayouts,defaultAssetColors,fmtM,getAsset,placeLayout,surfaceAssets,type AssetCategory,type AssetLayout,type AssetState,type SurfaceAsset} from "@/lib/surface-assets";
+import {assetCategories,assetDataUrl,assetLayouts,assetOptions,defaultAssetColors,fmtM,getAsset,placeLayout,stateFromOptions,surfaceAssets,type AssetCategory,type AssetLayout,type AssetState,type SurfaceAsset} from "@/lib/surface-assets";
 import "@/app/studio-asset-library.css";
 
 export const projectColorsFor=(p:Project)=>[...projectPatternColors(p),p.lineColor].map(c=>c.toUpperCase());
@@ -18,13 +18,20 @@ function LayoutPreview({p,layout}:{p:Project;layout:AssetLayout}){
  return <svg viewBox={`0 0 600 ${H}`} aria-hidden="true" preserveAspectRatio="xMidYMid meet"><rect width="600" height={H} fill={p.base}/>{placed.map((x,i)=><g key={i} transform={`translate(${x.x} ${x.y}) rotate(${x.rotation}) scale(${x.scale/100})`}><image href={assetDataUrl(x.asset,x.state)} x="-55" y="-55" width="110" height="110"/></g>)}</svg>;
 }
 
-export function StudioAssetLibrary({project:p,onAdd,onLayout}:{project:Project;onAdd:(asset:SurfaceAsset)=>void;onLayout:(layout:AssetLayout)=>void}){
- const [cat,setCat]=useState<AssetCategory>('zones');const c=assetCategories.find(x=>x.id===cat)!;
+/* Owner rule 2026-11-11: elements always sit on a single-colour surface, so its colour is chosen here. */
+export function SurfaceBaseColor({project:p,onBase,note}:{project:Project;onBase:(hex:string)=>void;note?:string}){
+ const own=[...new Set(projectColorsFor(p))];const cur=p.base.toUpperCase();
+ return <div className="gfal-base"><h3 className="gfal-h">Kolor nawierzchni</h3><p className="gfal-note">{note??'Elementy leżą na jednokolorowej nawierzchni. Wybierz jej kolor.'}</p>
+  <div className="gfae-swatches" role="group" aria-label="Kolor nawierzchni">{[...own.map(c=>[c,'kolor projektu '+c] as [string,string]),...SWATCHES.filter(([c])=>!own.includes(c))].map(([c,n])=><button type="button" key={c} aria-label={`Kolor nawierzchni: ${n}`} aria-pressed={cur===c} onClick={()=>onBase(c)}><i style={{background:c}}/></button>)}<label className="gfae-custom" title="Własny kolor"><input type="color" aria-label="Kolor nawierzchni: własny kolor" value={p.base} onChange={e=>onBase(e.target.value.toUpperCase())}/></label></div></div>;
+}
+export function StudioAssetLibrary({project:p,onAdd,onLayout,onBase}:{project:Project;onAdd:(asset:SurfaceAsset)=>void;onLayout:(layout:AssetLayout)=>void;onBase:(hex:string)=>void}){
+ const [cat,setCat]=useState<AssetCategory>('dribble');const c=assetCategories.find(x=>x.id===cat)!;
  const list=surfaceAssets.filter(a=>a.category===cat);
  const thumbs=useMemo(()=>new Map(list.map(a=>[a.id,assetDataUrl(a,{w:a.w,h:a.h,colors:assetColorsFor(p,a)})])),[list,p.base,p.zone,p.patternPalette,p.patternColors,p.lineColor]);// eslint-disable-line react-hooks/exhaustive-deps
- const layouts=assetLayouts.filter(l=>Math.max(p.length,p.width)>=l.minLength);
+ const longSide=Math.max(p.length,p.width);const layouts=assetLayouts.filter(l=>longSide>=l.minLength&&(l.maxLength===undefined||longSide<=l.maxLength));
  return <section className="gfal" aria-label="Elementy nawierzchni">
-  <p className="gfal-intro">Złóż nawierzchnię z elementów w prawdziwej skali. Kliknij element, a pojawi się na środku planu. Potem przeciągnij go na miejsce.</p>
+  <p className="gfal-intro">Zbuduj na nawierzchni własną przestrzeń treningową: slalom, tor przeszkód, strefy podań i strzałów. Wszystko w prawdziwej skali. Kliknij element, ustaw pachołki i odstępy, przeciągnij go na miejsce.</p>
+  <SurfaceBaseColor project={p} onBase={onBase}/>
   {layouts.length?<div className="gfal-block"><h3 className="gfal-h">Gotowe układy</h3><ul className="gfal-layouts" role="list">{layouts.map(l=><li key={l.id}><button type="button" className="gfal-layout" onClick={()=>onLayout(l)} aria-label={`Dodaj układ: ${l.name}`}><span className="gfal-layout-art"><LayoutPreview p={p} layout={l}/></span><b>{l.name}</b><small>{l.note}</small></button></li>)}</ul></div>:null}
   <div className="gfal-block"><h3 className="gfal-h">Elementy</h3>
    <div className="gfal-chips" role="group" aria-label="Rodzaj elementów">{assetCategories.map(x=><button type="button" key={x.id} aria-pressed={cat===x.id} onClick={()=>setCat(x.id)}>{x.label}</button>)}</div>
@@ -47,7 +54,8 @@ export function StudioAssetEditor({project:p,object:o,actions:a}:{project:Projec
  const slotName=(i:number)=>asset.slots===1?'Kolor':`Kolor ${i+1}`;
  return <section className="gfae" aria-label={`Edycja elementu: ${o.name}`}>
   <header><div><h2>{o.name}</h2><small>{size(st.w,st.h)}</small></div><button type="button" aria-label="Zamknij edycję elementu" onClick={a.close}><X size={18}/></button></header>
-  <label className="gfae-range"><span>Rozmiar <b>{fmtM(long)} m</b></span><input type="range" aria-label="Rozmiar w metrach" min={asset.min} max={maxSide} step={.1} value={long} onChange={e=>resize(Number(e.target.value))}/></label>
+  {asset.params?<div className="gfae-params">{asset.params.map(d=>{const o=assetOptions(asset,st.opts),v=o[d.key];const set=(x:number)=>a.change(stateFromOptions(asset,{...o,[d.key]:x},st.colors));return d.options?<div className="gfae-row" key={d.key}><span>{d.label}</span><div className="gfae-seg gfae-seg-auto" role="group" aria-label={d.label}>{d.options.map((label,i)=><button type="button" key={label} aria-pressed={v===i} onClick={()=>set(i)}>{label}</button>)}</div></div>:<label className="gfae-range" key={d.key}><span>{d.label} <b>{d.unit==='m'||d.unit==='×'?fmtM(v):v}{d.unit?(d.unit==='°'?'°':' '+d.unit):''}</b></span><input type="range" aria-label={d.label} min={d.min} max={d.max} step={d.step} value={v} onChange={e=>set(Number(e.target.value))}/></label>})}</div>:<label className="gfae-range"><span>Rozmiar <b>{fmtM(long)} m</b></span><input type="range" aria-label="Rozmiar w metrach" min={asset.min} max={maxSide} step={.1} value={long} onChange={e=>resize(Number(e.target.value))}/></label>}
+  {asset.hint?<p className="gfae-hint">{asset.hint}</p>:null}
   <div className="gfae-row"><span>Obrót <b>{o.rotation}°</b></span><div className="gfae-seg" role="group" aria-label="Obrót">{[0,45,90,135,180].map(r=><button type="button" key={r} aria-pressed={((o.rotation%360)+360)%360===r} onClick={()=>a.patch({rotation:r>180?r-360:r})}>{r}°</button>)}</div></div>
   <div className="gfae-colors">
    {asset.slots>1?<div className="gfae-slots" role="group" aria-label="Kolorowana część">{st.colors.map((c,i)=><button type="button" key={i} aria-pressed={active===i} onClick={()=>setSlot(i)}><i style={{background:c}}/>{slotName(i)}</button>)}</div>:<span className="gfae-label">Kolor</span>}
@@ -68,6 +76,6 @@ export function StudioAssetEditor({project:p,object:o,actions:a}:{project:Projec
    <label>Od lewej (m)<input type="number" step={.1} min={0} max={p.length} value={Math.round(o.x/upm*10)/10} onChange={e=>{const v=Number(e.target.value);if(Number.isFinite(v))a.patch({x:Math.min(600,Math.max(0,v*upm))})}}/></label>
    <label>Od góry (m)<input type="number" step={.1} min={0} max={p.width} value={Math.round(o.y/upm*10)/10} onChange={e=>{const v=Number(e.target.value);if(Number.isFinite(v))a.patch({y:Math.min(H,Math.max(0,v*upm))})}}/></label>
   </div></details>
-  <p className="gfae-hint">Na planie przeciągnij element. Przyciąga się do siatki co 25 cm i do osi boiska.</p>
+  <p className="gfae-hint">Na planie przeciągnij element. Przyciąga się do siatki co 25 cm i do osi boiska.{asset.params?" Rozmiar wynika z ustawień powyżej.":""}</p>
  </section>;
 }
