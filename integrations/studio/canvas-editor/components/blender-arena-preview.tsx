@@ -33,6 +33,7 @@ import {circlePanelSides} from '@/lib/circle-panel-sides';
 const catalog={w1};
 const titles={octagon:productNames["octagon"]+' · 4,962 × 4,962 m · wysokość 1,218 m','street-field':productNames["street-field"]+' · 6,214 × 4,648 m · wysokość 1,091 m','circle-cage-1':productNames["circle-cage-1"]+' · Ø 6 m · wysokość 0,9 m','circle-cage-2':productNames["circle-cage-2"]+' · Ø 6 m · wysokość 1,8 m',street15:productNames["street15"]+' · bandy 1 m',w1:productNames["w1"]+' · Ø zewn. 5,09 m · wysokość 1 m',o1:productNames["o1"]+' · Ø nominalne 6,00 m · wysokość 0,55–1,52 m',p1:productNames["p1"]+' · 7,19 × 5,57 m · wysokość do 1,22 m'};
 import {defaultArena} from '@/lib/default-arena';
+import {hasSurfaceAssets} from "@/lib/plain-surface";
 export {defaultArena};
 export function floorSvg(project:Project){
  if(project.surfaceModel)return renderToStaticMarkup(<SportSurfaceArt project={project}/>);
@@ -42,7 +43,7 @@ export function floorSvg(project:Project){
   <defs><clipPath id="disc"><circle cx="300" cy="300" r="300"/></clipPath></defs>
   <rect width="600" height="600" fill={slab&&turf?'none':project.base}/>
   <g clipPath={slab?undefined:"url(#disc)"}>
-   {!turf&&<PatternArt p={project} h={600}/>}
+   {!turf&&!hasSurfaceAssets(project)&&<PatternArt p={project} h={600}/>}
    {(!slab||['street-field','octagon'].includes(project.arenaModel||''))&&<SurfaceAppearance surface={project.surface} id="floor-6" height={600} length={project.length}/>}
    <CreativeCourtLines project={project} height={600}/>
    {/* plan objects: 600 units per court length; on rectangular slabs the court lines span 30–570 of the square texture */}

@@ -18,13 +18,20 @@ function LayoutPreview({p,layout}:{p:Project;layout:AssetLayout}){
  return <svg viewBox={`0 0 600 ${H}`} aria-hidden="true" preserveAspectRatio="xMidYMid meet"><rect width="600" height={H} fill={p.base}/>{placed.map((x,i)=><g key={i} transform={`translate(${x.x} ${x.y}) rotate(${x.rotation}) scale(${x.scale/100})`}><image href={assetDataUrl(x.asset,x.state)} x="-55" y="-55" width="110" height="110"/></g>)}</svg>;
 }
 
-export function StudioAssetLibrary({project:p,onAdd,onLayout}:{project:Project;onAdd:(asset:SurfaceAsset)=>void;onLayout:(layout:AssetLayout)=>void}){
+/* Owner rule 2026-11-11: elements always sit on a single-colour surface, so its colour is chosen here. */
+export function SurfaceBaseColor({project:p,onBase,note}:{project:Project;onBase:(hex:string)=>void;note?:string}){
+ const own=[...new Set(projectColorsFor(p))];const cur=p.base.toUpperCase();
+ return <div className="gfal-base"><h3 className="gfal-h">Kolor nawierzchni</h3><p className="gfal-note">{note??'Elementy leżą na jednokolorowej nawierzchni. Wybierz jej kolor.'}</p>
+  <div className="gfae-swatches" role="group" aria-label="Kolor nawierzchni">{[...own.map(c=>[c,'kolor projektu '+c] as [string,string]),...SWATCHES.filter(([c])=>!own.includes(c))].map(([c,n])=><button type="button" key={c} aria-label={`Kolor nawierzchni: ${n}`} aria-pressed={cur===c} onClick={()=>onBase(c)}><i style={{background:c}}/></button>)}<label className="gfae-custom" title="Własny kolor"><input type="color" aria-label="Kolor nawierzchni: własny kolor" value={p.base} onChange={e=>onBase(e.target.value.toUpperCase())}/></label></div></div>;
+}
+export function StudioAssetLibrary({project:p,onAdd,onLayout,onBase}:{project:Project;onAdd:(asset:SurfaceAsset)=>void;onLayout:(layout:AssetLayout)=>void;onBase:(hex:string)=>void}){
  const [cat,setCat]=useState<AssetCategory>('dribble');const c=assetCategories.find(x=>x.id===cat)!;
  const list=surfaceAssets.filter(a=>a.category===cat);
  const thumbs=useMemo(()=>new Map(list.map(a=>[a.id,assetDataUrl(a,{w:a.w,h:a.h,colors:assetColorsFor(p,a)})])),[list,p.base,p.zone,p.patternPalette,p.patternColors,p.lineColor]);// eslint-disable-line react-hooks/exhaustive-deps
  const longSide=Math.max(p.length,p.width);const layouts=assetLayouts.filter(l=>longSide>=l.minLength&&(l.maxLength===undefined||longSide<=l.maxLength));
  return <section className="gfal" aria-label="Elementy nawierzchni">
   <p className="gfal-intro">Zbuduj na nawierzchni własną przestrzeń treningową: slalom, tor przeszkód, strefy podań i strzałów. Wszystko w prawdziwej skali. Kliknij element, ustaw pachołki i odstępy, przeciągnij go na miejsce.</p>
+  <SurfaceBaseColor project={p} onBase={onBase}/>
   {layouts.length?<div className="gfal-block"><h3 className="gfal-h">Gotowe układy</h3><ul className="gfal-layouts" role="list">{layouts.map(l=><li key={l.id}><button type="button" className="gfal-layout" onClick={()=>onLayout(l)} aria-label={`Dodaj układ: ${l.name}`}><span className="gfal-layout-art"><LayoutPreview p={p} layout={l}/></span><b>{l.name}</b><small>{l.note}</small></button></li>)}</ul></div>:null}
   <div className="gfal-block"><h3 className="gfal-h">Elementy</h3>
    <div className="gfal-chips" role="group" aria-label="Rodzaj elementów">{assetCategories.map(x=><button type="button" key={x.id} aria-pressed={cat===x.id} onClick={()=>setCat(x.id)}>{x.label}</button>)}</div>

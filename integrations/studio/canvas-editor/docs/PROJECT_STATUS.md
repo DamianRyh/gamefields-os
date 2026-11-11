@@ -1,3 +1,32 @@
+## Studio — grafiki zawsze na jednokolorowej nawierzchni, 2026-11-11
+
+Decyzja właściciela: grafiki (elementy z biblioteki Grafika) mają zawsze leżeć na czystej, jednokolorowej nawierzchni.
+
+**Reguła (`lib/plain-surface.ts`):** gdy na boisku jest choć jeden element z biblioteki (`objects[].asset`), Studio nie rysuje wzoru ani pól strefy w kolorze `zone`. Dotyczy to:
+- planu 2D;
+- `blender-arena-preview`;
+- `street-football-realistic-preview`;
+- `panna-realistic-preview`;
+- `sport-surface-art`.
+
+**Interfejs:**
+- Grafika → Elementy ma nową sekcję „Kolor nawierzchni” (kolory projektu, 15 dodatkowych, własny).
+- Zakładka Nawierzchnia → Wzór przy elementach na boisku pokazuje „Nawierzchnia jest jednokolorowa” i wybór koloru zamiast projektów wzorów.
+- Wzór wraca po usunięciu wszystkich elementów.
+
+**Wycena:**
+- Malowanie liczone jest na poziomie wykonania 1/4 (zamiast złożoności ukrytego wzoru).
+- Budżet kolorów obejmuje tło, kolory elementów i otoczenie.
+- Elementy, jak dotąd, liczą się jako pozycje „Logo i napisy”.
+- Stawki się nie zmieniają.
+
+**Wcześniejszy commit:** dołączony jest commit z treningiem piłkarskim (a6f803a), który nie wszedł do #74, bo PR został scalony przed jego wysłaniem.
+
+**Walidacja:**
+- `test:assets`: wzór jest widoczny przed dodaniem elementu, znika po dodaniu, kolor nawierzchni zapisuje się w JSON, zakładka Wzór wyjaśnia regułę;
+- budżet kolorów: 5 = tło + 3 kolory elementu + otoczenie;
+- tsc, build, test:studio, test:surface, test:models, quote-engine, quote-api, graphic-boundaries, component-specification, project-owned-reference, print-contract.
+
 ## Studio — Grafika: trening piłkarski, 2026-11-10 (druga część)
 
 Prośba właściciela: na start głównie elementy do treningu piłkarskiego (slalom, tor przeszkód do kontroli piłki), z których klient sam zbuduje przestrzeń.

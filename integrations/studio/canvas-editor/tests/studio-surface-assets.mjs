@@ -31,7 +31,11 @@ try{
   assert.equal(await lib.locator('.gfal-card').count(),4,'dribbling first: slalom, gates, figure eight, duel');
   assert.equal(await lib.locator('.gfal-layout').count(),6,'six ready layouts on a 15 m court');
   const count=()=>page.evaluate(()=>document.querySelectorAll('.editable-object').length);
+  const patternDrawn=()=>page.evaluate(()=>document.querySelectorAll('svg.court feDropShadow').length>0);
+  await page.getByRole('group',{name:'Widok'}).getByRole('button',{name:'Plan 2D'}).click();assert.ok(await patternDrawn(),'pattern visible before any element');
   await lib.getByRole('button',{name:'Dodaj układ: Tor kontroli piłki'}).click();await page.waitForTimeout(300);const course=await count();assert.ok(course>=12,'obstacle course adds its stations');
+  assert.equal(await patternDrawn(),false,'elements always sit on a single-colour surface');
+  await lib.getByRole('group',{name:'Kolor nawierzchni'}).getByRole('button',{name:'Kolor nawierzchni: Granat'}).click();
   await chips.getByRole('button',{name:'Prowadzenie i slalom'}).click();await lib.getByRole('button',{name:/^Dodaj: Slalom,/}).click();
   const sed=page.locator('.gfae');await sed.waitFor();
   await sed.getByRole('slider',{name:'Pachołki'}).fill('8');await sed.getByRole('slider',{name:'Odstęp'}).fill('2');await sed.getByRole('group',{name:'Układ'}).getByRole('button',{name:'Zygzak'}).click();await sed.getByRole('slider',{name:'Wychylenie'}).fill('1.5');
@@ -45,12 +49,15 @@ try{
   await ed.getByRole('group',{name:'Obrót'}).getByRole('button',{name:'90°'}).click();
   await ed.getByRole('button',{name:'Lustrzana kopia'}).click();assert.equal(await count(),course+3);
   await ed.getByRole('button',{name:'Pod spód'}).click();
-  const project=await downloadProject(page);const assets=project.objects.filter(o=>o.asset);assert.equal(assets.length,course+3,'assets saved in the project JSON');const slalom=assets.find(o=>o.asset.id==='tr-slalom'&&o.asset.opts?.n===8);assert.ok(slalom&&slalom.asset.opts.gap===2&&slalom.asset.opts.mode===1&&slalom.asset.w===14.3,'slalom settings saved');
+  const project=await downloadProject(page);assert.equal(project.base.toUpperCase(),'#1F2A6B','surface colour chosen in Grafika');const assets=project.objects.filter(o=>o.asset);assert.equal(assets.length,course+3,'assets saved in the project JSON');const slalom=assets.find(o=>o.asset.id==='tr-slalom'&&o.asset.opts?.n===8);assert.ok(slalom&&slalom.asset.opts.gap===2&&slalom.asset.opts.mode===1&&slalom.asset.w===14.3,'slalom settings saved');
   const hop=assets.filter(o=>o.asset.id==='g-hopscotch');assert.equal(hop.length,2);
   assert.ok(hop.every(o=>Math.max(o.asset.w,o.asset.h)===3&&o.asset.colors[1]==='#D8F24A'),'size and colour saved');
   assert.equal(Math.round(hop[0].x+hop[1].x),600,'mirror copy is point-symmetric');assert.ok(Math.abs(Math.abs(hop[0].rotation-hop[1].rotation)-180)<1);
   assert.equal(project.objects.filter(o=>o.kind!=='equipment')[0].asset.id,'g-hopscotch','"Pod spód" moves the copy to the bottom layer');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'no sideways scroll');
+  await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Nawierzchnia/}).click();
+  assert.match(await page.locator('.gfsd-plain').innerText(),/Nawierzchnia jest jednokolorowa/,'pattern tab explains the single-colour rule');assert.equal(await page.locator('.gfsd .gfsd-card').count(),0,'no pattern projects while elements are on the court');
+  await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Grafika/}).click();
   await page.screenshot({path:`outputs/studio-ux/surface-assets-${width}.png`});
   // the 3D preview is one click away and keeps the assets
   const view=page.getByRole('group',{name:'Widok'});await view.getByRole('button',{name:'Podgląd 3D'}).click();assert.equal(await view.getByRole('button',{name:'Podgląd 3D'}).getAttribute('aria-pressed'),'true');await page.locator('[data-ready=true]').first().waitFor({timeout:60000});await page.waitForTimeout(2500);assert.equal(await page.locator('.gfae').count(),0,'editor closes in 3D');

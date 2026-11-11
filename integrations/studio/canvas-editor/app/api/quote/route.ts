@@ -2,6 +2,7 @@ import {projectSchema} from "@/lib/project";
 import {patternComplexity,patternFamilies} from "@/lib/pattern-library";
 import {calculateProjectQuote,parseRateCard} from "@/lib/quote-engine";
 import {salesRateCard} from "@/lib/sales-rate-card";
+import {hasSurfaceAssets} from "@/lib/plain-surface";
 const json=(data:unknown,status=200)=>Response.json(data,{status,headers:{"Cache-Control":"no-store"}});
 export async function POST(request:Request){
  try{
@@ -12,6 +13,6 @@ export async function POST(request:Request){
   const p=parsed.data;
   if(p.patternFamily&&!patternFamilies.some(f=>f.id===p.patternFamily))return json({error:"Unknown pattern"},400);
   const card=salesRateCard(parseRateCard(process.env.INTERNAL_COST_CARD),process.env.SALES_MARGIN);
-  return json(calculateProjectQuote({...p,objects:p.objects.filter(o=>o.kind!=="equipment")},card,patternComplexity(p.patternFamily||"organic-flow",p.patternVariant||1)));
+  return json(calculateProjectQuote({...p,objects:p.objects.filter(o=>o.kind!=="equipment")},card,hasSurfaceAssets(p)?1:patternComplexity(p.patternFamily||"organic-flow",p.patternVariant||1)));
  }catch{return json({error:"Quote temporarily unavailable"},503)}
 }

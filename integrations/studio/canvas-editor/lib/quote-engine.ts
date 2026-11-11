@@ -4,11 +4,12 @@ import {modularGeometry} from './studio-modular.ts';
 import {creativeLineOptions,type DecorativeLineStyle} from './creative-lines.ts';
 /** Commercial rates are supplied by the owner, never inferred from preview colours or scene. */
 export type RateCard={workingAssumptions?:boolean;notice?:string;version:string;currency:"PLN";vatRate?:number;surfaces:Record<string,{materialNetPerM2:number;installationNetPerM2:number}>;patternNetPerM2:Record<string,number>;colorPolicy?:{includedColors:number;additionalColorNetPerM2:number};linesNet:number;brandingNetPerItem:number;arenaNet:Record<string,number>;arenaInstallationNet?:Record<string,number>;finishNet?:Record<string,number>;equipmentNet:Record<string,number>;designNet:number;transportNet:number;exclusions:string[]};
-export type QuoteInput={decorativeLineStyle?:DecorativeLineStyle;surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string}[]};
+export type QuoteInput={decorativeLineStyle?:DecorativeLineStyle;surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string;asset?:{colors?:string[]}}[]};
 export type QuoteItem={id:string;label:string;quantity:number;unit:string;unitNet:number|null;totalNet:number|null;note?:string};
 export type ProjectQuote={workingAssumptions?:boolean;constructionPrices?:Record<string,number>;notice?:string;schemaVersion:2;status:"estimated"|"partial"|"unpriced";currency:"PLN";rateVersion:string|null;priceNet:number|null;priceGross:number|null;vatRate:number|null;knownSubtotalNet:number|null;area:number;areaLabel:string;items:QuoteItem[];exclusions:string[];assumptions:string[]};
 // Shared source-derived geometry; keep this re-export for existing consumers.
 import {projectPatternColors} from './pattern-library.ts';
+import {hasSurfaceAssets,surfaceAssetColors} from './plain-surface.ts';
 import {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
 export {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
 const money=(n:number)=>Math.round((n+Number.EPSILON)*100)/100;
@@ -42,7 +43,8 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
  if(painted&&c?.colorPolicy){
   const own=projectPatternColors(p);
   // Budget selected palette, not visible pixel colours or an approved paint recipe.
-  const selected=[p.base,p.zone,own[0],own[2],own[3],...(!p.arenaModel?[p.outside]:[])];
+  // Elements from the Grafika library sit on a single-colour surface: budget the base plus the elements' colours.
+  const selected=hasSurfaceAssets(p)?[p.base,...surfaceAssetColors(p),...(!p.arenaModel?[p.outside]:[])]:[p.base,p.zone,own[0],own[2],own[3],...(!p.arenaModel?[p.outside]:[])];
   const colors=new Set(selected.filter((v):v is string=>typeof v==="string"&&/^#[0-9a-f]{6}$/i.test(v)).map(v=>v.toLowerCase()));
   const extra=Math.max(0,colors.size-c.colorPolicy.includedColors);
   add("palette-colors",`Paleta projektu · ${colors.size} kolorów · ${extra} ponad pakiet`,billableArea,"m²",money(extra*c.colorPolicy.additionalColorNetPerM2),`Budżet wybranej palety, nie pomiar widocznych kolorów ani receptura farb. Pakiet: ${c.colorPolicy.includedColors}; każdy dodatkowy kolor: ${c.colorPolicy.additionalColorNetPerM2} PLN/m². Linie, logo, napisy, gradienty i cienie rozliczane lub weryfikowane oddzielnie.`);

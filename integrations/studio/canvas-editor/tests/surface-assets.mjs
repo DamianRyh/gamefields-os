@@ -37,4 +37,11 @@ const base={id:'p',name:'Test',type:'court',sport:'Piłka nożna 3×3',length:15
 const parsed=projectSchema.safeParse(base);
 if(parsed.success)assert.deepEqual(parsed.data.objects[0].asset,state,'asset survives JSON validation');
 else assert.ok(!parsed.error.issues.some(i=>String(i.path).startsWith('objects')),'object with asset is valid: '+JSON.stringify(parsed.error.issues.filter(i=>String(i.path).startsWith('objects'))));
+// owner rule: elements always on a single-colour surface; the quote budgets base + element colours
+const {hasSurfaceAssets}=await import('../lib/plain-surface.ts');const {calculateProjectQuote}=await import('../lib/quote-engine.ts');
+assert.equal(hasSurfaceAssets({objects:[{kind:'image'}]}),false);assert.equal(hasSurfaceAssets({objects:[{kind:'image',asset:{colors:['#FFFFFF']}}]}),true);
+const card={currency:'PLN',vatRate:.23,surfaces:{'Akryl sportowy':{materialNetPerM2:100,installationNetPerM2:50}},patternNetPerM2:{'1':10,'2':20,'3':30,'4':40},colorPolicy:{includedColors:2,additionalColorNetPerM2:5},linesNet:1000,brandingNetPerItem:200,designNet:500,equipmentNet:{},finishNet:{}};
+const quote=objects=>calculateProjectQuote({...base,objects,graphicOpacity:100,patternFamily:'organic-flow',patternVariant:1,patternPalette:'miami'},card,1);
+const label=r=>JSON.stringify(r).match(/Paleta projektu · (\d+) kolorów/)?.[1];
+assert.equal(label(quote([object])),'5','single-colour base + 3 element colours + surroundings, not the hidden pattern palette');
 console.log(`PASS: ${surfaceAssets.length} surface assets (${surfaceAssets.filter(a=>a.category!=='decor').length} new building blocks), SVG policy, real scale, ${assetLayouts.length} layouts inside the court, JSON schema.`);

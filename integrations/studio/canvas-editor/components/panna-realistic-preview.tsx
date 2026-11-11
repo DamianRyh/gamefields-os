@@ -7,6 +7,7 @@ import {SurfaceAppearance} from './surface-material';
 import {isTurf,surfaceLabel} from '@/lib/surface-materials';
 import {getPatternFamily,getPatternPalette} from '@/lib/pattern-library';
 import {REALISTIC_LOCATIONS,type RealisticLocation} from '@/lib/realistic-locations';
+import {hasSurfaceAssets} from "@/lib/plain-surface";
 
 const W=1672,H=941;
 type View='perspective'|'aerial'|'ground';
@@ -50,6 +51,6 @@ export function PannaRealisticPreview({project,view='perspective',location='park
  return <div className="realistic-stage green-screen-stage panna-stage" data-ready={ready} data-sport="panna" data-goal-count="2" role="img" aria-busy={!ready} aria-label={`Panna Football 1×1 · arena Ø 7 m · ${locationName} · ${view}`}>
  <div className="green-screen-scene" style={{aspectRatio:'1672/941',position:'relative',filter:project.scene==='night'?'brightness(.48) saturate(.8)':project.scene==='event'?'saturate(1.12)':'none'}}><canvas ref={canvas} width={W} height={H} style={{display:'block',width:'100%',height:'auto'}} aria-hidden="true"/>{!ready?<span style={{position:'absolute',inset:0,display:'grid',placeItems:'center',background:'#eeede7'}}>{error?'Nie udało się wczytać sceny. Wybierz inną lokalizację.':'Przygotowuję Twoją arenę…'}</span>:null}</div>
  <span className="realistic-disclaimer">WIZUALIZACJA KONCEPCYJNA</span><div className="realistic-badge"><span>PANNA 1×1 · Ø 7 M · {locationName}</span><b>{getPatternFamily(project.patternFamily).name}</b><span>{getPatternPalette(project.patternPalette).name} · {surfaceLabel(project.surface)}</span></div>
- <svg ref={texture} xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" style={{position:'absolute',width:0,height:0,overflow:'hidden'}} aria-hidden="true"><defs><clipPath id={`${id}-disc`}><circle cx="300" cy="300" r="300"/></clipPath></defs><rect width="600" height="600" fill={project.base}/><g clipPath={`url(#${id}-disc)`}>{!isTurf(project.surface)?<PatternArt p={project} h={600}/>:null}<SurfaceAppearance surface={project.surface} id={id} height={600} length={7}/><CreativeCourtLines project={project} height={600}/><PannaSurfaceObjects project={project}/>{project.lines?<circle cx="300" cy="300" r="289" fill="none" stroke={project.lineColor} strokeWidth="2.5"/>:null}</g></svg>
+ <svg ref={texture} xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" style={{position:'absolute',width:0,height:0,overflow:'hidden'}} aria-hidden="true"><defs><clipPath id={`${id}-disc`}><circle cx="300" cy="300" r="300"/></clipPath></defs><rect width="600" height="600" fill={project.base}/><g clipPath={`url(#${id}-disc)`}>{!isTurf(project.surface)&&!hasSurfaceAssets(project)?<PatternArt p={project} h={600}/>:null}<SurfaceAppearance surface={project.surface} id={id} height={600} length={7}/><CreativeCourtLines project={project} height={600}/><PannaSurfaceObjects project={project}/>{project.lines?<circle cx="300" cy="300" r="289" fill="none" stroke={project.lineColor} strokeWidth="2.5"/>:null}</g></svg>
  </div>;
 }

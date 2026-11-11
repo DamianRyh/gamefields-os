@@ -30,6 +30,7 @@ type Point={x:number;y:number};
 type Homography=[number,number,number,number,number,number,number,number,number];
 type RealisticView="perspective"|"aerial"|"ground";
 import {REALISTIC_LOCATIONS,type RealisticLocation} from "@/lib/realistic-locations";
+import {hasSurfaceAssets} from "@/lib/plain-surface";
 export {REALISTIC_LOCATIONS,type RealisticLocation} from "@/lib/realistic-locations";
 type SceneConfig={src:string;quad:[Point,Point,Point,Point];label:string;goalHeights:[number,number];lighting:[number,number]};
 
@@ -314,7 +315,7 @@ export function StreetFootballRealisticPreview({project,view="perspective",locat
    </defs>
    <rect width="600" height="400" fill={project.base}/>
    <path d={`M0 ${goalAreaY}H${inset+goalAreaDepth}V${goalAreaY+goalAreaHeight}H0Z M${COURT_WIDTH} ${goalAreaY}H${COURT_WIDTH-inset-goalAreaDepth}V${goalAreaY+goalAreaHeight}H${COURT_WIDTH}Z`} fill={project.zone}/>
-   <g clipPath={`url(#${textureId}-court)`}>{!isTurf(project.surface)?<PatternArt p={project} h={400}/>:null}<SurfaceAppearance surface={project.surface} id={textureId}/><CreativeCourtLines project={project} height={400}/><SurfaceObjects p={project}/></g>
+   <g clipPath={`url(#${textureId}-court)`}>{!isTurf(project.surface)&&!hasSurfaceAssets(project)?<PatternArt p={project} h={400}/>:null}<SurfaceAppearance surface={project.surface} id={textureId}/><CreativeCourtLines project={project} height={400}/><SurfaceObjects p={project}/></g>
    {project.lines?<g fill="none" stroke={project.lineColor} strokeWidth={meter(COURT_GEOMETRY.lineWidth)} strokeLinejoin="round">
     <rect x={inset} y={inset} width={COURT_WIDTH-inset*2} height={COURT_HEIGHT-inset*2}/>
     <path d={`M${COURT_WIDTH/2} ${inset}V${COURT_HEIGHT-inset}`}/>
