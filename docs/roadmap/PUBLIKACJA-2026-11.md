@@ -50,12 +50,18 @@ Na stronie działa Complianz (zgoda opt-in) i tag Google `GT-M63DMWRD`. Polityka
 >
 > Po wyrażeniu zgody Google Analytics zapisuje pliki cookie `_ga` i `_ga_*` i zbiera: odwiedzone strony, czas wizyty, typ urządzenia i przeglądarki, przybliżoną lokalizację (kraj, miasto) oraz źródło wejścia. Nie łączymy tych danych z treścią zapytań.
 >
-> Podstawą jest Twoja zgoda (art. 6 ust. 1 lit. a RODO). Możesz ją wycofać w każdej chwili: [cmplz-manage-consent]. Wycofanie nie wpływa na zgodność z prawem pomiaru sprzed wycofania.
+> Podstawą jest Twoja zgoda (art. 6 ust. 1 lit. a RODO). Możesz ją zmienić albo wycofać w każdej chwili przyciskiem „Zarządzaj zgodą” poniżej. Wycofanie nie wpływa na zgodność z prawem pomiaru sprzed wycofania.
 >
 > Dostawcą usługi jest Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia. Dane mogą być przekazywane do Google LLC w USA. Google LLC uczestniczy w programie EU-U.S. Data Privacy Framework, na podstawie decyzji Komisji Europejskiej stwierdzającej odpowiedni stopień ochrony. Dane w Google Analytics przechowujemy 14 miesięcy.
 
 Uwagi dla wykonawcy:
-- `[cmplz-manage-consent]` to krótki kod Complianz, który wyświetla przycisk zmiany zgody. Wpisz go w bloku „Krótki kod”. Sprawdź w Complianz → Ustawienia, że ta nazwa kodu działa w zainstalowanej wersji.
+- Pod akapitem z podstawą prawną dodaj blok „Własny HTML” z przyciskiem, który otwiera okno zgód Complianz (klasa `cmplz-show-banner`):
+
+  ```html
+  <p><button type="button" class="cmplz-show-banner" style="min-height:44px;padding:0 20px;border-radius:999px;border:1.5px solid #47132D;background:#fff;color:#47132D;font:inherit;font-weight:700;cursor:pointer">Zarządzaj zgodą</button></p>
+  ```
+
+  Nie używaj krótkiego kodu `[cmplz-manage-consent]`: w zainstalowanej wersji Complianz wyświetla on napis „[object Object]” (sprawdzone 12.11.2026).
 - Okres 14 miesięcy musi się zgadzać z ustawieniem GA4 (Administracja → Przechowywanie danych). Jeśli jest tam 2 miesiące, wpisz 2 miesiące albo zmień ustawienie na 14.
 - Nie publikuj pozostałych akapitów z `docs/roadmap/prywatnosc-uzupelnienia.md` (dane firmy, Warsztat, koszulki, PLAY), dopóki właściciel nie poda brakujących danych.
 
