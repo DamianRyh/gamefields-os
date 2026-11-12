@@ -15,7 +15,8 @@
     "test:mobile": "node tests/studio-mobile-goals.mjs",
     "test:surface": "node tests/studio-surface-designer.mjs",
     "test:models": "node tests/studio-model-picker.mjs",
-    "test:assets": "node --experimental-strip-types tests/surface-assets.mjs && node tests/studio-surface-assets.mjs"
+    "test:assets": "node --experimental-strip-types tests/surface-assets.mjs && node tests/studio-surface-assets.mjs",
+    "test:price": "node --experimental-strip-types tests/price-range.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

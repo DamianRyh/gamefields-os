@@ -5,3 +5,11 @@
 .studio-project-quote .studio-quote-notice{font-size:14px;line-height:1.55;padding:12px;border-left:3px solid #6436f5;background:#fff;margin:12px 0 16px}
 
 .studio-canvas-editor .studio-models button .studio-model-price{color:#4a122b;font-weight:700;font-size:13px;line-height:1.5;margin:6px 0}
+.studio-project-quote .studio-quote-range-note{font-size:14px;color:#705366;margin:4px 0 12px}
+.studio-project-quote>a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;color:#6436f5}
+.studio-project-card{padding:24px;border:1px solid #dcd5de;border-radius:12px;margin:24px 0;background:#fff}
+.studio-project-card h3{font-size:22px;margin:0 0 8px}
+.studio-project-card p{font-size:15px;line-height:1.6;margin:8px 0}
+.studio-project-card button{min-height:48px;padding:0 20px;border-radius:999px;border:0;background:#6436f5;color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.studio-project-card button:disabled{opacity:.6;cursor:progress}
+@media(max-width:800px){.studio-project-card{padding:16px}}
