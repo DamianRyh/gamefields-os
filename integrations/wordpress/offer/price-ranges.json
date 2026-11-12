@@ -1,0 +1,271 @@
+{
+ "source": "https://gamefields-studio.ryhfs90.chatgpt.site/api/quote",
+ "note": "Ceny orientacyjne netto (PLN) z karty stawek Studio. Bez przygotowania terenu, podbudowy, fundamentów, przyłączy i formalności.",
+ "models": [
+  {
+   "id": "w1",
+   "name": "Panna Ring",
+   "code": "GF-CT-001",
+   "areaM2": 19.6,
+   "constructionNet": 18714.29,
+   "fromNet": 27935.78,
+   "toNet": 37317.21,
+   "fromNetRounded": 27000,
+   "toNetRounded": 38000,
+   "bySurface": {
+    "Akryl sportowy": {
+     "bez grafiki": 27935.78,
+     "z grafiką i liniami": 30614.49
+    },
+    "EPDM": {
+     "bez grafiki": 34638.5,
+     "z grafiką i liniami": 37317.21
+    },
+    "Sztuczna trawa 60 mm": {
+     "bez grafiki": 29192.65,
+     "z grafiką i liniami": 30335.51
+    },
+    "Moduły sportowe": {
+     "bez grafiki": 30030.37,
+     "z grafiką i liniami": 32709.08
+    },
+    "Beton sportowy": {
+     "bez grafiki": 32962.87,
+     "z grafiką i liniami": 35641.58
+    }
+   }
+  },
+  {
+   "id": "o1",
+   "name": "Panna Play",
+   "code": "GF-CT-002",
+   "areaM2": 27.4,
+   "constructionNet": 15000,
+   "fromNet": 25335.8,
+   "toNet": 38004.23,
+   "fromNetRounded": 25000,
+   "toNetRounded": 39000,
+   "bySurface": {
+    "Akryl sportowy": {
+     "bez grafiki": 25335.8,
+     "z grafiką i liniami": 28627.28
+    },
+    "EPDM": {
+     "bez grafiki": 34712.75,
+     "z grafiką i liniami": 38004.23
+    },
+    "Sztuczna trawa 60 mm": {
+     "bez grafiki": 27094.13,
+     "z grafiką i liniami": 28236.99
+    },
+    "Moduły sportowe": {
+     "bez grafiki": 28266.08,
+     "z grafiką i liniami": 31557.56
+    },
+    "Beton sportowy": {
+     "bez grafiki": 32368.58,
+     "z grafiką i liniami": 35660.06
+    }
+   }
+  },
+  {
+   "id": "p1",
+   "name": "Panna Court",
+   "code": "GF-CT-003",
+   "areaM2": 39.3,
+   "constructionNet": 31857.14,
+   "fromNet": 45035.84,
+   "toNet": 62719.05,
+   "fromNetRounded": 45000,
+   "toNetRounded": 63000,
+   "bySurface": {
+    "Akryl sportowy": {
+     "bez grafiki": 45035.84,
+     "z grafiką i liniami": 49262.19
+    },
+    "EPDM": {
+     "bez grafiki": 58492.7,
+     "z grafiką i liniami": 62719.05
+    },
+    "Sztuczna trawa 60 mm": {
+     "bez grafiki": 47559.22,
+     "z grafiką i liniami": 48702.08
+    },
+    "Moduły sportowe": {
+     "bez grafiki": 49241.09,
+     "z grafiką i liniami": 53467.44
+    },
+    "Beton sportowy": {
+     "bez grafiki": 55128.58,
+     "z grafiką i liniami": 59354.93
+    }
+   }
+  },
+  {
+   "id": "circle-cage-1",
+   "name": "Panna Cage 90",
+   "code": "GF-CT-005",
+   "areaM2": 28.3,
+   "constructionNet": 20000,
+   "fromNet": 31037.23,
+   "toNet": 44089.15,
+   "fromNetRounded": 31000,
+   "toNetRounded": 45000,
+   "bySurface": {
+    "Akryl sportowy": {
+     "bez grafiki": 31037.23,
+     "z grafiką i liniami": 34400.2
+    },
+    "EPDM": {
+     "bez grafiki": 40726.18,
+     "z grafiką i liniami": 44089.15
+    },
+    "Sztuczna trawa 60 mm": {
+     "bez grafiki": 32854.07,
+     "z grafiką i liniami": 33996.93
+    },
+    "Moduły sportowe": {
+     "bez grafiki": 34065.01,
+     "z grafiką i liniami": 37427.98
+    },
+    "Beton sportowy": {
+     "bez grafiki": 38304.01,
+     "z grafiką i liniami": 41666.98
+    }
+   }
+  },
+  {
+   "id": "circle-cage-2",
+   "name": "Panna Cage 180",
+   "code": "GF-CT-006",
+   "areaM2": 28.3,
+   "constructionNet": 32428.57,
+   "fromNet": 44894.37,
+   "toNet": 57946.29,
+   "fromNetRounded": 44000,
+   "toNetRounded": 58000,
+   "bySurface": {
+    "Akryl sportowy": {
+     "bez grafiki": 44894.37,
+     "z grafiką i liniami": 48257.34
+    },
+    "EPDM": {
+     "bez grafiki": 54583.32,
+     "z grafiką i liniami": 57946.29
+    },
+    "Sztuczna trawa 60 mm": {
+     "bez grafiki": 46711.21,
+     "z grafiką i liniami": 47854.07
+    },
+    "Moduły sportowe": {
+     "bez grafiki": 47922.15,
+     "z grafiką i liniami": 51285.12
+    },
+    "Beton sportowy": {
+     "bez grafiki": 52161.15,
+     "z grafiką i liniami": 55524.12
+    }
+   }
+  },
+  {
+   "id": "octagon",
+   "name": "Panna Octa",
+   "code": "GF-CT-008",
+   "areaM2": 29.8,
+   "constructionNet": 21857.14,
+   "fromNet": 33402.95,
+   "toNet": 47112.24,
+   "fromNetRounded": 33000,
+   "toNetRounded": 48000,
+   "bySurface": {
+    "Akryl sportowy": {
+     "bez grafiki": 33402.95,
+     "z grafiką i liniami": 36888.46
+    },
+    "EPDM": {
+     "bez grafiki": 43626.73,
+     "z grafiką i liniami": 47112.24
+    },
+    "Sztuczna trawa 60 mm": {
+     "bez grafiki": 35320.08,
+     "z grafiką i liniami": 36462.94
+    },
+    "Moduły sportowe": {
+     "bez grafiki": 36597.86,
+     "z grafiką i liniami": 40083.37
+    },
+    "Beton sportowy": {
+     "bez grafiki": 41070.86,
+     "z grafiką i liniami": 44556.37
+    }
+   }
+  },
+  {
+   "id": "street-field",
+   "name": "Panna Grid",
+   "code": "GF-CT-007",
+   "areaM2": 38.7,
+   "constructionNet": 23714.29,
+   "fromNet": 36812.98,
+   "toNet": 54260.2,
+   "fromNetRounded": 36000,
+   "toNetRounded": 55000,
+   "bySurface": {
+    "Akryl sportowy": {
+     "bez grafiki": 36812.98,
+     "z grafiką i liniami": 40995.33
+    },
+    "EPDM": {
+     "bez grafiki": 50077.85,
+     "z grafiką i liniami": 54260.2
+    },
+    "Sztuczna trawa 60 mm": {
+     "bez grafiki": 39300.36,
+     "z grafiką i liniami": 40443.22
+    },
+    "Moduły sportowe": {
+     "bez grafiki": 40958.23,
+     "z grafiką i liniami": 45140.58
+    },
+    "Beton sportowy": {
+     "bez grafiki": 46761.73,
+     "z grafiką i liniami": 50944.08
+    }
+   }
+  },
+  {
+   "id": "street15",
+   "name": "Street Arena 15",
+   "code": "GF-CT-004",
+   "areaM2": 149.2,
+   "constructionNet": 37428.57,
+   "fromNet": 68309.01,
+   "toNet": 132309.38,
+   "fromNetRounded": 68000,
+   "toNetRounded": 133000,
+   "bySurface": {
+    "Akryl sportowy": {
+     "bez grafiki": 68309.01,
+     "z grafiką i liniami": 81169.88
+    },
+    "EPDM": {
+     "bez grafiki": 119448.51,
+     "z grafiką i liniami": 132309.38
+    },
+    "Sztuczna trawa 60 mm": {
+     "bez grafiki": 77898.51,
+     "z grafiką i liniami": 79041.37
+    },
+    "Moduły sportowe": {
+     "bez grafiki": 84290.01,
+     "z grafiką i liniami": 97150.88
+    },
+    "Beton sportowy": {
+     "bez grafiki": 106664.01,
+     "z grafiką i liniami": 119524.88
+    }
+   }
+  }
+ ],
+ "rateVersion": "GF-SALES-2026-10-23-v1"
+}
