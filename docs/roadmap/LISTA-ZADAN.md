@@ -1,6 +1,7 @@
 # Lista zadań gamefields.eu
 
 Bieżąca lista. Zasada: najpierw repozytorium (PR, testy), potem strona (wdrożenie, kontrola na żywo).
+Polecenia do wdrożenia na stronie czekają w kolejce: `docs/roadmap/POLECENIA-DLA-CHATGPT.md`.
 Statusy: ✅ zrobione · 🔄 w toku · ⏳ czeka na wdrożenie na stronie · ❓ czeka na decyzję właściciela · ⬜ do zrobienia
 
 Ostatnia aktualizacja: 12.11.2026
@@ -9,11 +10,14 @@ Ostatnia aktualizacja: 12.11.2026
 
 | # | Zadanie | Repozytorium | Strona | Status |
 | --- | --- | --- | --- | --- |
-| 1 | Przejrzystość cenowa: widełki w Studio, karta projektu PDF, ceny „od–do” 8 modeli | PR #80, `docs/roadmap/CENY-PRZEJRZYSTOSC-2026-11.md` | Studio w Sites po scaleniu | 🔄 / ❓ akceptacja cen |
+| 1 | Przejrzystość cenowa: widełki w Studio, karta projektu PDF, ceny „od–do” 8 modeli | ✅ PR #80, `docs/roadmap/CENY-PRZEJRZYSTOSC-2026-11.md` | Studio w Sites (polecenie 4) | ❓ akceptacja cen |
 | 2 | Ceny „od … zł netto” na kartach modeli i w FAQ | po akceptacji tabeli z pkt 1 | strona główna, sklep | ⬜ |
 | 3 | Polityka prywatności: „[object Object]” zamiast przycisku zgody, zdanie „wymaga weryfikacji” | poprawka w `DLA-CHATGPT-publikacja.md` (PR #78) | strona 4087 | ⏳ |
 | 4 | Strony autentyczności: Damian Gawrych, Jak powstaje arena, Koncepcje, Sztuka z gry | ✅ PR #79 | szkic 1/4 (ID 4626), reszta do utworzenia | ⏳ |
 | 5 | Zdjęcia na O nas, Eventy, Szkoły, Realizacje, link „Kim jestem” na stronie głównej | ✅ PR #79 | brak | ⏳ |
+| 6 | Dofinansowanie boisk (programy 2027, pomoc we wniosku) i Realizacje dla miast | gałąź `claude/samorzady-dofinansowania` | 2 nowe strony (polecenie 3) | 🔄 |
+| 7 | Liczby do case studies: frekwencja, trwałość, koszty utrzymania, zdjęcia „przed” | `integrations/wordpress/pages/samorzady-2026-11/ANKIETA-CASE-STUDY.md` | po odpowiedziach zamawiających | ❓ wysłać ankietę |
+| 8 | Aktualizacja terminów naborów po ogłoszeniu regulaminów MSiT 2027 | `samorzady-2026-11/build.py` | strona dofinansowania | ⬜ od 4.01.2027 |
 
 ## Zrobione
 
