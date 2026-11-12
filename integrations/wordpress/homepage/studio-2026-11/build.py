@@ -57,7 +57,7 @@ def jsonld(faq_html):
                 "email": "info@gamefields.eu",
                 "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp",
                 "description": "Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.",
-                "founder": {"@type": "Person", "@id": site + "#damian-gawrych", "name": "Damian Gawrych", "url": site + "damian-gawrych/"},
+                "founder": {"@type": "Person", "@id": site + "#damian-gawrych", "name": "Damian Gawrych", "url": site + "damian-gawrych/", "sameAs": ["https://www.instagram.com/damiangawrych/", "https://www.damiangawrych.pl/"]},
                 "address": {"@type": "PostalAddress", "addressLocality": "Warszawa", "addressCountry": "PL"},
                 "parentOrganization": {"@id": site + "#organization"},
                 "knowsAbout": ["boiska do panny", "street football", "boiska miejskie", "nawierzchnie sportowe", "malowanie boisk", "renowacja boisk betonowych", "projektowanie przestrzeni sportowych"],

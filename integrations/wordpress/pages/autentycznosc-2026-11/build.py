@@ -140,7 +140,8 @@ PERSON = {"@type": "Person", "@id": SITE + "#damian-gawrych", "name": "Damian Ga
           "url": SITE + "damian-gawrych/", "image": img(4596, 1024),
           "jobTitle": "Założyciel i projektant, Gamefields",
           "worksFor": {"@id": SITE + "#studio"},
-          "knowsAbout": ["panna", "street football", "boiska miejskie", "turnieje street soccer", "projektowanie boisk"]}
+          "knowsAbout": ["panna", "street football", "freestyle football", "boiska miejskie", "turnieje street soccer", "projektowanie boisk"],
+          "sameAs": ["https://www.instagram.com/damiangawrych/", "https://www.damiangawrych.pl/"]}
 
 # ---------------------------------------------------------------- /damian-gawrych/
 damian = f"""
@@ -148,18 +149,23 @@ damian = f"""
   <div>
     <p class="k">Autor studia Gamefields</p>
     <h1 class="d">Damian<br>Gawrych.</h1>
-    <p class="lead">Projektuję boiska do panny i street footballu, organizuję turnieje i pokazuję tę grę ludziom, którzy jeszcze jej nie znają. Gamefields to moje autorskie studio: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.</p>
-    <ul class="gfa-links"><li><a href="/realizacje-gamefields/">Realizacje</a></li><li><a href="/jak-powstaje-arena/">Jak powstaje arena</a></li><li><a href="/koncepcje/">Koncepcje</a></li></ul>
+    <p class="lead">W pannę gram od 2005 roku, turnieje organizuję od 2008. Dziś projektuję boiska do panny i street footballu, a Gamefields to moje autorskie studio: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.</p>
+    <dl class="gfa-facts" style="margin-top:28px"><div><dt>Zawodnik</dt><dd>od 2005</dd></div><div><dt>Organizator</dt><dd>od 2008</dd></div><div><dt>Mistrzostwa świata</dt><dd>2017</dd></div></dl>
+    <ul class="gfa-links"><li><a href="/realizacje-gamefields/">Realizacje</a></li><li><a href="/jak-powstaje-arena/">Jak powstaje arena</a></li><li><a href="/koncepcje/">Koncepcje</a></li><li><a href="/sztuka-z-gry/">Sztuka z gry</a></li><li><a href="https://www.instagram.com/damiangawrych/" rel="me noopener" target="_blank">Instagram ↗</a></li><li><a href="https://www.damiangawrych.pl/" rel="me noopener" target="_blank">damiangawrych.pl ↗</a></li></ul>
   </div>
   {fig(4596, "Na scenie", "Damian Gawrych, założyciel Alternative Soccer", alt="Damian Gawrych przemawia na scenie, za nim ekran z napisem Damian Gawrych, CEO and Founder Alternative Soccer", size=1024)}
 </div></section>
 
 <section class="gfa-sec"><div class="w">
-  <div class="gfa-head"><h2 class="d">Gra przed produktem.</h2><p>Street football i panna to dla mnie najpierw ludzie i miejsca, a dopiero potem konstrukcja. Od lat buduję wokół tej gry wydarzenia, areny i społeczność. Z tego doświadczenia wyrosło studio.</p></div>
+  <div class="gfa-head"><h2 class="d">Gra przed produktem.</h2><p>Zaczynałem jako zawodnik. Od 2008 roku buduję wokół panny i street footballu turnieje, areny i społeczność. Z tego doświadczenia wyrosło studio.</p></div>
   <div class="gfa-mom">
     <article>
-      <div class="ph">{fig(4580, "Freestival Street Games 2017", "promocja festiwalu na PGE Narodowym", cls="one")}{fig(4581, "Arena festiwalu", "wizualizacja")}{fig(4585, "Podium turnieju", "Street Games")}</div>
-      <div><p class="y">2017</p><h3>Freestival Street Games</h3><p>Festiwal ulicznej piłki z areną, trybunami i turniejami 1 na 1. Arena działa jak scena: gra w środku, publiczność dookoła, wszystko widać z każdego miejsca.</p></div>
+      <div class="ph">{fig(4586, "One vs One Panna", "plakat turnieju Street Games", cls="one")}</div>
+      <div><p class="y">2005 i 2008</p><h3>Od zawodnika do organizatora</h3><p>W pannę gram od 2005 roku. W 2008 roku zorganizowałem pierwszy turniej: Freestyle Football i Panna Football w Jaktorowie. Od tamtej pory turnieje, pokazy i areny są moją codzienną pracą.</p></div>
+    </article>
+    <article>
+      <div class="ph">{fig(4580, "Freestival Street Games 2017", "promocja festiwalu na PGE Narodowym", cls="one")}{fig(4581, "Arena festiwalu", "wizualizacja")}{fig(4582, "Widok na scenę", "wizualizacja")}</div>
+      <div><p class="y">2017 i 2018</p><h3>Mistrzostwa Świata Freestival Street Games</h3><p>W 2017 roku zorganizowałem Mistrzostwa Świata Freestival Street Games, a w 2018 roku międzynarodowy turniej w Grodzisku Mazowieckim. Arena działała jak scena: gra w środku, publiczność dookoła, wszystko widać z każdego miejsca.</p></div>
     </article>
     <article>
       <div class="ph">{fig(4607, "Taras w Parku Świętokrzyskim", "Warszawa", cls="one")}{fig(4609, "Gra na Tarasie", "zdjęcie: Zarząd Zieleni m.st. Warszawy", alt="Pokaz gry na Tarasie przy Pałacu Kultury i Nauki")}</div>
@@ -170,17 +176,21 @@ damian = f"""
       <div><p class="y">Dla wszystkich</p><h3>Gra bez barier</h3><p>Arena panna jest mała, bezpieczna i czytelna. Dlatego sprawdza się na zajęciach z zawodnikami Olimpiad Specjalnych tak samo jak na mistrzostwach.</p></div>
     </article>
     <article>
-      <div class="ph">{fig(4578, "Panna w szkole", "arena w sali gimnastycznej", cls="one", alt="Uczniowie wokół areny panna w szkolnej sali gimnastycznej")}{fig(4586, "One vs One Panna", "plakat turnieju Street Games")}{fig(4591, "Ekipa turnieju", "")}</div>
+      <div class="ph">{fig(4584, "Piłki dla dzieci", "akcja charytatywna w Afryce", cls="one", alt="Dzieci grają w piłkę na piaszczystym placu w Afryce")}</div>
+      <div><p class="y">Poza boiskiem</p><h3>Piłki, które dalej grają</h3><p>Zorganizowałem akcję charytatywną, w której dzieci w Afryce dostały piłki. Do gry wystarczy piłka i kawałek placu, a ta gra łączy ludzi wszędzie tak samo.</p></div>
+    </article>
+    <article>
+      <div class="ph">{fig(4578, "Panna w szkole", "arena w sali gimnastycznej", cls="one", alt="Uczniowie wokół areny panna w szkolnej sali gimnastycznej")}{fig(4591, "Ekipa turnieju", "")}{fig(4585, "Podium turnieju", "Street Games")}</div>
       <div><p class="y">Szkoły i turnieje</p><h3>Pokazy, turnieje, szkoły</h3><p>Mobilną arenę da się postawić w sali gimnastycznej, na stadionie i w centrum handlowym. Tak panna trafia do ludzi, którzy wcześniej nie widzieli tej gry.</p></div>
     </article>
   </div>
 </div></section>
 
 <section class="gfa-band"><div class="w">
-  <div class="gfa-head"><div><p class="k">W mediach i na scenie</p><h2 class="d">Opowiadam o grze.</h2></div><p>O pannie, street footballu i miejscach do gry mówiłem w telewizji, w radiu i na scenie.</p></div>
+  <div class="gfa-head"><div><p class="k">W mediach i na scenie</p><h2 class="d">Opowiadam o grze.</h2></div><p>O pannie, street footballu i miejscach do gry mówiłem w Polsacie, w radiu TOK FM i na scenie.</p></div>
   <ul class="gfa-grid">
-    <li>{fig(4588, "TVP Sport", "wywiad", cls="tall", alt="Damian Gawrych z ekipą TVP Sport podczas wywiadu")}</li>
-    <li>{fig(4583, "Radio TOK FM", "w studiu", cls="tall", alt="Damian Gawrych w studiu radia TOK FM")}</li>
+    <li>{fig(4588, "Polsat", "wywiad, styczeń 2018", cls="tall", alt="Damian Gawrych z ekipą telewizji Polsat podczas wywiadu")}</li>
+    <li>{fig(4583, "Radio TOK FM", "w studiu, styczeń 2018", cls="tall", alt="Damian Gawrych w studiu radia TOK FM")}</li>
     <li>{fig(4596, "Wystąpienie", "na scenie", cls="tall", alt="Damian Gawrych na scenie z mikrofonem")}</li>
   </ul>
 </div></section>
@@ -250,9 +260,18 @@ konc = f"""
   <div>
     <p class="k">Studio Gamefields</p>
     <h1 class="d">Koncepcje.</h1>
-    <p class="lead">Miejsca, które dopiero mogą powstać. Zaczynam od zdjęcia placu i rozmowy o tym, kto będzie na nim grał. Potem rysuję boisko, które pasuje do miasta, a nie z katalogu.</p>
+    <p class="lead">Miejsca, które dopiero mogą powstać: plac pod Pałacem Kultury, boisko pod Mostem Łazienkowskim, stare place do odnowienia. Zaczynam od zdjęcia placu i rozmowy o tym, kto będzie na nim grał. Potem rysuję boisko, które pasuje do miasta, a nie z katalogu.</p>
   </div>
   {fig(4618, "Pod Mostem Łazienkowskim", "Warszawa, styczeń 2026", size=1024, alt="Plac pod Mostem Łazienkowskim z mobilną bramką do gry")}
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Plac pod Pałacem Kultury.</h2><p>Projekt placu pod Pałacem Kultury i Nauki z boiskami Gamefields: miejsca do gry wpisane w posadzkę placu, obok strefy do jazdy i odpoczynku.</p></div>
+  <ul class="gfa-grid">
+    <li>{fig(4610, "Widok z placu", "wizualizacja")}</li>
+    <li>{fig(4611, "Panorama placu", "wizualizacja")}</li>
+    <li>{fig(4616, "Układ placu", "aksonometria")}</li>
+  </ul>
 </div></section>
 
 <section class="gfa-sec"><div class="w">
@@ -276,7 +295,7 @@ konc = f"""
 </div></section>
 
 <section class="gfa-band"><div class="w">
-  <div class="gfa-head"><div><p class="k">Wydarzenia</p><h2 class="d">Arena jako scena.</h2></div><p>Koncepcje areny turniejowej dla Freestival Street Games 2017: boisko w środku, trybuny dookoła, oświetlenie i miejsce dla DJ-a.</p></div>
+  <div class="gfa-head"><div><p class="k">Wydarzenia</p><h2 class="d">Arena jako scena.</h2></div><p>Koncepcje areny turniejowej dla Mistrzostw Świata Freestival Street Games 2017: boisko w środku, trybuny dookoła, oświetlenie i miejsce dla DJ-a.</p></div>
   <ul class="gfa-grid">
     <li>{fig(4581, "Arena z trybunami", "Freestival Street Games 2017")}</li>
     <li>{fig(4582, "Widok na scenę", "Freestival Street Games 2017")}</li>
@@ -288,9 +307,41 @@ konc = f"""
 ld_konc = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Koncepcje Gamefields",
            "url": SITE + "koncepcje/", "inLanguage": "pl-PL", "author": {"@id": PERSON["@id"], "@type": "Person", "name": "Damian Gawrych"}}
 
+# ---------------------------------------------------------------- /sztuka-z-gry/
+sztuka = f"""
+<section class="gfa-hero"><div class="w">
+  <div>
+    <p class="k">Damian Gawrych</p>
+    <h1 class="d">Sztuka<br>z gry.</h1>
+    <p class="lead">Seria grafik w czerni, bieli i czerwieni. Koła, ślady i rytm, które powtarzają się na boisku, przeniesione na papier. Ten sam język form trafia potem na nawierzchnie i plakaty Gamefields.</p>
+    <ul class="gfa-links"><li><a href="/damian-gawrych/">O autorze</a></li><li><a href="/product/plakat-z-twoim-boiskiem/">Plakat z Twoim boiskiem</a></li></ul>
+  </div>
+  {fig(4620, "Czerwień i czerń", "grafika w ramie", size=1024, alt="Grafika z czerwonych, czarnych i białych kół w czarnej ramie na ceglanej ścianie")}
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Seria.</h2><p>Każda praca jest inna: gęstość kół, układ i kolor zmieniają się jak przebieg meczu.</p></div>
+  <ul class="gfa-grid">
+    <li>{fig(4624, "Czerwień i czerń", "detal", cls="tall")}</li>
+    <li>{fig(4625, "Biel na czerni", "rytm kół", cls="tall")}</li>
+    <li>{fig(4621, "Biel na czerni", "w ramie", cls="tall")}</li>
+    <li>{fig(4622, "Czerwień i czerń", "w ramie", cls="tall")}</li>
+    <li>{fig(4619, "Biel na czerni", "w passe-partout", cls="tall")}</li>
+  </ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Chcesz grafikę<br>albo wzór na boisko?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Napisz do mnie →</a><a class="gfa-btn alt" href="/studio/">Wzory w Studio ↗</a></div>
+</div></section>
+"""
+ld_sztuka = {"@context": "https://schema.org", "@type": "CollectionPage", "name": "Sztuka z gry — grafiki Damiana Gawrycha",
+             "url": SITE + "sztuka-z-gry/", "inLanguage": "pl-PL", "author": {"@id": PERSON["@id"], "@type": "Person", "name": "Damian Gawrych"}}
+
 out = {"damian-gawrych.html": page(damian, ld_damian),
        "jak-powstaje-arena.html": page(arena, ld_arena),
-       "koncepcje.html": page(konc, ld_konc)}
+       "koncepcje.html": page(konc, ld_konc),
+       "sztuka-z-gry.html": page(sztuka, ld_sztuka)}
 for name, content in out.items():
     if "&&" in content:
         raise SystemExit(name + " contains a double ampersand")
