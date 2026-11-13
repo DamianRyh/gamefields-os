@@ -74,7 +74,7 @@ Załącznik: `DLA-CHATGPT-ceny.md`.
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) dodaj sekcję „Ile kosztuje arena?” z cenami konstrukcji, skrót „Ceny” na telefonie, nową odpowiedź w FAQ „Czy cena jest widoczna od razu?” i ceny w danych strukturalnych (kroki 1–5). Nie podmieniaj całej strony, tylko wstaw fragmenty. Pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
 ```
 
-## 6. Studio: tylko cena konstrukcji + karta konstrukcji 3D (publikacja z main)
+## 6. ✅ Studio: tylko cena konstrukcji + karta konstrukcji 3D (wdrożone, sprawdzone 13.11)
 
 Załącznik: brak. `main` łączy kod produkcyjny wykonawcy (karta konstrukcji 3D bez podłoża, gałąź `studio-produkcja-karta-konstrukcji`, commit abc3394) z trybem `PRICE_MODE="construction"` (przycisk Podsumowanie i podsumowanie pokazują cenę konstrukcji bez widełek z nawierzchnią).
 
