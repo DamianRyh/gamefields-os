@@ -3,7 +3,7 @@
 Właściciel przekaże je razem, gdy zdecyduje. Kolejność ma znaczenie: wcześniejsze punkty są pilniejsze.
 Przy każdym poleceniu: dołącz wskazany plik jako załącznik (ChatGPT nie otwiera GitHuba). Pliki są w repozytorium w `docs/roadmap/`.
 
-Ostatnia aktualizacja: 13.11.2026 (kontrola strony)
+Ostatnia aktualizacja: 13.11.2026 (ceny)
 
 ---
 
@@ -56,12 +56,18 @@ W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków
 
 ## 4. Studio: widełki ceny i karta projektu PDF
 
-Załącznik: brak. **Wstrzymane do decyzji właściciela o cenach** (`CENY-PRZEJRZYSTOSC-2026-11.md`).
+Załącznik: brak. Najpierw ustawienie cen konstrukcji w karcie stawek (punkt 1 polecenia), potem publikacja.
 
 ```
-Opublikuj nową wersję Studio Gamefields z gałęzi main repozytorium DamianRyh/gamefields-os (katalog integrations/studio/canvas-editor, commit db857b0 lub nowszy). Zmiany: widełki ceny w przycisku Podsumowanie i w podsumowaniu, karta projektu PDF. Nie zmieniaj ustawień serwera INTERNAL_COST_CARD ani SALES_MARGIN. Przed publikacją uruchom tsc, test:price, build i test:mobile. Po publikacji sprawdź: przycisk Podsumowanie pokazuje „… tys. zł netto”, a „Pobierz kartę projektu (PDF)” otwiera okno drukowania. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md.
+1. W ustawieniach serwera Studio Gamefields ustaw koszty konstrukcji (INTERNAL_COST_CARD.arenaNet) i marżę (SALES_MARGIN) według tabeli kosztów i marży, którą przekażę Ci osobno. Cena sprzedaży konstrukcji w Studio ma być równa cenom na stronie: Panna Octa Cage 90 36 000, Panna Play 40 000, Panna Ring 40 000, Panna Octa 49 000, Panna Grid 51 000, Panna Octa Cage 180 58 000, Panna Court 69 000, Boisko 3 na 3 100 000 zł netto. Nie zapisuj kosztów ani marży w kodzie ani w repozytorium.
+2. Opublikuj nową wersję Studio z gałęzi main repozytorium DamianRyh/gamefields-os (katalog integrations/studio/canvas-editor). Zmiany: widełki ceny w przycisku Podsumowanie i w podsumowaniu, karta projektu PDF. Przed publikacją uruchom tsc, test:price, build i test:mobile.
+3. Po publikacji sprawdź: w podsumowaniu Panny Play pozycja „Konstrukcja z bramkami” = 40 000 zł, przycisk Podsumowanie pokazuje „… tys. zł netto”, „Pobierz kartę projektu (PDF)” otwiera okno drukowania. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md.
 ```
 
-## 5. Ceny „od … zł netto” na kartach modeli
+## 5. Ceny konstrukcji na stronie głównej
 
-Do przygotowania po akceptacji cen (lista zadań, punkt 2).
+Załącznik: `DLA-CHATGPT-ceny.md`.
+
+```
+W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) dodaj sekcję „Ile kosztuje arena?” z cenami konstrukcji, skrót „Ceny” na telefonie, nową odpowiedź w FAQ „Czy cena jest widoczna od razu?” i ceny w danych strukturalnych (kroki 1–5). Nie podmieniaj całej strony, tylko wstaw fragmenty. Pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
+```

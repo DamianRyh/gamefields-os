@@ -27,6 +27,21 @@ def read(name):
     return (HERE / name).read_text(encoding="utf-8")
 
 
+def prices_html():
+    """Construction 'from' prices on the homepage, rendered from integrations/wordpress/offer/price-from.json."""
+    data = json.loads((HERE.parent.parent / "offer" / "price-from.json").read_text(encoding="utf-8"))
+    zl = lambda n: f"{n:,}".replace(",", " ") + " zł"
+    rows = []
+    for m in data["models"]:
+        code = f"<span>{m['code']}</span>" if m["code"] else "<span>wynajem i sprzedaż</span>"
+        who = m["forWhom"] or ""
+        label = "Zobacz ofertę" if m["id"] == "mobile" else "Zaprojektuj"
+        rows.append(f'<li><div class="name"><b>{htmllib.escape(m["name"])}</b>{code}</div><span class="dim">{htmllib.escape(m["dimensions"])}</span>'
+                    f'<div class="net">od {zl(m["constructionFromNet"])} <small>netto</small><span class="gross">od {zl(m["constructionFromGross"])} brutto</span></div>'
+                    f'<span class="who">{htmllib.escape(who)}</span><a class="go" href="{m["link"]}">{label} →</a></li>')
+    return '<ul class="prices" role="list">' + "".join(rows) + "</ul>", data
+
+
 def jsonld(faq_html):
     """Structured data for the studio, its services and the FAQ. Facts only from the page itself, no prices."""
     qa = []
@@ -45,6 +60,10 @@ def jsonld(faq_html):
         ("Plakaty boisk", "Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce."),
         # ("Piłki we wzorze boiska", ...) — ukryte na start 2026-11-08, wraca razem z sekcją #pilka
     ]
+    _, price_data = prices_html()
+    offers = [{"@type": "Offer", "itemOffered": {"@type": "Product", "name": m["name"], **({"sku": m["code"]} if m["code"] else {})},
+               "priceSpecification": {"@type": "PriceSpecification", "minPrice": m["constructionFromNet"], "priceCurrency": "PLN", "valueAddedTaxIncluded": False},
+               "seller": {"@id": site + "#studio"}} for m in price_data["models"]]
     graph = {
         "@context": "https://schema.org",
         "@graph": [
@@ -67,7 +86,7 @@ def jsonld(faq_html):
                     "itemListElement": [
                         {"@type": "Offer", "itemOffered": {"@type": "Service", "name": n, "description": d, "provider": {"@id": site + "#studio"}}}
                         for n, d in services
-                    ],
+                    ] + offers,
                 },
             },
             {"@type": "FAQPage", "@id": site + "#pytania", "inLanguage": "pl-PL", "mainEntity": qa},
@@ -89,6 +108,7 @@ def main():
         if body.count(token) != 1 and token != "{{ASSET}}":
             sys.exit(f"missing {token}")
 
+    body = body.replace("{{PRICES}}", prices_html()[0])
     body = body.replace("{{ASSET}}", ASSET_BASE)
     body = body.replace("{{KEPT_WORKSHOP}}", workshop.strip())
     body = body.replace("{{KEPT_FAQ}}", faq.strip())

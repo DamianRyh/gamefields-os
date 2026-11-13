@@ -40,3 +40,26 @@
 
 1. Studio: nowa wersja w Sites z gałęzi po scaleniu (instrukcja jak dotąd w `integrations/studio/canvas-editor/DEPLOYMENT.md`). Karta stawek i marża zostają w ustawieniach serwera, nic nie trafia do kodu.
 2. Strona: po akceptacji tabeli dopiszę „od … zł netto” do kart modeli i odpowiedź w FAQ (osobna zmiana).
+
+
+## Decyzja właściciela (13.11.2026)
+
+- „Od” na stronie to **cena sprzedaży samej konstrukcji z bramkami** (bez nawierzchni, montażu, transportu i grafiki), z tabeli właściciela z 13.11.2026.
+- Koszty produkcji i marża nie są zapisywane w repozytorium (jest publiczne). Właściciel przekazuje je bezpośrednio osobie, która ustawia kartę stawek Studio.
+- Dane: `integrations/wordpress/offer/price-from.json`. Sekcja „Ile kosztuje arena?” na stronie głównej i odpowiedź w FAQ są generowane z tego pliku.
+
+| Model | Konstrukcja od (netto) | Brutto (VAT 23%) | Karta stawek Studio dziś (sprzedaż) |
+| --- | --- | --- | --- |
+| Arena mobilna eventowa | 27 000 zł | 33 210 zł | — |
+| Panna Octa Cage 90 | 36 000 zł | 44 280 zł | 20 000 zł |
+| Panna Play | 40 000 zł | 49 200 zł | 15 000 zł |
+| Panna Ring | 40 000 zł | 49 200 zł | 18 714 zł |
+| Panna Octa | 49 000 zł | 60 270 zł | 21 857 zł |
+| Panna Grid | 51 000 zł | 62 730 zł | 23 714 zł |
+| Panna Octa Cage 180 | 58 000 zł | 71 340 zł | 32 429 zł |
+| Panna Court | 69 000 zł | 84 870 zł | 31 857 zł |
+| Boisko 3 na 3 (Street Arena 15) | 100 000 zł | 123 000 zł | 37 429 zł |
+
+## Do zrobienia przed publikacją Studio
+
+Karta stawek Studio (`INTERNAL_COST_CARD.arenaNet` z marżą `SALES_MARGIN`) daje dziś dużo niższe ceny konstrukcji niż tabela właściciela. Przed publikacją Studio z widełkami osoba z dostępem do ustawień serwera Studio ustawia koszty konstrukcji i marżę według tabeli właściciela, tak żeby cena sprzedaży konstrukcji w Studio była równa kolumnie „Konstrukcja od”. Pozostałe stawki (nawierzchnie, montaż, transport) liczą się z tą samą marżą, więc trzeba też sprawdzić, czy widełki całych projektów są zgodne z oczekiwaniami właściciela. Tabela „Ceny modeli do akceptacji” powyżej jest nieaktualna, bo pochodzi ze starej karty stawek.

@@ -1,0 +1,97 @@
+{
+ "updated": "2026-11-13",
+ "scope": "Cena samej konstrukcji z bramkami, netto i brutto (VAT 23%). Bez nawierzchni, montażu, transportu i grafiki.",
+ "source": "Ceny sprzedaży z tabeli właściciela, 13.11.2026.",
+ "models": [
+  {
+   "name": "Arena mobilna eventowa",
+   "id": "mobile",
+   "code": null,
+   "dimensions": "Różne",
+   "constructionFromNet": 27000,
+   "constructionFromGross": 33210,
+   "forWhom": "Marki, turnieje",
+   "link": "/wynajem-boisk-mobilnych/"
+  },
+  {
+   "name": "Panna Octa Cage 90",
+   "id": "circle-cage-1",
+   "code": "GF-CT-005",
+   "dimensions": "Ø, banda 0,9 m",
+   "constructionFromNet": 36000,
+   "constructionFromGross": 44280,
+   "forWhom": "Osiedla, szkoły",
+   "link": "/studio/?arena=circle-cage-1"
+  },
+  {
+   "name": "Panna Play",
+   "id": "o1",
+   "code": "GF-CT-002",
+   "dimensions": "Ø ~6 m",
+   "constructionFromNet": 40000,
+   "constructionFromGross": 49200,
+   "forWhom": "Kluby, eventy, szkoły",
+   "link": "/studio/?arena=o1"
+  },
+  {
+   "name": "Panna Ring",
+   "id": "w1",
+   "code": "GF-CT-001",
+   "dimensions": "Ø ~5 m",
+   "constructionFromNet": 40000,
+   "constructionFromGross": 49200,
+   "forWhom": null,
+   "link": "/studio/?arena=w1"
+  },
+  {
+   "name": "Panna Octa",
+   "id": "octagon",
+   "code": "GF-CT-008",
+   "dimensions": "Ośmiokąt",
+   "constructionFromNet": 49000,
+   "constructionFromGross": 60270,
+   "forWhom": "Gminy, parki, szkoły",
+   "link": "/studio/?arena=octagon"
+  },
+  {
+   "name": "Panna Grid",
+   "id": "street-field",
+   "code": "GF-CT-007",
+   "dimensions": "6,21 × 4,65 m",
+   "constructionFromNet": 51000,
+   "constructionFromGross": 62730,
+   "forWhom": null,
+   "link": "/studio/?arena=street-field"
+  },
+  {
+   "name": "Panna Octa Cage 180",
+   "id": "circle-cage-2",
+   "code": "GF-CT-006",
+   "dimensions": "Ø, banda 1,8 m",
+   "constructionFromNet": 58000,
+   "constructionFromGross": 71340,
+   "forWhom": "Kluby, akademie",
+   "link": "/studio/?arena=circle-cage-2"
+  },
+  {
+   "name": "Panna Court",
+   "id": "p1",
+   "code": "GF-CT-003",
+   "dimensions": "7,14 × 5,57 m",
+   "constructionFromNet": 69000,
+   "constructionFromGross": 84870,
+   "forWhom": null,
+   "link": "/studio/?arena=p1"
+  },
+  {
+   "name": "Boisko 3 na 3 (Street Arena 15)",
+   "id": "street15",
+   "code": "GF-CT-004",
+   "dimensions": "Pełny format, 15 × 10 m",
+   "constructionFromNet": 100000,
+   "constructionFromGross": 123000,
+   "forWhom": "Gminy, deweloperzy",
+   "link": "/studio/?arena=street15"
+  }
+ ]
+}

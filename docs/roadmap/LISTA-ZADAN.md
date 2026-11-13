@@ -10,8 +10,8 @@ Ostatnia aktualizacja: 13.11.2026
 
 | # | Zadanie | Repozytorium | Strona | Status |
 | --- | --- | --- | --- | --- |
-| 1 | Przejrzystość cenowa: widełki w Studio, karta projektu PDF, ceny „od–do” 8 modeli | ✅ PR #80, `docs/roadmap/CENY-PRZEJRZYSTOSC-2026-11.md` | Studio w Sites (polecenie 4) | ❓ akceptacja cen |
-| 2 | Ceny „od … zł netto” na kartach modeli i w FAQ | po akceptacji tabeli z pkt 1 | strona główna, sklep | ⬜ |
+| 1 | Przejrzystość cenowa: widełki w Studio, karta projektu PDF, ceny „od–do” 8 modeli | ✅ PR #80, `docs/roadmap/CENY-PRZEJRZYSTOSC-2026-11.md` | Studio w Sites (polecenie 4, najpierw ceny konstrukcji w karcie stawek) | ⏳ |
+| 2 | Ceny konstrukcji „od” na stronie głównej i w FAQ (tabela właściciela 13.11) | gałąź `claude/ceny-modeli`, `offer/price-from.json` | strona główna (polecenie 5) | 🔄 |
 | 3 | Polityka prywatności: przycisk zgody i pierwszy akapit | kolejka, polecenie 1 | strona 4087 | ✅ sprawdzone 13.11 |
 | 4 | Strony autentyczności: Damian Gawrych, Jak powstaje arena, Koncepcje, Sztuka z gry | ✅ PR #79 | ✅ wszystkie 4 strony, sprawdzone 13.11 | ✅ |
 | 5 | Zdjęcia na O nas, Eventy, Szkoły, Realizacje, link „Kim jestem” na stronie głównej | ✅ PR #79 | ✅ sprawdzone 13.11 | ✅ |
