@@ -81,3 +81,11 @@ Załącznik: brak. `main` łączy kod produkcyjny wykonawcy (karta konstrukcji 3
 ```
 Opublikuj Studio z najnowszego commita gałęzi main repozytorium DamianRyh/gamefields-os (integrations/studio/canvas-editor), bez własnych zmian w kodzie. Zawiera Twoją kartę konstrukcji 3D (commit abc3394) oraz tryb samej ceny konstrukcji w przycisku i podsumowaniu. Nie zmieniaj INTERNAL_COST_CARD ani SALES_MARGIN. Przed publikacją: tsc, test:price, build, test:mobile, node tests/construction-card-browser.mjs. Po publikacji sprawdź dla Panny Play: przycisk Podsumowanie „Konstrukcja: 40 000 zł netto”, w podsumowaniu „Cena konstrukcji” bez widełek, „Pobierz kartę konstrukcji (PDF)” daje kartę z modelem 3D i ceną 40 000 zł netto. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md (bez kosztów).
 ```
+
+## 7. Studio: nawierzchnia betonowa jako osobna cena (publikacja z main)
+
+Załącznik: brak. Ceny betonu to ceny sprzedaży z cennika właściciela, zapisane w kodzie (`lib/concrete-base.ts`). Karta kosztów i marża bez zmian.
+
+```
+Opublikuj Studio z najnowszego commita gałęzi main repozytorium DamianRyh/gamefields-os (integrations/studio/canvas-editor), bez własnych zmian w kodzie. Nowość: nawierzchnia betonowa bez wykończenia jako osobna cena obok konstrukcji (domyślnie wliczona, klient może ją odznaczyć w kroku Konstrukcja → Model). Nie zmieniaj INTERNAL_COST_CARD ani SALES_MARGIN. Przed publikacją: tsc, test:price, build, test:mobile, node tests/construction-card-browser.mjs, node tests/concrete-base-browser.mjs. Po publikacji sprawdź dla Panny Play: przycisk Podsumowanie „Konstrukcja 40 000 zł · Nawierzchnia 9100 zł netto”, w podsumowaniu osobne wiersze: konstrukcja 40 000 zł, nawierzchnia betonowa 9100 zł, wykończenie „Do wyceny”, razem 49 100 zł; po odznaczeniu nawierzchni przycisk pokazuje „Konstrukcja: 40 000 zł netto”; karta PDF ma te same wiersze. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md (bez kosztów).
+```

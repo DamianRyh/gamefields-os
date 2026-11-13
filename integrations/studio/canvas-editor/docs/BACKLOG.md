@@ -1,3 +1,8 @@
+## Studio — wykończenia nawierzchni na podłożu betonowym, 2026-11-13
+
+- [ ] Wybór wykończenia: malowanie, płytki sportowe, sztuczna trawa (ceny od właściciela). Pozycja „Wykończenie nawierzchni” w podsumowaniu i karcie jest dziś „do wyceny”.
+- [ ] Strona: pokazać ceny nawierzchni betonowej obok cen konstrukcji (`offer/concrete-base.json`).
+
 ## P2 — sporty i droga do zapytania, 2026-10-29
 
 Dodano Teqball, Street Football, Panna, koszykówkę 3×3 i pełną koszykówkę, wymagane wyposażenie w podglądzie i kalkulacji, udostępniane wersje z wycofaniem, wyszukiwanie/paginację Warsztatu, bibliotekę projektów oraz pakiet zapytania z wyceną. Zachowano najnowszy pływający edytor, karuzele i niezależne kolory konstrukcji; poprawiono mobilną paletę i hydratację. Zakres, testy, migracja i ograniczenia: [P2](P2_IMPLEMENTATION_2026_10_29.md). Produkcyjny CREW pozostaje zależny od poprawienia odrzuconego klucza OpenAI (502/AUTH); wyposażenie bez stawek wymaga indywidualnej wyceny.

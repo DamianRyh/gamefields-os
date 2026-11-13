@@ -35,6 +35,6 @@ export function StudioModelPicker({project:p,onSelect}:{project:Project;onSelect
     <tbody>{rows.map(({s,d,b})=><tr key={s.id} aria-current={p.arenaModel===s.arenaModel?'true':undefined}><th scope="row">{s.label}</th><td>{d.reference}</td><td>{b?formatBounds(b):'—'}</td><td>{b?`${metres.format(b.y)} m`:'—'}</td><td>{d.area===null?'—':formatArea(d.area)}</td></tr>)}</tbody></table></div>
    <p className="gfmp-fine">Wymiary pochodzą z modeli 3D. „Z bramkami” to prostokąt obejmujący całą konstrukcję. Miejsce wokół boiska potwierdzamy przy wycenie.</p>
   </details>
-  <p className="gfmp-fine">Cenę każdego modelu podajemy w indywidualnej wycenie.</p>
+  <p className="gfmp-fine">Cenę konstrukcji i nawierzchni zobaczysz osobno w podsumowaniu.</p>
  </section>;
 }
