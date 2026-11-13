@@ -1,0 +1,128 @@
+{
+ "name": "Malowanie nawierzchni na podłożu betonowym",
+ "source": "Cennik właściciela 13.11.2026 (ceny sprzedaży)",
+ "currency": "PLN",
+ "vatRate": 0.23,
+ "area": "Cała płyta betonowa modelu (ten sam metraż co nawierzchnia betonowa), cena zaokrąglona w górę do 100 zł",
+ "variants": [
+  {
+   "id": "plain",
+   "name": "Jednokolorowa",
+   "netPerM2": 78
+  },
+  {
+   "id": "plain-granulate",
+   "name": "Jednokolorowa z granulatem",
+   "netPerM2": 100
+  },
+  {
+   "id": "pattern",
+   "name": "Wzór średni",
+   "netPerM2": 150
+  },
+  {
+   "id": "pattern-advanced",
+   "name": "Wzór zaawansowany",
+   "netPerM2": 183
+  }
+ ],
+ "descriptions": {
+  "plain": "Grunt, 2 warstwy farby sportowej i standardowe linie.",
+  "plain-granulate": "Elastyczna powłoka z gumą: lepsza amortyzacja i antypoślizg, z liniami.",
+  "pattern": "4–6 kolorów, geometryczne wzory typu Signature, na bazie z granulatem.",
+  "pattern-advanced": "7 i więcej kolorów, złożone grafiki (Organic Flow, gradienty), na bazie z granulatem."
+ },
+ "excludes": [
+  "Naprawy podłoża (wypełnianie rys, szlifowanie): wyceniane po oględzinach."
+ ],
+ "models": [
+  {
+   "id": "w1",
+   "name": "Panna Ring",
+   "areaM2": 23,
+   "net": {
+    "plain": 1800,
+    "plain-granulate": 2300,
+    "pattern": 3500,
+    "pattern-advanced": 4300
+   }
+  },
+  {
+   "id": "o1",
+   "name": "Panna Play",
+   "areaM2": 32,
+   "net": {
+    "plain": 2500,
+    "plain-granulate": 3200,
+    "pattern": 4800,
+    "pattern-advanced": 5900
+   }
+  },
+  {
+   "id": "street-field",
+   "name": "Panna Grid",
+   "areaM2": 33,
+   "net": {
+    "plain": 2600,
+    "plain-granulate": 3300,
+    "pattern": 5000,
+    "pattern-advanced": 6100
+   }
+  },
+  {
+   "id": "circle-cage-1",
+   "name": "Panna Octa Cage 90",
+   "areaM2": 29,
+   "net": {
+    "plain": 2300,
+    "plain-granulate": 2900,
+    "pattern": 4400,
+    "pattern-advanced": 5400
+   }
+  },
+  {
+   "id": "octagon",
+   "name": "Panna Octa",
+   "areaM2": 52,
+   "net": {
+    "plain": 4100,
+    "plain-granulate": 5200,
+    "pattern": 7800,
+    "pattern-advanced": 9600
+   }
+  },
+  {
+   "id": "circle-cage-2",
+   "name": "Panna Octa Cage 180",
+   "areaM2": 32,
+   "net": {
+    "plain": 2500,
+    "plain-granulate": 3200,
+    "pattern": 4800,
+    "pattern-advanced": 5900
+   }
+  },
+  {
+   "id": "p1",
+   "name": "Panna Court",
+   "areaM2": 46,
+   "net": {
+    "plain": 3600,
+    "plain-granulate": 4600,
+    "pattern": 6900,
+    "pattern-advanced": 8500
+   }
+  },
+  {
+   "id": "street15",
+   "name": "Boisko 3 na 3",
+   "areaM2": 173,
+   "net": {
+    "plain": 13500,
+    "plain-granulate": 17300,
+    "pattern": 26000,
+    "pattern-advanced": 31700
+   }
+  }
+ ]
+}

@@ -1,6 +1,7 @@
 ## Studio — wykończenia nawierzchni na podłożu betonowym, 2026-11-13
 
-- [ ] Wybór wykończenia: malowanie, płytki sportowe, sztuczna trawa (ceny od właściciela). Pozycja „Wykończenie nawierzchni” w podsumowaniu i karcie jest dziś „do wyceny”.
+- [x] Malowanie (4 warianty, cennik 13.11).
+- [ ] Płytki sportowe, sztuczna trawa, EPDM: ceny od właściciela (dziś „do wyceny”).
 - [ ] Strona: pokazać ceny nawierzchni betonowej obok cen konstrukcji (`offer/concrete-base.json`).
 
 ## P2 — sporty i droga do zapytania, 2026-10-29

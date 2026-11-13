@@ -54,3 +54,23 @@ assert.equal(concreteBasePrice(withBase),9100);
 assert(withBase.exclusions[0].includes('płytę 12 cm'),'exclusions describe the concrete scope');
 assert.equal(calculateProjectQuote({...play,concreteBase:true,arenaModel:'street15'},null,1).items.find(i=>i.id==='concrete-base').totalNet,48800);
 console.log('PASS: concrete base priced per model from the owner list, matches the website file, included by default and removable.');
+
+// Painting on the concrete base (owner price list 13.11.2026): whole slab m² × rate, rounded up to 100 zł.
+import {PAINT_VARIANTS,autoPaintVariant,paintNet} from '../lib/surface-finish.ts';
+import {surfaceFinish} from '../lib/price-range.ts';
+const paintSite=JSON.parse(readFileSync(new URL('../../../wordpress/offer/surface-finish.json',import.meta.url),'utf8'));
+for(const v of paintSite.variants)assert.equal(PAINT_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
+for(const m of paintSite.models)for(const [v,net] of Object.entries(m.net))assert.equal(paintNet(m.id,v),net,`${m.name} ${v}`);
+assert.deepEqual(['plain','plain-granulate','pattern','pattern-advanced'].map(v=>paintNet('o1',v)),[2500,3200,4800,5900]);
+assert.equal(paintNet('street15','plain'),13500);
+assert.equal(autoPaintVariant({graphic:false,colors:1,complexity:1}),'plain');
+assert.equal(autoPaintVariant({graphic:true,colors:5,complexity:2}),'pattern');
+assert.equal(autoPaintVariant({graphic:true,colors:7,complexity:1}),'pattern-advanced');
+assert.equal(autoPaintVariant({graphic:true,colors:3,complexity:3}),'pattern-advanced');
+assert.equal(autoPaintVariant({graphic:true,colors:3,complexity:1,gradient:true}),'pattern-advanced');
+const painted=calculateProjectQuote({...play,surface:'Akryl sportowy',graphicOpacity:0,base:'#1d5147',zone:'#1d5147'},null,1);
+assert.deepEqual(surfaceFinish(painted),{label:'Malowanie · Jednokolorowa',net:2500,note:surfaceFinish(painted).note});
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'pattern'},null,1)).net,4800,'customer choice wins');
+assert.deepEqual(surfaceFinish(calculateProjectQuote({...play,surface:'EPDM'},null,1)),{label:'Wykończenie · Granulat',net:null,note:'Cenę tego wykończenia podamy indywidualnie.'});
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Beton sportowy'},null,1)),null,'bare concrete has no finish');
+console.log('PASS: painting priced per model and variant from the owner list, matches the website file, auto variant from the design, other finishes individual.');

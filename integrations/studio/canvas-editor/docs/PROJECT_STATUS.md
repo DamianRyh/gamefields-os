@@ -1,3 +1,11 @@
+## Studio — malowanie nawierzchni, 2026-11-13
+
+- Nowa pozycja wyceny `paint` „Malowanie · <wariant>” dla projektu z konstrukcją i materiałem „Malowana” (`Akryl sportowy`). Cennik właściciela 13.11.2026 (ceny sprzedaży netto): jednokolorowa 78 zł/m², jednokolorowa z granulatem 100, wzór średni 150, wzór zaawansowany 183. Metraż: cała płyta betonowa modelu (jak `concrete-base`), zaokrąglenie w górę do 100 zł, np. Panna Play 2500 / 3200 / 4800 / 5900 zł.
+- Wariant domyślnie dobrany do projektu (`autoPaintVariant`: brak grafiki → jednokolorowa; wzór → średni; złożoność ≥3, 7+ kolorów lub gradient → zaawansowany); klient może wybrać inny (`paintVariant`) w Nawierzchnia → Materiał.
+- Inne materiały (granulat EPDM, płytki, murawa, piasek): pozycja `finish-surface` „do wyceny”. „Beton sportowy” = bez wykończenia.
+- Przycisk: „Konstrukcja 40 000 zł · Nawierzchnia 15 000 zł netto” (beton + malowanie). Podsumowanie i karta PDF: osobne wiersze i razem. Karuzela materiałów: „Malowana od 2500 zł netto”.
+- Ceny w `lib/surface-finish.ts`, dla strony `integrations/wordpress/offer/surface-finish.json` (test zgodności).
+
 ## Studio — konstrukcja i nawierzchnia betonowa w osobnych cenach, 2026-11-13
 
 - Nowa pozycja wyceny `concrete-base` „Nawierzchnia betonowa bez wykończenia”: stała cena sprzedaży dla modelu z cennika właściciela (13.11.2026, 283 zł/m² netto, powierzchnia modelu +15%), np. Panna Play 9 100 zł, Boisko 3 na 3 48 800 zł. Źródło w kodzie: `lib/concrete-base.ts`; to samo dla strony: `integrations/wordpress/offer/concrete-base.json` (test pilnuje zgodności).
