@@ -54,14 +54,16 @@ Załącznik: `DLA-CHATGPT-samorzady.md`.
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Utwórz jako szkice dwie strony: „Dofinansowanie boisk” (/dofinansowanie-boisk/) i „Realizacje dla miast” (/realizacje-dla-miast/), szablon „Pełna szerokość”, tytuły SEO i opisy z instrukcji. Potem dodaj linki z istniejących stron (zadanie 2). Pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
 ```
 
-## 4. Studio: widełki ceny i karta projektu PDF
+## 4. Studio: ceny zgodne ze stroną, widełki i karta projektu PDF
 
-Załącznik: brak. Najpierw ustawienie cen konstrukcji w karcie stawek (punkt 1 polecenia), potem publikacja.
+Załącznik: brak. **Koszty i marżę właściciel wkleja do polecenia sam, na czacie z ChatGPT. Nie zapisujemy ich w repozytorium.**
+Sprawdzenie po wdrożeniu: `python3 tools/pricing/check_studio_prices.py` (porównuje ceny konstrukcji w Studio z `offer/price-from.json`, wynik „OK” przy każdym modelu).
 
 ```
-1. W ustawieniach serwera Studio Gamefields ustaw koszty konstrukcji (INTERNAL_COST_CARD.arenaNet) i marżę (SALES_MARGIN) według tabeli kosztów i marży, którą przekażę Ci osobno. Cena sprzedaży konstrukcji w Studio ma być równa cenom na stronie: Panna Octa Cage 90 36 000, Panna Play 40 000, Panna Ring 40 000, Panna Octa 49 000, Panna Grid 51 000, Panna Octa Cage 180 58 000, Panna Court 69 000, Boisko 3 na 3 100 000 zł netto. Nie zapisuj kosztów ani marży w kodzie ani w repozytorium.
+1. W ustawieniach serwera Studio Gamefields ustaw SALES_MARGIN i koszty konstrukcji INTERNAL_COST_CARD.arenaNet według tabeli, którą wklejam niżej. Klucze modeli: circle-cage-1 (Panna Octa Cage 90), o1 (Panna Play), w1 (Panna Ring), octagon (Panna Octa), street-field (Panna Grid), circle-cage-2 (Panna Octa Cage 180), p1 (Panna Court), street15 (Boisko 3 na 3). Nie zmieniaj innych pozycji karty. Nie zapisuj kosztów ani marży w kodzie, repozytorium ani w DEPLOYMENT.md.
+[TU WKLEJ TABELĘ: marża i 8 kosztów]
 2. Opublikuj nową wersję Studio z gałęzi main repozytorium DamianRyh/gamefields-os (katalog integrations/studio/canvas-editor). Zmiany: widełki ceny w przycisku Podsumowanie i w podsumowaniu, karta projektu PDF. Przed publikacją uruchom tsc, test:price, build i test:mobile.
-3. Po publikacji sprawdź: w podsumowaniu Panny Play pozycja „Konstrukcja z bramkami” = 40 000 zł, przycisk Podsumowanie pokazuje „… tys. zł netto”, „Pobierz kartę projektu (PDF)” otwiera okno drukowania. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md.
+3. Po publikacji sprawdź: w podsumowaniu Panny Play pozycja „Konstrukcja z bramkami” = 40 000 zł, przycisk Podsumowanie pokazuje „… tys. zł netto”, „Pobierz kartę projektu (PDF)” otwiera okno drukowania. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md (bez kosztów).
 ```
 
 ## 5. ✅ Ceny konstrukcji na stronie głównej (wdrożone, sprawdzone 13.11)
