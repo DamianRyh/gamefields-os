@@ -23,7 +23,7 @@ Popraw sekcję „Pomiar odwiedzin” w polityce prywatności (strona 4087):
 Pokaż mi podgląd, potem opublikuj i wyczyść cache LiteSpeed.
 ```
 
-## 2. Strony autentyczności (Damian Gawrych, Jak powstaje arena, Koncepcje, Sztuka z gry)
+## 2. ✅ Strony autentyczności (zastąpione przez 2a, wdrożone)
 
 Załącznik: `DLA-CHATGPT-autentycznosc.md`. Jeśli ChatGPT ma kłopot z dużym plikiem: dołącz osobno strony z `integrations/wordpress/pages/autentycznosc-2026-11/` (`damian-gawrych.html`, `jak-powstaje-arena.html`, `koncepcje.html`, `sztuka-z-gry.html`).
 
@@ -31,7 +31,7 @@ Załącznik: `DLA-CHATGPT-autentycznosc.md`. Jeśli ChatGPT ma kłopot z dużym 
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Szkic „Damian Gawrych” (ID 4626) już istnieje: porównaj go z kodem z załącznika i popraw, jeśli się różni. Utwórz jako szkice pozostałe trzy strony: „Jak powstaje arena” (/jak-powstaje-arena/), „Koncepcje” (/koncepcje/), „Sztuka z gry” (/sztuka-z-gry/), szablon „Pełna szerokość”, tytuły SEO i opisy z instrukcji. Potem fragmenty na istniejących stronach (zadania 2–3). Pokaż mi podgląd wszystkich stron (komputer i telefon) przed publikacją, potem opublikuj i wyczyść cache LiteSpeed.
 ```
 
-## 2a. Dokończenie stron autentyczności (stan 13.11)
+## 2a. ✅ Dokończenie stron autentyczności (wdrożone, sprawdzone 13.11)
 
 Na stronie: „Damian Gawrych” w **starej wersji** (bez danych od właściciela: od 2005/2008, Jaktorów, Polsat zamiast TVP Sport, Instagram, akcja charytatywna), „Jak powstaje arena” poprawnie. Brak: „Koncepcje” (link ze strony Damiana daje 404), „Sztuka z gry”, fragmenty na O nas / Eventy / Szkoły, link z Realizacji do budowy areny, link „Kim jestem” na stronie głównej.
 
