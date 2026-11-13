@@ -59,7 +59,7 @@ export function floorSvg(project:Project){
 const isStreetGoalNet=(model:string,mesh:Mesh)=>model==='street15'&&mesh.group==='goals'&&mesh.id.endsWith('-net');
 const arenaJsonUrl=(model:string)=>'/arenas/'+(model==='street15'?'street15-r3':model)+'.json';
 const poses={perspective:{cx:836,cy:535,scale:198,pitch:.365},aerial:{cx:836,cy:445,scale:122,pitch:Math.PI/2},ground:{cx:836,cy:616,scale:249,pitch:.25}};
-export function PannaStudioPreview({project,view='perspective',location='park',interactive=false,studio=false}:{project:Project;view?:'perspective'|'aerial'|'ground';location?:RealisticLocation;interactive?:boolean;studio?:boolean}){
+export function PannaStudioPreview({project,view='perspective',location='park',interactive=false,studio=false,structureOnly=false}:{project:Project;view?:'perspective'|'aerial'|'ground';location?:RealisticLocation;interactive?:boolean;studio?:boolean;structureOnly?:boolean}){
  const modularKey=project.surfaceModel?JSON.stringify([project.surfaceModel,project.arenaModel||null]):JSON.stringify(project.modular||null);
  const orbit=useRef({yaw:-.55,pitch:.365});
  const focusView=useRef<'east'|'west'|null>(null),focusAnimation=useRef(0);
@@ -82,7 +82,7 @@ export function PannaStudioPreview({project,view='perspective',location='park',i
  },[model,attempt,modularKey]);
  const cageSide=['circle-cage-1','circle-cage-2'].includes(model)?project.arenaDesign?.side||'both':'both';
  const baseMeshes=useMemo(()=>(project.modular||project.surfaceModel?(external?.model===model&&external.layoutKey===modularKey?external.meshes:[]):((model==='o1'||model==='p1'||model==='circle-cage-1'||model==='circle-cage-2'||model==='street-field'||model==='octagon'||model==='street15')?(external?.model===model?[...external.meshes,...(model==='p1'?p1Surface as Mesh[]:model==='o1'?o1Surface as Mesh[]:[])]:[]):model==='w1'?(glb?[...glb,...(w1 as Mesh[]).filter(m=>m.group==='floor')]:[]):catalog[model] as Mesh[])).map(m=>({...m,perforated:['o1','p1'].includes(model)&&m.group==='panels'})),[model,glb,external,modularKey]);
- const meshes=useMemo(()=>baseMeshes.length&&!project.modular?circlePanelSides(baseMeshes,model,cageSide):baseMeshes,[baseMeshes,model,cageSide,modularKey]),model6=true,design=project.arenaDesign||defaultArena,svg=useMemo(()=>floorSvg(project),[project]);
+ const meshes=useMemo(()=>{const visible=structureOnly?baseMeshes.filter(m=>!['floor','surface-edge','foundation'].includes(m.group)&&!/murawa|nawierz|podło|podlo/i.test(m.label)):baseMeshes;return visible.length&&!project.modular?circlePanelSides(visible,model,cageSide):visible},[baseMeshes,model,cageSide,modularKey,structureOnly]),model6=true,design=project.arenaDesign||defaultArena,svg=useMemo(()=>floorSvg(project),[project]);
 
  const bounds=useMemo(()=>orbitBounds(meshes),[meshes]);
 

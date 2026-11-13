@@ -511,3 +511,6 @@ Ekran wyboru produktu (`/studio/` na gamefields.eu, Lighthouse mobile 0,53–0,8
 ### Panna Octa R3
 
 Usunięto dwa poziome profile boczne z każdej bramki Octa. Zachowano obwiednię, podział części i identyfikatory paneli.
+
+
+Karta konstrukcji PDF przedstawia samą konstrukcję z bramkami i jej cenę orientacyjną; nawierzchnia i dodatkowe usługi nie są wliczone.
