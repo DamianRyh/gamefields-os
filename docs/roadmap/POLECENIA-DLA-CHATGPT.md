@@ -3,11 +3,11 @@
 Właściciel przekaże je razem, gdy zdecyduje. Kolejność ma znaczenie: wcześniejsze punkty są pilniejsze.
 Przy każdym poleceniu: dołącz wskazany plik jako załącznik (ChatGPT nie otwiera GitHuba). Pliki są w repozytorium w `docs/roadmap/`.
 
-Ostatnia aktualizacja: 12.11.2026
+Ostatnia aktualizacja: 13.11.2026 (kontrola strony)
 
 ---
 
-## 1. Poprawka polityki prywatności (pilne, błąd widoczny dla klientów)
+## 1. ✅ Poprawka polityki prywatności (wdrożone, sprawdzone 13.11)
 
 Załącznik: brak.
 
@@ -31,7 +31,22 @@ Załącznik: `DLA-CHATGPT-autentycznosc.md`. Jeśli ChatGPT ma kłopot z dużym 
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Szkic „Damian Gawrych” (ID 4626) już istnieje: porównaj go z kodem z załącznika i popraw, jeśli się różni. Utwórz jako szkice pozostałe trzy strony: „Jak powstaje arena” (/jak-powstaje-arena/), „Koncepcje” (/koncepcje/), „Sztuka z gry” (/sztuka-z-gry/), szablon „Pełna szerokość”, tytuły SEO i opisy z instrukcji. Potem fragmenty na istniejących stronach (zadania 2–3). Pokaż mi podgląd wszystkich stron (komputer i telefon) przed publikacją, potem opublikuj i wyczyść cache LiteSpeed.
 ```
 
-## 3. Strony dla samorządów (Dofinansowanie boisk, Realizacje dla miast)
+## 2a. Dokończenie stron autentyczności (stan 13.11)
+
+Na stronie: „Damian Gawrych” w **starej wersji** (bez danych od właściciela: od 2005/2008, Jaktorów, Polsat zamiast TVP Sport, Instagram, akcja charytatywna), „Jak powstaje arena” poprawnie. Brak: „Koncepcje” (link ze strony Damiana daje 404), „Sztuka z gry”, fragmenty na O nas / Eventy / Szkoły, link z Realizacji do budowy areny, link „Kim jestem” na stronie głównej.
+
+Załączniki: `damian-gawrych.html`, `koncepcje.html`, `sztuka-z-gry.html` z `integrations/wordpress/pages/autentycznosc-2026-11/` oraz `DLA-CHATGPT-autentycznosc.md`.
+
+```
+Dokończ strony autentyczności. Wszystko jest w załącznikach — nie otwieraj linków do GitHuba.
+
+1. Strona „Damian Gawrych” (/damian-gawrych/) ma na żywo starą wersję. Zastąp całą zawartość bloku „Własny HTML” kodem z załącznika damian-gawrych.html (bez zmian). Po zmianie na stronie mają być m.in.: „W pannę gram od 2005 roku”, „Jaktorowie”, „Polsat”, linki do Instagrama i damiangawrych.pl. Tytuł SEO zmień na: „Damian Gawrych — autor studia Gamefields | panna i street football od 2005”.
+2. Utwórz strony „Koncepcje” (/koncepcje/) i „Sztuka z gry” (/sztuka-z-gry/) z plików koncepcje.html i sztuka-z-gry.html, szablon „Pełna szerokość”, tytuły SEO i opisy z DLA-CHATGPT-autentycznosc.md.
+3. Zrób zadania 2 i 3 z DLA-CHATGPT-autentycznosc.md: fragmenty ze zdjęciami na /o-nas/, /eventy-sportowe/, /boiska-dla-szkol/, link z /realizacje-gamefields/ do /jak-powstaje-arena/, link „Kim jestem: Damian Gawrych” i zmiana „founder” w JSON-LD na stronie głównej, profil autora wpisów.
+Pokaż mi podgląd przed publikacją, potem opublikuj i wyczyść cache LiteSpeed.
+```
+
+## 3. ✅ Strony dla samorządów (wdrożone, sprawdzone 13.11)
 
 Załącznik: `DLA-CHATGPT-samorzady.md`.
 
