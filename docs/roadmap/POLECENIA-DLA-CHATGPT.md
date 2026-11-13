@@ -73,3 +73,11 @@ Załącznik: `DLA-CHATGPT-ceny.md`.
 ```
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) dodaj sekcję „Ile kosztuje arena?” z cenami konstrukcji, skrót „Ceny” na telefonie, nową odpowiedź w FAQ „Czy cena jest widoczna od razu?” i ceny w danych strukturalnych (kroki 1–5). Nie podmieniaj całej strony, tylko wstaw fragmenty. Pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
 ```
+
+## 6. Studio: tylko cena konstrukcji (synchronizacja produkcji z repozytorium)
+
+Załącznik: brak. Stan 13.11: na produkcji ceny konstrukcji są zgodne ze stroną, karta PDF to już „Karta konstrukcji” (zmiana zrobiona tylko na produkcji, nie ma jej w repozytorium), ale przycisk Podsumowanie i podsumowanie pokazują widełki razem z nawierzchnią. Repozytorium ma teraz tryb `PRICE_MODE="construction"` (`lib/price-range.ts`).
+
+```
+Opublikuj Studio z gałęzi main repozytorium DamianRyh/gamefields-os (integrations/studio/canvas-editor) bez własnych zmian w kodzie — wersja z main ma już „Kartę konstrukcji” i tryb samej ceny konstrukcji. Nie zmieniaj INTERNAL_COST_CARD ani SALES_MARGIN. Przed publikacją: tsc, test:price, build, test:mobile. Po publikacji sprawdź: przycisk Podsumowanie pokazuje „Konstrukcja: 40 000 zł netto” dla Panny Play, w podsumowaniu jest „Cena konstrukcji” bez widełek, a „Pobierz kartę konstrukcji (PDF)” otwiera okno drukowania. Jeśli zmieniałeś kod Studio na produkcji poza repozytorium, opisz te zmiany, zanim je nadpiszesz.
+```

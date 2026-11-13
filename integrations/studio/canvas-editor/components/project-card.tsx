@@ -2,7 +2,7 @@
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import type {Project} from '@/lib/project';
 import type {QuoteState} from '@/hooks/use-project-quote';
-import {formatPriceRange,priceRange} from '@/lib/price-range';
+import {PRICE_MODE,constructionPrice,formatPriceRange,priceRange} from '@/lib/price-range';
 
 const esc=(s:string)=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]!);
 const money=(v:number)=>new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',maximumFractionDigits:0}).format(v);
@@ -10,11 +10,15 @@ const money=(v:number)=>new Intl.NumberFormat('pl-PL',{style:'currency',currency
 /** One A4 page: top view, parameters, indicative price range and contact. Printed from a hidden iframe, so the
  * customer saves it as PDF with the system print dialog (desktop and phone), without a popup or a PDF library. */
 export function projectCardHtml({project,facts,quote,image,date}:{project:Project;facts:[string,string][];quote:QuoteState['data'];image:string;date:string}){
- const range=priceRange(quote);
+ const range=priceRange(quote),construction=constructionPrice(quote);
+ const cardTitle=PRICE_MODE==='construction'?'Karta konstrukcji':'Karta projektu';
  const items=range&&quote?quote.items.map(i=>`<tr><td>${esc(i.label)}</td><td>${i.totalNet===null?'do wyceny':money(i.totalNet)}</td></tr>`).join(''):'';
- const price=range?`<section class="price"><h2>Cena orientacyjna</h2><p class="big">${esc(formatPriceRange(range))}</p><p>Konstrukcja, nawierzchnia, grafika, montaż, projekt i transport w wybranym zakresie. Bez przygotowania terenu, podbudowy, fundamentów, przyłączy i formalności.</p><table>${items}</table></section>`
+ const price=PRICE_MODE==='construction'
+  ?(construction!==null?`<section class="price"><h2>Cena konstrukcji</h2><p class="big">${esc(money(construction))} netto</p><p>Konstrukcja z bramkami. Nawierzchnia, montaż, transport i przygotowanie podłoża są wyceniane oddzielnie, po zdjęciach placu.</p></section>`
+   :`<section class="price"><h2>Wycena</h2><p>Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.</p></section>`)
+  :range?`<section class="price"><h2>Cena orientacyjna</h2><p class="big">${esc(formatPriceRange(range))}</p><p>Konstrukcja, nawierzchnia, grafika, montaż, projekt i transport w wybranym zakresie. Bez przygotowania terenu, podbudowy, fundamentów, przyłączy i formalności.</p><table>${items}</table></section>`
   :`<section class="price"><h2>Wycena</h2><p>Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.</p></section>`;
- return `<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Gamefields — karta projektu — ${esc(project.name)}</title><style>
+ return `<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Gamefields — ${cardTitle.toLowerCase()} — ${esc(project.name)}</title><style>
 @page{size:A4;margin:14mm}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:#47132d;font-size:11pt;line-height:1.4}
 header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #47132d;padding-bottom:6mm;margin-bottom:6mm}
@@ -28,7 +32,7 @@ table{width:100%;border-collapse:collapse;font-size:8.5pt}td{padding:1.2mm 0;bor
 footer{margin-top:6mm;padding-top:4mm;border-top:1px solid #e1d9de;font-size:8.5pt;color:#6f5a66;display:flex;justify-content:space-between;gap:6mm}
 footer b{color:#47132d}
 </style></head><body>
-<header><div class="logo">gamefields.</div><div class="meta">Karta projektu · ${esc(date)}<br>Studio Gamefields · gamefields.eu/studio</div></header>
+<header><div class="logo">gamefields.</div><div class="meta">${cardTitle} · ${esc(date)}<br>Studio Gamefields · gamefields.eu/studio</div></header>
 <h1>${esc(project.name)}</h1>
 <div class="img"><img src="${image}" alt="Widok projektu z góry"></div>
 <div class="grid"><section><h2>Parametry</h2><dl>${facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></section>${price}</div>
@@ -54,5 +58,5 @@ export function ProjectCard({project,facts,quote,renderCourt}:{project:Project;f
   setMessage('Otworzyło się okno drukowania. Wybierz „Zapisz jako PDF”.');
   setTimeout(()=>frame.remove(),60000);
  }catch(e){if(!cancelled)setMessage((e as Error).message)}finally{if(!cancelled)setSnapshot(null)}})();return()=>{cancelled=true}},[snapshot,facts,quote.data]);
- return <section className="studio-project-card" aria-label="Karta projektu PDF"><h3>Karta projektu</h3><p>Jedna strona A4: widok z góry, parametry i cena orientacyjna. Do wysłania zarządowi, radzie osiedla albo do budżetu obywatelskiego.</p><button type="button" disabled={!!snapshot||quote.loading} onClick={()=>{setMessage('');setSnapshot(project)}}>{snapshot?'Przygotowuję kartę…':'Pobierz kartę projektu (PDF)'}</button>{message?<p role="status">{message}</p>:null}{snapshot?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,width:1,height:1,overflow:'hidden',pointerEvents:'none'}}>{renderCourt(snapshot)}</div>:null}</section>;
+ return <section className="studio-project-card" aria-label={PRICE_MODE==='construction'?'Karta konstrukcji PDF':'Karta projektu PDF'}><h3>{PRICE_MODE==='construction'?'Karta konstrukcji':'Karta projektu'}</h3><p>{PRICE_MODE==='construction'?'Jedna strona A4: widok z góry, parametry konstrukcji i jej cena. Nawierzchnię wyceniamy oddzielnie.':'Jedna strona A4: widok z góry, parametry i cena orientacyjna. Do wysłania zarządowi, radzie osiedla albo do budżetu obywatelskiego.'}</p><button type="button" disabled={!!snapshot||quote.loading} onClick={()=>{setMessage('');setSnapshot(project)}}>{snapshot?'Przygotowuję kartę…':PRICE_MODE==='construction'?'Pobierz kartę konstrukcji (PDF)':'Pobierz kartę projektu (PDF)'}</button>{message?<p role="status">{message}</p>:null}{snapshot?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,width:1,height:1,overflow:'hidden',pointerEvents:'none'}}>{renderCourt(snapshot)}</div>:null}</section>;
 }

@@ -4,6 +4,20 @@ import type {ProjectQuote} from "./quote-engine";
 export const SHOW_PRICE_RANGE=true;
 
 /**
+ * What the customer sees (owner decision 13.11.2026: surface rates are not ready yet).
+ * "construction": only the construction-with-goals price; surface, installation and transport are quoted individually.
+ * "range": the full-project range around the estimate (use once surface rates are approved).
+ */
+export const PRICE_MODE:"construction"|"range"="construction";
+
+/** Sale price of the construction with goals in this project, or null (no construction, modular, or not priced). */
+export function constructionPrice(q:ProjectQuote|null|undefined):number|null{
+ if(!SHOW_PRICE_RANGE||!q)return null;
+ const arena=q.items.find(i=>i.id==="arena");
+ return arena&&arena.totalNet!==null&&arena.totalNet>0?arena.totalNet:null;
+}
+
+/**
  * The estimate covers the configured scope only (no site preparation, base or foundations).
  * The customer sees a range around it, not a to-the-grosz figure: a little below for simpler execution,
  * more above for typical site differences. Owner can tune both factors.
