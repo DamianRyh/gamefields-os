@@ -64,7 +64,7 @@ Załącznik: brak. Najpierw ustawienie cen konstrukcji w karcie stawek (punkt 1 
 3. Po publikacji sprawdź: w podsumowaniu Panny Play pozycja „Konstrukcja z bramkami” = 40 000 zł, przycisk Podsumowanie pokazuje „… tys. zł netto”, „Pobierz kartę projektu (PDF)” otwiera okno drukowania. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md.
 ```
 
-## 5. Ceny konstrukcji na stronie głównej
+## 5. ✅ Ceny konstrukcji na stronie głównej (wdrożone, sprawdzone 13.11)
 
 Załącznik: `DLA-CHATGPT-ceny.md`.
 
