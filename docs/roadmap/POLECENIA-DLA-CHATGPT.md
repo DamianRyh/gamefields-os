@@ -73,3 +73,11 @@ Załącznik: `DLA-CHATGPT-ceny.md`.
 ```
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) dodaj sekcję „Ile kosztuje arena?” z cenami konstrukcji, skrót „Ceny” na telefonie, nową odpowiedź w FAQ „Czy cena jest widoczna od razu?” i ceny w danych strukturalnych (kroki 1–5). Nie podmieniaj całej strony, tylko wstaw fragmenty. Pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
 ```
+
+## 6. Studio: tylko cena konstrukcji + karta konstrukcji 3D (publikacja z main)
+
+Załącznik: brak. `main` łączy kod produkcyjny wykonawcy (karta konstrukcji 3D bez podłoża, gałąź `studio-produkcja-karta-konstrukcji`, commit abc3394) z trybem `PRICE_MODE="construction"` (przycisk Podsumowanie i podsumowanie pokazują cenę konstrukcji bez widełek z nawierzchnią).
+
+```
+Opublikuj Studio z najnowszego commita gałęzi main repozytorium DamianRyh/gamefields-os (integrations/studio/canvas-editor), bez własnych zmian w kodzie. Zawiera Twoją kartę konstrukcji 3D (commit abc3394) oraz tryb samej ceny konstrukcji w przycisku i podsumowaniu. Nie zmieniaj INTERNAL_COST_CARD ani SALES_MARGIN. Przed publikacją: tsc, test:price, build, test:mobile, node tests/construction-card-browser.mjs. Po publikacji sprawdź dla Panny Play: przycisk Podsumowanie „Konstrukcja: 40 000 zł netto”, w podsumowaniu „Cena konstrukcji” bez widełek, „Pobierz kartę konstrukcji (PDF)” daje kartę z modelem 3D i ceną 40 000 zł netto. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md (bez kosztów).
+```
