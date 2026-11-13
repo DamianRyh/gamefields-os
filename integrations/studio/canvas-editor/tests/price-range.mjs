@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {priceRange,formatPriceRange,RANGE_LOW,RANGE_HIGH} from '../lib/price-range.ts';
+import {priceRange,formatPriceRange,constructionPrice,PRICE_MODE,RANGE_LOW,RANGE_HIGH} from '../lib/price-range.ts';
 
 const base={schemaVersion:2,currency:'PLN',rateVersion:'TEST',priceGross:null,vatRate:null,area:27,areaLabel:'x',items:[],exclusions:[],assumptions:[]};
 
@@ -27,4 +27,11 @@ assert.equal(formatPriceRange(r),'3500–5000 zł netto');
 assert.equal(priceRange({...base,status:'unpriced',priceNet:null,knownSubtotalNet:null}),null);
 assert.equal(priceRange(null),null);
 
-console.log('PASS: price range rounds outwards, keeps the estimate inside, shows only a floor for partial quotes and nothing when unpriced.');
+// Construction-only mode (owner 13.11.2026): the construction item, nothing else.
+assert.equal(PRICE_MODE,'construction');
+const withArena={...base,status:'partial',priceNet:null,knownSubtotalNet:42000,items:[{id:'surface',label:'x',quantity:27,unit:'m²',unitNet:null,totalNet:null},{id:'arena',label:'Konstrukcja z bramkami',quantity:1,unit:'kpl.',unitNet:40000,totalNet:40000}]};
+assert.equal(constructionPrice(withArena),40000);
+assert.equal(constructionPrice({...withArena,items:[{id:'arena',label:'x',quantity:1,unit:'kpl.',unitNet:null,totalNet:null}]}),null,'modular or unpriced construction');
+assert.equal(constructionPrice({...base,status:'estimated',priceNet:5000,knownSubtotalNet:5000,items:[]}),null,'surface-only project has no construction price');
+
+console.log('PASS: construction price only from the construction item; price range rounds outwards, keeps the estimate inside, shows only a floor for partial quotes and nothing when unpriced.');

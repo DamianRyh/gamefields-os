@@ -1,24 +1,47 @@
 "use client";
 import type {QuoteState} from "@/hooks/use-project-quote";
-import {formatPriceRange,priceRange} from "@/lib/price-range";
+import {PRICE_MODE,constructionPrice,formatPriceRange,priceRange} from "@/lib/price-range";
 
 const money=(value:number)=>new Intl.NumberFormat("pl-PL",{style:"currency",currency:"PLN",maximumFractionDigits:0}).format(value);
 const qty=(value:number)=>new Intl.NumberFormat("pl-PL",{maximumFractionDigits:2}).format(value);
+const contact=<a href="https://www.gamefields.eu/kontakt/" target="_top">Poproś o ofertę dla tego projektu →</a>;
 
-/* Shop products (plakat, piłka, koszulki) pass their exact price as `label`. Courts show an indicative range. */
+/* Shop products (plakat, piłka, koszulki) pass their exact price as `label`.
+   Courts: construction price only (PRICE_MODE "construction") or the full-project range ("range"). */
 export function QuoteBadge({quote,onClick,label}:{quote:QuoteState;onClick:()=>void;label?:string}){
- const range=priceRange(quote.data);
- const text=label||(quote.loading?"Przeliczam…":range?formatPriceRange(range):"Indywidualna wycena");
+ let text=label;
+ if(!text){
+  if(quote.loading)text="Przeliczam…";
+  else if(PRICE_MODE==="construction"){const c=constructionPrice(quote.data);text=c!==null?`Konstrukcja: ${money(c)} netto`:"Indywidualna wycena";}
+  else{const r=priceRange(quote.data);text=r?formatPriceRange(r):"Indywidualna wycena";}
+ }
  return <button className="studio-primary studio-quote-badge" onClick={onClick} aria-label="Podsumowanie"><span>Podsumowanie</span><b>{text}</b></button>;
 }
 
-export function ProjectQuote({quote,title="Cena orientacyjna",label="Cena orientacyjna projektu",headingLevel=3}:{quote:QuoteState;title?:string;label?:string;headingLevel?:3|5}){
+function Individual({label,Heading,quote}:{label:string;Heading:"h3"|"h5";quote:QuoteState}){
+ return <section className="studio-project-quote" aria-label={label}><Heading>Wycena projektu</Heading><p>Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.</p>{quote.error?<button type="button" onClick={quote.retry}>Spróbuj przeliczyć ponownie</button>:null}{contact}</section>;
+}
+
+export function ProjectQuote({quote,title,label="Cena orientacyjna projektu",headingLevel=3}:{quote:QuoteState;title?:string;label?:string;headingLevel?:3|5}){
  const Heading=headingLevel===5?'h5':'h3';
- const data=quote.data,range=priceRange(data);
- const contact=<a href="https://www.gamefields.eu/kontakt/" target="_top">Poproś o ofertę dla tego projektu →</a>;
- if(!range&&!quote.loading)return <section className="studio-project-quote" aria-label={label}><Heading>Wycena projektu</Heading><p>Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.</p>{quote.error?<button type="button" onClick={quote.retry}>Spróbuj przeliczyć ponownie</button>:null}{contact}</section>;
+ const data=quote.data;
+ if(PRICE_MODE==="construction"){
+  const c=constructionPrice(data);
+  if(c===null&&!quote.loading)return <Individual label={label} Heading={Heading} quote={quote}/>;
+  return <section className="studio-project-quote" aria-label={label} aria-busy={quote.loading}>
+   <Heading>{title||"Cena konstrukcji"}</Heading>
+   <div role="status" aria-live="polite">{quote.loading||c===null?<p>Przeliczam aktualną konfigurację…</p>:<>
+    <p className="studio-quote-total"><strong>{money(c)}</strong> netto</p>
+    <p className="studio-quote-range-note">Konstrukcja z bramkami w wybranym modelu. Nawierzchnię, montaż, transport i przygotowanie podłoża wyceniamy indywidualnie, po zdjęciach placu.</p>
+   </>}</div>
+   {contact}
+   <p className="studio-quote-footnote">Cena orientacyjna netto, nie jest ofertą handlową.</p>
+  </section>;
+ }
+ const range=priceRange(data);
+ if(!range&&!quote.loading)return <Individual label={label} Heading={Heading} quote={quote}/>;
  return <section className="studio-project-quote" aria-label={label} aria-busy={quote.loading}>
-  <Heading>{title}</Heading>
+  <Heading>{title||"Cena orientacyjna"}</Heading>
   <div role="status" aria-live="polite">{quote.loading||!range||!data?<p>Przeliczam aktualną konfigurację…</p>:<>
    <p className="studio-quote-total"><strong>{formatPriceRange(range)}</strong></p>
    <p className="studio-quote-range-note">{range.high===null?"Część pozycji wymaga indywidualnej wyceny i nie jest wliczona.":"Widełki dla wybranego zakresu: konstrukcja, nawierzchnia, grafika, montaż, projekt i transport."} Bez przygotowania terenu, podbudowy i fundamentów.</p>
