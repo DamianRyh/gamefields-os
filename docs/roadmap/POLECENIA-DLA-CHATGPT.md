@@ -59,9 +59,9 @@ W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków
 Załącznik: brak. Najpierw ustawienie cen konstrukcji w karcie stawek (punkt 1 polecenia), potem publikacja.
 
 ```
-1. W ustawieniach serwera Studio Gamefields (INTERNAL_COST_CARD) ustaw arenaNet tak, żeby cena sprzedaży konstrukcji (po marży SALES_MARGIN) była równa: o1 18000, octagon 22000, circle-cage-1 16000, circle-cage-2 26000, street15 45000, w1 18714, street-field 23714, p1 31857 zł netto. Koszt = cena × (1 − SALES_MARGIN). Nie zmieniaj innych stawek ani marży. Nie publikuj wartości kosztów w kodzie ani w repozytorium.
+1. W ustawieniach serwera Studio Gamefields ustaw koszty konstrukcji (INTERNAL_COST_CARD.arenaNet) i marżę (SALES_MARGIN) według tabeli kosztów i marży, którą przekażę Ci osobno. Cena sprzedaży konstrukcji w Studio ma być równa cenom na stronie: Panna Octa Cage 90 36 000, Panna Play 40 000, Panna Ring 40 000, Panna Octa 49 000, Panna Grid 51 000, Panna Octa Cage 180 58 000, Panna Court 69 000, Boisko 3 na 3 100 000 zł netto. Nie zapisuj kosztów ani marży w kodzie ani w repozytorium.
 2. Opublikuj nową wersję Studio z gałęzi main repozytorium DamianRyh/gamefields-os (katalog integrations/studio/canvas-editor). Zmiany: widełki ceny w przycisku Podsumowanie i w podsumowaniu, karta projektu PDF. Przed publikacją uruchom tsc, test:price, build i test:mobile.
-3. Po publikacji sprawdź: w podsumowaniu Panny Play pozycja „Konstrukcja z bramkami” = 18 000 zł, przycisk Podsumowanie pokazuje „… tys. zł netto”, „Pobierz kartę projektu (PDF)” otwiera okno drukowania. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md.
+3. Po publikacji sprawdź: w podsumowaniu Panny Play pozycja „Konstrukcja z bramkami” = 40 000 zł, przycisk Podsumowanie pokazuje „… tys. zł netto”, „Pobierz kartę projektu (PDF)” otwiera okno drukowania. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md.
 ```
 
 ## 5. Ceny konstrukcji na stronie głównej
