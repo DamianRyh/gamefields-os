@@ -1,3 +1,12 @@
+## Studio — konstrukcja i nawierzchnia betonowa w osobnych cenach, 2026-11-13
+
+- Nowa pozycja wyceny `concrete-base` „Nawierzchnia betonowa bez wykończenia”: stała cena sprzedaży dla modelu z cennika właściciela (13.11.2026, 283 zł/m² netto, powierzchnia modelu +15%), np. Panna Play 9 100 zł, Boisko 3 na 3 48 800 zł. Źródło w kodzie: `lib/concrete-base.ts`; to samo dla strony: `integrations/wordpress/offer/concrete-base.json` (test pilnuje zgodności).
+- Domyślnie wliczona do projektu z konstrukcją (`concreteBase` w projekcie; `false` = klient ją odznaczył). Wybór w kroku Konstrukcja → Model.
+- Przycisk Podsumowanie: „Konstrukcja 40 000 zł · Nawierzchnia 9100 zł netto”. Podsumowanie i karta PDF: osobne wiersze konstrukcja / nawierzchnia betonowa / wykończenie (do wyceny) i razem.
+- Cena nie przechodzi przez kartę kosztów ani marżę (`INTERNAL_COST_CARD`, `SALES_MARGIN` bez zmian).
+- Testy: `test:price` (ceny, domyślność, wykluczenia), `tests/concrete-base-browser.mjs` (wybór, przycisk, podsumowanie, karta). Opcjonalnie `GF_TEST_RATES=<plik>` do podglądu z własną kartą stawek.
+- Następny krok: wykończenia nawierzchni (malowanie, płytki sportowe, sztuczna trawa) po cenach właściciela.
+
 ## Studio — grafiki zawsze na jednokolorowej nawierzchni, 2026-11-11
 
 Decyzja właściciela: grafiki (elementy z biblioteki Grafika) mają zawsze leżeć na czystej, jednokolorowej nawierzchni.

@@ -11,7 +11,10 @@ const money=(v:number)=>new Intl.NumberFormat('pl-PL',{style:'currency',currency
  * customer saves it as PDF with the system print dialog (desktop and phone), without a popup or a PDF library. */
 export function projectCardHtml({project,facts,quote,image,date}:{project:Project;facts:[string,string][];quote:QuoteState['data'];image:string;date:string}){
  const arena=quote?.items.find(i=>i.id==='arena');
- const price=arena?.totalNet!=null?`<section class="price"><h2>Cena konstrukcji</h2><p class="big">${esc(money(arena.totalNet))} netto</p><p>Konstrukcja z bramkami. Nawierzchnia, montaż, transport i przygotowanie podłoża są wyceniane oddzielnie.</p></section>`
+ const base=quote?.items.find(i=>i.id==='concrete-base');
+ const baseRow=base?.totalNet!=null&&arena?.totalNet!=null?`<table><tr><td>Konstrukcja boiska z bramkami</td><td>${esc(money(arena.totalNet))}</td></tr><tr><td>Nawierzchnia betonowa bez wykończenia (płyta 12 cm z podbudową)</td><td>${esc(money(base.totalNet))}</td></tr><tr><td>Wykończenie nawierzchni (malowanie, płytki, trawa)</td><td>do wyceny</td></tr><tr><td><b>Razem</b></td><td><b>${esc(money(arena.totalNet+base.totalNet))}</b></td></tr></table>`:'';
+ const price=arena?.totalNet!=null&&base?.totalNet!=null?`<section class="price"><h2>Cena konstrukcji i nawierzchni (netto)</h2>${baseRow}<p>Podłoże betonowe gotowe pod wykończenie. Wykończenie nawierzchni, montaż i transport są wyceniane oddzielnie.</p></section>`
+  :arena?.totalNet!=null?`<section class="price"><h2>Cena konstrukcji</h2><p class="big">${esc(money(arena.totalNet))} netto</p><p>Konstrukcja z bramkami. Nawierzchnia, montaż, transport i przygotowanie podłoża są wyceniane oddzielnie.</p></section>`
   :`<section class="price"><h2>Wycena konstrukcji</h2><p>Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.</p></section>`;
  return `<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Gamefields — karta projektu — ${esc(project.name)}</title><style>
 @page{size:A4;margin:14mm}
@@ -23,7 +26,7 @@ h1{font-size:20pt;letter-spacing:-.03em;margin:0 0 4mm}h2{font-size:12pt;margin:
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
 dl{margin:0}dl div{display:flex;justify-content:space-between;gap:4mm;border-bottom:1px solid #eee5ea;padding:1.6mm 0;font-size:9.5pt}dt{color:#6f5a66}dd{margin:0;font-weight:700;text-align:right}
 .price .big{font-size:20pt;font-weight:800;margin:0 0 2mm;color:#6336f5}.price p{font-size:9pt;margin:0 0 3mm}
-table{width:100%;border-collapse:collapse;font-size:8.5pt}td{padding:1.2mm 0;border-bottom:1px solid #eee5ea}td+td{text-align:right;white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:8.5pt;table-layout:fixed;margin-bottom:3mm}td{padding:1.2mm 0;border-bottom:1px solid #eee5ea;vertical-align:top}td+td{width:24mm;padding-left:3mm;text-align:right;white-space:nowrap}.grid>section{min-width:0}
 footer{margin-top:6mm;padding-top:4mm;border-top:1px solid #e1d9de;font-size:8.5pt;color:#6f5a66;display:flex;justify-content:space-between;gap:6mm}
 footer b{color:#47132d}
 </style></head><body>

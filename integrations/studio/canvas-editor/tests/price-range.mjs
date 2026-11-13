@@ -35,3 +35,22 @@ assert.equal(constructionPrice({...withArena,items:[{id:'arena',label:'x',quanti
 assert.equal(constructionPrice({...base,status:'estimated',priceNet:5000,knownSubtotalNet:5000,items:[]}),null,'surface-only project has no construction price');
 
 console.log('PASS: construction price only from the construction item; price range rounds outwards, keeps the estimate inside, shows only a floor for partial quotes and nothing when unpriced.');
+
+// Concrete base without finish (owner price list 13.11.2026): fixed sale price per model, separate from the construction.
+import {concreteBasePrice} from '../lib/price-range.ts';
+import {CONCRETE_BASE_NET,concreteBaseNet} from '../lib/concrete-base.ts';
+import {calculateProjectQuote} from '../lib/quote-engine.ts';
+import {readFileSync} from 'node:fs';
+const site=JSON.parse(readFileSync(new URL('../../../wordpress/offer/concrete-base.json',import.meta.url),'utf8'));
+for(const m of site.models){assert.equal(CONCRETE_BASE_NET[m.id].net,m.net,`Studio and website differ for ${m.name}`);assert.equal(Math.round(m.net*1.23),m.gross);}
+assert.equal(Object.keys(CONCRETE_BASE_NET).length,site.models.length);
+assert.equal(concreteBaseNet('o1'),9100);assert.equal(concreteBaseNet('o1',{revision:'GF-STUDIO-MODULAR-2'}),null);assert.equal(concreteBaseNet(undefined),null);
+const play={arenaModel:'o1',length:5.902,width:5.902,courtShape:'circle',diameter:5.902,surface:'Akryl sportowy',lines:false,graphicOpacity:0,objects:[]};
+const without=calculateProjectQuote({...play,concreteBase:false},null,1);
+assert.equal(without.items.find(i=>i.id==='concrete-base'),undefined,'customer removed the concrete base');
+assert.equal(concreteBasePrice(without),null);
+const withBase=calculateProjectQuote(play,null,1);
+assert.equal(concreteBasePrice(withBase),9100);
+assert(withBase.exclusions[0].includes('płytę 12 cm'),'exclusions describe the concrete scope');
+assert.equal(calculateProjectQuote({...play,concreteBase:true,arenaModel:'street15'},null,1).items.find(i=>i.id==='concrete-base').totalNet,48800);
+console.log('PASS: concrete base priced per model from the owner list, matches the website file, included by default and removable.');

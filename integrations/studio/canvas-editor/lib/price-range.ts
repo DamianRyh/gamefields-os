@@ -17,6 +17,13 @@ export function constructionPrice(q:ProjectQuote|null|undefined):number|null{
  return arena&&arena.totalNet!==null&&arena.totalNet>0?arena.totalNet:null;
 }
 
+/** Sale price of the concrete base without finish, when the customer added it to the construction; otherwise null. */
+export function concreteBasePrice(q:ProjectQuote|null|undefined):number|null{
+ if(!SHOW_PRICE_RANGE||!q)return null;
+ const item=q.items.find(i=>i.id==="concrete-base");
+ return item&&item.totalNet!==null&&item.totalNet>0?item.totalNet:null;
+}
+
 /**
  * The estimate covers the configured scope only (no site preparation, base or foundations).
  * The customer sees a range around it, not a to-the-grosz figure: a little below for simpler execution,

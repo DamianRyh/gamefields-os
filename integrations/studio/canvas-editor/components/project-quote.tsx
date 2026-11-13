@@ -1,6 +1,7 @@
 "use client";
 import type {QuoteState} from "@/hooks/use-project-quote";
-import {PRICE_MODE,constructionPrice,formatPriceRange,priceRange} from "@/lib/price-range";
+import {PRICE_MODE,concreteBasePrice,constructionPrice,formatPriceRange,priceRange} from "@/lib/price-range";
+import {CONCRETE_BASE_EXCLUDES,CONCRETE_BASE_INCLUDES} from "@/lib/concrete-base";
 
 const money=(value:number)=>new Intl.NumberFormat("pl-PL",{style:"currency",currency:"PLN",maximumFractionDigits:0}).format(value);
 const qty=(value:number)=>new Intl.NumberFormat("pl-PL",{maximumFractionDigits:2}).format(value);
@@ -12,7 +13,7 @@ export function QuoteBadge({quote,onClick,label}:{quote:QuoteState;onClick:()=>v
  let text=label;
  if(!text){
   if(quote.loading)text="Przeliczam…";
-  else if(PRICE_MODE==="construction"){const c=constructionPrice(quote.data);text=c!==null?`Konstrukcja: ${money(c)} netto`:"Indywidualna wycena";}
+  else if(PRICE_MODE==="construction"){const c=constructionPrice(quote.data),b=concreteBasePrice(quote.data);text=c===null?"Indywidualna wycena":b!==null?`Konstrukcja ${money(c)} · Nawierzchnia ${money(b)} netto`:`Konstrukcja: ${money(c)} netto`;}
   else{const r=priceRange(quote.data);text=r?formatPriceRange(r):"Indywidualna wycena";}
  }
  return <button className="studio-primary studio-quote-badge" onClick={onClick} aria-label="Podsumowanie"><span>Podsumowanie</span><b>{text}</b></button>;
@@ -26,13 +27,18 @@ export function ProjectQuote({quote,title,label="Cena orientacyjna projektu",hea
  const Heading=headingLevel===5?'h5':'h3';
  const data=quote.data;
  if(PRICE_MODE==="construction"){
-  const c=constructionPrice(data);
+  const c=constructionPrice(data),b=concreteBasePrice(data);
   if(c===null&&!quote.loading)return <Individual label={label} Heading={Heading} quote={quote}/>;
   return <section className="studio-project-quote" aria-label={label} aria-busy={quote.loading}>
-   <Heading>{title||"Cena konstrukcji"}</Heading>
-   <div role="status" aria-live="polite">{quote.loading||c===null?<p>Przeliczam aktualną konfigurację…</p>:<>
+   <Heading>{title||(b!==null?"Cena konstrukcji i nawierzchni":"Cena konstrukcji")}</Heading>
+   <div role="status" aria-live="polite">{quote.loading||c===null?<p>Przeliczam aktualną konfigurację…</p>:b===null?<>
     <p className="studio-quote-total"><strong>{money(c)}</strong> netto</p>
     <p className="studio-quote-range-note">Konstrukcja z bramkami w wybranym modelu. Nawierzchnię, montaż, transport i przygotowanie podłoża wyceniamy indywidualnie, po zdjęciach placu.</p>
+   </>:<>
+    <dl className="studio-quote-items studio-quote-split"><div><dt>Konstrukcja boiska<small>Konstrukcja z bramkami w wybranym modelu</small></dt><dd>{money(c)} netto</dd></div><div><dt>Nawierzchnia betonowa<small>Płyta 12 cm z podbudową, bez wykończenia</small></dt><dd>{money(b)} netto</dd></div><div><dt>Wykończenie nawierzchni<small>Malowanie, płytki sportowe lub sztuczna trawa — wybór wkrótce</small></dt><dd><span className="studio-quote-pending">Do wyceny</span></dd></div></dl>
+    <p className="studio-quote-sum">Razem konstrukcja i nawierzchnia: <strong>{money(c+b)}</strong> netto</p>
+    <details className="studio-quote-scope"><summary>Co obejmuje nawierzchnia betonowa</summary><ul>{CONCRETE_BASE_INCLUDES.map(t=><li key={t}>{t}</li>)}</ul><p>Nie obejmuje:</p><ul>{CONCRETE_BASE_EXCLUDES.map(t=><li key={t}>{t}</li>)}</ul></details>
+    <p className="studio-quote-range-note">Wykończenie nawierzchni, montaż konstrukcji i transport wyceniamy indywidualnie, po zdjęciach placu.</p>
    </>}</div>
    {contact}
    <p className="studio-quote-footnote">Cena orientacyjna netto, nie jest ofertą handlową.</p>
