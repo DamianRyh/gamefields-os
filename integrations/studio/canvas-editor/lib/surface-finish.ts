@@ -1,8 +1,17 @@
-import {CONCRETE_BASE_NET} from './concrete-base.ts';
+import {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
+
+/**
+ * Area of every surface finish (owner rule 14.11.2026): the surface inside the construction, taken from the model
+ * geometry, plus a 10% margin so it is never cut to size. Same rule for round, square and rectangular courts and for
+ * all materials. Rounded to 0,1 m².
+ */
+export const FINISH_MARGIN=0.10;
+export const FINISH_AREA_M2:Record<string,number>=Object.fromEntries(Object.entries(arenaSurfaceQuantities as Record<string,{area:number}>).map(([id,q])=>[id,Math.round(q.area*(1+FINISH_MARGIN)*10)/10]));
+export const areaLabel=(m2:number)=>new Intl.NumberFormat('pl-PL',{maximumFractionDigits:1}).format(m2);
 
 /**
  * Painting on the concrete base (owner price list 13.11.2026, sale prices net, not costs).
- * Priced on the whole concrete slab of the model (the same m² as the concrete base) and rounded up to 100 zł.
+ * Priced on the finish area (FINISH_AREA_M2) and rounded up to 100 zł.
  */
 export type PaintVariant="plain"|"plain-granulate"|"pattern"|"pattern-advanced";
 export const PAINT_VARIANTS:Record<PaintVariant,{label:string;netPerM2:number;description:string}>={
@@ -24,14 +33,14 @@ export function autoPaintVariant({graphic,colors,complexity,gradient,granulate}:
 }
 
 export function paintNet(arenaModel:string|undefined,variant:PaintVariant,modular?:unknown):number|null{
- const area=arenaModel&&!modular?CONCRETE_BASE_NET[arenaModel]?.areaM2:undefined;
+ const area=arenaModel&&!modular?FINISH_AREA_M2[arenaModel]:undefined;
  if(!area)return null;
  return Math.ceil(area*PAINT_VARIANTS[variant].netPerM2/100)*100;
 }
 
 /**
  * Polyurethane surface PU/EPDM on the concrete base (owner price list 14.11.2026, sale prices net, not costs).
- * Same area and rounding as painting. Concrete base, sports lines and transport are separate items.
+ * Priced on the finish area (FINISH_AREA_M2), rounded up to 100 zł. Concrete base, sports lines and transport are separate items.
  */
 export type EpdmVariant="standard"|"standard-plus"|"premium";
 export const EPDM_MATERIAL="EPDM";
@@ -43,14 +52,14 @@ export const EPDM_VARIANTS:Record<EpdmVariant,{label:string;netPerM2:number;desc
 export const EPDM_NOTES=["Zgodnie z PN-EN 14877. Układana na równym podłożu betonowym ze spadkami 0,5–1%.","Linie sportowe (farba PU), transport i przygotowanie podłoża wyceniamy osobno. Montaż w temperaturze 10–25°C, utwardzanie 24–72 h."];
 
 export function epdmNet(arenaModel:string|undefined,variant:EpdmVariant,modular?:unknown):number|null{
- const area=arenaModel&&!modular?CONCRETE_BASE_NET[arenaModel]?.areaM2:undefined;
+ const area=arenaModel&&!modular?FINISH_AREA_M2[arenaModel]:undefined;
  if(!area)return null;
  return Math.ceil(area*EPDM_VARIANTS[variant].netPerM2/100)*100;
 }
 
 /**
  * Modular sports tiles (PP interlocking, laid loose on the concrete base). Owner price list 14.11.2026, sale prices net.
- * Area per model from the owner's table (the tiled playing area, smaller than the concrete slab), rounded up to 100 zł.
+ * Priced on the finish area (FINISH_AREA_M2), rounded up to 100 zł.
  */
 export type TileVariant="standard"|"standard-plus"|"premium";
 export const TILES_MATERIAL="Moduły sportowe";
@@ -59,7 +68,6 @@ export const TILE_VARIANTS:Record<TileVariant,{label:string;netPerM2:number;desc
  "standard-plus":{label:"Standard+",netPerM2:325,description:"Płytki PP 18–19 mm, lepsza amortyzacja i odporność UV, więcej kolorów oznakowania."},
  "premium":{label:"Premium",netPerM2:400,description:"Płytki PP 19 mm+, wysoka amortyzacja, gwarancja 5–10 lat."},
 };
-export const TILE_AREA_M2:Record<string,number>={"w1":19.6,"o1":28.3,"p1":39.8,"street15":150,"circle-cage-1":25,"circle-cage-2":28,"street-field":28.9,"octagon":45};
 export const TILE_NOTES=["Cena obejmuje płytki, montaż, profile krawędziowe i podstawowe oznakowanie linii.","Płytki układamy luzem na płaskim betonie ze spadkami, bez klejenia. Podłoże betonowe wyceniamy osobno."];
 
 /** Internal quantity take-off only, never shown to the customer (owner 14.11.2026): 11 tiles per m² (30,5 × 30,5 cm,
@@ -69,14 +77,14 @@ export const TILE_SIZE_LABEL="30,5 × 30,5 cm";
 export function tileCount(area:number){return Math.ceil(Math.round(area*TILES_PER_M2*100)/100);}
 
 export function tilesNet(arenaModel:string|undefined,variant:TileVariant,modular?:unknown):number|null{
- const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ const area=arenaModel&&!modular?FINISH_AREA_M2[arenaModel]:undefined;
  if(!area)return null;
  return Math.ceil(area*TILE_VARIANTS[variant].netPerM2/100)*100;
 }
 
 /**
  * Artificial turf glued on the concrete base. Owner price list 14.11.2026, sale prices net.
- * Same playing area per model as the tiles (TILE_AREA_M2), rounded up to 100 zł.
+ * Finish area per model (FINISH_AREA_M2), rounded up to 100 zł.
  */
 export type TurfVariant="standard"|"standard-plus"|"premium";
 export const TURF_MATERIAL="Sztuczna trawa 60 mm";
@@ -88,14 +96,14 @@ export const TURF_VARIANTS:Record<TurfVariant,{label:string;netPerM2:number;desc
 export const TURF_NOTES=["Cena obejmuje trawę, montaż na betonie (klejenie pasów), podstawowy zasyp, szczotkowanie i podstawowe linie.","Podłoże betonowe wyceniamy osobno."];
 
 export function turfNet(arenaModel:string|undefined,variant:TurfVariant,modular?:unknown):number|null{
- const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ const area=arenaModel&&!modular?FINISH_AREA_M2[arenaModel]:undefined;
  if(!area)return null;
  return Math.ceil(Math.round(area*TURF_VARIANTS[variant].netPerM2*100)/10000)*100;
 }
 
 /**
  * Acrylic hard court system on the concrete base (owner price list 14.11.2026, sale prices net).
- * Separate material from painting. Playing area per model as tiles and turf, rounded up to 100 zł.
+ * Separate material from painting. Finish area per model (FINISH_AREA_M2), rounded up to 100 zł.
  */
 export type AcrylicVariant="standard"|"standard-plus"|"premium";
 export const ACRYLIC_MATERIAL="Akryl Hard Court";
@@ -107,14 +115,14 @@ export const ACRYLIC_VARIANTS:Record<AcrylicVariant,{label:string;netPerM2:numbe
 export const ACRYLIC_NOTES=["Cena obejmuje nawierzchnię akrylową na gotowym betonie i podstawowe linie.","Przygotowanie podłoża (frezowanie, naprawa pęknięć) i transport wyceniamy osobno."];
 
 export function acrylicNet(arenaModel:string|undefined,variant:AcrylicVariant,modular?:unknown):number|null{
- const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ const area=arenaModel&&!modular?FINISH_AREA_M2[arenaModel]:undefined;
  if(!area)return null;
  return Math.ceil(Math.round(area*ACRYLIC_VARIANTS[variant].netPerM2*100)/10000)*100;
 }
 
 /**
  * Stabilised modular rubber slabs SBR / EPDM, glued on the concrete base (owner price list 14.11.2026, sale prices net).
- * Separate material. Playing area per model as tiles and turf, rounded up to 100 zł.
+ * Separate material. Finish area per model (FINISH_AREA_M2), rounded up to 100 zł.
  */
 export type RubberVariant="standard"|"standard-plus"|"premium";
 export const RUBBER_MATERIAL="Płyty gumowe";
@@ -126,14 +134,14 @@ export const RUBBER_VARIANTS:Record<RubberVariant,{label:string;netPerM2:number;
 export const RUBBER_NOTES=["Cena obejmuje płyty, klejenie na betonie, profile krawędziowe i podstawowe linie.","Płyty wodoprzepuszczalne, antypoślizgowe (R11), z atestem PZH i zgodne z PN-EN 1177. Podłoże betonowe wyceniamy osobno."];
 
 export function rubberNet(arenaModel:string|undefined,variant:RubberVariant,modular?:unknown):number|null{
- const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ const area=arenaModel&&!modular?FINISH_AREA_M2[arenaModel]:undefined;
  if(!area)return null;
  return Math.ceil(Math.round(area*RUBBER_VARIANTS[variant].netPerM2*100)/10000)*100;
 }
 
 /**
  * Prefabricated rubber mats / rolls SBR / EPDM, glued with 2K PU adhesive on the concrete base
- * (owner price list 14.11.2026, sale prices net). Separate material. Playing area as tiles, rounded up to 100 zł.
+ * (owner price list 14.11.2026, sale prices net). Separate material. Finish area (FINISH_AREA_M2), rounded up to 100 zł.
  */
 export type MatVariant="standard"|"standard-plus"|"premium";
 export const MAT_MATERIAL="Maty gumowe";
@@ -145,7 +153,7 @@ export const MAT_VARIANTS:Record<MatVariant,{label:string;netPerM2:number;descri
 export const MAT_NOTES=["Grubość 10–20 mm, antypoślizg R11. Ciągła nawierzchnia z mniejszą liczbą spoin niż płyty 50 × 50 cm.","Cena obejmuje klejenie klejem PU na betonie, cięcie, profile krawędziowe i podstawowe linie. Podłoże betonowe wyceniamy osobno."];
 
 export function matNet(arenaModel:string|undefined,variant:MatVariant,modular?:unknown):number|null{
- const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ const area=arenaModel&&!modular?FINISH_AREA_M2[arenaModel]:undefined;
  if(!area)return null;
  return Math.ceil(Math.round(area*MAT_VARIANTS[variant].netPerM2*100)/10000)*100;
 }

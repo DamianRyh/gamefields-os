@@ -11,7 +11,7 @@ export type ProjectQuote={workingAssumptions?:boolean;constructionPrices?:Record
 import {projectPatternColors} from './pattern-library.ts';
 import {hasSurfaceAssets,surfaceAssetColors} from './plain-surface.ts';
 import {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
-import {PAINTED_MATERIAL,NO_FINISH_MATERIAL,PAINT_VARIANTS,autoPaintVariant,paintNet,type PaintVariant,EPDM_MATERIAL,EPDM_VARIANTS,epdmNet,type EpdmVariant,TILES_MATERIAL,TILE_VARIANTS,TILE_AREA_M2,tilesNet,type TileVariant,TURF_MATERIAL,TURF_VARIANTS,turfNet,type TurfVariant,ACRYLIC_MATERIAL,ACRYLIC_VARIANTS,acrylicNet,type AcrylicVariant,RUBBER_MATERIAL,RUBBER_VARIANTS,rubberNet,type RubberVariant,MAT_MATERIAL,MAT_VARIANTS,matNet,type MatVariant} from './surface-finish.ts';
+import {FINISH_AREA_M2,areaLabel,PAINTED_MATERIAL,NO_FINISH_MATERIAL,PAINT_VARIANTS,autoPaintVariant,paintNet,type PaintVariant,EPDM_MATERIAL,EPDM_VARIANTS,epdmNet,type EpdmVariant,TILES_MATERIAL,TILE_VARIANTS,tilesNet,type TileVariant,TURF_MATERIAL,TURF_VARIANTS,turfNet,type TurfVariant,ACRYLIC_MATERIAL,ACRYLIC_VARIANTS,acrylicNet,type AcrylicVariant,RUBBER_MATERIAL,RUBBER_VARIANTS,rubberNet,type RubberVariant,MAT_MATERIAL,MAT_VARIANTS,matNet,type MatVariant} from './surface-finish.ts';
 import {surfaceLabel} from './surface-materials.ts';
 import {CONCRETE_BASE_LABEL,CONCRETE_BASE_NET,CONCRETE_BASE_RATE_NET_PER_M2,concreteBaseNet} from './concrete-base.ts';
 export {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
@@ -60,31 +60,31 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
  }
  if(p.arenaModel){add("arena","Konstrukcja z bramkami",1,"kpl.",p.modular?undefined:c?.arenaNet[p.arenaModel],p.modular?"Konstrukcja modułowa wymaga wyceny z liczby komponentów.":"Cena modelu bazowego; obejmuje wbudowane bramki.");add("arena-installation","Montaż konstrukcji",1,"kpl.",p.modular?undefined:c?.arenaInstallationNet?.[p.arenaModel]);}
  if(p.arenaModel&&p.concreteBase!==false){const net=concreteBaseNet(p.arenaModel,p.modular);add("concrete-base",CONCRETE_BASE_LABEL,1,"kpl.",net??undefined,net===null?"Podłoże pod konstrukcję modułową wyceniamy indywidualnie.":`Około ${CONCRETE_BASE_NET[p.arenaModel].areaM2} m² (z zapasem 15%), ${CONCRETE_BASE_RATE_NET_PER_M2} zł/m² netto. Bez wykończenia.`);}
- if(p.arenaModel&&!p.modular&&CONCRETE_BASE_NET[p.arenaModel]){
+ if(p.arenaModel&&!p.modular&&FINISH_AREA_M2[p.arenaModel]){
   // Finish on the concrete base: painting priced from the owner list, other materials still individual.
   if(p.surface===PAINTED_MATERIAL){
    const own=projectPatternColors(p);const assets=hasSurfaceAssets(p);
    const colors=new Set((assets?[p.base,...surfaceAssetColors(p)]:[p.base,p.zone,own[0],own[2],own[3]]).filter((v):v is string=>typeof v==="string"&&/^#[0-9a-f]{6}$/i.test(v)).map(v=>v.toLowerCase())).size;
    const variant=p.paintVariant||autoPaintVariant({graphic:assets||p.graphicOpacity>0,colors,complexity,gradient:p.gradientEnabled});
-   add("paint",`Malowanie · ${PAINT_VARIANTS[variant].label}`,1,"kpl.",paintNet(p.arenaModel,variant)??undefined,`Około ${CONCRETE_BASE_NET[p.arenaModel].areaM2} m² × ${PAINT_VARIANTS[variant].netPerM2} zł/m² netto. ${PAINT_VARIANTS[variant].description}${p.paintVariant?"":" Wariant dobrany do projektu."}`);
+   add("paint",`Malowanie · ${PAINT_VARIANTS[variant].label}`,1,"kpl.",paintNet(p.arenaModel,variant)??undefined,`Około ${areaLabel(FINISH_AREA_M2[p.arenaModel])} m² × ${PAINT_VARIANTS[variant].netPerM2} zł/m² netto. ${PAINT_VARIANTS[variant].description}${p.paintVariant?"":" Wariant dobrany do projektu."}`);
   }else if(p.surface===EPDM_MATERIAL){
    const variant=p.epdmVariant||"standard";
-   add("epdm",`Nawierzchnia PU/EPDM · ${EPDM_VARIANTS[variant].label}`,1,"kpl.",epdmNet(p.arenaModel,variant)??undefined,`Około ${CONCRETE_BASE_NET[p.arenaModel].areaM2} m² × ${EPDM_VARIANTS[variant].netPerM2} zł/m² netto. ${EPDM_VARIANTS[variant].description}`);
-  }else if(p.surface===TILES_MATERIAL&&TILE_AREA_M2[p.arenaModel]){
+   add("epdm",`Nawierzchnia EPDM wylewana · ${EPDM_VARIANTS[variant].label}`,1,"kpl.",epdmNet(p.arenaModel,variant)??undefined,`Około ${areaLabel(FINISH_AREA_M2[p.arenaModel])} m² × ${EPDM_VARIANTS[variant].netPerM2} zł/m² netto. ${EPDM_VARIANTS[variant].description}`);
+  }else if(p.surface===TILES_MATERIAL&&FINISH_AREA_M2[p.arenaModel]){
    const variant=p.tileVariant||"standard";
-   add("tiles",`Płytki sportowe · ${TILE_VARIANTS[variant].label}`,1,"kpl.",tilesNet(p.arenaModel,variant)??undefined,`Około ${String(TILE_AREA_M2[p.arenaModel]).replace('.',',')} m² × ${TILE_VARIANTS[variant].netPerM2} zł/m² netto. ${TILE_VARIANTS[variant].description}`);
-  }else if(p.surface===TURF_MATERIAL&&TILE_AREA_M2[p.arenaModel]){
+   add("tiles",`Płytki sportowe PP · ${TILE_VARIANTS[variant].label}`,1,"kpl.",tilesNet(p.arenaModel,variant)??undefined,`Około ${areaLabel(FINISH_AREA_M2[p.arenaModel])} m² × ${TILE_VARIANTS[variant].netPerM2} zł/m² netto. ${TILE_VARIANTS[variant].description}`);
+  }else if(p.surface===TURF_MATERIAL&&FINISH_AREA_M2[p.arenaModel]){
    const variant=p.turfVariant||"standard";
-   add("turf",`Sztuczna trawa · ${TURF_VARIANTS[variant].label}`,1,"kpl.",turfNet(p.arenaModel,variant)??undefined,`Około ${String(TILE_AREA_M2[p.arenaModel]).replace('.',',')} m² × ${TURF_VARIANTS[variant].netPerM2} zł/m² netto. ${TURF_VARIANTS[variant].description}`);
-  }else if(p.surface===ACRYLIC_MATERIAL&&TILE_AREA_M2[p.arenaModel]){
+   add("turf",`Sztuczna trawa · ${TURF_VARIANTS[variant].label}`,1,"kpl.",turfNet(p.arenaModel,variant)??undefined,`Około ${areaLabel(FINISH_AREA_M2[p.arenaModel])} m² × ${TURF_VARIANTS[variant].netPerM2} zł/m² netto. ${TURF_VARIANTS[variant].description}`);
+  }else if(p.surface===ACRYLIC_MATERIAL&&FINISH_AREA_M2[p.arenaModel]){
    const variant=p.acrylicVariant||"standard";
-   add("acrylic",`Akryl Hard Court · ${ACRYLIC_VARIANTS[variant].label}`,1,"kpl.",acrylicNet(p.arenaModel,variant)??undefined,`Około ${String(TILE_AREA_M2[p.arenaModel]).replace('.',',')} m² × ${ACRYLIC_VARIANTS[variant].netPerM2} zł/m² netto. ${ACRYLIC_VARIANTS[variant].description}`);
-  }else if(p.surface===RUBBER_MATERIAL&&TILE_AREA_M2[p.arenaModel]){
+   add("acrylic",`Akryl Hard Court · ${ACRYLIC_VARIANTS[variant].label}`,1,"kpl.",acrylicNet(p.arenaModel,variant)??undefined,`Około ${areaLabel(FINISH_AREA_M2[p.arenaModel])} m² × ${ACRYLIC_VARIANTS[variant].netPerM2} zł/m² netto. ${ACRYLIC_VARIANTS[variant].description}`);
+  }else if(p.surface===RUBBER_MATERIAL&&FINISH_AREA_M2[p.arenaModel]){
    const variant=p.rubberVariant||"standard";
-   add("rubber",`Płyty gumowe · ${RUBBER_VARIANTS[variant].label}`,1,"kpl.",rubberNet(p.arenaModel,variant)??undefined,`Około ${String(TILE_AREA_M2[p.arenaModel]).replace('.',',')} m² × ${RUBBER_VARIANTS[variant].netPerM2} zł/m² netto. ${RUBBER_VARIANTS[variant].description}`);
-  }else if(p.surface===MAT_MATERIAL&&TILE_AREA_M2[p.arenaModel]){
+   add("rubber",`Płyty gumowe · ${RUBBER_VARIANTS[variant].label}`,1,"kpl.",rubberNet(p.arenaModel,variant)??undefined,`Około ${areaLabel(FINISH_AREA_M2[p.arenaModel])} m² × ${RUBBER_VARIANTS[variant].netPerM2} zł/m² netto. ${RUBBER_VARIANTS[variant].description}`);
+  }else if(p.surface===MAT_MATERIAL&&FINISH_AREA_M2[p.arenaModel]){
    const variant=p.matVariant||"standard";
-   add("mats",`Maty gumowe · ${MAT_VARIANTS[variant].label}`,1,"kpl.",matNet(p.arenaModel,variant)??undefined,`Około ${String(TILE_AREA_M2[p.arenaModel]).replace('.',',')} m² × ${MAT_VARIANTS[variant].netPerM2} zł/m² netto. ${MAT_VARIANTS[variant].description}`);
+   add("mats",`Maty gumowe · ${MAT_VARIANTS[variant].label}`,1,"kpl.",matNet(p.arenaModel,variant)??undefined,`Około ${areaLabel(FINISH_AREA_M2[p.arenaModel])} m² × ${MAT_VARIANTS[variant].netPerM2} zł/m² netto. ${MAT_VARIANTS[variant].description}`);
   }else if(p.surface!==NO_FINISH_MATERIAL)add("finish-surface",`Wykończenie · ${surfaceLabel(p.surface)}`,1,"kpl.",undefined,"Cenę tego wykończenia podamy indywidualnie.");
  }
  const equipment=new Map<string,number>(requiredSportEquipment(p).map(item=>[item.name,item.quantity]));let bundledGoals=p.arenaModel?2:0;

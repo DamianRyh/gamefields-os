@@ -30,7 +30,7 @@ try{
    if(arena==='p1'){
     await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Nawierzchnia/}).click();
     await page.locator('.gfsd').getByLabel(/: własny kolor$/).fill('#245e87');await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Materiał',exact:true}).click();
-    for(const [label,slug,surface] of [['Malowana','malowana','Akryl sportowy'],['Granulat','granulat-epdm','EPDM'],['Płytki modułowe','plytki-modulowe','Moduły sportowe'],['Sztuczna murawa','sztuczna-murawa','Sztuczna trawa 60 mm']]){
+    for(const [label,slug,surface] of [['Malowanie farbą sportową','malowana','Akryl sportowy'],['Nawierzchnia EPDM wylewana','granulat-epdm','EPDM'],['Płytki sportowe PP','plytki-modulowe','Moduły sportowe'],['Sztuczna trawa','sztuczna-murawa','Sztuczna trawa 60 mm']]){
      await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:label,exact:true}).click();
      console.log('Checking material',width,slug);
      await page.locator(`[data-model="p1"][data-surface="${slug}"][data-ready="true"]`).waitFor({timeout:90000});
@@ -41,7 +41,7 @@ try{
      assert.equal(exported.surface,surface);assert.equal(exported.base,'#245e87');assert.equal(exported.arenaModel,'p1');
      if(width===1440)await page.screenshot({animations:'disabled',path:`outputs/mobile/gamefields-p1-${slug}.jpg`,type:'jpeg',quality:85});
     }
-    await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:'Granulat',exact:true}).click();await ready();
+    await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:'Nawierzchnia EPDM wylewana',exact:true}).click();await ready();
     await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Wzór',exact:true}).click();
    }
    assert.equal(await page.getByLabel('Miejsce wizualizacji',{exact:true}).count(),0);

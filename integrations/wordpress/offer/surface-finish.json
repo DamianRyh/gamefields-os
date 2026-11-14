@@ -3,7 +3,7 @@
  "source": "Cennik właściciela 13.11.2026 (ceny sprzedaży)",
  "currency": "PLN",
  "vatRate": 0.23,
- "area": "Cała płyta betonowa modelu (ten sam metraż co nawierzchnia betonowa), cena zaokrąglona w górę do 100 zł",
+ "area": "Powierzchnia konstrukcji z modelu +10% zapasu (zasada właściciela 14.11.2026), cena zaokrąglona w górę do 100 zł",
  "variants": [
   {
    "id": "plain",
@@ -39,29 +39,51 @@
   {
    "id": "w1",
    "name": "Panna Ring",
-   "areaM2": 23,
+   "areaM2": 21.5,
    "net": {
-    "plain": 1800,
-    "plain-granulate": 2300,
-    "pattern": 3500,
-    "pattern-advanced": 4300
+    "plain": 1700,
+    "plain-granulate": 2200,
+    "pattern": 3300,
+    "pattern-advanced": 4000
    }
   },
   {
    "id": "o1",
    "name": "Panna Play",
-   "areaM2": 32,
+   "areaM2": 30.1,
    "net": {
-    "plain": 2500,
-    "plain-granulate": 3200,
-    "pattern": 4800,
-    "pattern-advanced": 5900
+    "plain": 2400,
+    "plain-granulate": 3100,
+    "pattern": 4600,
+    "pattern-advanced": 5600
    }
   },
   {
    "id": "street-field",
    "name": "Panna Grid",
-   "areaM2": 33,
+   "areaM2": 42.6,
+   "net": {
+    "plain": 3400,
+    "plain-granulate": 4300,
+    "pattern": 6400,
+    "pattern-advanced": 7800
+   }
+  },
+  {
+   "id": "circle-cage-1",
+   "name": "Panna Octa Cage 90",
+   "areaM2": 31.1,
+   "net": {
+    "plain": 2500,
+    "plain-granulate": 3200,
+    "pattern": 4700,
+    "pattern-advanced": 5700
+   }
+  },
+  {
+   "id": "octagon",
+   "name": "Panna Octa",
+   "areaM2": 32.8,
    "net": {
     "plain": 2600,
     "plain-granulate": 3300,
@@ -70,58 +92,36 @@
    }
   },
   {
-   "id": "circle-cage-1",
-   "name": "Panna Octa Cage 90",
-   "areaM2": 29,
-   "net": {
-    "plain": 2300,
-    "plain-granulate": 2900,
-    "pattern": 4400,
-    "pattern-advanced": 5400
-   }
-  },
-  {
-   "id": "octagon",
-   "name": "Panna Octa",
-   "areaM2": 52,
-   "net": {
-    "plain": 4100,
-    "plain-granulate": 5200,
-    "pattern": 7800,
-    "pattern-advanced": 9600
-   }
-  },
-  {
    "id": "circle-cage-2",
    "name": "Panna Octa Cage 180",
-   "areaM2": 32,
+   "areaM2": 31.1,
    "net": {
     "plain": 2500,
     "plain-granulate": 3200,
-    "pattern": 4800,
-    "pattern-advanced": 5900
+    "pattern": 4700,
+    "pattern-advanced": 5700
    }
   },
   {
    "id": "p1",
    "name": "Panna Court",
-   "areaM2": 46,
+   "areaM2": 43.2,
    "net": {
-    "plain": 3600,
-    "plain-granulate": 4600,
-    "pattern": 6900,
-    "pattern-advanced": 8500
+    "plain": 3400,
+    "plain-granulate": 4400,
+    "pattern": 6500,
+    "pattern-advanced": 8000
    }
   },
   {
    "id": "street15",
    "name": "Boisko 3 na 3",
-   "areaM2": 173,
+   "areaM2": 164.1,
    "net": {
-    "plain": 13500,
-    "plain-granulate": 17300,
-    "pattern": 26000,
-    "pattern-advanced": 31700
+    "plain": 12800,
+    "plain-granulate": 16500,
+    "pattern": 24700,
+    "pattern-advanced": 30100
    }
   }
  ],
@@ -159,89 +159,90 @@
    {
     "id": "w1",
     "name": "Panna Ring",
-    "areaM2": 23,
+    "areaM2": 21.5,
     "net": {
-     "standard": 5800,
-     "standard-plus": 7300,
-     "premium": 9200
+     "standard": 5400,
+     "standard-plus": 6900,
+     "premium": 8600
     }
    },
    {
     "id": "o1",
     "name": "Panna Play",
-    "areaM2": 32,
+    "areaM2": 30.1,
     "net": {
-     "standard": 8000,
-     "standard-plus": 10200,
-     "premium": 12800
+     "standard": 7600,
+     "standard-plus": 9600,
+     "premium": 12100
     }
    },
    {
     "id": "street-field",
     "name": "Panna Grid",
-    "areaM2": 33,
+    "areaM2": 42.6,
     "net": {
-     "standard": 8300,
-     "standard-plus": 10500,
-     "premium": 13200
+     "standard": 10700,
+     "standard-plus": 13600,
+     "premium": 17100
     }
    },
    {
     "id": "circle-cage-1",
     "name": "Panna Octa Cage 90",
-    "areaM2": 29,
+    "areaM2": 31.1,
     "net": {
-     "standard": 7300,
-     "standard-plus": 9200,
-     "premium": 11600
+     "standard": 7800,
+     "standard-plus": 9900,
+     "premium": 12500
     }
    },
    {
     "id": "octagon",
     "name": "Panna Octa",
-    "areaM2": 52,
+    "areaM2": 32.8,
     "net": {
-     "standard": 13000,
-     "standard-plus": 16500,
-     "premium": 20800
+     "standard": 8200,
+     "standard-plus": 10400,
+     "premium": 13200
     }
    },
    {
     "id": "circle-cage-2",
     "name": "Panna Octa Cage 180",
-    "areaM2": 32,
+    "areaM2": 31.1,
     "net": {
-     "standard": 8000,
-     "standard-plus": 10200,
-     "premium": 12800
+     "standard": 7800,
+     "standard-plus": 9900,
+     "premium": 12500
     }
    },
    {
     "id": "p1",
     "name": "Panna Court",
-    "areaM2": 46,
+    "areaM2": 43.2,
     "net": {
-     "standard": 11500,
-     "standard-plus": 14600,
-     "premium": 18400
+     "standard": 10800,
+     "standard-plus": 13700,
+     "premium": 17300
     }
    },
    {
     "id": "street15",
     "name": "Boisko 3 na 3",
-    "areaM2": 173,
+    "areaM2": 164.1,
     "net": {
-     "standard": 43300,
-     "standard-plus": 54900,
-     "premium": 69200
+     "standard": 41100,
+     "standard-plus": 52100,
+     "premium": 65700
     }
    }
-  ]
+  ],
+  "area": "Powierzchnia konstrukcji z modelu +10% zapasu (zasada właściciela 14.11.2026), cena zaokrąglona w górę do 100 zł"
  },
  "tiles": {
   "name": "Płytki modułowe sportowe (PP interlocking) na podłożu betonowym",
   "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
-  "area": "Pole gry modelu z tabeli właściciela, cena zaokrąglona w górę do 100 zł",
+  "area": "Powierzchnia konstrukcji z modelu +10% zapasu (zasada właściciela 14.11.2026), cena zaokrąglona w górę do 100 zł",
   "includes": [
    "Płytki, montaż, profile krawędziowe i rampy, podstawowe oznakowanie linii"
   ],
@@ -272,81 +273,81 @@
    {
     "id": "w1",
     "name": "Panna Ring",
-    "areaM2": 19.6,
+    "areaM2": 21.5,
     "net": {
-     "standard": 5400,
-     "standard-plus": 6400,
-     "premium": 7900
+     "standard": 6000,
+     "standard-plus": 7000,
+     "premium": 8600
     }
    },
    {
     "id": "o1",
     "name": "Panna Play",
-    "areaM2": 28.3,
+    "areaM2": 30.1,
     "net": {
-     "standard": 7800,
-     "standard-plus": 9200,
-     "premium": 11400
+     "standard": 8300,
+     "standard-plus": 9800,
+     "premium": 12100
     }
    },
    {
     "id": "p1",
     "name": "Panna Court",
-    "areaM2": 39.8,
+    "areaM2": 43.2,
     "net": {
-     "standard": 11000,
-     "standard-plus": 13000,
-     "premium": 16000
+     "standard": 11900,
+     "standard-plus": 14100,
+     "premium": 17300
     }
    },
    {
     "id": "street15",
     "name": "Boisko 3 na 3",
-    "areaM2": 150,
+    "areaM2": 164.1,
     "net": {
-     "standard": 41300,
-     "standard-plus": 48800,
-     "premium": 60000
+     "standard": 45200,
+     "standard-plus": 53400,
+     "premium": 65700
     }
    },
    {
     "id": "circle-cage-1",
     "name": "Panna Octa Cage 90",
-    "areaM2": 25,
+    "areaM2": 31.1,
     "net": {
-     "standard": 6900,
-     "standard-plus": 8200,
-     "premium": 10000
+     "standard": 8600,
+     "standard-plus": 10200,
+     "premium": 12500
     }
    },
    {
     "id": "circle-cage-2",
     "name": "Panna Octa Cage 180",
-    "areaM2": 28,
+    "areaM2": 31.1,
     "net": {
-     "standard": 7700,
-     "standard-plus": 9100,
-     "premium": 11200
+     "standard": 8600,
+     "standard-plus": 10200,
+     "premium": 12500
     }
    },
    {
     "id": "street-field",
     "name": "Panna Grid",
-    "areaM2": 28.9,
+    "areaM2": 42.6,
     "net": {
-     "standard": 8000,
-     "standard-plus": 9400,
-     "premium": 11600
+     "standard": 11800,
+     "standard-plus": 13900,
+     "premium": 17100
     }
    },
    {
     "id": "octagon",
     "name": "Panna Octa",
-    "areaM2": 45,
+    "areaM2": 32.8,
     "net": {
-     "standard": 12400,
-     "standard-plus": 14700,
-     "premium": 18000
+     "standard": 9100,
+     "standard-plus": 10700,
+     "premium": 13200
     }
    }
   ],
@@ -356,21 +357,21 @@
    "tileSize": "30,5 × 30,5 cm (typ Gerflor PowerGame+, 19 mm)",
    "orderWaste": "+5–8% na docinki i odpady przy zamówieniu",
    "tilesPerModel": {
-    "w1": 216,
-    "o1": 312,
-    "p1": 438,
-    "street15": 1650,
-    "circle-cage-1": 275,
-    "circle-cage-2": 308,
-    "street-field": 318,
-    "octagon": 495
+    "w1": 237,
+    "o1": 332,
+    "p1": 476,
+    "street15": 1806,
+    "circle-cage-1": 343,
+    "circle-cage-2": 343,
+    "street-field": 469,
+    "octagon": 361
    }
   }
  },
  "turf": {
   "name": "Sztuczna trawa na podłożu betonowym",
   "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
-  "area": "Pole gry modelu (jak płytki), cena zaokrąglona w górę do 100 zł",
+  "area": "Powierzchnia konstrukcji z modelu +10% zapasu (zasada właściciela 14.11.2026), cena zaokrąglona w górę do 100 zł",
   "includes": [
    "Trawa syntetyczna, montaż na betonie (klejenie pasów), podstawowy zasyp, szczotkowanie, podstawowe linie"
   ],
@@ -398,81 +399,81 @@
    {
     "id": "w1",
     "name": "Panna Ring",
-    "areaM2": 19.6,
+    "areaM2": 21.5,
     "net": {
-     "standard": 3300,
-     "standard-plus": 4500,
-     "premium": 5800
+     "standard": 3600,
+     "standard-plus": 4900,
+     "premium": 6300
     }
    },
    {
     "id": "o1",
     "name": "Panna Play",
-    "areaM2": 28.3,
+    "areaM2": 30.1,
     "net": {
-     "standard": 4800,
-     "standard-plus": 6400,
-     "premium": 8300
+     "standard": 5100,
+     "standard-plus": 6800,
+     "premium": 8800
     }
    },
    {
     "id": "p1",
     "name": "Panna Court",
-    "areaM2": 39.8,
+    "areaM2": 43.2,
     "net": {
-     "standard": 6700,
-     "standard-plus": 9000,
-     "premium": 11700
+     "standard": 7300,
+     "standard-plus": 9800,
+     "premium": 12700
     }
    },
    {
     "id": "street15",
     "name": "Boisko 3 na 3",
-    "areaM2": 150,
+    "areaM2": 164.1,
     "net": {
-     "standard": 25100,
-     "standard-plus": 33800,
-     "premium": 43800
+     "standard": 27500,
+     "standard-plus": 37000,
+     "premium": 48000
     }
    },
    {
     "id": "circle-cage-1",
     "name": "Panna Octa Cage 90",
-    "areaM2": 25,
+    "areaM2": 31.1,
     "net": {
-     "standard": 4200,
-     "standard-plus": 5700,
-     "premium": 7300
+     "standard": 5200,
+     "standard-plus": 7000,
+     "premium": 9100
     }
    },
    {
     "id": "circle-cage-2",
     "name": "Panna Octa Cage 180",
-    "areaM2": 28,
+    "areaM2": 31.1,
     "net": {
-     "standard": 4700,
-     "standard-plus": 6300,
-     "premium": 8200
+     "standard": 5200,
+     "standard-plus": 7000,
+     "premium": 9100
     }
    },
    {
     "id": "street-field",
     "name": "Panna Grid",
-    "areaM2": 28.9,
+    "areaM2": 42.6,
     "net": {
-     "standard": 4900,
-     "standard-plus": 6600,
-     "premium": 8500
+     "standard": 7200,
+     "standard-plus": 9600,
+     "premium": 12500
     }
    },
    {
     "id": "octagon",
     "name": "Panna Octa",
-    "areaM2": 45,
+    "areaM2": 32.8,
     "net": {
-     "standard": 7600,
-     "standard-plus": 10200,
-     "premium": 13200
+     "standard": 5500,
+     "standard-plus": 7400,
+     "premium": 9600
     }
    }
   ]
@@ -480,7 +481,7 @@
  "acrylic": {
   "name": "Nawierzchnia akrylowa Hard Court na podłożu betonowym",
   "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
-  "area": "Pole gry modelu (jak płytki i trawa), cena zaokrąglona w górę do 100 zł",
+  "area": "Powierzchnia konstrukcji z modelu +10% zapasu (zasada właściciela 14.11.2026), cena zaokrąglona w górę do 100 zł",
   "includes": [
    "Nawierzchnia akrylowa na gotowym betonie, podstawowe linie"
   ],
@@ -513,81 +514,81 @@
    {
     "id": "w1",
     "name": "Panna Ring",
-    "areaM2": 19.6,
+    "areaM2": 21.5,
     "net": {
-     "standard": 4000,
-     "standard-plus": 5300,
-     "premium": 6800
+     "standard": 4300,
+     "standard-plus": 5800,
+     "premium": 7400
     }
    },
    {
     "id": "o1",
     "name": "Panna Play",
-    "areaM2": 28.3,
+    "areaM2": 30.1,
     "net": {
-     "standard": 5700,
-     "standard-plus": 7600,
-     "premium": 9700
+     "standard": 6100,
+     "standard-plus": 8100,
+     "premium": 10300
     }
    },
    {
     "id": "p1",
     "name": "Panna Court",
-    "areaM2": 39.8,
+    "areaM2": 43.2,
     "net": {
-     "standard": 8000,
-     "standard-plus": 10700,
-     "premium": 13700
+     "standard": 8700,
+     "standard-plus": 11600,
+     "premium": 14800
     }
    },
    {
     "id": "street15",
     "name": "Boisko 3 na 3",
-    "areaM2": 150,
+    "areaM2": 164.1,
     "net": {
-     "standard": 30000,
-     "standard-plus": 40100,
-     "premium": 51300
+     "standard": 32900,
+     "standard-plus": 43900,
+     "premium": 56200
     }
    },
    {
     "id": "circle-cage-1",
     "name": "Panna Octa Cage 90",
-    "areaM2": 25,
+    "areaM2": 31.1,
     "net": {
-     "standard": 5000,
-     "standard-plus": 6700,
-     "premium": 8600
+     "standard": 6300,
+     "standard-plus": 8400,
+     "premium": 10700
     }
    },
    {
     "id": "circle-cage-2",
     "name": "Panna Octa Cage 180",
-    "areaM2": 28,
+    "areaM2": 31.1,
     "net": {
-     "standard": 5600,
-     "standard-plus": 7500,
-     "premium": 9600
+     "standard": 6300,
+     "standard-plus": 8400,
+     "premium": 10700
     }
    },
    {
     "id": "street-field",
     "name": "Panna Grid",
-    "areaM2": 28.9,
+    "areaM2": 42.6,
     "net": {
-     "standard": 5800,
-     "standard-plus": 7800,
-     "premium": 9900
+     "standard": 8600,
+     "standard-plus": 11400,
+     "premium": 14600
     }
    },
    {
     "id": "octagon",
     "name": "Panna Octa",
-    "areaM2": 45,
+    "areaM2": 32.8,
     "net": {
-     "standard": 9000,
-     "standard-plus": 12100,
-     "premium": 15400
+     "standard": 6600,
+     "standard-plus": 8800,
+     "premium": 11300
     }
    }
   ]
@@ -595,7 +596,7 @@
  "rubber": {
   "name": "Stabilizowane płyty gumowe SBR / EPDM na podłożu betonowym",
   "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
-  "area": "Pole gry modelu (jak płytki i trawa), cena zaokrąglona w górę do 100 zł",
+  "area": "Powierzchnia konstrukcji z modelu +10% zapasu (zasada właściciela 14.11.2026), cena zaokrąglona w górę do 100 zł",
   "includes": [
    "Płyty 50 × 50 cm, klejenie na betonie, profile krawędziowe, podstawowe linie"
   ],
@@ -632,81 +633,81 @@
    {
     "id": "w1",
     "name": "Panna Ring",
-    "areaM2": 19.6,
+    "areaM2": 21.5,
     "net": {
-     "standard": 6800,
-     "standard-plus": 7900,
-     "premium": 9700
+     "standard": 7400,
+     "standard-plus": 8600,
+     "premium": 10600
     }
    },
    {
     "id": "o1",
     "name": "Panna Play",
-    "areaM2": 28.3,
+    "areaM2": 30.1,
     "net": {
-     "standard": 9700,
-     "standard-plus": 11400,
-     "premium": 14000
+     "standard": 10300,
+     "standard-plus": 12100,
+     "premium": 14900
     }
    },
    {
     "id": "p1",
     "name": "Panna Court",
-    "areaM2": 39.8,
+    "areaM2": 43.2,
     "net": {
-     "standard": 13700,
-     "standard-plus": 16000,
-     "premium": 19600
+     "standard": 14800,
+     "standard-plus": 17300,
+     "premium": 21300
     }
    },
    {
     "id": "street15",
     "name": "Boisko 3 na 3",
-    "areaM2": 150,
+    "areaM2": 164.1,
     "net": {
-     "standard": 51300,
-     "standard-plus": 60000,
-     "premium": 73800
+     "standard": 56200,
+     "standard-plus": 65700,
+     "premium": 80800
     }
    },
    {
     "id": "circle-cage-1",
     "name": "Panna Octa Cage 90",
-    "areaM2": 25,
+    "areaM2": 31.1,
     "net": {
-     "standard": 8600,
-     "standard-plus": 10000,
-     "premium": 12300
+     "standard": 10700,
+     "standard-plus": 12500,
+     "premium": 15400
     }
    },
    {
     "id": "circle-cage-2",
     "name": "Panna Octa Cage 180",
-    "areaM2": 28,
+    "areaM2": 31.1,
     "net": {
-     "standard": 9600,
-     "standard-plus": 11200,
-     "premium": 13800
+     "standard": 10700,
+     "standard-plus": 12500,
+     "premium": 15400
     }
    },
    {
     "id": "street-field",
     "name": "Panna Grid",
-    "areaM2": 28.9,
+    "areaM2": 42.6,
     "net": {
-     "standard": 9900,
-     "standard-plus": 11600,
-     "premium": 14300
+     "standard": 14600,
+     "standard-plus": 17100,
+     "premium": 21000
     }
    },
    {
     "id": "octagon",
     "name": "Panna Octa",
-    "areaM2": 45,
+    "areaM2": 32.8,
     "net": {
-     "standard": 15400,
-     "standard-plus": 18000,
-     "premium": 22200
+     "standard": 11300,
+     "standard-plus": 13200,
+     "premium": 16200
     }
    }
   ]
@@ -714,7 +715,7 @@
  "mats": {
   "name": "Prefabrykowane maty / role gumowe SBR / EPDM na podłożu betonowym",
   "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
-  "area": "Pole gry modelu (jak płytki i trawa), cena zaokrąglona w górę do 100 zł",
+  "area": "Powierzchnia konstrukcji z modelu +10% zapasu (zasada właściciela 14.11.2026), cena zaokrąglona w górę do 100 zł",
   "includes": [
    "Klejenie klejem PU na betonie, cięcie, profile krawędziowe, podstawowe linie"
   ],
@@ -747,81 +748,81 @@
    {
     "id": "w1",
     "name": "Panna Ring",
-    "areaM2": 19.6,
+    "areaM2": 21.5,
     "net": {
-     "standard": 4800,
-     "standard-plus": 6300,
-     "premium": 8400
+     "standard": 5300,
+     "standard-plus": 6900,
+     "premium": 9200
     }
    },
    {
     "id": "o1",
     "name": "Panna Play",
-    "areaM2": 28.3,
+    "areaM2": 30.1,
     "net": {
-     "standard": 6900,
-     "standard-plus": 9000,
-     "premium": 12100
+     "standard": 7300,
+     "standard-plus": 9600,
+     "premium": 12800
     }
    },
    {
     "id": "p1",
     "name": "Panna Court",
-    "areaM2": 39.8,
+    "areaM2": 43.2,
     "net": {
-     "standard": 9700,
-     "standard-plus": 12700,
-     "premium": 17000
+     "standard": 10500,
+     "standard-plus": 13700,
+     "premium": 18400
     }
    },
    {
     "id": "street15",
     "name": "Boisko 3 na 3",
-    "areaM2": 150,
+    "areaM2": 164.1,
     "net": {
-     "standard": 36300,
-     "standard-plus": 47600,
-     "premium": 63800
+     "standard": 39800,
+     "standard-plus": 52100,
+     "premium": 69800
     }
    },
    {
     "id": "circle-cage-1",
     "name": "Panna Octa Cage 90",
-    "areaM2": 25,
+    "areaM2": 31.1,
     "net": {
-     "standard": 6100,
-     "standard-plus": 8000,
-     "premium": 10700
+     "standard": 7600,
+     "standard-plus": 9900,
+     "premium": 13300
     }
    },
    {
     "id": "circle-cage-2",
     "name": "Panna Octa Cage 180",
-    "areaM2": 28,
+    "areaM2": 31.1,
     "net": {
-     "standard": 6800,
-     "standard-plus": 8900,
-     "premium": 11900
+     "standard": 7600,
+     "standard-plus": 9900,
+     "premium": 13300
     }
    },
    {
     "id": "street-field",
     "name": "Panna Grid",
-    "areaM2": 28.9,
+    "areaM2": 42.6,
     "net": {
-     "standard": 7000,
-     "standard-plus": 9200,
-     "premium": 12300
+     "standard": 10400,
+     "standard-plus": 13600,
+     "premium": 18200
     }
    },
    {
     "id": "octagon",
     "name": "Panna Octa",
-    "areaM2": 45,
+    "areaM2": 32.8,
     "net": {
-     "standard": 10900,
-     "standard-plus": 14300,
-     "premium": 19200
+     "standard": 8000,
+     "standard-plus": 10400,
+     "premium": 14000
     }
    }
   ]

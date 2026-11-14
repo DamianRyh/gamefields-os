@@ -61,16 +61,16 @@ import {surfaceFinish} from '../lib/price-range.ts';
 const paintSite=JSON.parse(readFileSync(new URL('../../../wordpress/offer/surface-finish.json',import.meta.url),'utf8'));
 for(const v of paintSite.variants)assert.equal(PAINT_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
 for(const m of paintSite.models)for(const [v,net] of Object.entries(m.net))assert.equal(paintNet(m.id,v),net,`${m.name} ${v}`);
-assert.deepEqual(['plain','plain-granulate','pattern','pattern-advanced'].map(v=>paintNet('o1',v)),[2500,3200,4800,5900]);
-assert.equal(paintNet('street15','plain'),13500);
+assert.deepEqual(['plain','plain-granulate','pattern','pattern-advanced'].map(v=>paintNet('o1',v)),[2400,3100,4600,5600]);
+assert.equal(paintNet('street15','plain'),12800);
 assert.equal(autoPaintVariant({graphic:false,colors:1,complexity:1}),'plain');
 assert.equal(autoPaintVariant({graphic:true,colors:5,complexity:2}),'pattern');
 assert.equal(autoPaintVariant({graphic:true,colors:7,complexity:1}),'pattern-advanced');
 assert.equal(autoPaintVariant({graphic:true,colors:3,complexity:3}),'pattern-advanced');
 assert.equal(autoPaintVariant({graphic:true,colors:3,complexity:1,gradient:true}),'pattern-advanced');
 const painted=calculateProjectQuote({...play,surface:'Akryl sportowy',graphicOpacity:0,base:'#1d5147',zone:'#1d5147'},null,1);
-assert.deepEqual(surfaceFinish(painted),{label:'Malowanie · Jednokolorowa',net:2500,note:surfaceFinish(painted).note});
-assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'pattern'},null,1)).net,4800,'customer choice wins');
+assert.deepEqual(surfaceFinish(painted),{label:'Malowanie · Jednokolorowa',net:2400,note:surfaceFinish(painted).note});
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'pattern'},null,1)).net,4600,'customer choice wins');
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Piasek sportowy'},null,1)).net,null,'other materials stay individual');
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Beton sportowy'},null,1)),null,'bare concrete has no finish');
 console.log('PASS: painting priced per model and variant from the owner list, matches the website file, auto variant from the design, other finishes individual.');
@@ -79,65 +79,72 @@ console.log('PASS: painting priced per model and variant from the owner list, ma
 import {EPDM_VARIANTS,epdmNet} from '../lib/surface-finish.ts';
 for(const v of paintSite.epdm.variants)assert.equal(EPDM_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
 for(const m of paintSite.epdm.models)for(const [v,net] of Object.entries(m.net))assert.equal(epdmNet(m.id,v),net,`${m.name} ${v}`);
-assert.deepEqual(['standard','standard-plus','premium'].map(v=>epdmNet('o1',v)),[8000,10200,12800]);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>epdmNet('o1',v)),[7600,9600,12100]);
 const epdm=surfaceFinish(calculateProjectQuote({...play,surface:'EPDM'},null,1));
-assert.equal(epdm.label,'Nawierzchnia PU/EPDM · Standard (natrysk)');assert.equal(epdm.net,8000);
-assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'EPDM',epdmVariant:'premium'},null,1)).net,12800);
+assert.equal(epdm.label,'Nawierzchnia EPDM wylewana · Standard (natrysk)');assert.equal(epdm.net,7600);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'EPDM',epdmVariant:'premium'},null,1)).net,12100);
 console.log('PASS: PU/EPDM priced per model and variant from the owner list, matches the website file, Standard by default.');
 
 // Sports tiles (owner price list 14.11.2026): owner's tiled area per model, Standard by default.
 import {TILE_VARIANTS,tilesNet} from '../lib/surface-finish.ts';
 for(const v of paintSite.tiles.variants)assert.equal(TILE_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
 for(const m of paintSite.tiles.models)for(const [v,net] of Object.entries(m.net))assert.equal(tilesNet(m.id,v),net,`${m.name} ${v}`);
-assert.deepEqual(['standard','standard-plus','premium'].map(v=>tilesNet('o1',v)),[7800,9200,11400]);
-assert.equal(tilesNet('street15','standard'),41300);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>tilesNet('o1',v)),[8300,9800,12100]);
+assert.equal(tilesNet('street15','standard'),45200);
 const tiles=surfaceFinish(calculateProjectQuote({...play,surface:'Moduły sportowe'},null,1));
-assert.equal(tiles.label,'Płytki sportowe · Standard');assert.equal(tiles.net,7800);
-assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Moduły sportowe',tileVariant:'premium'},null,1)).net,11400);
+assert.equal(tiles.label,'Płytki sportowe PP · Standard');assert.equal(tiles.net,8300);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Moduły sportowe',tileVariant:'premium'},null,1)).net,12100);
 import {tileCount} from '../lib/surface-finish.ts';
 for(const m of paintSite.tiles.models)assert.equal(tileCount(m.areaM2),paintSite.tiles.internalTakeOff.tilesPerModel[m.id],`${m.name} tiles`);
-assert.equal(tileCount(150),1650);assert.doesNotMatch(tiles.note,/płytek/,'tile count is internal');assert.match(tiles.note,/Około 28,3 m²/);
+assert.equal(tileCount(150),1650);assert.doesNotMatch(tiles.note,/płytek/,'tile count is internal');assert.match(tiles.note,/Około 30,1 m²/);
 console.log('PASS: sports tiles priced per model and variant from the owner list, matches the website file, Standard by default.');
 
 // Artificial turf (owner price list 14.11.2026): playing area as tiles, Standard by default.
 import {TURF_VARIANTS,turfNet} from '../lib/surface-finish.ts';
 for(const v of paintSite.turf.variants)assert.equal(TURF_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
 for(const m of paintSite.turf.models)for(const [v,net] of Object.entries(m.net))assert.equal(turfNet(m.id,v),net,`${m.name} ${v}`);
-assert.deepEqual(['standard','standard-plus','premium'].map(v=>turfNet('o1',v)),[4800,6400,8300]);
-assert.equal(turfNet('street15','standard'),25100);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>turfNet('o1',v)),[5100,6800,8800]);
+assert.equal(turfNet('street15','standard'),27500);
 const turf=surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 60 mm'},null,1));
-assert.equal(turf.label,'Sztuczna trawa · Standard');assert.equal(turf.net,4800);
-assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 60 mm',turfVariant:'premium'},null,1)).net,8300);
+assert.equal(turf.label,'Sztuczna trawa · Standard');assert.equal(turf.net,5100);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 60 mm',turfVariant:'premium'},null,1)).net,8800);
 console.log('PASS: artificial turf priced per model and variant from the owner list, matches the website file, Standard by default.');
 
 // Acrylic hard court (owner price list 14.11.2026): separate material, playing area, Standard by default.
 import {ACRYLIC_VARIANTS,acrylicNet} from '../lib/surface-finish.ts';
 for(const v of paintSite.acrylic.variants)assert.equal(ACRYLIC_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
 for(const m of paintSite.acrylic.models)for(const [v,net] of Object.entries(m.net))assert.equal(acrylicNet(m.id,v),net,`${m.name} ${v}`);
-assert.deepEqual(['standard','standard-plus','premium'].map(v=>acrylicNet('o1',v)),[5700,7600,9700]);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>acrylicNet('o1',v)),[6100,8100,10300]);
 const acrylic=surfaceFinish(calculateProjectQuote({...play,surface:'Akryl Hard Court'},null,1));
-assert.equal(acrylic.label,'Akryl Hard Court · Standard (Hard Court)');assert.equal(acrylic.net,5700);
-assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl Hard Court',acrylicVariant:'premium'},null,1)).net,9700);
-assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'plain'},null,1)).net,2500,'painting unchanged');
+assert.equal(acrylic.label,'Akryl Hard Court · Standard (Hard Court)');assert.equal(acrylic.net,6100);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl Hard Court',acrylicVariant:'premium'},null,1)).net,10300);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'plain'},null,1)).net,2400,'painting unchanged');
 console.log('PASS: acrylic hard court priced per model and variant from the owner list, matches the website file, separate from painting.');
 
 // Rubber slabs SBR / EPDM (owner price list 14.11.2026): separate material, playing area, Standard by default.
 import {RUBBER_VARIANTS,rubberNet} from '../lib/surface-finish.ts';
 for(const v of paintSite.rubber.variants)assert.equal(RUBBER_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
 for(const m of paintSite.rubber.models)for(const [v,net] of Object.entries(m.net))assert.equal(rubberNet(m.id,v),net,`${m.name} ${v}`);
-assert.deepEqual(['standard','standard-plus','premium'].map(v=>rubberNet('o1',v)),[9700,11400,14000]);
-assert.equal(rubberNet('p1','standard'),13700);assert.equal(rubberNet('street15','standard'),51300);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>rubberNet('o1',v)),[10300,12100,14900]);
+assert.equal(rubberNet('p1','standard'),14800);assert.equal(rubberNet('street15','standard'),56200);
 const rubber=surfaceFinish(calculateProjectQuote({...play,surface:'Płyty gumowe'},null,1));
-assert.equal(rubber.label,'Płyty gumowe · Standard (SBR 40 mm)');assert.equal(rubber.net,9700);
-assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Płyty gumowe',rubberVariant:'premium'},null,1)).net,14000);
+assert.equal(rubber.label,'Płyty gumowe · Standard (SBR 40 mm)');assert.equal(rubber.net,10300);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Płyty gumowe',rubberVariant:'premium'},null,1)).net,14900);
 console.log('PASS: rubber slabs priced per model and variant from the owner list, matches the website file, separate material.');
 
 // Rubber mats / rolls (owner price list 14.11.2026): separate material, playing area, Standard by default.
 import {MAT_VARIANTS,matNet} from '../lib/surface-finish.ts';
 for(const v of paintSite.mats.variants)assert.equal(MAT_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
 for(const m of paintSite.mats.models)for(const [v,net] of Object.entries(m.net))assert.equal(matNet(m.id,v),net,`${m.name} ${v}`);
-assert.deepEqual(['standard','standard-plus','premium'].map(v=>matNet('o1',v)),[6900,9000,12100]);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>matNet('o1',v)),[7300,9600,12800]);
 const mats=surfaceFinish(calculateProjectQuote({...play,surface:'Maty gumowe'},null,1));
-assert.equal(mats.label,'Maty gumowe · Standard');assert.equal(mats.net,6900);
-assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Maty gumowe',matVariant:'premium'},null,1)).net,12100);
+assert.equal(mats.label,'Maty gumowe · Standard');assert.equal(mats.net,7300);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Maty gumowe',matVariant:'premium'},null,1)).net,12800);
 console.log('PASS: rubber mats priced per model and variant from the owner list, matches the website file, separate material.');
+
+// Owner rule 14.11.2026: every finish on the construction area from the model +10%, same for all shapes.
+import {FINISH_AREA_M2} from '../lib/surface-finish.ts';
+import {arenaSurfaceQuantities} from '../lib/arena-geometry-data.mjs';
+for(const [id,q] of Object.entries(arenaSurfaceQuantities))assert.equal(FINISH_AREA_M2[id],Math.round(q.area*1.1*10)/10,id);
+assert.equal(FINISH_AREA_M2.o1,30.1);assert.equal(FINISH_AREA_M2.street15,164.1);
+console.log('PASS: one finish area per model (construction area +10%) for every material.');
