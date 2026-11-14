@@ -59,7 +59,7 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
   add("decorative-lines",`Linie dekoracyjne · ${name}`,1,"kpl.",undefined,"Wykonanie dekoracyjnych linii wymaga indywidualnej wyceny. Nie jest ujęte w cenie standardowych linii sportowych ani grafiki nawierzchni.");
  }
  if(p.arenaModel){add("arena","Konstrukcja z bramkami",1,"kpl.",p.modular?undefined:c?.arenaNet[p.arenaModel],p.modular?"Konstrukcja modułowa wymaga wyceny z liczby komponentów.":"Cena modelu bazowego; obejmuje wbudowane bramki.");add("arena-installation","Montaż konstrukcji",1,"kpl.",p.modular?undefined:c?.arenaInstallationNet?.[p.arenaModel]);}
- if(p.arenaModel&&p.concreteBase!==false){const net=concreteBaseNet(p.arenaModel,p.modular);add("concrete-base",CONCRETE_BASE_LABEL,1,"kpl.",net??undefined,net===null?"Podłoże pod konstrukcję modułową wyceniamy indywidualnie.":`Około ${CONCRETE_BASE_NET[p.arenaModel].areaM2} m² (z zapasem 15%), ${CONCRETE_BASE_RATE_NET_PER_M2} zł/m² netto. Bez wykończenia.`);}
+ if(p.arenaModel&&p.concreteBase!==false){const net=concreteBaseNet(p.arenaModel,p.modular);add("concrete-base",CONCRETE_BASE_LABEL,1,"kpl.",net??undefined,net===null?"Podłoże pod konstrukcję modułową wyceniamy indywidualnie.":`Około ${areaLabel(CONCRETE_BASE_NET[p.arenaModel].areaM2)} m² (powierzchnia konstrukcji +10%), ${CONCRETE_BASE_RATE_NET_PER_M2} zł/m² netto. Bez wykończenia.`);}
  if(p.arenaModel&&!p.modular&&FINISH_AREA_M2[p.arenaModel]){
   // Finish on the concrete base: painting priced from the owner list, other materials still individual.
   if(p.surface===PAINTED_MATERIAL){

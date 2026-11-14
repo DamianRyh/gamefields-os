@@ -1,6 +1,6 @@
 {
  "name": "Nawierzchnia betonowa bez wykończenia",
- "source": "Cennik właściciela 13.11.2026 (ceny sprzedaży)",
+ "source": "Cennik właściciela 13.11.2026 (283 zł/m², ceny sprzedaży); metraż: powierzchnia konstrukcji z modelu +10% (zasada 14.11.2026), zaokrąglenie w górę do 100 zł",
  "currency": "PLN",
  "vatRate": 0.23,
  "rateNetPerM2": 283,
@@ -10,7 +10,7 @@
   "Płyta betonowa 12 cm (C20/25) ze spadkami i dylatacjami",
   "Siatka zbrojeniowa",
   "Powierzchnia gotowa pod wykończenie: malowanie, płytki, trawa, EPDM",
-  "Zapas powierzchni +15% względem konstrukcji"
+  "Zapas powierzchni +10% względem konstrukcji"
  ],
  "excludes": [
   "Wykończenie nawierzchni (malowanie, płytki, trawa, EPDM)",
@@ -23,65 +23,65 @@
    "id": "w1",
    "name": "Panna Ring",
    "code": "GF-CT-001",
-   "areaM2": 23,
-   "net": 6500,
-   "gross": 7995
+   "areaM2": 21.5,
+   "net": 6100,
+   "gross": 7503
   },
   {
    "id": "o1",
    "name": "Panna Play",
    "code": "GF-CT-002",
-   "areaM2": 32,
-   "net": 9100,
-   "gross": 11193
+   "areaM2": 30.1,
+   "net": 8600,
+   "gross": 10578
   },
   {
    "id": "street-field",
    "name": "Panna Grid",
    "code": "GF-CT-007",
-   "areaM2": 33,
-   "net": 9400,
-   "gross": 11562
+   "areaM2": 42.6,
+   "net": 12100,
+   "gross": 14883
   },
   {
    "id": "circle-cage-1",
    "name": "Panna Octa Cage 90",
    "code": "GF-CT-005",
-   "areaM2": 29,
-   "net": 8100,
-   "gross": 9963
+   "areaM2": 31.1,
+   "net": 8900,
+   "gross": 10947
   },
   {
    "id": "octagon",
    "name": "Panna Octa",
    "code": "GF-CT-008",
-   "areaM2": 52,
-   "net": 14600,
-   "gross": 17958
+   "areaM2": 32.8,
+   "net": 9300,
+   "gross": 11439
   },
   {
    "id": "circle-cage-2",
    "name": "Panna Octa Cage 180",
    "code": "GF-CT-006",
-   "areaM2": 32,
-   "net": 9100,
-   "gross": 11193
+   "areaM2": 31.1,
+   "net": 8900,
+   "gross": 10947
   },
   {
    "id": "p1",
    "name": "Panna Court",
    "code": "GF-CT-003",
-   "areaM2": 46,
-   "net": 13000,
-   "gross": 15990
+   "areaM2": 43.2,
+   "net": 12300,
+   "gross": 15129
   },
   {
    "id": "street15",
    "name": "Boisko 3 na 3",
    "code": "GF-CT-004",
-   "areaM2": 173,
-   "net": 48800,
-   "gross": 60024
+   "areaM2": 164.1,
+   "net": 46500,
+   "gross": 57195
   }
  ]
 }

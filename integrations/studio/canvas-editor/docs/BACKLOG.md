@@ -1,7 +1,7 @@
 ## Studio — dalsza czytelność, 2026-11-14
 
-- [ ] Lista materiałów zamiast karuzeli (miniatura, nazwa, „od … zł”, jedno zdanie „dla kogo”).
-- [ ] Cena konstrukcji na kartach modeli.
+- [x] Lista materiałów zamiast karuzeli (miniatura, nazwa, „od … zł”, jedno zdanie „dla kogo”).
+- [x] Cena konstrukcji na kartach modeli.
 - [ ] Porównanie wykończeń w podsumowaniu („ta sama arena z innym wykończeniem”).
 - [ ] Zdjęcia makro: akryl Hard Court, płyty gumowe, maty gumowe.
 - [ ] Odświeżyć testy `cage90-browser`, `cage180-browser`, `studio-realism`, `studio-visual-browser`.

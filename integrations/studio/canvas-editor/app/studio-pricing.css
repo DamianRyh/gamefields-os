@@ -20,3 +20,15 @@
 .studio-quote-badge-short{display:none}
 @media(max-width:800px){html body .studio-shell.studio-canvas-editor .studio-quote-badge .studio-quote-badge-short{display:block;font-size:11px;font-weight:600;line-height:1.2;opacity:.9;font-variant-numeric:tabular-nums;white-space:nowrap}}
 html body .studio-shell .gfmp .gfmp-card[aria-pressed=true] .gfmp-tags i{background:#ffffff2e!important;color:#fff!important}
+.studio-material-list{list-style:none;margin:8px 0 12px;padding:0;display:grid;gap:8px}
+.studio-material-list button{width:100%;display:flex;gap:12px;align-items:center;text-align:left;padding:8px;border:1px solid #e3dbe2;border-radius:14px;background:#fff;color:#47132d;cursor:pointer;position:relative;min-height:72px}
+.studio-material-list button[aria-pressed=true]{border-color:#6336f5;box-shadow:inset 0 0 0 1px #6336f5;background:#f7f4ff}
+.studio-material-thumb{flex:none;width:64px;height:64px;border-radius:10px;overflow:hidden;background:#eee}
+.studio-material-thumb img,.studio-material-thumb svg{width:100%;height:100%;object-fit:cover;display:block}
+.studio-material-copy{display:grid;gap:2px;min-width:0;padding-right:22px}
+.studio-material-copy b{font-size:15px;line-height:1.25}
+.studio-material-copy .studio-option-price{font-size:13px;font-weight:650;color:#6336f5}
+.studio-material-copy small{font-size:12.5px;line-height:1.4;color:#6a5363}
+.studio-material-check{position:absolute;right:10px;top:10px;width:22px;height:22px;border-radius:50%;background:#6336f5;color:#fff;font-size:13px;display:grid;place-items:center}
+.gfmp .gfmp-price{display:block;font-size:12.5px;font-weight:700;color:#6336f5;margin:1px 0 2px}
+html body .studio-shell .gfmp .gfmp-card[aria-pressed=true] .gfmp-price{color:#cdbfff}
