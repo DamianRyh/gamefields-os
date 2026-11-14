@@ -2,8 +2,9 @@
 
 - [x] Lista materiałów zamiast karuzeli (miniatura, nazwa, „od … zł”, jedno zdanie „dla kogo”).
 - [x] Cena konstrukcji na kartach modeli.
-- [ ] Porównanie wykończeń w podsumowaniu („ta sama arena z innym wykończeniem”).
-- [ ] Zdjęcia makro: akryl Hard Court, płyty gumowe, maty gumowe.
+- [x] Porównanie wykończeń w podsumowaniu („ta sama arena z innym wykończeniem”).
+- [x] Ilustracje makro: akryl Hard Court, płyty gumowe, maty gumowe (wygenerowane).
+- [ ] Prawdziwe zdjęcia materiałów (od właściciela lub z otwartą licencją) w miejsce ilustracji.
 - [ ] Odświeżyć testy `cage90-browser`, `cage180-browser`, `studio-realism`, `studio-visual-browser`.
 
 ## Studio — wykończenia nawierzchni na podłożu betonowym, 2026-11-13
