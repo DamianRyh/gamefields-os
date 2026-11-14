@@ -1,7 +1,7 @@
 "use client";
 import type {QuoteState} from "@/hooks/use-project-quote";
 import {PRICE_MODE,concreteBasePrice,constructionPrice,formatPriceRange,priceRange,surfaceFinish} from "@/lib/price-range";
-import {EPDM_NOTES,PAINT_NOTES,TILE_NOTES} from "@/lib/surface-finish";
+import {EPDM_NOTES,PAINT_NOTES,TILE_NOTES,TURF_NOTES} from "@/lib/surface-finish";
 import {CONCRETE_BASE_EXCLUDES,CONCRETE_BASE_INCLUDES} from "@/lib/concrete-base";
 
 const money=(value:number)=>new Intl.NumberFormat("pl-PL",{style:"currency",currency:"PLN",maximumFractionDigits:0}).format(value);
@@ -44,7 +44,7 @@ export function ProjectQuote({quote,title,label="Cena orientacyjna projektu",hea
     </dl>
     <p className="studio-quote-sum">Razem: <strong>{money(total)}</strong> netto{f&&f.net===null?" + wykończenie do wyceny":""}</p>
     {b!==null?<details className="studio-quote-scope"><summary>Co obejmuje nawierzchnia betonowa</summary><ul>{CONCRETE_BASE_INCLUDES.map(t=><li key={t}>{t}</li>)}</ul><p>Nie obejmuje:</p><ul>{CONCRETE_BASE_EXCLUDES.map(t=><li key={t}>{t}</li>)}</ul></details>:null}
-    {f?.net!=null?<p className="studio-quote-range-note">{f.label.startsWith("Nawierzchnia PU/EPDM")?EPDM_NOTES[1]:f.label.startsWith("Płytki")?TILE_NOTES.join(" "):PAINT_NOTES[1]}</p>:null}
+    {f?.net!=null?<p className="studio-quote-range-note">{f.label.startsWith("Nawierzchnia PU/EPDM")?EPDM_NOTES[1]:f.label.startsWith("Płytki")?TILE_NOTES.join(" "):f.label.startsWith("Sztuczna trawa")?TURF_NOTES.join(" "):PAINT_NOTES[1]}</p>:null}
     <p className="studio-quote-range-note">Montaż konstrukcji i transport wyceniamy indywidualnie, po zdjęciach placu.</p>
    </>}</div>
    {contact}

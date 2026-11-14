@@ -71,7 +71,7 @@ assert.equal(autoPaintVariant({graphic:true,colors:3,complexity:1,gradient:true}
 const painted=calculateProjectQuote({...play,surface:'Akryl sportowy',graphicOpacity:0,base:'#1d5147',zone:'#1d5147'},null,1);
 assert.deepEqual(surfaceFinish(painted),{label:'Malowanie · Jednokolorowa',net:2500,note:surfaceFinish(painted).note});
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'pattern'},null,1)).net,4800,'customer choice wins');
-assert.deepEqual(surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 60 mm'},null,1)),{label:'Wykończenie · Sztuczna murawa',net:null,note:'Cenę tego wykończenia podamy indywidualnie.'});
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Piasek sportowy'},null,1)).net,null,'other materials stay individual');
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Beton sportowy'},null,1)),null,'bare concrete has no finish');
 console.log('PASS: painting priced per model and variant from the owner list, matches the website file, auto variant from the design, other finishes individual.');
 
@@ -98,3 +98,14 @@ import {tileCount} from '../lib/surface-finish.ts';
 for(const m of paintSite.tiles.models)assert.equal(tileCount(m.areaM2),paintSite.tiles.internalTakeOff.tilesPerModel[m.id],`${m.name} tiles`);
 assert.equal(tileCount(150),1650);assert.doesNotMatch(tiles.note,/płytek/,'tile count is internal');assert.match(tiles.note,/Około 28,3 m²/);
 console.log('PASS: sports tiles priced per model and variant from the owner list, matches the website file, Standard by default.');
+
+// Artificial turf (owner price list 14.11.2026): playing area as tiles, Standard by default.
+import {TURF_VARIANTS,turfNet} from '../lib/surface-finish.ts';
+for(const v of paintSite.turf.variants)assert.equal(TURF_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
+for(const m of paintSite.turf.models)for(const [v,net] of Object.entries(m.net))assert.equal(turfNet(m.id,v),net,`${m.name} ${v}`);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>turfNet('o1',v)),[4800,6400,8300]);
+assert.equal(turfNet('street15','standard'),25100);
+const turf=surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 60 mm'},null,1));
+assert.equal(turf.label,'Sztuczna trawa · Standard');assert.equal(turf.net,4800);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 60 mm',turfVariant:'premium'},null,1)).net,8300);
+console.log('PASS: artificial turf priced per model and variant from the owner list, matches the website file, Standard by default.');
