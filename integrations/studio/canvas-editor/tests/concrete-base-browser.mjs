@@ -40,6 +40,23 @@ try{
  await page.getByRole('radio',{name:/Wzór zaawansowany/}).check();
  await badgeIs(`Nawierzchnia ${pl(9100+5900)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('paint-choice');
+ // PU/EPDM: switch the material to Granulat, pick a variant, then back to painting.
+ const materials=page.locator('[aria-label="Materiał nawierzchni"]');
+ await materials.getByRole('button',{name:'Granulat',exact:true}).click();
+ const std=page.getByRole('radio',{name:/^Standard \(natrysk\)/});await std.waitFor({timeout:30000});
+ assert.ok(await std.isChecked(),'Standard EPDM by default');
+ await badgeIs(`Nawierzchnia ${pl(9100+8000)}\\s?zł netto$`);
+ await page.getByRole('radio',{name:/^Premium/}).check();
+ await badgeIs(`Nawierzchnia ${pl(9100+12800)}\\s?zł netto$`);
+ await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('epdm-choice');
+ await steps.getByRole('button',{name:'Podsumowanie',exact:true}).click();
+ const epdmText=await page.locator('.studio-project-quote').first().innerText();
+ assert.match(epdmText,/Nawierzchnia PU\/EPDM · Premium[\s\S]*12\s?800\s?zł netto/);
+ assert.match(epdmText,new RegExp(`Razem: ${pl(arena+9100+12800)}\\s?zł netto`));
+ await shot('epdm-summary');
+ await page.getByRole('button',{name:'Wróć do edycji'}).click();
+ await materials.getByRole('button',{name:'Malowana',exact:true}).click();
+ await badgeIs(`Nawierzchnia ${pl(9100+5900)}\\s?zł netto$`);
  // Summary: separate rows and the total.
  await steps.getByRole('button',{name:'Podsumowanie',exact:true}).click();
  const summary=page.locator('.studio-project-quote').first();await summary.waitFor();
@@ -61,5 +78,5 @@ try{
  await page.keyboard.press('Escape').catch(()=>{});
  await page.goto(base+'/?arena=o1&tool=construction');await toggle.waitFor({timeout:60000});
  await toggle.uncheck();await badgeIs(`Nawierzchnia ${pl(5900)}\\s?zł netto$`);
- console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer');
+ console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer; PU/EPDM variants priced');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

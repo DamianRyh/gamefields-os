@@ -11,11 +11,11 @@ const money=(v:number)=>new Intl.NumberFormat('pl-PL',{style:'currency',currency
  * customer saves it as PDF with the system print dialog (desktop and phone), without a popup or a PDF library. */
 export function projectCardHtml({project,facts,quote,image,date}:{project:Project;facts:[string,string][];quote:QuoteState['data'];image:string;date:string}){
  const arena=quote?.items.find(i=>i.id==='arena');
- const base=quote?.items.find(i=>i.id==='concrete-base'),finish=quote?.items.find(i=>i.id==='paint'||i.id==='finish-surface');
+ const base=quote?.items.find(i=>i.id==='concrete-base'),finish=quote?.items.find(i=>i.id==='paint'||i.id==='epdm'||i.id==='finish-surface');
  const split=arena?.totalNet!=null&&(base?.totalNet!=null||finish);
  const total=(arena?.totalNet??0)+(base?.totalNet??0)+(finish?.totalNet??0);
  const rows=split?`<table><tr><td>Konstrukcja boiska z bramkami</td><td>${esc(money(arena!.totalNet!))}</td></tr>${base?.totalNet!=null?`<tr><td>Nawierzchnia betonowa bez wykończenia (płyta 12 cm z podbudową)</td><td>${esc(money(base.totalNet))}</td></tr>`:''}<tr><td>${esc(finish?finish.label:'Wykończenie nawierzchni')}</td><td>${finish?.totalNet!=null?esc(money(finish.totalNet)):finish?'do wyceny':'—'}</td></tr><tr><td><b>Razem</b></td><td><b>${esc(money(total))}</b></td></tr></table>`:'';
- const price=split?`<section class="price"><h2>Cena konstrukcji i nawierzchni (netto)</h2>${rows}<p>${finish?.totalNet!=null?'Malowanie nie obejmuje napraw podłoża (rysy, szlifowanie). ':''}Montaż konstrukcji i transport są wyceniane oddzielnie.</p></section>`
+ const price=split?`<section class="price"><h2>Cena konstrukcji i nawierzchni (netto)</h2>${rows}<p>${finish?.id==='paint'&&finish.totalNet!=null?'Malowanie nie obejmuje napraw podłoża (rysy, szlifowanie). ':finish?.id==='epdm'?'Nawierzchnia PU/EPDM zgodnie z PN-EN 14877; linie sportowe wyceniamy osobno. ':''}Montaż konstrukcji i transport są wyceniane oddzielnie.</p></section>`
   :arena?.totalNet!=null?`<section class="price"><h2>Cena konstrukcji</h2><p class="big">${esc(money(arena.totalNet))} netto</p><p>Konstrukcja z bramkami. Nawierzchnia, montaż, transport i przygotowanie podłoża są wyceniane oddzielnie.</p></section>`
   :`<section class="price"><h2>Wycena konstrukcji</h2><p>Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.</p></section>`;
  return `<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Gamefields — karta projektu — ${esc(project.name)}</title><style>

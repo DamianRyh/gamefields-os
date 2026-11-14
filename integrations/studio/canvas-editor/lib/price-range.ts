@@ -27,7 +27,7 @@ export function concreteBasePrice(q:ProjectQuote|null|undefined):number|null{
 /** Finish on the concrete base (painting, or another material still to be priced); null when there is none. */
 export function surfaceFinish(q:ProjectQuote|null|undefined):{label:string;net:number|null;note?:string}|null{
  if(!SHOW_PRICE_RANGE||!q)return null;
- const item=q.items.find(i=>i.id==="paint"||i.id==="finish-surface");
+ const item=q.items.find(i=>i.id==="paint"||i.id==="epdm"||i.id==="finish-surface");
  return item?{label:item.label,net:item.totalNet!==null&&item.totalNet>0?item.totalNet:null,note:item.note}:null;
 }
 

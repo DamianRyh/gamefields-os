@@ -71,6 +71,16 @@ assert.equal(autoPaintVariant({graphic:true,colors:3,complexity:1,gradient:true}
 const painted=calculateProjectQuote({...play,surface:'Akryl sportowy',graphicOpacity:0,base:'#1d5147',zone:'#1d5147'},null,1);
 assert.deepEqual(surfaceFinish(painted),{label:'Malowanie · Jednokolorowa',net:2500,note:surfaceFinish(painted).note});
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'pattern'},null,1)).net,4800,'customer choice wins');
-assert.deepEqual(surfaceFinish(calculateProjectQuote({...play,surface:'EPDM'},null,1)),{label:'Wykończenie · Granulat',net:null,note:'Cenę tego wykończenia podamy indywidualnie.'});
+assert.deepEqual(surfaceFinish(calculateProjectQuote({...play,surface:'Moduły sportowe'},null,1)),{label:'Wykończenie · Płytki modułowe',net:null,note:'Cenę tego wykończenia podamy indywidualnie.'});
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Beton sportowy'},null,1)),null,'bare concrete has no finish');
 console.log('PASS: painting priced per model and variant from the owner list, matches the website file, auto variant from the design, other finishes individual.');
+
+// PU/EPDM on the concrete base (owner price list 14.11.2026): same area and rounding, Standard by default.
+import {EPDM_VARIANTS,epdmNet} from '../lib/surface-finish.ts';
+for(const v of paintSite.epdm.variants)assert.equal(EPDM_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
+for(const m of paintSite.epdm.models)for(const [v,net] of Object.entries(m.net))assert.equal(epdmNet(m.id,v),net,`${m.name} ${v}`);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>epdmNet('o1',v)),[8000,10200,12800]);
+const epdm=surfaceFinish(calculateProjectQuote({...play,surface:'EPDM'},null,1));
+assert.equal(epdm.label,'Nawierzchnia PU/EPDM · Standard (natrysk)');assert.equal(epdm.net,8000);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'EPDM',epdmVariant:'premium'},null,1)).net,12800);
+console.log('PASS: PU/EPDM priced per model and variant from the owner list, matches the website file, Standard by default.');
