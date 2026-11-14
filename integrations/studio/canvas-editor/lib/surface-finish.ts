@@ -47,3 +47,29 @@ export function epdmNet(arenaModel:string|undefined,variant:EpdmVariant,modular?
  if(!area)return null;
  return Math.ceil(area*EPDM_VARIANTS[variant].netPerM2/100)*100;
 }
+
+/**
+ * Modular sports tiles (PP interlocking, laid loose on the concrete base). Owner price list 14.11.2026, sale prices net.
+ * Area per model from the owner's table (the tiled playing area, smaller than the concrete slab), rounded up to 100 zł.
+ */
+export type TileVariant="standard"|"standard-plus"|"premium";
+export const TILES_MATERIAL="Moduły sportowe";
+export const TILE_VARIANTS:Record<TileVariant,{label:string;netPerM2:number;description:string}>={
+ "standard":{label:"Standard",netPerM2:275,description:"Płytki PP 15–18 mm, outdoor multi-sport, podstawowe kolory i linie, drenaż."},
+ "standard-plus":{label:"Standard+",netPerM2:325,description:"Płytki PP 18–19 mm, lepsza amortyzacja i odporność UV, więcej kolorów oznakowania."},
+ "premium":{label:"Premium",netPerM2:400,description:"Płytki PP 19 mm+, wysoka amortyzacja, gwarancja 5–10 lat."},
+};
+export const TILE_AREA_M2:Record<string,number>={"w1":19.6,"o1":28.3,"p1":39.8,"street15":150,"circle-cage-1":25,"circle-cage-2":28,"street-field":28.9,"octagon":45};
+export const TILE_NOTES=["Cena obejmuje płytki, montaż, profile krawędziowe i podstawowe oznakowanie linii.","Płytki układamy luzem na płaskim betonie ze spadkami, bez klejenia. Podłoże betonowe wyceniamy osobno."];
+
+/** Internal quantity take-off only, never shown to the customer (owner 14.11.2026): 11 tiles per m² (30,5 × 30,5 cm,
+ * Gerflor PowerGame+ type); order +5–8% for cuts and waste. The customer sees only the m² of the surface. */
+export const TILES_PER_M2=11;
+export const TILE_SIZE_LABEL="30,5 × 30,5 cm";
+export function tileCount(area:number){return Math.ceil(Math.round(area*TILES_PER_M2*100)/100);}
+
+export function tilesNet(arenaModel:string|undefined,variant:TileVariant,modular?:unknown):number|null{
+ const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ if(!area)return null;
+ return Math.ceil(area*TILE_VARIANTS[variant].netPerM2/100)*100;
+}

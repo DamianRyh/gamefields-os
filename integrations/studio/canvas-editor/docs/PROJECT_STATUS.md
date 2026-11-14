@@ -1,3 +1,9 @@
+## Studio — płytki sportowe, 2026-11-14
+
+- Materiał „Płytki modułowe” (`Moduły sportowe`) na konstrukcji: pozycja `tiles` „Płytki sportowe · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard 275 zł/m², Standard+ 325, Premium 400. Metraż: pole gry modelu z tabeli właściciela (`TILE_AREA_M2`, np. Panna Play 28,3 m²), zaokrąglenie w górę do 100 zł: Panna Play 7800 / 9200 / 11 400 zł.
+- Domyślnie Standard; wybór w Nawierzchnia → Materiał. Cena obejmuje płytki, montaż, profile krawędziowe i podstawowe linie; beton osobno.
+- Liczba płytek (11 szt./m², 30,5 × 30,5 cm, +5–8% na odpady) tylko w zasobie przeliczeniowym: `tileCount()` w `lib/surface-finish.ts` i `internalTakeOff` w `offer/surface-finish.json`. Klient widzi wyłącznie m² (decyzja właściciela 14.11).
+
 ## Studio — nawierzchnia PU/EPDM, 2026-11-14
 
 - Materiał „Granulat” (`EPDM`) na konstrukcji: pozycja `epdm` „Nawierzchnia PU/EPDM · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto, orientacyjne): Standard (natrysk) 250 zł/m², Standard+ (2S) 317, Premium (sandwich) 400. Metraż i zaokrąglenie jak malowanie: Panna Play 8000 / 10 200 / 12 800 zł.
