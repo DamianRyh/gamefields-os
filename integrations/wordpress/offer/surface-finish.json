@@ -710,5 +710,120 @@
     }
    }
   ]
+ },
+ "mats": {
+  "name": "Prefabrykowane maty / role gumowe SBR / EPDM na podłożu betonowym",
+  "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
+  "area": "Pole gry modelu (jak płytki i trawa), cena zaokrąglona w górę do 100 zł",
+  "includes": [
+   "Klejenie klejem PU na betonie, cięcie, profile krawędziowe, podstawowe linie"
+  ],
+  "excludes": [
+   "Podłoże betonowe (osobna pozycja)"
+  ],
+  "thickness": "10–20 mm",
+  "slip": "R11",
+  "variants": [
+   {
+    "id": "standard",
+    "name": "Standard",
+    "netPerM2": 242,
+    "description": "Maty i role SBR, podstawowe kolory."
+   },
+   {
+    "id": "standard-plus",
+    "name": "Standard+",
+    "netPerM2": 317,
+    "description": "Grubsze maty o lepszej amortyzacji."
+   },
+   {
+    "id": "premium",
+    "name": "Premium",
+    "netPerM2": 425,
+    "description": "Maty z warstwą EPDM, szersza paleta kolorów, lepsza odporność UV."
+   }
+  ],
+  "models": [
+   {
+    "id": "w1",
+    "name": "Panna Ring",
+    "areaM2": 19.6,
+    "net": {
+     "standard": 4800,
+     "standard-plus": 6300,
+     "premium": 8400
+    }
+   },
+   {
+    "id": "o1",
+    "name": "Panna Play",
+    "areaM2": 28.3,
+    "net": {
+     "standard": 6900,
+     "standard-plus": 9000,
+     "premium": 12100
+    }
+   },
+   {
+    "id": "p1",
+    "name": "Panna Court",
+    "areaM2": 39.8,
+    "net": {
+     "standard": 9700,
+     "standard-plus": 12700,
+     "premium": 17000
+    }
+   },
+   {
+    "id": "street15",
+    "name": "Boisko 3 na 3",
+    "areaM2": 150,
+    "net": {
+     "standard": 36300,
+     "standard-plus": 47600,
+     "premium": 63800
+    }
+   },
+   {
+    "id": "circle-cage-1",
+    "name": "Panna Octa Cage 90",
+    "areaM2": 25,
+    "net": {
+     "standard": 6100,
+     "standard-plus": 8000,
+     "premium": 10700
+    }
+   },
+   {
+    "id": "circle-cage-2",
+    "name": "Panna Octa Cage 180",
+    "areaM2": 28,
+    "net": {
+     "standard": 6800,
+     "standard-plus": 8900,
+     "premium": 11900
+    }
+   },
+   {
+    "id": "street-field",
+    "name": "Panna Grid",
+    "areaM2": 28.9,
+    "net": {
+     "standard": 7000,
+     "standard-plus": 9200,
+     "premium": 12300
+    }
+   },
+   {
+    "id": "octagon",
+    "name": "Panna Octa",
+    "areaM2": 45,
+    "net": {
+     "standard": 10900,
+     "standard-plus": 14300,
+     "premium": 19200
+    }
+   }
+  ]
  }
 }

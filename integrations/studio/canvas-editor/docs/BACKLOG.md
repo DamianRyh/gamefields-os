@@ -6,6 +6,8 @@
 - [x] Sztuczna trawa (3 warianty, cennik 14.11).
 - [x] Akryl Hard Court jako osobny materiał (3 warianty, cennik 14.11).
 - [x] Płyty gumowe SBR / EPDM jako osobny materiał (3 warianty, cennik 14.11).
+- [x] Maty / role gumowe jako osobny materiał (3 warianty, cennik 14.11).
+- [ ] Grubość i parametry każdego wariantu mat (dziś opis ogólny 10–20 mm).
 - [ ] Zdjęcie makro płyt gumowych do karuzeli (dziś obraz granulatu).
 - [ ] Zdjęcie makro faktury akrylu Hard Court do karuzeli materiałów (dziś podgląd wzoru jak „Malowana”).
 - [ ] Linie sportowe na EPDM (farba PU): cena osobnej pozycji.

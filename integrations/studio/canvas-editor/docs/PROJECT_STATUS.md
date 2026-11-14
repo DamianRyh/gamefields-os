@@ -1,3 +1,7 @@
+## Studio — maty / role gumowe SBR / EPDM, 2026-11-14
+
+- Nowy materiał „Maty gumowe” (siódmy w karuzeli, wygląd granulatu). Pozycja `mats` „Maty gumowe · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard 242 zł/m², Standard+ 317, Premium 425. Metraż jak płytki (pole gry), zaokrąglenie w górę do 100 zł: Panna Play 6900 / 9000 / 12 100 zł. Domyślnie Standard. Opisy wariantów ogólne (właściciel podał grubość 10–20 mm dla całej grupy).
+
 ## Studio — płyty gumowe SBR / EPDM, 2026-11-14
 
 - Nowy materiał „Płyty gumowe” (szósty w karuzeli, podgląd i wygląd 3D jak granulat). Pozycja `rubber` „Płyty gumowe · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard (SBR 40 mm) 342 zł/m², Standard+ (SBR 45–50 mm) 400, Premium (SBR + EPDM) 492. Metraż jak płytki (pole gry), zaokrąglenie w górę do 100 zł: Panna Play 9700 / 11 400 / 14 000 zł. Domyślnie Standard.
