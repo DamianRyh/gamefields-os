@@ -120,3 +120,14 @@ assert.equal(acrylic.label,'Akryl Hard Court · Standard (Hard Court)');assert.e
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl Hard Court',acrylicVariant:'premium'},null,1)).net,9700);
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'plain'},null,1)).net,2500,'painting unchanged');
 console.log('PASS: acrylic hard court priced per model and variant from the owner list, matches the website file, separate from painting.');
+
+// Rubber slabs SBR / EPDM (owner price list 14.11.2026): separate material, playing area, Standard by default.
+import {RUBBER_VARIANTS,rubberNet} from '../lib/surface-finish.ts';
+for(const v of paintSite.rubber.variants)assert.equal(RUBBER_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
+for(const m of paintSite.rubber.models)for(const [v,net] of Object.entries(m.net))assert.equal(rubberNet(m.id,v),net,`${m.name} ${v}`);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>rubberNet('o1',v)),[9700,11400,14000]);
+assert.equal(rubberNet('p1','standard'),13700);assert.equal(rubberNet('street15','standard'),51300);
+const rubber=surfaceFinish(calculateProjectQuote({...play,surface:'Płyty gumowe'},null,1));
+assert.equal(rubber.label,'Płyty gumowe · Standard (SBR 40 mm)');assert.equal(rubber.net,9700);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Płyty gumowe',rubberVariant:'premium'},null,1)).net,14000);
+console.log('PASS: rubber slabs priced per model and variant from the owner list, matches the website file, separate material.');

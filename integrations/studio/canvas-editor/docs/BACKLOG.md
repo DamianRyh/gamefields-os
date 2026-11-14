@@ -5,6 +5,8 @@
 - [x] Płytki sportowe (3 warianty, cennik 14.11).
 - [x] Sztuczna trawa (3 warianty, cennik 14.11).
 - [x] Akryl Hard Court jako osobny materiał (3 warianty, cennik 14.11).
+- [x] Płyty gumowe SBR / EPDM jako osobny materiał (3 warianty, cennik 14.11).
+- [ ] Zdjęcie makro płyt gumowych do karuzeli (dziś obraz granulatu).
 - [ ] Zdjęcie makro faktury akrylu Hard Court do karuzeli materiałów (dziś podgląd wzoru jak „Malowana”).
 - [ ] Linie sportowe na EPDM (farba PU): cena osobnej pozycji.
 - [ ] Strona: pokazać ceny nawierzchni betonowej obok cen konstrukcji (`offer/concrete-base.json`).

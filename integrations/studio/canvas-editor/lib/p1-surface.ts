@@ -4,6 +4,7 @@ export type SurfaceFinish={slug:string;tileSize:number;reference:[number,number,
 export function p1SurfaceFinish(surface:string,detail=true):SurfaceFinish{
  const materials:Record<string,Omit<SurfaceFinish,'detail'>>={
   'Akryl sportowy':{slug:'malowana',tileSize:.2,reference:[32/255,102/255,103/255],turf:false},
+  'Płyty gumowe':{slug:'granulat-epdm',tileSize:.2,reference:[30/255,99/255,100/255],turf:false},
   'Akryl Hard Court':{slug:'malowana',tileSize:.2,reference:[32/255,102/255,103/255],turf:false},
   EPDM:{slug:'granulat-epdm',tileSize:.2,reference:[30/255,99/255,100/255],turf:false},
   'Moduły sportowe':{slug:'plytki-modulowe',tileSize:.3,reference:[31/255,105/255,108/255],turf:false},
