@@ -124,5 +124,118 @@
     "pattern-advanced": 31700
    }
   }
- ]
+ ],
+ "epdm": {
+  "name": "Nawierzchnia poliuretanowa PU/EPDM na podłożu betonowym",
+  "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży, orientacyjne)",
+  "norm": "PN-EN 14877",
+  "variants": [
+   {
+    "id": "standard",
+    "name": "Standard (natrysk)",
+    "netPerM2": 250,
+    "description": "System natryskowy SBR + EPDM, min. 13 mm, przepuszczalny. Boiska wielofunkcyjne, szkoły, rekreacja. Trwałość 8–12 lat."
+   },
+   {
+    "id": "standard-plus",
+    "name": "Standard+ (system 2S)",
+    "netPerM2": 317,
+    "description": "System dwuwarstwowy 2S, 14–16 mm, lepsza amortyzacja. Intensywne użytkowanie, Orlik. Trwałość 10–15 lat."
+   },
+   {
+    "id": "premium",
+    "name": "Premium (sandwich / EPDM premium)",
+    "netPerM2": 400,
+    "description": "Sandwich / EPDM premium, wysokie parametry trwałości. Obiekty o wysokich wymaganiach. Trwałość 12–20 lat."
+   }
+  ],
+  "excludes": [
+   "Podłoże betonowe (osobna pozycja)",
+   "Linie sportowe (farba PU)",
+   "Transport i przygotowanie podłoża (frezowanie, gruntowanie specjalne)",
+   "Odwodnienie i ogrodzenie"
+  ],
+  "models": [
+   {
+    "id": "w1",
+    "name": "Panna Ring",
+    "areaM2": 23,
+    "net": {
+     "standard": 5800,
+     "standard-plus": 7300,
+     "premium": 9200
+    }
+   },
+   {
+    "id": "o1",
+    "name": "Panna Play",
+    "areaM2": 32,
+    "net": {
+     "standard": 8000,
+     "standard-plus": 10200,
+     "premium": 12800
+    }
+   },
+   {
+    "id": "street-field",
+    "name": "Panna Grid",
+    "areaM2": 33,
+    "net": {
+     "standard": 8300,
+     "standard-plus": 10500,
+     "premium": 13200
+    }
+   },
+   {
+    "id": "circle-cage-1",
+    "name": "Panna Octa Cage 90",
+    "areaM2": 29,
+    "net": {
+     "standard": 7300,
+     "standard-plus": 9200,
+     "premium": 11600
+    }
+   },
+   {
+    "id": "octagon",
+    "name": "Panna Octa",
+    "areaM2": 52,
+    "net": {
+     "standard": 13000,
+     "standard-plus": 16500,
+     "premium": 20800
+    }
+   },
+   {
+    "id": "circle-cage-2",
+    "name": "Panna Octa Cage 180",
+    "areaM2": 32,
+    "net": {
+     "standard": 8000,
+     "standard-plus": 10200,
+     "premium": 12800
+    }
+   },
+   {
+    "id": "p1",
+    "name": "Panna Court",
+    "areaM2": 46,
+    "net": {
+     "standard": 11500,
+     "standard-plus": 14600,
+     "premium": 18400
+    }
+   },
+   {
+    "id": "street15",
+    "name": "Boisko 3 na 3",
+    "areaM2": 173,
+    "net": {
+     "standard": 43300,
+     "standard-plus": 54900,
+     "premium": 69200
+    }
+   }
+  ]
+ }
 }

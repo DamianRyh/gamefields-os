@@ -1,3 +1,9 @@
+## Studio — nawierzchnia PU/EPDM, 2026-11-14
+
+- Materiał „Granulat” (`EPDM`) na konstrukcji: pozycja `epdm` „Nawierzchnia PU/EPDM · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto, orientacyjne): Standard (natrysk) 250 zł/m², Standard+ (2S) 317, Premium (sandwich) 400. Metraż i zaokrąglenie jak malowanie: Panna Play 8000 / 10 200 / 12 800 zł.
+- Domyślnie Standard; wybór w Nawierzchnia → Materiał. Linie sportowe, transport i przygotowanie podłoża osobno (uwaga w podsumowaniu i na karcie).
+- Ceny w `lib/surface-finish.ts`, dla strony w `integrations/wordpress/offer/surface-finish.json` (sekcja `epdm`, test zgodności).
+
 ## Studio — malowanie nawierzchni, 2026-11-13
 
 - Nowa pozycja wyceny `paint` „Malowanie · <wariant>” dla projektu z konstrukcją i materiałem „Malowana” (`Akryl sportowy`). Cennik właściciela 13.11.2026 (ceny sprzedaży netto): jednokolorowa 78 zł/m², jednokolorowa z granulatem 100, wzór średni 150, wzór zaawansowany 183. Metraż: cała płyta betonowa modelu (jak `concrete-base`), zaokrąglenie w górę do 100 zł, np. Panna Play 2500 / 3200 / 4800 / 5900 zł.
