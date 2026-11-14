@@ -1,3 +1,11 @@
+## Studio — wycena samej nawierzchni (bez konstrukcji), 2026-11-14
+
+- Projekt nawierzchni bez konstrukcji jest wyceniany z tych samych cenników (beton 283 zł/m² i wszystkie wykończenia) od własnej powierzchni projektu +10% (`quoteArea`, `finishAreaFor` w `lib/quote-engine.ts`; `netForArea`, `finishArea` w `lib/surface-finish.ts`). Przykład: Street Football 3×3 15 × 10 m → 165 m², beton 46 700 zł, malowanie od 12 900 zł.
+- Z konstrukcją metraż nadal z modelu konstrukcji +10% (`FINISH_AREA_M2`), modułowe — wycena indywidualna.
+- Nawierzchnia → Materiał (projekt bez konstrukcji): wybór nawierzchni betonowej (domyślnie zaznaczona). Przycisk „Nawierzchnia … zł netto”, podsumowanie „Cena nawierzchni”, porównanie „Ta sama nawierzchnia z innym wykończeniem”, karta PDF „Cena nawierzchni (netto)”.
+- Kwoty pokazujemy tylko przy skonfigurowanej karcie stawek Studio (jak dotąd).
+- Test: `tests/surface-only-price-browser.mjs`.
+
 ## Studio — karta projektu = całe zamówienie, wybór zakresu, 2026-11-14
 
 - Karta PDF („Pobierz kartę projektu (PDF)”, wcześniej „karta konstrukcji”) pokazuje dokładnie to, co klient zamawia (decyzja właściciela 14.11):
