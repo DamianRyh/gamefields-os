@@ -1,3 +1,7 @@
+## Studio — płyty gumowe SBR / EPDM, 2026-11-14
+
+- Nowy materiał „Płyty gumowe” (szósty w karuzeli, podgląd i wygląd 3D jak granulat). Pozycja `rubber` „Płyty gumowe · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard (SBR 40 mm) 342 zł/m², Standard+ (SBR 45–50 mm) 400, Premium (SBR + EPDM) 492. Metraż jak płytki (pole gry), zaokrąglenie w górę do 100 zł: Panna Play 9700 / 11 400 / 14 000 zł. Domyślnie Standard.
+
 ## Studio — nawierzchnia akrylowa Hard Court, 2026-11-14
 
 - Nowy materiał „Akryl Hard Court” (wartość `Akryl Hard Court` w `projectSchema.surface`, piąty w karuzeli, wygląd 3D jak „Malowana”). Osobny od malowania farbą (decyzja właściciela 14.11).

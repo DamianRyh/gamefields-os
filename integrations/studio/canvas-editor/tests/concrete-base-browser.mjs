@@ -79,6 +79,14 @@ try{
  await page.getByRole('radio',{name:/^Premium/}).check();
  await badgeIs(`Nawierzchnia ${pl(9100+9700)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('acrylic-choice');
+ // Rubber slabs: separate material, Standard by default.
+ await materials.getByRole('button',{name:'Płyty gumowe',exact:true}).click();
+ await page.locator('.studio-paint-variant legend',{hasText:'Płyty gumowe'}).waitFor({timeout:30000});
+ assert.ok(await page.getByRole('radio',{name:/^Standard \(SBR 40 mm\)/}).isChecked(),'Standard rubber by default');
+ await badgeIs(`Nawierzchnia ${pl(9100+9700)}\\s?zł netto$`);
+ await page.getByRole('radio',{name:/^Premium/}).check();
+ await badgeIs(`Nawierzchnia ${pl(9100+14000)}\\s?zł netto$`);
+ await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('rubber-choice');
  await materials.getByRole('button',{name:'Malowana',exact:true}).click();
  await badgeIs(`Nawierzchnia ${pl(9100+5900)}\\s?zł netto$`);
  // Summary: separate rows and the total.
@@ -102,5 +110,5 @@ try{
  await page.keyboard.press('Escape').catch(()=>{});
  await page.goto(base+'/?arena=o1&tool=construction');await toggle.waitFor({timeout:60000});
  await toggle.uncheck();await badgeIs(`Nawierzchnia ${pl(5900)}\\s?zł netto$`);
- console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer; PU/EPDM, sports tiles, artificial turf and acrylic hard court variants priced');
+ console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer; PU/EPDM, sports tiles, artificial turf, acrylic hard court and rubber slab variants priced');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

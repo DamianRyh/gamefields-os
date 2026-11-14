@@ -111,3 +111,22 @@ export function acrylicNet(arenaModel:string|undefined,variant:AcrylicVariant,mo
  if(!area)return null;
  return Math.ceil(Math.round(area*ACRYLIC_VARIANTS[variant].netPerM2*100)/10000)*100;
 }
+
+/**
+ * Stabilised modular rubber slabs SBR / EPDM, glued on the concrete base (owner price list 14.11.2026, sale prices net).
+ * Separate material. Playing area per model as tiles and turf, rounded up to 100 zł.
+ */
+export type RubberVariant="standard"|"standard-plus"|"premium";
+export const RUBBER_MATERIAL="Płyty gumowe";
+export const RUBBER_VARIANTS:Record<RubberVariant,{label:string;netPerM2:number;description:string}>={
+ "standard":{label:"Standard (SBR 40 mm)",netPerM2:342,description:"Stabilizowane płyty SBR 40 mm, 50 × 50 cm, 5 podstawowych kolorów."},
+ "standard-plus":{label:"Standard+ (SBR 45–50 mm)",netPerM2:400,description:"Płyty SBR 45–50 mm z lepszą stabilizacją i amortyzacją."},
+ "premium":{label:"Premium (SBR + EPDM)",netPerM2:492,description:"SBR z warstwą EPDM: szeroka paleta RAL, lepsza odporność UV, logo i grafiki."},
+};
+export const RUBBER_NOTES=["Cena obejmuje płyty, klejenie na betonie, profile krawędziowe i podstawowe linie.","Płyty wodoprzepuszczalne, antypoślizgowe (R11), z atestem PZH i zgodne z PN-EN 1177. Podłoże betonowe wyceniamy osobno."];
+
+export function rubberNet(arenaModel:string|undefined,variant:RubberVariant,modular?:unknown):number|null{
+ const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ if(!area)return null;
+ return Math.ceil(Math.round(area*RUBBER_VARIANTS[variant].netPerM2*100)/10000)*100;
+}

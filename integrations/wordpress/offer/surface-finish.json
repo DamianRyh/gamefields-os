@@ -591,5 +591,124 @@
     }
    }
   ]
+ },
+ "rubber": {
+  "name": "Stabilizowane płyty gumowe SBR / EPDM na podłożu betonowym",
+  "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
+  "area": "Pole gry modelu (jak płytki i trawa), cena zaokrąglona w górę do 100 zł",
+  "includes": [
+   "Płyty 50 × 50 cm, klejenie na betonie, profile krawędziowe, podstawowe linie"
+  ],
+  "excludes": [
+   "Podłoże betonowe (osobna pozycja)"
+  ],
+  "certificates": [
+   "Atest PZH",
+   "PN-EN 1177",
+   "Antypoślizg R11",
+   "Wodoprzepuszczalne"
+  ],
+  "variants": [
+   {
+    "id": "standard",
+    "name": "Standard (SBR 40 mm)",
+    "netPerM2": 342,
+    "description": "Stabilizowane płyty SBR 40 mm, 50 × 50 cm, 5 podstawowych kolorów."
+   },
+   {
+    "id": "standard-plus",
+    "name": "Standard+ (SBR 45–50 mm)",
+    "netPerM2": 400,
+    "description": "Płyty SBR 45–50 mm, lepsza stabilizacja i amortyzacja."
+   },
+   {
+    "id": "premium",
+    "name": "Premium (SBR + EPDM)",
+    "netPerM2": 492,
+    "description": "SBR z warstwą EPDM, szeroka paleta RAL, lepsza odporność UV, logo i grafiki."
+   }
+  ],
+  "models": [
+   {
+    "id": "w1",
+    "name": "Panna Ring",
+    "areaM2": 19.6,
+    "net": {
+     "standard": 6800,
+     "standard-plus": 7900,
+     "premium": 9700
+    }
+   },
+   {
+    "id": "o1",
+    "name": "Panna Play",
+    "areaM2": 28.3,
+    "net": {
+     "standard": 9700,
+     "standard-plus": 11400,
+     "premium": 14000
+    }
+   },
+   {
+    "id": "p1",
+    "name": "Panna Court",
+    "areaM2": 39.8,
+    "net": {
+     "standard": 13700,
+     "standard-plus": 16000,
+     "premium": 19600
+    }
+   },
+   {
+    "id": "street15",
+    "name": "Boisko 3 na 3",
+    "areaM2": 150,
+    "net": {
+     "standard": 51300,
+     "standard-plus": 60000,
+     "premium": 73800
+    }
+   },
+   {
+    "id": "circle-cage-1",
+    "name": "Panna Octa Cage 90",
+    "areaM2": 25,
+    "net": {
+     "standard": 8600,
+     "standard-plus": 10000,
+     "premium": 12300
+    }
+   },
+   {
+    "id": "circle-cage-2",
+    "name": "Panna Octa Cage 180",
+    "areaM2": 28,
+    "net": {
+     "standard": 9600,
+     "standard-plus": 11200,
+     "premium": 13800
+    }
+   },
+   {
+    "id": "street-field",
+    "name": "Panna Grid",
+    "areaM2": 28.9,
+    "net": {
+     "standard": 9900,
+     "standard-plus": 11600,
+     "premium": 14300
+    }
+   },
+   {
+    "id": "octagon",
+    "name": "Panna Octa",
+    "areaM2": 45,
+    "net": {
+     "standard": 15400,
+     "standard-plus": 18000,
+     "premium": 22200
+    }
+   }
+  ]
  }
 }
