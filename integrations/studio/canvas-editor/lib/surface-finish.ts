@@ -130,3 +130,22 @@ export function rubberNet(arenaModel:string|undefined,variant:RubberVariant,modu
  if(!area)return null;
  return Math.ceil(Math.round(area*RUBBER_VARIANTS[variant].netPerM2*100)/10000)*100;
 }
+
+/**
+ * Prefabricated rubber mats / rolls SBR / EPDM, glued with 2K PU adhesive on the concrete base
+ * (owner price list 14.11.2026, sale prices net). Separate material. Playing area as tiles, rounded up to 100 zł.
+ */
+export type MatVariant="standard"|"standard-plus"|"premium";
+export const MAT_MATERIAL="Maty gumowe";
+export const MAT_VARIANTS:Record<MatVariant,{label:string;netPerM2:number;description:string}>={
+ "standard":{label:"Standard",netPerM2:242,description:"Maty i role SBR, podstawowe kolory. Boiska rekreacyjne i streetball."},
+ "standard-plus":{label:"Standard+",netPerM2:317,description:"Grubsze maty o lepszej amortyzacji, do intensywnego użytkowania."},
+ "premium":{label:"Premium",netPerM2:425,description:"Maty z warstwą EPDM: szersza paleta kolorów i lepsza odporność UV."},
+};
+export const MAT_NOTES=["Grubość 10–20 mm, antypoślizg R11. Ciągła nawierzchnia z mniejszą liczbą spoin niż płyty 50 × 50 cm.","Cena obejmuje klejenie klejem PU na betonie, cięcie, profile krawędziowe i podstawowe linie. Podłoże betonowe wyceniamy osobno."];
+
+export function matNet(arenaModel:string|undefined,variant:MatVariant,modular?:unknown):number|null{
+ const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ if(!area)return null;
+ return Math.ceil(Math.round(area*MAT_VARIANTS[variant].netPerM2*100)/10000)*100;
+}

@@ -131,3 +131,13 @@ const rubber=surfaceFinish(calculateProjectQuote({...play,surface:'Płyty gumowe
 assert.equal(rubber.label,'Płyty gumowe · Standard (SBR 40 mm)');assert.equal(rubber.net,9700);
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Płyty gumowe',rubberVariant:'premium'},null,1)).net,14000);
 console.log('PASS: rubber slabs priced per model and variant from the owner list, matches the website file, separate material.');
+
+// Rubber mats / rolls (owner price list 14.11.2026): separate material, playing area, Standard by default.
+import {MAT_VARIANTS,matNet} from '../lib/surface-finish.ts';
+for(const v of paintSite.mats.variants)assert.equal(MAT_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
+for(const m of paintSite.mats.models)for(const [v,net] of Object.entries(m.net))assert.equal(matNet(m.id,v),net,`${m.name} ${v}`);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>matNet('o1',v)),[6900,9000,12100]);
+const mats=surfaceFinish(calculateProjectQuote({...play,surface:'Maty gumowe'},null,1));
+assert.equal(mats.label,'Maty gumowe · Standard');assert.equal(mats.net,6900);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Maty gumowe',matVariant:'premium'},null,1)).net,12100);
+console.log('PASS: rubber mats priced per model and variant from the owner list, matches the website file, separate material.');
