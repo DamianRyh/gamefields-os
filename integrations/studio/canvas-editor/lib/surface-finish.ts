@@ -73,3 +73,22 @@ export function tilesNet(arenaModel:string|undefined,variant:TileVariant,modular
  if(!area)return null;
  return Math.ceil(area*TILE_VARIANTS[variant].netPerM2/100)*100;
 }
+
+/**
+ * Artificial turf glued on the concrete base. Owner price list 14.11.2026, sale prices net.
+ * Same playing area per model as the tiles (TILE_AREA_M2), rounded up to 100 zł.
+ */
+export type TurfVariant="standard"|"standard-plus"|"premium";
+export const TURF_MATERIAL="Sztuczna trawa 60 mm";
+export const TURF_VARIANTS:Record<TurfVariant,{label:string;netPerM2:number;description:string}>={
+ "standard":{label:"Standard",netPerM2:167,description:"Trawa syntetyczna z montażem na betonie: klejenie pasów, podstawowy zasyp, szczotkowanie i podstawowe linie."},
+ "standard-plus":{label:"Standard+",netPerM2:225,description:"Trawa wyższej klasy: gęstsze włókno i większa odporność na intensywne użytkowanie. Montaż jak w Standard."},
+ "premium":{label:"Premium",netPerM2:292,description:"Trawa najwyższej klasy do najbardziej wymagających obiektów. Montaż jak w Standard."},
+};
+export const TURF_NOTES=["Cena obejmuje trawę, montaż na betonie (klejenie pasów), podstawowy zasyp, szczotkowanie i podstawowe linie.","Podłoże betonowe wyceniamy osobno."];
+
+export function turfNet(arenaModel:string|undefined,variant:TurfVariant,modular?:unknown):number|null{
+ const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ if(!area)return null;
+ return Math.ceil(Math.round(area*TURF_VARIANTS[variant].netPerM2*100)/10000)*100;
+}

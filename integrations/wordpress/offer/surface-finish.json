@@ -366,5 +366,115 @@
     "octagon": 495
    }
   }
+ },
+ "turf": {
+  "name": "Sztuczna trawa na podłożu betonowym",
+  "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
+  "area": "Pole gry modelu (jak płytki), cena zaokrąglona w górę do 100 zł",
+  "includes": [
+   "Trawa syntetyczna, montaż na betonie (klejenie pasów), podstawowy zasyp, szczotkowanie, podstawowe linie"
+  ],
+  "excludes": [
+   "Podłoże betonowe (osobna pozycja)"
+  ],
+  "variants": [
+   {
+    "id": "standard",
+    "name": "Standard",
+    "netPerM2": 167
+   },
+   {
+    "id": "standard-plus",
+    "name": "Standard+",
+    "netPerM2": 225
+   },
+   {
+    "id": "premium",
+    "name": "Premium",
+    "netPerM2": 292
+   }
+  ],
+  "models": [
+   {
+    "id": "w1",
+    "name": "Panna Ring",
+    "areaM2": 19.6,
+    "net": {
+     "standard": 3300,
+     "standard-plus": 4500,
+     "premium": 5800
+    }
+   },
+   {
+    "id": "o1",
+    "name": "Panna Play",
+    "areaM2": 28.3,
+    "net": {
+     "standard": 4800,
+     "standard-plus": 6400,
+     "premium": 8300
+    }
+   },
+   {
+    "id": "p1",
+    "name": "Panna Court",
+    "areaM2": 39.8,
+    "net": {
+     "standard": 6700,
+     "standard-plus": 9000,
+     "premium": 11700
+    }
+   },
+   {
+    "id": "street15",
+    "name": "Boisko 3 na 3",
+    "areaM2": 150,
+    "net": {
+     "standard": 25100,
+     "standard-plus": 33800,
+     "premium": 43800
+    }
+   },
+   {
+    "id": "circle-cage-1",
+    "name": "Panna Octa Cage 90",
+    "areaM2": 25,
+    "net": {
+     "standard": 4200,
+     "standard-plus": 5700,
+     "premium": 7300
+    }
+   },
+   {
+    "id": "circle-cage-2",
+    "name": "Panna Octa Cage 180",
+    "areaM2": 28,
+    "net": {
+     "standard": 4700,
+     "standard-plus": 6300,
+     "premium": 8200
+    }
+   },
+   {
+    "id": "street-field",
+    "name": "Panna Grid",
+    "areaM2": 28.9,
+    "net": {
+     "standard": 4900,
+     "standard-plus": 6600,
+     "premium": 8500
+    }
+   },
+   {
+    "id": "octagon",
+    "name": "Panna Octa",
+    "areaM2": 45,
+    "net": {
+     "standard": 7600,
+     "standard-plus": 10200,
+     "premium": 13200
+    }
+   }
+  ]
  }
 }

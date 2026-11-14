@@ -1,3 +1,9 @@
+## Studio — sztuczna trawa, 2026-11-14
+
+- Materiał „Sztuczna murawa” (`Sztuczna trawa 60 mm`) na konstrukcji: pozycja `turf` „Sztuczna trawa · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard 167 zł/m², Standard+ 225, Premium 292. Metraż jak płytki (pole gry z tabeli właściciela), zaokrąglenie w górę do 100 zł: Panna Play 4800 / 6400 / 8300 zł.
+- Domyślnie Standard; wybór w Nawierzchnia → Materiał. Cena obejmuje trawę, klejenie pasów, podstawowy zasyp, szczotkowanie i podstawowe linie; beton osobno.
+- Wszystkie cztery wykończenia (malowanie, PU/EPDM, płytki, trawa) mają ceny; „do wyceny” zostaje tylko dla piasku i projektów modułowych.
+
 ## Studio — płytki sportowe, 2026-11-14
 
 - Materiał „Płytki modułowe” (`Moduły sportowe`) na konstrukcji: pozycja `tiles` „Płytki sportowe · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard 275 zł/m², Standard+ 325, Premium 400. Metraż: pole gry modelu z tabeli właściciela (`TILE_AREA_M2`, np. Panna Play 28,3 m²), zaokrąglenie w górę do 100 zł: Panna Play 7800 / 9200 / 11 400 zł.
