@@ -15,7 +15,7 @@ const FROM:Record<string,(m:string)=>number|null>={
 /** "The same court with another finish": every material with its price from for this model, one click to switch. */
 /** `priced`: the Studio has a rate card; without it the summary shows no amounts at all. */
 export function FinishComparison({project:p,update,priced}:{project:Project;update:(patch:Partial<Project>)=>void;priced:boolean}){
- if(!priced||!SHOW_PRICE_RANGE||!p.arenaModel||p.modular||!FINISH_AREA_M2[p.arenaModel])return null;
+ if(!priced||p.constructionOnly||!SHOW_PRICE_RANGE||!p.arenaModel||p.modular||!FINISH_AREA_M2[p.arenaModel])return null;
  const model=p.arenaModel,concrete=p.concreteBase!==false?concreteBaseNet(model):null;
  const rows=surfaceMaterials.map(m=>({m,net:FROM[m.value]?.(model)??null})).filter(r=>r.net!==null).sort((a,b)=>a.net!-b.net!);
  return <section className="studio-finish-compare" aria-label="Porównanie wykończeń">

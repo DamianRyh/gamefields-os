@@ -17,15 +17,18 @@ try{
  browser=await chromium.launch({headless:true,args:["--enable-webgl","--use-gl=angle",'--use-angle='+(process.env.GF_TEST_ANGLE||'swiftshader')],...(process.env.PLAYWRIGHT_EXECUTABLE_PATH?{executablePath:process.env.PLAYWRIGHT_EXECUTABLE_PATH}:{})});
 
  const page=await browser.newPage({viewport:{width:1200,height:900}});
- await page.goto(base+'/?arena=o1');
+ await page.goto(base+'/?arena=o1&tool=construction');
  await page.locator('[data-model="o1"][data-ready="true"]').first().waitFor({timeout:90000});
+ // Construction only: the card shows only what is ordered.
+ await page.getByRole('radio',{name:/Sama konstrukcja/}).check();
+ assert.equal(await page.getByRole('checkbox',{name:/Nawierzchnia betonowa/}).count(),0,'no concrete option for construction only');
  await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:'Podsumowanie',exact:true}).click();
- const button=page.getByRole('button',{name:'Pobierz kartę konstrukcji (PDF)'});
+ const button=page.getByRole('button',{name:'Pobierz kartę projektu (PDF)'});
  await button.waitFor({state:'visible'});await page.waitForTimeout(2000);await button.click();
  await page.waitForFunction(()=>Array.from(document.querySelectorAll('iframe')).some(f=>f.contentDocument?.title?.startsWith('Gamefields — karta projektu')),null,{timeout:90000});
  await page.getByText('Otworzyło się okno drukowania. Wybierz „Zapisz jako PDF”.').waitFor({timeout:30000});
  const report=await page.evaluate(()=>{let f=Array.from(document.querySelectorAll('iframe')).find(x=>x.contentDocument?.title?.startsWith('Gamefields — karta projektu'));let d=f.contentDocument;let img=d.querySelector('.img img');return {text:d.body.innerText,image:img?.src,complete:img?.complete,width:img?.naturalWidth}});
- assert.match(report.text,/Karta konstrukcji/);assert.match(report.text,/Cena konstrukcji/);assert.doesNotMatch(report.text,/Materiał nawierzchni|Grafika nawierzchni|Ułożenie nawierzchni/);assert.ok(report.image?.startsWith('data:image/png'));assert.ok(report.width>10);
+ assert.match(report.text,/Karta projektu/);assert.doesNotMatch(report.text,/Nawierzchnia|Materiał|Wzór|Paleta|betonow/);assert.match(report.text,/samą konstrukcję z bramkami/);assert.match(report.text,/Cena konstrukcji/);assert.doesNotMatch(report.text,/Materiał nawierzchni|Grafika nawierzchni|Ułożenie nawierzchni/);assert.ok(report.image?.startsWith('data:image/png'));assert.ok(report.width>10);
  const visible=await page.evaluate(async()=>{const f=Array.from(document.querySelectorAll('iframe')).find(x=>x.contentDocument?.title?.startsWith('Gamefields — karta projektu'));const img=f.contentDocument.querySelector('.img img');const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;const ctx=c.getContext('2d');ctx.drawImage(img,0,0);const p=ctx.getImageData(0,0,c.width,c.height).data;let n=0;for(let i=3;i<p.length;i+=4)if(p[i]>0)n++;return n});assert.ok(visible>100,'construction image must contain visible pixels');
- console.log('PASS: construction-only printable card, model image and construction price');
+ console.log('PASS: construction-only order: printable card with only the construction, model image without surface and construction price');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}
