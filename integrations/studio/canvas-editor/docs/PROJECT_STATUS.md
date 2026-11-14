@@ -1,3 +1,12 @@
+## Studio — karta projektu = całe zamówienie, wybór zakresu, 2026-11-14
+
+- Karta PDF („Pobierz kartę projektu (PDF)”, wcześniej „karta konstrukcji”) pokazuje dokładnie to, co klient zamawia (decyzja właściciela 14.11):
+  - konstrukcja z nawierzchnią: model 3D z nawierzchnią i wzorem, sekcje Konstrukcja i Nawierzchnia (beton, materiał, wariant, metraż wykończenia, wzór, paleta, kolory), wycena w wierszach i razem;
+  - sama konstrukcja: model bez nawierzchni, tylko sekcja Konstrukcja, cena konstrukcji;
+  - sama nawierzchnia (projekt bez konstrukcji): widok z góry, sekcja Nawierzchnia z formatem, wycena indywidualna.
+- Krok Konstrukcja → Model: „Co zamawiasz?” — „Konstrukcja z nawierzchnią” albo „Sama konstrukcja” (`constructionOnly` w projekcie). Sama konstrukcja usuwa z wyceny beton i wykończenie, ukrywa wybór betonu, warianty wykończenia i porównanie.
+- `tests/construction-card-browser.mjs` sprawdza teraz zamówienie samej konstrukcji (bez słów o nawierzchni na karcie); `concrete-base-browser` — pełną kartę zamówienia.
+
 ## Studio — etap 3: porównanie wykończeń, ilustracje nowych materiałów, 2026-11-14
 
 - Podsumowanie: sekcja „Ta sama arena z innym wykończeniem” (`components/finish-comparison.tsx`): 7 materiałów od najtańszego, cena „od” (najtańszy wariant) razem z betonem, przycisk „Wybierz” zmienia materiał w projekcie. Ukryta bez karty stawek (wtedy podsumowanie nie pokazuje kwot).

@@ -118,11 +118,11 @@ try{
  await compare.getByRole('button',{name:'Wybierz: Malowanie farbą sportową'}).click();
  await badgeIs(`Nawierzchnia ${pl(8600+5600)}\\s?zł netto$`);
  // PDF card: the same rows.
- const button=page.getByRole('button',{name:'Pobierz kartę konstrukcji (PDF)'});
+ const button=page.getByRole('button',{name:'Pobierz kartę projektu (PDF)'});
  await button.waitFor({state:'visible'});await page.waitForTimeout(2000);await button.click();
  await page.waitForFunction(()=>Array.from(document.querySelectorAll('iframe')).some(f=>f.contentDocument?.title?.startsWith('Gamefields — karta projektu')),null,{timeout:90000});
  const card=await page.evaluate(()=>{const f=Array.from(document.querySelectorAll('iframe')).find(x=>x.contentDocument?.title?.startsWith('Gamefields — karta projektu'));return {text:f.contentDocument.body.innerText,html:f.contentDocument.documentElement.outerHTML}});
- assert.match(card.text,/Cena konstrukcji i nawierzchni/);assert.match(card.text,/Malowanie · Wzór zaawansowany\s+5\s?600/);assert.match(card.text,new RegExp(`Razem\\s+${pl(arena+8600+5600)}\\s?zł`));assert.match(card.text,/Nawierzchnia betonowa\s+Tak, bez wykończenia/);
+ assert.match(card.text,/Cena konstrukcji i nawierzchni/);assert.match(card.text,/Malowanie · Wzór zaawansowany\s+5\s?600/);assert.match(card.text,new RegExp(`Razem\\s+${pl(arena+8600+5600)}\\s?zł`));assert.match(card.text,/Nawierzchnia betonowa\s+Tak, płyta 12 cm/);assert.match(card.text,/Materiał\s+Malowanie farbą sportową/);assert.match(card.text,/Wariant\s+Wzór zaawansowany/);assert.match(card.text,/Wzór\s+\S+/);assert.match(card.text,/Powierzchnia wykończenia\s+30,1 m²/);assert.match(card.text,/Karta projektu/);
  const c=await browser.newPage({viewport:{width:794,height:1123}});await c.setContent(card.html);await c.screenshot({path:'test-results/concrete-card.png'}).catch(()=>{});
  // Without concrete (own base): painting stays, concrete row goes.
  await page.keyboard.press('Escape').catch(()=>{});

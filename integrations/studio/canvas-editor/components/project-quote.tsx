@@ -35,7 +35,7 @@ export function ProjectQuote({quote,title,label="Cena orientacyjna projektu",hea
    <Heading>{title||(split?"Cena konstrukcji i nawierzchni":"Cena konstrukcji")}</Heading>
    <div role="status" aria-live="polite">{quote.loading||c===null?<p>Przeliczam aktualną konfigurację…</p>:!split?<>
     <p className="studio-quote-total"><strong>{money(c)}</strong> netto</p>
-    <p className="studio-quote-range-note">Konstrukcja z bramkami w wybranym modelu. Nawierzchnię, montaż, transport i przygotowanie podłoża wyceniamy indywidualnie, po zdjęciach placu.</p>
+    <p className="studio-quote-range-note">{data?.exclusions.some(e=>e.startsWith("Zamówienie obejmuje samą konstrukcję"))?"Zamawiasz samą konstrukcję z bramkami. Montaż i transport wyceniamy indywidualnie, po zdjęciach placu.":"Konstrukcja z bramkami w wybranym modelu. Nawierzchnię, montaż, transport i przygotowanie podłoża wyceniamy indywidualnie, po zdjęciach placu."}</p>
    </>:<>
     <dl className="studio-quote-items studio-quote-split">
      <div><dt>Konstrukcja boiska<small>Konstrukcja z bramkami w wybranym modelu</small></dt><dd>{money(c)} netto</dd></div>

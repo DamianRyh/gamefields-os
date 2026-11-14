@@ -9,6 +9,7 @@ const money=(v:number)=>new Intl.NumberFormat("pl-PL",{style:"currency",currency
 /** Painting variant on the concrete base. Default: chosen from the design; the customer can pick another. */
 export function PaintVariantChoice({project:p,update,quote}:{project:Project;update:(patch:Partial<Project>)=>void;quote:QuoteState}){
  if(!p.arenaModel||p.modular||!FINISH_AREA_M2[p.arenaModel])return null;
+ if(p.constructionOnly)return <p className="studio-order-note">Zamawiasz samą konstrukcję. Materiał i wzór są tylko podglądem; nawierzchnię dodasz w kroku Konstrukcja → „Co zamawiasz?”.</p>;
  if(p.surface===EPDM_MATERIAL)return <fieldset className="studio-concrete-base studio-paint-variant"><legend>Nawierzchnia EPDM wylewana · ok. {areaLabel(FINISH_AREA_M2[p.arenaModel])} m²</legend>
   {(Object.keys(EPDM_VARIANTS) as EpdmVariant[]).map(id=>{const net=epdmNet(p.arenaModel,id);return <label key={id}><input type="radio" name="epdm-variant" checked={(p.epdmVariant||"standard")===id} onChange={()=>update({epdmVariant:id==="standard"?undefined:id})}/><span><b>{EPDM_VARIANTS[id].label}</b>{SHOW_PRICE_RANGE&&net!==null?<small>{money(net)} netto</small>:null}<small>{EPDM_VARIANTS[id].netPerM2} zł/m². {EPDM_VARIANTS[id].description}</small></span></label>})}
   {EPDM_NOTES.map(t=><p key={t}>{t}</p>)}
