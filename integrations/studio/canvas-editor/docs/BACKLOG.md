@@ -2,7 +2,8 @@
 
 - [x] Malowanie (4 warianty, cennik 13.11).
 - [x] PU/EPDM (3 warianty, cennik 14.11).
-- [ ] Płytki sportowe, sztuczna trawa: ceny od właściciela (dziś „do wyceny”).
+- [x] Płytki sportowe (3 warianty, cennik 14.11).
+- [ ] Sztuczna trawa: ceny od właściciela (dziś „do wyceny”).
 - [ ] Linie sportowe na EPDM (farba PU): cena osobnej pozycji.
 - [ ] Strona: pokazać ceny nawierzchni betonowej obok cen konstrukcji (`offer/concrete-base.json`).
 

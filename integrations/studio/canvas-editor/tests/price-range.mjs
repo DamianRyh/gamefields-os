@@ -71,7 +71,7 @@ assert.equal(autoPaintVariant({graphic:true,colors:3,complexity:1,gradient:true}
 const painted=calculateProjectQuote({...play,surface:'Akryl sportowy',graphicOpacity:0,base:'#1d5147',zone:'#1d5147'},null,1);
 assert.deepEqual(surfaceFinish(painted),{label:'Malowanie · Jednokolorowa',net:2500,note:surfaceFinish(painted).note});
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'pattern'},null,1)).net,4800,'customer choice wins');
-assert.deepEqual(surfaceFinish(calculateProjectQuote({...play,surface:'Moduły sportowe'},null,1)),{label:'Wykończenie · Płytki modułowe',net:null,note:'Cenę tego wykończenia podamy indywidualnie.'});
+assert.deepEqual(surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 60 mm'},null,1)),{label:'Wykończenie · Sztuczna murawa',net:null,note:'Cenę tego wykończenia podamy indywidualnie.'});
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Beton sportowy'},null,1)),null,'bare concrete has no finish');
 console.log('PASS: painting priced per model and variant from the owner list, matches the website file, auto variant from the design, other finishes individual.');
 
@@ -84,3 +84,17 @@ const epdm=surfaceFinish(calculateProjectQuote({...play,surface:'EPDM'},null,1))
 assert.equal(epdm.label,'Nawierzchnia PU/EPDM · Standard (natrysk)');assert.equal(epdm.net,8000);
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'EPDM',epdmVariant:'premium'},null,1)).net,12800);
 console.log('PASS: PU/EPDM priced per model and variant from the owner list, matches the website file, Standard by default.');
+
+// Sports tiles (owner price list 14.11.2026): owner's tiled area per model, Standard by default.
+import {TILE_VARIANTS,tilesNet} from '../lib/surface-finish.ts';
+for(const v of paintSite.tiles.variants)assert.equal(TILE_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
+for(const m of paintSite.tiles.models)for(const [v,net] of Object.entries(m.net))assert.equal(tilesNet(m.id,v),net,`${m.name} ${v}`);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>tilesNet('o1',v)),[7800,9200,11400]);
+assert.equal(tilesNet('street15','standard'),41300);
+const tiles=surfaceFinish(calculateProjectQuote({...play,surface:'Moduły sportowe'},null,1));
+assert.equal(tiles.label,'Płytki sportowe · Standard');assert.equal(tiles.net,7800);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Moduły sportowe',tileVariant:'premium'},null,1)).net,11400);
+import {tileCount} from '../lib/surface-finish.ts';
+for(const m of paintSite.tiles.models)assert.equal(tileCount(m.areaM2),paintSite.tiles.internalTakeOff.tilesPerModel[m.id],`${m.name} tiles`);
+assert.equal(tileCount(150),1650);assert.doesNotMatch(tiles.note,/płytek/,'tile count is internal');assert.match(tiles.note,/Około 28,3 m²/);
+console.log('PASS: sports tiles priced per model and variant from the owner list, matches the website file, Standard by default.');

@@ -55,6 +55,14 @@ try{
  assert.match(epdmText,new RegExp(`Razem: ${pl(arena+9100+12800)}\\s?zł netto`));
  await shot('epdm-summary');
  await page.getByRole('button',{name:'Wróć do edycji'}).click();
+ // Sports tiles: Standard by default, Premium on request.
+ await materials.getByRole('button',{name:'Płytki modułowe',exact:true}).click();
+ const tileStd=page.getByRole('radio',{name:/^Standard(?!\+)/});await page.locator('.studio-paint-variant legend',{hasText:'Płytki sportowe'}).waitFor({timeout:30000});
+ assert.ok(await tileStd.isChecked(),'Standard tiles by default');
+ await badgeIs(`Nawierzchnia ${pl(9100+7800)}\\s?zł netto$`);
+ await page.getByRole('radio',{name:/^Premium/}).check();
+ await badgeIs(`Nawierzchnia ${pl(9100+11400)}\\s?zł netto$`);
+ await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('tiles-choice');
  await materials.getByRole('button',{name:'Malowana',exact:true}).click();
  await badgeIs(`Nawierzchnia ${pl(9100+5900)}\\s?zł netto$`);
  // Summary: separate rows and the total.
@@ -78,5 +86,5 @@ try{
  await page.keyboard.press('Escape').catch(()=>{});
  await page.goto(base+'/?arena=o1&tool=construction');await toggle.waitFor({timeout:60000});
  await toggle.uncheck();await badgeIs(`Nawierzchnia ${pl(5900)}\\s?zł netto$`);
- console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer; PU/EPDM variants priced');
+ console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer; PU/EPDM and sports tiles variants priced');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

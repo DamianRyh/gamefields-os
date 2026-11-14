@@ -237,5 +237,134 @@
     }
    }
   ]
+ },
+ "tiles": {
+  "name": "Płytki modułowe sportowe (PP interlocking) na podłożu betonowym",
+  "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
+  "area": "Pole gry modelu z tabeli właściciela, cena zaokrąglona w górę do 100 zł",
+  "includes": [
+   "Płytki, montaż, profile krawędziowe i rampy, podstawowe oznakowanie linii"
+  ],
+  "excludes": [
+   "Podłoże betonowe (osobna pozycja)"
+  ],
+  "variants": [
+   {
+    "id": "standard",
+    "name": "Standard",
+    "netPerM2": 275,
+    "description": "PP 15–18 mm, outdoor multi-sport, podstawowe kolory i linie, drenaż."
+   },
+   {
+    "id": "standard-plus",
+    "name": "Standard+",
+    "netPerM2": 325,
+    "description": "PP 18–19 mm, lepsza amortyzacja i odporność UV, więcej kolorów oznakowania."
+   },
+   {
+    "id": "premium",
+    "name": "Premium",
+    "netPerM2": 400,
+    "description": "PP 19 mm+, wysoka amortyzacja, gwarancja 5–10 lat."
+   }
+  ],
+  "models": [
+   {
+    "id": "w1",
+    "name": "Panna Ring",
+    "areaM2": 19.6,
+    "net": {
+     "standard": 5400,
+     "standard-plus": 6400,
+     "premium": 7900
+    }
+   },
+   {
+    "id": "o1",
+    "name": "Panna Play",
+    "areaM2": 28.3,
+    "net": {
+     "standard": 7800,
+     "standard-plus": 9200,
+     "premium": 11400
+    }
+   },
+   {
+    "id": "p1",
+    "name": "Panna Court",
+    "areaM2": 39.8,
+    "net": {
+     "standard": 11000,
+     "standard-plus": 13000,
+     "premium": 16000
+    }
+   },
+   {
+    "id": "street15",
+    "name": "Boisko 3 na 3",
+    "areaM2": 150,
+    "net": {
+     "standard": 41300,
+     "standard-plus": 48800,
+     "premium": 60000
+    }
+   },
+   {
+    "id": "circle-cage-1",
+    "name": "Panna Octa Cage 90",
+    "areaM2": 25,
+    "net": {
+     "standard": 6900,
+     "standard-plus": 8200,
+     "premium": 10000
+    }
+   },
+   {
+    "id": "circle-cage-2",
+    "name": "Panna Octa Cage 180",
+    "areaM2": 28,
+    "net": {
+     "standard": 7700,
+     "standard-plus": 9100,
+     "premium": 11200
+    }
+   },
+   {
+    "id": "street-field",
+    "name": "Panna Grid",
+    "areaM2": 28.9,
+    "net": {
+     "standard": 8000,
+     "standard-plus": 9400,
+     "premium": 11600
+    }
+   },
+   {
+    "id": "octagon",
+    "name": "Panna Octa",
+    "areaM2": 45,
+    "net": {
+     "standard": 12400,
+     "standard-plus": 14700,
+     "premium": 18000
+    }
+   }
+  ],
+  "internalTakeOff": {
+   "note": "Tylko do naszych przeliczeń i zamówień. Nie pokazywać klientowi (na stronie i w Studio tylko m²).",
+   "tilesPerM2": 11,
+   "tileSize": "30,5 × 30,5 cm (typ Gerflor PowerGame+, 19 mm)",
+   "orderWaste": "+5–8% na docinki i odpady przy zamówieniu",
+   "tilesPerModel": {
+    "w1": 216,
+    "o1": 312,
+    "p1": 438,
+    "street15": 1650,
+    "circle-cage-1": 275,
+    "circle-cage-2": 308,
+    "street-field": 318,
+    "octagon": 495
+   }
+  }
  }
 }
