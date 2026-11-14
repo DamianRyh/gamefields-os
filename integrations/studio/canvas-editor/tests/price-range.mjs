@@ -109,3 +109,14 @@ const turf=surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 
 assert.equal(turf.label,'Sztuczna trawa · Standard');assert.equal(turf.net,4800);
 assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Sztuczna trawa 60 mm',turfVariant:'premium'},null,1)).net,8300);
 console.log('PASS: artificial turf priced per model and variant from the owner list, matches the website file, Standard by default.');
+
+// Acrylic hard court (owner price list 14.11.2026): separate material, playing area, Standard by default.
+import {ACRYLIC_VARIANTS,acrylicNet} from '../lib/surface-finish.ts';
+for(const v of paintSite.acrylic.variants)assert.equal(ACRYLIC_VARIANTS[v.id].netPerM2,v.netPerM2,v.name);
+for(const m of paintSite.acrylic.models)for(const [v,net] of Object.entries(m.net))assert.equal(acrylicNet(m.id,v),net,`${m.name} ${v}`);
+assert.deepEqual(['standard','standard-plus','premium'].map(v=>acrylicNet('o1',v)),[5700,7600,9700]);
+const acrylic=surfaceFinish(calculateProjectQuote({...play,surface:'Akryl Hard Court'},null,1));
+assert.equal(acrylic.label,'Akryl Hard Court · Standard (Hard Court)');assert.equal(acrylic.net,5700);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl Hard Court',acrylicVariant:'premium'},null,1)).net,9700);
+assert.equal(surfaceFinish(calculateProjectQuote({...play,surface:'Akryl sportowy',paintVariant:'plain'},null,1)).net,2500,'painting unchanged');
+console.log('PASS: acrylic hard court priced per model and variant from the owner list, matches the website file, separate from painting.');

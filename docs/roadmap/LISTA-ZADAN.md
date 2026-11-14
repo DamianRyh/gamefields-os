@@ -15,7 +15,8 @@ Ostatnia aktualizacja: 13.11.2026
 | 11 | Studio: malowanie nawierzchni, 4 warianty (78 / 100 / 150 / 183 zł/m²), wariant dobrany do projektu | ✅ PR #91, `lib/surface-finish.ts`, `offer/surface-finish.json` | Studio w Sites (polecenie 7 obejmuje oba) | ⏳ |
 | 12 | Studio: nawierzchnia PU/EPDM, 3 warianty (250 / 317 / 400 zł/m²) | ✅ PR #92, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ ceny orientacyjne, do potwierdzenia ofertami wykonawców przed publikacją na stronie |
 | 13 | Studio: płytki sportowe, 3 warianty (275 / 325 / 400 zł/m²); liczba płytek tylko wewnętrznie | ✅ PR #93, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
-| 14 | Studio: sztuczna trawa, 3 warianty (167 / 225 / 292 zł/m²) | ✅ PR (ten), `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
+| 14 | Studio: sztuczna trawa, 3 warianty (167 / 225 / 292 zł/m²) | ✅ PR #94, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
+| 14a | Studio: nawierzchnia akrylowa Hard Court jako osobny materiał, 3 warianty (200 / 267 / 342 zł/m²) | ✅ PR (ten), `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |
 | 2 | Ceny konstrukcji „od” na stronie głównej i w FAQ (tabela właściciela 13.11) | ✅ PR #84, `offer/price-from.json` | ✅ strona główna, sprawdzone 13.11 | ✅ |
