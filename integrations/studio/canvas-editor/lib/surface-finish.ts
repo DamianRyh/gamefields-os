@@ -92,3 +92,22 @@ export function turfNet(arenaModel:string|undefined,variant:TurfVariant,modular?
  if(!area)return null;
  return Math.ceil(Math.round(area*TURF_VARIANTS[variant].netPerM2*100)/10000)*100;
 }
+
+/**
+ * Acrylic hard court system on the concrete base (owner price list 14.11.2026, sale prices net).
+ * Separate material from painting. Playing area per model as tiles and turf, rounded up to 100 zł.
+ */
+export type AcrylicVariant="standard"|"standard-plus"|"premium";
+export const ACRYLIC_MATERIAL="Akryl Hard Court";
+export const ACRYLIC_VARIANTS:Record<AcrylicVariant,{label:string;netPerM2:number;description:string}>={
+ "standard":{label:"Standard (Hard Court)",netPerM2:200,description:"Klasyczny hard court: 4–6 warstw, ok. 1–2 mm, twardy i szybki. Korty tenisowe, koszykówka, boiska wielofunkcyjne."},
+ "standard-plus":{label:"Standard+ (wzmocniony)",netPerM2:267,description:"Więcej warstw i lekka amortyzacja, ok. 2–3,5 mm. Lepszy komfort przy intensywnym użytkowaniu."},
+ "premium":{label:"Premium (Cushioned)",netPerM2:342,description:"Z warstwami gumowymi, 4–8 mm: wysoka amortyzacja i ochrona stawów, klasa systemów Plexipave / Laykold."},
+};
+export const ACRYLIC_NOTES=["Cena obejmuje nawierzchnię akrylową na gotowym betonie i podstawowe linie.","Przygotowanie podłoża (frezowanie, naprawa pęknięć) i transport wyceniamy osobno."];
+
+export function acrylicNet(arenaModel:string|undefined,variant:AcrylicVariant,modular?:unknown):number|null{
+ const area=arenaModel&&!modular?TILE_AREA_M2[arenaModel]:undefined;
+ if(!area)return null;
+ return Math.ceil(Math.round(area*ACRYLIC_VARIANTS[variant].netPerM2*100)/10000)*100;
+}

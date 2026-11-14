@@ -44,7 +44,7 @@ const obj=(kind:ObjectKind,name:string,x:number,y:number,extra:Partial<EditorObj
 const initial:Project={surfaceModel:"street-football-3x3",courtShape:"rectangle",id:"GF-001",name:"Street Football 3×3 — projekt",type:"Nowe boisko",sport:"Piłka nożna 3×3",length:15,width:10,surface:"EPDM",base:"#6336F5",zone:"#F3E68A",outside:"#4A122B",lineColor:"#ffffff",lines:true,pattern:"Organic Flow",patternFamily:"organic-flow",patternPalette:"court-culture",patternVariant:6,patternDensity:100,gradientEnabled:false,textureEnabled:false,shadowEnabled:true,artistFinishEnabled:false,creativity:0,shadowIntensity:25,graphicOpacity:100,graphicScale:100,graphicRotation:0,scene:"day",objects:[],status:"Szkic",date:"29.09.2026"};
 const modules=[["Design",Paintbrush],["Wyposażenie",Goal],["Wymiary i wycena",Ruler]] as const;
 const sports=sportProfiles.map(x=>x.sport);
-const surfaces=["Akryl sportowy","EPDM","Sztuczna trawa 60 mm","Moduły sportowe","Piasek sportowy","Beton sportowy"];
+const surfaces=["Akryl sportowy","EPDM","Sztuczna trawa 60 mm","Moduły sportowe","Piasek sportowy","Beton sportowy","Akryl Hard Court"];
 type RealisticPreview={src:string;alt:string};
 const realisticPreviews:Partial<Record<string,Record<string,RealisticPreview>>>= {
  "Piłka nożna 3×3":{

@@ -476,5 +476,120 @@
     }
    }
   ]
+ },
+ "acrylic": {
+  "name": "Nawierzchnia akrylowa Hard Court na podłożu betonowym",
+  "source": "Cennik właściciela 14.11.2026 (ceny sprzedaży)",
+  "area": "Pole gry modelu (jak płytki i trawa), cena zaokrąglona w górę do 100 zł",
+  "includes": [
+   "Nawierzchnia akrylowa na gotowym betonie, podstawowe linie"
+  ],
+  "excludes": [
+   "Podłoże betonowe (osobna pozycja)",
+   "Przygotowanie podłoża (frezowanie, naprawa pęknięć)",
+   "Transport przy małych powierzchniach"
+  ],
+  "variants": [
+   {
+    "id": "standard",
+    "name": "Standard (Hard Court)",
+    "netPerM2": 200,
+    "description": "Klasyczny hard court, 4–6 warstw, ok. 1–2 mm, twardy i szybki."
+   },
+   {
+    "id": "standard-plus",
+    "name": "Standard+ (wzmocniony)",
+    "netPerM2": 267,
+    "description": "Więcej warstw i lekka amortyzacja, ok. 2–3,5 mm."
+   },
+   {
+    "id": "premium",
+    "name": "Premium (Cushioned)",
+    "netPerM2": 342,
+    "description": "Warstwy gumowe 4–8 mm, wysoka amortyzacja, klasa Plexipave / Laykold."
+   }
+  ],
+  "models": [
+   {
+    "id": "w1",
+    "name": "Panna Ring",
+    "areaM2": 19.6,
+    "net": {
+     "standard": 4000,
+     "standard-plus": 5300,
+     "premium": 6800
+    }
+   },
+   {
+    "id": "o1",
+    "name": "Panna Play",
+    "areaM2": 28.3,
+    "net": {
+     "standard": 5700,
+     "standard-plus": 7600,
+     "premium": 9700
+    }
+   },
+   {
+    "id": "p1",
+    "name": "Panna Court",
+    "areaM2": 39.8,
+    "net": {
+     "standard": 8000,
+     "standard-plus": 10700,
+     "premium": 13700
+    }
+   },
+   {
+    "id": "street15",
+    "name": "Boisko 3 na 3",
+    "areaM2": 150,
+    "net": {
+     "standard": 30000,
+     "standard-plus": 40100,
+     "premium": 51300
+    }
+   },
+   {
+    "id": "circle-cage-1",
+    "name": "Panna Octa Cage 90",
+    "areaM2": 25,
+    "net": {
+     "standard": 5000,
+     "standard-plus": 6700,
+     "premium": 8600
+    }
+   },
+   {
+    "id": "circle-cage-2",
+    "name": "Panna Octa Cage 180",
+    "areaM2": 28,
+    "net": {
+     "standard": 5600,
+     "standard-plus": 7500,
+     "premium": 9600
+    }
+   },
+   {
+    "id": "street-field",
+    "name": "Panna Grid",
+    "areaM2": 28.9,
+    "net": {
+     "standard": 5800,
+     "standard-plus": 7800,
+     "premium": 9900
+    }
+   },
+   {
+    "id": "octagon",
+    "name": "Panna Octa",
+    "areaM2": 45,
+    "net": {
+     "standard": 9000,
+     "standard-plus": 12100,
+     "premium": 15400
+    }
+   }
+  ]
  }
 }

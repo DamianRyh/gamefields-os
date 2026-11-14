@@ -1,3 +1,9 @@
+## Studio — nawierzchnia akrylowa Hard Court, 2026-11-14
+
+- Nowy materiał „Akryl Hard Court” (wartość `Akryl Hard Court` w `projectSchema.surface`, piąty w karuzeli, wygląd 3D jak „Malowana”). Osobny od malowania farbą (decyzja właściciela 14.11).
+- Pozycja `acrylic` „Akryl Hard Court · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard 200 zł/m², Standard+ 267, Premium (Cushioned) 342. Metraż jak płytki i trawa (pole gry), zaokrąglenie w górę do 100 zł: Panna Play 5700 / 7600 / 9700 zł. Domyślnie Standard.
+- `tests/studio-visual-browser.mjs` nadal nieaktualny (menu „Narzędzia edycji”), bez związku z tą zmianą.
+
 ## Studio — sztuczna trawa, 2026-11-14
 
 - Materiał „Sztuczna murawa” (`Sztuczna trawa 60 mm`) na konstrukcji: pozycja `turf` „Sztuczna trawa · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard 167 zł/m², Standard+ 225, Premium 292. Metraż jak płytki (pole gry z tabeli właściciela), zaokrąglenie w górę do 100 zł: Panna Play 4800 / 6400 / 8300 zł.
