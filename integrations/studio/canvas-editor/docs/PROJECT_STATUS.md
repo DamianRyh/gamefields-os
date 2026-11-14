@@ -1,3 +1,8 @@
+## Studio — etap 3: porównanie wykończeń, ilustracje nowych materiałów, 2026-11-14
+
+- Podsumowanie: sekcja „Ta sama arena z innym wykończeniem” (`components/finish-comparison.tsx`): 7 materiałów od najtańszego, cena „od” (najtańszy wariant) razem z betonem, przycisk „Wybierz” zmienia materiał w projekcie. Ukryta bez karty stawek (wtedy podsumowanie nie pokazuje kwot).
+- Lista materiałów: miniatury dla Akryl Hard Court, Płyty gumowe, Maty gumowe (`public/surfaces/catalogue/{akryl,plyty-gumowe,maty-gumowe}-macro.webp`). To wygenerowane ilustracje faktury (`tools/studio/gen_material_macros.py`), nie zdjęcia producentów; źródła zdjęć z otwartą licencją (Wikimedia Commons, Pexels, Unsplash) są niedostępne z tego środowiska. Do podmiany na zdjęcia właściciela.
+
 ## Studio — etap 2: lista materiałów, ceny na kartach modeli, beton +10%, 2026-11-14
 
 - Nawierzchnia betonowa liczona jak wykończenia (decyzja właściciela 14.11): powierzchnia konstrukcji z modelu +10% × 283 zł/m², zaokrąglenie w górę do 100 zł. Panna Play 30,1 m² → 8600 zł (było 9100 z tabeli +15%). `CONCRETE_BASE_NET` liczone z `FINISH_AREA_M2`; `offer/concrete-base.json` przeliczony.

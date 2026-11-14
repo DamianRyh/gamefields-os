@@ -107,6 +107,16 @@ try{
  assert.match(text,/Malowanie · Wzór zaawansowany[\s\S]*5\s?600\s?zł netto/);
  assert.match(text,new RegExp(`Razem: ${pl(arena+8600+5600)}\\s?zł netto`));
  await shot('concrete-summary');
+ // Finish comparison: all materials with prices for this model, one click switches the material.
+ const compare=page.locator('.studio-finish-compare');await compare.waitFor();
+ assert.equal(await compare.locator('li').count(),7,'seven finishes compared');
+ assert.match(await compare.innerText(),/Sztuczna trawa[\s\S]*od 13\s?700\s?zł/);
+ await compare.getByRole('button',{name:'Wybierz: Sztuczna trawa'}).click();
+ await badgeIs(`Nawierzchnia ${pl(8600+8800)}\\s?zł netto$`);
+ await compare.locator('li[aria-current=true]',{hasText:'Sztuczna trawa'}).waitFor();
+ await compare.scrollIntoViewIfNeeded();await shot('finish-compare');
+ await compare.getByRole('button',{name:'Wybierz: Malowanie farbą sportową'}).click();
+ await badgeIs(`Nawierzchnia ${pl(8600+5600)}\\s?zł netto$`);
  // PDF card: the same rows.
  const button=page.getByRole('button',{name:'Pobierz kartę konstrukcji (PDF)'});
  await button.waitFor({state:'visible'});await page.waitForTimeout(2000);await button.click();
@@ -118,5 +128,5 @@ try{
  await page.keyboard.press('Escape').catch(()=>{});
  await page.goto(base+'/?arena=o1&tool=construction');await toggle.waitFor({timeout:60000});
  await toggle.uncheck();await badgeIs(`Nawierzchnia ${pl(5600)}\\s?zł netto$`);
- console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer; PU/EPDM, sports tiles, artificial turf, acrylic hard court, rubber slab and rubber mat variants priced');
+ console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer; PU/EPDM, sports tiles, artificial turf, acrylic hard court, rubber slab and rubber mat variants priced; finish comparison switches the material');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

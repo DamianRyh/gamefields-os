@@ -19,6 +19,27 @@
       "asset": "trawa-macro.webp",
       "sha256": "5698acf617bf8ef46716650a9f66e140dff2bbae96f234991a7d5b138b9fc76f",
       "bytes": 395960
+    },
+    {
+      "id": "akryl",
+      "asset": "akryl-macro.webp",
+      "sha256": "6383ee57a442fa35e9232d0e0dc332a22174e22cc1d1ad43efd99946dc50b717",
+      "bytes": 325420,
+      "source": "tools/studio/gen_material_macros.py (procedural illustration, 14.11.2026; replace with a licensed photo)"
+    },
+    {
+      "id": "plyty-gumowe",
+      "asset": "plyty-gumowe-macro.webp",
+      "sha256": "168f521921411a3fb9fee7812236ae5f34bc3ad9457c2922f8dade67ca29d938",
+      "bytes": 207824,
+      "source": "tools/studio/gen_material_macros.py (procedural illustration, 14.11.2026; replace with a licensed photo)"
+    },
+    {
+      "id": "maty-gumowe",
+      "asset": "maty-gumowe-macro.webp",
+      "sha256": "9352daf64331fb172ec3d4f2f24bb57c4c160574610954b13d4cfe0836061214",
+      "bytes": 231102,
+      "source": "tools/studio/gen_material_macros.py (procedural illustration, 14.11.2026; replace with a licensed photo)"
     }
   ]
 }

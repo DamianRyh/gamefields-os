@@ -20,8 +20,9 @@ Ostatnia aktualizacja: 13.11.2026
 | 14b | Studio: płyty gumowe SBR / EPDM jako osobny materiał, 3 warianty (342 / 400 / 492 zł/m²) | ✅ PR #96, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
 | 14c | Studio: maty / role gumowe jako osobny materiał, 3 warianty (242 / 317 / 425 zł/m²) | ✅ PR #97, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
 | 14d | Studio: jeden metraż wykończeń (konstrukcja +10%), nowe nazwy materiałów, poprawki czytelności (etap 1) | ✅ PR #98 | Studio w Sites (polecenie 7) | ⏳ |
-| 14e | Studio etap 2: lista materiałów, ceny na kartach modeli, beton też +10% | ✅ PR (ten) | Studio w Sites (polecenie 7) | ⏳ |
-| 14f | Studio etap 3: porównanie wykończeń w podsumowaniu, zdjęcia makro | ⬜ | | ⬜ |
+| 14e | Studio etap 2: lista materiałów, ceny na kartach modeli, beton też +10% | ✅ PR #99 | Studio w Sites (polecenie 7) | ⏳ |
+| 14f | Studio etap 3: porównanie wykończeń w podsumowaniu, ilustracje akrylu, płyt i mat | ✅ PR (ten) | Studio w Sites (polecenie 7) | ⏳ |
+| 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |
 | 2 | Ceny konstrukcji „od” na stronie głównej i w FAQ (tabela właściciela 13.11) | ✅ PR #84, `offer/price-from.json` | ✅ strona główna, sprawdzone 13.11 | ✅ |
