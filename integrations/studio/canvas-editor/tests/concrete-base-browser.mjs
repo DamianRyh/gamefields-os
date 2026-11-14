@@ -36,67 +36,67 @@ try{
  const auto=page.getByRole('radio',{name:/Dobierz do projektu/});await auto.waitFor({timeout:30000});
  assert.ok(await auto.isChecked(),'variant chosen from the design by default');
  await page.getByRole('radio',{name:/^Jednokolorowa(?! z)/}).check();
- await badgeIs(`Nawierzchnia ${pl(9100+2500)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+2400)}\\s?zł netto$`);
  await page.getByRole('radio',{name:/Wzór zaawansowany/}).check();
- await badgeIs(`Nawierzchnia ${pl(9100+5900)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+5600)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('paint-choice');
  // PU/EPDM: switch the material to Granulat, pick a variant, then back to painting.
  const materials=page.locator('[aria-label="Materiał nawierzchni"]');
- await materials.getByRole('button',{name:'Granulat',exact:true}).click();
+ await materials.getByRole('button',{name:'Nawierzchnia EPDM wylewana',exact:true}).click();
  const std=page.getByRole('radio',{name:/^Standard \(natrysk\)/});await std.waitFor({timeout:30000});
  assert.ok(await std.isChecked(),'Standard EPDM by default');
- await badgeIs(`Nawierzchnia ${pl(9100+8000)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+7600)}\\s?zł netto$`);
  await page.getByRole('radio',{name:/^Premium/}).check();
- await badgeIs(`Nawierzchnia ${pl(9100+12800)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+12100)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('epdm-choice');
  await steps.getByRole('button',{name:'Podsumowanie',exact:true}).click();
  const epdmText=await page.locator('.studio-project-quote').first().innerText();
- assert.match(epdmText,/Nawierzchnia PU\/EPDM · Premium[\s\S]*12\s?800\s?zł netto/);
- assert.match(epdmText,new RegExp(`Razem: ${pl(arena+9100+12800)}\\s?zł netto`));
+ assert.match(epdmText,/Nawierzchnia EPDM wylewana · Premium[\s\S]*12\s?100\s?zł netto/);
+ assert.match(epdmText,new RegExp(`Razem: ${pl(arena+9100+12100)}\\s?zł netto`));
  await shot('epdm-summary');
  await page.getByRole('button',{name:'Wróć do edycji'}).click();
  // Sports tiles: Standard by default, Premium on request.
- await materials.getByRole('button',{name:'Płytki modułowe',exact:true}).click();
- const tileStd=page.getByRole('radio',{name:/^Standard(?!\+)/});await page.locator('.studio-paint-variant legend',{hasText:'Płytki sportowe'}).waitFor({timeout:30000});
+ await materials.getByRole('button',{name:'Płytki sportowe PP',exact:true}).click();
+ const tileStd=page.getByRole('radio',{name:/^Standard(?!\+)/});await page.locator('.studio-paint-variant legend',{hasText:'Płytki sportowe PP'}).waitFor({timeout:30000});
  assert.ok(await tileStd.isChecked(),'Standard tiles by default');
- await badgeIs(`Nawierzchnia ${pl(9100+7800)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+8300)}\\s?zł netto$`);
  await page.getByRole('radio',{name:/^Premium/}).check();
- await badgeIs(`Nawierzchnia ${pl(9100+11400)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+12100)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('tiles-choice');
  // Artificial turf: Standard by default, Premium on request.
- await materials.getByRole('button',{name:'Sztuczna murawa',exact:true}).click();
+ await materials.getByRole('button',{name:'Sztuczna trawa',exact:true}).click();
  await page.locator('.studio-paint-variant legend',{hasText:'Sztuczna trawa'}).waitFor({timeout:30000});
  assert.ok(await page.getByRole('radio',{name:/^Standard(?!\+)/}).isChecked(),'Standard turf by default');
- await badgeIs(`Nawierzchnia ${pl(9100+4800)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+5100)}\\s?zł netto$`);
  await page.getByRole('radio',{name:/^Premium/}).check();
- await badgeIs(`Nawierzchnia ${pl(9100+8300)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+8800)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('turf-choice');
  // Acrylic hard court: separate material, Standard by default.
  await materials.getByRole('button',{name:'Akryl Hard Court',exact:true}).click();
  await page.locator('.studio-paint-variant legend',{hasText:'Akryl Hard Court'}).waitFor({timeout:30000});
  assert.ok(await page.getByRole('radio',{name:/^Standard \(Hard Court\)/}).isChecked(),'Standard acrylic by default');
- await badgeIs(`Nawierzchnia ${pl(9100+5700)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+6100)}\\s?zł netto$`);
  await page.getByRole('radio',{name:/^Premium/}).check();
- await badgeIs(`Nawierzchnia ${pl(9100+9700)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+10300)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('acrylic-choice');
  // Rubber slabs: separate material, Standard by default.
  await materials.getByRole('button',{name:'Płyty gumowe',exact:true}).click();
  await page.locator('.studio-paint-variant legend',{hasText:'Płyty gumowe'}).waitFor({timeout:30000});
  assert.ok(await page.getByRole('radio',{name:/^Standard \(SBR 40 mm\)/}).isChecked(),'Standard rubber by default');
- await badgeIs(`Nawierzchnia ${pl(9100+9700)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+10300)}\\s?zł netto$`);
  await page.getByRole('radio',{name:/^Premium/}).check();
- await badgeIs(`Nawierzchnia ${pl(9100+14000)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+14900)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('rubber-choice');
  // Rubber mats: separate material, Standard by default.
  await materials.getByRole('button',{name:'Maty gumowe',exact:true}).click();
  await page.locator('.studio-paint-variant legend',{hasText:'Maty gumowe'}).waitFor({timeout:30000});
  assert.ok(await page.getByRole('radio',{name:/^Standard(?!\+)/}).isChecked(),'Standard mats by default');
- await badgeIs(`Nawierzchnia ${pl(9100+6900)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+7300)}\\s?zł netto$`);
  await page.getByRole('radio',{name:/^Premium/}).check();
- await badgeIs(`Nawierzchnia ${pl(9100+12100)}\\s?zł netto$`);
+ await badgeIs(`Nawierzchnia ${pl(9100+12800)}\\s?zł netto$`);
  await page.locator('.studio-paint-variant').scrollIntoViewIfNeeded();await shot('mats-choice');
- await materials.getByRole('button',{name:'Malowana',exact:true}).click();
- await badgeIs(`Nawierzchnia ${pl(9100+5900)}\\s?zł netto$`);
+ await materials.getByRole('button',{name:'Malowanie farbą sportową',exact:true}).click();
+ await badgeIs(`Nawierzchnia ${pl(9100+5600)}\\s?zł netto$`);
  // Summary: separate rows and the total.
  await steps.getByRole('button',{name:'Podsumowanie',exact:true}).click();
  const summary=page.locator('.studio-project-quote').first();await summary.waitFor();
@@ -104,19 +104,19 @@ try{
  assert.match(text,/Cena konstrukcji i nawierzchni/);
  assert.match(text,new RegExp(`Konstrukcja boiska[\\s\\S]*${pl(arena)}\\s?zł netto`));
  assert.match(text,/Nawierzchnia betonowa[\s\S]*9\s?100\s?zł netto/);
- assert.match(text,/Malowanie · Wzór zaawansowany[\s\S]*5\s?900\s?zł netto/);
- assert.match(text,new RegExp(`Razem: ${pl(arena+15000)}\\s?zł netto`));
+ assert.match(text,/Malowanie · Wzór zaawansowany[\s\S]*5\s?600\s?zł netto/);
+ assert.match(text,new RegExp(`Razem: ${pl(arena+14700)}\\s?zł netto`));
  await shot('concrete-summary');
  // PDF card: the same rows.
  const button=page.getByRole('button',{name:'Pobierz kartę konstrukcji (PDF)'});
  await button.waitFor({state:'visible'});await page.waitForTimeout(2000);await button.click();
  await page.waitForFunction(()=>Array.from(document.querySelectorAll('iframe')).some(f=>f.contentDocument?.title?.startsWith('Gamefields — karta projektu')),null,{timeout:90000});
  const card=await page.evaluate(()=>{const f=Array.from(document.querySelectorAll('iframe')).find(x=>x.contentDocument?.title?.startsWith('Gamefields — karta projektu'));return {text:f.contentDocument.body.innerText,html:f.contentDocument.documentElement.outerHTML}});
- assert.match(card.text,/Cena konstrukcji i nawierzchni/);assert.match(card.text,/Malowanie · Wzór zaawansowany\s+5\s?900/);assert.match(card.text,new RegExp(`Razem\\s+${pl(arena+15000)}\\s?zł`));assert.match(card.text,/Nawierzchnia betonowa\s+Tak, bez wykończenia/);
+ assert.match(card.text,/Cena konstrukcji i nawierzchni/);assert.match(card.text,/Malowanie · Wzór zaawansowany\s+5\s?600/);assert.match(card.text,new RegExp(`Razem\\s+${pl(arena+14700)}\\s?zł`));assert.match(card.text,/Nawierzchnia betonowa\s+Tak, bez wykończenia/);
  const c=await browser.newPage({viewport:{width:794,height:1123}});await c.setContent(card.html);await c.screenshot({path:'test-results/concrete-card.png'}).catch(()=>{});
  // Without concrete (own base): painting stays, concrete row goes.
  await page.keyboard.press('Escape').catch(()=>{});
  await page.goto(base+'/?arena=o1&tool=construction');await toggle.waitFor({timeout:60000});
- await toggle.uncheck();await badgeIs(`Nawierzchnia ${pl(5900)}\\s?zł netto$`);
+ await toggle.uncheck();await badgeIs(`Nawierzchnia ${pl(5600)}\\s?zł netto$`);
  console.log('PASS: construction, concrete base and painting priced separately in the badge, summary and card; concrete removable, painting variant from the design or chosen by the customer; PU/EPDM, sports tiles, artificial turf, acrylic hard court, rubber slab and rubber mat variants priced');
 }finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

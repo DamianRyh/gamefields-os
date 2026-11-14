@@ -35,7 +35,7 @@ try{
  assert(assets.includes('/arenas/panna-cage-90-v2.glb'));assert(!assets.includes('/arenas/circle-cage-1.json'),'Cage90 runtime uses the smaller binary GLB');
  await page.getByRole('navigation',{name:'Kroki projektu'}).getByRole('button',{name:/^Nawierzchnia/}).click();
  await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Materiał',exact:true}).click();
- for(const material of ['Granulat','Płytki modułowe','Sztuczna murawa','Malowana']){
+ for(const material of ['Nawierzchnia EPDM wylewana','Płytki sportowe PP','Sztuczna trawa','Malowanie farbą sportową']){
   await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:material,exact:true}).click();
   await page.waitForFunction(()=>{const e=document.querySelector('.panna-studio-model');return e?.getAttribute('data-render-complete')===e?.getAttribute('data-render-request')});
   assert.equal(await canvas.evaluate(c=>(c.getContext('webgl2')||c.getContext('webgl')).getError()),0);

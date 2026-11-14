@@ -32,7 +32,7 @@ try{
  await page.getByText('Więcej ustawień band',{exact:true}).click();for(const finish of ['metal','gloss','matte']){await page.getByLabel('Wykończenie band',{exact:true}).selectOption(finish);await page.waitForFunction(()=>{const e=document.querySelector('.panna-studio-model');return e?.getAttribute('data-render-complete')===e?.getAttribute('data-render-request')});assert.equal(await canvas.evaluate(c=>(c.getContext('webgl2')||c.getContext('webgl')).getError()),0);}
  await page.getByRole('navigation',{name:'Narzędzia edycji'}).getByRole('button',{name:'Nawierzchnia',exact:true}).click();
  await page.getByRole('navigation',{name:'Ustawienia nawierzchni'}).getByRole('button',{name:'Materiał',exact:true}).click();
- for(const material of ['Granulat','Płytki modułowe','Sztuczna murawa','Malowana']){
+ for(const material of ['Nawierzchnia EPDM wylewana','Płytki sportowe PP','Sztuczna trawa','Malowanie farbą sportową']){
   await page.locator('[data-visual-carousel="Materiał nawierzchni"]').getByRole('button',{name:material,exact:true}).click();
   await page.waitForFunction(()=>{const e=document.querySelector('.panna-studio-model');return e?.getAttribute('data-render-complete')===e?.getAttribute('data-render-request')});
   assert.equal(await canvas.evaluate(c=>(c.getContext('webgl2')||c.getContext('webgl')).getError()),0);

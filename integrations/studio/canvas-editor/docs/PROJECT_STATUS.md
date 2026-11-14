@@ -1,3 +1,11 @@
+## Studio — czytelność nowych wykończeń, jeden metraż, nowe nazwy, 2026-11-14
+
+- Metraż każdego wykończenia (zasada właściciela 14.11): powierzchnia konstrukcji z modelu +10% zapasu, ta sama dla wszystkich kształtów i materiałów (`FINISH_AREA_M2` w `lib/surface-finish.ts`, z `arenaSurfaceQuantities`). Panna Play 30,1 m², Boisko 3 na 3 164,1 m². Zastępuje wcześniejsze metraże z tabel (32 m² dla malowania/EPDM, 28,3 m² dla płytek/trawy/gumy). Ceny wykończeń przeliczone; nawierzchnia betonowa bez zmian (stały cennik właściciela).
+- Podsumowanie → Wymiary: nowy wiersz „Powierzchnia do wyceny wykończenia (+10% zapasu)”.
+- Nazwy materiałów (zatwierdzone 14.11): Malowanie farbą sportową, Nawierzchnia EPDM wylewana (było: Granulat), Płytki sportowe PP (było: Płytki modułowe), Sztuczna trawa (było: Sztuczna murawa), Akryl Hard Court, Płyty gumowe, Maty gumowe. Wartości w JSON projektu bez zmian. Bez podziału na grupy.
+- Poprawki: karta w karuzeli materiałów mieściła się poza panelem na komputerze (ucięta nazwa i cena); etykiety wymiarów na zaznaczonym modelu były jasne na jasnym; tekst „wybór wkrótce” przy betonie; przycisk Podsumowanie na telefonie pokazuje kwotę razem („54 700 zł netto”).
+- Testy `cage90-browser`, `cage180-browser`, `studio-realism` (poza `package.json`) zatrzymują się przed krokiem materiałów (panel kolorów, usunięty przewodnik) — nieaktualne, jak `studio-visual-browser`.
+
 ## Studio — maty / role gumowe SBR / EPDM, 2026-11-14
 
 - Nowy materiał „Maty gumowe” (siódmy w karuzeli, wygląd granulatu). Pozycja `mats` „Maty gumowe · <wariant>”. Cennik właściciela 14.11.2026 (ceny sprzedaży netto): Standard 242 zł/m², Standard+ 317, Premium 425. Metraż jak płytki (pole gry), zaokrąglenie w górę do 100 zł: Panna Play 6900 / 9000 / 12 100 zł. Domyślnie Standard. Opisy wariantów ogólne (właściciel podał grubość 10–20 mm dla całej grupy).
