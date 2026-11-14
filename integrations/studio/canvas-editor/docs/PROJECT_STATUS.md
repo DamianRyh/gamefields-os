@@ -1,3 +1,9 @@
+## Studio — etap 2: lista materiałów, ceny na kartach modeli, beton +10%, 2026-11-14
+
+- Nawierzchnia betonowa liczona jak wykończenia (decyzja właściciela 14.11): powierzchnia konstrukcji z modelu +10% × 283 zł/m², zaokrąglenie w górę do 100 zł. Panna Play 30,1 m² → 8600 zł (było 9100 z tabeli +15%). `CONCRETE_BASE_NET` liczone z `FINISH_AREA_M2`; `offer/concrete-base.json` przeliczony.
+- Nawierzchnia → Materiał: lista wszystkich 7 materiałów zamiast karuzeli (miniatura, nazwa, „od … zł netto”, jedno zdanie „dla kogo” — `audience` w `lib/surface-materials.ts`).
+- Konstrukcja → Model: na każdej karcie „Konstrukcja … zł netto” z `quote.constructionPrices` (ceny sprzedaży z karty Studio); bez karty stawek ceny się nie pokazują.
+
 ## Studio — czytelność nowych wykończeń, jeden metraż, nowe nazwy, 2026-11-14
 
 - Metraż każdego wykończenia (zasada właściciela 14.11): powierzchnia konstrukcji z modelu +10% zapasu, ta sama dla wszystkich kształtów i materiałów (`FINISH_AREA_M2` w `lib/surface-finish.ts`, z `arenaSurfaceQuantities`). Panna Play 30,1 m², Boisko 3 na 3 164,1 m². Zastępuje wcześniejsze metraże z tabel (32 m² dla malowania/EPDM, 28,3 m² dla płytek/trawy/gumy). Ceny wykończeń przeliczone; nawierzchnia betonowa bez zmian (stały cennik właściciela).

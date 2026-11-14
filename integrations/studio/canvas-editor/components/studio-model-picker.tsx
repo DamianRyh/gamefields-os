@@ -19,7 +19,8 @@ const GROUPS:{id:string;label:string;note:string;test:(s:SportProfile)=>boolean}
 ];
 const countLabel=(n:number)=>n===1?'1 model':n<5?`${n} modele`:`${n} modeli`;
 
-export function StudioModelPicker({project:p,onSelect}:{project:Project;onSelect:(id:Model)=>void}){
+const pln=new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',maximumFractionDigits:0});
+export function StudioModelPicker({project:p,onSelect,prices}:{project:Project;onSelect:(id:Model)=>void;prices?:Record<string,number>}){
  const rows=sportProfiles.filter(s=>s.arenaModel).map(s=>{const d=projectDimensions(constructionProject(p,s));return {s,d,b:d.model?.constructionBounds??null}});
  return <section className="gfmp" aria-label="Model konstrukcji">
   {GROUPS.map(g=>{const items=rows.filter(r=>g.test(r.s));if(!items.length)return null;return <div key={g.id} className="gfmp-group">
@@ -27,7 +28,7 @@ export function StudioModelPicker({project:p,onSelect}:{project:Project;onSelect
    <ul className="gfmp-list" role="list">{items.map(({s,d,b})=>{const on=p.arenaModel===s.arenaModel;return <li key={s.id}>
     <button type="button" className="gfmp-card" aria-pressed={on} aria-label={`${s.label}: ${shapeOf(s).toLowerCase()}, pole gry ${d.reference}${b?`, wysokość ${metres.format(b.y)} m`:''}`} onClick={()=>onSelect(s.arenaModel as Model)}>
      <span className="gfmp-thumb"><img src={`/arenas/thumbnails/${s.arenaModel}.webp`} alt="" width={640} height={400} decoding="async"/></span>
-     <span className="gfmp-copy"><b>{s.label}</b><span>{shapeOf(s)}, pole {field(s)}</span><span className="gfmp-tags">{b?<><i title="Obrys konstrukcji z bramkami">{short.format(Math.max(b.x,b.z))} × {short.format(Math.min(b.x,b.z))} m z bramkami</i><i title="Wysokość konstrukcji">wys. {short.format(b.y)} m</i></>:null}</span></span>
+     <span className="gfmp-copy"><b>{s.label}</b>{prices?.[s.arenaModel as string]?<span className="gfmp-price">Konstrukcja {pln.format(prices[s.arenaModel as string])} netto</span>:null}<span>{shapeOf(s)}, pole {field(s)}</span><span className="gfmp-tags">{b?<><i title="Obrys konstrukcji z bramkami">{short.format(Math.max(b.x,b.z))} × {short.format(Math.min(b.x,b.z))} m z bramkami</i><i title="Wysokość konstrukcji">wys. {short.format(b.y)} m</i></>:null}</span></span>
      {on?<i className="gfmp-check" aria-hidden="true"><Check size={14}/></i>:null}
     </button></li>})}</ul></div>})}
   <details className="gfmp-compare"><summary>Porównaj wymiary wszystkich modeli</summary>
@@ -35,6 +36,6 @@ export function StudioModelPicker({project:p,onSelect}:{project:Project;onSelect
     <tbody>{rows.map(({s,d,b})=><tr key={s.id} aria-current={p.arenaModel===s.arenaModel?'true':undefined}><th scope="row">{s.label}</th><td>{d.reference}</td><td>{b?formatBounds(b):'—'}</td><td>{b?`${metres.format(b.y)} m`:'—'}</td><td>{d.area===null?'—':formatArea(d.area)}</td></tr>)}</tbody></table></div>
    <p className="gfmp-fine">Wymiary pochodzą z modeli 3D. „Z bramkami” to prostokąt obejmujący całą konstrukcję. Miejsce wokół boiska potwierdzamy przy wycenie.</p>
   </details>
-  <p className="gfmp-fine">Cenę konstrukcji i nawierzchni zobaczysz osobno w podsumowaniu.</p>
+  <p className="gfmp-fine">Ceny konstrukcji z bramkami, netto. Nawierzchnię i wykończenie wybierasz osobno; razem zobaczysz w podsumowaniu.</p>
  </section>;
 }
