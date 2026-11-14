@@ -148,3 +148,16 @@ import {arenaSurfaceQuantities} from '../lib/arena-geometry-data.mjs';
 for(const [id,q] of Object.entries(arenaSurfaceQuantities))assert.equal(FINISH_AREA_M2[id],Math.round(q.area*1.1*10)/10,id);
 assert.equal(FINISH_AREA_M2.o1,30.1);assert.equal(FINISH_AREA_M2.street15,164.1);
 console.log('PASS: one finish area per model (construction area +10%) for every material.');
+
+// Standalone surface (no construction): the same price lists on the surface area +10% (owner 14.11.2026).
+import {quoteArea,finishAreaFor} from '../lib/quote-engine.ts';
+const surf={surfaceModel:'street-football-3x3',length:15,width:10,courtShape:'rectangle',surface:'Akryl sportowy',lines:true,graphicOpacity:0,objects:[]};
+assert.equal(quoteArea(surf),150);assert.equal(finishAreaFor(surf),165);
+const sq=calculateProjectQuote(surf,null,1);
+assert.equal(sq.items.find(i=>i.id==='arena'),undefined);
+assert.equal(concreteBasePrice(sq),46700);assert.equal(surfaceFinish(sq).net,12900);assert.match(sq.items.find(i=>i.id==='concrete-base').note,/nawierzchni \+10%/);
+assert.equal(surfaceFinish(calculateProjectQuote({...surf,surface:'Sztuczna trawa 60 mm',turfVariant:'premium'},null,1)).net,48200);
+assert.equal(concreteBasePrice(calculateProjectQuote({...surf,concreteBase:false},null,1)),null,'existing base: no concrete');
+assert.equal(finishAreaFor({arenaModel:'street15',surfaceModel:'street-football-3x3',length:15,width:10}),164.1,'with a construction: construction area');
+assert.equal(finishAreaFor({arenaModel:'o1',modular:{revision:'GF-STUDIO-MODULAR-2'},length:6,width:6}),null,'modular: individual');
+console.log('PASS: standalone surfaces priced from the same lists on their own area +10%.');
