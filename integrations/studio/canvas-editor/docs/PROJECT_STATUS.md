@@ -1,3 +1,13 @@
+## Studio — nowy produkt: maty treningowe, 2026-11-15
+
+- Ekran startowy Studio: kafelek „Maty treningowe” („od 600 zł netto”). Gumowa mata z ćwiczeniami ze Studio (`lib/football-drills.ts`), wysyłana w całości, bez betonu i montażu (decyzja właściciela 15.11). Link bezpośredni: `/?tool=mat`.
+- Projekt maty: `matProduct` (`lib/mat-product.ts`, `matProject`). Wymiary: formaty 2 × 1, 2 × 2, 3 × 2, 4 × 3, 5 × 4 m albo własne 1–10 m co 0,5 m, do 50 m² (walidacja w `projectSchema`; boiska zachowują dotychczasowe minimum).
+- Panel „Mata treningowa” w kroku Grafika: wielkość, rodzaj gumy z ceną, nadruk ćwiczeń, ostrzeżenie, gdy ćwiczenie nie mieści się na macie, blok zamówienia. Kroki boiska, wybór konstrukcji, budowanie modułowe i ramka boiska ukryte; ćwiczenia przycinane do krawędzi maty (edytor i karta).
+- Ceny (właściciel 15.11, netto, w górę do 100 zł): guma bez montażu 167 / 233 / 333 zł/m², nadruk ćwiczeń 78 zł/m² (tylko gdy są ćwiczenia), wysyłka wyceniana po adresie. Np. 3 × 2 m Standard z ćwiczeniami: 1100 + 500 = 1600 zł netto (1968 zł brutto).
+- Zamówienie: gotowe formaty z ćwiczeniami — „Do koszyka” (produkt WooCommerce `mata-treningowa`, atrybut `wariant`, np. „3 × 2 m · Standard”, ceny brutto z nadrukiem), gdy produkt opublikowany i płatności włączone; inaczej i dla własnych wymiarów — „Zamów” przez formularz. Karta PDF „Mata treningowa” z planem maty.
+- Strona produktu: `integrations/wordpress/pages/maty-2026-11/` (`mata-treningowa.html`, obrazy w `media/`), dane z `integrations/wordpress/offer/mat-product.json` (generowane z kodu Studio, test zgodności). Motyw: `inc/shop.php` zwraca `mat` w `/wp-json/gfs/v1/shop`. Wdrożenie: `docs/roadmap/DLA-CHATGPT-maty.md`.
+- Testy: `tests/mat-product-browser.mjs` (1440 i 390 px), `test:price`.
+
 ## Studio — wycena samej nawierzchni (bez konstrukcji), 2026-11-14
 
 - Projekt nawierzchni bez konstrukcji jest wyceniany z tych samych cenników (beton 283 zł/m² i wszystkie wykończenia) od własnej powierzchni projektu +10% (`quoteArea`, `finishAreaFor` w `lib/quote-engine.ts`; `netForArea`, `finishArea` w `lib/surface-finish.ts`). Przykład: Street Football 3×3 15 × 10 m → 165 m², beton 46 700 zł, malowanie od 12 900 zł.

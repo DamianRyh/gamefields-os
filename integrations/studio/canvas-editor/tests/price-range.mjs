@@ -161,3 +161,29 @@ assert.equal(concreteBasePrice(calculateProjectQuote({...surf,concreteBase:false
 assert.equal(finishAreaFor({arenaModel:'street15',surfaceModel:'street-football-3x3',length:15,width:10}),164.1,'with a construction: construction area');
 assert.equal(finishAreaFor({arenaModel:'o1',modular:{revision:'GF-STUDIO-MODULAR-2'},length:6,width:6}),null,'modular: individual');
 console.log('PASS: standalone surfaces priced from the same lists on their own area +10%.');
+
+// Training mat as a product (owner 15.11.2026): exact mat area, rubber mats price list, no concrete.
+import {matProject,matNet as matProductNet,validMatSize} from '../lib/mat-product.ts';
+import {projectSchema} from '../lib/project.ts';
+const matQ=calculateProjectQuote({matProduct:true,sport:'Custom Court',courtShape:'rectangle',length:3,width:2,surface:'Maty gumowe',lines:false,graphicOpacity:0,objects:[],concreteBase:false},null,1);
+assert.equal(concreteBasePrice(matQ),null,'no concrete under a mat');
+assert.deepEqual([surfaceFinish(matQ).label,surfaceFinish(matQ).net],['Mata treningowa · Standard',1100]);assert.equal(matQ.items.find(i=>i.id==='mat-print'),undefined,'no print without drills');
+const big=calculateProjectQuote({matProduct:true,matVariant:'premium',sport:'Custom Court',courtShape:'rectangle',length:5,width:4,surface:'Maty gumowe',lines:false,graphicOpacity:0,objects:[{kind:'image',name:'Slalom'}]},null,1);
+assert.equal(surfaceFinish(big).net,6700);assert.equal(big.items.find(i=>i.id==='mat-print').totalNet,1600,'print 78 zł/m² with drills');
+assert.equal(matProductNet({length:2,width:1}),400);
+assert.ok(validMatSize(1,2)&&validMatSize(10,5)&&!validMatSize(10,6)&&!validMatSize(1.2,2)&&!validMatSize(0.5,2));
+const base0={id:'GF-1',name:'x',type:'Nowe boisko',sport:'Custom Court',length:20,width:12,surface:'Akryl sportowy',base:'#112233',zone:'#112233',outside:'#112233',lineColor:'#ffffff',lines:false,pattern:'Organic Flow',graphicOpacity:0,graphicScale:100,graphicRotation:0,scene:'day',objects:[]};
+const mat=matProject(projectSchema.parse(base0));
+assert.ok(projectSchema.safeParse(mat).success,'mat project validates');
+assert.equal(projectSchema.safeParse({...mat,length:0.5}).success,false,'too small');
+assert.equal(projectSchema.safeParse({...base0,length:3}).success,false,'courts keep their minimum size');
+console.log('PASS: training mat priced on its exact area (rubber without installation 167/233/333 zł/m², printing 78 zł/m² with drills), no concrete, sizes 1–10 m every 0,5 m up to 50 m².');
+
+// Website file for the training mat page and the shop variants is generated from the Studio code.
+import {MAT_FORMATS,matShopValue,matGross,MAT_PRODUCT_NET_PER_M2,MAT_PRINT_NET_PER_M2} from '../lib/mat-product.ts';
+const matSite=JSON.parse(readFileSync(new URL('../../../wordpress/offer/mat-product.json',import.meta.url),'utf8'));
+assert.deepEqual(matSite.rubberNetPerM2,MAT_PRODUCT_NET_PER_M2);assert.equal(matSite.printNetPerM2,MAT_PRINT_NET_PER_M2);
+assert.equal(matSite.formats.length,MAT_FORMATS.length);
+for(const f of matSite.formats)for(const v of f.variants){assert.equal(v.value,matShopValue(f.length,f.width,v.id));assert.equal(v.gross,matGross(f.length,f.width,v.id));}
+assert.equal(matShopValue(2,1,'standard'),'2 × 1 m · Standard');assert.equal(matGross(2,1,'standard'),738);
+console.log('PASS: mat website file and shop variant names match the Studio.');

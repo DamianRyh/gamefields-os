@@ -5,12 +5,13 @@ import {canBuy,cartLink,inquiryLink,shippingNote,zl,type ShopData,type ShopLine}
 /* Price, quantity and the order button of one Studio product.
    Payments on: "Do koszyka" (all lines in one link to the gamefields.eu cart). Payments off: "Zamów" opens the
    contact form with the design, quantity and price filled in. The Studio runs in an iframe, so links target the top window. */
-export function StudioShopOrder({shop,lines,note,qty,onQty,unitLabel,extra}:{
- shop:ShopData;lines:ShopLine[];note:string;qty?:number;onQty?:(q:number)=>void;unitLabel?:string;extra?:string;
+export function StudioShopOrder({shop,lines,note,qty,onQty,unitLabel,extra,shipping}:{
+ shop:ShopData;lines:ShopLine[];note:string;qty?:number;onQty?:(q:number)=>void;unitLabel?:string;extra?:string;shipping?:string;
 }){
  const total=lines.reduce((s,l)=>s+l.qty*l.price,0),count=lines.reduce((s,l)=>s+l.qty,0);
  const buy=canBuy(shop,lines),unit=lines.length&&lines.every(l=>l.price===lines[0].price)?lines[0].price:null;
- const text=`${note} · ilość: ${count} · `+(unit!=null?`cena: ${zl(unit)} brutto/szt., `:"")+`razem ${zl(total)} brutto · ${shippingNote(shop,total)}`;
+ const ship=shipping??shippingNote(shop,total);
+ const text=`${note} · ilość: ${count} · `+(unit!=null?`cena: ${zl(unit)} brutto/szt., `:"")+`razem ${zl(total)} brutto · ${ship}`;
  const href=buy?cartLink(shop,lines,note):inquiryLink(shop,"Zamówienie ze Studia: "+text);
  const set=(q:number)=>onQty?.(Math.max(1,Math.min(999,Math.round(q)||1)));
  return <section className="studio-shop-order" aria-label="Cena i zamówienie" data-shop-pay={shop.pay?"true":"false"}>
@@ -22,7 +23,7 @@ export function StudioShopOrder({shop,lines,note,qty,onQty,unitLabel,extra}:{
    </div>:<span className="studio-shop-count">{count} szt.</span>}
    <div className="studio-shop-price"><b data-shop-total>{zl(total)}</b><small>{unit!=null?`${zl(unit)} brutto / ${unitLabel||"szt."}`:"brutto"}</small></div>
   </div>
-  <p className="studio-shop-note">{[extra,shippingNote(shop,total)].filter(Boolean).join(" · ")}</p>
+  <p className="studio-shop-note">{[extra,ship].filter(Boolean).join(" · ")}</p>
   <a className="studio-primary studio-shop-cta" href={href} target="_top" rel="noopener">{buy?<ShoppingBag size={17}/>:<Send size={17}/>}{buy?"Do koszyka":"Zamów"} · {zl(total)}</a>
   {!buy?<p className="studio-hint">Formularz otworzy się z projektem, ilością i ceną. Potwierdzimy zamówienie mailowo.</p>:null}
  </section>;

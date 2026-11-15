@@ -31,6 +31,13 @@ export function surfaceFinish(q:ProjectQuote|null|undefined):{label:string;net:n
  return item?{label:item.label,net:item.totalNet!==null&&item.totalNet>0?item.totalNet:null,note:item.note}:null;
 }
 
+/** Printing of the drills on a training mat, or null. */
+export function matPrintPrice(q:ProjectQuote|null|undefined):number|null{
+ if(!SHOW_PRICE_RANGE||!q)return null;
+ const item=q.items.find(i=>i.id==="mat-print");
+ return item&&item.totalNet!==null&&item.totalNet>0?item.totalNet:null;
+}
+
 /**
  * The estimate covers the configured scope only (no site preparation, base or foundations).
  * The customer sees a range around it, not a to-the-grosz figure: a little below for simpler execution,

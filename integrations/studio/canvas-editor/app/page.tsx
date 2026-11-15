@@ -34,6 +34,7 @@ const PannaRealisticPreview=lazy(()=>import("@/components/blender-arena-preview"
 const studioLoading=<div className="studio-loading" role="status" style={{display:"grid",placeItems:"center",minHeight:"60vh",color:"#47132d",font:"600 16px Inter,Arial,sans-serif"}}>Wczytuję Studio…</div>;
 import {isRoundCourt,courtArea,courtAspect,courtDimensions,clampToCircle,roundBandPosition} from "@/lib/court-geometry";
 import {selectSurface,sportSurface,type SurfaceModel} from "@/lib/sport-surfaces";
+import {matProject} from "@/lib/mat-product";
 import {SportSurfaceArt} from "@/components/sport-surface-art";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 import {getAsset,scaleFor} from "@/lib/surface-assets";
@@ -148,7 +149,7 @@ export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,o
  function drop(e:React.DragEvent<SVGSVGElement>){if(!onDropEquipment)return;e.preventDefault();const name=e.dataTransfer.getData("gamefields/equipment");if(!name)return;const svg=svgRef.current;if(!svg)return;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const ctm=svg.getScreenCTM();if(!ctm)return;const loc=pt.matrixTransform(ctm.inverse());onDropEquipment(name,Math.max(0,Math.min(600,loc.x)),Math.max(0,Math.min(h,loc.y)))}
  return <svg ref={svgRef} role="img" aria-label={"Projekt boiska "+courtDimensions(p)} className={"court "+(iso?"iso":"")} viewBox={"-95 -95 "+(w+190)+" "+(h+190)} onPointerDown={e=>{if(e.target===e.currentTarget)onSelect?.(null)}} onDragOver={e=>e.preventDefault()} onDrop={drop}>
   <defs><pattern id={patternId} width="60" height="60" patternUnits="userSpaceOnUse"><rect width="30" height="60" fill="#fff" opacity=".045"/></pattern><clipPath id={clipId}>{round?<circle cx="300" cy="300" r="300"/>:<rect width={w} height={h}/>}</clipPath></defs>
-  {p.surfaceModel?<SportSurfaceArt plan project={{...p,objects:[]}}/>:<>  {round?<circle cx="300" cy="300" r="340" fill={p.outside}/>:<rect x="-40" y="-40" width={w+80} height={h+80} rx="3" fill={p.outside}/>}
+  {p.surfaceModel?<SportSurfaceArt plan project={{...p,objects:[]}}/>:<>  {p.matProduct?null:round?<circle cx="300" cy="300" r="340" fill={p.outside}/>:<rect x="-40" y="-40" width={w+80} height={h+80} rx="3" fill={p.outside}/>}
   {round?<circle cx="300" cy="300" r="300" fill={p.base}/>:<rect width={w} height={h} fill={p.base}/>}
   {p.surface.includes("trawa")?<rect width={w} height={h} fill={"url(#"+patternId+")"}/>:null}
   {!hasSurfaceAssets(p)&&!round&&(p.sport.includes("Piłka nożna")||p.sport==="Futsal")?<path d={"M0 "+h*.25+"h100v"+h*.5+"H0Z M600 "+h*.25+"H500v"+h*.5+"h100Z"} fill={p.zone}/>:null}
@@ -175,7 +176,7 @@ export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,o
    {p.sport==="Teqball"?<><path d={"M300 10V"+(h-10)}/><path d={"M10 "+h/2+"H590"} opacity=".5"/></>:null}
    {p.sport==="Wielofunkcyjne"?<><path d={"M10 "+h*.18+"Q240 "+h/2+" 10 "+h*.82+" M590 "+h*.18+"Q360 "+h/2+" 590 "+h*.82} opacity=".7"/><rect x="10" y={h/2-45} width="100" height="90" opacity=".7"/><rect x="490" y={h/2-45} width="100" height="90" opacity=".7"/></>:null}
   </g>:null}
-  {(p.sport.includes("Piłka nożna")||p.sport==="Padel"||p.sport==="Wielofunkcyjne"||p.sport==="Custom Court")?<g className="band-shell">
+  {!p.matProduct&&(p.sport.includes("Piłka nożna")||p.sport==="Padel"||p.sport==="Wielofunkcyjne"||p.sport==="Custom Court")?<g className="band-shell">
     {round?<circle cx="300" cy="300" r="305" fill="none" stroke={p.arenaDesign?.panelColor||"#20352c"} strokeWidth="18"/>:<><rect x="-8" y="-13" width="616" height="18" rx="2" fill="#20352c"/>
     <rect x="-8" y={h-5} width="616" height="18" rx="2" fill="#20352c"/>
     <rect x="-13" y="-5" width="18" height={h+10} rx="2" fill="#20352c"/>
@@ -185,7 +186,7 @@ export function Court({p,iso=false,small=false,selectedId,onSelect,onDragStart,o
   </g>:null}
   </>}
   {p.scene==="event"?<EventScene h={h}/>:null}
-  {p.objects.filter(o=>o.kind!=="equipment").map(o=><g key={o.id} clipPath={round&&o.target==="court"&&o.kind!=="equipment"?"url(#"+clipId+")":undefined}><EditorObjectView o={o} h={h} round={round} selected={o.id===selectedId} onPointerDown={onDragStart||(()=>{})}/></g>)}
+  {p.objects.filter(o=>o.kind!=="equipment").map(o=><g key={o.id} clipPath={(round||p.matProduct)&&o.target==="court"&&o.kind!=="equipment"?"url(#"+clipId+")":undefined}><EditorObjectView o={o} h={h} round={round} selected={o.id===selectedId} onPointerDown={onDragStart||(()=>{})}/></g>)}
   {!small?<g fill={p.scene==="night"?"#d7e1dc":"#66736d"} fontSize="13"><text x="300" y="-68" textAnchor="middle">{round?courtDimensions(p):(moduleSurface?.x??p.length).toFixed(3)+" m"}</text><text x="670" y={h/2} textAnchor="middle">{round?"Panna 1×1":(moduleSurface?.z??p.width).toFixed(3)+" m"}</text></g>:null}
  </svg>;
 }
@@ -209,10 +210,10 @@ export default function Home(){
  const recovery=useProjectRecovery(p,setP);
  const saveStatus=recovery.saveStatus;
  const [entryTool,setEntryTool]=useState<string|null>(null),[workspaceRevision,setWorkspaceRevision]=useState(0);
- useEffect(()=>{const params=new URLSearchParams(window.location.search);if(['home','arena','surface','sport','pattern','base','zone','seed','shared','workshop','tool'].some(key=>params.has(key))||params.get('view')==='builder'){setEntryTool(params.get('tool'));setView('builder')}},[]);
+ useEffect(()=>{const params=new URLSearchParams(window.location.search);if(['home','arena','surface','sport','pattern','base','zone','seed','shared','workshop','tool'].some(key=>params.has(key))||params.get('view')==='builder'){if(params.get('tool')==='mat'){setP(v=>v.matProduct?v:matProject(v));setEntryTool('graphics')}else setEntryTool(params.get('tool'));setView('builder')}},[]); // ?tool=mat: link from the training mat page
  function productsHome(){setView('hub');window.history.replaceState(null,'','/');}
  function continueProject(files=false){setEntryTool(files?'files':p.printDesign?.product||null);setView('builder');window.history.replaceState(null,'',files?'/?tool=files':'/?view=builder');}
- async function chooseEntry(kind:StudioEntry){try{await recovery.preserveCurrent();history(p);const tool=kind==='court'?'construction':kind==='surface'?'surface-model':kind;setEntryTool(tool);if(kind==='poster'||kind==='ball')setP(v=>({...v,name:kind==='poster'?'Plakat — mój projekt':'Piłka — mój projekt',printDesign:v.printDesign?.product===kind?v.printDesign:defaultStudioPrint(kind)}));else setP(v=>({...v,...(kind==='surface'?selectSurface(v,v.surfaceModel||'street-football-3x3'):{}),...(/^(Plakat|Piłka|Koszulki) — mój projekt$/.test(v.name)?{name:getSportProfile(v.sport,v.arenaModel).label+' — projekt'}:{}),printDesign:undefined}));window.history.replaceState(null,'','/?tool='+tool);setView('builder')}catch(error){toast.error((error as Error).message)}}
+ async function chooseEntry(kind:StudioEntry){try{await recovery.preserveCurrent();history(p);const tool=kind==='court'?'construction':kind==='surface'?'surface-model':kind==='mat'?'graphics':kind;setEntryTool(tool);if(kind==='mat')setP(v=>matProject(v));else if(kind==='poster'||kind==='ball')setP(v=>({...v,name:kind==='poster'?'Plakat — mój projekt':'Piłka — mój projekt',printDesign:v.printDesign?.product===kind?v.printDesign:defaultStudioPrint(kind)}));else setP(v=>({...v,matProduct:undefined,...(kind==='surface'?selectSurface(v,v.surfaceModel||'street-football-3x3'):{}),...(/^(Plakat|Piłka|Koszulki) — mój projekt$/.test(v.name)?{name:getSportProfile(v.sport,v.arenaModel).label+' — projekt'}:{}),printDesign:undefined}));window.history.replaceState(null,'','/?tool='+tool);setView('builder')}catch(error){toast.error((error as Error).message)}}
 
  const workshopRecovery=useRef(recovery);workshopRecovery.current=recovery;
  useEffect(()=>{const id=new URLSearchParams(location.search).get('shared'),key=location.hash.slice(1);if(!id)return;let cancelled=false;void(async()=>{try{const {studioJson}=await import('@/lib/studio-http');const {validShareId,validShareKey}=await import('@/lib/shared-project');if(!validShareId(id)||!validShareKey(key))throw Error('Nieprawidłowy link projektu.');const data=await studioJson<{project:unknown;sourceChanged:boolean}>('/api/shared?id='+id,{headers:{Authorization:'Bearer '+key}});if(data.sourceChanged)throw Error("Źródło modelu zmieniło się. Pobierz JSON z podglądu i sprawdź zgodność przed wczytaniem.");const copy=projectSchema.parse(data.project);if(cancelled)return;await workshopRecovery.current.preserveCurrent();if(cancelled)return;setP({...copy,id:'GF-'+uid(),name:copy.name.slice(0,180)+' — moja kopia'});setSelectedId(null);setView('builder');toast.success('Otworzono Twoją kopię udostępnionej wersji.')}catch(error){if(!cancelled)toast.error((error as Error).message)}})();return()=>{cancelled=true}},[]);
@@ -264,7 +265,7 @@ export default function Home(){
  const patternPages=Math.max(1,Math.ceil(patternCatalog.length/24));
  const visiblePatterns=patternCatalog.slice((patternPage-1)*24,patternPage*24);
  function history(prev:Project){setUndo(s=>[...s.slice(-39),prev]);setRedo([])}
- function update(patch:Partial<Project>,track=true){if(track)history(p);setP(v=>({...v,...patch}))}
+ function update(patch:Partial<Project>,track=true){if(track)history(p);setP(v=>{const next={...v,...patch};return next.matProduct&&patch.base?{...next,zone:patch.base,outside:patch.base}:next})}
  function selectSport(profile:SportProfile,enterBuilder=true){
   if(profile.id==="street-football-3x3"){if(p.surfaceModel!==profile.id||p.arenaModel){finishDrag.current?.();history(p);setP(v=>({...v,...selectSurface(v,"street-football-3x3")}))}if(enterBuilder)setView("builder");setSelectedId(null);return;}
   if(!p.surfaceModel&&profile.sport===p.sport&&profile.arenaModel===p.arenaModel){if(enterBuilder)setView("builder");return;}

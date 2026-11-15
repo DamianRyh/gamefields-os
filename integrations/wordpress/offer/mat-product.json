@@ -1,0 +1,341 @@
+{
+ "name": "Mata treningowa",
+ "source": "Cennik właściciela 15.11.2026 (ceny sprzedaży netto); generowane z integrations/studio/canvas-editor/lib/mat-product.ts",
+ "currency": "PLN",
+ "vatRate": 0.23,
+ "slug": "mata-treningowa",
+ "shopAttribute": "wariant",
+ "rubberNetPerM2": {
+  "standard": 167,
+  "standard-plus": 233,
+  "premium": 333
+ },
+ "printNetPerM2": 78,
+ "limits": {
+  "min": 1,
+  "max": 10,
+  "step": 0.5,
+  "maxArea": 50
+ },
+ "rubber": {
+  "standard": {
+   "label": "Standard",
+   "description": "Maty i role SBR, podstawowe kolory. Boiska rekreacyjne i streetball."
+  },
+  "standard-plus": {
+   "label": "Standard+",
+   "description": "Grubsze maty o lepszej amortyzacji, do intensywnego użytkowania."
+  },
+  "premium": {
+   "label": "Premium",
+   "description": "Maty z warstwą EPDM: szersza paleta kolorów i lepsza odporność UV."
+  }
+ },
+ "notes": [
+  "Mata wysyłana w całości, gotowa do rozłożenia. Bez podłoża i montażu.",
+  "Wysyłkę wyceniamy po podaniu adresu."
+ ],
+ "formats": [
+  {
+   "length": 2,
+   "width": 1,
+   "areaM2": 2,
+   "variants": [
+    {
+     "id": "standard",
+     "value": "2 × 1 m · Standard",
+     "matNet": 400,
+     "printNet": 200,
+     "net": 600,
+     "gross": 738
+    },
+    {
+     "id": "standard-plus",
+     "value": "2 × 1 m · Standard+",
+     "matNet": 500,
+     "printNet": 200,
+     "net": 700,
+     "gross": 861
+    },
+    {
+     "id": "premium",
+     "value": "2 × 1 m · Premium",
+     "matNet": 700,
+     "printNet": 200,
+     "net": 900,
+     "gross": 1107
+    }
+   ]
+  },
+  {
+   "length": 2,
+   "width": 2,
+   "areaM2": 4,
+   "variants": [
+    {
+     "id": "standard",
+     "value": "2 × 2 m · Standard",
+     "matNet": 700,
+     "printNet": 400,
+     "net": 1100,
+     "gross": 1353
+    },
+    {
+     "id": "standard-plus",
+     "value": "2 × 2 m · Standard+",
+     "matNet": 1000,
+     "printNet": 400,
+     "net": 1400,
+     "gross": 1722
+    },
+    {
+     "id": "premium",
+     "value": "2 × 2 m · Premium",
+     "matNet": 1400,
+     "printNet": 400,
+     "net": 1800,
+     "gross": 2214
+    }
+   ]
+  },
+  {
+   "length": 3,
+   "width": 2,
+   "areaM2": 6,
+   "variants": [
+    {
+     "id": "standard",
+     "value": "3 × 2 m · Standard",
+     "matNet": 1100,
+     "printNet": 500,
+     "net": 1600,
+     "gross": 1968
+    },
+    {
+     "id": "standard-plus",
+     "value": "3 × 2 m · Standard+",
+     "matNet": 1400,
+     "printNet": 500,
+     "net": 1900,
+     "gross": 2337
+    },
+    {
+     "id": "premium",
+     "value": "3 × 2 m · Premium",
+     "matNet": 2000,
+     "printNet": 500,
+     "net": 2500,
+     "gross": 3075
+    }
+   ]
+  },
+  {
+   "length": 4,
+   "width": 3,
+   "areaM2": 12,
+   "variants": [
+    {
+     "id": "standard",
+     "value": "4 × 3 m · Standard",
+     "matNet": 2100,
+     "printNet": 1000,
+     "net": 3100,
+     "gross": 3813
+    },
+    {
+     "id": "standard-plus",
+     "value": "4 × 3 m · Standard+",
+     "matNet": 2800,
+     "printNet": 1000,
+     "net": 3800,
+     "gross": 4674
+    },
+    {
+     "id": "premium",
+     "value": "4 × 3 m · Premium",
+     "matNet": 4000,
+     "printNet": 1000,
+     "net": 5000,
+     "gross": 6150
+    }
+   ]
+  },
+  {
+   "length": 5,
+   "width": 4,
+   "areaM2": 20,
+   "variants": [
+    {
+     "id": "standard",
+     "value": "5 × 4 m · Standard",
+     "matNet": 3400,
+     "printNet": 1600,
+     "net": 5000,
+     "gross": 6150
+    },
+    {
+     "id": "standard-plus",
+     "value": "5 × 4 m · Standard+",
+     "matNet": 4700,
+     "printNet": 1600,
+     "net": 6300,
+     "gross": 7749
+    },
+    {
+     "id": "premium",
+     "value": "5 × 4 m · Premium",
+     "matNet": 6700,
+     "printNet": 1600,
+     "net": 8300,
+     "gross": 10209
+    }
+   ]
+  }
+ ],
+ "drills": [
+  {
+   "name": "Slalom",
+   "category": "Prowadzenie i slalom",
+   "defaultSizeM": [
+    7.3,
+    1.2
+   ]
+  },
+  {
+   "name": "Bramki z pachołków",
+   "category": "Prowadzenie i slalom",
+   "defaultSizeM": [
+    9.3,
+    2.5
+   ]
+  },
+  {
+   "name": "Ósemka",
+   "category": "Prowadzenie i slalom",
+   "defaultSizeM": [
+    4.4,
+    1.4
+   ]
+  },
+  {
+   "name": "Pole pojedynku 1 na 1",
+   "category": "Prowadzenie i slalom",
+   "defaultSizeM": [
+    4,
+    4
+   ]
+  },
+  {
+   "name": "Kwadrat treningowy",
+   "category": "Podania i strzały",
+   "defaultSizeM": [
+    5.3,
+    5.3
+   ]
+  },
+  {
+   "name": "Trójkąt podań",
+   "category": "Podania i strzały",
+   "defaultSizeM": [
+    7.3,
+    6.4
+   ]
+  },
+  {
+   "name": "Korytarz podań",
+   "category": "Podania i strzały",
+   "defaultSizeM": [
+    8,
+    1.9
+   ]
+  },
+  {
+   "name": "Łuk strzałów",
+   "category": "Podania i strzały",
+   "defaultSizeM": [
+    12.7,
+    7.6
+   ]
+  },
+  {
+   "name": "Drabinka koordynacyjna",
+   "category": "Koordynacja",
+   "defaultSizeM": [
+    3.7,
+    0.6
+   ]
+  },
+  {
+   "name": "T-test",
+   "category": "Koordynacja",
+   "defaultSizeM": [
+    9.3,
+    4.8
+   ]
+  },
+  {
+   "name": "Gwiazda 5 pachołków",
+   "category": "Koordynacja",
+   "defaultSizeM": [
+    9.3,
+    9.3
+   ]
+  },
+  {
+   "name": "Sześciokąt zwinności",
+   "category": "Koordynacja",
+   "defaultSizeM": [
+    1.2,
+    1
+   ]
+  },
+  {
+   "name": "Kropki do pracy nóg",
+   "category": "Koordynacja",
+   "defaultSizeM": [
+    0.6,
+    0.9
+   ]
+  },
+  {
+   "name": "Pole techniki",
+   "category": "Koordynacja",
+   "defaultSizeM": [
+    4.5,
+    3
+   ]
+  },
+  {
+   "name": "Numer stacji",
+   "category": "Tor przeszkód",
+   "defaultSizeM": [
+    0.8,
+    0.8
+   ]
+  },
+  {
+   "name": "Strzałka kierunku",
+   "category": "Tor przeszkód",
+   "defaultSizeM": [
+    1.2,
+    0.5
+   ]
+  },
+  {
+   "name": "Linia startu",
+   "category": "Tor przeszkód",
+   "defaultSizeM": [
+    3,
+    0.6
+   ]
+  },
+  {
+   "name": "Linia mety",
+   "category": "Tor przeszkód",
+   "defaultSizeM": [
+    3,
+    0.5
+   ]
+  }
+ ]
+}
