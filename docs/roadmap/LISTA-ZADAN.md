@@ -24,8 +24,8 @@ Ostatnia aktualizacja: 13.11.2026
 | 14f | Studio etap 3: porównanie wykończeń w podsumowaniu, ilustracje akrylu, płyt i mat | ✅ PR #100 | Studio w Sites (polecenie 7) | ⏳ |
 | 14h | Karta projektu PDF = całe zamówienie; wybór „Sama konstrukcja” | ✅ PR #101 | Studio w Sites (polecenie 7) | ⏳ |
 | 14i | Wycena samej nawierzchni (bez konstrukcji) z tych samych cenników | ✅ PR #102 | Studio w Sites (polecenie 7) | ⏳ |
-| 14j | Nowy produkt: maty treningowe z ćwiczeniami ze Studio (wielkość, guma, cena, karta PDF) | ✅ PR (ten) | Studio w Sites (polecenie 7) | ⏳ |
-| 14k | Maty: osobny cennik produktu, zakup w sklepie, strona produktu | ⬜ | | ❓ cennik od właściciela |
+| 14j | Nowy produkt: maty treningowe (bez montażu, wysyłka; guma 167/233/333 + nadruk 78 zł/m²; koszyk dla formatów; przycinanie ćwiczeń) | ✅ PR #103 | Studio w Sites (polecenie 7) | ⏳ |
+| 14k | Maty: produkt WooCommerce, strona /mata-treningowa/, endpoint sklepu w motywie | ✅ repo: `pages/maty-2026-11/`, `offer/mat-product.json`, `theme/.../inc/shop.php` | polecenie 8 | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |

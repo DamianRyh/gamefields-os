@@ -1,9 +1,11 @@
 ## Maty treningowe — dalej, 2026-11-15
 
-- [ ] Osobny cennik maty jako produktu (bez montażu) i nadruku ćwiczeń — dziś cennik mat z montażem.
-- [ ] Zakup w sklepie (produkt WooCommerce z ceną za m²) zamiast samego zapytania.
-- [ ] Przycinanie ćwiczeń do krawędzi maty na karcie (dziś ostrzeżenie w panelu).
-- [ ] Zdjęcie i opis produktu na stronie gamefields.eu.
+- [x] Cennik maty bez montażu (167 / 233 / 333 zł/m²) i nadruku (78 zł/m²).
+- [x] Zakup w sklepie: gotowe formaty jako warianty produktu WooCommerce (wdrożenie: DLA-CHATGPT-maty.md).
+- [x] Przycinanie ćwiczeń do krawędzi maty (edytor i karta).
+- [x] Strona produktu /mata-treningowa/ (wdrożenie: DLA-CHATGPT-maty.md).
+- [ ] Stawka nadruku do potwierdzenia przez właściciela (przyjęto 78 zł/m² jak malowanie jednokolorowe).
+- [ ] Zdjęcia prawdziwych mat na stronie produktu (dziś plany ze Studio).
 
 ## Studio — dalsza czytelność, 2026-11-14
 

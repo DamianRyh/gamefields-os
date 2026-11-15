@@ -17,6 +17,7 @@ const GFT_SHOP_SLUGS = array(
 	'poster' => 'plakat-z-twoim-boiskiem',
 	'ball'   => 'pilka-z-twoim-wzorem',
 	'shirt'  => 'koszulka-gamefields',
+	'mat'    => 'mata-treningowa',
 );
 
 function gft_shop_product_id( $key ) {
@@ -29,7 +30,7 @@ function gft_shop_product_id( $key ) {
 }
 
 function gft_shop_ids() {
-	return array_values( array_filter( array( gft_shop_product_id( 'poster' ), gft_shop_product_id( 'ball' ), gft_shop_product_id( 'shirt' ) ) ) );
+	return array_values( array_filter( array( gft_shop_product_id( 'poster' ), gft_shop_product_id( 'ball' ), gft_shop_product_id( 'shirt' ), gft_shop_product_id( 'mat' ) ) ) );
 }
 
 function gft_shop_has_payments() {
@@ -206,7 +207,9 @@ add_action( 'rest_api_init', function () {
 				'poster'   => gft_shop_product_data( 'poster', 'format' ),
 				'ball'     => gft_shop_product_data( 'ball', '' ),
 				'shirt'    => gft_shop_product_data( 'shirt', 'rozmiar' ),
-				'notes'    => array( 'poster' => 'Sam print, bez ramy.', 'shirt' => 'Poliester, nadruk sublimacyjny.' ),
+				// Training mat (2026-11-15): variable product, attribute "wariant" = "2 × 1 m · Standard" etc. Shipping quoted after the address.
+				'mat'      => gft_shop_product_data( 'mat', 'wariant' ),
+				'notes'    => array( 'poster' => 'Sam print, bez ramy.', 'shirt' => 'Poliester, nadruk sublimacyjny.', 'mat' => 'Mata wysyłana w całości, bez montażu. Wysyłkę wyceniamy po podaniu adresu.' ),
 			);
 			$res = rest_ensure_response( $data );
 			$res->header( 'Cache-Control', 'public, max-age=300' );

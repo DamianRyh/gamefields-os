@@ -1,5 +1,5 @@
 'use client';
-import {matNet} from '@/lib/mat-product';
+import {matNet,matPrintNet} from '@/lib/mat-product';
 import {FolderOpen} from 'lucide-react';
 import {useEffect,useState} from 'react';
 import '@/app/studio-products.css';
@@ -8,7 +8,7 @@ import '@/app/studio-hub-2026-11.css';
 import {useShop,zl,type ShopData} from '@/lib/shop';
 /* Price shown on each card, so the cost is clear before anyone starts designing. */
 function cardPrice(id:string,shop:ShopData){
- if(id==='mat')return 'od '+zl(matNet({length:2,width:1}))+' netto';
+ if(id==='mat')return 'od '+zl(matNet({length:2,width:1})+matPrintNet({length:2,width:1}))+' netto';
  if(id==='poster'){const v=shop.poster?.variants?.map(x=>x.price)??[shop.poster?.price??99];return 'od '+zl(Math.min(...v))+' brutto';}
  if(id==='ball')return zl(shop.ball?.price??999)+' brutto';
  if(id==='kit')return zl(shop.shirt?.price??599)+' brutto / szt.';
@@ -18,7 +18,7 @@ export type StudioEntry='court'|'surface'|'mat'|'poster'|'ball'|'kit';
 const products=[
  {id:'court',name:'Boiska',image:'/product-studio/hub-court.webp',description:'Osiem modeli konstrukcji. Kolory, nawierzchnię i grafikę wybierasz sam.',cta:'Projektuj boisko'},
  {id:'surface',name:'Nawierzchnie',image:'/product-studio/hub-surface.webp',description:'Wzory z biblioteki Studio na nowe boisko albo istniejący plac.',cta:'Wybierz wzór'},
- {id:'mat',name:'Maty treningowe',image:'/surfaces/catalogue/maty-gumowe-macro.webp',description:'Gumowa mata z ćwiczeniami ze Studio: slalom, drabinka, strefy podań. Dowolna wielkość, bez betonu.',cta:'Zaprojektuj matę'},
+ {id:'mat',name:'Maty treningowe',image:'/surfaces/catalogue/maty-gumowe-macro.webp',description:'Gumowa mata z ćwiczeniami ze Studio: slalom, drabinka, strefy podań. Dowolna wielkość, wysyłka gotowej maty.',cta:'Zaprojektuj matę'},
  {id:'poster',name:'Plakaty',image:'/product-studio/poster-existing.svg',description:'Twoje boisko na ścianie. Formaty 30×40, 50×70 i 70×100 cm.',cta:'Zaprojektuj plakat'},
  {id:'ball',name:'Piłki',image:'/product-studio/hub-ball.webp',description:'32 panele. Wzory i kolory Gamefields.',cta:'Projektuj piłkę'},
  {id:'kit',name:'Koszulki',image:'/product-studio/hub-kit.webp',description:'Krój, wzór, kolory i personalizacja drużyny.',cta:'Projektuj koszulkę'}] as const;

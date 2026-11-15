@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
+import {MAT_SHOP_ATTRIBUTE,MAT_SHOP_SLUG,matShopVariants} from "./mat-product";
 
 /* Prices and order paths of the Gamefields shop (WooCommerce on gamefields.eu).
    The shop is the single source: GET /wp-json/gfs/v1/shop. The constants below are only the fallback
@@ -8,7 +9,7 @@ import {useEffect,useState} from "react";
 export const SHOP_ORIGIN="https://www.gamefields.eu";
 export type ShopVariant={id:number;value:string;price:number;buy?:boolean};
 export type ShopProduct={id:number;name:string;price:number;url:string;published:boolean;attribute?:string;variants?:ShopVariant[]};
-export type ShopData={pay:boolean;cart:string;contact:string;shipping:{cost:number|null;free_from:number|null};poster:ShopProduct|null;ball:ShopProduct|null;shirt:ShopProduct|null};
+export type ShopData={pay:boolean;cart:string;contact:string;shipping:{cost:number|null;free_from:number|null};poster:ShopProduct|null;ball:ShopProduct|null;shirt:ShopProduct|null;mat?:ShopProduct|null};
 
 export const posterFormats=[
  {value:"30 × 40 cm",ratio:40/30,price:99},
@@ -24,7 +25,10 @@ export const fallbackShop:ShopData={
  ball:{id:4394,name:"Piłka z Twoim wzorem",price:999,url:SHOP_ORIGIN+"/product/pilka-z-twoim-wzorem/",published:true},
  shirt:{id:4395,name:"Koszulka Gamefields",price:599,url:SHOP_ORIGIN+"/product/koszulka-gamefields/",published:false,attribute:"rozmiar",
   variants:shirtSizes.map((s,i)=>({id:4404+i,value:s,price:599,buy:false}))},
+ mat:fallbackMat(),
 };
+/* Until the WooCommerce product exists the mat is not on sale: the Studio sends an inquiry with the gross price. */
+export function fallbackMat():ShopProduct{const v=matShopVariants();return {id:0,name:"Mata treningowa",price:Math.min(...v.map(x=>x.gross)),url:SHOP_ORIGIN+"/product/"+MAT_SHOP_SLUG+"/",published:false,attribute:MAT_SHOP_ATTRIBUTE,variants:v.map((x,i)=>({id:-(i+1),value:x.value,price:x.gross,buy:false}))};}
 
 let cache:Promise<ShopData>|null=null;
 export function loadShop():Promise<ShopData>{
