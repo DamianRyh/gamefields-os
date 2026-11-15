@@ -7,6 +7,10 @@ import {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
  */
 export const FINISH_MARGIN=0.10;
 export const FINISH_AREA_M2:Record<string,number>=Object.fromEntries(Object.entries(arenaSurfaceQuantities as Record<string,{area:number}>).map(([id,q])=>[id,Math.round(q.area*(1+FINISH_MARGIN)*10)/10]));
+/** Finish area for any surface area (construction or standalone surface): +10%, rounded to 0,1 m². */
+export const finishArea=(area:number)=>Math.round(area*(1+FINISH_MARGIN)*10)/10;
+/** Price for an area at a rate per m², rounded up to 100 zł (same rule as every price list). */
+export const netForArea=(area:number,netPerM2:number)=>Math.ceil(Math.round(area*netPerM2*100)/10000)*100;
 export const areaLabel=(m2:number)=>new Intl.NumberFormat('pl-PL',{maximumFractionDigits:1}).format(m2);
 
 /**

@@ -14,7 +14,7 @@ export function QuoteBadge({quote,onClick,label}:{quote:QuoteState;onClick:()=>v
  let text=label,short:string|undefined;
  if(!text){
   if(quote.loading)text="Przeliczam…";
-  else if(PRICE_MODE==="construction"){const c=constructionPrice(quote.data),surface=(concreteBasePrice(quote.data)??0)+(surfaceFinish(quote.data)?.net??0);text=c===null?"Indywidualna wycena":surface>0?`Konstrukcja ${money(c)} · Nawierzchnia ${money(surface)} netto`:`Konstrukcja: ${money(c)} netto`;if(c!==null)short=`${money(c+surface)} netto`;}
+  else if(PRICE_MODE==="construction"){const priced=!!quote.data?.constructionPrices,c=priced?constructionPrice(quote.data):null,surface=priced?(concreteBasePrice(quote.data)??0)+(surfaceFinish(quote.data)?.net??0):0;text=c===null?(surface>0?`Nawierzchnia ${money(surface)} netto`:"Indywidualna wycena"):surface>0?`Konstrukcja ${money(c)} · Nawierzchnia ${money(surface)} netto`:`Konstrukcja: ${money(c)} netto`;if(c!==null||surface>0)short=`${money((c??0)+surface)} netto`;}
   else{const r=priceRange(quote.data);text=r?formatPriceRange(r):"Indywidualna wycena";}
  }
  return <button className="studio-primary studio-quote-badge" onClick={onClick} aria-label="Podsumowanie"><span>Podsumowanie</span><b>{text}</b>{short?<small className="studio-quote-badge-short">{short}</small>:null}</button>;
@@ -28,24 +28,25 @@ export function ProjectQuote({quote,title,label="Cena orientacyjna projektu",hea
  const Heading=headingLevel===5?'h5':'h3';
  const data=quote.data;
  if(PRICE_MODE==="construction"){
-  const c=constructionPrice(data),b=concreteBasePrice(data),f=surfaceFinish(data);
-  if(c===null&&!quote.loading)return <Individual label={label} Heading={Heading} quote={quote}/>;
+  // Amounts only with a rate card (owner rule); a standalone surface has no construction row.
+  const priced=!!data?.constructionPrices,c=priced?constructionPrice(data):null,b=priced?concreteBasePrice(data):null,f=priced?surfaceFinish(data):null;
+  if(c===null&&b===null&&f?.net==null&&!quote.loading)return <Individual label={label} Heading={Heading} quote={quote}/>;
   const split=b!==null||f!==null,total=(c??0)+(b??0)+(f?.net??0);
   return <section className="studio-project-quote" aria-label={label} aria-busy={quote.loading}>
-   <Heading>{title||(split?"Cena konstrukcji i nawierzchni":"Cena konstrukcji")}</Heading>
-   <div role="status" aria-live="polite">{quote.loading||c===null?<p>Przeliczam aktualną konfigurację…</p>:!split?<>
+   <Heading>{title||(c===null?"Cena nawierzchni":split?"Cena konstrukcji i nawierzchni":"Cena konstrukcji")}</Heading>
+   <div role="status" aria-live="polite">{quote.loading||(c===null&&!split)?<p>Przeliczam aktualną konfigurację…</p>:!split&&c!==null?<>
     <p className="studio-quote-total"><strong>{money(c)}</strong> netto</p>
     <p className="studio-quote-range-note">{data?.exclusions.some(e=>e.startsWith("Zamówienie obejmuje samą konstrukcję"))?"Zamawiasz samą konstrukcję z bramkami. Montaż i transport wyceniamy indywidualnie, po zdjęciach placu.":"Konstrukcja z bramkami w wybranym modelu. Nawierzchnię, montaż, transport i przygotowanie podłoża wyceniamy indywidualnie, po zdjęciach placu."}</p>
    </>:<>
     <dl className="studio-quote-items studio-quote-split">
-     <div><dt>Konstrukcja boiska<small>Konstrukcja z bramkami w wybranym modelu</small></dt><dd>{money(c)} netto</dd></div>
+     {c!==null?<div><dt>Konstrukcja boiska<small>Konstrukcja z bramkami w wybranym modelu</small></dt><dd>{money(c)} netto</dd></div>:null}
      {b!==null?<div><dt>Nawierzchnia betonowa<small>Płyta 12 cm z podbudową, bez wykończenia</small></dt><dd>{money(b)} netto</dd></div>:null}
      <div><dt>{f?f.label:"Wykończenie nawierzchni"}<small>{f?.note||"Bez wykończenia. Wykończenie wybierzesz w kroku Nawierzchnia → Materiał."}</small></dt><dd>{f?.net!=null?`${money(f.net)} netto`:<span className="studio-quote-pending">{f?"Do wyceny":"—"}</span>}</dd></div>
     </dl>
     <p className="studio-quote-sum">Razem: <strong>{money(total)}</strong> netto{f&&f.net===null?" + wykończenie do wyceny":""}</p>
     {b!==null?<details className="studio-quote-scope"><summary>Co obejmuje nawierzchnia betonowa</summary><ul>{CONCRETE_BASE_INCLUDES.map(t=><li key={t}>{t}</li>)}</ul><p>Nie obejmuje:</p><ul>{CONCRETE_BASE_EXCLUDES.map(t=><li key={t}>{t}</li>)}</ul></details>:null}
     {f?.net!=null?<p className="studio-quote-range-note">{f.label.startsWith("Nawierzchnia EPDM")?EPDM_NOTES[1]:f.label.startsWith("Płytki")?TILE_NOTES.join(" "):f.label.startsWith("Sztuczna trawa")?TURF_NOTES.join(" "):f.label.startsWith("Akryl Hard Court")?ACRYLIC_NOTES.join(" "):f.label.startsWith("Płyty gumowe")?RUBBER_NOTES[0]:f.label.startsWith("Maty gumowe")?MAT_NOTES[1]:PAINT_NOTES[1]}</p>:null}
-    <p className="studio-quote-range-note">Montaż konstrukcji i transport wyceniamy indywidualnie, po zdjęciach placu.</p>
+    <p className="studio-quote-range-note">{c!==null?"Montaż konstrukcji i transport wyceniamy indywidualnie, po zdjęciach placu.":"Transport i ewentualne przygotowanie istniejącego placu wyceniamy indywidualnie, po zdjęciach."}</p>
    </>}</div>
    {contact}
    <p className="studio-quote-footnote">Cena orientacyjna netto, nie jest ofertą handlową.</p>
