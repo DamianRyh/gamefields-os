@@ -14,7 +14,7 @@ export function QuoteBadge({quote,onClick,label}:{quote:QuoteState;onClick:()=>v
  let text=label,short:string|undefined;
  if(!text){
   if(quote.loading)text="Przeliczam…";
-  else if(PRICE_MODE==="construction"){const priced=!!quote.data?.constructionPrices,c=priced?constructionPrice(quote.data):null,surface=priced?(concreteBasePrice(quote.data)??0)+(surfaceFinish(quote.data)?.net??0):0;text=c===null?(surface>0?`Nawierzchnia ${money(surface)} netto`:"Indywidualna wycena"):surface>0?`Konstrukcja ${money(c)} · Nawierzchnia ${money(surface)} netto`:`Konstrukcja: ${money(c)} netto`;if(c!==null||surface>0)short=`${money((c??0)+surface)} netto`;}
+  else if(PRICE_MODE==="construction"){const priced=!!quote.data?.constructionPrices,c=priced?constructionPrice(quote.data):null,surface=priced?(concreteBasePrice(quote.data)??0)+(surfaceFinish(quote.data)?.net??0):0;text=c===null?(surface>0?`${surfaceFinish(quote.data)?.label.startsWith("Mata treningowa")?"Mata":"Nawierzchnia"} ${money(surface)} netto`:"Indywidualna wycena"):surface>0?`Konstrukcja ${money(c)} · Nawierzchnia ${money(surface)} netto`:`Konstrukcja: ${money(c)} netto`;if(c!==null||surface>0)short=`${money((c??0)+surface)} netto`;}
   else{const r=priceRange(quote.data);text=r?formatPriceRange(r):"Indywidualna wycena";}
  }
  return <button className="studio-primary studio-quote-badge" onClick={onClick} aria-label="Podsumowanie"><span>Podsumowanie</span><b>{text}</b>{short?<small className="studio-quote-badge-short">{short}</small>:null}</button>;
@@ -33,7 +33,7 @@ export function ProjectQuote({quote,title,label="Cena orientacyjna projektu",hea
   if(c===null&&b===null&&f?.net==null&&!quote.loading)return <Individual label={label} Heading={Heading} quote={quote}/>;
   const split=b!==null||f!==null,total=(c??0)+(b??0)+(f?.net??0);
   return <section className="studio-project-quote" aria-label={label} aria-busy={quote.loading}>
-   <Heading>{title||(c===null?"Cena nawierzchni":split?"Cena konstrukcji i nawierzchni":"Cena konstrukcji")}</Heading>
+   <Heading>{title||(c===null?(f?.label.startsWith("Mata treningowa")?"Cena maty":"Cena nawierzchni"):split?"Cena konstrukcji i nawierzchni":"Cena konstrukcji")}</Heading>
    <div role="status" aria-live="polite">{quote.loading||(c===null&&!split)?<p>Przeliczam aktualną konfigurację…</p>:!split&&c!==null?<>
     <p className="studio-quote-total"><strong>{money(c)}</strong> netto</p>
     <p className="studio-quote-range-note">{data?.exclusions.some(e=>e.startsWith("Zamówienie obejmuje samą konstrukcję"))?"Zamawiasz samą konstrukcję z bramkami. Montaż i transport wyceniamy indywidualnie, po zdjęciach placu.":"Konstrukcja z bramkami w wybranym modelu. Nawierzchnię, montaż, transport i przygotowanie podłoża wyceniamy indywidualnie, po zdjęciach placu."}</p>
@@ -46,7 +46,7 @@ export function ProjectQuote({quote,title,label="Cena orientacyjna projektu",hea
     <p className="studio-quote-sum">Razem: <strong>{money(total)}</strong> netto{f&&f.net===null?" + wykończenie do wyceny":""}</p>
     {b!==null?<details className="studio-quote-scope"><summary>Co obejmuje nawierzchnia betonowa</summary><ul>{CONCRETE_BASE_INCLUDES.map(t=><li key={t}>{t}</li>)}</ul><p>Nie obejmuje:</p><ul>{CONCRETE_BASE_EXCLUDES.map(t=><li key={t}>{t}</li>)}</ul></details>:null}
     {f?.net!=null?<p className="studio-quote-range-note">{f.label.startsWith("Nawierzchnia EPDM")?EPDM_NOTES[1]:f.label.startsWith("Płytki")?TILE_NOTES.join(" "):f.label.startsWith("Sztuczna trawa")?TURF_NOTES.join(" "):f.label.startsWith("Akryl Hard Court")?ACRYLIC_NOTES.join(" "):f.label.startsWith("Płyty gumowe")?RUBBER_NOTES[0]:f.label.startsWith("Maty gumowe")?MAT_NOTES[1]:PAINT_NOTES[1]}</p>:null}
-    <p className="studio-quote-range-note">{c!==null?"Montaż konstrukcji i transport wyceniamy indywidualnie, po zdjęciach placu.":"Transport i ewentualne przygotowanie istniejącego placu wyceniamy indywidualnie, po zdjęciach."}</p>
+    <p className="studio-quote-range-note">{c!==null?"Montaż konstrukcji i transport wyceniamy indywidualnie, po zdjęciach placu.":f?.label.startsWith("Mata treningowa")?"Mata bez podłoża i montażu. Transport wyceniamy po podaniu adresu.":"Transport i ewentualne przygotowanie istniejącego placu wyceniamy indywidualnie, po zdjęciach."}</p>
    </>}</div>
    {contact}
    <p className="studio-quote-footnote">Cena orientacyjna netto, nie jest ofertą handlową.</p>

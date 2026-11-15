@@ -79,3 +79,9 @@
  .hub26 .hub26-poster .hub26-text,.hub26 .hub26-poster .hub26-foot{max-width:50%}
  .hub26 .hub26-poster .hub26-go{padding:0 16px;font-size:14px}
 }
+/* Training mats (2026-11-15): full-width tile under courts, surfaces and posters. */
+.hub26 .product-hub-card.hub26-mat{grid-column:1/-1;background:#2b2e33;min-height:clamp(220px,18vw,280px)}
+.hub26 .hub26-mat .hub26-fill{opacity:.9}
+.hub26 .hub26-mat::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(23,25,29,.92) 18%,rgba(23,25,29,.25) 70%)}
+.hub26 .hub26-mat .hub26-text{max-width:min(40ch,60%)}
+@media (max-width:1023px){.hub26 .product-hub-card.hub26-mat{grid-column:auto}.hub26 .hub26-mat .hub26-text{max-width:none}}

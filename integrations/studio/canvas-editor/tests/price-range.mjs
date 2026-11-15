@@ -161,3 +161,19 @@ assert.equal(concreteBasePrice(calculateProjectQuote({...surf,concreteBase:false
 assert.equal(finishAreaFor({arenaModel:'street15',surfaceModel:'street-football-3x3',length:15,width:10}),164.1,'with a construction: construction area');
 assert.equal(finishAreaFor({arenaModel:'o1',modular:{revision:'GF-STUDIO-MODULAR-2'},length:6,width:6}),null,'modular: individual');
 console.log('PASS: standalone surfaces priced from the same lists on their own area +10%.');
+
+// Training mat as a product (owner 15.11.2026): exact mat area, rubber mats price list, no concrete.
+import {matProject,matNet as matProductNet,validMatSize} from '../lib/mat-product.ts';
+import {projectSchema} from '../lib/project.ts';
+const matQ=calculateProjectQuote({matProduct:true,sport:'Custom Court',courtShape:'rectangle',length:3,width:2,surface:'Maty gumowe',lines:false,graphicOpacity:0,objects:[],concreteBase:false},null,1);
+assert.equal(concreteBasePrice(matQ),null,'no concrete under a mat');
+assert.deepEqual([surfaceFinish(matQ).label,surfaceFinish(matQ).net],['Mata treningowa · Standard',1500]);
+assert.equal(surfaceFinish(calculateProjectQuote({matProduct:true,matVariant:'premium',sport:'Custom Court',courtShape:'rectangle',length:5,width:4,surface:'Maty gumowe',lines:false,graphicOpacity:0,objects:[]},null,1)).net,8500);
+assert.equal(matProductNet({length:2,width:1}),500);
+assert.ok(validMatSize(1,2)&&validMatSize(10,5)&&!validMatSize(10,6)&&!validMatSize(1.2,2)&&!validMatSize(0.5,2));
+const base0={id:'GF-1',name:'x',type:'Nowe boisko',sport:'Custom Court',length:20,width:12,surface:'Akryl sportowy',base:'#112233',zone:'#112233',outside:'#112233',lineColor:'#ffffff',lines:false,pattern:'Organic Flow',graphicOpacity:0,graphicScale:100,graphicRotation:0,scene:'day',objects:[]};
+const mat=matProject(projectSchema.parse(base0));
+assert.ok(projectSchema.safeParse(mat).success,'mat project validates');
+assert.equal(projectSchema.safeParse({...mat,length:0.5}).success,false,'too small');
+assert.equal(projectSchema.safeParse({...base0,length:3}).success,false,'courts keep their minimum size');
+console.log('PASS: training mat priced on its exact area from the rubber mats list, no concrete, sizes 1–10 m every 0,5 m up to 50 m².');

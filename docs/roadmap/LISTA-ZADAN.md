@@ -23,7 +23,9 @@ Ostatnia aktualizacja: 13.11.2026
 | 14e | Studio etap 2: lista materiałów, ceny na kartach modeli, beton też +10% | ✅ PR #99 | Studio w Sites (polecenie 7) | ⏳ |
 | 14f | Studio etap 3: porównanie wykończeń w podsumowaniu, ilustracje akrylu, płyt i mat | ✅ PR #100 | Studio w Sites (polecenie 7) | ⏳ |
 | 14h | Karta projektu PDF = całe zamówienie; wybór „Sama konstrukcja” | ✅ PR #101 | Studio w Sites (polecenie 7) | ⏳ |
-| 14i | Wycena samej nawierzchni (bez konstrukcji) z tych samych cenników | ✅ PR (ten) | Studio w Sites (polecenie 7) | ⏳ |
+| 14i | Wycena samej nawierzchni (bez konstrukcji) z tych samych cenników | ✅ PR #102 | Studio w Sites (polecenie 7) | ⏳ |
+| 14j | Nowy produkt: maty treningowe z ćwiczeniami ze Studio (wielkość, guma, cena, karta PDF) | ✅ PR (ten) | Studio w Sites (polecenie 7) | ⏳ |
+| 14k | Maty: osobny cennik produktu, zakup w sklepie, strona produktu | ⬜ | | ❓ cennik od właściciela |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |

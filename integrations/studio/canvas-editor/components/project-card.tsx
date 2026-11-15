@@ -1,5 +1,5 @@
 'use client';
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useRef,useState,type ReactNode} from 'react';
 import type {Project} from '@/lib/project';
 import type {QuoteState} from '@/hooks/use-project-quote';
 import {PannaStudioPreview} from '@/components/blender-arena-preview';
@@ -17,7 +17,7 @@ export function projectCardHtml({project,sections,quote,image,date}:{project:Pro
  const split=(arena?.totalNet!=null||!project.arenaModel)&&(base?.totalNet!=null||finish?.totalNet!=null);
  const total=(arena?.totalNet??0)+(base?.totalNet??0)+(finish?.totalNet??0);
  const rows=split?`<table>${arena?.totalNet!=null?`<tr><td>Konstrukcja boiska z bramkami</td><td>${esc(money(arena.totalNet))}</td></tr>`:''}${base?.totalNet!=null?`<tr><td>Nawierzchnia betonowa bez wykończenia (płyta 12 cm z podbudową)</td><td>${esc(money(base.totalNet))}</td></tr>`:''}<tr><td>${esc(finish?finish.label:'Wykończenie nawierzchni')}</td><td>${finish?.totalNet!=null?esc(money(finish.totalNet)):finish?'do wyceny':'—'}</td></tr><tr><td><b>Razem</b></td><td><b>${esc(money(total))}</b></td></tr></table>`:'';
- const price=split?`<section class="price"><h2>${arena?.totalNet!=null?"Cena konstrukcji i nawierzchni (netto)":"Cena nawierzchni (netto)"}</h2>${rows}<p>${finish?.id==='paint'&&finish.totalNet!=null?'Malowanie nie obejmuje napraw podłoża (rysy, szlifowanie). ':finish?.id==='epdm'?'Nawierzchnia EPDM wylewana zgodnie z PN-EN 14877; linie sportowe wyceniamy osobno. ':finish?.id==='tiles'?'Płytki z montażem, profilami krawędziowymi i podstawowymi liniami. ':finish?.id==='turf'?'Trawa z montażem na betonie, zasypem i podstawowymi liniami. ':finish?.id==='acrylic'?'Nawierzchnia akrylowa z podstawowymi liniami; przygotowanie podłoża osobno. ':finish?.id==='rubber'?'Płyty gumowe klejone na betonie, z profilami krawędziowymi i podstawowymi liniami. ':finish?.id==='mats'?'Maty gumowe klejone na betonie, z profilami krawędziowymi i podstawowymi liniami. ':''}${project.arenaModel?'Montaż konstrukcji i transport są wyceniane oddzielnie.':'Transport wyceniamy oddzielnie.'}</p></section>`
+ const price=split?`<section class="price"><h2>${arena?.totalNet!=null?"Cena konstrukcji i nawierzchni (netto)":project.matProduct?"Cena maty (netto)":"Cena nawierzchni (netto)"}</h2>${rows}<p>${finish?.id==='paint'&&finish.totalNet!=null?'Malowanie nie obejmuje napraw podłoża (rysy, szlifowanie). ':finish?.id==='epdm'?'Nawierzchnia EPDM wylewana zgodnie z PN-EN 14877; linie sportowe wyceniamy osobno. ':finish?.id==='tiles'?'Płytki z montażem, profilami krawędziowymi i podstawowymi liniami. ':finish?.id==='turf'?'Trawa z montażem na betonie, zasypem i podstawowymi liniami. ':finish?.id==='acrylic'?'Nawierzchnia akrylowa z podstawowymi liniami; przygotowanie podłoża osobno. ':finish?.id==='rubber'?'Płyty gumowe klejone na betonie, z profilami krawędziowymi i podstawowymi liniami. ':finish?.id==='mats'&&project.matProduct?'Gumowa mata treningowa z nadrukowanymi ćwiczeniami. ':finish?.id==='mats'?'Maty gumowe klejone na betonie, z profilami krawędziowymi i podstawowymi liniami. ':''}${project.arenaModel?'Montaż konstrukcji i transport są wyceniane oddzielnie.':project.matProduct?'Mata bez podłoża i montażu. Transport wyceniamy oddzielnie.':'Transport wyceniamy oddzielnie.'}</p></section>`
   :arena?.totalNet!=null?`<section class="price"><h2>Cena konstrukcji</h2><p class="big">${esc(money(arena.totalNet))} netto</p><p>${project.constructionOnly?'Zamówienie obejmuje samą konstrukcję z bramkami. Montaż i transport wyceniamy oddzielnie.':'Konstrukcja z bramkami. Nawierzchnia, montaż, transport i przygotowanie podłoża są wyceniane oddzielnie.'}</p></section>`
   :`<section class="price"><h2>${project.arenaModel?'Wycena konstrukcji':'Wycena nawierzchni'}</h2><p>Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.</p></section>`;
  return `<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Gamefields — karta projektu — ${esc(project.name)}</title><style>
@@ -42,12 +42,21 @@ footer b{color:#47132d}
 </body></html>`;
 }
 
-export function ProjectCard({project,sections,quote}:{project:Project;sections:CardSection[];quote:QuoteState}){
+export function ProjectCard({project,sections,quote,renderCourt}:{project:Project;sections:CardSection[];quote:QuoteState;renderCourt?:(p:Project)=>ReactNode}){
  const [snapshot,setSnapshot]=useState<Project|null>(null),[message,setMessage]=useState(''),ref=useRef<HTMLDivElement>(null);
  useEffect(()=>{if(!snapshot)return;let cancelled=false;void(async()=>{try{
+  const plan=!!(snapshot.matProduct&&renderCourt);
+  let image='';
+  if(plan){
+   // Training mat: the 2D plan in real scale is the clearest picture of the drills on the mat.
+   await new Promise(r=>setTimeout(r,50));const svg=ref.current?.querySelector('svg');if(!svg)throw Error('Nie udało się przygotować planu maty.');
+   const clone=svg.cloneNode(true) as SVGSVGElement;clone.setAttribute('xmlns','http://www.w3.org/2000/svg');
+   image='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(clone));
+  }else{
   const stage=await new Promise<HTMLElement>((resolve,reject)=>{const host=ref.current;if(!host){reject(Error('Nie udało się przygotować modelu.'));return}let timer=0;const observer=new MutationObserver(check);function check(){const node=host!.querySelector<HTMLElement>('.panna-studio-model');if(node?.dataset.ready==='true'&&node.dataset.renderComplete===node.dataset.renderRequest&&Number(node.dataset.renderComplete)>0){observer.disconnect();clearTimeout(timer);resolve(node)}}observer.observe(host,{subtree:true,attributes:true,childList:true});timer=window.setTimeout(()=>{observer.disconnect();reject(Error('Nie udało się przygotować modelu boiska. Spróbuj ponownie.'))},60000);check()});
   const canvas=stage.querySelector('canvas');if(!canvas)throw Error('Nie udało się przygotować modelu boiska.');
-  const image=canvas.toDataURL('image/png');
+  image=canvas.toDataURL('image/png');
+  }
   const date=new Intl.DateTimeFormat('pl-PL',{dateStyle:'long'}).format(new Date());
   const frame=document.createElement('iframe');frame.setAttribute('aria-hidden','true');frame.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
   document.body.appendChild(frame);
@@ -58,6 +67,6 @@ export function ProjectCard({project,sections,quote}:{project:Project;sections:C
   frame.contentWindow.focus();frame.contentWindow.print();
   setMessage('Otworzyło się okno drukowania. Wybierz „Zapisz jako PDF”.');
   setTimeout(()=>frame.remove(),60000);
- }catch(e){if(!cancelled)setMessage((e as Error).message)}finally{if(!cancelled)setSnapshot(null)}})();return()=>{cancelled=true}},[snapshot,sections,quote.data]);
- return <section className="studio-project-card" aria-label="Karta projektu PDF"><h3>Karta projektu</h3><p>Jedna strona A4 z całym zamówieniem: wizualizacja boiska z wybraną nawierzchnią i wzorem, parametry konstrukcji i nawierzchni oraz wycena.</p><button type="button" disabled={!!snapshot||quote.loading||(!project.arenaModel&&!project.surfaceModel)} onClick={()=>{setMessage('');setSnapshot(project)}}>{snapshot?'Przygotowuję kartę…':'Pobierz kartę projektu (PDF)'}</button>{!project.arenaModel&&!project.surfaceModel?<p>Wybierz model konstrukcji albo format nawierzchni, aby przygotować kartę.</p>:null}{message?<p role="status">{message}</p>:null}{snapshot?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,top:0,width:1200,height:675,overflow:'hidden',pointerEvents:'none'}}>{snapshot.constructionOnly?<PannaStudioPreview project={{...snapshot,surfaceModel:undefined,objects:[]}} studio structureOnly/>:<PannaStudioPreview project={snapshot} studio view={snapshot.arenaModel?'perspective':'aerial'}/>}</div>:null}</section>;
+ }catch(e){if(!cancelled)setMessage((e as Error).message)}finally{if(!cancelled)setSnapshot(null)}})();return()=>{cancelled=true}},[snapshot,sections,quote.data,renderCourt]);
+ return <section className="studio-project-card" aria-label="Karta projektu PDF"><h3>Karta projektu</h3><p>Jedna strona A4 z całym zamówieniem: wizualizacja boiska z wybraną nawierzchnią i wzorem, parametry konstrukcji i nawierzchni oraz wycena.</p><button type="button" disabled={!!snapshot||quote.loading||(!project.arenaModel&&!project.surfaceModel&&!project.matProduct)} onClick={()=>{setMessage('');setSnapshot(project)}}>{snapshot?'Przygotowuję kartę…':'Pobierz kartę projektu (PDF)'}</button>{!project.arenaModel&&!project.surfaceModel&&!project.matProduct?<p>Wybierz model konstrukcji albo format nawierzchni, aby przygotować kartę.</p>:null}{message?<p role="status">{message}</p>:null}{snapshot?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,top:0,width:1200,height:675,overflow:'hidden',pointerEvents:'none'}}>{snapshot.matProduct&&renderCourt?renderCourt(snapshot):snapshot.constructionOnly?<PannaStudioPreview project={{...snapshot,surfaceModel:undefined,objects:[]}} studio structureOnly/>:<PannaStudioPreview project={snapshot} studio view={snapshot.arenaModel?'perspective':'aerial'}/>}</div>:null}</section>;
 }

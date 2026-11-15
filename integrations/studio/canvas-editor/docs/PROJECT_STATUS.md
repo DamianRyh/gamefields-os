@@ -1,3 +1,12 @@
+## Studio — nowy produkt: maty treningowe, 2026-11-15
+
+- Ekran startowy Studio: kafelek „Maty treningowe” („od 500 zł netto”). Gumowa mata z ćwiczeniami ze Studio (slalom, bramki, ósemka, drabinka itd. z `lib/football-drills.ts`), bez betonu i montażu (decyzja właściciela 15.11).
+- Projekt maty: `matProduct` w projekcie (`lib/mat-product.ts`, `matProject`). Wymiary: gotowe formaty 2 × 1, 2 × 2, 3 × 2, 4 × 3, 5 × 4 m albo własne od 1 do 10 m co 0,5 m, do 50 m² (walidacja w `projectSchema`; boiska zachowują dotychczasowe minimum).
+- Panel „Mata treningowa” w kroku Grafika: wielkość, rodzaj gumy (Standard / Standard+ / Premium) z ceną, ostrzeżenie, gdy ćwiczenie nie mieści się na macie. Kroki boiska, wybór konstrukcji i budowanie modułowe ukryte.
+- Cena: na start cennik mat gumowych (242 / 317 / 425 zł/m², decyzja właściciela) na dokładnej powierzchni maty, zaokrąglenie w górę do 100 zł; bez betonu. Np. 3 × 2 m Standard 1500 zł, 5 × 4 m Premium 8500 zł. Przycisk „Mata … zł netto”, podsumowanie „Cena maty”.
+- Zamówienie przez zapytanie: karta PDF „Mata treningowa” z planem 2D (wymiary, powierzchnia, guma, kolor, lista ćwiczeń, cena).
+- Test: `tests/mat-product-browser.mjs` (1440 i 390 px).
+
 ## Studio — wycena samej nawierzchni (bez konstrukcji), 2026-11-14
 
 - Projekt nawierzchni bez konstrukcji jest wyceniany z tych samych cenników (beton 283 zł/m² i wszystkie wykończenia) od własnej powierzchni projektu +10% (`quoteArea`, `finishAreaFor` w `lib/quote-engine.ts`; `netForArea`, `finishArea` w `lib/surface-finish.ts`). Przykład: Street Football 3×3 15 × 10 m → 165 m², beton 46 700 zł, malowanie od 12 900 zł.

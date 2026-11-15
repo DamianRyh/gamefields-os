@@ -1,4 +1,5 @@
 'use client';
+import {matNet} from '@/lib/mat-product';
 import {FolderOpen} from 'lucide-react';
 import {useEffect,useState} from 'react';
 import '@/app/studio-products.css';
@@ -7,15 +8,17 @@ import '@/app/studio-hub-2026-11.css';
 import {useShop,zl,type ShopData} from '@/lib/shop';
 /* Price shown on each card, so the cost is clear before anyone starts designing. */
 function cardPrice(id:string,shop:ShopData){
+ if(id==='mat')return 'od '+zl(matNet({length:2,width:1}))+' netto';
  if(id==='poster'){const v=shop.poster?.variants?.map(x=>x.price)??[shop.poster?.price??99];return 'od '+zl(Math.min(...v))+' brutto';}
  if(id==='ball')return zl(shop.ball?.price??999)+' brutto';
  if(id==='kit')return zl(shop.shirt?.price??599)+' brutto / szt.';
  return 'Wycena indywidualna';
 }
-export type StudioEntry='court'|'surface'|'poster'|'ball'|'kit';
+export type StudioEntry='court'|'surface'|'mat'|'poster'|'ball'|'kit';
 const products=[
  {id:'court',name:'Boiska',image:'/product-studio/hub-court.webp',description:'Osiem modeli konstrukcji. Kolory, nawierzchnię i grafikę wybierasz sam.',cta:'Projektuj boisko'},
  {id:'surface',name:'Nawierzchnie',image:'/product-studio/hub-surface.webp',description:'Wzory z biblioteki Studio na nowe boisko albo istniejący plac.',cta:'Wybierz wzór'},
+ {id:'mat',name:'Maty treningowe',image:'/surfaces/catalogue/maty-gumowe-macro.webp',description:'Gumowa mata z ćwiczeniami ze Studio: slalom, drabinka, strefy podań. Dowolna wielkość, bez betonu.',cta:'Zaprojektuj matę'},
  {id:'poster',name:'Plakaty',image:'/product-studio/poster-existing.svg',description:'Twoje boisko na ścianie. Formaty 30×40, 50×70 i 70×100 cm.',cta:'Zaprojektuj plakat'},
  {id:'ball',name:'Piłki',image:'/product-studio/hub-ball.webp',description:'32 panele. Wzory i kolory Gamefields.',cta:'Projektuj piłkę'},
  {id:'kit',name:'Koszulki',image:'/product-studio/hub-kit.webp',description:'Krój, wzór, kolory i personalizacja drużyny.',cta:'Projektuj koszulkę'}] as const;
@@ -35,9 +38,9 @@ export function StudioProductHub({onSelect,onProjects,onContinue}:{onSelect:(kin
    <div className="hub26-intro"><h1>Co projektujemy?</h1><p>Wybierz, od czego zaczynasz. Projekt zapiszesz i wyślesz do wyceny w każdej chwili.</p></div>
    <section className="hub26-wall product-hub-grid" aria-label="Wybierz produkt">
     {list.map(p=><button key={p.id} type="button" aria-label={p.name} aria-describedby={'hub-desc-'+p.id+' hub-price-'+p.id} className={'product-hub-card hub26-tile hub26-'+p.id} onClick={()=>onSelect(p.id)}>
-     {p.id==='surface'?<img className="hub26-fill" src={p.image} alt="" width={1200} height={800} decoding="async"/>:null}
-     {p.id!=='surface'&&p.id!=='poster'?<CourtLines/>:null}
-     {p.id!=='surface'?<img className="hub26-art" src={p.image} alt="" width={960} height={540} decoding="async" loading={p.id==='ball'||p.id==='kit'?'lazy':undefined} fetchPriority={p.id==='court'?'high':undefined}/>:null}
+     {p.id==='surface'||p.id==='mat'?<img className="hub26-fill" src={p.image} alt="" width={1200} height={800} decoding="async"/>:null}
+     {p.id!=='surface'&&p.id!=='poster'&&p.id!=='mat'?<CourtLines/>:null}
+     {p.id!=='surface'&&p.id!=='mat'?<img className="hub26-art" src={p.image} alt="" width={960} height={540} decoding="async" loading={p.id==='ball'||p.id==='kit'?'lazy':undefined} fetchPriority={p.id==='court'?'high':undefined}/>:null}
      <span className="hub26-text"><span className="hub26-name">{p.name}</span><span className="hub26-desc" id={'hub-desc-'+p.id}>{p.description}</span></span>
      <span className="hub26-foot"><span className="hub26-price" id={'hub-price-'+p.id} data-card-price>{cardPrice(p.id,shop)}</span><span className="hub26-go" aria-hidden="true">{p.cta}</span></span>
     </button>)}
