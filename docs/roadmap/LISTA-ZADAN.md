@@ -27,6 +27,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 14j | Nowy produkt: maty treningowe (bez montażu, wysyłka; guma 167/233/333 + nadruk 78 zł/m²; koszyk dla formatów; przycinanie ćwiczeń) | ✅ PR #103 | Studio w Sites (polecenie 7) | ⏳ |
 | 14k | Maty: produkt WooCommerce, strona /mata-treningowa/, endpoint sklepu w motywie | ✅ repo: `pages/maty-2026-11/`, `offer/mat-product.json`, `theme/.../inc/shop.php` | polecenie 8 | ✖ wycofane (16.11): mata tylko jako wykończenie w Studio; kod produktu uśpiony |
 | 17 | Strona główna: sekcja „Dla gmin, szkół i Orlików” (gwarancja 12 mies. + opieka, Orlik 2012, dokumenty producentów, normy, Kraków od planu do parku, miasta), ceny kompletu z nawierzchnią, tabela nawierzchni za m², 4 zdjęcia z boisk | ✅ PR (ten) | polecenie 9 | ⏳ |
+| 17a | Strona główna: blok „Autor studia” (zdjęcie, bio, cytat „Zaczynam od miejsca, kończę na pierwszym meczu”, 6 faktów) | ✅ PR (ten) | polecenie 10 | ⏳ |
 | 18 | Logo miast w sekcji dla gmin (zgoda jest) i certyfikaty producentów do pobrania | ⬜ | | ❓ pliki od właściciela |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
