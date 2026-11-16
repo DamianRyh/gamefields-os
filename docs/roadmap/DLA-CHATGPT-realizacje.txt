@@ -1,0 +1,20 @@
+Polecenie dla ChatGPT: nowa strona Realizacje, 16.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /realizacje-gamefields/ (ID 3466): strona to jeden blok HTML.
+Adres, tytuł strony i ustawienia SEO zostają bez zmian. Zmienia się tylko treść.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/realizacje-2026-11/realizacje-gamefields.html
+SHA-256 zaczyna się od: 9ef3573b2cb940b5
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3466 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Realizacje.” ze zdjęciami, pas liczb (10 lat, 3 areny, 7 miast, od 2008), logo sześciu miast;
+   - pasek skrótów do historii; przy przewijaniu przykleja się pod menu i go nie zasłania;
+   - pięć historii: Taras, Kutno, Kraków, Wake For Friends, Orlik. Każda ma zdjęcia, fakty, cytat i ciemny pasek „Model… Zobacz model / Zaprojektuj podobne”;
+   - pas „Słowa osób, które zamówiły.” z czterema opiniami;
+   - galeria „Turnieje i eventy” (14 zdjęć), „Więcej boisk”, cztery kafelki „Twoje miejsce może być następne”, przyciski na dole;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują.
+4. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
