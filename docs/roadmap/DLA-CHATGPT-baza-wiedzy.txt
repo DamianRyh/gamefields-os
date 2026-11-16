@@ -1,0 +1,23 @@
+Polecenie dla ChatGPT: nowa baza wiedzy (6 stron), 16.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści sześciu stron poniżej: każda strona to jeden blok HTML.
+Adresy (slug), tytuły stron i ustawienia SEO zostają bez zmian. Zmienia się tylko treść.
+
+Strony (ID → plik z nową treścią, zwykły tekst do pobrania):
+- strona 3717 (/baza-wiedzy/): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/baza-wiedzy.html  (SHA-256: e09f80d2a1bdedc2…)
+- strona 3710 (/ile-kosztuje-budowa-boiska-sportowego/): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/ile-kosztuje-budowa-boiska-sportowego.html  (SHA-256: 9e59b46fbcd5db52…)
+- strona 3711 (/budowa-boiska-krok-po-kroku/): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/budowa-boiska-krok-po-kroku.html  (SHA-256: 4d5b769eda78d73f…)
+- strona 3712 (/jak-wybrac-nawierzchnie-sportowa/): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/jak-wybrac-nawierzchnie-sportowa.html  (SHA-256: 997046dfc34b81bd…)
+- strona 3713 (/renowacja-czy-budowa-nowego-boiska/): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/renowacja-czy-budowa-nowego-boiska.html  (SHA-256: faccf5e86745ad77…)
+- strona 3714 (/wymiary-boiska-wielofunkcyjnego/): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/wymiary-boiska-wielofunkcyjnego.html  (SHA-256: 36c8c84a6b07c5b3…)
+
+Kroki:
+1. Dla każdej strony zrób kopię obecnej treści (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd strony /baza-wiedzy/ i jednego poradnika na komputerze i telefonie. Sprawdź:
+   - /baza-wiedzy/: nagłówek „Zanim powstanie boisko.”, 5 kart poradników ze zdjęciami, pas „Punkt startowy budżetu.” z cenami,
+     „Szybkie odpowiedzi” (rozwijane), 4 narzędzia, przyciski na dole;
+   - poradnik: spis treści z boku (na telefonie przewijany rząd), „Krótka odpowiedź”, tabele cen, ramki „W Gamefields”, „Czytaj dalej”;
+   - brak przewijania strony w bok, wszystkie zdjęcia się ładują.
+4. Po akceptacji opublikuj wszystkie 6 stron i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
