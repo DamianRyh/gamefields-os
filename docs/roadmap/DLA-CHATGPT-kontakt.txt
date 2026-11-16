@@ -1,0 +1,27 @@
+Polecenie dla ChatGPT: nowa strona Kontakt, 16.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /kontakt/ (ID 3716): jeden blok HTML.
+Adres, tytuł strony i ustawienia SEO zostają bez zmian.
+Formularz Contact Form 7 (ID 3758) zostaje bez zmian. Nie edytuj formularza ani jego ustawień poczty.
+Nowa treść wstawia ten sam formularz shortcode'em [contact-form-7 id="3758"].
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/kontakt-2026-11/kontakt.html
+SHA-256 zaczyna się od: f1d28019b108feb2
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3716 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź SHA-256, że nie zawiera "&&" i że zawiera [contact-form-7 id="3758"]. Przygotuj szkic z nową treścią (cały plik, bez zmian).
+3. Podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Zacznijmy od miejsca.” i karta Damiana z e-mailem i telefonem;
+   - „Kim jesteś?”: 4 karty, w tym limonkowa „Zgłaszam miejsce”. Kliknięcie przewija do formularza i pokazuje „Ścieżka: …”;
+   - w kroku „2. Miejsce” pojawiają się dodatkowe pytania wybranej ścieżki.
+     Przy „Mam mniej niż 16 lat” pokazuje się prośba o wysłanie z rodzicem lub nauczycielem;
+   - po prawej „Co wydarzy się dalej” zmienia się z wybraną ścieżką;
+   - kroki formularza 1–2–3 działają, pole zdjęcia jest widoczne;
+   - „Zanim napiszesz.” (pytania) i dane kontaktowe na dole;
+   - link /kontakt/?produkt=Test wpisuje „Test” do wiadomości i wybiera pierwszą ścieżkę;
+   - brak przewijania w bok.
+4. Wyślij JEDNO testowe zgłoszenie na szkicu (ścieżka „Zgłaszam miejsce”, e-mail właściciela, w wiadomości: TEST).
+   Sprawdź, czy mail doszedł i czy na końcu wiadomości są linie „— Z formularza (ścieżka i odpowiedzi) —”.
+   Jeśli właściciel nie chce testu, pomiń ten punkt.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj.
