@@ -146,3 +146,14 @@ a:hover{color:var(--gf-violet)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 /* inquiry mode */
 .gft-inquiry{margin:8px 0 16px}.gft-inquiry .button{min-height:48px}.gft-inquiry-note{font-size:14px;color:#6F5A66;max-width:46ch}.gft-quote-note{font-size:.8em;font-weight:500;color:#6F5A66}
+/* Studio catalogue in the shop (2026-11-16): price net first, gross below, button to the Studio */
+.gft-shop-intro{max-width:70ch;margin:0 0 8px;font-size:17px;color:var(--gf-muted)}
+.gft-shop-intro a{color:var(--gf-violet);font-weight:600;text-decoration:none}
+.woocommerce .price .gft-from,.gft-from{display:block;color:var(--gf-ink);font-weight:600}
+.woocommerce .price .gft-from b,.gft-from b{font-weight:800;letter-spacing:-.02em}
+.woocommerce .price .gft-gross,.gft-gross{display:block;margin-top:2px;font-size:13px;font-weight:500;color:var(--gf-muted)}
+.woocommerce div.product p.price .gft-from b{font-size:clamp(28px,3vw,36px)}
+.gft-studio-cta p:first-child{display:flex;flex-wrap:wrap;gap:10px}
+.woocommerce a.button.gft-studio-btn,.gft-studio-btn{background:var(--gf-ink)!important;color:#fff!important}
+.gft-studio-cta .gft-ask-btn{background:transparent!important;color:var(--gf-ink)!important;border:1.5px solid #CDBFC6!important}
+.gft-studio-cta .gft-ask-btn:hover{border-color:var(--gf-violet)!important;color:var(--gf-violet)!important}

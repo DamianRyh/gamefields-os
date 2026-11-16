@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.28' );
+define( 'GFT_VERSION', '1.0.29' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -242,6 +242,9 @@ require_once get_template_directory() . '/inc/city.php';
 
 /* Shop: designs from the homepage creators in the cart and the order, payment flag for the homepage. */
 require_once get_template_directory() . '/inc/shop.php';
+
+/* Shop catalogue = Studio catalogue: products and prices from data/studio-shop.json (2026-11-16). */
+require_once get_template_directory() . '/inc/studio-shop.php';
 
 /* Studio lives at /studio/ (roadmap: Studio pod domeną gamefields.eu). The old address keeps working:
    301 with the query string, so links carrying ?arena=…&panel=…&frame=… still open the right model and colours. */

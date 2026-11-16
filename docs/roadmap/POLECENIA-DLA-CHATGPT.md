@@ -137,3 +137,11 @@ Instrukcja: `DLA-CHATGPT-strona-glowna-uzytecznosc.md`. Najpierw motyw (część
 ```
 Pobierz instrukcję z https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/DLA-CHATGPT-strona-glowna-uzytecznosc.md. Najpierw część A: motyw Gamefields 1.0.28 (kopia plików, podmiana gf-home.js z kontrolą SHA-256, dwie zmiany w functions.php, wersja w style.css). Potem część B: zatwierdzam podmianę treści strony głównej (ID 3462) pod warunkiem sprawdzenia z punktu 3 — zmienione mogą być tylko bloki styl, naglowek, boiska, ceny i skrypty, pozostałe 17 muszą być identyczne. Zrób kopię, przygotuj szkic, pokaż mi podgląd na komputerze i telefonie, a po mojej akceptacji opublikuj i wyczyść cache LiteSpeed.
 ```
+
+## 14. Sklep = produkty i ceny ze Studia (motyw 1.0.29)
+
+Instrukcja: `DLA-CHATGPT-sklep-studio.md`. Zawiera też motyw z polecenia 13 (część A).
+
+```
+Pobierz instrukcję z https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/DLA-CHATGPT-sklep-studio.md. Część A: zrób kopie i podmień/dodaj 7 plików motywu z tabeli (sprawdź SHA-256). Część B: wejdź do wp-admin, żeby uruchomić synchronizację sklepu, przekaż mi treść komunikatu i wyczyść cache LiteSpeed. Część C: sprawdź sklep, karty produktów i przekierowania starych adresów, pokaż mi podgląd /shop/ na komputerze i telefonie. Niczego nie usuwaj: stare produkty mają być tylko ukryte. Jeśli polecenie 13 nie było jeszcze wykonane, po tym wykonaj jego część B (strona główna).
+```
