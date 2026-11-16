@@ -17,7 +17,19 @@
    "button": "Zaprojektuj w Studio",
    "url": "/studio/?arena=circle-cage-1",
    "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-005-circle-cage-1.webp",
-   "short": "<p><strong>GF-CT-005</strong> · Ø, banda 0,9 m · Osiedla, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 36 000 zł netto (od 44 280 zł brutto).</p><p>Z nawierzchnią od 47 400 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+   "short": "<p><strong>GF-CT-005</strong> · Ø, banda 0,9 m · Osiedla, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 36 000 zł netto (od 44 280 zł brutto).</p><p>Z nawierzchnią od 47 400 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>",
+   "show": {
+    "key": "circle-cage-1",
+    "bg": "#D23A26",
+    "ink": "#FFFFFF",
+    "render": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-1200.webp",
+    "renderSmall": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-720.webp",
+    "glb": "",
+    "dims": "Ø ~6 m · banda 0,90 m",
+    "fullNet": 47400,
+    "forWhom": "Osiedla, szkoły",
+    "areaM2": 31.1
+   }
   },
   {
    "sku": "GF-CT-002",
@@ -35,7 +47,19 @@
    "button": "Zaprojektuj w Studio",
    "url": "/studio/?arena=o1",
    "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-002-o1.webp",
-   "short": "<p><strong>GF-CT-002</strong> · Ø ~6 m · Kluby, eventy, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 40 000 zł netto (od 49 200 zł brutto).</p><p>Z nawierzchnią od 51 000 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+   "short": "<p><strong>GF-CT-002</strong> · Ø ~6 m · Kluby, eventy, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 40 000 zł netto (od 49 200 zł brutto).</p><p>Z nawierzchnią od 51 000 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>",
+   "show": {
+    "key": "o1",
+    "bg": "#2457D6",
+    "ink": "#FFFFFF",
+    "render": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-play-1200.webp",
+    "renderSmall": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-play-720.webp",
+    "glb": "panna-play.glb",
+    "dims": "Ø ~6 m · do 1,52 m · 1 na 1",
+    "fullNet": 51000,
+    "forWhom": "Kluby, eventy, szkoły",
+    "areaM2": 30.1
+   }
   },
   {
    "sku": "GF-CT-001",
@@ -53,7 +77,19 @@
    "button": "Zaprojektuj w Studio",
    "url": "/studio/?arena=w1",
    "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/W-1-—-GF-CT-001.webp",
-   "short": "<p><strong>GF-CT-001</strong> · Ø ~5 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 40 000 zł netto (od 49 200 zł brutto).</p><p>Z nawierzchnią od 47 800 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+   "short": "<p><strong>GF-CT-001</strong> · Ø ~5 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 40 000 zł netto (od 49 200 zł brutto).</p><p>Z nawierzchnią od 47 800 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>",
+   "show": {
+    "key": "w1",
+    "bg": "#6336F5",
+    "ink": "#FFFFFF",
+    "render": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-ring-1200.webp",
+    "renderSmall": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-ring-720.webp",
+    "glb": "panna-ring.glb",
+    "dims": "Ø ~5 m · 1 m",
+    "fullNet": 47800,
+    "forWhom": "",
+    "areaM2": 21.5
+   }
   },
   {
    "sku": "GF-CT-008",
@@ -71,7 +107,19 @@
    "button": "Zaprojektuj w Studio",
    "url": "/studio/?arena=octagon",
    "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-008-octagon.webp",
-   "short": "<p><strong>GF-CT-008</strong> · Ośmiokąt · Gminy, parki, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 49 000 zł netto (od 60 270 zł brutto).</p><p>Z nawierzchnią od 60 900 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+   "short": "<p><strong>GF-CT-008</strong> · Ośmiokąt · Gminy, parki, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 49 000 zł netto (od 60 270 zł brutto).</p><p>Z nawierzchnią od 60 900 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>",
+   "show": {
+    "key": "octagon",
+    "bg": "#47132D",
+    "ink": "#F4F1EE",
+    "render": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-octa-1200.webp",
+    "renderSmall": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-octa-720.webp",
+    "glb": "panna-octa.glb",
+    "dims": "4,96 m · 1,22 m · oktagon",
+    "fullNet": 60900,
+    "forWhom": "Gminy, parki, szkoły",
+    "areaM2": 32.8
+   }
   },
   {
    "sku": "GF-CT-007",
@@ -89,7 +137,19 @@
    "button": "Zaprojektuj w Studio",
    "url": "/studio/?arena=street-field",
    "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-007-street-field.webp",
-   "short": "<p><strong>GF-CT-007</strong> · 6,21 × 4,65 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 51 000 zł netto (od 62 730 zł brutto).</p><p>Z nawierzchnią od 66 500 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+   "short": "<p><strong>GF-CT-007</strong> · 6,21 × 4,65 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 51 000 zł netto (od 62 730 zł brutto).</p><p>Z nawierzchnią od 66 500 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>",
+   "show": {
+    "key": "street-field",
+    "bg": "#E8E1D8",
+    "ink": "#47132D",
+    "render": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-grid-1200.webp",
+    "renderSmall": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-grid-720.webp",
+    "glb": "",
+    "dims": "6,21 × 4,65 m",
+    "fullNet": 66500,
+    "forWhom": "",
+    "areaM2": 42.6
+   }
   },
   {
    "sku": "GF-CT-006",
@@ -107,7 +167,19 @@
    "button": "Zaprojektuj w Studio",
    "url": "/studio/?arena=circle-cage-2",
    "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-006-circle-cage-2.webp",
-   "short": "<p><strong>GF-CT-006</strong> · Ø, banda 1,8 m · Kluby, akademie</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 58 000 zł netto (od 71 340 zł brutto).</p><p>Z nawierzchnią od 69 400 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+   "short": "<p><strong>GF-CT-006</strong> · Ø, banda 1,8 m · Kluby, akademie</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 58 000 zł netto (od 71 340 zł brutto).</p><p>Z nawierzchnią od 69 400 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>",
+   "show": {
+    "key": "circle-cage-2",
+    "bg": "#D8F24A",
+    "ink": "#1F2A6B",
+    "render": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage180-1200.webp",
+    "renderSmall": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage180-720.webp",
+    "glb": "",
+    "dims": "Ø ~6 m · banda 1,80 m",
+    "fullNet": 69400,
+    "forWhom": "Kluby, akademie",
+    "areaM2": 31.1
+   }
   },
   {
    "sku": "GF-CT-003",
@@ -125,7 +197,19 @@
    "button": "Zaprojektuj w Studio",
    "url": "/studio/?arena=p1",
    "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-003-p1.webp",
-   "short": "<p><strong>GF-CT-003</strong> · 7,14 × 5,57 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 69 000 zł netto (od 84 870 zł brutto).</p><p>Z nawierzchnią od 84 700 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+   "short": "<p><strong>GF-CT-003</strong> · 7,14 × 5,57 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 69 000 zł netto (od 84 870 zł brutto).</p><p>Z nawierzchnią od 84 700 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>",
+   "show": {
+    "key": "p1",
+    "bg": "#FFB3C8",
+    "ink": "#47132D",
+    "render": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-court-1200.webp",
+    "renderSmall": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-court-720.webp",
+    "glb": "panna-court.glb",
+    "dims": "7,14 × 5,57 m · do 1,22 m",
+    "fullNet": 84700,
+    "forWhom": "",
+    "areaM2": 43.2
+   }
   },
   {
    "sku": "GF-CT-004",
@@ -143,7 +227,19 @@
    "button": "Zaprojektuj w Studio",
    "url": "/studio/?arena=street15",
    "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-004-street15.webp",
-   "short": "<p><strong>GF-CT-004</strong> · Pełny format, 15 × 10 m · Gminy, deweloperzy</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 100 000 zł netto (od 123 000 zł brutto).</p><p>Z nawierzchnią od 159 300 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+   "short": "<p><strong>GF-CT-004</strong> · Pełny format, 15 × 10 m · Gminy, deweloperzy</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 100 000 zł netto (od 123 000 zł brutto).</p><p>Z nawierzchnią od 159 300 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>",
+   "show": {
+    "key": "street15",
+    "bg": "#1F2A6B",
+    "ink": "#FFFFFF",
+    "render": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-street15-1200.webp",
+    "renderSmall": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-street15-720.webp",
+    "glb": "",
+    "dims": "15 × 10 m · 3 na 3",
+    "fullNet": 159300,
+    "forWhom": "Gminy, deweloperzy",
+    "areaM2": 164.1
+   }
   },
   {
    "sku": "GF-NW-001",
@@ -162,7 +258,17 @@
    "image": {
     "fromProduct": 2769
    },
-   "short": "<p>Podstawa pod każde wykończenie: 283 zł/m² netto.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+   "short": "<p>Podstawa pod każde wykończenie: 283 zł/m² netto.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>",
+   "show": {
+    "tag": "Podstawa",
+    "variants": [
+     {
+      "name": "za m²",
+      "net": 283
+     }
+    ],
+    "texture": ""
+   }
   },
   {
    "sku": "GF-NW-002",
@@ -179,7 +285,29 @@
    "button": "Wybierz w Studio",
    "url": "/studio/",
    "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/p1/malowana-kolor.jpg",
-   "short": "<p>Na płycie betonowej albo na istniejącym placu: jednokolorowa 78 zł/m², jednokolorowa z granulatem 100 zł/m², wzór średni 150 zł/m², wzór zaawansowany 183 zł/m² netto.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+   "short": "<p>Na płycie betonowej albo na istniejącym placu: jednokolorowa 78 zł/m², jednokolorowa z granulatem 100 zł/m², wzór średni 150 zł/m², wzór zaawansowany 183 zł/m² netto.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>",
+   "show": {
+    "tag": "Na beton i stary plac",
+    "variants": [
+     {
+      "name": "Jednokolorowa",
+      "net": 78
+     },
+     {
+      "name": "Jednokolorowa z granulatem",
+      "net": 100
+     },
+     {
+      "name": "Wzór średni",
+      "net": 150
+     },
+     {
+      "name": "Wzór zaawansowany",
+      "net": 183
+     }
+    ],
+    "texture": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/p1/malowana-kolor.jpg"
+   }
   },
   {
    "sku": "GF-NW-003",
@@ -196,7 +324,25 @@
    "button": "Wybierz w Studio",
    "url": "/studio/",
    "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/granulat-macro.webp",
-   "short": "<p>Wykończenie na płycie betonowej: 250–400 zł/m² netto, warianty Standard, Standard+ i Premium. Norma PN-EN 14877.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+   "short": "<p>Wykończenie na płycie betonowej: 250–400 zł/m² netto, warianty Standard, Standard+ i Premium. Norma PN-EN 14877.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>",
+   "show": {
+    "tag": "PN-EN 14877",
+    "variants": [
+     {
+      "name": "Standard",
+      "net": 250
+     },
+     {
+      "name": "Standard+",
+      "net": 317
+     },
+     {
+      "name": "Premium",
+      "net": 400
+     }
+    ],
+    "texture": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/granulat-macro.webp"
+   }
   },
   {
    "sku": "GF-NW-004",
@@ -213,7 +359,25 @@
    "button": "Wybierz w Studio",
    "url": "/studio/",
    "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/plytki-macro.webp",
-   "short": "<p>Wykończenie na płycie betonowej: 275–400 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+   "short": "<p>Wykończenie na płycie betonowej: 275–400 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>",
+   "show": {
+    "tag": "Montaż bez klejenia",
+    "variants": [
+     {
+      "name": "Standard",
+      "net": 275
+     },
+     {
+      "name": "Standard+",
+      "net": 325
+     },
+     {
+      "name": "Premium",
+      "net": 400
+     }
+    ],
+    "texture": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/plytki-macro.webp"
+   }
   },
   {
    "sku": "GF-NW-005",
@@ -230,7 +394,25 @@
    "button": "Wybierz w Studio",
    "url": "/studio/",
    "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/trawa-macro.webp",
-   "short": "<p>Wykończenie na płycie betonowej: 167–292 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+   "short": "<p>Wykończenie na płycie betonowej: 167–292 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>",
+   "show": {
+    "tag": "Klasyczna murawa",
+    "variants": [
+     {
+      "name": "Standard",
+      "net": 167
+     },
+     {
+      "name": "Standard+",
+      "net": 225
+     },
+     {
+      "name": "Premium",
+      "net": 292
+     }
+    ],
+    "texture": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/trawa-macro.webp"
+   }
   },
   {
    "sku": "GF-NW-006",
@@ -247,7 +429,25 @@
    "button": "Wybierz w Studio",
    "url": "/studio/",
    "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/akryl-macro.webp",
-   "short": "<p>Wykończenie na płycie betonowej: 200–342 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+   "short": "<p>Wykończenie na płycie betonowej: 200–342 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>",
+   "show": {
+    "tag": "Jak na kortach",
+    "variants": [
+     {
+      "name": "Standard",
+      "net": 200
+     },
+     {
+      "name": "Standard+",
+      "net": 267
+     },
+     {
+      "name": "Premium",
+      "net": 342
+     }
+    ],
+    "texture": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/akryl-macro.webp"
+   }
   },
   {
    "sku": "GF-NW-007",
@@ -264,7 +464,25 @@
    "button": "Wybierz w Studio",
    "url": "/studio/",
    "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/plyty-gumowe-macro.webp",
-   "short": "<p>Wykończenie na płycie betonowej: 342–492 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+   "short": "<p>Wykończenie na płycie betonowej: 342–492 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>",
+   "show": {
+    "tag": "PN-EN 1177, atest PZH",
+    "variants": [
+     {
+      "name": "Standard",
+      "net": 342
+     },
+     {
+      "name": "Standard+",
+      "net": 400
+     },
+     {
+      "name": "Premium",
+      "net": 492
+     }
+    ],
+    "texture": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/plyty-gumowe-macro.webp"
+   }
   },
   {
    "sku": "GF-NW-008",
@@ -281,7 +499,25 @@
    "button": "Wybierz w Studio",
    "url": "/studio/",
    "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/maty-gumowe-macro.webp",
-   "short": "<p>Wykończenie na płycie betonowej: 242–425 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+   "short": "<p>Wykończenie na płycie betonowej: 242–425 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>",
+   "show": {
+    "tag": "Ciągła guma",
+    "variants": [
+     {
+      "name": "Standard",
+      "net": 242
+     },
+     {
+      "name": "Standard+",
+      "net": 317
+     },
+     {
+      "name": "Premium",
+      "net": 425
+     }
+    ],
+    "texture": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/maty-gumowe-macro.webp"
+   }
   }
  ],
  "legacy": {
@@ -304,5 +540,5 @@
  "catalogHidden": [
   4393
  ],
- "version": "eec68e92e971"
+ "version": "b311f646c21e"
 }

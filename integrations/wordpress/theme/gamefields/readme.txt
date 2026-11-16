@@ -10,3 +10,4 @@ Lekki motyw Gamefields zastępujący Savoy.
 - WooCommerce: domyślne szablony, styl Gamefields, „Cena na zapytanie” i „Zapytaj o wycenę” dla produktów bez ceny.
 - Menu jest wbudowane w motyw (gft_nav_items w functions.php), tak samo jak na stronie głównej.
 - Sklep = Studio (1.0.29, inc/studio-shop.php): produkty i ceny z data/studio-shop.json (generator: integrations/wordpress/offer/build_studio_shop.py). Synchronizacja przy wejściu administratora do wp-admin, raz na wersję danych; stare produkty tylko ukryte (_gft_prev_visibility) i przekierowane 301.
+- Sklep jako showroom (1.0.30, templates/shop-studio.php): strona /shop/ pokazuje 8 boisk na scenie (3D dla Play, Court, Ring, Octa; rendery na kolorach marki dla pozostałych), nawierzchnie z kalkulatorem ceny dla wybranego boiska i „Jak zamówić”. Kategorie, wyszukiwanie i sortowanie zostają listą WooCommerce.

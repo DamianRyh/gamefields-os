@@ -26,6 +26,23 @@ SLUG = {"w1": "panna-ring", "o1": "panna-play", "p1": "panna-court", "octagon": 
         "street-field": "panna-grid", "circle-cage-1": "panna-octa-cage-90", "circle-cage-2": "panna-octa-cage-180",
         "street15": "street-arena-15"}
 
+# Showroom on /shop/ (2026-11-16): brand colours and transparent renders as on the homepage collection tiles;
+# rotating 3D only for the four light models the theme already serves (hero-r3, 0.4-3.3 MB).
+UP11 = "https://www.gamefields.eu/wp-content/uploads/2026/11/"
+LOOK = {
+    "circle-cage-1": ("#D23A26", "#FFFFFF", "gf-cage90", "", "Ø ~6 m · banda 0,90 m"),
+    "circle-cage-2": ("#D8F24A", "#1F2A6B", "gf-cage180", "", "Ø ~6 m · banda 1,80 m"),
+    "o1": ("#2457D6", "#FFFFFF", "gf-play", "panna-play.glb", "Ø ~6 m · do 1,52 m · 1 na 1"),
+    "p1": ("#FFB3C8", "#47132D", "gf-court", "panna-court.glb", "7,14 × 5,57 m · do 1,22 m"),
+    "octagon": ("#47132D", "#F4F1EE", "gf-octa", "panna-octa.glb", "4,96 m · 1,22 m · oktagon"),
+    "street-field": ("#E8E1D8", "#47132D", "gf-grid", "", "6,21 × 4,65 m"),
+    "w1": ("#6336F5", "#FFFFFF", "gf-ring", "panna-ring.glb", "Ø ~5 m · 1 m"),
+    "street15": ("#1F2A6B", "#FFFFFF", "gf-street15", "", "15 × 10 m · 3 na 3"),
+}
+SURF_LOOK = {"GF-NW-001": "Podstawa", "GF-NW-002": "Na beton i stary plac", "GF-NW-003": "PN-EN 14877",
+             "GF-NW-004": "Montaż bez klejenia", "GF-NW-005": "Klasyczna murawa", "GF-NW-006": "Jak na kortach",
+             "GF-NW-007": "PN-EN 1177, atest PZH", "GF-NW-008": "Ciągła guma"}
+
 # Old WooCommerce products (catalogue from before the Studio, checked 2026-11-16). Hidden, never deleted.
 # Their URLs redirect (301) to the matching Studio product, or to the shop.
 LEGACY = {251: "", 250: "", 249: "", 248: "", 245: "", 239: "", 238: "", 232: "", 230: "",
@@ -63,9 +80,13 @@ def main():
             "categories": ["boiska-sportowe-nowoczesne-rozwiazania-gamefields", SHAPE[m["id"]]],
             "button": "Zaprojektuj w Studio", "url": m["link"],
             "image": media[m["id"]], "short": short,
+            "show": {"key": m["id"], "bg": LOOK[m["id"]][0], "ink": LOOK[m["id"]][1],
+                     "render": UP11 + LOOK[m["id"]][2] + "-1200.webp", "renderSmall": UP11 + LOOK[m["id"]][2] + "-720.webp",
+                     "glb": LOOK[m["id"]][3], "dims": LOOK[m["id"]][4], "fullNet": full,
+                     "forWhom": m["forWhom"] or "", "areaM2": next(x["areaM2"] for x in base["models"] if x["id"] == m["id"])},
         })
 
-    def surface(sku, slug, name, net_list, img, short, url="/studio/"):
+    def surface(sku, slug, name, net_list, img, short, url="/studio/", variants=None):
         nonlocal order
         order += 1
         net = min(net_list)
@@ -74,6 +95,8 @@ def main():
             "net": net, "gross": round(net * VAT, 2), "unit": "m²",
             "categories": ["nawierzchnie-sportowe-profesjonalne-podloza-gamefields"],
             "button": "Wybierz w Studio", "url": url, "image": img, "short": short,
+            "show": {"tag": SURF_LOOK[sku], "variants": variants or [{"name": "za m²", "net": net}],
+                     "texture": img if isinstance(img, str) else ""},
         })
 
     rng = lambda vs: f"{min(vs)}–{max(vs)} zł/m² netto" if min(vs) != max(vs) else f"{vs[0]} zł/m² netto"
@@ -83,7 +106,8 @@ def main():
     pv = [v["netPerM2"] for v in fin["variants"]]
     surface("GF-NW-002", "malowanie-farba-sportowa", "Malowanie farbą sportową", pv,
             f"{STUDIO_SITE}/surfaces/p1/malowana-kolor.jpg",
-            "<p>Na płycie betonowej albo na istniejącym placu: " + ", ".join(f"{v['name'].lower()} {v['netPerM2']} zł/m²" for v in fin["variants"]) + " netto.</p>" + note)
+            "<p>Na płycie betonowej albo na istniejącym placu: " + ", ".join(f"{v['name'].lower()} {v['netPerM2']} zł/m²" for v in fin["variants"]) + " netto.</p>" + note,
+            variants=[{"name": v["name"], "net": v["netPerM2"]} for v in fin["variants"]])
     for key, sku, slug, name, img in [
         ("epdm", "GF-NW-003", "nawierzchnia-epdm", "Nawierzchnia EPDM wylewana", "granulat-macro.webp"),
         ("tiles", "GF-NW-004", "plytki-sportowe", "Płytki sportowe PP", "plytki-macro.webp"),
@@ -96,7 +120,8 @@ def main():
         vs = [v["netPerM2"] for v in f["variants"]]
         extra = f" Norma {f['norm']}." if f.get("norm") else ""
         surface(sku, slug, name, vs, f"{STUDIO_SITE}/surfaces/catalogue/{img}",
-                f"<p>Wykończenie na płycie betonowej: {rng(vs)}, warianty Standard, Standard+ i Premium.{extra}</p>" + note)
+                f"<p>Wykończenie na płycie betonowej: {rng(vs)}, warianty Standard, Standard+ i Premium.{extra}</p>" + note,
+                variants=[{"name": ["Standard", "Standard+", "Premium"][i] if i < 3 else v["name"], "net": v["netPerM2"]} for i, v in enumerate(f["variants"])])
 
     data = {"source": "integrations/wordpress/offer/build_studio_shop.py", "products": products,
             "legacy": {str(k): v for k, v in LEGACY.items()}, "catalogHidden": CATALOG_HIDDEN}
