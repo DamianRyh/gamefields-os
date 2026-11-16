@@ -103,10 +103,11 @@
 <section id="ceny" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-price">
   <div class="head">
     <div class="hd"><p class="kicker m">Ceny</p><h2 class="d" id="gfs-price">Ile kosztuje arena?</h2></div>
-    <div class="side"><p>Ceny konstrukcji z bramkami. Nawierzchnia, montaż i transport zależą od miejsca, dlatego koszt całego boiska policzę po zdjęciach placu.</p><div class="chips"><a class="chip" href="#kontakt">Wyślij zdjęcia placu</a><a class="chip" href="/studio/">Zaprojektuj w Studio</a><a class="chip" href="/dofinansowanie-boisk/">Dofinansowanie</a></div></div>
+    <div class="side"><p>Ceny konstrukcji z bramkami i całego boiska z nawierzchnią. Montaż i transport zależą od miejsca, dlatego policzę je po zdjęciach placu.</p><div class="chips"><a class="chip" href="#kontakt">Wyślij zdjęcia placu</a><a class="chip" href="/studio/">Zaprojektuj w Studio</a><a class="chip" href="/dofinansowanie-boisk/">Dofinansowanie</a></div></div>
   </div>
   {{PRICES}}
-  <p class="price-note">Ceny orientacyjne „od”, konstrukcja w podstawowej konfiguracji i standardowym kolorze. Netto oraz brutto z VAT 23%. Nie obejmują nawierzchni, montażu, transportu i grafiki.</p>
+  <p class="price-note">Ceny orientacyjne „od”, konstrukcja w podstawowej konfiguracji i standardowym kolorze. Netto oraz brutto z VAT 23%. „Z nawierzchnią” to konstrukcja, płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem. Bez montażu, transportu i przygotowania terenu.</p>
+  {{SURFACES}}
 </section>
 
 <!-- MODERNIZACJA: stary beton -> kolorowe boisko (2026-11-11). Zdjęcia: strona /radar-boisko-koszykowki-warszawa/, Street View 2017 + koncepcja Organic Flow. -->
@@ -146,6 +147,42 @@
 </section>
 <script>(function(){var f=document.querySelector('.gfs [data-ba]');if(!f)return;var r=f.querySelector('.mod-range');function s(){f.style.setProperty('--p',r.value+'%')}r.addEventListener('input',s);s();var a=document.querySelector('.gfs [data-mod-ask]');if(a)a.addEventListener('click',function(){var t=document.querySelector('.gfs textarea[name="project-details"]');if(t){if(!t.value)t.value='Mam stary betonowy plac do modernizacji. Wymiary: ... Lokalizacja: ... Zdjęcia wyślę w odpowiedzi.';}});})();</script>
 
+<!-- SAMORZĄDY: gminy, szkoły, Orliki (2026-11-16). Fakty: właściciel 16.11 (gwarancja 12 miesięcy + stała opieka nad renowacją,
+     zgodność z programem „Moje Boisko – Orlik 2012”, dokumentacja producentów), normy z kosztorysów nawierzchni, realizacje z mediów. -->
+<section id="samorzady" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-gov">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Dla gmin, szkół i Orlików</p><h2 class="d" id="gfs-gov">Boisko, które się broni.</h2></div>
+    <div class="side"><p>Modernizacja Orlika, nowe boisko w gminie albo strefa przy szkole. Przygotuję koncepcję, parametry techniczne i dokumenty do wniosku o dofinansowanie i do przetargu.</p>
+      <div class="chips"><a class="chip" href="/dofinansowanie-boisk/">Dofinansowanie boisk</a><a class="chip" href="/realizacje-dla-miast/">Realizacje dla miast</a></div></div>
+  </div>
+  <ul class="gov-facts" role="list">
+    <li><span class="m">10 lat</span><b>Panna Ring na Orliku</b><span>W użyciu od 10 lat na Orliku OSiR w Grodzisku Mazowieckim.</span></li>
+    <li><span class="m">Orlik 2012</span><b>Zgodne z programem</b><span>Rozwiązania spełniają wymagania programu „Moje Boisko – Orlik 2012”. Nabory na 2027 rok ruszają 4 stycznia.</span></li>
+    <li><span class="m">12 miesięcy</span><b>Gwarancja i opieka</b><span>Rok gwarancji i stała opieka nad renowacją boiska po odbiorze.</span></li>
+    <li><span class="m">Dokumenty</span><b>Certyfikaty producentów</b><span>Karty techniczne i certyfikaty stali, farb i nawierzchni dołączam do oferty, wniosku i dokumentacji przetargowej.</span></li>
+  </ul>
+  <div class="gov-norms" aria-label="Parametry nawierzchni">
+    <span><b>PN-EN 14877</b> nawierzchnie poliuretanowe EPDM</span>
+    <span><b>PN-EN 1177</b> i atest PZH: płyty gumowe</span>
+    <span><b>R11</b> antypoślizg: płyty i maty gumowe</span>
+    <span><b>Wodoprzepuszczalne</b> EPDM natryskowe i płyty</span>
+  </div>
+  <figure class="gov-build">
+    <ol role="list">
+      <li><img src="/wp-content/uploads/2026/11/Gamefields-x-boiska-x-Projekt-Krakow--768x768.jpg" alt="Plan zagospodarowania z arenami Gamefields, Kraków" width="768" height="768" loading="lazy" decoding="async"><span>Projekt na planie</span></li>
+      <li><img src="/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-montaz-768x576.jpg" alt="Montaż areny Panna Cage w parku, Kraków" width="768" height="576" loading="lazy" decoding="async"><span>Montaż</span></li>
+      <li><img src="/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-768x576.jpg" alt="Gotowa arena Panna Cage przed zakończeniem prac, Kraków" width="768" height="576" loading="lazy" decoding="async"><span>Przed odbiorem</span></li>
+      <li><img src="/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Panna Octa Cage 90 w parku, Kraków" width="768" height="768" loading="lazy" decoding="async"><span>W parku</span></li>
+    </ol>
+    <figcaption><b>Kraków: od planu do boiska w parku.</b> Panna Octa Cage 90 na terenie miejskim.</figcaption>
+  </figure>
+  <p class="gov-cities"><span class="m">Realizacje</span>Warszawa · Kraków · Grodzisk Mazowiecki · Kutno · Żyrardów · Gdańsk · Łódź</p>
+  <div class="mod-cta">
+    <a class="pill" href="#kontakt" style="background:var(--violet);color:#fff">Wyślij zdjęcie placu <span aria-hidden="true">→</span></a>
+    <a class="pill" href="/studio/" style="background:var(--ink);color:var(--paper)">Zaprojektuj w 3D i wyślij do wyceny <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+
 <!-- STUDIO -->
 <!-- WHO: paths per audience, linked to the existing landing pages -->
 <section id="dla-kogo" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-who">
@@ -171,6 +208,10 @@
     <div class="side"><p>Areny Gamefields w miastach, na turniejach i eventach marek. <a href="/realizacje-gamefields/">Wszystkie realizacje →</a></p></div>
   </div>
   <ul class="reals" role="list">
+    <li><figure><img src="/wp-content/uploads/2026/11/GAMEFIELDS-Street-Football-Tournament-1-768x576.png" alt="Arena Gamefields na turnieju street football" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Turniej Street Football</b><span>Arena Gamefields i kibice</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/Damian-Gawrych-x-Wake-for-friends--768x960.jpg" alt="Dzieci grają na arenie Gamefields, Wake For Friends" width="768" height="960" loading="lazy" decoding="async"><figcaption><b>Wake For Friends</b><span>Gra na arenie nad wodą</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/Urodziny-pilkarskie-Gamefields-Damian-Gawrych--768x431.jpg" alt="Urodziny piłkarskie Gamefields przy arenie" width="768" height="431" loading="lazy" decoding="async"><figcaption><b>Urodziny piłkarskie</b><span>Gamefields</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/Zyrardow-Panna-Arena-1v1--768x575.jpg" alt="Pojedynek na arenie Panna 1 na 1, Żyrardów" width="768" height="575" loading="lazy" decoding="async"><figcaption><b>Panna 1 na 1</b><span>Żyrardów</span></figcaption></figure></li>
     <li><figure><img src="/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Taras w Parku Świętokrzyskim</b><span>Warszawa</span></figcaption></figure></li>
     <li><figure><img src="/wp-content/uploads/2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Złote Tarasy, Warszawa</span></figcaption></figure></li>
     <li><figure><img src="/wp-content/uploads/2026/11/1-768x576.jpg" alt="Event Head &amp; Shoulders, Stadion, Gdańsk" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Stadion, Gdańsk</span></figcaption></figure></li>

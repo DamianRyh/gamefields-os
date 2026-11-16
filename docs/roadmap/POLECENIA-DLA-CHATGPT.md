@@ -97,3 +97,11 @@ Załączniki: `DLA-CHATGPT-maty.md` oraz trzy obrazy z `integrations/wordpress/p
 ```
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Zrób punkty 1–4 z DLA-CHATGPT-maty.md: wgraj trzy obrazy, utwórz produkt zmienny „Mata treningowa” (slug mata-treningowa, atrybut „wariant”, 15 wariantów z cenami brutto z tabeli, jako szkic), utwórz stronę /mata-treningowa/ z kodu (szkic) i wprowadź cztery zmiany w inc/shop.php motywu. Przed zmianą motywu zrób kopię pliku. Pokaż mi ustawienia wysyłki dla maty i podgląd strony (komputer i telefon), potem sprawdź punkt 5. Publikację produktu i strony zrobimy po moim potwierdzeniu.
 ```
+
+## 9. Strona główna: gminy i Orliki, ceny kompletu, zdjęcia z boisk
+
+Załącznik: `DLA-CHATGPT-strona-glowna-samorzady.md`. Niezależne od poleceń 7 i 8.
+
+```
+W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) wstaw fragmenty z punktów 1–4 (CSS, nowa sekcja cen, nowa sekcja „Dla gmin, szkół i Orlików” przed „Wybierz swoją drogę”, cztery zdjęcia na początku „Z boiska”). Nie podmieniaj całej strony. Zrób kopię przed zmianą, pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
+```
