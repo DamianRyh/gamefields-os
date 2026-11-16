@@ -38,6 +38,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 24 | Baza wiedzy od nowa: /baza-wiedzy/ i 5 poradników w stylu strony, z cenami Gamefields, Studio, gwarancją; cała dotychczasowa treść zachowana | ✅ PR (ten) | DLA-CHATGPT-baza-wiedzy.txt | ⏳ |
 | 25 | Realizacje od nowa: liczby, logo miast, 5 historii (z Krakowem) z cytatami i linkiem do modelu z ceną, pas opinii, galeria eventów z markami | ✅ PR (ten) | DLA-CHATGPT-realizacje.txt | ⏳ |
 | 26 | Strona główna „Poczuj różnicę.”: wybór 8 nawierzchni z przybliżaną teksturą, ceną za m², cechami i kosztem dla wybranego boiska | ✅ PR (ten) | DLA-CHATGPT-nawierzchnie-wybor.txt (2 bloki) | ⏳ |
+| 27 | Kontakt od nowa: 4 ścieżki („Zgłaszam miejsce” dla młodzieży i mieszkańców bez budżetu, z linkiem do projektu i opieką dla osób poniżej 16 lat), pytania pod ścieżkę w mailu, „co dalej”, FAQ; formularz CF7 3758 bez zmian | ✅ PR (ten) | DLA-CHATGPT-kontakt.txt | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |
