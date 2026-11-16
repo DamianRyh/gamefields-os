@@ -566,3 +566,32 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .prices a.go:hover{border-color:var(--violet);color:var(--violet)}
 .gfs .price-note{margin:16px 0 0;font-size:14px;color:var(--muted);max-width:820px}
 @media (max-width:900px){.gfs .prices li{grid-template-columns:minmax(0,1fr) auto;gap:6px 16px}.gfs .prices .who{grid-column:1/-1}.gfs .prices .dim{display:none}.gfs .prices a.go{grid-column:1/-1;justify-self:start}}
+
+/* SAMORZĄDY + ceny kompletu (2026-11-16) */
+.gfs .prices .full{display:block;margin-top:4px;font-size:14px;font-weight:700;letter-spacing:0;color:var(--violet);white-space:normal}
+.gfs .surf-rates{margin:18px 0 0;border:1px solid var(--line);background:#fff}
+.gfs .surf-rates summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:800;font-size:18px;display:flex;justify-content:space-between;gap:12px}
+.gfs .surf-rates summary::-webkit-details-marker{display:none}
+.gfs .surf-rates summary::after{content:'+';color:var(--violet);font-weight:400;font-size:22px}
+.gfs .surf-rates[open] summary::after{content:'−'}
+.gfs .surf-rates ul{list-style:none;margin:0;padding:0 18px}
+.gfs .surf-rates li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3fr) minmax(0,4fr);gap:8px 18px;padding:12px 0;border-top:1px solid var(--line);align-items:baseline}
+.gfs .surf-rates li b{font-size:16px}.gfs .surf-rates .rate{font-weight:800;white-space:nowrap}.gfs .surf-rates li span:last-child{color:var(--muted);font-size:14px}
+.gfs .surf-rates p{margin:0;padding:12px 18px 16px;color:var(--muted);font-size:14px}
+.gfs .gov-facts{list-style:none;margin:0 0 14px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfs .gov-facts li{display:grid;gap:6px;align-content:start;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfs .gov-facts .m{color:var(--violet);font-weight:800;font-size:clamp(26px,2.4vw,36px);letter-spacing:-.03em;line-height:1}
+.gfs .gov-facts b{font-size:18px;line-height:1.2}.gfs .gov-facts li>span:last-child{color:var(--muted);font-size:15px;line-height:1.5}
+.gfs .gov-norms{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.gfs .gov-norms span{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font-size:14px}
+.gfs .gov-build{margin:0 0 18px}
+.gfs .gov-build ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:b}
+.gfs .gov-build li{position:relative;counter-increment:b}
+.gfs .gov-build img{display:block;width:100%;height:clamp(180px,20vw,300px)!important;object-fit:cover;background:#E6E0DA}
+.gfs .gov-build li span{display:block;margin-top:8px;font-weight:700;font-size:15px}
+.gfs .gov-build li span::before{content:counter(b,decimal-leading-zero) "  ";color:var(--violet)}
+.gfs .gov-build figcaption{margin-top:10px;color:var(--muted);font-size:15px}.gfs .gov-build figcaption b{color:var(--ink)}
+.gfs .gov-cities{margin:0 0 22px;font-size:clamp(18px,1.6vw,22px);font-weight:700;letter-spacing:-.01em}
+.gfs .gov-cities .m{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
+@media (max-width:900px){.gfs .gov-facts,.gfs .gov-build ol{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .surf-rates li{grid-template-columns:minmax(0,1fr) auto}.gfs .surf-rates li span:last-child{grid-column:1/-1}}
+@media (max-width:520px){.gfs .gov-facts{grid-template-columns:minmax(0,1fr)}.gfs .gov-build img{height:150px!important}}

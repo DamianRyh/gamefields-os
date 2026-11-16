@@ -30,6 +30,8 @@ def read(name):
 def prices_html():
     """Construction 'from' prices on the homepage, rendered from integrations/wordpress/offer/price-from.json."""
     data = json.loads((HERE.parent.parent / "offer" / "price-from.json").read_text(encoding="utf-8"))
+    concrete = {m["id"]: m["net"] for m in json.loads((HERE.parent.parent / "offer" / "concrete-base.json").read_text(encoding="utf-8"))["models"]}
+    paint = {m["id"]: m["net"]["plain"] for m in json.loads((HERE.parent.parent / "offer" / "surface-finish.json").read_text(encoding="utf-8"))["models"]}
     zl = lambda n: f"{n:,}".replace(",", " ") + " zł"
     rows = []
     for m in data["models"]:
@@ -37,9 +39,27 @@ def prices_html():
         who = m["forWhom"] or ""
         label = "Zobacz ofertę" if m["id"] == "mobile" else "Zaprojektuj"
         rows.append(f'<li><div class="name"><b>{htmllib.escape(m["name"])}</b>{code}</div><span class="dim">{htmllib.escape(m["dimensions"])}</span>'
-                    f'<div class="net">od {zl(m["constructionFromNet"])} <small>netto</small><span class="gross">od {zl(m["constructionFromGross"])} brutto</span></div>'
+                    f'<div class="net">od {zl(m["constructionFromNet"])} <small>netto</small><span class="gross">od {zl(m["constructionFromGross"])} brutto</span>'
+                    + (f'<span class="full">z nawierzchnią od {zl(m["constructionFromNet"] + concrete[m["id"]] + paint[m["id"]])} netto</span>' if m["id"] in concrete and m["id"] in paint else "")
+                    + '</div>'
                     f'<span class="who">{htmllib.escape(who)}</span><a class="go" href="{m["link"]}">{label} →</a></li>')
     return '<ul class="prices" role="list">' + "".join(rows) + "</ul>", data
+
+
+def surfaces_html():
+    """Surface prices per m² (net) from the owner's price lists: concrete base and every finish, Standard to Premium."""
+    fin = json.loads((HERE.parent.parent / "offer" / "surface-finish.json").read_text(encoding="utf-8"))
+    base = json.loads((HERE.parent.parent / "offer" / "concrete-base.json").read_text(encoding="utf-8"))
+    rng = lambda vs: f"{min(vs)}–{max(vs)}" if min(vs) != max(vs) else f"{vs[0]}"
+    items = [("Płyta betonowa 12 cm z podbudową", str(base["rateNetPerM2"]), "podstawa pod każde wykończenie"),
+             ("Malowanie farbą sportową", rng([v["netPerM2"] for v in fin["variants"]]), "jednokolorowe do wzoru zaawansowanego")]
+    for key, name, note in [("acrylic", "Akryl Hard Court", "system warstwowy jak na kortach"), ("turf", "Sztuczna trawa", "z montażem na betonie"),
+                            ("mats", "Maty gumowe", "ciągła nawierzchnia gumowa"), ("epdm", "Nawierzchnia EPDM wylewana", "PN-EN 14877"),
+                            ("tiles", "Płytki sportowe PP", "szybki montaż bez klejenia"), ("rubber", "Płyty gumowe", "PN-EN 1177, atest PZH")]:
+        items.append((name, rng([v["netPerM2"] for v in fin[key]["variants"]]), note))
+    li = "".join(f'<li><b>{htmllib.escape(n)}</b><span class="rate">{r} zł/m² <small>netto</small></span><span>{htmllib.escape(t)}</span></li>' for n, r, t in items)
+    return ('<details class="surf-rates"><summary>Nawierzchnie: ceny za m²</summary><ul role="list">' + li +
+            '</ul><p>Warianty Standard, Standard+ i Premium. Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę policzy Studio dla wybranego modelu.</p></details>')
 
 
 def jsonld(faq_html):
@@ -108,7 +128,7 @@ def main():
         if body.count(token) != 1 and token != "{{ASSET}}":
             sys.exit(f"missing {token}")
 
-    body = body.replace("{{PRICES}}", prices_html()[0])
+    body = body.replace("{{PRICES}}", prices_html()[0]).replace("{{SURFACES}}", surfaces_html())
     body = body.replace("{{ASSET}}", ASSET_BASE)
     body = body.replace("{{KEPT_WORKSHOP}}", workshop.strip())
     body = body.replace("{{KEPT_FAQ}}", faq.strip())
