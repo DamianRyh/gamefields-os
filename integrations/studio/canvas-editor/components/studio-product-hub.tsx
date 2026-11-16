@@ -24,7 +24,8 @@ const products=[
  {id:'kit',name:'Koszulki',image:'/product-studio/hub-kit.webp',description:'Krój, wzór, kolory i personalizacja drużyny.',cta:'Projektuj koszulkę'}] as const;
 /* Launch scope (owner, 2026-11-08): courts, surfaces and posters are on sale; balls and t-shirts come back after the launch.
    Their editors stay in the code; ?all=1 (kept for the browser tab) shows them for previews and tests. */
-const LAUNCH_HIDDEN=new Set<StudioEntry>(['ball','kit']);
+/* Training mats hidden until the website is finished (owner, 2026-11-16); the editor and /?tool=mat stay for previews. */
+const LAUNCH_HIDDEN=new Set<StudioEntry>(['ball','kit','mat']);
 function showAll(){try{if(new URLSearchParams(window.location.search).has('all'))sessionStorage.setItem('gf-studio-all','1');return sessionStorage.getItem('gf-studio-all')==='1'}catch{return false}}
 /* Product chooser, redesign 2026-11-09: the same colour fields and court lines as the collection wall on gamefields.eu.
    Courts are the main product and get the large field; surfaces and posters sit beside it. */

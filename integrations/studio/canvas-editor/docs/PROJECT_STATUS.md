@@ -1,3 +1,7 @@
+## Studio — maty schowane, 2026-11-16
+
+- Kafelek „Maty treningowe” schowany na ekranie startowym (`LAUNCH_HIDDEN`, jak piłki i koszulki) do czasu dokończenia strony (decyzja właściciela 16.11). Edytor maty, ceny i `/?tool=mat` zostają; podgląd z `?all=1`. Polecenie 8 (sklep, strona maty) wstrzymane.
+
 ## Studio — nowy produkt: maty treningowe, 2026-11-15
 
 - Ekran startowy Studio: kafelek „Maty treningowe” („od 600 zł netto”). Gumowa mata z ćwiczeniami ze Studio (`lib/football-drills.ts`), wysyłana w całości, bez betonu i montażu (decyzja właściciela 15.11). Link bezpośredni: `/?tool=mat`.

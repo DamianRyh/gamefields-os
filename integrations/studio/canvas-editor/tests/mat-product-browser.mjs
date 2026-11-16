@@ -20,7 +20,10 @@ try{
  const page=await browser.newPage({viewport:{width:W,height:900}});
  const shot=n=>page.screenshot({path:`test-results/${n}-${W}.png`}).catch(()=>{});
  const badgeIs=t=>page.waitForFunction(t=>new RegExp(t).test((document.querySelector('.studio-quote-badge b')?.textContent||'').replace(/ /g,' ')),t,{timeout:30000});
- await page.goto(base+'/');await page.waitForTimeout(3000);
+ await page.goto(base+'/');await page.waitForTimeout(2500);
+ assert.equal(await page.getByRole('button',{name:'Maty treningowe',exact:true}).count(),0,'mats hidden on the hub until launch');
+ await page.evaluate(()=>{try{sessionStorage.clear()}catch{}});
+ await page.goto(base+'/?all=1');await page.waitForTimeout(3000); // mats are hidden on the hub until launch; ?all=1 shows hidden products
  const tile=page.getByRole('button',{name:'Maty treningowe',exact:true});await tile.waitFor();
  assert.match(await page.locator('.hub26-mat').innerText(),/od 600\s?zł netto/);
  await tile.click();
