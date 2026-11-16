@@ -556,19 +556,9 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 @media (max-width:560px){.gfs .mod-steps{grid-template-columns:minmax(0,1fr)}.gfs .mod-handle::after{width:44px;height:44px;margin:-22px 0 0 -22px}}
 
 /* ---------- 2026-11-13 · Ile kosztuje arena? (ceny konstrukcji od) ---------- */
-.gfs .prices{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.gfs .prices li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,3fr) minmax(0,3fr) minmax(0,3fr) auto;gap:12px 24px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
-.gfs .prices .name b{display:block;font-size:22px;letter-spacing:-.02em;line-height:1.15}
-.gfs .prices .name span,.gfs .prices .who{color:var(--muted);font-size:15px}
-.gfs .prices .net{font-size:24px;font-weight:800;letter-spacing:-.03em;white-space:nowrap}
-.gfs .prices .net small,.gfs .prices .gross{display:block;font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted)}
-.gfs .prices a.go{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid #CDBFC6;color:var(--ink);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
-.gfs .prices a.go:hover{border-color:var(--violet);color:var(--violet)}
 .gfs .price-note{margin:16px 0 0;font-size:14px;color:var(--muted);max-width:820px}
-@media (max-width:900px){.gfs .prices li{grid-template-columns:minmax(0,1fr) auto;gap:6px 16px}.gfs .prices .who{grid-column:1/-1}.gfs .prices .dim{display:none}.gfs .prices a.go{grid-column:1/-1;justify-self:start}}
 
 /* SAMORZĄDY + ceny kompletu (2026-11-16) */
-.gfs .prices .full{display:block;margin-top:4px;font-size:14px;font-weight:700;letter-spacing:0;color:var(--violet);white-space:normal}
 .gfs .surf-rates{margin:18px 0 0;border:1px solid var(--line);background:#fff}
 .gfs .surf-rates summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:800;font-size:18px;display:flex;justify-content:space-between;gap:12px}
 .gfs .surf-rates summary::-webkit-details-marker{display:none}
@@ -616,3 +606,60 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .gov-logos li{display:grid;place-items:center;height:96px;padding:10px;background:#fff;border:1px solid var(--line);overflow:hidden}
 .gfs .gov-logos img{display:block;max-width:100%;max-height:76px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
 @media (max-width:900px){.gfs .gov-logos{grid-template-columns:repeat(3,minmax(0,1fr))}.gfs .gov-logos li{height:80px}.gfs .gov-logos img{max-height:60px}}
+
+/* ---------- UX 2026-11-16 · lżejsze, czytelniejsze nowe sekcje (nic nie usunięte) ---------- */
+/* Ceny: karty zamiast długiej tabeli. Komputer 3 kolumny, telefon zwarte karty z ceną obok nazwy. */
+.gfs .prices{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfs .prices li{display:flex;flex-direction:column;gap:14px;padding:24px;background:#fff;border:1px solid transparent;transition:border-color .2s ease,box-shadow .2s ease}
+.gfs .prices li:hover{border-color:var(--violet);box-shadow:0 10px 30px -18px rgba(71,19,45,.35)}
+.gfs .prices .name b{display:block;font-size:21px;letter-spacing:-.02em;line-height:1.15}
+.gfs .prices .name span{display:block;margin-top:4px;color:var(--muted);font-size:14px}
+.gfs .prices .net{color:var(--ink);font-size:14px;color:var(--muted)}
+.gfs .prices .net b{font-size:clamp(28px,2.4vw,34px);font-weight:800;letter-spacing:-.035em;line-height:1;color:var(--ink);white-space:nowrap}
+.gfs .prices .gross{display:block;margin-top:4px;font-size:13px;color:var(--muted)}
+.gfs .prices .full{align-self:flex-start;margin:0;padding:7px 12px;border-radius:999px;background:#EEE8FF;color:var(--violet);font-size:14px;font-weight:700;line-height:1.3}
+.gfs .prices .pfoot{margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line)}
+.gfs .prices .who{flex:1 1 auto;min-width:0}.gfs .prices a.go{margin-left:auto}
+.gfs .prices .who{color:var(--muted);font-size:14px;line-height:1.35}
+.gfs .prices a.go{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfs .prices a.go:hover{background:var(--violet)}
+.gfs .price-note{margin:16px 0 0;font-size:14px;color:var(--muted);max-width:820px}
+@media (max-width:1100px){.gfs .prices{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){
+  .gfs .prices{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(-1*max(16px,3.4vw));padding-inline:max(16px,3.4vw);scroll-padding-inline:max(16px,3.4vw)}
+  .gfs .prices::-webkit-scrollbar{display:none}
+  .gfs .prices li{scroll-snap-align:start;padding:20px;gap:12px}
+  .gfs .prices .name b{font-size:19px}
+  .gfs .prices .net b{font-size:30px}
+}
+.gfs .swipe-hint{display:none;align-items:center;gap:6px;margin:10px 0 0;font-size:13px;color:var(--muted)}
+/* Przewijane rzędy na telefonie: kroki, zdjęcia z Krakowa i normy w jednym rzędzie zamiast długiej kolumny. */
+@media (max-width:700px){
+  .gfs .mod-steps,.gfs .gov-build ol{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(-1*max(16px,3.4vw));padding-inline:max(16px,3.4vw);scroll-padding-inline:max(16px,3.4vw)}
+  .gfs .mod-steps::-webkit-scrollbar,.gfs .gov-build ol::-webkit-scrollbar,.gfs .gov-norms::-webkit-scrollbar{display:none}
+  .gfs .mod-steps li,.gfs .gov-build li{scroll-snap-align:start}
+  .gfs .gov-build ol{grid-auto-columns:72%}
+  .gfs .gov-build img{height:230px!important}
+  .gfs .gov-norms{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*max(16px,3.4vw));padding-inline:max(16px,3.4vw)}
+  .gfs .gov-norms span{flex:none;white-space:nowrap}
+  .gfs .swipe-hint{display:flex}
+}
+/* Nawierzchnie: lżejsze kroki, bez ciężkich ramek. */
+.gfs .mod-steps li{border-color:transparent;padding:26px 24px}
+.gfs .mod-steps .m{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#EEE8FF;font-weight:800}
+/* Gminy: fakty lżejsze, na telefonie 2 × 2 zamiast czterech wysokich kart. */
+.gfs .gov-facts li{border-color:transparent;padding:24px}
+.gfs .gov-facts .m{font-size:clamp(24px,2.1vw,32px)}
+@media (max-width:700px){
+  .gfs .gov-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gfs .gov-facts li{padding:14px;gap:4px}
+  .gfs .gov-facts .m{font-size:21px}
+  .gfs .gov-facts b{font-size:15px}
+  .gfs .gov-facts li>span:last-child{font-size:13.5px;line-height:1.4}
+}
+/* Autor: na telefonie kadr 4:3 od góry zamiast pełnej wysokości zdjęcia. */
+@media (max-width:700px){
+  .gfs .author-photo{max-width:none}
+  .gfs .author-photo img{aspect-ratio:4/3;object-position:50% 14%}
+  .gfs .author-facts div{grid-template-columns:92px minmax(0,1fr);padding:10px 0}
+}
