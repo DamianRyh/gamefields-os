@@ -53,6 +53,11 @@ EXTRA_CSS = """
 .gfa-faq summary::after{content:'+';font-size:24px;font-weight:400;color:var(--violet)}
 .gfa-faq details[open] summary::after{content:'−'}
 .gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+.gfa-logos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gfa-logos li{display:grid;place-items:center;height:110px;padding:12px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.gfa-logos img{display:block;max-width:100%;max-height:84px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
+.gfa-logos-more{margin:12px 0 0;color:var(--muted);font-size:15px}
+@media (max-width:900px){.gfa-logos{grid-template-columns:repeat(3,minmax(0,1fr))}.gfa-logos li{height:84px}.gfa-logos img{max-height:62px}}
 @media (max-width:900px){.gfa-alert,.gfa-check{grid-template-columns:minmax(0,1fr)}.gfa-paths{grid-template-columns:repeat(2,minmax(0,1fr))}.gfa-nums{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:560px){.gfa-paths{grid-template-columns:minmax(0,1fr)}}
 """
@@ -221,6 +226,12 @@ real = f"""
     <ul class="gfa-links"><li><a href="#orlik">Orlik, Grodzisk Mazowiecki</a></li><li><a href="#kutno">Kutno</a></li><li><a href="#taras">Warszawa</a></li><li><a href="/dofinansowanie-boisk/">Dofinansowanie</a></li></ul>
   </div>
   <figure>{img("2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg", "Taras w Parku Świętokrzyskim w Warszawie, areny panna")}<figcaption><b>Taras w Parku Świętokrzyskim</b>Warszawa</figcaption></figure>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Miasta i instytucje.</h2><p>Areny i boiska Gamefields działają w przestrzeni miejskiej tych miast i instytucji.</p></div>
+  <ul class="gfa-logos" role="list"><li style="--z:1.3"><img src="{UP}2026/11/LOGO-Warszawa--300x194.png" alt="Miasto stołeczne Warszawa" width="300" height="194" loading="lazy" decoding="async"></li><li style="--z:1.7"><img src="{UP}2026/11/Zarzad-Zieleni-Miejskiej-Warszawa-300x141.jpg" alt="Zarząd Zieleni m.st. Warszawy" width="300" height="141" loading="lazy" decoding="async"></li><li style="--z:1"><img src="{UP}2026/11/LOHO-Krakow--300x200.jpg" alt="Kraków" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1.6"><img src="{UP}2026/11/Grodzisk-Mazowiecki-LOGO-300x200.jpg" alt="Grodzisk Mazowiecki" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1"><img src="{UP}2026/11/LOGO-Kutno--300x231.jpg" alt="Kutno" width="300" height="231" loading="lazy" decoding="async"></li><li style="--z:1.15"><img src="{UP}2026/11/LOGO-Lodz-300x139.webp" alt="Łódź" width="300" height="139" loading="lazy" decoding="async"></li></ul>
+  <p class="gfa-logos-more">Także Żyrardów i Gdańsk.</p>
 </div></section>
 
 <section class="gfa-sec"><div class="w">
