@@ -37,6 +37,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 23 | Sklep: tekstury betonu i malowania ze zdjęcia CC0 (Poly Haven), zakładka „Wiedza o produkcie”, opinie przy produktach wyłączone (motyw 1.0.31) | ✅ PR (ten) | DLA-CHATGPT-sklep-1.0.31.txt | ✅ motyw 1.0.31 wgrany 16.11 |
 | 24 | Baza wiedzy od nowa: /baza-wiedzy/ i 5 poradników w stylu strony, z cenami Gamefields, Studio, gwarancją; cała dotychczasowa treść zachowana | ✅ PR (ten) | DLA-CHATGPT-baza-wiedzy.txt | ⏳ |
 | 25 | Realizacje od nowa: liczby, logo miast, 5 historii (z Krakowem) z cytatami i linkiem do modelu z ceną, pas opinii, galeria eventów z markami | ✅ PR (ten) | DLA-CHATGPT-realizacje.txt | ⏳ |
+| 26 | Strona główna „Poczuj różnicę.”: wybór 8 nawierzchni z przybliżaną teksturą, ceną za m², cechami i kosztem dla wybranego boiska | ✅ PR (ten) | DLA-CHATGPT-nawierzchnie-wybor.txt (2 bloki) | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |

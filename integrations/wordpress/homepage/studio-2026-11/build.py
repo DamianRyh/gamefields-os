@@ -64,6 +64,81 @@ def surfaces_html():
             '</ul><p>Warianty Standard, Standard+ i Premium. Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę policzy Studio dla wybranego modelu.</p></details>')
 
 
+def materials_html():
+    """'Poczuj różnicę' (2026-11-16): a surface picker with a zoomable texture, price per m², variants, facts
+    and the cost for a chosen model (area incl. 10%, rounded up to 100 zł). Facts only from the price files'
+    variant descriptions and the norms stated on the homepage. Swatches are links to the shop products."""
+    fin = json.loads((HERE.parent.parent / "offer" / "surface-finish.json").read_text(encoding="utf-8"))
+    base = json.loads((HERE.parent.parent / "offer" / "concrete-base.json").read_text(encoding="utf-8"))
+    price = json.loads((HERE.parent.parent / "offer" / "price-from.json").read_text(encoding="utf-8"))
+    up = "https://www.gamefields.eu/wp-content/uploads/2026/11/"
+    tiers = ["Standard", "Standard+", "Premium"]
+    var = lambda key: [{"n": tiers[i], "r": v["netPerM2"]} for i, v in enumerate(fin[key]["variants"])]
+    items = [
+        ("granulat", "Nawierzchnia EPDM", "wylewana", "nawierzchnia-epdm", var("epdm"),
+         ["PN-EN 14877", "Natrysk wodoprzepuszczalny", "Trwałość od 8–12 do 12–20 lat, zależnie od wariantu"]),
+        ("plytki", "Płytki sportowe PP", "modułowe", "plytki-sportowe", var("tiles"),
+         ["Montaż bez klejenia, z drenażem", "Grubość od 15–18 mm do 19 mm+", "Premium: gwarancja 5–10 lat"]),
+        ("trawa", "Sztuczna trawa", "klasyczna murawa", "sztuczna-trawa", var("turf"),
+         ["Montaż na płycie betonowej", "Trzy warianty jakości", "Naturalny wybór do piłki"]),
+        ("malowanie", "Malowanie farbą sportową", "na płycie lub starym placu", "malowanie-farba-sportowa",
+         [{"n": v["name"], "r": v["netPerM2"]} for v in fin["variants"]],
+         ["Farba z granulatem gumowym: amortyzacja i antypoślizg", "Wzory Signature, 4–6 i 7+ kolorów", "Linie do piłki, kosza i 3 na 3"]),
+        ("akryl", "Akryl Hard Court", "jak na kortach", "akryl-hard-court", var("acrylic"),
+         ["Standard: 4–6 warstw, ok. 1–2 mm", "Twardy i szybki", "Premium: warstwy gumowe 4–8 mm"]),
+        ("plyty-gumowe", "Płyty gumowe", "bezpieczny upadek", "plyty-gumowe", var("rubber"),
+         ["PN-EN 1177, atest PZH", "Antypoślizg R11, wodoprzepuszczalne", "Płyty 50 × 50 cm, 40–50 mm"]),
+        ("maty-gumowe", "Maty gumowe", "ciągła guma", "maty-gumowe-nawierzchnia", var("mats"),
+         ["SBR, w Premium z warstwą EPDM", "Antypoślizg R11", "Wykończenie płyty w Studio"]),
+        ("beton", "Płyta betonowa 12 cm", "podstawa", "plyta-betonowa", [{"n": "za m²", "r": base["rateNetPerM2"]}],
+         ["C20/25 ze spadkami i dylatacjami", "Siatka zbrojeniowa, podbudowa z kruszywa", "Gotowa pod każde wykończenie"]),
+    ]
+    models = [(m["name"], next(x["areaM2"] for x in base["models"] if x["id"] == m["id"])) for m in price["models"] if any(x["id"] == m["id"] for x in base["models"])]
+    data = [{"k": k, "n": n, "t": t, "u": f"/product/{slug}/", "v": v, "f": f} for k, n, t, slug, v, f in items]
+    first = data[0]
+    sw = "".join(
+        f'<a class="sw" href="{d["u"]}" data-mat="{i}"' + (' aria-current="true"' if i == 0 else "") + f'>'
+        f'<img src="{up}{d["k"]}-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async">'
+        f'<b>{htmllib.escape(d["n"])}</b><span>od {min(x["r"] for x in d["v"])} zł/m²</span></a>' for i, d in enumerate(data))
+    opts = "".join(f'<option value="{a}"' + (" selected" if n == "Panna Play" else "") + f'>{htmllib.escape(n)} · {str(a).replace(".", ",")} m²</option>' for n, a in models)
+    return (
+        '<div class="matx" data-matx>'
+        f'<div class="matx-stage" data-mat-stage><img data-mat-img src="{up}{first["k"]}-macro-1024x768.webp" '
+        f'srcset="{up}{first["k"]}-macro-768x576.webp 768w, {up}{first["k"]}-macro-1024x768.webp 1024w, {up}{first["k"]}-macro.webp 1448w" '
+        f'sizes="(max-width:900px) 100vw, 58vw" alt="{htmllib.escape(first["n"])} z bliska" width="1024" height="768" loading="lazy" decoding="async">'
+        '<span class="matx-zoom m">Najedź, aby przybliżyć</span></div>'
+        '<div class="matx-panel" aria-live="polite">'
+        f'<p class="matx-tag m" data-mat-t>{htmllib.escape(first["t"])}</p><h3 data-mat-n>{htmllib.escape(first["n"])}</h3>'
+        f'<p class="matx-price">od <b data-mat-p>{min(x["r"] for x in first["v"])} zł/m²</b> netto</p>'
+        '<ul class="matx-f" data-mat-f role="list">' + "".join(f"<li>{htmllib.escape(x)}</li>" for x in first["f"]) + "</ul>"
+        '<div class="matx-calc"><label for="gfs-mat-area">Policz dla boiska</label>'
+        f'<select id="gfs-mat-area" data-mat-area>{opts}</select></div>'
+        '<ul class="matx-v" data-mat-v role="list"></ul>'
+        '<div class="matx-cta"><a class="pill" href="/studio/" style="background:var(--ink);color:var(--paper)">Wybierz w Studio <span aria-hidden="true">↗</span></a>'
+        f'<a class="pill matx-more" data-mat-u href="{first["u"]}">Szczegóły i warianty</a></div>'
+        '<p class="matx-note">Ceny orientacyjne netto. Koszt dla boiska: metraż konstrukcji z 10% zapasem, w górę do 100 zł. Wykończenie leży na płycie betonowej (osobna pozycja) albo na stabilnym placu.</p>'
+        '</div>'
+        f'<nav class="matx-sw" aria-label="Wybierz nawierzchnię">{sw}</nav>'
+        '</div>'
+        '<script type="application/json" id="gfs-mat-data">' + json.dumps(data, ensure_ascii=False) + '</script>'
+        "<script>(function(){var box=document.querySelector('.gfs [data-matx]');if(!box)return;"
+        "var D=JSON.parse(document.getElementById('gfs-mat-data').textContent);var UP='" + up + "';var cur=0;"
+        "var q=function(s){return box.querySelector(s)};var img=q('[data-mat-img]'),stage=q('[data-mat-stage]'),area=q('[data-mat-area]');"
+        "function fmt(n){return String(n).replace(/\\B(?=(\\d{3})+(?!\\d))/g,'\\u00a0')}"
+        "function render(){var d=D[cur],a=parseFloat(area.value)||0;q('[data-mat-n]').textContent=d.n;q('[data-mat-t]').textContent=d.t;"
+        "var mn=Math.min.apply(null,d.v.map(function(x){return x.r}));q('[data-mat-p]').textContent=mn+' zł/m²';q('[data-mat-u]').href=d.u;"
+        "q('[data-mat-f]').innerHTML=d.f.map(function(x){return '<li>'+x+'</li>'}).join('');"
+        "q('[data-mat-v]').innerHTML=d.v.map(function(x){return '<li><span>'+x.n+'</span><b>'+x.r+' zł/m²</b><i>'+fmt(Math.ceil(a*x.r/100)*100)+' zł</i></li>'}).join('');}"
+        "function pick(i){if(i===cur)return;cur=i;var d=D[i];stage.classList.add('swap');"
+        "setTimeout(function(){img.srcset=UP+d.k+'-macro-768x576.webp 768w, '+UP+d.k+'-macro-1024x768.webp 1024w, '+UP+d.k+'-macro.webp 1448w';img.src=UP+d.k+'-macro-1024x768.webp';img.alt=d.n+' z bliska';stage.classList.remove('swap');},180);"
+        "box.querySelectorAll('[data-mat]').forEach(function(s){if(+s.getAttribute('data-mat')===i)s.setAttribute('aria-current','true');else s.removeAttribute('aria-current')});render();}"
+        "box.querySelectorAll('[data-mat]').forEach(function(s){s.addEventListener('click',function(e){if(e.metaKey||e.ctrlKey)return;e.preventDefault();pick(+s.getAttribute('data-mat'))})});"
+        "area.addEventListener('change',render);"
+        "stage.addEventListener('pointermove',function(e){var r=stage.getBoundingClientRect();stage.style.setProperty('--x',((e.clientX-r.left)/r.width*100)+'%');stage.style.setProperty('--y',((e.clientY-r.top)/r.height*100)+'%');stage.classList.add('zoom')});"
+        "stage.addEventListener('pointerleave',function(){stage.classList.remove('zoom')});render();})();</script>"
+    )
+
+
 def jsonld(faq_html):
     """Structured data for the studio, its services and the FAQ. Facts only from the page itself, no prices."""
     qa = []
@@ -133,7 +208,7 @@ def main():
     prices_list, price_data = prices_html()
     wall_prices = json.dumps({m["id"]: m["constructionFromNet"] for m in price_data["models"]}, separators=(",", ":"))
     body = body.replace('<div class="wall" data-wall></div>', f"<div class=\"wall\" data-wall data-prices='{wall_prices}'></div>", 1)
-    body = body.replace("{{PRICES}}", prices_list).replace("{{SURFACES}}", surfaces_html())
+    body = body.replace("{{PRICES}}", prices_list).replace("{{MATERIALS}}", materials_html()).replace("{{SURFACES}}", surfaces_html())
     body = body.replace("{{ASSET}}", ASSET_BASE)
     body = body.replace("{{KEPT_WORKSHOP}}", workshop.strip())
     body = body.replace("{{KEPT_FAQ}}", faq.strip())
