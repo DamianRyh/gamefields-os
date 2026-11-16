@@ -1,0 +1,23 @@
+Polecenie dla ChatGPT: strona główna, sekcja „Poczuj różnicę.” (wybór nawierzchni), 16.11.2026
+
+Strona główna (ID 3462) ma 22 bloki „Własny HTML”. Każdy blok zaczyna się komentarzem <!-- gf-blok: NAZWA -->.
+Właściciel zatwierdza podmianę DWÓCH bloków. Pozostałych 20 nie ruszaj.
+
+1. Blok „styl” (pierwszy, <!-- gf-blok: styl -->) zastąp w całości plikiem:
+   https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/01-styl.html
+   SHA-256 zaczyna się od: a18003863ca469de
+2. Blok „materialy” (<!-- gf-blok: materialy -->, sekcja „Poczuj różnicę.”) zastąp w całości plikiem:
+   https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/13-materialy.html
+   SHA-256 zaczyna się od: 70747bd81344098d
+   Każdy plik zawiera już <!-- wp:html --> i <!-- /wp:html -->: zastępuje cały blok.
+
+Kroki:
+- Zrób kopię strony głównej (wersja lub szkic) i zapisz jej ID.
+- Sprawdź SHA-256 i że pliki nie zawierają "&&". Przygotuj szkic z dwoma podmienionymi blokami.
+- Porównaj szkic z obecną stroną: różnią się tylko bloki „styl” i „materialy”.
+- Pokaż właścicielowi podgląd sekcji „Poczuj różnicę.” na komputerze i telefonie. Sprawdź:
+  - duża tekstura po lewej; po najechaniu myszą przybliża się;
+  - panel po prawej: nazwa, cena za m², 3 cechy, wybór boiska i tabela wariantów z kosztem;
+  - pod spodem 8 miniatur nawierzchni; kliknięcie zmienia teksturę i panel;
+  - na telefonie: tekstura, 8 miniatur w dwóch rzędach, potem panel; brak przewijania w bok.
+- Po akceptacji opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj.
