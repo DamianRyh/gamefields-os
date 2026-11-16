@@ -629,13 +629,26 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .prices a.go:hover{background:var(--violet)}
 .gfs .price-note{margin:16px 0 0;font-size:14px;color:var(--muted);max-width:820px}
 @media (max-width:1100px){.gfs .prices{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Telefon: pionowa lista (Baymard: treść w poziomych karuzelach często umyka, a ceny trzeba porównać). */
 @media (max-width:700px){
-  .gfs .prices{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(-1*max(16px,3.4vw));padding-inline:max(16px,3.4vw);scroll-padding-inline:max(16px,3.4vw)}
-  .gfs .prices::-webkit-scrollbar{display:none}
-  .gfs .prices li{scroll-snap-align:start;padding:20px;gap:12px}
-  .gfs .prices .name b{font-size:19px}
-  .gfs .prices .net b{font-size:30px}
+  .gfs .prices{grid-template-columns:minmax(0,1fr);gap:8px}
+  .gfs .prices li{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name net" "full full" "pfoot pfoot";gap:8px 12px;padding:14px 16px}
+  .gfs .prices .name{grid-area:name}.gfs .prices .net{grid-area:net;text-align:right}.gfs .prices .full{grid-area:full;justify-self:start;font-size:13px;padding:5px 10px}
+  .gfs .prices .pfoot{grid-area:pfoot;padding-top:8px}
+  .gfs .prices .name b{font-size:17px}.gfs .prices .name span{font-size:13px}
+  .gfs .prices .net b{font-size:21px}.gfs .prices .net small{display:block;font-size:12px}.gfs .prices .gross{font-size:12px;margin-top:0}
 }
+/* Co zawiera cena: dwie krótkie listy zamiast jednego akapitu. */
+.gfs .price-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin-top:20px;padding:20px 24px;background:#fff}
+.gfs .price-incl .m{display:block;margin-bottom:8px;color:var(--ink);font-weight:700}
+.gfs .price-incl ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:15px;color:var(--muted)}
+.gfs .price-incl li{position:relative;padding-left:20px}
+.gfs .price-incl > div:first-child li::before{content:"✓";position:absolute;left:0;color:var(--violet);font-weight:800}
+.gfs .price-incl > div:nth-child(2) li::before{content:"·";position:absolute;left:4px;color:var(--muted);font-weight:800}
+.gfs .price-incl .price-note{grid-column:1/-1;margin:0}
+@media (max-width:700px){.gfs .price-incl{grid-template-columns:minmax(0,1fr);padding:16px}}
+/* Kafelki boisk: cena „od” przy nazwie. */
+.gfs .tile .bar .pr{display:block;margin-top:2px;font-size:13px;font-weight:600;color:var(--violet)}
 .gfs .swipe-hint{display:none;align-items:center;gap:6px;margin:10px 0 0;font-size:13px;color:var(--muted)}
 /* Przewijane rzędy na telefonie: kroki, zdjęcia z Krakowa i normy w jednym rzędzie zamiast długiej kolumny. */
 @media (max-width:700px){
@@ -684,6 +697,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
   <nav class="links" id="gfs-links" aria-label="Główna nawigacja">
     <!-- Same menu as every other page (theme gft_nav_items), 2026-11-09 -->
     <a href="#boiska">Boiska</a>
+    <a href="#ceny">Ceny</a>
     <a href="#dla-kogo">Dla kogo</a>
     <a href="/realizacje-gamefields/">Realizacje</a>
     <a href="/baza-wiedzy/">Wiedza</a>
@@ -753,7 +767,54 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
       <div class="chips" role="group" aria-label="Filtruj według kształtu" data-filters></div>
     </div>
   </div>
-  <div class="wall" data-wall></div>
+  <div class="wall" data-wall data-prices='{"mobile":27000,"circle-cage-1":36000,"o1":40000,"w1":40000,"octagon":49000,"street-field":51000,"circle-cage-2":58000,"p1":69000,"street15":100000}'></div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: ceny -->
+<!-- CENY: cena konstrukcji od (tabela właściciela 13.11.2026), generowane z integrations/wordpress/offer/price-from.json -->
+<section id="ceny" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-price">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Ceny</p><h2 class="d" id="gfs-price">Ile kosztuje arena?</h2></div>
+    <div class="side"><p>Ceny konstrukcji z bramkami i całego boiska z nawierzchnią. Montaż i transport zależą od miejsca, dlatego policzę je po zdjęciach placu.</p><div class="chips"><a class="chip" href="#kontakt">Wyślij zdjęcia placu</a><a class="chip" href="/studio/">Zaprojektuj w Studio</a><a class="chip" href="/dofinansowanie-boisk/">Dofinansowanie</a></div></div>
+  </div>
+  <ul class="prices" role="list"><li><div class="name"><b>Arena mobilna eventowa</b><span>wynajem i sprzedaż · różne wymiary</span></div><div class="net"><b>od 27 000 zł</b> <small>netto</small><span class="gross">od 33 210 zł brutto</span></div><div class="pfoot"><span class="who">Marki, turnieje</span><a class="go" href="/wynajem-boisk-mobilnych/">Zobacz ofertę <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa Cage 90</b><span>GF-CT-005 · Ø, banda 0,9 m</span></div><div class="net"><b>od 36 000 zł</b> <small>netto</small><span class="gross">od 44 280 zł brutto</span></div><p class="full">Z nawierzchnią od 47 400 zł netto</p><div class="pfoot"><span class="who">Osiedla, szkoły</span><a class="go" href="/studio/?arena=circle-cage-1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Play</b><span>GF-CT-002 · Ø ~6 m</span></div><div class="net"><b>od 40 000 zł</b> <small>netto</small><span class="gross">od 49 200 zł brutto</span></div><p class="full">Z nawierzchnią od 51 000 zł netto</p><div class="pfoot"><span class="who">Kluby, eventy, szkoły</span><a class="go" href="/studio/?arena=o1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Ring</b><span>GF-CT-001 · Ø ~5 m</span></div><div class="net"><b>od 40 000 zł</b> <small>netto</small><span class="gross">od 49 200 zł brutto</span></div><p class="full">Z nawierzchnią od 47 800 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=w1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa</b><span>GF-CT-008 · Ośmiokąt</span></div><div class="net"><b>od 49 000 zł</b> <small>netto</small><span class="gross">od 60 270 zł brutto</span></div><p class="full">Z nawierzchnią od 60 900 zł netto</p><div class="pfoot"><span class="who">Gminy, parki, szkoły</span><a class="go" href="/studio/?arena=octagon">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Grid</b><span>GF-CT-007 · 6,21 × 4,65 m</span></div><div class="net"><b>od 51 000 zł</b> <small>netto</small><span class="gross">od 62 730 zł brutto</span></div><p class="full">Z nawierzchnią od 66 500 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=street-field">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa Cage 180</b><span>GF-CT-006 · Ø, banda 1,8 m</span></div><div class="net"><b>od 58 000 zł</b> <small>netto</small><span class="gross">od 71 340 zł brutto</span></div><p class="full">Z nawierzchnią od 69 400 zł netto</p><div class="pfoot"><span class="who">Kluby, akademie</span><a class="go" href="/studio/?arena=circle-cage-2">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Court</b><span>GF-CT-003 · 7,14 × 5,57 m</span></div><div class="net"><b>od 69 000 zł</b> <small>netto</small><span class="gross">od 84 870 zł brutto</span></div><p class="full">Z nawierzchnią od 84 700 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=p1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Boisko 3 na 3 (Street Arena 15)</b><span>GF-CT-004 · Pełny format, 15 × 10 m</span></div><div class="net"><b>od 100 000 zł</b> <small>netto</small><span class="gross">od 123 000 zł brutto</span></div><p class="full">Z nawierzchnią od 159 300 zł netto</p><div class="pfoot"><span class="who">Gminy, deweloperzy</span><a class="go" href="/studio/?arena=street15">Zaprojektuj <span aria-hidden="true">→</span></a></div></li></ul>
+  <div class="price-incl">
+    <div><span class="m">„Z nawierzchnią” zawiera</span><ul role="list"><li>konstrukcję w podstawowej konfiguracji i standardowym kolorze</li><li>płytę betonową 12 cm z podbudową</li><li>malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem</li></ul></div>
+    <div><span class="m">Bez montażu, transportu i przygotowania terenu</span><ul role="list"><li>te koszty zależą od miejsca</li><li>policzę je po zdjęciach placu</li></ul></div>
+    <p class="price-note">Ceny orientacyjne „od”. Netto oraz brutto z VAT 23%.</p>
+  </div>
+  <details class="surf-rates"><summary>Nawierzchnie: ceny za m²</summary><ul role="list"><li><b>Płyta betonowa 12 cm z podbudową</b><span class="rate">283 zł/m² <small>netto</small></span><span>podstawa pod każde wykończenie</span></li><li><b>Malowanie farbą sportową</b><span class="rate">78–183 zł/m² <small>netto</small></span><span>jednokolorowe do wzoru zaawansowanego</span></li><li><b>Akryl Hard Court</b><span class="rate">200–342 zł/m² <small>netto</small></span><span>system warstwowy jak na kortach</span></li><li><b>Sztuczna trawa</b><span class="rate">167–292 zł/m² <small>netto</small></span><span>z montażem na betonie</span></li><li><b>Maty gumowe</b><span class="rate">242–425 zł/m² <small>netto</small></span><span>ciągła nawierzchnia gumowa</span></li><li><b>Nawierzchnia EPDM wylewana</b><span class="rate">250–400 zł/m² <small>netto</small></span><span>PN-EN 14877</span></li><li><b>Płytki sportowe PP</b><span class="rate">275–400 zł/m² <small>netto</small></span><span>szybki montaż bez klejenia</span></li><li><b>Płyty gumowe</b><span class="rate">342–492 zł/m² <small>netto</small></span><span>PN-EN 1177, atest PZH</span></li></ul><p>Warianty Standard, Standard+ i Premium. Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę policzy Studio dla wybranego modelu.</p></details>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: realizacje -->
+<!-- REALIZACJE: zdjęcia z biblioteki mediów, podpisy właściciela (2026-11-08) -->
+<section id="realizacje" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-real">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Realizacje</p><h2 class="d" id="gfs-real">Z boiska.</h2></div>
+    <div class="side"><p>Areny Gamefields w miastach, na turniejach i eventach marek. <a href="/realizacje-gamefields/">Wszystkie realizacje →</a></p></div>
+  </div>
+  <ul class="reals" role="list">
+    <li><figure><img src="/wp-content/uploads/2026/11/GAMEFIELDS-Street-Football-Tournament-1-768x576.png" alt="Arena Gamefields na turnieju street football" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Turniej Street Football</b><span>Arena Gamefields i kibice</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/Damian-Gawrych-x-Wake-for-friends--768x960.jpg" alt="Dzieci grają na arenie Gamefields, Wake For Friends" width="768" height="960" loading="lazy" decoding="async"><figcaption><b>Wake For Friends</b><span>Gra na arenie nad wodą</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/Urodziny-pilkarskie-Gamefields-Damian-Gawrych--768x431.jpg" alt="Urodziny piłkarskie Gamefields przy arenie" width="768" height="431" loading="lazy" decoding="async"><figcaption><b>Urodziny piłkarskie</b><span>Gamefields</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/Zyrardow-Panna-Arena-1v1--768x575.jpg" alt="Pojedynek na arenie Panna 1 na 1, Żyrardów" width="768" height="575" loading="lazy" decoding="async"><figcaption><b>Panna 1 na 1</b><span>Żyrardów</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Taras w Parku Świętokrzyskim</b><span>Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Złote Tarasy, Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2026/11/1-768x576.jpg" alt="Event Head &amp; Shoulders, Stadion, Gdańsk" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Stadion, Gdańsk</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa, Kutno" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa</b><span>Kutno</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/12-3-768x768.jpg" alt="Panna Octa Cage 180, Wake For Friends, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Wake For Friends, Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Street Soccer 2017</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/10-3-768x768.jpg" alt="Puchar Polski, Żerków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Puchar Polski</b><span>Żerków</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/22-768x432.jpg" alt="Mistrzostwa Świata Superball, Liberec" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Superball</b><span>Liberec</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/13-3-768x768.jpg" alt="Panna Ring, Nowy Świat, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Nowy Świat, Warszawa</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/5-3-768x768.jpg" alt="Mistrzostwa Polski, Street Mekka, Łódź" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Polski, Street Mekka</b><span>Łódź</span></figcaption></figure></li>
+    <li><figure><img src="/wp-content/uploads/2024/12/15-3-768x768.jpg" alt="Panna Octa Cage 180, Kraków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Kraków</span></figcaption></figure></li>
+  </ul>
 </section>
 <!-- /wp:html -->
 
@@ -778,20 +839,6 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
     </div>
     <div class="pn-list" data-pn-list role="group" aria-label="Boiska i dopasowanie do placu"></div>
   </div>
-</section>
-<!-- /wp:html -->
-
-<!-- wp:html -->
-<!-- gf-blok: ceny -->
-<!-- CENY: cena konstrukcji od (tabela właściciela 13.11.2026), generowane z integrations/wordpress/offer/price-from.json -->
-<section id="ceny" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-price">
-  <div class="head">
-    <div class="hd"><p class="kicker m">Ceny</p><h2 class="d" id="gfs-price">Ile kosztuje arena?</h2></div>
-    <div class="side"><p>Ceny konstrukcji z bramkami i całego boiska z nawierzchnią. Montaż i transport zależą od miejsca, dlatego policzę je po zdjęciach placu.</p><div class="chips"><a class="chip" href="#kontakt">Wyślij zdjęcia placu</a><a class="chip" href="/studio/">Zaprojektuj w Studio</a><a class="chip" href="/dofinansowanie-boisk/">Dofinansowanie</a></div></div>
-  </div>
-  <ul class="prices" role="list"><li><div class="name"><b>Arena mobilna eventowa</b><span>wynajem i sprzedaż · różne wymiary</span></div><div class="net"><b>od 27 000 zł</b> <small>netto</small><span class="gross">od 33 210 zł brutto</span></div><div class="pfoot"><span class="who">Marki, turnieje</span><a class="go" href="/wynajem-boisk-mobilnych/">Zobacz ofertę <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa Cage 90</b><span>GF-CT-005 · Ø, banda 0,9 m</span></div><div class="net"><b>od 36 000 zł</b> <small>netto</small><span class="gross">od 44 280 zł brutto</span></div><p class="full">Z nawierzchnią od 47 400 zł netto</p><div class="pfoot"><span class="who">Osiedla, szkoły</span><a class="go" href="/studio/?arena=circle-cage-1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Play</b><span>GF-CT-002 · Ø ~6 m</span></div><div class="net"><b>od 40 000 zł</b> <small>netto</small><span class="gross">od 49 200 zł brutto</span></div><p class="full">Z nawierzchnią od 51 000 zł netto</p><div class="pfoot"><span class="who">Kluby, eventy, szkoły</span><a class="go" href="/studio/?arena=o1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Ring</b><span>GF-CT-001 · Ø ~5 m</span></div><div class="net"><b>od 40 000 zł</b> <small>netto</small><span class="gross">od 49 200 zł brutto</span></div><p class="full">Z nawierzchnią od 47 800 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=w1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa</b><span>GF-CT-008 · Ośmiokąt</span></div><div class="net"><b>od 49 000 zł</b> <small>netto</small><span class="gross">od 60 270 zł brutto</span></div><p class="full">Z nawierzchnią od 60 900 zł netto</p><div class="pfoot"><span class="who">Gminy, parki, szkoły</span><a class="go" href="/studio/?arena=octagon">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Grid</b><span>GF-CT-007 · 6,21 × 4,65 m</span></div><div class="net"><b>od 51 000 zł</b> <small>netto</small><span class="gross">od 62 730 zł brutto</span></div><p class="full">Z nawierzchnią od 66 500 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=street-field">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa Cage 180</b><span>GF-CT-006 · Ø, banda 1,8 m</span></div><div class="net"><b>od 58 000 zł</b> <small>netto</small><span class="gross">od 71 340 zł brutto</span></div><p class="full">Z nawierzchnią od 69 400 zł netto</p><div class="pfoot"><span class="who">Kluby, akademie</span><a class="go" href="/studio/?arena=circle-cage-2">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Court</b><span>GF-CT-003 · 7,14 × 5,57 m</span></div><div class="net"><b>od 69 000 zł</b> <small>netto</small><span class="gross">od 84 870 zł brutto</span></div><p class="full">Z nawierzchnią od 84 700 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=p1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Boisko 3 na 3 (Street Arena 15)</b><span>GF-CT-004 · Pełny format, 15 × 10 m</span></div><div class="net"><b>od 100 000 zł</b> <small>netto</small><span class="gross">od 123 000 zł brutto</span></div><p class="full">Z nawierzchnią od 159 300 zł netto</p><div class="pfoot"><span class="who">Gminy, deweloperzy</span><a class="go" href="/studio/?arena=street15">Zaprojektuj <span aria-hidden="true">→</span></a></div></li></ul><p class="swipe-hint" aria-hidden="true">Przesuń w bok: 9 modeli <span>→</span></p>
-  <p class="price-note">Ceny orientacyjne „od”, konstrukcja w podstawowej konfiguracji i standardowym kolorze. Netto oraz brutto z VAT 23%. „Z nawierzchnią” to konstrukcja, płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem. Bez montażu, transportu i przygotowania terenu.</p>
-  <details class="surf-rates"><summary>Nawierzchnie: ceny za m²</summary><ul role="list"><li><b>Płyta betonowa 12 cm z podbudową</b><span class="rate">283 zł/m² <small>netto</small></span><span>podstawa pod każde wykończenie</span></li><li><b>Malowanie farbą sportową</b><span class="rate">78–183 zł/m² <small>netto</small></span><span>jednokolorowe do wzoru zaawansowanego</span></li><li><b>Akryl Hard Court</b><span class="rate">200–342 zł/m² <small>netto</small></span><span>system warstwowy jak na kortach</span></li><li><b>Sztuczna trawa</b><span class="rate">167–292 zł/m² <small>netto</small></span><span>z montażem na betonie</span></li><li><b>Maty gumowe</b><span class="rate">242–425 zł/m² <small>netto</small></span><span>ciągła nawierzchnia gumowa</span></li><li><b>Nawierzchnia EPDM wylewana</b><span class="rate">250–400 zł/m² <small>netto</small></span><span>PN-EN 14877</span></li><li><b>Płytki sportowe PP</b><span class="rate">275–400 zł/m² <small>netto</small></span><span>szybki montaż bez klejenia</span></li><li><b>Płyty gumowe</b><span class="rate">342–492 zł/m² <small>netto</small></span><span>PN-EN 1177, atest PZH</span></li></ul><p>Warianty Standard, Standard+ i Premium. Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę policzy Studio dla wybranego modelu.</p></details>
 </section>
 <!-- /wp:html -->
 
@@ -901,35 +948,6 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 <!-- /wp:html -->
 
 <!-- wp:html -->
-<!-- gf-blok: realizacje -->
-<!-- REALIZACJE: zdjęcia z biblioteki mediów, podpisy właściciela (2026-11-08) -->
-<section id="realizacje" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-real">
-  <div class="head">
-    <div class="hd"><p class="kicker m">Realizacje</p><h2 class="d" id="gfs-real">Z boiska.</h2></div>
-    <div class="side"><p>Areny Gamefields w miastach, na turniejach i eventach marek. <a href="/realizacje-gamefields/">Wszystkie realizacje →</a></p></div>
-  </div>
-  <ul class="reals" role="list">
-    <li><figure><img src="/wp-content/uploads/2026/11/GAMEFIELDS-Street-Football-Tournament-1-768x576.png" alt="Arena Gamefields na turnieju street football" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Turniej Street Football</b><span>Arena Gamefields i kibice</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2026/11/Damian-Gawrych-x-Wake-for-friends--768x960.jpg" alt="Dzieci grają na arenie Gamefields, Wake For Friends" width="768" height="960" loading="lazy" decoding="async"><figcaption><b>Wake For Friends</b><span>Gra na arenie nad wodą</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2026/11/Urodziny-pilkarskie-Gamefields-Damian-Gawrych--768x431.jpg" alt="Urodziny piłkarskie Gamefields przy arenie" width="768" height="431" loading="lazy" decoding="async"><figcaption><b>Urodziny piłkarskie</b><span>Gamefields</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2026/11/Zyrardow-Panna-Arena-1v1--768x575.jpg" alt="Pojedynek na arenie Panna 1 na 1, Żyrardów" width="768" height="575" loading="lazy" decoding="async"><figcaption><b>Panna 1 na 1</b><span>Żyrardów</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Taras w Parku Świętokrzyskim</b><span>Warszawa</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Złote Tarasy, Warszawa</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2026/11/1-768x576.jpg" alt="Event Head &amp; Shoulders, Stadion, Gdańsk" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Stadion, Gdańsk</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa, Kutno" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa</b><span>Kutno</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/12-3-768x768.jpg" alt="Panna Octa Cage 180, Wake For Friends, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Wake For Friends, Grodzisk Mazowiecki</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Street Soccer 2017</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/10-3-768x768.jpg" alt="Puchar Polski, Żerków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Puchar Polski</b><span>Żerków</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/22-768x432.jpg" alt="Mistrzostwa Świata Superball, Liberec" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Superball</b><span>Liberec</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/13-3-768x768.jpg" alt="Panna Ring, Nowy Świat, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Nowy Świat, Warszawa</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/5-3-768x768.jpg" alt="Mistrzostwa Polski, Street Mekka, Łódź" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Polski, Street Mekka</b><span>Łódź</span></figcaption></figure></li>
-    <li><figure><img src="/wp-content/uploads/2024/12/15-3-768x768.jpg" alt="Panna Octa Cage 180, Kraków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Kraków</span></figcaption></figure></li>
-  </ul>
-</section>
-<!-- /wp:html -->
-
-<!-- wp:html -->
 <!-- gf-blok: studio -->
 <section id="studio" class="studio sec" aria-labelledby="gfs-studio">
   <div class="wrap studio-grid">
@@ -1006,6 +1024,19 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 <!-- /wp:html -->
 
 <!-- wp:html -->
+<!-- gf-blok: jak-to-dziala -->
+<!-- HOW -->
+<section class="wrap sec" aria-labelledby="gfs-how">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Proces</p><h2 class="d" id="gfs-how">Od placu do meczu.</h2></div>
+    <div class="side"><p>Cztery kroki. Na każdym rozmawiasz ze mną, nie z formularzem.</p></div>
+  </div>
+  <div class="steps" role="group" aria-label="Kroki" data-steps></div>
+  <div class="step-detail"><p data-step-text></p><a class="pill" data-step-cta href="#boiska" style="background:var(--violet);color:#fff"></a></div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
 <!-- gf-blok: materialy -->
 <!-- MATERIALS -->
 <section class="wrap sec" aria-labelledby="gfs-mats">
@@ -1019,6 +1050,42 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
     <figure class="mat"><img src="https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/trawa-macro.webp" alt="Sztuczna trawa z bliska" loading="lazy"><figcaption class="bar"><b>Trawa</b><span class="m">klasyczna</span></figcaption></figure>
     <figure class="mat"><img src="https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-probka-nawierzchni-malowanej.svg" alt="Próbka nawierzchni malowanej" loading="lazy"><figcaption class="bar"><b>Malowana</b><a class="m" href="#nawierzchnie">na istniejącym placu</a></figcaption></figure>
   </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: na-twoim-placu -->
+<!-- ON YOUR SITE -->
+<section class="wrap sec" aria-labelledby="gfs-site">
+  <div class="site">
+    <div class="site-img" data-site>
+      <img class="bgp" data-site-photo loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/plac-przykladowy.webp" alt="Zdjęcie placu">
+      <img class="fg" data-site-model loading="lazy" decoding="async" src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-1200.webp" alt="Panna Cage 90 na zdjęciu placu, do przeciągnięcia" draggable="false">
+      <div class="bar"><b data-site-label>Przykładowy plac</b><span class="m">przeciągnij boisko</span></div>
+    </div>
+    <div style="display:grid;gap:22px;align-content:center">
+      <span class="m" style="color:var(--violet)">Na Twoim placu</span>
+      <h2 class="d" id="gfs-site" style="font-size:clamp(48px,6vw,96px)">Wgraj zdjęcie. Postaw boisko.</h2>
+      <p style="font-size:18px;line-height:1.5;color:var(--muted);max-width:40ch">Przeciągnij model, ustaw skalę i opisz mi miejsce. Zdjęcie zostaje w Twojej przeglądarce, nigdzie go nie wysyłamy.</p>
+      <label for="gfs-site-scale" class="m" style="display:grid;gap:10px">Skala boiska<input id="gfs-site-scale" type="range" min="20" max="80" value="48" style="accent-color:var(--violet)"></label>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <label class="pill file" for="gfs-photo" style="background:var(--ink);color:var(--paper)">Wgraj zdjęcie placu<input id="gfs-photo" type="file" accept="image/*"></label>
+        <button type="button" class="pill" data-site-reset style="background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)">Przykładowy plac</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: zestawy -->
+<!-- KITS -->
+<section aria-labelledby="gfs-kits">
+  <div class="wrap head">
+    <div class="hd"><p class="kicker m">Zestawy</p><h2 class="d" id="gfs-kits">Pięć miejsc. Pięć zestawów.</h2></div>
+    <div class="side"><p>Kliknij miejsce, żeby zobaczyć gotowy zestaw: boisko, nawierzchnię i kolor.</p></div>
+  </div>
+  <div data-kits></div>
 </section>
 <!-- /wp:html -->
 
@@ -1236,42 +1303,6 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 <!-- /wp:html -->
 
 <!-- wp:html -->
-<!-- gf-blok: zestawy -->
-<!-- KITS -->
-<section aria-labelledby="gfs-kits">
-  <div class="wrap head">
-    <div class="hd"><p class="kicker m">Zestawy</p><h2 class="d" id="gfs-kits">Pięć miejsc. Pięć zestawów.</h2></div>
-    <div class="side"><p>Kliknij miejsce, żeby zobaczyć gotowy zestaw: boisko, nawierzchnię i kolor.</p></div>
-  </div>
-  <div data-kits></div>
-</section>
-<!-- /wp:html -->
-
-<!-- wp:html -->
-<!-- gf-blok: na-twoim-placu -->
-<!-- ON YOUR SITE -->
-<section class="wrap sec" aria-labelledby="gfs-site">
-  <div class="site">
-    <div class="site-img" data-site>
-      <img class="bgp" data-site-photo loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/plac-przykladowy.webp" alt="Zdjęcie placu">
-      <img class="fg" data-site-model loading="lazy" decoding="async" src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-1200.webp" alt="Panna Cage 90 na zdjęciu placu, do przeciągnięcia" draggable="false">
-      <div class="bar"><b data-site-label>Przykładowy plac</b><span class="m">przeciągnij boisko</span></div>
-    </div>
-    <div style="display:grid;gap:22px;align-content:center">
-      <span class="m" style="color:var(--violet)">Na Twoim placu</span>
-      <h2 class="d" id="gfs-site" style="font-size:clamp(48px,6vw,96px)">Wgraj zdjęcie. Postaw boisko.</h2>
-      <p style="font-size:18px;line-height:1.5;color:var(--muted);max-width:40ch">Przeciągnij model, ustaw skalę i opisz mi miejsce. Zdjęcie zostaje w Twojej przeglądarce, nigdzie go nie wysyłamy.</p>
-      <label for="gfs-site-scale" class="m" style="display:grid;gap:10px">Skala boiska<input id="gfs-site-scale" type="range" min="20" max="80" value="48" style="accent-color:var(--violet)"></label>
-      <div style="display:flex;flex-wrap:wrap;gap:10px">
-        <label class="pill file" for="gfs-photo" style="background:var(--ink);color:var(--paper)">Wgraj zdjęcie placu<input id="gfs-photo" type="file" accept="image/*"></label>
-        <button type="button" class="pill" data-site-reset style="background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)">Przykładowy plac</button>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- /wp:html -->
-
-<!-- wp:html -->
 <!-- gf-blok: warsztat -->
 <!-- Kept from live page 3462 (revision of 2026-10-31): community workshop feed, unchanged markup and script. -->
 <section class="gh-section gh-tinted gh-workshop" id="warsztat" aria-labelledby="gh-workshop-title"><div class="gh-wrap"><div class="gh-workshop-heading"><div><p class="gh-eyebrow">ZAPROJEKTUJ · ZAPISZ · ZAINSPIRUJ</p><h2 id="gh-workshop-title">Warsztat.<br>Wasze pomysły.</h2></div><div><p>Zaprojektuj boisko i kliknij w Studio <strong>„Zapisz dla innych”</strong>. Twój układ i kolory od razu pojawią się tutaj.</p><div class="gh-actions"><a class="gh-btn gh-primary" href="/studio/">Zaprojektuj i pokaż innym ↗</a></div></div></div><div class="gh-workshop-bar"><span data-workshop-count>10 ostatnich projektów</span><button type="button" class="gh-btn" data-workshop-refresh>Odśwież</button></div><p class="gh-caption" role="status" data-workshop-status>Wczytujemy projekty…</p><div class="gh-workshop-rail" data-workshop-projects role="region" aria-label="Najnowsze projekty społeczności"></div><div class="gh-workshop-empty" data-workshop-empty hidden><div class="gh-workshop-placeholder" aria-hidden="true"><span>+</span></div><div><h3>Twój projekt może być pierwszy.</h3><p>Wybierz kolory. Kliknij „Zapisz dla innych”. Gotowe.</p><a class="gh-btn" href="/studio/">Otwórz Studio ↗</a></div></div><p class="gh-caption">Projekty społeczności · koncepcje. Publikujemy układ, wzór i kolory bez prywatnych nazw, własnych napisów i logo. Zapisany projekt możesz wycofać przyciskiem w Studio.</p><noscript><p><a href="/studio/">Przejdź do Studia</a>, aby zaprojektować własne boisko.</p></noscript></div></section>
@@ -1313,19 +1344,6 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
       <a class="pill" href="#kontakt" style="background:var(--lime);color:#0F0F0F">Porozmawiajmy o współpracy <span aria-hidden="true">→</span></a>
     </div>
   </div>
-</section>
-<!-- /wp:html -->
-
-<!-- wp:html -->
-<!-- gf-blok: jak-to-dziala -->
-<!-- HOW -->
-<section class="wrap sec" aria-labelledby="gfs-how">
-  <div class="head">
-    <div class="hd"><p class="kicker m">Proces</p><h2 class="d" id="gfs-how">Od placu do meczu.</h2></div>
-    <div class="side"><p>Cztery kroki. Na każdym rozmawiasz ze mną, nie z formularzem.</p></div>
-  </div>
-  <div class="steps" role="group" aria-label="Kroki" data-steps></div>
-  <div class="step-detail"><p data-step-text></p><a class="pill" data-step-cta href="#boiska" style="background:var(--violet);color:#fff"></a></div>
 </section>
 <!-- /wp:html -->
 
@@ -1373,7 +1391,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
 <!-- gf-blok: skrypty -->
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-pro.js?v=81274c9b16"></script>
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-ball-core.js?v=0dff1b42a9"></script>
-<script defer src="/wp-content/themes/gamefields/assets/js/home/gf-home.js?v=db852fb4b4"></script>
+<script defer src="/wp-content/themes/gamefields/assets/js/home/gf-home.js?v=9af2573c74"></script>
 <script>(function(){const names={"w1":"Panna Ring","o1":"Panna Play","p1":"Panna Court","street15":"Street Arena 15","circle-cage-1":"Panna Cage 90","circle-cage-2":"Panna Cage 180","street-field":"Panna Grid","octagon":"Panna Octa","street-football-15x10":"Street Arena 15","panna-perfo-circle": "Panna Perfo-Circle", "panna-perfo-rect": "Panna Perfo-Rect", "panna-net-rect": "Panna Net-Rect", "panna-solid-circle": "Panna Solid-Circle", "panna-net-circle": "Panna Net-Circle", "panna-high-net-circle": "Panna High Net-Circle", "panna-steel-octaground": "Panna Steel OctaGround"};const key=new URLSearchParams(window.location.search).get('gf_product');if(!Object.prototype.hasOwnProperty.call(names,key))return;const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]');if(!field)return;const name=names[key],summary='Wybrany model: '+name+'. Proszę o dobór konfiguracji i wycenę dla mojej lokalizacji.';root.dataset.gfProductName=name;field.addEventListener('input',function(){if(!field.value.includes(summary))delete root.dataset.gfProductName});field.value=summary+(field.value.trim()?'\n\n'+field.value.trim():'');field.dispatchEvent(new Event('input',{bubbles:true}));const attached=root.querySelector('#gc-attached');if(attached){attached.textContent='Wybrany model: '+name+'. Opisz miejsce i sposób użytkowania — model został dołączony do zapytania.';attached.hidden=false;}if(window.location.hash==='#kontakt'){root.querySelector('#kontakt')?.scrollIntoView({behavior:'auto'});root.querySelector('[name="your-email"]')?.focus({preventScroll:true});}})();</script>
 <script>(function(){const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]'),review=root?.querySelector('#gc-project-review'),text=root?.querySelector('#gc-project-text'),status=root?.querySelector('#gc-review-status');if(!field||!review||!text||!status)return;let cleared=false;function render(){const value=field.value.trim();text.textContent=value;review.hidden=!value;if(!value){review.open=false;root.querySelector('#gc-attached').hidden=true;status.textContent=cleared?'Dołączone parametry usunięte. Twoja wiadomość i dane kontaktowe pozostały w formularzu.':'';}else status.textContent='Parametry dołączone — możesz je przejrzeć przed wysłaniem.';}field.addEventListener('input',function(){cleared=false;queueMicrotask(render)});root.querySelector('#gc-clear-project').addEventListener('click',function(){field.value='';field.dispatchEvent(new Event('input',{bubbles:true}));cleared=true;delete root.dataset.gfProductName;root.querySelectorAll('[data-gf-inquiry]').forEach(function(item){item.setAttribute('aria-pressed','false');item.closest('.gc-direction').setAttribute('data-selected','false')});root.querySelector('#gc-direction-status').textContent='Wybór kierunku usunięty. Możesz wybrać inny.';const url=new URL(window.location.href);url.searchParams.delete('gf_product');window.history.replaceState(window.history.state,'',url);status.textContent='Dołączone parametry usunięte. Twoja wiadomość i dane kontaktowe pozostały w formularzu.';render();root.querySelector('[name="your-email"]')?.focus({preventScroll:true});});render();})();</script>
 <!-- /wp:html -->

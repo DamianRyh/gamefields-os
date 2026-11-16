@@ -629,13 +629,26 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .prices a.go:hover{background:var(--violet)}
 .gfs .price-note{margin:16px 0 0;font-size:14px;color:var(--muted);max-width:820px}
 @media (max-width:1100px){.gfs .prices{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Telefon: pionowa lista (Baymard: treść w poziomych karuzelach często umyka, a ceny trzeba porównać). */
 @media (max-width:700px){
-  .gfs .prices{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(-1*max(16px,3.4vw));padding-inline:max(16px,3.4vw);scroll-padding-inline:max(16px,3.4vw)}
-  .gfs .prices::-webkit-scrollbar{display:none}
-  .gfs .prices li{scroll-snap-align:start;padding:20px;gap:12px}
-  .gfs .prices .name b{font-size:19px}
-  .gfs .prices .net b{font-size:30px}
+  .gfs .prices{grid-template-columns:minmax(0,1fr);gap:8px}
+  .gfs .prices li{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name net" "full full" "pfoot pfoot";gap:8px 12px;padding:14px 16px}
+  .gfs .prices .name{grid-area:name}.gfs .prices .net{grid-area:net;text-align:right}.gfs .prices .full{grid-area:full;justify-self:start;font-size:13px;padding:5px 10px}
+  .gfs .prices .pfoot{grid-area:pfoot;padding-top:8px}
+  .gfs .prices .name b{font-size:17px}.gfs .prices .name span{font-size:13px}
+  .gfs .prices .net b{font-size:21px}.gfs .prices .net small{display:block;font-size:12px}.gfs .prices .gross{font-size:12px;margin-top:0}
 }
+/* Co zawiera cena: dwie krótkie listy zamiast jednego akapitu. */
+.gfs .price-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin-top:20px;padding:20px 24px;background:#fff}
+.gfs .price-incl .m{display:block;margin-bottom:8px;color:var(--ink);font-weight:700}
+.gfs .price-incl ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:15px;color:var(--muted)}
+.gfs .price-incl li{position:relative;padding-left:20px}
+.gfs .price-incl > div:first-child li::before{content:"✓";position:absolute;left:0;color:var(--violet);font-weight:800}
+.gfs .price-incl > div:nth-child(2) li::before{content:"·";position:absolute;left:4px;color:var(--muted);font-weight:800}
+.gfs .price-incl .price-note{grid-column:1/-1;margin:0}
+@media (max-width:700px){.gfs .price-incl{grid-template-columns:minmax(0,1fr);padding:16px}}
+/* Kafelki boisk: cena „od” przy nazwie. */
+.gfs .tile .bar .pr{display:block;margin-top:2px;font-size:13px;font-weight:600;color:var(--violet)}
 .gfs .swipe-hint{display:none;align-items:center;gap:6px;margin:10px 0 0;font-size:13px;color:var(--muted)}
 /* Przewijane rzędy na telefonie: kroki, zdjęcia z Krakowa i normy w jednym rzędzie zamiast długiej kolumny. */
 @media (max-width:700px){
