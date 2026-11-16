@@ -13,6 +13,9 @@ export const MAT_PRODUCT_NOTES=['Mata wysyłana w całości, gotowa do rozłoże
  * - printing of the drills: 78 zł/m² of the mat, only when the mat carries drills;
  * - shipping quoted after the address.
  */
+/** Owner 16.11.2026: the mat as a standalone product is withdrawn for now. Rubber mats stay a surface finish on concrete
+ * (MAT_VARIANTS in surface-finish.ts). The product code stays dormant: hidden on the hub, reachable only with ?all=1. */
+export const MAT_PRODUCT_ENABLED=false;
 export const MAT_FORMATS:[number,number][]=[[2,1],[2,2],[3,2],[4,3],[5,4]];
 export const MAT_LIMITS={min:1,max:10,step:0.5,maxArea:50};
 export const MAT_LABEL="Mata treningowa";

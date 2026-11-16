@@ -1,3 +1,5 @@
+> **WYCOFANE (właściciel 16.11.2026).** Mata jako osobny produkt nie jest sprzedawana. Nie wdrażać. Maty gumowe zostają w Studio jako wykończenie na betonie.
+
 # Dla ChatGPT: mata treningowa (sklep, strona, motyw) — 15.11.2026
 
 Wszystko potrzebne jest w tym pliku i w trzech obrazach (załączniki: `gamefields-mata-2x1.webp`, `gamefields-mata-4x3.webp`, `gamefields-mata-5x4.webp`). Nie otwieraj linków do GitHuba.

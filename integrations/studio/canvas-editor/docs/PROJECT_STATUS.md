@@ -1,3 +1,8 @@
+## Studio — mata jako produkt wycofana, 2026-11-16
+
+- Właściciel 16.11: sprzedaż maty jako osobnego produktu wycofana. Maty gumowe zostają wykończeniem na betonie (Nawierzchnia → Materiał, 242 / 317 / 425 zł/m²), jak pozostałe materiały.
+- `MAT_PRODUCT_ENABLED=false` w `lib/mat-product.ts`: kafelek „Maty treningowe” schowany (`LAUNCH_HIDDEN`), `/?tool=mat` działa tylko z `?all=1`. Kod produktu uśpiony na wypadek powrotu; strona `pages/maty-2026-11/` i `DLA-CHATGPT-maty.md` oznaczone jako wycofane.
+
 ## Studio — nowy produkt: maty treningowe, 2026-11-15
 
 - Ekran startowy Studio: kafelek „Maty treningowe” („od 600 zł netto”). Gumowa mata z ćwiczeniami ze Studio (`lib/football-drills.ts`), wysyłana w całości, bez betonu i montażu (decyzja właściciela 15.11). Link bezpośredni: `/?tool=mat`.
