@@ -145,3 +145,11 @@ Instrukcja: `DLA-CHATGPT-sklep-studio.md`. Zawiera też motyw z polecenia 13 (cz
 ```
 Pobierz instrukcję z https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/DLA-CHATGPT-sklep-studio.md. Część A: zrób kopie i podmień/dodaj 7 plików motywu z tabeli (sprawdź SHA-256). Część B: wejdź do wp-admin, żeby uruchomić synchronizację sklepu, przekaż mi treść komunikatu i wyczyść cache LiteSpeed. Część C: sprawdź sklep, karty produktów i przekierowania starych adresów, pokaż mi podgląd /shop/ na komputerze i telefonie. Niczego nie usuwaj: stare produkty mają być tylko ukryte. Jeśli polecenie 13 nie było jeszcze wykonane, po tym wykonaj jego część B (strona główna).
 ```
+
+## 15. Sklep jako showroom (motyw 1.0.30)
+
+Najpierw właściciel wgrywa `gamefields-1.0.30.zip` (Wygląd → Motywy → Wyślij motyw → Zastąp) i otwiera wp-admin. Potem:
+
+```
+Pobierz instrukcję z https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/DLA-CHATGPT-sklep-showroom.md. Motyw 1.0.30 wgrałem sam. Wykonaj część „ChatGPT”: wyczyść cache LiteSpeed, sprawdź /shop/ na komputerze i telefonie (scena z boiskami i 3D, nawierzchnie z kalkulatorem, jak zamówić), sprawdź że kategorie zostały listą i pokaż mi zrzuty.
+```
