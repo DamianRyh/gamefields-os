@@ -40,6 +40,20 @@
       "sha256": "9352daf64331fb172ec3d4f2f24bb57c4c160574610954b13d4cfe0836061214",
       "bytes": 231102,
       "source": "tools/studio/gen_material_macros.py (procedural illustration, 14.11.2026; replace with a licensed photo)"
+    },
+    {
+      "id": "beton",
+      "asset": "beton-macro.webp",
+      "sha256": "93235fcd872007df7949b9153095f40b43bd4c7cc1f1cfe8558775c8ad48deb5",
+      "bytes": 656436,
+      "source": "Poly Haven Concrete Floor 03 (Matterfield / Rob Tuytel), CC0 1.0, https://polyhaven.com/a/concrete_floor_03; graded by tools/studio/photo_material_macros.py"
+    },
+    {
+      "id": "malowanie",
+      "asset": "malowanie-macro.webp",
+      "sha256": "8b423415935bb1ff286c7837c507e85f39c33492b5ed1abdd8afa50a06ba3c59",
+      "bytes": 221506,
+      "source": "Poly Haven Concrete Floor 03 (Matterfield / Rob Tuytel), CC0 1.0, https://polyhaven.com/a/concrete_floor_03; graded by tools/studio/photo_material_macros.py"
     }
   ]
 }

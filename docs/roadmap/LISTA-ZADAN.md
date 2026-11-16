@@ -34,6 +34,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 20 | Strona główna wg Baymard: „Ceny” w menu (motyw 1.0.28), ceny „od” na kafelkach boisk, realizacje zaraz po cenach, dodatki niżej, ceny na telefonie w pionowej liście, „co zawiera cena” | ✅ PR (ten) | polecenie 13 | ⏳ |
 | 21 | Sklep = Studio: 8 modeli i 8 nawierzchni w cenach ze Studia, stare produkty ukryte z przekierowaniem 301, plakat poza listą (motyw 1.0.29) | ✅ PR (ten) | polecenie 14 | ✅ zsynchronizowane 16.11 (16 produktów) |
 | 22 | Sklep jako showroom: scena z 8 boiskami (3D dla Play/Court/Ring/Octa), nawierzchnie z teksturami i kalkulatorem dla wybranego boiska, „Jak zamówić” (motyw 1.0.30) | ✅ PR (ten) | polecenie 15 | ⏳ |
+| 23 | Sklep: tekstury betonu i malowania ze zdjęcia CC0 (Poly Haven), zakładka „Wiedza o produkcie”, opinie przy produktach wyłączone (motyw 1.0.31) | ✅ PR (ten) | DLA-CHATGPT-sklep-1.0.31.txt | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |

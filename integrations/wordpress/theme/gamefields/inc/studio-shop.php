@@ -105,12 +105,14 @@ function gft_studio_shop_sync() {
 		if ( $cats ) {
 			$product->set_category_ids( $cats );
 		}
-		if ( ! $product->get_image_id() ) {
+		$src = is_string( $row['image'] ) ? $row['image'] : wp_json_encode( $row['image'] );
+		if ( ! $product->get_image_id() || ( $id && get_post_meta( $id, '_gft_img_src', true ) !== $src ) ) {
 			$img = gft_studio_shop_image( $row['image'], $row['name'] );
 			if ( $img ) {
 				$product->set_image_id( $img );
 			}
 		}
+		$product->set_reviews_allowed( false );
 		$saved = $product->save();
 		if ( ! $saved ) {
 			$log['errors'][] = $row['sku'];
@@ -121,6 +123,7 @@ function gft_studio_shop_sync() {
 		update_post_meta( $saved, '_gft_unit', (string) $row['unit'] );
 		update_post_meta( $saved, '_gft_studio_url', (string) $row['url'] );
 		update_post_meta( $saved, '_gft_studio_button', (string) $row['button'] );
+		update_post_meta( $saved, '_gft_img_src', $src );
 		$new ? $log['created']++ : $log['updated']++;
 	}
 	$hide = array_merge( array_map( 'intval', array_keys( (array) $data['legacy'] ) ), array_map( 'intval', (array) $data['catalogHidden'] ) );
@@ -237,3 +240,38 @@ add_action( 'woocommerce_archive_description', function () {
 		echo '<p class="gft-shop-intro">Boiska i nawierzchnie ze Studio 3D, w tych samych cenach co w Studiu. Ceny „od”, netto; montaż i transport policzę po zdjęciach placu. <a href="' . esc_url( home_url( '/studio/' ) ) . '">Otwórz Studio 3D →</a></p>';
 	}
 }, 5 );
+
+/* ---------- product pages: no reviews, a "Wiedza" tab instead (2026-11-16) ---------- */
+function gft_studio_shop_row( $product ) {
+	if ( ! $product ) {
+		return null;
+	}
+	foreach ( gft_studio_shop_data()['products'] as $row ) {
+		if ( $row['sku'] === $product->get_sku() ) {
+			return $row;
+		}
+	}
+	return null;
+}
+
+add_filter( 'woocommerce_product_tabs', function ( $tabs ) {
+	unset( $tabs['reviews'] );
+	global $product;
+	$row = gft_studio_shop_row( $product );
+	if ( $row && ! empty( $row['knowledge'] ) ) {
+		$tabs['gft_knowledge'] = array(
+			'title'    => 'Wiedza o produkcie',
+			'priority' => 5,
+			'callback' => function () use ( $row ) {
+				echo wp_kses_post( $row['knowledge'] );
+			},
+		);
+	}
+	return $tabs;
+}, 98 );
+
+/* Comments and reviews are off on products; existing ones stay in the database. */
+add_filter( 'comments_open', function ( $open, $post_id ) {
+	return 'product' === get_post_type( $post_id ) ? false : $open;
+}, 20, 2 );
+add_filter( 'woocommerce_product_review_comment_form_args', '__return_empty_array' );
