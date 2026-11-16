@@ -11,24 +11,24 @@ Ostatnia aktualizacja: 13.11.2026
 | # | Zadanie | Repozytorium | Strona | Status |
 | --- | --- | --- | --- | --- |
 | 1 | Przejrzystość cenowa w Studio: cena samej konstrukcji (bez podłoża), karta konstrukcji PDF z modelem 3D, ceny zgodne ze stroną | ✅ PR #80, #86, #88 | ✅ Studio, sprawdzone 13.11: ceny 8 modeli = strona, Panna Play 40 000 zł netto w przycisku, podsumowaniu i karcie | ✅ |
-| 10 | Studio: nawierzchnia betonowa bez wykończenia jako osobna cena obok konstrukcji (cennik 13.11, 283 zł/m²), domyślnie wliczona, do odznaczenia | ✅ PR #90, `lib/concrete-base.ts`, `offer/concrete-base.json` | Studio w Sites (polecenie 7) | ⏳ |
+| 10 | Studio: nawierzchnia betonowa bez wykończenia jako osobna cena obok konstrukcji (cennik 13.11, 283 zł/m²), domyślnie wliczona, do odznaczenia | ✅ PR #90, `lib/concrete-base.ts`, `offer/concrete-base.json` | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
 | 11 | Studio: malowanie nawierzchni, 4 warianty (78 / 100 / 150 / 183 zł/m²), wariant dobrany do projektu | ✅ PR #91, `lib/surface-finish.ts`, `offer/surface-finish.json` | Studio w Sites (polecenie 7 obejmuje oba) | ⏳ |
 | 12 | Studio: nawierzchnia PU/EPDM, 3 warianty (250 / 317 / 400 zł/m²) | ✅ PR #92, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ ceny orientacyjne, do potwierdzenia ofertami wykonawców przed publikacją na stronie |
-| 13 | Studio: płytki sportowe, 3 warianty (275 / 325 / 400 zł/m²); liczba płytek tylko wewnętrznie | ✅ PR #93, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
-| 14 | Studio: sztuczna trawa, 3 warianty (167 / 225 / 292 zł/m²) | ✅ PR #94, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
-| 14a | Studio: nawierzchnia akrylowa Hard Court jako osobny materiał, 3 warianty (200 / 267 / 342 zł/m²) | ✅ PR #95, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
-| 14b | Studio: płyty gumowe SBR / EPDM jako osobny materiał, 3 warianty (342 / 400 / 492 zł/m²) | ✅ PR #96, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
-| 14c | Studio: maty / role gumowe jako osobny materiał, 3 warianty (242 / 317 / 425 zł/m²) | ✅ PR #97, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ⏳ |
-| 14d | Studio: jeden metraż wykończeń (konstrukcja +10%), nowe nazwy materiałów, poprawki czytelności (etap 1) | ✅ PR #98 | Studio w Sites (polecenie 7) | ⏳ |
-| 14e | Studio etap 2: lista materiałów, ceny na kartach modeli, beton też +10% | ✅ PR #99 | Studio w Sites (polecenie 7) | ⏳ |
-| 14f | Studio etap 3: porównanie wykończeń w podsumowaniu, ilustracje akrylu, płyt i mat | ✅ PR #100 | Studio w Sites (polecenie 7) | ⏳ |
-| 14h | Karta projektu PDF = całe zamówienie; wybór „Sama konstrukcja” | ✅ PR #101 | Studio w Sites (polecenie 7) | ⏳ |
-| 14i | Wycena samej nawierzchni (bez konstrukcji) z tych samych cenników | ✅ PR #102 | Studio w Sites (polecenie 7) | ⏳ |
-| 14j | Nowy produkt: maty treningowe (bez montażu, wysyłka; guma 167/233/333 + nadruk 78 zł/m²; koszyk dla formatów; przycinanie ćwiczeń) | ✅ PR #103 | Studio w Sites (polecenie 7) | ⏳ |
+| 13 | Studio: płytki sportowe, 3 warianty (275 / 325 / 400 zł/m²); liczba płytek tylko wewnętrznie | ✅ PR #93, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14 | Studio: sztuczna trawa, 3 warianty (167 / 225 / 292 zł/m²) | ✅ PR #94, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14a | Studio: nawierzchnia akrylowa Hard Court jako osobny materiał, 3 warianty (200 / 267 / 342 zł/m²) | ✅ PR #95, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14b | Studio: płyty gumowe SBR / EPDM jako osobny materiał, 3 warianty (342 / 400 / 492 zł/m²) | ✅ PR #96, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14c | Studio: maty / role gumowe jako osobny materiał, 3 warianty (242 / 317 / 425 zł/m²) | ✅ PR #97, `offer/surface-finish.json` | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14d | Studio: jeden metraż wykończeń (konstrukcja +10%), nowe nazwy materiałów, poprawki czytelności (etap 1) | ✅ PR #98 | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14e | Studio etap 2: lista materiałów, ceny na kartach modeli, beton też +10% | ✅ PR #99 | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14f | Studio etap 3: porównanie wykończeń w podsumowaniu, ilustracje akrylu, płyt i mat | ✅ PR #100 | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14h | Karta projektu PDF = całe zamówienie; wybór „Sama konstrukcja” | ✅ PR #101 | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14i | Wycena samej nawierzchni (bez konstrukcji) z tych samych cenników | ✅ PR #102 | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
+| 14j | Nowy produkt: maty treningowe (bez montażu, wysyłka; guma 167/233/333 + nadruk 78 zł/m²; koszyk dla formatów; przycinanie ćwiczeń) | ✅ PR #103 | Studio w Sites (polecenie 7) | ✅ sprawdzone 16.11 |
 | 14k | Maty: produkt WooCommerce, strona /mata-treningowa/, endpoint sklepu w motywie | ✅ repo: `pages/maty-2026-11/`, `offer/mat-product.json`, `theme/.../inc/shop.php` | polecenie 8 | ✖ wycofane (16.11): mata tylko jako wykończenie w Studio; kod produktu uśpiony |
-| 17 | Strona główna: sekcja „Dla gmin, szkół i Orlików” (gwarancja 12 mies. + opieka, Orlik 2012, dokumenty producentów, normy, Kraków od planu do parku, miasta), ceny kompletu z nawierzchnią, tabela nawierzchni za m², 4 zdjęcia z boisk | ✅ PR (ten) | polecenie 9 | ⏳ |
-| 17a | Strona główna: blok „Autor studia” (zdjęcie, bio, cytat „Zaczynam od miejsca, kończę na pierwszym meczu”, 6 faktów) | ✅ PR (ten) | polecenie 10 | ⏳ |
-| 18 | Logo miast (Warszawa, ZZM, Kraków, Grodzisk, Kutno, Łódź): strona główna i Realizacje dla miast | ✅ PR (ten) | polecenie 11 | ⏳ |
+| 17 | Strona główna: sekcja „Dla gmin, szkół i Orlików” (gwarancja 12 mies. + opieka, Orlik 2012, dokumenty producentów, normy, Kraków od planu do parku, miasta), ceny kompletu z nawierzchnią, tabela nawierzchni za m², 4 zdjęcia z boisk | ✅ PR (ten) | polecenie 9 | ✅ sprawdzone 16.11 |
+| 17a | Strona główna: blok „Autor studia” (zdjęcie, bio, cytat „Zaczynam od miejsca, kończę na pierwszym meczu”, 6 faktów) | ✅ PR (ten) | polecenie 10 | ✅ sprawdzone 16.11 |
+| 18 | Logo miast (Warszawa, ZZM, Kraków, Grodzisk, Kutno, Łódź): strona główna i Realizacje dla miast | ✅ PR #108 | polecenie 11 | ⏳ |
 | 18a | Certyfikaty producentów do pobrania | ⬜ | | ❓ pliki od właściciela |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |

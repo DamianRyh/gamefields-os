@@ -1,7 +1,7 @@
 # Polecenia dla ChatGPT (kolejka, jeszcze nieprzekazane)
 
 Właściciel przekaże je razem, gdy zdecyduje. Kolejność ma znaczenie: wcześniejsze punkty są pilniejsze.
-Przy każdym poleceniu: dołącz wskazany plik jako załącznik (ChatGPT nie otwiera GitHuba). Pliki są w repozytorium w `docs/roadmap/`.
+Przy każdym poleceniu: dołącz wskazany plik jako załącznik albo podaj adres surowego pliku `https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/<plik>` (ChatGPT nie otwiera stron GitHuba, surowe pliki tak). Pliki są w repozytorium w `docs/roadmap/`.
 
 Ostatnia aktualizacja: 13.11.2026 (ceny)
 
@@ -82,7 +82,7 @@ Załącznik: brak. `main` łączy kod produkcyjny wykonawcy (karta konstrukcji 3
 Opublikuj Studio z najnowszego commita gałęzi main repozytorium DamianRyh/gamefields-os (integrations/studio/canvas-editor), bez własnych zmian w kodzie. Zawiera Twoją kartę konstrukcji 3D (commit abc3394) oraz tryb samej ceny konstrukcji w przycisku i podsumowaniu. Nie zmieniaj INTERNAL_COST_CARD ani SALES_MARGIN. Przed publikacją: tsc, test:price, build, test:mobile, node tests/construction-card-browser.mjs. Po publikacji sprawdź dla Panny Play: przycisk Podsumowanie „Konstrukcja: 40 000 zł netto”, w podsumowaniu „Cena konstrukcji” bez widełek, „Pobierz kartę konstrukcji (PDF)” daje kartę z modelem 3D i ceną 40 000 zł netto. Zapisz numer wersji i ID wdrożenia w DEPLOYMENT.md (bez kosztów).
 ```
 
-## 7. Studio: konstrukcja, beton i 7 wykończeń jako osobne ceny, lista materiałów (publikacja z main)
+## 7. ✅ (wdrożone, sprawdzone 16.11) Studio: konstrukcja, beton i 7 wykończeń jako osobne ceny, lista materiałów (publikacja z main)
 
 Załącznik: brak. Ceny betonu i wykończeń to ceny sprzedaży z cenników właściciela, zapisane w kodzie (`lib/concrete-base.ts`, `lib/surface-finish.ts`). Metraż betonu i wykończeń: powierzchnia konstrukcji +10%. Karta kosztów i marża bez zmian.
 
@@ -98,7 +98,7 @@ Załączniki: `DLA-CHATGPT-maty.md` oraz trzy obrazy z `integrations/wordpress/p
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Zrób punkty 1–4 z DLA-CHATGPT-maty.md: wgraj trzy obrazy, utwórz produkt zmienny „Mata treningowa” (slug mata-treningowa, atrybut „wariant”, 15 wariantów z cenami brutto z tabeli, jako szkic), utwórz stronę /mata-treningowa/ z kodu (szkic) i wprowadź cztery zmiany w inc/shop.php motywu. Przed zmianą motywu zrób kopię pliku. Pokaż mi ustawienia wysyłki dla maty i podgląd strony (komputer i telefon), potem sprawdź punkt 5. Publikację produktu i strony zrobimy po moim potwierdzeniu.
 ```
 
-## 9. Strona główna: gminy i Orliki, ceny kompletu, zdjęcia z boisk
+## 9. ✅ Strona główna: gminy i Orliki, ceny kompletu, zdjęcia z boisk (wdrożone, sprawdzone 16.11)
 
 Załącznik: `DLA-CHATGPT-strona-glowna-samorzady.md`. Niezależne od poleceń 7 i 8.
 
@@ -106,7 +106,7 @@ Załącznik: `DLA-CHATGPT-strona-glowna-samorzady.md`. Niezależne od poleceń 7
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) wstaw fragmenty z punktów 1–4 (CSS, nowa sekcja cen, nowa sekcja „Dla gmin, szkół i Orlików” przed „Wybierz swoją drogę”, cztery zdjęcia na początku „Z boiska”). Nie podmieniaj całej strony. Zrób kopię przed zmianą, pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
 ```
 
-## 10. Strona główna: blok „Autor studia” ze zdjęciem
+## 10. ✅ Strona główna: blok „Autor studia” ze zdjęciem (wdrożone, sprawdzone 16.11)
 
 Załącznik: `DLA-CHATGPT-strona-glowna-autor.md`. Można razem z poleceniem 9.
 
