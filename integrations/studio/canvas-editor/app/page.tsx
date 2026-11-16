@@ -34,7 +34,7 @@ const PannaRealisticPreview=lazy(()=>import("@/components/blender-arena-preview"
 const studioLoading=<div className="studio-loading" role="status" style={{display:"grid",placeItems:"center",minHeight:"60vh",color:"#47132d",font:"600 16px Inter,Arial,sans-serif"}}>Wczytuję Studio…</div>;
 import {isRoundCourt,courtArea,courtAspect,courtDimensions,clampToCircle,roundBandPosition} from "@/lib/court-geometry";
 import {selectSurface,sportSurface,type SurfaceModel} from "@/lib/sport-surfaces";
-import {matProject} from "@/lib/mat-product";
+import {MAT_PRODUCT_ENABLED,matProject} from "@/lib/mat-product";
 import {SportSurfaceArt} from "@/components/sport-surface-art";
 import {sportProfiles,getSportProfile,type SportProfile} from "@/lib/sport-profiles";
 import {getAsset,scaleFor} from "@/lib/surface-assets";
@@ -210,7 +210,7 @@ export default function Home(){
  const recovery=useProjectRecovery(p,setP);
  const saveStatus=recovery.saveStatus;
  const [entryTool,setEntryTool]=useState<string|null>(null),[workspaceRevision,setWorkspaceRevision]=useState(0);
- useEffect(()=>{const params=new URLSearchParams(window.location.search);if(['home','arena','surface','sport','pattern','base','zone','seed','shared','workshop','tool'].some(key=>params.has(key))||params.get('view')==='builder'){if(params.get('tool')==='mat'){setP(v=>v.matProduct?v:matProject(v));setEntryTool('graphics')}else setEntryTool(params.get('tool'));setView('builder')}},[]); // ?tool=mat: link from the training mat page
+ useEffect(()=>{const params=new URLSearchParams(window.location.search);if(['home','arena','surface','sport','pattern','base','zone','seed','shared','workshop','tool'].some(key=>params.has(key))||params.get('view')==='builder'){if(params.get('tool')==='mat'&&(MAT_PRODUCT_ENABLED||params.has('all'))){setP(v=>v.matProduct?v:matProject(v));setEntryTool('graphics')}else setEntryTool(params.get('tool'));setView('builder')}},[]); // ?tool=mat: link from the training mat page
  function productsHome(){setView('hub');window.history.replaceState(null,'','/');}
  function continueProject(files=false){setEntryTool(files?'files':p.printDesign?.product||null);setView('builder');window.history.replaceState(null,'',files?'/?tool=files':'/?view=builder');}
  async function chooseEntry(kind:StudioEntry){try{await recovery.preserveCurrent();history(p);const tool=kind==='court'?'construction':kind==='surface'?'surface-model':kind==='mat'?'graphics':kind;setEntryTool(tool);if(kind==='mat')setP(v=>matProject(v));else if(kind==='poster'||kind==='ball')setP(v=>({...v,name:kind==='poster'?'Plakat — mój projekt':'Piłka — mój projekt',printDesign:v.printDesign?.product===kind?v.printDesign:defaultStudioPrint(kind)}));else setP(v=>({...v,matProduct:undefined,...(kind==='surface'?selectSurface(v,v.surfaceModel||'street-football-3x3'):{}),...(/^(Plakat|Piłka|Koszulki) — mój projekt$/.test(v.name)?{name:getSportProfile(v.sport,v.arenaModel).label+' — projekt'}:{}),printDesign:undefined}));window.history.replaceState(null,'','/?tool='+tool);setView('builder')}catch(error){toast.error((error as Error).message)}}

@@ -1,6 +1,7 @@
-## Studio — maty schowane, 2026-11-16
+## Studio — mata jako produkt wycofana, 2026-11-16
 
-- Kafelek „Maty treningowe” schowany na ekranie startowym (`LAUNCH_HIDDEN`, jak piłki i koszulki) do czasu dokończenia strony (decyzja właściciela 16.11). Edytor maty, ceny i `/?tool=mat` zostają; podgląd z `?all=1`. Polecenie 8 (sklep, strona maty) wstrzymane.
+- Właściciel 16.11: sprzedaż maty jako osobnego produktu wycofana. Maty gumowe zostają wykończeniem na betonie (Nawierzchnia → Materiał, 242 / 317 / 425 zł/m²), jak pozostałe materiały.
+- `MAT_PRODUCT_ENABLED=false` w `lib/mat-product.ts`: kafelek „Maty treningowe” schowany (`LAUNCH_HIDDEN`), `/?tool=mat` działa tylko z `?all=1`. Kod produktu uśpiony na wypadek powrotu; strona `pages/maty-2026-11/` i `DLA-CHATGPT-maty.md` oznaczone jako wycofane.
 
 ## Studio — nowy produkt: maty treningowe, 2026-11-15
 
