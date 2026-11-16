@@ -1,0 +1,14 @@
+Polecenie dla ChatGPT: sklep, motyw 1.0.31 (16.11.2026)
+
+Motyw Gamefields 1.0.31 wgrał właściciel (ZIP). Nie ruszaj plików motywu.
+
+1. Wyczyść cache LiteSpeed.
+2. Sklep /shop/, sekcja Nawierzchnie: kafelki „Płyta betonowa 12 cm z podbudową” i „Malowanie farbą sportową” mają nowe zdjęcia. Beton to jasnoszara płyta ze szczeliną dylatacyjną. Malowanie to niebiesko-czerwona nawierzchnia z białymi liniami. Pasują do pozostałych tekstur.
+3. Karta dowolnego produktu, np. /product/panna-play/ i /product/malowanie-farba-sportowa/:
+   - pierwsza zakładka to „Wiedza o produkcie”;
+   - zakładka Panna Play: parametry, co zawiera cena, ceny nawierzchni dla tego boiska, gwarancja i dokumenty, linki do poradników;
+   - zakładka malowania: warianty z cenami, jak maluję plac, ceny dla 8 boisk;
+   - NIE ma zakładki „Opinie” ani formularza komentarza.
+4. Sprawdź na komputerze i telefonie, pokaż właścicielowi zrzuty.
+5. Jeśli strona główna (szkic 4767) nie jest jeszcze opublikowana, pokaż jej podgląd i opublikuj po akceptacji właściciela, potem wyczyść cache.
+Niczego nie usuwaj.

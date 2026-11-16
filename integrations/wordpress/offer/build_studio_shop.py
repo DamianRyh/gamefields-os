@@ -18,6 +18,7 @@ import pathlib
 HERE = pathlib.Path(__file__).resolve().parent
 OUT = HERE.parent / "theme" / "gamefields" / "data" / "studio-shop.json"
 STUDIO_SITE = "https://gamefields-studio.ryhfs90.chatgpt.site"
+RAW_CAT = "https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/studio/canvas-editor/public/surfaces/catalogue/"
 VAT = 1.23
 
 SHAPE = {"w1": "okragle", "o1": "okragle", "circle-cage-1": "okragle", "circle-cage-2": "okragle",
@@ -53,6 +54,84 @@ CATALOG_HIDDEN = [4393]
 
 def zl(n):
     return f"{n:,.0f}".replace(",", " ") + " zł"
+
+
+def cost(area, rate):
+    return -(-int(round(area * rate * 100)) // 10000) * 100  # area × rate, rounded up to 100 zł (Studio rule)
+
+
+def links(items):
+    return '<ul class="gfk-links">' + "".join(f'<li><a href="{u}">{t}</a></li>' for t, u in items) + "</ul>"
+
+
+def add_knowledge(products, load, fin, base):
+    """'Wiedza' tab on every product page: parameters, what the price covers, surfaces for the model, guides.
+    Facts only from the repository: public/catalog/products.json (approved model cards), the price files and the
+    owner's statements on the homepage (12-month warranty, producers' documents, norms)."""
+    cat = {p["code"]: p for p in json.loads((HERE.parent.parent.parent / "public" / "catalog" / "products.json").read_text(encoding="utf-8"))["products"]}
+    arenas = [p for p in products if p["kind"] == "arena"]
+    surfaces = [p for p in products if p["kind"] == "surface"]
+    guides = [("Ile kosztuje budowa boiska sportowego?", "/ile-kosztuje-budowa-boiska-sportowego/"),
+              ("Budowa boiska krok po kroku", "/budowa-boiska-krok-po-kroku/"),
+              ("Jak wybrać nawierzchnię sportową", "/jak-wybrac-nawierzchnie-sportowa/"),
+              ("Renowacja czy budowa nowego boiska?", "/renowacja-czy-budowa-nowego-boiska/"),
+              ("Dofinansowanie boisk dla gmin i szkół", "/dofinansowanie-boisk/")]
+    care = ("<h3>Gwarancja i dokumenty</h3><p>Rok gwarancji i stała opieka nad renowacją po odbiorze. "
+            "Karty techniczne i certyfikaty producentów stali, farb i nawierzchni dołączam do oferty, wniosku o dofinansowanie "
+            "i dokumentacji przetargowej.</p>")
+    for p in arenas:
+        c = cat[p["sku"]]
+        area = p["show"]["areaM2"]
+        rows = [("Kod", p["sku"]), ("Kształt", c["shape_label"]), ("Wymiary", c["dimension_label"]),
+                ("Wysokość band", c["height_label"]), ("Wypełnienie", c["infill"]), ("Dla kogo", p["show"]["forWhom"] or "—"),
+                ("Powierzchnia nawierzchni", f"{area:.1f} m² (konstrukcja + 10% zapasu)".replace(".", ","))]
+        surf_rows = "".join(f'<tr><td><a href="/product/{s["slug"]}/">{s["name"]}</a></td><td>od {zl(cost(area, s["net"]))} netto</td></tr>' for s in surfaces)
+        p["knowledge"] = (
+            f'<div class="gfk"><p class="gfk-lead">{c["description"]}</p>'
+            '<h3>Parametry</h3><dl class="gfk-spec">' + "".join(f"<div><dt>{a}</dt><dd>{b}</dd></div>" for a, b in rows) + "</dl>"
+            "<h3>Co zawiera cena</h3><ul>"
+            f"<li><b>Konstrukcja od {zl(p['net'])} netto</b> (od {zl(p['gross'])} brutto): bandy i bramki w podstawowej konfiguracji, standardowy kolor.</li>"
+            f"<li><b>Z nawierzchnią od {zl(p['show']['fullNet'])} netto</b>: konstrukcja, płyta betonowa 12 cm z podbudową i malowanie jednokolorowe.</li>"
+            "<li>Osobno, po zdjęciach placu: montaż, transport i przygotowanie terenu.</li></ul>"
+            f"<h3>Nawierzchnia pod {p['name']}</h3><p>Ceny wykończeń dla {str(area).replace('.', ',')} m², wariant Standard. "
+            "Wykończenie kładziemy na płycie betonowej (osobna pozycja) albo na istniejącym, stabilnym placu.</p>"
+            f'<table class="gfk-table"><tbody>{surf_rows}</tbody></table>'
+            + care +
+            "<h3>Zanim zamówisz</h3><p>Sprawdź w planerze „Zmieści się?”, czy model mieści się na Twoim placu razem ze strefą bezpieczeństwa, "
+            "a kolory, grafikę i nawierzchnię wybierz w Studio 3D.</p>"
+            + links([("Planer „Zmieści się?”", "/#planer"), (f"{p['name']} w Studio 3D", p["url"])] + guides) + "</div>")
+    notes = {
+        "GF-NW-001": ("<h3>Co zawiera</h3><ul>" + "".join(f"<li>{x}</li>" for x in base["includes"]) + "</ul>"
+                      "<h3>Czego nie zawiera</h3><ul>" + "".join(f"<li>{x}</li>" for x in base["excludes"]) + "</ul>"),
+        "GF-NW-002": ("<h3>Jak maluję plac</h3><ol><li><b>Ocena placu.</b> Ze zdjęć i wymiarów sprawdzam pęknięcia, spadki, odwodnienie i stan betonu.</li>"
+                      "<li><b>Naprawa i grunt.</b> Mycie, szlifowanie, wypełnienie rys i ubytków, grunt do betonu i warstwa wyrównująca.</li>"
+                      "<li><b>Farby z gumą.</b> Elastyczna powłoka sportowa z granulatem gumowym: amortyzuje krok, nie ślizga się i przykrywa drobne rysy.</li>"
+                      "<li><b>Wzór i linie.</b> Wzór Signature albo Twój projekt ze Studio 3D, linie do piłki, koszykówki i gry 3 na 3.</li></ol>"
+                      "<p>Farby sportowe kładziemy na suchy beton przy dodatniej temperaturze, zwykle od wiosny do jesieni. "
+                      "Naprawy podłoża wyceniam po oględzinach.</p>"),
+        "GF-NW-003": "<p>Norma PN-EN 14877 (nawierzchnie poliuretanowe). Wersje natryskowe są wodoprzepuszczalne.</p>",
+        "GF-NW-007": "<p>PN-EN 1177 i atest PZH, antypoślizg R11. Płyty są wodoprzepuszczalne.</p>",
+        "GF-NW-008": "<p>Antypoślizg R11. Maty kładziemy jako wykończenie płyty betonowej w Studio; nie sprzedajemy ich osobno do samodzielnego montażu.</p>",
+    }
+    desc = {"GF-NW-002": fin.get("descriptions", {})}
+    keys = {"GF-NW-003": "epdm", "GF-NW-004": "tiles", "GF-NW-005": "turf", "GF-NW-006": "acrylic", "GF-NW-007": "rubber", "GF-NW-008": "mats"}
+    for p in surfaces:
+        if p["sku"] == "GF-NW-002":
+            var = [(v["name"], v["netPerM2"], fin["descriptions"].get(v["id"], "")) for v in fin["variants"]]
+        elif p["sku"] in keys:
+            var = [(v["name"], v["netPerM2"], v.get("description", "")) for v in fin[keys[p["sku"]]]["variants"]]
+        else:
+            var = [("Płyta 12 cm z podbudową", base["rateNetPerM2"], "Podstawa pod każde wykończenie.")]
+        vt = "".join(f"<tr><td><b>{n}</b>{('<br><span>' + d + '</span>') if d else ''}</td><td>{r} zł/m² netto</td></tr>" for n, r, d in var)
+        mt = "".join(f'<tr><td><a href="/product/{a["slug"]}/">{a["name"]}</a> · {str(a["show"]["areaM2"]).replace(".", ",")} m²</td><td>od {zl(cost(a["show"]["areaM2"], p["net"]))} netto</td></tr>' for a in arenas)
+        p["knowledge"] = (
+            '<div class="gfk"><h3>Warianty i ceny</h3>'
+            f'<table class="gfk-table"><tbody>{vt}</tbody></table>'
+            + notes.get(p["sku"], "") +
+            "<h3>Cena dla boisk Gamefields</h3><p>Metraż: powierzchnia konstrukcji z 10% zapasem, cena zaokrąglona w górę do 100 zł, "
+            "najtańszy wariant. Dokładną cenę dla Twojego projektu policzy Studio.</p>"
+            f'<table class="gfk-table"><tbody>{mt}</tbody></table>'
+            + care + links([("Wybierz w Studio 3D", "/studio/"), ("Malowanie boisk", "/malowanie-boisk/"), ("Renowacja boisk", "/renowacja-boisk/")] + guides) + "</div>")
 
 
 def main():
@@ -101,11 +180,11 @@ def main():
 
     rng = lambda vs: f"{min(vs)}–{max(vs)} zł/m² netto" if min(vs) != max(vs) else f"{vs[0]} zł/m² netto"
     note = "<p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
-    surface("GF-NW-001", "plyta-betonowa", "Płyta betonowa 12 cm z podbudową", [base["rateNetPerM2"]], {"fromProduct": 2769},
+    surface("GF-NW-001", "plyta-betonowa", "Płyta betonowa 12 cm z podbudową", [base["rateNetPerM2"]], RAW_CAT + "beton-macro.webp",
             f"<p>Podstawa pod każde wykończenie: {base['rateNetPerM2']} zł/m² netto.</p>" + note)
     pv = [v["netPerM2"] for v in fin["variants"]]
     surface("GF-NW-002", "malowanie-farba-sportowa", "Malowanie farbą sportową", pv,
-            f"{STUDIO_SITE}/surfaces/p1/malowana-kolor.jpg",
+            RAW_CAT + "malowanie-macro.webp",
             "<p>Na płycie betonowej albo na istniejącym placu: " + ", ".join(f"{v['name'].lower()} {v['netPerM2']} zł/m²" for v in fin["variants"]) + " netto.</p>" + note,
             variants=[{"name": v["name"], "net": v["netPerM2"]} for v in fin["variants"]])
     for key, sku, slug, name, img in [
@@ -123,6 +202,7 @@ def main():
                 f"<p>Wykończenie na płycie betonowej: {rng(vs)}, warianty Standard, Standard+ i Premium.{extra}</p>" + note,
                 variants=[{"name": ["Standard", "Standard+", "Premium"][i] if i < 3 else v["name"], "net": v["netPerM2"]} for i, v in enumerate(f["variants"])])
 
+    add_knowledge(products, load, fin, base)
     data = {"source": "integrations/wordpress/offer/build_studio_shop.py", "products": products,
             "legacy": {str(k): v for k, v in LEGACY.items()}, "catalogHidden": CATALOG_HIDDEN}
     data["version"] = hashlib.sha1(json.dumps(data, sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:12]
