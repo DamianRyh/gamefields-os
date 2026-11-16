@@ -105,3 +105,11 @@ Załącznik: `DLA-CHATGPT-strona-glowna-samorzady.md`. Niezależne od poleceń 7
 ```
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) wstaw fragmenty z punktów 1–4 (CSS, nowa sekcja cen, nowa sekcja „Dla gmin, szkół i Orlików” przed „Wybierz swoją drogę”, cztery zdjęcia na początku „Z boiska”). Nie podmieniaj całej strony. Zrób kopię przed zmianą, pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
 ```
+
+## 10. Strona główna: blok „Autor studia” ze zdjęciem
+
+Załącznik: `DLA-CHATGPT-strona-glowna-autor.md`. Można razem z poleceniem 9.
+
+```
+W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) dopisz CSS z punktu 1 i wstaw sekcję „Autor studia” z punktu 2 przed sekcją „Poczuj różnicę.”. Nie podmieniaj całej strony. Zrób kopię przed zmianą, pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
+```

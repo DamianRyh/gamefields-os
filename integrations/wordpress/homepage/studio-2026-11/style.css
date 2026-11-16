@@ -595,3 +595,17 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .gov-cities .m{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
 @media (max-width:900px){.gfs .gov-facts,.gfs .gov-build ol{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .surf-rates li{grid-template-columns:minmax(0,1fr) auto}.gfs .surf-rates li span:last-child{grid-column:1/-1}}
 @media (max-width:520px){.gfs .gov-facts{grid-template-columns:minmax(0,1fr)}.gfs .gov-build img{height:150px!important}}
+
+/* AUTOR (2026-11-16) */
+.gfs .author{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center}
+.gfs .author-photo{margin:0;background:#8E9094}
+.gfs .author-photo img{display:block;width:100%;height:auto;aspect-ratio:768/998;object-fit:cover}
+.gfs .author-copy{display:grid;gap:16px;align-content:start}
+.gfs .author-copy .d{margin:0;font-size:clamp(48px,6vw,96px)}
+.gfs .author-lead{margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.55;color:var(--muted);max-width:46ch}
+.gfs .author-quote{margin:4px 0;padding:0 0 0 18px;border-left:4px solid var(--violet);font-size:clamp(22px,2.2vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.2;color:var(--ink)}
+.gfs .author-facts{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.gfs .author-facts div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:baseline}
+.gfs .author-facts dt{color:var(--violet);font-weight:800}.gfs .author-facts dd{margin:0;font-size:15px;line-height:1.4}
+.gfs .author-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+@media (max-width:900px){.gfs .author{grid-template-columns:minmax(0,1fr)}.gfs .author-photo{max-width:420px}.gfs .author-facts{grid-template-columns:minmax(0,1fr)}}
