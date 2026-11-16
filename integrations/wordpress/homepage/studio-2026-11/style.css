@@ -717,3 +717,47 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 @media (max-width:560px){.gfs .matx-sw{gap:6px}.gfs .matx-sw .sw{padding:4px 4px 8px}.gfs .matx-sw b{font-size:11.5px}.gfs .matx-sw span{font-size:10.5px}.gfs .matx-v i{min-width:0}}
 @media (hover:none){.gfs .matx-zoom{display:none}}
 @media (prefers-reduced-motion:reduce){.gfs .matx-stage img,.gfs .matx-sw .sw{transition:none}}
+
+/* ---------- Z BOISKA v2 (2026-11-16): realizacje jako karty dla klienta ---------- */
+.gfs .rcards{list-style:none;margin:0 0 clamp(28px,3vw,44px);padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfs .rc{display:flex;flex-direction:column;height:100%;background:#fff;text-decoration:none;color:var(--ink);transition:transform .25s ease,box-shadow .25s ease}
+.gfs .rc:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(71,19,45,.45)}
+.gfs .rc-ph{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfs .rc-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfs .rc:hover .rc-ph img{transform:scale(1.05)}
+.gfs .rc-who{position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-size:12px;font-weight:800}
+.gfs .rc-tx{display:flex;flex-direction:column;gap:6px;flex:1;padding:18px 18px 20px}
+.gfs .rc-place{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfs .rc-tx b{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.03em;line-height:1.08}
+.gfs .rc-lead{font-size:15px;line-height:1.45;color:var(--muted)}
+.gfs .rc-model{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-size:14px;font-weight:700}
+.gfs .rc-go{font-size:14px;font-weight:800;color:var(--violet)}
+.gfs .rmore-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 12px}
+.gfs .rmore-h .m{margin:0;color:var(--muted)}
+.gfs .rmore-h a{font-size:14px;font-weight:700;color:var(--violet);text-decoration:none}
+.gfs .reals{grid-auto-columns:minmax(200px,18%)}
+.gfs .reals img{aspect-ratio:1}
+@media (max-width:1100px){.gfs .rcards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.gfs .rcards{grid-template-columns:minmax(0,1fr)}.gfs .rc{display:grid;grid-template-columns:120px minmax(0,1fr)}.gfs .rc-ph{aspect-ratio:auto;min-height:100%}.gfs .rc-tx{padding:14px}.gfs .rc-lead{display:none}.gfs .rc-who{top:8px;left:8px;font-size:10.5px;padding:4px 8px}.gfs .reals{grid-auto-columns:46%}}
+
+/* ---------- STARY BETON v2: kroki jako oś, pasek cen malowania, lżejsze fakty ---------- */
+.gfs .mod-steps{position:relative;counter-reset:none}
+.gfs .mod-steps li{position:relative;padding:28px 24px 24px;background:#fff;border:0}
+.gfs .mod-steps li::after{content:"";position:absolute;top:44px;right:-12px;width:12px;height:2px;background:var(--violet);opacity:.35}
+.gfs .mod-steps li:last-child::after{display:none}
+.gfs .mod-steps .m{width:40px;height:40px;background:var(--violet);color:#fff;font-size:14px}
+.gfs .mod-steps b{font-size:clamp(21px,1.8vw,26px)}
+.gfs .pv{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(16px,2.4vw,32px);align-items:start;margin-top:12px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfs .pv-h .m{margin:0 0 8px;color:var(--lime)}
+.gfs .pv-h p:last-child{margin:0;font-size:16px;line-height:1.5;color:rgba(244,241,238,.85)}
+.gfs .pv-h a{color:var(--lime);font-weight:700}
+.gfs .pv-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.gfs .pv-list li{display:grid;gap:4px;align-content:start;padding:16px;border:1px solid rgba(244,241,238,.2)}
+.gfs .pv-n{font-size:13px;font-weight:700;color:rgba(244,241,238,.8)}
+.gfs .pv-list b{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfs .pv-d{font-size:13px;line-height:1.4;color:rgba(244,241,238,.72)}
+.gfs .mod-facts{gap:12px;padding-top:0;border-top:0}
+.gfs .mod-facts > div{padding:18px 20px;background:#fff}
+.gfs .mod-facts .m{color:var(--violet)}
+.gfs .mod-facts p{font-size:16px}
+@media (max-width:900px){.gfs .pv{grid-template-columns:minmax(0,1fr)}.gfs .pv-list{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .mod-steps li::after{display:none}}

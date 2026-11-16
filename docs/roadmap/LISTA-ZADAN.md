@@ -39,6 +39,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 25 | Realizacje od nowa: liczby, logo miast, 5 historii (z Krakowem) z cytatami i linkiem do modelu z ceną, pas opinii, galeria eventów z markami | ✅ PR (ten) | DLA-CHATGPT-realizacje.txt | ⏳ |
 | 26 | Strona główna „Poczuj różnicę.”: wybór 8 nawierzchni z przybliżaną teksturą, ceną za m², cechami i kosztem dla wybranego boiska | ✅ PR (ten) | DLA-CHATGPT-nawierzchnie-wybor.txt (2 bloki) | ⏳ |
 | 27 | Kontakt od nowa: 4 ścieżki („Zgłaszam miejsce” dla młodzieży i mieszkańców bez budżetu, z linkiem do projektu i opieką dla osób poniżej 16 lat), pytania pod ścieżkę w mailu, „co dalej”, FAQ; formularz CF7 3758 bez zmian | ✅ PR (ten) | DLA-CHATGPT-kontakt.txt | ⏳ |
+| 28 | Strona główna: „Z boiska.” jako 4 karty realizacji dla klienta (typ klienta, model z ceną, link do historii) bez zdjęć z turnieju i urodzin; „Stary beton” z osią kroków i paskiem cen malowania | ✅ PR (ten) | DLA-CHATGPT-z-boiska.txt (4 bloki) | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |
