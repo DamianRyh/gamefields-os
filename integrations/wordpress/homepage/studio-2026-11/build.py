@@ -64,6 +64,51 @@ def surfaces_html():
             '</ul><p>Warianty Standard, Standard+ i Premium. Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę policzy Studio dla wybranego modelu.</p></details>')
 
 
+def reals_html():
+    """'Z boiska' (2026-11-16): four realizations as client cards (who ordered, model with its "from" price, link to the
+    story on /realizacje-gamefields/), then a strip of more photos. Facts as on the Realizacje page."""
+    price = {m["id"]: m for m in json.loads((HERE.parent.parent / "offer" / "price-from.json").read_text(encoding="utf-8"))["models"]}
+    zl = lambda n: f"{n:,}".replace(",", "\u00a0") + "\u00a0zł"
+    up = "/wp-content/uploads/"
+    cards = [
+        ("taras", "Miasto", "Warszawa, Park Świętokrzyski", "Taras pod Pałacem Kultury", "Trzy areny Panna Ring połączone z tarasem i rampą. Jedno z najpopularniejszych miejsc spotkań młodzieży.", "2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg", "w1"),
+        ("kutno", "Miasto", "Kutno, pasaż sportowy", "Panna Octa w Kutnie", "Zamówienie Urzędu Miasta. „Realizacja przebiegła bez zastrzeżeń.”", "2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg", "octagon"),
+        ("krakow", "Park miejski", "Kraków", "Od planu do parku", "Panna Octa Cage 90 na terenie miejskim: projekt na planie, montaż, gotowa arena.", "2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg", "circle-cage-1"),
+        ("wake", "Biznes", "Grodzisk Mazowiecki, park wakeboardowy", "Wake For Friends", "Arena na sztucznej trawie poszerzyła ofertę parku: na co dzień i na wydarzenia.", "2024/12/12-3-768x768.jpg", "circle-cage-2"),
+    ]
+    more = [
+        ("2024/12/9-768x432.jpg", "Panna Ring na Orliku", "Grodzisk Mazowiecki, 10 lat w użyciu"),
+        ("2026/11/Zyrardow-Panna-Arena-1v1--768x575.jpg", "Panna 1 na 1", "Żyrardów"),
+        ("2026/11/Damian-Gawrych-x-Wake-for-friends--768x960.jpg", "Wake For Friends", "Gra na arenie nad wodą"),
+        ("2026/11/12-768x574.jpg", "Event Head & Shoulders", "Złote Tarasy, Warszawa"),
+        ("2026/11/1-768x576.jpg", "Event Head & Shoulders", "Stadion, Gdańsk"),
+        ("2024/12/13-3-768x768.jpg", "Panna Ring", "Nowy Świat, Warszawa"),
+        ("2024/12/15-3-768x768.jpg", "Panna Octa Cage 180", "Kraków"),
+        ("2024/12/1-4-768x768.jpg", "Mistrzostwa Świata Street Soccer 2017", "Grodzisk Mazowiecki"),
+        ("2024/12/22-768x432.jpg", "Mistrzostwa Świata Superball", "Liberec"),
+        ("2024/12/10-3-768x768.jpg", "Puchar Polski", "Żerków"),
+        ("2024/12/5-3-768x768.jpg", "Mistrzostwa Polski, Street Mekka", "Łódź"),
+    ]
+    c = "".join(
+        f'<li><a class="rc" href="/realizacje-gamefields/#{cid}"><span class="rc-ph"><img src="{up}{img}" alt="{htmllib.escape(title)}, {htmllib.escape(place)}" width="768" height="576" loading="lazy" decoding="async"><span class="rc-who">{who}</span></span>'
+        f'<span class="rc-tx"><span class="rc-place">{htmllib.escape(place)}</span><b>{htmllib.escape(title)}</b><span class="rc-lead">{htmllib.escape(lead)}</span>'
+        f'<span class="rc-model">{htmllib.escape(price[mid]["name"])} · od {zl(price[mid]["constructionFromNet"])} netto</span><span class="rc-go">Historia realizacji →</span></span></a></li>'
+        for cid, who, place, title, lead, img, mid in cards)
+    m = "".join(f'<li><figure><img src="{up}{img}" alt="{htmllib.escape(t)}, {htmllib.escape(w)}" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>{htmllib.escape(t)}</b><span>{htmllib.escape(w)}</span></figcaption></figure></li>' for img, t, w in more)
+    return (f'<ul class="rcards" role="list">{c}</ul>'
+            '<div class="rmore-h"><p class="m">Więcej z boisk</p><a href="/realizacje-gamefields/#eventy">Turnieje i eventy →</a></div>'
+            f'<ul class="reals" role="list">{m}</ul>')
+
+
+def paint_html():
+    """'Stary beton. Nowe boisko.' price strip: the four painting variants from surface-finish.json (same as Studio and shop)."""
+    fin = json.loads((HERE.parent.parent / "offer" / "surface-finish.json").read_text(encoding="utf-8"))
+    li = "".join(f'<li><span class="pv-n">{htmllib.escape(v["name"])}</span><b>{v["netPerM2"]} zł/m²</b><span class="pv-d">{htmllib.escape(fin["descriptions"].get(v["id"], ""))}</span></li>' for v in fin["variants"])
+    return ('<div class="pv"><div class="pv-h"><p class="m">Ile kosztuje malowanie</p><p>Ceny za m² netto, jak w Studio 3D i w sklepie. '
+            'Naprawy podłoża wyceniam po zdjęciach. <a href="#materialy-wybor">Policz dla swojego boiska ↓</a></p></div>'
+            f'<ol class="pv-list" role="list">{li}</ol></div>')
+
+
 def materials_html():
     """'Poczuj różnicę' (2026-11-16): a surface picker with a zoomable texture, price per m², variants, facts
     and the cost for a chosen model (area incl. 10%, rounded up to 100 zł). Facts only from the price files'
@@ -102,7 +147,7 @@ def materials_html():
         f'<b>{htmllib.escape(d["n"])}</b><span>od {min(x["r"] for x in d["v"])} zł/m²</span></a>' for i, d in enumerate(data))
     opts = "".join(f'<option value="{a}"' + (" selected" if n == "Panna Play" else "") + f'>{htmllib.escape(n)} · {str(a).replace(".", ",")} m²</option>' for n, a in models)
     return (
-        '<div class="matx" data-matx>'
+        '<div class="matx" id="materialy-wybor" data-matx>'
         f'<div class="matx-stage" data-mat-stage><img data-mat-img src="{up}{first["k"]}-macro-1024x768.webp" '
         f'srcset="{up}{first["k"]}-macro-768x576.webp 768w, {up}{first["k"]}-macro-1024x768.webp 1024w, {up}{first["k"]}-macro.webp 1448w" '
         f'sizes="(max-width:900px) 100vw, 58vw" alt="{htmllib.escape(first["n"])} z bliska" width="1024" height="768" loading="lazy" decoding="async">'
@@ -208,7 +253,7 @@ def main():
     prices_list, price_data = prices_html()
     wall_prices = json.dumps({m["id"]: m["constructionFromNet"] for m in price_data["models"]}, separators=(",", ":"))
     body = body.replace('<div class="wall" data-wall></div>', f"<div class=\"wall\" data-wall data-prices='{wall_prices}'></div>", 1)
-    body = body.replace("{{PRICES}}", prices_list).replace("{{MATERIALS}}", materials_html()).replace("{{SURFACES}}", surfaces_html())
+    body = body.replace("{{PRICES}}", prices_list).replace("{{MATERIALS}}", materials_html()).replace("{{REALS}}", reals_html()).replace("{{PAINT}}", paint_html()).replace("{{SURFACES}}", surfaces_html())
     body = body.replace("{{ASSET}}", ASSET_BASE)
     body = body.replace("{{KEPT_WORKSHOP}}", workshop.strip())
     body = body.replace("{{KEPT_FAQ}}", faq.strip())

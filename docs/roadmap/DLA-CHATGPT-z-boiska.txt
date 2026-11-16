@@ -1,0 +1,25 @@
+Polecenie dla ChatGPT: strona główna, sekcje „Z boiska.” i „Stary beton. Nowe boisko.”, 16.11.2026
+
+Strona główna (ID 3462) ma 22 bloki „Własny HTML”. Każdy zaczyna się komentarzem <!-- gf-blok: NAZWA -->.
+Właściciel zatwierdza podmianę CZTERECH bloków poniżej. Pozostałych 18 nie ruszaj.
+Te pliki zawierają też zmianę „Poczuj różnicę.” z poprzedniego polecenia (nawierzchnie). Jeśli tamtego nie wykonano, to polecenie je zastępuje.
+Każdy plik zawiera już <!-- wp:html --> i <!-- /wp:html --> i zastępuje cały blok o tej nazwie.
+
+- blok „styl”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/01-styl.html  (SHA-256 zaczyna się od: f38d4a3a4af80218)
+- blok „realizacje”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/05-realizacje.html  (SHA-256 zaczyna się od: 1c07c54b60a47fa3)
+- blok „nawierzchnie”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/07-nawierzchnie.html  (SHA-256 zaczyna się od: 326bebabab5d0fb7)
+- blok „materialy”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/13-materialy.html  (SHA-256 zaczyna się od: 72c68012b25f6ec3)
+
+Kroki:
+1. Zrób kopię strony głównej (wersja lub szkic) i zapisz jej ID.
+2. Pobierz pliki, sprawdź SHA-256 i że nie zawierają "&&". Przygotuj szkic z czterema podmienionymi blokami.
+3. Porównaj szkic z obecną stroną: różnią się tylko te cztery bloki.
+4. Podgląd na komputerze i telefonie. Sprawdź:
+   - „Z boiska.”: 4 karty (Taras, Kutno, Kraków, Wake For Friends), każda z etykietą (Miasto / Park miejski / Biznes),
+     modelem z ceną i „Historia realizacji →” (prowadzi do /realizacje-gamefields/#...). Pod nimi pasek „Więcej z boisk”.
+     NIE ma już zdjęcia z turnieju street football ani z urodzin;
+   - „Stary beton. Nowe boisko.”: kroki 01–04 z fioletowymi numerami, ciemny pasek „Ile kosztuje malowanie” z 4 wariantami
+     (78 / 100 / 150 / 183 zł/m²), białe karty: czas, pogoda, na start;
+   - link „Policz dla swojego boiska ↓” przewija do sekcji „Poczuj różnicę.”;
+   - brak przewijania w bok.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj.
