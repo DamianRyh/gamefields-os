@@ -113,3 +113,11 @@ Załącznik: `DLA-CHATGPT-strona-glowna-autor.md`. Można razem z poleceniem 9.
 ```
 W załączniku jest kompletna instrukcja z całym kodem — nie otwieraj linków do GitHuba. Na stronie głównej (ID 3462) dopisz CSS z punktu 1 i wstaw sekcję „Autor studia” z punktu 2 przed sekcją „Poczuj różnicę.”. Nie podmieniaj całej strony. Zrób kopię przed zmianą, pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
 ```
+
+## 11. Logo miast: strona główna i „Realizacje dla miast”
+
+Instrukcja: `DLA-CHATGPT-logo-miast.md` (załącznik albo link do surowego pliku).
+
+```
+Pobierz instrukcję z https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/DLA-CHATGPT-logo-miast.md (zwykły plik tekstowy z całym kodem). Wykonaj część A na stronie głównej (ID 3462) i część B na stronie /realizacje-dla-miast/. Wstaw tylko fragmenty, nie podmieniaj całych stron, zrób kopie przed zmianą. Pokaż mi podgląd (komputer i telefon), potem opublikuj i wyczyść cache LiteSpeed.
+```

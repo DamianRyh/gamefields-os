@@ -609,3 +609,10 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .author-facts dt{color:var(--violet);font-weight:800}.gfs .author-facts dd{margin:0;font-size:15px;line-height:1.4}
 .gfs .author-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 @media (max-width:900px){.gfs .author{grid-template-columns:minmax(0,1fr)}.gfs .author-photo{max-width:420px}.gfs .author-facts{grid-template-columns:minmax(0,1fr)}}
+
+/* LOGO MIAST (2026-11-16) */
+.gfs .gov-cities p{margin:10px 0 0;font-size:15px;font-weight:400;color:var(--muted)}
+.gfs .gov-logos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gfs .gov-logos li{display:grid;place-items:center;height:96px;padding:10px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.gfs .gov-logos img{display:block;max-width:100%;max-height:76px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
+@media (max-width:900px){.gfs .gov-logos{grid-template-columns:repeat(3,minmax(0,1fr))}.gfs .gov-logos li{height:80px}.gfs .gov-logos img{max-height:60px}}
