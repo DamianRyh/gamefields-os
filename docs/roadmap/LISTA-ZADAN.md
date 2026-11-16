@@ -32,6 +32,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 18a | Certyfikaty producentów do pobrania | ⬜ | | ❓ pliki od właściciela |
 | 19 | Strona główna: 22 bloki zamiast jednego + odświeżony wygląd nowych sekcji (karty cen, przewijane rzędy na telefonie, lżejsze fakty) | ✅ PR #109 | polecenie 12 | ✅ sprawdzone 16.11 |
 | 20 | Strona główna wg Baymard: „Ceny” w menu (motyw 1.0.28), ceny „od” na kafelkach boisk, realizacje zaraz po cenach, dodatki niżej, ceny na telefonie w pionowej liście, „co zawiera cena” | ✅ PR (ten) | polecenie 13 | ⏳ |
+| 21 | Sklep = Studio: 8 modeli i 8 nawierzchni w cenach ze Studia, stare produkty ukryte z przekierowaniem 301, plakat poza listą (motyw 1.0.29) | ✅ PR (ten) | polecenie 14 | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |

@@ -302,8 +302,8 @@ add_action( 'woocommerce_before_single_product', function () {
 
 add_action( 'woocommerce_single_product_summary', function () {
 	global $product;
-	if ( ! gft_shop_inquiry_mode() || ! $product || '' === $product->get_price() ) {
-		return; // products without a price already show "Zapytaj o wycenę" (functions.php)
+	if ( ! gft_shop_inquiry_mode() || ! $product || '' === $product->get_price() || gft_is_studio_product( $product ) ) {
+		return; // products without a price already show "Zapytaj o wycenę" (functions.php); Studio products: inc/studio-shop.php
 	}
 	$creator = array( gft_shop_product_id( 'poster' ) => '/#plakaty', gft_shop_product_id( 'ball' ) => '/#pilka' );
 	echo '<div class="gft-inquiry">';

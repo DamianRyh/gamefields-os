@@ -1,0 +1,308 @@
+{
+ "source": "integrations/wordpress/offer/build_studio_shop.py",
+ "products": [
+  {
+   "sku": "GF-CT-005",
+   "slug": "panna-octa-cage-90",
+   "name": "Panna Octa Cage 90",
+   "kind": "arena",
+   "order": 1,
+   "net": 36000,
+   "gross": 44280,
+   "unit": "",
+   "categories": [
+    "boiska-sportowe-nowoczesne-rozwiazania-gamefields",
+    "okragle"
+   ],
+   "button": "Zaprojektuj w Studio",
+   "url": "/studio/?arena=circle-cage-1",
+   "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-005-circle-cage-1.webp",
+   "short": "<p><strong>GF-CT-005</strong> · Ø, banda 0,9 m · Osiedla, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 36 000 zł netto (od 44 280 zł brutto).</p><p>Z nawierzchnią od 47 400 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+  },
+  {
+   "sku": "GF-CT-002",
+   "slug": "panna-play",
+   "name": "Panna Play",
+   "kind": "arena",
+   "order": 2,
+   "net": 40000,
+   "gross": 49200,
+   "unit": "",
+   "categories": [
+    "boiska-sportowe-nowoczesne-rozwiazania-gamefields",
+    "okragle"
+   ],
+   "button": "Zaprojektuj w Studio",
+   "url": "/studio/?arena=o1",
+   "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-002-o1.webp",
+   "short": "<p><strong>GF-CT-002</strong> · Ø ~6 m · Kluby, eventy, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 40 000 zł netto (od 49 200 zł brutto).</p><p>Z nawierzchnią od 51 000 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+  },
+  {
+   "sku": "GF-CT-001",
+   "slug": "panna-ring",
+   "name": "Panna Ring",
+   "kind": "arena",
+   "order": 3,
+   "net": 40000,
+   "gross": 49200,
+   "unit": "",
+   "categories": [
+    "boiska-sportowe-nowoczesne-rozwiazania-gamefields",
+    "okragle"
+   ],
+   "button": "Zaprojektuj w Studio",
+   "url": "/studio/?arena=w1",
+   "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/W-1-—-GF-CT-001.webp",
+   "short": "<p><strong>GF-CT-001</strong> · Ø ~5 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 40 000 zł netto (od 49 200 zł brutto).</p><p>Z nawierzchnią od 47 800 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+  },
+  {
+   "sku": "GF-CT-008",
+   "slug": "panna-octa",
+   "name": "Panna Octa",
+   "kind": "arena",
+   "order": 4,
+   "net": 49000,
+   "gross": 60270,
+   "unit": "",
+   "categories": [
+    "boiska-sportowe-nowoczesne-rozwiazania-gamefields",
+    "oktagony"
+   ],
+   "button": "Zaprojektuj w Studio",
+   "url": "/studio/?arena=octagon",
+   "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-008-octagon.webp",
+   "short": "<p><strong>GF-CT-008</strong> · Ośmiokąt · Gminy, parki, szkoły</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 49 000 zł netto (od 60 270 zł brutto).</p><p>Z nawierzchnią od 60 900 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+  },
+  {
+   "sku": "GF-CT-007",
+   "slug": "panna-grid",
+   "name": "Panna Grid",
+   "kind": "arena",
+   "order": 5,
+   "net": 51000,
+   "gross": 62730,
+   "unit": "",
+   "categories": [
+    "boiska-sportowe-nowoczesne-rozwiazania-gamefields",
+    "prostokatne"
+   ],
+   "button": "Zaprojektuj w Studio",
+   "url": "/studio/?arena=street-field",
+   "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-007-street-field.webp",
+   "short": "<p><strong>GF-CT-007</strong> · 6,21 × 4,65 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 51 000 zł netto (od 62 730 zł brutto).</p><p>Z nawierzchnią od 66 500 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+  },
+  {
+   "sku": "GF-CT-006",
+   "slug": "panna-octa-cage-180",
+   "name": "Panna Octa Cage 180",
+   "kind": "arena",
+   "order": 6,
+   "net": 58000,
+   "gross": 71340,
+   "unit": "",
+   "categories": [
+    "boiska-sportowe-nowoczesne-rozwiazania-gamefields",
+    "okragle"
+   ],
+   "button": "Zaprojektuj w Studio",
+   "url": "/studio/?arena=circle-cage-2",
+   "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-006-circle-cage-2.webp",
+   "short": "<p><strong>GF-CT-006</strong> · Ø, banda 1,8 m · Kluby, akademie</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 58 000 zł netto (od 71 340 zł brutto).</p><p>Z nawierzchnią od 69 400 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+  },
+  {
+   "sku": "GF-CT-003",
+   "slug": "panna-court",
+   "name": "Panna Court",
+   "kind": "arena",
+   "order": 7,
+   "net": 69000,
+   "gross": 84870,
+   "unit": "",
+   "categories": [
+    "boiska-sportowe-nowoczesne-rozwiazania-gamefields",
+    "prostokatne"
+   ],
+   "button": "Zaprojektuj w Studio",
+   "url": "/studio/?arena=p1",
+   "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-003-p1.webp",
+   "short": "<p><strong>GF-CT-003</strong> · 7,14 × 5,57 m</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 69 000 zł netto (od 84 870 zł brutto).</p><p>Z nawierzchnią od 84 700 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+  },
+  {
+   "sku": "GF-CT-004",
+   "slug": "street-arena-15",
+   "name": "Boisko 3 na 3 (Street Arena 15)",
+   "kind": "arena",
+   "order": 8,
+   "net": 100000,
+   "gross": 123000,
+   "unit": "",
+   "categories": [
+    "boiska-sportowe-nowoczesne-rozwiazania-gamefields",
+    "prostokatne"
+   ],
+   "button": "Zaprojektuj w Studio",
+   "url": "/studio/?arena=street15",
+   "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/GF-CT-004-street15.webp",
+   "short": "<p><strong>GF-CT-004</strong> · Pełny format, 15 × 10 m · Gminy, deweloperzy</p><p>Konstrukcja z bramkami w podstawowej konfiguracji i standardowym kolorze: od 100 000 zł netto (od 123 000 zł brutto).</p><p>Z nawierzchnią od 159 300 zł netto: płyta betonowa 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><p>Montaż, transport i przygotowanie terenu policzę po zdjęciach placu. Kolory, grafikę i nawierzchnię wybierzesz w Studio 3D.</p>"
+  },
+  {
+   "sku": "GF-NW-001",
+   "slug": "plyta-betonowa",
+   "name": "Płyta betonowa 12 cm z podbudową",
+   "kind": "surface",
+   "order": 109,
+   "net": 283,
+   "gross": 348.09,
+   "unit": "m²",
+   "categories": [
+    "nawierzchnie-sportowe-profesjonalne-podloza-gamefields"
+   ],
+   "button": "Wybierz w Studio",
+   "url": "/studio/",
+   "image": {
+    "fromProduct": 2769
+   },
+   "short": "<p>Podstawa pod każde wykończenie: 283 zł/m² netto.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+  },
+  {
+   "sku": "GF-NW-002",
+   "slug": "malowanie-farba-sportowa",
+   "name": "Malowanie farbą sportową",
+   "kind": "surface",
+   "order": 110,
+   "net": 78,
+   "gross": 95.94,
+   "unit": "m²",
+   "categories": [
+    "nawierzchnie-sportowe-profesjonalne-podloza-gamefields"
+   ],
+   "button": "Wybierz w Studio",
+   "url": "/studio/",
+   "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/p1/malowana-kolor.jpg",
+   "short": "<p>Na płycie betonowej albo na istniejącym placu: jednokolorowa 78 zł/m², jednokolorowa z granulatem 100 zł/m², wzór średni 150 zł/m², wzór zaawansowany 183 zł/m² netto.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+  },
+  {
+   "sku": "GF-NW-003",
+   "slug": "nawierzchnia-epdm",
+   "name": "Nawierzchnia EPDM wylewana",
+   "kind": "surface",
+   "order": 111,
+   "net": 250,
+   "gross": 307.5,
+   "unit": "m²",
+   "categories": [
+    "nawierzchnie-sportowe-profesjonalne-podloza-gamefields"
+   ],
+   "button": "Wybierz w Studio",
+   "url": "/studio/",
+   "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/granulat-macro.webp",
+   "short": "<p>Wykończenie na płycie betonowej: 250–400 zł/m² netto, warianty Standard, Standard+ i Premium. Norma PN-EN 14877.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+  },
+  {
+   "sku": "GF-NW-004",
+   "slug": "plytki-sportowe",
+   "name": "Płytki sportowe PP",
+   "kind": "surface",
+   "order": 112,
+   "net": 275,
+   "gross": 338.25,
+   "unit": "m²",
+   "categories": [
+    "nawierzchnie-sportowe-profesjonalne-podloza-gamefields"
+   ],
+   "button": "Wybierz w Studio",
+   "url": "/studio/",
+   "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/plytki-macro.webp",
+   "short": "<p>Wykończenie na płycie betonowej: 275–400 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+  },
+  {
+   "sku": "GF-NW-005",
+   "slug": "sztuczna-trawa",
+   "name": "Sztuczna trawa",
+   "kind": "surface",
+   "order": 113,
+   "net": 167,
+   "gross": 205.41,
+   "unit": "m²",
+   "categories": [
+    "nawierzchnie-sportowe-profesjonalne-podloza-gamefields"
+   ],
+   "button": "Wybierz w Studio",
+   "url": "/studio/",
+   "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/trawa-macro.webp",
+   "short": "<p>Wykończenie na płycie betonowej: 167–292 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+  },
+  {
+   "sku": "GF-NW-006",
+   "slug": "akryl-hard-court",
+   "name": "Akryl Hard Court",
+   "kind": "surface",
+   "order": 114,
+   "net": 200,
+   "gross": 246.0,
+   "unit": "m²",
+   "categories": [
+    "nawierzchnie-sportowe-profesjonalne-podloza-gamefields"
+   ],
+   "button": "Wybierz w Studio",
+   "url": "/studio/",
+   "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/akryl-macro.webp",
+   "short": "<p>Wykończenie na płycie betonowej: 200–342 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+  },
+  {
+   "sku": "GF-NW-007",
+   "slug": "plyty-gumowe",
+   "name": "Płyty gumowe",
+   "kind": "surface",
+   "order": 115,
+   "net": 342,
+   "gross": 420.66,
+   "unit": "m²",
+   "categories": [
+    "nawierzchnie-sportowe-profesjonalne-podloza-gamefields"
+   ],
+   "button": "Wybierz w Studio",
+   "url": "/studio/",
+   "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/plyty-gumowe-macro.webp",
+   "short": "<p>Wykończenie na płycie betonowej: 342–492 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+  },
+  {
+   "sku": "GF-NW-008",
+   "slug": "maty-gumowe-nawierzchnia",
+   "name": "Maty gumowe",
+   "kind": "surface",
+   "order": 116,
+   "net": 242,
+   "gross": 297.66,
+   "unit": "m²",
+   "categories": [
+    "nawierzchnie-sportowe-profesjonalne-podloza-gamefields"
+   ],
+   "button": "Wybierz w Studio",
+   "url": "/studio/",
+   "image": "https://gamefields-studio.ryhfs90.chatgpt.site/surfaces/catalogue/maty-gumowe-macro.webp",
+   "short": "<p>Wykończenie na płycie betonowej: 242–425 zł/m² netto, warianty Standard, Standard+ i Premium.</p><p>Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę dla wybranego modelu policzy Studio.</p>"
+  }
+ ],
+ "legacy": {
+  "251": "",
+  "250": "",
+  "249": "",
+  "248": "",
+  "245": "",
+  "239": "",
+  "238": "",
+  "232": "",
+  "230": "",
+  "2769": "plyta-betonowa",
+  "2770": "sztuczna-trawa",
+  "2790": "",
+  "2788": "",
+  "2791": "",
+  "236": ""
+ },
+ "catalogHidden": [
+  4393
+ ],
+ "version": "eec68e92e971"
+}
