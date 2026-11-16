@@ -1,0 +1,86 @@
+<!-- wp:html -->
+<!-- gf-blok: plakaty -->
+<!-- POSTER LAB -->
+<section id="plakaty" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-print">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Plakaty</p><h2 class="d" id="gfs-print">Boisko na ścianę.</h2></div>
+    <div class="side"><p>Zaprojektuj plakat z własnym boiskiem. 16 kierunków artystycznych, 192 kompozycje, każdy kolor i każdy napis do zmiany. Druk na papierze archiwalnym, numerowana edycja. Każdy zakup wspiera rozwój Gamefields.</p></div>
+  </div>
+  <div class="pl">
+    <div class="pl-stage">
+      <div class="pl-wall" data-pl-wall data-view="wall">
+        <div class="pl-floor" aria-hidden="true"></div>
+        <div class="pl-frame" data-pl-frame><div class="pl-sheet" data-pl-sheet role="img" aria-label="Podgląd plakatu"></div></div>
+        <span class="pl-tag m" data-pl-tag>50 × 70 cm · ściana ok. 1,6 m</span>
+      </div>
+      <div class="pl-quick">
+        <button type="button" class="chip" data-pl-random>Losuj wszystko</button>
+        <button type="button" class="chip" data-pl-shift>Przetasuj kolory</button>
+        <button type="button" class="chip" data-pl-view aria-pressed="false">Sam plakat</button>
+      </div>
+      <button type="button" class="pill tool-toggle" data-tool-toggle="pl" aria-expanded="true" aria-controls="pl-editor">Projektuj plakat <span aria-hidden="true">→</span></button>
+    </div>
+    <div class="pl-ed" id="pl-editor">
+      <div class="pl-tabs" role="tablist" aria-label="Edycja plakatu">
+        <button type="button" role="tab" id="pl-t-art" aria-controls="pl-p-art" aria-selected="true">Wzór</button>
+        <button type="button" role="tab" id="pl-t-col" aria-controls="pl-p-col" aria-selected="false" tabindex="-1">Kolory</button>
+        <button type="button" role="tab" id="pl-t-txt" aria-controls="pl-p-txt" aria-selected="false" tabindex="-1">Tekst</button>
+        <button type="button" role="tab" id="pl-t-lay" aria-controls="pl-p-lay" aria-selected="false" tabindex="-1">Układ</button>
+        <button type="button" role="tab" id="pl-t-prn" aria-controls="pl-p-prn" aria-selected="false" tabindex="-1">Druk</button>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-art" aria-labelledby="pl-t-art">
+        <div class="pl-h"><b>Signature Pro</b><span data-pl-famname>Duperré Fade</span></div>
+        <div class="pl-sig" data-pl-sig role="group" aria-label="Gotowe projekty"></div>
+        <div class="pl-h"><b>Kierunek</b><span data-pl-insp></span></div>
+        <div class="chips" data-pl-fams role="group" aria-label="Kierunek artystyczny"></div>
+        <div class="pl-h"><b>Kompozycja</b><span>1–12, albo losuj</span></div>
+        <div class="pl-vars" data-pl-vars role="group" aria-label="Kompozycja"></div>
+        <button type="button" class="chip" data-pl-seed>Nowa wersja tej kompozycji</button>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-col" aria-labelledby="pl-t-col" hidden>
+        <div class="pl-h"><b>Paleta</b><span data-pl-palname>Duperré</span></div>
+        <div class="pl-pals" data-pl-pals role="group" aria-label="Paleta"></div>
+        <div class="pl-h"><b>Twoje kolory</b><span>kliknij, aby zmienić</span></div>
+        <div class="pl-colors" data-pl-colors></div>
+        <div class="pl-h"><b>Linie boiska</b></div>
+        <div class="chips" data-pl-lines role="group" aria-label="Linie boiska"></div>
+        <div class="pl-h"><b>Papier</b></div>
+        <div class="chips" data-pl-papers role="group" aria-label="Kolor papieru"></div>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-txt" aria-labelledby="pl-t-txt" hidden>
+        <label class="pl-field"><span>Tytuł</span><input class="input" id="pl-title" maxlength="28" value="Mój plac"></label>
+        <label class="pl-field"><span>Miejsce</span><input class="input" id="pl-sub" maxlength="34" value="Warszawa · Praga-Północ"></label>
+        <label class="pl-field"><span>Dopisek</span><input class="input" id="pl-note" maxlength="34" value="Gramy od 2026"></label>
+        <p class="pl-hint">Nazwa podwórka, drużyny, ulicy, data meczu albo dedykacja. Numer edycji nadajemy automatycznie.</p>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-lay" aria-labelledby="pl-t-lay" hidden>
+        <div class="pl-h"><b>Układ plakatu</b><span data-pl-layname>Galeria</span></div>
+        <div class="pl-lays" data-pl-lays role="group" aria-label="Układ plakatu"></div>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-prn" aria-labelledby="pl-t-prn" hidden>
+        <div class="pl-h"><b>Format</b><span>sam print, bez ramy · ceny brutto</span></div>
+        <div class="chips" data-pl-formats role="group" aria-label="Format"></div>
+        <div class="pl-h"><b>Ściana w podglądzie</b></div>
+        <div class="chips" data-pl-walls role="group" aria-label="Kolor ściany"></div>
+      </div>
+      <div class="pl-order">
+        <div class="pl-sum" data-pl-sum>Duperré Fade · 30 × 40 cm · sam print, bez ramy</div>
+        <div class="price-row">
+          <div class="qty" role="group" aria-label="Ilość">
+            <button type="button" data-qty-step="pl" data-d="-1" aria-label="Mniej">−</button>
+            <input type="number" inputmode="numeric" min="1" max="999" value="1" data-qty="pl" aria-label="Liczba plakatów">
+            <button type="button" data-qty-step="pl" data-d="1" aria-label="Więcej">+</button>
+          </div>
+          <div class="price"><b data-total="pl">99 zł</b><small data-price-note="pl">99 zł brutto / szt.</small></div>
+        </div>
+        <div class="pl-actions">
+          <button type="button" class="pill" data-print-order style="background:var(--violet);color:#fff">Zamów print <span aria-hidden="true">→</span></button>
+          <button type="button" class="chip" data-pl-share>Kopiuj link do projektu</button>
+          <a class="chip" data-pl-court href="/studio/">Zobacz ten wzór na boisku 3D ↗</a>
+        </div>
+        <span class="m pl-status" data-pl-status role="status">30 × 40 cm 99 zł · 50 × 70 cm 149 zł · 70 × 100 cm 199 zł · wysyłka 19 zł, od 299 zł gratis</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->

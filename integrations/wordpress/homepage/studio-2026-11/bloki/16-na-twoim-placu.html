@@ -1,0 +1,23 @@
+<!-- wp:html -->
+<!-- gf-blok: na-twoim-placu -->
+<!-- ON YOUR SITE -->
+<section class="wrap sec" aria-labelledby="gfs-site">
+  <div class="site">
+    <div class="site-img" data-site>
+      <img class="bgp" data-site-photo loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/plac-przykladowy.webp" alt="Zdjęcie placu">
+      <img class="fg" data-site-model loading="lazy" decoding="async" src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-1200.webp" alt="Panna Cage 90 na zdjęciu placu, do przeciągnięcia" draggable="false">
+      <div class="bar"><b data-site-label>Przykładowy plac</b><span class="m">przeciągnij boisko</span></div>
+    </div>
+    <div style="display:grid;gap:22px;align-content:center">
+      <span class="m" style="color:var(--violet)">Na Twoim placu</span>
+      <h2 class="d" id="gfs-site" style="font-size:clamp(48px,6vw,96px)">Wgraj zdjęcie. Postaw boisko.</h2>
+      <p style="font-size:18px;line-height:1.5;color:var(--muted);max-width:40ch">Przeciągnij model, ustaw skalę i opisz mi miejsce. Zdjęcie zostaje w Twojej przeglądarce, nigdzie go nie wysyłamy.</p>
+      <label for="gfs-site-scale" class="m" style="display:grid;gap:10px">Skala boiska<input id="gfs-site-scale" type="range" min="20" max="80" value="48" style="accent-color:var(--violet)"></label>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <label class="pill file" for="gfs-photo" style="background:var(--ink);color:var(--paper)">Wgraj zdjęcie placu<input id="gfs-photo" type="file" accept="image/*"></label>
+        <button type="button" class="pill" data-site-reset style="background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)">Przykładowy plac</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->

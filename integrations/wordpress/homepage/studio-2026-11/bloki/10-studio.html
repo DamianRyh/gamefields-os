@@ -1,0 +1,50 @@
+<!-- wp:html -->
+<!-- gf-blok: studio -->
+<section id="studio" class="studio sec" aria-labelledby="gfs-studio">
+  <div class="wrap studio-grid">
+    <div class="elev tall2" data-elev aria-label="Schemat z boku: sylwetka obok paneli boiska, wysokości w skali 1:1">
+      <div class="elev-top">
+        <span class="m" style="color:#B9A3AF">Widok z boku · wysokości 1:1</span>
+        <div class="seg" role="group" aria-label="Boisko do porównania" style="color:var(--paper)">
+          <button type="button" data-scale="90" aria-pressed="false">Cage 90</button>
+          <button type="button" data-scale="180" aria-pressed="true">Cage 180</button>
+        </div>
+      </div>
+      <div class="elev-draw">
+        <div class="ruler m">
+          <div class="tick" style="bottom:0"><span>0</span></div>
+          <div class="tick" style="bottom:calc(var(--m) * .9)"><span>0,90 m</span></div>
+          <div class="tick" style="bottom:calc(var(--m) * 1.2)"><span>1,20 m</span></div>
+          <div class="tick" style="bottom:calc(var(--m) * 1.8)"><span>1,80 m</span></div>
+          <div class="tick" style="bottom:calc(var(--m) * 2)"><span>2,00 m</span></div>
+        </div>
+        <div class="panels" aria-hidden="true">
+          <div class="panel"></div>
+          <div class="panel gap"><span class="tag m" style="bottom:6px;left:50%;transform:translateX(-50%)">wejście</span></div>
+          <div class="panel"></div>
+          <div class="panel"><div class="goal"></div><span class="tag m" style="top:-24px;left:18%;color:#FFB3C8">bramka</span></div>
+          <div class="panel"></div>
+        </div>
+        <div class="ground"></div>
+        <div class="fig" data-fig>
+          <svg viewBox="0 0 60 180" aria-hidden="true"><circle cx="30" cy="13" r="12" fill="#D8F24A"/><path d="M14 32h32a6 6 0 0 1 6 6v52a4 4 0 0 1-4 4h-4v-40h-2v126h-11v-72h-2v72H18V54h-2v40h-4a4 4 0 0 1-4-4V38a6 6 0 0 1 6-6z" fill="#D8F24A"/></svg>
+          <span class="who m" data-fig-label>180 cm</span>
+        </div>
+      </div>
+      <label class="range" for="gfs-height"><span class="m" data-height-note style="color:var(--paper)">Twój wzrost · 180 cm · rama sięga mniej więcej do głowy</span><input id="gfs-height" type="range" min="110" max="200" step="5" value="180"></label>
+    </div>
+    <div class="studio-copy">
+      <span class="m" style="color:var(--lime)">Studio</span>
+      <h2 class="d" id="gfs-studio" style="font-size:clamp(48px,6vw,96px)">Projektuję miejsca, do których się wraca.</h2>
+      <p style="font-size:19px;line-height:1.55;color:#E6DAE0;max-width:46ch">Gamefields to moje autorskie studio. Rysuję ramy, panele i nawierzchnie tak, żeby z kilku modułów powstało boisko pasujące do placu, szkoły albo klubu. Zaczynam od miejsca, kończę na pierwszym meczu.</p>
+      <dl class="spec">
+        <dt class="m">Studio</dt><dd>Warszawa · cała Polska</dd>
+        <dt class="m">Projektuję</dt><dd>konstrukcje, nawierzchnie, grafikę boisk</dd>
+        <dt class="m">Pracuję w</dt><dd>CAD i renderach 3D, potem na placu</dd>
+      </dl>
+      <a class="pill" href="#kontakt" style="background:var(--lime);color:var(--plum);align-self:flex-start">Napisz do mnie <span aria-hidden="true">→</span></a>
+      <a href="/damian-gawrych/" style="color:var(--paper);font-weight:700;text-underline-offset:4px">Kim jestem: Damian Gawrych →</a>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->

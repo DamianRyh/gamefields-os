@@ -35,15 +35,18 @@ def prices_html():
     zl = lambda n: f"{n:,}".replace(",", " ") + " zł"
     rows = []
     for m in data["models"]:
-        code = f"<span>{m['code']}</span>" if m["code"] else "<span>wynajem i sprzedaż</span>"
+        # Card layout (UX 2026-11-16): name and size, price, the "with surface" chip, then audience and the link.
+        meta = " · ".join(x for x in [m["code"] or "wynajem i sprzedaż", m["dimensions"] if m["dimensions"] != "Różne" else "różne wymiary"] if x)
         who = m["forWhom"] or ""
         label = "Zobacz ofertę" if m["id"] == "mobile" else "Zaprojektuj"
-        rows.append(f'<li><div class="name"><b>{htmllib.escape(m["name"])}</b>{code}</div><span class="dim">{htmllib.escape(m["dimensions"])}</span>'
-                    f'<div class="net">od {zl(m["constructionFromNet"])} <small>netto</small><span class="gross">od {zl(m["constructionFromGross"])} brutto</span>'
-                    + (f'<span class="full">z nawierzchnią od {zl(m["constructionFromNet"] + concrete[m["id"]] + paint[m["id"]])} netto</span>' if m["id"] in concrete and m["id"] in paint else "")
-                    + '</div>'
-                    f'<span class="who">{htmllib.escape(who)}</span><a class="go" href="{m["link"]}">{label} →</a></li>')
-    return '<ul class="prices" role="list">' + "".join(rows) + "</ul>", data
+        full = (f'<p class="full">Z nawierzchnią od {zl(m["constructionFromNet"] + concrete[m["id"]] + paint[m["id"]])} netto</p>'
+                if m["id"] in concrete and m["id"] in paint else "")
+        rows.append(f'<li><div class="name"><b>{htmllib.escape(m["name"])}</b><span>{htmllib.escape(meta)}</span></div>'
+                    f'<div class="net"><b>od {zl(m["constructionFromNet"])}</b> <small>netto</small><span class="gross">od {zl(m["constructionFromGross"])} brutto</span></div>'
+                    + full +
+                    f'<div class="pfoot"><span class="who">{htmllib.escape(who)}</span><a class="go" href="{m["link"]}">{label} <span aria-hidden="true">→</span></a></div></li>')
+    hint = f'<p class="swipe-hint" aria-hidden="true">Przesuń w bok: {len(rows)} modeli <span>→</span></p>'
+    return '<ul class="prices" role="list">' + "".join(rows) + "</ul>" + hint, data
 
 
 def surfaces_html():
@@ -175,16 +178,30 @@ def main():
             (jsdir / name).write_text(code + "\n", encoding="utf-8")
         ver = hashlib.sha1(code.encode("utf-8")).hexdigest()[:10]
         tags.append(f'<script defer src="/wp-content/themes/gamefields/assets/js/home/{name}?v={ver}"></script>')
-    head = [
-        "<!-- wp:html -->",
+    # Since 2026-11-16 the page is a list of small wp:html blocks, one per section, so that a later change
+    # replaces one small block instead of the whole page. Each block starts with "<!-- gf-blok: NAME -->";
+    # the wrapper <div class="gfs"> opens in "naglowek" and closes in "kontakt", which WordPress keeps as is.
+    # Every block is also written to bloki/NN-NAME.html, so a deployment can point at a single raw file.
+    parts = re.split(r"<!--GF-BLOK:([a-z0-9-]+)-->", body.strip())
+    sections = [("naglowek", parts[0])] + list(zip(parts[1::2], parts[2::2]))
+    styl = "\n".join([
         "<!-- Gamefields homepage studio-2026-11 · source: integrations/wordpress/homepage/studio-2026-11 · Inter SIL OFL: https://rsms.me/inter/ -->",
         f"<style>{THEME_FONT_FACE}\n{style}</style>",
         jsonld(faq),
-        body.strip(),
-    ]
-    tail = [contact_scripts.strip(), "<!-- /wp:html -->"]
-    block = "\n".join(head + tags + tail) + "\n"
-    inline_block = "\n".join(head + [loader, "<script>" + ball_core + "</script>", f"<script>\n{script.strip()}\n</script>"] + tail) + "\n"
+    ])
+
+    def assemble(script_part):
+        blocks = [("styl", styl)] + sections + [("skrypty", "\n".join(script_part + [contact_scripts.strip()]))]
+        return blocks, "\n\n".join(f"<!-- wp:html -->\n<!-- gf-blok: {n} -->\n{c.strip()}\n<!-- /wp:html -->" for n, c in blocks) + "\n"
+
+    blocks, block = assemble(tags)
+    _, inline_block = assemble([loader, "<script>" + ball_core + "</script>", f"<script>\n{script.strip()}\n</script>"])
+    out = HERE / "bloki"
+    out.mkdir(exist_ok=True)
+    for f in out.glob("*.html"):
+        f.unlink()
+    for i, (n, c) in enumerate(blocks, 1):
+        (out / f"{i:02d}-{n}.html").write_text(f"<!-- wp:html -->\n<!-- gf-blok: {n} -->\n{c.strip()}\n<!-- /wp:html -->\n", encoding="utf-8")
     (HERE / "homepage.html").write_text(block, encoding="utf-8")
 
     stand_in = ('<form class="wpcf7-form" onsubmit="event.preventDefault()">'
@@ -198,7 +215,7 @@ def main():
         "<title>Gamefields — podgląd lokalny</title></head><body>" + preview + "</body></html>\n",
         encoding="utf-8",
     )
-    print(f"homepage.html {len(block)} bytes")
+    print(f"homepage.html {len(block)} bytes, {len(blocks)} blocks")
 
 
 if __name__ == "__main__":
