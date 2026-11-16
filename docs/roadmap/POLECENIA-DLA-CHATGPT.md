@@ -129,3 +129,11 @@ Instrukcja: `DLA-CHATGPT-strona-glowna-bloki.md`. Zastępuje część A poleceni
 ```
 Pobierz instrukcję z https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/DLA-CHATGPT-strona-glowna-bloki.md. Ten jeden raz zatwierdzam podmianę całej treści strony głównej (ID 3462) plikiem homepage.html z instrukcji — dzieli stronę na 22 małe bloki, żeby kolejne zmiany dotyczyły tylko jednego bloku. Zrób kopię obecnej strony, sprawdź plik (22 bloki, brak &&, SHA-256), przygotuj szkic i pokaż mi podgląd na komputerze i telefonie. Po mojej akceptacji opublikuj i wyczyść cache LiteSpeed.
 ```
+
+## 13. Strona główna: użyteczność (Baymard) — menu „Ceny”, ceny na kafelkach, kolejność sekcji
+
+Instrukcja: `DLA-CHATGPT-strona-glowna-uzytecznosc.md`. Najpierw motyw (część A), potem strona (część B).
+
+```
+Pobierz instrukcję z https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/docs/roadmap/DLA-CHATGPT-strona-glowna-uzytecznosc.md. Najpierw część A: motyw Gamefields 1.0.28 (kopia plików, podmiana gf-home.js z kontrolą SHA-256, dwie zmiany w functions.php, wersja w style.css). Potem część B: zatwierdzam podmianę treści strony głównej (ID 3462) pod warunkiem sprawdzenia z punktu 3 — zmienione mogą być tylko bloki styl, naglowek, boiska, ceny i skrypty, pozostałe 17 muszą być identyczne. Zrób kopię, przygotuj szkic, pokaż mi podgląd na komputerze i telefonie, a po mojej akceptacji opublikuj i wyczyść cache LiteSpeed.
+```

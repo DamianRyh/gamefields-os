@@ -45,8 +45,7 @@ def prices_html():
                     f'<div class="net"><b>od {zl(m["constructionFromNet"])}</b> <small>netto</small><span class="gross">od {zl(m["constructionFromGross"])} brutto</span></div>'
                     + full +
                     f'<div class="pfoot"><span class="who">{htmllib.escape(who)}</span><a class="go" href="{m["link"]}">{label} <span aria-hidden="true">→</span></a></div></li>')
-    hint = f'<p class="swipe-hint" aria-hidden="true">Przesuń w bok: {len(rows)} modeli <span>→</span></p>'
-    return '<ul class="prices" role="list">' + "".join(rows) + "</ul>" + hint, data
+    return '<ul class="prices" role="list">' + "".join(rows) + "</ul>", data
 
 
 def surfaces_html():
@@ -131,7 +130,10 @@ def main():
         if body.count(token) != 1 and token != "{{ASSET}}":
             sys.exit(f"missing {token}")
 
-    body = body.replace("{{PRICES}}", prices_html()[0]).replace("{{SURFACES}}", surfaces_html())
+    prices_list, price_data = prices_html()
+    wall_prices = json.dumps({m["id"]: m["constructionFromNet"] for m in price_data["models"]}, separators=(",", ":"))
+    body = body.replace('<div class="wall" data-wall></div>', f"<div class=\"wall\" data-wall data-prices='{wall_prices}'></div>", 1)
+    body = body.replace("{{PRICES}}", prices_list).replace("{{SURFACES}}", surfaces_html())
     body = body.replace("{{ASSET}}", ASSET_BASE)
     body = body.replace("{{KEPT_WORKSHOP}}", workshop.strip())
     body = body.replace("{{KEPT_FAQ}}", faq.strip())
@@ -167,6 +169,7 @@ def main():
     jsdir.mkdir(parents=True, exist_ok=True)
     files = [("gf-pro.js", eng), ("gf-ball-core.js", ball_core), ("gf-home.js", script.strip())]
     tags = []
+    served = {}
     # gf-home.js is owned by the theme since hero R3 (PR #63, 2026-11-08): the hero code lives only there, so the build
     # no longer overwrites it and versions the theme file as it is. script.js stays as the historical source.
     # gf-pro.js likewise (2026-11-11): the deployed theme file is newer than surface-pro-2026-11, so the build keeps it as is.
@@ -176,6 +179,7 @@ def main():
             code = (jsdir / name).read_text(encoding="utf-8").rstrip("\n")
         else:
             (jsdir / name).write_text(code + "\n", encoding="utf-8")
+        served[name] = code
         ver = hashlib.sha1(code.encode("utf-8")).hexdigest()[:10]
         tags.append(f'<script defer src="/wp-content/themes/gamefields/assets/js/home/{name}?v={ver}"></script>')
     # Since 2026-11-16 the page is a list of small wp:html blocks, one per section, so that a later change
@@ -195,7 +199,9 @@ def main():
         return blocks, "\n\n".join(f"<!-- wp:html -->\n<!-- gf-blok: {n} -->\n{c.strip()}\n<!-- /wp:html -->" for n, c in blocks) + "\n"
 
     blocks, block = assemble(tags)
-    _, inline_block = assemble([loader, "<script>" + ball_core + "</script>", f"<script>\n{script.strip()}\n</script>"])
+    # The local preview loads the same page script as WordPress (the theme file, by relative path; serve the
+    # integrations/wordpress folder over http and open homepage/studio-2026-11/index.html).
+    _, inline_block = assemble([loader, "<script>" + ball_core + "</script>", '<script defer src="../../theme/gamefields/assets/js/home/gf-home.js"></script>'])
     out = HERE / "bloki"
     out.mkdir(exist_ok=True)
     for f in out.glob("*.html"):

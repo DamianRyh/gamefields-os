@@ -31,6 +31,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 18 | Logo miast (Warszawa, ZZM, Kraków, Grodzisk, Kutno, Łódź): strona główna i Realizacje dla miast | ✅ PR #108 | polecenie 11 | ✅ sprawdzone 16.11 |
 | 18a | Certyfikaty producentów do pobrania | ⬜ | | ❓ pliki od właściciela |
 | 19 | Strona główna: 22 bloki zamiast jednego + odświeżony wygląd nowych sekcji (karty cen, przewijane rzędy na telefonie, lżejsze fakty) | ✅ PR #109 | polecenie 12 | ✅ sprawdzone 16.11 |
+| 20 | Strona główna wg Baymard: „Ceny” w menu (motyw 1.0.28), ceny „od” na kafelkach boisk, realizacje zaraz po cenach, dodatki niżej, ceny na telefonie w pionowej liście, „co zawiera cena” | ✅ PR (ten) | polecenie 13 | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |

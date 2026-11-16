@@ -211,12 +211,15 @@
   ];
   var LAYOUT = { 8: ['s7 tall', 's5 tall', 's4', 's4', 's4', 's5', 's3', 's4'], 5: ['s7 tall', 's5 tall', 's4', 's4', 's4'], 3: ['s4 tall', 's4 tall', 's4 tall'], 1: ['s12 tall'] };
   var wall = $('[data-wall]'), filters = $('[data-filters]');
+  // Construction 'from' prices (net) come from the page (data-prices, built from offer/price-from.json), 2026-11-16.
+  var PRICE = {}; try { PRICE = JSON.parse(wall.getAttribute('data-prices') || '{}'); } catch (e) {}
+  function priceFrom(k) { return PRICE[k] ? '<span class="pr">od ' + String(PRICE[k]).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0zł netto</span>' : ''; }
   function renderWall(shape) {
     var list = ALL.filter(function (m) { return shape === 'all' ? true : m.shape === shape; });
     var lay = LAYOUT[list.length] || LAYOUT[8];
     wall.replaceChildren.apply(wall, list.map(function (m, i) {
-      var a = el('a', { class: 'tile ' + lay[i], href: STUDIO + '?' + new URLSearchParams({ arena: m.k }).toString(), style: 'background:' + m.bg + ';color:' + m.ink, 'aria-label': m.name + ', ' + m.dim + '. Otwórz w Studio.' });
-      a.innerHTML = '<div class="court" style="--ln:' + m.line + ';--cr:30%"><i></i><i></i></div><span class="go">Konfiguruj →</span><span class="num d">' + m.n + '</span><img loading="lazy" decoding="async" src="' + m.img + '" alt="" loading="lazy" decoding="async"><div class="bar"><b>' + esc(m.name) + '</b><span class="m">' + esc(m.dim) + '</span></div>';
+      var a = el('a', { class: 'tile ' + lay[i], href: STUDIO + '?' + new URLSearchParams({ arena: m.k }).toString(), style: 'background:' + m.bg + ';color:' + m.ink, 'aria-label': m.name + ', ' + m.dim + (PRICE[m.k] ? ', od ' + PRICE[m.k] + ' zł netto' : '') + '. Otwórz w Studio.' });
+      a.innerHTML = '<div class="court" style="--ln:' + m.line + ';--cr:30%"><i></i><i></i></div><span class="go">Konfiguruj →</span><span class="num d">' + m.n + '</span><img loading="lazy" decoding="async" src="' + m.img + '" alt="" loading="lazy" decoding="async"><div class="bar"><b>' + esc(m.name) + priceFrom(m.k) + '</b><span class="m">' + esc(m.dim) + '</span></div>';
       return a;
     }));
   }
