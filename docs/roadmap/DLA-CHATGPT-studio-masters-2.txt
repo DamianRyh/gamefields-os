@@ -1,0 +1,14 @@
+Polecenie dla ChatGPT: Studio — nowe wzory nawierzchni „Masters II”, 17.11.2026
+
+Opublikuj Studio z najnowszego commita gałęzi main repozytorium DamianRyh/gamefields-os (integrations/studio/canvas-editor), bez własnych zmian w kodzie.
+
+Nowości: 8 nowych kierunków wzoru nawierzchni (Vega Bulge, Protractor, Neo-Plastic, Overprint, Ndebele, Munich Bands, Promenade, Garden Plan),
+8 palet i 8 projektów „MASTERS II”, które są pierwsze w filtrze „Inspiracje mistrzów”. Zmienione pliki: lib/court-art-pro.mjs, lib/pattern-library-pro.ts.
+Schemat projektu, ceny, istniejące wzory i zapisane projekty bez zmian. Nie zmieniaj INTERNAL_COST_CARD ani SALES_MARGIN.
+
+Przed publikacją: tsc, build, test:studio, test:mobile.
+Po publikacji sprawdź w edytorze nawierzchni (390 i 1440 px):
+- w „Inspiracje mistrzów” pierwsze są projekty MASTERS II 01–08: Vega Bulge, Protractor, Neo-Plastic, Overprint, Ndebele, Munich Chevrons, Promenade, Garden Plan;
+- każdy daje się wybrać, zmienić wariant (1–12) i paletę, a podgląd 3D i karta projektu PDF pokazują wzór;
+- stare projekty i wzory działają jak wcześniej.
+Pokaż właścicielowi zrzuty i podaj wersję wdrożenia.

@@ -82,3 +82,25 @@ Każdy kierunek przejmuje metodę szkoły lub artysty (siatkę, proporcję, logi
 | Housetop Quilt | kołdry z Gee’s Bend |
 
 Regeneracja: `node build-studio-files.mjs` zapisuje `studio/lib/*` oraz `../canvas-editor/lib/pattern-library-pro.ts` i `court-art-pro.mjs`. Razem jest 53 rodziny × 12 = 636 wzorów.
+
+## Kolekcja Masters II (2026-11-17)
+
+Osiem nowych rodzin w tym samym silniku, 8 palet i 8 projektów w `signature-masters-2.json`. Projekty Masters II są w edytorze **pierwsze**, przed Masters, w filtrze „Inspiracje mistrzów”. Razem 61 rodzin × 12 = 732 wzory.
+
+Każdy kierunek przejmuje **metodę** szkoły lub artysty, nie konkretne dzieło. Zasady malowalności tej kolekcji (sprawdzone na wszystkich 96 wariantach):
+- każdy pas, komórka i kontur ma co najmniej 8 px, czyli ok. 20 cm na boisku 15 × 10 m (40 px = 1 m);
+- najwyżej 5 farb z palety, a w Overprint jedna dodatkowa farba zmieszana na przecięcia;
+- kompozycja symetryczna względem środka boiska (lustro albo obrót o 180°), więc obie połowy grają tak samo.
+
+| Rodzina | Grupa | Metoda | Maskowanie |
+|---|---|---|---|
+| Vega Bulge | geometric | Victor Vasarely: szachownica puchnąca w kule | bardzo wysoka |
+| Protractor | premium | Frank Stella: półtarcze z koncentrycznych pasów oparte o bramki i linie | wysoka |
+| Neo-Plastic | geometric | De Stijl: czarne belki i płaszczyzny kolorów podstawowych | średnia |
+| Overprint | brand | Karel Martens: dwa systemy pasów nadrukowane na siebie | średnia |
+| Ndebele | street | malarstwo ścienne Ndebele: płaskie figury w czarnych konturach | wysoka |
+| Munich Bands | brand | Otl Aicher, system 1972: widmo pasów cięte pod 45° | średnia |
+| Promenade | organic | Roberto Burle Marx, promenada Copacabana: falujące pasy | wysoka |
+| Garden Plan | organic | Roberto Burle Marx, plany ogrodów: rabaty w pasy i ścieżka | średnia |
+
+Regeneracja: `node build-studio-files.mjs` (kopiuje silnik i `pattern-library-pro.ts` do `canvas-editor/lib/`), `node build-gallery.mjs`.

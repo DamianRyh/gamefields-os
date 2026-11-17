@@ -1,0 +1,10 @@
+[
+ {"id":"vega-bulge","name":"Vega Bulge","familyId":"pro-vega","variant":3,"paletteId":"vasarely","useCase":"park / ikona miejsca","note":"Szachownica puchnie w kulę wokół koła środkowego. Z drona wygląda jak trójwymiarowa, a maluje się z szablonu kratki."},
+ {"id":"protractor-goals","name":"Protractor","familyId":"pro-protractor","variant":4,"paletteId":"stella","useCase":"street / turnieje","note":"Dwie półtarcze z pasów wyrastają z bramek. Mocny kolor na ciemnym tle, rytm jak na obrazach Franka Stelli."},
+ {"id":"neo-plastic","name":"Neo-Plastic","familyId":"pro-neoplastic","variant":6,"paletteId":"stijl","useCase":"szkoła / kampus","note":"Czarne belki i trzy podstawowe kolory, obie połowy identyczne po obrocie. Klasyka, która zawsze się broni."},
+ {"id":"overprint","name":"Overprint","familyId":"pro-overprint","variant":1,"paletteId":"martens","useCase":"marka / kampania","note":"Dwa systemy pasów nadrukowane na siebie, przecięcia w trzecim kolorze. Cztery farby, efekt druku na całym boisku."},
+ {"id":"ndebele-court","name":"Ndebele","familyId":"pro-ndebele","variant":3,"paletteId":"ndebele","useCase":"osiedle / mural","note":"Płaskie figury w grubych czarnych konturach, jak na malowanych domach Ndebele. Kontur ukrywa drobne nierówności malowania."},
+ {"id":"munich-chevrons","name":"Munich Chevrons","familyId":"pro-munich","variant":2,"paletteId":"aicher","useCase":"klub / sport","note":"Spokojne widmo pasów cięte pod 45° prowadzi grę do środka. Duch systemu Otla Aichera, czytelny z każdej strony."},
+ {"id":"promenade","name":"Promenade","familyId":"pro-promenade","variant":1,"paletteId":"copacabana","useCase":"bulwar / plac miejski","note":"Falujące pasy jak bruk nadmorskiej promenady. Dwie farby i taśma do łuków, efekt widać z daleka."},
+ {"id":"garden-plan","name":"Garden Plan","familyId":"pro-garden","variant":3,"paletteId":"burle-marx","useCase":"park / ogród","note":"Organiczne rabaty, część w pasy, i jedna ścieżka przez boisko. Projekt ogrodu zamieniony w nawierzchnię."}
+]
