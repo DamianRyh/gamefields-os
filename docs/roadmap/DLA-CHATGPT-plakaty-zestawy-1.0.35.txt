@@ -1,0 +1,32 @@
+Polecenie dla ChatGPT: motyw 1.0.35 (plakaty + zestawy), 17.11.2026
+Zastępuje polecenie DLA-CHATGPT-zestawy-studio.txt (motyw 1.0.33) — tamtego nie wykonuj.
+
+Motyw Gamefields 1.0.35 wgrywa właściciel (ZIP). Nie ruszaj plików motywu.
+1.0.35 zawiera Twoje zmiany plakatu z 1.0.34 (brak koła w środku dla Fade/Rings,
+napis „podgląd poglądowy”, stały rozmiar podglądu), więc niczego nie cofa.
+
+Strona główna (ID 3462): podmień TRZY bloki, pozostałych 19 nie ruszaj.
+Każdy plik zastępuje cały blok o tej nazwie (zawiera <!-- wp:html --> i <!-- /wp:html -->).
+- blok „styl”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/01-styl.html  (SHA-256 zaczyna się od: 4eb9f332e6bf824a)
+- blok „plakaty”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/16-plakaty.html  (SHA-256 zaczyna się od: 79e068a3d94cb027)
+- blok „skrypty”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/22-skrypty.html  (SHA-256 zaczyna się od: 7f51c3b3bc3b529b)
+Blok „skrypty” ładuje gf-home.js?v=e64d639913 zamiast ręcznego ?v=plakat-1.0.34 — to ten sam plik po aktualizacji, z nowym znacznikiem wersji.
+Jeśli blok „plakaty” jest identyczny z obecnym — wystarczą „styl” i „skrypty”.
+
+Kroki:
+1. Sprawdź, że motyw ma wersję 1.0.35 (Wygląd → Motywy). Jeśli nie — zatrzymaj się i daj znać właścicielowi.
+2. Kopia strony głównej, potem szkic z podmienionymi blokami i porównanie (różnią się tylko te bloki).
+3. Podgląd na komputerze i telefonie:
+   Plakaty:
+   - na plakacie brak tekstu, tylko pełny spad;
+   - Fade (kompozycja 2, 6, 10) i Rings (wszystkie poza 3, 7, 11) bez nieprzezroczystego koła w środku;
+   - napis pod plakatem kończy się „podgląd poglądowy”;
+   - zmiana formatu (30×40, 50×70, 70×100), wzoru, koloru i widoku „na ścianie / sam plakat” NIE zmienia rozmiaru podglądu; plakat nie jest ucięty u góry ani u dołu.
+   Zestawy („Pięć miejsc. Pięć zestawów.”):
+   - przy każdym zestawie miniatura z widokiem 3D (konstrukcja z kolorową nawierzchnią);
+   - po kliknięciu „Zobacz zestaw +”: duży widok, lista: Konstrukcja, Nawierzchnia, Miejsce, Cena konstrukcji;
+   - Miasto: Panna Cage 90 + Garden Plan, od 36 000 zł netto; Szkoła: Panna Play + Neo-Plastic; Osiedle: Panna Court + Ndebele;
+     Klub: Panna Cage 180 + Munich Chevrons; Marka: Street Arena 15 + Overprint;
+   - „Otwórz zestaw w Studio” otwiera Studio z tą samą konstrukcją, wzorem i kolorami;
+   - brak przewijania w bok.
+4. Po akceptacji właściciela opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj.

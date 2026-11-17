@@ -43,6 +43,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 29 | Studio: wzory nawierzchni Masters II — 8 nowych kierunków × 12 wariantów (Vasarely, Stella, De Stijl, Martens, Ndebele, Aicher, Burle Marx ×2), 8 palet, 8 projektów; zasady malowalności (min. 20 cm, maks. 5 farb, symetria) | ✅ PR (ten) | DLA-CHATGPT-studio-masters-2.txt | ⏳ |
 | 30 | Plakaty bez tekstu: tylko „Pełny spad”, bez zakładek Tekst/Układ i wyboru papieru (motyw 1.0.32, bloki plakaty i skrypty, opis produktu 4393) | ✅ PR (ten) | DLA-CHATGPT-plakaty-bez-tekstu.txt | ⏳ |
 | 31 | Zestawy na stronie głównej jak w Studio 3D: rendery konstrukcja + nawierzchnia Masters II ze Studia, poprawne linki do Studia (wzór, paleta, kolory), cena konstrukcji (motyw 1.0.33) | ✅ PR (ten) | DLA-CHATGPT-zestawy-studio.txt | ⏳ |
+| 32 | Motyw 1.0.35 = 1.0.33 + zmiany plakatu z 1.0.34 (ChatGPT, live): bez koła w środku dla Fade/Rings, „podgląd poglądowy”; podgląd plakatu ma stały rozmiar przy zmianie formatu i opcji. Zastępuje 1.0.33 (niewdrożony) | ✅ PR (ten) | DLA-CHATGPT-plakaty-zestawy-1.0.35.txt | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |

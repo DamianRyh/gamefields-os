@@ -257,6 +257,9 @@
       { name: '50 × 70', size: '50 × 70 cm', ratio: 1.4, wall: '44%', price: 149 },
       { name: '70 × 100', size: '70 × 100 cm', ratio: 100 / 70, wall: '58%', price: 199 }
     ];
+    // The on-page preview keeps one size and one proportion whatever the format or option (2026-11-17);
+    // the format changes the label and the price only.
+    var PREVIEW_RATIO = Math.max.apply(null, FORMATS.map(function (f) { return f.ratio; }));
     var FRAMES = [['none', 'Bez ramy', ''], ['black', 'Czarna', '#161013'], ['oak', 'Dąb', '#B98A5B'], ['white', 'Biała', '#F7F5F2'], ['alu', 'Aluminium', '#A8A8A4']];
     var PAPERS = [['#FFFFFF', 'Biały'], ['#F4F1EE', 'Kremowy'], ['#161013', 'Czarny'], ['#47132D', 'Śliwka']];
     var WALLS = [['#EFEAE4', 'Ciepła biel'], ['#C9C4BE', 'Beton'], ['#B7C1A9', 'Szałwia'], ['#2B2226', 'Grafit']];
@@ -290,7 +293,13 @@
       var hh = 600 * b.w / b.h, sc = b.h / 600;
       var minL = Math.min.apply(null, s.colors.map(function (c) { return 1 - G.lightness(c); }));
       var lc = s.line === 'auto' ? (minL > 0.14 ? '#FFFFFF' : G.recommendLineColor(s.colors)) : s.line;
-      var inner = G.renderPro(s.fam, s.v, hh, s.colors, { seed: s.seed, uid: uid + 'a' }) + (s.line === 'none' ? '' : G.courtLines(hh, lc));
+      var art = G.renderPro(s.fam, s.v, hh, s.colors, { seed: s.seed, uid: uid + 'a' });
+      // These two families append an opaque centre-spot overlay after the pattern.
+      // Keep the underlying artwork visible; the court marking is drawn separately.
+      if ((s.fam === 'pro-fade' ? s.v % 4 === 2 : false) || (s.fam === 'pro-rings' ? s.v % 4 !== 3 : false)) {
+        art = art.replace(/<circle\b[^>]*\/>\s*$/, '');
+      }
+      var inner = art + (s.line === 'none' ? '' : G.courtLines(hh, lc));
       return '<defs><clipPath id="' + uid + 'c"><rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '"/></clipPath></defs>' +
         '<g clip-path="url(#' + uid + 'c)"><g transform="translate(' + (b.x + b.w / 2) + ' ' + (b.y + b.h / 2) + ') rotate(90) scale(' + sc + ') translate(-300 ' + (-hh / 2) + ')">' + inner + '</g></g>';
     }
@@ -301,7 +310,7 @@
       return out.length ? out.slice(0, 3) : [' '];
     }
     function posterSvg(s, uid, opts) {
-      var F = FORMATS[s.fmt], W = 500, H = Math.round(500 * F.ratio);
+      var F = FORMATS[s.fmt], W = 500, H = Math.round(500 * (opts.preview ? PREVIEW_RATIO : F.ratio));
       var paper = PAPERS[s.paper][0], dark = G.lightness(paper) < 0.5;
       var ink = dark ? '#F4F1EE' : '#1C0912', soft = dark ? 'rgba(244,241,238,.6)' : 'rgba(28,9,18,.55)';
       var no = 'No. ' + (opts.no || '0000'), dims = '15 × 10 M', fam = FAM[s.fam].name.toUpperCase();
@@ -388,14 +397,14 @@
     }
     function draw() {
       var no = edition();
-      sheet.innerHTML = posterSvg(st, 'pl', { no: no });
+      sheet.innerHTML = posterSvg(st, 'pl', { no: no, preview: true });
       frame.dataset.frame = FRAMES[st.frame][0];
       frame.style.borderColor = FRAMES[st.frame][2] || 'transparent';
       sizeFrame();
       wall.style.backgroundColor = flat ? '' : WALLS[st.wall][0];
       wall.dataset.view = flat ? 'flat' : 'wall';
       viewBtn.setAttribute('aria-pressed', String(flat)); viewBtn.textContent = flat ? 'Na ścianie' : 'Sam plakat';
-      $('[data-pl-tag]').textContent = flat ? FORMATS[st.fmt].size + ' · No. ' + no : FORMATS[st.fmt].size + ' · ściana ok. 1,6 m';
+      $('[data-pl-tag]').textContent = flat ? FORMATS[st.fmt].size + ' · No. ' + no : FORMATS[st.fmt].size + ' · podgląd poglądowy';
       var f = FAM[st.fam];
       $('[data-pl-famname]').textContent = f.name;
       $('[data-pl-insp]').textContent = f.inspiration;
@@ -419,9 +428,11 @@
       drawLayoutThumbs();
     }
     function sizeFrame() {
-      var F = FORMATS[st.fmt], ww = wall.clientWidth, wh = wall.clientHeight;
-      var pct = parseFloat(F.wall) * (window.innerWidth < 700 ? 1.4 : 1) / 100;
-      var w = flat ? Math.min(ww * 0.62, (wh - 40) / F.ratio) : Math.min(ww * pct, (wh * 0.74) / F.ratio);
+      var ww = wall.clientWidth, wh = wall.clientHeight;
+      // The stylesheet scales the frame up (1.35 on the wall, 1.18 for the poster alone), so the size is set
+      // before that scale: the visible poster is at most 84% (wall) or 92% (alone) of the stage height.
+      var sc = flat ? 1.18 : 1.35, pct = 0.44 * (window.innerWidth < 700 ? 1.4 : 1);
+      var w = flat ? Math.min(ww * 0.62 * sc, (wh * 0.92) / PREVIEW_RATIO) / sc : Math.min(ww * pct * sc, (wh * 0.84) / PREVIEW_RATIO) / sc;
       frame.style.width = Math.round(Math.max(80, w)) + 'px';
     }
     window.addEventListener('resize', sizeFrame);
