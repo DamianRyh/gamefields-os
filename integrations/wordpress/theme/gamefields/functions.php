@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.33' );
+define( 'GFT_VERSION', '1.0.35' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );

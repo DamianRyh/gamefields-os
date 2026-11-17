@@ -14,3 +14,4 @@ Lekki motyw Gamefields zastępujący Savoy.
 - 1.0.31: zakładka „Wiedza o produkcie” na kartach produktów ze Studia (parametry, co zawiera cena, ceny nawierzchni dla modelu, gwarancja, poradniki); opinie i komentarze przy produktach wyłączone; nowe tekstury betonu i malowania (zdjęcie CC0 z Poly Haven).
 - 1.0.32: plakaty bez tekstu — w kreatorze tylko układ „Pełny spad”, bez zakładek Tekst i Układ oraz bez wyboru papieru; stare linki z napisem otwierają się jako czysty pełny spad.
 - 1.0.33: zestawy na stronie głównej pokazują widok ze Studio 3D (konstrukcja z nawierzchnią Masters II na podłodze, assets/js/home/kits/), link otwiera ten sam wzór, paletę i kolory w Studiu, cena konstrukcji przy zestawie.
+- 1.0.35: zawiera zmiany plakatów zrobione na serwerze w 1.0.34 (bez nieprzezroczystego koła na środku w Duperré Fade i Op Rings, etykieta „podgląd poglądowy”, jednakowy rozmiar podglądu dla formatów) oraz zestawy ze Studio 3D z 1.0.33.
