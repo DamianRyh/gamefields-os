@@ -31,20 +31,13 @@ Na stronie działa wersja nowsza niż `premium-2026-10-26` w repo (fioletowe her
 
 Narzędzie zmienia wyłącznie źródła `@font-face` zapisane jako base64. Reszta treści zostaje bajt w bajt taka sama.
 
-## Pomiar krok po kroku
+## Pomiar
 
-Na stronie jest już zainstalowana wtyczka zgód Complianz (audyt z 21.10: aktywna, bez zapisanego banera). Nie dokładamy drugiego mechanizmu zgód, tylko kończymy konfigurację Complianz.
+Stan na 11.11.2026 (sprawdzone na żywej stronie): pomiar działa. Complianz ma baner zgody (`consenttype: optin`) i wstawia tag Google **`GT-M63DMWRD`** z Consent Mode (`analytics_storage` tylko po zgodzie). Kontenera Google Tag Manager `GTM-W3BD5D9P` nie ma na stronie i **nie dodajemy go**, bo podwoiłby pomiar. Gdyby kiedyś był potrzebny GTM, zastępuje on tag `GT-…` w ustawieniach Complianz, a nie działa obok niego.
 
-1. W Google Analytics utwórz usługę GA4 dla gamefields.eu. Ustaw przechowywanie danych zdarzeń na 14 miesięcy i skopiuj identyfikator `G-…`.
-2. WordPress → Complianz → Kreator: region UE (RODO), statystyki „Google Analytics”, wklej identyfikator GA4, włącz Google Consent Mode v2. Dodaj YouTube i Instagram, które Complianz już wykrył.
-3. Kreator → Dokumenty: nie generuj nowej polityki prywatności. Zostaje obecna strona `/polityka-prywatnosci/` (ID 4087) z akapitami z `prywatnosc-uzupelnienia.md`. Dodaj tylko politykę cookies, jeśli Complianz jej wymaga.
-4. Opublikuj baner. Sprawdź w oknie prywatnym:
-   - baner pojawia się przy pierwszej wizycie,
-   - przed zgodą żądania do `google-analytics.com` mają `gcs=G100` (brak zgody),
-   - po zgodzie w GA4 (Raporty → Czas rzeczywisty) widać wizytę.
-5. Search Console: dodaj domenę gamefields.eu (weryfikacja przez DNS) i połącz z GA4.
+Kontrola `check-live-site` sprawdza co tydzień, czy `GT-M63DMWRD` jest na każdej stronie i czy skrypty Google ładują się raz (`--tag` zmienia oczekiwany identyfikator).
 
-Cofnięcie: wyłączenie statystyk w Complianz. Strona działa dalej, tylko bez pomiaru.
+Do zrobienia: polityka prywatności nie opisuje jeszcze pomiaru ani sklepu (patrz `prywatnosc-uzupelnienia.md`). Search Console: potwierdzić, że domena jest zweryfikowana (mapa witryny `sitemap_index.xml` działa).
 
 ## Jedno źródło Studio krok po kroku
 

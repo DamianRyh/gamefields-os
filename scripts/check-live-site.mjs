@@ -15,6 +15,8 @@ const base = arg('base', 'https://www.gamefields.eu').replace(/\/$/, '');
 const pages = arg('pages', '/,/konfigurator-boisk/,/polityka-prywatnosci/').split(',').map(p => p.trim()).filter(Boolean);
 const outDir = arg('out', 'outputs/site-monitor');
 const INLINE_LIMIT = 100 * 1024;
+// Google tag expected on every page (Complianz loads it with Consent Mode). Override with --tag.
+const TAG_ID = arg('tag', 'GT-M63DMWRD');
 
 const results = [];
 const critical = [];
@@ -22,9 +24,10 @@ const critical = [];
 async function checkPage(browser, route, width) {
   const page = await browser.newPage({viewport: {width, height: 900}});
   const errors = [];
-  let bytes = 0;
+  let bytes = 0, gtmLoads = 0;
   page.on('pageerror', e => errors.push(e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('request', r => { if (/googletagmanager\.com\/(gtm|gtag\/js)/.test(r.url())) gtmLoads++; });
   page.on('response', async r => {
     const len = Number(r.headers()['content-length']);
     if (Number.isFinite(len)) bytes += len;
@@ -57,13 +60,14 @@ async function checkPage(browser, route, width) {
       title: document.title,
       description: Boolean(document.querySelector('meta[name="description"]')?.content),
       contactForm: Boolean(document.querySelector('form.wpcf7-form, .wpcf7 form')),
+      gtmIds: [...new Set((document.documentElement.outerHTML.match(/\b(?:GTM|GT|G)-[A-Z0-9]{6,12}\b/g) || []))],
       studioLink: [...document.querySelectorAll('a[href*="konfigurator-boisk"], iframe[src*="studio"]')].length,
       htmlKb: Math.round(document.documentElement.outerHTML.length / 1024),
       inline,
     }));
   }, INLINE_LIMIT) : null;
   await page.close();
-  return {route, width, status, loadMs, transferKb: Math.round(bytes / 1024), errors, ...facts};
+  return {route, width, status, loadMs, transferKb: Math.round(bytes / 1024), gtmLoads, errors, ...facts};
 }
 
 async function probe(url) {
@@ -98,9 +102,9 @@ const lines = [
   '',
   `Data: ${new Date().toISOString().slice(0, 16).replace('T', ' ')} UTC`,
   '',
-  '| Strona | Szer. | Status | Ładowanie | LCP | Transfer | HTML | Przewijanie w bok | H1 | Opis meta | Formularz | Błędy konsoli |',
-  '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
-  ...results.map(r => `| ${r.route} | ${r.width} | ${r.status} | ${r.loadMs} ms | ${r.lcpMs ?? '-'} ms | ${r.transferKb} KB | ${r.htmlKb ?? '-'} KB | ${r.overflowPx ?? '-'} px | ${r.h1 ?? '-'} | ${r.description ? 'tak' : 'nie'} | ${r.contactForm ? 'tak' : 'nie'} | ${r.errors.length} |`),
+  '| Strona | Szer. | Status | Ładowanie | LCP | Transfer | HTML | Przewijanie w bok | H1 | Opis meta | Formularz | Tag Google | Błędy konsoli |',
+  '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
+  ...results.map(r => `| ${r.route} | ${r.width} | ${r.status} | ${r.loadMs} ms | ${r.lcpMs ?? '-'} ms | ${r.transferKb} KB | ${r.htmlKb ?? '-'} KB | ${r.overflowPx ?? '-'} px | ${r.h1 ?? '-'} | ${r.description ? 'tak' : 'nie'} | ${r.contactForm ? 'tak' : 'nie'} | ${r.gtmLoads}× | ${r.errors.length} |`),
   '',
   '## Usługi',
   '',
@@ -112,6 +116,12 @@ const lines = [
 for (const r of results) {
   for (const x of r.inline || []) lines.push(`- ${r.route} (${r.width} px): blok <${x.tag}> w treści ma ${x.kb} KB. Duże bloki w HTML (np. czcionka base64) spowalniają stronę.`);
   if ((r.overflowPx ?? 0) > 0) lines.push(`- ${r.route} (${r.width} px): strona przewija się w bok o ${r.overflowPx} px.`);
+  if (r.status === 200) {
+    if (!(r.gtmIds || []).includes(TAG_ID)) lines.push(`- ${r.route} (${r.width} px): brak tagu Google ${TAG_ID} w kodzie strony.`);
+    if (r.gtmLoads > 1) lines.push(`- ${r.route} (${r.width} px): skrypty Google ładują się ${r.gtmLoads} razy. Dwa tagi podwajają pomiar.`);
+    const other = (r.gtmIds || []).filter(id => id !== TAG_ID);
+    if (other.length) lines.push(`- ${r.route} (${r.width} px): na stronie są też inne identyfikatory Google: ${other.join(', ')}.`);
+  }
   if ((r.h1 ?? 1) !== 1) lines.push(`- ${r.route} (${r.width} px): liczba nagłówków H1 = ${r.h1}.`);
   for (const e of r.errors.slice(0, 5)) lines.push(`- ${r.route} (${r.width} px): błąd: ${e.slice(0, 200)}`);
 }
