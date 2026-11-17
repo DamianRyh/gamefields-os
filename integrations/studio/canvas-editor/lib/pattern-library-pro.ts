@@ -364,6 +364,110 @@ export const proFamilies:PatternFamily[]=[
   ],
   "baseComplexity": 3,
   "renderer": "pro"
+ },
+ {
+  "id": "pro-vega",
+  "name": "Vega Bulge",
+  "short": "VEGA",
+  "group": "geometric",
+  "description": "Szachownica, która puchnie w kule: przy kole środkowym albo w obu połowach.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 4,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-protractor",
+  "name": "Protractor",
+  "short": "ARC",
+  "group": "premium",
+  "description": "Półtarcze z koncentrycznych pasów oparte o bramki, linię boczną albo koło.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 3,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-neoplastic",
+  "name": "Neo-Plastic",
+  "short": "STIJL",
+  "group": "geometric",
+  "description": "Czarne belki dzielą boisko na prostokąty, kilka pól w kolorze; obie połowy grają tak samo.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-overprint",
+  "name": "Overprint",
+  "short": "PRINT",
+  "group": "brand",
+  "description": "Dwa systemy pasów nadrukowane na siebie; przecięcia w trzecim, zmieszanym kolorze.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-ndebele",
+  "name": "Ndebele",
+  "short": "NDEB",
+  "group": "street",
+  "description": "Mocne czarne kontury wokół płaskich figur w rejestrach, lustrzane odbicie połów.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 3,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-munich",
+  "name": "Munich Bands",
+  "short": "MUC",
+  "group": "brand",
+  "description": "Spokojne widmo równoległych pasów cięte pod 45°: pole, drabina albo strzałki do środka.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-promenade",
+  "name": "Promenade",
+  "short": "PROM",
+  "group": "organic",
+  "description": "Falujące pasy jak bruk promenady: dwa albo trzy kolory, wzdłuż albo w poprzek.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 3,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-garden",
+  "name": "Garden Plan",
+  "short": "GARDEN",
+  "group": "organic",
+  "description": "Organiczne rabaty, część w pasy, na jednym tle i jedna ścieżka; symetria punktowa.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
  }
 ];
 export const proPalettes:PatternPalette[]=[
@@ -606,6 +710,102 @@ export const proPalettes:PatternPalette[]=[
    "#F1E9DA"
   ],
   "tone": "tekstylna"
+ },
+ {
+  "id": "vasarely",
+  "name": "Vasarely",
+  "colors": [
+   "#1B1464",
+   "#5B2C8F",
+   "#C2187E",
+   "#F2A2C0",
+   "#F4F1EA"
+  ],
+  "tone": "optyczna"
+ },
+ {
+  "id": "stella",
+  "name": "Stella",
+  "colors": [
+   "#F25C05",
+   "#F2B705",
+   "#0FA3B1",
+   "#D7263D",
+   "#1B1B1E"
+  ],
+  "tone": "fluorescencyjna"
+ },
+ {
+  "id": "stijl",
+  "name": "De Stijl",
+  "colors": [
+   "#111111",
+   "#D52B1E",
+   "#1F4E9C",
+   "#F2C230",
+   "#F5F2EA"
+  ],
+  "tone": "klasyczna"
+ },
+ {
+  "id": "martens",
+  "name": "Martens",
+  "colors": [
+   "#1E1E1E",
+   "#E5383B",
+   "#2A6FDB",
+   "#F2C14E",
+   "#F2EFE6"
+  ],
+  "tone": "drukarska"
+ },
+ {
+  "id": "ndebele",
+  "name": "Ndebele",
+  "colors": [
+   "#141414",
+   "#1F4FA3",
+   "#E23B2E",
+   "#F4C430",
+   "#F7F3EA"
+  ],
+  "tone": "muralowa"
+ },
+ {
+  "id": "aicher",
+  "name": "Aicher 72",
+  "colors": [
+   "#0F5B3A",
+   "#2E9C5E",
+   "#6FB7E9",
+   "#F08A24",
+   "#F2F2EE"
+  ],
+  "tone": "olimpijska"
+ },
+ {
+  "id": "copacabana",
+  "name": "Copacabana",
+  "colors": [
+   "#141414",
+   "#7A7A72",
+   "#C9B79C",
+   "#E8E0D0",
+   "#F6F3EC"
+  ],
+  "tone": "promenada"
+ },
+ {
+  "id": "burle-marx",
+  "name": "Burle Marx",
+  "colors": [
+   "#1F5E3A",
+   "#7DB04B",
+   "#C8553D",
+   "#F2C14E",
+   "#EFE7D6"
+  ],
+  "tone": "ogrodowa"
  }
 ] as PatternPalette[];
 export const proSignaturePresets:SignaturePreset[]=[
@@ -771,6 +971,86 @@ export const proSignaturePresets:SignaturePreset[]=[
  }
 ];
 export const mastersSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "vega-bulge",
+  "name": "Vega Bulge",
+  "eyebrow": "MASTERS II 01",
+  "familyId": "pro-vega",
+  "variant": 3,
+  "paletteId": "vasarely",
+  "useCase": "park / ikona miejsca",
+  "note": "Szachownica puchnie w kulę wokół koła środkowego. Z drona wygląda jak trójwymiarowa, a maluje się z szablonu kratki."
+ },
+ {
+  "id": "protractor-goals",
+  "name": "Protractor",
+  "eyebrow": "MASTERS II 02",
+  "familyId": "pro-protractor",
+  "variant": 4,
+  "paletteId": "stella",
+  "useCase": "street / turnieje",
+  "note": "Dwie półtarcze z pasów wyrastają z bramek. Mocny kolor na ciemnym tle, rytm jak na obrazach Franka Stelli."
+ },
+ {
+  "id": "neo-plastic",
+  "name": "Neo-Plastic",
+  "eyebrow": "MASTERS II 03",
+  "familyId": "pro-neoplastic",
+  "variant": 6,
+  "paletteId": "stijl",
+  "useCase": "szkoła / kampus",
+  "note": "Czarne belki i trzy podstawowe kolory, obie połowy identyczne po obrocie. Klasyka, która zawsze się broni."
+ },
+ {
+  "id": "overprint",
+  "name": "Overprint",
+  "eyebrow": "MASTERS II 04",
+  "familyId": "pro-overprint",
+  "variant": 1,
+  "paletteId": "martens",
+  "useCase": "marka / kampania",
+  "note": "Dwa systemy pasów nadrukowane na siebie, przecięcia w trzecim kolorze. Cztery farby, efekt druku na całym boisku."
+ },
+ {
+  "id": "ndebele-court",
+  "name": "Ndebele",
+  "eyebrow": "MASTERS II 05",
+  "familyId": "pro-ndebele",
+  "variant": 3,
+  "paletteId": "ndebele",
+  "useCase": "osiedle / mural",
+  "note": "Płaskie figury w grubych czarnych konturach, jak na malowanych domach Ndebele. Kontur ukrywa drobne nierówności malowania."
+ },
+ {
+  "id": "munich-chevrons",
+  "name": "Munich Chevrons",
+  "eyebrow": "MASTERS II 06",
+  "familyId": "pro-munich",
+  "variant": 2,
+  "paletteId": "aicher",
+  "useCase": "klub / sport",
+  "note": "Spokojne widmo pasów cięte pod 45° prowadzi grę do środka. Duch systemu Otla Aichera, czytelny z każdej strony."
+ },
+ {
+  "id": "promenade",
+  "name": "Promenade",
+  "eyebrow": "MASTERS II 07",
+  "familyId": "pro-promenade",
+  "variant": 1,
+  "paletteId": "copacabana",
+  "useCase": "bulwar / plac miejski",
+  "note": "Falujące pasy jak bruk nadmorskiej promenady. Dwie farby i taśma do łuków, efekt widać z daleka."
+ },
+ {
+  "id": "garden-plan",
+  "name": "Garden Plan",
+  "eyebrow": "MASTERS II 08",
+  "familyId": "pro-garden",
+  "variant": 3,
+  "paletteId": "burle-marx",
+  "useCase": "park / ogród",
+  "note": "Organiczne rabaty, część w pasy, i jedna ścieżka przez boisko. Projekt ogrodu zamieniony w nawierzchnię."
+ },
  {
   "id": "swiss-grid",
   "name": "Swiss Grid",

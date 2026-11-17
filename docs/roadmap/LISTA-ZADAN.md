@@ -40,6 +40,7 @@ Ostatnia aktualizacja: 13.11.2026
 | 26 | Strona główna „Poczuj różnicę.”: wybór 8 nawierzchni z przybliżaną teksturą, ceną za m², cechami i kosztem dla wybranego boiska | ✅ PR (ten) | DLA-CHATGPT-nawierzchnie-wybor.txt (2 bloki) | ⏳ |
 | 27 | Kontakt od nowa: 4 ścieżki („Zgłaszam miejsce” dla młodzieży i mieszkańców bez budżetu, z linkiem do projektu i opieką dla osób poniżej 16 lat), pytania pod ścieżkę w mailu, „co dalej”, FAQ; formularz CF7 3758 bez zmian | ✅ PR (ten) | DLA-CHATGPT-kontakt.txt | ⏳ |
 | 28 | Strona główna: „Z boiska.” jako 4 karty realizacji dla klienta (typ klienta, model z ceną, link do historii) bez zdjęć z turnieju i urodzin; „Stary beton” z osią kroków i paskiem cen malowania | ✅ PR (ten) | DLA-CHATGPT-z-boiska.txt (4 bloki) | ⏳ |
+| 29 | Studio: wzory nawierzchni Masters II — 8 nowych kierunków × 12 wariantów (Vasarely, Stella, De Stijl, Martens, Ndebele, Aicher, Burle Marx ×2), 8 palet, 8 projektów; zasady malowalności (min. 20 cm, maks. 5 farb, symetria) | ✅ PR (ten) | DLA-CHATGPT-studio-masters-2.txt | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |

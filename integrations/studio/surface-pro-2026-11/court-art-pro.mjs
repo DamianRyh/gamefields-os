@@ -524,6 +524,115 @@ function quilt(R, v, h, c) {
 }
 
 /* ---------------- catalogue ---------------- */
+/* ---------------- Masters II (2026-11-17) ----------------
+   Eight more directions, each taking the METHOD of a school or artist, never a specific work.
+   Paintability rules for this collection: every band, cell and outline is at least 8 px wide
+   (about 20 cm on a 15 x 10 m court, 40 px = 1 m), at most five paints from the palette plus,
+   where stated, one mixed overprint colour; compositions are symmetric about the court centre so
+   both halves play the same. */
+
+// 29 Vega Bulge — Victor Vasarely: a checker grid swelling into spheres
+function vega(R, v, h, c) {
+  const L = byLight(c); const A = L[0], B = L[4]; const glow = [L[1], L[2], L[3]]; const mode = v % 3; const cell = [40, 34, 30][Math.floor(v / 3) % 3];
+  const cy = h / 2; const centres = mode === 0 ? [[300, cy, h * 0.62]] : mode === 1 ? [[150, cy, h * 0.42], [450, cy, h * 0.42]] : [[150, h * 0.3, h * 0.3], [450, h * 0.7, h * 0.3]];
+  const warp = (x, y) => { let dx = 0, dy = 0; for (const [cx, cyy, Rr] of centres) { const rx = x - cx, ry = y - cyy, r = Math.hypot(rx, ry); if (r < 1e-6) continue; const k = (mode === 1 ? 0.32 : 0.42) * Rr * Math.exp(-((r / Rr) ** 2)) * Math.min(1, r / (Rr * 0.35)); dx += (rx / r) * k; dy += (ry / r) * k; } return [x + dx, y + dy]; };
+  const inside = (x, y) => { let best = 9; for (const [cx, cyy, Rr] of centres) best = Math.min(best, Math.hypot(x - cx, y - cyy) / Rr); return best; };
+  const nx = Math.ceil(W / cell) + 1, ny = Math.ceil(h / cell) + 1; const ox = (W - (nx - 1) * cell) / 2, oy = (h - (ny - 1) * cell) / 2; let s = rect(0, 0, W, h, B);
+  for (let j = -1; j < ny; j++) for (let i = -1; i < nx; i++) {
+    const x0 = ox + i * cell, y0 = oy + j * cell; const corners = [[x0, y0], [x0 + cell, y0], [x0 + cell, y0 + cell], [x0, y0 + cell]].map(([x, y]) => warp(x, y));
+    const d = inside(x0 + cell / 2, y0 + cell / 2); const dark = (i + j) % 2 === 0;
+    let col = dark ? A : B; if (d < 1) { const band = Math.min(2, Math.floor(d * 3)); col = dark ? glow[2 - band] : B; }
+    if (col !== B) s += poly(corners, col);
+  }
+  return s;
+}
+
+// 30 Protractor — Frank Stella: half-discs of concentric bands anchored on the court's own geometry
+function protractor(R, v, h, c) {
+  const L = byLight(c); const bg = v % 2 ? L[4] : L[0]; const o = others(c, bg); const mode = v % 4; const bw = [22, 18, 26][v % 3]; const cy = h / 2; let s = rect(0, 0, W, h, bg);
+  const half = (cx, cyy, rMax, a0, a1, shift) => { let out = ''; const n = Math.floor(rMax / bw); for (let i = n; i >= 1; i--) out += sector(cx, cyy, 0, i * bw, a0, a1, pick(o, i + shift)); return out; };
+  if (mode === 0) { s += half(0, cy, h * 0.48, -Math.PI / 2, Math.PI / 2, v); s += half(W, cy, h * 0.48, Math.PI / 2, Math.PI * 1.5, v); }
+  else if (mode === 1) { const g = half(300, h, h * 0.92, Math.PI, Math.PI * 2, v); s += g + rot180(h, half(300, h, h * 0.55, Math.PI, Math.PI * 2, v + 1)); }
+  else if (mode === 2) { [[150, h], [450, h]].forEach(([x, y], k) => { s += half(x, y, h * 0.62, Math.PI, Math.PI * 2, v + k); }); s += rot180(h, half(300, h, h * 0.4, Math.PI, Math.PI * 2, v + 2)); }
+  else { const n = 6 + (v % 3) * 2; const g = (cx, cyy, a0, a1) => { let out = ''; for (let i = 0; i < n; i++) { const t0 = a0 + (a1 - a0) * i / n, t1 = a0 + (a1 - a0) * (i + 1) / n; out += sector(cx, cyy, h * 0.12, h * 0.46, t0, t1, pick(o, i + v)); } return out + sector(cx, cyy, 0, h * 0.12, a0, a1, bg); }; s += g(0, cy, -Math.PI / 2, Math.PI / 2) + g(W, cy, Math.PI / 2, Math.PI * 1.5); }
+  return s;
+}
+
+// 31 Neo-Plastic — De Stijl: black bars split the court, a few primary planes; point symmetry for fair play
+function neoplastic(R, v, h, c) {
+  const L = byLight(c); const ground = L[4], bar = L[0]; const acc = [L[1], L[2], L[3]]; const lw = [10, 12, 14][v % 3]; const depth = 2 + (v % 3); const nAcc = 2 + (v % 2);
+  const cells = []; const split = (x, y, w, hh, d) => { if (d === 0 || (w < 90 && hh < 90)) { cells.push([x, y, w, hh]); return; } const vert = w / hh > 1.1 ? true : w / hh < 0.8 ? false : R() > 0.5; const t = 0.32 + R() * 0.36; if (vert) { const a = w * t; split(x, y, a, hh, d - 1); split(x + a, y, w - a, hh, d - 1); } else { const a = hh * t; split(x, y, w, a, d - 1); split(x, y + a, w, hh - a, d - 1); } };
+  split(0, 0, 300, h, depth);
+  const sorted = [...cells].sort((p, q) => q[2] * q[3] - p[2] * p[3]); const fills = new Map(); for (let i = 0; i < nAcc; i++) fills.set(sorted[(i * 2 + v) % sorted.length], acc[(i + v) % 3]);
+  let g = ''; for (const cl of cells) { if (fills.has(cl)) g += rect(cl[0], cl[1], cl[2], cl[3], fills.get(cl)); }
+  for (const [x, y, w, hh] of cells) { g += rect(x - lw / 2, y - lw / 2, w + lw, lw, bar) + rect(x - lw / 2, y - lw / 2, lw, hh + lw, bar); }
+  g += rect(300 - lw / 2, 0, lw, h, bar);
+  return rect(0, 0, W, h, ground) + g + rot180(h, g);
+}
+
+// 32 Overprint — Karel Martens: two stripe systems printed over each other; the overlap is a third, mixed colour
+function overprint(R, v, h, c) {
+  const L = byLight(c); const bg = L[4]; const X = c[(v + 1) % 5] === bg ? L[1] : c[(v + 1) % 5]; let Y = c[(v + 3) % 5]; if (Y === bg || Y === X) Y = L[2] === X ? L[3] : L[2]; const XY = mix(X, Y, 0.5) === X ? L[0] : mix(mix(X, Y, 0.5), L[0], 0.35);
+  const mode = v % 3; const bw = [28, 22, 34][v % 3], gap = bw * (1 + (v % 2) * 0.6); const k = mode === 0 ? 0 : mode === 1 ? 0.6 : -0.6; let s = rect(0, 0, W, h, bg);
+  const hBands = []; for (let y = (h - Math.floor(h / (bw + gap)) * (bw + gap) + gap) / 2; y < h; y += bw + gap) hBands.push([y, y + bw]);
+  const dBands = []; const span = W + Math.abs(k) * h; for (let d = -Math.abs(k) * h + ((span % (bw * 1.6 + gap)) / 2); d < W; d += bw * 1.6 + gap) dBands.push([d, d + bw * 1.6]);
+  for (const [y0, y1] of hBands) s += rect(0, y0, W, y1 - y0, X);
+  const band = (d0, d1, ya, yb) => [[d0 + k * ya, ya], [d1 + k * ya, ya], [d1 + k * yb, yb], [d0 + k * yb, yb]];
+  for (const [d0, d1] of dBands) s += poly(band(d0, d1, -2, h + 2), Y);
+  for (const [y0, y1] of hBands) for (const [d0, d1] of dBands) s += poly(band(d0, d1, y0, y1), XY);
+  return s;
+}
+
+// 33 Ndebele — mural painting of the Ndebele women: bold black outlines around flat geometric colour, mirrored registers
+function ndebele(R, v, h, c) {
+  const L = byLight(c); const ink = L[0], wall = L[4]; const col = [L[1], L[2], L[3]]; const per = [3, 4, 5][v % 3]; const rows = per >= 5 ? 2 : 2 + (v % 2); const ow = 7 + (v % 2) * 2; const rh = h / rows, cw = 300 / per;
+  const stroke = ' stroke="' + ink + '" stroke-width="' + ow + '" stroke-linejoin="miter"';
+  const P = (list, fill) => '<polygon points="' + pts(list) + '" fill="' + fill + '"' + stroke + '/>';
+  let g = '';
+  for (let r = 0; r < rows; r++) for (let i = 0; i < per; i++) {
+    const x = i * cw, y = r * rh, m = (i + r * 2 + v) % 4, a = col[(i + r + v) % 3], b = col[(i + r + v + 1) % 3];
+    g += '<rect x="' + f(x) + '" y="' + f(y) + '" width="' + f(cw) + '" height="' + f(rh) + '" fill="' + wall + '"' + stroke + '/>';
+    const px = cw * 0.16, py = rh * 0.14;
+    if (m === 0) g += P([[x + px, y + py], [x + cw / 2, y + rh / 2], [x + cw - px, y + py], [x + cw - px, y + rh * 0.45], [x + cw / 2, y + rh - py], [x + px, y + rh * 0.45]], a);
+    else if (m === 1) g += P([[x + cw / 2, y + py], [x + cw - px, y + rh / 2], [x + cw / 2, y + rh - py], [x + px, y + rh / 2]], a) + P([[x + cw / 2, y + rh * 0.34], [x + cw * 0.66, y + rh / 2], [x + cw / 2, y + rh * 0.66], [x + cw * 0.34, y + rh / 2]], b);
+    else if (m === 2) { const st = 3; for (let k = 0; k < st; k++) { const w2 = (cw - 2 * px) * (1 - k / st), h2 = (rh - 2 * py) / st; g += P([[x + cw / 2 - w2 / 2, y + rh - py - k * h2], [x + cw / 2 + w2 / 2, y + rh - py - k * h2], [x + cw / 2 + w2 / 2, y + rh - py - (k + 1) * h2], [x + cw / 2 - w2 / 2, y + rh - py - (k + 1) * h2]], k % 2 ? b : a); } }
+    else g += P([[x + px, y + py], [x + cw - px, y + py], [x + cw / 2, y + rh / 2]], a) + P([[x + px, y + rh - py], [x + cw - px, y + rh - py], [x + cw / 2, y + rh / 2]], b);
+  }
+  return rect(0, 0, W, h, wall) + g + '<g transform="matrix(-1 0 0 1 600 0)">' + g + '</g>';
+}
+
+// 34 Munich Bands — Otl Aicher's 1972 system: a calm spectrum of parallel bands, 45° cuts, no outlines
+function munich(R, v, h, c) {
+  const L = byLight(c); const bg = L[4]; const seq = [L[0], L[1], L[2], L[3]]; const mode = v % 3; const bw = [24, 30, 20][v % 3]; const n = 6 + (v % 3) * 2; let s = rect(0, 0, W, h, bg);
+  if (mode === 0) { const per = 4 * bw + bw * 1.5; let g = ''; for (let d = -h - per; d < W + per; d += per) for (let i = 0; i < 4; i++) { const d0 = d + i * bw; g += poly([[d0, 0], [d0 + bw, 0], [d0 + bw + h, h], [d0 + h, h]], seq[(i + v) % 4]); } s += g; }
+  else if (mode === 1) { let g = ''; const top = (h - n * bw) / 2; for (let i = 0; i < n; i++) { const y = top + i * bw, len = 120 + ((i * 37 + v * 11) % 5) * 22; g += poly([[0, y], [len, y], [len + bw, y + bw], [0, y + bw]], seq[(i + v) % 4]); } s += g + rot180(h, g); }
+  else { let g = ''; for (let i = 0; i < n; i++) { const o = i * bw; g += poly([[o, 0], [o + bw, 0], [300 - h / 2 + o + bw, h / 2], [o + bw, h], [o, h], [300 - h / 2 + o, h / 2]].map(([x, y]) => [Math.min(x, 300), y]), seq[(i + v) % 4]); } s += g + '<g transform="matrix(-1 0 0 1 600 0)">' + g + '</g>'; }
+  return s;
+}
+
+// 35 Promenade — Portuguese pavement waves (Copacabana promenade by Roberto Burle Marx): two-colour undulating bands
+function promenade(R, v, h, c) {
+  const L = byLight(c); const A = v % 2 ? L[0] : L[1], B = L[4], C = L[2]; const three = v % 3 === 2; const vertical = v % 4 >= 2; const n = [8, 10, 12][v % 3]; const amp = [0.35, 0.5, 0.42][v % 3]; const lam = [2, 3, 1.5][(v >> 1) % 3];
+  const len = vertical ? h : W, wid = vertical ? W : h; const step = wid / n; let s = rect(0, 0, W, h, B);
+  const curve = (o) => { const p = []; for (let t = 0; t <= 24; t++) { const u = (t / 24) * len; p.push([u, o + Math.sin((u / len) * Math.PI * 2 * lam + o * 0.02) * step * amp]); } return p; };
+  for (let i = 0; i < n; i += 1) { if (i % 2 === 1 && !three) continue; const a = curve(i * step), b = curve((i + 1) * step).reverse(); const d = openCurve(a) + 'L' + openCurve(b).slice(1) + 'Z'; const col = three ? [A, B, C][i % 3] : A; s += vertical ? '<g transform="matrix(0 1 1 0 0 0)">' + pathF(d, col) + '</g>' : pathF(d, col); }
+  return s;
+}
+
+// 36 Garden Plan — Roberto Burle Marx garden plans: organic beds, some striped, on one calm ground; point symmetry
+function gardenPlan(R, v, h, c, uid) {
+  const L = byLight(c); const ground = v % 2 ? L[3] : L[4]; const o = others(c, ground); const n = 2 + (v % 2); const sw = 12 + (v % 2) * 4; let defs = '', g = '';
+  for (let i = 0; i < n; i++) {
+    const cx = 60 + (i / Math.max(1, n - 1)) * 170 + (R() - 0.5) * 30, cy = h * (0.25 + ((i + v) % 3) * 0.25) + (R() - 0.5) * 40, r = 55 + R() * 45; const d = blob(cx, cy, r, R, 9, 0.32, 1.25, 0.85); const col = pick(o, i + v); const id = uid + 'g' + i;
+    if ((i + v) % 2 === 0) { defs += '<clipPath id="' + id + '"><path d="' + d + '"/></clipPath>'; let st = pathF(d, pick(o, i + v + 1)); for (let y = cy - r * 1.4; y < cy + r * 1.4; y += sw * 2) st += rect(cx - r * 1.6, y, r * 3.2, sw, col); g += '<g clip-path="url(#' + id + ')">' + st + '</g>'; }
+    else g += pathF(d, col);
+  }
+  const path = openCurve([[0, h * 0.82], [90, h * 0.7], [170, h * 0.86], [250, h * 0.62], [300, h * 0.5]]); g += pathS(path, pick(o, v + 3), 16);
+  const g2 = g.split(uid + 'g').join(uid + 'h'); const defs2 = defs.split(uid + 'g').join(uid + 'h');
+  return '<defs>' + defs + defs2 + '</defs>' + rect(0, 0, W, h, ground) + g + rot180(h, g2);
+}
+
+
 export const PRO_FAMILIES = [
   { id: 'pro-fade', name: 'Duperré Fade', short: 'FADE', group: 'premium', renderer: fade, masking: 'wysoka', description: 'Schodkowy gradient od bramek do środka, symetryczny względem linii środkowej.', inspiration: 'Pigalle Duperré, Paryż (Ill-Studio, Pigalle, Nike, 2017)' },
   { id: 'pro-fields', name: 'Colour Field', short: 'FIELD', group: 'premium', renderer: fields, masking: 'średnia', description: 'Malarskie pola koloru dzielone rekurencyjnie, z akcentami w wybranych polach.', inspiration: 'William LaChance, Kinloch Park, St Louis (Project Backboard)' },
@@ -553,6 +662,14 @@ export const PRO_FAMILIES = [
   { id: 'pro-loops', name: 'Loop Bands', short: 'WAVE', group: 'organic', renderer: loops, masking: 'wysoka', description: 'Grube, falujące pasy z konturem w kontrze — poziomo albo pętlami wokół środka.', inspiration: 'Sol LeWitt, późne „wall drawings”' },
   { id: 'pro-kinetic', name: 'Kinetic Stripes', short: 'KINET', group: 'geometric', renderer: kinetic, masking: 'bardzo wysoka', description: 'Drobne pasy, których pary kolorów zmieniają się strefami — kolor „drga” w ruchu.', inspiration: 'Carlos Cruz-Diez, „Physichromie”, kolor kinetyczny' },
   { id: 'pro-quilt', name: 'Housetop Quilt', short: 'QUILT', group: 'play', renderer: quilt, masking: 'wysoka', description: 'Improwizowane bloki „housetop” i pasy, nic idealnie równe — ciepło tkaniny.', inspiration: 'Kołdry z Gee’s Bend, Alabama' },
+  { id: 'pro-vega', name: 'Vega Bulge', short: 'VEGA', group: 'geometric', renderer: vega, masking: 'bardzo wysoka', description: 'Szachownica, która puchnie w kule: przy kole środkowym albo w obu połowach.', inspiration: 'Victor Vasarely, op-art' },
+  { id: 'pro-protractor', name: 'Protractor', short: 'ARC', group: 'premium', renderer: protractor, masking: 'wysoka', description: 'Półtarcze z koncentrycznych pasów oparte o bramki, linię boczną albo koło.', inspiration: 'Frank Stella, seria Protractor' },
+  { id: 'pro-neoplastic', name: 'Neo-Plastic', short: 'STIJL', group: 'geometric', renderer: neoplastic, masking: 'średnia', description: 'Czarne belki dzielą boisko na prostokąty, kilka pól w kolorze; obie połowy grają tak samo.', inspiration: 'De Stijl, Piet Mondrian' },
+  { id: 'pro-overprint', name: 'Overprint', short: 'PRINT', group: 'brand', renderer: overprint, masking: 'średnia', description: 'Dwa systemy pasów nadrukowane na siebie; przecięcia w trzecim, zmieszanym kolorze.', inspiration: 'Karel Martens, nadruki' },
+  { id: 'pro-ndebele', name: 'Ndebele', short: 'NDEB', group: 'street', renderer: ndebele, masking: 'wysoka', description: 'Mocne czarne kontury wokół płaskich figur w rejestrach, lustrzane odbicie połów.', inspiration: 'Malarstwo ścienne kobiet Ndebele' },
+  { id: 'pro-munich', name: 'Munich Bands', short: 'MUC', group: 'brand', renderer: munich, masking: 'średnia', description: 'Spokojne widmo równoległych pasów cięte pod 45°: pole, drabina albo strzałki do środka.', inspiration: 'Otl Aicher, system identyfikacji 1972' },
+  { id: 'pro-promenade', name: 'Promenade', short: 'PROM', group: 'organic', renderer: promenade, masking: 'wysoka', description: 'Falujące pasy jak bruk promenady: dwa albo trzy kolory, wzdłuż albo w poprzek.', inspiration: 'Roberto Burle Marx, promenada Copacabana' },
+  { id: 'pro-garden', name: 'Garden Plan', short: 'GARDEN', group: 'organic', renderer: gardenPlan, masking: 'średnia', description: 'Organiczne rabaty, część w pasy, na jednym tle i jedna ścieżka; symetria punktowa.', inspiration: 'Roberto Burle Marx, plany ogrodów' },
 ];
 
 export const PRO_PALETTES = [
@@ -576,6 +693,14 @@ export const PRO_PALETTES = [
   { id: 'nihon', name: 'Nihon', colors: ['#D6342C', '#1D2A44', '#E9B44C', '#2F6F8F', '#F3EBDD'], tone: 'graficzna' },
   { id: 'cruz-diez', name: 'Cruz-Diez', colors: ['#E63A2E', '#1D9E5A', '#2B5FD9', '#111111', '#F7F3EA'], tone: 'kinetyczna' },
   { id: 'gees-bend', name: 'Gee’s Bend', colors: ['#2E4A7A', '#B5462F', '#E2C08D', '#6F7D3A', '#F1E9DA'], tone: 'tekstylna' },
+  { id: 'vasarely', name: 'Vasarely', colors: ['#1B1464', '#5B2C8F', '#C2187E', '#F2A2C0', '#F4F1EA'], tone: 'optyczna' },
+  { id: 'stella', name: 'Stella', colors: ['#F25C05', '#F2B705', '#0FA3B1', '#D7263D', '#1B1B1E'], tone: 'fluorescencyjna' },
+  { id: 'stijl', name: 'De Stijl', colors: ['#111111', '#D52B1E', '#1F4E9C', '#F2C230', '#F5F2EA'], tone: 'klasyczna' },
+  { id: 'martens', name: 'Martens', colors: ['#1E1E1E', '#E5383B', '#2A6FDB', '#F2C14E', '#F2EFE6'], tone: 'drukarska' },
+  { id: 'ndebele', name: 'Ndebele', colors: ['#141414', '#1F4FA3', '#E23B2E', '#F4C430', '#F7F3EA'], tone: 'muralowa' },
+  { id: 'aicher', name: 'Aicher 72', colors: ['#0F5B3A', '#2E9C5E', '#6FB7E9', '#F08A24', '#F2F2EE'], tone: 'olimpijska' },
+  { id: 'copacabana', name: 'Copacabana', colors: ['#141414', '#7A7A72', '#C9B79C', '#E8E0D0', '#F6F3EC'], tone: 'promenada' },
+  { id: 'burle-marx', name: 'Burle Marx', colors: ['#1F5E3A', '#7DB04B', '#C8553D', '#F2C14E', '#EFE7D6'], tone: 'ogrodowa' },
 ];
 
 const FAM = Object.fromEntries(PRO_FAMILIES.map((x) => [x.id, x]));
