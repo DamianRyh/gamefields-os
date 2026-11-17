@@ -260,11 +260,12 @@
     var FRAMES = [['none', 'Bez ramy', ''], ['black', 'Czarna', '#161013'], ['oak', 'Dąb', '#B98A5B'], ['white', 'Biała', '#F7F5F2'], ['alu', 'Aluminium', '#A8A8A4']];
     var PAPERS = [['#FFFFFF', 'Biały'], ['#F4F1EE', 'Kremowy'], ['#161013', 'Czarny'], ['#47132D', 'Śliwka']];
     var WALLS = [['#EFEAE4', 'Ciepła biel'], ['#C9C4BE', 'Beton'], ['#B7C1A9', 'Szałwia'], ['#2B2226', 'Grafit']];
-    var LAYOUTS = [['gallery', 'Galeria'], ['bleed', 'Pełny spad'], ['type', 'Wielki tytuł'], ['match', 'Matchday'], ['side', 'Pion']];
+    // Posters carry no text since 2026-11-17: one layout only, the pattern bleeds to every edge.
+    var LAYOUTS = [['bleed', 'Pełny spad']];
     var LINES = [['auto', 'Auto'], ['#FFFFFF', 'Białe'], ['#111111', 'Czarne'], ['#D8F24A', 'Limonka'], ['none', 'Bez linii']];
     var HEX = /^#[0-9A-Fa-f]{6}$/;
     var basePal = 'duperre';
-    var st = { fam: 'pro-fade', v: 2, pal: 'duperre', colors: PAL.duperre.colors.slice(), seed: 0, line: 'auto', layout: 'gallery', paper: 0, title: 'Mój plac', sub: 'Warszawa · Praga-Północ', note: 'Gramy od 2026', fmt: 0, frame: 0, wall: 0 };
+    var st = { fam: 'pro-fade', v: 2, pal: 'duperre', colors: PAL.duperre.colors.slice(), seed: 0, line: 'auto', layout: 'bleed', paper: 0, title: '', sub: '', note: '', fmt: 0, frame: 0, wall: 0 };
     var flat = false;
 
     var sheet = $('[data-pl-sheet]'), frame = $('[data-pl-frame]'), wall = $('[data-pl-wall]');
@@ -307,43 +308,14 @@
       var lines = words(s.title || ' ', 9), big = Math.min(118, fit(lines.reduce(function (a, b) { return b.length > a.length ? b : a; }, ''), W - 64, 118, 0.74));
       var b = boxFor(s.layout, W, H, lines.length, big);
       var o = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '"><rect width="' + W + '" height="' + H + '" fill="' + paper + '"/>' + artSvg(b, s, uid);
-      var ls = ' letter-spacing="1.4"', tight = ' letter-spacing="-1.2"';
-      if (s.layout === 'gallery') {
-        var ts = fit(s.title, 300, 40);
-        o += T(36, H - 66, s.title, ts, 800, ink, '', tight);
-        o += T(W - 36, H - 78, (s.sub || '').toUpperCase(), 9.5, 600, ink, 'end', ls) + T(W - 36, H - 63, (s.note || '').toUpperCase(), 9.5, 600, soft, 'end', ls);
-        o += '<rect x="36" y="' + (H - 46) + '" width="' + (W - 72) + '" height="1" fill="' + soft + '"/>';
-        o += T(36, H - 28, 'GAMEFIELDS · ' + fam, 8.5, 600, soft, '', ls) + T(W - 36, H - 28, dims + ' · ' + no, 8.5, 600, soft, 'end', ls);
-      } else if (s.layout === 'bleed') {
-        var ts2 = fit(s.title, 300, 34), lw = Math.max(210, Math.min(W - 48, String(s.title).length * ts2 * 0.58 + 36));
-        o += '<rect x="24" y="' + (H - 24 - 92) + '" width="' + lw + '" height="92" fill="' + paper + '"/>';
-        o += T(42, H - 24 - 52, s.title, ts2, 800, ink, '', tight);
-        o += T(42, H - 24 - 30, (s.sub || '').toUpperCase(), 8.5, 600, ink, '', ls) + T(42, H - 24 - 16, ((s.note ? s.note + ' · ' : '') + no).toUpperCase(), 8.5, 600, soft, '', ls);
-      } else if (s.layout === 'type') {
-        lines.forEach(function (ln, i) { o += T(30, 34 + big * 0.8 + i * big * 0.86, ln.toUpperCase(), big, 800, ink, '', ' letter-spacing="' + (-big * 0.05) + '"'); });
-        o += T(34, H - 30, (s.sub || '').toUpperCase(), 9.5, 600, ink, '', ls) + T(W - 34, H - 30, (s.note || '').toUpperCase(), 9.5, 600, soft, 'end', ls);
-        o += T(W - 34, H - 16, 'GAMEFIELDS · ' + no, 8, 600, soft, 'end', ls);
-      } else if (s.layout === 'match') {
-        var y0 = b.h, ts3 = fit(s.title, W - 72, 60, 0.58);
-        o += T(36, y0 + 30 + ts3 * 0.78, s.title, ts3, 800, ink, '', tight);
-        var gy = H - 96; o += '<rect x="36" y="' + gy + '" width="' + (W - 72) + '" height="1" fill="' + soft + '"/>';
-        var cells = [['MIEJSCE', s.sub || '–'], ['WYDARZENIE', s.note || '–'], ['BOISKO', dims], ['EDYCJA', no]], cw = (W - 72) / 2;
-        cells.forEach(function (c, i) { var cx = 36 + (i % 2) * cw, cy = gy + 20 + Math.floor(i / 2) * 34; var val = String(c[1]).toUpperCase(); o += T(cx, cy, c[0], 7.5, 600, soft, '', ls); o += T(cx, cy + 15, val, fit(val, cw - 14, 11, 0.7), 700, ink, '', ' letter-spacing="0.4"'); });
-        o += T(W - 36, H - 16, 'GAMEFIELDS · ' + fam, 7.5, 600, soft, 'end', ls);
-      } else if (s.layout === 'side') {
-        var colW = b.x, vt = fit(s.title, H - 150, colW * 0.62, 0.58);
-        o += '<g transform="translate(' + (colW * 0.5 + vt * 0.34) + ' ' + (H - 120) + ') rotate(-90)">' + T(0, 0, s.title, vt, 800, ink, '', tight) + '</g>';
-        o += T(22, 36, no, 9, 700, ink, '', ls);
-        o += T(22, H - 74, (s.sub || '').toUpperCase().slice(0, 26), 7.5, 600, ink, '', ls) + T(22, H - 60, (s.note || '').toUpperCase().slice(0, 26), 7.5, 600, soft, '', ls);
-        o += '<rect x="22" y="' + (H - 48) + '" width="' + (colW - 44) + '" height="1" fill="' + soft + '"/>' + T(22, H - 30, 'GAMEFIELDS', 7.5, 700, soft, '', ls) + T(22, H - 18, dims, 7.5, 600, soft, '', ls);
-      }
       return o + '</svg>';
     }
 
     /* ---------- controls ---------- */
-    function press(container, test) { $$('[aria-pressed]', container).forEach(function (b, i) { b.setAttribute('aria-pressed', String(test(b, i))); }); }
+    function press(container, test) { if (!container) return; $$('[aria-pressed]', container).forEach(function (b, i) { b.setAttribute('aria-pressed', String(test(b, i))); }); }
     function chipList(sel, list, onPick, swatch) {
       var g = $(sel);
+      if (!g) return null; // control removed from the page (e.g. paper colour since posters are full bleed)
       list.forEach(function (it, i) {
         var b = el('button', { type: 'button', class: swatch ? 'sw2' : 'chip', 'aria-pressed': 'false', 'aria-label': it[1] || it[0] }, swatch ? '' : esc(it[1] || it[0]));
         if (swatch) b.style.background = it[0];
@@ -383,14 +355,14 @@
     var linesBox = chipList('[data-pl-lines]', LINES, function (i) { st.line = LINES[i][0]; draw(); });
     var papersBox = chipList('[data-pl-papers]', PAPERS, function (i) { st.paper = i; draw(); });
     var laysBox = $('[data-pl-lays]');
-    LAYOUTS.forEach(function (l, i) {
+    if (laysBox) LAYOUTS.forEach(function (l, i) {
       var b = el('button', { type: 'button', 'aria-pressed': 'false' }, '');
       b.addEventListener('click', function () { st.layout = l[0]; draw(); });
       laysBox.appendChild(b);
     });
     var fmtBox = chipList('[data-pl-formats]', FORMATS.map(function (f) { return [f.name, f.size + ' · ' + f.price + ' zł']; }), function (i) { st.fmt = i; draw(); });
     var wallBox = chipList('[data-pl-walls]', WALLS, function (i) { st.wall = i; draw(); }, true);
-    [inTitle, inSub, inNote].forEach(function (inp) { inp.addEventListener('input', function () { st.title = inTitle.value; st.sub = inSub.value; st.note = inNote.value; schedule(); }); });
+    [inTitle, inSub, inNote].filter(Boolean).forEach(function (inp) { inp.addEventListener('input', function () { st.title = inTitle ? inTitle.value : ''; st.sub = inSub ? inSub.value : ''; st.note = inNote ? inNote.value : ''; schedule(); }); });
     $('[data-pl-random]').addEventListener('click', function () {
       var f = G.PRO_FAMILIES[Math.floor(Math.random() * G.PRO_FAMILIES.length)], p = G.PRO_PALETTES[Math.floor(Math.random() * G.PRO_PALETTES.length)];
       st.fam = f.id; st.v = 1 + Math.floor(Math.random() * 12); st.pal = p.id; basePal = p.id; st.colors = p.colors.slice(); st.seed = Math.floor(Math.random() * 999999); st.layout = LAYOUTS[Math.floor(Math.random() * LAYOUTS.length)][0]; draw();
@@ -428,7 +400,7 @@
       $('[data-pl-famname]').textContent = f.name;
       $('[data-pl-insp]').textContent = f.inspiration;
       $('[data-pl-palname]').textContent = st.pal === 'custom' ? 'Własne kolory' : PAL[st.pal].name;
-      $('[data-pl-layname]').textContent = LAYOUTS.filter(function (l) { return l[0] === st.layout; })[0][1];
+      if ($('[data-pl-layname]')) $('[data-pl-layname]').textContent = LAYOUTS.filter(function (l) { return l[0] === st.layout; })[0][1];
       press(sigBox, function (b, i) { var s = SIGP[i]; return s.familyId === st.fam ? (s.variant === st.v ? (s.paletteId === st.pal ? !st.seed : false) : false) : false; });
       press(famsBox, function (b, i) { return G.PRO_FAMILIES[i].id === st.fam; });
       press(varsBox, function (b, i) { return i + 1 === st.v; });
@@ -439,9 +411,9 @@
       press(wallBox, function (b, i) { return i === st.wall; });
       press(laysBox, function (b, i) { return LAYOUTS[i][0] === st.layout; });
       colInputs.forEach(function (inp, k) { if (document.activeElement !== inp) inp.value = st.colors[k]; });
-      if (document.activeElement !== inTitle) inTitle.value = st.title;
-      if (document.activeElement !== inSub) inSub.value = st.sub;
-      if (document.activeElement !== inNote) inNote.value = st.note;
+      if (inTitle) { if (document.activeElement !== inTitle) inTitle.value = st.title; }
+      if (inSub) { if (document.activeElement !== inSub) inSub.value = st.sub; }
+      if (inNote) { if (document.activeElement !== inNote) inNote.value = st.note; }
       $('[data-pl-sum]').textContent = summary();
       $('[data-pl-court]').href = STUDIO + '?pattern=' + encodeURIComponent(st.fam) + courtQuery();
       drawLayoutThumbs();
@@ -456,6 +428,7 @@
     function courtQuery() { return ['variant=' + st.v, 'palette=' + encodeURIComponent(st.pal === 'custom' ? basePal : st.pal)].map(function (q) { return String.fromCharCode(38) + q; }).join(''); }
     var layKey = '';
     function drawLayoutThumbs() {
+      if (!laysBox) return;
       var key = [st.fam, st.v, st.colors.join(''), st.seed, st.line, st.paper, st.title, st.sub, st.note, st.fmt].join('|');
       if (key === layKey) return; layKey = key;
       $$('button', laysBox).forEach(function (b, i) {
@@ -483,7 +456,7 @@
         if (LINES.some(function (l) { return l[0] === c.l; })) st.line = c.l;
         if (LAYOUTS.some(function (l) { return l[0] === c.y; })) st.layout = c.y;
         if (PAPERS[c.pa]) st.paper = c.pa;
-        if (typeof c.t === 'string') st.title = c.t.slice(0, 28);
+        // older shared links may carry a title: posters have no text now, so it is ignored
         if (typeof c.u === 'string') st.sub = c.u.slice(0, 34);
         if (typeof c.n === 'string') st.note = c.n.slice(0, 34);
         if (FORMATS[c.fm]) st.fmt = c.fm;
@@ -501,11 +474,11 @@
 
     PL.ready = true;
     PL.get = function () { return { fam: st.fam, v: st.v, pal: st.pal, colors: st.colors.slice() }; };
-    PL.order = function () { return { name: st.title || 'bez tytułu', text: summary() + ' · No. ' + edition() + ' · link: ' + shareUrl() }; };
+    PL.order = function () { return { name: 'Plakat ' + FAM[st.fam].name, text: summary() + ' · No. ' + edition() + ' · link: ' + shareUrl() }; };
     PL.size = function () { return FORMATS[st.fmt].size; };
     PL.price = function () { var s = window.GF_SHOP, f = s ? (s.poster ? (s.poster.formats ? s.poster.formats[FORMATS[st.fmt].size] : null) : null) : null; return f ? f[1] : FORMATS[st.fmt].price; };
     PL.link = shareUrl;
-    PL.note = function () { return '„' + (st.title || 'bez tytułu') + '” · ' + summary() + ' · No. ' + edition(); };
+    PL.note = function () { return 'Plakat ' + FAM[st.fam].name + ' · ' + summary() + ' · No. ' + edition(); };
     var shared = loadShared();
     draw();
     (window.requestIdleCallback || function (fn) { return setTimeout(fn, 400); })(paintThumbs);

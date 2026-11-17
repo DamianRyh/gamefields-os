@@ -1159,7 +1159,7 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 <section id="plakaty" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-print">
   <div class="head">
     <div class="hd"><p class="kicker m">Plakaty</p><h2 class="d" id="gfs-print">Boisko na ścianę.</h2></div>
-    <div class="side"><p>Zaprojektuj plakat z własnym boiskiem. 16 kierunków artystycznych, 192 kompozycje, każdy kolor i każdy napis do zmiany. Druk na papierze archiwalnym, numerowana edycja. Każdy zakup wspiera rozwój Gamefields.</p></div>
+    <div class="side"><p>Zaprojektuj plakat z własnym boiskiem: sam wzór na pełnym spadzie, od krawędzi do krawędzi, bez napisów. Dziesiątki kierunków artystycznych i każdy kolor do zmiany. Druk na papierze archiwalnym, numerowana edycja. Każdy zakup wspiera rozwój Gamefields.</p></div>
   </div>
   <div class="pl">
     <div class="pl-stage">
@@ -1179,8 +1179,6 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
       <div class="pl-tabs" role="tablist" aria-label="Edycja plakatu">
         <button type="button" role="tab" id="pl-t-art" aria-controls="pl-p-art" aria-selected="true">Wzór</button>
         <button type="button" role="tab" id="pl-t-col" aria-controls="pl-p-col" aria-selected="false" tabindex="-1">Kolory</button>
-        <button type="button" role="tab" id="pl-t-txt" aria-controls="pl-p-txt" aria-selected="false" tabindex="-1">Tekst</button>
-        <button type="button" role="tab" id="pl-t-lay" aria-controls="pl-p-lay" aria-selected="false" tabindex="-1">Układ</button>
         <button type="button" role="tab" id="pl-t-prn" aria-controls="pl-p-prn" aria-selected="false" tabindex="-1">Druk</button>
       </div>
       <div class="pl-panel" role="tabpanel" id="pl-p-art" aria-labelledby="pl-t-art">
@@ -1199,18 +1197,6 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
         <div class="pl-colors" data-pl-colors></div>
         <div class="pl-h"><b>Linie boiska</b></div>
         <div class="chips" data-pl-lines role="group" aria-label="Linie boiska"></div>
-        <div class="pl-h"><b>Papier</b></div>
-        <div class="chips" data-pl-papers role="group" aria-label="Kolor papieru"></div>
-      </div>
-      <div class="pl-panel" role="tabpanel" id="pl-p-txt" aria-labelledby="pl-t-txt" hidden>
-        <label class="pl-field"><span>Tytuł</span><input class="input" id="pl-title" maxlength="28" value="Mój plac"></label>
-        <label class="pl-field"><span>Miejsce</span><input class="input" id="pl-sub" maxlength="34" value="Warszawa · Praga-Północ"></label>
-        <label class="pl-field"><span>Dopisek</span><input class="input" id="pl-note" maxlength="34" value="Gramy od 2026"></label>
-        <p class="pl-hint">Nazwa podwórka, drużyny, ulicy, data meczu albo dedykacja. Numer edycji nadajemy automatycznie.</p>
-      </div>
-      <div class="pl-panel" role="tabpanel" id="pl-p-lay" aria-labelledby="pl-t-lay" hidden>
-        <div class="pl-h"><b>Układ plakatu</b><span data-pl-layname>Galeria</span></div>
-        <div class="pl-lays" data-pl-lays role="group" aria-label="Układ plakatu"></div>
       </div>
       <div class="pl-panel" role="tabpanel" id="pl-p-prn" aria-labelledby="pl-t-prn" hidden>
         <div class="pl-h"><b>Format</b><span>sam print, bez ramy · ceny brutto</span></div>
@@ -1455,7 +1441,7 @@ refresh.addEventListener('click',load);document.addEventListener('visibilitychan
 <!-- gf-blok: skrypty -->
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-pro.js?v=81274c9b16"></script>
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-ball-core.js?v=0dff1b42a9"></script>
-<script defer src="/wp-content/themes/gamefields/assets/js/home/gf-home.js?v=9af2573c74"></script>
+<script defer src="/wp-content/themes/gamefields/assets/js/home/gf-home.js?v=b27702740c"></script>
 <script>(function(){const names={"w1":"Panna Ring","o1":"Panna Play","p1":"Panna Court","street15":"Street Arena 15","circle-cage-1":"Panna Cage 90","circle-cage-2":"Panna Cage 180","street-field":"Panna Grid","octagon":"Panna Octa","street-football-15x10":"Street Arena 15","panna-perfo-circle": "Panna Perfo-Circle", "panna-perfo-rect": "Panna Perfo-Rect", "panna-net-rect": "Panna Net-Rect", "panna-solid-circle": "Panna Solid-Circle", "panna-net-circle": "Panna Net-Circle", "panna-high-net-circle": "Panna High Net-Circle", "panna-steel-octaground": "Panna Steel OctaGround"};const key=new URLSearchParams(window.location.search).get('gf_product');if(!Object.prototype.hasOwnProperty.call(names,key))return;const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]');if(!field)return;const name=names[key],summary='Wybrany model: '+name+'. Proszę o dobór konfiguracji i wycenę dla mojej lokalizacji.';root.dataset.gfProductName=name;field.addEventListener('input',function(){if(!field.value.includes(summary))delete root.dataset.gfProductName});field.value=summary+(field.value.trim()?'\n\n'+field.value.trim():'');field.dispatchEvent(new Event('input',{bubbles:true}));const attached=root.querySelector('#gc-attached');if(attached){attached.textContent='Wybrany model: '+name+'. Opisz miejsce i sposób użytkowania — model został dołączony do zapytania.';attached.hidden=false;}if(window.location.hash==='#kontakt'){root.querySelector('#kontakt')?.scrollIntoView({behavior:'auto'});root.querySelector('[name="your-email"]')?.focus({preventScroll:true});}})();</script>
 <script>(function(){const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]'),review=root?.querySelector('#gc-project-review'),text=root?.querySelector('#gc-project-text'),status=root?.querySelector('#gc-review-status');if(!field||!review||!text||!status)return;let cleared=false;function render(){const value=field.value.trim();text.textContent=value;review.hidden=!value;if(!value){review.open=false;root.querySelector('#gc-attached').hidden=true;status.textContent=cleared?'Dołączone parametry usunięte. Twoja wiadomość i dane kontaktowe pozostały w formularzu.':'';}else status.textContent='Parametry dołączone — możesz je przejrzeć przed wysłaniem.';}field.addEventListener('input',function(){cleared=false;queueMicrotask(render)});root.querySelector('#gc-clear-project').addEventListener('click',function(){field.value='';field.dispatchEvent(new Event('input',{bubbles:true}));cleared=true;delete root.dataset.gfProductName;root.querySelectorAll('[data-gf-inquiry]').forEach(function(item){item.setAttribute('aria-pressed','false');item.closest('.gc-direction').setAttribute('data-selected','false')});root.querySelector('#gc-direction-status').textContent='Wybór kierunku usunięty. Możesz wybrać inny.';const url=new URL(window.location.href);url.searchParams.delete('gf_product');window.history.replaceState(window.history.state,'',url);status.textContent='Dołączone parametry usunięte. Twoja wiadomość i dane kontaktowe pozostały w formularzu.';render();root.querySelector('[name="your-email"]')?.focus({preventScroll:true});});render();})();</script>
 <!-- /wp:html -->
