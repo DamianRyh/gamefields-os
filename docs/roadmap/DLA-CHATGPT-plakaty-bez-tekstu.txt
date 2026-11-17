@@ -1,0 +1,23 @@
+Polecenie dla ChatGPT: plakaty Gamefields bez tekstu, 17.11.2026
+
+Motyw Gamefields 1.0.32 wgrał właściciel (ZIP). Nie ruszaj plików motywu.
+
+1. Strona główna (ID 3462): podmień DWA bloki, pozostałych 20 nie ruszaj.
+   Każdy plik zastępuje cały blok o tej nazwie (zawiera <!-- wp:html --> i <!-- /wp:html -->).
+   - blok „plakaty”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/16-plakaty.html  (SHA-256 zaczyna się od: 79e068a3d94cb027)
+   - blok „skrypty”: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/22-skrypty.html  (SHA-256 zaczyna się od: dc6a87951244274d)
+   Najpierw kopia strony, potem szkic, porównanie (różnią się tylko te 2 bloki) i podgląd.
+2. Produkt „Plakat z Twoim boiskiem” (ID 4393): zastąp opis i krótki opis tym tekstem:
+   Krótki opis:
+   Plakat z boiskiem w Twoim wzorze i kolorach, na pełnym spadzie: sam wzór od krawędzi do krawędzi, bez napisów. Zaprojektuj go w kreatorze na stronie głównej, a link do projektu dołączymy do zamówienia.
+   Opis:
+   Dziesiątki kierunków artystycznych i każdy kolor do zmiany. Plakat bez tekstu, na pełnym spadzie. Druk na papierze archiwalnym, numerowana edycja.
+   Ceny brutto za 1 szt.: 30 × 40 cm — 99 zł; 50 × 70 cm — 149 zł; 70 × 100 cm — 199 zł.
+   Wysyłamy sam print, bez ramy. Wysyłka 19 zł, przy zamówieniu od 299 zł darmowa.
+   Zaprojektuj plakat w kreatorze → (link: /?plakat=#plakaty)
+   Nie zmieniaj cen, wariantów ani ustawień wysyłki.
+3. Sprawdź na komputerze i telefonie sekcję „Boisko na ścianę.”:
+   - plakat nie ma żadnego napisu, wzór wypełnia cały plakat;
+   - zakładki: Wzór, Kolory, Druk (bez „Tekst” i „Układ”, bez wyboru papieru);
+   - „Losuj wszystko”, zmiana formatu i „Zamów” działają, a w zamówieniu jest nazwa wzoru.
+4. Po akceptacji właściciela opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj.
