@@ -789,26 +789,32 @@
   });
 
   /* ---------- KITS ---------- */
+  // Kits (2026-11-17): one Studio render per kit, the construction in 3D with the surface on its floor,
+  // patterns from the Masters II collection. The link opens the same kit in the Studio.
+  var kitAssets = new URL('../kits/', heroAssets); // next to hero-r3/ in the theme's home folder
+  function kitImg(name, small) { return new URL(name + (small ? '-480' : '') + '.webp', kitAssets).href; }
   var KITS = [
-    { seg: 'Miasto', pitch: 'Mała arena jako punkt spotkań w parku. Komplet materiałów do budżetu obywatelskiego.', arena: 'circle-cage-1', model: 'Panna Cage 90', img: up('Cage-90-Hero-4-gray.webp'), surf: 'city-fluid', surfName: 'City Fluid', space: 'park, skwer, plac', bg: '#D23A26', ink: '#FFFFFF' },
-    { seg: 'Szkoła', pitch: 'Czytelna, bezpieczna arena na przerwę i WF. Przyjazne kolory dla dzieci.', arena: 'o1', model: 'Panna Play', img: up('Gamefields-Panna-Play-wide-v3-default.webp'), surf: 'play-system', surfName: 'Play System', space: 'boisko szkolne, dziedziniec', bg: '#D8F24A', ink: '#1F2A6B' },
-    { seg: 'Osiedle', pitch: 'Wyróżnik inwestycji wpisany w zieleń. Mieści się na placu o boku 5–7 m.', arena: 'p1', model: 'Panna Court', img: up('Gamefields-Panna-Court-wide-v3-default.webp'), surf: 'earth-motion', surfName: 'Earth Motion', space: 'dziedziniec, zieleń osiedlowa', bg: '#FFB3C8', ink: '#47132D' },
-    { seg: 'Klub', pitch: 'Trening 1 na 1 przez cały rok. Barwy klubu i partnera na nawierzchni.', arena: 'circle-cage-2', model: 'Panna Cage 180', img: up('Cage-180-Hero-4-gray.webp'), surf: 'club-heritage', surfName: 'Club Heritage', space: 'akademia, ośrodek treningowy', bg: '#2457D6', ink: '#FFFFFF' },
-    { seg: 'Marka', pitch: 'Boisko jako nośnik kampanii. Turniej, logo i treści z wydarzenia.', arena: 'street15', model: 'Street Arena 15', img: up('GF-CT-004-street15.webp'), surf: 'brand-stage', surfName: 'Brand Stage', space: 'event, galeria, festiwal', bg: '#47132D', ink: '#F4F1EE' }
+    { seg: 'Miasto', pitch: 'Mała arena jako punkt spotkań w parku. Komplet materiałów do budżetu obywatelskiego.', arena: 'circle-cage-1', model: 'Panna Cage 90', file: 'miasto', pattern: 'pro-garden', variant: 3, palette: 'burle-marx', panel: '1F5E3A', frame: '1B1B1B', surfName: 'Garden Plan', space: 'park, skwer, plac', bg: '#D23A26', ink: '#FFFFFF' },
+    { seg: 'Szkoła', pitch: 'Czytelna, bezpieczna arena na przerwę i WF. Przyjazne kolory dla dzieci.', arena: 'o1', model: 'Panna Play', file: 'szkola', pattern: 'pro-neoplastic', variant: 6, palette: 'stijl', panel: '1F4E9C', frame: '111111', surfName: 'Neo-Plastic', space: 'boisko szkolne, dziedziniec', bg: '#D8F24A', ink: '#1F2A6B' },
+    { seg: 'Osiedle', pitch: 'Wyróżnik inwestycji wpisany w zieleń. Mieści się na placu o boku 5–7 m.', arena: 'p1', model: 'Panna Court', file: 'osiedle', pattern: 'pro-ndebele', variant: 3, palette: 'ndebele', panel: 'F4C430', frame: '141414', surfName: 'Ndebele', space: 'dziedziniec, zieleń osiedlowa', bg: '#FFB3C8', ink: '#47132D' },
+    { seg: 'Klub', pitch: 'Trening 1 na 1 przez cały rok. Barwy klubu i partnera na nawierzchni.', arena: 'circle-cage-2', model: 'Panna Cage 180', file: 'klub', pattern: 'pro-munich', variant: 2, palette: 'aicher', panel: '2E9C5E', frame: '0F5B3A', surfName: 'Munich Chevrons', space: 'akademia, ośrodek treningowy', bg: '#2457D6', ink: '#FFFFFF' },
+    { seg: 'Marka', pitch: 'Boisko jako nośnik kampanii. Turniej, logo i treści z wydarzenia.', arena: 'street15', model: 'Street Arena 15', file: 'marka', pattern: 'pro-overprint', variant: 1, palette: 'martens', panel: 'E5383B', frame: '1E1E1E', surfName: 'Overprint', space: 'event, galeria, festiwal', bg: '#47132D', ink: '#F4F1EE' }
   ];
   var kitsBox = $('[data-kits]'), openKit = -1;
+  function kitPrice(k) { var n = PRICE[k.arena]; return n ? 'od ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' zł netto' : ''; }
   function renderKits() {
     kitsBox.replaceChildren.apply(kitsBox, KITS.map(function (k, i) {
       var wrap = el('div', { style: 'background:' + k.bg + ';color:' + k.ink });
       var btn = el('button', { type: 'button', class: 'stripe', 'aria-expanded': String(openKit === i), 'aria-controls': 'gfs-kit-' + i },
-        '<span class="d w">' + esc(k.seg) + '</span><span class="p">' + esc(k.pitch) + '</span><span class="combo"><img loading="lazy" src="' + k.img + '" alt=""><img loading="lazy" class="s" src="' + SP + k.surf + '.svg" alt=""></span><span class="m meta">' + (openKit === i ? 'Zwiń −' : 'Zobacz zestaw +') + '</span>');
+        '<span class="d w">' + esc(k.seg) + '</span><span class="p">' + esc(k.pitch) + '</span><span class="combo"><img loading="lazy" src="' + kitImg(k.file, true) + '" alt=""></span><span class="m meta">' + (openKit === i ? 'Zwiń −' : 'Zobacz zestaw +') + '</span>');
       btn.addEventListener('click', function () { openKit = openKit === i ? -1 : i; renderKits(); });
       wrap.appendChild(btn);
       if (openKit === i) {
-        var href = STUDIO + '?' + new URLSearchParams({ arena: k.arena, pattern: k.surf }).toString();
+        var href = STUDIO + '?' + new URLSearchParams({ arena: k.arena, pattern: k.pattern, variant: String(k.variant), palette: k.palette, panel: k.panel, frame: k.frame }).toString();
+        var price = kitPrice(k);
         wrap.appendChild(el('div', { class: 'kit-open', id: 'gfs-kit-' + i },
-          '<div class="big"><img loading="lazy" class="surf" src="' + SP + k.surf + '.svg" alt=""><img loading="lazy" class="model" src="' + k.img + '" alt="' + esc(k.model) + ' na nawierzchni ' + esc(k.surfName) + '"></div>' +
-          '<div style="display:grid;gap:22px;align-content:center"><ul><li><span class="m">Boisko</span><b>' + esc(k.model) + '</b></li><li><span class="m">Nawierzchnia</span><b>' + esc(k.surfName) + '</b></li><li><span class="m">Miejsce</span><b>' + esc(k.space) + '</b></li></ul>' +
+          '<div class="big"><img loading="lazy" src="' + kitImg(k.file, false) + '" alt="' + esc(k.model) + ' z nawierzchnią ' + esc(k.surfName) + ', widok ze Studio 3D"><span class="kit-tag m">Widok ze Studio 3D</span></div>' +
+          '<div style="display:grid;gap:22px;align-content:center"><ul><li><span class="m">Konstrukcja</span><b>' + esc(k.model) + '</b></li><li><span class="m">Nawierzchnia</span><b>' + esc(k.surfName) + '</b></li><li><span class="m">Miejsce</span><b>' + esc(k.space) + '</b></li>' + (price ? '<li><span class="m">Cena konstrukcji</span><b>' + price + '</b></li>' : '') + '</ul>' +
           '<a class="pill" href="' + href + '" style="background:' + k.ink + ';color:' + k.bg + ';justify-self:start">Otwórz zestaw w Studio <span aria-hidden="true">→</span></a></div>'));
       }
       return wrap;

@@ -761,3 +761,9 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .gfs .mod-facts .m{color:var(--violet)}
 .gfs .mod-facts p{font-size:16px}
 @media (max-width:900px){.gfs .pv{grid-template-columns:minmax(0,1fr)}.gfs .pv-list{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .mod-steps li::after{display:none}}
+
+/* ---------- ZESTAWY v2 (2026-11-17): widok ze Studio 3D, konstrukcja z nawierzchnią ---------- */
+.gfs .stripe .combo img{width:150px;height:96px;object-fit:contain;background:#fff;padding:6px}
+.gfs .kit-open .big{position:relative;aspect-ratio:16/10;overflow:hidden;background:#fff;display:grid;place-items:center}
+.gfs .kit-open .big img{position:static;width:94%;height:94%;object-fit:contain;transform:none;filter:none}
+.gfs .kit-open .kit-tag{position:absolute;left:14px;bottom:12px;padding:6px 10px;border-radius:999px;background:#F4F1EE;color:#47132D;font-size:11px}
