@@ -1,4 +1,4 @@
-# PACZKA DO WDROŻENIA — leady Gamefields, 18.11.2026
+# PACZKA DO WDROŻENIA v2 — leady + social media, Gamefields, 18.11.2026
 
 Wszystko jest gotowe. Niczego nie trzeba budować ani pisać — tylko wgrać w kolejności 1 → 2 → 3 → 4 (+ 5 w GA4).
 
