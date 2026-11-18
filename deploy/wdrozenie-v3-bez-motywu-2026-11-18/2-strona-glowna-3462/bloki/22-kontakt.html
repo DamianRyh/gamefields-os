@@ -1,0 +1,33 @@
+<!-- wp:html -->
+<!-- gf-blok: kontakt -->
+<!-- CONTACT (existing CF7 form a71dc3a, field project-details) -->
+<section id="kontakt" class="contact sec" aria-labelledby="gfs-contact">
+  <div class="court" style="--ln:rgba(255,255,255,.3);--cr:30%"><i></i><i></i></div>
+  <div class="wrap contact-grid">
+    <h2 class="d" id="gfs-contact">Masz plac? Napisz do mnie.</h2>
+    <div class="me">
+      <b style="font-size:20px">Damian Gawrych</b>
+      <span style="opacity:.9">Nie musisz znać wymiarów ani budżetu. Wyślij zdjęcie placu, odpiszę osobiście w ciągu 1–2 dni roboczych.</span>
+      <a href="mailto:info@gamefields.eu" style="font-size:20px;font-weight:600">info@gamefields.eu</a>
+    </div>
+    <div class="form">
+      <span class="lbl">Kim jesteś</span>
+      <div class="chips" role="group" aria-label="Kim jesteś" data-who></div>
+      <span class="lbl">Czego potrzebujesz</span>
+      <div class="chips" role="group" aria-label="Czego potrzebujesz" data-needs></div>
+      <div id="gc-attached" class="gc-attachment" hidden>Parametry projektu ze Studio dołączone. Wpisz swój e-mail i wyślij zapytanie.</div>
+      <details class="gc-project-review" id="gc-project-review" hidden><summary>Zobacz dołączone parametry</summary><pre id="gc-project-text" tabindex="0" aria-label="Parametry dołączone do zapytania"></pre><button type="button" id="gc-clear-project">Usuń dołączone parametry</button></details>
+      <div class="gc-review-status" id="gc-review-status" role="status" aria-live="polite"></div>
+      <span id="gc-direction-status" hidden></span>
+      <div class="gc-cf7">[contact-form-7 id="a71dc3a" title="Gamefields — zapytanie o projekt"]</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- the site footer comes from the Gamefields theme (same on every page) -->
+</div>
+
+<!-- Flat surfaces in the audience kits (2026-11-08): the Studio SVGs are drawn in perspective on white, these fill the whole window. -->
+<script>(function(){var F={'city-fluid':1,'play-system':1,'earth-motion':1,'club-heritage':1,'brand-stage':1};function fix(){var list=document.querySelectorAll('img[src*="/surface-projects/"]');for(var i=0;i<list.length;i++){var m=list[i].getAttribute('src').match(/surface-projects\/([a-z-]+)\.svg/);if(m){if(F[m[1]]){list[i].src='/wp-content/uploads/2026/11/gf-surf-'+m[1]+'.webp';}}}}new MutationObserver(fix).observe(document.documentElement,{childList:true,subtree:true});fix();})();</script>
+<!-- /wp:html -->

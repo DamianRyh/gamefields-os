@@ -11,6 +11,9 @@
  */
 (function () {
 	'use strict';
+	/* Loaded either inline in page content (package v3, before theme 1.0.37) or by the theme: run once. */
+	if (window.gfLeadLoaded) return;
+	window.gfLeadLoaded = true;
 	var MAX = 5 * 1024 * 1024, EDGE = 2560, OK_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 	var canTransfer = (function () { try { return !!new DataTransfer(); } catch (e) { return false; } })();
 
@@ -221,7 +224,9 @@
 		} catch (e) { /* the inquiry goes without the picture */ }
 	});
 	/* Studio opened directly (not on /studio/) sends the project to a new homepage window and waits for this signal. */
-	if (window.opener) if (first) { try { window.opener.postMessage({ type: 'gf-contact-ready' }, STUDIO); } catch (e) { /* not opened by Studio */ } }
+	/* Sent after window load, so the page's own Studio listener (gf-home.js, deferred) is already attached. */
+	function ready() { try { window.opener.postMessage({ type: 'gf-contact-ready' }, STUDIO); } catch (e) { /* not opened by Studio */ } }
+	if (window.opener) if (first) { if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready); }
 
 	/* ---------- social media (1.0.37) ----------
 	 * Same list as gft_social_links() in functions.php. After a sent form: "Zanim odpiszę…" card with the profiles

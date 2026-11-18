@@ -1,0 +1,204 @@
+diff --git a/integrations/studio/canvas-editor/components/project-image.tsx b/integrations/studio/canvas-editor/components/project-image.tsx
+index 137a505..f98b4f8 100644
+--- a/integrations/studio/canvas-editor/components/project-image.tsx
++++ b/integrations/studio/canvas-editor/components/project-image.tsx
+@@ -1,15 +1,23 @@
+ 'use client';
+ import {useEffect,useRef,useState,type ReactNode} from 'react';
+ import type {Project} from '@/lib/project';
++import {courtSvgToPng} from '@/lib/court-png';
+ export function ProjectImage({project,renderCourt}:{project:Project;renderCourt:(p:Project)=>ReactNode}){
+  const [snapshot,setSnapshot]=useState<Project|null>(null),[message,setMessage]=useState(''),ref=useRef<HTMLDivElement>(null);
+- useEffect(()=>{if(!snapshot)return;let cancelled=false;let url='';void(async()=>{try{
++ useEffect(()=>{if(!snapshot)return;let cancelled=false;void(async()=>{try{
+   const svg=ref.current?.querySelector('svg');if(!svg)throw Error('Nie udało się przygotować podglądu.');
+-  const clone=svg.cloneNode(true) as SVGSVGElement;clone.setAttribute('xmlns','http://www.w3.org/2000/svg');const box=svg.viewBox.baseVal;
+-  const scale=2000/Math.max(box.width,box.height),width=Math.round(box.width*scale),height=Math.round(box.height*scale);clone.setAttribute('width',String(width));clone.setAttribute('height',String(height));
+-  url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml;charset=utf-8'}));const image=new Image();image.src=url;await image.decode();if(cancelled)return;
+-  const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height+72;const ctx=canvas.getContext('2d');if(!ctx)throw Error('Ta przeglądarka nie obsługuje eksportu obrazu.');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,width,height+72);ctx.drawImage(image,0,0,width,height);ctx.fillStyle='#47132d';ctx.font='20px Arial';ctx.fillText('GAMEFIELDS · wizualizacja koncepcyjna · widok z góry',24,height+42);
+-  const a=document.createElement('a');a.href=canvas.toDataURL('image/png');a.download='gamefields-'+snapshot.id.replace(/[^a-zA-Z0-9_-]/g,'')+'-wizualizacja.png';a.click();setMessage('Pobrano PNG: koncepcyjny widok z góry z kolorami i grafiką.');
+- }catch(e){if(!cancelled)setMessage((e as Error).message)}finally{if(url)URL.revokeObjectURL(url);if(!cancelled)setSnapshot(null)}})();return()=>{cancelled=true;if(url)URL.revokeObjectURL(url)}},[snapshot]);
++  const href=await courtSvgToPng(svg,{edge:2000,caption:true});if(cancelled)return;
++  const a=document.createElement('a');a.href=href;a.download='gamefields-'+snapshot.id.replace(/[^a-zA-Z0-9_-]/g,'')+'-wizualizacja.png';a.click();setMessage('Pobrano PNG: koncepcyjny widok z góry z kolorami i grafiką.');
++ }catch(e){if(!cancelled)setMessage((e as Error).message)}finally{if(!cancelled)setSnapshot(null)}})();return()=>{cancelled=true}},[snapshot]);
+  return <section aria-label="Wizualizacja do pobrania"><h3>Zabierz projekt na spotkanie</h3><p>Pobierz koncepcyjny widok z góry z kolorami i grafiką. PNG możesz dołączyć do prezentacji; indywidualną ofertę potwierdzimy osobno.</p><button type="button" disabled={!!snapshot} onClick={()=>{setMessage('');setSnapshot(project)}}>{snapshot?'Przygotowuję PNG…':'Pobierz wizualizację PNG'}</button>{message?<p role="status">{message}</p>:null}{snapshot?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,width:1,height:1,overflow:'hidden',pointerEvents:'none'}}>{renderCourt(snapshot)}</div>:null}</section>;
+ }
++
++/** Off-screen render of the court for the inquiry e-mail: capture(project) resolves to a PNG data URL or null. */
++export function useCourtCapture(renderCourt:(p:Project)=>ReactNode){
++ const [snapshot,setSnapshot]=useState<Project|null>(null),ref=useRef<HTMLDivElement>(null),resolve=useRef<((v:string|null)=>void)|null>(null);
++ useEffect(()=>{if(!snapshot)return;let done=false;void(async()=>{let out:string|null=null;try{const svg=ref.current?.querySelector('svg');if(svg)out=await courtSvgToPng(svg,{edge:1600,caption:true})}catch{out=null}
++  if(!done){done=true;resolve.current?.(out);resolve.current=null;setSnapshot(null)}})();return()=>{if(!done){done=true;resolve.current?.(null);resolve.current=null}}},[snapshot]);
++ const capture=(project:Project)=>new Promise<string|null>(res=>{resolve.current?.(null);resolve.current=res;setSnapshot(project)});
++ const node=snapshot?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,width:1,height:1,overflow:'hidden',pointerEvents:'none'}}>{renderCourt(snapshot)}</div>:null;
++ return {capture,node};
++}
+diff --git a/integrations/studio/canvas-editor/components/project-quote.tsx b/integrations/studio/canvas-editor/components/project-quote.tsx
+index 3506026..b70c087 100644
+--- a/integrations/studio/canvas-editor/components/project-quote.tsx
++++ b/integrations/studio/canvas-editor/components/project-quote.tsx
+@@ -6,7 +6,9 @@ import {CONCRETE_BASE_EXCLUDES,CONCRETE_BASE_INCLUDES} from "@/lib/concrete-base
+ 
+ const money=(value:number)=>new Intl.NumberFormat("pl-PL",{style:"currency",currency:"PLN",maximumFractionDigits:0}).format(value);
+ const qty=(value:number)=>new Intl.NumberFormat("pl-PL",{maximumFractionDigits:2}).format(value);
+-const contact=<a href="https://www.gamefields.eu/kontakt/" target="_top">Poproś o ofertę dla tego projektu →</a>;
++/* 2026-11-18: inside the summary it jumps to "Odbierz propozycję na maila", so the project goes with the inquiry;
++   elsewhere (no button on screen) it still opens the contact page. */
++const contact=<a href="https://www.gamefields.eu/kontakt/" target="_top" onClick={e=>{const t=document.getElementById("gf-inquiry-cta");if(t){e.preventDefault();t.scrollIntoView({behavior:"smooth",block:"center"});t.focus({preventScroll:true})}}}>Odbierz propozycję dla tego projektu ↓</a>;
+ 
+ /* Shop products (plakat, piłka, koszulki) pass their exact price as `label`.
+    Courts: construction price only (PRICE_MODE "construction") or the full-project range ("range"). */
+diff --git a/integrations/studio/canvas-editor/components/studio-workspace.tsx b/integrations/studio/canvas-editor/components/studio-workspace.tsx
+index 5e03bc8..f500d68 100644
+--- a/integrations/studio/canvas-editor/components/studio-workspace.tsx
++++ b/integrations/studio/canvas-editor/components/studio-workspace.tsx
+@@ -18,7 +18,8 @@ import {primarySports} from "@/lib/primary-sports";
+ import {defaultArena} from "@/components/blender-arena-preview";
+ import {StudioKnowledge} from "@/components/studio-knowledge";
+ import {ProjectLibrary} from "@/components/project-library";
+-import {ProjectImage} from "@/components/project-image";
++import {ProjectImage,useCourtCapture} from "@/components/project-image";
++import {createInquiryLink} from "@/lib/inquiry-link";
+ import {InquiryPackage} from "@/components/inquiry-package";
+ import {WorkshopSave} from "@/components/workshop-save";
+ import {sportSurfaces,sportSurface,selectSurface,type SurfaceModel} from "@/lib/sport-surfaces";
+@@ -179,15 +180,24 @@ export function StudioWorkspace(props:Props){
+   window.addEventListener("message",onMessage);
+   return()=>{window.removeEventListener("message",onMessage);transport.dispose();inquiryTransport.current=null};
+  },[]);
+- const requestInquiry=()=>{
++ const courtCapture=useCourtCapture(project=>props.renderCourt(project));
++ /* "Odbierz propozycję na maila" (2026-11-18): the summary goes to form 3758 as before, plus a 1:1 link to this
++    configuration (server copy, 30 days) and a top-down PNG for the e-mail. Both are optional: if either fails or
++    takes longer than 8 s, the inquiry still goes without it. The popup is opened in the click, before any await. */
++ const requestInquiry=async()=>{
+   setInquiryError("");setInquiryState("idle");setInquiryMessage("");
+-  let summary:string;try{summary=inquirySummary({...p,objects:p.objects.filter(o=>o.kind!=="equipment")},null)}catch(error){setInquiryError((error as Error).message);return}
+-  if(window.parent!==window)inquiryTransport.current?.start(window.parent,summary);
+-  else {
+-   const contactWindow=window.open("https://www.gamefields.eu/#kontakt",`gamefields-inquiry-${crypto.randomUUID()}`);
+-   if(!contactWindow){setInquiryError("Przeglądarka zablokowała formularz. Zezwól na otwarcie okna i spróbuj ponownie.");return}
+-   inquiryTransport.current?.start(contactWindow,summary,true);
++  const project={...p,objects:p.objects.filter(o=>o.kind!=="equipment")};
++  let summary:string;try{summary=inquirySummary(project,null)}catch(error){setInquiryError((error as Error).message);return}
++  const embedded=window.parent!==window;
++  let target:Window|null=embedded?window.parent:null;
++  if(!embedded){
++   target=window.open("https://www.gamefields.eu/#kontakt",`gamefields-inquiry-${crypto.randomUUID()}`);
++   if(!target){setInquiryError("Przeglądarka zablokowała formularz. Zezwól na otwarcie okna i spróbuj ponownie.");return}
+   }
++  setInquiryState("waiting");setInquiryMessage("Przygotowuję link do konfiguracji i wizualizację…");
++  const within=<T,>(work:Promise<T>,ms:number)=>Promise.race([work,new Promise<null>(res=>setTimeout(()=>res(null),ms))]);
++  const [link,image]=await Promise.all([within(createInquiryLink(project,window.location.origin),8000),within(courtCapture.capture(project),8000).catch(()=>null)]);
++  if(target)inquiryTransport.current?.start(target,summary,!embedded,{link:link||undefined,image:image||undefined});
+  };
+  useEffect(()=>{
+   const root=document.documentElement;
+@@ -320,6 +330,6 @@ export function StudioWorkspace(props:Props){
+    {!p.printDesign&&<ProjectCard renderCourt={props.renderCourt} project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} quote={props.quote} sections={p.matProduct?[{title:"Mata treningowa",rows:[["Wymiary",`${String(p.length).replace(".",",")} × ${String(p.width).replace(".",",")} m`],["Powierzchnia",`${String(matArea(p)).replace(".",",")} m²`],["Rodzaj gumy",props.quote.data?.items.find(i=>i.id==="mats")?.label.split(" · ").slice(1).join(" · ")||"Standard"],["Kolor maty",p.base],["Ćwiczenia",p.objects.filter(o=>o.kind!=="equipment").map(o=>o.name).join(", ")||"Brak"]]}]:([
+  {title:"Konstrukcja",rows:[["Model",profile.label],["Kod produktu",modelCode||"Projekt indywidualny"],["Wymiary pola gry",projectDimensions(p).reference],["Kolor paneli",design.panelColor],["Kolor ramy",design.frameColor],["Kolor bramek",design.goalColor],["Wykończenie konstrukcji",({matte:"Matowe",gloss:"Połysk",metal:"Metal lakierowany"})[design.finish]],...(design.text?[["Napis na panelach",design.text] as [string,string]]:[]),...(design.src?[["Logo na panelach","Dodane"] as [string,string]]:[])]},
+  {title:"Nawierzchnia",rows:[...(!p.arenaModel&&selectedSurface?[["Format",`${selectedSurface.name} · ${selectedSurface.length} × ${selectedSurface.width} m`] as [string,string]]:[]),["Nawierzchnia betonowa",p.concreteBase!==false?"Tak, płyta 12 cm z podbudową":"Nie, własne podłoże"] as [string,string],["Materiał",surfaceLabel(p.surface)],...(()=>{const f=props.quote.data?.items.find(i=>["paint","epdm","tiles","turf","acrylic","rubber","mats"].includes(i.id));return f?[["Wariant",f.label.split(" · ").slice(1).join(" · ")||f.label] as [string,string]]:[]})(),...(finishAreaFor(p)!==null?[["Powierzchnia wykończenia",`${areaLabel(finishAreaFor(p)!)} m² (${p.arenaModel?"konstrukcja":"nawierzchnia"} +10%)`] as [string,string]]:[]),["Wzór",`${family.name} · wariant ${p.patternVariant||1}`],["Paleta",getPatternPalette(p.patternPalette).name],["Pole gry",p.base],["Strefy",p.zone],["Linie",p.lines?p.lineColor:"Wyłączone"]]}
+-] as {title:string;rows:[string,string][]}[]).filter(s=>s.title==="Konstrukcja"?!!p.arenaModel:!p.constructionOnly)}/>}{!p.printDesign&&<ProjectImage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} renderCourt={props.renderCourt}/>}<InquiryPackage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} quote={props.quote}/>{!p.printDesign&&<StudioKnowledge project={p}/>}{!p.printDesign&&<ProjectSpecification project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}}/>}<p className="studio-hint">Parametry projektu dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}{inquiryState!=="idle"&&inquiryState!=="error"?<p role="status">{inquiryMessage}</p>:null}<button className="studio-primary" disabled={inquiryState==="waiting"} onClick={requestInquiry}>Wyślij projekt do wyceny <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
++] as {title:string;rows:[string,string][]}[]).filter(s=>s.title==="Konstrukcja"?!!p.arenaModel:!p.constructionOnly)}/>}{!p.printDesign&&<ProjectImage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} renderCourt={props.renderCourt}/>}<InquiryPackage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} quote={props.quote}/>{!p.printDesign&&<StudioKnowledge project={p}/>}{!p.printDesign&&<ProjectSpecification project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}}/>}<p className="studio-hint">Na maila dostaniesz link do tej konfiguracji i wizualizację z góry. Indywidualną propozycję przygotuję w ciągu 1–2 dni roboczych. Żeby link działał, zapiszemy kopię projektu na 30 dni. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}{inquiryState!=="idle"&&inquiryState!=="error"?<p role="status">{inquiryMessage}</p>:null}<button id="gf-inquiry-cta" className="studio-primary" disabled={inquiryState==="waiting"} onClick={()=>{void requestInquiry()}}>{inquiryState==="waiting"?"Przygotowuję…":"Odbierz propozycję na maila"} <ArrowRight size={18}/></button>{courtCapture.node}<button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
+  </main></OptionPrices>;
+ }
+diff --git a/integrations/studio/canvas-editor/lib/court-png.ts b/integrations/studio/canvas-editor/lib/court-png.ts
+new file mode 100644
+index 0000000..4987303
+--- /dev/null
++++ b/integrations/studio/canvas-editor/lib/court-png.ts
+@@ -0,0 +1,13 @@
++/** Top-down court SVG to a PNG data URL (shared by the PNG download and the inquiry e-mail, 2026-11-18). */
++export async function courtSvgToPng(svg:SVGSVGElement,{edge=2000,caption=true}:{edge?:number;caption?:boolean}={}):Promise<string>{
++ const clone=svg.cloneNode(true) as SVGSVGElement;clone.setAttribute('xmlns','http://www.w3.org/2000/svg');const box=svg.viewBox.baseVal;
++ const scale=edge/Math.max(box.width,box.height),width=Math.round(box.width*scale),height=Math.round(box.height*scale);clone.setAttribute('width',String(width));clone.setAttribute('height',String(height));
++ const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)],{type:'image/svg+xml;charset=utf-8'}));
++ try{
++  const image=new Image();image.src=url;await image.decode();
++  const foot=caption?72:0,canvas=document.createElement('canvas');canvas.width=width;canvas.height=height+foot;const ctx=canvas.getContext('2d');if(!ctx)throw Error('Ta przeglądarka nie obsługuje eksportu obrazu.');
++  ctx.fillStyle='#ffffff';ctx.fillRect(0,0,width,height+foot);ctx.drawImage(image,0,0,width,height);
++  if(caption){ctx.fillStyle='#47132d';ctx.font='20px Arial';ctx.fillText('GAMEFIELDS · wizualizacja koncepcyjna · widok z góry',24,height+42)}
++  return canvas.toDataURL('image/png');
++ }finally{URL.revokeObjectURL(url)}
++}
+diff --git a/integrations/studio/canvas-editor/lib/inquiry-link.ts b/integrations/studio/canvas-editor/lib/inquiry-link.ts
+new file mode 100644
+index 0000000..722a5ce
+--- /dev/null
++++ b/integrations/studio/canvas-editor/lib/inquiry-link.ts
+@@ -0,0 +1,17 @@
++import type {Project} from './project';
++import {projectLink} from './project-link';
++import {shareProject,parseShareReceipt} from './shared-project';
++import {studioJson} from './studio-http';
++
++/** A 1:1 link to the configuration for the inquiry e-mail (same server snapshot as "Link do projektu", 30 days).
++ *  Returns null on any failure: the inquiry must never wait on or fail because of the link. */
++export async function createInquiryLink(project:Project,origin:string,timeout=8000):Promise<string|null>{
++ try{
++  const snapshot=shareProject(project,true);
++  const data=await studioJson<{id:string;key:string;deleteKey:string;createdAt:number;expiresAt:number}>('/api/shared',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({project:snapshot,includePrivate:true,consent:true})},timeout);
++  const receipt=parseShareReceipt({...data,url:origin+'/shared?id='+data.id+'#'+data.key},origin);
++  if(!receipt)return null;
++  try{const old=JSON.parse(localStorage.getItem('gamefields-shared-links-v1')||'[]');localStorage.setItem('gamefields-shared-links-v1',JSON.stringify([receipt,...(Array.isArray(old)?old:[])].slice(0,10)))}catch{}
++  return projectLink(snapshot,origin,receipt);
++ }catch{return null}
++}
+diff --git a/integrations/studio/canvas-editor/lib/inquiry-transport.ts b/integrations/studio/canvas-editor/lib/inquiry-transport.ts
+index fdc781f..beb5935 100644
+--- a/integrations/studio/canvas-editor/lib/inquiry-transport.ts
++++ b/integrations/studio/canvas-editor/lib/inquiry-transport.ts
+@@ -1,6 +1,9 @@
+ export const CONTACT_ORIGIN = "https://www.gamefields.eu";
+ export type InquiryState = "idle" | "waiting" | "attached" | "error";
+ type Target = Pick<Window, "postMessage">;
++/** Optional extras (2026-11-18): a 1:1 link to this configuration and a top-down PNG. Older receivers ignore them. */
++export type InquiryExtras = {link?: string; image?: string};
++export const MAX_INQUIRY_IMAGE_CHARS = 6_000_000;
+ type Options = {
+  onState: (state: InquiryState, message: string) => void;
+  timeoutMs?: number;
+@@ -11,18 +14,21 @@ type Options = {
+ 
+ // An acknowledgement confirms attachment to the form, never email delivery.
+ export function createInquiryTransport({onState, timeoutMs=15000, schedule=setTimeout, cancelTimer=clearTimeout, createId=()=>crypto.randomUUID()}:Options){
+- let pending:{target:Target;summary:string;id:string}|null=null;
++ let pending:{target:Target;summary:string;id:string;extras:InquiryExtras}|null=null;
+  let timer:ReturnType<typeof setTimeout>|undefined;
+  const clear=()=>{if(timer!==undefined)cancelTimer(timer);timer=undefined;pending=null};
+  const fail=(message:string)=>{clear();onState("error",message)};
+  const send=()=>{
+   if(!pending)return;
+-  try{pending.target.postMessage({type:"gf-inquiry",requestId:pending.id,summary:pending.summary},CONTACT_ORIGIN)}
++  try{pending.target.postMessage({type:"gf-inquiry",requestId:pending.id,summary:pending.summary,...pending.extras},CONTACT_ORIGIN)}
+   catch{fail("Nie udało się przekazać projektu. Spróbuj ponownie lub pobierz kopię JSON.")}
+  };
+  return {
+-  start(target:Target,summary:string,waitForReady=false){
+-   clear();pending={target,summary,id:createId()};
++  start(target:Target,summary:string,waitForReady=false,extras:InquiryExtras={}){
++   const clean:InquiryExtras={};
++   if(typeof extras.link==="string"&&/^https:\/\/[^\s]{1,2000}$/.test(extras.link))clean.link=extras.link;
++   if(typeof extras.image==="string"&&/^data:image\/(png|jpeg);base64,/.test(extras.image)&&extras.image.length<=MAX_INQUIRY_IMAGE_CHARS)clean.image=extras.image;
++   clear();pending={target,summary,id:createId(),extras:clean};
+    onState("waiting","Dołączam parametry do formularza…");
+    timer=schedule(()=>fail("Formularz nie potwierdził dołączenia projektu. Spróbuj ponownie lub pobierz kopię JSON."),timeoutMs);
+    if(!waitForReady)send();
+diff --git a/integrations/studio/canvas-editor/tests/inquiry-transport.mjs b/integrations/studio/canvas-editor/tests/inquiry-transport.mjs
+index dd82878..47bbbb2 100644
+--- a/integrations/studio/canvas-editor/tests/inquiry-transport.mjs
++++ b/integrations/studio/canvas-editor/tests/inquiry-transport.mjs
+@@ -25,7 +25,12 @@ assert.equal(events.at(-1).state,'error');assert.equal(timers.size,0);
+ transport.start(target,summary);const timeout=[...timers.values()][0];timeout();
+ assert.equal(events.at(-1).state,'error');assert.match(events.at(-1).message,/nie potwierdził/);
+ assert.equal(response({type:'gf-inquiry-attached',requestId:'test-3',summaryLength:summary.length}),false);
++transport.start(target,summary,false,{link:'https://gamefields-studio.example/?shared=1#k',image:'data:image/png;base64,AAAA'});
++assert.equal(messages.at(-1).data.link,'https://gamefields-studio.example/?shared=1#k');assert.equal(messages.at(-1).data.image,'data:image/png;base64,AAAA');assert.equal(messages.at(-1).data.summary,summary);
++transport.start(target,summary,false,{link:'javascript:alert(1)',image:'data:text/html;base64,AAAA'});
++assert.equal('link' in messages.at(-1).data,false,'unsafe link dropped');assert.equal('image' in messages.at(-1).data,false,'non-image data dropped');
++transport.start(target,summary);assert.equal('link' in messages.at(-1).data,false,'no extras by default');
+ transport.start(target,summary);transport.dispose();assert.equal(timers.size,0);
+ transport.start({postMessage:()=>{throw Error('closed')}},summary);
+ assert.equal(events.at(-1).state,'error');assert.equal(timers.size,0);
+-console.log('PASS: complete large payload, origin/source/id/length guards, popup readiness, stale/duplicate replies, rejection, timeout, retry, disposal and send failure.');
++console.log('PASS: optional link/image extras with validation, complete large payload, origin/source/id/length guards, popup readiness, stale/duplicate replies, rejection, timeout, retry, disposal and send failure.');
