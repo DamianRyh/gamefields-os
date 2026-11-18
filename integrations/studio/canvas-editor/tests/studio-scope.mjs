@@ -26,7 +26,11 @@ import {resolve} from 'node:path';
 const root=resolve(import.meta.dirname,'..');
 const read=path=>readFile(resolve(root,path),'utf8');
 const {patternFamilies,patternPalettes,signaturePresets,variants,PATTERN_COUNT}=await import('../lib/pattern-library.ts');
-assert.equal(PATTERN_COUNT,636);assert.equal(patternFamilies.length,53);assert.equal(patternPalettes.length,39);assert.equal(signaturePresets.length,40);assert.equal(variants.length,12);
+const {proFamilies,proPalettes,proSignaturePresets,mastersSignaturePresets}=await import('../lib/pattern-library-pro.ts');
+// Base library: 25 families, 19 palettes, 12 presets; the Pro catalogue is checked against the engine in surface-pro.mjs.
+assert.equal(variants.length,12);assert.equal(patternFamilies.length,25+proFamilies.length);assert.equal(patternPalettes.length,19+proPalettes.length);
+assert.equal(signaturePresets.length,12+mastersSignaturePresets.length+proSignaturePresets.length);assert.equal(PATTERN_COUNT,patternFamilies.length*12);
+assert.equal(PATTERN_COUNT,732,'61 families x 12 compositions after Masters II');
 const home=await read('app/page.tsx');
 assert.ok(!home.includes('/api/projects'));assert.ok(!home.includes('/play'));assert.ok(!home.includes('Object.values(realisticPreviews).forEach'));
 assert.ok((await read('app/manifest.ts')).includes('start_url: "/"'));
@@ -36,6 +40,6 @@ for(const dir of ['app','components','lib']){
 const sources=await Promise.all(['app/page.tsx','components/street-football-realistic-preview.tsx','lib/radar-locations.ts'].map(read));
 for(const src of new Set(sources.join('\n').match(/\/(?:studio|radar)\/[^"'`\s]+\.(?:png|webp)/g)||[]))await access(resolve(root,'public'+src));
 assert.ok((await read('lib/realistic-locations.ts')).includes('enabled:false'));
-console.log('PASS: Studio/Radar scope, 636 patterns, 39 palettes, 12 Masters + 16 Signature Pro + 12 legacy directions, assets present, Kraków hidden, no retired account calls.');
+console.log(`PASS: Studio/Radar scope, ${PATTERN_COUNT} patterns, ${patternPalettes.length} palettes, ${mastersSignaturePresets.length} Masters + ${proSignaturePresets.length} Signature Pro + 12 legacy directions, assets present, Kraków hidden, no retired account calls.`);
 
 for(const loc of ["park","school","courtyard","warsaw-pkin"])for(const view of ["perspective","aerial","ground"])await access(resolve(root,`public/studio/panna/${loc}-${view}.webp`));
