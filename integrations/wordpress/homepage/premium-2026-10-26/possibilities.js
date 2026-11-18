@@ -90,7 +90,7 @@ function startMap(){
  return loadLeaflet().then(lib=>{
   L=lib;btn.remove();
   map=L.map(box,{scrollWheelZoom:false}).setView([52.07,19.48],6);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  L.tileLayer(box.dataset.tiles,{maxZoom:19,attribution:box.dataset.attribution}).addTo(map);
   map.on('click',e=>setPin(e.latlng.lat,e.latlng.lng));
   if(state.lat!=null)setPin(state.lat,state.lng,15);
  }).catch(()=>{btn.textContent='Mapa niedostępna — wpisz miejsce poniżej';});
@@ -110,7 +110,7 @@ function planText(){
  if(state.area)lines.push('Teren: '+label('area',state.area));
  if(state.need)lines.push('Chcę: '+label('need',state.need));
  if(place)lines.push('Miejsce: '+place);
- if(state.lat!=null)lines.push('Na mapie: '+state.lat+', '+state.lng+' (https://www.openstreetmap.org/?mlat='+state.lat+'&mlon='+state.lng+'#map=17/'+state.lat+'/'+state.lng+')');
+ if(state.lat!=null){const mapBox=$('#gm-map'),link=(mapBox.dataset.link||'').split('{lat}').join(state.lat).split('{lng}').join(state.lng);lines.push('Na mapie: '+state.lat+', '+state.lng+(link?' ('+link+')':''))}
  lines.push('Drogi, które mnie interesują: '+matches().map(t=>t.name).join('; '));
  return lines.join('\n');
 }

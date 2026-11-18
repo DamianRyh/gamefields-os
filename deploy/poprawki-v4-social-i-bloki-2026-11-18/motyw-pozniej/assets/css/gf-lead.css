@@ -1,0 +1,90 @@
+/* Gamefields — "Wyślij zdjęcie placu" (theme 1.0.36). Low specificity (:where) so page styles such as /kontakt/ win. */
+:where([data-gf-lead]){--gl-ink:var(--ink,var(--gf-ink,#47132D));--gl-violet:var(--violet,var(--gf-violet,#6336F5));--gl-line:var(--line,var(--gf-line,#D9CFD4));--gl-muted:var(--muted,var(--gf-muted,#6F5A66))}
+
+/* photo drop zone over the three CF7 inputs */
+:where(.gf-photos-on) .wpcf7-form-control-wrap[data-name^="project-photo"]{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+:where(.gf-photos-on) label{display:block;font-weight:700}
+:where(.gf-photos-on) br{display:none}
+.gf-drop{display:grid;justify-items:center;gap:4px;width:100%;margin:8px 0 10px;padding:22px 16px;border:2px dashed var(--gl-violet);border-radius:18px;background:rgba(99,54,245,.06);color:var(--gl-ink);font:inherit;text-align:center;cursor:pointer;transition:background .15s,border-color .15s}
+.gf-drop:hover,.gf-drop.over{background:rgba(99,54,245,.14)}
+.gf-drop:focus-visible{outline:3px solid var(--gl-violet);outline-offset:3px}
+.gf-drop[disabled]{cursor:default;opacity:.65;border-style:solid}
+.gf-drop b{font-size:17px}
+.gf-drop span{font-size:14px;color:var(--gl-muted)}
+.gf-drop-ico{width:40px;height:32px;margin-bottom:4px;border-radius:8px;background:var(--gl-violet);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Cpath d='M14 2h12l3 4h7a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4h7l3-4zm6 8a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Cpath d='M14 2h12l3 4h7a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4h7l3-4zm6 8a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8z'/%3E%3C/svg%3E") center/contain no-repeat}
+.gf-thumbs{display:flex;gap:10px;margin:0 0 6px;padding:0;list-style:none}
+.gf-thumbs:empty{display:none}
+.gf-thumbs li{position:relative;width:88px;height:88px;margin:0}
+.gf-thumbs img{width:100%;height:100%;object-fit:cover;border-radius:12px;border:1px solid var(--gl-line)}
+.gf-thumb-x{position:absolute;top:-8px;right:-8px;display:grid;place-items:center;width:32px!important;height:32px;min-height:0!important;padding:0!important;border-radius:50%!important;border:2px solid #fff!important;background:var(--gl-ink)!important;color:#fff!important;font:700 18px/1 sans-serif!important;cursor:pointer}
+.gf-photos-status{min-height:1.2em;margin:0 0 6px!important;font-size:14px;color:var(--gl-ink)}
+.gf-photos-status:empty{margin:0!important}
+
+/* optional marketing consent */
+:where(.gf-lead-consent){margin:4px 0 14px;font-size:14px;line-height:1.5}
+.gf-lead-consent label{display:flex!important;gap:10px;align-items:flex-start;font-weight:400;cursor:pointer}
+.gf-lead-consent input[type=checkbox]{flex:none;width:20px!important;height:20px;min-height:0!important;margin:2px 0 0;accent-color:var(--gl-violet)}
+
+/* homepage: the steps of form 3758 (the /kontakt/ page styles its own) */
+.gfs [data-gf-lead] fieldset{border:0;min-width:0;margin:0;padding:0}
+.gfs [data-gf-lead] legend{font-weight:800;font-size:22px;letter-spacing:-.02em;margin:6px 0 14px;padding:0}
+.gfs [data-gf-lead] .gf-lead-progress p,.gfs [data-gf-lead] .gf-lead-progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px}
+.gfs [data-gf-lead] .gf-lead-progress p{margin:0}
+.gfs [data-gf-lead] .gf-lead-progress button{min-height:44px;padding:0 8px;border:0;border-radius:999px;background:#fff;color:var(--gl-muted);font:700 13px/1.2 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] .gf-lead-progress button[aria-current]{background:var(--gl-ink);color:#fff}
+.gfs [data-gf-lead] fieldset>p:last-child{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.gfs [data-gf-lead] [data-gf-next]{min-height:52px;padding:0 26px;border:0;border-radius:999px;background:var(--gl-violet);color:#fff;font:700 16px/1 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] [data-gf-prev]{min-height:52px;padding:0 22px;border:1.5px solid #CDBFC6;border-radius:999px;background:transparent;color:var(--gl-ink);font:700 15px/1 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] [hidden]{display:none!important}
+
+/* sent: the CF7 message becomes a confirmation card */
+.wpcf7 form.sent .wpcf7-response-output{margin:16px 0 0!important;padding:18px 20px!important;border:0!important;border-radius:16px;background:#E3F6E8;color:#14532D;font-weight:600;font-size:16px}
+
+/* mobile sticky bar */
+.gf-sticky{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:900;transform:translateY(150%);transition:transform .25s ease;pointer-events:none}
+.gf-sticky.on{transform:none;pointer-events:auto}
+.gf-sticky.on.off{transform:translateY(150%);pointer-events:none}
+.gf-sticky a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:999px;background:#6336F5;color:#fff!important;font:700 16px/1 GHInter,Inter,Arial,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,9,18,.28)}
+@media (min-width:900px){.gf-sticky{display:none}}
+@media (prefers-reduced-motion:reduce){.gf-sticky,.gf-drop{transition:none}}
+
+/* header link (desktop) — next to "Studio 3D" on the homepage and subpages */
+.gf-photo-link{display:none}
+@media (min-width:1200px){.gf-photo-link{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;margin-left:12px;border-radius:999px;background:#6336F5;color:#fff!important;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}.gf-photo-link:hover{background:#5126DA}}
+
+/* subpage band above the footer */
+.gft-photo-band{background:#6336F5;color:#fff}
+.gft-photo-band-in{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-block:56px}
+.gft-photo-band h2{margin:6px 0 10px;color:#fff;font-size:clamp(32px,4.4vw,56px);line-height:1;letter-spacing:-.03em}
+.gft-photo-band p{max-width:56ch;margin:0;color:rgba(255,255,255,.86)}
+.gft-photo-band .gft-kicker{color:#D8F24A}
+.gft-photo-band .gft-pill{flex:none;background:#D8F24A;color:#47132D}
+@media (max-width:800px){.gft-photo-band-in{flex-direction:column;align-items:stretch;padding-block:40px}}
+
+/* mobile header button: one line */
+#gfs-nav .ask,.gft-ask{white-space:nowrap}
+.gf-lead-consent .wpcf7-list-item-label{font-weight:400}
+
+/* ---------- social follow (1.0.37) ---------- */
+.gf-follow{margin:22px 0 0}
+.gf-follow-t{margin:0 0 10px!important;font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.gf-follow-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.gf-follow-a{display:grid;grid-template-columns:36px 1fr;column-gap:12px;align-items:center;min-height:52px;padding:8px 14px 8px 8px;border:1px solid currentColor;border-color:rgba(127,127,127,.35);border-radius:14px;color:inherit!important;text-decoration:none;transition:border-color .15s,background .15s}
+.gf-follow-a:hover{border-color:#6336F5;background:rgba(99,54,245,.08)}
+.gf-follow-a:focus-visible{outline:3px solid #6336F5;outline-offset:2px}
+.gf-follow-ico{grid-row:1/3;width:36px;height:36px;border-radius:10px;background:#6336F5;position:relative}
+.gf-follow-ico::after{content:"";position:absolute;inset:8px;background:#fff;-webkit-mask:var(--gf-i) center/contain no-repeat;mask:var(--gf-i) center/contain no-repeat}
+.gf-follow-instagram .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.3 5.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z'/%3E%3C/svg%3E")}
+.gf-follow-linkedin .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 9h4v12H4zM6 3a2.2 2.2 0 1 1 0 4.4A2.2 2.2 0 0 1 6 3zm4.5 6h3.8v1.7c.6-1 1.9-2 3.9-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21h-4z'/%3E%3C/svg%3E")}
+.gf-follow-facebook .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.5 22v-8h2.8l.4-3.3h-3.2V8.6c0-.9.3-1.6 1.7-1.6h1.7V4.1a23 23 0 0 0-2.5-.1c-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.8v8z'/%3E%3C/svg%3E")}
+.gf-follow-a b{font-size:15px;line-height:1.2}
+.gf-follow-a span:not(.gf-follow-ico){font-size:13px;line-height:1.3;opacity:.75}
+.gft-foot .gf-follow-a{border-color:rgba(255,255,255,.22)}
+.gft-foot .gf-follow-ico{background:#D8F24A}
+.gft-foot .gf-follow-ico::after{background:#47132D}
+/* row layout where there is room (sections, thank-you card) */
+.gf-follow.row .gf-follow-list{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+/* thank-you card after the form */
+.gf-thanks-follow{margin:12px 0 0;padding:18px 20px;border-radius:16px;background:#fff;color:#47132D;border:1px solid #D9CFD4}
+.gf-thanks-follow .gf-follow{margin:0}
+.gf-thanks-follow p.gf-thanks-lead{margin:0 0 12px;font-size:15px;color:#47132D}

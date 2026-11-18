@@ -111,9 +111,67 @@
 <section id="realizacje" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-real">
   <div class="head">
     <div class="hd"><p class="kicker m">Realizacje</p><h2 class="d" id="gfs-real">Z boiska.</h2></div>
-    <div class="side"><p>Boiska, które działają na co dzień: w miastach, parkach i na obiektach sportowych. Każda historia z opinią zamawiającego. <a href="/realizacje-gamefields/">Wszystkie realizacje →</a></p><p class="follow-line">Na bieżąco z budowy: <a href="https://www.instagram.com/gamefields.eu/" target="_blank" rel="noopener me" data-gf-social="instagram" data-gf-place="realizacje">Instagram</a> i <a href="https://www.facebook.com/Gamefields.eu" target="_blank" rel="noopener me" data-gf-social="facebook" data-gf-place="realizacje">Facebook</a>.</p></div>
+    <div class="side"><p>Boiska, które działają na co dzień: w miastach, parkach i na obiektach sportowych. Każda historia z opinią zamawiającego. <a href="/realizacje-gamefields/">Wszystkie realizacje →</a></p></div>
   </div>
   {{REALS}}
+</section>
+
+<!--GF-BLOK:social-->
+<!-- SOCIAL (2026-11-18): "Gamefields w sieci" — the three profiles as one section, own styles -->
+<section id="social" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-social">
+<style>
+/* "Gamefields w sieci" (2026-11-18): own styles, so the block looks right on its own */
+.gso-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px}
+.gso-card{display:flex;flex-direction:column;gap:18px;padding:24px;border:1px solid var(--line);border-radius:22px;background:#fff;color:var(--ink)}
+.gso-card.ig{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.gso-top{display:flex;align-items:center;gap:12px}
+.gso-ico{flex:none;width:44px;height:44px;border-radius:12px;background:var(--violet);position:relative}
+.gso-ico::after{content:"";position:absolute;inset:11px;background:#fff;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}
+.gso-card.ig .gso-ico{background:var(--lime)}
+.gso-card.ig .gso-ico::after{background:var(--ink)}
+.gso-ico.ig{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.3 5.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z'/%3E%3C/svg%3E")}.gso-ico.li{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 9h4v12H4zM6 3a2.2 2.2 0 1 1 0 4.4A2.2 2.2 0 0 1 6 3zm4.5 6h3.8v1.7c.6-1 1.9-2 3.9-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21h-4z'/%3E%3C/svg%3E")}.gso-ico.fb{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.5 22v-8h2.8l.4-3.3h-3.2V8.6c0-.9.3-1.6 1.7-1.6h1.7V4.1a23 23 0 0 0-2.5-.1c-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.8v8z'/%3E%3C/svg%3E")}
+.gso-top div b{display:block;font-size:18px;line-height:1.2}
+.gso-top div span{font-size:14px;opacity:.7}
+.gso-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0;padding:0;list-style:none}
+.gso-tiles li{margin:0;aspect-ratio:1;overflow:hidden;border-radius:10px;background:rgba(255,255,255,.08)}
+.gso-tiles img{width:100%;height:100%;object-fit:cover;display:block}
+.gso-card h3{margin:0;font-size:20px;line-height:1.2;letter-spacing:-.02em;color:inherit}
+.gso-card p{margin:0;font-size:15px;line-height:1.5;color:inherit;opacity:.8}
+.gso-list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.gso-list li{position:relative;margin:0;padding-left:26px;font-size:15px;line-height:1.4}
+.gso-list li::before{content:"";position:absolute;left:0;top:3px;width:16px;height:16px;border-radius:50%;background:var(--violet) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.2l2.6 2.6L12 5.4' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E") center/12px no-repeat}
+.gso-go{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;margin-top:auto;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--paper)!important;font-weight:600;font-size:15px;text-decoration:none!important;transition:transform .2s ease}
+.gso-card.ig .gso-go{background:var(--lime);color:var(--ink)!important}
+.gso-go:hover{transform:translateY(-2px)}
+.gso-go:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+@media(max-width:1000px){.gso-grid{grid-template-columns:1fr 1fr}.gso-card.ig{grid-column:1/-1}}
+@media(max-width:640px){.gso-grid{grid-template-columns:1fr}.gso-card{padding:20px}}
+@media(prefers-reduced-motion:reduce){.gso-go{transition:none}}
+</style>
+  <div class="head">
+    <div class="hd"><p class="kicker m">Gamefields w sieci</p><h2 class="d" id="gfs-social">Zobacz, co budujemy.</h2></div>
+    <div class="side"><p>Montaże, nowe wzory i otwarcia boisk pokazujemy na bieżąco. Każdy kanał ma inną rolę — obserwuj ten, który jest dla Ciebie.</p></div>
+  </div>
+  <div class="gso-grid">
+    <article class="gso-card ig">
+      <div class="gso-top"><span class="gso-ico ig" aria-hidden="true"></span><div><b>Instagram</b><span>@gamefields.eu</span></div></div>
+      <ul class="gso-tiles" role="list"><li><img src="/wp-content/uploads/2024/12/13-3-768x768.jpg" alt="Panna Ring, Nowy Świat, Warszawa" width="300" height="300" loading="lazy" decoding="async"></li><li><img src="/wp-content/uploads/2024/12/15-3-768x768.jpg" alt="Panna Octa Cage 180, Kraków" width="300" height="300" loading="lazy" decoding="async"></li><li><img src="/wp-content/uploads/2026/11/Zyrardow-Panna-Arena-1v1--768x575.jpg" alt="Panna 1 na 1, Żyrardów" width="300" height="300" loading="lazy" decoding="async"></li></ul>
+      <p>Montaże, wzory nawierzchni i boiska w akcji. Przed i po: jak stary plac zamienia się w miejsce do gry.</p>
+      <a class="gso-go" href="https://www.instagram.com/gamefields.eu/" target="_blank" rel="noopener me" data-gf-social="instagram" data-gf-place="sekcja-social">Obserwuj na Instagramie <span aria-hidden="true">↗</span></a>
+    </article>
+    <article class="gso-card">
+      <div class="gso-top"><span class="gso-ico li" aria-hidden="true"></span><div><b>LinkedIn</b><span>Gamefields</span></div></div>
+      <h3>Dla gmin, szkół i firm</h3>
+      <ul class="gso-list" role="list"><li>Realizacje dla miast z opinią zamawiającego</li><li>Starty naborów dotacji, zanim ruszą</li><li>Parametry do przetargów i wniosków</li></ul>
+      <a class="gso-go" href="https://www.linkedin.com/company/gamefields" target="_blank" rel="noopener me" data-gf-social="linkedin" data-gf-place="sekcja-social">Obserwuj na LinkedIn <span aria-hidden="true">↗</span></a>
+    </article>
+    <article class="gso-card">
+      <div class="gso-top"><span class="gso-ico fb" aria-hidden="true"></span><div><b>Facebook</b><span>Gamefields.eu</span></div></div>
+      <h3>Dla mieszkańców i społeczności</h3>
+      <ul class="gso-list" role="list"><li>Nowe boiska w Twojej okolicy</li><li>Budżet obywatelski krok po kroku</li><li>Wydarzenia i otwarcia boisk</li></ul>
+      <a class="gso-go" href="https://www.facebook.com/Gamefields.eu" target="_blank" rel="noopener me" data-gf-social="facebook" data-gf-place="sekcja-social">Obserwuj na Facebooku <span aria-hidden="true">↗</span></a>
+    </article>
+  </div>
 </section>
 
 <!--GF-BLOK:planer-->
@@ -217,7 +275,7 @@
     <a class="pill" href="#zdjecie" style="background:var(--violet);color:#fff">Wyślij zdjęcie placu <span aria-hidden="true">→</span></a>
     <a class="pill" href="/studio/" style="background:var(--ink);color:var(--paper)">Zaprojektuj w 3D i wyślij do wyceny <span aria-hidden="true">↗</span></a>
   </div>
-  <p class="follow-line">Starty naborów dotacji i realizacje dla samorządów publikuję na <a href="https://www.linkedin.com/company/gamefields" target="_blank" rel="noopener me" data-gf-social="linkedin" data-gf-place="samorzady">LinkedIn</a>. Obserwuj, żeby zdążyć z wnioskiem.</p>
+  <p class="follow-line" style="margin-top:16px;font-size:15px;color:var(--muted)">Starty naborów dotacji i realizacje dla samorządów publikuję na <a href="https://www.linkedin.com/company/gamefields" target="_blank" rel="noopener me" data-gf-social="linkedin" data-gf-place="samorzady" style="color:var(--violet);font-weight:600;text-decoration:underline;text-underline-offset:3px">LinkedIn</a>. Obserwuj, żeby zdążyć z wnioskiem.</p>
 </section>
 
 <!--GF-BLOK:dla-kogo-->

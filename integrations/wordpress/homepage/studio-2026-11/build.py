@@ -320,7 +320,9 @@ def main():
     ])
 
     def assemble(script_part):
-        blocks = [("styl", styl)] + sections + [("skrypty", "\n".join(script_part + [contact_scripts.strip()]))]
+        # "gf-lead" (2026-11-18): gf-lead.js/css + profile template, in content until theme 1.0.37 (build_gf_lead_block.py)
+        gf_lead = read("gf-lead-blok.html").replace("<!-- wp:html -->", "").replace("<!-- /wp:html -->", "").replace("<!-- gf-blok: gf-lead -->", "").strip()
+        blocks = [("styl", styl)] + sections + [("skrypty", "\n".join(script_part + [contact_scripts.strip()])), ("gf-lead", gf_lead)]
         return blocks, "\n\n".join(f"<!-- wp:html -->\n<!-- gf-blok: {n} -->\n{c.strip()}\n<!-- /wp:html -->" for n, c in blocks) + "\n"
 
     blocks, block = assemble(tags)

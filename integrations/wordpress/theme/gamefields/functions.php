@@ -439,7 +439,7 @@ function gft_social_links() {
 }
 
 function gft_social_follow( $place, $title = 'Obserwuj Gamefields' ) {
-	echo '<div class="gf-follow" data-gf-follow="' . esc_attr( $place ) . '"><p class="gf-follow-t">' . esc_html( $title ) . '</p><ul class="gf-follow-list" role="list">';
+	echo '<div class="gf-follow' . ( $title ? '' : ' row' ) . '" data-gf-follow="' . esc_attr( $place ) . '">' . ( $title ? '<p class="gf-follow-t">' . esc_html( $title ) . '</p>' : '' ) . '<ul class="gf-follow-list" role="list">';
 	foreach ( gft_social_links() as $s ) {
 		printf(
 			'<li><a class="gf-follow-a gf-follow-%1$s" href="%2$s" target="_blank" rel="noopener me" data-gf-social="%1$s" data-gf-place="%3$s"><span class="gf-follow-ico" aria-hidden="true"></span><b>%4$s</b><span>%5$s</span></a></li>',
@@ -448,3 +448,11 @@ function gft_social_follow( $place, $title = 'Obserwuj Gamefields' ) {
 	}
 	echo '</ul></div>';
 }
+
+/* Profiles shown after a sent form: gf-lead.js clones this template. The links stay in HTML, because Complianz
+ * blocks scripts that mention social networks until marketing consent. */
+add_action( 'wp_footer', function () {
+	echo '<template id="gf-follow-tpl">';
+	gft_social_follow( 'po-wyslaniu', '' );
+	echo '</template>';
+}, 5 );

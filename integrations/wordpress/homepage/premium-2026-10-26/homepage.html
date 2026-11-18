@@ -98,6 +98,11 @@
 .gm-note{margin-top:20px;font-size:13px}
 @media(max-width:1000px){.gm-head,.gm-grid{grid-template-columns:1fr;gap:24px}.gm-cta{flex-direction:column;align-items:stretch}.gm-cta-actions .gh-btn{width:100%}}
 @media(max-width:600px){.gm-options-who{grid-template-columns:1fr 1fr}.gm-opt{padding:10px 12px;font-size:15px}.gm-map{height:240px}.gm-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -20px;padding:0 20px 12px;scroll-padding:0 20px}.gm-cards>.gm-card{flex:0 0 84%;scroll-snap-align:start}.gm-level:has(.gm-card:nth-child(2)) .gm-level-head p::after{content:" Przesuń w bok →";color:var(--gh-violet);font-weight:600}.gm-facts div{grid-template-columns:84px 1fr}.gm-cta{padding:24px}.gm-summary{font-size:19px}}
+.gm-follow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:24px;font-size:15px;color:var(--gh-ink)!important}
+.gm-follow>span{margin-right:4px}
+.gm-soc{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 16px;border:1.5px solid var(--gh-line);border-radius:999px;background:#fff;color:var(--gh-ink)!important;font-weight:600;font-size:14px;text-decoration:none!important}
+.gm-soc:hover{border-color:var(--gh-violet);color:var(--gh-violet)!important}
+.gm-soc:focus-visible{outline:3px solid var(--gh-violet);outline-offset:2px}
 </style><div class="gf-premium" id="gf-culture" data-homepage-version="2026-10-26">
 <a class="gh-skip" href="#gh-main">Przejdź do treści</a>
 <header class="gh-nav gh-wrap"><a href="/" class="gh-logo" aria-label="Gamefields — strona główna">gamefields.</a><button type="button" class="gh-btn gh-menu" aria-expanded="false" aria-controls="gh-nav-links">Menu</button><nav id="gh-nav-links" aria-label="Główna nawigacja"><a class="gh-btn" href="#boiska" >Boiska</a><a class="gh-btn" href="#nawierzchnie" >Nawierzchnie</a><a class="gh-btn" href="#kierunki" >Inspiracje</a><a class="gh-btn gh-primary" href="/konfigurator-boisk/?arena=o1" data-current-studio>Projektuj w Studio</a></nav></header>
@@ -121,13 +126,13 @@
 <fieldset class="gm-step" data-step="need"><legend><span class="gm-num">3</span>Co chcesz zrobić?</legend><div class="gm-options" data-options="need"></div></fieldset>
 </div>
 <div class="gm-place"><p class="gm-place-title"><span class="gm-num">+</span>Zaznacz miejsce <span class="gm-optional">(opcjonalnie)</span></p>
-<div class="gm-map" id="gm-map" role="application" aria-label="Mapa — kliknij, aby zaznaczyć miejsce"><button type="button" class="gh-btn gm-map-start" id="gm-map-start">Pokaż mapę</button></div>
+<div class="gm-map" id="gm-map" role="application" aria-label="Mapa — kliknij, aby zaznaczyć miejsce" data-tiles="https://tile.openstreetmap.org/{z}/{x}/{y}.png" data-attribution="&amp;copy; &lt;a href=&quot;https://www.openstreetmap.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt;" data-link="https://www.openstreetmap.org/?mlat={lat}&amp;mlon={lng}#map=17/{lat}/{lng}"><button type="button" class="gh-btn gm-map-start" id="gm-map-start">Pokaż mapę</button></div>
 <div class="gm-place-row"><label class="gm-label" for="gm-place-name">Miejscowość, ulica albo opis miejsca</label><input id="gm-place-name" type="text" maxlength="160" placeholder="np. Kraków, boisko przy SP 12" autocomplete="off"></div>
 <div class="gm-place-actions"><button type="button" class="gh-btn" id="gm-locate">Użyj mojej lokalizacji</button><span class="gm-coords" id="gm-coords" aria-live="polite"></span></div></div>
 </div>
 <div class="gm-results" id="gm-results" aria-live="polite"></div>
 <div class="gm-cta" id="gm-cta" hidden><div><h3>Masz już swój plan.</h3><p>Wyślij go nam — przygotujemy wizualizację i szacunkowy koszt, które przydadzą się w każdej z tych dróg. <strong>Dla mieszkańców bez budżetu za darmo.</strong></p></div><div class="gm-cta-actions"><button type="button" class="gh-btn gh-primary" id="gm-send">Wyślij nam swój plan →</button><button type="button" class="gh-btn" id="gm-share">Skopiuj link do planu</button><span class="gm-share-status" id="gm-share-status" role="status"></span></div></div>
-<div class="gf-follow row" data-gf-follow="mapa-mozliwosci"><p class="gf-follow-t">Nie przegap naboru — starty ogłaszamy tutaj</p><ul class="gf-follow-list" role="list"><li><a class="gf-follow-a gf-follow-linkedin" href="https://www.linkedin.com/company/gamefields" target="_blank" rel="noopener me" data-gf-social="linkedin" data-gf-place="mapa-mozliwosci"><span class="gf-follow-ico" aria-hidden="true"></span><b>LinkedIn</b><span>Nabory dotacji i programy dla samorządów</span></a></li><li><a class="gf-follow-a gf-follow-facebook" href="https://www.facebook.com/Gamefields.eu" target="_blank" rel="noopener me" data-gf-social="facebook" data-gf-place="mapa-mozliwosci"><span class="gf-follow-ico" aria-hidden="true"></span><b>Facebook</b><span>Budżety obywatelskie i boiska w okolicy</span></a></li><li><a class="gf-follow-a gf-follow-instagram" href="https://www.instagram.com/gamefields.eu/" target="_blank" rel="noopener me" data-gf-social="instagram" data-gf-place="mapa-mozliwosci"><span class="gf-follow-ico" aria-hidden="true"></span><b>Instagram</b><span>Przed i po: odnowione place</span></a></li></ul></div>
+<p class="gm-follow"><span>Nie przegap naboru — starty ogłaszamy na bieżąco:</span><a class="gm-soc" href="https://www.linkedin.com/company/gamefields" target="_blank" rel="noopener me" data-gf-social="linkedin" data-gf-place="mapa-mozliwosci">LinkedIn <span aria-hidden="true">↗</span></a><a class="gm-soc" href="https://www.facebook.com/Gamefields.eu" target="_blank" rel="noopener me" data-gf-social="facebook" data-gf-place="mapa-mozliwosci">Facebook <span aria-hidden="true">↗</span></a></p>
 <p class="gm-note" id="gm-note"></p>
 <noscript><p>Napisz do nas: <a href="mailto:info@gamefields.eu">info@gamefields.eu</a> — pomożemy znaleźć sposób na Twoje boisko.</p></noscript>
 </div></section>
@@ -297,7 +302,7 @@ function startMap(){
  return loadLeaflet().then(lib=>{
   L=lib;btn.remove();
   map=L.map(box,{scrollWheelZoom:false}).setView([52.07,19.48],6);
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  L.tileLayer(box.dataset.tiles,{maxZoom:19,attribution:box.dataset.attribution}).addTo(map);
   map.on('click',e=>setPin(e.latlng.lat,e.latlng.lng));
   if(state.lat!=null)setPin(state.lat,state.lng,15);
  }).catch(()=>{btn.textContent='Mapa niedostępna — wpisz miejsce poniżej';});
@@ -317,7 +322,7 @@ function planText(){
  if(state.area)lines.push('Teren: '+label('area',state.area));
  if(state.need)lines.push('Chcę: '+label('need',state.need));
  if(place)lines.push('Miejsce: '+place);
- if(state.lat!=null)lines.push('Na mapie: '+state.lat+', '+state.lng+' (https://www.openstreetmap.org/?mlat='+state.lat+'&mlon='+state.lng+'#map=17/'+state.lat+'/'+state.lng+')');
+ if(state.lat!=null){const mapBox=$('#gm-map'),link=(mapBox.dataset.link||'').split('{lat}').join(state.lat).split('{lng}').join(state.lng);lines.push('Na mapie: '+state.lat+', '+state.lng+(link?' ('+link+')':''))}
  lines.push('Drogi, które mnie interesują: '+matches().map(t=>t.name).join('; '));
  return lines.join('\n');
 }

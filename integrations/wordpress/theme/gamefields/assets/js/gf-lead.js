@@ -228,26 +228,15 @@
 	function ready() { try { window.opener.postMessage({ type: 'gf-contact-ready' }, STUDIO); } catch (e) { /* not opened by Studio */ } }
 	if (window.opener) if (first) { if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready); }
 
-	/* ---------- social media (1.0.37) ----------
-	 * Same list as gft_social_links() in functions.php. After a sent form: "Zanim odpiszę…" card with the profiles
-	 * (the moment of highest interest). Every [data-gf-social] click: GA4 event gf_social {platform, placement}. */
-	var SOCIAL = [
-		['instagram', 'Instagram', 'https://www.instagram.com/gamefields.eu/', 'Wzory, montaże i boiska w akcji'],
-		['linkedin', 'LinkedIn', 'https://www.linkedin.com/company/gamefields', 'Realizacje dla miast i nabory dotacji'],
-		['facebook', 'Facebook', 'https://www.facebook.com/Gamefields.eu', 'Nowe boiska w Twojej okolicy']
-	];
-	function follow(place, title) {
-		var box = el('div', 'gf-follow row'), list = el('ul', 'gf-follow-list');
-		box.setAttribute('data-gf-follow', place); list.setAttribute('role', 'list');
-		if (title) box.appendChild(el('p', 'gf-follow-t', title));
-		SOCIAL.forEach(function (s) {
-			var li = el('li'), a = el('a', 'gf-follow-a gf-follow-' + s[0]);
-			a.href = s[2]; a.target = '_blank'; a.rel = 'noopener me'; a.setAttribute('data-gf-social', s[0]); a.setAttribute('data-gf-place', place);
-			var ico = el('span', 'gf-follow-ico'); ico.setAttribute('aria-hidden', 'true');
-			a.appendChild(ico); a.appendChild(el('b', '', s[1])); a.appendChild(el('span', '', s[3]));
-			li.appendChild(a); list.appendChild(li);
-		});
-		box.appendChild(list); return box;
+	/* ---------- profiles after a sent form (1.0.37) ----------
+	 * No profile addresses in this script: the cookie plugin (Complianz) treats a script that mentions them as a
+	 * social embed and blocks the whole file until marketing consent. The links live in HTML instead:
+	 * <template id="gf-follow-tpl"> printed by the page block or the theme footer; it is cloned after a sent form.
+	 * Every [data-gf-social] click: GA4 event gf_social {platform, placement}. */
+	function follow() {
+		var tpl = document.getElementById('gf-follow-tpl');
+		if (!tpl) return null;
+		return tpl.content ? tpl.content.cloneNode(true) : null;
 	}
 	leads.forEach(function (lead) {
 		var wrap = lead.closest('.wpcf7'); if (!wrap) return;
@@ -255,7 +244,8 @@
 			if (wrap.querySelector('.gf-thanks-follow')) return;
 			var card = el('div', 'gf-thanks-follow');
 			card.appendChild(el('p', 'gf-thanks-lead', 'Zanim odpiszę: zobacz, co teraz budujemy, i obserwuj nas, żeby nie przegapić naborów dotacji.'));
-			card.appendChild(follow('po-wyslaniu', ''));
+			var links = follow(); if (!links) return;
+			card.appendChild(links);
 			var out = wrap.querySelector('.wpcf7-response-output');
 			if (out) out.insertAdjacentElement('afterend', card); else wrap.appendChild(card);
 		});
