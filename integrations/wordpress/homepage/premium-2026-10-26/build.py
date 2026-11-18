@@ -24,7 +24,7 @@ hero_choices=''.join(b(name,f'data-select-model="{key}" aria-pressed="'+('true' 
 concepts=json.loads((root/'surface-projects.json').read_text())
 materials=[('Granulat','granulat-macro.webp'),('Płytki modułowe','plytki-macro.webp'),('Sztuczna trawa','trawa-macro.webp')]
 painted='https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-probka-nawierzchni-malowanej.svg'
-css=(root/'style.css').read_text()
+css=(root/'style.css').read_text()+'\n'+(root/'possibilities.css').read_text()
 # The font is served as a cached file (upload assets/InterVariable.woff2 to FONT_URL once).
 # GF_INLINE_FONT=1 restores the old base64 copy, which added ~460 KB to every page view.
 import os
@@ -64,6 +64,7 @@ out+=f'''<button type="button" class="gh-material" data-material-src="{painted}"
 '''
 out+=(root/'workshop.html').read_text()
 out+=(root/'collaboration.html').read_text()
+out+=(root/'possibilities.html').read_text()
 contact=(root/'contact-template.html').read_text()
 contact=contact.replace('<h2>Masz miejsce?<br>Porozmawiajmy.</h2>','<h2>Masz miejsce?<br>Zróbmy miejsce do gry.</h2>')
 out+=contact+'<p id="gc-direction-status" hidden></p></main><footer class="gh-wrap gh-footer"><a class="gh-logo" href="/">gamefields.</a><a href="mailto:info@gamefields.eu">info@gamefields.eu</a><a href="/konfigurator-boisk/">Studio</a><a href="/kontakt/">Kontakt</a><a href="/polityka-prywatnosci/">Polityka prywatności</a></footer>'
@@ -72,6 +73,8 @@ runtime=(root/'script.js').read_text().replace('\nconst studio=', '\n'+(root/'pa
 data={'models':models,'modelMedia':model_media,'names':names,'modelOrder':list(names),'defaultModel':'o1','studio':S,'painted':painted}
 out+='<script type="application/json" id="gh-data">'+json.dumps(data,ensure_ascii=False).replace('</','<\\/')+'</script><script>'+runtime+'</script>'
 out+='<script>'+(root/'workshop.js').read_text()+'</script>'
+possibilities=json.loads((root/'possibilities.json').read_text())
+out+='<script type="application/json" id="gm-data">'+json.dumps(possibilities,ensure_ascii=False).replace('</','<\\/')+'</script><script>'+(root/'possibilities.js').read_text()+'</script>'
 # Keep the existing selected-product query and review/remove behavior, with the same contact field IDs.
 for script in (root/'contact-existing.js').read_text().splitlines():out+='<script>'+script+'</script>'
 out+='\n<!-- /wp:html -->'
