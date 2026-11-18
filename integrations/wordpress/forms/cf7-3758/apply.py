@@ -49,6 +49,11 @@ Twoja konfiguracja w Studio (link ważny 30 dni): [project-link]
 
 Chcesz coś dodać, np. kolejne zdjęcia? Odpowiedz na tę wiadomość.
 
+Zanim odpiszę — zobacz, co teraz budujemy:
+Instagram (wzory, montaże, przed i po): https://www.instagram.com/gamefields.eu/
+LinkedIn (realizacje dla miast, nabory dotacji): https://www.linkedin.com/company/gamefields
+Facebook (nowe boiska w okolicy): https://www.facebook.com/Gamefields.eu
+
 Damian Gawrych
 Gamefields — boiska miejskie
 info@gamefields.eu · +48 794 911 746

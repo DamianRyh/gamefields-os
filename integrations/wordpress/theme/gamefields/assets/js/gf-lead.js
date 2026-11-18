@@ -1,4 +1,4 @@
-/* Gamefields — "Wyślij zdjęcie placu" (theme 1.0.36, 2026-11-18).
+/* Gamefields — "Wyślij zdjęcie placu" (theme 1.0.36) and social media (1.0.37), 2026-11-18.
  * Enhances Contact Form 7 form 3758 wherever it is ([data-gf-lead]) without changing its fields:
  * - steps (only if the page did not enhance them already, e.g. /kontakt/ has its own),
  * - photo drop zone over the three CF7 file inputs (project-photo, -2, -3): drag and drop, several at once,
@@ -222,6 +222,44 @@
 	});
 	/* Studio opened directly (not on /studio/) sends the project to a new homepage window and waits for this signal. */
 	if (window.opener) if (first) { try { window.opener.postMessage({ type: 'gf-contact-ready' }, STUDIO); } catch (e) { /* not opened by Studio */ } }
+
+	/* ---------- social media (1.0.37) ----------
+	 * Same list as gft_social_links() in functions.php. After a sent form: "Zanim odpiszę…" card with the profiles
+	 * (the moment of highest interest). Every [data-gf-social] click: GA4 event gf_social {platform, placement}. */
+	var SOCIAL = [
+		['instagram', 'Instagram', 'https://www.instagram.com/gamefields.eu/', 'Wzory, montaże i boiska w akcji'],
+		['linkedin', 'LinkedIn', 'https://www.linkedin.com/company/gamefields', 'Realizacje dla miast i nabory dotacji'],
+		['facebook', 'Facebook', 'https://www.facebook.com/Gamefields.eu', 'Nowe boiska w Twojej okolicy']
+	];
+	function follow(place, title) {
+		var box = el('div', 'gf-follow row'), list = el('ul', 'gf-follow-list');
+		box.setAttribute('data-gf-follow', place); list.setAttribute('role', 'list');
+		if (title) box.appendChild(el('p', 'gf-follow-t', title));
+		SOCIAL.forEach(function (s) {
+			var li = el('li'), a = el('a', 'gf-follow-a gf-follow-' + s[0]);
+			a.href = s[2]; a.target = '_blank'; a.rel = 'noopener me'; a.setAttribute('data-gf-social', s[0]); a.setAttribute('data-gf-place', place);
+			var ico = el('span', 'gf-follow-ico'); ico.setAttribute('aria-hidden', 'true');
+			a.appendChild(ico); a.appendChild(el('b', '', s[1])); a.appendChild(el('span', '', s[3]));
+			li.appendChild(a); list.appendChild(li);
+		});
+		box.appendChild(list); return box;
+	}
+	leads.forEach(function (lead) {
+		var wrap = lead.closest('.wpcf7'); if (!wrap) return;
+		wrap.addEventListener('wpcf7mailsent', function () {
+			if (wrap.querySelector('.gf-thanks-follow')) return;
+			var card = el('div', 'gf-thanks-follow');
+			card.appendChild(el('p', 'gf-thanks-lead', 'Zanim odpiszę: zobacz, co teraz budujemy, i obserwuj nas, żeby nie przegapić naborów dotacji.'));
+			card.appendChild(follow('po-wyslaniu', ''));
+			var out = wrap.querySelector('.wpcf7-response-output');
+			if (out) out.insertAdjacentElement('afterend', card); else wrap.appendChild(card);
+		});
+	});
+	document.addEventListener('click', function (e) {
+		var a = e.target.closest('a[data-gf-social]'); if (!a) return;
+		if (typeof window.gtag !== 'function') return;
+		window.gtag('event', 'gf_social', { platform: a.getAttribute('data-gf-social'), placement: a.getAttribute('data-gf-place') || 'inne', page_path: location.pathname });
+	});
 
 	/* ---------- mobile sticky bar ---------- */
 	var path = location.pathname, skip = /^\/(kontakt|studio|koszyk|cart|zamowienie|checkout|moje-konto|my-account)(\/|$)/.test(path);

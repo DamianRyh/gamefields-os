@@ -221,6 +221,8 @@ def jsonld(faq_html):
                 "founder": {"@type": "Person", "@id": site + "#damian-gawrych", "name": "Damian Gawrych", "url": site + "damian-gawrych/", "sameAs": ["https://www.instagram.com/damiangawrych/", "https://www.damiangawrych.pl/"]},
                 "address": {"@type": "PostalAddress", "addressLocality": "Warszawa", "addressCountry": "PL"},
                 "parentOrganization": {"@id": site + "#organization"},
+                # company profiles (2026-11-18): Google links the studio to its social media
+                "sameAs": ["https://www.instagram.com/gamefields.eu/", "https://www.linkedin.com/company/gamefields", "https://www.facebook.com/Gamefields.eu"],
                 "knowsAbout": ["boiska do panny", "street football", "boiska miejskie", "nawierzchnie sportowe", "malowanie boisk", "renowacja boisk betonowych", "projektowanie przestrzeni sportowych"],
                 "hasOfferCatalog": {
                     "@type": "OfferCatalog",

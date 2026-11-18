@@ -773,3 +773,8 @@ body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-
 .photo-strip p{max-width:62ch;margin-top:8px;color:var(--muted)}
 .photo-strip .pill{flex:none}
 @media(max-width:800px){.photo-strip{flex-direction:column;align-items:stretch;gap:16px;padding-block:22px}}
+
+/* social lines (2026-11-18) */
+.follow-line{margin-top:10px;font-size:15px;color:var(--muted)}
+.follow-line a{color:var(--violet);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.mod-cta + .follow-line{margin-top:16px}

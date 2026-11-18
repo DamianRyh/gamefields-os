@@ -10,6 +10,7 @@
 				<a class="gft-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>">gamefields.</a>
 				<p>Autorskie studio boisk miejskich Damiana Gawrycha. Projektuję konstrukcję, nawierzchnię i grafikę jako jeden przedmiot.</p>
 				<a class="gft-pill" href="<?php echo esc_url( is_front_page() ? '#zdjecie' : home_url( '/kontakt/#zdjecie' ) ); ?>">Wyślij zdjęcie placu <span aria-hidden="true">→</span></a>
+				<?php gft_social_follow( 'stopka' ); ?>
 			</div>
 			<nav class="gft-foot-col" aria-label="Oferta">
 				<p class="gft-kicker">Oferta</p>

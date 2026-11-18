@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.36' );
+define( 'GFT_VERSION', '1.0.37' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -425,4 +425,26 @@ function gft_photo_band() {
 	</div>
 </section>
 	<?php
+}
+
+/* ---------- social profiles (1.0.37) ----------
+ * One list for the footer and other theme places. Each link says what the visitor gets there.
+ * data-gf-social / data-gf-place feed the GA4 event gf_social (gf-lead.js). */
+function gft_social_links() {
+	return array(
+		array( 'instagram', 'Instagram', 'https://www.instagram.com/gamefields.eu/', 'Wzory, montaże i boiska w akcji' ),
+		array( 'linkedin', 'LinkedIn', 'https://www.linkedin.com/company/gamefields', 'Realizacje dla miast i nabory dotacji' ),
+		array( 'facebook', 'Facebook', 'https://www.facebook.com/Gamefields.eu', 'Nowe boiska w Twojej okolicy' ),
+	);
+}
+
+function gft_social_follow( $place, $title = 'Obserwuj Gamefields' ) {
+	echo '<div class="gf-follow" data-gf-follow="' . esc_attr( $place ) . '"><p class="gf-follow-t">' . esc_html( $title ) . '</p><ul class="gf-follow-list" role="list">';
+	foreach ( gft_social_links() as $s ) {
+		printf(
+			'<li><a class="gf-follow-a gf-follow-%1$s" href="%2$s" target="_blank" rel="noopener me" data-gf-social="%1$s" data-gf-place="%3$s"><span class="gf-follow-ico" aria-hidden="true"></span><b>%4$s</b><span>%5$s</span></a></li>',
+			esc_attr( $s[0] ), esc_url( $s[2] ), esc_attr( $place ), esc_html( $s[1] ), esc_html( $s[3] )
+		);
+	}
+	echo '</ul></div>';
 }
