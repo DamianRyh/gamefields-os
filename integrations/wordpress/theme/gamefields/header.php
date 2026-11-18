@@ -18,8 +18,9 @@
 		<span class="gft-tag">Studio Damiana Gawrycha · Warszawa</span>
 		<nav class="gft-links" id="gft-links" aria-label="Główna nawigacja"><?php gft_primary_nav(); ?></nav>
 		<?php gft_cart_link(); ?>
-		<a class="gft-ask" href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>">Zapytanie</a>
+		<a class="gft-ask" href="<?php echo esc_url( home_url( '/kontakt/#zdjecie' ) ); ?>">Wyślij zdjęcie</a>
 		<button type="button" class="gft-menu" aria-expanded="false" aria-controls="gft-links">Menu</button>
+		<a class="gf-photo-link" href="<?php echo esc_url( home_url( '/kontakt/#zdjecie' ) ); ?>">Wyślij zdjęcie placu</a>
 		<a class="gft-cta" href="<?php echo esc_url( home_url( '/studio/' ) ); ?>">Studio 3D <span aria-hidden="true">↗</span></a>
 	</div>
 </header>

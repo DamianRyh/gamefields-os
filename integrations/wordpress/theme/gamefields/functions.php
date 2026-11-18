@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.35' );
+define( 'GFT_VERSION', '1.0.36' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -40,6 +40,9 @@ add_action( 'wp_enqueue_scripts', function () {
 	$uri = get_template_directory_uri();
 	wp_enqueue_style( 'gft', $uri . '/assets/css/gft.css', array(), GFT_VERSION );
 	wp_enqueue_script( 'gft', $uri . '/assets/js/gft.js', array(), GFT_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+	// 1.0.36: "Wyślij zdjęcie placu" — photo drop zone on form 3758, entry buttons, mobile bar, GA4 details.
+	wp_enqueue_style( 'gf-lead', $uri . '/assets/css/gf-lead.css', array(), GFT_VERSION );
+	wp_enqueue_script( 'gf-lead', $uri . '/assets/js/gf-lead.js', array(), GFT_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
 	// the block library CSS is only needed where blocks are used (cart, checkout, posts)
 	if ( is_front_page() ) {
 		wp_dequeue_style( 'wp-block-library' );
@@ -396,3 +399,30 @@ add_action( 'template_redirect', function () {
 		exit;
 	}
 }, 3 );
+
+/* ---------- "Wyślij zdjęcie placu" band (1.0.36) ----------
+ * Printed above the footer on offer, audience and realizations pages, which have no form of their own.
+ * The button leads to the form on /kontakt/ with the photo step open (#zdjecie). */
+function gft_photo_band_pages() {
+	return array( 'realizacje-gamefields', 'wynajem-boisk-mobilnych', 'boiska-dla-szkol', 'dla-miast', 'boiska-dla-deweloperow',
+		'boiska-dla-klubow', 'aktywacje-sportowe-dla-marek', 'budowa-boisk-sportowych', 'renowacja-boisk', 'nawierzchnie-sportowe',
+		'malowanie-boisk', 'projektowanie-boisk', 'o-nas' );
+}
+
+function gft_photo_band() {
+	if ( is_front_page() || ! is_page( gft_photo_band_pages() ) ) {
+		return;
+	}
+	?>
+<section class="gft-photo-band" aria-labelledby="gft-photo-band-t">
+	<div class="gft-wrap gft-photo-band-in">
+		<div>
+			<p class="gft-kicker">Bezpłatna ocena miejsca</p>
+			<h2 id="gft-photo-band-t">Masz plac? Wyślij zdjęcie.</h2>
+			<p>Sprawdzę miejsce i przygotuję propozycję boiska dopasowaną do Twojej przestrzeni. Odpowiadam osobiście w ciągu 1–2 dni roboczych.</p>
+		</div>
+		<a class="gft-pill" href="<?php echo esc_url( home_url( '/kontakt/#zdjecie' ) ); ?>">Wyślij zdjęcie placu <span aria-hidden="true">→</span></a>
+	</div>
+</section>
+	<?php
+}

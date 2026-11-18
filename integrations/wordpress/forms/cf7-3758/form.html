@@ -1,0 +1,34 @@
+<div class="gf-lead-steps" data-gf-lead>
+<nav class="gf-lead-progress" aria-label="Etapy zapytania"><button type="button" data-gf-go="0">1. Potrzeba</button><button type="button" data-gf-go="1">2. Miejsce</button><button type="button" data-gf-go="2">3. Kontakt</button></nav>
+<fieldset class="gf-lead-step" data-gf-step="0"><legend>Co chcesz zrobić?</legend>
+<div class="gf-lead-field"><label>Rodzaj potrzeby
+[select project-type "Jeszcze nie wiem" "Budowa nowego boiska" "Renowacja lub malowanie boiska" "Wynajem boiska i event" "Aktywacja marki" "Plakat lub piłka"]</label></div>
+<p>Możesz zacząć bez wybranego modelu i bez gotowego projektu.</p>
+<button type="button" data-gf-next>Dalej: miejsce</button></fieldset>
+<fieldset class="gf-lead-step" data-gf-step="1"><legend>Pokaż miejsce</legend>
+<div class="gf-lead-field gf-lead-photos" id="zdjecie" data-gf-photos><label>Zdjęcia placu (opcjonalnie, do 3)
+[file project-photo limit:5mb filetypes:jpg|jpeg|png|webp]</label>
+[file project-photo-2 limit:5mb filetypes:jpg|jpeg|png|webp]
+[file project-photo-3 limit:5mb filetypes:jpg|jpeg|png|webp]<small>JPG, PNG lub WebP do 5 MB każde. Duże zdjęcia z telefonu zmniejszymy automatycznie przed wysłaniem.</small></div>
+<div class="gf-lead-field"><label>Typ miejsca (opcjonalnie)
+[select place-type first_as_label "Wybierz typ miejsca" "Gmina" "Orlik" "Szkoła" "Park" "Event" "Inne"]</label></div>
+<div class="gf-lead-field"><label>Miasto / miejsce (opcjonalnie)
+[text project-location maxlength:250 placeholder "Miasto, adres lub link do mapy"]</label></div>
+<div class="gf-lead-field"><label>Orientacyjne wymiary (opcjonalnie)
+[text project-area maxlength:100 placeholder "Np. 12 × 9 m albo jeszcze nie wiem"]</label></div>
+<button type="button" data-gf-prev>Wstecz</button> <button type="button" data-gf-next>Dalej: kontakt</button></fieldset>
+<fieldset class="gf-lead-step" data-gf-step="2"><legend>Jak się skontaktować?</legend>
+<div class="gf-lead-field"><label>E-mail (wymagane)
+[email* your-email autocomplete:email]</label></div>
+<div class="gf-lead-field"><label>Imię lub organizacja (opcjonalnie)
+[text your-name autocomplete:name maxlength:160]</label></div>
+<div class="gf-lead-field"><label>Telefon (opcjonalnie)
+[tel your-phone autocomplete:tel]</label></div>
+<div class="gf-lead-field"><label>Opisz miejsce i co chcesz osiągnąć (opcjonalnie)
+[textarea your-message maxlength:4000 placeholder "Np. stary asfalt przy szkole, ok. 20 × 12 m, chcemy grać w piłkę i kosza. Budżet możesz podać, jeśli go znasz."]</label></div>
+<div class="gf-lead-consent">[acceptance marketing-consent optional] Chcę dostawać od Gamefields e-mailem informacje o ofercie i nowych realizacjach. Zgoda jest dobrowolna, możesz ją wycofać w każdej chwili.[/acceptance]</div>
+<p class="gf-lead-note">Odpowiadam osobiście w ciągu 1–2 dni roboczych. Sprawdzę miejsce i konfigurację, a potem ustalimy kolejny krok. Indywidualną wycenę przygotuję po sprawdzeniu projektu i zakresu.</p>
+<p class="gf-lead-note">Dane wykorzystam do odpowiedzi na zapytanie. Bez zaznaczonej zgody nie wyślę Ci informacji handlowych. <a href="/polityka-prywatnosci/">Polityka prywatności</a>.</p>
+<button type="button" data-gf-prev>Wstecz</button> [submit "Wyślij zapytanie"]</fieldset>
+<div hidden>[textarea project-details maxlength:500000][hidden lead-source "formularz"]</div>
+</div>
