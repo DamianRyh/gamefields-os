@@ -6,7 +6,9 @@ import {CONCRETE_BASE_EXCLUDES,CONCRETE_BASE_INCLUDES} from "@/lib/concrete-base
 
 const money=(value:number)=>new Intl.NumberFormat("pl-PL",{style:"currency",currency:"PLN",maximumFractionDigits:0}).format(value);
 const qty=(value:number)=>new Intl.NumberFormat("pl-PL",{maximumFractionDigits:2}).format(value);
-const contact=<a href="https://www.gamefields.eu/kontakt/" target="_top">Poproś o ofertę dla tego projektu →</a>;
+/* 2026-11-18: inside the summary it jumps to "Odbierz propozycję na maila", so the project goes with the inquiry;
+   elsewhere (no button on screen) it still opens the contact page. */
+const contact=<a href="https://www.gamefields.eu/kontakt/" target="_top" onClick={e=>{const t=document.getElementById("gf-inquiry-cta");if(t){e.preventDefault();t.scrollIntoView({behavior:"smooth",block:"center"});t.focus({preventScroll:true})}}}>Odbierz propozycję dla tego projektu ↓</a>;
 
 /* Shop products (plakat, piłka, koszulki) pass their exact price as `label`.
    Courts: construction price only (PRICE_MODE "construction") or the full-project range ("range"). */

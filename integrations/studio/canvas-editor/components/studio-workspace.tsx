@@ -18,7 +18,8 @@ import {primarySports} from "@/lib/primary-sports";
 import {defaultArena} from "@/components/blender-arena-preview";
 import {StudioKnowledge} from "@/components/studio-knowledge";
 import {ProjectLibrary} from "@/components/project-library";
-import {ProjectImage} from "@/components/project-image";
+import {ProjectImage,useCourtCapture} from "@/components/project-image";
+import {createInquiryLink} from "@/lib/inquiry-link";
 import {InquiryPackage} from "@/components/inquiry-package";
 import {WorkshopSave} from "@/components/workshop-save";
 import {sportSurfaces,sportSurface,selectSurface,type SurfaceModel} from "@/lib/sport-surfaces";
@@ -179,15 +180,24 @@ export function StudioWorkspace(props:Props){
   window.addEventListener("message",onMessage);
   return()=>{window.removeEventListener("message",onMessage);transport.dispose();inquiryTransport.current=null};
  },[]);
- const requestInquiry=()=>{
+ const courtCapture=useCourtCapture(project=>props.renderCourt(project));
+ /* "Odbierz propozycję na maila" (2026-11-18): the summary goes to form 3758 as before, plus a 1:1 link to this
+    configuration (server copy, 30 days) and a top-down PNG for the e-mail. Both are optional: if either fails or
+    takes longer than 8 s, the inquiry still goes without it. The popup is opened in the click, before any await. */
+ const requestInquiry=async()=>{
   setInquiryError("");setInquiryState("idle");setInquiryMessage("");
-  let summary:string;try{summary=inquirySummary({...p,objects:p.objects.filter(o=>o.kind!=="equipment")},null)}catch(error){setInquiryError((error as Error).message);return}
-  if(window.parent!==window)inquiryTransport.current?.start(window.parent,summary);
-  else {
-   const contactWindow=window.open("https://www.gamefields.eu/#kontakt",`gamefields-inquiry-${crypto.randomUUID()}`);
-   if(!contactWindow){setInquiryError("Przeglądarka zablokowała formularz. Zezwól na otwarcie okna i spróbuj ponownie.");return}
-   inquiryTransport.current?.start(contactWindow,summary,true);
+  const project={...p,objects:p.objects.filter(o=>o.kind!=="equipment")};
+  let summary:string;try{summary=inquirySummary(project,null)}catch(error){setInquiryError((error as Error).message);return}
+  const embedded=window.parent!==window;
+  let target:Window|null=embedded?window.parent:null;
+  if(!embedded){
+   target=window.open("https://www.gamefields.eu/#kontakt",`gamefields-inquiry-${crypto.randomUUID()}`);
+   if(!target){setInquiryError("Przeglądarka zablokowała formularz. Zezwól na otwarcie okna i spróbuj ponownie.");return}
   }
+  setInquiryState("waiting");setInquiryMessage("Przygotowuję link do konfiguracji i wizualizację…");
+  const within=<T,>(work:Promise<T>,ms:number)=>Promise.race([work,new Promise<null>(res=>setTimeout(()=>res(null),ms))]);
+  const [link,image]=await Promise.all([within(createInquiryLink(project,window.location.origin),8000),within(courtCapture.capture(project),8000).catch(()=>null)]);
+  if(target)inquiryTransport.current?.start(target,summary,!embedded,{link:link||undefined,image:image||undefined});
  };
  useEffect(()=>{
   const root=document.documentElement;
@@ -320,6 +330,6 @@ export function StudioWorkspace(props:Props){
    {!p.printDesign&&<ProjectCard renderCourt={props.renderCourt} project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} quote={props.quote} sections={p.matProduct?[{title:"Mata treningowa",rows:[["Wymiary",`${String(p.length).replace(".",",")} × ${String(p.width).replace(".",",")} m`],["Powierzchnia",`${String(matArea(p)).replace(".",",")} m²`],["Rodzaj gumy",props.quote.data?.items.find(i=>i.id==="mats")?.label.split(" · ").slice(1).join(" · ")||"Standard"],["Kolor maty",p.base],["Ćwiczenia",p.objects.filter(o=>o.kind!=="equipment").map(o=>o.name).join(", ")||"Brak"]]}]:([
  {title:"Konstrukcja",rows:[["Model",profile.label],["Kod produktu",modelCode||"Projekt indywidualny"],["Wymiary pola gry",projectDimensions(p).reference],["Kolor paneli",design.panelColor],["Kolor ramy",design.frameColor],["Kolor bramek",design.goalColor],["Wykończenie konstrukcji",({matte:"Matowe",gloss:"Połysk",metal:"Metal lakierowany"})[design.finish]],...(design.text?[["Napis na panelach",design.text] as [string,string]]:[]),...(design.src?[["Logo na panelach","Dodane"] as [string,string]]:[])]},
  {title:"Nawierzchnia",rows:[...(!p.arenaModel&&selectedSurface?[["Format",`${selectedSurface.name} · ${selectedSurface.length} × ${selectedSurface.width} m`] as [string,string]]:[]),["Nawierzchnia betonowa",p.concreteBase!==false?"Tak, płyta 12 cm z podbudową":"Nie, własne podłoże"] as [string,string],["Materiał",surfaceLabel(p.surface)],...(()=>{const f=props.quote.data?.items.find(i=>["paint","epdm","tiles","turf","acrylic","rubber","mats"].includes(i.id));return f?[["Wariant",f.label.split(" · ").slice(1).join(" · ")||f.label] as [string,string]]:[]})(),...(finishAreaFor(p)!==null?[["Powierzchnia wykończenia",`${areaLabel(finishAreaFor(p)!)} m² (${p.arenaModel?"konstrukcja":"nawierzchnia"} +10%)`] as [string,string]]:[]),["Wzór",`${family.name} · wariant ${p.patternVariant||1}`],["Paleta",getPatternPalette(p.patternPalette).name],["Pole gry",p.base],["Strefy",p.zone],["Linie",p.lines?p.lineColor:"Wyłączone"]]}
-] as {title:string;rows:[string,string][]}[]).filter(s=>s.title==="Konstrukcja"?!!p.arenaModel:!p.constructionOnly)}/>}{!p.printDesign&&<ProjectImage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} renderCourt={props.renderCourt}/>}<InquiryPackage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} quote={props.quote}/>{!p.printDesign&&<StudioKnowledge project={p}/>}{!p.printDesign&&<ProjectSpecification project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}}/>}<p className="studio-hint">Parametry projektu dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}{inquiryState!=="idle"&&inquiryState!=="error"?<p role="status">{inquiryMessage}</p>:null}<button className="studio-primary" disabled={inquiryState==="waiting"} onClick={requestInquiry}>Wyślij projekt do wyceny <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
+] as {title:string;rows:[string,string][]}[]).filter(s=>s.title==="Konstrukcja"?!!p.arenaModel:!p.constructionOnly)}/>}{!p.printDesign&&<ProjectImage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} renderCourt={props.renderCourt}/>}<InquiryPackage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} quote={props.quote}/>{!p.printDesign&&<StudioKnowledge project={p}/>}{!p.printDesign&&<ProjectSpecification project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}}/>}<p className="studio-hint">Na maila dostaniesz link do tej konfiguracji i wizualizację z góry. Indywidualną propozycję przygotuję w ciągu 1–2 dni roboczych. Żeby link działał, zapiszemy kopię projektu na 30 dni. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}{inquiryState!=="idle"&&inquiryState!=="error"?<p role="status">{inquiryMessage}</p>:null}<button id="gf-inquiry-cta" className="studio-primary" disabled={inquiryState==="waiting"} onClick={()=>{void requestInquiry()}}>{inquiryState==="waiting"?"Przygotowuję…":"Odbierz propozycję na maila"} <ArrowRight size={18}/></button>{courtCapture.node}<button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
  </main></OptionPrices>;
 }

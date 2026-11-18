@@ -184,6 +184,45 @@
 	});
 	if (location.hash === '#zdjecie') { if (first) setTimeout(function () { bring(first, false); }, 300); }
 
+	/* ---------- Studio: link to the configuration and top-down PNG (2026-11-18) ----------
+	 * The page's own handler (Studio dialog on /studio/, gf-home.js on the homepage) still attaches the summary and
+	 * answers Studio. This listener only adds the optional extras of the same message to the same form:
+	 * hidden project-link and the file field project-render (both arrive in the e-mail). */
+	var STUDIO = 'https://gamefields-studio.ryhfs90.chatgpt.site';
+	function studioForm(source) {
+		var frame = document.getElementById('studio');
+		if (frame) if (source === frame.contentWindow) {
+			var dlg = document.getElementById('gf-inquiry-dialog');
+			var inDialog = dlg ? dlg.querySelector('[data-gf-lead]') : null;
+			if (inDialog) return inDialog;
+		}
+		if (source === window.opener) return first;
+		if (frame) if (source === frame.contentWindow) return first;
+		return null;
+	}
+	window.addEventListener('message', function (event) {
+		if (event.origin !== STUDIO) return;
+		var d = event.data; if (!d) return; if (d.type !== 'gf-inquiry') return;
+		var lead = studioForm(event.source); if (!lead) return;
+		var link = lead.querySelector('[name="project-link"]');
+		if (link) link.value = (typeof d.link === 'string' ? (/^https:\/\/gamefields-studio\.ryhfs90\.chatgpt\.site\/\?[^\s]{1,2000}$/.test(d.link) ? d.link : '') : '');
+		var file = lead.querySelector('input[type=file][name="project-render"]');
+		if (!file) return;
+		file.value = '';
+		if (typeof d.image !== 'string') return;
+		if (!/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(d.image)) return;
+		if (d.image.length > 6000000) return;
+		if (!canTransfer) return;
+		try {
+			var type = d.image.slice(5, d.image.indexOf(';')), bin = atob(d.image.slice(d.image.indexOf(',') + 1)), bytes = new Uint8Array(bin.length);
+			for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+			var dt = new DataTransfer(); dt.items.add(new File([bytes], 'gamefields-studio-wizualizacja.' + (type === 'image/png' ? 'png' : 'jpg'), { type: type }));
+			file.files = dt.files;
+		} catch (e) { /* the inquiry goes without the picture */ }
+	});
+	/* Studio opened directly (not on /studio/) sends the project to a new homepage window and waits for this signal. */
+	if (window.opener) if (first) { try { window.opener.postMessage({ type: 'gf-contact-ready' }, STUDIO); } catch (e) { /* not opened by Studio */ } }
+
 	/* ---------- mobile sticky bar ---------- */
 	var path = location.pathname, skip = /^\/(kontakt|studio|koszyk|cart|zamowienie|checkout|moje-konto|my-account)(\/|$)/.test(path);
 	if (!skip) {

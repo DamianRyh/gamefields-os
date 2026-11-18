@@ -4,7 +4,8 @@
 What changes (everything else on the form stays as it is: recipient, sender, mail body, other messages):
 - form: form.html (same three steps and field names as before, plus: up to 3 photos, place-type, optional
   marketing consent, hidden lead-source, new texts),
-- mail: attachments get project-photo-2 and -3; the subject and body get place type and lead source,
+- mail: attachments get project-photo-2, -3 and project-render (Studio PNG); the subject and body get place type,
+  lead source and the Studio link (project-link),
 - mail_2: auto-reply to the sender (summary, 1–2 working days, reply-to info@gamefields.eu), without attachments,
 - messages.mail_sent_ok: "Dziękujemy. Damian odezwie się w ciągu 1–2 dni roboczych."
 
@@ -31,7 +32,8 @@ EXTRA_BODY = """
 — Zdjęcie placu / źródło —
 Typ miejsca: [place-type]
 Źródło zgłoszenia: [lead-source]
-Zgoda na informacje handlowe: [marketing-consent]"""
+Zgoda na informacje handlowe: [marketing-consent]
+Link do konfiguracji w Studio: [project-link]"""
 
 MAIL_2_BODY = """Dzień dobry,
 
@@ -43,6 +45,7 @@ Typ miejsca: [place-type]
 Miejsce: [project-location]
 Wymiary: [project-area]
 Opis: [your-message]
+Twoja konfiguracja w Studio (link ważny 30 dni): [project-link]
 
 Chcesz coś dodać, np. kolejne zdjęcia? Odpowiedz na tę wiadomość.
 
@@ -70,7 +73,7 @@ def patched(cur):
     new["form"] = (HERE / "form.html").read_text(encoding="utf-8").strip()
     mail = new["mail"]
     att = mail.get("attachments", "") or ""
-    for tag in ("[project-photo]", "[project-photo-2]", "[project-photo-3]"):
+    for tag in ("[project-photo]", "[project-photo-2]", "[project-photo-3]", "[project-render]"):
         if tag not in att:
             att = (att + "\n" + tag).strip()
     mail["attachments"] = att
