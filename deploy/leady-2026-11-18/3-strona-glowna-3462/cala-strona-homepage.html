@@ -1,0 +1,1650 @@
+<!-- wp:html -->
+<!-- gf-blok: styl -->
+<!-- Gamefields homepage studio-2026-11 · source: integrations/wordpress/homepage/studio-2026-11 · Inter SIL OFL: https://rsms.me/inter/ -->
+<style>@font-face{font-family:GHInter;font-style:normal;font-weight:100 900;font-display:swap;src:url(/wp-content/themes/gamefields/assets/fonts/GHInter-sub.woff2) format('woff2')}
+/* Gamefields homepage "Studio" 2026-11 — boisko jako plakat.
+   Everything is scoped to .gfs so the Savoy theme cannot restyle it. Inter (GHInter) is the only face. */
+body:has(.gfs){margin:0!important;background:#F4F1EE!important}
+body:has(.gfs) :is(#nm-header,#nm-footer,#nm-top-bar,.nm-page-title){display:none!important}
+body:has(.gfs) :is(#nm-page-wrap,.nm-page-default,.nm-row,.nm-page-content){max-width:none!important;width:100%!important;margin:0!important;padding:0!important}
+.gfs{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--plum:#1C0912;--line:#D9CFD4;
+  background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
+.gfs *,.gfs *::before,.gfs *::after{box-sizing:border-box}
+.gfs a{color:inherit}
+.gfs a:hover{color:var(--violet)}
+.gfs img{max-width:100%;display:block}
+.gfs h1,.gfs h2,.gfs h3,.gfs p{margin:0}
+/* the theme colours headings and text globally; inside .gfs colour always comes from the section */
+.gfs :is(h1,h2,h3,h4,p,dt,dd,li,span,label,figcaption,b,strong,summary){color:inherit}
+.gfs :is(h1,h2,h3,h4){font-family:inherit;text-transform:none}
+.gfs button{font-family:inherit}
+.gfs :focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+.gfs [hidden]{display:none!important}
+.gfs .d{font-weight:800;letter-spacing:-.055em;line-height:.86;text-wrap:balance}
+.gfs .m{font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.gfs .wrap{max-width:1440px;margin:0 auto;padding-left:max(16px,3.4vw);padding-right:max(16px,3.4vw)}
+.gfs .skip{position:absolute;left:-9999px}
+.gfs .skip:focus{left:16px;top:16px;z-index:100;background:#fff;padding:10px 14px}
+.gfs .pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:0;cursor:pointer;transition:transform .2s ease}
+.gfs .pill:hover{transform:translateY(-2px)}
+.gfs .chip{font-size:14px;font-weight:600;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid #CDBFC6;background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;text-decoration:none}
+.gfs .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.gfs .chip small{font-weight:500;opacity:.6;margin-left:6px;font-size:inherit}
+.gfs .chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfs .seg{display:inline-flex;flex-wrap:wrap;border-radius:999px;padding:4px;background:rgba(255,255,255,.18)}
+.gfs .seg button{font-size:14px;font-weight:600;border:0;background:none;color:inherit;min-height:40px;padding:0 16px;border-radius:999px;cursor:pointer}
+.gfs .seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+.gfs .bar{position:absolute;left:clamp(10px,1.6vw,22px);right:clamp(10px,1.6vw,22px);bottom:clamp(10px,1.6vw,22px);display:flex;justify-content:space-between;gap:12px;background:rgba(244,241,238,.94);color:var(--ink);padding:10px 14px}
+.gfs .bar b{font-size:15px}
+
+/* court markings: every coloured field is a playing field */
+.gfs .court{position:absolute;inset:clamp(10px,1.6vw,22px);border:2px solid var(--ln,rgba(255,255,255,.6));pointer-events:none}
+.gfs .court::before{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:2px solid var(--ln,rgba(255,255,255,.6))}
+.gfs .court::after{content:"";position:absolute;left:50%;top:50%;width:var(--cr,34%);aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid var(--ln,rgba(255,255,255,.6));border-radius:50%}
+.gfs .court i{position:absolute;top:30%;bottom:30%;width:9%;border:2px solid var(--ln,rgba(255,255,255,.6))}
+.gfs .court i:first-child{left:-2px;border-left:0}
+.gfs .court i:last-child{right:-2px;border-right:0}
+
+/* NAV */
+.gfs .nav{display:flex;align-items:center;gap:28px;min-height:72px;position:relative;z-index:5}
+.gfs .logo{font-weight:800;font-size:26px;letter-spacing:-1.2px;text-decoration:none}
+.gfs .nav .links{display:flex;gap:24px;margin-left:auto;font-size:15px;font-weight:500}
+.gfs .nav .links a{text-decoration:none}
+.gfs .menu-btn{display:none}
+
+/* HERO */
+.gfs .hero{position:relative;min-height:880px;transition:background-color .5s ease,color .5s ease;overflow:hidden}
+.gfs .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto 1fr auto;min-height:880px;padding-block:clamp(40px,4vw,64px) clamp(36px,3vw,52px);pointer-events:none}
+.gfs .hero-grid :is(a,button){pointer-events:auto}
+.gfs .hero-top{grid-column:1/-1;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.gfs .h1a{grid-column:1/9;grid-row:2;align-self:start;margin-top:clamp(24px,4vw,64px);font-size:clamp(64px,12.5vw,200px)}
+.gfs .h1b{grid-column:6/13;grid-row:2;align-self:end;justify-self:end;text-align:right;font-size:clamp(64px,12.5vw,200px);margin-bottom:clamp(8px,2vw,28px)}
+.gfs .hero-3d{position:absolute;left:50%;top:52%;width:min(64vw,940px);height:min(52vw,660px);transform:translate(-50%,-50%);z-index:1}
+.gfs .hero-3d model-viewer{width:100%;height:100%;--poster-color:transparent;background:transparent;cursor:grab}
+.gfs .hero-3d .still{position:absolute;left:50%;top:50%;width:84%;transform:translate(-50%,-50%);filter:drop-shadow(0 40px 40px rgba(20,4,12,.28))}
+.gfs .hero-3d.ready .still{display:none}
+.gfs .drag{position:absolute;left:50%;top:1%;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:rgba(244,241,238,.92);color:var(--ink);pointer-events:none;white-space:nowrap}
+.gfs .ball{position:absolute;z-index:3;width:34px;height:34px;border-radius:50%;background:#fff;box-shadow:0 10px 18px rgba(0,0,0,.25);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .2s}
+.gfs .ball::after{content:"";position:absolute;inset:10px;border-radius:50%;background:var(--ink);opacity:.85}
+.gfs .hero-foot{grid-column:1/-1;grid-row:3;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.gfs .ctrl{display:grid;gap:12px}
+.gfs .dots{display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:min(100%,560px)}
+.gfs .dot{width:44px;height:44px;border-radius:50%;border:0;cursor:pointer;padding:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);transition:transform .2s;outline-offset:4px}
+.gfs .dot:hover{transform:scale(1.1)}
+.gfs .dot[aria-pressed="true"]{outline:2px solid currentColor}
+.gfs .hero .dot[aria-pressed="true"]{outline:3px solid #FFFFFF;outline-offset:3px}
+
+.gfs .ticker{overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--paper);padding-block:clamp(18px,2.4vw,30px);border-block:1px solid rgba(244,241,238,.12)}
+.gfs .ticker-track{display:flex;width:max-content;animation:gfsticker 42s linear infinite}
+.gfs .ticker:hover .ticker-track,.gfs .ticker:focus-within .ticker-track{animation-play-state:paused}
+.gfs .ticker-set{display:flex;align-items:center;flex:none}
+.gfs .ticker a,.gfs .ticker i{flex:none;white-space:nowrap;font-weight:800;font-size:clamp(34px,4.6vw,72px);line-height:1;letter-spacing:-.045em;text-decoration:none;color:var(--paper);font-style:normal}
+.gfs .ticker a{padding-inline:clamp(14px,1.6vw,26px);transition:color .2s,-webkit-text-stroke-color .2s}
+.gfs .ticker a.o{color:transparent;-webkit-text-stroke:1.5px var(--lime)}
+.gfs .ticker a:hover,.gfs .ticker a:focus-visible{color:var(--lime);-webkit-text-stroke-color:var(--lime);outline:none}
+.gfs .ticker a.o:hover,.gfs .ticker a.o:focus-visible{color:var(--lime)}
+.gfs .ticker i{color:var(--violet);font-size:clamp(20px,2.4vw,36px)}
+@keyframes gfsticker{to{transform:translateX(-50%)}}
+
+.gfs .sec{padding-block:clamp(72px,9vw,140px)}
+.gfs .head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px 24px;align-items:end;margin-bottom:clamp(28px,4vw,56px)}
+.gfs .head h2{grid-column:1/8;font-size:clamp(52px,8vw,128px)}
+.gfs .head .side{grid-column:9/13;display:grid;gap:18px}
+.gfs .head p{font-size:18px;line-height:1.5;color:var(--muted)}
+
+/* WALL */
+.gfs .wall{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.gfs .tile{position:relative;overflow:hidden;min-height:340px;text-decoration:none;display:block;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.gfs .tile:hover{transform:translateY(-6px)}
+.gfs .tile img{position:absolute;left:50%;top:50%;width:76%;transform:translate(-50%,-52%);transition:transform .5s cubic-bezier(.2,.7,.2,1);mix-blend-mode:luminosity;filter:contrast(1.12)}
+.gfs .tile:hover img{transform:translate(-50%,-56%) scale(1.05) rotate(-2deg)}
+.gfs .tile .num{position:absolute;right:clamp(18px,2vw,30px);top:clamp(10px,1.4vw,22px);font-size:clamp(56px,6vw,104px)}
+.gfs .tile .go{position:absolute;left:clamp(18px,2vw,30px);top:clamp(18px,1.8vw,28px);font-weight:700;font-size:15px;opacity:0;transform:translateY(-6px);transition:opacity .25s,transform .25s}
+.gfs .tile:hover .go,.gfs .tile:focus-visible .go{opacity:1;transform:none}
+.gfs .s3{grid-column:span 3}.gfs .s4{grid-column:span 4}.gfs .s5{grid-column:span 5}.gfs .s6{grid-column:span 6}.gfs .s7{grid-column:span 7}.gfs .s12{grid-column:span 12}
+.gfs .tall{min-height:520px}
+
+/* STUDIO + scale */
+.gfs .studio{background:var(--plum);color:var(--paper)}
+.gfs .studio-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
+.gfs .elev{grid-column:1/7;position:relative;background:#2A1220;overflow:hidden;--m:230px;display:grid;grid-template-rows:auto 1fr auto;min-height:680px}
+.gfs .elev-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding:22px}
+.gfs .elev-draw{position:relative;min-height:calc(var(--m) * 2.1 + 96px)}
+.gfs .ground{position:absolute;left:0;right:0;bottom:56px;border-top:2px solid rgba(244,241,238,.5)}
+.gfs .panels{position:absolute;left:120px;bottom:58px;display:flex;align-items:flex-end}
+.gfs .panel{position:relative;width:calc(var(--m) * 1.2);height:calc(var(--m) * var(--ph,.9));border:3px solid #E6DAE0;border-bottom:0;margin-left:-3px;background-image:linear-gradient(rgba(230,218,224,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(230,218,224,.35) 1px,transparent 1px);background-size:calc(var(--m) * .1) calc(var(--m) * .1);transition:height .35s ease}
+.gfs .elev.tall2 .panel{--ph:1.8}
+.gfs .elev.tall2 .panel::after{content:"";position:absolute;left:0;right:0;top:50%;border-top:3px solid #E6DAE0}
+.gfs .panel.gap{background:none;border-color:transparent;width:calc(var(--m) * .7)}
+.gfs .panel.gap::after{display:none}
+.gfs .panel .goal{position:absolute;left:18%;right:18%;bottom:0;height:calc(var(--m) * .5);border:3px solid #FFB3C8;border-bottom:0;background:repeating-linear-gradient(90deg,rgba(255,179,200,.5) 0 2px,transparent 2px 10px)}
+.gfs .tag{position:absolute;white-space:nowrap;color:#B9A3AF}
+.gfs .ruler{position:absolute;left:22px;bottom:58px;height:calc(var(--m) * 2);border-left:2px solid var(--lime)}
+.gfs .tick{position:absolute;left:-2px;width:12px;border-top:2px solid var(--lime)}
+.gfs .tick span{position:absolute;left:18px;top:-8px;color:var(--lime);white-space:nowrap}
+.gfs .fig{position:absolute;left:150px;bottom:58px;z-index:2;height:calc(var(--m) * 1.8);transition:height .25s ease}
+.gfs .fig svg{height:100%;width:auto;display:block}
+.gfs .fig .who{position:absolute;left:100%;top:0;margin-left:10px;color:var(--lime);white-space:nowrap}
+.gfs .range{display:grid;gap:8px;padding:0 22px 22px}
+.gfs .range input{width:100%;accent-color:var(--lime)}
+.gfs .studio-copy{grid-column:8/13;display:flex;flex-direction:column;gap:28px;justify-content:center}
+.gfs .spec{display:grid;grid-template-columns:auto minmax(0,1fr);border-top:1px solid rgba(244,241,238,.25);margin:0}
+.gfs .spec :is(dt,dd){padding:12px 0;border-bottom:1px solid rgba(244,241,238,.25);margin:0}
+.gfs .spec dt{padding-right:24px;color:#B9A3AF}
+
+/* MATERIALS */
+.gfs .mats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfs .mat{position:relative;aspect-ratio:4/5;overflow:hidden;background:#E6E0DA}
+.gfs .mat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gfs .mat:hover img{transform:scale(1.06)}
+
+/* PRINT STUDIO */
+.gfs .pl{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:start}
+.gfs .pl-stage{position:sticky;top:16px;display:grid;gap:12px;min-width:0}
+.gfs .pl-wall{position:relative;aspect-ratio:4/3.4;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#EFEAE4;transition:background-color .4s}
+.gfs .pl-floor{position:absolute;left:0;right:0;bottom:0;height:11%;background:rgba(28,9,18,.07)}
+.gfs .pl-frame{position:relative;width:40%;margin-bottom:5%;transition:width .4s cubic-bezier(.2,.8,.2,1),border-color .3s;border:9px solid #161013;box-shadow:0 34px 44px -26px rgba(20,4,12,.5),0 3px 8px rgba(20,4,12,.14);background:#fff;line-height:0}
+.gfs .pl-frame[data-frame="none"]{border-width:0;box-shadow:0 26px 34px -24px rgba(20,4,12,.42),0 1px 3px rgba(20,4,12,.16)}
+.gfs .pl-sheet svg{display:block;width:100%;height:auto}
+.gfs .pl-wall[data-view="flat"]{background:#E4DED8}
+.gfs .pl-wall[data-view="flat"] .pl-floor{display:none}
+.gfs .pl-wall[data-view="flat"] .pl-frame{margin:0;border-width:0;box-shadow:0 22px 40px -28px rgba(20,4,12,.45)}
+.gfs .pl-tag{position:absolute;left:16px;bottom:14px;color:var(--muted)}
+.gfs .pl-quick{display:flex;flex-wrap:wrap;gap:8px}
+.gfs .pl-ed{min-width:0;display:grid;gap:4px}
+.gfs .pl-tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.gfs .pl-tabs button{flex:1 0 auto;background:transparent;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:12px 10px;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer}
+.gfs .pl-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.gfs .pl-panel{display:grid;gap:12px;padding:16px 0 8px;min-height:300px;align-content:start}
+.gfs .pl-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-top:6px}
+.gfs .pl-h b{font-size:15px}
+.gfs .pl-h span{font-size:13px;color:var(--muted);text-align:right}
+.gfs .pl-sig{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.gfs .pl-sig button{position:relative;aspect-ratio:3/2;border:0;padding:0;cursor:pointer;overflow:hidden;background:#E6E0DA;outline-offset:2px;line-height:0}
+.gfs .pl-sig button svg{width:100%;height:100%;display:block}
+.gfs .pl-sig button span{position:absolute;left:0;right:0;bottom:0;padding:3px 5px;font-size:10px;line-height:1.2;font-weight:600;color:#fff;background:linear-gradient(transparent,rgba(20,4,12,.7));text-align:left;opacity:0;transition:opacity .2s}
+.gfs .pl-sig button:hover span,.gfs .pl-sig button:focus-visible span,.gfs .pl-sig button[aria-pressed="true"] span{opacity:1}
+.gfs .pl-sig button[aria-pressed="true"]{outline:2px solid var(--ink)}
+.gfs .pl .chips .chip{min-height:38px;padding:0 14px;font-size:13px}
+.gfs .pl-vars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px}
+.gfs .pl-vars button{min-height:36px;border:1.5px solid #CDBFC6;background:transparent;font-size:12px;font-weight:700;cursor:pointer;padding:0;font-variant-numeric:tabular-nums;color:var(--ink)}
+.gfs .pl-vars button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.gfs .pl-pals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.gfs .pl-pals button{border:1.5px solid #CDBFC6;background:transparent;padding:5px;display:grid;gap:4px;cursor:pointer;text-align:left;color:var(--ink)}
+.gfs .pl-pals button i{display:flex;height:14px}
+.gfs .pl-pals button i b{flex:1}
+.gfs .pl-pals button small{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gfs .pl-pals button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.gfs .pl-colors{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.gfs .pl-colors label{display:grid;gap:4px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer}
+.gfs .pl-colors input{width:100%;height:48px;border:1.5px solid #CDBFC6;padding:0;background:none;cursor:pointer}
+.gfs .pl-colors input::-webkit-color-swatch-wrapper{padding:0}
+.gfs .pl-colors input::-webkit-color-swatch{border:0}
+.gfs .pl-field{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.gfs .pl-hint{font-size:13px;color:var(--muted)}
+.gfs .pl-lays{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.gfs .pl-lays button{border:1.5px solid #CDBFC6;background:#fff;padding:6px;display:grid;gap:6px;cursor:pointer;color:var(--ink);font-size:11px;font-weight:600;line-height:1.2}
+.gfs .pl-lays button svg{width:100%;height:auto;display:block}
+.gfs .pl-lays button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.gfs .pl-order{border-top:2px solid var(--ink);padding-top:16px;display:grid;gap:12px}
+.gfs .pl-sum{font-size:14px;font-weight:600}
+.gfs .pl-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.gfs .pl-status{color:var(--muted)}
+.gfs .sw2{width:36px;height:36px;border-radius:50%;border:0;padding:0;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18);outline-offset:3px}
+.gfs .sw2[aria-pressed="true"]{outline:2px solid var(--ink)}
+.gfs .input{font:inherit;font-size:16px;padding:12px 14px;border:1px solid #CDBFC6;background:#fff;color:var(--ink);width:100%}
+
+/* KITS */
+.gfs .stripe{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,4fr) minmax(0,3fr) minmax(0,1.4fr);align-items:center;gap:24px;padding:28px max(16px,3.4vw);min-height:150px;width:100%;border:0;text-align:left;cursor:pointer;color:inherit;background:inherit;transition:min-height .35s cubic-bezier(.2,.7,.2,1)}
+.gfs .stripe:hover{min-height:190px}
+.gfs .stripe .w{font-size:clamp(48px,6.4vw,104px)}
+.gfs .stripe .p{font-size:17px;line-height:1.45;max-width:34ch}
+.gfs .stripe .combo{display:flex;gap:10px;align-items:center}
+.gfs .stripe .combo img{width:120px;height:90px;object-fit:contain;background:rgba(255,255,255,.85)}
+.gfs .stripe .combo img.s{object-fit:cover;background:none}
+.gfs .stripe .meta{justify-self:end;text-align:right}
+.gfs .kit-open{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:32px;padding:8px max(16px,3.4vw) 48px}
+.gfs .kit-open .big{position:relative;aspect-ratio:3/2;overflow:hidden}
+.gfs .kit-open .big .surf{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.gfs .kit-open .big .model{position:absolute;left:50%;top:52%;width:64%;transform:translate(-50%,-50%);filter:drop-shadow(0 30px 30px rgba(0,0,0,.35))}
+.gfs .kit-open ul{margin:0;padding:0;list-style:none;display:grid;border-top:1px solid currentColor}
+.gfs .kit-open li{padding:14px 0;border-bottom:1px solid currentColor;display:flex;justify-content:space-between;gap:16px}
+
+/* ON SITE */
+.gfs .site{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px)}
+.gfs .site-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA;touch-action:none;user-select:none}
+.gfs .site-img .bgp{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.gfs .site-img .fg{position:absolute;left:26%;top:38%;width:48%;outline:2px dashed var(--lime);outline-offset:6px;cursor:grab;filter:drop-shadow(0 18px 18px rgba(0,0,0,.35))}
+.gfs .file{position:relative;overflow:hidden}
+.gfs .file input{position:absolute;inset:0;opacity:0;cursor:pointer}
+
+/* COLLAB */
+.gfs .collab{background:#0F0F0F;color:var(--paper)}
+.gfs .collab h2{font-size:clamp(56px,10.5vw,176px)}
+.gfs .collab .x{color:var(--lime)}
+.gfs .boards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.gfs .boards button{border:0;padding:0;background:#222;cursor:pointer;aspect-ratio:4/3;overflow:hidden;outline-offset:3px;opacity:.6}
+.gfs .boards button[aria-pressed="true"]{opacity:1;outline:2px solid var(--lime)}
+.gfs .boards img{width:100%;height:100%;object-fit:cover}
+.gfs .board-big{width:100%;max-height:72vh;object-fit:contain;background:#1A1A1A}
+
+/* STEPS */
+.gfs .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}
+.gfs .steps button{border:0;background:none;color:inherit;text-align:left;cursor:pointer;padding:22px 24px 22px 0;display:grid;gap:10px;align-content:start}
+.gfs .steps button + button{padding-left:24px;border-left:1px solid var(--line)}
+.gfs .steps button[aria-pressed="true"] h3{color:var(--violet)}
+.gfs .steps h3{font-size:clamp(34px,3.4vw,52px)}
+.gfs .steps p{color:var(--muted);line-height:1.5}
+.gfs .step-detail{margin-top:24px;padding:24px;background:transparent;border:1.5px solid var(--ink);display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between}
+.gfs .step-detail p{font-size:18px;line-height:1.5;max-width:60ch}
+
+/* KEPT: workshop + FAQ restyled */
+.gfs #warsztat{background:var(--paper);padding-block:clamp(72px,9vw,140px)}
+.gfs #warsztat h2{font-weight:800;letter-spacing:-.055em;line-height:.86;font-size:clamp(52px,8vw,128px)}
+.gfs .gh-wrap{max-width:1440px;margin:0 auto;padding-left:max(16px,3.4vw);padding-right:max(16px,3.4vw)}
+.gfs .gh-workshop-heading{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px;align-items:end;margin-bottom:32px}
+.gfs .gh-eyebrow{font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfs .gh-caption{font-size:13px;color:var(--muted)}
+.gfs .gh-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid #CDBFC6;background:transparent;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;cursor:pointer}
+.gfs .gh-primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.gfs .gh-workshop-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0}
+.gfs .gh-workshop-rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,24%);gap:12px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory}
+.gfs .gh-workshop-card{scroll-snap-align:start;background:transparent;padding:0 0 14px;display:grid;gap:8px;align-content:start;border-bottom:1px solid var(--line)}
+.gfs .gh-workshop-3d{position:relative;aspect-ratio:1;background:#E9E3DD;overflow:hidden}
+.gfs .gh-workshop-3d img{width:100%;height:100%;object-fit:contain}
+.gfs .gh-workshop-frame{position:absolute;inset:0;width:100%;height:100%;border:0}
+.gfs .gh-workshop-rotate{position:absolute;right:10px;bottom:10px;border:0;border-radius:999px;background:var(--paper);padding:6px 12px;font-weight:600;font-size:13px;cursor:pointer;color:var(--ink)}
+.gfs .gh-workshop-card h3{font-size:20px;font-weight:800;letter-spacing:-.03em}
+.gfs .gh-workshop-empty{display:flex;gap:20px;align-items:center;padding:24px;background:#fff}
+.gfs .gh-workshop-placeholder{width:96px;height:96px;display:flex;align-items:center;justify-content:center;border:2px dashed #CDBFC6;font-size:40px}
+.gfs .gh-faq{max-width:1440px!important;margin:0 auto;padding:clamp(56px,7vw,100px) max(16px,3.4vw)!important}
+.gfs .gh-faq h2{font-weight:800;letter-spacing:-.055em!important;line-height:.9;font-size:clamp(44px,6vw,96px)!important}
+.gfs .gh-faq-tag{color:var(--violet)!important;letter-spacing:.08em!important;font-weight:600!important}
+.gfs .gh-faq summary::after{color:var(--violet)!important}
+
+/* CONTACT */
+.gfs .contact{position:relative;overflow:hidden;background:var(--violet);color:#fff}
+.gfs .contact-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
+.gfs .contact h2{grid-column:1/8;font-size:clamp(60px,9vw,150px)}
+.gfs .me{grid-column:1/7;display:grid;gap:14px;align-content:start}
+.gfs .form{grid-column:8/13;grid-row:1/4;align-self:end;background:var(--paper);color:var(--ink);padding:28px;display:grid;gap:14px}
+.gfs .form .lbl{font-size:13px;font-weight:600}
+.gfs .form .chip{min-height:38px;font-size:13px;padding:0 14px}
+.gfs .gc-attachment,.gfs .gc-review-status{font-size:13px;background:#EEE9FF;padding:10px 12px}
+.gfs .gc-review-status:empty{display:none}
+.gfs .gc-project-review pre{white-space:pre-wrap;font-size:12px;max-height:180px;overflow:auto;background:#fff;padding:10px}
+.gfs .gc-project-review button{border:0;background:none;color:var(--violet);text-decoration:underline;cursor:pointer;padding:6px 0}
+.gfs .gc-cf7 :is(input[type=text],input[type=email],input[type=tel],textarea,select){font:inherit;font-size:16px;width:100%;padding:12px 14px;border:1px solid #CDBFC6;background:#fff;color:var(--ink);border-radius:0}
+.gfs .gc-cf7 label{display:grid;gap:6px;font-size:13px;font-weight:600}
+.gfs .gc-cf7 p{margin:0 0 12px}
+.gfs .gc-cf7 input[type=submit]{font:inherit;font-weight:600;font-size:16px;min-height:52px;width:100%;border:0;border-radius:999px;background:var(--violet);color:#fff;cursor:pointer}
+.gfs .gc-cf7 .wpcf7-not-valid-tip{color:#A30032;font-size:13px}
+.gfs .gc-cf7 .wpcf7-response-output{margin:12px 0 0!important;padding:12px!important;font-size:14px}
+
+.gfs .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:32px;font-size:14px;color:var(--muted)}
+.gfs .foot a{text-underline-offset:3px}
+
+@media (max-width:900px){
+  .gfs .nav .links{display:none;position:absolute;left:16px;right:16px;top:64px;flex-direction:column;background:#fff;padding:16px;gap:14px;box-shadow:0 16px 30px rgba(71,19,45,.15)}
+  .gfs .nav.open .links{display:flex}
+  .gfs .menu-btn{display:inline-flex;align-items:center;justify-content:center;margin-left:auto;min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--violet);color:#fff;font-weight:600}
+  .gfs .nav .pill.cfg{display:none}
+  .gfs .nav > .m{display:none}
+  .gfs .hero-top{flex-direction:column;gap:6px}
+  .gfs .hero{display:flex;flex-direction:column;min-height:0}
+  .gfs .hero-grid{order:1;display:flex;flex-direction:column;gap:20px;min-height:0}
+  .gfs .hero-3d{order:2;position:relative;left:auto;top:auto;transform:none;width:100%;height:86vw;margin-bottom:24px}
+  .gfs .ball{display:none}
+  .gfs :is(.h1a,.h1b){text-align:left;justify-self:start;margin:0;font-size:clamp(56px,17vw,120px)}
+  .gfs .head :is(h2,.side){grid-column:1/-1}
+  .gfs :is(.s3,.s4,.s5,.s6,.s7){grid-column:1/-1}
+  .gfs .tall{min-height:380px}
+  .gfs :is(.elev,.studio-copy){grid-column:1/-1}
+  .gfs .elev{--m:150px;min-height:0}
+  .gfs .panels{left:80px}.gfs .fig{left:96px}
+  .gfs :is(.pl,.kit-open,.site,.gh-workshop-heading){grid-template-columns:minmax(0,1fr)}
+  .gfs .pl-stage{position:relative;top:auto}
+  .gfs .pl-lays{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .gfs .pl-vars{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .gfs .mats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gfs .stripe{grid-template-columns:minmax(0,1fr);gap:12px}
+  .gfs .stripe .meta{justify-self:start;text-align:left}
+  .gfs .steps{grid-template-columns:minmax(0,1fr)}
+  .gfs .steps button,.gfs .steps button + button{padding:20px 0;border-left:0;border-bottom:1px solid var(--line)}
+  .gfs :is(.contact h2,.me,.form){grid-column:1/-1;grid-row:auto}
+  .gfs .boards{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .gfs .gh-workshop-rail{grid-auto-columns:82%}
+}
+@media (prefers-reduced-motion:reduce){.gfs .ticker-track{animation:none}.gfs *{transition:none!important}}
+
+/* ---------- site planner ---------- */
+.gfs .pn{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:start}
+.gfs .pn-in{display:grid;gap:14px;min-width:0}
+.gfs .pn-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gfs .pn-f{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.gfs .pn-f b{color:var(--ink);font-variant-numeric:tabular-nums}
+.gfs .pn-num{position:relative;display:block}
+.gfs .pn-num input{padding-right:34px;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.gfs .pn-num i{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-style:normal;color:var(--muted)}
+.gfs .pn input[type=range]{width:100%;accent-color:var(--violet)}
+.gfs .pn-plan{background:#fff;border:1px solid var(--line);aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:12px}
+.gfs .pn-plan svg{width:100%;height:100%;display:block}
+.gfs .pn-cap{color:var(--muted);font-size:14px}
+.gfs .pn-list{display:grid;gap:0;border-top:1px solid var(--line)}
+.gfs .pn-it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:12px 10px;border:0;border-bottom:1px solid var(--line);background:transparent;text-align:left;cursor:pointer;color:var(--ink);font:inherit}
+.gfs .pn-it[aria-pressed="true"]{background:rgba(99,54,245,.06);box-shadow:inset 3px 0 0 var(--violet)}
+.gfs .pn-it b{font-size:16px}
+.gfs .pn-it small{grid-column:1;color:var(--muted);font-size:13px}
+.gfs .pn-pill{grid-row:1 / span 2;grid-column:2;font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.gfs .pn-pill.ok{background:#D8F24A;color:#1C0912}
+.gfs .pn-pill.no{background:#EFE7EA;color:var(--muted)}
+.gfs .pn-go{margin-top:14px}
+@media (max-width:900px){.gfs .pn{grid-template-columns:minmax(0,1fr)}}
+/* ---------- ball ---------- */
+.gfs .bl{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:start}
+.gfs .bl-side{position:sticky;top:16px;display:grid;gap:12px;min-width:0}
+.gfs .bl-stage{position:relative;aspect-ratio:1/1;max-height:80vh;width:100%;background:#E9E3DD;overflow:hidden;touch-action:none;cursor:grab;transition:background-color .4s}
+.gfs .bl-stage[data-scene="court"]{background:#CFC8C0}
+.gfs .bl-stage canvas{display:block;width:100%!important;height:100%!important}
+.gfs .bl-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.gfs .bl-tag{position:absolute;left:14px;bottom:12px;color:var(--muted)}
+.gfs .bl-hint{position:absolute;right:14px;bottom:12px;color:var(--muted)}
+.gfs .bl-ed{display:grid;gap:4px;min-width:0;align-content:start}
+.gfs .bl-ed input[type=file]{font-size:14px}
+.gfs .bl-cols{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.gfs .bl{grid-template-columns:minmax(0,1fr)}.gfs .bl-side{position:relative;top:auto}.gfs .bl-hint{display:none}}
+/* ---------- aesthetics pass 2026-11-02 ---------- */
+/* section kickers: one quiet label above every big heading */
+.gfs .hd{display:grid;gap:14px;align-content:start}
+.gfs .kicker{color:var(--violet);margin:0}
+.gfs .band-dark .kicker{color:var(--lime)}
+/* full-bleed dark band for the ball, the page breathes: violet hero, plum ticker, paper, dark studio, paper, dark ball, colour kits */
+.gfs .band-dark{--ink:#F4F1EE;--paper:#1C0912;--muted:#BBA8B1;--line:#3E2531;background:#1C0912;color:var(--ink);box-shadow:0 0 0 100vmax #1C0912;clip-path:inset(0 -100vmax)}
+.gfs .band-dark :is(h2,h3,p,b,span,label,small){color:inherit}
+.gfs .band-dark .side p,.gfs .band-dark .pl-h span,.gfs .band-dark .pl-hint,.gfs .band-dark .pl-status,.gfs .band-dark .pl-field{color:var(--muted)}
+.gfs .band-dark .chip,.gfs .band-dark .pl-vars button,.gfs .band-dark .pl-pals button{border-color:#5A3A49;color:var(--ink)}
+.gfs .band-dark .chip:hover{border-color:var(--ink)}
+.gfs .band-dark .chip[aria-pressed="true"],.gfs .band-dark .pl-vars button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#1C0912}
+.gfs .band-dark .pl-pals button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.gfs .band-dark .input{background:#2A1520;border-color:#5A3A49;color:var(--ink)}
+.gfs .band-dark .pl-colors input{border-color:#5A3A49}
+.gfs .band-dark .bl-stage{background:#2A1520}
+.gfs .band-dark .bl-stage[data-scene="court"]{background:#3A2430}
+.gfs .band-dark .bl-tag,.gfs .band-dark .bl-hint,.gfs .band-dark .bl-load{color:#BBA8B1}
+.gfs .band-dark .pl-tabs button{color:var(--muted)}
+.gfs .band-dark .pl-tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--lime)}
+.gfs .band-dark .pl-order{border-top-color:var(--lime)}
+.gfs .band-dark .sw2{box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+/* long family lists become one swipeable row instead of six rows of chips */
+.gfs :is([data-pl-fams],[data-bl-fams]){flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+.gfs :is([data-pl-fams],[data-bl-fams])::-webkit-scrollbar{display:none}
+.gfs :is([data-pl-fams],[data-bl-fams]) .chip{flex:0 0 auto;scroll-snap-align:start}
+.gfs .head .hd{grid-column:1/8}
+.gfs .head .kicker{font-size:11.5px;line-height:1.2;color:var(--violet)}
+.gfs .band-dark .head .kicker{color:var(--lime)}
+@media (max-width:900px){.gfs .head .hd{grid-column:1/-1}}
+.gfs section[aria-labelledby="gfs-kits"]{padding-top:clamp(56px,7vw,100px)}
+
+/* ---------- 2026-11-06 · mobile hero: the model sits right under the headline ---------- */
+@media (max-width:900px){
+  .gfs .hero-grid{display:contents}
+  .gfs .hero-top{order:1;flex-direction:row;flex-wrap:wrap;gap:2px 12px;padding:clamp(24px,7vw,40px) max(16px,3.4vw) 0;position:relative;z-index:2}
+  .gfs .h1a{order:2;padding-inline:max(16px,3.4vw);margin-top:10px!important;font-size:clamp(48px,14.6vw,96px)!important;position:relative;z-index:2}
+  .gfs .h1b{order:3;padding-inline:max(16px,3.4vw);margin-top:-.08em!important;font-size:clamp(48px,14.6vw,96px)!important;position:relative;z-index:2}
+  .gfs .hero-3d{order:4;height:min(64vw,420px);margin:6px 0 0}
+  .gfs .hero-foot{order:5;padding:8px max(16px,3.4vw) clamp(32px,9vw,52px);flex-direction:column;align-items:flex-start;gap:18px;position:relative;z-index:2}
+  .gfs .hero .court{opacity:.5}
+  .gfs .nav .menu-btn{align-items:center;line-height:1}
+}
+
+/* ---------- 2026-11-06 · usability pass (Baymard: persistent header, current section, scope, hit areas, touch targets) ---------- */
+/* sticky header: becomes fixed and compact after the hero starts scrolling away */
+.gfs .nav-spacer{display:none}
+.gfs .nav.stuck{position:fixed;top:var(--wp-admin--admin-bar--height,0px);left:0;right:0;z-index:60;min-height:58px;background:var(--paper);
+  box-shadow:0 0 0 100vmax var(--paper),0 1px 0 100vmax var(--line);clip-path:inset(0 -100vmax -1px);animation:gfs-drop .22s ease-out}
+.gfs .nav.stuck + .nav-spacer{display:block}
+.gfs .nav.stuck .logo{font-size:22px}
+.gfs .nav.stuck .pill.cfg{min-height:40px!important}
+@keyframes gfs-drop{from{transform:translateY(-100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.gfs .nav.stuck{animation:none}}
+/* current section in the menu */
+.gfs .nav .links a{position:relative;padding-block:6px}
+.gfs .nav .links a[aria-current]{color:var(--violet)}
+.gfs .nav .links a[aria-current]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:currentColor;border-radius:2px}
+@media (max-width:1280px){.gfs .nav > .m{display:none}.gfs .nav .links{gap:18px}}
+/* quick inquiry button, phones only */
+.gfs .nav .ask{display:none}
+/* scope strip, phones and tablets only */
+.gfs .scope{display:none}
+/* audience paths */
+.gfs .who{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfs .who a{position:relative;display:grid;gap:8px;align-content:start;min-height:100%;padding:24px 56px 26px 24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s,transform .2s}
+.gfs .who a:hover{border-color:var(--violet);transform:translateY(-3px);color:inherit}
+.gfs .who a:hover b{color:var(--violet)}
+.gfs .who b{font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.gfs .who a > span:not(.m){color:var(--muted);font-size:15px;line-height:1.45}
+.gfs .who .m{color:var(--muted)}
+.gfs .who i{position:absolute;right:22px;top:22px;font-style:normal;font-size:22px;color:var(--violet)}
+/* guides under the FAQ */
+.gfs .gh-guides{margin-top:34px}
+.gfs .gh-guides ul{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.gfs .gh-guides a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none!important;font-weight:600;font-size:14px}
+.gfs .gh-guides a:hover{border-color:var(--violet)}
+/* collection tiles: the call to action is always visible on touch screens (no hover there) */
+@media (hover:none){.gfs .tile .go{opacity:1;transform:none}}
+/* touch targets: at least 44 px on coarse pointers */
+@media (pointer:coarse){
+  .gfs .chip,.gfs .seg button{min-height:44px}
+  .gfs :is([data-pl-vars],[data-bl-vars]) button{min-height:44px}
+  .gfs input[type=range]{min-height:44px}
+}
+/* inline e-mail validation (contact form) */
+.gfs .gf-ok{border-color:#2E8B57!important;box-shadow:0 0 0 1px #2E8B57 inset}
+.gfs .gf-bad{border-color:#C0262D!important;box-shadow:0 0 0 1px #C0262D inset}
+.gfs .gf-hint{display:block;margin-top:6px;font-size:13px;font-weight:600}
+.gfs .gf-hint.ok{color:#2E7D4F}.gfs .gf-hint.bad{color:#B3202A}
+
+@media (max-width:900px){
+  .gfs .nav.stuck{min-height:56px}
+  .gfs .nav .ask{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;margin-left:auto;border-radius:999px;border:1.5px solid var(--ink);font-weight:600;font-size:15px;text-decoration:none}
+  .gfs .nav .ask + .menu-btn{margin-left:8px}
+  .gfs .nav.stuck .links{top:56px}
+  .gfs .scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-block:18px 6px}
+  .gfs .scope a{display:grid;gap:2px;min-height:72px;padding:12px 14px;background:#fff;border:1px solid var(--line);text-decoration:none;align-content:center}
+  .gfs .scope b{font-size:16px;line-height:1.2}
+  .gfs .scope b::after{content:" →";color:var(--violet)}
+  .gfs .scope span{font-size:13px;line-height:1.3;color:var(--muted)}
+  .gfs .who{grid-template-columns:minmax(0,1fr);gap:8px}
+  .gfs .who a{padding:18px 52px 18px 18px}
+  .gfs .who b{font-size:19px}
+}
+@media (max-width:600px){
+  .gfs .nav.stuck{top:0}
+  /* collection: two columns instead of eight full-width posters */
+  .gfs .wall{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gfs .wall .tile{grid-column:span 1!important;min-height:216px!important}
+  .gfs .wall .tile .num{font-size:40px;right:12px;top:8px}
+  .gfs .wall .tile .go{left:12px;top:14px;font-size:13px}
+  .gfs .wall .tile img{width:92%;transform:translate(-50%,-58%)}
+  .gfs .wall .tile .bar{flex-direction:column;gap:0;padding:8px 10px;left:8px;right:8px;bottom:8px}
+  .gfs .wall .tile .bar b{font-size:14px}
+  .gfs .wall .tile .bar .m{font-size:10.5px;letter-spacing:.04em}
+  .gfs .wall .tile .court{inset:8px}
+}
+/* anchors land below the sticky header */
+.gfs :is(section,nav,div)[id]{scroll-margin-top:72px}
+
+/* ---------- 2026-11-06 · phones: poster and ball editors fold under their previews ---------- */
+.gfs .tool-toggle{display:none}
+@media (max-width:700px){
+  .gfs .tool-toggle{display:inline-flex;width:100%;margin-top:12px;background:var(--ink);color:var(--paper)}
+  .gfs .band-dark .tool-toggle{background:var(--lime);color:var(--plum)}
+  .gfs :is(.pl,.bl).tool-closed :is(.pl-ed,.bl-ed){display:none}
+}
+
+/* ---------- 2026-11-06 · prices in the poster and ball creators ---------- */
+.gfs .price-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:14px 0 16px;flex-wrap:wrap}
+.gfs .qty{display:inline-flex;align-items:center;border:1.5px solid #CDBFC6;border-radius:999px}
+.gfs .band-dark .qty{border-color:var(--line)}
+.gfs .qty button{width:44px;height:44px;border:0;background:none;color:inherit;font:600 20px/1 inherit;cursor:pointer;border-radius:999px}
+.gfs .qty input{width:52px;height:44px;border:0;background:transparent;color:inherit;text-align:center;font:600 17px inherit;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
+.gfs .qty input::-webkit-inner-spin-button,.gfs .qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.gfs .price{text-align:right}
+.gfs .price b{display:block;font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.gfs .price small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+/* hero: two colour rows (panels, frame and goals) */
+.gfs .ctrl-colors .dots+.m{margin-top:14px}
+@media (min-width:701px){.gfs .ctrl-colors .dot{width:34px;height:34px}.gfs .ctrl-colors .dots{gap:8px}}
+@media (max-width:700px){.gfs .ctrl-colors{max-width:100%;min-width:0}.gfs .ctrl-colors .dots{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding:6px 6px 8px;margin:-6px -6px 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}.gfs .ctrl-colors .dots::-webkit-scrollbar{display:none}.gfs .ctrl-colors .dot{flex:0 0 40px;width:40px;height:40px}}
+
+/* Opinie klientów (2026-11-08) */
+.gfs .ops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfs .ops figure{margin:0;height:100%;display:grid;grid-template-rows:1fr auto;gap:22px;padding:28px 28px 26px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--violet)}
+.gfs .ops blockquote{margin:0}
+.gfs .ops blockquote p{margin:0;font-size:clamp(19px,1.7vw,23px);line-height:1.4;letter-spacing:-.01em;color:var(--ink)}
+.gfs .ops figcaption{display:grid;gap:2px;font-size:15px;line-height:1.4;color:var(--muted)}
+.gfs .ops figcaption b{color:var(--ink);font-size:16px}
+.gfs .ops figcaption .m{margin-top:6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+@media (max-width:900px){.gfs .ops{grid-template-columns:minmax(0,1fr);gap:8px}.gfs .ops figure{padding:22px 20px}}
+
+/* Readability pass 2026-11-08 */
+.gfs figure.mat{margin:0}
+.gfs .mats{gap:clamp(10px,1.4vw,18px)}
+.gfs .mat .bar{flex-direction:column;align-items:flex-start;gap:2px;padding:12px 14px}
+.gfs .mat .bar b{font-size:clamp(16px,1.4vw,20px)}
+.gfs .mat .bar .m{white-space:normal}
+/* Larger poster preview: the frame keeps its size per format, the whole frame is scaled up. */
+.gfs .pl-wall:not([data-view="flat"]) .pl-frame{transform:scale(1.35);transform-origin:50% 50%}
+.gfs .pl-wall[data-view="flat"] .pl-frame{transform:scale(1.18)}
+/* Community projects: square tiles, the white snapshot background melts into the tile. */
+.gfs .gh-workshop-3d{aspect-ratio:1/1}
+.gfs .gh-workshop-3d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:6%}
+@media (min-width:701px) and (max-width:1199px){.gfs .mats{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .mat{aspect-ratio:4/3}}
+
+/* Realizacje rail (2026-11-08) */
+.gfs .reals{list-style:none;margin:0;padding:0 0 12px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,23%);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.gfs .reals li{scroll-snap-align:start}
+.gfs .reals figure{margin:0;display:grid;gap:10px}
+.gfs .reals img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#E6E0DA}
+.gfs .reals figcaption{display:grid;gap:2px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfs .reals figcaption b{color:var(--ink);font-size:16px}
+.gfs #realizacje .side a{color:var(--violet);font-weight:700;text-decoration:none;white-space:nowrap}
+@media (max-width:700px){.gfs .reals{grid-auto-columns:72%}}
+/* Kits: the flat surface fills its window */
+.gfs .stripe .combo img.s{object-fit:cover;background:none}
+
+/* ---------- 2026-11-11 · Stary beton. Nowe boisko. (modernizacja placów) ---------- */
+.gfs .mod-ba{margin:0}
+.gfs .mod-frame{position:relative;overflow:hidden;background:#d9d4cf;aspect-ratio:2/1;max-height:680px;width:100%;user-select:none;-webkit-user-select:none}
+.gfs .mod-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 38%;display:block}
+.gfs .mod-after{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p))}
+.gfs .mod-handle{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;background:var(--paper);pointer-events:none}
+.gfs .mod-handle::after{content:"↔";position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center;font-size:22px;font-weight:700;box-shadow:0 6px 24px rgba(28,9,18,.25)}
+.gfs .mod-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y}
+.gfs .mod-range:focus-visible ~ .mod-handle::after{outline:3px solid var(--violet);outline-offset:3px}
+.gfs .mod-tag{position:absolute;top:clamp(10px,1.6vw,22px);padding:8px 14px;background:rgba(244,241,238,.94);color:var(--ink);pointer-events:none}
+.gfs .mod-tag.l{left:clamp(10px,1.6vw,22px)}
+.gfs .mod-tag.r{right:clamp(10px,1.6vw,22px);background:var(--lime)}
+.gfs .mod-ba figcaption{padding:14px 0 0;max-width:820px;font-size:15px;line-height:1.5;color:var(--muted)}
+.gfs .mod-ba figcaption b{color:var(--ink)}
+.gfs .mod-steps{list-style:none;margin:clamp(24px,3vw,40px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfs .mod-steps li{display:grid;gap:8px;align-content:start;padding:24px;background:#fff;border:1px solid var(--line)}
+.gfs .mod-steps b{font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.gfs .mod-steps li > span:not(.m){color:var(--muted);font-size:15px;line-height:1.45}
+.gfs .mod-steps .m{color:var(--violet)}
+.gfs .mod-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:clamp(28px,3vw,44px);padding-top:24px;border-top:1px solid var(--line)}
+.gfs .mod-facts .m{color:var(--muted)}
+.gfs .mod-facts p{margin:6px 0 0;font-size:17px;line-height:1.45}
+.gfs .mod-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,3vw,40px)}
+@media (max-width:900px){.gfs .mod-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .mod-facts{grid-template-columns:minmax(0,1fr);gap:16px}.gfs .mod-frame{aspect-ratio:4/3}.gfs .mod-frame img{object-position:38% 40%}}
+@media (max-width:560px){.gfs .mod-steps{grid-template-columns:minmax(0,1fr)}.gfs .mod-handle::after{width:44px;height:44px;margin:-22px 0 0 -22px}}
+
+/* ---------- 2026-11-13 · Ile kosztuje arena? (ceny konstrukcji od) ---------- */
+.gfs .price-note{margin:16px 0 0;font-size:14px;color:var(--muted);max-width:820px}
+
+/* SAMORZĄDY + ceny kompletu (2026-11-16) */
+.gfs .surf-rates{margin:18px 0 0;border:1px solid var(--line);background:#fff}
+.gfs .surf-rates summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:800;font-size:18px;display:flex;justify-content:space-between;gap:12px}
+.gfs .surf-rates summary::-webkit-details-marker{display:none}
+.gfs .surf-rates summary::after{content:'+';color:var(--violet);font-weight:400;font-size:22px}
+.gfs .surf-rates[open] summary::after{content:'−'}
+.gfs .surf-rates ul{list-style:none;margin:0;padding:0 18px}
+.gfs .surf-rates li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3fr) minmax(0,4fr);gap:8px 18px;padding:12px 0;border-top:1px solid var(--line);align-items:baseline}
+.gfs .surf-rates li b{font-size:16px}.gfs .surf-rates .rate{font-weight:800;white-space:nowrap}.gfs .surf-rates li span:last-child{color:var(--muted);font-size:14px}
+.gfs .surf-rates p{margin:0;padding:12px 18px 16px;color:var(--muted);font-size:14px}
+.gfs .gov-facts{list-style:none;margin:0 0 14px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfs .gov-facts li{display:grid;gap:6px;align-content:start;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfs .gov-facts .m{color:var(--violet);font-weight:800;font-size:clamp(26px,2.4vw,36px);letter-spacing:-.03em;line-height:1}
+.gfs .gov-facts b{font-size:18px;line-height:1.2}.gfs .gov-facts li>span:last-child{color:var(--muted);font-size:15px;line-height:1.5}
+.gfs .gov-norms{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.gfs .gov-norms span{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font-size:14px}
+.gfs .gov-build{margin:0 0 18px}
+.gfs .gov-build ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:b}
+.gfs .gov-build li{position:relative;counter-increment:b}
+.gfs .gov-build img{display:block;width:100%;height:clamp(180px,20vw,300px)!important;object-fit:cover;background:#E6E0DA}
+.gfs .gov-build li span{display:block;margin-top:8px;font-weight:700;font-size:15px}
+.gfs .gov-build li span::before{content:counter(b,decimal-leading-zero) "  ";color:var(--violet)}
+.gfs .gov-build figcaption{margin-top:10px;color:var(--muted);font-size:15px}.gfs .gov-build figcaption b{color:var(--ink)}
+.gfs .gov-cities{margin:0 0 22px;font-size:clamp(18px,1.6vw,22px);font-weight:700;letter-spacing:-.01em}
+.gfs .gov-cities .m{display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px}
+@media (max-width:900px){.gfs .gov-facts,.gfs .gov-build ol{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .surf-rates li{grid-template-columns:minmax(0,1fr) auto}.gfs .surf-rates li span:last-child{grid-column:1/-1}}
+@media (max-width:520px){.gfs .gov-facts{grid-template-columns:minmax(0,1fr)}.gfs .gov-build img{height:150px!important}}
+
+/* AUTOR (2026-11-16) */
+.gfs .author{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center}
+.gfs .author-photo{margin:0;background:#8E9094}
+.gfs .author-photo img{display:block;width:100%;height:auto;aspect-ratio:768/998;object-fit:cover}
+.gfs .author-copy{display:grid;gap:16px;align-content:start}
+.gfs .author-copy .d{margin:0;font-size:clamp(48px,6vw,96px)}
+.gfs .author-lead{margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.55;color:var(--muted);max-width:46ch}
+.gfs .author-quote{margin:4px 0;padding:0 0 0 18px;border-left:4px solid var(--violet);font-size:clamp(22px,2.2vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.2;color:var(--ink)}
+.gfs .author-facts{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.gfs .author-facts div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:baseline}
+.gfs .author-facts dt{color:var(--violet);font-weight:800}.gfs .author-facts dd{margin:0;font-size:15px;line-height:1.4}
+.gfs .author-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+@media (max-width:900px){.gfs .author{grid-template-columns:minmax(0,1fr)}.gfs .author-photo{max-width:420px}.gfs .author-facts{grid-template-columns:minmax(0,1fr)}}
+
+/* LOGO MIAST (2026-11-16) */
+.gfs .gov-cities p{margin:10px 0 0;font-size:15px;font-weight:400;color:var(--muted)}
+.gfs .gov-logos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gfs .gov-logos li{display:grid;place-items:center;height:96px;padding:10px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.gfs .gov-logos img{display:block;max-width:100%;max-height:76px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
+@media (max-width:900px){.gfs .gov-logos{grid-template-columns:repeat(3,minmax(0,1fr))}.gfs .gov-logos li{height:80px}.gfs .gov-logos img{max-height:60px}}
+
+/* ---------- UX 2026-11-16 · lżejsze, czytelniejsze nowe sekcje (nic nie usunięte) ---------- */
+/* Ceny: karty zamiast długiej tabeli. Komputer 3 kolumny, telefon zwarte karty z ceną obok nazwy. */
+.gfs .prices{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfs .prices li{display:flex;flex-direction:column;gap:14px;padding:24px;background:#fff;border:1px solid transparent;transition:border-color .2s ease,box-shadow .2s ease}
+.gfs .prices li:hover{border-color:var(--violet);box-shadow:0 10px 30px -18px rgba(71,19,45,.35)}
+.gfs .prices .name b{display:block;font-size:21px;letter-spacing:-.02em;line-height:1.15}
+.gfs .prices .name span{display:block;margin-top:4px;color:var(--muted);font-size:14px}
+.gfs .prices .net{color:var(--ink);font-size:14px;color:var(--muted)}
+.gfs .prices .net b{font-size:clamp(28px,2.4vw,34px);font-weight:800;letter-spacing:-.035em;line-height:1;color:var(--ink);white-space:nowrap}
+.gfs .prices .gross{display:block;margin-top:4px;font-size:13px;color:var(--muted)}
+.gfs .prices .full{align-self:flex-start;margin:0;padding:7px 12px;border-radius:999px;background:#EEE8FF;color:var(--violet);font-size:14px;font-weight:700;line-height:1.3}
+.gfs .prices .pfoot{margin-top:auto;display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line)}
+.gfs .prices .who{flex:1 1 auto;min-width:0}.gfs .prices a.go{margin-left:auto}
+.gfs .prices .who{color:var(--muted);font-size:14px;line-height:1.35}
+.gfs .prices a.go{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border-radius:999px;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfs .prices a.go:hover{background:var(--violet)}
+.gfs .price-note{margin:16px 0 0;font-size:14px;color:var(--muted);max-width:820px}
+@media (max-width:1100px){.gfs .prices{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Telefon: pionowa lista (Baymard: treść w poziomych karuzelach często umyka, a ceny trzeba porównać). */
+@media (max-width:700px){
+  .gfs .prices{grid-template-columns:minmax(0,1fr);gap:8px}
+  .gfs .prices li{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name net" "full full" "pfoot pfoot";gap:8px 12px;padding:14px 16px}
+  .gfs .prices .name{grid-area:name}.gfs .prices .net{grid-area:net;text-align:right}.gfs .prices .full{grid-area:full;justify-self:start;font-size:13px;padding:5px 10px}
+  .gfs .prices .pfoot{grid-area:pfoot;padding-top:8px}
+  .gfs .prices .name b{font-size:17px}.gfs .prices .name span{font-size:13px}
+  .gfs .prices .net b{font-size:21px}.gfs .prices .net small{display:block;font-size:12px}.gfs .prices .gross{font-size:12px;margin-top:0}
+}
+/* Co zawiera cena: dwie krótkie listy zamiast jednego akapitu. */
+.gfs .price-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin-top:20px;padding:20px 24px;background:#fff}
+.gfs .price-incl .m{display:block;margin-bottom:8px;color:var(--ink);font-weight:700}
+.gfs .price-incl ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:15px;color:var(--muted)}
+.gfs .price-incl li{position:relative;padding-left:20px}
+.gfs .price-incl > div:first-child li::before{content:"✓";position:absolute;left:0;color:var(--violet);font-weight:800}
+.gfs .price-incl > div:nth-child(2) li::before{content:"·";position:absolute;left:4px;color:var(--muted);font-weight:800}
+.gfs .price-incl .price-note{grid-column:1/-1;margin:0}
+@media (max-width:700px){.gfs .price-incl{grid-template-columns:minmax(0,1fr);padding:16px}}
+/* Kafelki boisk: cena „od” przy nazwie. */
+.gfs .tile .bar .pr{display:block;margin-top:2px;font-size:13px;font-weight:600;color:var(--violet)}
+.gfs .swipe-hint{display:none;align-items:center;gap:6px;margin:10px 0 0;font-size:13px;color:var(--muted)}
+/* Przewijane rzędy na telefonie: kroki, zdjęcia z Krakowa i normy w jednym rzędzie zamiast długiej kolumny. */
+@media (max-width:700px){
+  .gfs .mod-steps,.gfs .gov-build ol{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(-1*max(16px,3.4vw));padding-inline:max(16px,3.4vw);scroll-padding-inline:max(16px,3.4vw)}
+  .gfs .mod-steps::-webkit-scrollbar,.gfs .gov-build ol::-webkit-scrollbar,.gfs .gov-norms::-webkit-scrollbar{display:none}
+  .gfs .mod-steps li,.gfs .gov-build li{scroll-snap-align:start}
+  .gfs .gov-build ol{grid-auto-columns:72%}
+  .gfs .gov-build img{height:230px!important}
+  .gfs .gov-norms{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*max(16px,3.4vw));padding-inline:max(16px,3.4vw)}
+  .gfs .gov-norms span{flex:none;white-space:nowrap}
+  .gfs .swipe-hint{display:flex}
+}
+/* Nawierzchnie: lżejsze kroki, bez ciężkich ramek. */
+.gfs .mod-steps li{border-color:transparent;padding:26px 24px}
+.gfs .mod-steps .m{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#EEE8FF;font-weight:800}
+/* Gminy: fakty lżejsze, na telefonie 2 × 2 zamiast czterech wysokich kart. */
+.gfs .gov-facts li{border-color:transparent;padding:24px}
+.gfs .gov-facts .m{font-size:clamp(24px,2.1vw,32px)}
+@media (max-width:700px){
+  .gfs .gov-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .gfs .gov-facts li{padding:14px;gap:4px}
+  .gfs .gov-facts .m{font-size:21px}
+  .gfs .gov-facts b{font-size:15px}
+  .gfs .gov-facts li>span:last-child{font-size:13.5px;line-height:1.4}
+}
+/* Autor: na telefonie kadr 4:3 od góry zamiast pełnej wysokości zdjęcia. */
+@media (max-width:700px){
+  .gfs .author-photo{max-width:none}
+  .gfs .author-photo img{aspect-ratio:4/3;object-position:50% 14%}
+  .gfs .author-facts div{grid-template-columns:92px minmax(0,1fr);padding:10px 0}
+}
+
+/* ---------- MATERIAŁY v2 (2026-11-16): wybór nawierzchni z przybliżeniem, ceną i kosztem dla boiska ---------- */
+.gfs .matx{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);grid-template-areas:"stage panel" "sw sw";gap:12px}
+.gfs .matx-stage{grid-area:stage;position:relative;overflow:hidden;aspect-ratio:4/3;background:#2a2a2a;cursor:zoom-in;--x:50%;--y:50%}
+.gfs .matx-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:var(--x) var(--y);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .18s ease}
+.gfs .matx-stage.zoom img{transform:scale(2.2)}
+.gfs .matx-stage.swap img{opacity:0}
+.gfs .matx-zoom{position:absolute;left:14px;bottom:14px;padding:7px 12px;border-radius:999px;background:rgba(244,241,238,.9);color:var(--ink);font-size:11px;pointer-events:none;transition:opacity .2s}
+.gfs .matx-stage.zoom .matx-zoom{opacity:0}
+.gfs .matx-panel{grid-area:panel;display:flex;flex-direction:column;gap:12px;padding:clamp(20px,2.4vw,36px);background:#fff}
+.gfs .matx-tag{margin:0;color:var(--violet);font-size:12px}
+.gfs .matx-panel h3{margin:0;font-weight:800;font-size:clamp(28px,2.8vw,44px);letter-spacing:-.045em;line-height:.98}
+.gfs .matx-price{margin:0;font-size:15px;color:var(--muted)}
+.gfs .matx-price b{font-size:clamp(26px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;color:var(--ink)}
+.gfs .matx-f{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.gfs .matx-f li{position:relative;padding-left:22px;font-size:15px;line-height:1.4}
+.gfs .matx-f li::before{content:"✓";position:absolute;left:0;color:var(--violet);font-weight:800}
+.gfs .matx-calc{display:grid;gap:6px;margin-top:4px}
+.gfs .matx-calc label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfs .matx-calc select{min-height:44px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:999px;background:var(--paper);color:var(--ink);font:600 15px inherit;font-family:inherit}
+.gfs .matx-v{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.gfs .matx-v li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.gfs .matx-v span{color:var(--muted)}
+.gfs .matx-v b{font-weight:700}
+.gfs .matx-v i{font-style:normal;font-weight:800;color:var(--violet);min-width:86px;text-align:right}
+.gfs .matx-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.gfs .matx-cta .pill{min-height:48px;padding:0 20px;font-size:15px}
+.gfs .matx-more{background:transparent;color:var(--ink);border:1.5px solid #CDBFC6!important}
+.gfs .matx-note{margin:0;font-size:12.5px;color:var(--muted)}
+.gfs .matx-sw{grid-area:sw;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}
+.gfs .matx-sw .sw{display:grid;gap:2px;padding:6px 6px 10px;background:#fff;text-decoration:none;color:var(--ink);box-shadow:inset 0 0 0 2px transparent;transition:transform .2s ease,box-shadow .2s ease}
+.gfs .matx-sw .sw:hover{transform:translateY(-3px)}
+.gfs .matx-sw .sw[aria-current]{box-shadow:inset 0 0 0 2px var(--violet)}
+.gfs .matx-sw img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;margin-bottom:6px}
+.gfs .matx-sw b{font-size:13px;line-height:1.2;letter-spacing:-.01em}
+.gfs .matx-sw span{font-size:12px;color:var(--muted)}
+@media (max-width:1100px){.gfs .matx-sw{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:900px){.gfs .matx{grid-template-columns:minmax(0,1fr);grid-template-areas:"stage" "sw" "panel"}.gfs .matx-stage{cursor:default}}
+@media (max-width:560px){.gfs .matx-sw{gap:6px}.gfs .matx-sw .sw{padding:4px 4px 8px}.gfs .matx-sw b{font-size:11.5px}.gfs .matx-sw span{font-size:10.5px}.gfs .matx-v i{min-width:0}}
+@media (hover:none){.gfs .matx-zoom{display:none}}
+@media (prefers-reduced-motion:reduce){.gfs .matx-stage img,.gfs .matx-sw .sw{transition:none}}
+
+/* ---------- Z BOISKA v2 (2026-11-16): realizacje jako karty dla klienta ---------- */
+.gfs .rcards{list-style:none;margin:0 0 clamp(28px,3vw,44px);padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfs .rc{display:flex;flex-direction:column;height:100%;background:#fff;text-decoration:none;color:var(--ink);transition:transform .25s ease,box-shadow .25s ease}
+.gfs .rc:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(71,19,45,.45)}
+.gfs .rc-ph{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfs .rc-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfs .rc:hover .rc-ph img{transform:scale(1.05)}
+.gfs .rc-who{position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-size:12px;font-weight:800}
+.gfs .rc-tx{display:flex;flex-direction:column;gap:6px;flex:1;padding:18px 18px 20px}
+.gfs .rc-place{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfs .rc-tx b{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.03em;line-height:1.08}
+.gfs .rc-lead{font-size:15px;line-height:1.45;color:var(--muted)}
+.gfs .rc-model{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-size:14px;font-weight:700}
+.gfs .rc-go{font-size:14px;font-weight:800;color:var(--violet)}
+.gfs .rmore-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 12px}
+.gfs .rmore-h .m{margin:0;color:var(--muted)}
+.gfs .rmore-h a{font-size:14px;font-weight:700;color:var(--violet);text-decoration:none}
+.gfs .reals{grid-auto-columns:minmax(200px,18%)}
+.gfs .reals img{aspect-ratio:1}
+@media (max-width:1100px){.gfs .rcards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.gfs .rcards{grid-template-columns:minmax(0,1fr)}.gfs .rc{display:grid;grid-template-columns:120px minmax(0,1fr)}.gfs .rc-ph{aspect-ratio:auto;min-height:100%}.gfs .rc-tx{padding:14px}.gfs .rc-lead{display:none}.gfs .rc-who{top:8px;left:8px;font-size:10.5px;padding:4px 8px}.gfs .reals{grid-auto-columns:46%}}
+
+/* ---------- STARY BETON v2: kroki jako oś, pasek cen malowania, lżejsze fakty ---------- */
+.gfs .mod-steps{position:relative;counter-reset:none}
+.gfs .mod-steps li{position:relative;padding:28px 24px 24px;background:#fff;border:0}
+.gfs .mod-steps li::after{content:"";position:absolute;top:44px;right:-12px;width:12px;height:2px;background:var(--violet);opacity:.35}
+.gfs .mod-steps li:last-child::after{display:none}
+.gfs .mod-steps .m{width:40px;height:40px;background:var(--violet);color:#fff;font-size:14px}
+.gfs .mod-steps b{font-size:clamp(21px,1.8vw,26px)}
+.gfs .pv{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(16px,2.4vw,32px);align-items:start;margin-top:12px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfs .pv-h .m{margin:0 0 8px;color:var(--lime)}
+.gfs .pv-h p:last-child{margin:0;font-size:16px;line-height:1.5;color:rgba(244,241,238,.85)}
+.gfs .pv-h a{color:var(--lime);font-weight:700}
+.gfs .pv-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.gfs .pv-list li{display:grid;gap:4px;align-content:start;padding:16px;border:1px solid rgba(244,241,238,.2)}
+.gfs .pv-n{font-size:13px;font-weight:700;color:rgba(244,241,238,.8)}
+.gfs .pv-list b{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfs .pv-d{font-size:13px;line-height:1.4;color:rgba(244,241,238,.72)}
+.gfs .mod-facts{gap:12px;padding-top:0;border-top:0}
+.gfs .mod-facts > div{padding:18px 20px;background:#fff}
+.gfs .mod-facts .m{color:var(--violet)}
+.gfs .mod-facts p{font-size:16px}
+@media (max-width:900px){.gfs .pv{grid-template-columns:minmax(0,1fr)}.gfs .pv-list{grid-template-columns:repeat(2,minmax(0,1fr))}.gfs .mod-steps li::after{display:none}}
+
+/* ---------- ZESTAWY v2 (2026-11-17): widok ze Studio 3D, konstrukcja z nawierzchnią ---------- */
+.gfs .stripe .combo img{width:150px;height:96px;object-fit:contain;background:#fff;padding:6px}
+.gfs .kit-open .big{position:relative;aspect-ratio:16/10;overflow:hidden;background:#fff;display:grid;place-items:center}
+.gfs .kit-open .big img{position:static;width:94%;height:94%;object-fit:contain;transform:none;filter:none}
+.gfs .kit-open .kit-tag{position:absolute;left:14px;bottom:12px;padding:6px 10px;border-radius:999px;background:#F4F1EE;color:#47132D;font-size:11px}
+/* photo strip under the hero (2026-11-18) */
+.photo-strip{display:flex;align-items:center;justify-content:space-between;gap:28px;padding-block:28px;border-bottom:1px solid var(--line)}
+.photo-strip h2{font-size:clamp(28px,3.4vw,44px);line-height:1;letter-spacing:-.03em}
+.photo-strip p{max-width:62ch;margin-top:8px;color:var(--muted)}
+.photo-strip .pill{flex:none}
+@media(max-width:800px){.photo-strip{flex-direction:column;align-items:stretch;gap:16px;padding-block:22px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://www.gamefields.eu/#studio","name":"Gamefields","alternateName":"Gamefields — autorskie studio boisk miejskich","url":"https://www.gamefields.eu/","email":"info@gamefields.eu","image":"https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp","description":"Projektowanie, renowacje i realizacje boisk miejskich: street football, boiska panna, kolorowe nawierzchnie, murale i modułowe areny dla miast, szkół, deweloperów i marek.","founder":{"@type":"Person","@id":"https://www.gamefields.eu/#damian-gawrych","name":"Damian Gawrych","url":"https://www.gamefields.eu/damian-gawrych/","sameAs":["https://www.instagram.com/damiangawrych/","https://www.damiangawrych.pl/"]},"address":{"@type":"PostalAddress","addressLocality":"Warszawa","addressCountry":"PL"},"parentOrganization":{"@id":"https://www.gamefields.eu/#organization"},"knowsAbout":["boiska do panny","street football","boiska miejskie","nawierzchnie sportowe","malowanie boisk","renowacja boisk betonowych","projektowanie przestrzeni sportowych"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Usługi Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Projektowanie boisk miejskich","description":"Koncepcja miejsca gry: konstrukcja, nawierzchnia i grafika projektowane jako jeden przedmiot.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modułowe boiska do panny i street footballu","description":"Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 i Street Arena 15.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kolorowe nawierzchnie i grafika boisk","description":"Wzory nawierzchni malowanej, EPDM, płytek i trawy projektowane w Studiu 3D.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Modernizacja betonowych placów w kolorowe boiska","description":"Naprawa i gruntowanie starego betonu lub asfaltu, elastyczne farby sportowe z granulatem gumowym, wzór i linie do piłki, koszykówki i gry 3 na 3.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Plakaty boisk","description":"Plakat z wzorem nawierzchni i liniami boiska, projektowany w przeglądarce.","provider":{"@id":"https://www.gamefields.eu/#studio"}}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Arena mobilna eventowa"},"priceSpecification":{"@type":"PriceSpecification","minPrice":27000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Panna Octa Cage 90","sku":"GF-CT-005"},"priceSpecification":{"@type":"PriceSpecification","minPrice":36000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Panna Play","sku":"GF-CT-002"},"priceSpecification":{"@type":"PriceSpecification","minPrice":40000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Panna Ring","sku":"GF-CT-001"},"priceSpecification":{"@type":"PriceSpecification","minPrice":40000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Panna Octa","sku":"GF-CT-008"},"priceSpecification":{"@type":"PriceSpecification","minPrice":49000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Panna Grid","sku":"GF-CT-007"},"priceSpecification":{"@type":"PriceSpecification","minPrice":51000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Panna Octa Cage 180","sku":"GF-CT-006"},"priceSpecification":{"@type":"PriceSpecification","minPrice":58000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Panna Court","sku":"GF-CT-003"},"priceSpecification":{"@type":"PriceSpecification","minPrice":69000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Boisko 3 na 3 (Street Arena 15)","sku":"GF-CT-004"},"priceSpecification":{"@type":"PriceSpecification","minPrice":100000,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"seller":{"@id":"https://www.gamefields.eu/#studio"}}]}},{"@type":"FAQPage","@id":"https://www.gamefields.eu/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile miejsca potrzebuję na boisko?","acceptedAnswer":{"@type":"Answer","text":"To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w planerze „Zmieści się?” — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu."}},{"@type":"Question","name":"Czy mogę zmienić kolory i wzory?","acceptedAnswer":{"@type":"Answer","text":"Tak. W GAMEFIELDS Studio możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu."}},{"@type":"Question","name":"Czy wykonujecie również samą nawierzchnię?","acceptedAnswer":{"@type":"Answer","text":"Tak. Nawierzchnie to druga połowa mojej pracy, obok konstrukcji boisk: projekt wzoru, malowanie, EPDM, płytki i trawa. Zobacz, jak zmieniam stare place."}},{"@type":"Question","name":"Czy da się zrobić boisko na starym betonie?","acceptedAnswer":{"@type":"Answer","text":"Zwykle tak. Jeśli beton jest stabilny, naprawiam rysy i ubytki, gruntuję podłoże i kładę elastyczną farbę sportową z granulatem gumowym, a na niej wzór i linie. Gdy podłoże jest poważnie uszkodzone, najpierw trzeba je przebudować. Ocenię to ze zdjęć. Stary beton, nowe boisko."}},{"@type":"Question","name":"Ile trwa modernizacja placu?","acceptedAnswer":{"@type":"Answer","text":"Zależy od wielkości boiska i stanu placu na starcie: ile jest napraw podłoża, ile warstw i ile kolorów ma wzór. Farby sportowe kładziemy na suchy beton przy dodatniej temperaturze, więc pracujemy zwykle od wiosny do jesieni. Termin podaję po ocenie zdjęć. Wyślij zdjęcia placu."}},{"@type":"Question","name":"Czy mogę zacząć bez gotowego projektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. Wyślij zapytanie, aby omówić możliwości."}},{"@type":"Question","name":"Czy cena jest widoczna od razu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Konstrukcje zaczynają się od 27 000 zł netto (arena mobilna) i od 36 000 zł netto (Panna Octa Cage 90). Pełna lista jest w sekcji „Ile kosztuje arena?”. Koszt całego boiska z nawierzchnią, montażem i transportem zależy od miejsca, dlatego dokładną ofertę przygotujemy po zdjęciach placu. Co wpływa na budżet, opisujemy w poradniku „Ile kosztuje budowa boiska sportowego?”."}}]}]}</script>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: naglowek -->
+<div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11" data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/">
+<a class="skip" href="#gfs-main">Przejdź do treści</a>
+
+<header class="wrap nav" id="gfs-nav">
+  <a href="/" class="logo" aria-label="Gamefields, strona główna">gamefields.</a>
+  <span class="m" style="color:var(--muted)">Studio Damiana Gawrycha · Warszawa</span>
+  <a class="ask" href="#zdjecie">Wyślij zdjęcie</a>
+  <button type="button" class="menu-btn" aria-expanded="false" aria-controls="gfs-links">Menu</button>
+  <nav class="links" id="gfs-links" aria-label="Główna nawigacja">
+    <!-- Same menu as every other page (theme gft_nav_items), 2026-11-09 -->
+    <a href="#boiska">Boiska</a>
+    <a href="#ceny">Ceny</a>
+    <a href="#dla-kogo">Dla kogo</a>
+    <a href="/realizacje-gamefields/">Realizacje</a>
+    <a href="/baza-wiedzy/">Wiedza</a>
+    <a href="/shop/">Sklep</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <a class="gf-photo-link" href="#zdjecie">Wyślij zdjęcie placu</a>
+  <a class="pill cfg" href="/studio/" style="background:var(--ink);color:var(--paper);min-height:44px;padding:0 20px;font-size:15px">Studio 3D ↗</a>
+</header>
+
+<main id="gfs-main">
+<!-- HERO: the court is the poster, the cursor is the ball, the model is 3D -->
+<section class="hero" id="gfs-hero" style="background:#1F2A6B;color:#fff" aria-labelledby="gfs-h1">
+  <div class="court" data-hero-court style="--ln:rgba(255,255,255,.45);--cr:36%"><i></i><i></i></div>
+  <div class="hero-3d" data-hero-3d>
+    <picture><source media="(max-width:700px)" srcset="/wp-content/themes/gamefields/assets/js/home/hero-r3/panna-play-720.webp"><img class="still" src="/wp-content/themes/gamefields/assets/js/home/hero-r3/panna-play-1200.webp" alt="" aria-hidden="true" width="1200" height="675" fetchpriority="high" decoding="async"></picture>
+    <span class="drag m">↻ Przeciągnij, aby obrócić</span>
+  </div>
+  <div class="ball" data-ball aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-top m"><span data-hero-code>GF-CT-002 · Panna Play · model 3D</span><span data-hero-dim>Ø ~6 m · do 1,52 m · 1 na 1</span></div>
+    <h1 class="d h1a" id="gfs-h1">Gra zmienia <span class="skip">miejsce.</span></h1>
+    <p class="d h1b" aria-hidden="true">miejsce.</p>
+    <div class="hero-foot">
+      <div class="ctrl">
+        <span class="m">Model</span>
+        <div class="seg" role="group" aria-label="Model 3D" data-hero-models></div>
+      </div>
+      <div class="ctrl ctrl-colors">
+        <span class="m" data-hero-colorname="panel">Panele · Czerwień sygnałowa</span>
+        <div class="dots" role="group" aria-label="Kolor paneli" data-hero-dots="panel"></div>
+        <span class="m" data-hero-colorname="frame">Rama i bramki · Grafit</span>
+        <div class="dots" role="group" aria-label="Kolor ramy i bramek" data-hero-dots="frame"></div>
+      </div>
+      <p style="max-width:32ch;font-size:17px;line-height:1.45">Modułowe boiska do panny i street footballu. Projektuję konstrukcję, nawierzchnię i grafikę jako jeden przedmiot.</p>
+      <a class="pill" data-hero-cta href="/studio/?arena=o1" style="background:#D8F24A;color:#1F2A6B">Zaprojektuj swoje <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER: one line per model, each opens the model in Studio (2026-11-08) -->
+<nav class="ticker" aria-label="Modele boisk"><div class="ticker-track">
+  <div class="ticker-set"><a href="/studio/?arena=w1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field">Panna Grid</a><i aria-hidden="true">•</i></div>
+  <div class="ticker-set" aria-hidden="true"><a href="/studio/?arena=w1" tabindex="-1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1" tabindex="-1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1" tabindex="-1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1" tabindex="-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2" tabindex="-1">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon" tabindex="-1">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field" tabindex="-1">Panna Grid</a><i aria-hidden="true">•</i></div>
+</div></nav>
+
+<!-- PHOTO STRIP (2026-11-18): "Wyślij zdjęcie placu" — the button opens the photo picker of form 3758 (theme gf-lead.js) -->
+<section class="wrap photo-strip" aria-labelledby="gfs-photo-strip">
+  <div class="photo-strip-t">
+    <h2 id="gfs-photo-strip">Masz plac? Wyślij zdjęcie.</h2>
+    <p>Sprawdzę miejsce i przygotuję propozycję boiska dopasowaną do Twojej przestrzeni. Odpowiadam osobiście w ciągu 1–2 dni roboczych.</p>
+  </div>
+  <a class="pill" href="#zdjecie" data-gf-photo-pick style="background:var(--violet);color:#fff">Wybierz zdjęcie placu <span aria-hidden="true">→</span></a>
+</section>
+
+<!-- SCOPE (mobile): the whole offer at a glance, Baymard: show catalogue scope on the homepage -->
+<nav class="wrap scope" aria-label="Na skróty">
+  <a href="#boiska"><b>8 boisk</b><span>Panna, Cage, Street Arena</span></a>
+  <a href="#planer"><b>Zmieści się?</b><span>Sprawdź na swoim placu</span></a>
+  <a href="/studio/"><b>Studio 3D</b><span>Konstrukcja, nawierzchnia, grafika</span></a>
+  <a href="#ceny"><b>Ceny</b><span>Konstrukcje od 27 000 zł netto</span></a>
+  <a href="#nawierzchnie"><b>Stary plac?</b><span>Malowanie i modernizacja</span></a>
+  <a href="#dla-kogo"><b>Dla kogo</b><span>Szkoły, osiedla, kluby, marki</span></a>
+  <a href="#plakaty"><b>Plakaty</b><span>Twój wzór boiska</span></a>
+  <a href="#zdjecie"><b>Wyślij zdjęcie</b><span>Odpisuję w 1–2 dni robocze</span></a>
+</nav>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: boiska -->
+<!-- COLLECTION -->
+<section id="boiska" class="wrap sec" aria-labelledby="gfs-boiska">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Kolekcja</p><h2 class="d" id="gfs-boiska">Osiem boisk. Jeden system.</h2></div>
+    <div class="side">
+      <p>Od areny o średnicy 5 metrów do pełnego boiska 3 na 3. Wspólne moduły, różne formy. Kliknij, żeby otworzyć model w Studio.</p>
+      <div class="chips" role="group" aria-label="Filtruj według kształtu" data-filters></div>
+    </div>
+  </div>
+  <div class="wall" data-wall data-prices='{"mobile":27000,"circle-cage-1":36000,"o1":40000,"w1":40000,"octagon":49000,"street-field":51000,"circle-cage-2":58000,"p1":69000,"street15":100000}'></div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: ceny -->
+<!-- CENY: cena konstrukcji od (tabela właściciela 13.11.2026), generowane z integrations/wordpress/offer/price-from.json -->
+<section id="ceny" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-price">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Ceny</p><h2 class="d" id="gfs-price">Ile kosztuje arena?</h2></div>
+    <div class="side"><p>Ceny konstrukcji z bramkami i całego boiska z nawierzchnią. Montaż i transport zależą od miejsca, dlatego policzę je po zdjęciach placu.</p><div class="chips"><a class="chip" href="#kontakt">Wyślij zdjęcia placu</a><a class="chip" href="/studio/">Zaprojektuj w Studio</a><a class="chip" href="/dofinansowanie-boisk/">Dofinansowanie</a></div></div>
+  </div>
+  <ul class="prices" role="list"><li><div class="name"><b>Arena mobilna eventowa</b><span>wynajem i sprzedaż · różne wymiary</span></div><div class="net"><b>od 27 000 zł</b> <small>netto</small><span class="gross">od 33 210 zł brutto</span></div><div class="pfoot"><span class="who">Marki, turnieje</span><a class="go" href="/wynajem-boisk-mobilnych/">Zobacz ofertę <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa Cage 90</b><span>GF-CT-005 · Ø, banda 0,9 m</span></div><div class="net"><b>od 36 000 zł</b> <small>netto</small><span class="gross">od 44 280 zł brutto</span></div><p class="full">Z nawierzchnią od 47 400 zł netto</p><div class="pfoot"><span class="who">Osiedla, szkoły</span><a class="go" href="/studio/?arena=circle-cage-1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Play</b><span>GF-CT-002 · Ø ~6 m</span></div><div class="net"><b>od 40 000 zł</b> <small>netto</small><span class="gross">od 49 200 zł brutto</span></div><p class="full">Z nawierzchnią od 51 000 zł netto</p><div class="pfoot"><span class="who">Kluby, eventy, szkoły</span><a class="go" href="/studio/?arena=o1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Ring</b><span>GF-CT-001 · Ø ~5 m</span></div><div class="net"><b>od 40 000 zł</b> <small>netto</small><span class="gross">od 49 200 zł brutto</span></div><p class="full">Z nawierzchnią od 47 800 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=w1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa</b><span>GF-CT-008 · Ośmiokąt</span></div><div class="net"><b>od 49 000 zł</b> <small>netto</small><span class="gross">od 60 270 zł brutto</span></div><p class="full">Z nawierzchnią od 60 900 zł netto</p><div class="pfoot"><span class="who">Gminy, parki, szkoły</span><a class="go" href="/studio/?arena=octagon">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Grid</b><span>GF-CT-007 · 6,21 × 4,65 m</span></div><div class="net"><b>od 51 000 zł</b> <small>netto</small><span class="gross">od 62 730 zł brutto</span></div><p class="full">Z nawierzchnią od 66 500 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=street-field">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Octa Cage 180</b><span>GF-CT-006 · Ø, banda 1,8 m</span></div><div class="net"><b>od 58 000 zł</b> <small>netto</small><span class="gross">od 71 340 zł brutto</span></div><p class="full">Z nawierzchnią od 69 400 zł netto</p><div class="pfoot"><span class="who">Kluby, akademie</span><a class="go" href="/studio/?arena=circle-cage-2">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Panna Court</b><span>GF-CT-003 · 7,14 × 5,57 m</span></div><div class="net"><b>od 69 000 zł</b> <small>netto</small><span class="gross">od 84 870 zł brutto</span></div><p class="full">Z nawierzchnią od 84 700 zł netto</p><div class="pfoot"><span class="who"></span><a class="go" href="/studio/?arena=p1">Zaprojektuj <span aria-hidden="true">→</span></a></div></li><li><div class="name"><b>Boisko 3 na 3 (Street Arena 15)</b><span>GF-CT-004 · Pełny format, 15 × 10 m</span></div><div class="net"><b>od 100 000 zł</b> <small>netto</small><span class="gross">od 123 000 zł brutto</span></div><p class="full">Z nawierzchnią od 159 300 zł netto</p><div class="pfoot"><span class="who">Gminy, deweloperzy</span><a class="go" href="/studio/?arena=street15">Zaprojektuj <span aria-hidden="true">→</span></a></div></li></ul>
+  <div class="price-incl">
+    <div><span class="m">„Z nawierzchnią” zawiera</span><ul role="list"><li>konstrukcję w podstawowej konfiguracji i standardowym kolorze</li><li>płytę betonową 12 cm z podbudową</li><li>malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem</li></ul></div>
+    <div><span class="m">Bez montażu, transportu i przygotowania terenu</span><ul role="list"><li>te koszty zależą od miejsca</li><li>policzę je po zdjęciach placu</li></ul></div>
+    <p class="price-note">Ceny orientacyjne „od”. Netto oraz brutto z VAT 23%.</p>
+  </div>
+  <details class="surf-rates"><summary>Nawierzchnie: ceny za m²</summary><ul role="list"><li><b>Płyta betonowa 12 cm z podbudową</b><span class="rate">283 zł/m² <small>netto</small></span><span>podstawa pod każde wykończenie</span></li><li><b>Malowanie farbą sportową</b><span class="rate">78–183 zł/m² <small>netto</small></span><span>jednokolorowe do wzoru zaawansowanego</span></li><li><b>Akryl Hard Court</b><span class="rate">200–342 zł/m² <small>netto</small></span><span>system warstwowy jak na kortach</span></li><li><b>Sztuczna trawa</b><span class="rate">167–292 zł/m² <small>netto</small></span><span>z montażem na betonie</span></li><li><b>Maty gumowe</b><span class="rate">242–425 zł/m² <small>netto</small></span><span>ciągła nawierzchnia gumowa</span></li><li><b>Nawierzchnia EPDM wylewana</b><span class="rate">250–400 zł/m² <small>netto</small></span><span>PN-EN 14877</span></li><li><b>Płytki sportowe PP</b><span class="rate">275–400 zł/m² <small>netto</small></span><span>szybki montaż bez klejenia</span></li><li><b>Płyty gumowe</b><span class="rate">342–492 zł/m² <small>netto</small></span><span>PN-EN 1177, atest PZH</span></li></ul><p>Warianty Standard, Standard+ i Premium. Metraż: powierzchnia konstrukcji z 10% zapasem. Dokładną cenę policzy Studio dla wybranego modelu.</p></details>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: realizacje -->
+<!-- REALIZACJE: zdjęcia z biblioteki mediów, podpisy właściciela (2026-11-08) -->
+<section id="realizacje" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-real">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Realizacje</p><h2 class="d" id="gfs-real">Z boiska.</h2></div>
+    <div class="side"><p>Boiska, które działają na co dzień: w miastach, parkach i na obiektach sportowych. Każda historia z opinią zamawiającego. <a href="/realizacje-gamefields/">Wszystkie realizacje →</a></p></div>
+  </div>
+  <ul class="rcards" role="list"><li><a class="rc" href="/realizacje-gamefields/#taras"><span class="rc-ph"><img src="/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras pod Pałacem Kultury, Warszawa, Park Świętokrzyski" width="768" height="576" loading="lazy" decoding="async"><span class="rc-who">Miasto</span></span><span class="rc-tx"><span class="rc-place">Warszawa, Park Świętokrzyski</span><b>Taras pod Pałacem Kultury</b><span class="rc-lead">Trzy areny Panna Ring połączone z tarasem i rampą. Jedno z najpopularniejszych miejsc spotkań młodzieży.</span><span class="rc-model">Panna Ring · od 40 000 zł netto</span><span class="rc-go">Historia realizacji →</span></span></a></li><li><a class="rc" href="/realizacje-gamefields/#kutno"><span class="rc-ph"><img src="/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa w Kutnie, Kutno, pasaż sportowy" width="768" height="576" loading="lazy" decoding="async"><span class="rc-who">Miasto</span></span><span class="rc-tx"><span class="rc-place">Kutno, pasaż sportowy</span><b>Panna Octa w Kutnie</b><span class="rc-lead">Zamówienie Urzędu Miasta. „Realizacja przebiegła bez zastrzeżeń.”</span><span class="rc-model">Panna Octa · od 49 000 zł netto</span><span class="rc-go">Historia realizacji →</span></span></a></li><li><a class="rc" href="/realizacje-gamefields/#krakow"><span class="rc-ph"><img src="/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Od planu do parku, Kraków" width="768" height="576" loading="lazy" decoding="async"><span class="rc-who">Park miejski</span></span><span class="rc-tx"><span class="rc-place">Kraków</span><b>Od planu do parku</b><span class="rc-lead">Panna Octa Cage 90 na terenie miejskim: projekt na planie, montaż, gotowa arena.</span><span class="rc-model">Panna Octa Cage 90 · od 36 000 zł netto</span><span class="rc-go">Historia realizacji →</span></span></a></li><li><a class="rc" href="/realizacje-gamefields/#wake"><span class="rc-ph"><img src="/wp-content/uploads/2024/12/12-3-768x768.jpg" alt="Wake For Friends, Grodzisk Mazowiecki, park wakeboardowy" width="768" height="576" loading="lazy" decoding="async"><span class="rc-who">Biznes</span></span><span class="rc-tx"><span class="rc-place">Grodzisk Mazowiecki, park wakeboardowy</span><b>Wake For Friends</b><span class="rc-lead">Arena na sztucznej trawie poszerzyła ofertę parku: na co dzień i na wydarzenia.</span><span class="rc-model">Panna Octa Cage 180 · od 58 000 zł netto</span><span class="rc-go">Historia realizacji →</span></span></a></li></ul><div class="rmore-h"><p class="m">Więcej z boisk</p><a href="/realizacje-gamefields/#eventy">Turnieje i eventy →</a></div><ul class="reals" role="list"><li><figure><img src="/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring na Orliku, Grodzisk Mazowiecki, 10 lat w użyciu" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring na Orliku</b><span>Grodzisk Mazowiecki, 10 lat w użyciu</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2026/11/Zyrardow-Panna-Arena-1v1--768x575.jpg" alt="Panna 1 na 1, Żyrardów" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna 1 na 1</b><span>Żyrardów</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2026/11/Damian-Gawrych-x-Wake-for-friends--768x960.jpg" alt="Wake For Friends, Gra na arenie nad wodą" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Wake For Friends</b><span>Gra na arenie nad wodą</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Złote Tarasy, Warszawa</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2026/11/1-768x576.jpg" alt="Event Head &amp; Shoulders, Stadion, Gdańsk" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Event Head &amp; Shoulders</b><span>Stadion, Gdańsk</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/13-3-768x768.jpg" alt="Panna Ring, Nowy Świat, Warszawa" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b><span>Nowy Świat, Warszawa</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/15-3-768x768.jpg" alt="Panna Octa Cage 180, Kraków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b><span>Kraków</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Street Soccer 2017</b><span>Grodzisk Mazowiecki</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/22-768x432.jpg" alt="Mistrzostwa Świata Superball, Liberec" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Świata Superball</b><span>Liberec</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/10-3-768x768.jpg" alt="Puchar Polski, Żerków" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Puchar Polski</b><span>Żerków</span></figcaption></figure></li><li><figure><img src="/wp-content/uploads/2024/12/5-3-768x768.jpg" alt="Mistrzostwa Polski, Street Mekka, Łódź" width="768" height="576" loading="lazy" decoding="async"><figcaption><b>Mistrzostwa Polski, Street Mekka</b><span>Łódź</span></figcaption></figure></li></ul>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: planer -->
+<!-- SITE PLANNER: does it fit? -->
+<section id="planer" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-plan">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Planer placu</p><h2 class="d" id="gfs-plan">Zmieści się?</h2></div>
+    <div class="side"><p>Wpisz wymiary swojego placu. Narysuję go w skali i pokażę, które boiska się zmieszczą razem z zapasem wokół. Wymiary modeli są rzeczywiste; strefę bezpieczeństwa dla Twojej lokalizacji potwierdzimy przy projekcie.</p></div>
+  </div>
+  <div class="pn">
+    <div class="pn-in">
+      <div class="pn-row">
+        <label class="pn-f"><span>Długość placu</span><span class="pn-num"><input id="pn-l" class="input" type="number" inputmode="decimal" min="3" max="60" step="0.5" value="12"><i>m</i></span></label>
+        <label class="pn-f"><span>Szerokość placu</span><span class="pn-num"><input id="pn-w" class="input" type="number" inputmode="decimal" min="3" max="60" step="0.5" value="9"><i>m</i></span></label>
+      </div>
+      <label class="pn-f"><span>Zapas wokół boiska <b data-pn-mv>1,0 m</b></span><input id="pn-m" type="range" min="0" max="3" step="0.25" value="1"></label>
+      <div class="chips" data-pn-presets role="group" aria-label="Przykładowe place"></div>
+      <div class="pn-plan" data-pn-plan role="img" aria-label="Plan placu w skali"></div>
+      <p class="pn-cap" data-pn-cap></p>
+    </div>
+    <div class="pn-list" data-pn-list role="group" aria-label="Boiska i dopasowanie do placu"></div>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: nawierzchnie -->
+<!-- MODERNIZACJA: stary beton -> kolorowe boisko (2026-11-11). Zdjęcia: strona /radar-boisko-koszykowki-warszawa/, Street View 2017 + koncepcja Organic Flow. -->
+<section id="nawierzchnie" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-mod">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Nawierzchnie i modernizacje</p><h2 class="d" id="gfs-mod">Stary beton. Nowe boisko.</h2></div>
+    <div class="side">
+      <p>Nie każdy plac trzeba rozbierać. Szary beton albo asfalt zamieniam w kolorowe boisko do piłki, kosza i gry 3 na 3: naprawa podłoża, farby z gumą, wzór i linie w jednym zleceniu.</p>
+      <div class="chips"><a class="chip" href="/malowanie-boisk/">Malowanie boisk</a><a class="chip" href="/renowacja-boisk/">Renowacja boisk</a></div>
+    </div>
+  </div>
+  <figure class="mod-ba">
+  <div class="mod-frame" data-ba style="--p:50%">
+    <img src="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-przed-1100.webp" srcset="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-przed-720.webp 720w, https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-przed-1100.webp 1100w" sizes="(max-width:900px) 100vw, 66vw" width="1100" height="733" loading="lazy" decoding="async" alt="Przed: szary betonowy plac do koszykówki między drzewami, Pole Mokotowskie w Warszawie, Street View 2017">
+    <div class="mod-after" aria-hidden="true"><img src="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-po-1100.webp" srcset="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-po-720.webp 720w, https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-po-1100.webp 1100w" sizes="(max-width:900px) 100vw, 66vw" width="1100" height="733" loading="lazy" decoding="async" alt=""></div>
+    <span class="mod-tag l m">Przed</span><span class="mod-tag r m">Koncepcja po</span>
+    <span class="mod-handle" aria-hidden="true"></span>
+    <input class="mod-range" type="range" min="0" max="100" value="50" aria-label="Porównaj plac przed i koncepcję po modernizacji">
+  </div>
+    <figcaption><b>Pole Mokotowskie, Warszawa.</b> Betonowy plac do koszykówki i koncepcja Organic Flow na tym samym zdjęciu. Przesuń suwak. Zdjęcie: Google Street View, sierpień 2017. To wizualizacja, nie realizacja. <a href="/radar-boisko-koszykowki-warszawa/">Zobacz koncepcję →</a></figcaption>
+  </figure>
+  <ol class="mod-steps" role="list">
+    <li><span class="m">01</span><b>Ocena placu</b><span>Ze zdjęć i wymiarów sprawdzam pęknięcia, spadki, odwodnienie i stan betonu. Mówię wprost, czy wystarczy malowanie, czy trzeba naprawić podłoże.</span></li>
+    <li><span class="m">02</span><b>Naprawa i grunt</b><span>Mycie, szlifowanie, wypełnienie rys i ubytków, grunt do betonu i warstwa wyrównująca. Od tego zależy trwałość koloru.</span></li>
+    <li><span class="m">03</span><b>Farby z gumą</b><span>Elastyczna powłoka sportowa z granulatem gumowym: amortyzuje krok, nie ślizga się i przykrywa drobne rysy. Na wyższe wymagania natrysk poliuretanowy z EPDM.</span></li>
+    <li><span class="m">04</span><b>Wzór i linie</b><span>Wzór Signature albo Twój projekt ze Studio 3D. Linie do piłki, koszykówki, 3 na 3 albo kilku gier naraz.</span></li>
+  </ol>
+  <p class="swipe-hint" aria-hidden="true">Przesuń w bok <span>→</span></p>
+  <div class="pv"><div class="pv-h"><p class="m">Ile kosztuje malowanie</p><p>Ceny za m² netto, jak w Studio 3D i w sklepie. Naprawy podłoża wyceniam po zdjęciach. <a href="#materialy-wybor">Policz dla swojego boiska ↓</a></p></div><ol class="pv-list" role="list"><li><span class="pv-n">Jednokolorowa</span><b>78 zł/m²</b><span class="pv-d">Grunt, 2 warstwy farby sportowej i standardowe linie.</span></li><li><span class="pv-n">Jednokolorowa z granulatem</span><b>100 zł/m²</b><span class="pv-d">Elastyczna powłoka z gumą: lepsza amortyzacja i antypoślizg, z liniami.</span></li><li><span class="pv-n">Wzór średni</span><b>150 zł/m²</b><span class="pv-d">4–6 kolorów, geometryczne wzory typu Signature, na bazie z granulatem.</span></li><li><span class="pv-n">Wzór zaawansowany</span><b>183 zł/m²</b><span class="pv-d">7 i więcej kolorów, złożone grafiki (Organic Flow, gradienty), na bazie z granulatem.</span></li></ol></div>
+  <div class="mod-facts">
+    <div><span class="m">Czas realizacji</span><p>Zależy od wielkości boiska i stanu placu na starcie. Termin podaję po ocenie zdjęć, zanim podpiszemy cokolwiek.</p></div>
+    <div><span class="m">Pogoda</span><p>Farby sportowe kładziemy na suchy beton, przy dodatniej temperaturze, zwykle od wiosny do jesieni.</p></div>
+    <div><span class="m">Na start</span><p>Zdjęcia placu, przybliżone wymiary i lokalizacja. Nie musisz znać budżetu.</p></div>
+  </div>
+  <div class="mod-cta">
+    <a class="pill" href="#kontakt" data-mod-ask style="background:var(--violet);color:#fff">Wyślij zdjęcia placu <span aria-hidden="true">→</span></a>
+    <a class="pill" href="/studio/" style="background:var(--ink);color:var(--paper)">Zaprojektuj wzór w Studio 3D <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+<script>(function(){var f=document.querySelector('.gfs [data-ba]');if(!f)return;var r=f.querySelector('.mod-range');function s(){f.style.setProperty('--p',r.value+'%')}r.addEventListener('input',s);s();var a=document.querySelector('.gfs [data-mod-ask]');if(a)a.addEventListener('click',function(){var t=document.querySelector('.gfs textarea[name="project-details"]');if(t){if(!t.value)t.value='Mam stary betonowy plac do modernizacji. Wymiary: ... Lokalizacja: ... Zdjęcia wyślę w odpowiedzi.';}});})();</script>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: samorzady -->
+<!-- SAMORZĄDY: gminy, szkoły, Orliki (2026-11-16). Fakty: właściciel 16.11 (gwarancja 12 miesięcy + stała opieka nad renowacją,
+     zgodność z programem „Moje Boisko – Orlik 2012”, dokumentacja producentów), normy z kosztorysów nawierzchni, realizacje z mediów. -->
+<section id="samorzady" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-gov">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Dla gmin, szkół i Orlików</p><h2 class="d" id="gfs-gov">Boisko, które się broni.</h2></div>
+    <div class="side"><p>Modernizacja Orlika, nowe boisko w gminie albo strefa przy szkole. Przygotuję koncepcję, parametry techniczne i dokumenty do wniosku o dofinansowanie i do przetargu.</p>
+      <div class="chips"><a class="chip" href="/dofinansowanie-boisk/">Dofinansowanie boisk</a><a class="chip" href="/realizacje-dla-miast/">Realizacje dla miast</a></div></div>
+  </div>
+  <ul class="gov-facts" role="list">
+    <li><span class="m">10 lat</span><b>Panna Ring na Orliku</b><span>W użyciu od 10 lat na Orliku OSiR w Grodzisku Mazowieckim.</span></li>
+    <li><span class="m">Orlik 2012</span><b>Zgodne z programem</b><span>Rozwiązania spełniają wymagania programu „Moje Boisko – Orlik 2012”. Nabory na 2027 rok ruszają 4 stycznia.</span></li>
+    <li><span class="m">12 miesięcy</span><b>Gwarancja i opieka</b><span>Rok gwarancji i stała opieka nad renowacją boiska po odbiorze.</span></li>
+    <li><span class="m">Dokumenty</span><b>Certyfikaty producentów</b><span>Karty techniczne i certyfikaty stali, farb i nawierzchni dołączam do oferty, wniosku i dokumentacji przetargowej.</span></li>
+  </ul>
+  <div class="gov-norms" aria-label="Parametry nawierzchni">
+    <span><b>PN-EN 14877</b> nawierzchnie poliuretanowe EPDM</span>
+    <span><b>PN-EN 1177</b> i atest PZH: płyty gumowe</span>
+    <span><b>R11</b> antypoślizg: płyty i maty gumowe</span>
+    <span><b>Wodoprzepuszczalne</b> EPDM natryskowe i płyty</span>
+  </div>
+  <figure class="gov-build">
+    <ol role="list">
+      <li><img src="/wp-content/uploads/2026/11/Gamefields-x-boiska-x-Projekt-Krakow--768x768.jpg" alt="Plan zagospodarowania z arenami Gamefields, Kraków" width="768" height="768" loading="lazy" decoding="async"><span>Projekt na planie</span></li>
+      <li><img src="/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-montaz-768x576.jpg" alt="Montaż areny Panna Cage w parku, Kraków" width="768" height="576" loading="lazy" decoding="async"><span>Montaż</span></li>
+      <li><img src="/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-768x576.jpg" alt="Gotowa arena Panna Cage przed zakończeniem prac, Kraków" width="768" height="576" loading="lazy" decoding="async"><span>Przed odbiorem</span></li>
+      <li><img src="/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Panna Octa Cage 90 w parku, Kraków" width="768" height="768" loading="lazy" decoding="async"><span>W parku</span></li>
+    </ol>
+    <p class="swipe-hint" aria-hidden="true">Przesuń w bok <span>→</span></p>
+    <figcaption><b>Kraków: od planu do boiska w parku.</b> Panna Octa Cage 90 na terenie miejskim.</figcaption>
+  </figure>
+  <div class="gov-cities"><span class="m">Realizacje w miastach</span>
+    <ul class="gov-logos" role="list"><li style="--z:1.3"><img src="/wp-content/uploads/2026/11/LOGO-Warszawa--300x194.png" alt="Miasto stołeczne Warszawa" width="300" height="194" loading="lazy" decoding="async"></li><li style="--z:1.7"><img src="/wp-content/uploads/2026/11/Zarzad-Zieleni-Miejskiej-Warszawa-300x141.jpg" alt="Zarząd Zieleni m.st. Warszawy" width="300" height="141" loading="lazy" decoding="async"></li><li><img src="/wp-content/uploads/2026/11/LOHO-Krakow--300x200.jpg" alt="Kraków" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1.6"><img src="/wp-content/uploads/2026/11/Grodzisk-Mazowiecki-LOGO-300x200.jpg" alt="Grodzisk Mazowiecki" width="300" height="200" loading="lazy" decoding="async"></li><li><img src="/wp-content/uploads/2026/11/LOGO-Kutno--300x231.jpg" alt="Kutno" width="300" height="231" loading="lazy" decoding="async"></li><li style="--z:1.15"><img src="/wp-content/uploads/2026/11/LOGO-Lodz-300x139.webp" alt="Łódź" width="300" height="139" loading="lazy" decoding="async"></li></ul>
+    <p>Także Żyrardów i Gdańsk.</p>
+  </div>
+  <div class="mod-cta">
+    <a class="pill" href="#kontakt" style="background:var(--violet);color:#fff">Wyślij zdjęcie placu <span aria-hidden="true">→</span></a>
+    <a class="pill" href="/studio/" style="background:var(--ink);color:var(--paper)">Zaprojektuj w 3D i wyślij do wyceny <span aria-hidden="true">↗</span></a>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: dla-kogo -->
+<!-- STUDIO -->
+<!-- WHO: paths per audience, linked to the existing landing pages -->
+<section id="dla-kogo" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-who">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Dla kogo</p><h2 class="d" id="gfs-who">Wybierz swoją drogę.</h2></div>
+    <div class="side"><p>Każdy projekt zaczyna się od miejsca i ludzi, którzy będą na nim grać. Zobacz, jak pracuję z Twoim typem inwestycji.</p></div>
+  </div>
+  <ul class="who" role="list">
+    <li><a href="/boiska-dla-szkol/"><span class="m">01</span><b>Szkoły i gminy</b><span>Boiska wielofunkcyjne, modernizacje i małe strefy aktywności.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/boiska-dla-deweloperow/"><span class="m">02</span><b>Deweloperzy i osiedla</b><span>Kompaktowe boiska i strefy sportowe dla inwestycji mieszkaniowych.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/boiska-dla-klubow/"><span class="m">03</span><b>Kluby i akademie</b><span>Strefy treningowe 1 na 1 i 3 na 3, technika, nawierzchnie.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/aktywacje-sportowe-dla-marek/"><span class="m">04</span><b>Marki i agencje</b><span>Brandowane boiska, turnieje, pop-upy i aktywacje.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/wynajem-boisk-mobilnych/"><span class="m">05</span><b>Eventy i wynajem</b><span>Mobilne boiska panna i street football na turnieje.</span><i aria-hidden="true">→</i></a></li>
+    <li><a href="/projektuj-i-wybuduj-boisko/"><span class="m">06</span><b>Pełna realizacja</b><span>Od analizy terenu po odbiór, z jednym partnerem.</span><i aria-hidden="true">→</i></a></li>
+  </ul>
+</section>
+<!-- Opinie klientów: przeniesione na strony boisk w sklepie (2026-11-08). -->
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: studio -->
+<section id="studio" class="studio sec" aria-labelledby="gfs-studio">
+  <div class="wrap studio-grid">
+    <div class="elev tall2" data-elev aria-label="Schemat z boku: sylwetka obok paneli boiska, wysokości w skali 1:1">
+      <div class="elev-top">
+        <span class="m" style="color:#B9A3AF">Widok z boku · wysokości 1:1</span>
+        <div class="seg" role="group" aria-label="Boisko do porównania" style="color:var(--paper)">
+          <button type="button" data-scale="90" aria-pressed="false">Cage 90</button>
+          <button type="button" data-scale="180" aria-pressed="true">Cage 180</button>
+        </div>
+      </div>
+      <div class="elev-draw">
+        <div class="ruler m">
+          <div class="tick" style="bottom:0"><span>0</span></div>
+          <div class="tick" style="bottom:calc(var(--m) * .9)"><span>0,90 m</span></div>
+          <div class="tick" style="bottom:calc(var(--m) * 1.2)"><span>1,20 m</span></div>
+          <div class="tick" style="bottom:calc(var(--m) * 1.8)"><span>1,80 m</span></div>
+          <div class="tick" style="bottom:calc(var(--m) * 2)"><span>2,00 m</span></div>
+        </div>
+        <div class="panels" aria-hidden="true">
+          <div class="panel"></div>
+          <div class="panel gap"><span class="tag m" style="bottom:6px;left:50%;transform:translateX(-50%)">wejście</span></div>
+          <div class="panel"></div>
+          <div class="panel"><div class="goal"></div><span class="tag m" style="top:-24px;left:18%;color:#FFB3C8">bramka</span></div>
+          <div class="panel"></div>
+        </div>
+        <div class="ground"></div>
+        <div class="fig" data-fig>
+          <svg viewBox="0 0 60 180" aria-hidden="true"><circle cx="30" cy="13" r="12" fill="#D8F24A"/><path d="M14 32h32a6 6 0 0 1 6 6v52a4 4 0 0 1-4 4h-4v-40h-2v126h-11v-72h-2v72H18V54h-2v40h-4a4 4 0 0 1-4-4V38a6 6 0 0 1 6-6z" fill="#D8F24A"/></svg>
+          <span class="who m" data-fig-label>180 cm</span>
+        </div>
+      </div>
+      <label class="range" for="gfs-height"><span class="m" data-height-note style="color:var(--paper)">Twój wzrost · 180 cm · rama sięga mniej więcej do głowy</span><input id="gfs-height" type="range" min="110" max="200" step="5" value="180"></label>
+    </div>
+    <div class="studio-copy">
+      <span class="m" style="color:var(--lime)">Studio</span>
+      <h2 class="d" id="gfs-studio" style="font-size:clamp(48px,6vw,96px)">Projektuję miejsca, do których się wraca.</h2>
+      <p style="font-size:19px;line-height:1.55;color:#E6DAE0;max-width:46ch">Gamefields to moje autorskie studio. Rysuję ramy, panele i nawierzchnie tak, żeby z kilku modułów powstało boisko pasujące do placu, szkoły albo klubu. Zaczynam od miejsca, kończę na pierwszym meczu.</p>
+      <dl class="spec">
+        <dt class="m">Studio</dt><dd>Warszawa · cała Polska</dd>
+        <dt class="m">Projektuję</dt><dd>konstrukcje, nawierzchnie, grafikę boisk</dd>
+        <dt class="m">Pracuję w</dt><dd>CAD i renderach 3D, potem na placu</dd>
+      </dl>
+      <a class="pill" href="#kontakt" style="background:var(--lime);color:var(--plum);align-self:flex-start">Napisz do mnie <span aria-hidden="true">→</span></a>
+      <a href="/damian-gawrych/" style="color:var(--paper);font-weight:700;text-underline-offset:4px">Kim jestem: Damian Gawrych →</a>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: autor -->
+<!-- AUTOR: ludzki element (2026-11-16). Zdjęcie z mediów (ID 4677), fakty ze strony /damian-gawrych/ i z mediów właściciela. -->
+<section id="autor" class="wrap sec" aria-labelledby="gfs-author">
+  <div class="author">
+    <figure class="author-photo"><img src="/wp-content/uploads/2026/11/DAMIAN-GAWRYCH-1-768x998.jpeg" alt="Damian Gawrych, autor studia Gamefields" width="768" height="998" loading="lazy" decoding="async"></figure>
+    <div class="author-copy">
+      <p class="kicker m">Autor studia</p>
+      <h2 class="d" id="gfs-author">Damian Gawrych.</h2>
+      <p class="author-lead">W pannę gram od 2005 roku, turnieje organizuję od 2008. Gamefields to moje autorskie studio: każdy projekt zaczynam od rozmowy z ludźmi, którzy będą na nim grać.</p>
+      <blockquote class="author-quote">„Zaczynam od miejsca, kończę na pierwszym meczu.”</blockquote>
+      <dl class="author-facts">
+        <div><dt class="m">2005</dt><dd>Zawodnik panny i street footballu</dd></div>
+        <div><dt class="m">2008</dt><dd>Pierwszy turniej, Jaktorów</dd></div>
+        <div><dt class="m">2015</dt><dd>Podium mistrzostw świata, Praga</dd></div>
+        <div><dt class="m">2017</dt><dd>Organizator Mistrzostw Świata Freestival Street Games</dd></div>
+        <div><dt class="m">Warszawa</dt><dd>Taras pod Pałacem Kultury: trzy areny Panna Ring</dd></div>
+        <div><dt class="m">Warsaw FC</dt><dd>Założyciel klubu</dd></div>
+      </dl>
+      <div class="author-links"><a class="pill" href="#kontakt" style="background:var(--violet);color:#fff">Napisz do mnie <span aria-hidden="true">→</span></a><a class="pill" href="/damian-gawrych/" style="background:var(--ink);color:var(--paper)">Kim jestem <span aria-hidden="true">→</span></a></div>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: jak-to-dziala -->
+<!-- HOW -->
+<section class="wrap sec" aria-labelledby="gfs-how">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Proces</p><h2 class="d" id="gfs-how">Od placu do meczu.</h2></div>
+    <div class="side"><p>Cztery kroki. Na każdym rozmawiasz ze mną, nie z formularzem.</p></div>
+  </div>
+  <div class="steps" role="group" aria-label="Kroki" data-steps></div>
+  <div class="step-detail"><p data-step-text></p><a class="pill" data-step-cta href="#boiska" style="background:var(--violet);color:#fff"></a></div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: materialy -->
+<!-- MATERIALS -->
+<section class="wrap sec" aria-labelledby="gfs-mats">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Materiały</p><h2 class="d" id="gfs-mats">Poczuj różnicę.</h2></div>
+    <div class="side"><p>Osiem nawierzchni ze Studia. Faktura z bliska, cena za metr i koszt dla Twojego boiska. Próbki wyślę pocztą.</p></div>
+  </div>
+  <div class="matx" id="materialy-wybor" data-matx><div class="matx-stage" data-mat-stage><img data-mat-img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-1024x768.webp" srcset="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-768x576.webp 768w, https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-1024x768.webp 1024w, https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro.webp 1448w" sizes="(max-width:900px) 100vw, 58vw" alt="Nawierzchnia EPDM z bliska" width="1024" height="768" loading="lazy" decoding="async"><span class="matx-zoom m">Najedź, aby przybliżyć</span></div><div class="matx-panel" aria-live="polite"><p class="matx-tag m" data-mat-t>wylewana</p><h3 data-mat-n>Nawierzchnia EPDM</h3><p class="matx-price">od <b data-mat-p>250 zł/m²</b> netto</p><ul class="matx-f" data-mat-f role="list"><li>PN-EN 14877</li><li>Natrysk wodoprzepuszczalny</li><li>Trwałość od 8–12 do 12–20 lat, zależnie od wariantu</li></ul><div class="matx-calc"><label for="gfs-mat-area">Policz dla boiska</label><select id="gfs-mat-area" data-mat-area><option value="31.1">Panna Octa Cage 90 · 31,1 m²</option><option value="30.1" selected>Panna Play · 30,1 m²</option><option value="21.5">Panna Ring · 21,5 m²</option><option value="32.8">Panna Octa · 32,8 m²</option><option value="42.6">Panna Grid · 42,6 m²</option><option value="31.1">Panna Octa Cage 180 · 31,1 m²</option><option value="43.2">Panna Court · 43,2 m²</option><option value="164.1">Boisko 3 na 3 (Street Arena 15) · 164,1 m²</option></select></div><ul class="matx-v" data-mat-v role="list"></ul><div class="matx-cta"><a class="pill" href="/studio/" style="background:var(--ink);color:var(--paper)">Wybierz w Studio <span aria-hidden="true">↗</span></a><a class="pill matx-more" data-mat-u href="/product/nawierzchnia-epdm/">Szczegóły i warianty</a></div><p class="matx-note">Ceny orientacyjne netto. Koszt dla boiska: metraż konstrukcji z 10% zapasem, w górę do 100 zł. Wykończenie leży na płycie betonowej (osobna pozycja) albo na stabilnym placu.</p></div><nav class="matx-sw" aria-label="Wybierz nawierzchnię"><a class="sw" href="/product/nawierzchnia-epdm/" data-mat="0" aria-current="true"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async"><b>Nawierzchnia EPDM</b><span>od 250 zł/m²</span></a><a class="sw" href="/product/plytki-sportowe/" data-mat="1"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plytki-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async"><b>Płytki sportowe PP</b><span>od 275 zł/m²</span></a><a class="sw" href="/product/sztuczna-trawa/" data-mat="2"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/trawa-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async"><b>Sztuczna trawa</b><span>od 167 zł/m²</span></a><a class="sw" href="/product/malowanie-farba-sportowa/" data-mat="3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/malowanie-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async"><b>Malowanie farbą sportową</b><span>od 78 zł/m²</span></a><a class="sw" href="/product/akryl-hard-court/" data-mat="4"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/akryl-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async"><b>Akryl Hard Court</b><span>od 200 zł/m²</span></a><a class="sw" href="/product/plyty-gumowe/" data-mat="5"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plyty-gumowe-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async"><b>Płyty gumowe</b><span>od 342 zł/m²</span></a><a class="sw" href="/product/maty-gumowe-nawierzchnia/" data-mat="6"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/maty-gumowe-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async"><b>Maty gumowe</b><span>od 242 zł/m²</span></a><a class="sw" href="/product/plyta-betonowa/" data-mat="7"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/beton-macro-300x225.webp" alt="" width="300" height="225" loading="lazy" decoding="async"><b>Płyta betonowa 12 cm</b><span>od 283 zł/m²</span></a></nav></div><script type="application/json" id="gfs-mat-data">[{"k": "granulat", "n": "Nawierzchnia EPDM", "t": "wylewana", "u": "/product/nawierzchnia-epdm/", "v": [{"n": "Standard", "r": 250}, {"n": "Standard+", "r": 317}, {"n": "Premium", "r": 400}], "f": ["PN-EN 14877", "Natrysk wodoprzepuszczalny", "Trwałość od 8–12 do 12–20 lat, zależnie od wariantu"]}, {"k": "plytki", "n": "Płytki sportowe PP", "t": "modułowe", "u": "/product/plytki-sportowe/", "v": [{"n": "Standard", "r": 275}, {"n": "Standard+", "r": 325}, {"n": "Premium", "r": 400}], "f": ["Montaż bez klejenia, z drenażem", "Grubość od 15–18 mm do 19 mm+", "Premium: gwarancja 5–10 lat"]}, {"k": "trawa", "n": "Sztuczna trawa", "t": "klasyczna murawa", "u": "/product/sztuczna-trawa/", "v": [{"n": "Standard", "r": 167}, {"n": "Standard+", "r": 225}, {"n": "Premium", "r": 292}], "f": ["Montaż na płycie betonowej", "Trzy warianty jakości", "Naturalny wybór do piłki"]}, {"k": "malowanie", "n": "Malowanie farbą sportową", "t": "na płycie lub starym placu", "u": "/product/malowanie-farba-sportowa/", "v": [{"n": "Jednokolorowa", "r": 78}, {"n": "Jednokolorowa z granulatem", "r": 100}, {"n": "Wzór średni", "r": 150}, {"n": "Wzór zaawansowany", "r": 183}], "f": ["Farba z granulatem gumowym: amortyzacja i antypoślizg", "Wzory Signature, 4–6 i 7+ kolorów", "Linie do piłki, kosza i 3 na 3"]}, {"k": "akryl", "n": "Akryl Hard Court", "t": "jak na kortach", "u": "/product/akryl-hard-court/", "v": [{"n": "Standard", "r": 200}, {"n": "Standard+", "r": 267}, {"n": "Premium", "r": 342}], "f": ["Standard: 4–6 warstw, ok. 1–2 mm", "Twardy i szybki", "Premium: warstwy gumowe 4–8 mm"]}, {"k": "plyty-gumowe", "n": "Płyty gumowe", "t": "bezpieczny upadek", "u": "/product/plyty-gumowe/", "v": [{"n": "Standard", "r": 342}, {"n": "Standard+", "r": 400}, {"n": "Premium", "r": 492}], "f": ["PN-EN 1177, atest PZH", "Antypoślizg R11, wodoprzepuszczalne", "Płyty 50 × 50 cm, 40–50 mm"]}, {"k": "maty-gumowe", "n": "Maty gumowe", "t": "ciągła guma", "u": "/product/maty-gumowe-nawierzchnia/", "v": [{"n": "Standard", "r": 242}, {"n": "Standard+", "r": 317}, {"n": "Premium", "r": 425}], "f": ["SBR, w Premium z warstwą EPDM", "Antypoślizg R11", "Wykończenie płyty w Studio"]}, {"k": "beton", "n": "Płyta betonowa 12 cm", "t": "podstawa", "u": "/product/plyta-betonowa/", "v": [{"n": "za m²", "r": 283}], "f": ["C20/25 ze spadkami i dylatacjami", "Siatka zbrojeniowa, podbudowa z kruszywa", "Gotowa pod każde wykończenie"]}]</script><script>(function(){var box=document.querySelector('.gfs [data-matx]');if(!box)return;var D=JSON.parse(document.getElementById('gfs-mat-data').textContent);var UP='https://www.gamefields.eu/wp-content/uploads/2026/11/';var cur=0;var q=function(s){return box.querySelector(s)};var img=q('[data-mat-img]'),stage=q('[data-mat-stage]'),area=q('[data-mat-area]');function fmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')}function render(){var d=D[cur],a=parseFloat(area.value)||0;q('[data-mat-n]').textContent=d.n;q('[data-mat-t]').textContent=d.t;var mn=Math.min.apply(null,d.v.map(function(x){return x.r}));q('[data-mat-p]').textContent=mn+' zł/m²';q('[data-mat-u]').href=d.u;q('[data-mat-f]').innerHTML=d.f.map(function(x){return '<li>'+x+'</li>'}).join('');q('[data-mat-v]').innerHTML=d.v.map(function(x){return '<li><span>'+x.n+'</span><b>'+x.r+' zł/m²</b><i>'+fmt(Math.ceil(a*x.r/100)*100)+' zł</i></li>'}).join('');}function pick(i){if(i===cur)return;cur=i;var d=D[i];stage.classList.add('swap');setTimeout(function(){img.srcset=UP+d.k+'-macro-768x576.webp 768w, '+UP+d.k+'-macro-1024x768.webp 1024w, '+UP+d.k+'-macro.webp 1448w';img.src=UP+d.k+'-macro-1024x768.webp';img.alt=d.n+' z bliska';stage.classList.remove('swap');},180);box.querySelectorAll('[data-mat]').forEach(function(s){if(+s.getAttribute('data-mat')===i)s.setAttribute('aria-current','true');else s.removeAttribute('aria-current')});render();}box.querySelectorAll('[data-mat]').forEach(function(s){s.addEventListener('click',function(e){if(e.metaKey||e.ctrlKey)return;e.preventDefault();pick(+s.getAttribute('data-mat'))})});area.addEventListener('change',render);stage.addEventListener('pointermove',function(e){var r=stage.getBoundingClientRect();stage.style.setProperty('--x',((e.clientX-r.left)/r.width*100)+'%');stage.style.setProperty('--y',((e.clientY-r.top)/r.height*100)+'%');stage.classList.add('zoom')});stage.addEventListener('pointerleave',function(){stage.classList.remove('zoom')});render();})();</script>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: na-twoim-placu -->
+<!-- ON YOUR SITE -->
+<section class="wrap sec" aria-labelledby="gfs-site">
+  <div class="site">
+    <div class="site-img" data-site>
+      <img class="bgp" data-site-photo loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/plac-przykladowy.webp" alt="Zdjęcie placu">
+      <img class="fg" data-site-model loading="lazy" decoding="async" src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-1200.webp" alt="Panna Cage 90 na zdjęciu placu, do przeciągnięcia" draggable="false">
+      <div class="bar"><b data-site-label>Przykładowy plac</b><span class="m">przeciągnij boisko</span></div>
+    </div>
+    <div style="display:grid;gap:22px;align-content:center">
+      <span class="m" style="color:var(--violet)">Na Twoim placu</span>
+      <h2 class="d" id="gfs-site" style="font-size:clamp(48px,6vw,96px)">Wgraj zdjęcie. Postaw boisko.</h2>
+      <p style="font-size:18px;line-height:1.5;color:var(--muted);max-width:40ch">Przeciągnij model, ustaw skalę i opisz mi miejsce. Zdjęcie zostaje w Twojej przeglądarce, nigdzie go nie wysyłamy.</p>
+      <label for="gfs-site-scale" class="m" style="display:grid;gap:10px">Skala boiska<input id="gfs-site-scale" type="range" min="20" max="80" value="48" style="accent-color:var(--violet)"></label>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <label class="pill file" for="gfs-photo" style="background:var(--ink);color:var(--paper)">Wgraj zdjęcie placu<input id="gfs-photo" type="file" accept="image/*"></label>
+        <button type="button" class="pill" data-site-reset style="background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)">Przykładowy plac</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: zestawy -->
+<!-- KITS -->
+<section aria-labelledby="gfs-kits">
+  <div class="wrap head">
+    <div class="hd"><p class="kicker m">Zestawy</p><h2 class="d" id="gfs-kits">Pięć miejsc. Pięć zestawów.</h2></div>
+    <div class="side"><p>Kliknij miejsce, żeby zobaczyć gotowy zestaw: boisko, nawierzchnię i kolor.</p></div>
+  </div>
+  <div data-kits></div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: plakaty -->
+<!-- POSTER LAB -->
+<section id="plakaty" class="wrap sec" style="padding-top:0" aria-labelledby="gfs-print">
+  <div class="head">
+    <div class="hd"><p class="kicker m">Plakaty</p><h2 class="d" id="gfs-print">Boisko na ścianę.</h2></div>
+    <div class="side"><p>Zaprojektuj plakat z własnym boiskiem: sam wzór na pełnym spadzie, od krawędzi do krawędzi, bez napisów. Dziesiątki kierunków artystycznych i każdy kolor do zmiany. Druk na papierze archiwalnym, numerowana edycja. Każdy zakup wspiera rozwój Gamefields.</p></div>
+  </div>
+  <div class="pl">
+    <div class="pl-stage">
+      <div class="pl-wall" data-pl-wall data-view="wall">
+        <div class="pl-floor" aria-hidden="true"></div>
+        <div class="pl-frame" data-pl-frame><div class="pl-sheet" data-pl-sheet role="img" aria-label="Podgląd plakatu"></div></div>
+        <span class="pl-tag m" data-pl-tag>50 × 70 cm · ściana ok. 1,6 m</span>
+      </div>
+      <div class="pl-quick">
+        <button type="button" class="chip" data-pl-random>Losuj wszystko</button>
+        <button type="button" class="chip" data-pl-shift>Przetasuj kolory</button>
+        <button type="button" class="chip" data-pl-view aria-pressed="false">Sam plakat</button>
+      </div>
+      <button type="button" class="pill tool-toggle" data-tool-toggle="pl" aria-expanded="true" aria-controls="pl-editor">Projektuj plakat <span aria-hidden="true">→</span></button>
+    </div>
+    <div class="pl-ed" id="pl-editor">
+      <div class="pl-tabs" role="tablist" aria-label="Edycja plakatu">
+        <button type="button" role="tab" id="pl-t-art" aria-controls="pl-p-art" aria-selected="true">Wzór</button>
+        <button type="button" role="tab" id="pl-t-col" aria-controls="pl-p-col" aria-selected="false" tabindex="-1">Kolory</button>
+        <button type="button" role="tab" id="pl-t-prn" aria-controls="pl-p-prn" aria-selected="false" tabindex="-1">Druk</button>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-art" aria-labelledby="pl-t-art">
+        <div class="pl-h"><b>Signature Pro</b><span data-pl-famname>Duperré Fade</span></div>
+        <div class="pl-sig" data-pl-sig role="group" aria-label="Gotowe projekty"></div>
+        <div class="pl-h"><b>Kierunek</b><span data-pl-insp></span></div>
+        <div class="chips" data-pl-fams role="group" aria-label="Kierunek artystyczny"></div>
+        <div class="pl-h"><b>Kompozycja</b><span>1–12, albo losuj</span></div>
+        <div class="pl-vars" data-pl-vars role="group" aria-label="Kompozycja"></div>
+        <button type="button" class="chip" data-pl-seed>Nowa wersja tej kompozycji</button>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-col" aria-labelledby="pl-t-col" hidden>
+        <div class="pl-h"><b>Paleta</b><span data-pl-palname>Duperré</span></div>
+        <div class="pl-pals" data-pl-pals role="group" aria-label="Paleta"></div>
+        <div class="pl-h"><b>Twoje kolory</b><span>kliknij, aby zmienić</span></div>
+        <div class="pl-colors" data-pl-colors></div>
+        <div class="pl-h"><b>Linie boiska</b></div>
+        <div class="chips" data-pl-lines role="group" aria-label="Linie boiska"></div>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="pl-p-prn" aria-labelledby="pl-t-prn" hidden>
+        <div class="pl-h"><b>Format</b><span>sam print, bez ramy · ceny brutto</span></div>
+        <div class="chips" data-pl-formats role="group" aria-label="Format"></div>
+        <div class="pl-h"><b>Ściana w podglądzie</b></div>
+        <div class="chips" data-pl-walls role="group" aria-label="Kolor ściany"></div>
+      </div>
+      <div class="pl-order">
+        <div class="pl-sum" data-pl-sum>Duperré Fade · 30 × 40 cm · sam print, bez ramy</div>
+        <div class="price-row">
+          <div class="qty" role="group" aria-label="Ilość">
+            <button type="button" data-qty-step="pl" data-d="-1" aria-label="Mniej">−</button>
+            <input type="number" inputmode="numeric" min="1" max="999" value="1" data-qty="pl" aria-label="Liczba plakatów">
+            <button type="button" data-qty-step="pl" data-d="1" aria-label="Więcej">+</button>
+          </div>
+          <div class="price"><b data-total="pl">99 zł</b><small data-price-note="pl">99 zł brutto / szt.</small></div>
+        </div>
+        <div class="pl-actions">
+          <button type="button" class="pill" data-print-order style="background:var(--violet);color:#fff">Zamów print <span aria-hidden="true">→</span></button>
+          <button type="button" class="chip" data-pl-share>Kopiuj link do projektu</button>
+          <a class="chip" data-pl-court href="/studio/">Zobacz ten wzór na boisku 3D ↗</a>
+        </div>
+        <span class="m pl-status" data-pl-status role="status">30 × 40 cm 99 zł · 50 × 70 cm 149 zł · 70 × 100 cm 199 zł · wysyłka 19 zł, od 299 zł gratis</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: pilka -->
+<!-- BALL -->
+<section id="pilka" class="wrap sec band-dark" aria-labelledby="gfs-ball" hidden>
+  <div class="head">
+    <div class="hd"><p class="kicker m">Piłka</p><h2 class="d" id="gfs-ball">Piłka do kompletu.</h2></div>
+    <div class="side"><p>Ten sam wzór na boisku, na plakacie i na piłce. 32 prawdziwe panele, druk na całej piłce albo osobno na każdym panelu, gotowe układy kolorów, Twój napis, numer i logo. Zamówienie przyjmuję przez formularz; cenę, minimalną ilość i termin potwierdzę mailowo.</p></div>
+  </div>
+  <div class="bl">
+    <div class="bl-side">
+      <div class="bl-stage" data-bl-stage aria-label="Model 3D piłki. Przeciągnij, aby obrócić. Kliknij panel, aby go pomalować." role="img">
+        <span class="bl-load m" data-bl-load>Wczytuję model 3D…</span>
+        <span class="bl-tag m" data-bl-tag>Rozmiar 5 · Ø ok. 22 cm</span>
+        <span class="bl-hint m">Przeciągnij · kliknij panel, aby pomalować</span>
+      </div>
+      <div class="pl-quick">
+        <button type="button" class="chip" data-bl-random>Losuj piłkę</button>
+        <button type="button" class="chip" data-bl-frompl>Weź wzór z mojego plakatu</button>
+        <button type="button" class="chip" data-bl-scene aria-pressed="false">Na boisku</button>
+        <button type="button" class="chip" data-bl-spin aria-pressed="true">Obrót</button>
+      </div>
+      <button type="button" class="pill tool-toggle" data-tool-toggle="bl" aria-expanded="true" aria-controls="bl-editor">Projektuj piłkę <span aria-hidden="true">→</span></button>
+    </div>
+    <div class="bl-ed" id="bl-editor">
+      <div class="pl-tabs" role="tablist" aria-label="Edycja piłki">
+        <button type="button" role="tab" id="bl-t-art" aria-controls="bl-p-art" aria-selected="true">Wzór</button>
+        <button type="button" role="tab" id="bl-t-pan" aria-controls="bl-p-pan" aria-selected="false" tabindex="-1">Panele</button>
+        <button type="button" role="tab" id="bl-t-txt" aria-controls="bl-p-txt" aria-selected="false" tabindex="-1">Nadruk</button>
+        <button type="button" role="tab" id="bl-t-fin" aria-controls="bl-p-fin" aria-selected="false" tabindex="-1">Wykończenie</button>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="bl-p-art" aria-labelledby="bl-t-art">
+        <div class="pl-h"><b>Styl piłki</b></div>
+        <div class="chips" data-bl-modes role="group" aria-label="Styl piłki">
+          <button type="button" class="chip" data-mode="full" aria-pressed="true">Wzór na całej piłce</button>
+          <button type="button" class="chip" data-mode="mix" aria-pressed="false">Wzór + pięciokąty</button>
+          <button type="button" class="chip" data-mode="panels" aria-pressed="false">Kolorowe panele</button>
+        </div>
+        <div class="pl-h"><b>Druk wzoru</b><span>panel po panelu = bez rozciągania</span></div>
+        <div class="chips" data-bl-maps role="group" aria-label="Sposób druku">
+          <button type="button" class="chip" data-map="sphere" aria-pressed="true">Jeden ciągły druk</button>
+          <button type="button" class="chip" data-map="panel" aria-pressed="false">Osobno na każdym panelu</button>
+        </div>
+        <div class="pl-h"><b>Wzór</b><span data-bl-famname>Textile</span></div>
+        <div class="chips" data-bl-fams role="group" aria-label="Wzór piłki"></div>
+        <div class="pl-vars" data-bl-vars role="group" aria-label="Kompozycja"></div>
+        <button type="button" class="chip" data-bl-seed>Nowa wersja tej kompozycji</button>
+        <div class="pl-h"><b>Paleta</b><span data-bl-palname>Lagos</span></div>
+        <div class="pl-pals" data-bl-pals role="group" aria-label="Paleta"></div>
+        <div class="pl-h"><b>Akcent na wzorze</b></div>
+        <div class="chips" data-bl-decos role="group" aria-label="Akcent">
+          <button type="button" class="chip" data-deco="none" aria-pressed="true">Bez</button>
+          <button type="button" class="chip" data-deco="band" aria-pressed="false">Pas</button>
+          <button type="button" class="chip" data-deco="poles" aria-pressed="false">Czapy</button>
+          <button type="button" class="chip" data-deco="spiral" aria-pressed="false">Spirala</button>
+        </div>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="bl-p-pan" aria-labelledby="bl-t-pan" hidden>
+        <div class="pl-h"><b>Układ kolorów paneli</b><span>dla stylu „Kolorowe panele”</span></div>
+        <div class="chips" data-bl-schemes role="group" aria-label="Układ kolorów">
+          <button type="button" class="chip" data-scheme="classic" aria-pressed="true">Klasyczny</button>
+          <button type="button" class="chip" data-scheme="mosaic" aria-pressed="false">Mozaika</button>
+          <button type="button" class="chip" data-scheme="gradient" aria-pressed="false">Gradient</button>
+          <button type="button" class="chip" data-scheme="half" aria-pressed="false">Pół na pół</button>
+          <button type="button" class="chip" data-scheme="band" aria-pressed="false">Pas</button>
+          <button type="button" class="chip" data-scheme="star" aria-pressed="false">Gwiazdy</button>
+        </div>
+        <div class="pl-colors bl-cols">
+          <label>Pięciokąty<input type="color" id="bl-pent" value="#1C0912"></label>
+          <label>Sześciokąty<input type="color" id="bl-hex" value="#F4F1EE"></label>
+          <label>Pędzel<input type="color" id="bl-brush" value="#D8F24A"></label>
+        </div>
+        <div class="pl-h"><b>Pędzel z palety</b><span>potem kliknij panel na piłce</span></div>
+        <div class="chips" data-bl-brushes></div>
+        <div class="chips"><button type="button" class="chip" data-bl-fillpent>Pędzlem: wszystkie pięciokąty</button><button type="button" class="chip" data-bl-clear>Wyczyść malowanie</button></div>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="bl-p-txt" aria-labelledby="bl-t-txt" hidden>
+        <label class="pl-field"><span>Napis (z przodu)</span><input class="input" id="bl-label" maxlength="16" value="MÓJ PLAC"></label>
+        <label class="pl-field"><span>Numer albo drugi napis (z tyłu)</span><input class="input" id="bl-number" maxlength="10" value="10"></label>
+        <div class="pl-h"><b>Wielkość napisu</b></div>
+        <div class="chips" data-bl-tsize role="group" aria-label="Wielkość napisu">
+          <button type="button" class="chip" data-ts="0.8" aria-pressed="false">Mały</button>
+          <button type="button" class="chip" data-ts="1" aria-pressed="true">Średni</button>
+          <button type="button" class="chip" data-ts="1.3" aria-pressed="false">Duży</button>
+        </div>
+        <label class="pl-field"><span>Logo (PNG, JPG albo SVG, z tyłu piłki)</span><input type="file" id="bl-logo" accept="image/png,image/jpeg,image/svg+xml"></label>
+        <button type="button" class="chip" data-bl-nologo hidden>Usuń logo</button>
+        <p class="pl-hint">Logo zostaje w Twojej przeglądarce. Do zamówienia dołącz plik w mailu, a przygotuję go do druku.</p>
+      </div>
+      <div class="pl-panel" role="tabpanel" id="bl-p-fin" aria-labelledby="bl-t-fin" hidden>
+        <div class="pl-h"><b>Powierzchnia</b></div>
+        <div class="chips" data-bl-finish role="group" aria-label="Powierzchnia">
+          <button type="button" class="chip" data-fin="matte" aria-pressed="false">Mat</button>
+          <button type="button" class="chip" data-fin="satin" aria-pressed="true">Satyna</button>
+          <button type="button" class="chip" data-fin="gloss" aria-pressed="false">Połysk</button>
+        </div>
+        <div class="pl-h"><b>Szwy</b></div>
+        <div class="chips" data-bl-seams role="group" aria-label="Kolor szwów"></div>
+        <div class="pl-h"><b>Rozmiar</b></div>
+        <div class="chips" data-bl-sizes role="group" aria-label="Rozmiar">
+          <button type="button" class="chip" data-size="3" aria-pressed="false">3 · dzieci</button>
+          <button type="button" class="chip" data-size="4" aria-pressed="false">4 · juniorzy</button>
+          <button type="button" class="chip" data-size="5" aria-pressed="true">5 · mecz</button>
+        </div>
+      </div>
+      <div class="pl-order">
+        <div class="pl-sum" data-bl-sum></div>
+        <div class="price-row">
+          <div class="qty" role="group" aria-label="Ilość">
+            <button type="button" data-qty-step="bl" data-d="-1" aria-label="Mniej">−</button>
+            <input type="number" inputmode="numeric" min="1" max="999" value="1" data-qty="bl" aria-label="Liczba piłek">
+            <button type="button" data-qty-step="bl" data-d="1" aria-label="Więcej">+</button>
+          </div>
+          <div class="price"><b data-total="bl">999 zł</b><small data-price-note="bl">999 zł brutto / szt.</small></div>
+        </div>
+        <div class="pl-actions">
+          <button type="button" class="pill" data-bl-order style="background:var(--violet);color:#fff">Zamów piłki <span aria-hidden="true">→</span></button>
+          <button type="button" class="chip" data-bl-share>Kopiuj link do piłki</button>
+          <button type="button" class="chip" data-bl-png>Pobierz podgląd PNG</button>
+        </div>
+        <span class="m pl-status" data-bl-status role="status">Cena 999 zł brutto za sztukę · wysyłka gratis · termin potwierdzę mailowo</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: warsztat -->
+<!-- Kept from live page 3462 (revision of 2026-10-31): community workshop feed, unchanged markup and script. -->
+<section class="gh-section gh-tinted gh-workshop" id="warsztat" aria-labelledby="gh-workshop-title"><div class="gh-wrap"><div class="gh-workshop-heading"><div><p class="gh-eyebrow">ZAPROJEKTUJ · ZAPISZ · ZAINSPIRUJ</p><h2 id="gh-workshop-title">Warsztat.<br>Wasze pomysły.</h2></div><div><p>Zaprojektuj boisko i kliknij w Studio <strong>„Zapisz dla innych”</strong>. Twój układ i kolory od razu pojawią się tutaj.</p><div class="gh-actions"><a class="gh-btn gh-primary" href="/studio/">Zaprojektuj i pokaż innym ↗</a></div></div></div><div class="gh-workshop-bar"><span data-workshop-count>10 ostatnich projektów</span><button type="button" class="gh-btn" data-workshop-refresh>Odśwież</button></div><p class="gh-caption" role="status" data-workshop-status>Wczytujemy projekty…</p><div class="gh-workshop-rail" data-workshop-projects role="region" aria-label="Najnowsze projekty społeczności"></div><div class="gh-workshop-empty" data-workshop-empty hidden><div class="gh-workshop-placeholder" aria-hidden="true"><span>+</span></div><div><h3>Twój projekt może być pierwszy.</h3><p>Wybierz kolory. Kliknij „Zapisz dla innych”. Gotowe.</p><a class="gh-btn" href="/studio/">Otwórz Studio ↗</a></div></div><p class="gh-caption">Projekty społeczności · koncepcje. Publikujemy układ, wzór i kolory bez prywatnych nazw, własnych napisów i logo. Zapisany projekt możesz wycofać przyciskiem w Studio.</p><noscript><p><a href="/studio/">Przejdź do Studia</a>, aby zaprojektować własne boisko.</p></noscript></div></section>
+<script>(function(){'use strict';
+const root=document.querySelector('#warsztat');if(!root)return;
+const api='https://gamefields-studio.ryhfs90.chatgpt.site/api/workshop',studio='/studio/',rail=root.querySelector('[data-workshop-projects]'),empty=root.querySelector('[data-workshop-empty]'),status=root.querySelector('[data-workshop-status]'),count=root.querySelector('[data-workshop-count]'),refresh=root.querySelector('[data-workshop-refresh]');let controller=null;
+const node=(tag,props={},text)=>{const n=document.createElement(tag);Object.assign(n,props);if(text)n.textContent=text;return n;};
+const previewOrigin=new URL(api).origin,snapshots=new Map(),queue=[];let active=null;const observed=new Map();
+function stopPreview(){if(!active)return;clearTimeout(active.timer);active.frame.remove();active.card.classList.remove('is-loading','is-interactive');active.button.setAttribute('aria-pressed','false');active.button.textContent='Obróć 3D';active.note.textContent=snapshots.has(active.id)?'Zapisana konstrukcja, kolory i układ.':'Podgląd 3D na żądanie.';active=null;}
+function pump(){if(active||document.hidden)return;while(queue.length){const item=queue.shift();item.queued=false;if(item.visible)if(item.card.isConnected)if(!snapshots.has(item.id)){startPreview(item,false);return;}}}
+function startPreview(item,interactive){stopPreview();const frame=node('iframe',{title:item.title+' — zapisany model 3D',src:previewOrigin+'/workshop-preview?'+new URLSearchParams({id:item.id,parentOrigin:location.origin}),className:'gh-workshop-frame'});frame.setAttribute('sandbox','allow-scripts allow-same-origin');item.card.classList.add(interactive?'is-interactive':'is-loading');item.button.setAttribute('aria-pressed',String(interactive));item.button.textContent=interactive?'Zamknij 3D':'Obróć 3D';item.note.textContent=interactive?'Przeciągnij model, aby go obrócić.':'Przygotowujemy podgląd 3D…';item.preview.append(frame);active={...item,frame,interactive,timer:setTimeout(()=>{if(active?.frame!==frame)return;stopPreview();item.note.textContent='Otwórz 3D, aby ponowić podgląd.';pump();},45000)};}
+const previewObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(entry=>{const item=observed.get(entry.target);if(!item)return;item.visible=entry.isIntersecting;if(item.visible)if(!snapshots.has(item.id))if(!item.queued){item.queued=true;queue.push(item);}if(!item.visible)if(active?.id===item.id){stopPreview();}pump();}),{rootMargin:'120px 0px',threshold:.01}):null;
+window.addEventListener('message',event=>{if(event.origin!==previewOrigin)return;if(!active||event.source!==active.frame.contentWindow)return;const data=event.data;if(data?.type!=='gf-workshop-preview'||data.id!==active.id)return;if(typeof data.image!=='string'||data.image.length>2000000||!/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(data.image))return;const item=active;clearTimeout(item.timer);snapshots.set(item.id,data.image);while(snapshots.size>30)snapshots.delete(snapshots.keys().next().value);item.img.src=data.image;item.img.alt=item.title+' — model 3D w zapisanej konfiguracji';item.card.dataset.preview3d='true';item.note.textContent=item.interactive?'Przeciągnij model, aby go obrócić.':'Zapisana konstrukcja, kolory i układ.';if(!item.interactive){stopPreview();pump();}});
+window.addEventListener('keydown',event=>{if(event.key==='Escape'){stopPreview();pump();}});
+function clearPreviews(){stopPreview();previewObserver?.disconnect();observed.clear();queue.length=0;}
+function card(item){if(!/^[0-9a-f-]{36}$/.test(item.id))return null;const date=new Date(item.createdAt);if(!Number.isFinite(date.getTime()))return null;const title=typeof item.title==='string'?item.title.slice(0,190):'Projekt społeczności';const article=node('article',{className:'gh-workshop-card'}),preview=node('div',{className:'gh-workshop-3d'}),img=node('img',{src:snapshots.get(item.id)||api+'?id='+item.id+'&format=svg',alt:title+' — przygotowywany podgląd',loading:'lazy',decoding:'async'}),button=node('button',{type:'button',className:'gh-workshop-rotate'},'Obróć 3D'),note=node('p',{className:'gh-caption gh-workshop-preview-note'},'Przygotowujemy podgląd 3D…'),time=node('time',{dateTime:date.toISOString()},new Intl.DateTimeFormat('pl-PL',{day:'2-digit',month:'2-digit',year:'numeric'}).format(date)),meta=node('p',{className:'gh-caption'},'Dodano ');button.setAttribute('aria-label',title+': obracaj model 3D');button.setAttribute('aria-pressed','false');preview.append(img,button);meta.append(time);article.append(preview,note,node('p',{className:'gh-eyebrow'},'PROJEKT SPOŁECZNOŚCI'),node('h3',{},title),meta,node('a',{className:'gh-btn gh-primary',href:studio+'?workshop='+item.id},'Zrób swoją wersję ↗'));const state={...item,title,card:article,preview,img,button,note,visible:false,queued:false};button.addEventListener('click',()=>{if(active?.id===item.id?active.interactive:false){stopPreview();pump();}else startPreview(state,true);});observed.set(article,state);if(snapshots.has(item.id)){article.dataset.preview3d='true';note.textContent='Zapisana konstrukcja, kolory i układ.';}return article;}
+async function load(){controller?.abort();const current=new AbortController();controller=current;const timer=setTimeout(()=>current.abort(),12000);refresh.disabled=true;status.textContent='Wczytujemy projekty…';try{const response=await fetch(api,{signal:current.signal,credentials:'omit',cache:'no-store'});if(!response.ok)throw Error('HTTP');const text=await response.text();if(text.length>50000)throw Error('Size');const data=JSON.parse(text);if(!Array.isArray(data.items))throw Error('Invalid');if(controller!==current)return;clearPreviews();const cards=data.items.slice(0,10).map(card).filter(Boolean);rail.replaceChildren(...cards);cards.forEach(card=>{const item=observed.get(card);if(previewObserver)previewObserver.observe(card);else{item.visible=true;item.queued=true;queue.push(item);}});pump();empty.hidden=cards.length>0;count.textContent=cards.length?cards.length+' ostatnich projektów':'Pierwsze projekty przed nami';status.textContent=cards.length?'Modele 3D pokazują zapisane konstrukcje i kolory. Wybierz „Obróć 3D”, aby obejrzeć projekt.':'';}catch{if(controller!==current)return;empty.hidden=true;status.textContent='Nie udało się wczytać prac. Odśwież galerię za chwilę.';}finally{clearTimeout(timer);if(controller===current)refresh.disabled=false;}}
+refresh.addEventListener('click',load);document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPreview();else pump();});load();
+})();
+</script>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: wspolpraca -->
+<!-- COLLAB -->
+<section id="projekty" class="collab sec" aria-labelledby="gfs-collab">
+  <div class="wrap" style="display:grid;gap:40px">
+    <span class="m" style="color:#9C9C9C">Instytucje × artyści × studio · koncepcja</span>
+    <h2 class="d" id="gfs-collab">Warsaw FC <span class="x">×</span> RTOA SYSTEMS <span class="x">×</span> gamefields.</h2>
+    <img class="board-big" data-board-big src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s54-1200.webp" alt="Koncepcja miejsca gry pod mostem Łazienkowskim, perspektywa boiska" loading="lazy">
+    <div class="boards" role="group" aria-label="Plansze koncepcji" data-boards>
+      <button type="button" aria-pressed="true" data-src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s54-1200.webp" aria-label="Perspektywa boiska"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s54-720.webp" alt="" loading="lazy"></button>
+      <button type="button" aria-pressed="false" data-src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s51-1200.webp" aria-label="Widok ze schodów"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s51-720.webp" alt="" loading="lazy"></button>
+      <button type="button" aria-pressed="false" data-src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s53-1200.webp" aria-label="Grafika w przestrzeni"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s53-720.webp" alt="" loading="lazy"></button>
+      <button type="button" aria-pressed="false" data-src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s52-1200.webp" aria-label="System graficzny"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-s52-720.webp" alt="" loading="lazy"></button>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:24px 64px;align-items:flex-end;justify-content:space-between">
+      <p style="max-width:52ch;font-size:18px;line-height:1.55;color:#CFCFCF">Miejsce gry pod mostem Łazienkowskim. Klub Warsaw FC, projektant Maciej Szewczyk (RTOA SYSTEMS) i moje studio. Pokazujemy szkice i wizualizacje koncepcyjne, nie zdjęcia gotowego obiektu.</p>
+      <a class="pill" href="#kontakt" style="background:var(--lime);color:#0F0F0F">Porozmawiajmy o współpracy <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: pytania -->
+<!-- Kept from live page 3462 (revision of 2026-10-31): FAQ (link targets adapted to the new sections) and the CF7 project-details helpers, unchanged. -->
+<section class="gh-faq gh-section gh-wrap" id="pytania" aria-labelledby="gh-faq-title"><style>.gh-faq{padding:42px 20px 74px;max-width:1160px}.gh-faq-tag{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#7855e8}.gh-faq h2{font-size:clamp(30px,4vw,48px);letter-spacing:-.04em;margin:12px 0 24px}.gh-faq-list{border-top:1px solid rgba(36,25,48,.2)}.gh-faq details{border-bottom:1px solid rgba(36,25,48,.2);padding:0}.gh-faq summary{display:flex;align-items:center;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}.gh-faq summary::-webkit-details-marker{display:none}.gh-faq summary::after{content:'+';font-size:24px;font-weight:400;color:#7855e8;flex-shrink:0}.gh-faq details[open] summary::after{content:'−'}.gh-faq details p{max-width:790px;margin:0;padding:0 4px 22px;font-size:15px;line-height:1.65;opacity:.8}.gh-faq a{text-decoration:underline;text-underline-offset:4px}@media(max-width:600px){.gh-faq{padding:28px 16px 48px}.gh-faq summary{font-size:16px;padding:16px 2px}.gh-faq details p{font-size:14px}}</style><p class="gh-faq-tag">Przed pierwszym projektem</p><h2 id="gh-faq-title">Krótkie odpowiedzi.</h2><div class="gh-faq-list"><details><summary>Ile miejsca potrzebuję na boisko?</summary><p>To zależy od wybranej konstrukcji i strefy bezpieczeństwa wokół niej. Wpisz wymiary placu w <a href="#planer">planerze „Zmieści się?”</a> — od razu zobaczysz, które modele się mieszczą. W zapytaniu podaj orientacyjne wymiary terenu.</p></details><details><summary>Czy mogę zmienić kolory i wzory?</summary><p>Tak. W <a href="/studio/">GAMEFIELDS Studio</a> możesz przygotować własny wariant kolorystyczny i graficzny. Zakres wykonania potwierdzamy podczas ustalania projektu.</p></details><details><summary>Czy wykonujecie również samą nawierzchnię?</summary><p>Tak. Nawierzchnie to druga połowa mojej pracy, obok konstrukcji boisk: projekt wzoru, malowanie, EPDM, płytki i trawa. <a href="#nawierzchnie">Zobacz, jak zmieniam stare place</a>.</p></details><details><summary>Czy da się zrobić boisko na starym betonie?</summary><p>Zwykle tak. Jeśli beton jest stabilny, naprawiam rysy i ubytki, gruntuję podłoże i kładę elastyczną farbę sportową z granulatem gumowym, a na niej wzór i linie. Gdy podłoże jest poważnie uszkodzone, najpierw trzeba je przebudować. Ocenię to ze zdjęć. <a href="#nawierzchnie">Stary beton, nowe boisko</a>.</p></details><details><summary>Ile trwa modernizacja placu?</summary><p>Zależy od wielkości boiska i stanu placu na starcie: ile jest napraw podłoża, ile warstw i ile kolorów ma wzór. Farby sportowe kładziemy na suchy beton przy dodatniej temperaturze, więc pracujemy zwykle od wiosny do jesieni. Termin podaję po ocenie zdjęć. <a href="#kontakt">Wyślij zdjęcia placu</a>.</p></details><details><summary>Czy mogę zacząć bez gotowego projektu?</summary><p>Tak. Wystarczy opis pomysłu, przybliżone wymiary i — jeśli je masz — zdjęcia miejsca. <a href="#kontakt">Wyślij zapytanie</a>, aby omówić możliwości.</p></details><details><summary>Czy cena jest widoczna od razu?</summary><p>Tak. Konstrukcje zaczynają się od 27 000 zł netto (arena mobilna) i od 36 000 zł netto (Panna Octa Cage 90). Pełna lista jest w sekcji <a href="#ceny">„Ile kosztuje arena?”</a>. Koszt całego boiska z nawierzchnią, montażem i transportem zależy od miejsca, dlatego dokładną ofertę przygotujemy po zdjęciach placu. Co wpływa na budżet, opisujemy w poradniku <a href="/ile-kosztuje-budowa-boiska-sportowego/">„Ile kosztuje budowa boiska sportowego?”</a>.</p></details></div><nav class="gh-guides" aria-label="Poradniki"><p class="gh-faq-tag">Poradniki</p><ul><li><a href="/ile-kosztuje-budowa-boiska-sportowego/">Ile kosztuje budowa boiska?</a></li><li><a href="/jak-wybrac-nawierzchnie-sportowa/">Jak wybrać nawierzchnię?</a></li><li><a href="/budowa-boiska-krok-po-kroku/">Budowa boiska krok po kroku</a></li><li><a href="/wymiary-boiska-wielofunkcyjnego/">Wymiary boiska wielofunkcyjnego</a></li><li><a href="/renowacja-czy-budowa-nowego-boiska/">Renowacja czy budowa nowego?</a></li><li><a href="/baza-wiedzy/">Cała baza wiedzy →</a></li></ul></nav></section>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: mozliwosci -->
+<!-- Gamefields — Mapa możliwości. Wklej w blok „Własny HTML”. Dane: possibilities.json, sprawdzone 2026-11-18. -->
+<style>#mozliwosci{--gh-ink:#47132d;--gh-muted:#74656d;--gh-violet:#6336f5;--gh-line:#e8e3e6;--gh-soft:#f1ecff;color:var(--gh-ink);font-family:GHInter,Inter,Arial,sans-serif;font-size:16px;line-height:1.4;padding:48px 0}
+#mozliwosci *{box-sizing:border-box}
+#mozliwosci :is(h2,h3,h4,p){margin:0;padding:0;font-family:inherit}
+#mozliwosci h2{font-weight:700;font-size:clamp(36px,5vw,58px);line-height:1.04;letter-spacing:-1.5px;color:var(--gh-ink)}
+#mozliwosci h3{font-size:24px;font-weight:700;line-height:1.3;color:var(--gh-ink)}
+#mozliwosci p{color:var(--gh-muted)}
+#mozliwosci .gh-wrap{max-width:1440px;margin:auto;padding-left:48px;padding-right:48px}
+#mozliwosci .gh-eyebrow{font-size:11px;font-weight:600;letter-spacing:.02em;margin-bottom:18px;color:var(--gh-ink)}
+#mozliwosci .gh-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border:1px solid var(--gh-line);border-radius:12px;color:var(--gh-ink);background:#fff;font:400 16px/1.4 GHInter,Inter,Arial,sans-serif;text-decoration:none;cursor:pointer}
+#mozliwosci .gh-btn:hover{background:var(--gh-soft);border-color:var(--gh-violet)}
+#mozliwosci .gh-btn.gh-primary{background:var(--gh-violet);border-color:var(--gh-violet);color:#fff}
+#mozliwosci .gh-btn.gh-primary:hover{background:#5129d8}
+#mozliwosci button{font-family:inherit}
+#mozliwosci [hidden]{display:none!important}
+@media(max-width:1000px){#mozliwosci .gh-wrap{padding-left:28px;padding-right:28px}}
+@media(max-width:600px){#mozliwosci .gh-wrap{padding-left:20px;padding-right:20px}#mozliwosci{padding:32px 0}}
+#mozliwosci.gm-section{background:#fff;border-top:1px solid var(--gh-line)}#mozliwosci .gm-head{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:end;margin-bottom:40px}#mozliwosci .gm-lead{font-size:18px;line-height:1.5}#mozliwosci .gm-lead strong{color:var(--gh-ink)}#mozliwosci .gm-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:32px;align-items:start}#mozliwosci .gm-steps{display:grid;gap:28px}#mozliwosci .gm-step{border:0;margin:0;padding:0;min-width:0}#mozliwosci .gm-step legend,#mozliwosci .gm-place-title{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:700;letter-spacing:-.3px;margin:0 0 14px;padding:0;color:var(--gh-ink)}#mozliwosci .gm-num{display:inline-grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;background:var(--gh-violet);color:#fff;font-size:15px;font-weight:700}#mozliwosci .gm-optional{font-weight:400;font-size:15px;color:var(--gh-muted)}#mozliwosci .gm-options{display:flex;flex-wrap:wrap;gap:10px}#mozliwosci .gm-options-who{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}#mozliwosci .gm-opt{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:48px;padding:12px 18px;border:1.5px solid var(--gh-line);border-radius:14px;background:#fff;color:var(--gh-ink);font:600 16px/1.3 GHInter,Inter,Arial,sans-serif;text-align:left;transition:border-color .15s,background .15s}#mozliwosci .gm-opt small{font-weight:400;font-size:13px;color:var(--gh-muted)}#mozliwosci .gm-opt:hover{border-color:var(--gh-violet)}#mozliwosci .gm-opt[aria-pressed=true]{border-color:var(--gh-violet);background:var(--gh-soft);box-shadow:inset 0 0 0 1px var(--gh-violet)}#mozliwosci .gm-opt:focus-visible,#mozliwosci .gm-card summary:focus-visible{outline:3px solid var(--gh-violet);outline-offset:2px}#mozliwosci .gm-place{background:#faf9f8;border:1px solid var(--gh-line);border-radius:20px;padding:20px}#mozliwosci .gm-map{position:relative;height:300px;border-radius:14px;overflow:hidden;background:var(--gh-soft) linear-gradient(135deg,#f1ecff,#faf9f8);display:grid;place-items:center;margin-bottom:14px}#mozliwosci .gm-map .leaflet-container{width:100%;height:100%;font:inherit}#mozliwosci .gm-map-start{position:relative;z-index:1}#mozliwosci .gm-label{display:block;font-size:14px;font-weight:600;margin-bottom:6px}#mozliwosci .gm-place input{width:100%;min-height:48px;border:1px solid #d5c8cf;border-radius:10px;padding:12px;font:inherit;color:var(--gh-ink);background:#fff}#mozliwosci .gm-place-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:12px}#mozliwosci .gm-place-actions .gh-btn{min-width:0}#mozliwosci .gm-coords{font-size:14px;color:var(--gh-muted)}#mozliwosci .gm-pin{width:28px;height:28px;border-radius:50% 50% 50% 0;background:var(--gh-violet);transform:rotate(-45deg);border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}#mozliwosci .gm-results{margin-top:48px}#mozliwosci .gm-empty{padding:28px;border:1.5px dashed var(--gh-line);border-radius:20px;text-align:center;font-size:17px}#mozliwosci .gm-summary{font-size:22px;font-weight:700;letter-spacing:-.4px;margin-bottom:32px;color:var(--gh-ink)!important}#mozliwosci .gm-summary span{color:var(--gh-violet)}#mozliwosci .gm-level{margin-bottom:36px}#mozliwosci .gm-level-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:16px}#mozliwosci .gm-level-head h3{font-size:24px}#mozliwosci .gm-level-head p{font-size:15px}#mozliwosci .gm-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}#mozliwosci .gm-card{display:flex;flex-direction:column;border:1px solid var(--gh-line);border-radius:18px;padding:20px;background:#fff}#mozliwosci .gm-card h4{margin:10px 0 6px;font-size:19px;line-height:1.3;color:var(--gh-ink)}#mozliwosci .gm-card>p{font-size:15px;margin:0 0 14px}#mozliwosci .gm-badge{align-self:flex-start;display:inline-block;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;background:#f3f1f2;color:var(--gh-ink)}#mozliwosci .gm-badge.always{background:#e3f6e8;color:#14532d}#mozliwosci .gm-badge.check{background:var(--gh-violet);color:#fff}#mozliwosci .gm-badge.next{background:var(--gh-soft);color:#3b1fa8}#mozliwosci .gm-facts{display:grid;gap:8px;margin:10px 0;font-size:14px}#mozliwosci .gm-amount{font-size:15px;color:var(--gh-ink)!important;margin:0 0 12px}#mozliwosci .gm-facts div{display:grid;grid-template-columns:96px 1fr;gap:8px}#mozliwosci .gm-facts dt{color:var(--gh-muted)}#mozliwosci .gm-facts dd{margin:0;color:var(--gh-ink)}#mozliwosci .gm-we{background:var(--gh-soft);border-radius:12px;padding:10px 12px;font-size:14px;color:var(--gh-ink);margin-bottom:12px}#mozliwosci .gm-we b{color:#3b1fa8}#mozliwosci .gm-card details{margin-top:auto;border-top:1px solid var(--gh-line);padding-top:10px}#mozliwosci .gm-card summary{cursor:pointer;font-weight:600;font-size:15px;color:var(--gh-violet);min-height:32px;display:flex;align-items:center}#mozliwosci .gm-card ol{margin:8px 0;padding-left:20px;font-size:14px;color:var(--gh-ink)}#mozliwosci .gm-card ol li{margin:4px 0}#mozliwosci .gm-source{font-size:13px;color:var(--gh-muted)}#mozliwosci .gm-source a{text-decoration:underline!important;color:var(--gh-muted)!important}#mozliwosci .gm-cta{display:flex;justify-content:space-between;align-items:center;gap:32px;background:var(--gh-ink);color:#fff;border-radius:24px;padding:32px;margin-top:8px}#mozliwosci .gm-cta h3,#mozliwosci .gm-cta p{color:#fff}#mozliwosci .gm-cta p{margin-top:8px;max-width:620px}#mozliwosci .gm-cta-actions{display:flex;flex-direction:column;gap:10px;flex:none}#mozliwosci .gm-cta .gh-btn:not(.gh-primary){background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}#mozliwosci .gm-share-status{font-size:13px;min-height:18px;color:#fff}#mozliwosci .gm-note{margin-top:20px;font-size:13px}
+@media(max-width:1000px){#mozliwosci .gm-head,#mozliwosci .gm-grid{grid-template-columns:1fr;gap:24px}#mozliwosci .gm-cta{flex-direction:column;align-items:stretch}#mozliwosci .gm-cta-actions .gh-btn{width:100%}}
+@media(max-width:600px){#mozliwosci .gm-options-who{grid-template-columns:1fr 1fr}#mozliwosci .gm-opt{padding:10px 12px;font-size:15px}#mozliwosci .gm-map{height:240px}#mozliwosci .gm-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -20px;padding:0 20px 12px;scroll-padding:0 20px}#mozliwosci .gm-cards>.gm-card{flex:0 0 84%;scroll-snap-align:start}#mozliwosci .gm-level:has(.gm-card:nth-child(2)) .gm-level-head p::after{content:" Przesuń w bok →";color:var(--gh-violet);font-weight:600}#mozliwosci .gm-facts div{grid-template-columns:84px 1fr}#mozliwosci .gm-cta{padding:24px}#mozliwosci .gm-summary{font-size:19px}}
+</style>
+<section class="gh-section gm-section" id="mozliwosci" aria-labelledby="gm-title"><div class="gh-wrap" id="gm-root">
+<div class="gm-head"><div><p class="gh-eyebrow">MAPA MOŻLIWOŚCI · BEZ WZGLĘDU NA BUDŻET</p><h2 id="gm-title">Znasz miejsce?<br>Zróbmy tam boisko.</h2></div><p class="gm-lead">Nie musisz mieć pieniędzy ani firmy. Pokaż miejsce, odpowiedz na 3 pytania, a my pokażemy Ci, jak to zrobić — budżet obywatelski, granty, fundacje, sponsorzy. <strong>Wszystko w jednym miejscu, bez szukania.</strong></p></div>
+<div class="gm-grid">
+<div class="gm-steps">
+<fieldset class="gm-step" data-step="who"><legend><span class="gm-num">1</span>Kim jesteś?</legend><div class="gm-options gm-options-who" data-options="who"></div></fieldset>
+<fieldset class="gm-step" data-step="area"><legend><span class="gm-num">2</span>Gdzie jest to miejsce?</legend><div class="gm-options" data-options="area"></div></fieldset>
+<fieldset class="gm-step" data-step="need"><legend><span class="gm-num">3</span>Co chcesz zrobić?</legend><div class="gm-options" data-options="need"></div></fieldset>
+</div>
+<div class="gm-place"><p class="gm-place-title"><span class="gm-num">+</span>Zaznacz miejsce <span class="gm-optional">(opcjonalnie)</span></p>
+<div class="gm-map" id="gm-map" role="application" aria-label="Mapa — kliknij, aby zaznaczyć miejsce"><button type="button" class="gh-btn gm-map-start" id="gm-map-start">Pokaż mapę</button></div>
+<div class="gm-place-row"><label class="gm-label" for="gm-place-name">Miejscowość, ulica albo opis miejsca</label><input id="gm-place-name" type="text" maxlength="160" placeholder="np. Kraków, boisko przy SP 12" autocomplete="off"></div>
+<div class="gm-place-actions"><button type="button" class="gh-btn" id="gm-locate">Użyj mojej lokalizacji</button><span class="gm-coords" id="gm-coords" aria-live="polite"></span></div></div>
+</div>
+<div class="gm-results" id="gm-results" aria-live="polite"></div>
+<div class="gm-cta" id="gm-cta" hidden><div><h3>Masz już swój plan.</h3><p>Wyślij go nam — przygotujemy wizualizację i szacunkowy koszt, które przydadzą się w każdej z tych dróg. <strong>Dla mieszkańców bez budżetu za darmo.</strong></p></div><div class="gm-cta-actions"><button type="button" class="gh-btn gh-primary" id="gm-send">Wyślij nam swój plan →</button><button type="button" class="gh-btn" id="gm-share">Skopiuj link do planu</button><span class="gm-share-status" id="gm-share-status" role="status"></span></div></div>
+<p class="gm-note" id="gm-note"></p>
+<noscript><p>Napisz do nas: <a href="mailto:info@gamefields.eu">info@gamefields.eu</a> — pomożemy znaleźć sposób na Twoje boisko.</p></noscript>
+</div></section>
+<script type="application/json" id="gm-data">{"verifiedAt": "2026-11-18", "note": "Kwoty i terminy pochodzą z ogłoszeń na 2026 r. Kolejne edycje mogą mieć inne zasady — zawsze sprawdź regulamin naboru. Aktualizuj ten plik co najmniej raz na kwartał i przy każdym nowym naborze.", "who": [{"id": "resident", "label": "Mieszkam tu", "hint": "Sam/sama, ze znajomymi albo z sąsiadami"}, {"id": "ngo", "label": "Klub lub stowarzyszenie", "hint": "Także fundacja, KGW, OSP, UKS"}, {"id": "school", "label": "Szkoła lub instytucja", "hint": "Szkoła, gmina, spółdzielnia, MOSiR"}, {"id": "company", "label": "Firma", "hint": "Chcecie pokazać markę i pomóc okolicy"}, {"id": "private", "label": "Dla siebie", "hint": "Boisko przy domu albo na działce"}], "area": [{"id": "city", "label": "Miasto"}, {"id": "village", "label": "Wieś lub małe miasteczko"}], "need": [{"id": "renovate", "label": "Odnowić stare boisko lub beton"}, {"id": "new", "label": "Zrobić nowe boisko"}, {"id": "vision", "label": "Na razie pokazać pomysł"}], "levels": [{"id": 1, "title": "Możesz zacząć od razu", "lead": "Bez organizacji, bez pieniędzy. Wystarczy pomysł i kilka osób."}, {"id": 2, "title": "Z pomocą organizacji", "lead": "Stowarzyszenie, klub, KGW albo fundacja składa wniosek — może to być organizacja, którą już znasz."}, {"id": 3, "title": "Duże programy", "lead": "Składa gmina, szkoła lub klub. Ty możesz dać im gotowy pomysł i poparcie mieszkańców."}], "tools": [{"id": "budzet-obywatelski", "name": "Budżet obywatelski", "short": "Zgłaszasz projekt, mieszkańcy głosują, miasto buduje.", "level": 1, "who": ["resident"], "area": ["city", "village"], "need": ["renovate", "new", "vision"], "submits": "Mieszkaniec (zasady wieku i poparcia ustala regulamin Twojego miasta lub gminy)", "amount": "Pulę i limit na projekt ustala miasto lub gmina", "timing": {"kind": "yearly", "text": "Raz w roku, termin ustala miasto lub gmina"}, "own": "Nie", "weDo": "Wizualizacja, szacunkowy koszt, opis projektu i grafiki do zbierania głosów.", "steps": ["Sprawdź na stronie swojego miasta lub gminy termin zgłoszeń budżetu obywatelskiego.", "Weź od nas wizualizację i szacunkowy koszt.", "Zgłoś projekt i zbierz głosy znajomych i sąsiadów."], "source": {"label": "Ustawa o samorządzie gminnym, art. 5a", "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19900160095"}}, {"id": "fundusz-solecki", "name": "Fundusz sołecki", "short": "Na wsi mieszkańcy sami decydują, na co pójdą pieniądze sołectwa.", "level": 1, "who": ["resident"], "area": ["village"], "need": ["renovate", "new", "vision"], "submits": "Zebranie wiejskie (mieszkańcy sołectwa), wniosek przekazuje sołtys", "amount": "Kwota sołectwa wynika z ustawy i liczby mieszkańców — zapytaj sołtysa", "timing": {"kind": "yearly", "text": "Wniosek sołectwa zwykle do 30 września na kolejny rok"}, "own": "Nie", "weDo": "Gotowa propozycja na zebranie wiejskie: wizualizacja, koszt i krótki opis.", "steps": ["Porozmawiaj z sołtysem albo radą sołecką.", "Przyjdź na zebranie wiejskie z naszą wizualizacją.", "Zebranie wpisuje boisko do wniosku funduszu."], "source": {"label": "Ustawa o funduszu sołeckim", "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20140000301"}}, {"id": "inicjatywa-lokalna", "name": "Inicjatywa lokalna", "short": "Grupa mieszkańców proponuje gminie zadanie i dokłada coś od siebie — np. pracę.", "level": 1, "who": ["resident", "ngo"], "area": ["city", "village"], "need": ["renovate", "new"], "submits": "Mieszkańcy (także bez stowarzyszenia) albo organizacja", "amount": "Decyduje gmina, powiat lub województwo", "timing": {"kind": "yearly", "text": "Zależy od uchwały gminy, często przez cały rok"}, "own": "Tak — praca, materiały albo pieniądze", "weDo": "Wycena, wzór opisu zadania i plan, co mieszkańcy mogą zrobić sami (np. malowanie).", "steps": ["Sprawdź, czy Twoja gmina ma uchwałę o inicjatywie lokalnej.", "Zbierz grupę i ustalcie, co dokładacie (praca, sprzęt).", "Złóżcie wniosek z naszą wyceną i wizualizacją."], "source": {"label": "Ustawa o pożytku publicznym, art. 19b–19h", "url": "https://lexlege.pl/ustawa-o-dzialalnosci-pozytku-publicznego-i-o-wolontariacie/rozdzial-2a-inicjatywa-lokalna/4255/"}}, {"id": "dzialaj-lokalnie", "name": "Działaj Lokalnie", "short": "Mały grant na pierwszy krok — także dla grupy znajomych.", "level": 1, "who": ["resident", "ngo"], "area": ["village"], "need": ["renovate", "vision"], "submits": "Grupa nieformalna (z pomocą lokalnego ośrodka) albo organizacja", "amount": "Zwykle do ok. 6 000 zł (limit ustala lokalny ośrodek)", "timing": {"kind": "yearly", "text": "W 2026 nabory były wiosną (marzec–maj)", "next": "Orientacyjnie wiosna 2027"}, "own": "Zwykle wymagany wkład (może być praca wolontariuszy)", "weDo": "Pomysł na projekt, który da się zrobić za taką kwotę, np. wydarzenie, kampania albo pierwszy etap odnowy.", "steps": ["Znajdź ośrodek Działaj Lokalnie w swoim powiecie.", "Zbierz grupę i wymyślcie pierwszy krok.", "Złóżcie wniosek w wiosennym naborze."], "source": {"label": "Działaj Lokalnie", "url": "https://dzialajlokalnie.pl/"}}, {"id": "nowefio", "name": "NOWEFIO — mikrodotacje", "short": "Granty na lokalne inicjatywy, często z priorytetem dla młodzieży.", "level": 1, "who": ["resident", "ngo"], "area": ["city", "village"], "need": ["renovate", "vision"], "submits": "Grupa co najmniej 3 dorosłych albo młoda organizacja", "amount": "Zwykle ok. 1 000–6 000 zł (zależy od województwa)", "timing": {"kind": "yearly", "text": "W 2026 nabory były w marcu i kwietniu", "next": "Orientacyjnie wiosna 2027"}, "own": "Zależy od regulaminu operatora", "weDo": "Pomoc w opisie projektu i wycena.", "steps": ["Znajdź operatora NOWEFIO w swoim województwie.", "Zbierz grupę co najmniej 3 dorosłych.", "Złóżcie wniosek, gdy ruszy nabór."], "source": {"label": "NIW — operatorzy NOWEFIO", "url": "https://niw.gov.pl/nasze-programy/nowefio/operatorzy-lokalni-nowefio/"}}, {"id": "zbiorka", "name": "Zbiórka internetowa", "short": "Zbieracie pieniądze od ludzi, którym też zależy.", "level": 1, "who": ["resident", "ngo", "school"], "area": ["city", "village"], "need": ["renovate", "new", "vision"], "submits": "Każdy (zbiórkę w imieniu niepełnoletnich zakłada dorosły)", "amount": "Tyle, ile zbierzecie", "timing": {"kind": "always", "text": "Zawsze"}, "own": "Nie", "weDo": "Wizualizacja i dokładna kwota celu, żeby ludzie wiedzieli, na co wpłacają.", "steps": ["Weź od nas wizualizację i kwotę.", "Załóżcie zbiórkę i pokażcie ją w okolicy.", "Połączcie zbiórkę ze sponsorem albo grantem."], "source": null}, {"id": "sponsor", "name": "Sponsor z okolicy", "short": "Lokalna firma finansuje boisko i pokazuje na nim swoją markę.", "level": 1, "who": ["resident", "ngo", "school"], "area": ["city", "village"], "need": ["renovate", "new"], "submits": "Nikt nic nie składa — to rozmowa", "amount": "Do ustalenia z firmą", "timing": {"kind": "always", "text": "Zawsze"}, "own": "Nie", "weDo": "Szukamy firmy, która chce wspierać Twoją okolicę, i przygotowujemy jej propozycję.", "steps": ["Wyślij nam swoje miejsce.", "Pokażemy je firmom, które szukają takich projektów.", "Gdy firma się zgodzi, robimy projekt razem."], "source": null}, {"id": "male-granty", "name": "Małe granty z gminy", "short": "Szybka dotacja z gminy bez dużego konkursu.", "level": 2, "who": ["ngo"], "area": ["city", "village"], "need": ["renovate", "vision"], "submits": "Organizacja pozarządowa", "amount": "Do 10 000 zł, projekt do 90 dni", "timing": {"kind": "always", "text": "Przez cały rok, póki gmina ma środki"}, "own": "Zależy od gminy", "weDo": "Projekt dopasowany do kwoty i czasu realizacji.", "steps": ["Zapytaj gminę o tryb małych grantów (art. 19a).", "Przygotujcie krótką ofertę z naszą wyceną.", "Zrealizujcie projekt w ciągu 90 dni."], "source": {"label": "Ustawa o pożytku publicznym, art. 19a", "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20030960873"}}, {"id": "orlen", "name": "Fundacja ORLEN — „Moje miejsce na Ziemi”", "short": "Granty firmy dla lokalnych społeczności, także na sport.", "level": 2, "who": ["ngo", "school"], "area": ["city", "village"], "need": ["renovate", "new"], "submits": "Stowarzyszenie, fundacja, KGW, OSP, szkoła", "amount": "W ostatnich edycjach 10 000–25 000 zł", "timing": {"kind": "unconfirmed", "text": "Edycja 2026 niepotwierdzona; wcześniej nabór do końca lipca"}, "own": "Zależy od regulaminu", "weDo": "Opis projektu, wizualizacja i wycena do wniosku.", "steps": ["Sprawdź na stronie programu, czy trwa nabór.", "Znajdź organizację, która złoży wniosek.", "Dołącz naszą wizualizację i wycenę."], "source": {"label": "mojemiejscenaziemi.pl", "url": "https://mojemiejscenaziemi.pl/"}}, {"id": "enea", "name": "Fundacja Enea — „Zielona społeczność”", "short": "Granty na zazielenianie i ożywianie wspólnych miejsc.", "level": 2, "who": ["ngo", "school"], "area": ["city", "village"], "need": ["renovate", "vision"], "submits": "Stowarzyszenie, fundacja, szkoła, instytucja kultury", "amount": "Sprawdź w regulaminie", "timing": {"kind": "unconfirmed", "text": "Edycja 2026 ogłoszona — sprawdź termin i obszar"}, "own": "Zależy od regulaminu", "weDo": "Projekt łączący boisko z zielenią i wycena.", "steps": ["Sprawdź, czy Twoja okolica jest objęta programem.", "Zaplanujcie boisko razem z zielenią.", "Złóżcie wniosek z naszą wizualizacją."], "source": {"label": "Zielona społeczność 2026", "url": "https://www.kolektywaktywnemiasto.pl/zielona-spolecznosc/edycja-2026/"}}, {"id": "leader", "name": "LEADER — Lokalna Grupa Działania", "short": "Pieniądze unijne na ogólnodostępne boiska na wsi.", "level": 2, "who": ["ngo", "school"], "area": ["village"], "need": ["renovate", "new"], "submits": "Stowarzyszenie, fundacja, gmina (zależy od LGD)", "amount": "Do 500 000 zł na beneficjenta w okresie programu", "timing": {"kind": "yearly", "text": "Każda LGD ma własne terminy naborów"}, "own": "Tak", "weDo": "Dokumentacja techniczna, wycena i wizualizacja do wniosku.", "steps": ["Znajdź LGD dla swojej gminy.", "Sprawdź nabór na infrastrukturę rekreacyjną.", "Złóżcie wniosek z naszą dokumentacją."], "source": {"label": "Przykładowy nabór LGD 2026", "url": "https://www.partnerstwo5gmin.pl/index.php/ps-wpr/nabory-konkursy/nabor-nr-1-2026"}}, {"id": "opp", "name": "1,5% podatku", "short": "Ludzie przekazują część podatku na Waszą organizację.", "level": 2, "who": ["ngo"], "area": ["city", "village"], "need": ["renovate", "new"], "submits": "Organizacja pożytku publicznego (OPP)", "amount": "Tyle, ile przekażą podatnicy", "timing": {"kind": "yearly", "text": "Rozliczenia PIT do 30 kwietnia"}, "own": "Nie", "weDo": "Wizualizacja na kampanię „przekaż 1,5% na nasze boisko”.", "steps": ["Upewnijcie się, że macie status OPP.", "Pokażcie konkretny cel z wizualizacją.", "Zbierajcie przez kolejne lata, jeśli trzeba."], "source": null}, {"id": "msit-wojewodztwa", "name": "Program rozwoju infrastruktury sportowej (MSiT)", "short": "Duży program ministerstwa na budowę i modernizację obiektów.", "level": 3, "who": ["ngo", "school", "company"], "area": ["city", "village"], "need": ["renovate", "new"], "submits": "Gmina, powiat, a od 2026 także stowarzyszenia, fundacje i spółki", "amount": "Do 60% kosztów; pula 2026: 400 mln zł", "timing": {"kind": "yearly", "text": "Nabór 2026: 21 stycznia – 15 marca", "next": "Orientacyjnie początek 2027"}, "own": "Tak, co najmniej 40%", "weDo": "Dokumentacja, specyfikacja i kosztorys inwestycji.", "steps": ["Ustalcie, kto będzie wnioskodawcą i ma prawo do terenu.", "Przygotujcie z nami dokumentację jesienią.", "Złóżcie wniosek, gdy ruszy nabór."], "source": {"label": "Ministerstwo Sportu i Turystyki", "url": "https://www.gov.pl/web/sport/program-rozwoju-infrastruktury-sportowej-w-wojewodztwach--edycja-2026"}}, {"id": "moje-boisko", "name": "„Moje Boisko” — modernizacja Orlików", "short": "Pieniądze na odnowienie istniejących Orlików.", "level": 3, "who": ["school", "resident"], "area": ["city", "village"], "need": ["renovate"], "submits": "Gmina (mieszkaniec może zainicjować sprawę)", "amount": "Co najmniej 100 000 zł na obiekt", "timing": {"kind": "yearly", "text": "Nabór 2026: 18 lutego – 31 marca", "next": "Orientacyjnie początek 2027"}, "own": "Tak", "weDo": "Ocena stanu nawierzchni, projekt odnowy i kosztorys.", "steps": ["Pokaż nam Orlika, który trzeba odnowić.", "Zanieś nasz projekt do gminy albo radnego.", "Gmina składa wniosek w naborze."], "source": {"label": "Program Orlik 2026 (PDF)", "url": "https://samorzad.pap.pl/sites/default/files/2026-03/Program%20budowy%20kompleks%C3%B3w%20sportowych%20Orlik%20-%20Edycja%202026%20MSiT.pdf"}}, {"id": "orly", "name": "„Orły” — pełnowymiarowe boiska", "short": "Program ministerstwa na duże boiska piłkarskie.", "level": 3, "who": ["school", "ngo"], "area": ["city", "village"], "need": ["new"], "submits": "Gmina lub klub — według regulaminu edycji", "amount": "Do 60% kosztów", "timing": {"kind": "yearly", "text": "Nabór 2026: styczeń–marzec", "next": "Orientacyjnie początek 2027"}, "own": "Tak", "weDo": "Projekt nawierzchni i kosztorys.", "steps": ["Sprawdź regulamin kolejnej edycji.", "Ustal z gminą lub klubem, kto składa wniosek.", "Przygotuj z nami dokumentację."], "source": {"label": "Ministerstwo Sportu i Turystyki — Orły", "url": "https://www.gov.pl/web/sport/czas-na-orly-ponad-300-mln-zl-na-dofinansowanie-budowy-pelnowymiarowych-boisk-pilkarskich"}}, {"id": "solectwa-wojewodztwo", "name": "Programy marszałkowskie dla sołectw", "short": "Województwo dokłada do projektów wybranych przez sołectwa.", "level": 3, "who": ["resident", "school"], "area": ["village"], "need": ["renovate", "new"], "submits": "Gmina, na wniosek sołectwa", "amount": "Np. Mazowsze: 10 000 zł na zadanie", "timing": {"kind": "check", "text": "Mazowsze: nabór na 2026 trwał 24.11–12.12.2025 — sprawdź teraz edycję 2027"}, "own": "Tak, np. z funduszu sołeckiego", "weDo": "Wycena i wizualizacja dla sołectwa i gminy.", "steps": ["Sprawdź program swojego województwa.", "Poproś sołtysa o zgłoszenie boiska.", "Połącz to z funduszem sołeckim."], "source": {"label": "Mazowsze dla sołectw", "url": "https://mazovia.pl/pl/bip/komunikaty/mazowsze-dla-solectw-2026-rusza-nabor-wnioskow.html"}}, {"id": "adoptuj", "name": "Zaadoptuj miejsce", "short": "Wybierz miejsce zgłoszone przez mieszkańców i sfinansuj boisko z Twoją marką.", "level": 1, "who": ["company"], "area": ["city", "village"], "need": ["renovate", "new", "vision"], "submits": "Firma", "amount": "Od pomalowania starego betonu do pełnego boiska", "timing": {"kind": "always", "text": "Zawsze"}, "own": "—", "weDo": "Wybór miejsca, projekt w barwach marki, realizacja oraz zdjęcia i filmy na social media.", "steps": ["Powiedz nam, gdzie działa Twoja firma.", "Pokażemy miejsca zgłoszone w okolicy.", "Projektujemy, budujemy i otwieramy boisko z mieszkańcami."], "source": null}, {"id": "wspolfinansowanie", "name": "Wkład własny do grantu", "short": "Dokładasz brakującą część do grantu szkoły, klubu albo gminy.", "level": 2, "who": ["company"], "area": ["city", "village"], "need": ["renovate", "new"], "submits": "Firma razem z organizacją lub gminą", "amount": "Zwykle 20–40% wartości projektu", "timing": {"kind": "always", "text": "Najlepiej przed naborem grantowym"}, "own": "—", "weDo": "Łączymy Cię z organizacją, która przygotowuje wniosek.", "steps": ["Powiedz nam, ile chcesz przeznaczyć.", "Dobierzemy projekt i partnera.", "Twoja marka pojawi się na boisku i w komunikacji."], "source": null}, {"id": "studio", "name": "Zaprojektuj i zamów", "short": "Projektujesz w Studio, widzisz efekt i pytasz o wycenę.", "level": 1, "who": ["private", "company", "school", "ngo"], "area": ["city", "village"], "need": ["renovate", "new", "vision"], "submits": "Ty", "amount": "Wycena dla Twojej lokalizacji", "timing": {"kind": "always", "text": "Zawsze"}, "own": "—", "weDo": "Dobór konstrukcji i nawierzchni, wycena, montaż.", "steps": ["Zaprojektuj boisko w Studio.", "Wyślij nam projekt.", "Dostaniesz wycenę dla swojego miejsca."], "source": {"label": "Studio Gamefields", "url": "/konfigurator-boisk/"}}]}</script>
+<script>(function(){
+const root=document.getElementById('gm-root'),dataEl=document.getElementById('gm-data');
+if(!root||!dataEl)return;
+const D=JSON.parse(dataEl.textContent);
+const state={who:null,area:null,need:null,lat:null,lng:null};
+const $=s=>root.querySelector(s);
+const label=(group,id)=>(D[group].find(o=>o.id===id)||{}).label||'';
+function el(tag,attrs,children){const n=document.createElement(tag);for(const k in attrs||{}){if(k==='text')n.textContent=attrs[k];else if(k==='class')n.className=attrs[k];else n.setAttribute(k,attrs[k]);}for(const c of children||[])if(c)n.appendChild(typeof c==='string'?document.createTextNode(c):c);return n;}
+
+// Options
+for(const group of ['who','area','need']){
+ const box=root.querySelector('[data-options="'+group+'"]');
+ for(const o of D[group]){
+  const btn=el('button',{type:'button',class:'gm-opt','aria-pressed':'false','data-group':group,'data-id':o.id},[o.label]);
+  if(o.hint)btn.appendChild(el('small',{text:o.hint}));
+  btn.addEventListener('click',()=>{state[group]=state[group]===o.id?null:o.id;sync();render();});
+  box.appendChild(btn);
+ }
+}
+function sync(){root.querySelectorAll('.gm-opt').forEach(b=>b.setAttribute('aria-pressed',String(state[b.dataset.group]===b.dataset.id)));}
+
+// Status badge
+function badge(t){
+ const k=t.timing.kind;
+ if(k==='always')return el('span',{class:'gm-badge always',text:'Dostępne zawsze'});
+ if(k==='check')return el('span',{class:'gm-badge check',text:'Sprawdź teraz'});
+ if(k==='unconfirmed')return el('span',{class:'gm-badge',text:'Edycja do potwierdzenia'});
+ if(t.timing.next)return el('span',{class:'gm-badge next',text:'Kolejny nabór: '+t.timing.next.replace(/^Orientacyjnie /,'ok. ')});
+ return el('span',{class:'gm-badge',text:'Co roku'});
+}
+function fact(name,value){return el('div',{},[el('dt',{text:name}),el('dd',{text:value})]);}
+function card(t){
+ const facts=[fact('Kto składa',t.submits),fact('Kiedy',t.timing.text)];
+ if(t.own)if(t.own!=='—')facts.push(fact('Wkład własny',t.own));
+ const det=el('details',{},[el('summary',{text:'Szczegóły i jak zacząć'}),el('dl',{class:'gm-facts'},facts),el('ol',{},t.steps.map(s=>el('li',{text:s})))]);
+ if(t.source){const a=el('a',{href:t.source.url,text:t.source.label});if(/^https?:/.test(t.source.url)){a.target='_blank';a.rel='noopener';}det.appendChild(el('p',{class:'gm-source'},['Źródło: ',a]));}
+ return el('article',{class:'gm-card','data-tool':t.id},[
+  badge(t),el('h4',{text:t.name}),el('p',{text:t.short}),
+  el('p',{class:'gm-amount'},[el('b',{text:'Ile: '}),t.amount]),
+  el('p',{class:'gm-we'},[el('b',{text:'Co robimy za Ciebie: '}),t.weDo]),det]);
+}
+function matches(){
+ return D.tools.filter(t=>[t.who.includes(state.who),!state.area||t.area.includes(state.area),!state.need||t.need.includes(state.need)].every(Boolean));
+}
+function render(){
+ const out=$('#gm-results');out.textContent='';
+ const cta=$('#gm-cta');
+ if(!state.who){out.appendChild(el('p',{class:'gm-empty',text:'Zacznij od pytania 1 — pokażemy Ci wszystkie drogi, które pasują właśnie do Ciebie.'}));cta.hidden=true;writeUrl();return;}
+ const list=matches();
+ const sum=el('p',{class:'gm-summary'},['Mamy dla Ciebie ',el('span',{text:list.length+' '+(list.length===1?'drogę':list.length<5?'drogi':'dróg')}),'. Zacznij od pierwszej grupy.']);
+ out.appendChild(sum);
+ for(const lv of D.levels){
+  const tools=list.filter(t=>t.level===lv.id);if(!tools.length)continue;
+  out.appendChild(el('div',{class:'gm-level'},[el('div',{class:'gm-level-head'},[el('h3',{text:lv.title}),el('p',{text:lv.lead})]),el('div',{class:'gm-cards'},tools.map(card))]));
+ }
+ cta.hidden=false;writeUrl();
+}
+
+// Shareable URL
+function writeUrl(){
+ try{const u=new URL(location.href);for(const k of ['who','area','need'])state[k]?u.searchParams.set('gm_'+k,state[k]):u.searchParams.delete('gm_'+k);history.replaceState(null,'',u);}catch(e){}
+}
+function readUrl(){
+ const p=new URLSearchParams(location.search);
+ for(const k of ['who','area','need']){const v=p.get('gm_'+k);if(v)if(D[k].some(o=>o.id===v))state[k]=v;}
+}
+
+// Map (Leaflet loaded only when asked)
+let map=null,marker=null,L=null;
+function loadLeaflet(){
+ if(window.L)return Promise.resolve(window.L);
+ return new Promise((res,rej)=>{
+  const css=el('link',{rel:'stylesheet',href:'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',integrity:'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=',crossorigin:''});document.head.appendChild(css);
+  const s=el('script',{src:'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',integrity:'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=',crossorigin:''});
+  s.onload=()=>res(window.L);s.onerror=rej;document.head.appendChild(s);
+ });
+}
+function setPin(lat,lng,zoom){
+ state.lat=+lat.toFixed(5);state.lng=+lng.toFixed(5);
+ $('#gm-coords').textContent='Zaznaczone: '+state.lat+', '+state.lng;
+ if(!map)return;
+ if(!marker)marker=L.marker([lat,lng],{draggable:true,icon:L.divIcon({html:'<div class="gm-pin"></div>',className:'',iconSize:[28,28],iconAnchor:[14,28]})}).addTo(map).on('dragend',e=>{const p=e.target.getLatLng();setPin(p.lat,p.lng);});
+ else marker.setLatLng([lat,lng]);
+ if(zoom)map.setView([lat,lng],zoom);
+}
+function startMap(){
+ const box=$('#gm-map'),btn=$('#gm-map-start');
+ if(map)return Promise.resolve();
+ btn.textContent='Ładuję mapę…';btn.disabled=true;
+ return loadLeaflet().then(lib=>{
+  L=lib;btn.remove();
+  map=L.map(box,{scrollWheelZoom:false}).setView([52.07,19.48],6);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  map.on('click',e=>setPin(e.latlng.lat,e.latlng.lng));
+  if(state.lat!=null)setPin(state.lat,state.lng,15);
+ }).catch(()=>{btn.textContent='Mapa niedostępna — wpisz miejsce poniżej';});
+}
+$('#gm-map-start').addEventListener('click',startMap);
+$('#gm-locate').addEventListener('click',()=>{
+ const out=$('#gm-coords');
+ if(!navigator.geolocation){out.textContent='Twoja przeglądarka nie udostępnia lokalizacji — zaznacz miejsce na mapie.';return;}
+ out.textContent='Szukam Twojej lokalizacji…';
+ navigator.geolocation.getCurrentPosition(p=>startMap().then(()=>setPin(p.coords.latitude,p.coords.longitude,16)),()=>{out.textContent='Nie udało się pobrać lokalizacji — zaznacz miejsce na mapie.';},{enableHighAccuracy:true,timeout:10000});
+});
+
+// Plan text → contact form
+function planText(){
+ const place=$('#gm-place-name').value.trim();
+ const lines=['MAPA MOŻLIWOŚCI — mój plan','Kim jestem: '+label('who',state.who)];
+ if(state.area)lines.push('Teren: '+label('area',state.area));
+ if(state.need)lines.push('Chcę: '+label('need',state.need));
+ if(place)lines.push('Miejsce: '+place);
+ if(state.lat!=null)lines.push('Na mapie: '+state.lat+', '+state.lng+' (https://www.openstreetmap.org/?mlat='+state.lat+'&mlon='+state.lng+'#map=17/'+state.lat+'/'+state.lng+')');
+ lines.push('Drogi, które mnie interesują: '+matches().map(t=>t.name).join('; '));
+ return lines.join('\n');
+}
+$('#gm-send').addEventListener('click',()=>{
+ const page=document.getElementById('gf-culture')||document,field=page.querySelector('[name="project-details"]'),contact=page.querySelector('#kontakt');
+ if(field){
+  const text=planText(),rest=field.value.replace(/MAPA MOŻLIWOŚCI — mój plan[\s\S]*?(\n\n|$)/,'').trim();
+  field.value=text+(rest?'\n\n'+rest:'');field.dispatchEvent(new Event('input',{bubbles:true}));
+  const att=page.querySelector('#gc-attached');if(att){att.textContent='Twój plan z Mapy możliwości jest dołączony. Wpisz e-mail i wyślij — odezwiemy się z wizualizacją i kosztem.';att.hidden=false;}
+ }
+ if(contact){contact.scrollIntoView({behavior:'smooth'});const mail=page.querySelector('[name="your-email"]');if(mail)setTimeout(()=>mail.focus({preventScroll:true}),400);}
+ else location.href='mailto:info@gamefields.eu?subject='+encodeURIComponent('Mapa możliwości — mój plan')+'&body='+encodeURIComponent(planText());
+});
+$('#gm-share').addEventListener('click',()=>{
+ const s=$('#gm-share-status'),url=location.href;
+ const done=()=>{s.textContent='Link skopiowany — wyślij go znajomym.';};
+ if(navigator.share)if(matchMedia('(pointer:coarse)').matches){navigator.share({title:'Zróbmy tu boisko',url}).catch(()=>{});return;}
+ if(navigator.clipboard)navigator.clipboard.writeText(url).then(done,()=>{s.textContent=url;});else s.textContent=url;
+});
+
+$('#gm-note').textContent='Informacje sprawdzone '+D.verifiedAt.split('-').reverse().join('.')+'. Kwoty i terminy pochodzą z naborów 2026 — przed złożeniem wniosku zawsze sprawdź regulamin aktualnej edycji. Pomagamy przygotować materiały, ale wniosek składa uprawniona osoba lub organizacja.';
+readUrl();sync();render();
+})();
+</script>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: kontakt -->
+<!-- CONTACT (existing CF7 form a71dc3a, field project-details) -->
+<section id="kontakt" class="contact sec" aria-labelledby="gfs-contact">
+  <div class="court" style="--ln:rgba(255,255,255,.3);--cr:30%"><i></i><i></i></div>
+  <div class="wrap contact-grid">
+    <h2 class="d" id="gfs-contact">Masz plac? Napisz do mnie.</h2>
+    <div class="me">
+      <b style="font-size:20px">Damian Gawrych</b>
+      <span style="opacity:.9">Nie musisz znać wymiarów ani budżetu. Wyślij zdjęcie placu, odpiszę osobiście w ciągu 1–2 dni roboczych.</span>
+      <a href="mailto:info@gamefields.eu" style="font-size:20px;font-weight:600">info@gamefields.eu</a>
+    </div>
+    <div class="form">
+      <span class="lbl">Kim jesteś</span>
+      <div class="chips" role="group" aria-label="Kim jesteś" data-who></div>
+      <span class="lbl">Czego potrzebujesz</span>
+      <div class="chips" role="group" aria-label="Czego potrzebujesz" data-needs></div>
+      <div id="gc-attached" class="gc-attachment" hidden>Parametry projektu ze Studio dołączone. Wpisz swój e-mail i wyślij zapytanie.</div>
+      <details class="gc-project-review" id="gc-project-review" hidden><summary>Zobacz dołączone parametry</summary><pre id="gc-project-text" tabindex="0" aria-label="Parametry dołączone do zapytania"></pre><button type="button" id="gc-clear-project">Usuń dołączone parametry</button></details>
+      <div class="gc-review-status" id="gc-review-status" role="status" aria-live="polite"></div>
+      <span id="gc-direction-status" hidden></span>
+      <div class="gc-cf7">[contact-form-7 id="a71dc3a" title="Gamefields — zapytanie o projekt"]</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- the site footer comes from the Gamefields theme (same on every page) -->
+</div>
+
+<!-- Flat surfaces in the audience kits (2026-11-08): the Studio SVGs are drawn in perspective on white, these fill the whole window. -->
+<script>(function(){var F={'city-fluid':1,'play-system':1,'earth-motion':1,'club-heritage':1,'brand-stage':1};function fix(){var list=document.querySelectorAll('img[src*="/surface-projects/"]');for(var i=0;i<list.length;i++){var m=list[i].getAttribute('src').match(/surface-projects\/([a-z-]+)\.svg/);if(m){if(F[m[1]]){list[i].src='/wp-content/uploads/2026/11/gf-surf-'+m[1]+'.webp';}}}}new MutationObserver(fix).observe(document.documentElement,{childList:true,subtree:true});fix();})();</script>
+<!-- /wp:html -->
+
+<!-- wp:html -->
+<!-- gf-blok: skrypty -->
+<script defer src="/wp-content/themes/gamefields/assets/js/home/gf-pro.js?v=81274c9b16"></script>
+<script defer src="/wp-content/themes/gamefields/assets/js/home/gf-ball-core.js?v=0dff1b42a9"></script>
+<script defer src="/wp-content/themes/gamefields/assets/js/home/gf-home.js?v=e64d639913"></script>
+<script>(function(){const names={"w1":"Panna Ring","o1":"Panna Play","p1":"Panna Court","street15":"Street Arena 15","circle-cage-1":"Panna Cage 90","circle-cage-2":"Panna Cage 180","street-field":"Panna Grid","octagon":"Panna Octa","street-football-15x10":"Street Arena 15","panna-perfo-circle": "Panna Perfo-Circle", "panna-perfo-rect": "Panna Perfo-Rect", "panna-net-rect": "Panna Net-Rect", "panna-solid-circle": "Panna Solid-Circle", "panna-net-circle": "Panna Net-Circle", "panna-high-net-circle": "Panna High Net-Circle", "panna-steel-octaground": "Panna Steel OctaGround"};const key=new URLSearchParams(window.location.search).get('gf_product');if(!Object.prototype.hasOwnProperty.call(names,key))return;const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]');if(!field)return;const name=names[key],summary='Wybrany model: '+name+'. Proszę o dobór konfiguracji i wycenę dla mojej lokalizacji.';root.dataset.gfProductName=name;field.addEventListener('input',function(){if(!field.value.includes(summary))delete root.dataset.gfProductName});field.value=summary+(field.value.trim()?'\n\n'+field.value.trim():'');field.dispatchEvent(new Event('input',{bubbles:true}));const attached=root.querySelector('#gc-attached');if(attached){attached.textContent='Wybrany model: '+name+'. Opisz miejsce i sposób użytkowania — model został dołączony do zapytania.';attached.hidden=false;}if(window.location.hash==='#kontakt'){root.querySelector('#kontakt')?.scrollIntoView({behavior:'auto'});root.querySelector('[name="your-email"]')?.focus({preventScroll:true});}})();</script>
+<script>(function(){const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]'),review=root?.querySelector('#gc-project-review'),text=root?.querySelector('#gc-project-text'),status=root?.querySelector('#gc-review-status');if(!field||!review||!text||!status)return;let cleared=false;function render(){const value=field.value.trim();text.textContent=value;review.hidden=!value;if(!value){review.open=false;root.querySelector('#gc-attached').hidden=true;status.textContent=cleared?'Dołączone parametry usunięte. Twoja wiadomość i dane kontaktowe pozostały w formularzu.':'';}else status.textContent='Parametry dołączone — możesz je przejrzeć przed wysłaniem.';}field.addEventListener('input',function(){cleared=false;queueMicrotask(render)});root.querySelector('#gc-clear-project').addEventListener('click',function(){field.value='';field.dispatchEvent(new Event('input',{bubbles:true}));cleared=true;delete root.dataset.gfProductName;root.querySelectorAll('[data-gf-inquiry]').forEach(function(item){item.setAttribute('aria-pressed','false');item.closest('.gc-direction').setAttribute('data-selected','false')});root.querySelector('#gc-direction-status').textContent='Wybór kierunku usunięty. Możesz wybrać inny.';const url=new URL(window.location.href);url.searchParams.delete('gf_product');window.history.replaceState(window.history.state,'',url);status.textContent='Dołączone parametry usunięte. Twoja wiadomość i dane kontaktowe pozostały w formularzu.';render();root.querySelector('[name="your-email"]')?.focus({preventScroll:true});});render();})();</script>
+<!-- /wp:html -->

@@ -1,0 +1,28 @@
+MAIL 2 — zaznacz „Użyj Mail (2)”
+
+Do: [your-email]
+Od: (skopiuj dokładnie pole „Od” z Mail 1)
+Temat: Gamefields — mam Twoje zgłoszenie
+Dodatkowe nagłówki: Reply-To: info@gamefields.eu
+Treść:
+Dzień dobry,
+
+dziękuję za zgłoszenie. Sprawdzę miejsce i odpiszę osobiście w ciągu 1–2 dni roboczych.
+
+Twoje zgłoszenie:
+Potrzeba: [project-type]
+Typ miejsca: [place-type]
+Miejsce: [project-location]
+Wymiary: [project-area]
+Opis: [your-message]
+Twoja konfiguracja w Studio (link ważny 30 dni): [project-link]
+
+Chcesz coś dodać, np. kolejne zdjęcia? Odpowiedz na tę wiadomość.
+
+Damian Gawrych
+Gamefields — boiska miejskie
+info@gamefields.eu · +48 794 911 746
+https://www.gamefields.eu/
+
+Załączniki: (puste)
+Zaznacz: „Pomiń wiersze z pustymi znacznikami pól w wiadomości”. HTML: wyłączony.

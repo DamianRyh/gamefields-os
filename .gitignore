@@ -47,3 +47,4 @@ next-env.d.ts
 
 *.tsbuildinfo
 integrations/wordpress/homepage/premium-2026-10-26/index.html
+deploy/*.zip

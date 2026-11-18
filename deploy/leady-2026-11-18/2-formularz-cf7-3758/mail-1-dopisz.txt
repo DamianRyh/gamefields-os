@@ -1,0 +1,17 @@
+MAIL 1 (do Ciebie) — NIE usuwaj niczego, tylko dopisz:
+
+Temat: na końcu obecnego tematu dopisz:
+ · [place-type] · [lead-source]
+
+Treść: na końcu obecnej treści dopisz:
+
+— Zdjęcie placu / źródło —
+Typ miejsca: [place-type]
+Źródło zgłoszenia: [lead-source]
+Zgoda na informacje handlowe: [marketing-consent]
+Link do konfiguracji w Studio: [project-link]
+
+Załączniki plików: obecne [project-photo] zostaw i dopisz w kolejnych liniach:
+[project-photo-2]
+[project-photo-3]
+[project-render]
