@@ -31,7 +31,7 @@ function badge(t){
 function fact(name,value){return el('div',{},[el('dt',{text:name}),el('dd',{text:value})]);}
 function card(t){
  const facts=[fact('Kto składa',t.submits),fact('Kiedy',t.timing.text)];
- if(t.own&&t.own!=='—')facts.push(fact('Wkład własny',t.own));
+ if(t.own)if(t.own!=='—')facts.push(fact('Wkład własny',t.own));
  const det=el('details',{},[el('summary',{text:'Szczegóły i jak zacząć'}),el('dl',{class:'gm-facts'},facts),el('ol',{},t.steps.map(s=>el('li',{text:s})))]);
  if(t.source){const a=el('a',{href:t.source.url,text:t.source.label});if(/^https?:/.test(t.source.url)){a.target='_blank';a.rel='noopener';}det.appendChild(el('p',{class:'gm-source'},['Źródło: ',a]));}
  return el('article',{class:'gm-card','data-tool':t.id},[
@@ -40,7 +40,7 @@ function card(t){
   el('p',{class:'gm-we'},[el('b',{text:'Co robimy za Ciebie: '}),t.weDo]),det]);
 }
 function matches(){
- return D.tools.filter(t=>t.who.includes(state.who)&&(!state.area||t.area.includes(state.area))&&(!state.need||t.need.includes(state.need)));
+ return D.tools.filter(t=>[t.who.includes(state.who),!state.area||t.area.includes(state.area),!state.need||t.need.includes(state.need)].every(Boolean));
 }
 function render(){
  const out=$('#gm-results');out.textContent='';
@@ -62,7 +62,7 @@ function writeUrl(){
 }
 function readUrl(){
  const p=new URLSearchParams(location.search);
- for(const k of ['who','area','need']){const v=p.get('gm_'+k);if(v&&D[k].some(o=>o.id===v))state[k]=v;}
+ for(const k of ['who','area','need']){const v=p.get('gm_'+k);if(v)if(D[k].some(o=>o.id===v))state[k]=v;}
 }
 
 // Map (Leaflet loaded only when asked)
@@ -127,7 +127,7 @@ $('#gm-send').addEventListener('click',()=>{
 $('#gm-share').addEventListener('click',()=>{
  const s=$('#gm-share-status'),url=location.href;
  const done=()=>{s.textContent='Link skopiowany — wyślij go znajomym.';};
- if(navigator.share&&matchMedia('(pointer:coarse)').matches){navigator.share({title:'Zróbmy tu boisko',url}).catch(()=>{});return;}
+ if(navigator.share)if(matchMedia('(pointer:coarse)').matches){navigator.share({title:'Zróbmy tu boisko',url}).catch(()=>{});return;}
  if(navigator.clipboard)navigator.clipboard.writeText(url).then(done,()=>{s.textContent=url;});else s.textContent=url;
 });
 

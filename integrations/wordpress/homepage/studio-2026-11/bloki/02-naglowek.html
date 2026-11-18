@@ -6,7 +6,7 @@
 <header class="wrap nav" id="gfs-nav">
   <a href="/" class="logo" aria-label="Gamefields, strona główna">gamefields.</a>
   <span class="m" style="color:var(--muted)">Studio Damiana Gawrycha · Warszawa</span>
-  <a class="ask" href="#kontakt">Zapytanie</a>
+  <a class="ask" href="#zdjecie">Wyślij zdjęcie</a>
   <button type="button" class="menu-btn" aria-expanded="false" aria-controls="gfs-links">Menu</button>
   <nav class="links" id="gfs-links" aria-label="Główna nawigacja">
     <!-- Same menu as every other page (theme gft_nav_items), 2026-11-09 -->
@@ -18,6 +18,7 @@
     <a href="/shop/">Sklep</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
+  <a class="gf-photo-link" href="#zdjecie">Wyślij zdjęcie placu</a>
   <a class="pill cfg" href="/studio/" style="background:var(--ink);color:var(--paper);min-height:44px;padding:0 20px;font-size:15px">Studio 3D ↗</a>
 </header>
 
@@ -57,6 +58,15 @@
   <div class="ticker-set" aria-hidden="true"><a href="/studio/?arena=w1" tabindex="-1">Panna Ring</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=o1" tabindex="-1">Panna Play</a><i aria-hidden="true">•</i><a href="/studio/?arena=p1" tabindex="-1">Panna Court</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=circle-cage-1" tabindex="-1">Cage 90</a><i aria-hidden="true">•</i><a href="/studio/?arena=circle-cage-2" tabindex="-1">Cage 180</a><i aria-hidden="true">•</i><a class="o" href="/studio/?arena=octagon" tabindex="-1">Panna Octa</a><i aria-hidden="true">•</i><a href="/studio/?arena=street-field" tabindex="-1">Panna Grid</a><i aria-hidden="true">•</i></div>
 </div></nav>
 
+<!-- PHOTO STRIP (2026-11-18): "Wyślij zdjęcie placu" — the button opens the photo picker of form 3758 (theme gf-lead.js) -->
+<section class="wrap photo-strip" aria-labelledby="gfs-photo-strip">
+  <div class="photo-strip-t">
+    <h2 id="gfs-photo-strip">Masz plac? Wyślij zdjęcie.</h2>
+    <p>Sprawdzę miejsce i przygotuję propozycję boiska dopasowaną do Twojej przestrzeni. Odpowiadam osobiście w ciągu 1–2 dni roboczych.</p>
+  </div>
+  <a class="pill" href="#zdjecie" data-gf-photo-pick style="background:var(--violet);color:#fff">Wybierz zdjęcie placu <span aria-hidden="true">→</span></a>
+</section>
+
 <!-- SCOPE (mobile): the whole offer at a glance, Baymard: show catalogue scope on the homepage -->
 <nav class="wrap scope" aria-label="Na skróty">
   <a href="#boiska"><b>8 boisk</b><span>Panna, Cage, Street Arena</span></a>
@@ -66,6 +76,6 @@
   <a href="#nawierzchnie"><b>Stary plac?</b><span>Malowanie i modernizacja</span></a>
   <a href="#dla-kogo"><b>Dla kogo</b><span>Szkoły, osiedla, kluby, marki</span></a>
   <a href="#plakaty"><b>Plakaty</b><span>Twój wzór boiska</span></a>
-  <a href="#kontakt"><b>Zapytanie</b><span>Odpisuję osobiście</span></a>
+  <a href="#zdjecie"><b>Wyślij zdjęcie</b><span>Odpisuję w 1–2 dni robocze</span></a>
 </nav>
 <!-- /wp:html -->

@@ -257,6 +257,9 @@ def main():
     body = body.replace("{{ASSET}}", ASSET_BASE)
     body = body.replace("{{KEPT_WORKSHOP}}", workshop.strip())
     body = body.replace("{{KEPT_FAQ}}", faq.strip())
+    # "Mapa możliwości" (2026-11-18): self-contained block (own scoped styles, data and script) built in
+    # ../premium-2026-10-26 by build_possibilities_embed.py; it sits right before #kontakt, as on the live page.
+    body = body.replace("{{MOZLIWOSCI}}", (HERE.parent / "premium-2026-10-26" / "possibilities-embed.html").read_text(encoding="utf-8").strip())
     body = body.replace(
         'data-homepage-version="studio-2026-11"',
         f'data-homepage-version="studio-2026-11" data-asset-base="{ASSET_BASE}" data-repo-base="{REPO_BASE}"',
