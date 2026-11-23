@@ -2,15 +2,15 @@
 /**
  * Plugin Name: Gamefields Studio & PLAY
  * Description: Serves Studio and PLAY directly on gamefields.eu using the existing application backend.
- * Version: 0.10.0
+ * Version: 0.11.0
  */
 if (!defined('ABSPATH')) { exit; }
 
 add_action('init', function () {
     $uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
     $path = (string) parse_url($uri, PHP_URL_PATH);
-    $app = $path === '/play' || strpos($path, '/play/') === 0 || in_array($path, array('/studio', '/studio/'), true);
-    $api = $path === '/api/play' || strpos($path, '/api/play/') === 0 || in_array($path, array('/api/quote', '/api/templates', '/api/projects'), true);
+    $app = $path === '/play' || strpos($path, '/play/') === 0 || in_array($path, array('/studio', '/studio/', '/tresci', '/tresci/'), true);
+    $api = $path === '/api/play' || strpos($path, '/api/play/') === 0 || strpos($path, '/api/tresci/') === 0 || in_array($path, array('/api/quote', '/api/templates', '/api/projects'), true);
     $studioAsset = preg_match('#^/studio/[a-zA-Z0-9_-]+\.webp$#', $path) === 1;
     $asset = $studioAsset || preg_match('#^/(?:assets|_next)/[a-zA-Z0-9_./-]+$#', $path) === 1 || in_array($path, array('/manifest.webmanifest', '/favicon.svg'), true);
     if (!$app && !$api && !$asset) { return; }

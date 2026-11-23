@@ -39,3 +39,14 @@ Before activation:
 Rollback for the ordinary plugin: deactivate it in the Plugins panel. For the MU-plugin: rename its file as described above. Keep the previous deployment and database backup available; deactivating the gateway does not undo application migrations.
 
 If the upload option is missing or plugin installation is disabled, the administrator must use the hosting file manager/SFTP. `DISALLOW_FILE_EDIT` alone does not establish that plugin installation is disabled; the current site's permissions have not been verified.
+
+## Studio treści — `/tresci`
+
+Prywatne narzędzie autora do planowania i rozliczania treści marki osobistej: pulpit tygodnia, kalendarz, tablica statusów i wyniki z filarami. Dostęp ma tylko konto administratora (`PLAY_ADMIN_USER_IDS` lub `PLAY_ADMIN_EMAILS`); pozostali dostają 401/403. Strona ma `noindex`.
+
+1. Zastosuj migrację `drizzle/0012_content_studio.sql` na produkcyjnej bazie D1 (tylko nowa tabela `content_posts`, bez zmian w istniejących).
+2. Wdróż aplikację zawierającą `app/tresci` i `app/api/tresci`.
+3. Zaktualizuj bramkę do wersji 0.11.0 (`gamefields-play.php` albo paczka z `pnpm build:wordpress`). Przepuszcza `/tresci` i `/api/tresci/*` i wyłącza je z cache tak jak PLAY.
+4. Upewnij się, że Twoje konto jest w `PLAY_ADMIN_USER_IDS`. Wejdź na `https://gamefields.eu/tresci`, zaloguj się przez `/play/auth` i kliknij „Wczytaj plan 8 tygodni”. Ponowne wczytanie nie tworzy duplikatów.
+
+Funkcje AI (szkice postów przez Claude) celowo nie są włączone. Wymagałyby klucza API zapisanego jako sekret aplikacji.
