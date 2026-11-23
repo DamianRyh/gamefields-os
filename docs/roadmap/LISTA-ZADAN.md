@@ -1,6 +1,7 @@
 # Lista zadań gamefields.eu
 
 Bieżąca lista. Zasada: najpierw repozytorium (PR, testy), potem strona (wdrożenie, kontrola na żywo).
+Zasada właściciela (23.11.2026): każdą zmianę najpierw pokazać w podglądzie w prawdziwym motywie (`python3 tools/preview/live_shell.py <adres strony> <blok.html> <podglad.html>`), dopiero potem paczka do wdrożenia albo wdrożenie samodzielne.
 Polecenia do wdrożenia na stronie czekają w kolejce: `docs/roadmap/POLECENIA-DLA-CHATGPT.md`.
 Statusy: ✅ zrobione · 🔄 w toku · ⏳ czeka na wdrożenie na stronie · ❓ czeka na decyzję właściciela · ⬜ do zrobienia
 
