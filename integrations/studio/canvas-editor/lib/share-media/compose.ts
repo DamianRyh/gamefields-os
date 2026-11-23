@@ -12,7 +12,7 @@ export type ComposeOptions={format:ShareFormat;style:ShareStyle;background:strin
 export const BRAND={ink:'#47132D',paper:'#F4F1EE',violet:'#6336F5',lime:'#D8F24A',navy:'#1F2A6B',muted:'#6F5A66'};
 export const FORMAT_SIZE:Record<ShareFormat,[number,number]>={story:[1080,1920],post:[1080,1350]};
 /** Where the model goes in each template (px of the 1080 canvas). Films render the 3D view at exactly this aspect. */
-export const MODEL_SLOT:Record<'clean'|'street',Record<ShareFormat,[number,number]>>={clean:{story:[952,760],post:[952,500]},street:{story:[1140,560],post:[1140,430]}};
+export const MODEL_SLOT:Record<'clean'|'street',Record<ShareFormat,[number,number]>>={clean:{story:[952,760],post:[952,680]},street:{story:[1140,560],post:[1140,430]}};
 export const BACKGROUNDS:Record<ShareStyle,{id:string;label:string;color:string|null}[]>={
  clean:[{id:'auto',label:'Z projektu',color:null},{id:'paper',label:'Jasne',color:BRAND.paper},{id:'ink',label:'Śliwka',color:BRAND.ink},{id:'navy',label:'Granat',color:BRAND.navy},{id:'violet',label:'Fiolet',color:BRAND.violet}],
  street:[{id:'auto',label:'Wzór z projektu',color:null},{id:'ink',label:'Śliwka',color:BRAND.ink},{id:'navy',label:'Granat',color:BRAND.navy}],
@@ -53,10 +53,10 @@ export function compose(canvas:HTMLCanvasElement,o:ComposeOptions){
   ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
   text('gamefields.',M,top+44,{w:800,s:52,c:fg,ls:-2});
   text('DESIGNED IN GAMEFIELDS STUDIO',W-M,top+40,{w:800,s:20,c:acc,ls:2.4,al:'right'});
-  const [sw,sh]=MODEL_SLOT.clean[o.format],cy=story?top+520:top+330;
+  const [sw,sh]=MODEL_SLOT.clean[o.format],cy=story?top+520:top+410;
   const g=ctx.createRadialGradient(W/2,cy+60,40,W/2,cy+60,W*.55);g.addColorStop(0,dk?'rgba(255,255,255,.10)':mix(mid,bg,.35)+'aa');g.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=g;ctx.fillRect(0,cy-500,W,1000);
   draw(o.images.hero,W/2,cy,sw,sh);
-  let y=story?bot-290:cy+330;
+  let y=story?bot-290:bot-260;
   if(f.caption)text(f.caption.toUpperCase(),M,y-70,{w:800,s:22,c:acc,ls:2.4});
   text(f.name,M,y+(story?40:20),{w:800,s:fit(f.name,W-2*M,800,story?112:92),c:fg,ls:-4});
   y+=story?100:74;text(facts,M,y,{w:500,s:30,c:mu});
