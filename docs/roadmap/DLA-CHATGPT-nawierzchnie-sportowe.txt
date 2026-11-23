@@ -1,0 +1,26 @@
+Polecenie dla ChatGPT: nowa strona Nawierzchnie sportowe, 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /nawierzchnie-sportowe/ (ID 3686): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/nawierzchnie-2026-11/nawierzchnie-sportowe.html
+SHA-256 zaczyna się od: bf77774fe3221a8f
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3686 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Nawierzchnie sportowe.” z siatką 8 tekstur (kliknięcie przewija do opisu), pas liczb (8, od 78 zł/m², 283 zł/m², próbki pocztą);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - „Najpierw gra, potem technologia.”: sześć zastosowań z poleconymi nawierzchniami;
+   - tabela porównawcza 8 pozycji (na telefonie karty);
+   - „Porównaj na swoim metrażu”: domyślnie Panna Play 30,1 m²: malowanie 2 400–5 600 zł, trawa 5 100–8 800 zł.
+     Wybierz Boisko 3 na 3 i zaznacz płytę: trawa 74 000–94 500 zł;
+   - „Każda nawierzchnia z bliska”: 8 kart z wariantami (na telefonie warianty przewijane w bok), „W cenie” i „Osobno”;
+   - ciemny pas norm, „Dotknij, zanim wybierzesz.” (próbki i wycena), 8 pytań, linki i przyciski na dole;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Nawierzchnie sportowe: trawa, EPDM, akryl, płytki, guma i farba od 78 zł/m². Porównanie, warianty, koszt dla Twojego boiska i próbki pocztą.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
