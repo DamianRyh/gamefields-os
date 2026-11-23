@@ -1,0 +1,25 @@
+Polecenie dla ChatGPT: nowa strona Kluby i akademie (/boiska-dla-klubow/), 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /boiska-dla-klubow/ (ID 3703): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/kluby-2026-11/boiska-dla-klubow.html
+SHA-256 zaczyna się od: 697b85d03a496c89
+
+Wymaganie: motyw Gamefields 1.0.35 lub nowszy (obraz zestawu /wp-content/themes/gamefields/assets/js/home/kits/klub.webp).
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3703 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Boiska i strefy treningowe dla klubów.” z renderem zestawu „Klub”, pas liczb (od 58 000 zł, 1,80 m, 15 × 10 m, Warsaw FC);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - trzy strefy (technika 1 na 1, 3 na 3, modernizacja), trzy modele z cenami, ciemny pas zestawu „Klub”,
+     cztery nawierzchnie z kosztem dla Cage 180, „Projekt do rozmowy ze sponsorem.” z ramką „Uczciwie”,
+     realizacja Wake For Friends z cytatem, ciemny pas autora (Warsaw FC), trzy kroki startu, 8 pytań;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Boiska i strefy treningowe dla klubów: Panna Cage 180 od 58 000 zł netto, małe gry 3 na 3, barwy klubu i sponsora, karta projektu do rozmowy z partnerem.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
