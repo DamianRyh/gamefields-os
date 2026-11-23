@@ -104,3 +104,18 @@ Zasady, które trzeba zachować w Studio:
    + biblioteka `mp4-muxer`, klatki kodowane na bieżąco (bez trzymania w pamięci), pasek postępu, „Anuluj”.
    Zapas: `MediaRecorder` tylko gdy `isTypeSupported('video/mp4;codecs=avc1')`; w przeciwnym razie bez filmu (zostaje PNG).
 5. Udostępnianie jak PNG: `navigator.share({files:[new File([mp4], 'gamefields-obrot.mp4', {type:'video/mp4'})]})`.
+
+## 7. Wersja kinowa (zatwierdzona przez właściciela 23.11)
+
+Przykłady: `examples/gamefields-story-*-kino.mp4`. Generator: `film-kino.html` + `film-kino.js`
+(`node film-kino.js <clean|street> <story|post> 180 out.mp4`).
+
+- Ruch kamery w 6 s: najazd z góry (elewacja 54°→24° w Clean, 40°→13° w Street), lekki dojazd (1,18→1,0 / 1,04→1,0),
+  obrót boiska o 200–220° z łagodnym startem i hamowaniem (easeInOutCubic do 86% czasu), potem dryf o kilka stopni.
+  Ostatnie ujęcie = ujęcie bohatera, takie jak na grafice PNG.
+- Kadrowanie bez przycinania: renderer ma proporcje miejsca na model w szablonie (`SLOT`), a odległość kamery
+  w każdej klatce liczona jest z dopasowania w poziomie i w pionie, więc boisko nie wychodzi poza kadr.
+- Rozmycie ruchu: 4 podklatki w połowie odstępu między klatkami, uśrednione (`globalAlpha = 1/(j+1)`).
+  Na telefonie można zejść do 2 podklatek.
+- Napisy: `composer.js` ma `ANIM.t` (sekundy, `null` = obraz statyczny). Elementy pojawiają się kolejno co 0,12 s
+  (przezroczystość + 40 px w górę, 0,55 s), naklejka w Street wskakuje od 1,1 s.
