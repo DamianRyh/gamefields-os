@@ -1,0 +1,26 @@
+Polecenie dla ChatGPT: nowa strona Miasta (/dla-miast/), 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /dla-miast/ (ID 3464): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/miasta-2026-11/dla-miast.html
+SHA-256 zaczyna się od: b2572e035afff00b
+
+Wymaganie: motyw Gamefields 1.0.35 lub nowszy (obraz zestawu /wp-content/themes/gamefields/assets/js/home/kits/miasto.webp).
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3464 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Więcej gry z mniejszej przestrzeni.” z renderem zestawu „Miasto”, pas liczb (od 36 000 zł, 5–7 m, 10 lat, 7 miast);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - cztery problemy miejsca z rozwiązaniem i ceną;
+   - „Wpisz metraż placu.”: 45 → „Boisko 1 na 1, panna”, 180 → „Piłka uliczna 3 na 3”, 800 → „Projekt indywidualny”, 12 → podpowiedź;
+   - ciemny pas argumentów, cztery realizacje (zadanie, rozwiązanie, efekt, cytaty) i 6 logo, zestaw „Miasto” do budżetu obywatelskiego,
+     trzy koncepcje z etykietą „wizualizacja”, „Boisko ma działać po otwarciu.”, 6 etapów, 8 pytań;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Boiska dla miast: arena na placu 5–7 m od 36 000 zł netto, renowacja miejskich boisk, zestaw do budżetu obywatelskiego, realizacje i turniej na otwarcie.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
