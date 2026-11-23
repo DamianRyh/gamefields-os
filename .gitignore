@@ -47,3 +47,6 @@ next-env.d.ts
 
 *.tsbuildinfo
 __pycache__/
+
+# local page previews written by integrations/wordpress/pages/*/build.py
+integrations/wordpress/pages/*/preview.html
