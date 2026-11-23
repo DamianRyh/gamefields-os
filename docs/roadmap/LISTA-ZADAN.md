@@ -4,7 +4,7 @@ Bieżąca lista. Zasada: najpierw repozytorium (PR, testy), potem strona (wdroż
 Polecenia do wdrożenia na stronie czekają w kolejce: `docs/roadmap/POLECENIA-DLA-CHATGPT.md`.
 Statusy: ✅ zrobione · 🔄 w toku · ⏳ czeka na wdrożenie na stronie · ❓ czeka na decyzję właściciela · ⬜ do zrobienia
 
-Ostatnia aktualizacja: 13.11.2026
+Ostatnia aktualizacja: 23.11.2026
 
 ## Teraz
 
@@ -46,14 +46,14 @@ Ostatnia aktualizacja: 13.11.2026
 | 32 | Motyw 1.0.35 = 1.0.33 + zmiany plakatu z 1.0.34 (ChatGPT, live): bez koła w środku dla Fade/Rings, „podgląd poglądowy”; podgląd plakatu ma stały rozmiar przy zmianie formatu i opcji. Zastępuje 1.0.33 (niewdrożony) | ✅ PR (ten) | DLA-CHATGPT-plakaty-zestawy-1.0.35.txt | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
-| 16 | Strona: ceny nawierzchni (beton, malowanie, EPDM, płytki, trawa) obok cen konstrukcji | ⬜ `offer/concrete-base.json`, `offer/surface-finish.json` | sekcja „Ile kosztuje arena?” | ⬜ |
+| 16 | Strona: ceny nawierzchni obok cen konstrukcji w „Ile kosztuje arena?”: na każdej karcie „Z nawierzchnią od” (beton + malowanie), rozwijana tabela „Nawierzchnie: ceny za m²” (beton i 7 wykończeń, Standard–Premium) | ✅ PR #104, #109 (`prices_html`, `surfaces_html` w `homepage/studio-2026-11/build.py`) | ✅ sprawdzone 23.11: blok „ceny” na żywo = repozytorium | ✅ |
 | 2 | Ceny konstrukcji „od” na stronie głównej i w FAQ (tabela właściciela 13.11) | ✅ PR #84, `offer/price-from.json` | ✅ strona główna, sprawdzone 13.11 | ✅ |
 | 3 | Polityka prywatności: przycisk zgody i pierwszy akapit | kolejka, polecenie 1 | strona 4087 | ✅ sprawdzone 13.11 |
 | 4 | Strony autentyczności: Damian Gawrych, Jak powstaje arena, Koncepcje, Sztuka z gry | ✅ PR #79 | ✅ wszystkie 4 strony, sprawdzone 13.11 | ✅ |
 | 5 | Zdjęcia na O nas, Eventy, Szkoły, Realizacje, link „Kim jestem” na stronie głównej | ✅ PR #79 | ✅ sprawdzone 13.11 | ✅ |
 | 6 | Dofinansowanie boisk (programy 2027, pomoc we wniosku) i Realizacje dla miast | ✅ PR #81 | ✅ obie strony i linki, sprawdzone 13.11 | ✅ |
 | 7 | Liczby do case studies: frekwencja, trwałość, koszty utrzymania, zdjęcia „przed” | `integrations/wordpress/pages/samorzady-2026-11/ANKIETA-CASE-STUDY.md` | po odpowiedziach zamawiających | ❓ wysłać ankietę |
-| 9 | Obrazy przed/po (Pole Mokotowskie) ładowane z jsDelivr: przenieść do mediów WordPress, żeby strona nie zależała od zewnętrznego CDN | strona główna, `/koncepcje/` | media WP | ⬜ |
+| 9 | Obrazy przed/po (Pole Mokotowskie) i zdjęcie placu z mediów WordPress zamiast jsDelivr: strona główna, /koncepcje/, /baza-wiedzy/ i 3 poradniki | ✅ PR (ten): `MEDIA` w `homepage/studio-2026-11/build.py` (build blokuje adresy CDN), `UP` w `autentycznosc-2026-11` i `wiedza-2026-11` | DLA-CHATGPT-media-pole-mokotowskie.txt (wgranie 5 plików + Znajdź i zamień na 6 stronach) | ⏳ |
 | 8 | Aktualizacja terminów naborów po ogłoszeniu regulaminów MSiT 2027 | `samorzady-2026-11/build.py` | strona dofinansowania | ⬜ od 4.01.2027 |
 
 ## Zrobione
@@ -74,7 +74,8 @@ Ostatnia aktualizacja: 13.11.2026
 
 ## Później (roadmapa)
 
-- ⬜ Strona: dodać ceny nawierzchni betonowej obok cen konstrukcji (sekcja „Ile kosztuje arena?”). `offer/price-ranges.json` jest nieaktualny (widełki z PR #80).
+- ⬜ `offer/price-ranges.json` jest nieaktualny (widełki z PR #80); ceny nawierzchni na stronie są już z `surface-finish.json` (zad. 16).
+- ⚠ Blok „naglowek” strony głównej na żywo jest nowszy niż repozytorium (np. „Wyślij zdjęcie” zamiast „Zapytanie”): przed kolejną podmianą tego bloku zsynchronizować repo ze stroną.
 - ❓ Studio na telefonie: przycisk Podsumowanie nie pokazuje ceny (ukryta w `studio-skin-2026-11.css`, oszczędność miejsca). Cena jest w podsumowaniu. Pokazać ją też w przycisku?
 - ❓ Panna Ring nie ma jej w wyborze modelu w Studio (7 modeli), a jest w cenniku strony (40 000 zł). Dodać czy tak ma zostać?
 - ❓ Kafelek „Boiska” w Studio pisze „Wycena indywidualna”, choć ceny konstrukcji są już podane: zmienić na „od 27 tys. zł netto”?

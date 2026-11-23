@@ -216,8 +216,8 @@ konc = f"""
 <section class="gfa-sec"><div class="w">
   <div class="gfa-head"><h2 class="d">Stary plac.<br>Nowe boisko.</h2><p>Betonowe boisko na Polu Mokotowskim i koncepcja Organic Flow na tym samym zdjęciu. Zdjęcie: Google Street View, 2017. To wizualizacja, nie realizacja.</p></div>
   <ul class="gfa-grid">
-    <li><figure><img src="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-przed-720.webp" alt="Przed: szary betonowy plac do koszykówki" loading="lazy" decoding="async"><figcaption><b>Przed</b><span>Google Street View, 2017</span></figcaption></figure></li>
-    <li><figure><img src="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-po-720.webp" alt="Koncepcja: kolorowe boisko Organic Flow na tym samym placu" loading="lazy" decoding="async"><figcaption><b>Koncepcja po</b><span>Organic Flow</span></figcaption></figure></li>
+    <li><figure><img src="{UP}2026/11/pole-mokotowskie-przed-720.webp" alt="Przed: szary betonowy plac do koszykówki" loading="lazy" decoding="async"><figcaption><b>Przed</b><span>Google Street View, 2017</span></figcaption></figure></li>
+    <li><figure><img src="{UP}2026/11/pole-mokotowskie-po-720.webp" alt="Koncepcja: kolorowe boisko Organic Flow na tym samym placu" loading="lazy" decoding="async"><figcaption><b>Koncepcja po</b><span>Organic Flow</span></figcaption></figure></li>
     <li><figure><img src="{UP}2026/10/Gamefields-Studio-%E2%80%94-Organic-Flow.webp" alt="Wzór nawierzchni Organic Flow w Studio Gamefields" loading="lazy" decoding="async"><figcaption><b>Wzór Organic Flow</b><span>Studio Gamefields</span></figcaption></figure></li>
   </ul>
   <ul class="gfa-links"><li><a href="/radar-boisko-koszykowki-warszawa/">Cała koncepcja →</a></li><li><a href="/renowacja-boisk/">Renowacja boisk</a></li></ul>

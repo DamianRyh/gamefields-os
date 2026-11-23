@@ -27,7 +27,7 @@ ROOT = HERE.parents[3]
 OFFER = HERE.parent.parent / "offer"
 UP = "https://www.gamefields.eu/wp-content/uploads/"
 SITE = "https://www.gamefields.eu/"
-MOD = "https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/"
+MOD = UP + "2026/11/"  # Pole Mokotowskie before/after in WordPress media (source: homepage/studio-2026-11/assets/modernizacja/)
 UPDATED = "16.11.2026"
 BASE_CSS = (HERE.parent / "gfa-style.css").read_text(encoding="utf-8").split("\n", 1)[1]
 
