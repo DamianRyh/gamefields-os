@@ -1,0 +1,28 @@
+Polecenie dla ChatGPT: nowa strona Boiska panna i street football, 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /boiska-street-football/ (ID 3465): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/boiska-2026-11/boiska-street-football.html
+SHA-256 zaczyna się od: d5f8f7f4fab11ede
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3465 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+   Obecna strona ładuje własną czcionkę Google (Space Grotesk); nowa jej nie potrzebuje (używa czcionki motywu).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Boiska panna i street football.” z renderem Panna Play, pas liczb (8, od 36 000 zł, 1 na 1 · 3 na 3, 10 lat);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - filtr: „Okrąg” → 4 modele; „Okrąg” + „Wyższe” → 2 modele (Panna Play, Panna Cage 180); „ponad 120 m²” → 1 model (Street Arena 15);
+     bez wyników pojawia się podpowiedź;
+   - 8 kart modeli z renderem, wymiarami, ceną konstrukcji i „z płytą i malowaniem”, przyciski Studio / W sklepie / Model 3D (/os/);
+   - tabela porównawcza (na telefonie karty), „Zacznij od placu.”, ciemny pas „Dwie gry, jedno studio.”, „Co w cenie”, 8 pytań;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Boiska panna 1 na 1 i street football 3 na 3: 8 modeli od 36 000 zł netto. Porównanie, wymiary, wysokość band, model 3D, Studio i realizacje.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
+
+Uwaga (bez wykonywania): link „Boiska panna i street football” w stopce prowadzi do /#boiska. Zmiana na /boiska-street-football/
+wymaga nowej wersji motywu — zrobimy ją przy najbliższym wydaniu motywu.
