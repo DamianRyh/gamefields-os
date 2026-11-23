@@ -1,0 +1,26 @@
+Polecenie dla ChatGPT: nowa strona Malowanie boisk, 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /malowanie-boisk/ (ID 3687): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/malowanie-2026-11/malowanie-boisk.html
+SHA-256 zaczyna się od: 9af8624557098c04
+
+Wymaganie: motyw Gamefields 1.0.35 lub nowszy (obrazy zestawów /wp-content/themes/gamefields/assets/js/home/kits/*.webp) i Studio z wzorami Masters II.
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3687 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Malowanie boisk sportowych.” z renderem Garden Plan, pas liczb (od 78 zł/m², 150–183 zł/m², 732, 12 miesięcy);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - „Trzy poziomy zmiany.”: Odświeżenie, Court design, Branding;
+   - „Ile kosztuje malowanie?”: domyślnie 420 m²: 32 800 / 42 000 / 63 000 / 76 900 zł; przycisk „Wielofunkcyjne · 19 × 32 m”: 47 500 / 60 800 / 91 200 / 111 300 zł;
+   - „Pięć miejsc, pięć wzorów.”: 5 zestawów; kliknięcie otwiera Studio z tym samym wzorem (np. Garden Plan na Panna Cage 90), pod spodem 3 wzory ze Studia;
+   - ciemny pas Masters II (8 kierunków), „Wzór, który da się namalować.” (4 zasady i kolory linii), 5 etapów, 8 pytań, linki i przyciski na dole;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Malowanie boisk: od 78 zł/m² netto. Odświeżenie, linie, court design i branding. 732 wzory w Studio 3D, kalkulator kosztu i malowalne wzory Masters II.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.

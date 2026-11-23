@@ -1,0 +1,30 @@
+Polecenie dla ChatGPT: nowa strona Renowacja boisk, 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /renowacja-boisk/ (ID 3685): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/renowacja-2026-11/renowacja-boisk.html
+SHA-256 zaczyna się od: 0ddfee5bbbca16a7
+
+Wymaganie: zdjęcia Pole Mokotowskie są w mediach (/wp-content/uploads/2026/11/pole-mokotowskie-przed-1100.webp i -po-1100.webp
+zwracają 200). Jeśli nie, najpierw wykonaj DLA-CHATGPT-media-pole-mokotowskie.txt, etap 1.
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3685 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Renowacja boisk sportowych.” z suwakiem przed/po (Pole Mokotowskie); przeciągnięcie suwaka odsłania koncepcję;
+     pas liczb (od 78 zł/m², od 167 zł/m², ze zdjęć, 12 miesięcy);
+   - pasek skrótów (Co z boiskiem? … Pytania) przykleja się pod menu i go nie zasłania;
+   - „Co jest z Twoim boiskiem?”: sześć objawów z „Co robię”, ceną i linkiem; ostatni (Woda stoi) ciemny, prowadzi do Budowy boisk;
+   - „Renowacja czy nowe boisko?”: dwie kolumny i fioletowa ramka „Najczęściej wychodzi coś pośrodku”;
+   - pięć etapów, cztery warianty malowania (78 / 100 / 150 / 183 zł/m²), siedem nawierzchni ze zdjęciami;
+   - kalkulator: domyślnie 420 m², malowanie z granulatem = 42 000 zł netto. Kliknij „Wielofunkcyjne · 19 × 32 m”: 60 800 zł.
+     Wybierz „Nowa nawierzchnia”, EPDM, Standard+: 192 800 zł. Dodaj arenę Panna Play: 232 800 zł;
+   - trzy wzory ze Studia, ciemny pas dla gmin, „Co sfotografować?”, 9 pytań (rozwijane), poradniki i przyciski na dole;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Renowacja boisk: malowanie od 78 zł/m², nowa nawierzchnia na starym placu od 167 zł/m², ocena placu ze zdjęć, kalkulator i nowy wzór w Studio 3D.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.

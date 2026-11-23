@@ -1,6 +1,7 @@
 # Lista zadań gamefields.eu
 
 Bieżąca lista. Zasada: najpierw repozytorium (PR, testy), potem strona (wdrożenie, kontrola na żywo).
+Zasada właściciela (23.11.2026): każdą zmianę najpierw pokazać w podglądzie w prawdziwym motywie (`python3 tools/preview/live_shell.py <adres strony> <blok.html> <podglad.html>`), dopiero potem paczka do wdrożenia albo wdrożenie samodzielne.
 Polecenia do wdrożenia na stronie czekają w kolejce: `docs/roadmap/POLECENIA-DLA-CHATGPT.md`.
 Statusy: ✅ zrobione · 🔄 w toku · ⏳ czeka na wdrożenie na stronie · ❓ czeka na decyzję właściciela · ⬜ do zrobienia
 
@@ -44,6 +45,10 @@ Ostatnia aktualizacja: 23.11.2026
 | 30 | Plakaty bez tekstu: tylko „Pełny spad”, bez zakładek Tekst/Układ i wyboru papieru (motyw 1.0.32, bloki plakaty i skrypty, opis produktu 4393) | ✅ PR (ten) | DLA-CHATGPT-plakaty-bez-tekstu.txt | ⏳ |
 | 31 | Zestawy na stronie głównej jak w Studio 3D: rendery konstrukcja + nawierzchnia Masters II ze Studia, poprawne linki do Studia (wzór, paleta, kolory), cena konstrukcji (motyw 1.0.33) | ✅ PR (ten) | DLA-CHATGPT-zestawy-studio.txt | ⏳ |
 | 32 | Motyw 1.0.35 = 1.0.33 + zmiany plakatu z 1.0.34 (ChatGPT, live): bez koła w środku dla Fade/Rings, „podgląd poglądowy”; podgląd plakatu ma stały rozmiar przy zmianie formatu i opcji. Zastępuje 1.0.33 (niewdrożony) | ✅ PR (ten) | DLA-CHATGPT-plakaty-zestawy-1.0.35.txt | ⏳ |
+| 33 | Podstrony od nowa (UX/UI, spójne z Realizacjami i Bazą wiedzy): /budowa-boisk-sportowych/ — 4 ścieżki startu, ceny 8 modeli, kalkulator budżetu (model lub własny metraż, płyta, 8 nawierzchni z wariantami), 7 etapów, nawierzchnie, gminy i szkoły, realizacje, „Co mi wysłać?”, 9 pytań z FAQPage, poradniki; poprawione martwe linki „#” | ✅ PR (ten), `pages/budowa-2026-11/` | DLA-CHATGPT-budowa-boisk.txt | ⏳ |
+| 34 | /renowacja-boisk/ od nowa: suwak przed/po (Pole Mokotowskie), 6 objawów z rozwiązaniem i ceną, renowacja czy nowe, 5 etapów, 4 warianty malowania, 7 nawierzchni na stary plac, kalkulator renowacji (metraż, malowanie lub nawierzchnia, arena), wzory ze Studia, gminy, co sfotografować, 9 pytań. Wspólny styl i dane: `pages/gfb_common.py` | ✅ PR (ten), `pages/renowacja-2026-11/` | DLA-CHATGPT-renowacja-boisk.txt | ⏳ |
+| 35 | /nawierzchnie-sportowe/ od nowa: siatka 8 tekstur, dobór według zastosowania, tabela porównawcza, porównanie kosztu na własnym metrażu (paski Standard–Premium, opcjonalnie z płytą), 8 kart z wariantami, „W cenie” i „Osobno”, normy, próbki pocztą, 8 pytań | ✅ PR #125, `pages/nawierzchnie-2026-11/` | DLA-CHATGPT-nawierzchnie-sportowe.txt | ⏳ |
+| 36 | /malowanie-boisk/ od nowa: court design zamiast powtórki renowacji — 3 zakresy (odświeżenie, court design, branding), 4 warianty z kosztem dla wpisanego metrażu, 5 zestawów ze Studia z linkiem do tego samego wzoru, Masters II (8 kierunków), zasady malowalności i kolory linii, 5 etapów, 8 pytań | ✅ PR #125, `pages/malowanie-2026-11/` | DLA-CHATGPT-malowanie-boisk.txt | ⏳ |
 | 14g | Prawdziwe zdjęcia materiałów w miejsce ilustracji | ⬜ | | ❓ zdjęcia od właściciela |
 | 15 | Linie sportowe na EPDM (osobna pozycja) | ⬜ | | ❓ czekam na cenę |
 | 16 | Strona: ceny nawierzchni obok cen konstrukcji w „Ile kosztuje arena?”: na każdej karcie „Z nawierzchnią od” (beton + malowanie), rozwijana tabela „Nawierzchnie: ceny za m²” (beton i 7 wykończeń, Standard–Premium) | ✅ PR #104, #109 (`prices_html`, `surfaces_html` w `homepage/studio-2026-11/build.py`) | ✅ sprawdzone 23.11: blok „ceny” na żywo = repozytorium | ✅ |
