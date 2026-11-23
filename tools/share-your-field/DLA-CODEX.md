@@ -87,3 +87,20 @@ node render-shot.js '[["hero.png","w=2400&h=1800&d=21"],["low.png","w=2400&h=180
 ```
 
 Posadzka i szachownica w `render.html` są uproszczeniem do prototypu; w Studio użyj prawdziwej nawierzchni ze sceny.
+
+## 6. Film z obrotem (MP4)
+
+Przykłady: `examples/gamefields-*-obrot.mp4` (H.264 High, yuv420p, 30 kl./s, 6 s, 180 klatek, pętla bez szwu, ok. 1,8 MB).
+Generator wzorcowy: `film.html` (scena 3D + `composer.js`) i `film.js` (Playwright + ffmpeg), np.
+`node film.js street story low 180 out.mp4`.
+
+Zasady, które trzeba zachować w Studio:
+1. Kamera stoi, obraca się boisko (`pivot.rotation.y = i / N · 2π`), światło stoi, więc cień przesuwa się naturalnie.
+   Klatka N nie jest renderowana (równa klatce 0): pętla bez szwu.
+2. Wspólne przycięcie dla całego obrotu: przed nagraniem przebieg co 4. klatkę w małej rozdzielczości, suma ramek
+   konturu, potem każda klatka przycinana tym samym prostokątem. Inaczej boisko skacze i zmienia skalę.
+3. Statyczne warstwy szablonu (tło, napisy, logo) rysowane raz, na klatkę zmienia się tylko warstwa modelu.
+4. W przeglądarce zamiast ffmpeg: WebCodecs `VideoEncoder` (`avc1.640028`, 1080 × 1920, 30 kl./s, ok. 6 Mb/s)
+   + biblioteka `mp4-muxer`, klatki kodowane na bieżąco (bez trzymania w pamięci), pasek postępu, „Anuluj”.
+   Zapas: `MediaRecorder` tylko gdy `isTypeSupported('video/mp4;codecs=avc1')`; w przeciwnym razie bez filmu (zostaje PNG).
+5. Udostępnianie jak PNG: `navigator.share({files:[new File([mp4], 'gamefields-obrot.mp4', {type:'video/mp4'})]})`.
