@@ -1,0 +1,41 @@
+<!doctype html><html><body style="margin:0;background:transparent">
+<script type="importmap">{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const P=new URLSearchParams(location.search);
+const W=+P.get('w')||2160,H=+P.get('h')||1620,view=P.get('view')||'hero';
+const frame=P.get('frame')||'#F29BBE',panel=P.get('panel')||'#F6F1EC';
+const cols=(P.get('pal')||'FBF4EC,F7B3CB,EE4D96').split(',').map(c=>'#'+c);
+const r=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+r.setSize(W,H);r.setPixelRatio(1);r.outputColorSpace=THREE.SRGBColorSpace;r.toneMapping=THREE.NoToneMapping;
+r.shadowMap.enabled=true;r.shadowMap.type=THREE.PCFSoftShadowMap;document.body.appendChild(r.domElement);
+const scene=new THREE.Scene();const pm=new THREE.PMREMGenerator(r);scene.environment=pm.fromScene(new RoomEnvironment(),0.04).texture;scene.environmentIntensity=0.6;
+scene.add(new THREE.HemisphereLight(0xffffff,0xd8c8d0,0.9));
+const sun=new THREE.DirectionalLight(0xffffff,1.6);sun.position.set(-6,12,8);sun.castShadow=true;sun.shadow.mapSize.set(4096,4096);
+Object.assign(sun.shadow.camera,{left:-8,right:8,top:8,bottom:-8});sun.shadow.radius=6;sun.shadow.bias=-0.0004;scene.add(sun);
+// checker texture: cream / light pink, magenta accents
+function checker(n=10){const c=document.createElement('canvas');c.width=c.height=2048;const g=c.getContext('2d');const s=2048/n;
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){g.fillStyle=(x+y)%2?cols[1]:cols[0];g.fillRect(x*s,y*s,s,s)}
+ // magenta accent ring
+ g.save();g.beginPath();g.arc(1024,1024,1024,0,7);g.arc(1024,1024,900,0,7,true);g.clip();
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){if((x+y)%2){g.fillStyle=cols[2];g.fillRect(x*s,y*s,s,s)}}g.restore();
+ const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t}
+new GLTFLoader().load('panna-kids-o1.glb',g=>{
+ const m=g.scene;const box=new THREE.Box3().setFromObject(m);const size=box.getSize(new THREE.Vector3()),ctr=box.getCenter(new THREE.Vector3());
+ m.position.sub(new THREE.Vector3(ctr.x,box.min.y,ctr.z));scene.add(m);
+ m.traverse(o=>{if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;const n=(o.material.name||'');
+  if(n.startsWith('Panele')){o.material=new THREE.MeshStandardMaterial({color:panel,roughness:.55,metalness:.1,transparent:true,opacity:.72,side:THREE.DoubleSide})}
+  else{o.material=new THREE.MeshStandardMaterial({color:frame,roughness:.42,metalness:.35})}});
+ const R=size.x/2*0.975;
+ const floor=new THREE.Mesh(new THREE.CircleGeometry(R,128),new THREE.MeshStandardMaterial({map:checker(),roughness:.8}));
+ floor.rotation.x=-Math.PI/2;floor.position.y=0.01;floor.receiveShadow=true;scene.add(floor);
+ const shadow=new THREE.Mesh(new THREE.PlaneGeometry(60,60),new THREE.ShadowMaterial({opacity:.18}));shadow.rotation.x=-Math.PI/2;shadow.receiveShadow=true;scene.add(shadow);
+ let cam;
+ if(view==='top'){const a=W/H,h=R*2.5;cam=new THREE.OrthographicCamera(-h*a/2,h*a/2,h/2,-h/2,.1,100);cam.position.set(0,30,0);cam.up.set(0,0,-1);cam.lookAt(0,0,0);shadow.visible=false}
+ else{cam=new THREE.PerspectiveCamera(+P.get('fov')||22,W/H,.1,200);const az=(+P.get('az')||38)*Math.PI/180,el=(+P.get('el')||32)*Math.PI/180,d=+P.get('d')||24;
+  cam.position.set(Math.sin(az)*Math.cos(el)*d,Math.sin(el)*d,Math.cos(az)*Math.cos(el)*d);cam.lookAt(0,size.y*0.18,0)}
+ r.render(scene,cam);document.title='done '+JSON.stringify([size.x.toFixed(2),size.y.toFixed(2),size.z.toFixed(2)]);
+});
+</script></body></html>
