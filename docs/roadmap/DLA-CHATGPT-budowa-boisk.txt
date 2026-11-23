@@ -1,0 +1,27 @@
+Polecenie dla ChatGPT: nowa strona Budowa boisk sportowych, 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /budowa-boisk-sportowych/ (ID 3684): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/budowa-2026-11/budowa-boisk-sportowych.html
+SHA-256 zaczyna się od: a6e289ea961d6bed
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3684 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Budowa boisk sportowych.” z czterema zdjęciami (Kraków: gotowe boisko, projekt, montaż; Kutno) i pas liczb
+     (od 36 000 zł, 283 zł/m², 12 miesięcy, 10 lat);
+   - pasek skrótów (Od czego zacząć … Pytania); przy przewijaniu przykleja się pod menu i go nie zasłania; kliknięcie przewija do sekcji;
+   - „Jaki masz punkt wyjścia?”: cztery karty (pusty teren, stary beton, mało miejsca, event), każda z ceną i linkiem;
+   - „Ile kosztuje boisko?”: tabela 8 modeli (konstrukcja od / z nawierzchnią od, przyciski Zobacz i Studio); na telefonie karty zamiast tabeli;
+   - „Policz swój budżet.”: domyślnie Panna Play = 51 000 zł netto (40 000 + 8 600 + 2 400). Zmień nawierzchnię na EPDM Premium:
+     60 700 zł. Wybierz „Własny metraż”, wpisz 608 i odznacz płytę: 243 200 zł. Przycisk „Zaprojektuj w Studio” otwiera Studio z wybranym modelem;
+   - siedem etapów, osiem nawierzchni ze zdjęciami (linki do produktów), ciemny pas „Boisko, które się broni.”, 4 realizacje,
+     „Co mi wysłać?”, 9 pytań (rozwijane), poradniki i przyciski na dole;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Budowa boisk sportowych: konstrukcja od 36 000 zł netto, płyta z podbudową 283 zł/m², 8 nawierzchni, kalkulator budżetu i dokumenty dla gmin i szkół.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
