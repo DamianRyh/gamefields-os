@@ -1,0 +1,27 @@
+Polecenie dla ChatGPT: nowa strona Szkoły i gminy (/boiska-dla-szkol/), 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /boiska-dla-szkol/ (ID 3701): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/szkoly-2026-11/boiska-dla-szkol.html
+SHA-256 zaczyna się od: 0b550030d029deaa
+
+Wymaganie: motyw Gamefields 1.0.35 lub nowszy (obraz zestawu /wp-content/themes/gamefields/assets/js/home/kits/szkola.webp).
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3701 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Boiska dla szkół i gmin.” z renderem zestawu „Szkoła”, pas liczb (od 4.01, do 60%, 12 miesięcy, 10 lat);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - „Czas liczy się od grudnia.”: limonkowy licznik dni do 4 stycznia 2027 i trzy nabory z terminami;
+   - cztery sposoby (przy szkole, modernizacja, wielofunkcyjne, panna w sali gimnastycznej), trzy modele z cenami;
+   - ciemny pas „Sześć źródeł finansowania.” z czterema wymaganiami komisji (edycja 2026), „Część techniczna wniosku.” (6 pozycji i normy);
+   - „Słowa urzędu i OSiR.” (dwie opinie i 6 logo miast), plan 2027 (5 kroków), „Co mi wysłać?”, 9 pytań;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Boiska dla szkół i gmin: arena przy szkole od 36 000 zł netto, modernizacja Orlika, nabory 2027 od 4 stycznia i część techniczna wniosku o dofinansowanie.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
+Po 26.02.2027 licznik sam pokaże, że nabory 2027 się zakończyły; treść stron o naborach aktualizujemy z regulaminów (zadanie 8).

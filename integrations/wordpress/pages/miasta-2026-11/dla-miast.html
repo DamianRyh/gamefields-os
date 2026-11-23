@@ -1,0 +1,412 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-surf{gap:8px}.gfb-surf .tx{padding:10px 12px 12px}.gfb-surf b{font-size:15px}.gfb-surf .nt{font-size:12px}.gfb-surf .r{font-size:13px}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+
+.gfb-hero figure.kit{margin:0;background:#D23A26;overflow:hidden;position:relative}
+.gfb-hero figure.kit img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.gfa .gfb-hero figure.kit figcaption{position:absolute;left:10px;bottom:10px;margin:0;padding:6px 10px;background:rgba(28,9,18,.84);color:#fff;font-size:13px}
+/* problems */
+.gfb-pr{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-pr > li{display:flex;flex-direction:column;gap:10px;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfb-pr .n{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--violet)}
+.gfb-pr b{font-size:22px;letter-spacing:-.025em;line-height:1.1}
+.gfb-pr p{margin:0;color:#5A4652;font-size:15px}
+.gfb-pr .fx{padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-pr .fx::before{content:"Rozwiązanie: ";font-weight:800;color:var(--violet)}
+.gfb-pr .pr{margin-top:auto;font-weight:800;font-size:15px}
+.gfb-pr a{color:var(--violet);font-weight:800;font-size:14px;text-decoration:none}
+/* area picker */
+.gfb-ar{display:flex;flex-wrap:wrap;align-items:end;gap:10px 16px;margin:0 0 14px;padding:16px 18px;background:#fff;border:1px solid var(--line)}
+.gfb-ar label{display:block;margin:0 0 6px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-ar input{width:160px;min-height:48px;padding:0 12px;border:1.5px solid #CDBFC6;border-radius:10px;font:inherit;font-size:16px;color:var(--ink)}
+.gfb-ar output{font-size:15px;font-weight:700}
+.gfb-ranges{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.gfb-ranges li{display:flex;flex-direction:column;gap:6px;padding:18px 16px;background:#fff;border:1.5px solid var(--line);transition:border-color .2s ease,background .2s ease}
+.gfb-ranges li.on{border-color:var(--violet);background:#EEE8FF}
+.gfb-ranges b{font-size:clamp(22px,2vw,30px);font-weight:800;letter-spacing:-.04em;color:var(--violet)}
+.gfb-ranges strong{font-size:17px;line-height:1.15}
+.gfb-ranges span{font-size:14px;color:#5A4652}
+.gfb-ranges a{margin-top:auto;padding-top:6px;color:var(--violet);font-weight:800;font-size:14px;text-decoration:none}
+/* why */
+.gfb-why{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-why div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-why dt{font-size:21px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.gfb-why dd{margin:8px 0 0;font-size:15px;color:rgba(244,241,238,.85)}
+/* cases */
+.gfb-cases{display:grid;gap:12px}
+.gfb-cases article{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(16px,2.4vw,32px);padding:clamp(16px,2vw,22px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfb-cases img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfb-cases .pl{margin:0 0 4px;color:var(--violet);font-weight:800;font-size:14px}
+.gfb-cases h3{font-size:clamp(26px,2.6vw,38px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-cases dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 0}
+.gfb-cases dl div{padding:12px 14px;background:var(--paper)}
+.gfb-cases dt{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-cases dd{margin:6px 0 0;font-size:15px;color:#5A4652}
+.gfb-cases blockquote{margin:14px 0 0;padding:0 0 0 14px;border-left:4px solid var(--violet);font-size:16px;font-weight:600;line-height:1.45}
+.gfb-cases cite{display:block;margin-top:6px;font-style:normal;font-size:14px;color:var(--muted)}
+.gfb-cases .ln{display:inline-block;margin-top:10px;color:var(--violet);font-weight:800;font-size:14px}
+/* kit band */
+.gfb-kitb{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:center}
+.gfb-kitb img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#D23A26}
+.gfb-kitb ul{margin:14px 0 0;padding-left:20px;display:grid;gap:6px;font-size:16px;color:#5A4652}
+.gfb-kitb .pr{margin:14px 0 0;font-size:18px;font-weight:800}
+/* concepts row */
+.gfb-cr{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-cr a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-cr a:hover{border-color:var(--violet)}
+.gfb-cr img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#E6E0DA}
+.gfb-cr .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-cr b{font-size:19px;letter-spacing:-.02em}.gfb-cr .nt{font-size:14px;color:var(--muted)}
+.gfb-cr .tag{justify-self:start;padding:3px 8px;border-radius:999px;background:var(--paper);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+/* activation */
+.gfb-act{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px}
+.gfb-act .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfb-act .ph img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#E6E0DA}
+.gfb-act ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-act li{padding:16px 18px;background:#fff;border:1px solid var(--line)}
+.gfb-act li b{display:block;font-size:18px;letter-spacing:-.02em}
+.gfb-act li span{font-size:15px;color:#5A4652}
+.gfa-logos{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gfa-logos li{display:grid;place-items:center;height:96px;padding:12px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.gfa-logos img{display:block;max-width:100%;max-height:72px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
+@media (max-width:1100px){.gfb-pr,.gfb-why{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-ranges{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:900px){.gfb-cases article,.gfb-kitb,.gfb-act,.gfb-cr{grid-template-columns:minmax(0,1fr)}.gfb-cases dl{grid-template-columns:minmax(0,1fr)}.gfa-logos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.gfb-pr,.gfb-why,.gfb-ranges{grid-template-columns:minmax(0,1fr)}.gfb-ar input{width:100%}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://www.gamefields.eu/dla-miast/#usluga","name":"Boiska dla miast i samorządów","serviceType":"Projekt, realizacja i aktywacja miejskich przestrzeni sportowych","url":"https://www.gamefields.eu/dla-miast/","inLanguage":"pl-PL","areaServed":{"@type":"Country","name":"Polska"},"provider":{"@id":"https://www.gamefields.eu/#studio"},"audience":{"@type":"Audience","audienceType":"miasta, gminy, zarządy zieleni, ośrodki sportu"},"description":"Areny panna i boiska 3 na 3 na małych placach, renowacja miejskich boisk, materiały do budżetu obywatelskiego i wniosków, turniej na otwarcie."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Miasta","item":"https://www.gamefields.eu/dla-miast/"}]},{"@type":"FAQPage","@id":"https://www.gamefields.eu/dla-miast/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile kosztuje arena w parku albo na placu?","acceptedAnswer":{"@type":"Answer","text":"Panna Cage 90 kosztuje od 36 000 zł netto, a z płytą betonową i malowaniem od 47 400 zł netto. Boisko 3 na 3 (Street Arena 15) od 100 000 zł netto. Montaż, transport i przygotowanie terenu liczę po zdjęciach."}},{"@type":"Question","name":"Ile miejsca potrzeba?","acceptedAnswer":{"@type":"Answer","text":"Arena 1 na 1 mieści się na placu o boku od około 5 do 7 m. Na 30–60 m² zmieści się panna, na 120–250 m² boisko 3 na 3, powyżej 500 m² proponuję projekt indywidualny. Do tego strefa bezpieczeństwa wokół."}},{"@type":"Question","name":"Czy pomagacie w budżecie obywatelskim?","acceptedAnswer":{"@type":"Answer","text":"Tak. Zestaw „Miasto” (Panna Cage 90 + wzór Garden Plan) to komplet materiałów do budżetu obywatelskiego: koncepcja, wizualizacja i cena orientacyjna do formularza."}},{"@type":"Question","name":"Skąd miasto może wziąć pieniądze?","acceptedAnswer":{"@type":"Answer","text":"Programy Ministerstwa Sportu (m.in. modernizacja Orlików), programy województw, budżet obywatelski, fundusz sołecki, Fundusze Europejskie na rewitalizację albo partner, który finansuje arenę z logo na bandach. Przygotuję część techniczną wniosku."}},{"@type":"Question","name":"Czy arena jest bezpieczna w przestrzeni ogólnodostępnej?","acceptedAnswer":{"@type":"Answer","text":"Konstrukcje są stalowe i zamknięte bandami, a Panna Ring stoi na ogólnodostępnym Orliku od 10 lat bez uszkodzeń. Nawierzchnie mają normy: EPDM PN-EN 14877, płyty gumowe PN-EN 1177 z atestem PZH."}},{"@type":"Question","name":"Czy możecie pomóc uruchomić miejsce po otwarciu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Mogę zorganizować turniej na otwarcie z prowadzeniem i muzyką oraz zaproponować formaty cykliczne. Turnieje organizuję od 2008 roku, w 2017 zorganizowałem Mistrzostwa Świata Freestival Street Games."}},{"@type":"Question","name":"Czy odnowicie stare miejskie boisko?","acceptedAnswer":{"@type":"Answer","text":"Tak. Oceniam plac ze zdjęć, naprawiam podłoże i kładę farby sportowe z gumą (od 78 zł/m² netto) albo nową nawierzchnię. Gdy podłoże jest zniszczone, proponuję nową płytę (283 zł/m²)."}},{"@type":"Question","name":"Jak wygląda współpraca z urzędem?","acceptedAnswer":{"@type":"Answer","text":"Możesz zlecić pojedynczy etap albo cały proces: analizę, koncepcję, projekt, realizację i otwarcie. Dostajesz karty techniczne i certyfikaty do dokumentacji przetargowej oraz 12 miesięcy gwarancji."}}]}]}</script>
+<div class="gfa gfb">
+<section class="gfb-hero"><div class="w top">
+  <div>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Miasta</p>
+    <p class="k">Dla miast i samorządów</p>
+    <h1 class="d">Więcej gry z mniejszej przestrzeni.</h1>
+    <p class="lead">Puste place, stare boiska i fragmenty parków zamieniam w miejsca codziennej gry. Od koncepcji i wniosku, przez realizację, po turniej na otwarcie.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Pokaż mi miejsce →</a><a class="gfa-btn alt" href="/studio/?arena=circle-cage-1&amp;pattern=pro-garden&amp;variant=3&amp;palette=burle-marx&amp;panel=1F5E3A&amp;frame=1B1B1B">Zestaw „Miasto” w Studio ↗</a></div>
+  </div>
+  <figure class="kit"><img src="/wp-content/themes/gamefields/assets/js/home/kits/miasto.webp" alt="Panna Cage 90 z nawierzchnią Garden Plan, zestaw dla miasta, widok ze Studio 3D" loading="eager" decoding="async"><figcaption>Zestaw „Miasto”: Panna Cage 90 + Garden Plan</figcaption></figure>
+</div>
+<div class="w">
+  <dl class="gfb-nums">
+    <div><dt>Arena</dt><dd>od 36 000 zł<small>netto, Panna Cage 90</small></dd></div>
+    <div><dt>Plac</dt><dd>5–7 m<small>tyle wystarczy na arenę 1 na 1</small></dd></div>
+    <div><dt>Trwałość</dt><dd>10 lat<small>na Orliku, bez uszkodzeń</small></dd></div>
+    <div><dt>Miasta</dt><dd>7<small>od Warszawy po Gdańsk</small></dd></div>
+  </dl>
+</div></section>
+
+<nav class="gfb-jump" aria-label="Na tej stronie"><div class="w"><ul role="list"><li><a href="#problem">Problem miejsca</a></li><li><a href="#metraz">Ile miejsca</a></li><li><a href="#dlaczego">Dlaczego arena</a></li><li><a href="#realizacje">Realizacje</a></li><li><a href="#budzet">Budżet obywatelski</a></li><li><a href="#aktywacja">Otwarcie</a></li><li><a href="#proces">Proces</a></li><li><a href="#pytania">Pytania</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="problem"><div class="w">
+  <div class="gfa-head"><div><p class="k">Problem miejsca</p><h2 class="d">Nie zaczynam od produktu.</h2></div><p>Nie musisz wiedzieć, czy potrzebujesz areny, boiska 3 na 3 czy renowacji. Pokaż teren, jego skalę i użytkowników. Najpierw rozwiązanie, potem technologia.</p></div>
+  <ul class="gfb-pr" role="list"><li><span class="n">01</span><b>Pusta przestrzeń</b><p>Mały plac, fragment parku, dziedziniec albo niewykorzystany teren.</p><span class="fx">arena panna na płycie betonowej, wpisana w zieleń i dojścia.</span><span class="pr">komplet od 47 400 zł netto</span><a href="#metraz">Dobierz do metrażu ↓</a></li><li><span class="n">02</span><b>Zużyte boisko</b><p>Istniejący plac, który może dostać nowe życie zamiast rozbiórki.</p><span class="fx">naprawa podłoża, farby z gumą, wzór i linie do kilku gier.</span><span class="pr">malowanie od 78 zł/m² netto</span><a href="/renowacja-boisk/">Renowacja boisk →</a></li><li><span class="n">03</span><b>Za mało miejsca</b><p>Klasyczne boisko się nie mieści, a młodzież nie ma gdzie grać.</p><span class="fx">format 1 na 1 albo 3 na 3: arena mieści się na placu o boku 5–7 m.</span><span class="pr">konstrukcja od 36 000 zł netto</span><a href="/boiska-street-football/">Modele i ceny →</a></li><li><span class="n">04</span><b>Brak aktywności</b><p>Boisko stoi, ale nikt nie gra albo miejsce nie ma charakteru.</p><span class="fx">nowy wzór, turniej na otwarcie i formaty cykliczne.</span><span class="pr">arena mobilna od 27 000 zł netto</span><a href="#aktywacja">Otwarcie i aktywacja ↓</a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="metraz"><div class="w">
+  <div class="gfa-head"><div><p class="k">Ile miejsca</p><h2 class="d">Wpisz metraż placu.</h2></div><p>Podświetlę format, który pasuje. Dokładnie w skali sprawdzisz to w planerze <a href="/#planer">„Zmieści się?”</a>.</p></div>
+  <div class="gfb-ar" data-ar><div><label for="gfb-ar-a">Powierzchnia placu w m²</label><input id="gfb-ar-a" type="number" min="1" step="1" value="45" inputmode="numeric"></div><output aria-live="polite"></output></div>
+  <ul class="gfb-ranges" role="list"><li data-lo="30" data-hi="60"><b>30–60 m²</b><strong>Boisko 1 na 1, panna</strong><span>Panna Ring, Play, Cage 90 i 180, Octa</span><a href="/boiska-street-football/">Zobacz →</a></li><li data-lo="60" data-hi="120"><b>60–120 m²</b><strong>Strefa techniki i małej gry</strong><span>Panna Court, Panna Grid albo dwie areny</span><a href="/boiska-street-football/">Zobacz →</a></li><li data-lo="120" data-hi="250"><b>120–250 m²</b><strong>Piłka uliczna 3 na 3</strong><span>Street Arena 15: 15 × 10 m</span><a href="/product/street-arena-15/">Zobacz →</a></li><li data-lo="250" data-hi="500"><b>250–500 m²</b><strong>Rozbudowana strefa piłki ulicznej</strong><span>3 na 3 i areny 1 na 1 obok siebie</span><a href="/projektowanie-boisk/">Zobacz →</a></li><li data-lo="500" data-hi="100000"><b>500 m²+</b><strong>Projekt indywidualny</strong><span>boisko wielofunkcyjne, plac z kilkoma funkcjami</span><a href="/projektowanie-boisk/">Zobacz →</a></li></ul>
+</div></section>
+
+<section class="gfa-band" id="dlaczego"><div class="w">
+  <div class="gfa-head"><div><p class="k">Dlaczego arena</p><h2 class="d">Argumenty zamawiających.</h2></div><p>To słyszę od urzędów, ośrodków sportu i zarządców zieleni, którzy już mają nasze areny.</p></div>
+  <dl class="gfb-why"><div><dt>Mała powierzchnia</dt><dd>Arena mieści się na placu o boku od około 5 do 7 m, obok istniejących boisk.</dd></div><div><dt>Trwałość</dt><dd>Panna Ring na Orliku w Grodzisku Mazowieckim stoi od 10 lat bez uszkodzeń.</dd></div><div><dt>Gra bez organizacji</dt><dd>Wystarczą dwie osoby i piłka. Bez zapisów, trenera i rezerwacji.</dd></div><div><dt>Czytelny znak</dt><dd>Kolorowa konstrukcja i nawierzchnia przyciągają wzrok i porządkują plac.</dd></div></dl>
+</div></section>
+
+<section class="gfa-sec" id="realizacje"><div class="w">
+  <div class="gfa-head"><div><p class="k">Realizacje</p><h2 class="d">Zadanie, rozwiązanie, efekt.</h2></div><p>Cztery miejsca w czterech miastach. Także Żyrardów i Gdańsk. <a href="/realizacje-dla-miast/">Realizacje dla miast →</a></p></div>
+  <div class="gfb-cases"><article><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim, Warszawa" loading="lazy" decoding="async"><div><p class="pl">Warszawa, Park Świętokrzyski</p><h3>Taras pod Pałacem Kultury</h3><dl><div><dt>Zadanie</dt><dd>Wielofunkcyjna przestrzeń rekreacji w centrum, przy metrze i Pałacu Kultury. Inwestycja tymczasowa.</dd></div><div><dt>Rozwiązanie</dt><dd>Trzy areny Panna Ring połączone z tarasem i rampą do skateboardingu. Inwestor: Zarząd Zieleni m.st. Warszawy.</dd></div><div><dt>Efekt</dt><dd>Jedno z najpopularniejszych miejsc spotkań warszawskiej młodzieży; pisał o nim m.in. New York Times.</dd></div></dl><blockquote>„Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży.”<cite>Grzegorz Gądek, Prezes Fundacji Skwery Sportów Miejskich</cite></blockquote><a class="ln" href="/realizacje-gamefields/#taras">Historia realizacji →</a></div></article><article><img src="https://www.gamefields.eu/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa w Kutnie" loading="lazy" decoding="async"><div><p class="pl">Kutno, pasaż sportowy</p><h3>Panna Octa w Kutnie</h3><dl><div><dt>Zadanie</dt><dd>Stałe miejsce do gry dla młodzieży na miejskim pasażu sportowym.</dd></div><div><dt>Rozwiązanie</dt><dd>Ośmiokątna arena Panna Octa, zamówiona przez Urząd Miasta Kutno.</dd></div><div><dt>Efekt</dt><dd>Realizacja bez zastrzeżeń, boisko cieszy się dużą popularnością wśród młodzieży.</dd></div></dl><blockquote>„Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.”<cite>Beata Rafalska, Urząd Miasta Kutno, ds. inwestycji</cite></blockquote><a class="ln" href="/realizacje-gamefields/#kutno">Historia realizacji →</a></div></article><article><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Panna Octa Cage 90 w parku, Kraków" loading="lazy" decoding="async"><div><p class="pl">Kraków, teren miejski</p><h3>Od planu do parku</h3><dl><div><dt>Zadanie</dt><dd>Arena na terenie miejskim, wpisana w plan zagospodarowania.</dd></div><div><dt>Rozwiązanie</dt><dd>Panna Octa Cage 90: projekt na planie, montaż, odbiór.</dd></div><div><dt>Efekt</dt><dd>Gotowa arena w parku. Ten sam proces prowadzę dla gmin: koncepcja, wizualizacja, parametry i dokumenty.</dd></div></dl><a class="ln" href="/realizacje-gamefields/#krakow">Historia realizacji →</a></div></article><article><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring na Orliku, Grodzisk Mazowiecki" loading="lazy" decoding="async"><div><p class="pl">Grodzisk Mazowiecki, Orlik</p><h3>Arena przy Orliku</h3><dl><div><dt>Zadanie</dt><dd>Dodatkowa strefa gry na istniejącym obiekcie sportowym, dla gry 1 na 1 i w małych grupach.</dd></div><div><dt>Rozwiązanie</dt><dd>Arena Panna Ring na terenie Orlika OSiR.</dd></div><div><dt>Efekt</dt><dd>Stoi od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</dd></div></dl><blockquote>„Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.”<cite>Mariusz Smysło, Dyrektor OSiR Grodzisk Mazowiecki</cite></blockquote><a class="ln" href="/realizacje-gamefields/#orlik">Historia realizacji →</a></div></article></div>
+  <ul class="gfa-logos" role="list"><li style="--z:1.3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Warszawa--300x194.png" alt="Miasto stołeczne Warszawa" width="300" height="194" loading="lazy" decoding="async"></li><li style="--z:1.7"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Zarzad-Zieleni-Miejskiej-Warszawa-300x141.jpg" alt="Zarząd Zieleni m.st. Warszawy" width="300" height="141" loading="lazy" decoding="async"></li><li style="--z:1"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOHO-Krakow--300x200.jpg" alt="Kraków" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1.6"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Grodzisk-Mazowiecki-LOGO-300x200.jpg" alt="Grodzisk Mazowiecki" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Kutno--300x231.jpg" alt="Kutno" width="300" height="231" loading="lazy" decoding="async"></li><li style="--z:1.15"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Lodz-300x139.webp" alt="Łódź" width="300" height="139" loading="lazy" decoding="async"></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="budzet"><div class="w">
+  <div class="gfb-kitb">
+    <img src="/wp-content/themes/gamefields/assets/js/home/kits/miasto.webp" alt="Zestaw Miasto: Panna Cage 90 z nawierzchnią Garden Plan" loading="lazy" decoding="async">
+    <div><p class="k">Budżet obywatelski</p><h2 class="d" style="font-size:clamp(40px,5vw,80px)">Zestaw „Miasto”.</h2>
+      <p class="lead" style="margin:16px 0 0;font-size:18px;color:var(--muted)">Mała arena jako punkt spotkań w parku. Komplet materiałów do budżetu obywatelskiego.</p>
+      <ul><li>Panna Cage 90 i nawierzchnia Garden Plan (park, skwer, plac)</li><li>koncepcja i wizualizacja na zdjęciu miejsca</li><li>cena orientacyjna do formularza zgłoszenia</li></ul>
+      <p class="pr">konstrukcja od 36 000 zł netto · z płytą i malowaniem od 47 400 zł</p>
+      <div class="gfa-btns" style="margin-top:18px"><a class="gfa-btn" href="/studio/?arena=circle-cage-1&amp;pattern=pro-garden&amp;variant=3&amp;palette=burle-marx&amp;panel=1F5E3A&amp;frame=1B1B1B">Otwórz zestaw w Studio ↗</a><a class="gfa-btn alt" href="/dofinansowanie-boisk/">Źródła finansowania →</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="koncepcje"><div class="w">
+  <div class="gfa-head"><div><p class="k">Koncepcje</p><h2 class="d">Pomysły dla Warszawy.</h2></div><p>Miejsca, które dopiero mogą powstać: plac, przestrzeń pod mostem, stary plac do odnowienia. <a href="/koncepcje/">Wszystkie koncepcje →</a></p></div>
+  <ul class="gfb-cr" role="list"><li><a href="/koncepcje/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/IMG_1050-768x492.jpg" alt="Plac pod Pałacem Kultury, wizualizacja" loading="lazy" decoding="async"><span class="tx"><span class="tag">wizualizacja</span><b>Plac pod Pałacem Kultury</b><span class="nt">miejsca do gry w posadzce placu</span></span></a></li><li><a href="/koncepcje/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/10/51.jpg" alt="Pod Mostem Łazienkowskim, wizualizacja" loading="lazy" decoding="async"><span class="tx"><span class="tag">wizualizacja</span><b>Pod Mostem Łazienkowskim</b><span class="nt">boisko w miejscu pustego betonu</span></span></a></li><li><a href="/koncepcje/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-po-720.webp" alt="Pole Mokotowskie, wizualizacja" loading="lazy" decoding="async"><span class="tx"><span class="tag">wizualizacja</span><b>Pole Mokotowskie</b><span class="nt">stary plac, nowy wzór Organic Flow</span></span></a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="aktywacja"><div class="w">
+  <div class="gfa-head"><div><p class="k">Otwarcie</p><h2 class="d">Boisko ma działać po otwarciu.</h2></div><p>Największą wartością nie jest konstrukcja, tylko miejsce, do którego ludzie wracają. Dlatego łączę infrastrukturę z praktyką piłki ulicznej i wydarzeń.</p></div>
+  <div class="gfb-act">
+    <div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/5-3-768x768.jpg" alt="Mistrzostwa Polski, Street Mekka, Łódź" loading="lazy" decoding="async"></div>
+    <ul role="list">
+      <li><b>Turniej na otwarcie</b><span>Prowadzenie, muzyka i lokalna aktywacja w dniu startu.</span></li>
+      <li><b>Formaty cykliczne</b><span>Ligi i spotkania, które utrzymują zainteresowanie miejscem.</span></li>
+      <li><b>Doświadczenie</b><span>Turnieje od 2008 roku, Mistrzostwa Świata Freestival Street Games 2017, Puchar Polski, Mistrzostwa Polski.</span></li>
+      <li><b>Arena mobilna</b><span>Na festyn albo dzień miasta, wynajem i sprzedaż od 27 000 zł netto. <a href="/wynajem-boisk-mobilnych/" style="color:var(--violet);font-weight:700">Szczegóły →</a></span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="proces"><div class="w">
+  <div class="gfa-head"><div><p class="k">Proces</p><h2 class="d">Jeden partner, kilka etapów.</h2></div><p>Możesz zlecić pojedynczy etap albo cały proces, od analizy miejsca po otwarcie.</p></div>
+  <ol class="gfb-steps"><li><b>Pokaż miejsce</b><p>Lokalizacja, zdjęcia, przybliżone wymiary.</p><span class="gf">nie potrzebujesz specyfikacji.</span></li><li><b>Określamy potrzeby</b><p>Kto ma grać, jak często, co dzieje się wokół.</p><span class="gf">rozmowa, nie formularz.</span></li><li><b>Dobieramy format</b><p>1 na 1, 3 na 3, renowacja albo projekt indywidualny.</p><span class="gf">dobór do metrażu i budżetu.</span></li><li><b>Projektujemy</b><p>Układ, konstrukcja, nawierzchnia, kolory.</p><span class="gf">Studio 3D i karta projektu PDF.</span></li><li><b>Realizujemy</b><p>Produkcja, przygotowanie, montaż albo renowacja.</p><span class="gf">12 miesięcy gwarancji.</span></li><li><b>Uruchamiamy</b><p>Turniej na otwarcie i formaty cykliczne, jeśli chcesz.</p><span class="gf">eventy od 2008 roku.</span></li><li class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Gamefields-x-boiska-x-Projekt-Krakow--768x768.jpg" alt="Plan z arenami, Kraków" loading="lazy" decoding="async"></li><li class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-montaz-768x576.jpg" alt="Montaż areny, Kraków" loading="lazy" decoding="async"></li></ol>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><div><p class="k">Pytania</p><h2 class="d">Zanim złożysz zamówienie.</h2></div><p>Koszty, miejsce, finansowanie, bezpieczeństwo i współpraca z urzędem.</p></div>
+  <div class="gfa-faq"><details><summary>Ile kosztuje arena w parku albo na placu?</summary><p>Panna Cage 90 kosztuje od 36 000 zł netto, a z płytą betonową i malowaniem od 47 400 zł netto. Boisko 3 na 3 (Street Arena 15) od 100 000 zł netto. Montaż, transport i przygotowanie terenu liczę po zdjęciach.</p></details><details><summary>Ile miejsca potrzeba?</summary><p>Arena 1 na 1 mieści się na placu o boku od około 5 do 7 m. Na 30–60 m² zmieści się panna, na 120–250 m² boisko 3 na 3, powyżej 500 m² proponuję projekt indywidualny. Do tego strefa bezpieczeństwa wokół.</p></details><details><summary>Czy pomagacie w budżecie obywatelskim?</summary><p>Tak. Zestaw „Miasto” (Panna Cage 90 + wzór Garden Plan) to komplet materiałów do budżetu obywatelskiego: koncepcja, wizualizacja i cena orientacyjna do formularza.</p></details><details><summary>Skąd miasto może wziąć pieniądze?</summary><p>Programy Ministerstwa Sportu (m.in. modernizacja Orlików), programy województw, budżet obywatelski, fundusz sołecki, Fundusze Europejskie na rewitalizację albo partner, który finansuje arenę z logo na bandach. Przygotuję część techniczną wniosku.</p></details><details><summary>Czy arena jest bezpieczna w przestrzeni ogólnodostępnej?</summary><p>Konstrukcje są stalowe i zamknięte bandami, a Panna Ring stoi na ogólnodostępnym Orliku od 10 lat bez uszkodzeń. Nawierzchnie mają normy: EPDM PN-EN 14877, płyty gumowe PN-EN 1177 z atestem PZH.</p></details><details><summary>Czy możecie pomóc uruchomić miejsce po otwarciu?</summary><p>Tak. Mogę zorganizować turniej na otwarcie z prowadzeniem i muzyką oraz zaproponować formaty cykliczne. Turnieje organizuję od 2008 roku, w 2017 zorganizowałem Mistrzostwa Świata Freestival Street Games.</p></details><details><summary>Czy odnowicie stare miejskie boisko?</summary><p>Tak. Oceniam plac ze zdjęć, naprawiam podłoże i kładę farby sportowe z gumą (od 78 zł/m² netto) albo nową nawierzchnię. Gdy podłoże jest zniszczone, proponuję nową płytę (283 zł/m²).</p></details><details><summary>Jak wygląda współpraca z urzędem?</summary><p>Możesz zlecić pojedynczy etap albo cały proces: analizę, koncepcję, projekt, realizację i otwarcie. Dostajesz karty techniczne i certyfikaty do dokumentacji przetargowej oraz 12 miesięcy gwarancji.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><div><p class="k">Dalej</p><h2 class="d">Więcej dla samorządów.</h2></div><p>Finansowanie, szkoły i referencje.</p></div>
+  <ul class="gfb-next" role="list">
+    <li><a href="/dofinansowanie-boisk/"><i>Finansowanie</i><b>Dofinansowanie boisk</b><span>Nabory 2027, źródła i wymagania.</span></a></li>
+    <li><a href="/boiska-dla-szkol/"><i>Szkoły i gminy</i><b>Boiska dla szkół i gmin</b><span>Licznik naborów i część techniczna wniosku.</span></a></li>
+    <li><a href="/realizacje-dla-miast/"><i>Referencje</i><b>Realizacje dla miast</b><span>Orlik, Kutno, Taras pod PKiN.</span></a></li>
+  </ul>
+  <ul class="gfb-who" role="list"><li><a href="/boiska-street-football/">Modele i ceny</a></li><li><a href="/renowacja-boisk/">Renowacja boisk</a></li><li><a href="/projektowanie-boisk/">Projektowanie boisk</a></li><li><a href="/eventy-sportowe/">Eventy sportowe</a></li><li><a href="/koncepcje/">Koncepcje</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Masz miejsce do<br>zagospodarowania?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Pokaż mi miejsce →</a><a class="gfa-btn alt" href="/studio/">Zaprojektuj w Studio ↗</a></div>
+</div></section>
+<script>(function(){var b=document.querySelector('.gfb [data-ar]');if(!b)return;var i=b.querySelector('input'),o=b.querySelector('output'),li=document.querySelectorAll('.gfb [data-lo]');
+function r(){var a=parseFloat(String(i.value).replace(',','.'))||0,hit=null;li.forEach(function(x){var on=a>=+x.getAttribute('data-lo');if(on){if(a>=+x.getAttribute('data-hi'))on=false}if(a<30){on=false}x.classList.toggle('on',on);if(on)hit=x});
+o.textContent=a<30?(a?'Poniżej 30 m²: napisz, sprawdzę, co się zmieści.':''):(hit?'Pasuje: '+hit.querySelector('strong').textContent:'')}
+i.addEventListener('input',r);r();})();</script>
+</div>
+<!-- /wp:html -->

@@ -1,0 +1,424 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-surf{gap:8px}.gfb-surf .tx{padding:10px 12px 12px}.gfb-surf b{font-size:15px}.gfb-surf .nt{font-size:12px}.gfb-surf .r{font-size:13px}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+
+.gfb-hero figure.kit{margin:0;background:#D8F24A;overflow:hidden;position:relative}
+.gfb-hero figure.kit img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.gfa .gfb-hero figure.kit figcaption{position:absolute;left:10px;bottom:10px;margin:0;padding:6px 10px;background:rgba(28,9,18,.84);color:#fff;font-size:13px}
+/* calls */
+.gfb-calls{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:12px}
+.gfb-cd{display:flex;flex-direction:column;justify-content:center;gap:8px;padding:clamp(22px,2.6vw,36px);background:var(--lime);color:#1F2A6B}
+.gfb-cd .k{color:#1F2A6B;margin:0}
+.gfb-cd b{font-size:clamp(56px,7vw,112px);font-weight:800;letter-spacing:-.06em;line-height:.85}
+.gfb-cd span{font-size:17px;font-weight:700}
+.gfb-cd small{font-size:14px;color:#1F2A6B}
+.gfb-callist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-callist li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px;align-items:center;padding:18px 20px;background:#fff;border:1px solid var(--line)}
+.gfb-callist b{font-size:18px;letter-spacing:-.01em}
+.gfb-callist span{font-size:14px;color:var(--muted)}
+.gfb-callist .dt{text-align:right;font-weight:800;font-size:16px;color:var(--violet)}
+/* scopes */
+.gfb-sc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-sc > li{display:flex;flex-direction:column;gap:10px;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfb-sc .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-sc b{font-size:22px;letter-spacing:-.025em;line-height:1.1}
+.gfb-sc p{margin:0;color:#5A4652;font-size:15px}
+.gfb-sc .pr{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-sc .go{color:var(--violet);font-weight:800;font-size:14px;text-decoration:none}
+/* models */
+.gfb-mods{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-mods a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-mods a:hover{border-color:var(--violet)}
+.gfb-mods .ph{background:var(--bg);overflow:hidden}
+.gfb-mods img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-mods a:hover img{transform:scale(1.04)}
+.gfb-mods .tx{display:grid;gap:6px;padding:18px 20px 20px}
+.gfb-mods b{font-size:24px;letter-spacing:-.03em}
+.gfb-mods .wh{font-size:14px;color:var(--muted)}
+.gfb-mods .pr{font-size:15px;font-weight:800}.gfb-mods .pr small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-mods .go{margin-top:4px;color:var(--violet);font-weight:800;font-size:14px}
+/* funding */
+.gfb-src{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:f}
+.gfb-src li{padding:20px;border:1px solid rgba(244,241,238,.2);counter-increment:f}
+.gfb-src li::before{content:"0" counter(f);display:block;margin-bottom:8px;color:var(--lime);font-weight:800;font-size:13px}
+.gfb-src b{display:block;font-size:20px;color:#fff;letter-spacing:-.02em}
+.gfb-src p{margin:6px 0 0;font-size:14px;color:rgba(244,241,238,.85)}
+.gfb-src i{display:block;margin-top:8px;font-style:normal;font-size:13px;color:rgba(244,241,238,.65)}
+.gfb-rulez{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 0}
+.gfb-rulez div{padding:16px 18px;background:rgba(244,241,238,.08)}
+.gfb-rulez dt{font-size:18px;font-weight:800;color:var(--lime)}
+.gfb-rulez dd{margin:6px 0 0;font-size:14px;color:rgba(244,241,238,.85)}
+.gfb-srcnote{margin:12px 0 0;font-size:13px;color:rgba(244,241,238,.65)}
+/* quotes */
+.gfb-q{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-q li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:16px;align-items:center;padding:16px;background:#fff;border:1px solid var(--line)}
+.gfb-q img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#E6E0DA}
+.gfb-q blockquote{margin:0;font-size:17px;line-height:1.4;font-weight:600}
+.gfb-q blockquote::before{content:"„";color:var(--violet)}.gfb-q blockquote::after{content:"”";color:var(--violet)}
+.gfb-q p{margin:10px 0 0;font-size:14px;color:var(--muted)}.gfb-q p b{display:block;color:var(--ink);font-size:15px}
+.gfb-q a{color:var(--violet);font-weight:700;font-size:14px}
+/* deliverables */
+.gfb-dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0}
+.gfb-dl div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-dl dt{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.gfb-dl dd{margin:6px 0 0;font-size:15px;color:#5A4652}
+.gfb-norms.lt li{border-color:var(--line)}.gfb-norms.lt b{color:var(--violet)}
+/* plan */
+.gfb-plan{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.gfb-plan li{position:relative;padding:18px 16px 16px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--violet)}
+.gfb-plan .t{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-plan b{display:block;margin-top:6px;font-size:18px;letter-spacing:-.02em;line-height:1.15}
+.gfb-plan p{margin:6px 0 0;font-size:14px;color:#5A4652}
+.gfb-plan li.now{border-top-color:var(--lime);background:#FBFDEB}
+.gfa-logos{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gfa-logos li{display:grid;place-items:center;height:96px;padding:12px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.gfa-logos img{display:block;max-width:100%;max-height:72px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
+@media (max-width:1100px){.gfb-dl{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-sc{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-plan{grid-template-columns:repeat(3,minmax(0,1fr))}.gfb-rulez{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.gfb-calls,.gfb-q,.gfb-mods,.gfb-src{grid-template-columns:minmax(0,1fr)}.gfa-logos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.gfb-dl,.gfb-sc,.gfb-plan,.gfb-rulez{grid-template-columns:minmax(0,1fr)}.gfb-callist li{grid-template-columns:minmax(0,1fr)}.gfb-callist .dt{text-align:left}.gfb-q li{grid-template-columns:minmax(0,1fr)}.gfb-q img{aspect-ratio:16/9}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://www.gamefields.eu/boiska-dla-szkol/#usluga","name":"Boiska dla szkół i gmin","serviceType":"Projekt, budowa i modernizacja boisk szkolnych i gminnych","url":"https://www.gamefields.eu/boiska-dla-szkol/","inLanguage":"pl-PL","areaServed":{"@type":"Country","name":"Polska"},"provider":{"@id":"https://www.gamefields.eu/#studio"},"audience":{"@type":"Audience","audienceType":"szkoły, gminy, powiaty, ośrodki sportu"},"description":"Areny przy szkołach, modernizacja Orlików i boisk szkolnych, boiska wielofunkcyjne. Koncepcja, cena i część techniczna wniosku o dofinansowanie."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Szkoły i gminy","item":"https://www.gamefields.eu/boiska-dla-szkol/"}]},{"@type":"FAQPage","@id":"https://www.gamefields.eu/boiska-dla-szkol/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Kto składa wniosek o dofinansowanie?","acceptedAnswer":{"@type":"Answer","text":"Uprawniony podmiot, najczęściej gmina, powiat albo szkoła przez organ prowadzący. Ja przygotowuję część techniczną: koncepcję, wizualizację, opis rozwiązania i cenę orientacyjną do kosztorysu."}},{"@type":"Question","name":"Kiedy zacząć przygotowania do naborów 2027?","acceptedAnswer":{"@type":"Answer","text":"Najlepiej kilka tygodni przed naborem. Ministerstwo Sportu zapowiedziało pierwsze nabory na 2027 rok od 4 stycznia 2027 r., a nabór „Moje Boisko – Orlik 2012” potrwa do 26 lutego 2027 r. Koncepcję i kosztorys warto mieć gotowe w grudniu."}},{"@type":"Question","name":"Ile trzeba mieć wkładu własnego?","acceptedAnswer":{"@type":"Answer","text":"W edycji 2026 programu rozwoju infrastruktury sportowej w województwach wnioskodawca pokrywał co najmniej 40% kosztów kwalifikowanych, a dofinansowanie wynosiło do 60%. Zasady kolejnych edycji sprawdzamy w aktualnym regulaminie."}},{"@type":"Question","name":"Czy małe boisko do panny może dostać dofinansowanie?","acceptedAnswer":{"@type":"Answer","text":"To zależy od programu. Małą arenę warto włączyć do większego zadania, np. modernizacji Orlika albo strefy sportowej przy szkole. Mniejsze kwoty łatwiej sfinansować z budżetu obywatelskiego, funduszu sołeckiego albo programów województwa."}},{"@type":"Question","name":"Ile kosztuje arena przy szkole?","acceptedAnswer":{"@type":"Answer","text":"Panna Cage 90 od 36 000 zł netto (z płytą i malowaniem od 47 400 zł), Panna Play od 40 000 zł netto (z płytą i malowaniem od 51 000 zł). Montaż, transport i przygotowanie terenu liczę po zdjęciach."}},{"@type":"Question","name":"Czy możecie zmodernizować stary Orlik albo boisko szkolne?","acceptedAnswer":{"@type":"Answer","text":"Tak. Oceniam podłoże i wyposażenie ze zdjęć, a potem proponuję renowację albo przebudowę. Rozwiązania spełniają wymagania programu „Moje Boisko – Orlik 2012”; Panna Ring stoi na Orliku w Grodzisku Mazowieckim od 10 lat."}},{"@type":"Question","name":"Czy dostanę dokumenty do przetargu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Karty techniczne i certyfikaty stali, farb i nawierzchni dołączam do oferty, wniosku i dokumentacji przetargowej. Nawierzchnie EPDM spełniają PN-EN 14877, płyty gumowe PN-EN 1177 z atestem PZH."}},{"@type":"Question","name":"Czy pomagacie w budżecie obywatelskim?","acceptedAnswer":{"@type":"Answer","text":"Tak. Przygotuję koncepcję, wizualizację i cenę orientacyjną do formularza zgłoszenia."}},{"@type":"Question","name":"Czy można wykorzystać mały szkolny dziedziniec?","acceptedAnswer":{"@type":"Answer","text":"Tak. Areny 1 na 1 zaczynają się od około 5 m średnicy, a boisko 3 na 3 ma 15 × 10 m. Wymiary dziedzińca sprawdzisz w planerze „Zmieści się?” na stronie głównej."}}]}]}</script>
+<div class="gfa gfb">
+<section class="gfb-hero"><div class="w top">
+  <div>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Szkoły i gminy</p>
+    <p class="k">Dla szkół, gmin i Orlików</p>
+    <h1 class="d">Boiska dla szkół i gmin.</h1>
+    <p class="lead">Arena na przerwę i WF, modernizacja Orlika albo nowe boisko w gminie. Przygotuję koncepcję, cenę i część techniczną wniosku o dofinansowanie, a potem zbuduję to, co zaprojektujemy.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Przygotujmy wniosek →</a><a class="gfa-btn alt" href="/studio/?arena=o1&amp;pattern=pro-neoplastic&amp;variant=6&amp;palette=stijl&amp;panel=1F4E9C&amp;frame=111111">Zestaw „Szkoła” w Studio ↗</a></div>
+  </div>
+  <figure class="kit"><img src="/wp-content/themes/gamefields/assets/js/home/kits/szkola.webp" alt="Panna Play z nawierzchnią Neo-Plastic, zestaw dla szkoły, widok ze Studio 3D" loading="eager" decoding="async"><figcaption>Zestaw „Szkoła”: Panna Play + Neo-Plastic, widok ze Studio 3D</figcaption></figure>
+</div>
+<div class="w">
+  <dl class="gfb-nums">
+    <div><dt>Nabory 2027</dt><dd>od 4.01<small>Orlik 2012 do 26.02.2027</small></dd></div>
+    <div><dt>Dofinansowanie</dt><dd>do 60%<small>edycja 2026, programy MSiT</small></dd></div>
+    <div><dt>Gwarancja</dt><dd>12 miesięcy<small>i opieka po odbiorze</small></dd></div>
+    <div><dt>Na Orliku</dt><dd>10 lat<small>Panna Ring bez uszkodzeń</small></dd></div>
+  </dl>
+</div></section>
+
+<nav class="gfb-jump" aria-label="Na tej stronie"><div class="w"><ul role="list"><li><a href="#nabory">Nabory 2027</a></li><li><a href="#zakres">Co robię</a></li><li><a href="#modele">Modele</a></li><li><a href="#finansowanie">Finansowanie</a></li><li><a href="#wniosek">Do wniosku</a></li><li><a href="#realizacje">Realizacje</a></li><li><a href="#plan">Plan 2027</a></li><li><a href="#pytania">Pytania</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="nabory"><div class="w">
+  <div class="gfa-head"><div><p class="k">Nabory 2027</p><h2 class="d">Czas liczy się od grudnia.</h2></div><p>Wniosek ma szanse, gdy koncepcja i kosztorys są gotowe przed startem naboru. Stan na 12.11.2026, terminy sprawdzamy w regulaminach na gov.pl.</p></div>
+  <div class="gfb-calls">
+    <div class="gfb-cd" data-cd><p class="k">Do naborów</p><b>42</b><span>dni do startu naborów 2027</span><small>Start: 4 stycznia 2027 · Orlik 2012: do 26 lutego 2027</small></div>
+    <ul class="gfb-callist" role="list"><li><div><b>„Moje Boisko – Orlik 2012”</b><br><span>modernizacja Orlików, Ministerstwo Sportu i Turystyki</span></div><span class="dt">4.01–26.02.2027</span></li><li><div><b>Rozwój infrastruktury sportowej w województwach</b><br><span>Ministerstwo Sportu i Turystyki, edycja 2027</span></div><span class="dt">termin w regulaminie</span></li><li><div><b>Budżety obywatelskie miast</b><br><span>mieszkańcy zgłaszają, urząd ocenia, mieszkańcy głosują</span></div><span class="dt">zwykle zimą</span></li></ul>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="zakres"><div class="w">
+  <div class="gfa-head"><div><p class="k">Co robię</p><h2 class="d">Cztery sposoby na boisko przy szkole.</h2></div><p>Od małego dziedzińca po pełne boisko wielofunkcyjne. Inwestycję można etapować i dopasować do budżetu.</p></div>
+  <ul class="gfb-sc" role="list"><li><span class="q">Przy szkole</span><b>Arena na przerwę i WF</b><p>Czytelna, bezpieczna arena na dziedzińcu albo przy boisku. Mieści się tam, gdzie nie ma miejsca na pełne boisko.</p><span class="pr">z płytą i malowaniem od 47 400 zł netto</span><a class="go" href="#modele">Modele dla szkół ↓</a></li><li><span class="q">Istniejący obiekt</span><b>Modernizacja Orlika i starego boiska</b><p>Nowa nawierzchnia, kolor, linie i arena na istniejącym placu, zamiast rozbiórki, jeśli podłoże na to pozwala.</p><span class="pr">malowanie od 78 zł/m² netto</span><a class="go" href="/renowacja-boisk/">Renowacja boisk →</a></li><li><span class="q">Kilka dyscyplin</span><b>Boisko wielofunkcyjne</b><p>Piłka, kosz, siatkówka i 3 na 3 w jednym układzie, z liniami, które nie robią chaosu. Projekt indywidualny.</p><span class="pr">płyta z podbudową 283 zł/m²</span><a class="go" href="/budowa-boisk-sportowych/">Budowa boisk →</a></li><li><span class="q">W sali gimnastycznej</span><b>Panna w szkole</b><p>Mobilna arena mieści się w sali gimnastycznej: pokaz, turniej szkolny i zajęcia integracyjne, także z zawodnikami Olimpiad Specjalnych.</p><span class="pr">arena mobilna od 27 000 zł netto</span><a class="go" href="/wynajem-boisk-mobilnych/">Arena mobilna →</a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="modele"><div class="w">
+  <div class="gfa-head"><div><p class="k">Modele</p><h2 class="d">Trzy areny, które polecam szkołom.</h2></div><p>Bezpieczne, czytelne i trwałe. Ceny „od” netto: sama konstrukcja i komplet z płytą betonową i malowaniem. <a href="/boiska-street-football/">Wszystkie 8 modeli →</a></p></div>
+  <ul class="gfb-mods" role="list"><li><a href="/studio/?arena=circle-cage-1"><span class="ph" style="--bg:#D23A26"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-720.webp" alt="Panna Octa Cage 90, render konstrukcji" loading="lazy" decoding="async"></span><span class="tx"><b>Panna Octa Cage 90</b><span class="wh">Osiedla, szkoły · Ø, banda 0,9 m</span><span class="wh">Niska i otwarta wizualnie (0,90 m): nauczyciel widzi całe pole gry.</span><span class="pr">konstrukcja od 36 000 zł netto<small>z płytą i malowaniem od 47 400 zł netto</small></span><span class="go">Zaprojektuj w Studio ↗</span></span></a></li><li><a href="/studio/?arena=o1"><span class="ph" style="--bg:#2457D6"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-play-720.webp" alt="Panna Play, render konstrukcji" loading="lazy" decoding="async"></span><span class="tx"><b>Panna Play</b><span class="wh">Kluby, eventy, szkoły · Ø ~6 m</span><span class="wh">Perforowane panele i dwie bramki. Zestaw „Szkoła” z wzorem Neo-Plastic.</span><span class="pr">konstrukcja od 40 000 zł netto<small>z płytą i malowaniem od 51 000 zł netto</small></span><span class="go">Zaprojektuj w Studio ↗</span></span></a></li><li><a href="/studio/?arena=octagon"><span class="ph" style="--bg:#47132D"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-octa-720.webp" alt="Panna Octa, render konstrukcji" loading="lazy" decoding="async"></span><span class="tx"><b>Panna Octa</b><span class="wh">Gminy, parki, szkoły · Ośmiokąt</span><span class="wh">Ośmiokąt z prętowymi panelami. Kutno: zamówienie Urzędu Miasta.</span><span class="pr">konstrukcja od 49 000 zł netto<small>z płytą i malowaniem od 60 900 zł netto</small></span><span class="go">Zaprojektuj w Studio ↗</span></span></a></li></ul>
+  <p class="gfb-note">Dla najmłodszych: płyty gumowe z PN-EN 1177 i atestem PZH, antypoślizg R11. <a href="/nawierzchnie-sportowe/#plyty">Nawierzchnie →</a></p>
+</div></section>
+
+<section class="gfa-band" id="finansowanie"><div class="w">
+  <div class="gfa-head"><div><p class="k">Finansowanie</p><h2 class="d">Sześć źródeł finansowania.</h2></div><p>Każde ma inne progi i wymagania. Na start wystarczy lokalizacja i pomysł, a ja podpowiem, które pasuje do Twojego placu.</p></div>
+  <ul class="gfb-src" role="list"><li><b>Ministerstwo Sportu i Turystyki</b><p>Programy na nowe i modernizowane obiekty, m.in. „Moje Boisko – Orlik 2012” i rozwój infrastruktury w województwach.</p><i>Dla: gminy, powiaty, szkoły przez organ prowadzący</i></li><li><b>Województwo</b><p>Urzędy marszałkowskie prowadzą własne programy i współfinansują ministerialne, np. „Sportowa Małopolska”.</p><i>Dla: gminy i powiaty danego województwa</i></li><li><b>Budżet obywatelski</b><p>Dobra droga dla jednej areny w parku albo przy szkole.</p><i>Dla: mieszkańcy, rady osiedli, szkoły</i></li><li><b>Fundusz sołecki</b><p>Sołectwo może przeznaczyć środki m.in. na urządzenie boiska. Mała arena mieści się w skali tego funduszu.</p><i>Dla: sołectwa w gminach wiejskich</i></li><li><b>Fundusze Europejskie</b><p>Programy regionalne 2021–2027 finansują rewitalizację. Boisko może być częścią odnowy placu lub osiedla.</p><i>Dla: gminy z programem rewitalizacji</i></li><li><b>Marka lub fundacja</b><p>Firma finansuje arenę, a jej logo jest na bandach i nawierzchni.</p><i>Dla: szkoły, kluby, osiedla i firmy</i></li></ul>
+  <dl class="gfb-rulez">
+    <div><dt>Wkład własny</dt><dd>co najmniej 40%; dofinansowanie do 60% kosztów kwalifikowanych.</dd></div>
+    <div><dt>Ogólnodostępny</dt><dd>Obiekt bezpłatny; priorytet dla obiektów przy szkołach, otwartych dla dzieci i młodzieży.</dd></div>
+    <div><dt>Bez asfaltu</dt><dd>Nawierzchnie asfaltowe nie są finansowane (z wyjątkami, np. skateparki).</dd></div>
+    <div><dt>Nowy lub modernizacja</dt><dd>Same remonty nie są finansowane.</dd></div>
+  </dl>
+  <p class="gfb-srcnote">Co oceniają komisje: regulamin edycji 2026 programu rozwoju infrastruktury sportowej w województwach. Kolejne edycje mogą to zmienić.</p>
+  <ul class="gfa-links"><li><a href="/dofinansowanie-boisk/">Dofinansowanie boisk: źródła i terminy →</a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="wniosek"><div class="w">
+  <div class="gfa-head"><div><p class="k">Do wniosku</p><h2 class="d">Część techniczna wniosku.</h2></div><p>Wniosek składa gmina albo szkoła. Ja dostarczam materiały, które pokazują, co powstanie, ile kosztuje i dlaczego się sprawdzi.</p></div>
+  <dl class="gfb-dl"><div><dt>Koncepcja i wizualizacja</dt><dd>Boisko na zdjęciu Twojego placu, z modelu 3D w Studio, w kolorach i wzorze nawierzchni.</dd></div><div><dt>Karta projektu PDF</dt><dd>Parametry, widok z góry i cena orientacyjna do kosztorysu.</dd></div><div><dt>Opis techniczny</dt><dd>Wymiary, materiały, warstwy i wyposażenie konstrukcji i nawierzchni.</dd></div><div><dt>Harmonogram</dt><dd>Od zamówienia do odbioru, z zależnością od pogody.</dd></div><div><dt>Argumenty dla komisji</dt><dd>Ogólnodostępność, trwałość, mała powierzchnia, koszty utrzymania, realizacje referencyjne.</dd></div><div><dt>Dokumenty i wsparcie</dt><dd>Karty techniczne i certyfikaty producentów; po decyzji dopasowanie projektu do przyznanego zakresu.</dd></div></dl>
+  <ul class="gfb-norms lt" role="list"><li><b>PN-EN 14877</b>EPDM</li><li><b>PN-EN 1177</b>płyty gumowe, atest PZH</li><li><b>R11</b>antypoślizg</li><li><b>Orlik 2012</b>zgodne z wymaganiami programu</li></ul>
+</div></section>
+
+<section class="gfa-sec" id="realizacje"><div class="w">
+  <div class="gfa-head"><div><p class="k">Realizacje</p><h2 class="d">Słowa urzędu i OSiR.</h2></div><p>Boiska zamówione przez miasta i ośrodki sportu. <a href="/realizacje-dla-miast/">Realizacje dla miast →</a></p></div>
+  <ul class="gfb-q" role="list"><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring na Orliku, Grodzisk Mazowiecki" loading="lazy" decoding="async"><div><blockquote>Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</blockquote><p><b>Mariusz Smysło</b>Dyrektor OSiR Grodzisk Mazowiecki</p><a href="/realizacje-gamefields/#orlik">Historia realizacji →</a></div></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa w Kutnie" loading="lazy" decoding="async"><div><blockquote>Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.</blockquote><p><b>Beata Rafalska</b>Urząd Miasta Kutno, ds. inwestycji</p><a href="/realizacje-gamefields/#kutno">Historia realizacji →</a></div></li></ul>
+  <ul class="gfa-logos" role="list"><li style="--z:1.3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Warszawa--300x194.png" alt="Miasto stołeczne Warszawa" width="300" height="194" loading="lazy" decoding="async"></li><li style="--z:1.7"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Zarzad-Zieleni-Miejskiej-Warszawa-300x141.jpg" alt="Zarząd Zieleni m.st. Warszawy" width="300" height="141" loading="lazy" decoding="async"></li><li style="--z:1"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOHO-Krakow--300x200.jpg" alt="Kraków" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1.6"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Grodzisk-Mazowiecki-LOGO-300x200.jpg" alt="Grodzisk Mazowiecki" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Kutno--300x231.jpg" alt="Kutno" width="300" height="231" loading="lazy" decoding="async"></li><li style="--z:1.15"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Lodz-300x139.webp" alt="Łódź" width="300" height="139" loading="lazy" decoding="async"></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="plan"><div class="w">
+  <div class="gfa-head"><div><p class="k">Plan 2027</p><h2 class="d">Od koncepcji do odbioru.</h2></div><p>Tak wygląda rok z boiskiem finansowanym z naboru. Pierwszy krok jest dziś.</p></div>
+  <ol class="gfb-plan" role="list"><li class="now"><span class="t">Grudzień 2026</span><b>Koncepcja i kosztorys</b><p>Zdjęcia placu, wybór modelu i nawierzchni, karta projektu z ceną.</p></li><li class=""><span class="t">4 stycznia 2027</span><b>Start naborów</b><p>Wniosek składa gmina, powiat albo szkoła przez organ prowadzący.</p></li><li class=""><span class="t">Do 26 lutego 2027</span><b>Koniec naboru Orlik</b><p>„Moje Boisko – Orlik 2012”: modernizacja Orlików.</p></li><li class=""><span class="t">Po decyzji</span><b>Dopasowanie projektu</b><p>Zakres do przyznanych środków, dokumenty do przetargu.</p></li><li class=""><span class="t">Wiosna–jesień</span><b>Realizacja</b><p>Farby i nawierzchnie na suchym podłożu, przy dodatniej temperaturze.</p></li></ol>
+</div></section>
+
+<section class="gfa-sec" id="start"><div class="w">
+  <div class="gfa-head"><div><p class="k">Na start</p><h2 class="d">Co mi wysłać?</h2></div><p>Nie potrzebujesz dokumentacji. Wystarczy kilka informacji, a odpowiem osobiście.</p></div>
+  <div class="gfb-prep">
+    <div><h3>Pięć informacji</h3><ul class="gfb-check">
+      <li><span><b>Lokalizacja</b>: szkoła, Orlik albo działka gminy.</span></li><li><span><b>Wymiary</b>: przybliżone, z miarki albo z mapy.</span></li>
+      <li><span><b>Zdjęcia</b>: plac i stan obecnej nawierzchni.</span></li><li><span><b>Użytkownicy</b>: wiek, WF, zajęcia po lekcjach.</span></li>
+      <li><span><b>Nabór</b>: program i termin, jeśli już wiesz.</span></li></ul></div>
+    <div><h3>Albo zacznij sam</h3><ul class="gfb-check">
+      <li><span>Sprawdź dziedziniec w planerze „Zmieści się?”.</span></li><li><span>Otwórz zestaw „Szkoła” w Studio 3D.</span></li>
+      <li><span>Pobierz kartę projektu PDF z ceną.</span></li><li><span>Dołącz ją do zapytania.</span></li></ul>
+      <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Przygotujmy wniosek →</a><a class="gfa-btn alt" href="/#planer">Planer placu</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><div><p class="k">Pytania</p><h2 class="d">Wnioski, ceny, dokumenty.</h2></div><p>Najczęstsze pytania szkół, gmin i ośrodków sportu.</p></div>
+  <div class="gfa-faq"><details><summary>Kto składa wniosek o dofinansowanie?</summary><p>Uprawniony podmiot, najczęściej gmina, powiat albo szkoła przez organ prowadzący. Ja przygotowuję część techniczną: koncepcję, wizualizację, opis rozwiązania i cenę orientacyjną do kosztorysu.</p></details><details><summary>Kiedy zacząć przygotowania do naborów 2027?</summary><p>Najlepiej kilka tygodni przed naborem. Ministerstwo Sportu zapowiedziało pierwsze nabory na 2027 rok od 4 stycznia 2027 r., a nabór „Moje Boisko – Orlik 2012” potrwa do 26 lutego 2027 r. Koncepcję i kosztorys warto mieć gotowe w grudniu.</p></details><details><summary>Ile trzeba mieć wkładu własnego?</summary><p>W edycji 2026 programu rozwoju infrastruktury sportowej w województwach wnioskodawca pokrywał co najmniej 40% kosztów kwalifikowanych, a dofinansowanie wynosiło do 60%. Zasady kolejnych edycji sprawdzamy w aktualnym regulaminie.</p></details><details><summary>Czy małe boisko do panny może dostać dofinansowanie?</summary><p>To zależy od programu. Małą arenę warto włączyć do większego zadania, np. modernizacji Orlika albo strefy sportowej przy szkole. Mniejsze kwoty łatwiej sfinansować z budżetu obywatelskiego, funduszu sołeckiego albo programów województwa.</p></details><details><summary>Ile kosztuje arena przy szkole?</summary><p>Panna Cage 90 od 36 000 zł netto (z płytą i malowaniem od 47 400 zł), Panna Play od 40 000 zł netto (z płytą i malowaniem od 51 000 zł). Montaż, transport i przygotowanie terenu liczę po zdjęciach.</p></details><details><summary>Czy możecie zmodernizować stary Orlik albo boisko szkolne?</summary><p>Tak. Oceniam podłoże i wyposażenie ze zdjęć, a potem proponuję renowację albo przebudowę. Rozwiązania spełniają wymagania programu „Moje Boisko – Orlik 2012”; Panna Ring stoi na Orliku w Grodzisku Mazowieckim od 10 lat.</p></details><details><summary>Czy dostanę dokumenty do przetargu?</summary><p>Tak. Karty techniczne i certyfikaty stali, farb i nawierzchni dołączam do oferty, wniosku i dokumentacji przetargowej. Nawierzchnie EPDM spełniają PN-EN 14877, płyty gumowe PN-EN 1177 z atestem PZH.</p></details><details><summary>Czy pomagacie w budżecie obywatelskim?</summary><p>Tak. Przygotuję koncepcję, wizualizację i cenę orientacyjną do formularza zgłoszenia.</p></details><details><summary>Czy można wykorzystać mały szkolny dziedziniec?</summary><p>Tak. Areny 1 na 1 zaczynają się od około 5 m średnicy, a boisko 3 na 3 ma 15 × 10 m. Wymiary dziedzińca sprawdzisz w planerze „Zmieści się?” na stronie głównej.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><div><p class="k">Dalej</p><h2 class="d">Więcej dla samorządów.</h2></div><p>Finansowanie, realizacje i poradniki z cenami.</p></div>
+  <ul class="gfb-next" role="list">
+    <li><a href="/dofinansowanie-boisk/"><i>Finansowanie</i><b>Dofinansowanie boisk</b><span>Źródła, terminy, wymagania komisji.</span></a></li>
+    <li><a href="/realizacje-dla-miast/"><i>Referencje</i><b>Realizacje dla miast</b><span>Trwałość, opinie, finansowanie.</span></a></li>
+    <li><a href="/wymiary-boiska-wielofunkcyjnego/"><i>Poradnik</i><b>Wymiary boiska wielofunkcyjnego</b><span>Orlik, strefy i mały metraż.</span></a></li>
+  </ul>
+  <ul class="gfb-who" role="list"><li><a href="/dla-miast/"><span>Dla</span>miast</a></li><li><a href="/boiska-wielofunkcyjne/">Boiska wielofunkcyjne</a></li><li><a href="/renowacja-boisk/">Renowacja boisk</a></li><li><a href="/budowa-boisk-sportowych/">Budowa boisk</a></li><li><a href="/boiska-street-football/">Modele i ceny</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Planujesz boisko<br>przy szkole?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Przygotujmy wniosek →</a><a class="gfa-btn alt" href="/studio/">Zaprojektuj w Studio ↗</a></div>
+</div></section>
+<script>(function(){var b=document.querySelector('.gfb [data-cd]');if(!b)return;var n=b.querySelector('b'),s=b.querySelector('span');
+var start=new Date(2027,0,4),end=new Date(2027,1,26,23,59),now=new Date(),day=86400000;
+if(now<start){var d=Math.ceil((start-now)/day);n.textContent=d;s.textContent=(d===1?'dzień':'dni')+' do startu naborów 2027'}
+else if(now<=end){var e=Math.ceil((end-now)/day);n.textContent=e;s.textContent=(e===1?'dzień':'dni')+' do końca naboru Orlik 2012'}
+else{n.textContent='2027';s.textContent='Nabory na 2027 rok zakończone. Zapytaj o kolejne.'}})();</script>
+</div>
+<!-- /wp:html -->

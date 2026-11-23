@@ -1,0 +1,25 @@
+Polecenie dla ChatGPT: nowa strona Deweloperzy i osiedla (/boiska-dla-deweloperow/), 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /boiska-dla-deweloperow/ (ID 3702): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/deweloperzy-2026-11/boiska-dla-deweloperow.html
+SHA-256 zaczyna się od: ac3005ef8f759144
+
+Wymaganie: motyw Gamefields 1.0.35 lub nowszy (obrazy zestawów /wp-content/themes/gamefields/assets/js/home/kits/*.webp).
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3702 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Boiska dla deweloperów i osiedli.” z renderem zestawu „Osiedle”, pas liczb (od 36 000 zł, 5–7 m, 732, 10 lat);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - cztery wartości, tabela „Do masterplanu.” (8 modeli od najmniejszego; na telefonie karty z podpisami);
+   - ciemny pas zestawu „Osiedle”, „Spójny z architekturą.” (galeria 5 zestawów otwiera Studio), „Co sprawdzam w koncepcji.” (6 pozycji),
+     ciemny pas „Materiały dla działu sprzedaży.”, 5 etapów, 8 pytań;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Boiska dla deweloperów i osiedli: arena na placu 5–7 m od 36 000 zł netto, kolory zgodne z architekturą, materiały do sprzedaży i realizacja.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
