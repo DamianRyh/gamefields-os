@@ -19,7 +19,7 @@ Kroki:
      ciemny pas „Materiały dla działu sprzedaży.”, 5 etapów, 8 pytań;
    - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
 4. Opis SEO (Yoast, meta description) zamień na:
-   Boiska dla deweloperów i osiedli: arena na placu 5–7 m od 36 000 zł netto, kolory zgodne z architekturą, materiały do sprzedaży i realizacja w harmonogramie.
+   Boiska dla deweloperów i osiedli: arena na placu 5–7 m od 36 000 zł netto, kolory zgodne z architekturą, materiały do sprzedaży i realizacja.
    Tytuł SEO bez zmian.
 5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
 Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
