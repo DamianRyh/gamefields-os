@@ -1,0 +1,58 @@
+Polecenie dla ChatGPT: zdjęcia przed/po (Pole Mokotowskie) i zdjęcie placu z mediów WordPress, 23.11.2026
+
+Cel: strona nie pobiera już zdjęć z zewnętrznego CDN (cdn.jsdelivr.net). Pięć zdjęć trafia do biblioteki mediów,
+a w treści 6 stron zmienia się tylko adres obrazka. Niczego innego w tych stronach nie ruszaj.
+
+ETAP 1. Wgraj 5 plików do Media → Dodaj nowy (bez zmiany nazw, w listopadzie 2026, więc trafią do /2026/11/).
+Pobierz je jako pliki (raw), sprawdź początek SHA-256:
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-przed-1100.webp  (f4f3399141c9a3a7, 1100×733)
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-przed-720.webp   (06ea5caa0df313e0, 720×480)
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-po-1100.webp     (1a1c416cdfe9a820, 1100×733)
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/pole-mokotowskie-po-720.webp      (986bccb885fd4045, 720×480)
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/assets/plac-przykladowy.webp                       (a0a5c798ebf8826e, 1600×900)
+Teksty alternatywne w bibliotece:
+- przed: „Przed: szary betonowy plac do koszykówki, Pole Mokotowskie (Google Street View, 2017)”
+- po: „Koncepcja po modernizacji: kolorowe boisko Organic Flow na tym samym placu”
+- plac-przykladowy: „Przykładowe zdjęcie placu”
+
+Sprawdź, że każdy z tych adresów otwiera obrazek (kod 200):
+- https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-przed-1100.webp
+- https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-przed-720.webp
+- https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-po-1100.webp
+- https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-po-720.webp
+- https://www.gamefields.eu/wp-content/uploads/2026/11/plac-przykladowy.webp
+Jeśli WordPress nadał inną nazwę (np. „-1” na końcu) albo inny folder niż 2026/11, ZATRZYMAJ SIĘ i podaj właścicielowi
+rzeczywiste adresy. Nie przechodź do etapu 2.
+
+ETAP 2. Podmiana adresów w treści stron (edytor kodu, Znajdź i zamień, bez innych zmian).
+Strony: 3462 (strona główna), 4630 (/koncepcje/), 3717 (/baza-wiedzy/), 3710 (/ile-kosztuje-budowa-boiska-sportowego/),
+3712 (/jak-wybrac-nawierzchnie-sportowa/), 3713 (/renowacja-czy-budowa-nowego-boiska/).
+
+Zamiana A (wszystkie 6 stron, wszystkie wystąpienia):
+  szukaj:  https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/modernizacja/
+  zamień:  https://www.gamefields.eu/wp-content/uploads/2026/11/
+
+Zamiana B (tylko strona główna 3462, blok „na-twoim-placu”, jedno wystąpienie):
+  szukaj:  https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/plac-przykladowy.webp
+  zamień:  https://www.gamefields.eu/wp-content/uploads/2026/11/plac-przykladowy.webp
+
+Zamiana C (tylko strona główna 3462, blok „naglowek”, jedno wystąpienie; atrybuty nieużywane przez skrypty):
+  usuń dokładnie ten fragment (ze spacją na początku):
+   data-asset-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/integrations/wordpress/homepage/studio-2026-11/assets/" data-repo-base="https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@dc298dede4689c700ad901e78628a1938fd941b0/"
+  Po usunięciu znacznik zaczyna się: <div class="gfs" id="gf-culture" data-homepage-version="studio-2026-11">
+
+WAŻNE: nie podmieniaj całych bloków strony głównej z repozytorium — blok „naglowek” na stronie zawiera nowsze zmiany
+niż repozytorium (np. przycisk „Wyślij zdjęcie”). Tylko Znajdź i zamień.
+
+Kroki:
+1. Kopia każdej z 6 stron (wersja lub szkic), zapisz ID kopii.
+2. Wykonaj zamiany. Po zamianach treść żadnej z 6 stron nie zawiera „cdn.jsdelivr.net/gh/DamianRyh” ani „&&”.
+3. Podgląd na komputerze i telefonie:
+   - strona główna, sekcja „Stary beton. Nowe boisko.”: suwak przed/po działa, oba zdjęcia się ładują;
+   - strona główna, sekcja ze zdjęciem placu: zdjęcie się ładuje;
+   - /koncepcje/, sekcja „Stary plac. Nowe boisko.”: zdjęcia „Przed” i „Koncepcja po”;
+   - /baza-wiedzy/ i 3 poradniki: karty i ilustracje ze zdjęciem Pola Mokotowskiego się ładują;
+   - w narzędziach przeglądarki (Sieć) brak żądań do cdn.jsdelivr.net na tych stronach.
+4. Po akceptacji właściciela opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj z mediów ani stron.
+5. Jeśli Yoast pokazuje dla strony głównej obrazek z jsdelivr (og:image / primaryimage), po wyczyszczeniu cache powinien
+   wziąć zdjęcie z mediów; jeśli nie, zgłoś właścicielowi.

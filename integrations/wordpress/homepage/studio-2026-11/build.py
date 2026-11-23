@@ -5,8 +5,8 @@ Output:
   homepage.html  Gutenberg wp:html block (the exact content.raw to send to WordPress)
   index.html     local preview shell; the CF7 shortcode is replaced by a minimal stand-in form
 
-The 3D models and the sample photo are served by jsDelivr from this repository, pinned to ASSET_COMMIT,
-so the published page never changes when the branch moves.
+Photos (Pole Mokotowskie before/after, the sample square) are served from the WordPress media library
+(MEDIA, uploaded 2026-11), so the published page does not depend on an external CDN.
 """
 import base64
 import hashlib
@@ -17,9 +17,8 @@ import pathlib
 import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
-ASSET_COMMIT = "dc298dede4689c700ad901e78628a1938fd941b0"
-REPO_BASE = f"https://cdn.jsdelivr.net/gh/DamianRyh/gamefields-os@{ASSET_COMMIT}/"
-ASSET_BASE = REPO_BASE + "integrations/wordpress/homepage/studio-2026-11/assets/"
+# Source files: assets/modernizacja/*.webp and assets/plac-przykladowy.webp, uploaded with the same names.
+MEDIA = "https://www.gamefields.eu/wp-content/uploads/2026/11/"
 FONT = HERE / "assets" / "fonts" / "GHInter-sub.woff2"  # InterVariable subset: Latin + Polish + arrows (pyftsubset), 63 KB instead of 352 KB
 
 
@@ -246,22 +245,19 @@ def main():
 
     if "&&" in script:
         sys.exit("script.js contains a double ampersand; WordPress would break it")
-    for token in ("{{ASSET}}", "{{KEPT_WORKSHOP}}", "{{KEPT_FAQ}}"):
-        if body.count(token) != 1 and token != "{{ASSET}}":
+    for token in ("{{KEPT_WORKSHOP}}", "{{KEPT_FAQ}}"):
+        if body.count(token) != 1:
             sys.exit(f"missing {token}")
+    if "{{ASSET}}" in body or "cdn.jsdelivr.net/gh/" in body:
+        sys.exit("body.html points at the repository CDN; use {{MEDIA}} (WordPress media) instead")
 
     prices_list, price_data = prices_html()
     wall_prices = json.dumps({m["id"]: m["constructionFromNet"] for m in price_data["models"]}, separators=(",", ":"))
     body = body.replace('<div class="wall" data-wall></div>', f"<div class=\"wall\" data-wall data-prices='{wall_prices}'></div>", 1)
     body = body.replace("{{PRICES}}", prices_list).replace("{{MATERIALS}}", materials_html()).replace("{{REALS}}", reals_html()).replace("{{PAINT}}", paint_html()).replace("{{SURFACES}}", surfaces_html())
-    body = body.replace("{{ASSET}}", ASSET_BASE)
+    body = body.replace("{{MEDIA}}", MEDIA)
     body = body.replace("{{KEPT_WORKSHOP}}", workshop.strip())
     body = body.replace("{{KEPT_FAQ}}", faq.strip())
-    body = body.replace(
-        'data-homepage-version="studio-2026-11"',
-        f'data-homepage-version="studio-2026-11" data-asset-base="{ASSET_BASE}" data-repo-base="{REPO_BASE}"',
-        1,
-    )
 
     # Court Art Pro engine for the poster lab. It contains double ampersands, which WordPress would break,
     # so it ships base64-encoded and is decoded in the browser into window.GFPRO.
