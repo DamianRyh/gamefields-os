@@ -1,0 +1,25 @@
+Polecenie dla ChatGPT: nowa strona Projektowanie boisk, 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /projektowanie-boisk/ (ID 3689): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/projektowanie-2026-11/projektowanie-boisk.html
+SHA-256 zaczyna się od: f6276a4ca24fb5c4
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3689 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Projektowanie boisk sportowych.” z czterema obrazami (Pałac Kultury, plan Kraków, plansze Most Łazienkowski, gotowa arena),
+     pas liczb (na żywo, 732, PDF, od 2005);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - „Jak chcesz zacząć?”: trzy drogi (Studio 3D ciemne, Koncepcja miejsca, Koncepcja z dokumentami);
+   - „Sprawdź, zanim zapytasz.”: 4 narzędzia; linki /#planer, /#gfs-site, /studio/, /budowa-boisk-sportowych/#kalkulator działają;
+   - „Projekt, który da się zbudować.” (6 pozycji), cztery koncepcje ze zdjęciami i etykietą „wizualizacja”,
+     ciemny pas Kraków (4 zdjęcia), 5 etapów, ciemny pas autora ze zdjęciem i cytatem, „Masz miejsce? To wystarczy.”, 8 pytań;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Projektowanie boisk: koncepcja dopasowana do miejsca, Studio 3D z ceną na żywo, planer placu, karta projektu PDF i dokumenty do wniosku dla gmin.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
