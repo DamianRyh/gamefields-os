@@ -4,7 +4,7 @@ Właściciel zatwierdza podmianę CAŁEJ treści strony /budowa-boisk-sportowych
 Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
 
 Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/budowa-2026-11/budowa-boisk-sportowych.html
-SHA-256 zaczyna się od: a6e289ea961d6bed
+SHA-256 zaczyna się od: eba6bef531c434f6
 
 Kroki:
 1. Zrób kopię obecnej treści strony 3684 (wersja lub szkic) i zapisz jej ID.
