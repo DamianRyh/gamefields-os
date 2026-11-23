@@ -1,0 +1,23 @@
+Polecenie dla ChatGPT: nowa strona Eventy i wynajem (/wynajem-boisk-mobilnych/), 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /wynajem-boisk-mobilnych/ (ID 3725): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wynajem-2026-11/wynajem-boisk-mobilnych.html
+SHA-256 zaczyna się od: a93ba9244a204efd
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3725 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Wynajem boisk mobilnych na eventy.” ze zdjęciem areny w hali (Head & Shoulders 2013), pas liczb (na termin, od 27 000 zł, od 2008, hala i plener);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - trzy formaty, „W hali, w parku, w galerii.” (4 zdjęcia Head & Shoulders i lista miejsc),
+     „Wynajem czy zakup” (wynajem wyceniany do terminu, zakup od 27 000 zł netto), zakres w 6 krokach,
+     ciemny pas „Od konceptu do pierwszego gwizdka.” (4 zdjęcia z eventów), 5 etapów, „Co mi wysłać?”, 8 pytań;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Wynajem boisk mobilnych na eventy: arena panna i street football z transportem, montażem, brandingiem i turniejem. Zakup areny od 27 000 zł netto.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
