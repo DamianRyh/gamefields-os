@@ -1,0 +1,383 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-surf{gap:8px}.gfb-surf .tx{padding:10px 12px 12px}.gfb-surf b{font-size:15px}.gfb-surf .nt{font-size:12px}.gfb-surf .r{font-size:13px}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+
+.gfb-hero figure.kit{margin:0;background:#47132D;overflow:hidden;position:relative}
+.gfb-hero figure.kit img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.gfa .gfb-hero figure.kit figcaption{position:absolute;left:10px;bottom:10px;margin:0;padding:6px 10px;background:rgba(28,9,18,.84);color:#fff;font-size:13px}
+.gfb-brands{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.gfb-brands li{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:15px}
+.gfb-ev{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gfb-ev li{position:relative;overflow:hidden;background:#2a1520}
+.gfb-ev img{display:block;width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gfb-ev li:hover img{transform:scale(1.05)}
+.gfb-ev span{position:absolute;left:8px;right:8px;bottom:8px;padding:8px 10px;background:rgba(28,9,18,.84);color:#fff;font-size:13px;line-height:1.3}
+.gfb-ev span b{display:block;font-size:14px}
+.gfb-fmt{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-fmt > li{display:flex;flex-direction:column;gap:10px;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfb-fmt .n{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--violet)}
+.gfb-fmt b{font-size:22px;letter-spacing:-.025em;line-height:1.1}
+.gfb-fmt p{margin:0;color:#5A4652;font-size:15px}
+.gfb-fmt .pr{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-fmt a{color:var(--violet);font-weight:800;font-size:14px;text-decoration:none}
+.gfb-kitb{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:center}
+.gfb-kitb img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#47132D}
+.gfb-kitb ul{margin:14px 0 0;padding-left:20px;display:grid;gap:6px;font-size:16px;color:rgba(244,241,238,.88)}
+.gfb-kitb .pr{margin:14px 0 0;font-size:18px;font-weight:800;color:#fff}
+.gfb-kitb p.l{margin:16px 0 0;font-size:18px;color:rgba(244,241,238,.85)}
+.gfb-kitb .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-kitb .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+.gfb-where{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-where div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-where dt{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.gfb-where dd{margin:6px 0 0;font-size:15px;color:#5A4652}
+.gfb-scope{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-scope li{padding:20px 22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-scope li::before{content:counter(s,decimal-leading-zero);display:block;margin-bottom:8px;color:var(--violet);font-weight:800;font-size:13px}
+.gfb-scope b{display:block;font-size:19px;letter-spacing:-.02em}
+.gfb-scope span{display:block;margin-top:6px;font-size:15px;color:#5A4652}
+.gfb-org{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,48px);align-items:center}
+.gfb-org .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfb-org .ph img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#2a1520}
+.gfb-org p.l{margin:16px 0 0;font-size:17px;color:rgba(244,241,238,.85)}
+.gfb-tl{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfb-tl li{padding:12px 14px;border:1px solid rgba(244,241,238,.2);font-size:14px;color:rgba(244,241,238,.85)}
+.gfb-tl b{display:block;font-size:20px;color:var(--lime)}
+@media (max-width:1100px){.gfb-fmt,.gfb-where{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.gfb-kitb,.gfb-org{grid-template-columns:minmax(0,1fr)}.gfb-scope{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-ev{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.gfb-fmt,.gfb-where,.gfb-scope,.gfb-tl{grid-template-columns:minmax(0,1fr)}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://www.gamefields.eu/aktywacje-sportowe-dla-marek/#usluga","name":"Aktywacje sportowe dla marek","serviceType":"Brandowane boiska, turnieje i pop-upy sportowe","url":"https://www.gamefields.eu/aktywacje-sportowe-dla-marek/","inLanguage":"pl-PL","areaServed":{"@type":"Country","name":"Polska"},"provider":{"@id":"https://www.gamefields.eu/#studio"},"audience":{"@type":"BusinessAudience","audienceType":"marki, agencje eventowe i marketingowe"},"description":"Brandowane boiska, turnieje 1 na 1 i 3 na 3, pop-upy z areną mobilną i stała obecność marki w mieście. Koncepcja, produkcja, program, muzyka i content."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Marki i agencje","item":"https://www.gamefields.eu/aktywacje-sportowe-dla-marek/"}]},{"@type":"FAQPage","@id":"https://www.gamefields.eu/aktywacje-sportowe-dla-marek/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile kosztuje aktywacja sportowa dla marki?","acceptedAnswer":{"@type":"Answer","text":"Zależy od formatu. Arena mobilna (wynajem i sprzedaż) od 27 000 zł netto, stały brandowany court 3 na 3 od 100 000 zł netto za konstrukcję. Program, prowadzenie, muzykę i content wyceniam do briefu."}},{"@type":"Question","name":"Z jakimi markami pracowaliście?","acceptedAnswer":{"@type":"Answer","text":"Między innymi Head & Shoulders (event w Złotych Tarasach w Warszawie, na stadionie w Gdańsku i turniej z Legią Warszawa) oraz event UEFA Champions League z areną panna. Organizowałem też Mistrzostwa Świata Freestival Street Games 2017."}},{"@type":"Question","name":"Czy możecie przygotować tylko boisko bez eventu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Zakres może obejmować sam projekt i wykonanie brandowanej przestrzeni albo pełną produkcję wraz z programem sportowym."}},{"@type":"Question","name":"Czy realizujecie mobilne rozwiązania?","acceptedAnswer":{"@type":"Answer","text":"Tak. Mobilna arena panna to modułowe bandy i bramki do czasowych aktywacji: galeria, festiwal, stadion, plac miejski. Można ją wynająć albo kupić."}},{"@type":"Question","name":"Czy projektujecie format od zera?","acceptedAnswer":{"@type":"Answer","text":"Tak. Zaczynam od briefu marketingowego i proponuję sport, mechanikę uczestnictwa, przestrzeń oraz sposób wykorzystania wydarzenia w komunikacji."}},{"@type":"Question","name":"Jak duże logo zmieści się na boisku?","acceptedAnswer":{"@type":"Answer","text":"Na nawierzchni i bandach projektuję je tak, żeby nie zaburzało czytelności gry. Wzór i kolory marki zobaczysz najpierw w Studio 3D, na wybranym modelu."}},{"@type":"Question","name":"Czy marka może sfinansować stałe boisko w mieście?","acceptedAnswer":{"@type":"Answer","text":"Tak. To jedno ze źródeł finansowania boisk: firma finansuje arenę, a jej logo jest na bandach i nawierzchni. Dobrze działa przy szkołach, w parkach i na osiedlach."}},{"@type":"Question","name":"Ile czasu potrzeba na przygotowanie aktywacji?","acceptedAnswer":{"@type":"Answer","text":"Zależy od formatu i tego, czy arena jest z wynajmu, czy powstaje nowa konstrukcja. Termin podaję po briefie, zanim cokolwiek podpiszemy."}}]}]}</script>
+<div class="gfa gfb">
+<section class="gfb-hero"><div class="w top">
+  <div>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Marki i agencje</p>
+    <p class="k">Boisko jako medium</p>
+    <h1 class="d">Aktywacje sportowe dla marek.</h1>
+    <p class="lead">Brandowane boiska, turnieje i pop-upy, w których marka jest częścią gry, a nie banerem obok. Od briefu i court designu, przez produkcję areny, po prowadzenie, muzykę i content.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij brief →</a><a class="gfa-btn alt" href="/studio/?arena=street15&amp;pattern=pro-overprint&amp;variant=1&amp;palette=martens&amp;panel=E5383B&amp;frame=1E1E1E">Zestaw „Marka” w Studio ↗</a></div>
+  </div>
+  <figure class="kit"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders na arenie Gamefields, Złote Tarasy, Warszawa" loading="eager" decoding="async"><figcaption>Head &amp; Shoulders, Złote Tarasy, Warszawa</figcaption></figure>
+</div>
+<div class="w">
+  <dl class="gfb-nums">
+    <div><dt>Arena mobilna</dt><dd>od 27 000 zł<small>netto, wynajem i sprzedaż</small></dd></div>
+    <div><dt>Turnieje</dt><dd>od 2008<small>od lokalnych po mistrzostwa świata</small></dd></div>
+    <div><dt>Mistrzostwa Świata</dt><dd>2017<small>organizator, Freestival Street Games</small></dd></div>
+    <div><dt>Court 3 na 3</dt><dd>15 × 10 m<small>Street Arena 15</small></dd></div>
+  </dl>
+</div></section>
+
+<nav class="gfb-jump" aria-label="Na tej stronie"><div class="w"><ul role="list"><li><a href="#marki">Marki</a></li><li><a href="#formaty">Formaty</a></li><li><a href="#marka">Zestaw Marka</a></li><li><a href="#branding">Branding</a></li><li><a href="#zakres">Zakres</a></li><li><a href="#organizator">Organizator</a></li><li><a href="#brief">Brief</a></li><li><a href="#pytania">Pytania</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="marki"><div class="w">
+  <div class="gfa-head"><div><p class="k">Marki i wydarzenia</p><h2 class="d">Zagrane z markami.</h2></div><p>Mobilne areny panna na eventach marek, turniejach i mistrzostwach. <a href="/realizacje-gamefields/#eventy">Wszystkie eventy →</a></p></div>
+  <ul class="gfb-brands" role="list" style="margin-bottom:16px"><li>Head &amp; Shoulders</li><li>UEFA Champions League</li><li>Legia Warszawa</li><li>Mistrzostwa Świata 2017</li><li>Superball, Liberec</li></ul>
+  <ul class="gfb-ev" role="list"><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/1-768x576.jpg" alt="Event Head & Shoulders, Stadion, Gdańsk" loading="lazy" decoding="async"><span><b>Event Head &amp; Shoulders</b>Stadion, Gdańsk</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/10-768x432.jpg" alt="Turniej Head & Shoulders, Legia Warszawa" loading="lazy" decoding="async"><span><b>Turniej Head &amp; Shoulders</b>Legia Warszawa</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/13-768x432.jpg" alt="UEFA Champions League, event z areną panna" loading="lazy" decoding="async"><span><b>UEFA Champions League</b>event z areną panna</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" loading="lazy" decoding="async"><span><b>Mistrzostwa Świata Street Soccer 2017</b>Grodzisk Mazowiecki</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/22-768x432.jpg" alt="Mistrzostwa Świata Superball, Liberec" loading="lazy" decoding="async"><span><b>Mistrzostwa Świata Superball</b>Liberec</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/GAMEFIELDS-Street-Football-Tournament-1-768x576.png" alt="Turniej street football, Arena Gamefields" loading="lazy" decoding="async"><span><b>Turniej street football</b>Arena Gamefields</span></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="formaty"><div class="w">
+  <div class="gfa-head"><div><p class="k">Formaty</p><h2 class="d">Marka częścią gry.</h2></div><p>Zamiast stawiać branding obok wydarzenia, projektuję mechanikę i przestrzeń, w których marka jest naturalnym elementem doświadczenia. Na weekend albo na lata.</p></div>
+  <ul class="gfb-fmt" role="list"><li><span class="n">01</span><b>Pop-up sport</b><p>Modułowa arena w galerii, na festiwalu albo w miejskiej lokalizacji. Montaż na czas kampanii.</p><span class="pr">arena mobilna od 27 000 zł netto (wynajem i sprzedaż)</span><a href="/wynajem-boisk-mobilnych/">Arena mobilna →</a></li><li><span class="n">02</span><b>Turniej lub challenge</b><p>1 na 1, 3 na 3 albo inna mechanika uczestnictwa, z prowadzeniem i muzyką.</p><span class="pr">wycena do briefu</span><a href="#zakres">Zakres ↓</a></li><li><span class="n">03</span><b>Brandowany court</b><p>Nawierzchnia, bandy i wyposażenie w identyfikacji marki: boisko jako nośnik kampanii.</p><span class="pr">Street Arena 15 od 100 000 zł netto</span><a href="#marka">Zestaw „Marka” ↓</a></li><li><span class="n">04</span><b>Stała obecność w mieście</b><p>Marka finansuje arenę w parku, przy szkole albo na osiedlu, a jej logo jest na bandach i nawierzchni.</p><span class="pr">arena od 36 000 zł netto</span><a href="/dofinansowanie-boisk/">Finansowanie →</a></li></ul>
+</div></section>
+
+<section class="gfa-band" id="marka"><div class="w">
+  <div class="gfb-kitb">
+    <img src="/wp-content/themes/gamefields/assets/js/home/kits/marka.webp" alt="Zestaw Marka: Street Arena 15 z nawierzchnią Overprint, widok ze Studio 3D" loading="lazy" decoding="async">
+    <div><p class="k">Zestaw „Marka”</p><h2 class="d" style="font-size:clamp(40px,5vw,80px)">Boisko jako nośnik kampanii.</h2>
+      <p class="l">Turniej, logo i treści z wydarzenia. Event, galeria, festiwal.</p>
+      <ul><li>Street Arena 15: 15 × 10 m, gładkie bandy 1 m</li><li>nawierzchnia Overprint (Karel Martens): dwa systemy pasów nadrukowane na siebie</li><li>kolory ramy, paneli i wzoru w barwach marki</li></ul>
+      <p class="pr">konstrukcja od 100 000 zł netto · komplet od 159 300 zł</p>
+      <div class="gfa-btns" style="margin-top:18px"><a class="gfa-btn" href="/studio/?arena=street15&amp;pattern=pro-overprint&amp;variant=1&amp;palette=martens&amp;panel=E5383B&amp;frame=1E1E1E">Otwórz zestaw w Studio ↗</a><a class="gfa-btn alt" href="/wynajem-boisk-mobilnych/">Arena mobilna</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="branding"><div class="w">
+  <div class="gfa-head"><div><p class="k">Branding</p><h2 class="d">Gdzie marka gra.</h2></div><p>Logo to za mało. Marka może być w całym polu gry, a przestrzeń projektuję tak, żeby dobrze wyglądała w kadrze. <a href="/malowanie-boisk/">Malowanie i grafika →</a></p></div>
+  <dl class="gfb-where"><div><dt>Nawierzchnia</dt><dd>Wzór i kolory marki na całym polu gry; Overprint z kolekcji Masters II jak dwa nałożone systemy pasów.</dd></div><div><dt>Bandy</dt><dd>Logo i barwy na bandach: widoczne z każdej strony i na każdym zdjęciu z gry.</dd></div><div><dt>Wyposażenie i oprawa</dt><dd>Bramki, elementy wokół areny, scena prowadzącego i DJ-a.</dd></div><div><dt>Content</dt><dd>Przestrzeń projektowana pod zdjęcia, wideo i social: widok z góry, kadry z gry.</dd></div></dl>
+</div></section>
+
+<section class="gfa-sec" id="zakres"><div class="w">
+  <div class="gfa-head"><div><p class="k">Zakres</p><h2 class="d">Od pomysłu po działającą przestrzeń.</h2></div><p>Łączę wykonanie infrastruktury z produkcją wydarzenia. Możesz zlecić jeden etap albo całość.</p></div>
+  <ol class="gfb-scope" role="list"><li><b>Koncepcja</b><span>Mechanika aktywacji, sport, grupa odbiorców i rola marki.</span></li><li><b>Projekt przestrzeni</b><span>Court design, branding, wyposażenie i ruch uczestników.</span></li><li><b>Produkcja</b><span>Budowa albo wynajem infrastruktury, transport i montaż.</span></li><li><b>Program sportowy</b><span>Turniej, challenge, trening, pokaz albo otwarta gra.</span></li><li><b>Muzyka i oprawa</b><span>DJ, prowadzenie i atmosfera dopasowana do formatu.</span></li><li><b>Content</b><span>Przestrzeń i program pod zdjęcia, wideo i komunikację social.</span></li></ol>
+</div></section>
+
+<section class="gfa-band" id="organizator"><div class="w">
+  <div class="gfb-org">
+    <div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/22-768x432.jpg" alt="Mistrzostwa Świata Superball, Liberec" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/10-3-768x768.jpg" alt="Puchar Polski, Żerków" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/5-3-768x768.jpg" alt="Mistrzostwa Polski, Street Mekka, Łódź" loading="lazy" decoding="async"></div>
+    <div><p class="k">Organizator, nie tylko producent</p><h2 class="d" style="font-size:clamp(40px,5vw,80px)">Wiem, jak zrobić turniej.</h2>
+      <p class="l">Damian Gawrych. W pannę gram od 2005 roku, turnieje organizuję od 2008. Aktywację marki prowadzę jak turniej: z zasadami, które rozumieją gracze, i atmosferą, którą widać na zdjęciach.</p>
+      <ul class="gfb-tl" role="list"><li><b>2015</b>podium mistrzostw świata, Praga</li><li><b>2017</b>organizator Mistrzostw Świata Freestival Street Games</li><li><b>Puchar Polski</b>Żerków</li><li><b>Mistrzostwa Polski</b>Street Mekka, Łódź</li></ul>
+      <ul class="gfa-links"><li><a href="/damian-gawrych/">Kim jestem →</a></li><li><a href="/eventy-sportowe/">Eventy sportowe →</a></li></ul></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="brief"><div class="w">
+  <div class="gfa-head"><div><p class="k">Brief</p><h2 class="d">Co mi wysłać?</h2></div><p>Z tego zbuduję format od przestrzeni po aktywację. Odpowiadam osobiście.</p></div>
+  <div class="gfb-prep">
+    <div><h3>Brief kampanii</h3><ul class="gfb-check">
+      <li><span><b>Cel</b>: zasięg, content, sprzedaż, community.</span></li><li><span><b>Grupa odbiorców</b>: wiek, miasto, zainteresowania.</span></li>
+      <li><span><b>Lokalizacja i termin</b>: galeria, festiwal, stadion, plac.</span></li><li><span><b>Czas trwania</b>: jeden dzień, kampania albo stała obecność.</span></li>
+      <li><span><b>Budżet</b>: także widełki, jeśli dopiero je ustalacie.</span></li></ul></div>
+    <div><h3>Albo zacznij od obrazu</h3><ul class="gfb-check">
+      <li><span>Otwórz zestaw „Marka” w Studio 3D.</span></li><li><span>Zmień kolory ramy, paneli i wzoru na barwy marki.</span></li>
+      <li><span>Pobierz kartę projektu PDF i dołącz do briefu.</span></li></ul>
+      <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij brief →</a><a class="gfa-btn alt" href="/studio/?arena=street15&amp;pattern=pro-overprint&amp;variant=1&amp;palette=martens&amp;panel=E5383B&amp;frame=1E1E1E">Zestaw „Marka” ↗</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><div><p class="k">Pytania</p><h2 class="d">Sport jako platforma marki.</h2></div><p>Koszty, formaty, mobilność, branding i terminy.</p></div>
+  <div class="gfa-faq"><details><summary>Ile kosztuje aktywacja sportowa dla marki?</summary><p>Zależy od formatu. Arena mobilna (wynajem i sprzedaż) od 27 000 zł netto, stały brandowany court 3 na 3 od 100 000 zł netto za konstrukcję. Program, prowadzenie, muzykę i content wyceniam do briefu.</p></details><details><summary>Z jakimi markami pracowaliście?</summary><p>Między innymi Head &amp; Shoulders (event w Złotych Tarasach w Warszawie, na stadionie w Gdańsku i turniej z Legią Warszawa) oraz event UEFA Champions League z areną panna. Organizowałem też Mistrzostwa Świata Freestival Street Games 2017.</p></details><details><summary>Czy możecie przygotować tylko boisko bez eventu?</summary><p>Tak. Zakres może obejmować sam projekt i wykonanie brandowanej przestrzeni albo pełną produkcję wraz z programem sportowym.</p></details><details><summary>Czy realizujecie mobilne rozwiązania?</summary><p>Tak. Mobilna arena panna to modułowe bandy i bramki do czasowych aktywacji: galeria, festiwal, stadion, plac miejski. Można ją wynająć albo kupić.</p></details><details><summary>Czy projektujecie format od zera?</summary><p>Tak. Zaczynam od briefu marketingowego i proponuję sport, mechanikę uczestnictwa, przestrzeń oraz sposób wykorzystania wydarzenia w komunikacji.</p></details><details><summary>Jak duże logo zmieści się na boisku?</summary><p>Na nawierzchni i bandach projektuję je tak, żeby nie zaburzało czytelności gry. Wzór i kolory marki zobaczysz najpierw w Studio 3D, na wybranym modelu.</p></details><details><summary>Czy marka może sfinansować stałe boisko w mieście?</summary><p>Tak. To jedno ze źródeł finansowania boisk: firma finansuje arenę, a jej logo jest na bandach i nawierzchni. Dobrze działa przy szkołach, w parkach i na osiedlach.</p></details><details><summary>Ile czasu potrzeba na przygotowanie aktywacji?</summary><p>Zależy od formatu i tego, czy arena jest z wynajmu, czy powstaje nowa konstrukcja. Termin podaję po briefie, zanim cokolwiek podpiszemy.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><div><p class="k">Dalej</p><h2 class="d">Od briefu do boiska.</h2></div><p>Arena mobilna, eventy i court design.</p></div>
+  <ul class="gfb-next" role="list">
+    <li><a href="/wynajem-boisk-mobilnych/"><i>Produkcja</i><b>Arena mobilna</b><span>Wynajem i sprzedaż areny panna na event.</span></a></li>
+    <li><a href="/eventy-sportowe/"><i>Wydarzenia</i><b>Eventy sportowe</b><span>Turnieje, pokazy i aktywacje.</span></a></li>
+    <li><a href="/malowanie-boisk/"><i>Brand design</i><b>Malowanie i grafika</b><span>Wzór, kolory i logo na nawierzchni.</span></a></li>
+  </ul>
+  <ul class="gfb-who" role="list"><li><a href="/realizacje-gamefields/#eventy">Turnieje i eventy</a></li><li><a href="/boiska-street-football/">Modele i ceny</a></li><li><a href="/boiska-dla-klubow/"><span>Dla</span>klubów</a></li><li><a href="/dla-miast/"><span>Dla</span>miast</a></li><li><a href="/studio/">Studio 3D</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Masz brief?<br>Zamieńmy go w grę.</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij brief →</a><a class="gfa-btn alt" href="/studio/?arena=street15&amp;pattern=pro-overprint&amp;variant=1&amp;palette=martens&amp;panel=E5383B&amp;frame=1E1E1E">Zestaw „Marka” ↗</a></div>
+</div></section>
+
+</div>
+<!-- /wp:html -->

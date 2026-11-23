@@ -1,0 +1,25 @@
+Polecenie dla ChatGPT: nowa strona Marki i agencje (/aktywacje-sportowe-dla-marek/), 23.11.2026
+
+Właściciel zatwierdza podmianę CAŁEJ treści strony /aktywacje-sportowe-dla-marek/ (ID 3704): strona to jeden blok HTML.
+Adres i tytuł strony zostają bez zmian. Zmienia się treść i (krok 4) opis SEO.
+
+Nowa treść (zwykły plik tekstowy): https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/marki-2026-11/aktywacje-sportowe-dla-marek.html
+SHA-256 zaczyna się od: 3572a2d8688199a5
+
+Wymaganie: motyw Gamefields 1.0.35 lub nowszy (obraz zestawu /wp-content/themes/gamefields/assets/js/home/kits/marka.webp).
+
+Kroki:
+1. Zrób kopię obecnej treści strony 3704 (wersja lub szkic) i zapisz jej ID.
+2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic strony z nową treścią (cały plik, bez zmian).
+3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
+   - nagłówek „Aktywacje sportowe dla marek.” ze zdjęciem Head & Shoulders w Złotych Tarasach, pas liczb (od 27 000 zł, od 2008, 2017, 15 × 10 m);
+   - pasek skrótów przykleja się pod menu i go nie zasłania;
+   - „Zagrane z markami.”: 5 limonkowych nazw i galeria 6 zdjęć w równej siatce;
+   - cztery formaty (pop-up, turniej, brandowany court, stała obecność w mieście), ciemny pas zestawu „Marka”,
+     „Gdzie marka gra.” (4 miejsca), zakres w 6 krokach, ciemny pas organizatora (4 zdjęcia z mistrzostw), „Co mi wysłać?”, 8 pytań;
+   - brak przewijania w bok, wszystkie zdjęcia się ładują, brak błędów w konsoli.
+4. Opis SEO (Yoast, meta description) zamień na:
+   Aktywacje sportowe dla marek: brandowany court, turnieje i pop-upy z areną mobilną od 27 000 zł netto. Head & Shoulders, UEFA Champions League, MŚ 2017.
+   Tytuł SEO bez zmian.
+5. Po akceptacji opublikuj i wyczyść cache LiteSpeed.
+Niczego nie usuwaj. Jeśli coś się nie zgadza, przerwij i napisz właścicielowi.
