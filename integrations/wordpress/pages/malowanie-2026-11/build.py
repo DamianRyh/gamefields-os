@@ -101,6 +101,16 @@ CSS = GFB_CSS + """
 .gfb-looks figure{margin:0;background:#fff;border:1px solid var(--line)}
 .gfb-looks img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#E6E0DA}
 .gfb-looks figcaption{padding:14px 16px;font-size:14px;color:var(--muted)}.gfb-looks figcaption b{display:block;color:var(--ink);font-size:17px}
+.gfb-graf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-graf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-graf a:hover{border-color:var(--violet)}
+.gfb-graf .ph{overflow:hidden;background:#E6E0DA}
+.gfb-graf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-graf a:hover img{transform:scale(1.04)}
+.gfb-graf .tx{display:grid;gap:6px;padding:18px 20px 20px}
+.gfb-graf b{font-size:21px;letter-spacing:-.02em}
+.gfb-graf .d2{color:var(--muted);font-size:15px}
+.gfb-graf .go{margin-top:4px;color:var(--violet);font-weight:800;font-size:14px}
 /* masters */
 .gfb-masters{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:m}
 .gfb-masters li{padding:20px;border:1px solid rgba(244,241,238,.2);counter-increment:m}
@@ -118,7 +128,7 @@ CSS = GFB_CSS + """
 .gfb-lines li{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:14px}
 .gfb-lines i{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
 @media (max-width:1100px){.gfb-pv,.gfb-masters,.gfb-rules{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-kits{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-kits li,.gfb-kits li:nth-child(1),.gfb-kits li:nth-child(2){grid-column:span 1}.gfb-kits li:nth-child(1){grid-column:1/-1}}
-@media (max-width:900px){.gfb-scopes,.gfb-looks{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){.gfb-scopes,.gfb-looks,.gfb-graf{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:560px){.gfb-pv,.gfb-masters,.gfb-rules,.gfb-kits{grid-template-columns:minmax(0,1fr)}.gfb-qc input{width:100%}}
 """
 
@@ -147,6 +157,13 @@ looks = [("2026/10/Gamefields-Studio-%E2%80%94-Organic-Flow-768x432.webp", "Orga
          ("2026/10/Studio-Urban-Contrast.webp", "Urban Contrast", "mocne kontrasty na miejski plac"),
          ("2026/10/Studio-Classic-Lines.webp", "Classic Lines", "czytelne linie do kilku gier")]
 looks_html = "".join(f'<li><figure>{img(p, "Wzór nawierzchni " + n + " w Studio Gamefields")}<figcaption><b>{n}</b>{d}</figcaption></figure></li>' for p, n, d in looks)
+
+GRAFIKA = [
+    ("2026/11/IMG_4969-768x1024.jpg", "Czerwień i czerń, grafika z serii Sztuka z gry w ramie", "Sztuka z gry", "Seria grafik w czerni, bieli i czerwieni: koła, ślady i rytm z boiska przeniesione na papier. Ten sam język form trafia potem na nawierzchnie.", "/sztuka-z-gry/", "Zobacz serię →"),
+    ("2026/11/gamefields-plakat-sciana.webp", "Plakat Gamefields z wzorem boiska na ścianie", "Plakat z Twoim boiskiem", "Sam wzór na pełnym spadzie, bez napisów. Druk na papierze archiwalnym, numerowana edycja. 30 × 40 cm 99 zł, 50 × 70 cm 149 zł, 70 × 100 cm 199 zł brutto.", "/#plakaty", "Projektuj plakat →"),
+    ("2026/11/12-768x574.jpg", "Event Head & Shoulders na arenie Gamefields, Złote Tarasy", "Branding i aktywacje", "Barwy i znak marki na nawierzchni i bandach, turnieje i treści z wydarzenia. Arena mobilna od 27 000 zł netto.", "/aktywacje-sportowe-dla-marek/", "Dla marek →"),
+]
+graf_html = "".join(f'<li><a href="{h}"><span class="ph">{img(p, a)}</span><span class="tx"><b>{t}</b><span class="d2">{d}</span><span class="go">{g}</span></span></a></li>' for p, a, t, d, h, g in GRAFIKA)
 
 STEPS = [
     ("Zdjęcia i wymiary", "Pokazujesz plac, ja sprawdzam stan nawierzchni, spadki i odwodnienie.", "mówię wprost, czy wystarczy malowanie."),
@@ -185,14 +202,14 @@ function render(){var v=Math.max(0,parseFloat(String(a.value).replace(',','.'))|
 box.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){a.value=b.getAttribute('data-a');box.querySelectorAll('[data-a]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});render()})});
 a.addEventListener('input',function(){box.querySelectorAll('[data-a]').forEach(function(x){x.setAttribute('aria-pressed','false')});render()});render();})();</script>"""
 
-jump = [("zakres", "Zakres"), ("ceny", "Ceny"), ("wzory", "Wzory ze Studia"), ("masters", "Masters II"), ("malowalne", "Malowalne"), ("proces", "Etapy"), ("pytania", "Pytania")]
+jump = [("zakres", "Zakres"), ("ceny", "Ceny"), ("wzory", "Wzory ze Studia"), ("masters", "Masters II"), ("malowalne", "Malowalne"), ("grafika", "Grafika"), ("proces", "Etapy"), ("pytania", "Pytania")]
 
 body = f"""
 <section class="gfb-hero"><div class="w top">
   <div>
-    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Malowanie boisk</p>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Malowanie i grafika</p>
     <p class="k">Kolor, wzór, linie, branding</p>
-    <h1 class="d">Malowanie boisk sportowych.</h1>
+    <h1 class="d">Malowanie i grafika boisk.</h1>
     <p class="lead">Od odświeżenia kolorów i linii po autorski court design. Wzór projektujesz w Studio 3D, widzisz cenę, a ja przenoszę go na nawierzchnię farbami sportowymi z gumą.</p>
     <div class="gfa-btns"><a class="gfa-btn" href="#wzory">Zobacz wzory ↓</a><a class="gfa-btn alt" href="/kontakt/">Wyślij zdjęcia boiska →</a></div>
   </div>
@@ -244,6 +261,11 @@ body = f"""
   <ul class="gfb-lines" role="list"><li><i style="background:#fff"></i>Linie białe</li><li><i style="background:#111"></i>czarne</li><li><i style="background:#D8F24A"></i>limonkowe</li><li>Kolor linii dobieram do najlepszego kontrastu</li><li>Piłka · kosz · 3 na 3 · kilka gier naraz</li></ul>
 </div></section>
 
+<section class="gfa-sec" id="grafika"><div class="w">
+  <div class="gfa-head"><div><p class="k">Grafika</p><h2 class="d">Grafika także poza boiskiem.</h2></div><p>Wzory z boiska żyją też na papierze, na ścianie i w kampaniach. Ten sam język form, od nawierzchni po plakat.</p></div>
+  <ul class="gfb-graf" role="list">{graf_html}</ul>
+</div></section>
+
 <section class="gfa-sec" id="proces"><div class="w">
   <div class="gfa-head"><div><p class="k">Etapy</p><h2 class="d">Z ekranu na nawierzchnię.</h2></div><p>Pięć kroków od zdjęcia placu do pierwszego meczu na nowym wzorze.</p></div>
   <ol class="gfb-steps">{steps_html}</ol>
@@ -271,7 +293,7 @@ body = f"""
 """
 
 ld = {"@context": "https://schema.org", "@graph": [
-    {"@type": "Service", "@id": URL + "#usluga", "name": "Malowanie boisk sportowych", "serviceType": "Malowanie boisk i court design", "url": URL, "inLanguage": "pl-PL",
+    {"@type": "Service", "@id": URL + "#usluga", "name": "Malowanie i grafika boisk", "serviceType": "Malowanie boisk, court design i grafika", "url": URL, "inLanguage": "pl-PL",
      "areaServed": {"@type": "Country", "name": "Polska"}, "provider": {"@id": SITE + "#studio"},
      "description": "Malowanie boisk farbami sportowymi z granulatem gumowym: odświeżenie, linie, wzory Signature i Masters II ze Studia 3D, branding.",
      "offers": {"@type": "AggregateOffer", "priceCurrency": "PLN", "lowPrice": PMIN, "highPrice": PMAX, "offerCount": len(PV),
