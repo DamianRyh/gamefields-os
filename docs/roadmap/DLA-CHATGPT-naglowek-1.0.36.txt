@@ -1,0 +1,24 @@
+Polecenie dla ChatGPT: motyw 1.0.36 (jeden nagłówek na całej witrynie), 24.11.2026
+
+Motyw Gamefields 1.0.36 wgrywa właściciel (ZIP). Nie ruszaj plików motywu i nie zmieniaj bloków strony głównej.
+
+Co się zmienia:
+- Ten sam nagłówek na każdej stronie, także na stronie głównej: logo, „Studio Damiana Gawrycha · Warszawa”,
+  Boiska, Ceny, Dla kogo, Realizacje, Wiedza, Sklep, Kontakt, fioletowy „Wyślij zdjęcie placu” i „Studio 3D ↗”.
+- Stary nagłówek z bloku „naglowek” strony głównej jest ukryty przez motyw (zostaje w treści, niczego nie usuwaj).
+- Napisy w nagłówku nie łamią się już na dwie linie. Poniżej 1360 px znika opis, poniżej 1180 px przycisk ma napis
+  „Wyślij zdjęcie”, poniżej 1100 px zostaje tylko „Studio 3D”, od 900 px: „Wyślij zdjęcie” + „Menu”.
+- Stopka: „Boiska panna i street football” prowadzi do /boiska-street-football/.
+
+Kroki:
+1. Sprawdź, że motyw ma wersję 1.0.36 (Wygląd → Motywy). Jeśli nie — zatrzymaj się i daj znać właścicielowi.
+2. Wyczyść cache LiteSpeed.
+3. Sprawdź na komputerze (szerokość ok. 1440 i 1100 px) i telefonie:
+   - strona główna, /budowa-boisk-sportowych/, /shop/, /product/panna-play/, /kontakt/, /baza-wiedzy/:
+     nagłówek wygląda tak samo, jest tylko jeden, żaden napis nie jest w dwóch liniach;
+   - na stronie główniej kliknięcie „Ceny” przewija do cen i podkreśla „Ceny” w menu;
+   - „Wyślij zdjęcie placu” na podstronie otwiera stronę główną przy sekcji wysyłania zdjęcia;
+   - na telefonie „Menu” otwiera listę linków, „Wyślij zdjęcie” działa;
+   - na stronie głównej działają: wybór boisk, ceny, nawierzchnie, zestawy, plakaty (to sprawdza skrypt strony głównej).
+4. Jeśli coś wygląda źle: przywróć motyw 1.0.35 (właściciel ma ZIP) i daj znać właścicielowi.
+Niczego nie usuwaj.

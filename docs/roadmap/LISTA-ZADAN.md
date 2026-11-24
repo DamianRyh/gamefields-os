@@ -5,7 +5,7 @@ Zasada właściciela (23.11.2026): każdą zmianę najpierw pokazać w podglądz
 Polecenia do wdrożenia na stronie czekają w kolejce: `docs/roadmap/POLECENIA-DLA-CHATGPT.md`.
 Statusy: ✅ zrobione · 🔄 w toku · ⏳ czeka na wdrożenie na stronie · ❓ czeka na decyzję właściciela · ⬜ do zrobienia
 
-Ostatnia aktualizacja: 23.11.2026
+Ostatnia aktualizacja: 24.11.2026
 
 ## Teraz
 
@@ -51,7 +51,8 @@ Ostatnia aktualizacja: 23.11.2026
 | 36 | /malowanie-boisk/ („Malowanie i grafika”) od nowa: court design zamiast powtórki renowacji — 3 zakresy (odświeżenie, court design, branding), 4 warianty z kosztem dla wpisanego metrażu, 5 zestawów ze Studia z linkiem do tego samego wzoru, Masters II (8 kierunków), zasady malowalności i kolory linii, grafika poza boiskiem (Sztuka z gry, plakaty, branding), 5 etapów, 8 pytań | ✅ PR #125 + uzupełnienie grafiki, `pages/malowanie-2026-11/` | DLA-CHATGPT-malowanie-boisk.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
 | 37 | /projektowanie-boisk/ od nowa: 3 drogi (Studio 3D, koncepcja miejsca, koncepcja z dokumentami dla gmin), 4 narzędzia online, co zawiera projekt, 4 koncepcje (Pałac Kultury, Most Łazienkowski, Pole Mokotowskie, Freestival) z etykietą „wizualizacja”, Kraków od planu do parku, 5 etapów, autor, 8 pytań | ✅ PR (ten), `pages/projektowanie-2026-11/` | DLA-CHATGPT-projektowanie-boisk.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
 | 38 | /boiska-street-football/ („Boiska panna i street football”) od nowa: ceny zamiast „wycena indywidualna”, filtr (kształt, bandy, metraż), 8 kart z renderem, wymiarami, cenami, Studio, sklepem i modelem 3D, tabela, dobór do metrażu, panna vs 3 na 3, co w cenie, 8 pytań | ✅ PR #126, `pages/boiska-2026-11/` | DLA-CHATGPT-boiska-street-football.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
-| 38a | Stopka motywu: link „Boiska panna i street football” z /#boiska na /boiska-street-football/ | ⬜ przy najbliższym wydaniu motywu | | ⬜ |
+| 38a | Stopka motywu: link „Boiska panna i street football” z /#boiska na /boiska-street-football/ | ✅ motyw 1.0.36 | DLA-CHATGPT-naglowek-1.0.36.txt | ⏳ |
+| 45 | Jeden nagłówek na całej witrynie (motyw 1.0.36): ten sam na stronie głównej i podstronach, „Wyślij zdjęcie placu” obok „Studio 3D”, bez łamania napisów (opis znika < 1360 px, krótszy przycisk < 1180 px, menu mobilne od 900 px), podświetlanie sekcji na stronie głównej; stary nagłówek bloku strony głównej ukryty | ✅ PR (ten), `theme/gamefields/header.php`, `gft.css`, `gft.js`, `gf-home.js` | DLA-CHATGPT-naglowek-1.0.36.txt (ZIP od właściciela) | ⏳ |
 | 39 | /boiska-dla-szkol/ („Szkoły i gminy”) od nowa: licznik do naborów 2027 i terminy, 4 sposoby (przy szkole, modernizacja Orlika, wielofunkcyjne, panna w sali), 3 polecane modele z cenami, 6 źródeł finansowania i wymagania komisji (edycja 2026), część techniczna wniosku, opinie OSiR i Urzędu Miasta Kutno, logo miast, plan 2027, 9 pytań | ✅ PR #127, `pages/szkoly-2026-11/` | DLA-CHATGPT-boiska-dla-szkol.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
 | 40 | /dla-miast/ („Miasta”) od nowa: 4 problemy miejsca z rozwiązaniem i ceną, dobór do metrażu (interaktywny), argumenty zamawiających, 4 realizacje jako zadanie/rozwiązanie/efekt z cytatami, logo miast, zestaw „Miasto” do budżetu obywatelskiego, koncepcje dla Warszawy, otwarcie i aktywacja, 6 etapów, 8 pytań | ✅ PR #127, `pages/miasta-2026-11/` | DLA-CHATGPT-dla-miast.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
 | 41 | /boiska-dla-deweloperow/ („Deweloperzy i osiedla”) od nowa: 4 wartości, tabela 8 modeli do masterplanu z cenami, zestaw „Osiedle”, design zgodny z architekturą (galeria zestawów do Studia), co sprawdzam w koncepcji (sąsiedztwo, panele, format), materiały do sprzedaży, 5 etapów, 8 pytań | ✅ PR #127, `pages/deweloperzy-2026-11/` | DLA-CHATGPT-boiska-dla-deweloperow.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
@@ -91,7 +92,7 @@ Ostatnia aktualizacja: 23.11.2026
 ## Później (roadmapa)
 
 - ⬜ `offer/price-ranges.json` jest nieaktualny (widełki z PR #80); ceny nawierzchni na stronie są już z `surface-finish.json` (zad. 16).
-- ⚠ Blok „naglowek” strony głównej na żywo jest nowszy niż repozytorium (np. „Wyślij zdjęcie” zamiast „Zapytanie”): przed kolejną podmianą tego bloku zsynchronizować repo ze stroną.
+- ⚠ Blok „naglowek” strony głównej na żywo jest nowszy niż repozytorium. Od motywu 1.0.36 jego nagłówek (#gfs-nav) jest ukryty; po sprawdzeniu 1.0.36 można usunąć z bloku sam element <header> (reszta bloku zostaje).
 - ❓ Studio na telefonie: przycisk Podsumowanie nie pokazuje ceny (ukryta w `studio-skin-2026-11.css`, oszczędność miejsca). Cena jest w podsumowaniu. Pokazać ją też w przycisku?
 - ❓ Panna Ring nie ma jej w wyborze modelu w Studio (7 modeli), a jest w cenniku strony (40 000 zł). Dodać czy tak ma zostać?
 - ❓ Kafelek „Boiska” w Studio pisze „Wycena indywidualna”, choć ceny konstrukcji są już podane: zmienić na „od 27 tys. zł netto”?

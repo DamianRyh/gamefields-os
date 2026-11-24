@@ -23,6 +23,19 @@
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
+  /* Links to sections of this page (Boiska, Ceny, Dla kogo on the homepage): mark the section in view. */
+  var spy = [].filter.call(nav.querySelectorAll('.gft-links a'), function (a) {
+    return a.hash && a.pathname.replace(/\/$/, '') === location.pathname.replace(/\/$/, '') && document.getElementById(a.hash.slice(1));
+  });
+  if (spy.length && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        spy.forEach(function (a) { if (a.hash === '#' + e.target.id) a.setAttribute('aria-current', 'location'); else if (a.getAttribute('aria-current') === 'location') a.removeAttribute('aria-current'); });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    spy.forEach(function (a) { io.observe(document.getElementById(a.hash.slice(1))); });
+  }
 })();
 
 /* Contact page: a product or order passed in the link (?produkt=...) lands in the message field. */

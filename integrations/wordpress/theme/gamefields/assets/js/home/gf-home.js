@@ -26,7 +26,9 @@
   function pressGroup(container, active) { $$('[aria-pressed]', container).forEach(function (b) { b.setAttribute('aria-pressed', String(b === active)); }); }
 
   /* ---------- NAV (mobile) ---------- */
-  var nav = $('#gfs-nav'), menuBtn = $('.menu-btn', nav);
+  var nav = $('#gfs-nav'), menuBtn = nav && $('.menu-btn', nav);
+  /* 1.0.36: the theme header is used on every page; the block's own header may be removed or hidden */
+  if (nav && menuBtn && nav.offsetParent !== null) {
   menuBtn.addEventListener('click', function () { var o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', String(o)); });
   $$('.links a', nav).forEach(function (a) { a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
 
@@ -56,6 +58,7 @@
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     spyLinks.forEach(function (l) { var s = document.getElementById(l.getAttribute('href').slice(1)); if (s) spy.observe(s); });
+  }
   }
 
   /* ---------- HERO: 3D model + court colour ---------- */
