@@ -27,6 +27,6 @@
 html body .studio-shell .gfj .gfj-go{min-height:36px;padding:0 14px;border-radius:999px;border:0;background:#47132d!important;color:#fff!important;font-weight:700;font-size:13px}
 html body .studio-shell .gfj .gfj-later{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid #e4dbe6;background:#fff!important;color:#47132d!important;font-weight:600;font-size:13px}
 @keyframes gfj-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@media(max-width:800px){.gfj{left:8px;right:8px;bottom:150px;max-width:none}.gfj-card,.gfj-nudge{width:100%}.gfj-card ol{max-height:38vh}}
+@media(max-width:800px){.gfj{left:8px;right:8px;top:146px;bottom:auto;max-width:none;justify-items:end}.gfj-card,.gfj-nudge{width:100%}.gfj-card ol{max-height:38vh}}
 @media(prefers-reduced-motion:reduce){.gfj-nudge{animation:none}.gfj-bar i{transition:none}}
 .gfj-card li button{padding:5px 6px}.gfj-card li.is-next button{background:#f5f1fb}.gfj-card li.is-next .gfj-dot{border-color:#6336f5}

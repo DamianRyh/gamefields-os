@@ -26,3 +26,23 @@ Zmienione:
 2. Zmień kolor panelu, a po około 2 s pojawi się podpowiedź Oli. „Zapisz projekt” pobiera plik JSON i licznik pokazuje 3 z 8.
 3. Na telefonie (390 px) widać tylko pigułkę i nie ma poziomego przewijania.
 4. Kontrola: `pnpm build`, `npx tsc --noEmit`.
+
+## Dodatek (2026-11-25): nowy kreator „Kampania BO”
+Formularz kampanii zastąpiony kreatorem w 4 krokach (Miejsce → Głosowanie → Dlaczego → Publikacja):
+- ekran startowy z korzyściami;
+- jeden temat na krok;
+- podgląd strony na żywo;
+- tytuł podpowiadany z nazwy miejsca;
+- etap wniosku do wyboru jednym kliknięciem;
+- gotowe zdania do opisu;
+- podsumowanie z przyciskami „Zmień”;
+- błędy przy konkretnych polach;
+- szkic zapisywany w przeglądarce (`gf-campaign-draft-v1`);
+- ekran sukcesu z 3 krokami „co dalej”.
+
+API i baza bez zmian.
+
+Pliki: `components/campaign-create.tsx`, `app/campaign-create.css`.
+Uwaga dla przyszłych zmian: Studio koloruje na fioletowo każdy przycisk wewnątrz elementu z „next” w nazwie klasy (`[class*="next"] button`), więc nie używaj takich klas.
+
+Telefon: pigułka „Ścieżka” stoi w prawym górnym rogu sceny (`app/journey-guide.css`) i nie zasłania panelu. Lista zwija się po kliknięciu kroku.

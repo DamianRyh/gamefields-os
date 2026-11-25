@@ -70,7 +70,7 @@ export function JourneyGuide({project,onOpen}:{project:Project;onOpen:(step:Jour
   {open?<section className="gfj-card" aria-label="Twoja ścieżka">
    <header><div><b>Twoja ścieżka</b><span>{count} z {total}</span></div><button type="button" className="gfj-x" aria-label="Zwiń ścieżkę" onClick={toggle}>–</button></header>
    <div className="gfj-bar" aria-hidden="true"><i style={{width:`${count/total*100}%`}}/></div>
-   <ol>{JOURNEY.map(j=>{const ok=s.done.includes(j.id),next=JOURNEY.find(x=>!s.done.includes(x.id))?.id===j.id;return <li key={j.id} className={ok?'is-done':next?'is-next':''}><button type="button" onClick={()=>{journeyEvent('path_click',j.id);onOpen(j.id)}}>
+   <ol>{JOURNEY.map(j=>{const ok=s.done.includes(j.id),next=JOURNEY.find(x=>!s.done.includes(x.id))?.id===j.id;return <li key={j.id} className={ok?'is-done':next?'is-next':''}><button type="button" onClick={()=>{journeyEvent('path_click',j.id);if(phone)save({...state.current,open:false});onOpen(j.id)}}>
     <span className="gfj-dot" aria-hidden="true">{ok?'✓':''}</span><span className="gfj-t"><b>{j.label}</b>{next?<small>{j.id==='publish'&&contest?.open?`Teraz: „${contest.contest.title}”`:j.hint}</small>:null}</span><span className="sr-only">{ok?' (zrobione)':''}</span></button></li>})}</ol>
    <footer>{s.muted?<button type="button" onClick={()=>save({...state.current,muted:false,dismissStreak:0})}>Włącz podpowiedzi</button>:<button type="button" onClick={()=>save({...state.current,muted:true})}>Wycisz podpowiedzi</button>}</footer>
   </section>:<button type="button" className="gfj-pill" onClick={toggle} aria-label={`Twoja ścieżka: ${count} z ${total}. Rozwiń`}><span className="gfj-ring" style={{['--p' as string]:count/total}}/>Ścieżka {count}/{total}</button>}
