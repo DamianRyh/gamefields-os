@@ -14,9 +14,9 @@ import '@/app/share-media.css';
 type Output='image'|'film';
 const emit=(name:string,detail:Record<string,unknown>={})=>{try{window.dispatchEvent(new CustomEvent('gf-share',{detail:{name,...detail}}))}catch{/* analytics is optional */}};
 
-export function ShareMediaPanel({project,price,link,onClose}:{project:Project;price?:number|null;link?:string|null;onClose?:()=>void}){
+export function ShareMediaPanel({project,price,link,onClose,defaultCaption,heading='Udostępnij projekt'}:{project:Project;price?:number|null;link?:string|null;onClose?:()=>void;defaultCaption?:string;heading?:string}){
  const [format,setFormat]=useState<ShareFormat>('story'),[style,setStyle]=useState<ShareStyle>('clean'),[bgPick,setBg]=useState('auto');
- const [caption,setCaption]=useState(()=>{try{const c=JSON.parse(sessionStorage.getItem('gf-share-credit')||'null');if(c?.id===project.id&&typeof c.credit==='string')return ('@'+c.credit).slice(0,28)}catch{/* optional */}return 'Moje boisko.'}),[showPrice,setShowPrice]=useState(false),[safe,setSafe]=useState(true),[outputPick,setOutput]=useState<Output>('image');
+ const [caption,setCaption]=useState(()=>{try{const c=JSON.parse(sessionStorage.getItem('gf-share-credit')||'null');if(c?.id===project.id&&typeof c.credit==='string')return ('@'+c.credit).slice(0,28)}catch{/* optional */}return defaultCaption||'Moje boisko.'}),[showPrice,setShowPrice]=useState(false),[safe,setSafe]=useState(true),[outputPick,setOutput]=useState<Output>('image');
  const [shots,setImages]=useState<ShareImages|null>(null),[status,setStatus]=useState(''),[progress,setProgress]=useState<number|null>(null),[video,setVideo]=useState<{url:string;blob:Blob;key:string}|null>(null);
  const [rendererReady,setRendererReady]=useState(()=>!!shareRenderer());
  const canvas=useRef<HTMLCanvasElement>(null),abort=useRef<AbortController|null>(null);
@@ -54,7 +54,7 @@ export function ShareMediaPanel({project,price,link,onClose}:{project:Project;pr
 
  const [W,H]=FORMAT_SIZE[format],pct=(v:number)=>`${v/H*100}%`,showFilm=output==='film'&&video?.key===filmKey;
  return <section className="gfsm" aria-label="Udostępnij projekt">
-  <header className="gfsm-head"><div><h2>Udostępnij projekt</h2><p>{facts.name} · {facts.pattern}</p></div>{onClose?<button type="button" className="gfsm-x" aria-label="Zamknij" onClick={onClose}>×</button>:null}</header>
+  <header className="gfsm-head"><div><h2>{heading}</h2><p>{facts.name} · {facts.pattern}</p></div>{onClose?<button type="button" className="gfsm-x" aria-label="Zamknij" onClick={onClose}>×</button>:null}</header>
   <div className="gfsm-body">
    <div className="gfsm-stage"><div className="gfsm-frame" style={{aspectRatio:`${W}/${H}`}}>
     <canvas ref={canvas} width={W} height={H} aria-label="Podgląd grafiki" hidden={showFilm}/>

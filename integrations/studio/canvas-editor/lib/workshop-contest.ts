@@ -15,6 +15,8 @@ export function currentContest(now=Date.now()):{contest:Contest;open:boolean}|nu
 export const allContests=()=>THEMES.slice();
 export const contestById=(id:string)=>THEMES.find(c=>c.id===id)||null;
 const BLOCK=['kurw','chuj','pierd','jeba','jebi','pizd','cipa','huj','dziwk','szmat','spierd','nazi','hitler'];
+/** True when the text contains an obvious insult (shared with the BO campaign pages). */
+export const rude=(v:string)=>{const low=v.toLowerCase().replace(/[^a-ząćęłńóśźż]/g,'');return BLOCK.some(b=>low.includes(b))};
 /** Pseudonym: 2–24 letters, digits, spaces, dot, dash, underscore. No links, no obvious insults. Empty = anonymous. */
 export function cleanNickname(raw:unknown):string|null|false{
  if(raw==null||raw==='')return null;if(typeof raw!=='string')return false;

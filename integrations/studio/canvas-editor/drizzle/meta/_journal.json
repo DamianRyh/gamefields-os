@@ -99,6 +99,13 @@
       "when": 1795600000000,
       "tag": "0014_workshop_contest",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1795610000000,
+      "tag": "0015_bo_campaigns",
+      "breakpoints": true
     }
   ]
 }

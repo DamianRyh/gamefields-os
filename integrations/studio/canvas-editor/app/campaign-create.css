@@ -1,0 +1,17 @@
+/* "Kampania BO" tab (2026-11-25). */
+.gfcc-form{display:grid;gap:12px;margin-top:12px}
+.gfcc-form label{display:grid;gap:6px;font-size:13px;font-weight:700;color:#47132d}
+.gfcc-form input:not([type=checkbox]),.gfcc-form textarea{width:100%;box-sizing:border-box;min-height:42px;padding:9px 12px;border:1.5px solid #d9cfd4;border-radius:10px;font:inherit;font-weight:500;font-size:15px;color:#47132d;background:#fff}
+.gfcc-form textarea{resize:vertical;min-height:84px}
+.gfcc-form input:focus,.gfcc-form textarea:focus{outline:2px solid #6336f5;border-color:#6336f5}
+.gfcc-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.gfcc-form .gfcc-c{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:14px;line-height:1.45}
+.gfcc-c input{width:18px;height:18px;margin:1px 0 0;accent-color:#6336f5;flex:none}
+.gfcc-hint{margin:0;font-size:13px;color:#8a7686}.gfcc-warn{margin:0;font-size:14px;color:#c2185b;font-weight:650}
+.gfcc-done{display:grid;gap:8px;margin-top:12px;padding:16px 18px;border-radius:14px;background:#efe9ff}
+.gfcc-done p{margin:0}.gfcc-done code{font-size:13px;overflow-wrap:anywhere;color:#47132d}
+.gfcc-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.gfcc-acts a{color:#6336f5;font-weight:700}
+.gfcc-mine{margin-top:18px}.gfcc-mine h3{font-size:15px;margin:0 0 8px}
+.gfcc-mine ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.gfcc-mine li{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px}.gfcc-mine li span{flex:1;min-width:0;font-weight:650}.gfcc-mine a{color:#6336f5;font-weight:650}
+@media(max-width:560px){.gfcc-2{grid-template-columns:minmax(0,1fr)}}

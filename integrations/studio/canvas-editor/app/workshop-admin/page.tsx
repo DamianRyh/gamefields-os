@@ -45,6 +45,24 @@ export default function WorkshopAdmin(){
     <button type="button" onClick={()=>void act(i.id,{hidden:!i.hidden})}>{i.hidden?'Pokaż':'Ukryj'}</button>
    </div></li>)}</ol>
   {!shown.length&&!busy?<p>Brak prac dla tych filtrów.</p>:null}
+  <CampaignAdmin adminKey={key}/>
   <p className="gfwa-note">Grafiki i film: „Otwórz w Studio”, potem Pliki projektu → Udostępnij. Podpis „@pseudonim” wstawia się sam, gdy autor dał zgodę. Zwycięzca pojawia się na stronie głównej w sekcji Warsztat.</p>
  </main>
+}
+
+type Camp={id:string;title:string;place:string;city:string;budgetName:string|null;budgetUrl:string|null;voteUntil:string|null;organizer:string|null;email:string|null;supporters:number;approved:boolean;hidden:boolean;createdAt:string};
+/* BO campaign pages: who collects support where, and who asked for help with the application (sales leads). */
+function CampaignAdmin({adminKey}:{adminKey:string}){
+ const [items,setItems]=useState<Camp[]>([]),[error,setError]=useState(''),[tick,setTick]=useState(0);
+ useEffect(()=>{let active=true;fetch('/api/campaign/admin',{headers:{'x-gf-admin':adminKey}}).then(async r=>{const d=await r.json();if(!active)return;if(!r.ok){setError(d.error||'Błąd');return}setError('');setItems(d.items)}).catch(e=>{if(active)setError((e as Error).message)});return()=>{active=false}},[adminKey,tick]);
+ async function act(id:string,body:Record<string,unknown>){const r=await fetch('/api/campaign/admin',{method:'POST',headers:{'x-gf-admin':adminKey,'Content-Type':'application/json'},body:JSON.stringify({id,...body})});if(!r.ok)setError('Nie udało się zapisać zmiany');setTick(n=>n+1)}
+ const leads=items.filter(i=>i.email).length;
+ return <section className="gfwa-camps"><h2>Kampanie do budżetu obywatelskiego</h2><p>{items.length} stron · {leads} z prośbą o pomoc we wniosku (kontakt sprzedażowy).</p>{error?<p className="gfwa-err" role="alert">{error}</p>:null}
+  <ol className="gfwa-list">{items.map(i=><li key={i.id} className={(i.hidden?'is-hidden ':'')+(i.email?'is-lead':'')}>
+   <span className="gfwa-rank">{i.supporters}</span><img src={'/api/campaign?id='+i.id+'&format=svg'} alt="" loading="lazy"/>
+   <div className="gfwa-info"><b>{i.title}</b><span>{i.place}, {i.city}{i.budgetName?' · '+i.budgetName:''}</span>
+    <small>{new Date(i.createdAt).toLocaleDateString('pl-PL')}{i.voteUntil?' · głosowanie do '+i.voteUntil:''}{i.organizer?' · @'+i.organizer:''}{i.email?<> · <em className="ok">pomoc we wniosku: <a href={'mailto:'+i.email}>{i.email}</a></em></>:null}</small></div>
+   <div className="gfwa-stats"><span title="Popierają">♥ {i.supporters}</span></div>
+   <div className="gfwa-acts"><a href={'/kampania?id='+i.id} target="_blank" rel="noopener">Strona ↗</a>{i.budgetUrl?<a href={i.budgetUrl} target="_blank" rel="noopener nofollow">BO ↗</a>:null}<button type="button" onClick={()=>void act(i.id,{hidden:!i.hidden})}>{i.hidden?'Pokaż':'Ukryj'}</button></div></li>)}</ol>
+  {!items.length?<p>Brak stron kampanii.</p>:null}</section>
 }

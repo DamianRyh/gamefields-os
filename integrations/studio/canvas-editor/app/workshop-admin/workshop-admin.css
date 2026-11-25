@@ -23,3 +23,5 @@
 .gfwa-acts a{color:#6336f5;font-weight:650;text-decoration:none;white-space:nowrap}
 .gfwa-note{margin-top:18px!important;font-size:13px}
 @media(max-width:800px){.gfwa-list li{grid-template-columns:72px minmax(0,1fr);}.gfwa-rank{display:none}.gfwa-list img{width:72px;height:52px}.gfwa-stats,.gfwa-acts{grid-column:1/-1;justify-content:flex-start}}
+.gfwa-camps{margin-top:36px}.gfwa-camps h2{margin:0;font-size:22px;letter-spacing:-.02em}.gfwa-camps>p{margin:4px 0 12px}
+.gfwa-list li.is-lead{border:2px solid #1d7a46;background:#f1fbf4}.gfwa-info em a{color:inherit}
