@@ -49,7 +49,7 @@ export function compose(canvas:HTMLCanvasElement,o:ComposeOptions){
  const priceLine=o.showPrice&&f.price?f.price:null,facts=[f.field,f.pattern].filter(Boolean).join(' · ');
 
  if(o.style==='clean'){
-  const bg=bgChoice.color||mix(mix(light,BRAND.paper,.5),f.panel,.16),dk=lum(bg)<.3,fg=dk?BRAND.paper:BRAND.ink,mu=dk?'rgba(244,241,238,.72)':BRAND.muted,acc=dk?BRAND.lime:BRAND.violet,M=64,top=S.top+30,bot=H-S.bottom-24;
+  const bg=bgChoice.color||mix(lum(light)>.5?mix(light,BRAND.paper,.5):BRAND.paper,f.panel,.14),dk=lum(bg)<.3,fg=dk?BRAND.paper:BRAND.ink,mu=dk?'rgba(244,241,238,.72)':BRAND.muted,acc=dk?BRAND.lime:BRAND.violet,M=64,top=S.top+30,bot=H-S.bottom-24;
   ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
   text('gamefields.',M,top+44,{w:800,s:52,c:fg,ls:-2});
   text('DESIGNED IN GAMEFIELDS STUDIO',W-M,top+40,{w:800,s:20,c:acc,ls:2.4,al:'right'});
