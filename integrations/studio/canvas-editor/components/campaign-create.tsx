@@ -4,7 +4,7 @@
    a live preview of the page the neighbours will see, a draft kept in this browser, errors shown next to the field.
    Public scope as in the Workshop (layout, pattern, colours; no private name, text or logos). E-mail only when the
    organiser asks Gamefields for help with the application. The server validates everything again. */
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useRef,useState,type ReactNode} from 'react';
 import type {Project} from '@/lib/project';
 import {publicWorkshopProject} from '@/lib/workshop-project';
 import {cleanCampaign,CAMPAIGN_LINK,type CampaignInput} from '@/lib/campaign';
@@ -30,12 +30,13 @@ const EMPTY:Partial<Record<Field,string>>={city:'Wpisz miasto albo gminę.',plac
 const STEP_FIELDS:Field[][]=[['title','place','city'],['budgetName','budgetUrl','voteUntil'],['about','organizer'],['email']];
 const fmtDate=(v:string)=>{try{return new Intl.DateTimeFormat('pl-PL',{day:'numeric',month:'long',year:'numeric'}).format(new Date(v+'T12:00:00'))}catch{return v}};
 
-export function CampaignCreate({project}:{project:Project}){
+/** page: full-page wizard (/kampania/nowa) — no intro, step 0 goes back to the project choice, preview shows `hero`. */
+export function CampaignCreate({project,page=false,hero,onBack}:{project:Project;page?:boolean;hero?:ReactNode;onBack?:()=>void}){
  useEffect(()=>{journey('financing')},[]);
  const init=():{f:Form;stage:Stage;step:number;help:boolean}=>{const empty={title:'',place:'',city:'',budgetName:'',budgetUrl:'',voteUntil:'',organizer:'',about:'',email:''};
   try{const d=JSON.parse(localStorage.getItem(DRAFT)||'null');if(d?.f)return {f:{...empty,...d.f},stage:d.stage||'new',step:Math.min(3,d.step||0),help:!!d.help}}catch{/* no draft */}
   let nick='';try{nick=localStorage.getItem('gf-workshop-nickname')||''}catch{/* optional */}
-  return {f:{...empty,organizer:nick},stage:'new',step:-1,help:false}};
+  return {f:{...empty,organizer:nick},stage:'new',step:page?0:-1,help:false}};
  const [first]=useState(init);
  const [f,setF]=useState<Form>(first.f),[stage,setStage]=useState<Stage>(first.stage),[step,setStep]=useState(first.step),[help,setHelp]=useState(first.help);
  const [titleTouched,setTitleTouched]=useState(!!first.f.title),[shown,setShown]=useState<Set<Field>>(new Set()),[pub,setPub]=useState(false);
@@ -45,7 +46,11 @@ export function CampaignCreate({project}:{project:Project}){
  /* draft survives closing the panel */
  useEffect(()=>{if(step<0||done)return;try{localStorage.setItem(DRAFT,JSON.stringify({f,stage,step,help}))}catch{/* optional */}},[f,stage,step,help,done]);
  useEffect(()=>{head.current?.focus()},[step,done]);
- const autoTitle=(place:string)=>place.trim()?`Boisko dla ${/^(osiedl|ul\.|ulic|szko|park|plac|podw)/i.test(place.trim())?'':'osiedla '}${place.trim()}`.slice(0,70):'';
+ const autoTitle=(raw:string)=>{const v=raw.trim().replace(/\s+/g,' ');if(!v)return '';let t:string;
+  if(/^os(iedle|\.)\s+/i.test(v))t='Boisko dla osiedla '+v.replace(/^os(iedle|\.)\s+/i,'');
+  else if(/^(ul\.|ulica|ulicy|al\.|aleja)\s+/i.test(v))t='Boisko przy ul. '+v.replace(/^(ul\.|ulica|ulicy|al\.|aleja)\s+/i,'');
+  else if(/^(szko|przedszk|park|plac|podw|skwer|boisk)/i.test(v))t='Nowe boisko: '+v;
+  else t='Boisko dla osiedla '+v;return t.slice(0,70)};
  const set=(k:Field)=>(e:{target:{value:string}})=>{const v=e.target.value;setF(o=>({...o,[k]:v,...(k==='place'&&!titleTouched?{title:autoTitle(v)}:{})}));if(k==='title')setTitleTouched(true)};
  const err=(k:Field)=>shown.has(k)?fieldError(f,k,help):'';
  const blur=(k:Field)=>()=>{if(f[k])setShown(s=>new Set(s).add(k))};
@@ -76,7 +81,7 @@ export function CampaignCreate({project}:{project:Project}){
  const preview=<aside className="gfcc-pv" aria-label="Podgląd strony kampanii">
   <span className="gfcc-pv-tag">Podgląd · tak zobaczą to sąsiedzi</span>
   <div className="gfcc-pv-page">
-   <div className="gfcc-pv-hero" style={{['--gfcc-acc' as string]:accent}}><span className="gfcc-pv-field" aria-hidden="true"><i/></span></div>
+   <div className={'gfcc-pv-hero'+(hero?' is-3d':'')} style={{['--gfcc-acc' as string]:accent}}>{hero||<span className="gfcc-pv-field" aria-hidden="true"><i/></span>}</div>
    <small className="gfcc-pv-kicker">{f.budgetName.trim()||'Budżet obywatelski'}</small>
    <b className={'gfcc-pv-title'+(f.title.trim()?'':' is-empty')}>{f.title.trim()||'Boisko dla osiedla…'}</b>
    <span className="gfcc-pv-place">{[f.place.trim(),f.city.trim()].filter(Boolean).join(' · ')||'Miejsce · miasto'}</span>
@@ -88,19 +93,19 @@ export function CampaignCreate({project}:{project:Project}){
 
  const list=mine.length?<div className="gfcc-mine"><h3>Twoje strony kampanii</h3><ul>{mine.map(m=><li key={m.id}><span>{m.title}</span><a href={'/kampania?id='+m.id} target="_blank" rel="noopener">Otwórz ↗</a><button type="button" onClick={()=>copy(CAMPAIGN_LINK(m.id))}>Kopiuj link</button></li>)}</ul></div>:null;
 
- if(done)return <section className="studio-p2-section gfcc" aria-label="Kampania do budżetu obywatelskiego">
+ if(done)return <section className={(page?'gfcc-page ':'studio-p2-section ')+'gfcc'} aria-label="Kampania do budżetu obywatelskiego">
   <div className="gfcc-done" role="status"><span className="gfcc-done-icon" aria-hidden="true">✓</span><h2 ref={head} tabIndex={-1}>Strona „{done.title}” jest gotowa</h2>
    <p>Teraz zbierz pierwsze poparcia. Najlepiej działa wiadomość na grupie osiedla i plakat przy placu.</p>
    <div className="gfcc-link"><code>{CAMPAIGN_LINK(done.id)}</code><button type="button" className="studio-primary" onClick={()=>copy(CAMPAIGN_LINK(done.id))}>{copied?'Skopiowano ✓':'Kopiuj link'}</button></div>
    <ol className="gfcc-todo">
     <li><b>Wyślij link sąsiadom</b><span>Grupa osiedla na Facebooku, WhatsApp, rada rodziców w szkole.</span></li>
-    <li><b>Dodaj grafikę albo film</b><span>Gotowe formaty do Stories i postów z Twoim boiskiem.</span><button type="button" onClick={openShare}>Przygotuj grafiki →</button></li>
+    <li><b>Dodaj grafikę albo film</b><span>Gotowe formaty do Stories i postów z Twoim boiskiem{page?' znajdziesz na stronie kampanii.':'.'}</span>{page?null:<button type="button" onClick={openShare}>Przygotuj grafiki →</button>}</li>
     <li><b>Sprawdź stronę</b><span>Kartę techniczną PDF dla urzędu pobierzesz na stronie kampanii.</span><a href={'/kampania?id='+done.id} target="_blank" rel="noopener">Otwórz stronę ↗</a></li>
    </ol>
    <button type="button" className="gfcc-ghost" onClick={restart}>Utwórz kolejną kampanię</button></div>
   {list}</section>;
 
- if(step<0)return <section className="studio-p2-section gfcc" aria-label="Kampania do budżetu obywatelskiego">
+ if(step<0)return <section className={(page?'gfcc-page ':'studio-p2-section ')+'gfcc'} aria-label="Kampania do budżetu obywatelskiego">
   <div className="gfcc-intro"><span className="gfcc-eyebrow">Budżet obywatelski</span><h2 ref={head} tabIndex={-1}>Zbierz poparcie sąsiadów dla tego boiska</h2>
    <p>W 3 minuty zrobisz z tego projektu stronę kampanii, którą wyślesz na grupę osiedla. Bez logowania i bez kosztów.</p>
    <ul className="gfcc-get">
@@ -113,7 +118,7 @@ export function CampaignCreate({project}:{project:Project}){
    <small className="gfcc-fine">4 krótkie kroki. Postęp zapisuje się w tej przeglądarce.</small></div>
   {list}</section>;
 
- return <section className="studio-p2-section gfcc" aria-label="Kampania do budżetu obywatelskiego">
+ return <section className={(page?'gfcc-page ':'studio-p2-section ')+'gfcc'} aria-label="Kampania do budżetu obywatelskiego">
   <nav className="gfcc-steps" aria-label="Kroki kampanii"><ol>{STEPS.map((s,i)=><li key={s} className={i<step?'is-done':i===step?'is-now':''}><button type="button" onClick={()=>go(i)} aria-current={i===step?'step':undefined}><span>{i<step?'✓':i+1}</span>{s}</button></li>)}</ol></nav>
   <div className="gfcc-grid">
    <form className="gfcc-form" noValidate onSubmit={e=>{e.preventDefault();if(step<3)next();else void create()}}>
@@ -151,7 +156,7 @@ export function CampaignCreate({project}:{project:Project}){
      {error?<p className="gfcc-warn" role="alert">{error}</p>:null}
     </>}
     <div className="gfcc-nav">
-     {step>0?<button type="button" className="gfcc-ghost" onClick={back}>← Wstecz</button>:<button type="button" className="gfcc-ghost" onClick={()=>setStep(-1)}>← Wstecz</button>}
+     {step>0?<button type="button" className="gfcc-ghost" onClick={back}>← Wstecz</button>:<button type="button" className="gfcc-ghost" onClick={()=>page?onBack?.():setStep(-1)}>{page?'← Zmień projekt':'← Wstecz'}</button>}
      {step<3?<button type="submit" className="studio-primary">Dalej</button>:<button type="submit" className="studio-primary" disabled={busy}>{busy?'Tworzę stronę…':'Utwórz stronę kampanii'}</button>}
     </div>
    </form>

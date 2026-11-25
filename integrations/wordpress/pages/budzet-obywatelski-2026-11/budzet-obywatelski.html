@@ -1,0 +1,307 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-surf{gap:8px}.gfb-surf .tx{padding:10px 12px 12px}.gfb-surf b{font-size:15px}.gfb-surf .nt{font-size:12px}.gfb-surf .r{font-size:13px}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+
+.gfbo-hero{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,56px);align-items:center}
+.gfa .gfbo-hero h1{font-size:clamp(44px,5.6vw,92px);overflow-wrap:anywhere;hyphens:auto}
+.gfbo-guard{display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px;padding:clamp(20px,2.4vw,28px);background:var(--ink);color:#fff}
+.gfbo-guard .av{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--lime,#D8F24A);color:var(--ink);font-weight:900;font-size:21px}
+.gfbo-guard small{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#d9c9d3}
+.gfbo-guard b{display:block;font-size:24px;letter-spacing:-.03em;line-height:1.1;margin-top:4px}
+.gfbo-guard span{display:block;font-size:15px;color:#e6dbe2;margin-top:2px}
+.gfbo-guard p{margin:12px 0 0;font-size:16px;line-height:1.5;color:#f3ecf0}
+.gfa .gfbo-guard a{display:inline-block;margin-top:12px;color:var(--lime,#D8F24A);font-weight:800;text-decoration:none}
+.gfbo-get{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfbo-get li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfbo-get .n{font-size:28px}
+.gfbo-get b{font-size:21px;letter-spacing:-.025em;line-height:1.1}
+.gfbo-get p{margin:0;color:#5A4652;font-size:15px}
+.gfbo-steps{list-style:none;counter-reset:s;margin:0;padding:0;display:grid;gap:10px}
+.gfbo-steps li{counter-increment:s;display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfbo-steps li::before{content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--violet);color:#fff;font-weight:900;font-size:18px}
+.gfbo-steps b{display:block;font-size:20px;letter-spacing:-.02em}
+.gfbo-steps p{margin:6px 0 0;color:#5A4652;font-size:15.5px}
+.gfbo-steps em{display:inline-block;margin-top:8px;padding:4px 10px;background:#EEE8FF;color:var(--violet);font-style:normal;font-weight:700;font-size:13.5px}
+.gfbo-docs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfbo-docs li{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;background:#fff;border:1px solid var(--line);font-size:15.5px}
+.gfbo-docs li::before{content:"";flex:none;width:20px;height:20px;margin-top:2px;border:2px solid var(--violet)}
+.gfbo-docs small{display:block;color:var(--violet);font-weight:700;font-size:13px;margin-top:2px}
+@media (max-width:900px){.gfbo-hero,.gfbo-docs{grid-template-columns:minmax(0,1fr)}.gfbo-get{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.gfbo-get{grid-template-columns:minmax(0,1fr)}.gfbo-steps li{grid-template-columns:minmax(0,1fr)}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.gamefields.eu/budzet-obywatelski/","url":"https://www.gamefields.eu/budzet-obywatelski/","name":"Boisko z budżetu obywatelskiego · Gamefields","inLanguage":"pl-PL","description":"Zaprojektuj boisko, zrób stronę kampanii z licznikiem poparcia i złóż wniosek do budżetu obywatelskiego z bezpłatną pomocą Gamefields."},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ile kosztuje pomoc Gamefields przy wniosku?","acceptedAnswer":{"@type":"Answer","text":"Nic. Przygotowujemy część techniczną wniosku (opis, wymiary, kosztorys) bezpłatnie. Jeśli projekt wygra, miasto wybiera wykonawcę zgodnie ze swoimi zasadami."}},{"@type":"Question","name":"Kto może zgłosić boisko do budżetu obywatelskiego?","acceptedAnswer":{"@type":"Answer","text":"Każdy mieszkaniec miasta albo gminy, która prowadzi budżet obywatelski. Terminy, limity kwot i liczbę podpisów poparcia ustala rada gminy w uchwale, więc zacznij od regulaminu swojego miasta."}},{"@type":"Question","name":"Czy strona kampanii zastępuje głosowanie w budżecie?","acceptedAnswer":{"@type":"Answer","text":"Nie. Licznik „Popieram” pokazuje poparcie sąsiadów i pomaga zebrać podpisy, ale oficjalne głosowanie odbywa się na stronie albo w urzędzie Twojego miasta. Strona kampanii prowadzi do niego linkiem."}},{"@type":"Question","name":"Jakie dane są widoczne na stronie kampanii?","acceptedAnswer":{"@type":"Answer","text":"Tytuł, miejsce, opis, pseudonim organizatora i projekt boiska. Bez imienia, nazwiska i adresu e-mail. Strona nie trafia do wyszukiwarek, a organizator może ją wycofać w każdej chwili."}},{"@type":"Question","name":"Nie mam jeszcze projektu. Od czego zacząć?","acceptedAnswer":{"@type":"Answer","text":"Otwórz kreator kampanii i wybierz projekt z galerii Warsztatu albo zaprojektuj własny w Studio. Projekt możesz później zmienić."}},{"@type":"Question","name":"Jak szybko powstanie boisko?","acceptedAnswer":{"@type":"Answer","text":"Zwykle ponad rok od zgłoszenia, bo miasto realizuje zwycięskie projekty w kolejnym roku budżetowym. Sam montaż areny trwa kilka dni."}}]}]}</script>
+<div class="gfa gfb">
+<section class="gfb-hero"><div class="w top gfbo-hero">
+  <div>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / <a href="/dla-miast/">Miasta</a> / Budżet obywatelski</p>
+    <p class="k">Budżet obywatelski</p>
+    <h1 class="d">Boisko z budżetu obywatelskiego.</h1>
+    <p class="lead">Dla Twojego osiedla, szkoły albo parku. Zaprojektuj boisko, zrób stronę kampanii dla sąsiadów i złóż wniosek z naszą pomocą. Bezpłatnie i bez logowania.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="/studio/?kampania=nowa">Załóż kampanię →</a><a class="gfa-btn alt" href="/studio/">Zaprojektuj w Studio ↗</a></div>
+  </div>
+  <aside class="gfbo-guard" aria-label="Opiekun kampanii"><span class="av" aria-hidden="true">DG</span><div><small>Opiekun kampanii</small><b>Damian Gawrych</b><span>Grodzisk Mazowiecki</span><p>Pomagam mieszkańcom przejść przez budżet obywatelski: od opisu i kosztorysu boiska po dzień głosowania. Napisz, gdzie ma stanąć boisko, a odezwę się osobiście.</p><a href="/kontakt/">Napisz do mnie →</a></div></aside>
+</div></section>
+
+<nav class="gfb-jump" aria-label="Na tej stronie"><div class="w"><ul role="list"><li><a href="#co-dostajesz">Co dostajesz</a></li><li><a href="#jak-to-dziala">Jak to działa</a></li><li><a href="#dokumenty">Dokumenty</a></li><li><a href="#pytania">Pytania</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="co-dostajesz"><div class="w">
+  <div class="gfa-head"><div><p class="k">Co dostajesz</p><h2 class="d">Wszystko do kampanii w jednym miejscu.</h2></div><p>Kreator prowadzi przez 4 krótkie kroki: projekt, miejsce, głosowanie i opis. Po około 3 minutach masz link do wysłania sąsiadom.</p></div>
+  <ul class="gfbo-get" role="list"><li><span class="n" aria-hidden="true">🗳️</span><b>Strona kampanii</b><p>„Boisko dla osiedla…” z Twoim projektem w 3D, licznikiem „Popieram” i odliczaniem do głosowania.</p></li><li><span class="n" aria-hidden="true">📱</span><b>Grafiki i film</b><p>Gotowe formaty do Stories i postów oraz 6-sekundowy film z obrotem kamery wokół boiska.</p></li><li><span class="n" aria-hidden="true">📄</span><b>Karta dla urzędu</b><p>Wymiary, nawierzchnia i szacunek kosztu na jednej stronie PDF: załącznik do formularza zgłoszenia.</p></li><li><span class="n" aria-hidden="true">🤝</span><b>Pomoc przy wniosku</b><p>Bezpłatnie przygotujemy część techniczną: opis, wymiary i kosztorys. Ty zostajesz autorem projektu.</p></li></ul>
+  <div class="gfa-btns" style="margin-top:22px"><a class="gfa-btn" href="/studio/?kampania=nowa">Załóż kampanię →</a></div>
+</div></section>
+
+<section class="gfa-sec" id="jak-to-dziala"><div class="w">
+  <div class="gfa-head"><div><p class="k">Jak to działa</p><h2 class="d">Od pustego placu do boiska w 5 krokach.</h2></div><p>Szczegóły ustala każda gmina w swoim regulaminie: terminy, limity kwot i liczbę podpisów. Ogólny przebieg jest podobny w całej Polsce.</p></div>
+  <ol class="gfbo-steps"><li><div><b>Znajdź teren</b><p>Boisko z budżetu obywatelskiego musi stanąć na gruncie miasta i być ogólnodostępne. Sprawdź właściciela działki w geoportalu albo w urzędzie dzielnicy. Teren szkoły albo ośrodka sportu wymaga zwykle zgody dyrektora.</p><em>Kompaktowa arena mieści się na placu o boku od około 5 do 7 m.</em></div></li><li><div><b>Zaprojektuj boisko</b><p>W Studio wybierasz konstrukcję, nawierzchnię i kolory. Projekt od razu ma wymiary i szacunek ceny, więc wiesz, czy zmieści się w puli dla Twojej dzielnicy.</p><em>Studio Gamefields, bez logowania.</em></div></li><li><div><b>Złóż wniosek</b><p>Formularz ma zwykle tytuł, lokalizację, opis, uzasadnienie i szacunkowy koszt. Kartę projektu PDF dołączasz jako wizualizację i opis techniczny.</p><em>Pomożemy z częścią techniczną.</em></div></li><li><div><b>Zbierz poparcie</b><p>Wiele miast wymaga listy poparcia. Strona kampanii z licznikiem „Popieram”, grafikami i filmem pomaga przekonać sąsiadów jeszcze przed głosowaniem.</p><em>Strona kampanii w 3 minuty.</em></div></li><li><div><b>Ocena urzędu i głosowanie</b><p>Urząd sprawdza teren, koszt i wykonalność. Jeśli coś trzeba poprawić, zwykle można to zrobić albo odwołać się od oceny. Potem głosują mieszkańcy, a zwycięskie projekty miasto realizuje w kolejnym roku.</p><em>Przypomnij sąsiadom o terminie głosowania.</em></div></li></ol>
+</div></section>
+
+<section class="gfa-sec" id="dokumenty"><div class="w">
+  <div class="gfa-head"><div><p class="k">Dokumenty</p><h2 class="d">Lista do wniosku.</h2></div><p>Najczęstszy powód odrzucenia projektu to teren. Zacznij od sprawdzenia działki i zgody zarządcy.</p></div>
+  <ul class="gfbo-docs" role="list"><li><span>Lokalizacja z numerem działki<small>potwierdzenie, że zarządza nią miasto</small></span></li><li><span>Opinia albo zgoda zarządcy terenu<small>szkoła, ośrodek sportu, zarząd zieleni</small></span></li><li><span>Opis i uzasadnienie<small>kto będzie grać i czego dziś brakuje</small></span></li><li><span>Szacunkowy koszt z podziałem na pozycje<small>konstrukcja, nawierzchnia, podbudowa, rezerwa</small></span></li><li><span>Wizualizacja i wymiary<small>karta projektu PDF ze Studio</small></span></li><li><span>Lista poparcia<small>jeśli regulamin Twojego miasta jej wymaga</small></span></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><div><p class="k">Pytania</p><h2 class="d">Zanim zaczniesz kampanię.</h2></div><p>Pomoc, dane na stronie kampanii i czas realizacji.</p></div>
+  <div class="gfa-faq"><details><summary>Ile kosztuje pomoc Gamefields przy wniosku?</summary><p>Nic. Przygotowujemy część techniczną wniosku (opis, wymiary, kosztorys) bezpłatnie. Jeśli projekt wygra, miasto wybiera wykonawcę zgodnie ze swoimi zasadami.</p></details><details><summary>Kto może zgłosić boisko do budżetu obywatelskiego?</summary><p>Każdy mieszkaniec miasta albo gminy, która prowadzi budżet obywatelski. Terminy, limity kwot i liczbę podpisów poparcia ustala rada gminy w uchwale, więc zacznij od regulaminu swojego miasta.</p></details><details><summary>Czy strona kampanii zastępuje głosowanie w budżecie?</summary><p>Nie. Licznik „Popieram” pokazuje poparcie sąsiadów i pomaga zebrać podpisy, ale oficjalne głosowanie odbywa się na stronie albo w urzędzie Twojego miasta. Strona kampanii prowadzi do niego linkiem.</p></details><details><summary>Jakie dane są widoczne na stronie kampanii?</summary><p>Tytuł, miejsce, opis, pseudonim organizatora i projekt boiska. Bez imienia, nazwiska i adresu e-mail. Strona nie trafia do wyszukiwarek, a organizator może ją wycofać w każdej chwili.</p></details><details><summary>Nie mam jeszcze projektu. Od czego zacząć?</summary><p>Otwórz kreator kampanii i wybierz projekt z galerii Warsztatu albo zaprojektuj własny w Studio. Projekt możesz później zmienić.</p></details><details><summary>Jak szybko powstanie boisko?</summary><p>Zwykle ponad rok od zgłoszenia, bo miasto realizuje zwycięskie projekty w kolejnym roku budżetowym. Sam montaż areny trwa kilka dni.</p></details></div>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Zbierzmy poparcie dla Twojego boiska.</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/studio/?kampania=nowa">Załóż kampanię →</a><a class="gfa-btn alt" href="/kontakt/">Napisz do opiekuna</a></div>
+</div></section>
+
+</div>
+<!-- /wp:html -->

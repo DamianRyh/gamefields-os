@@ -196,7 +196,7 @@ function download(p:Project,wordpress=false){if(wordpress&&!projectSchema.safePa
 type TemplateCard={id:number;title:string;description:string;image:string|null;link:string};
 export default function Home(){
  /* BO campaign links (gamefields.eu/studio/?kampania=<id>) open the campaign page, not the editor. */
- useEffect(()=>{const k=new URLSearchParams(location.search).get('kampania');if(k&&/^[0-9a-f-]{36}$/.test(k))location.replace('/kampania?id='+k)},[]);
+ useEffect(()=>{const k=new URLSearchParams(location.search).get('kampania');if(k==='nowa')location.replace('/kampania/nowa');else if(k&&/^[0-9a-f-]{36}$/.test(k))location.replace('/kampania?id='+k)},[]);
  const [templates,setTemplates]=useState<TemplateCard[]>([]),[templatesLoading,setTemplatesLoading]=useState(false),[templateError,setTemplateError]=useState(""),[templatePage,setTemplatePage]=useState(1),[templateTotal,setTemplateTotal]=useState(1),[openingTemplate,setOpeningTemplate]=useState<number|null>(null);
  const [patternFilter,setPatternFilter]=useState("all"),[patternSearch,setPatternSearch]=useState(""),[patternPage,setPatternPage]=useState(1),[patternMode,setPatternMode]=useState<"random"|"signature"|"all">("signature"),[randomPick,setRandomPick]=useState({familyId:"organic-flow",variant:6,paletteId:"warsaw"});
  const templateRequest=useRef(0);
