@@ -263,3 +263,27 @@ body:has(.studio-canvas-editor){overflow:hidden;background:#fff}
 .studio-shell.studio-canvas-editor .studio-stage>.studio-render{position:relative;z-index:1}
 .studio-shell.studio-canvas-editor .studio-stage>.studio-scene-name,.studio-shell.studio-canvas-editor .studio-stage>.studio-stage-footer,.studio-shell.studio-canvas-editor .studio-stage>.studio-plan-note,.studio-shell.studio-canvas-editor .studio-stage>.studio-construction-preview-note{z-index:3}
 @media(prefers-reduced-motion:reduce){.studio-shell.studio-canvas-editor .studio-stage>.studio-two-worlds-background{opacity:.55}}
+/* Sport surface cards (2026-11-25): thumbnail left, name on up to two lines, size and price as quiet second lines.
+   Replaces the 152 px card where the price squeezed the name to one letter per line. */
+.studio-bottom-dock:not(.is-floating) .studio-bottom-items{gap:10px;padding:4px 2px 8px;scroll-snap-type:x proximity;scrollbar-width:none;mask-image:linear-gradient(90deg,#000 94%,transparent)}
+.studio-bottom-dock:not(.is-floating) .studio-bottom-items::-webkit-scrollbar{display:none}
+.studio-bottom-item{flex:0 0 212px;gap:10px;padding:7px 12px 7px 7px;border-radius:14px;border:1px solid #ece5ee;scroll-snap-align:start;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease;cursor:pointer}
+.studio-bottom-item:hover{border-color:#cdbfd8;box-shadow:0 6px 18px -10px #47132d40;transform:translateY(-1px)}
+.studio-bottom-item[aria-pressed=true]{border:1px solid #6835f7;padding:7px 12px 7px 7px;background:#f7f3ff;box-shadow:0 0 0 2px #6835f733}
+.studio-bottom-thumb{flex:none;width:72px;height:60px;border-radius:10px;background:linear-gradient(160deg,#f6f3f8,#ece6ef);display:grid;place-items:center;overflow:hidden}
+.studio-bottom-item .studio-bottom-thumb img{width:100%;height:100%;object-fit:contain;background:none;border-radius:0;transform:scale(1.08)}
+.studio-bottom-copy{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.studio-bottom-copy b{font-size:12.5px;font-weight:750;line-height:1.2;color:#47132d;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:normal;word-break:normal;hyphens:none}
+.studio-bottom-meta{font-size:11px;font-weight:600;color:#7a6676;line-height:1.25;font-variant-numeric:tabular-nums;white-space:nowrap}
+.studio-bottom-meta.is-soft{font-weight:500;color:#9a8796;overflow:hidden;text-overflow:ellipsis}
+.studio-bottom-item[aria-pressed=true] .studio-bottom-meta{color:#5b2fd6}
+.studio-bottom-note{font-style:normal;font-weight:600;letter-spacing:0;text-transform:none;color:#a493a1}
+@media(max-width:800px){.studio-bottom-note{display:none}}
+.studio-bottom-check{position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:50%;background:#6835f7;color:#fff;display:grid;place-items:center}
+.studio-bottom-item>svg{display:none}
+@media(max-width:800px){.studio-bottom-item{flex-basis:184px}.studio-bottom-thumb{width:60px;height:52px}.studio-bottom-copy b{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.studio-bottom-item{transition:none}.studio-bottom-item:hover{transform:none}}
+html body .studio-shell.studio-canvas-editor .studio-bottom-dock .studio-bottom-item[aria-pressed=true]{background:#f7f3ff!important;color:#47132d!important;border-color:#6835f7!important}
+html body .studio-shell.studio-canvas-editor .studio-bottom-dock .studio-bottom-item:hover:not([aria-pressed=true]){background:#fff!important}
+.studio-bottom-dock-head button{white-space:nowrap}
+@media(max-width:800px){.studio-bottom-dock:not(.is-floating) .studio-bottom-dock-head>span{display:none}.studio-bottom-dock:not(.is-floating) .studio-bottom-dock-head{justify-content:flex-end}}
