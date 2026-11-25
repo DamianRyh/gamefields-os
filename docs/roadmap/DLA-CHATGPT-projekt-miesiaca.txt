@@ -1,0 +1,17 @@
+Polecenie dla ChatGPT: Projekt miesiąca na stronie głównej, 25.11.2026
+WYKONAJ DOPIERO, gdy właściciel potwierdzi, że Studio z Projektem miesiąca jest wdrożone (DLA-CODEX-projekt-miesiaca.md).
+
+1. Strona główna (ID 3462): podmień CAŁY blok „warsztat” (zaczyna się od <!-- gf-blok: warsztat -->) na plik:
+   https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/studio-2026-11/bloki/18-warsztat.html
+   (cały plik, z <!-- wp:html --> i <!-- /wp:html -->). Pozostałych bloków nie ruszaj. Plik nie zawiera podwójnego ampersandu.
+2. Nowa strona „Regulamin Projektu miesiąca”, adres /regulamin-projekt-miesiaca/, szablon „Pełna szerokość”, treść z pliku:
+   https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/regulamin-2026-11/regulamin-projekt-miesiaca.html
+   ZANIM opublikujesz: poproś właściciela o dane w [nawiasach] (nazwa firmy, adres, NIP, data). Bez nich zostaw szkic.
+   Opis SEO: Regulamin konkursu Projekt miesiąca w Gamefields Studio: temat, terminy, głosowanie, nagroda i zgoda na publikację.
+3. Podgląd na komputerze i telefonie, sekcja Warsztat:
+   - karta „Projekt miesiąca · Boisko pod blokiem” z terminem (ile dni zostało), nagrodą, „Weź udział w Studio” i „Regulamin”;
+   - zakładki „Najlepsze w konkursie” i „Najnowsze”; przy pustym konkursie od razu „Najnowsze”;
+   - na kartach: pseudonim (albo „Projekt społeczności”), przycisk ♥ z liczbą, „wersje innych”, „Obróć 3D”, „Zrób swoją wersję”;
+   - kliknięcie ♥ zwiększa liczbę i podświetla serce; ponowne kliknięcie cofa;
+   - brak przewijania w bok, brak błędów w konsoli.
+4. Po akceptacji właściciela opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj.

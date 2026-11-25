@@ -1,0 +1,22 @@
+/* Projekt miesiąca: publish popover under "Zapisz dla innych" (2026-11-25). Studio skin colours. */
+.studio-workshop-save{position:relative}
+.studio-workshop-note b{font-weight:750;color:#6336f5}
+.gfwc{position:absolute;z-index:60;top:calc(100% + 8px);left:0;width:min(380px,calc(100vw - 24px));display:grid;gap:8px;padding:16px;background:#fff;border:1px solid #e4dbe6;border-radius:16px;box-shadow:0 24px 50px -20px #2b0d2155;color:#47132d;font-size:14px}
+.gfwc-theme{display:grid;gap:3px;padding:12px 14px;border-radius:12px;background:linear-gradient(135deg,#efe9ff,#f8f5ff);margin-bottom:4px}
+.gfwc-theme span{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#6336f5}
+.gfwc-theme b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfwc-theme p{margin:0;font-size:13px;line-height:1.4;color:#5a4652}
+.gfwc-theme small{font-size:12px;color:#6f5a66}
+.gfwc-l{font-size:12px;font-weight:750;letter-spacing:.05em;text-transform:uppercase;color:#6f5a66}
+.gfwc-in{width:100%;box-sizing:border-box;min-height:42px;padding:0 12px;border:1.5px solid #d9cfd4;border-radius:10px;font:inherit;color:#47132d;background:#fff}
+.gfwc-in:focus{outline:2px solid #6336f5;border-color:#6336f5}.gfwc-in[aria-invalid=true]{border-color:#c2185b}
+.gfwc-h{font-size:12px;color:#8a7686;margin-top:-4px}.gfwc-h.is-err{color:#c2185b}
+.gfwc-c{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.4;cursor:pointer}
+.gfwc-c input{width:18px;height:18px;margin:1px 0 0;accent-color:#6336f5;flex:none}
+.gfwc-c em{font-style:normal;color:#6336f5;font-weight:650}
+.gfwc-p{margin:2px 0 0;font-size:12px;line-height:1.45;color:#8a7686}.gfwc-p a{color:#6336f5;font-weight:650}
+.gfwc-a{display:flex;gap:8px;margin-top:4px}
+html body .studio-shell .gfwc .gfwc-go{flex:1;min-height:44px;border-radius:999px;border:0;background:#47132d!important;color:#fff!important;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer}
+html body .studio-shell .gfwc .gfwc-go:disabled{opacity:.45;cursor:not-allowed}
+html body .studio-shell .gfwc .gfwc-no{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid #d9cfd4;background:#fff!important;color:#47132d!important;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer}
+@media(max-width:700px){.gfwc{position:fixed;left:12px;right:12px;top:auto;bottom:12px;width:auto}}

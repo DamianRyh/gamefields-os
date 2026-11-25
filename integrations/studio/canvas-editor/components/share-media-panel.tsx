@@ -16,7 +16,7 @@ const emit=(name:string,detail:Record<string,unknown>={})=>{try{window.dispatchE
 
 export function ShareMediaPanel({project,price,link,onClose}:{project:Project;price?:number|null;link?:string|null;onClose?:()=>void}){
  const [format,setFormat]=useState<ShareFormat>('story'),[style,setStyle]=useState<ShareStyle>('clean'),[bgPick,setBg]=useState('auto');
- const [caption,setCaption]=useState('Moje boisko.'),[showPrice,setShowPrice]=useState(false),[safe,setSafe]=useState(true),[outputPick,setOutput]=useState<Output>('image');
+ const [caption,setCaption]=useState(()=>{try{const c=JSON.parse(sessionStorage.getItem('gf-share-credit')||'null');if(c?.id===project.id&&typeof c.credit==='string')return ('@'+c.credit).slice(0,28)}catch{/* optional */}return 'Moje boisko.'}),[showPrice,setShowPrice]=useState(false),[safe,setSafe]=useState(true),[outputPick,setOutput]=useState<Output>('image');
  const [shots,setImages]=useState<ShareImages|null>(null),[status,setStatus]=useState(''),[progress,setProgress]=useState<number|null>(null),[video,setVideo]=useState<{url:string;blob:Blob;key:string}|null>(null);
  const [rendererReady,setRendererReady]=useState(()=>!!shareRenderer());
  const canvas=useRef<HTMLCanvasElement>(null),abort=useRef<AbortController|null>(null);
