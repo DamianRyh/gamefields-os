@@ -54,7 +54,7 @@ export function compose(canvas:HTMLCanvasElement,o:ComposeOptions){
   text('gamefields.',M,top+44,{w:800,s:52,c:fg,ls:-2});
   text('DESIGNED IN GAMEFIELDS STUDIO',W-M,top+40,{w:800,s:20,c:acc,ls:2.4,al:'right'});
   const [sw,sh]=MODEL_SLOT.clean[o.format],cy=story?top+520:top+410;
-  const g=ctx.createRadialGradient(W/2,cy+60,40,W/2,cy+60,W*.55);g.addColorStop(0,dk?'rgba(255,255,255,.10)':mix(mid,bg,.35)+'aa');g.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=g;ctx.fillRect(0,cy-500,W,1000);
+  const g=ctx.createRadialGradient(W/2,cy+60,40,W/2,cy+60,W*.55);g.addColorStop(0,dk?'rgba(255,255,255,.10)':mix(bg,'#ffffff',.65)+'cc');g.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=g;ctx.fillRect(0,cy+60-W*.56,W,W*1.12);
   draw(o.images.hero,W/2,cy,sw,sh);
   let y=story?bot-290:bot-260;
   if(f.caption)text(f.caption.toUpperCase(),M,y-70,{w:800,s:22,c:acc,ls:2.4});
