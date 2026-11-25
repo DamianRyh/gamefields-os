@@ -2,15 +2,17 @@
 /* "Kampania BO" tab of the project library (2026-11-25): turns the current design into a public campaign page
    "Boisko dla osiedla X" for a participatory budget. Public scope as in the Workshop (layout, pattern, colours;
    no private name, text or logos). E-mail only when the organiser asks Gamefields for help with the application. */
-import {useState} from 'react';
+import {useEffect,useState} from 'react';
 import type {Project} from '@/lib/project';
 import {publicWorkshopProject} from '@/lib/workshop-project';
 import {cleanCampaign,CAMPAIGN_LINK} from '@/lib/campaign';
 import '@/app/campaign-create.css';
+import {journey} from '@/lib/journey';
 const KEYS='gf-campaign-keys';
 type Saved={id:string;key:string;title:string;createdAt:number};
 const read=():Saved[]=>{try{return JSON.parse(localStorage.getItem(KEYS)||'[]')}catch{return []}};
 export function CampaignCreate({project}:{project:Project}){
+ useEffect(()=>{journey('financing')},[]);
  const [f,setF]=useState(()=>({title:'Boisko dla osiedla ',place:'',city:'',budgetName:'',budgetUrl:'',voteUntil:'',organizer:(()=>{try{return localStorage.getItem('gf-workshop-nickname')||''}catch{return ''}})(),about:'',email:''}));
  const [help,setHelp]=useState(false),[pub,setPub]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(''),[done,setDone]=useState<Saved|null>(null),[mine,setMine]=useState<Saved[]>(()=>typeof localStorage==='undefined'?[]:read());
  const set=(k:keyof typeof f)=>(e:{target:{value:string}})=>setF(v=>({...v,[k]:e.target.value}));

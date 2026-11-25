@@ -9,6 +9,8 @@ import {LazyMedia} from "@/components/lazy-media";
 import {OptionPrices,OptionPrice} from "@/components/option-price";
 import {constructionProject} from "@/lib/project-options";
 import {ProjectSteps} from "@/components/project-steps";
+import {JourneyGuide} from "@/components/journey-guide";
+import {journey,type JourneyStep} from "@/lib/journey";
 import {projectStepState,type ProjectStep} from "@/lib/project-steps";
 import {ProjectReset} from "@/components/project-reset";
 import {ProjectLink} from "@/components/project-link";
@@ -146,7 +148,7 @@ export function StudioWorkspace(props:Props){
  const [inquiryState,setInquiryState]=useState<InquiryState>("idle"),[inquiryMessage,setInquiryMessage]=useState("");
  const inquiryTransport=useRef<ReturnType<typeof createInquiryTransport>|null>(null);
  const modalTrigger=useRef<HTMLElement|null>(null);
- const showSummary=()=>{modalTrigger.current=document.activeElement as HTMLElement|null;setSummaryOpen(true)};
+ const showSummary=()=>{try{window.dispatchEvent(new Event('gf-journey-summary'))}catch{/* optional */}modalTrigger.current=document.activeElement as HTMLElement|null;setSummaryOpen(true)};
  const showPatterns=()=>{modalTrigger.current=document.activeElement as HTMLElement|null;setPatternsOpen(true)};
  const showMotifs=()=>{modalTrigger.current=document.activeElement as HTMLElement|null;setMotifsOpen(true)};
  const importRef=useRef<HTMLInputElement>(null),uploadRef=useRef<HTMLInputElement>(null),panelRef=useRef<HTMLElement>(null),workspaceRef=useRef<HTMLDivElement>(null);
@@ -235,12 +237,21 @@ export function StudioWorkspace(props:Props){
  const printTotal=(d:StudioPrintDesign)=>{const q=d.qty||1,u=d.product==='poster'?variantPrice(shop.poster,printFormats[d.fmt]||printFormats[0],99):(shop.ball?.price??999);return `${zl(q*u)} brutto (${q} × ${zl(u)}) · ${shippingNote(shop,q*u)}`};
  const productPrice=(activeTool==='poster'||activeTool==='ball')&&p.printDesign?(()=>{const d=p.printDesign!,q=d.qty||1,u=d.product==='poster'?variantPrice(shop.poster,printFormats[d.fmt]||printFormats[0],99):(shop.ball?.price??999);return zl(q*u)+' brutto'})():activeTool==='kit'&&p.kit?(p.kit.fit==='kids'?'Cena na zapytanie':zl(p.kit.players.length*variantPrice(shop.shirt,'M',599))+' brutto'):undefined;
  const summarySection=(title:string,tool:StudioTool,rows:[string,ReactNode][])=><section className="studio-summary-section"><header><h3>{title}</h3><button aria-label={`Edytuj: ${title}`} onClick={()=>{setSummaryOpen(false);openTool(tool)}}>Edytuj <ArrowRight size={14}/></button></header><dl>{rows.map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></section>;
+ /* "Twoja ścieżka": each step opens the place in the Studio where it is done. */
+ const openJourneyStep=(step:JourneyStep)=>{
+  if(step==='model'||step==='colors'){openTool('construction');if(step==='colors')window.setTimeout(()=>{const b=[...document.querySelectorAll<HTMLButtonElement>('.studio-panel button')].find(x=>x.textContent?.trim()==='Kolory');b?.click()},120)}
+  else if(step==='surface')openTool('surface');
+  else if(step==='save'){props.download();journey('save')}
+  else if(step==='publish')(document.querySelector('.studio-workshop-publish') as HTMLButtonElement|null)?.click();
+  else if(step==='share'||step==='financing'){const tab=step==='share'?'share':'campaign';(window as unknown as {gfLibraryTab?:string}).gfLibraryTab=tab;openTool('files');window.setTimeout(()=>window.dispatchEvent(new CustomEvent('gf-library-tab',{detail:{tab}})),80)}
+  else if(step==='card'){showSummary();window.setTimeout(()=>{const b=[...document.querySelectorAll('button')].find(x=>/Pobierz kartę projektu/.test(x.textContent||''));b?.scrollIntoView({block:'center',behavior:'smooth'});b?.focus()},300)}
+ };
  return <OptionPrices project={p} quote={props.quote}><main className="studio-shell studio-canvas-editor" data-tool={activeTool} data-print-mode={p.printDesign?"true":undefined} data-product-mode={productMode?"true":undefined} data-expanded={activeTool==="surface"&&(materialOpen||advancedOpen)}>
   <div className="studio-workspace-content" ref={workspaceRef} onChangeCapture={()=>{stepInteraction.current=true}} onClickCapture={()=>{stepInteraction.current=true}}>
   <header className="studio-topbar">
    {props.onProducts&&<button className="studio-product-switch" aria-label="Produkty" onClick={props.onProducts}><ArrowLeft size={16}/><span>Produkty</span></button>}
    <a href="https://www.gamefields.eu/" target="_top" className="studio-logo" aria-label="Gamefields — strona główna">gamefields <span>studio</span></a>
-   {props.recovery.blocked?<button className="studio-save studio-recovery-status" aria-label="Otwórz odzyskiwanie projektu" onClick={()=>openTool("files")}>{props.saveStatus}</button>:<span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span>}<div className="studio-top-actions"><button aria-label="Pliki projektu" onClick={()=>openTool("files")}><FolderOpen size={18}/></button><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={props.download}><Download size={18}/><span>Pobierz projekt</span></button>{!p.printDesign&&!productMode&&<ProjectLink project={p}/>}<QuoteBadge quote={props.quote} onClick={showSummary} label={productPrice}/></div>
+   {props.recovery.blocked?<button className="studio-save studio-recovery-status" aria-label="Otwórz odzyskiwanie projektu" onClick={()=>openTool("files")}>{props.saveStatus}</button>:<span className="studio-save" role="status">{props.saveStatus.startsWith("Zapisano")?<Check size={16}/>:null}{props.saveStatus}</span>}<div className="studio-top-actions"><button aria-label="Pliki projektu" onClick={()=>openTool("files")}><FolderOpen size={18}/></button><button className="studio-save-project" aria-label="Pobierz projekt" title="Pobierz kopię projektu JSON" onClick={()=>{props.download();journey('save')}}><Download size={18}/><span>Pobierz projekt</span></button>{!p.printDesign&&!productMode&&<ProjectLink project={p}/>}<QuoteBadge quote={props.quote} onClick={showSummary} label={productPrice}/></div>
   </header>
   {!p.printDesign&&!productMode&&<WorkshopSave project={p}/>}
   <div className="studio-screen">
@@ -321,5 +332,6 @@ export function StudioWorkspace(props:Props){
  {title:"Konstrukcja",rows:[["Model",profile.label],["Kod produktu",modelCode||"Projekt indywidualny"],["Wymiary pola gry",projectDimensions(p).reference],["Kolor paneli",design.panelColor],["Kolor ramy",design.frameColor],["Kolor bramek",design.goalColor],["Wykończenie konstrukcji",({matte:"Matowe",gloss:"Połysk",metal:"Metal lakierowany"})[design.finish]],...(design.text?[["Napis na panelach",design.text] as [string,string]]:[]),...(design.src?[["Logo na panelach","Dodane"] as [string,string]]:[])]},
  {title:"Nawierzchnia",rows:[...(!p.arenaModel&&selectedSurface?[["Format",`${selectedSurface.name} · ${selectedSurface.length} × ${selectedSurface.width} m`] as [string,string]]:[]),["Nawierzchnia betonowa",p.concreteBase!==false?"Tak, płyta 12 cm z podbudową":"Nie, własne podłoże"] as [string,string],["Materiał",surfaceLabel(p.surface)],...(()=>{const f=props.quote.data?.items.find(i=>["paint","epdm","tiles","turf","acrylic","rubber","mats"].includes(i.id));return f?[["Wariant",f.label.split(" · ").slice(1).join(" · ")||f.label] as [string,string]]:[]})(),...(finishAreaFor(p)!==null?[["Powierzchnia wykończenia",`${areaLabel(finishAreaFor(p)!)} m² (${p.arenaModel?"konstrukcja":"nawierzchnia"} +10%)`] as [string,string]]:[]),["Wzór",`${family.name} · wariant ${p.patternVariant||1}`],["Paleta",getPatternPalette(p.patternPalette).name],["Pole gry",p.base],["Strefy",p.zone],["Linie",p.lines?p.lineColor:"Wyłączone"]]}
 ] as {title:string;rows:[string,string][]}[]).filter(s=>s.title==="Konstrukcja"?!!p.arenaModel:!p.constructionOnly)}/>}{!p.printDesign&&<ProjectImage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} renderCourt={props.renderCourt}/>}<InquiryPackage project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}} quote={props.quote}/>{!p.printDesign&&<StudioKnowledge project={p}/>}{!p.printDesign&&<ProjectSpecification project={{...p,objects:p.objects.filter(o=>o.kind!=="equipment")}}/>}<p className="studio-hint">Parametry projektu dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.</p>{inquiryError?<p role="alert">{inquiryError}</p>:null}{inquiryState!=="idle"&&inquiryState!=="error"?<p role="status">{inquiryMessage}</p>:null}<button className="studio-primary" disabled={inquiryState==="waiting"} onClick={requestInquiry}>Wyślij projekt do wyceny <ArrowRight size={18}/></button><button className="studio-export" onClick={props.download}><Download size={16}/> Pobierz kopię projektu JSON</button></section></div>:null}
+  {!['kit','poster','ball'].includes(activeTool)&&!p.matProduct&&!p.printDesign?<JourneyGuide project={p} onOpen={openJourneyStep}/>:null}
  </main></OptionPrices>;
 }

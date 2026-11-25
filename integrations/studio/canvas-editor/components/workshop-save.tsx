@@ -7,6 +7,7 @@ import {publicWorkshopProject} from '@/lib/workshop-project';
 import {currentContest,cleanNickname,CONTEST_RULES} from '@/lib/workshop-contest';
 import type {Project} from '@/lib/project';
 import '@/app/workshop-contest.css';
+import {journey} from '@/lib/journey';
 type Receipt={id:string;key?:string;contest?:string|null};
 const NICK='gf-workshop-nickname';
 const fmt=(iso:string)=>new Intl.DateTimeFormat('pl-PL',{day:'numeric',month:'long'}).format(new Date(iso+'T12:00:00'));
@@ -22,7 +23,7 @@ export function WorkshopSave({project}:{project:Project}){
    const data=await response.json();if(!response.ok)throw Error(data.error||'Nie udało się zapisać');
    let saved:Receipt=data;if(!data.key)try{saved={...data,key:JSON.parse(localStorage.getItem('gf-workshop-receipts')||'[]').find((r:Receipt)=>r.id===data.id)?.key}}catch{/* optional */}
    setReceipt(saved);if(saved.key)try{const old=JSON.parse(localStorage.getItem('gf-workshop-receipts')||'[]');localStorage.setItem('gf-workshop-receipts',JSON.stringify([saved,...old.filter((r:Receipt)=>r.id!==saved.id)].slice(0,30)))}catch{/* optional */}
-   setOpen(false);setMessage(data.contest?`Gotowe — projekt bierze udział w Projekcie miesiąca „${live?.title}”.`:'Gotowe — projekt jest już w Warsztacie.');
+   journey('publish');setOpen(false);setMessage(data.contest?`Gotowe — projekt bierze udział w Projekcie miesiąca „${live?.title}”.`:'Gotowe — projekt jest już w Warsztacie.');
   }catch(e){setMessage((e as Error).message)}finally{setBusy(false)}}
  async function withdraw(){if(!receipt?.key)return;setBusy(true);try{const r=await fetch('/api/workshop',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:receipt.id,key:receipt.key})});if(!r.ok)throw Error('Nie udało się wycofać. Spróbuj ponownie.');setReceipt(null);setMessage('Projekt wycofany z galerii.')}catch(e){setMessage((e as Error).message)}finally{setBusy(false)}}
  return <div className="studio-workshop-save" ref={box}>
