@@ -5,7 +5,7 @@ Zasada właściciela (23.11.2026): każdą zmianę najpierw pokazać w podglądz
 Polecenia do wdrożenia na stronie czekają w kolejce: `docs/roadmap/POLECENIA-DLA-CHATGPT.md`.
 Statusy: ✅ zrobione · 🔄 w toku · ⏳ czeka na wdrożenie na stronie · ❓ czeka na decyzję właściciela · ⬜ do zrobienia
 
-Ostatnia aktualizacja: 24.11.2026
+Ostatnia aktualizacja: 25.11.2026
 
 ## Teraz
 
@@ -53,6 +53,7 @@ Ostatnia aktualizacja: 24.11.2026
 | 38 | /boiska-street-football/ („Boiska panna i street football”) od nowa: ceny zamiast „wycena indywidualna”, filtr (kształt, bandy, metraż), 8 kart z renderem, wymiarami, cenami, Studio, sklepem i modelem 3D, tabela, dobór do metrażu, panna vs 3 na 3, co w cenie, 8 pytań | ✅ PR #126, `pages/boiska-2026-11/` | DLA-CHATGPT-boiska-street-football.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
 | 38a | Stopka motywu: link „Boiska panna i street football” z /#boiska na /boiska-street-football/ | ✅ motyw 1.0.36 | DLA-CHATGPT-naglowek-1.0.36.txt | ⏳ |
 | 45 | Jeden nagłówek na całej witrynie (motyw 1.0.36): ten sam na stronie głównej i podstronach, „Wyślij zdjęcie placu” obok „Studio 3D”, bez łamania napisów (opis znika < 1360 px, krótszy przycisk < 1180 px, menu mobilne od 900 px), podświetlanie sekcji na stronie głównej; stary nagłówek bloku strony głównej ukryty | ✅ PR (ten), `theme/gamefields/header.php`, `gft.css`, `gft.js`, `gf-home.js` | DLA-CHATGPT-naglowek-1.0.36.txt (ZIP od właściciela) | ⏳ |
+| 46 | Strona główna: „Udostępnij” w banerze (motyw 1.0.37): grafika Stories/Post (Clean, Street) albo film 6 s z modelu 3D banera w wybranych kolorach, te same szablony co Studio; link /?boisko=&panele=&rama= odtwarza konfigurację; link do Studia dla Play, Court, Octa | ✅ PR (ten), `assets/js/home/gf-share.js`, `gf-share-core.js` (z `lib/share-media`), `gf-home.js` | DLA-CHATGPT-udostepnij-baner-1.0.37.txt (ZIP + znacznik `gf-home.js?v=`) | ⏳ |
 | 39 | /boiska-dla-szkol/ („Szkoły i gminy”) od nowa: licznik do naborów 2027 i terminy, 4 sposoby (przy szkole, modernizacja Orlika, wielofunkcyjne, panna w sali), 3 polecane modele z cenami, 6 źródeł finansowania i wymagania komisji (edycja 2026), część techniczna wniosku, opinie OSiR i Urzędu Miasta Kutno, logo miast, plan 2027, 9 pytań | ✅ PR #127, `pages/szkoly-2026-11/` | DLA-CHATGPT-boiska-dla-szkol.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
 | 40 | /dla-miast/ („Miasta”) od nowa: 4 problemy miejsca z rozwiązaniem i ceną, dobór do metrażu (interaktywny), argumenty zamawiających, 4 realizacje jako zadanie/rozwiązanie/efekt z cytatami, logo miast, zestaw „Miasto” do budżetu obywatelskiego, koncepcje dla Warszawy, otwarcie i aktywacja, 6 etapów, 8 pytań | ✅ PR #127, `pages/miasta-2026-11/` | DLA-CHATGPT-dla-miast.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |
 | 41 | /boiska-dla-deweloperow/ („Deweloperzy i osiedla”) od nowa: 4 wartości, tabela 8 modeli do masterplanu z cenami, zestaw „Osiedle”, design zgodny z architekturą (galeria zestawów do Studia), co sprawdzam w koncepcji (sąsiedztwo, panele, format), materiały do sprzedaży, 5 etapów, 8 pytań | ✅ PR #127, `pages/deweloperzy-2026-11/` | DLA-CHATGPT-boiska-dla-deweloperow.txt | ✅ sprawdzone 23.11: na żywo = repozytorium |

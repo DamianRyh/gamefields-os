@@ -40,7 +40,7 @@
     var saved = { orbit: mv.getAttribute('camera-orbit'), rotate: mv.hasAttribute('auto-rotate'), controls: mv.hasAttribute('camera-controls'), shadow: mv.getAttribute('shadow-intensity') };
     /* model-viewer lowers its render scale on slow devices, and toBlob() then returns only part of the view: full scale while capturing */
     var MV = customElements.get('model-viewer'), scale = MV ? MV.minimumRenderScale : null; if (MV) MV.minimumRenderScale = 1;
-    mv.removeAttribute('auto-rotate'); mv.removeAttribute('camera-controls'); mv.setAttribute('shadow-intensity', '0.22');
+    mv.removeAttribute('auto-rotate'); mv.removeAttribute('camera-controls'); mv.setAttribute('shadow-intensity', '0.08');
     return function end() {
       if (saved.controls) mv.setAttribute('camera-controls', '');
       if (saved.shadow) mv.setAttribute('shadow-intensity', saved.shadow);

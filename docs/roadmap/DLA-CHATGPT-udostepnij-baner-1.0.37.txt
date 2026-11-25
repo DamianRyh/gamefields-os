@@ -1,0 +1,26 @@
+Polecenie dla ChatGPT: motyw 1.0.37 („Udostępnij” w banerze strony głównej), 25.11.2026
+Zawiera też wszystko z 1.0.36 (jeden nagłówek na całej witrynie). Jeśli 1.0.36 nie był wgrany, sprawdź też listę z DLA-CHATGPT-naglowek-1.0.36.txt.
+
+Motyw Gamefields 1.0.37 wgrywa właściciel (ZIP). Nie ruszaj plików motywu.
+
+Strona główna (ID 3462): JEDNA zmiana tekstu, nic więcej.
+W bloku „skrypty” zamień (Znajdź i zamień, dokładnie ten ciąg):
+  gf-home.js?v=e64d639913
+na:
+  gf-home.js?v=09a48c75af
+To tylko znacznik wersji pliku (dzięki niemu przeglądarki i LiteSpeed pobiorą nowy gf-home.js). Pozostałych bloków nie zmieniaj.
+Jeśli w bloku „skrypty” jest inny znacznik niż e64d639913 — zatrzymaj się i podaj właścicielowi, jaki jest.
+
+Kroki:
+1. Sprawdź, że motyw ma wersję 1.0.37 (Wygląd → Motywy). Jeśli nie — zatrzymaj się.
+2. Kopia strony głównej, potem zmiana znacznika w bloku „skrypty”, podgląd szkicu.
+3. Sprawdź na komputerze i telefonie:
+   - w banerze obok „Zaprojektuj swoje” jest przycisk „Udostępnij”;
+   - wybierz Court, panele Limonka, rama Grafit, kliknij „Udostępnij”: otwiera się okno z grafiką Panna Court w tych kolorach
+     (Stories / Post, Clean / Street, tło, podpis); „Pobierz PNG” zapisuje grafikę;
+   - „Film 6 s” → „Pobierz MP4”: pasek postępu, boisko obraca się w banerze, po chwili zapisuje się plik MP4 (6 s);
+   - „Kopiuj link” → otwórz skopiowany link w nowej karcie: baner pokazuje ten sam model i kolory;
+   - na telefonie „Udostępnij” w oknie otwiera systemowe menu udostępniania z plikiem;
+   - reszta strony głównej działa jak wcześniej (modele, ceny, nawierzchnie, zestawy, plakaty); brak przewijania w bok.
+4. Po akceptacji właściciela opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj.
+Jeśli coś nie działa: przywróć motyw 1.0.35/1.0.36 (ZIP u właściciela) i przywróć znacznik e64d639913.
