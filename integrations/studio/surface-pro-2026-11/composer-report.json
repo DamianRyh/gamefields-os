@@ -222,5 +222,19 @@
   },
   "modes": 2,
   "tapeMedian": 76
+ },
+ "pro-m-cutouts": {
+  "candidates": 258,
+  "passed": 90,
+  "kept": 36,
+  "rejected": {
+   "thin": 110,
+   "specks": 14,
+   "paints": 0,
+   "sym": 44,
+   "balance": 0
+  },
+  "modes": 3,
+  "tapeMedian": 99
  }
 }
