@@ -143,4 +143,6 @@ node build-studio-files.mjs && node build-gallery.mjs
 NODE_PATH=$(npm root -g) node preview-composer.mjs
 ```
 
+Wynik 26.11 (kept/passed/candidates): Echo 36/172/220, Strefy gry 36/173/220, Promienie 36/199/220, Szewrony 36/180/220, Tor 36/158/220, Płyty 36/90/355, Teren 36/193/220, Pole pikseli 34/108/220. Sprawdzone: `tsc --strict` na `pattern-library.ts` z nowymi plikami, 69 rodzin i `PATTERN_COUNT` = 828, wszystkie presety wskazują istniejące rodziny i palety, galeria bez błędów JS i bez przewijania w bok przy 390 i 1360 px. Pełne kontrole Studia (build, test:studio, test:mobile) nie były uruchamiane w tej sesji (brak `node_modules`).
+
 Nową rodzinę dodaje się jako funkcję gramatyki w `COMPOSER_GRAMMARS` i wpis w `COMPOSER_FAMILIES`; kurator sam ją sprawdzi. Razem 69 rodzin × 12 = 828 wzorów.

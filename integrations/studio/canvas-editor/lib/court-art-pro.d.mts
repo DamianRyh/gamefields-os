@@ -7,6 +7,7 @@ export function proExecution(familyId: string, variant: number, h: number, color
 export function recommendLineColor(colors: string[]): string;
 export function courtLines(h?: number, color?: string): string;
 export function fullSvg(familyId: string, variant: number, colors: string[], opts?: { h?: number; lines?: boolean; lineColor?: string }): string;
+export function composerMetrics(familyId: string, variant: number, colors: string[], opts?: { seed?: number; area?: number }): { colors: number; paint: Record<string, number>; tape: number; masking: string; minWidthCm: number } | null;
 export function mix(a: string, b: string, t: number): string;
 export function lightness(hex: string): number;
 export function rng(seed: number): () => number;

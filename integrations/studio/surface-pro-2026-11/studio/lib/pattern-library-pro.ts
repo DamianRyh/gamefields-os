@@ -468,6 +468,110 @@ export const proFamilies:PatternFamily[]=[
   ],
   "baseComplexity": 2,
   "renderer": "pro"
+ },
+ {
+  "id": "pro-k-echo",
+  "name": "Echo",
+  "short": "ECHO",
+  "group": "premium",
+  "description": "Linie boiska powtórzone na zewnątrz pasami: pierścienie wokół koła środkowego i obwiednie pól bramkowych.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-zones",
+  "name": "Strefy gry",
+  "short": "ZONES",
+  "group": "geometric",
+  "description": "Kolorem malowane same strefy gry: pola bramkowe, koło, pas środkowy, narożniki. Mało taśmy, czytelna gra.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-rays",
+  "name": "Promienie",
+  "short": "RAYS",
+  "group": "street",
+  "description": "Wachlarze promieni z bramek, narożników albo ze środka, z piastą, dzięki której ostrza są malowalne.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-chevron",
+  "name": "Szewrony",
+  "short": "CHEV",
+  "group": "brand",
+  "description": "Pasy w kształcie V skierowane na bramki albo do środka, lustrzane względem linii środkowej.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-flow",
+  "name": "Tor",
+  "short": "FLOW",
+  "group": "organic",
+  "description": "Wstęga pasów biegnąca od bramki do bramki przez punkt środkowy, symetryczna po obrocie.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-shards",
+  "name": "Płyty",
+  "short": "PLATE",
+  "group": "geometric",
+  "description": "Duże płyty Voronoi, sąsiednie zawsze w innym kolorze, opcjonalnie z fugą koloru tła.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-terrain",
+  "name": "Teren",
+  "short": "TERR",
+  "group": "organic",
+  "description": "Warstwice jak na mapie: jedno wzgórze w kole środkowym albo dwa naprzeciw siebie.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-pixel",
+  "name": "Pole pikseli",
+  "short": "PIX",
+  "group": "play",
+  "description": "Siatka od środka boiska: wielkość albo kolor kafla płynie w stronę bramek, środka lub po przekątnej.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
  }
 ];
 export const proPalettes:PatternPalette[]=[
@@ -968,6 +1072,88 @@ export const proSignaturePresets:SignaturePreset[]=[
   "paletteId": "gamefields",
   "useCase": "klub / sponsor",
   "note": "Numer jako supergrafika — klub, rok założenia, kod dzielnicy."
+ }
+];
+export const composerSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "k-echo",
+  "name": "Echo",
+  "eyebrow": "KOMPOZYTOR 01",
+  "familyId": "pro-k-echo",
+  "variant": 4,
+  "paletteId": "swiss",
+  "useCase": "miasto / park",
+  "note": "Koło środkowe i pola bramkowe powtórzone pasami jak echo. Gra jest czytelna, bo wzór rośnie z jej własnych linii."
+ },
+ {
+  "id": "k-zones",
+  "name": "Strefy gry",
+  "eyebrow": "KOMPOZYTOR 02",
+  "familyId": "pro-k-zones",
+  "variant": 1,
+  "paletteId": "stijl",
+  "useCase": "szkoła / dzieci",
+  "note": "Kolorem malowane tylko strefy gry. Najmniej taśmy w kolekcji, a dzieci od razu widzą, gdzie stać."
+ },
+ {
+  "id": "k-rays",
+  "name": "Promienie",
+  "eyebrow": "KOMPOZYTOR 03",
+  "familyId": "pro-k-rays",
+  "variant": 3,
+  "paletteId": "stella",
+  "useCase": "street / turnieje",
+  "note": "Wachlarze promieni wychodzą z bramek. Piasta przy bramce sprawia, że żadne ostrze nie jest węższe niż 20 cm."
+ },
+ {
+  "id": "k-chevron",
+  "name": "Szewrony",
+  "eyebrow": "KOMPOZYTOR 04",
+  "familyId": "pro-k-chevron",
+  "variant": 6,
+  "paletteId": "aicher",
+  "useCase": "klub / turniej",
+  "note": "Pasy w kształcie V prowadzą wzrok do bramek. Szerokość liczona prostopadle do pasa, więc każdy pas da się okleić."
+ },
+ {
+  "id": "k-flow",
+  "name": "Tor",
+  "eyebrow": "KOMPOZYTOR 05",
+  "familyId": "pro-k-flow",
+  "variant": 2,
+  "paletteId": "nightshift",
+  "useCase": "event / nocne granie",
+  "note": "Wstęga pasów biegnie od bramki do bramki przez punkt środkowy. Po obrocie o 180° obie połowy są identyczne."
+ },
+ {
+  "id": "k-shards",
+  "name": "Płyty",
+  "eyebrow": "KOMPOZYTOR 06",
+  "familyId": "pro-k-shards",
+  "variant": 3,
+  "paletteId": "gees-bend",
+  "useCase": "plac / rewitalizacja",
+  "note": "Duże płyty, sąsiednie zawsze w innym kolorze. Z 355 kandydatów kontrolę przeszło 90, do Studia trafiło 36."
+ },
+ {
+  "id": "k-terrain",
+  "name": "Teren",
+  "eyebrow": "KOMPOZYTOR 07",
+  "familyId": "pro-k-terrain",
+  "variant": 2,
+  "paletteId": "burle-marx",
+  "useCase": "park / eco",
+  "note": "Dwa wzgórza warstwic naprzeciw siebie na ciemnej zieleni. Mapa miejsca na nawierzchni."
+ },
+ {
+  "id": "k-pixel",
+  "name": "Pole pikseli",
+  "eyebrow": "KOMPOZYTOR 08",
+  "familyId": "pro-k-pixel",
+  "variant": 6,
+  "paletteId": "cruz-diez",
+  "useCase": "szkoła / zabawa",
+  "note": "Siatka kafli od środka boiska, kolor płynie pasmami. Maluje się z jednego szablonu kratki."
  }
 ];
 export const mastersSignaturePresets:SignaturePreset[]=[
