@@ -10,7 +10,8 @@
 //  - specks: islands smaller than 30 x 30 cm (144 px) — more than two reject;
 //  - paints: at most 5 slots used, at least 3 (ground + 2);
 //  - symmetry: the raster equals its 180° turn or its mirror (≤ 1.2 % pixels differ);
-//    mural families (MURAL) instead: halves balanced — paint shares differ by ≤ 0.4 (L1) and detail by ≤ 1.6x;
+//    mural families (MURAL): a tapered point (thin piece shorter than 75 cm and under 0.09 m²) is allowed, a thin strip is not;
+//    and instead of symmetry the halves are balanced — paint shares differ by ≤ 0.4 (L1) and detail by ≤ 1.6x;
 //  - balance: the ground or any paint covers ≤ 82 % of the court.
 // Measured and stored: area share per slot (paint m²), masking-edge length in metres, mode tag.
 import { createRequire } from 'module';
@@ -27,7 +28,7 @@ const toSvg = (g, h, sc = 1) => '<svg xmlns="http://www.w3.org/2000/svg" shape-r
 
 // runs inside the page
 const ANALYSE = `
-window.analyse = async (svg, W, H, sig, sc) => {
+window.analyse = async (svg, W, H, sig, sc, taper) => {
   const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); await img.decode();
   const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const cx = cv.getContext('2d', { willReadFrequently: true }); cx.imageSmoothingEnabled = false; cx.drawImage(img, 0, 0);
   const px = cx.getImageData(0, 0, W, H).data; const N = W * H; const lab = new Uint8Array(N);
@@ -42,18 +43,18 @@ window.analyse = async (svg, W, H, sig, sc) => {
       if (x < W-1) v = Math.min(v, d[i+1] + 3); if (y < H-1) { v = Math.min(v, d[i+W] + 3); if (x < W-1) v = Math.min(v, d[i+W+1] + 4); if (x > 0) v = Math.min(v, d[i+W-1] + 4); } d[i] = v; }
     return d; };
   const comps = (mask, minArea) => { const seen = new Uint8Array(N); const out = []; const st = new Int32Array(N);
-    for (let i = 0; i < N; i++) { if (!mask[i] || seen[i]) continue; let n = 0, sp = 0; st[sp++] = i; seen[i] = 1; let edge = false;
-      while (sp) { const j = st[--sp]; n++; const x = j % W, y = (j / W) | 0; if (x === 0 || y === 0 || x === W-1 || y === H-1) edge = true;
+    for (let i = 0; i < N; i++) { if (!mask[i] || seen[i]) continue; let n = 0, sp = 0; st[sp++] = i; seen[i] = 1; let edge = false; let x0 = W, x1 = 0, y0 = H, y1 = 0;
+      while (sp) { const j = st[--sp]; n++; const x = j % W, y = (j / W) | 0; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; if (x === 0 || y === 0 || x === W-1 || y === H-1) edge = true;
         if (x > 0 && mask[j-1] && !seen[j-1]) { seen[j-1] = 1; st[sp++] = j-1; } if (x < W-1 && mask[j+1] && !seen[j+1]) { seen[j+1] = 1; st[sp++] = j+1; }
         if (y > 0 && mask[j-W] && !seen[j-W]) { seen[j-W] = 1; st[sp++] = j-W; } if (y < H-1 && mask[j+W] && !seen[j+W]) { seen[j+W] = 1; st[sp++] = j+W; } }
-      if (n >= minArea) out.push({ n, edge }); }
+      if (n >= minArea) out.push({ n, edge, len: Math.hypot(x1 - x0, y1 - y0) }); }
     return out; };
   let thinBad = 0, thinPx = 0, specks = 0;
   for (let k = 0; k < 5; k++) { if (!area[k]) continue; const m = new Uint8Array(N); for (let i = 0; i < N; i++) m[i] = lab[i] === k ? 1 : 0;
     const d = dt(m); const er = new Uint8Array(N); for (let i = 0; i < N; i++) er[i] = d[i] >= 12 * sc ? 1 : 0; // core: ≥ 4 px (court scale) from the edge
     const notEr = new Uint8Array(N); for (let i = 0; i < N; i++) notEr[i] = er[i] ? 0 : 1; const d2 = dt(notEr); // distance to the core
     const thin = new Uint8Array(N); for (let i = 0; i < N; i++) if (m[i] && d2[i] > 13.5 * sc) { thin[i] = 1; thinPx++; }
-    thinBad += comps(thin, 40 * sc * sc).length;
+    thinBad += comps(thin, 40 * sc * sc).filter((c) => !taper || c.len >= 30 * sc || c.n >= 150 * sc * sc).length; // taper: a point shorter than 75 cm is allowed, a strip is not
     specks += comps(m, 1).filter((c) => c.n < 144 * sc * sc).length; }
   // symmetry with a 1 px (court scale) tolerance: rasterising a turned edge can move it by a pixel
   const tol = sc; const hasNear = (x, y, v) => { for (let dy = -tol; dy <= tol; dy++) for (let dx = -tol; dx <= tol; dx++) { const xx = x + dx, yy = y + dy; if (xx >= 0 && yy >= 0 && xx < W && yy < H && lab[yy*W+xx] === v) return true; } return false; };
@@ -84,7 +85,7 @@ for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
   for (let i = 0; i < 3 * N && (i < N || cands.length < POOL_SIZE * 2.5); i++, tried++) {
     const seed = (base + i * 7919) % 999983 + 1;
     const a = composeSlots(fid, seed, 400), b = composeSlots(fid, seed, 600);
-    const [m4, m6] = await page.evaluate(async ([s4, s6]) => [await window.analyse(s4, 1200, 800, true, 2), await window.analyse(s6, 600, 600, false, 1)], [toSvg(a.g, 400, 2), toSvg(b.g, 600)]);
+    const [m4, m6] = await page.evaluate(async ([s4, s6, tp]) => [await window.analyse(s4, 1200, 800, true, 2, tp), await window.analyse(s6, 600, 600, false, 1, tp)], [toSvg(a.g, 400, 2), toSvg(b.g, 600), MURAL.has(fid)]);
     const used = m4.area.filter((x) => x > 0.003).length;
     let why = null;
     if (m4.thinBad || m6.thinBad) why = 'thin'; else if (m4.specks > 2 || m6.specks > 2) why = 'specks'; else if (used < 3 || used > 5) why = 'paints'; else if (MURAL.has(fid) ? (m4.bal > 0.4 || m4.eRatio > 1.6 || m6.bal > 0.45) : (m4.sym > 0.012 || m6.sym > 0.012)) why = 'sym'; else if (Math.max(...m4.area) > 0.82) why = 'balance';
