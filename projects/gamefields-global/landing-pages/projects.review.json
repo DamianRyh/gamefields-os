@@ -1,0 +1,37 @@
+{
+  "source_wp_id": 3466,
+  "source": "live snapshot",
+  "translated_text_nodes": 144,
+  "translated_attributes": 14,
+  "unmapped_unique": [
+    "Żyrardów",
+    "Gdańsk",
+    "OSiR Grodzisk Mazowiecki",
+    "Wake For Friends",
+    "Head & Shoulders",
+    "Kraków",
+    "Michał Sikorski, Marcin Kwietowicz",
+    "Grzegorz Gądek",
+    "Model:",
+    "Panna Ring",
+    "Panna Octa",
+    "Beata Rafalska",
+    "Panna Octa Cage 90",
+    "Panna Octa Cage 180",
+    "Piotr Wiśniewski",
+    "Mariusz Smysło",
+    "UEFA Champions League",
+    "Legia Warszawa",
+    "Superball, Liberec",
+    "Grodzisk Mazowiecki",
+    "Liberec",
+    "Żerków",
+    "Łódź"
+  ],
+  "protected_tokens_identical": true,
+  "status": "review-only",
+  "remaining": [
+    "Review remaining names, image attributes, schema and links; browser tests pending.",
+    "Verify source claims, funding dates and rental/purchase distinction before release."
+  ]
+}
