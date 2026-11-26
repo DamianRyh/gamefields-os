@@ -278,5 +278,19 @@
   },
   "modes": 2,
   "tapeMedian": 80
+ },
+ "pro-m-flora": {
+  "candidates": 221,
+  "passed": 90,
+  "kept": 36,
+  "rejected": {
+   "thin": 117,
+   "specks": 10,
+   "paints": 0,
+   "sym": 4,
+   "balance": 0
+  },
+  "modes": 2,
+  "tapeMedian": 118
  }
 }
