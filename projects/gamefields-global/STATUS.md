@@ -1,9 +1,10 @@
 # Status — 2026-11-26
-01 Initial audit done; full inventory pending.
-02 PL/EN registered, EN draft 4945; relation to 3462 not verified.
-03 Theme helpers wired into repo 1.0.35 header/footer/nav; CSS switcher; homepage uses legacy header so footer switcher only until reconciliation with production 1.0.37. EN shop and Studio links withheld until ready. PHP/runtime/mobile tests pending.
-04 Partial EN draft; static/dynamic translation pending.
+01 Audit baseline; full inventory pending.
+02 PL/EN registered; draft 4945; relation 3462 unverified.
+03 Shared theme integrated in repo 1.0.35; runtime tests and 1.0.37 reconciliation pending.
+04 Static/dynamic phase A and catalogue phase B committed. Review generators not executed; routes, CF7, generated material runtime, mixed strings and full QA pending.
 05–07 Not started.
-08 63 bilingual keys, dictionary package parity checked at generation.
-09–12 Not started.
-No deployment authorised; reconcile live theme before any release.
+08 63 shared bilingual keys; homepage dictionary expanded.
+09 Draft schema generator only; no international SEO verified.
+10 Static checks only; runtime tests pending.
+11–12 Not started. No production deployment authorised.
