@@ -1,0 +1,30 @@
+{
+  "source_wp_id": 3684,
+  "source": "live snapshot",
+  "translated_text_nodes": 342,
+  "translated_attributes": 3,
+  "unmapped_unique": [
+    "Gamefields",
+    "Panna Octa Cage 90",
+    "Studio ↗",
+    "Panna Play",
+    "Panna Ring",
+    "Panna Octa",
+    "Panna Grid",
+    "Panna Octa Cage 180",
+    "Panna Court",
+    "Orlik 2012",
+    "PN-EN 14877",
+    "PN-EN 1177",
+    "R11",
+    "Kraków",
+    "Orlik",
+    "Grodzisk Mazowiecki"
+  ],
+  "protected_tokens_identical": true,
+  "status": "review-only",
+  "remaining": [
+    "Calculator dynamic UI, schema, image attributes, EN links and browser tests pending.",
+    "Verify source pricing scope and funding claims before release; no business logic changed."
+  ]
+}

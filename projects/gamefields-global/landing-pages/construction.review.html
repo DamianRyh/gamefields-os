@@ -1,0 +1,384 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://www.gamefields.eu/budowa-boisk-sportowych/#usluga","name":"Budowa boisk sportowych","serviceType":"Budowa boisk sportowych","url":"https://www.gamefields.eu/budowa-boisk-sportowych/","inLanguage":"pl-PL","areaServed":{"@type":"Country","name":"Polska"},"provider":{"@id":"https://www.gamefields.eu/#studio"},"description":"Budowa boisk sportowych od analizy terenu, przez płytę betonową z podbudową i nawierzchnię, po konstrukcję, linie i odbiór. Dla gmin, szkół, osiedli, klubów i marek.","offers":{"@type":"AggregateOffer","priceCurrency":"PLN","lowPrice":36000,"offerCount":8,"priceSpecification":{"@type":"PriceSpecification","valueAddedTaxIncluded":false}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Budowa boisk sportowych","item":"https://www.gamefields.eu/budowa-boisk-sportowych/"}]},{"@type":"FAQPage","@id":"https://www.gamefields.eu/budowa-boisk-sportowych/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile kosztuje budowa boiska sportowego?","acceptedAnswer":{"@type":"Answer","text":"W Gamefields konstrukcje kosztują od 36 000 zł netto, a całe boisko z płytą betonową i malowaniem, np. Panna Play, od 51 000 zł netto. Płyta betonowa z podbudową to 283 zł/m², wykończenia od 78 do 492 zł/m² netto. Montaż, transport i przygotowanie terenu liczę po zdjęciach placu."}},{"@type":"Question","name":"Co zawiera cena „z nawierzchnią”?","acceptedAnswer":{"@type":"Answer","text":"Konstrukcję w podstawowej konfiguracji i standardowym kolorze, płytę betonową 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem. Bez montażu, transportu i przygotowania terenu."}},{"@type":"Question","name":"Czy budujecie też większe boiska wielofunkcyjne?","acceptedAnswer":{"@type":"Answer","text":"Tak, jako projekt indywidualny: analiza terenu, koncepcja, podbudowa, nawierzchnia, linie i wyposażenie. Cenę takiego boiska przygotowuję po zdjęciach, wymiarach i ustaleniu sportów, bo zależy od zakresu robót."}},{"@type":"Question","name":"Czy da się zrobić boisko na starym betonie?","acceptedAnswer":{"@type":"Answer","text":"Zwykle tak. Jeśli beton jest stabilny, naprawiam rysy i ubytki, gruntuję podłoże i kładę elastyczną farbę sportową z granulatem gumowym, a na niej wzór i linie. Gdy podłoże jest poważnie uszkodzone, najpierw trzeba je przebudować."}},{"@type":"Question","name":"Ile miejsca potrzebuję?","acceptedAnswer":{"@type":"Answer","text":"Najmniejsze areny mają około 5 m średnicy, boisko 3 na 3 ma 15 × 10 m. Do metrażu trzeba doliczyć strefę bezpieczeństwa. Wymiary placu sprawdzisz w planerze „Zmieści się?” na stronie głównej."}},{"@type":"Question","name":"Czy mogę zobaczyć projekt i cenę przed zamówieniem?","acceptedAnswer":{"@type":"Answer","text":"Tak. W Studio 3D wybierasz model, kolory, wzór i nawierzchnię, a cena liczy się na bieżąco. Projekt pobierasz jako kartę PDF i wysyłasz do wyceny."}},{"@type":"Question","name":"Czy pomagacie w dofinansowaniu i przetargu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Dla gmin i szkół przygotowuję koncepcję, parametry techniczne i dokumenty do wniosku o dofinansowanie i do przetargu, z kartami technicznymi i certyfikatami producentów. Nabory na 2027 rok ruszają 4 stycznia."}},{"@type":"Question","name":"Jaka jest gwarancja?","acceptedAnswer":{"@type":"Answer","text":"12 miesięcy gwarancji i stała opieka nad renowacją boiska po odbiorze. Panna Ring na Orliku OSiR w Grodzisku Mazowieckim jest w użyciu od 10 lat bez żadnych uszkodzeń."}},{"@type":"Question","name":"Kiedy można prowadzić prace?","acceptedAnswer":{"@type":"Answer","text":"Farby sportowe kładziemy na suchy beton przy dodatniej temperaturze, zwykle od wiosny do jesieni. Projekt, wycenę i dokumenty można przygotować wcześniej, także zimą."}}]}]}</script>
+<div class="gfa gfb">
+<section class="gfb-hero"><div class="w top">
+  <div>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Court construction</p>
+    <p class="k">Design, sub-base, surface and installation</p>
+    <h1 class="d">Sports court construction.</h1>
+    <p class="lead">From an empty site or old concrete to the first match. I tailor the format, surface and scope of work to the site and budget, and you see the price before signing anything.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="#kalkulator">Calculate your budget ↓</a><a class="gfa-btn alt" href="/kontakt/">Send site photos →</a></div>
+  </div>
+  <ul class="gfb-mosaic" role="list"><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-1024x1024.jpg" alt="Gotowa arena Panna Octa Cage 90 w parku, Kraków" loading="eager" decoding="async"><span>Completed court</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Gamefields-x-boiska-x-Projekt-Krakow--768x768.jpg" alt="Site plan with Gamefields arenas, Kraków" loading="lazy" decoding="async"><span>Design</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-montaz-768x576.jpg" alt="Montaż areny w parku, Kraków" loading="lazy" decoding="async"><span>Installation</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Dzieci na boisku Panna Octa w Kutnie" loading="lazy" decoding="async"><span>In use</span></li></ul>
+</div>
+<div class="w">
+  <dl class="gfb-nums">
+    <div><dt>Structure</dt><dd>from PLN 36,000<small>excluding VAT, Panna Octa Cage 90</small></dd></div>
+    <div><dt>Slab with sub-base</dt><dd>PLN 283/m²<small>excluding VAT, 12 cm concrete</small></dd></div>
+    <div><dt>Warranty</dt><dd>12 months<small>and support after handover</small></dd></div>
+    <div><dt>At an Orlik facility</dt><dd>10 years<small>Panna Ring without damage</small></dd></div>
+  </dl>
+</div></section>
+
+<nav class="gfb-jump" aria-label="On this page"><div class="w"><ul role="list"><li><a href="#start">Where to start</a></li><li><a href="#ceny">Pricing</a></li><li><a href="#kalkulator">Calculator</a></li><li><a href="#proces">Stages</a></li><li><a href="#nawierzchnie">Surfaces</a></li><li><a href="#gminy">Municipalities and schools</a></li><li><a href="#realizacje">Projects</a></li><li><a href="#wycena">For a quote</a></li><li><a href="#pytania">FAQs</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="start"><div class="w">
+  <div class="gfa-head"><div><p class="k">Where to start</p><h2 class="d">What is your starting point?</h2></div><p>Choose the situation that suits you. Each route leads to a price and a specific scope of work.</p></div>
+  <ul class="gfb-paths" role="list"><li><a href="#kalkulator"><span class="q">I have an empty site</span><b>New court from the sub-base up</b><p>Ground preparation, concrete slab, surface and structure with goals.</p><ul><li>12 cm slab with sub-base</li><li>one of eight surfaces</li><li>arena or multi-use court</li></ul><span class="pr">Complete court from PLN 47,400 excluding VAT</span><span class="go">Calculate your budget ↓</span></a></li><li><a href="/renowacja-boisk/"><span class="q">I have old concrete or an existing court</span><b>Renovation and new graphics</b><p>Crack and defect repairs, primer, flexible rubberised sports coating, graphics and markings.</p><ul><li>substrate assessment from photos</li><li>painting or new surfacing</li><li>multi-sport markings</li></ul><span class="pr">Painting from PLN 78/m² excluding VAT</span><span class="go">Court renovation →</span></a></li><li><a href="#ceny"><span class="q">I have limited space</span><b>1v1 or 3v3 arena</b><p>Compact arenas from approximately 5 m in diameter to a 3v3 court (15 × 10 m). Small spaces call for a format of their own.</p><ul><li>8 models with prices</li><li>design and price in 3D Studio</li><li>“Will it fit?” planner</li></ul><span class="pr">Structure from PLN 36,000 excluding VAT</span><span class="go">Models and prices ↓</span></a></li><li><a href="/wynajem-boisk-mobilnych/"><span class="q">I need a court for an event</span><b>Mobile arena</b><p>Rent or buy a panna arena for a tournament, brand activation or festival.</p><ul><li>installation at the event venue</li><li>tournaments and events since 2008</li><li>rental and sale</li></ul><span class="pr">From PLN 27,000 excluding VAT</span><span class="go">Mobile arena →</span></a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="ceny"><div class="w">
+  <div class="gfa-head"><div><p class="k">Pricing</p><h2 class="d">How much does a court cost?</h2></div><p>Eight models: prices for the structure with goals and for a complete court with concrete slab and painting. Starting prices, excluding VAT.</p></div>
+  <div class="gfb-scroll"><table class="gfb-table"><thead><tr><th>Model</th><th class="r">Structure from (excl. VAT)</th><th class="r">With surface from (excl. VAT)</th><th class="r"><span class="sr">Links</span></th></tr></thead><tbody><tr><td><b>Panna Octa Cage 90</b><br>Ø, 0.9 m boards · 31.1 m² surface · Residential estates, schools</td><td class="r" data-l="Konstrukcja od">36 000 PLN<small>PLN 44,280 including VAT</small></td><td class="r" data-l="Z nawierzchnią od">47 400 PLN<small>slab + painting</small></td><td class="r"><a href="/product/panna-octa-cage-90/">View</a> <a href="/studio/?arena=circle-cage-1">Studio ↗</a></td></tr><tr><td><b>Panna Play</b><br>Ø approx. 6 m · 30.1 m² surface · Clubs, events, schools</td><td class="r" data-l="Konstrukcja od">40 000 PLN<small>PLN 49,200 including VAT</small></td><td class="r" data-l="Z nawierzchnią od">51 000 PLN<small>slab + painting</small></td><td class="r"><a href="/product/panna-play/">View</a> <a href="/studio/?arena=o1">Studio ↗</a></td></tr><tr><td><b>Panna Ring</b><br>Ø approx. 5 m · 21.5 m² surface</td><td class="r" data-l="Konstrukcja od">40 000 PLN<small>PLN 49,200 including VAT</small></td><td class="r" data-l="Z nawierzchnią od">47 800 PLN<small>slab + painting</small></td><td class="r"><a href="/product/panna-ring/">View</a> <a href="/studio/?arena=w1">Studio ↗</a></td></tr><tr><td><b>Panna Octa</b><br>Octagon · 32.8 m² surface · Municipalities, parks, schools</td><td class="r" data-l="Konstrukcja od">49 000 PLN<small>PLN 60,270 including VAT</small></td><td class="r" data-l="Z nawierzchnią od">60 900 PLN<small>slab + painting</small></td><td class="r"><a href="/product/panna-octa/">View</a> <a href="/studio/?arena=octagon">Studio ↗</a></td></tr><tr><td><b>Panna Grid</b><br>6.21 × 4.65 m · 42.6 m² surface</td><td class="r" data-l="Konstrukcja od">51 000 PLN<small>PLN 62,730 including VAT</small></td><td class="r" data-l="Z nawierzchnią od">66 500 PLN<small>slab + painting</small></td><td class="r"><a href="/product/panna-grid/">View</a> <a href="/studio/?arena=street-field">Studio ↗</a></td></tr><tr><td><b>Panna Octa Cage 180</b><br>Ø, 1.8 m boards · 31.1 m² surface · Clubs, academies</td><td class="r" data-l="Konstrukcja od">58 000 PLN<small>PLN 71,340 including VAT</small></td><td class="r" data-l="Z nawierzchnią od">69 400 PLN<small>slab + painting</small></td><td class="r"><a href="/product/panna-octa-cage-180/">View</a> <a href="/studio/?arena=circle-cage-2">Studio ↗</a></td></tr><tr><td><b>Panna Court</b><br>7.14 × 5.57 m · 43.2 m² surface</td><td class="r" data-l="Konstrukcja od">69 000 PLN<small>PLN 84,870 including VAT</small></td><td class="r" data-l="Z nawierzchnią od">84 700 PLN<small>slab + painting</small></td><td class="r"><a href="/product/panna-court/">View</a> <a href="/studio/?arena=p1">Studio ↗</a></td></tr><tr><td><b>3v3 court (Street Arena 15)</b><br>Full format, 15 × 10 m · 164.1 m² surface · Municipalities, developers</td><td class="r" data-l="Konstrukcja od">100 000 PLN<small>PLN 123,000 including VAT</small></td><td class="r" data-l="Z nawierzchnią od">159 300 PLN<small>slab + painting</small></td><td class="r"><a href="/product/street-arena-15/">View</a> <a href="/studio/?arena=street15">Studio ↗</a></td></tr></tbody></table></div>
+  <div class="gfb-incl">
+    <div><p class="k">Concrete slab includes</p><ul><li>Excavation and ground preparation</li><li>Geotextile and aggregate sub-base</li><li>12 cm concrete slab (C20/25) with gradients and movement joints</li><li>Reinforcement mesh</li><li>Surface ready for finishing: painting, tiles, turf or EPDM</li><li>10% surface area allowance relative to the structure</li></ul></div>
+    <div><p class="k">Quoted separately after reviewing site photos</p><ul><li>Complex drainage or soil replacement deeper than 30 cm</li><li>Restricted access and additional logistics</li><li>Structure installation and transport</li></ul></div>
+  </div>
+  <p class="gfb-note">“With surface”: structure in basic configuration and standard colour, 12 cm slab with sub-base and single-colour painting, calculated from the structure footprint plus 10%. Mobile arena: from PLN 27,000 excluding VAT. Gross prices include 23% VAT.</p>
+</div></section>
+
+<section class="gfa-sec" id="kalkulator"><div class="w">
+  <div class="gfa-head"><div><p class="k">Calculator</p><h2 class="d">Calculate your budget.</h2></div><p>Choose a court or enter your own area, then add the slab and surface. The same prices as in 3D Studio and the shop.</p></div>
+  <div class="gfb-calc">
+    <form id="gfb-calc" aria-label="Kalkulator budżetu boiska">
+      <div><label for="gfb-model">Court</label>
+        <select id="gfb-model" name="model"><option value="circle-cage-1">Panna Octa Cage 90 · 31.1 m²</option><option value="o1" selected>Panna Play · 30.1 m²</option><option value="w1">Panna Ring · 21.5 m²</option><option value="octagon">Panna Octa · 32.8 m²</option><option value="street-field">Panna Grid · 42.6 m²</option><option value="circle-cage-2">Panna Octa Cage 180 · 31.1 m²</option><option value="p1">Panna Court · 43.2 m²</option><option value="street15">3v3 court (Street Arena 15) · 164.1 m²</option><option value="custom">Custom area (bespoke court, surfacing only)</option></select></div>
+      <div class="gfb-area" data-area hidden><label for="gfb-area">Area in m²</label><input id="gfb-area" name="area" type="number" min="1" step="1" value="200" inputmode="numeric"></div>
+      <fieldset><legend>Scope</legend><div class="gfb-tog">
+        <label><input type="checkbox" name="cons" checked><span>Structure with boards and goals<small>basic configuration, standard colour</small></span></label>
+        <label><input type="checkbox" name="slab" checked><span>12 cm concrete slab with sub-base<small>untick if you have a stable site (concrete or asphalt)</small></span></label>
+      </div></fieldset>
+      <div><label for="gfb-surf">Surface</label><select id="gfb-surf" name="surf"><option value="0">No finish (concrete only)</option><option value="1" selected>Sports surface painting</option><option value="2">Artificial turf</option><option value="3">Acrylic hard court</option><option value="4">In-situ EPDM surface</option><option value="5">PP sports tiles</option><option value="6">Rubber mats</option><option value="7">Rubber tiles</option></select></div>
+      <fieldset><legend>Option</legend><div data-var></div></fieldset>
+    </form>
+    <div class="gfb-out" aria-live="polite">
+      <p class="k">Estimated budget excluding VAT</p>
+      <p class="sum"><span data-sum>—</span><small data-gross></small></p>
+      <dl data-list></dl>
+      <p>Excludes installation, transport and site preparation: these costs depend on the location and are quoted after reviewing photos. Surface area includes a 10% allowance, with cost rounded up to the nearest PLN 100.</p>
+      <div class="gfa-btns"><a class="gfa-btn" data-studio href="/studio/?arena=o1">Design in Studio ↗</a><a class="gfa-btn alt" href="/kontakt/">Request a quote</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="proces"><div class="w">
+  <div class="gfa-head"><div><p class="k">Stages</p><h2 class="d">From site to match.</h2></div><p>First the site and people, then the concept, and finally the colours. You speak with me at every stage. <a href="/budowa-boiska-krok-po-kroku/">Details in the guide →</a></p></div>
+  <ol class="gfb-steps"><li><b>Site assessment</b><p>Dimensions, access, gradients, existing surface and surroundings. Unsuitable formats are ruled out at this stage.</p><span class="gf">photos and dimensions are enough to get started.</span></li><li><b>Users and sports</b><p>School, residential estate, club or park: age, intensity of play and whether the space should remain active outside training.</p><span class="gf">model and surface selection for the user group.</span></li><li><b>Concept and price</b><p>Court layout, safety zones, colours and graphics. Compare options before deciding.</p><span class="gf">3D Studio and project PDF with price.</span></li><li><b>Sub-base and drainage</b><p>The hidden part that determines durability. Water must drain predictably.</p><span class="gf">12 cm C20/25 slab with gradients, PLN 283/m².</span></li><li><b>Surface</b><p>Determined by the sport, intensity of use and maintenance, not just the price per square metre.</p><span class="gf">eight surfaces with prices per m².</span></li><li><b>Structure and equipment</b><p>Boards, goals, basketball hoops and fencing installed before the final layers.</p><span class="gf">modular arena installed on the slab.</span></li><li><b>Markings, handover and support</b><p>Sports markings, colours, workmanship checks and handover.</p><span class="gf">12-month warranty and support after handover.</span></li><li class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-montaz-768x576.jpg" alt="Montaż areny Gamefields w parku, Kraków" loading="lazy" decoding="async"></li></ol>
+</div></section>
+
+<section class="gfa-sec" id="nawierzchnie"><div class="w">
+  <div class="gfa-head"><div><p class="k">Surfaces</p><h2 class="d">Eight surfaces.</h2></div><p>Each is installed on a concrete slab or stable existing site. Prices per m² excluding VAT, from Standard to Premium. <a href="/jak-wybrac-nawierzchnie-sportowa/">How to choose →</a></p></div>
+  <ul class="gfb-surf" role="list"><li><a href="/product/malowanie-farba-sportowa/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/malowanie-macro-768x576.webp" alt="Malowanie farbą sportową z bliska" loading="lazy" decoding="async"><span class="tx"><b>Sports surface painting</b><span class="nt">on a slab or existing site</span><span class="r">PLN 78–183/m² excluding VAT</span></span></a></li><li><a href="/product/sztuczna-trawa/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/trawa-macro-768x576.webp" alt="Sztuczna trawa z bliska" loading="lazy" decoding="async"><span class="tx"><b>Artificial turf</b><span class="nt">traditional football turf</span><span class="r">PLN 167–292/m² excluding VAT</span></span></a></li><li><a href="/product/akryl-hard-court/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/akryl-macro-768x576.webp" alt="Akryl Hard Court z bliska" loading="lazy" decoding="async"><span class="tx"><b>Acrylic hard court</b><span class="nt">hard and fast, like a tennis court</span><span class="r">PLN 200–342/m² excluding VAT</span></span></a></li><li><a href="/product/nawierzchnia-epdm/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-768x576.webp" alt="Nawierzchnia EPDM wylewana z bliska" loading="lazy" decoding="async"><span class="tx"><b>In-situ EPDM surface</b><span class="nt">PN-EN 14877, water-permeable</span><span class="r">PLN 250–400/m² excluding VAT</span></span></a></li><li><a href="/product/plytki-sportowe/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plytki-macro-768x576.webp" alt="Płytki sportowe PP z bliska" loading="lazy" decoding="async"><span class="tx"><b>PP sports tiles</b><span class="nt">adhesive-free installation with drainage</span><span class="r">PLN 275–400/m² excluding VAT</span></span></a></li><li><a href="/product/maty-gumowe-nawierzchnia/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/maty-gumowe-macro-768x576.webp" alt="Maty gumowe z bliska" loading="lazy" decoding="async"><span class="tx"><b>Rubber mats</b><span class="nt">continuous rubber, R11 slip resistance</span><span class="r">PLN 242–425/m² excluding VAT</span></span></a></li><li><a href="/product/plyty-gumowe/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plyty-gumowe-macro-768x576.webp" alt="Płyty gumowe z bliska" loading="lazy" decoding="async"><span class="tx"><b>Rubber tiles</b><span class="nt">PN-EN 1177, PZH certification</span><span class="r">PLN 342–492/m² excluding VAT</span></span></a></li><li><a href="/product/plyta-betonowa/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/beton-macro-768x576.webp" alt="Płyta betonowa z bliska" loading="lazy" decoding="async"><span class="tx"><b>12 cm concrete slab</b><span class="nt">base for any finish</span><span class="r">PLN 283/m² excluding VAT</span></span></a></li></ul>
+</div></section>
+
+<section class="gfa-band" id="gminy"><div class="w">
+  <div class="gfa-head"><div><p class="k">For municipalities, schools and Orlik sports facilities</p><h2 class="d">A court built to last.</h2></div><p>Renovating an Orlik facility, building a municipal court or creating a school activity zone. I prepare concepts, technical specifications and documents for funding applications and tenders.</p></div>
+  <dl class="gfb-docs">
+    <div><dt>Documentation</dt><dd>I include technical data sheets and certificates for steel, coatings and surfaces in quotations, applications and tender documentation.</dd></div>
+    <div><dt>Orlik 2012</dt><dd>Solutions meet the requirements of Poland's “Moje Boisko – Orlik 2012” programme. Applications for 2027 open on 4 January.</dd></div>
+    <div><dt>12 months</dt><dd>A one-year warranty and ongoing support for court renovation after handover.</dd></div>
+    <div><dt>10 years</dt><dd>Panna Ring in use at the Grodzisk Mazowiecki municipal sports centre's Orlik facility, without any damage.</dd></div>
+  </dl>
+  <ul class="gfb-norms" role="list"><li><b>PN-EN 14877</b>polyurethane EPDM surfaces</li><li><b>PN-EN 1177</b>and PZH certification: rubber tiles</li><li><b>R11</b>slip resistance: rubber tiles and mats</li><li><b>Water-permeable</b>sprayed EPDM and tiles</li></ul>
+  <ul class="gfa-links"><li><a href="/dofinansowanie-boisk/">Court funding →</a></li><li><a href="/realizacje-dla-miast/">Municipal projects →</a></li><li><a href="/dla-miast/">For cities</a></li><li><a href="/boiska-dla-szkol/">For schools</a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="realizacje"><div class="w">
+  <div class="gfa-head"><div><p class="k">Projects</p><h2 class="d">Built and in use.</h2></div><p>Cities, parks and Polish Orlik facilities. Each story includes the model, price and client feedback. <a href="/realizacje-gamefields/">All projects →</a></p></div>
+  <ul class="gfb-reals" role="list"><li><a href="/realizacje-gamefields/#taras"><span class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras pod Pałacem Kultury, Warszawa, Park Świętokrzyski" loading="lazy" decoding="async"><span class="who">City</span></span><span class="tx"><span class="pl">Warsaw, Świętokrzyski Park</span><b>Terrace by the Palace of Culture</b><span class="ld">Three arenas connected by a terrace and ramp.</span><span class="md">Panna Ring · from PLN 40,000 excluding VAT</span></span></a></li><li><a href="/realizacje-gamefields/#kutno"><span class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa w Kutnie, Kutno, pasaż sportowy" loading="lazy" decoding="async"><span class="who">City</span></span><span class="tx"><span class="pl">Kutno, sports promenade</span><b>Panna Octa in Kutno</b><span class="ld">Commissioned by the municipal office, “without issues”.</span><span class="md">Panna Octa · from PLN 49,000 excluding VAT</span></span></a></li><li><a href="/realizacje-gamefields/#krakow"><span class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Od planu do parku, Kraków" loading="lazy" decoding="async"><span class="who">Park</span></span><span class="tx"><span class="pl">Kraków</span><b>From plan to park</b><span class="ld">Site plan, installation and completed arena.</span><span class="md">Panna Octa Cage 90 · from PLN 36,000 excluding VAT</span></span></a></li><li><a href="/realizacje-gamefields/#orlik"><span class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring at an Orlik facility, Grodzisk Mazowiecki" loading="lazy" decoding="async"><span class="who">Orlik</span></span><span class="tx"><span class="pl">Grodzisk Mazowiecki</span><b>Panna Ring at an Orlik facility</b><span class="ld">10 years in use without any damage.</span><span class="md">Panna Ring · from PLN 40,000 excluding VAT</span></span></a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="wycena"><div class="w">
+  <div class="gfa-head"><div><p class="k">For a quote</p><h2 class="d">What should you send me?</h2></div><p>No documentation or technical expertise is needed. Five details and a few phone photos are enough to start.</p></div>
+  <div class="gfb-prep">
+    <div><h3>Five details</h3><ul class="gfb-check">
+      <li><span><b>Location</b>: address or map pin.</span></li>
+      <li><span><b>Dimensions</b>: approximate, measured or taken from a map.</span></li>
+      <li><span><b>Sports and users</b>: who will play and which sports.</span></li>
+      <li><span><b>Scope</b>: complete court, surfacing only or renovation.</span></li>
+      <li><span><b>Timing and budget</b>: including any funding-related constraints.</span></li>
+    </ul></div>
+    <div><h3>Site photos</h3><ul class="gfb-check">
+      <li><span>The whole surface from several angles.</span></li>
+      <li><span>Close-ups of cracks, defects and edges.</span></li>
+      <li><span>Drains and areas of standing water.</span></li>
+      <li><span>Existing equipment and foundations.</span></li>
+      <li><span>Access for transport and equipment.</span></li>
+    </ul>
+    <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Send site photos →</a><a class="gfa-btn alt" href="/studio/">Design in Studio ↗</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><div><p class="k">FAQs</p><h2 class="d">Before enquiring.</h2></div><p>Common questions about costs, scope, funding and timing.</p></div>
+  <div class="gfa-faq"><details><summary>How much does sports court construction cost?</summary><p>Gamefields structures start at PLN 36,000 excluding VAT, and a complete court with concrete slab and painting, such as Panna Play, from PLN 51,000 excluding VAT. A concrete slab with sub-base costs PLN 283/m², and finishes range from PLN 78 to 492/m² excluding VAT. Installation, transport and site preparation are quoted after reviewing site photos.</p></details><details><summary>What does the “with surface” price include?</summary><p>Structure in basic configuration and standard colour, a 12 cm concrete slab with sub-base and single-colour painting, calculated from the structure footprint plus 10%. Excludes installation, transport and site preparation.</p></details><details><summary>Do you also build larger multi-use courts?</summary><p>Yes, as a bespoke project: site assessment, concept, sub-base, surface, markings and equipment. The price is quoted after reviewing photos, dimensions and intended sports, as it depends on the scope of work.</p></details><details><summary>Can a court be built on old concrete?</summary><p>Usually, yes. If the concrete is stable, I repair cracks and defects, prime the substrate and apply a flexible sports coating with rubber granules, then graphics and markings. Severely damaged substrates must first be rebuilt.</p></details><details><summary>How much space do I need?</summary><p>The smallest arenas are approximately 5 m in diameter; a 3v3 court measures 15 × 10 m. Additional safety clearance must be allowed. Check site dimensions in the “Will it fit?” planner on the homepage.</p></details><details><summary>Can I see the design and price before ordering?</summary><p>Yes. Choose the model, colours, pattern and surface in 3D Studio, with live pricing. Download the project PDF and submit it for a quotation.</p></details><details><summary>Can you help with funding and tenders?</summary><p>Yes. For municipalities and schools, I prepare the concept, technical specifications and funding and tender documentation, including manufacturers' data sheets and certificates. Polish 2027 funding rounds open from 4 January.</p></details><details><summary>What warranty is provided?</summary><p>A 12-month warranty and ongoing renovation support after handover. Panna Ring at the Grodzisk Mazowiecki municipal sports centre's Orlik facility has been in use for 10 years without damage.</p></details><details><summary>When can work be carried out?</summary><p>Sports coatings are applied to dry concrete at temperatures above freezing, usually from spring to autumn. Design, quotation and documentation can be prepared earlier, including winter.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><div><p class="k">Knowledge hub</p><h2 class="d">Read before deciding.</h2></div><p>Guides with Gamefields prices: costs, stages, surfaces, renovation, dimensions and funding.</p></div>
+  <ul class="gfb-next" role="list"><li><a href="/ile-kosztuje-budowa-boiska-sportowego/"><i>Budget</i><b>How much does sports court construction cost?</b><span>Cost components and Gamefields prices.</span></a></li><li><a href="/budowa-boiska-krok-po-kroku/"><i>Process</i><b>Court construction step by step</b><span>Seven stages from site to handover.</span></a></li><li><a href="/jak-wybrac-nawierzchnie-sportowa/"><i>Technology</i><b>How to choose a sports surface?</b><span>Turf, EPDM, tiles, rubber, acrylic and paint.</span></a></li><li><a href="/renowacja-czy-budowa-nowego-boiska/"><i>Existing facility</i><b>Renovation or new court construction?</b><span>When renovating an existing site is enough.</span></a></li><li><a href="/wymiary-boiska-wielofunkcyjnego/"><i>Dimensions</i><b>Multi-use court dimensions</b><span>Geometry, zones, Orlik facilities and compact sites.</span></a></li><li><a href="/dofinansowanie-boisk/"><i>Funding</i><b>Court funding</b><span>Polish 2027 funding rounds and application documents.</span></a></li></ul>
+  <ul class="gfb-who" role="list"><li><a href="/dla-miast/"><span>For</span>cities and municipalities</a></li><li><a href="/boiska-dla-szkol/"><span>For</span>schools</a></li><li><a href="/boiska-dla-deweloperow/"><span>For</span>developers</a></li><li><a href="/boiska-dla-klubow/"><span>For</span>clubs</a></li><li><a href="/aktywacje-sportowe-dla-marek/"><span>For</span>brands</a></li><li><a href="/renowacja-boisk/">Court renovation</a></li><li><a href="/malowanie-boisk/">Court painting</a></li><li><a href="/nawierzchnie-sportowe/">Sports surfaces</a></li><li><a href="/projektowanie-boisk/">Court design</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Have a site<br>for a court?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Send site photos →</a><a class="gfa-btn alt" href="/studio/">Design in Studio ↗</a></div>
+</div></section>
+<script type="application/json" id="gfb-calc-data">{"models":[{"id":"circle-cage-1","n":"Panna Octa Cage 90","a":31.1,"c":36000,"s":8900},{"id":"o1","n":"Panna Play","a":30.1,"c":40000,"s":8600},{"id":"w1","n":"Panna Ring","a":21.5,"c":40000,"s":6100},{"id":"octagon","n":"Panna Octa","a":32.8,"c":49000,"s":9300},{"id":"street-field","n":"Panna Grid","a":42.6,"c":51000,"s":12100},{"id":"circle-cage-2","n":"Panna Octa Cage 180","a":31.1,"c":58000,"s":8900},{"id":"p1","n":"Panna Court","a":43.2,"c":69000,"s":12300},{"id":"street15","n":"Boisko 3 na 3 (Street Arena 15)","a":164.1,"c":100000,"s":46500}],"surf":[{"k":"none","n":"Bez wykończenia (sam beton)","v":[]},{"k":"paint","n":"Malowanie farbą sportową","v":[{"n":"Jednokolorowa","r":78},{"n":"Jednokolorowa z granulatem","r":100},{"n":"Wzór średni","r":150},{"n":"Wzór zaawansowany","r":183}]},{"k":"turf","n":"Sztuczna trawa","v":[{"n":"Standard","r":167},{"n":"Standard+","r":225},{"n":"Premium","r":292}]},{"k":"acrylic","n":"Akryl Hard Court","v":[{"n":"Standard","r":200},{"n":"Standard+","r":267},{"n":"Premium","r":342}]},{"k":"epdm","n":"Nawierzchnia EPDM wylewana","v":[{"n":"Standard","r":250},{"n":"Standard+","r":317},{"n":"Premium","r":400}]},{"k":"tiles","n":"Płytki sportowe PP","v":[{"n":"Standard","r":275},{"n":"Standard+","r":325},{"n":"Premium","r":400}]},{"k":"mats","n":"Maty gumowe","v":[{"n":"Standard","r":242},{"n":"Standard+","r":317},{"n":"Premium","r":425}]},{"k":"rubber","n":"Płyty gumowe","v":[{"n":"Standard","r":342},{"n":"Standard+","r":400},{"n":"Premium","r":492}]}],"slab":283,"vat":0.23}</script>
+<script>(function(){var f=document.getElementById('gfb-calc');if(!f)return;var D=JSON.parse(document.getElementById('gfb-calc-data').textContent);
+var q=function(s){return document.querySelector(s)};var mSel=f.querySelector('[name=model]'),area=f.querySelector('[name=area]'),areaBox=q('[data-area]'),sSel=f.querySelector('[name=surf]'),vBox=q('[data-var]'),
+cons=f.querySelector('[name=cons]'),slab=f.querySelector('[name=slab]'),out=q('[data-sum]'),gross=q('[data-gross]'),list=q('[data-list]'),studio=q('[data-studio]');
+function fmt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')+'\u00a0zł'}
+function up(a,r){return Math.ceil(Math.round(a*r*100)/10000)*100}
+function model(){var id=mSel.value;for(var i=0;i<D.models.length;i++){if(D.models[i].id===id)return D.models[i]}return null}
+function variants(){var s=D.surf[+sSel.value];if(!s.v.length){vBox.innerHTML='<p class="gfb-note">Sama płyta betonowa, gotowa pod wykończenie.</p>';return}
+var cur=vBox.querySelector('input:checked');var keep=cur?+cur.value:0;if(keep>=s.v.length)keep=0;
+vBox.innerHTML='<div class="gfb-chips" role="radiogroup">'+s.v.map(function(v,i){return '<label><input type="radio" name="var" value="'+i+'"'+(i===keep?' checked':'')+'> '+v.n+' · '+v.r+' zł/m²</label>'}).join('')+'</div>';}
+var wasCustom=false;function render(){var m=model(),custom=!m;areaBox.hidden=!custom;cons.disabled=custom;if(custom)cons.checked=false;if(wasCustom){if(!custom)cons.checked=true}wasCustom=custom;
+var a=custom?Math.max(0,parseFloat(String(area.value).replace(',','.'))||0):m.a;var s=D.surf[+sSel.value];var vi=vBox.querySelector('input:checked');var v=s.v.length?s.v[vi?+vi.value:0]:null;
+var rows=[],sum=0;if(!custom){if(cons.checked){rows.push(['Konstrukcja '+m.n,m.c]);sum+=m.c}}
+if(slab.checked){var sl=custom?up(a,D.slab):m.s;rows.push(['Płyta betonowa z podbudową · '+String(a).replace('.',',')+' m²',sl]);sum+=sl}
+if(v){var fi=up(a,v.r);rows.push([s.n+' · '+v.n,fi]);sum+=fi}
+out.textContent=sum?fmt(sum):'—';gross.textContent=sum?fmt(sum*(1+D.vat))+' brutto (VAT 23%)':'Wybierz elementy';
+list.innerHTML=rows.map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+fmt(r[1])+'</dd></div>'}).join('');
+studio.href=custom?'/studio/':'/studio/?arena='+m.id;}
+mSel.addEventListener('change',render);area.addEventListener('input',render);cons.addEventListener('change',render);slab.addEventListener('change',render);
+sSel.addEventListener('change',function(){variants();render()});vBox.addEventListener('change',render);f.addEventListener('submit',function(e){e.preventDefault()});variants();render();})();</script>
+</div>
+<!-- /wp:html -->
