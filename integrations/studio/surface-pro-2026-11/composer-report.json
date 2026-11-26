@@ -236,5 +236,19 @@
   },
   "modes": 3,
   "tapeMedian": 99
+ },
+ "pro-m-field": {
+  "candidates": 220,
+  "passed": 134,
+  "kept": 36,
+  "rejected": {
+   "thin": 47,
+   "specks": 0,
+   "paints": 0,
+   "sym": 39,
+   "balance": 0
+  },
+  "modes": 4,
+  "tapeMedian": 63
  }
 }
