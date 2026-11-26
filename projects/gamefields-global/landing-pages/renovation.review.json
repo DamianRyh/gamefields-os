@@ -1,0 +1,21 @@
+{
+  "source_wp_id": 3685,
+  "source": "live snapshot",
+  "translated_text_nodes": 292,
+  "translated_attributes": 1,
+  "unmapped_unique": [
+    "Gamefields",
+    "Organic Flow",
+    "Urban Contrast",
+    "Classic Lines",
+    "Orlik 2012",
+    "PN-EN 14877"
+  ],
+  "protected_tokens_identical": true,
+  "status": "review-only",
+  "remaining": [
+    "Calculator JS, dynamic options, price formatting and schema not localised; test before release.",
+    "Review technical and funding claims against approved sources; no changes to business logic.",
+    "Image attributes, links and browser tests pending."
+  ]
+}
