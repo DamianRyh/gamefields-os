@@ -1,7 +1,7 @@
 // Curates the Court Composer: renders candidates per family in Chromium, measures each on a raster and
 // writes the best, most varied seeds with their measurements into court-composer.mjs (POOL block).
 //
-//   node curate-composer.mjs [candidatesPerFamily=220] [poolSize=36]
+//   node curate-composer.mjs [candidatesPerFamily=220] [poolSize=36] [family,family]
 //
 // Checks per candidate, at h = 400 (15 x 10 m, 40 px = 1 m, rastered at 2x so 8 px is measured, not 7)
 // and h = 600 (square / Panna, 1x):
@@ -54,7 +54,9 @@ window.analyse = async (svg, W, H, sig, sc) => {
     const thin = new Uint8Array(N); for (let i = 0; i < N; i++) if (m[i] && d2[i] > 13.5 * sc) { thin[i] = 1; thinPx++; }
     thinBad += comps(thin, 40 * sc * sc).length;
     specks += comps(m, 1).filter((c) => c.n < 144 * sc * sc).length; }
-  let rot = 0, mir = 0; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const v = lab[y*W+x]; if (v !== lab[(H-1-y)*W + (W-1-x)]) rot++; if (v !== lab[y*W + (W-1-x)]) mir++; }
+  // symmetry with a 1 px (court scale) tolerance: rasterising a turned edge can move it by a pixel
+  const tol = sc; const hasNear = (x, y, v) => { for (let dy = -tol; dy <= tol; dy++) for (let dx = -tol; dx <= tol; dx++) { const xx = x + dx, yy = y + dy; if (xx >= 0 && yy >= 0 && xx < W && yy < H && lab[yy*W+xx] === v) return true; } return false; };
+  let rot = 0, mir = 0; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const v = lab[y*W+x]; if (v !== lab[(H-1-y)*W + (W-1-x)] && !hasNear(W-1-x, H-1-y, v)) rot++; if (v !== lab[y*W + (W-1-x)] && !hasNear(W-1-x, y, v)) mir++; }
   let edges = 0; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = y*W + x; if (x < W-1 && lab[i] !== lab[i+1]) edges++; if (y < H-1 && lab[i] !== lab[i+W]) edges++; }
   let s = null; if (sig) { s = []; const cs = 10 * sc; for (let y = 0; y < H; y += cs) for (let x = 0; x < W; x += cs) { let e = 0; for (let yy = y; yy < Math.min(H, y+cs) && !e; yy++) for (let xx = x; xx < Math.min(W, x+cs) - 1; xx++) if (lab[yy*W+xx] !== lab[yy*W+xx+1] || (yy < H-1 && lab[yy*W+xx] !== lab[(yy+1)*W+xx])) { e = 1; break; } s.push(e); } }
   return { area: area.map((a) => a / N), thinBad, thinPx: thinPx / (sc * sc), specks, sym: Math.min(rot, mir) / N, edges: edges / sc, sig: s };
@@ -65,8 +67,12 @@ const page = await browser.newPage();
 await page.setContent('<html><body></body></html>');
 await page.addScriptTag({ content: ANALYSE });
 
-const POOL = {}; const report = {};
+// optional 3rd argument: comma-separated families to (re)curate; the others keep their pool and report
+const only = process.argv[4] ? process.argv[4].split(',') : null;
+const prev = only ? await import('./court-composer.mjs?' + Date.now()) : null;
+const POOL = only ? { ...prev.POOL } : {}; let report = {}; try { if (only) report = JSON.parse(readFileSync(here + 'composer-report.json', 'utf8')); } catch {}
 for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
+  if (only && !only.includes(fid)) continue;
   const base = hashS(fid); const cands = [];
   const reasons = { thin: 0, specks: 0, paints: 0, sym: 0, balance: 0 };
   // N candidates, more (up to 3 N) for strict families until 2.5 x the pool has passed
