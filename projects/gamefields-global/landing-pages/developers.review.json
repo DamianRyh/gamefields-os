@@ -1,13 +1,18 @@
 {
-  "source": "deweloperzy-2026-11/boiska-dla-deweloperow.html",
-  "proposed_slug": "courts-for-developers",
-  "locale": "en-GB",
+  "source_wp_id": 3702,
+  "source_modified": "2026-11-23T10:31:49",
+  "source_template": "templates/page-full.php",
+  "source_repo_path": "integrations/wordpress/pages/deweloperzy-2026-11/boiska-dla-deweloperow.html",
+  "source_matches_live_after_trim": true,
+  "translated_text_nodes": 183,
+  "translated_attributes": 11,
+  "protected_tokens_identical": true,
+  "unmapped_diacritic_nodes": [],
   "status": "review-only",
-  "source_commit": "cc27f44fcf3be23037f72671fbdba4733a2e28f9",
-  "unmapped_diacritic_text": [],
-  "notes": [
-    "Preserve all technical data, price figures and existing assets.",
-    "Source claim about 5–7 m site needs reconciliation with Panna Court dimensions and safety clearance before publication.",
-    "No EN routes, structured data, runtime JS or CF7 verified."
+  "remaining": [
+    "Internal links still point to original PL routes intentionally; map only published translations before release.",
+    "Embedded scripts and structured data preserved, not yet localised.",
+    "Review 5–7 m site claim against model dimensions and clearance.",
+    "Browser layout and WordPress preview not tested."
   ]
 }
