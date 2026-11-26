@@ -1,0 +1,402 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-surf{gap:8px}.gfb-surf .tx{padding:10px 12px 12px}.gfb-surf b{font-size:15px}.gfb-surf .nt{font-size:12px}.gfb-surf .r{font-size:13px}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+
+.gfb-table a.nm{display:inline;min-height:0;padding:0;border:0;border-radius:0;font-size:inherit;color:inherit;text-decoration:underline;text-decoration-color:#CDBFC6;text-underline-offset:3px}
+.gfb-tex{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.gfb-tex a{position:relative;display:block;aspect-ratio:1;overflow:hidden;background:#E6E0DA;text-decoration:none}
+.gfb-tex img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-tex a:hover img{transform:scale(1.08)}
+.gfb-tex span{position:absolute;left:6px;right:6px;bottom:6px;padding:5px 8px;background:rgba(28,9,18,.82);color:#fff;font-size:12px;font-weight:700;line-height:1.25}
+.gfb-tex span small{display:block;font-weight:500;color:rgba(255,255,255,.8)}
+/* uses */
+.gfb-uses{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-uses li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfb-uses b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-uses p{margin:0;color:var(--muted);font-size:15px}
+.gfb-uses .rec{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:10px}
+.gfb-uses .rec a{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px 0 4px;border-radius:999px;background:var(--paper);border:1.5px solid transparent;text-decoration:none;font-weight:700;font-size:14px}
+.gfb-uses .rec a:hover{border-color:var(--violet)}
+.gfb-uses .rec img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+/* detail cards */
+.gfb-det{display:grid;gap:12px}
+.gfb-det article{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(16px,2.6vw,36px);padding:clamp(18px,2.2vw,28px);background:#fff;border:1px solid var(--line);scroll-margin-top:120px}
+.gfb-det .ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfb-det .ph ul{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.gfb-det .ph li{display:inline-flex;align-items:center;min-height:30px;padding:0 10px;border-radius:999px;background:var(--paper);font-size:13px;font-weight:700}
+.gfb-det h3{font-size:clamp(28px,2.8vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-det .for{margin:8px 0 0;color:var(--muted);font-size:16px}.gfb-det .for b{color:var(--ink)}
+.gfb-tiers{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gfb-tiers.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfb-tiers li{display:flex;flex-direction:column;gap:4px;padding:14px;border:1px solid var(--line)}
+.gfb-tiers .n{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-tiers b{font-size:24px;font-weight:800;letter-spacing:-.03em}
+.gfb-tiers b small{font-size:13px;font-weight:600;letter-spacing:0;color:var(--muted)}
+.gfb-tiers p{margin:0;font-size:14px;color:#5A4652}
+.gfb-tiers .ex{margin-top:auto;padding-top:6px;font-size:13px;color:var(--muted)}
+.gfb-io{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 0}
+.gfb-io div{padding:12px 14px;background:var(--paper);font-size:14px;color:#5A4652}
+.gfb-io p{margin:0 0 4px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.gfb-io ul{margin:0;padding-left:18px;display:grid;gap:2px}
+.gfb-det .gfa-links{margin-top:14px}
+/* compare calc */
+.gfb-cmp{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:12px}
+.gfb-cmp form{display:grid;gap:16px;align-content:start;padding:clamp(20px,2.4vw,28px);background:#fff;border:1px solid var(--line)}
+.gfb-cmp label,.gfb-cmp legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-cmp select,.gfb-cmp input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-cmp fieldset{margin:0;padding:0;border:0}
+.gfb-cmp .gfb-tog label{display:flex;margin:0;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink)}
+.gfb-bars{list-style:none;margin:0;padding:clamp(16px,2vw,24px);display:grid;gap:10px;background:var(--ink);color:var(--paper)}
+.gfb-bars li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,3fr);gap:12px;align-items:center;font-size:15px}
+.gfb-bars .t{font-weight:700;color:inherit;text-decoration:none}
+.gfb-bars .tr{position:relative;height:14px;background:rgba(244,241,238,.12);border-radius:999px}
+.gfb-bars .rg{position:absolute;top:0;bottom:0;border-radius:999px;background:var(--lime)}
+.gfb-bars .v{text-align:right;font-weight:800;white-space:nowrap}
+.gfb-bars .v small{display:block;font-weight:500;color:rgba(244,241,238,.7);font-size:12px}
+.gfb-bars .h{grid-template-columns:1fr;font-size:13px;color:rgba(244,241,238,.75)}
+@media (max-width:1100px){.gfb-uses{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-tiers.c4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.gfb-det article,.gfb-cmp{grid-template-columns:minmax(0,1fr)}.gfb-io{grid-template-columns:minmax(0,1fr)}
+ .gfb-tiers,.gfb-tiers.c4{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(220px,78%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.gfb-tiers li{scroll-snap-align:start}
+ .gfb-det .ph img{aspect-ratio:16/9}}
+@media (max-width:560px){.gfb-uses{grid-template-columns:minmax(0,1fr)}.gfb-bars li{grid-template-columns:minmax(0,1fr) auto}.gfb-bars .tr{grid-column:1/-1;grid-row:2}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://www.gamefields.eu/nawierzchnie-sportowe/#usluga","name":"Nawierzchnie sportowe","serviceType":"Wykonanie nawierzchni sportowych","url":"https://www.gamefields.eu/nawierzchnie-sportowe/","inLanguage":"pl-PL","areaServed":{"@type":"Country","name":"Polska"},"provider":{"@id":"https://www.gamefields.eu/#studio"},"description":"Sztuczna trawa, EPDM, akryl, płytki PP, płyty i maty gumowe, farba sportowa i płyta betonowa: dobór, warianty i wykonanie.","hasOfferCatalog":{"@type":"OfferCatalog","name":"Nawierzchnie Gamefields","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Product","name":"Sztuczna trawa","url":"https://www.gamefields.eu/product/sztuczna-trawa/"},"priceSpecification":{"@type":"UnitPriceSpecification","price":167,"priceCurrency":"PLN","unitText":"m²","valueAddedTaxIncluded":false}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Nawierzchnia EPDM wylewana","url":"https://www.gamefields.eu/product/nawierzchnia-epdm/"},"priceSpecification":{"@type":"UnitPriceSpecification","price":250,"priceCurrency":"PLN","unitText":"m²","valueAddedTaxIncluded":false}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Akryl Hard Court","url":"https://www.gamefields.eu/product/akryl-hard-court/"},"priceSpecification":{"@type":"UnitPriceSpecification","price":200,"priceCurrency":"PLN","unitText":"m²","valueAddedTaxIncluded":false}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Płytki sportowe PP","url":"https://www.gamefields.eu/product/plytki-sportowe/"},"priceSpecification":{"@type":"UnitPriceSpecification","price":275,"priceCurrency":"PLN","unitText":"m²","valueAddedTaxIncluded":false}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Płyty gumowe","url":"https://www.gamefields.eu/product/plyty-gumowe/"},"priceSpecification":{"@type":"UnitPriceSpecification","price":342,"priceCurrency":"PLN","unitText":"m²","valueAddedTaxIncluded":false}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Maty gumowe","url":"https://www.gamefields.eu/product/maty-gumowe-nawierzchnia/"},"priceSpecification":{"@type":"UnitPriceSpecification","price":242,"priceCurrency":"PLN","unitText":"m²","valueAddedTaxIncluded":false}},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Malowanie farbą sportową","url":"https://www.gamefields.eu/product/malowanie-farba-sportowa/"},"priceSpecification":{"@type":"UnitPriceSpecification","price":78,"priceCurrency":"PLN","unitText":"m²","valueAddedTaxIncluded":false}}]}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Nawierzchnie sportowe","item":"https://www.gamefields.eu/nawierzchnie-sportowe/"}]},{"@type":"FAQPage","@id":"https://www.gamefields.eu/nawierzchnie-sportowe/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Jaka nawierzchnia jest najlepsza na boisko?","acceptedAnswer":{"@type":"Answer","text":"Nie ma jednej najlepszej. Do piłki zwykle sztuczna trawa albo EPDM, do kosza, siatkówki i boisk wielofunkcyjnych EPDM albo akryl, tam gdzie liczy się bezpieczny upadek płyty lub maty gumowe, a na stary beton malowanie farbą sportową. Zaczynam od sportu, podłoża i sposobu użytkowania."}},{"@type":"Question","name":"Ile kosztuje metr nawierzchni sportowej?","acceptedAnswer":{"@type":"Answer","text":"Od 78 zł/m² (malowanie) do 492 zł/m² (płyty gumowe Premium) netto. Płyta betonowa z podbudową, jeśli jest potrzebna, to 283 zł/m²."}},{"@type":"Question","name":"Czym jest nawierzchnia syntetyczna?","acceptedAnswer":{"@type":"Answer","text":"To grupa systemów z materiałów syntetycznych. Na boiskach najczęściej oznacza nawierzchnię poliuretanową (EPDM) albo system akrylowy; sztuczną trawę porównuje się osobno. Systemy różnią się elastycznością, wykonaniem, wymaganiami wobec podłoża i utrzymaniem."}},{"@type":"Question","name":"Czy można położyć nawierzchnię na istniejącym betonie?","acceptedAnswer":{"@type":"Answer","text":"Często tak, jeśli podłoże jest stabilne i w dobrym stanie. Wymaga to oceny i przygotowania powierzchni. Przygotowanie podłoża (frezowanie, naprawa pęknięć) wyceniam osobno, po zdjęciach."}},{"@type":"Question","name":"Czy wykonujecie podbudowę?","acceptedAnswer":{"@type":"Answer","text":"Tak. Płyta betonowa 12 cm (C20/25) ze spadkami i dylatacjami, na geowłókninie i podbudowie z kruszywa, z siatką zbrojeniową: 283 zł/m² netto."}},{"@type":"Question","name":"Czy mogę zobaczyć próbki?","acceptedAnswer":{"@type":"Answer","text":"Tak. Próbki nawierzchni wyślę pocztą. Napisz, które nawierzchnie chcesz porównać i dokąd je wysłać."}},{"@type":"Question","name":"Jak długo wytrzyma nawierzchnia?","acceptedAnswer":{"@type":"Answer","text":"Zależy od systemu i wariantu. Dla EPDM: Standard 8–12 lat, Standard+ 10–15 lat, Premium 12–20 lat. Płytki PP Premium mają gwarancję 5–10 lat. Na całe boisko daję 12 miesięcy gwarancji i opiekę po odbiorze."}},{"@type":"Question","name":"Czy nawierzchnię można zaprojektować graficznie?","acceptedAnswer":{"@type":"Answer","text":"Tak. Kolory, strefy, wzory i linie są częścią projektu. W Studio 3D zmieniasz nawierzchnię i wzór na wybranym boisku i od razu widzisz cenę."}}]}]}</script>
+<div class="gfa gfb">
+<section class="gfb-hero"><div class="w top">
+  <div>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Sports surfaces</p>
+    <p class="k">Eight surfaces from Studio</p>
+    <h1 class="d">Sports surfaces.</h1>
+    <p class="lead">Artificial turf, EPDM, acrylic, tiles, rubber and sports coatings. I choose the surface to suit the game, site and budget, not the other way around. Each includes prices per m², options and costs for your court.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="#do-czego">Choose a surface ↓</a><a class="gfa-btn alt" href="/kontakt/">Request samples →</a></div>
+  </div>
+  <ul class="gfb-tex" role="list"><li><a href="#trawa"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/trawa-macro-300x225.webp" alt="Sztuczna trawa z bliska" loading="eager" decoding="async"><span>Artificial turf<small>from PLN 167/m²</small></span></a></li><li><a href="#epdm"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-300x225.webp" alt="Nawierzchnia EPDM wylewana z bliska" loading="eager" decoding="async"><span>In-situ EPDM surface<small>from PLN 250/m²</small></span></a></li><li><a href="#akryl"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/akryl-macro-300x225.webp" alt="Akryl Hard Court z bliska" loading="eager" decoding="async"><span>Acrylic hard court<small>from PLN 200/m²</small></span></a></li><li><a href="#plytki"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plytki-macro-300x225.webp" alt="Płytki sportowe PP z bliska" loading="eager" decoding="async"><span>PP sports tiles<small>from PLN 275/m²</small></span></a></li><li><a href="#plyty"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plyty-gumowe-macro-300x225.webp" alt="Płyty gumowe z bliska" loading="eager" decoding="async"><span>Rubber tiles<small>from PLN 342/m²</small></span></a></li><li><a href="#maty"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/maty-gumowe-macro-300x225.webp" alt="Maty gumowe z bliska" loading="eager" decoding="async"><span>Rubber mats<small>from PLN 242/m²</small></span></a></li><li><a href="#malowanie"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/malowanie-macro-300x225.webp" alt="Malowanie farbą sportową z bliska" loading="eager" decoding="async"><span>Sports surface painting<small>from PLN 78/m²</small></span></a></li><li><a href="#beton"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/beton-macro-300x225.webp" alt="Płyta betonowa z bliska" loading="eager" decoding="async"><span>Concrete slab<small>PLN 283/m²</small></span></a></li></ul>
+</div>
+<div class="w">
+  <dl class="gfb-nums">
+    <div><dt>Surfaces</dt><dd>8<small>with Standard–Premium options</small></dd></div>
+    <div><dt>Lowest price</dt><dd>from PLN 78/m²<small>excluding VAT, painting</small></dd></div>
+    <div><dt>Sub-base</dt><dd>PLN 283/m²<small>12 cm concrete slab</small></dd></div>
+    <div><dt>Samples</dt><dd>by post<small>compare in person</small></dd></div>
+  </dl>
+</div></section>
+
+<nav class="gfb-jump" aria-label="On this page"><div class="w"><ul role="list"><li><a href="#do-czego">Intended use</a></li><li><a href="#porownanie">Comparison</a></li><li><a href="#koszt">Your cost</a></li><li><a href="#szczegoly">Options and prices</a></li><li><a href="#normy">Standards</a></li><li><a href="#probki">Samples</a></li><li><a href="#pytania">FAQs</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="do-czego"><div class="w">
+  <div class="gfa-head"><div><p class="k">Intended use</p><h2 class="d">The game first, technology second.</h2></div><p>Choose how the court will be used. Select a surface to see its options and prices. <a href="/jak-wybrac-nawierzchnie-sportowa/">Guide →</a></p></div>
+  <ul class="gfb-uses" role="list"><li><b>Football and panna</b><p>Foot play, sliding and everyday games.</p><span class="rec"><a href="#trawa"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/trawa-macro-300x225.webp" alt="" loading="lazy" decoding="async">Artificial turf</a><a href="#epdm"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-300x225.webp" alt="" loading="lazy" decoding="async">In-situ EPDM surface</a></span></li><li><b>Basketball, volleyball and multi-use</b><p>Consistent ball bounce, grip and multi-sport markings.</p><span class="rec"><a href="#epdm"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-300x225.webp" alt="" loading="lazy" decoding="async">In-situ EPDM surface</a><a href="#akryl"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/akryl-macro-300x225.webp" alt="" loading="lazy" decoding="async">Acrylic hard court</a></span></li><li><b>Fast, hard-court play</b><p>Tennis, basketball and hard-court 3v3.</p><span class="rec"><a href="#akryl"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/akryl-macro-300x225.webp" alt="" loading="lazy" decoding="async">Acrylic hard court</a><a href="#plytki"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plytki-macro-300x225.webp" alt="" loading="lazy" decoding="async">PP sports tiles</a></span></li><li><b>Impact attenuation</b><p>Young children, activity zones and playgrounds.</p><span class="rec"><a href="#plyty"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plyty-gumowe-macro-300x225.webp" alt="" loading="lazy" decoding="async">Rubber tiles</a><a href="#maty"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/maty-gumowe-macro-300x225.webp" alt="" loading="lazy" decoding="async">Rubber mats</a></span></li><li><b>Quick installation</b><p>Short lead time and individual module replacement.</p><span class="rec"><a href="#plytki"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plytki-macro-300x225.webp" alt="" loading="lazy" decoding="async">PP sports tiles</a></span></li><li><b>Existing concrete or asphalt</b><p>Colour, pattern and markings without demolition.</p><span class="rec"><a href="#malowanie"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/malowanie-macro-300x225.webp" alt="" loading="lazy" decoding="async">Sports surface painting</a><a href="#akryl"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/akryl-macro-300x225.webp" alt="" loading="lazy" decoding="async">Acrylic hard court</a></span></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="porownanie"><div class="w">
+  <div class="gfa-head"><div><p class="k">Comparison</p><h2 class="d">All surfaces in one table.</h2></div><p>Prices per m² excluding VAT, from Standard to Premium, and the lowest-priced option for Panna Play (30.1 m² including a 10% allowance).</p></div>
+  <div class="gfb-scroll"><table class="gfb-table"><thead><tr><th>Surface and application</th><th>Installed on</th><th class="r">Per m² excl. VAT</th><th class="r">For Panna Play (30.1 m²)</th></tr></thead><tbody><tr><td><b><a class="nm" href="#trawa">Artificial turf</a></b><br>football, panna, everyday play</td><td data-l="Leży na">slab or stable concrete</td><td class="r" data-l="Za m² netto">PLN 167–292</td><td class="r" data-l="Panna Play, 30,1 m²">from PLN 5,100<small>without slab</small></td></tr><tr><td><b><a class="nm" href="#epdm">In-situ EPDM surface</a></b><br>multi-use courts, schools, basketball and volleyball</td><td data-l="Leży na">slab or stable concrete</td><td class="r" data-l="Za m² netto">PLN 250–400</td><td class="r" data-l="Panna Play, 30,1 m²">from PLN 7,600<small>without slab</small></td></tr><tr><td><b><a class="nm" href="#akryl">Acrylic hard court</a></b><br>fast hard-court play: tennis and basketball</td><td data-l="Leży na">slab or stable concrete</td><td class="r" data-l="Za m² netto">PLN 200–342</td><td class="r" data-l="Panna Play, 30,1 m²">from PLN 6,100<small>without slab</small></td></tr><tr><td><b><a class="nm" href="#plytki">PP sports tiles</a></b><br>quick installation, intensive use</td><td data-l="Leży na">slab or stable concrete</td><td class="r" data-l="Za m² netto">PLN 275–400</td><td class="r" data-l="Panna Play, 30,1 m²">from PLN 8,300<small>without slab</small></td></tr><tr><td><b><a class="nm" href="#plyty">Rubber tiles</a></b><br>impact attenuation, young children</td><td data-l="Leży na">slab or stable concrete</td><td class="r" data-l="Za m² netto">PLN 342–492</td><td class="r" data-l="Panna Play, 30,1 m²">from PLN 10,300<small>without slab</small></td></tr><tr><td><b><a class="nm" href="#maty">Rubber mats</a></b><br>continuous rubber, training zones</td><td data-l="Leży na">slab or stable concrete</td><td class="r" data-l="Za m² netto">PLN 242–425</td><td class="r" data-l="Panna Play, 30,1 m²">from PLN 7,300<small>without slab</small></td></tr><tr><td><b><a class="nm" href="#malowanie">Sports surface painting</a></b><br>existing concrete or asphalt, colour and graphics</td><td data-l="Leży na">slab, existing concrete or asphalt</td><td class="r" data-l="Za m² netto">PLN 78–183</td><td class="r" data-l="Panna Play, 30,1 m²">from PLN 2,400<small>without slab</small></td></tr><tr><td><b>12 cm concrete slab with sub-base</b><br>base for any finish</td><td data-l="Leży na">ground and sub-base</td><td class="r" data-l="Za m² netto">PLN 283</td><td class="r" data-l="Panna Play, 30,1 m²">PLN 8,600<small>slab</small></td></tr></tbody></table></div>
+</div></section>
+
+<section class="gfa-sec" id="koszt"><div class="w">
+  <div class="gfa-head"><div><p class="k">Your cost</p><h2 class="d">Compare for your own area.</h2></div><p>Choose a court or enter an area. The bars show the cost of each surface from Standard to Premium, starting with the least expensive.</p></div>
+  <div class="gfb-cmp">
+    <form id="gfb-cmp" aria-label="Porównanie kosztu nawierzchni">
+      <div><label for="gfb-cmp-model">Court</label><select id="gfb-cmp-model" name="model"><option value="">Custom area</option><option value="31.1">Panna Octa Cage 90 · 31.1 m²</option><option value="30.1" selected>Panna Play · 30.1 m²</option><option value="21.5">Panna Ring · 21.5 m²</option><option value="32.8">Panna Octa · 32.8 m²</option><option value="42.6">Panna Grid · 42.6 m²</option><option value="31.1">Panna Octa Cage 180 · 31.1 m²</option><option value="43.2">Panna Court · 43.2 m²</option><option value="164.1">3v3 court (Street Arena 15) · 164.1 m²</option></select></div>
+      <div><label for="gfb-cmp-area">Area in m²</label><input id="gfb-cmp-area" name="area" type="number" min="1" step="0.1" value="30.1" inputmode="decimal"></div>
+      <fieldset><legend>Substrate</legend><div class="gfb-tog"><label><input type="checkbox" name="slab"><span>Include concrete slab<small>when there is no stable site, PLN 283/m²</small></span></label></div></fieldset>
+      <p class="gfb-note">Cost rounded up to the nearest PLN 100, excluding VAT. Transport and substrate preparation excluded. <a href="/studio/">Detailed design in Studio ↗</a></p>
+    </form>
+    <ul class="gfb-bars" data-bars aria-live="polite" role="list"></ul>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="szczegoly"><div class="w">
+  <div class="gfa-head"><div><p class="k">Options and prices</p><h2 class="d">A closer look at each surface.</h2></div><p>Three options (four for painting), showing what is included and what is quoted separately. The same prices as in 3D Studio and the shop.</p></div>
+  <div class="gfb-det"><article id="trawa"><div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/trawa-macro-768x576.webp" alt="Sztuczna trawa z bliska" loading="lazy" decoding="async"><ul><li>A natural choice for football</li><li>Installation on concrete: bonding strips, infill and brushing</li></ul></div><div><h3>Artificial turf</h3><p class="for">Best for: <b>football, panna, everyday play</b>. Installed on: <b>slab or stable concrete</b>.</p><ul class="gfb-tiers" role="list"><li><span class="n">Standard</span><b>167 <small>PLN/m²</small></b><span class="ex">Panna Play: PLN 5,100</span></li><li><span class="n">Standard+</span><b>225 <small>PLN/m²</small></b><span class="ex">Panna Play: PLN 6,800</span></li><li><span class="n">Premium</span><b>292 <small>PLN/m²</small></b><span class="ex">Panna Play: PLN 8,800</span></li></ul><div class="gfb-io"><div><p>Included</p><ul><li>Synthetic turf, installation on concrete (bonded strips), basic infill, brushing and basic markings</li></ul></div><div><p>Quoted separately</p><ul><li>Concrete substrate (separate item)</li></ul></div></div><ul class="gfa-links"><li><a href="/product/sztuczna-trawa/">Options in the shop →</a></li><li><a href="/studio/">View on a court in Studio ↗</a></li></ul></div></article><article id="epdm"><div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-768x576.webp" alt="Nawierzchnia EPDM wylewana z bliska" loading="lazy" decoding="async"><ul><li>PN-EN 14877</li><li>Water-permeable spray coating</li><li>Service life from 8–12 to 12–20 years, depending on option</li></ul></div><div><h3>In-situ EPDM surface</h3><p class="for">Best for: <b>multi-use courts, schools, basketball and volleyball</b>. Installed on: <b>slab or stable concrete</b>.</p><ul class="gfb-tiers" role="list"><li><span class="n">Standard</span><b>250 <small>PLN/m²</small></b><p>Spray-applied SBR + EPDM system, minimum 13 mm, permeable. Multi-use courts, schools and recreation. Service life 8–12 years.</p><span class="ex">Panna Play: PLN 7,600</span></li><li><span class="n">Standard+</span><b>317 <small>PLN/m²</small></b><p>Two-layer 2S system, 14–16 mm, improved cushioning. Intensive use, Orlik facilities. Service life 10–15 years.</p><span class="ex">Panna Play: PLN 9,600</span></li><li><span class="n">Premium</span><b>400 <small>PLN/m²</small></b><p>Premium sandwich / EPDM system, high durability characteristics. Facilities with demanding requirements. Service life 12–20 years.</p><span class="ex">Panna Play: PLN 12,100</span></li></ul><div class="gfb-io"><div><p>Quoted separately</p><ul><li>Concrete substrate (separate item)</li><li>Sports markings (PU paint)</li><li>Transport and substrate preparation (milling, special priming)</li><li>Drainage and fencing</li></ul></div></div><ul class="gfa-links"><li><a href="/product/nawierzchnia-epdm/">Options in the shop →</a></li><li><a href="/studio/">View on a court in Studio ↗</a></li></ul></div></article><article id="akryl"><div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/akryl-macro-768x576.webp" alt="Akryl Hard Court z bliska" loading="lazy" decoding="async"><ul><li>Layered system as used on tennis courts</li><li>Premium: 4–8 mm rubber layers</li></ul></div><div><h3>Acrylic hard court</h3><p class="for">Best for: <b>fast hard-court play: tennis and basketball</b>. Installed on: <b>slab or stable concrete</b>.</p><ul class="gfb-tiers" role="list"><li><span class="n">Standard</span><b>200 <small>PLN/m²</small></b><p>Classic hard court, 4–6 layers, approx. 1–2 mm, hard and fast.</p><span class="ex">Panna Play: PLN 6,100</span></li><li><span class="n">Standard+</span><b>267 <small>PLN/m²</small></b><p>More layers and light cushioning, approx. 2–3.5 mm.</p><span class="ex">Panna Play: PLN 8,100</span></li><li><span class="n">Premium</span><b>342 <small>PLN/m²</small></b><p>Rubber layers 4–8 mm, high cushioning, Plexipave / Laykold class.</p><span class="ex">Panna Play: PLN 10,300</span></li></ul><div class="gfb-io"><div><p>Included</p><ul><li>Acrylic surface on prepared concrete, basic markings</li></ul></div><div><p>Quoted separately</p><ul><li>Concrete substrate (separate item)</li><li>Substrate preparation (milling, crack repair)</li><li>Transport for small areas</li></ul></div></div><ul class="gfa-links"><li><a href="/product/akryl-hard-court/">Options in the shop →</a></li><li><a href="/studio/">View on a court in Studio ↗</a></li></ul></div></article><article id="plytki"><div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plytki-macro-768x576.webp" alt="Płytki sportowe PP z bliska" loading="lazy" decoding="async"><ul><li>Adhesive-free installation with drainage</li><li>Individual module replacement</li><li>Premium: 5–10-year warranty</li></ul></div><div><h3>PP sports tiles</h3><p class="for">Best for: <b>quick installation, intensive use</b>. Installed on: <b>slab or stable concrete</b>.</p><ul class="gfb-tiers" role="list"><li><span class="n">Standard</span><b>275 <small>PLN/m²</small></b><p>PP 15–18 mm, outdoor multi-sport, basic colours and markings, drainage.</p><span class="ex">Panna Play: PLN 8,300</span></li><li><span class="n">Standard+</span><b>325 <small>PLN/m²</small></b><p>PP 18–19 mm, improved cushioning and UV resistance, more marking colours.</p><span class="ex">Panna Play: PLN 9,800</span></li><li><span class="n">Premium</span><b>400 <small>PLN/m²</small></b><p>PP 19 mm+, high cushioning, 5–10-year warranty.</p><span class="ex">Panna Play: PLN 12,100</span></li></ul><div class="gfb-io"><div><p>Included</p><ul><li>Tiles, installation, edge profiles and ramps, basic line markings</li></ul></div><div><p>Quoted separately</p><ul><li>Concrete substrate (separate item)</li></ul></div></div><ul class="gfa-links"><li><a href="/product/plytki-sportowe/">Options in the shop →</a></li><li><a href="/studio/">View on a court in Studio ↗</a></li></ul></div></article><article id="plyty"><div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plyty-gumowe-macro-768x576.webp" alt="Płyty gumowe z bliska" loading="lazy" decoding="async"><ul><li>PN-EN 1177, PZH certification</li><li>R11 slip resistance, water-permeable</li><li>50 × 50 cm tiles, 40–50 mm</li></ul></div><div><h3>Rubber tiles</h3><p class="for">Best for: <b>impact attenuation, young children</b>. Installed on: <b>slab or stable concrete</b>.</p><ul class="gfb-tiers" role="list"><li><span class="n">Standard</span><b>342 <small>PLN/m²</small></b><p>Stabilised SBR tiles, 40 mm, 50 × 50 cm, five basic colours.</p><span class="ex">Panna Play: PLN 10,300</span></li><li><span class="n">Standard+</span><b>400 <small>PLN/m²</small></b><p>SBR tiles 45–50 mm, improved stability and cushioning.</p><span class="ex">Panna Play: PLN 12,100</span></li><li><span class="n">Premium</span><b>492 <small>PLN/m²</small></b><p>SBR with an EPDM layer, wide RAL palette, improved UV resistance, logos and graphics.</p><span class="ex">Panna Play: PLN 14,900</span></li></ul><div class="gfb-io"><div><p>Included</p><ul><li>50 × 50 cm tiles, bonding to concrete, edge profiles and basic markings</li></ul></div><div><p>Quoted separately</p><ul><li>Concrete substrate (separate item)</li></ul></div></div><ul class="gfa-links"><li><a href="/product/plyty-gumowe/">Options in the shop →</a></li><li><a href="/studio/">View on a court in Studio ↗</a></li></ul></div></article><article id="maty"><div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/maty-gumowe-macro-768x576.webp" alt="Maty gumowe z bliska" loading="lazy" decoding="async"><ul><li>Thickness 10–20 mm</li><li>R11 slip resistance</li><li>Premium with EPDM layer</li></ul></div><div><h3>Rubber mats</h3><p class="for">Best for: <b>continuous rubber, training zones</b>. Installed on: <b>slab or stable concrete</b>.</p><ul class="gfb-tiers" role="list"><li><span class="n">Standard</span><b>242 <small>PLN/m²</small></b><p>SBR mats and rolls, basic colours.</p><span class="ex">Panna Play: PLN 7,300</span></li><li><span class="n">Standard+</span><b>317 <small>PLN/m²</small></b><p>Thicker mats with improved cushioning.</p><span class="ex">Panna Play: PLN 9,600</span></li><li><span class="n">Premium</span><b>425 <small>PLN/m²</small></b><p>Mats with an EPDM layer, wider colour palette and improved UV resistance.</p><span class="ex">Panna Play: PLN 12,800</span></li></ul><div class="gfb-io"><div><p>Included</p><ul><li>Bonding to concrete with PU adhesive, cutting, edge profiles and basic markings</li></ul></div><div><p>Quoted separately</p><ul><li>Concrete substrate (separate item)</li></ul></div></div><ul class="gfa-links"><li><a href="/product/maty-gumowe-nawierzchnia/">Options in the shop →</a></li><li><a href="/studio/">View on a court in Studio ↗</a></li></ul></div></article><article id="malowanie"><div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/malowanie-macro-768x576.webp" alt="Malowanie farbą sportową z bliska" loading="lazy" decoding="async"><ul><li>Rubber-granule coating: cushioning and grip</li><li>Signature patterns, 4–6 and 7+ colours</li><li>Markings for football, basketball and 3v3</li></ul></div><div><h3>Sports surface painting</h3><p class="for">Best for: <b>existing concrete or asphalt, colour and graphics</b>. Installed on: <b>slab, existing concrete or asphalt</b>.</p><ul class="gfb-tiers c4" role="list"><li><span class="n">Single colour</span><b>78 <small>PLN/m²</small></b><p>Primer, two coats of sports paint and standard markings.</p><span class="ex">Panna Play: PLN 2,400</span></li><li><span class="n">Single colour with granules</span><b>100 <small>PLN/m²</small></b><p>Flexible rubberised coating: improved cushioning and grip, with markings.</p><span class="ex">Panna Play: PLN 3,100</span></li><li><span class="n">Intermediate pattern</span><b>150 <small>PLN/m²</small></b><p>4–6 colours, Signature-style geometric patterns, on a granulated base.</p><span class="ex">Panna Play: PLN 4,600</span></li><li><span class="n">Advanced pattern</span><b>183 <small>PLN/m²</small></b><p>7 or more colours, complex graphics (Organic Flow, gradients), on a granulated base.</p><span class="ex">Panna Play: PLN 5,600</span></li></ul><div class="gfb-io"><div><p>Included</p><ul><li>Primer, sports coating and markings in every option</li></ul></div><div><p>Quoted separately</p><ul><li>Substrate repairs (crack filling, grinding): quoted after inspection.</li></ul></div></div><ul class="gfa-links"><li><a href="/product/malowanie-farba-sportowa/">Options in the shop →</a></li><li><a href="/studio/">View on a court in Studio ↗</a></li></ul></div></article><article id="beton"><div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/beton-macro-768x576.webp" alt="Płyta betonowa z bliska" loading="lazy" decoding="async"><ul><li>C20/25, 12 cm</li><li>gradients and movement joints</li></ul></div><div><h3>12 cm concrete slab</h3><p class="for">Base for any finish when there is no stable site. <b>PLN 283/m² excluding VAT</b>, for Panna Play PLN 8,600.</p><div class="gfb-io"><div><p>Included</p><ul><li>Excavation and ground preparation</li><li>Geotextile and aggregate sub-base</li><li>12 cm concrete slab (C20/25) with gradients and movement joints</li><li>Reinforcement mesh</li><li>Surface ready for finishing: painting, tiles, turf or EPDM</li><li>10% surface area allowance relative to the structure</li></ul></div><div><p>Quoted separately</p><ul><li>Surface finish (painting, tiles, turf, EPDM)</li><li>Complex drainage or soil replacement deeper than 30 cm</li><li>Restricted access and additional logistics</li><li>Steel structure (boards, goals, panels)</li></ul></div></div><ul class="gfa-links"><li><a href="/product/plyta-betonowa/">Slab in the shop →</a></li><li><a href="/budowa-boisk-sportowych/">Court construction →</a></li></ul></div></article></div>
+</div></section>
+
+<section class="gfa-band" id="normy"><div class="w">
+  <div class="gfa-head"><div><p class="k">Standards and documentation</p><h2 class="d">Documented specifications.</h2></div><p>I include technical data sheets and certificates for coatings and surfaces in quotations, funding applications and tender documentation.</p></div>
+  <dl class="gfb-docs">
+    <div><dt>PN-EN 14877</dt><dd>Polyurethane EPDM surfaces.</dd></div>
+    <div><dt>PN-EN 1177</dt><dd>Rubber tiles with PZH certification: impact attenuation.</dd></div>
+    <div><dt>R11</dt><dd>Slip resistance: rubber tiles and mats.</dd></div>
+    <div><dt>Water-permeable</dt><dd>Spray-applied EPDM and rubber tiles.</dd></div>
+  </dl>
+  <ul class="gfa-links"><li><a href="/dofinansowanie-boisk/">Court funding →</a></li><li><a href="/realizacje-dla-miast/">Municipal projects →</a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="probki"><div class="w">
+  <div class="gfa-head"><div><p class="k">Samples and quotation</p><h2 class="d">Feel the surface before choosing.</h2></div><p>I can send surface samples by post. Site photos and approximate dimensions are enough to request a quotation.</p></div>
+  <div class="gfb-prep">
+    <div><h3>Request samples</h3><ul class="gfb-check">
+      <li><span>Tell me which surfaces you want to compare.</span></li><li><span>Provide a delivery address.</span></li><li><span>Tell me the intended use of the court so I can select suitable options.</span></li></ul>
+      <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Request samples →</a></div></div>
+    <div><h3>Surface quotation</h3><ul class="gfb-check">
+      <li><span><b>Substrate photos</b>: overview and close-ups of damage.</span></li><li><span><b>Dimensions</b>: approximate, measured or taken from a map.</span></li>
+      <li><span><b>Sports</b>: primary and additional games.</span></li><li><span><b>Location</b> and equipment access.</span></li></ul>
+      <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Send photos →</a><a class="gfa-btn alt" href="/studio/">3D Studio ↗</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><div><p class="k">FAQs</p><h2 class="d">Turf, EPDM or paint?</h2></div><p>Common questions about selection, prices, substrates and durability.</p></div>
+  <div class="gfa-faq"><details><summary>Which surface is best for a court?</summary><p>There is no single best surface. Football typically uses artificial turf or EPDM; basketball, volleyball and multi-use courts use EPDM or acrylic; rubber tiles or mats suit areas requiring impact attenuation; and sports coatings can refresh old concrete. I start with the sport, substrate and intended use.</p></details><details><summary>How much does a square metre of sports surfacing cost?</summary><p>From PLN 78/m² (painting) to PLN 492/m² (Premium rubber tiles), excluding VAT. A concrete slab with sub-base, where required, costs PLN 283/m².</p></details><details><summary>What is a synthetic surface?</summary><p>A group of systems made from synthetic materials. For courts, the term usually refers to polyurethane (EPDM) or acrylic systems; artificial turf is compared separately. Systems differ in elasticity, installation, substrate requirements and maintenance.</p></details><details><summary>Can a surface be installed on existing concrete?</summary><p>Often yes, if the substrate is stable and in good condition. Assessment and surface preparation are necessary. Substrate preparation (milling, crack repair) is quoted separately after reviewing photos.</p></details><details><summary>Do you install the sub-base?</summary><p>Yes. A 12 cm concrete slab (C20/25) with gradients and movement joints, on geotextile and an aggregate sub-base, with reinforcement mesh: PLN 283/m² excluding VAT.</p></details><details><summary>Can I see samples?</summary><p>Yes. I can send surface samples by post. Tell me which surfaces to compare and where to send them.</p></details><details><summary>How long will the surface last?</summary><p>It depends on the system and option. For EPDM: Standard 8–12 years, Standard+ 10–15 years, Premium 12–20 years. Premium PP tiles have a 5–10-year warranty. I provide a 12-month warranty on the complete court and support after handover.</p></details><details><summary>Can the surface graphics be customised?</summary><p>Yes. Colours, zones, patterns and markings are part of the design. Change the surface and pattern on your selected court in 3D Studio and see the price immediately.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><div><p class="k">Explore more</p><h2 class="d">The surface is part of the court.</h2></div><p>Guides with Gamefields prices and services in which the surface plays a central role.</p></div>
+  <ul class="gfb-next" role="list">
+    <li><a href="/jak-wybrac-nawierzchnie-sportowa/"><i>Guide</i><b>How to choose a sports surface?</b><span>Systems, selection criteria and prices.</span></a></li>
+    <li><a href="/renowacja-boisk/"><i>Existing court</i><b>Court renovation</b><span>A new layer or colour on an existing site.</span></a></li>
+    <li><a href="/budowa-boisk-sportowych/"><i>Full scope</i><b>Court construction</b><span>Płyta, nawierzchnia, konstrukcja i odbiór.</span></a></li>
+  </ul>
+  <ul class="gfb-who" role="list"><li><a href="/boiska-do-pilki-noznej/">Football courts</a></li><li><a href="/boiska-do-koszykowki/">Basketball courts</a></li><li><a href="/boiska-wielofunkcyjne/">Multi-use courts</a></li><li><a href="/korty-tenisowe/">Tennis courts</a></li><li><a href="/malowanie-boisk/">Court painting</a></li><li><a href="/shop/#nawierzchnie">Surfaces in the shop</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Not sure<br>which to choose?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Show me your site →</a><a class="gfa-btn alt" href="/studio/">Compare in Studio ↗</a></div>
+</div></section>
+<script type="application/json" id="gfb-cmp-data">{"s":[{"id":"trawa","n":"Sztuczna trawa","r":[167,225,292]},{"id":"epdm","n":"Nawierzchnia EPDM wylewana","r":[250,317,400]},{"id":"akryl","n":"Akryl Hard Court","r":[200,267,342]},{"id":"plytki","n":"Płytki sportowe PP","r":[275,325,400]},{"id":"plyty","n":"Płyty gumowe","r":[342,400,492]},{"id":"maty","n":"Maty gumowe","r":[242,317,425]},{"id":"malowanie","n":"Malowanie farbą sportową","r":[78,100,150,183]}],"slab":283,"max":492,"models":[{"id":"circle-cage-1","n":"Panna Octa Cage 90","a":31.1},{"id":"o1","n":"Panna Play","a":30.1},{"id":"w1","n":"Panna Ring","a":21.5},{"id":"octagon","n":"Panna Octa","a":32.8},{"id":"street-field","n":"Panna Grid","a":42.6},{"id":"circle-cage-2","n":"Panna Octa Cage 180","a":31.1},{"id":"p1","n":"Panna Court","a":43.2},{"id":"street15","n":"Boisko 3 na 3 (Street Arena 15)","a":164.1}]}</script>
+<script>(function(){var f=document.getElementById('gfb-cmp');if(!f)return;var D=JSON.parse(document.getElementById('gfb-cmp-data').textContent);
+var sel=f.querySelector('[name=model]'),area=f.querySelector('[name=area]'),slab=f.querySelector('[name=slab]'),out=document.querySelector('[data-bars]');
+function fmt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')+'\u00a0zł'}
+function up(a,r){return Math.ceil(Math.round(a*r*100)/10000)*100}
+function render(){var a=Math.max(0,parseFloat(String(area.value).replace(',','.'))||0);var s=slab.checked?up(a,D.slab):0;var top=up(a,D.max)+s||1;
+var rows=D.s.map(function(x){var lo=up(a,x.r[0])+s,hi=up(a,x.r[x.r.length-1])+s;return {n:x.n,id:x.id,lo:lo,hi:hi}}).sort(function(p,q){return p.lo-q.lo});
+out.innerHTML='<li class="h">'+String(a).replace('.',',')+' m²'+(slab.checked?' · z płytą betonową ('+fmt(s)+')':' · na istniejącym placu')+' · netto, od Standard do Premium</li>'+rows.map(function(r){
+return '<li><a class="t" href="#'+r.id+'">'+r.n+'</a><span class="tr"><span class="rg" style="left:'+(r.lo/top*100)+'%;width:'+Math.max(1.5,(r.hi-r.lo)/top*100)+'%"></span></span><span class="v">'+fmt(r.lo)+'<small>do '+fmt(r.hi)+'</small></span></li>'}).join('');}
+sel.addEventListener('change',function(){if(sel.value)area.value=sel.value;render()});area.addEventListener('input',function(){sel.value='';render()});slab.addEventListener('change',render);
+f.addEventListener('submit',function(e){e.preventDefault()});render();})();</script>
+</div>
+<!-- /wp:html -->

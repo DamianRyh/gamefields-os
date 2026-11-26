@@ -1,0 +1,23 @@
+{
+  "source_wp_id": 3686,
+  "source": "live snapshot",
+  "translated_text_nodes": 397,
+  "translated_attributes": 1,
+  "unmapped_unique": [
+    "Gamefields",
+    "Standard",
+    "Standard+",
+    "Premium",
+    "PN-EN 14877",
+    "C20/25, 12 cm",
+    "PN-EN 1177",
+    "R11",
+    "Płyta, nawierzchnia, konstrukcja i odbiór."
+  ],
+  "protected_tokens_identical": true,
+  "status": "review-only",
+  "remaining": [
+    "Dynamic comparison calculator, schema, image attributes, EN links and browser tests pending.",
+    "Verify surface specifications, lifespan, warranties and standards against manufacturer documentation before release."
+  ]
+}
