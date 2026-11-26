@@ -202,16 +202,16 @@ function pixel(R, h) {
 
 // Mown Stripes — the way grass pitches are mown: wide bands across or along the court, a mown checker or 45° stripes.
 function stripes(R, h) {
-  const cy = h / 2; const mode = intR(R, 0, 3); const k = intR(R, 1, 3); const withGround = k === 1 || R() < 0.5; let g = '';
+  const cy = h / 2; const mode = intR(R, 0, 3); const k = intR(R, 2, 3); const withGround = R() < 0.5; let g = ''; // ≥ 2 paints + ground
   const seq = (b) => { const j = Math.abs(b); return withGround ? (j % 2 ? 1 + ((j >> 1) % k) : 0) : 1 + (j % k); }; // b ↔ -b keeps the symmetry
   const odd = R() < 0.5; // centre band on the axis, or a boundary on the axis
   if (mode === 0 || mode === 1) { const bw = pickR(R, mode === 0 ? [40, 50, 60, 75] : [40, 50, 66]); const len = mode === 0 ? 300 : cy; const nb = Math.ceil(len / bw) + 1;
     for (let b = -nb; b <= nb; b++) { const o = odd ? b * bw - bw / 2 : b * bw; const sl = seq(odd ? b : (b >= 0 ? b + 1 : b)); if (!sl) continue; g += mode === 0 ? Rc(300 + o, 0, bw, h, sl) : Rc(0, cy + o, W, bw, sl); } }
-  else if (mode === 2) { const s = pickR(R, [60, 75, 100]); const nx = Math.ceil(300 / s) + 1, ny = Math.ceil(cy / s) + 1; const a = 1 + intR(R, 0, k - 1), b = withGround ? 0 : 1 + (a % k);
+  else if (mode === 2) { const s = pickR(R, [60, 75, 100]); const nx = Math.ceil(300 / s) + 1, ny = Math.ceil(cy / s) + 1; const a = 1 + intR(R, 0, k - 1), b = 1 + (a % k); // checker in two paints; the centre disc below adds the third
     for (let j = -ny; j < ny; j++) for (let i = -nx; i < nx; i++) g += Rc(300 + i * s, cy + j * s, s, s, (i + j) % 2 ? a : b); }
   else { const bw = pickR(R, [40, 56, 70]) ; const dir = R() < 0.5 ? 1 : -1; const nb = Math.ceil((W + h) / bw / 1.41) + 2;
     for (let b = -nb; b <= nb; b++) { const sl = seq(b); if (!sl) continue; const d0 = (b - 0.5) * bw * 1.414, d1 = d0 + bw * 1.414; const q = (d) => [[300 + d - dir * (cy + 10) * 1, -10], [300 + d + dir * (cy + 10) * 1, h + 10]]; const [a0, b0] = q(d0), [a1, b1] = q(d1); g += P([a0, a1, b1, b0], sl); } }
-  if (R() < 0.35) g += Ci(300, cy, pickR(R, [45, 60]), 1 + (k % 4));
+  if (mode === 2 || R() < 0.35) g += Ci(300, cy, pickR(R, [45, 60]), 1 + (k % 4));
   return { g, mode: 'mow' + mode };
 }
 
