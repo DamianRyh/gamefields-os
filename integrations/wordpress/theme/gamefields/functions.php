@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.35' );
+define( 'GFT_VERSION', '1.0.37' );
 require_once __DIR__ . '/inc/i18n.php';
 
 add_action( 'after_setup_theme', function () {
@@ -403,3 +403,4 @@ add_action( 'template_redirect', function () {
 		exit;
 	}
 }, 3 );
+
