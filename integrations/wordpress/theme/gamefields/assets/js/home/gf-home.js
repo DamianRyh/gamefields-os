@@ -4,6 +4,93 @@
      This file must not contain that character at all; use nested ifs or ternaries. */
   var root = document.querySelector('.gfs');
   if (!root) return;
+  /* GLOBAL-04: presentation only; order payloads and model keys remain unchanged. */
+  var homeLocale = /^en(?:-|$)/i.test(document.documentElement.lang || '') ? 'en' : 'pl';
+  var homeEnglish = {
+    "Szary stalowy": "Steel grey",
+    "Czerwień sygnałowa": "Signal red",
+    "Pomarańcz sygnałowy": "Signal orange",
+    "Żółty sygnałowy": "Signal yellow",
+    "Limonka": "Lime",
+    "Szałwia": "Sage",
+    "Niebieski kort": "Court blue",
+    "Róż Duperré": "Duperré pink",
+    "Biel": "White",
+    "Grafit": "Graphite",
+    "Panele · ": "Panels · ",
+    "Rama i bramki · ": "Frame and goals · ",
+    " · model 3D": " · 3D model",
+    ", model 3D. Przeciągnij, aby obrócić.": ", 3D model. Drag to rotate.",
+    "Panele: ": "Panels: ",
+    "Rama i bramki: ": "Frame and goals: ",
+    "Wszystkie": "All",
+    "Okrąg": "Circle",
+    "Prostokąt": "Rectangle",
+    "Oktagon": "Octagon",
+    "dziecko, wejście i bramki w zasięgu": "child, entrance and goals within reach",
+    "rama wyższa niż Ty": "frame is taller than you",
+    "rama sięga mniej więcej do głowy": "frame reaches roughly head height",
+    "rama do pasa, widok zostaje otwarty": "waist-high frame, open view",
+    "Twój wzrost · ": "Your height · ",
+    "Kompozycja ": "Composition ",
+    "Paleta ": "Palette ",
+    "Kolor ": "Colour ",
+    "Na ścianie": "On the wall",
+    "Sam plakat": "Poster only",
+    " · podgląd poglądowy": " · illustrative preview",
+    "Własne kolory": "Custom colours",
+    "Link skopiowany. Każdy, kto go otworzy, zobaczy ten plakat.": "Link copied. Anyone opening it will see this poster.",
+    "Podwórko 10 × 8": "Courtyard 10 × 8",
+    "Kąt parku 8 × 6": "Park corner 8 × 6",
+    "Plac szkolny 20 × 15": "School site 20 × 15",
+    "Dach / taras 7 × 7": "Roof / terrace 7 × 7",
+    " mieści się": " fits",
+    " po obróceniu": " when rotated",
+    "; zostaje ": "; clearance of ",
+    " m w najwęższym miejscu.": " m at the narrowest point.",
+    " nie mieści się; brakuje ": " does not fit; short by ",
+    " Kratka = 1 m, kropka w rogu = człowiek z góry. Linia przerywana = Twój zapas.": " Grid = 1 m; corner dot = person viewed from above. Dashed line = your clearance.",
+    " Średnica modelu przybliżona.": " Model diameter is approximate.",
+    "mieści się · +": "fits · +",
+    "brakuje ": "short by ",
+    "Pędzel ": "Brush ",
+    "Logo jest większe niż 3 MB. Wybierz mniejszy plik.": "Logo exceeds 3 MB. Choose a smaller file.",
+    "Wzór i kolory przeniesione z plakatu.": "Pattern and colours copied from the poster.",
+    "Link skopiowany. Otwiera dokładnie tę piłkę (bez logo).": "Link copied. Opens this exact ball (without logo).",
+    "Projekt piłki z ceną dołączony do zapytania. Wpisz e-mail": "Ball design and price attached to your enquiry. Enter your email",
+    ", a plik logo dołącz w odpowiedzi na mojego maila": ", and attach your logo file when replying to my email",
+    ". Potwierdzę zamówienie i termin.": ". I will confirm the order and lead time.",
+    "Rozmiar ": "Size ",
+    "Nie udało się wczytać modelu 3D.": "Could not load the 3D model.",
+    "Podgląd zapisany jako pilka-gamefields.png.": "Preview saved as pilka-gamefields.png.",
+    "Plakat z ceną dołączony do zapytania razem z linkiem do projektu. Wpisz e-mail, a potwierdzę zamówienie i wysyłkę.": "Poster price and design link attached to your enquiry. Enter your email and I will confirm the order and shipping.",
+    "Zwiń −": "Collapse −",
+    "Zobacz zestaw +": "View package +",
+    "Twój plac": "Your site",
+    "Przykładowy plac": "Example site",
+    "Koncepcja pod mostem Łazienkowskim: ": "Concept beneath Łazienkowski Bridge: ",
+    "Projektuj plakat": "Design a poster",
+    "Projektuj piłkę": "Design a ball",
+    "✓ Adres wygląda dobrze": "✓ Email address looks valid",
+    "Sprawdź adres — brakuje „@” albo domeny, np. jan@firma.pl": "Check the address — missing @ or domain, e.g. name@company.com",
+    "Do koszyka · ": "Add to cart · ",
+    "Zamów · ": "Order · ",
+    "wysyłka gratis": "free shipping",
+    "wysyłka 19 zł, od 299 zł gratis": "shipping PLN 19, free from PLN 299",
+    " brutto / szt. · ": " including VAT / item · ",
+    "Gmina lub szkoła": "Municipality or school",
+    "Osiedle lub deweloper": "Residential estate or developer",
+    "Klub lub akademia": "Club or academy",
+    "Marka lub agencja": "Brand or agency",
+    "Osoba prywatna": "Private individual",
+    "Bezpłatne planowanie": "Free planning",
+    "Próbki materiałów": "Material samples",
+    "Pakiet dla projektanta": "Designer package",
+    "Plakat": "Poster",
+    "Szczegóły projektu": "Project details"
+  };
+  function homeText(value) { return homeLocale === 'en' ? (Object.prototype.hasOwnProperty.call(homeEnglish, value) ? homeEnglish[value] : value) : value; }
+
   var A = root.getAttribute('data-asset-base') || '';
   var UP = 'https://www.gamefields.eu/wp-content/uploads/2026/10/';
   /* Light copies (2026-11-07, Lighthouse): 720 px on phones, 1200 px elsewhere; the 1920 px originals stay in the media library. */
@@ -62,16 +149,16 @@
   /* The hero keeps one navy ground (owner, 2026-11-06); only the model and its colour change. */
   var HERO = { ground: '#1F2A6B', ink: '#FFFFFF', line: 'rgba(255,255,255,.4)', cta: ['#D8F24A', '#1F2A6B'] };
   var COATS = [
-    { k: 'gray', n: 'Szary stalowy', c: '#8F9493' },
-    { k: 'red', n: 'Czerwień sygnałowa', c: '#D9142B' },
-    { k: 'orange', n: 'Pomarańcz sygnałowy', c: '#F2711C' },
-    { k: 'yellow', n: 'Żółty sygnałowy', c: '#F5C400' },
-    { k: 'lime', n: 'Limonka', c: '#D8F24A' },
-    { k: 'green', n: 'Szałwia', c: '#6B7C4F' },
-    { k: 'blue', n: 'Niebieski kort', c: '#2C6FB0' },
-    { k: 'pink', n: 'Róż Duperré', c: '#FF6FAE' },
-    { k: 'white', n: 'Biel', c: '#F4F1EE' },
-    { k: 'graphite', n: 'Grafit', c: '#2B2226' }
+    { k: 'gray', n: homeText('Szary stalowy'), c: '#8F9493' },
+    { k: 'red', n: homeText('Czerwień sygnałowa'), c: '#D9142B' },
+    { k: 'orange', n: homeText('Pomarańcz sygnałowy'), c: '#F2711C' },
+    { k: 'yellow', n: homeText('Żółty sygnałowy'), c: '#F5C400' },
+    { k: 'lime', n: homeText('Limonka'), c: '#D8F24A' },
+    { k: 'green', n: homeText('Szałwia'), c: '#6B7C4F' },
+    { k: 'blue', n: homeText('Niebieski kort'), c: '#2C6FB0' },
+    { k: 'pink', n: homeText('Róż Duperré'), c: '#FF6FAE' },
+    { k: 'white', n: homeText('Biel'), c: '#F4F1EE' },
+    { k: 'graphite', n: homeText('Grafit'), c: '#2B2226' }
   ];
   var heroAssets = new URL('hero-r3/', document.currentScript.src);
   function heroAsset(name) { return new URL(name, heroAssets).href; }
@@ -102,9 +189,9 @@
       cta.href = '/kontakt/?' + new URLSearchParams({ produkt: cur.model.full + ' · panele: ' + cur.panel.n + ' · rama i bramki: ' + cur.frame.n }).toString();
       cta.firstChild.nodeValue = 'Zapytaj o ten model ';
     }
-    $('[data-hero-colorname="panel"]').textContent = 'Panele · ' + cur.panel.n;
-    $('[data-hero-colorname="frame"]').textContent = 'Rama i bramki · ' + cur.frame.n;
-    $('[data-hero-code]').textContent = cur.model.code + ' · ' + cur.model.full + ' · model 3D';
+    $('[data-hero-colorname="panel"]').textContent = homeText('Panele · ') + cur.panel.n;
+    $('[data-hero-colorname="frame"]').textContent = homeText('Rama i bramki · ') + cur.frame.n;
+    $('[data-hero-code]').textContent = cur.model.code + ' · ' + cur.model.full + homeText(' · model 3D');
     $('[data-hero-dim]').textContent = cur.model.dim;
     var stillImg = $('.still', hero3d), stillSrc = stillImg.parentNode.tagName === 'PICTURE' ? $('source', stillImg.parentNode) : null;
     var desktopPoster = heroAsset(cur.model.still + '-1200.webp');
@@ -153,7 +240,7 @@
       }
       if (mv.getAttribute('src') === cur.model.glb) return;
       hero3d.classList.remove('ready');
-      mv.setAttribute('alt', cur.model.full + ', model 3D. Przeciągnij, aby obrócić.');
+      mv.setAttribute('alt', cur.model.full + homeText(', model 3D. Przeciągnij, aby obrócić.'));
       mv.setAttribute('camera-orbit', cur.model.orbit);
       mv.setAttribute('src', cur.model.glb);
     });
@@ -167,7 +254,7 @@
   ['panel', 'frame'].forEach(function (part) {
     var box = $('[data-hero-dots="' + part + '"]');
     COATS.forEach(function (c) {
-      var b = el('button', { type: 'button', class: 'dot', 'aria-label': (part === 'panel' ? 'Panele: ' : 'Rama i bramki: ') + c.n, 'aria-pressed': String(c === cur[part]), style: 'background:' + c.c });
+      var b = el('button', { type: 'button', class: 'dot', 'aria-label': (part === 'panel' ? homeText('Panele: ') : homeText('Rama i bramki: ')) + c.n, 'aria-pressed': String(c === cur[part]), style: 'background:' + c.c });
       b.addEventListener('click', function () { cur[part] = c; pressGroup(box, b); paintHero(); });
       box.appendChild(b);
     });
@@ -223,7 +310,7 @@
       return a;
     }));
   }
-  [['all', 'Wszystkie'], ['okrag', 'Okrąg'], ['prostokat', 'Prostokąt'], ['oktagon', 'Oktagon']].forEach(function (f, i) {
+  [['all', homeText('Wszystkie')], ['okrag', homeText('Okrąg')], ['prostokat', homeText('Prostokąt')], ['oktagon', homeText('Oktagon')]].forEach(function (f, i) {
     var count = f[0] === 'all' ? ALL.length : ALL.filter(function (m) { return m.shape === f[0]; }).length;
     var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': String(i === 0) }, esc(f[1]) + '<small>' + count + '</small>');
     b.addEventListener('click', function () { pressGroup(filters, b); renderWall(f[0]); });
@@ -237,8 +324,8 @@
     var cm = Number(hIn.value);
     fig.style.height = 'calc(var(--m) * ' + (cm / 100) + ')';
     $('[data-fig-label]').textContent = cm + ' cm';
-    var note = cm < 140 ? 'dziecko, wejście i bramki w zasięgu' : (tall ? (cm < 180 ? 'rama wyższa niż Ty' : 'rama sięga mniej więcej do głowy') : 'rama do pasa, widok zostaje otwarty');
-    $('[data-height-note]').textContent = 'Twój wzrost · ' + cm + ' cm · ' + note;
+    var note = cm < 140 ? homeText('dziecko, wejście i bramki w zasięgu') : (tall ? (cm < 180 ? homeText('rama wyższa niż Ty') : homeText('rama sięga mniej więcej do głowy')) : homeText('rama do pasa, widok zostaje otwarty'));
+    $('[data-height-note]').textContent = homeText('Twój wzrost · ') + cm + ' cm · ' + note;
     elev.classList.toggle('tall2', tall);
   }
   hIn.addEventListener('input', paintScale);
@@ -347,17 +434,17 @@
     }
     var famsBox = chipList('[data-pl-fams]', G.PRO_FAMILIES.map(function (f) { return [f.id, f.name]; }), function (i) { st.fam = G.PRO_FAMILIES[i].id; st.seed = 0; draw(); });
     var varsBox = $('[data-pl-vars]');
-    for (var vi = 1; vi <= 12; vi++) (function (n) { var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Kompozycja ' + n }, String(n)); b.addEventListener('click', function () { st.v = n; st.seed = 0; draw(); }); varsBox.appendChild(b); })(vi);
+    for (var vi = 1; vi <= 12; vi++) (function (n) { var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': homeText('Kompozycja ') + n }, String(n)); b.addEventListener('click', function () { st.v = n; st.seed = 0; draw(); }); varsBox.appendChild(b); })(vi);
     $('[data-pl-seed]').addEventListener('click', function () { st.seed = 1 + Math.floor(Math.random() * 999999); draw(); });
     var palsBox = $('[data-pl-pals]');
     G.PRO_PALETTES.forEach(function (p) {
-      var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Paleta ' + p.name }, '<i>' + p.colors.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join('') + '</i><small>' + esc(p.name) + '</small>');
+      var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': homeText('Paleta ') + p.name }, '<i>' + p.colors.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join('') + '</i><small>' + esc(p.name) + '</small>');
       b.addEventListener('click', function () { st.pal = p.id; basePal = p.id; st.colors = p.colors.slice(); draw(); });
       palsBox.appendChild(b);
     });
     var colBox = $('[data-pl-colors]'), colInputs = [];
     for (var ci = 0; ci < 5; ci++) (function (k) {
-      var lab = el('label', null, 'Kolor ' + (k + 1)); var inp = el('input', { type: 'color', 'aria-label': 'Kolor ' + (k + 1) });
+      var lab = el('label', null, homeText('Kolor ') + (k + 1)); var inp = el('input', { type: 'color', 'aria-label': homeText('Kolor ') + (k + 1) });
       inp.addEventListener('input', function () { st.colors[k] = inp.value.toUpperCase(); st.pal = 'custom'; schedule(); });
       lab.appendChild(inp); colBox.appendChild(lab); colInputs.push(inp);
     })(ci);
@@ -403,12 +490,12 @@
       sizeFrame();
       wall.style.backgroundColor = flat ? '' : WALLS[st.wall][0];
       wall.dataset.view = flat ? 'flat' : 'wall';
-      viewBtn.setAttribute('aria-pressed', String(flat)); viewBtn.textContent = flat ? 'Na ścianie' : 'Sam plakat';
-      $('[data-pl-tag]').textContent = flat ? FORMATS[st.fmt].size + ' · No. ' + no : FORMATS[st.fmt].size + ' · podgląd poglądowy';
+      viewBtn.setAttribute('aria-pressed', String(flat)); viewBtn.textContent = flat ? homeText('Na ścianie') : homeText('Sam plakat');
+      $('[data-pl-tag]').textContent = flat ? FORMATS[st.fmt].size + ' · No. ' + no : FORMATS[st.fmt].size + homeText(' · podgląd poglądowy');
       var f = FAM[st.fam];
       $('[data-pl-famname]').textContent = f.name;
       $('[data-pl-insp]').textContent = f.inspiration;
-      $('[data-pl-palname]').textContent = st.pal === 'custom' ? 'Własne kolory' : PAL[st.pal].name;
+      $('[data-pl-palname]').textContent = st.pal === 'custom' ? homeText('Własne kolory') : PAL[st.pal].name;
       if ($('[data-pl-layname]')) $('[data-pl-layname]').textContent = LAYOUTS.filter(function (l) { return l[0] === st.layout; })[0][1];
       press(sigBox, function (b, i) { var s = SIGP[i]; return s.familyId === st.fam ? (s.variant === st.v ? (s.paletteId === st.pal ? !st.seed : false) : false) : false; });
       press(famsBox, function (b, i) { return G.PRO_FAMILIES[i].id === st.fam; });
@@ -478,7 +565,7 @@
     var status = $('[data-pl-status]');
     $('[data-pl-share]').addEventListener('click', function () {
       var url = shareUrl();
-      var done = function () { status.textContent = 'Link skopiowany. Każdy, kto go otworzy, zobaczy ten plakat.'; };
+      var done = function () { status.textContent = homeText('Link skopiowany. Każdy, kto go otworzy, zobaczy ten plakat.'); };
       if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { status.textContent = url; });
       else status.textContent = url;
     });
@@ -510,7 +597,7 @@
       { k: 'w1', name: 'Panna Ring', shape: 'circle', a: 5, b: 5, approx: true, meta: 'Ø ~5 m · wys. 1 m · 1 na 1', noArena: true },
       { k: 'street15', name: 'Street Arena 15', shape: 'rect', a: 15, b: 10, meta: '15 × 10 m · 3 na 3' }
     ];
-    var PRESETS = [['Podwórko 10 × 8', 10, 8], ['Kąt parku 8 × 6', 8, 6], ['Plac szkolny 20 × 15', 20, 15], ['Dach / taras 7 × 7', 7, 7]];
+    var PRESETS = [[homeText('Podwórko 10 × 8'), 10, 8], [homeText('Kąt parku 8 × 6'), 8, 6], [homeText('Plac szkolny 20 × 15'), 20, 15], [homeText('Dach / taras 7 × 7'), 7, 7]];
     var inL = $('#pn-l'), inW = $('#pn-w'), inM = $('#pn-m'), plan = $('[data-pn-plan]'), list = $('[data-pn-list]'), cap = $('[data-pn-cap]');
     var sel = 'p1';
     var nf = function (v) { return (Math.round(v * 10) / 10).toFixed(1).replace('.', ','); };
@@ -550,13 +637,13 @@
       // 1.8 m person for scale, standing in the corner of the plot
       var ph2 = Math.max(6, 0.5 * s); o += '<circle cx="' + (ox + 10 + ph2 / 2) + '" cy="' + (oy + ph - 10 - ph2 / 2) + '" r="' + (ph2 / 2) + '" fill="#47132D"/>';
       plan.innerHTML = o + '</svg>';
-      cap.textContent = m.name + (f.ok ? ' mieści się' + (f.rot ? ' po obróceniu' : '') + '; zostaje ' + nf(f.spare) + ' m w najwęższym miejscu.' : ' nie mieści się; brakuje ' + nf(-f.spare) + ' m.') + ' Kratka = 1 m, kropka w rogu = człowiek z góry. Linia przerywana = Twój zapas.' + (m.approx ? ' Średnica modelu przybliżona.' : '');
+      cap.textContent = m.name + (f.ok ? homeText(' mieści się') + (f.rot ? homeText(' po obróceniu') : '') + homeText('; zostaje ') + nf(f.spare) + homeText(' m w najwęższym miejscu.') : homeText(' nie mieści się; brakuje ') + nf(-f.spare) + ' m.') + homeText(' Kratka = 1 m, kropka w rogu = człowiek z góry. Linia przerywana = Twój zapas.') + (m.approx ? homeText(' Średnica modelu przybliżona.') : '');
       // ranked list
       var rows = PLAN.map(function (x) { return { m: x, f: fit(x, L, Wd, r) }; }).sort(function (p, q) { if (p.f.ok !== q.f.ok) return p.f.ok ? -1 : 1; return p.f.ok ? (q.m.a * q.m.b - p.m.a * p.m.b) : (q.f.spare - p.f.spare); });
       list.innerHTML = '';
       rows.forEach(function (row) {
         var b = el('button', { type: 'button', class: 'pn-it', 'aria-pressed': String(row.m.k === sel) },
-          '<b>' + esc(row.m.name) + '</b><span class="pn-pill ' + (row.f.ok ? 'ok' : 'no') + '">' + (row.f.ok ? 'mieści się · +' + nf(row.f.spare) + ' m' : 'brakuje ' + nf(-row.f.spare) + ' m') + '</span><small>' + esc(row.m.meta) + '</small>');
+          '<b>' + esc(row.m.name) + '</b><span class="pn-pill ' + (row.f.ok ? 'ok' : 'no') + '">' + (row.f.ok ? homeText('mieści się · +') + nf(row.f.spare) + ' m' : homeText('brakuje ') + nf(-row.f.spare) + ' m') + '</span><small>' + esc(row.m.meta) + '</small>');
         b.addEventListener('click', function () { sel = row.m.k; draw(); });
         list.appendChild(b);
       });
@@ -595,12 +682,12 @@
     var famBox = $('[data-bl-fams]');
     G.PRO_FAMILIES.forEach(function (f) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(f.name)); b.dataset.f = f.id; b.addEventListener('click', function () { bs.fam = f.id; bs.seed = 0; update(true); }); famBox.appendChild(b); });
     var varBox = $('[data-bl-vars]');
-    for (var i = 1; i <= 12; i++) (function (n) { var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Kompozycja ' + n }, String(n)); b.addEventListener('click', function () { bs.v = n; bs.seed = 0; update(true); }); varBox.appendChild(b); })(i);
+    for (var i = 1; i <= 12; i++) (function (n) { var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': homeText('Kompozycja ') + n }, String(n)); b.addEventListener('click', function () { bs.v = n; bs.seed = 0; update(true); }); varBox.appendChild(b); })(i);
     $('[data-bl-seed]').addEventListener('click', function () { bs.seed = 1 + Math.floor(Math.random() * 999999); update(true); });
     var palBox = $('[data-bl-pals]');
     function setPalette(id) { var p = PAL[id]; bs.pal = id; bs.colors = p.colors.slice(); var L = sorted(); bs.pent = L[0]; bs.hex = L[4]; }
     G.PRO_PALETTES.forEach(function (p) {
-      var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': 'Paleta ' + p.name }, '<i>' + p.colors.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join('') + '</i><small>' + esc(p.name) + '</small>');
+      var b = el('button', { type: 'button', 'aria-pressed': 'false', 'aria-label': homeText('Paleta ') + p.name }, '<i>' + p.colors.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join('') + '</i><small>' + esc(p.name) + '</small>');
       b.dataset.p = p.id; b.addEventListener('click', function () { setPalette(p.id); update(true); }); palBox.appendChild(b);
     });
     chipsFrom('[data-bl-modes]', 'mode', 'mode', null, false);
@@ -614,7 +701,7 @@
     var seamBox = $('[data-bl-seams]');
     SEAMS.forEach(function (s, k) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(s[1])); b.addEventListener('click', function () { bs.seam = k; update(false); }); seamBox.appendChild(b); });
     var brushBox = $('[data-bl-brushes]');
-    function paintBrushes() { brushBox.innerHTML = ''; bs.colors.concat(['#FFFFFF', '#111111']).forEach(function (c) { var b = el('button', { type: 'button', class: 'sw2', 'aria-label': 'Pędzel ' + c }, ''); b.style.background = c; b.addEventListener('click', function () { $('#bl-brush').value = c; $$('[data-bl-brushes] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); brushBox.appendChild(b); }); }
+    function paintBrushes() { brushBox.innerHTML = ''; bs.colors.concat(['#FFFFFF', '#111111']).forEach(function (c) { var b = el('button', { type: 'button', class: 'sw2', 'aria-label': homeText('Pędzel ') + c }, ''); b.style.background = c; b.addEventListener('click', function () { $('#bl-brush').value = c; $$('[data-bl-brushes] button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); brushBox.appendChild(b); }); }
     $('#bl-pent').addEventListener('input', function () { bs.pent = this.value.toUpperCase(); update(false); });
     $('#bl-hex').addEventListener('input', function () { bs.hex = this.value.toUpperCase(); update(false); });
     $('[data-bl-clear]').addEventListener('click', function () { bs.paint = {}; update(false); });
@@ -623,7 +710,7 @@
     function textInput() { bs.label = $('#bl-label').value.toUpperCase(); bs.number = $('#bl-number').value.toUpperCase(); clearTimeout(tTimer); tTimer = setTimeout(function () { update(true); }, 180); }
     $('#bl-label').addEventListener('input', textInput); $('#bl-number').addEventListener('input', textInput);
     $('#bl-logo').addEventListener('change', function () {
-      var f = this.files[0]; if (!f) return; if (f.size > 3000000) { $('[data-bl-status]').textContent = 'Logo jest większe niż 3 MB. Wybierz mniejszy plik.'; return; }
+      var f = this.files[0]; if (!f) return; if (f.size > 3000000) { $('[data-bl-status]').textContent = homeText('Logo jest większe niż 3 MB. Wybierz mniejszy plik.'); return; }
       var rd = new FileReader(); rd.onload = function () { var im = new Image(); im.onload = function () { logo = im; logoName = f.name; $('[data-bl-nologo]').hidden = false; update(true); }; im.src = rd.result; }; rd.readAsDataURL(f);
     });
     $('[data-bl-nologo]').addEventListener('click', function () { logo = null; logoName = ''; $('#bl-logo').value = ''; this.hidden = true; update(true); });
@@ -631,7 +718,7 @@
     $('[data-bl-scene]').addEventListener('click', function () { bs.scene = !bs.scene; update(true); });
     $('[data-bl-frompl]').addEventListener('click', function () {
       if (!PL.get) return; var s = PL.get(); bs.fam = s.fam; bs.v = s.v; bs.seed = 0; bs.colors = s.colors.slice(); bs.pal = PAL[s.pal] ? s.pal : 'custom'; var L = sorted(); bs.pent = L[0]; bs.hex = L[4]; update(true);
-      $('[data-bl-status]').textContent = 'Wzór i kolory przeniesione z plakatu.';
+      $('[data-bl-status]').textContent = homeText('Wzór i kolory przeniesione z plakatu.');
     });
     $('[data-bl-random]').addEventListener('click', function () {
       var r = function (a) { return a[Math.floor(Math.random() * a.length)]; };
@@ -669,12 +756,12 @@
       return FAM[bs.fam].name + ' ' + bs.v + (bs.seed ? '.' + bs.seed : '') + ' · paleta ' + palName + ' · ' + look + (n.length ? ' · pomalowane panele: ' + n.length : '') + ' · napis „' + (bs.label || '-') + '”' + (bs.number ? ', numer „' + bs.number + '”' : '') + (logo ? ', logo: ' + logoName : '') + ' · ' + FINS[bs.finish] + ', szwy ' + SEAMS[bs.seam][1].toLowerCase() + ' · rozmiar ' + bs.size;
     }
     var status = $('[data-bl-status]');
-    $('[data-bl-share]').addEventListener('click', function () { var url = shareUrl(); var done = function () { status.textContent = 'Link skopiowany. Otwiera dokładnie tę piłkę (bez logo).'; }; if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { status.textContent = url; }); else status.textContent = url; });
+    $('[data-bl-share]').addEventListener('click', function () { var url = shareUrl(); var done = function () { status.textContent = homeText('Link skopiowany. Otwiera dokładnie tę piłkę (bez logo).'); }; if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { status.textContent = url; }); else status.textContent = url; });
     $('[data-bl-order]').addEventListener('click', function () {
       var q = qtyOf('bl'), u1 = unitPrice('bl');
       if (canBuy('bl')) { toCart('bl', shareUrl(), summary() + (logo ? ' · logo: ' + logoName + ' (prześlę mailem)' : '')); return; }
       setLine('Zamówienie piłki: ', summary() + ' · ilość: ' + q + ' · cena: ' + zl(u1) + ' brutto/szt., razem ' + zl(q * u1) + ' · link: ' + shareUrl());
-      var att = $('#gc-attached'); if (att) { att.textContent = 'Projekt piłki z ceną dołączony do zapytania. Wpisz e-mail' + (logo ? ', a plik logo dołącz w odpowiedzi na mojego maila' : '') + '. Potwierdzę zamówienie i termin.'; att.hidden = false; }
+      var att = $('#gc-attached'); if (att) { att.textContent = homeText('Projekt piłki z ceną dołączony do zapytania. Wpisz e-mail') + (logo ? homeText(', a plik logo dołącz w odpowiedzi na mojego maila') : '') + homeText('. Potwierdzę zamówienie i termin.'); att.hidden = false; }
       goContact();
     });
 
@@ -694,8 +781,8 @@
       $('[data-bl-spin]').setAttribute('aria-pressed', String(bs.spin)); $('[data-bl-scene]').setAttribute('aria-pressed', String(bs.scene));
       $('#bl-pent').value = bs.pent; $('#bl-hex').value = bs.hex;
       $('[data-bl-famname]').textContent = FAM[bs.fam].name;
-      $('[data-bl-palname]').textContent = bs.pal === 'custom' ? 'Własne kolory' : PAL[bs.pal].name;
-      $('[data-bl-tag]').textContent = 'Rozmiar ' + bs.size + ' · ' + SIZES[bs.size];
+      $('[data-bl-palname]').textContent = bs.pal === 'custom' ? homeText('Własne kolory') : PAL[bs.pal].name;
+      $('[data-bl-tag]').textContent = homeText('Rozmiar ') + bs.size + ' · ' + SIZES[bs.size];
       $('[data-bl-sum]').textContent = summary();
       stage.dataset.scene = bs.scene ? 'court' : 'studio';
       if (retex) paintBrushes();
@@ -716,7 +803,7 @@
     }
 
     function start() {
-      if (!window.THREE) { $('[data-bl-load]').textContent = 'Nie udało się wczytać modelu 3D.'; return; }
+      if (!window.THREE) { $('[data-bl-load]').textContent = homeText('Nie udało się wczytać modelu 3D.'); return; }
       var T = window.THREE, renderer = new T.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
       renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); stage.insertBefore(renderer.domElement, stage.firstChild);
       var scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, 0.1, 50);
@@ -750,7 +837,7 @@
       });
       $('[data-bl-png]').addEventListener('click', function () {
         renderer.render(scene, cam);
-        renderer.domElement.toBlob(function (blob) { if (!blob) return; var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'pilka-gamefields.png'; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000); status.textContent = 'Podgląd zapisany jako pilka-gamefields.png.'; }, 'image/png');
+        renderer.domElement.toBlob(function (blob) { if (!blob) return; var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'pilka-gamefields.png'; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000); status.textContent = homeText('Podgląd zapisany jako pilka-gamefields.png.'); }, 'image/png');
       });
       if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(stage);
       (function loop() { requestAnimationFrame(loop); if (!visible) return; if (!drag) { if (bs.spin) rot(0, 0.004); else { vel.x *= 0.92; vel.y *= 0.92; if (Math.abs(vel.x) + Math.abs(vel.y) > 0.0004) rot(vel.x, vel.y); } } renderer.render(scene, cam); })();
@@ -759,7 +846,7 @@
     }
     function loadThree() {
       if (window.THREE) { start(); return; }
-      var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'; sc.onload = function () { if (window.THREE) start(); else setTimeout(start, 300); }; sc.onerror = function () { $('[data-bl-load]').textContent = 'Nie udało się wczytać modelu 3D.'; }; document.head.appendChild(sc);
+      var sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'; sc.onload = function () { if (window.THREE) start(); else setTimeout(start, 300); }; sc.onerror = function () { $('[data-bl-load]').textContent = homeText('Nie udało się wczytać modelu 3D.'); }; document.head.appendChild(sc);
     }
     var shared = loadShared();
     update(true);
@@ -795,7 +882,7 @@
     if (canBuy('pl')) { toCart('pl', PL.link(), PL.note()); return; }
     var o = PL.order();
     setLine('Zamówienie plakatu: ', '„' + o.name + '” · ' + o.text + ' · ilość: ' + q + ' · cena: ' + zl(u1) + ' brutto/szt., razem ' + zl(q * u1) + ' · sam print, bez ramy');
-    var att = $('#gc-attached'); if (att) { att.textContent = 'Plakat z ceną dołączony do zapytania razem z linkiem do projektu. Wpisz e-mail, a potwierdzę zamówienie i wysyłkę.'; att.hidden = false; }
+    var att = $('#gc-attached'); if (att) { att.textContent = homeText('Plakat z ceną dołączony do zapytania razem z linkiem do projektu. Wpisz e-mail, a potwierdzę zamówienie i wysyłkę.'); att.hidden = false; }
     goContact();
   });
 
@@ -817,7 +904,7 @@
     kitsBox.replaceChildren.apply(kitsBox, KITS.map(function (k, i) {
       var wrap = el('div', { style: 'background:' + k.bg + ';color:' + k.ink });
       var btn = el('button', { type: 'button', class: 'stripe', 'aria-expanded': String(openKit === i), 'aria-controls': 'gfs-kit-' + i },
-        '<span class="d w">' + esc(k.seg) + '</span><span class="p">' + esc(k.pitch) + '</span><span class="combo"><img loading="lazy" src="' + kitImg(k.file, true) + '" alt=""></span><span class="m meta">' + (openKit === i ? 'Zwiń −' : 'Zobacz zestaw +') + '</span>');
+        '<span class="d w">' + esc(k.seg) + '</span><span class="p">' + esc(k.pitch) + '</span><span class="combo"><img loading="lazy" src="' + kitImg(k.file, true) + '" alt=""></span><span class="m meta">' + (openKit === i ? homeText('Zwiń −') : homeText('Zobacz zestaw +')) + '</span>');
       btn.addEventListener('click', function () { openKit = openKit === i ? -1 : i; renderKits(); });
       wrap.appendChild(btn);
       if (openKit === i) {
@@ -844,14 +931,14 @@
   $('#gfs-photo').addEventListener('change', function (e) {
     var f = e.target.files ? e.target.files[0] : null; if (!f) return;
     if (objUrl) URL.revokeObjectURL(objUrl);
-    objUrl = URL.createObjectURL(f); sPhoto.src = objUrl; $('[data-site-label]').textContent = 'Twój plac';
+    objUrl = URL.createObjectURL(f); sPhoto.src = objUrl; $('[data-site-label]').textContent = homeText('Twój plac');
   });
-  $('[data-site-reset]').addEventListener('click', function () { if (objUrl) URL.revokeObjectURL(objUrl); objUrl = null; sPhoto.src = samplePhoto; sp = { x: 26, y: 38, w: 48 }; sScale.value = 48; placeSite(); $('[data-site-label]').textContent = 'Przykładowy plac'; });
+  $('[data-site-reset]').addEventListener('click', function () { if (objUrl) URL.revokeObjectURL(objUrl); objUrl = null; sPhoto.src = samplePhoto; sp = { x: 26, y: 38, w: 48 }; sScale.value = 48; placeSite(); $('[data-site-label]').textContent = homeText('Przykładowy plac'); });
   placeSite();
 
   /* ---------- COLLAB boards ---------- */
   var boards = $('[data-boards]'), big = $('[data-board-big]');
-  $$('button', boards).forEach(function (b) { b.addEventListener('click', function () { big.src = b.getAttribute('data-src'); big.alt = 'Koncepcja pod mostem Łazienkowskim: ' + b.getAttribute('aria-label'); pressGroup(boards, b); }); });
+  $$('button', boards).forEach(function (b) { b.addEventListener('click', function () { big.src = b.getAttribute('data-src'); big.alt = homeText('Koncepcja pod mostem Łazienkowskim: ') + b.getAttribute('aria-label'); pressGroup(boards, b); }); });
 
   /* ---------- STEPS ---------- */
   var STEPS = [
@@ -878,8 +965,8 @@
     setLine('Profil zapytania: ', parts.join(' · '));
   }
   var whoBox = $('[data-who]'), needsBox = $('[data-needs]');
-  WHO.forEach(function (w, i) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(w)); b.addEventListener('click', function () { who = who === i ? -1 : i; $$('button', whoBox).forEach(function (x, j) { x.setAttribute('aria-pressed', String(j === who)); }); syncProfile(); }); whoBox.appendChild(b); });
-  NEEDS.forEach(function (w, i) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(w)); b.addEventListener('click', function () { var k = needs.indexOf(i); if (k > -1) needs.splice(k, 1); else needs.push(i); b.setAttribute('aria-pressed', String(k < 0)); syncProfile(); }); needsBox.appendChild(b); });
+  WHO.forEach(function (w, i) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(homeText(w))); b.addEventListener('click', function () { who = who === i ? -1 : i; $$('button', whoBox).forEach(function (x, j) { x.setAttribute('aria-pressed', String(j === who)); }); syncProfile(); }); whoBox.appendChild(b); });
+  NEEDS.forEach(function (w, i) { var b = el('button', { type: 'button', class: 'chip', 'aria-pressed': 'false' }, esc(homeText(w))); b.addEventListener('click', function () { var k = needs.indexOf(i); if (k > -1) needs.splice(k, 1); else needs.push(i); b.setAttribute('aria-pressed', String(k < 0)); syncProfile(); }); needsBox.appendChild(b); });
 
   /* ---------- Studio -> inquiry (Studio opened from this page) ---------- */
   var studioOrigin = 'https://gamefields-studio.ryhfs90.chatgpt.site';
@@ -904,7 +991,7 @@
       if (!f.getAttribute('aria-label')) f.setAttribute('aria-label', txt);
     });
   }
-  nameField('textarea[name="project-details"]', 'Szczegóły projektu');
+  nameField('textarea[name="project-details"]', homeText('Szczegóły projektu'));
 
   /* ---------- PRICES and CART: poster 99 zł, ball 999 zł brutto per piece ---------- */
   function shop() { return window.GF_SHOP || {}; }
@@ -924,8 +1011,8 @@
     var q = qtyOf(key), u1 = unitPrice(key), free = q * u1 >= 299;
     var tot = $('[data-total="' + key + '"]'), note = $('[data-price-note="' + key + '"]'), btn = $(key === 'pl' ? '[data-print-order]' : '[data-bl-order]');
     if (tot) tot.textContent = zl(q * u1);
-    if (note) note.textContent = zl(u1) + ' brutto / szt. · ' + (free ? 'wysyłka gratis' : 'wysyłka 19 zł, od 299 zł gratis');
-    if (btn) btn.innerHTML = (canBuy(key) ? 'Do koszyka · ' : 'Zamów · ') + zl(q * u1) + ' <span aria-hidden="true">→</span>';
+    if (note) note.textContent = zl(u1) + homeText(' brutto / szt. · ') + (free ? homeText('wysyłka gratis') : homeText('wysyłka 19 zł, od 299 zł gratis'));
+    if (btn) btn.innerHTML = (canBuy(key) ? homeText('Do koszyka · ') : homeText('Zamów · ')) + zl(q * u1) + ' <span aria-hidden="true">→</span>';
   }
   function toCart(key, link, note) {
     var s = shop(), p = key === 'pl' ? s.poster : s.ball;
@@ -949,7 +1036,7 @@
   $$('[data-tool-toggle]', root).forEach(function (btn) {
     var key = btn.getAttribute('data-tool-toggle');
     var box = $('.' + key, root);
-    var label = key === 'pl' ? 'Projektuj plakat' : 'Projektuj piłkę';
+    var label = key === 'pl' ? homeText('Projektuj plakat') : homeText('Projektuj piłkę');
     function set(open) {
       box.classList.toggle('tool-closed', !open);
       btn.setAttribute('aria-expanded', String(open));
@@ -973,8 +1060,8 @@
     var check = function (strict) {
       var v = mail.value.trim();
       if (!v) { mail.classList.remove('gf-ok', 'gf-bad'); hint.textContent = ''; hint.className = 'gf-hint'; mail.removeAttribute('aria-invalid'); return; }
-      if (RE.test(v)) { mail.classList.add('gf-ok'); mail.classList.remove('gf-bad'); hint.textContent = '✓ Adres wygląda dobrze'; hint.className = 'gf-hint ok'; mail.setAttribute('aria-invalid', 'false'); return; }
-      if (strict) { mail.classList.add('gf-bad'); mail.classList.remove('gf-ok'); hint.textContent = 'Sprawdź adres — brakuje „@” albo domeny, np. jan@firma.pl'; hint.className = 'gf-hint bad'; mail.setAttribute('aria-invalid', 'true'); }
+      if (RE.test(v)) { mail.classList.add('gf-ok'); mail.classList.remove('gf-bad'); hint.textContent = homeText('✓ Adres wygląda dobrze'); hint.className = 'gf-hint ok'; mail.setAttribute('aria-invalid', 'false'); return; }
+      if (strict) { mail.classList.add('gf-bad'); mail.classList.remove('gf-ok'); hint.textContent = homeText('Sprawdź adres — brakuje „@” albo domeny, np. jan@firma.pl'); hint.className = 'gf-hint bad'; mail.setAttribute('aria-invalid', 'true'); }
     };
     mail.addEventListener('blur', function () { check(true); });
     mail.addEventListener('input', function () { check(mail.classList.contains('gf-bad')); });
