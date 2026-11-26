@@ -1,0 +1,13 @@
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+import {resolveStudioLocale,studioLocaleFromSearch,studioLocalHref,studioNumberLocale} from "../lib/i18n/locale.mjs";
+const read=name=>JSON.parse(readFileSync(new URL("../lib/i18n/"+name+".json",import.meta.url),"utf8"));
+assert.deepEqual(Object.keys(read("pl")).sort(),Object.keys(read("en")).sort());
+assert.equal(resolveStudioLocale("de"),"pl");
+assert.equal(studioLocaleFromSearch("?lang=en&project=abc"),"en");
+assert.equal(studioLocaleFromSearch(""),"pl");
+assert.equal(studioLocalHref("/radar?project=abc#map","en"),"/radar?project=abc&lang=en#map");
+assert.equal(studioLocalHref("/?lang=en&project=abc","pl"),"/?project=abc");
+assert.equal(studioNumberLocale("en"),"en-GB");
+assert.throws(()=>studioLocalHref("https://example.com/","en"));
+console.log("Studio locale contract OK");

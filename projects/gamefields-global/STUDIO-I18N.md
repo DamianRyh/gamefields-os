@@ -1,0 +1,3 @@
+# GLOBAL-06 — Studio i18n foundation
+
+Implemented: PL default, explicit ?lang=en, URL-based client provider, shared navigation translations and provisional selector. Preserves project state, query and hash; no changes to project schema, pricing or product IDs. WordPress home link remains PL pending EN routing. Client hydration and responsive layout require browser QA. Next: hub, workspace, quote display with stable IDs, exports, Radar and Makeover. Added Node contract tests but did not run them or the application build in this session. Static source checks: {"keyParity":true,"wrapper":true,"selector":true,"stableViews":true,"headerKeys":true,"translatedSubnav":true}. Do not deploy yet.

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import {StudioLanguageProvider} from "@/components/studio-language";
 import "./globals.css";
 import "./brand.css";
 import "./studio-workspace.css";
@@ -48,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body className="antialiased">
-        {children}
+        <StudioLanguageProvider>{children}</StudioLanguageProvider>
         {/* Gamefields Crew (Marek, Kuba, Ola, Alex) is off for the launch (owner, 2026-11-08); the component stays in components/gamefields-crew.tsx. */}
       </body>
     </html>
