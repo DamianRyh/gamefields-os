@@ -146,3 +146,20 @@ NODE_PATH=$(npm root -g) node preview-composer.mjs
 Wynik 26.11 (kept/passed/candidates): Echo 36/172/220, Strefy gry 36/173/220, Promienie 36/199/220, Szewrony 36/180/220, Tor 36/158/220, Płyty 36/90/355, Teren 36/193/220, Pole pikseli 34/108/220. Sprawdzone: `tsc --strict` na `pattern-library.ts` z nowymi plikami, 69 rodzin i `PATTERN_COUNT` = 828, wszystkie presety wskazują istniejące rodziny i palety, galeria bez błędów JS i bez przewijania w bok przy 390 i 1360 px. Pełne kontrole Studia (build, test:studio, test:mobile) nie były uruchamiane w tej sesji (brak `node_modules`).
 
 Nową rodzinę dodaje się jako funkcję gramatyki w `COMPOSER_GRAMMARS` i wpis w `COMPOSER_FAMILIES`; kurator sam ją sprawdzi. Razem 69 rodzin × 12 = 828 wzorów.
+
+### Kompozytor II (2026-11-26)
+
+Osiem kolejnych gramatyk w tym samym modelu, sprawdzonych tym samym kuratorem (`node curate-composer.mjs 220 36 <rodziny>` przelicza tylko wskazane rodziny, pozostałe zachowują pulę). Projekty KOMPOZYTOR II (`signature-composer-2.json`) są pierwsze w edytorze i w zakładce „Kompozytor”. Podgląd: `composer-2-preview.png` (`node preview-composer.mjs composer-2-preview.png II`). Razem 77 rodzin × 12 = 924 wzory.
+
+| Rodzina | Grupa | Reguła | kept / passed / candidates |
+|---|---|---|---|
+| Koszone pasy (`pro-k-mown`) | premium | pasy w poprzek, wzdłuż, szachownica albo 45°, jak koszona murawa | 28 / 165 / 220 |
+| Orbita (`pro-k-orbit`) | geometric | zagnieżdżone koła przesunięte w stronę bramek; przesunięcie < szerokość pasa | 36 / 135 / 220 |
+| Łuki (`pro-k-arcs`) | street | koncentryczne łuki z narożników, linii bramkowych albo środka linii bocznych | 36 / 153 / 220 |
+| Romby (`pro-k-argyle`) | brand | siatka rombów od punktu środkowego, kolor wg pierścieni, opcjonalna fuga | 32 / 131 / 220 |
+| Krata (`pro-k-plaid`) | brand | pasy poziome i pionowe lustrzane względem obu osi, skrzyżowania w trzeciej farbie | 36 / 155 / 220 |
+| Equalizer (`pro-k-steps`) | play | słupki od bramek do środka, wysokość schodkami | 36 / 220 / 220 |
+| Rozeta (`pro-k-rosette`) | organic | pierścienie z parzystą liczbą płatków wokół koła środkowego | 36 / 161 / 220 |
+| Cięcia (`pro-k-cuts`) | geometric | proste cięcia parami symetrycznymi, pola na przemian w dwóch kolorach, piasta | 36 / 90 / 372 |
+
+Poprawki po przeglądzie: Koszone pasy zawsze mają co najmniej dwie farby na tle (wcześniej 88 kandydatów odpadało za 2 kolory); w Orbicie usunięto odmianę pionową, bo jej lustrzane odbicie tworzyło twarde cięcie na linii środkowej.

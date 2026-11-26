@@ -110,5 +110,117 @@
   },
   "modes": 3,
   "tapeMedian": 62
+ },
+ "pro-k-mown": {
+  "candidates": 220,
+  "passed": 165,
+  "kept": 28,
+  "rejected": {
+   "thin": 25,
+   "specks": 0,
+   "paints": 30,
+   "sym": 0,
+   "balance": 0
+  },
+  "modes": 4,
+  "tapeMedian": 104
+ },
+ "pro-k-orbit": {
+  "candidates": 220,
+  "passed": 135,
+  "kept": 36,
+  "rejected": {
+   "thin": 83,
+   "specks": 2,
+   "paints": 0,
+   "sym": 0,
+   "balance": 0
+  },
+  "modes": 1,
+  "tapeMedian": 174
+ },
+ "pro-k-arcs": {
+  "candidates": 220,
+  "passed": 153,
+  "kept": 36,
+  "rejected": {
+   "thin": 7,
+   "specks": 0,
+   "paints": 3,
+   "sym": 0,
+   "balance": 57
+  },
+  "modes": 3,
+  "tapeMedian": 116
+ },
+ "pro-k-argyle": {
+  "candidates": 220,
+  "passed": 131,
+  "kept": 32,
+  "rejected": {
+   "thin": 0,
+   "specks": 51,
+   "paints": 38,
+   "sym": 0,
+   "balance": 0
+  },
+  "modes": 6,
+  "tapeMedian": 160
+ },
+ "pro-k-plaid": {
+  "candidates": 220,
+  "passed": 155,
+  "kept": 36,
+  "rejected": {
+   "thin": 15,
+   "specks": 50,
+   "paints": 0,
+   "sym": 0,
+   "balance": 0
+  },
+  "modes": 3,
+  "tapeMedian": 213
+ },
+ "pro-k-steps": {
+  "candidates": 220,
+  "passed": 220,
+  "kept": 36,
+  "rejected": {
+   "thin": 0,
+   "specks": 0,
+   "paints": 0,
+   "sym": 0,
+   "balance": 0
+  },
+  "modes": 6,
+  "tapeMedian": 112
+ },
+ "pro-k-rosette": {
+  "candidates": 220,
+  "passed": 161,
+  "kept": 36,
+  "rejected": {
+   "thin": 56,
+   "specks": 2,
+   "paints": 0,
+   "sym": 0,
+   "balance": 1
+  },
+  "modes": 8,
+  "tapeMedian": 175
+ },
+ "pro-k-cuts": {
+  "candidates": 372,
+  "passed": 90,
+  "kept": 36,
+  "rejected": {
+   "thin": 200,
+   "specks": 41,
+   "paints": 41,
+   "sym": 0,
+   "balance": 0
+  },
+  "modes": 2,
+  "tapeMedian": 76
  }
 }

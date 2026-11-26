@@ -1,0 +1,10 @@
+[
+ {"id":"k2-mown","name":"Koszone pasy","familyId":"pro-k-mown","variant":4,"paletteId":"bondy","useCase":"klub / turniej","note":"Szachownica jak na skoszonej murawie stadionu i koło w środku. Trzy farby, proste oklejanie, wygląda jak prawdziwe boisko."},
+ {"id":"k2-orbit","name":"Orbita","familyId":"pro-k-orbit","variant":4,"paletteId":"vasarely","useCase":"park / ikona miejsca","note":"Koła wsuwają się w siebie w stronę bramek jak tunel. Przesunięcie jest zawsze mniejsze niż pas, więc żaden pierścień się nie zwęża."},
+ {"id":"k2-arcs","name":"Łuki","familyId":"pro-k-arcs","variant":2,"paletteId":"nihon","useCase":"miasto / plac","note":"Koncentryczne łuki wyrastają z linii bramkowych. Bramki stają się środkiem kompozycji, a pole gry zostaje spokojne."},
+ {"id":"k2-argyle","name":"Romby","familyId":"pro-k-argyle","variant":10,"paletteId":"martens","useCase":"marka / kampania","note":"Siatka rombów od punktu środkowego, kolory w pierścieniach. Wzór jak z dzianiny, łatwy do przeniesienia na merch."},
+ {"id":"k2-plaid","name":"Krata","familyId":"pro-k-plaid","variant":2,"paletteId":"albers","useCase":"moda / kultura","note":"Pasy poziome i pionowe, skrzyżowania w trzeciej farbie, jak w tkaninie. Lustrzana względem obu osi boiska."},
+ {"id":"k2-steps","name":"Equalizer","familyId":"pro-k-steps","variant":5,"paletteId":"gamefields","useCase":"event / festiwal","note":"Słupki rosną od środka do bramek jak wskaźnik dźwięku. Mało taśmy, mocny efekt na zdjęciach z drona."},
+ {"id":"k2-rosette","name":"Rozeta","familyId":"pro-k-rosette","variant":12,"paletteId":"simultane","useCase":"szkoła / dzieci","note":"Pierścienie z płatkami wokół koła środkowego. Parzysta liczba płatków, więc obie połowy boiska są identyczne."},
+ {"id":"k2-cuts","name":"Cięcia","familyId":"pro-k-cuts","variant":6,"paletteId":"hard-edge","useCase":"street / youth","note":"Proste cięcia parami, pola na przemian w dwóch kolorach jak złożony papier, piasta w kole środkowym. Najtańsza w kolekcji."}
+]

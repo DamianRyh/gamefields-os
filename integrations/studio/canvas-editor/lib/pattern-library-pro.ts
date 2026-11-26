@@ -572,6 +572,110 @@ export const proFamilies:PatternFamily[]=[
   ],
   "baseComplexity": 1,
   "renderer": "pro"
+ },
+ {
+  "id": "pro-k-mown",
+  "name": "Koszone pasy",
+  "short": "MOWN",
+  "group": "premium",
+  "description": "Pasy jak na koszonej murawie: w poprzek, wzdłuż, w szachownicę albo pod 45°. Spokojne, tanie w malowaniu.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-orbit",
+  "name": "Orbita",
+  "short": "ORBIT",
+  "group": "geometric",
+  "description": "Zagnieżdżone koła przesuwające się w stronę bramek jak tunel. Przesunięcie zawsze mniejsze niż pas, więc nic się nie zwęża.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-arcs",
+  "name": "Łuki",
+  "short": "ARCS",
+  "group": "street",
+  "description": "Koncentryczne łuki z narożników, z linii bramkowych albo ze środka linii bocznych.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-argyle",
+  "name": "Romby",
+  "short": "ARGY",
+  "group": "brand",
+  "description": "Siatka rombów od punktu środkowego, kolor według pierścieni odległości, opcjonalna fuga.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-plaid",
+  "name": "Krata",
+  "short": "PLAID",
+  "group": "brand",
+  "description": "Pasy poziome i pionowe lustrzane względem obu osi; skrzyżowania w trzeciej farbie, jak w tkaninie.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-steps",
+  "name": "Equalizer",
+  "short": "EQ",
+  "group": "play",
+  "description": "Słupki od bramek do środka, wysokość rośnie albo maleje schodkami, jak wskaźnik dźwięku.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-rosette",
+  "name": "Rozeta",
+  "short": "ROSE",
+  "group": "organic",
+  "description": "Pierścienie wokół koła środkowego z regularnymi płatkami (parzysta liczba, więc obie połowy są równe).",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-cuts",
+  "name": "Cięcia",
+  "short": "CUTS",
+  "group": "geometric",
+  "description": "Proste cięcia parami symetrycznymi; pola na przemian w dwóch kolorach jak złożony papier, z piastą w środku.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
  }
 ];
 export const proPalettes:PatternPalette[]=[
@@ -1075,6 +1179,86 @@ export const proSignaturePresets:SignaturePreset[]=[
  }
 ];
 export const composerSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "k2-mown",
+  "name": "Koszone pasy",
+  "eyebrow": "KOMPOZYTOR II 01",
+  "familyId": "pro-k-mown",
+  "variant": 4,
+  "paletteId": "bondy",
+  "useCase": "klub / turniej",
+  "note": "Szachownica jak na skoszonej murawie stadionu i koło w środku. Trzy farby, proste oklejanie, wygląda jak prawdziwe boisko."
+ },
+ {
+  "id": "k2-orbit",
+  "name": "Orbita",
+  "eyebrow": "KOMPOZYTOR II 02",
+  "familyId": "pro-k-orbit",
+  "variant": 4,
+  "paletteId": "vasarely",
+  "useCase": "park / ikona miejsca",
+  "note": "Koła wsuwają się w siebie w stronę bramek jak tunel. Przesunięcie jest zawsze mniejsze niż pas, więc żaden pierścień się nie zwęża."
+ },
+ {
+  "id": "k2-arcs",
+  "name": "Łuki",
+  "eyebrow": "KOMPOZYTOR II 03",
+  "familyId": "pro-k-arcs",
+  "variant": 2,
+  "paletteId": "nihon",
+  "useCase": "miasto / plac",
+  "note": "Koncentryczne łuki wyrastają z linii bramkowych. Bramki stają się środkiem kompozycji, a pole gry zostaje spokojne."
+ },
+ {
+  "id": "k2-argyle",
+  "name": "Romby",
+  "eyebrow": "KOMPOZYTOR II 04",
+  "familyId": "pro-k-argyle",
+  "variant": 10,
+  "paletteId": "martens",
+  "useCase": "marka / kampania",
+  "note": "Siatka rombów od punktu środkowego, kolory w pierścieniach. Wzór jak z dzianiny, łatwy do przeniesienia na merch."
+ },
+ {
+  "id": "k2-plaid",
+  "name": "Krata",
+  "eyebrow": "KOMPOZYTOR II 05",
+  "familyId": "pro-k-plaid",
+  "variant": 2,
+  "paletteId": "albers",
+  "useCase": "moda / kultura",
+  "note": "Pasy poziome i pionowe, skrzyżowania w trzeciej farbie, jak w tkaninie. Lustrzana względem obu osi boiska."
+ },
+ {
+  "id": "k2-steps",
+  "name": "Equalizer",
+  "eyebrow": "KOMPOZYTOR II 06",
+  "familyId": "pro-k-steps",
+  "variant": 5,
+  "paletteId": "gamefields",
+  "useCase": "event / festiwal",
+  "note": "Słupki rosną od środka do bramek jak wskaźnik dźwięku. Mało taśmy, mocny efekt na zdjęciach z drona."
+ },
+ {
+  "id": "k2-rosette",
+  "name": "Rozeta",
+  "eyebrow": "KOMPOZYTOR II 07",
+  "familyId": "pro-k-rosette",
+  "variant": 12,
+  "paletteId": "simultane",
+  "useCase": "szkoła / dzieci",
+  "note": "Pierścienie z płatkami wokół koła środkowego. Parzysta liczba płatków, więc obie połowy boiska są identyczne."
+ },
+ {
+  "id": "k2-cuts",
+  "name": "Cięcia",
+  "eyebrow": "KOMPOZYTOR II 08",
+  "familyId": "pro-k-cuts",
+  "variant": 6,
+  "paletteId": "hard-edge",
+  "useCase": "street / youth",
+  "note": "Proste cięcia parami, pola na przemian w dwóch kolorach jak złożony papier, piasta w kole środkowym. Najtańsza w kolekcji."
+ },
  {
   "id": "k-echo",
   "name": "Echo",
