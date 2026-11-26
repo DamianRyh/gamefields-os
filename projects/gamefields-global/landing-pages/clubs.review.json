@@ -1,11 +1,9 @@
 {
   "source_wp_id": 3703,
   "source_matches_live_after_trim": true,
-  "translated_text_nodes": 172,
+  "translated_text_nodes": 173,
   "translated_attributes": 1,
-  "unmapped_diacritic_nodes": [
-    "Panna Cage 180 kosztuje od 58 000 zł netto (z płytą i malowaniem od 69 400 zł), boisko 3 na 3 Street Arena 15 od 100 000 zł netto. Sztuczna trawa na Cage 180 to dodatkowo 5 200 zł–9 100 zł netto. Montaż i transport liczę po zdjęciach."
-  ],
+  "unmapped_diacritic_nodes": [],
   "status": "review-only",
-  "remaining": "Remaining text, attributes, structured data, links and browser tests required."
+  "remaining": "Attributes, structured data, links and browser tests required. FAQ also occurs in protected schema; localise schema separately."
 }
