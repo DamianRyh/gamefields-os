@@ -104,3 +104,43 @@ Każdy kierunek przejmuje **metodę** szkoły lub artysty, nie konkretne dzieło
 | Garden Plan | organic | Roberto Burle Marx, plany ogrodów: rabaty w pasy i ścieżka | średnia |
 
 Regeneracja: `node build-studio-files.mjs` (kopiuje silnik i `pattern-library-pro.ts` do `canvas-editor/lib/`), `node build-gallery.mjs`.
+
+## Kompozytor (2026-11-26): model, który sam sprawdza swoje wzory
+
+Nowy sposób tworzenia wzorów w tym samym silniku. Do tej pory każda rodzina miała 12 ręcznie zakodowanych kompozycji, a malowalność sprawdzał człowiek na podglądach. Kompozytor odwraca kolejność:
+
+1. **Gramatyka zamiast 12 obrazków.** Każda rodzina to zbiór reguł zakotwiczonych w samym boisku (koło środkowe, pola bramkowe, bramki, połowy). Parametry (szerokość pasa w krokach co 0,5–1 m, liczba pasów, tryb, symetria, kolejność farb) losuje ziarno, więc kandydatów jest nieograniczenie wiele.
+2. **Sloty zamiast kolorów.** Geometria jest zapisana w slotach (0 = tło, 1–4 = farby). Jedno sprawdzenie obowiązuje dla każdej palety.
+3. **Kontrola na rastrze.** `curate-composer.mjs` renderuje w Chromium setki kandydatów na rodzinę, przy h = 400 (15 × 10 m, raster 2×) i h = 600 (kwadrat / Panna), i odrzuca każdego, który:
+   - ma fragment węższy niż 20 cm (otwarcie morfologiczne dyskiem 8 px; odpada każdy utracony kawałek > 40 px),
+   - ma więcej niż dwie plamki mniejsze niż 30 × 30 cm,
+   - używa mniej niż 3 albo więcej niż 5 farb,
+   - nie jest symetryczny (obrót o 180° albo lustro, różnica ≤ 1,2 % pikseli),
+   - ma jeden kolor na ponad 82 % boiska.
+4. **Wybór najlepszych i różnych.** Ocena: zrównoważone pola koloru i umiarkowane maskowanie (ok. 1–3 m taśmy na m²). Wybór po kolei z każdego trybu rodziny, z odrzuceniem prawie identycznych (odległość Jaccarda krawędzi < 0,35). Zostaje 36 sprawdzonych ziaren na rodzinę.
+5. **Liczby do wyceny.** Każde ziarno ma zmierzony udział każdej farby i długość krawędzi do oklejenia. `composerMetrics(rodzina, wariant, kolory, {seed, area})` zwraca m² każdej farby i metry taśmy dla rzeczywistego metrażu, a `proExecution()` dla rodzin Kompozytora podaje poziom maskowania wyliczony z taśmy, nie z tabeli.
+
+W Studiu wariant 1–12 to 12 najlepszych ziaren, a przycisk „Losowy wariant” (`patternSeed`) przegląda pozostałe sprawdzone ziarna, więc losowanie nigdy nie da wzoru, który nie przeszedł kontroli. Schemat projektu bez zmian.
+
+| Rodzina | Grupa | Reguła |
+|---|---|---|
+| Echo (`pro-k-echo`) | premium | linie boiska powtórzone pasami: pierścienie wokół koła, obwiednie pól bramkowych |
+| Strefy gry (`pro-k-zones`) | geometric | kolorem tylko strefy gry: pola bramkowe, koło, pas środkowy, pasy boczne, narożniki |
+| Promienie (`pro-k-rays`) | street | wachlarze z bramek, narożników albo ze środka, z piastą chroniącą ostrza |
+| Szewrony (`pro-k-chevron`) | brand | pasy V na bramki albo do środka, szerokość liczona prostopadle do pasa |
+| Tor (`pro-k-flow`) | organic | wstęga pasów od bramki do bramki przez punkt środkowy |
+| Płyty (`pro-k-shards`) | geometric | duże płyty Voronoi, sąsiednie zawsze w innym kolorze, opcjonalna fuga |
+| Teren (`pro-k-terrain`) | organic | warstwice: jedno wzgórze w środku albo dwa naprzeciw siebie |
+| Pole pikseli (`pro-k-pixel`) | play | siatka od środka boiska, wielkość albo kolor kafla płynie wg pola |
+
+Pliki: `court-composer.mjs` (gramatyki, plan kolorów, `POOL` z ziarnami i pomiarami), `curate-composer.mjs` (kurator), `composer-report.json` (ile kandydatów, ile przeszło, powody odrzuceń), `preview-composer.mjs` → `composer-preview.png` (8 × 12), `signature-composer.json` (8 projektów KOMPOZYTOR, pierwsze w edytorze i w zakładce „Kompozytor”).
+
+Regeneracja:
+
+```bash
+NODE_PATH=$(npm root -g) node curate-composer.mjs 220 36
+node build-studio-files.mjs && node build-gallery.mjs
+NODE_PATH=$(npm root -g) node preview-composer.mjs
+```
+
+Nową rodzinę dodaje się jako funkcję gramatyki w `COMPOSER_GRAMMARS` i wpis w `COMPOSER_FAMILIES`; kurator sam ją sprawdzi. Razem 69 rodzin × 12 = 828 wzorów.

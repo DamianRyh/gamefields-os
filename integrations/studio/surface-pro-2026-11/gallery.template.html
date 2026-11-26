@@ -131,7 +131,9 @@ footer{padding-block:32px 48px;color:var(--muted);font-size:13px;border-top:1px 
       <div class="spec">
         <div><span class="m">Kolory farby</span><b id="specColors">–</b></div>
         <div><span class="m">Maskowanie</span><b id="specMask">–</b></div>
+        <div id="specTapeBox" hidden><span class="m">Taśma, 15 × 10 m</span><b id="specTape">–</b></div>
       </div>
+      <div class="group" id="paintBox" hidden><span class="m">Farba na 150 m² (zmierzona)</span><div class="code" id="paint"></div></div>
       <div class="group"><span class="m">Kod do Studia</span><div class="code" id="code"></div></div>
     </aside>
   </div>
@@ -174,6 +176,7 @@ footer{padding-block:32px 48px;color:var(--muted);font-size:13px;border-top:1px 
       <div class="rule"><div class="k">03</div><h3>Gradient w schodkach</h3><p>Farby nie da się płynnie przelać, więc przejścia to pasy w przestrzeni OKLab. Dają równą, malowalną gradację.</p></div>
       <div class="rule"><div class="k">04</div><h3>Kontrast linii liczony</h3><p>Kolor linii (biały, czarny albo limonkowy) dobierany jest automatycznie: wybierany jest ten z najlepszym kontrastem do najsłabszego koloru wzoru.</p></div>
       <div class="rule"><div class="k">05</div><h3>Wykonalność w liczbach</h3><p>Każdy wzór podaje liczbę kolorów farby i poziom maskowania. To dane do wyceny, nie tylko obrazek.</p></div>
+      <div class="rule"><div class="k">07</div><h3>Kompozytor: sprawdzony na rastrze</h3><p>Osiem rodzin Kompozytora powstaje z reguł opartych na geometrii gry. Każdy kandydat jest renderowany i mierzony: min. 20 cm szerokości, maks. 5 farb, symetria, brak drobnych plamek. Do Studia trafiają tylko te, które przeszły, z policzoną farbą w m² i długością taśmy.</p></div>
       <div class="rule"><div class="k">06</div><h3>Odniesienie, nie kopia</h3><p>Rodziny przejmują technikę (gradient, pola koloru, op-art), nie konkretne dzieło. Każda kompozycja jest generowana od nowa.</p></div>
     </div>
   </section>
@@ -218,6 +221,9 @@ var SIG = /*SIG*/;
     $('#stageTag').textContent = '15 × 10 m · ' + (st.persp ? 'perspektywa' : 'widok z góry');
     var ex = proExecution(st.fam, st.v, 400, pal.colors);
     $('#specColors').textContent = String(ex.colors); $('#specMask').textContent = ex.masking;
+    var cm = fam.composer ? composerMetrics(st.fam, st.v, pal.colors, { seed: st.seed }) : null;
+    $('#specTapeBox').hidden = !cm; $('#paintBox').hidden = !cm;
+    if (cm) { $('#specTape').textContent = cm.tape + ' m'; $('#paint').innerHTML = Object.keys(cm.paint).map(function(c){ return '<span style="display:inline-flex;align-items:center;gap:6px;margin-right:12px"><i style="width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid rgba(127,127,127,.4);background:' + c + '"></i>' + cm.paint[c] + ' m²</span>'; }).join(''); }
     $('#code').textContent = JSON.stringify({ patternFamily: st.fam, patternVariant: st.v, patternPalette: st.pal, seed: st.seed || undefined });
   }
   build(); draw();

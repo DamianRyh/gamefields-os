@@ -5,6 +5,9 @@
 // so it works as a 3D texture and as a stencil plan. Stepped colour bands replace true gradients.
 // The Studio draws the court lines on top; designs are composed around the court axes (x=300, y=h/2).
 
+import { COMPOSER_FAMILIES, renderComposer, composerMasking, composerMetrics } from './court-composer.mjs';
+export { composerMetrics };
+
 /* ---------------- utilities ---------------- */
 const W = 600;
 export function rng(seed) {
@@ -703,14 +706,18 @@ export const PRO_PALETTES = [
   { id: 'burle-marx', name: 'Burle Marx', colors: ['#1F5E3A', '#7DB04B', '#C8553D', '#F2C14E', '#EFE7D6'], tone: 'ogrodowa' },
 ];
 
+// Court Composer (2026-11-26): generated, raster-checked families, appended after the hand-written ones.
+for (const k of COMPOSER_FAMILIES) PRO_FAMILIES.push({ ...k, composer: true, masking: composerMasking(k.id), renderer: (R, v, h, c, uid, opts) => renderComposer(k.id, v, h, c, opts) });
+
 const FAM = Object.fromEntries(PRO_FAMILIES.map((x) => [x.id, x]));
 export function renderPro(familyId, variant, h = 400, colors, opts = {}) {
   const fam = FAM[familyId]; if (!fam) return '';
   const v = clamp(Math.round(variant) || 1, 1, 12); const R = rng(hash(familyId + ':' + v + ':' + (opts.seed || 0)));
-  return fam.renderer(R, v, h, colors, opts.uid || ('gfp' + (hash(familyId + v) % 1e6)));
+  return fam.renderer(R, v, h, colors, opts.uid || ('gfp' + (hash(familyId + v) % 1e6)), opts);
 }
 // distinct paint colours and masking level for the execution estimate
 export function proExecution(familyId, variant, h, colors) {
+  if (FAM[familyId]?.composer) { const m = composerMetrics(familyId, variant, colors); if (m) return { colors: m.colors, masking: m.masking }; }
   const svg = renderPro(familyId, variant, h, colors); const used = new Set((svg.match(/(fill|stroke)="(#[0-9A-Fa-f]{6})"/g) || []).map((m) => m.slice(-8, -1).toUpperCase()));
   return { colors: used.size, masking: FAM[familyId]?.masking || 'średnia' };
 }

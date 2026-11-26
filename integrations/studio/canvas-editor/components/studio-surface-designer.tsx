@@ -14,6 +14,7 @@ import {SurfaceBaseColor} from "@/components/studio-asset-library";
 type Patch=Partial<Project>;
 const CATEGORIES=[
  {id:'all',label:'Wszystkie',test:/./},
+ {id:'composer',label:'Kompozytor',test:/./,eyebrow:'KOMPOZYTOR'},
  {id:'masters',label:'Inspiracje mistrzów',test:/./,eyebrow:'MASTERS'},
  {id:'city',label:'Miasto i park',test:/miast|park|plac|dzielnic|miejsk|eco|rynek|rewitaliz|sztuka publiczna/},
  {id:'school',label:'Szkoła i dzieci',test:/szkoł|dzieci|młodzież|zabaw/},

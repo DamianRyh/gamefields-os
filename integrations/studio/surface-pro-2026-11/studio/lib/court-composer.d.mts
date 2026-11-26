@@ -1,0 +1,10 @@
+export const COMPOSER_FAMILIES: { id: string; name: string; short: string; group: string; description: string; inspiration: string }[];
+export const POOL: Record<string, { s: number; m: { a: number[]; t: number; w: number; md: string } }[]>;
+export function renderComposer(familyId: string, variant: number, h: number, colors: string[], opts?: { seed?: number }): string;
+export function composerMetrics(familyId: string, variant: number, colors: string[], opts?: { seed?: number; area?: number }): { colors: number; paint: Record<string, number>; tape: number; masking: string; minWidthCm: number } | null;
+export function composerMasking(familyId: string): string;
+export function composerPlan(seed: number, colors: string[]): string[];
+export function composeSeed(familyId: string, seed: number, h: number, colors: string[]): string;
+export function composeSlots(familyId: string, seed: number, h?: number): { g: string; mode: string } | null;
+export function composerEntry(familyId: string, variant: number, seed?: number): { s: number; m: { a: number[]; t: number; w: number; md: string } | null };
+export const COMPOSER_GRAMMARS: Record<string, unknown>;
