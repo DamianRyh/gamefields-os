@@ -1,0 +1,15 @@
+{
+  "source_wp_id": 3464,
+  "source_modified": "2026-11-25T11:44:41",
+  "source_template": "templates/page-full.php",
+  "source": "live WordPress HTML block",
+  "translated_text_nodes": 219,
+  "translated_attributes": 16,
+  "unmapped_diacritic_nodes": [],
+  "protected_tokens_identical": true,
+  "status": "review-only",
+  "remaining": [
+    "Review sizing and safety clearance claims, grant eligibility and testimonial translations before release.",
+    "Inline scripts, schema, links, mobile and browser tests pending."
+  ]
+}
