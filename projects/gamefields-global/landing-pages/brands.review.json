@@ -1,0 +1,16 @@
+{
+  "source_wp_id": 3704,
+  "source_matches_live_after_trim": true,
+  "translated_text_nodes": 154,
+  "translated_attributes": 13,
+  "unmapped_diacritic_nodes": [
+    "Żerków",
+    "Street Mekka, Łódź"
+  ],
+  "protected_tokens_identical": true,
+  "status": "review-only",
+  "remaining": [
+    "Clarify rental versus purchase price in source before publication; no price changes made.",
+    "Schema, links, browser tests pending."
+  ]
+}
