@@ -198,6 +198,94 @@ function pixel(R, h) {
   return { g, mode: 'pix' + mode + fieldKind };
 }
 
+/* ---------------- grammars, Kompozytor II (2026-11-26) ---------------- */
+
+// Mown Stripes — the way grass pitches are mown: wide bands across or along the court, a mown checker or 45° stripes.
+function stripes(R, h) {
+  const cy = h / 2; const mode = intR(R, 0, 3); const k = intR(R, 1, 3); const withGround = k === 1 || R() < 0.5; let g = '';
+  const seq = (b) => { const j = Math.abs(b); return withGround ? (j % 2 ? 1 + ((j >> 1) % k) : 0) : 1 + (j % k); }; // b ↔ -b keeps the symmetry
+  const odd = R() < 0.5; // centre band on the axis, or a boundary on the axis
+  if (mode === 0 || mode === 1) { const bw = pickR(R, mode === 0 ? [40, 50, 60, 75] : [40, 50, 66]); const len = mode === 0 ? 300 : cy; const nb = Math.ceil(len / bw) + 1;
+    for (let b = -nb; b <= nb; b++) { const o = odd ? b * bw - bw / 2 : b * bw; const sl = seq(odd ? b : (b >= 0 ? b + 1 : b)); if (!sl) continue; g += mode === 0 ? Rc(300 + o, 0, bw, h, sl) : Rc(0, cy + o, W, bw, sl); } }
+  else if (mode === 2) { const s = pickR(R, [60, 75, 100]); const nx = Math.ceil(300 / s) + 1, ny = Math.ceil(cy / s) + 1; const a = 1 + intR(R, 0, k - 1), b = withGround ? 0 : 1 + (a % k);
+    for (let j = -ny; j < ny; j++) for (let i = -nx; i < nx; i++) g += Rc(300 + i * s, cy + j * s, s, s, (i + j) % 2 ? a : b); }
+  else { const bw = pickR(R, [40, 56, 70]) ; const dir = R() < 0.5 ? 1 : -1; const nb = Math.ceil((W + h) / bw / 1.41) + 2;
+    for (let b = -nb; b <= nb; b++) { const sl = seq(b); if (!sl) continue; const d0 = (b - 0.5) * bw * 1.414, d1 = d0 + bw * 1.414; const q = (d) => [[300 + d - dir * (cy + 10) * 1, -10], [300 + d + dir * (cy + 10) * 1, h + 10]]; const [a0, b0] = q(d0), [a1, b1] = q(d1); g += P([a0, a1, b1, b0], sl); } }
+  if (R() < 0.35) g += Ci(300, cy, pickR(R, [45, 60]), 1 + (k % 4));
+  return { g, mode: 'mow' + mode };
+}
+
+// Orbit — nested circles drifting toward each goal like a tunnel; the drift is smaller than the band so no ring pinches.
+function orbit(R, h) {
+  const cy = h / 2; const st = pickR(R, [22, 28, 36, 44]); const drift = Math.max(0, st - pickR(R, [10, 14, 18])); const n = intR(R, 3, 7); const k = intR(R, 2, 4); const vert = R() < 0.3; const R0 = pickR(R, [0.42, 0.5, 0.6]) * h + n * 4;
+  const circ = (cx, cyy, r) => { const p = []; for (let i = 0; i < 64; i++) { const a = (i / 64) * TAU; p.push([cx + Math.cos(a) * r, cyy + Math.sin(a) * r]); } return p; };
+  // circle i: radius R0 - i·st, centre moved i·drift toward the goal (or up, in the vertical variant); clipped to the left half
+  const cx0 = pickR(R, [300, 260, 220]); let half = '';
+  for (let i = 0; i <= n; i++) { const r = R0 - i * st; if (r < 16) break; const c = vert ? [cx0 - 60, cy - i * drift] : [cx0 - i * drift, cy]; half += P(clipHalf(circ(c[0], c[1], r), 300, 0, 1, 0), 1 + (i % k)); }
+  return { g: half + (vert ? rot180(h, half) : mirX(half)), mode: 'orb' + (vert ? 'v' : 'h') };
+}
+
+// Arcs — concentric quarter or half rings from the corners, the goal lines or the middle of the sidelines.
+function arcs(R, h) {
+  const cy = h / 2; const mode = intR(R, 0, 2); const bw = pickR(R, [22, 28, 36, 44]); const k = intR(R, 2, 4); const withGround = R() < 0.4; const n = intR(R, 4, 9);
+  const seq = (i) => (withGround ? (i % 2 ? 1 + ((i >> 1) % k) : 0) : 1 + (i % k)); let g = '';
+  const rings = (cx, cyy, a0, a1, clipX, clipY) => { let out = ''; for (let i = n; i >= 1; i--) { let q = sectorPts(cx, cyy, (i - 1) * bw, i * bw, a0, a1); if (clipX) q = clipHalf(q, 300, 0, 1, 0); if (clipY) q = clipHalf(q, 0, cy, 0, 1); out += P(q, seq(i)); } return out; };
+  if (mode === 0) { const c = rings(0, 0, 0, Math.PI / 2, true, true); const left = c + mirY(h, c); g = left + mirX(left); }
+  else if (mode === 1) { const c = rings(0, cy, -Math.PI / 2, Math.PI / 2, true, false); g = c + mirX(c); }
+  else { const c = rings(300, 0, 0, Math.PI, false, true); g = c + mirY(h, c); }
+  return { g, mode: 'arc' + mode };
+}
+
+// Argyle — a diamond lattice centred on the spot; colour by distance rings and parity, optional grout.
+function argyle(R, h) {
+  const cy = h / 2; const dx = pickR(R, [50, 60, 75, 100]); const dy = dx * pickR(R, [0.8, 1, 1.25]); const k = intR(R, 2, 4); const grout = pickR(R, [0, 0, 10, 14]); const rule = intR(R, 0, 2); let g = '';
+  const ni = Math.ceil(300 / dx) + 2, nj = Math.ceil(cy / dy) + 2;
+  for (let j = -nj; j <= nj; j++) for (let i = -ni; i <= ni; i++) { if ((i + j) % 2) continue; const x = 300 + i * dx, y = cy + j * dy; const d = Math.abs(i) + Math.abs(j);
+    const sl = rule === 0 ? 1 + (Math.floor(d / 2) % k) : rule === 1 ? 1 + (Math.abs(i) % k) : (d % 4 === 0 ? 1 : 1 + ((Math.floor(d / 4) + 1) % k));
+    const ex = dx - grout * 0.7, ey = dy - grout * 0.7 * dy / dx; g += P([[x, y - ey], [x + ex, y], [x, y + ey], [x - ex, y]], sl); }
+  return { g, mode: 'arg' + rule + (grout ? 'g' : '') };
+}
+
+// Plaid — horizontal and vertical band sets mirrored about both axes; the crossings are a third paint.
+function plaid(R, h) {
+  const cy = h / 2; const k = intR(R, 2, 3); const pat = []; const nb = intR(R, 2, 4); for (let i = 0; i < nb; i++) pat.push([pickR(R, [20, 28, 40, 56]), pickR(R, [24, 40, 64, 90])]);
+  const bands = (len) => { const out = []; let o = pickR(R, [0, 30, 60]); for (let i = 0; o < len; i++) { const [w, gap] = pat[i % pat.length]; out.push([o, Math.min(len, o + w)]); o += w + gap; } return out; };
+  const hb = bands(cy), vb = bands(300); let g = ''; const H = 1, V = 2, X = k === 3 ? 3 : 1 + (R() < 0.5 ? 2 : 0);
+  const both = (list, c) => list.flatMap(([a, b]) => [[c + a, c + b], [c - b, c - a]]);
+  const HB = both(hb, cy), VB = both(vb, 300);
+  for (const [a, b] of HB) g += Rc(0, a, W, b - a, H); for (const [a, b] of VB) g += Rc(a, 0, b - a, h, V);
+  for (const [a, b] of HB) for (const [c, d] of VB) g += Rc(c, a, d - c, b - a, X);
+  return { g, mode: 'plaid' + nb };
+}
+
+// Equaliser — columns from the goals to the centre, each a centred bar whose height steps with distance.
+function steps(R, h) {
+  const cy = h / 2; const cw = pickR(R, [24, 30, 40, 50]); const gap = pickR(R, [0, 10, 14]); const k = intR(R, 2, 4); const shape = intR(R, 0, 2); const minH = pickR(R, [0.15, 0.3]); let half = '';
+  const n = Math.floor(300 / cw);
+  for (let i = 0; i < n; i++) { const t = (i + 0.5) / n; const v = shape === 0 ? t : shape === 1 ? 1 - t : Math.abs(Math.sin(t * Math.PI * pickR(R, [1, 1.5]))) ; const hh = Math.round(h * (minH + (1 - minH) * v) / 20) * 20; const x = i * cw + gap / 2; const lvl = Math.min(k - 1, Math.floor(v * k));
+    half += Rc(x, cy - hh / 2, cw - gap, hh, 1 + lvl); if (hh < h - 40 && R() < 0.5) half += Rc(x, cy - hh / 2 - 0, cw - gap, Math.min(20, hh), 1 + ((lvl + 1) % k)) + Rc(x, cy + hh / 2 - Math.min(20, hh), cw - gap, Math.min(20, hh), 1 + ((lvl + 1) % k)); }
+  return { g: half + mirX(half), mode: 'eq' + shape + (gap ? 'g' : '') };
+}
+
+// Rosette — rings around the centre circle with regular petals (even count, so the turn is symmetric).
+function rosette(R, h) {
+  const cy = h / 2; const m = pickR(R, [4, 6, 8, 10]); const st = pickR(R, [22, 28, 36]); const amp = pickR(R, [0.08, 0.14, 0.2]); const n = intR(R, 3, 7); const k = intR(R, 2, 4); const sx = pickR(R, [1, 1.3, 1.6]); const ph = R() * TAU / m; const twist = pickR(R, [0, 0, 0.12]);
+  let g = '';
+  for (let i = n; i >= 0; i--) { const r = 45 + i * st; const pp = []; for (let j = 0; j < 72; j++) { const a = (j / 72) * TAU; const mm = 1 + amp * Math.cos(m * a + ph + i * twist * m); pp.push([300 + Math.cos(a) * r * mm * sx, cy + Math.sin(a) * r * mm]); } g += D(closedCurve(pp), i === 0 ? 1 + (n % k) : 1 + (i % k)); }
+  return { g, mode: 'ros' + m + (twist ? 't' : '') };
+}
+
+// Cuts — straight cuts in point-symmetric pairs; the regions alternate like a folded paper (two-colour map) with a hub.
+function cuts(R, h) {
+  const cy = h / 2; const np = intR(R, 2, 3); const lines = [];
+  for (let i = 0; i < np; i++) { const a = R() * Math.PI; const off = (R() - 0.5) * h * 0.7; const nx = Math.cos(a), ny = Math.sin(a); lines.push([300 + nx * off, cy + ny * off, nx, ny]); lines.push([300 - nx * off, cy - ny * off, nx, ny]); }
+  let cells = [[[-2, -2], [602, -2], [602, h + 2], [-2, h + 2]]]; const par = [0];
+  for (const [px, py, nx, ny] of lines) { const nc = [], np2 = []; cells.forEach((c, i) => { const a = clipHalf(c, px, py, nx, ny), b = clipHalf(c, px, py, -nx, -ny); if (a.length > 2) { nc.push(a); np2.push(par[i]); } if (b.length > 2) { nc.push(b); np2.push(par[i] ^ 1); } }); cells = nc; par.length = 0; par.push(...np2); }
+  const a = 1 + intR(R, 0, 2), b = R() < 0.5 ? 0 : 1 + ((a) % 3); let g = ''; cells.forEach((c, i) => { g += P(c, par[i] ? a : b); });
+  if (R() < 0.7) { const r = pickR(R, [45, 60, 80]); g += Ci(300, cy, r + 24, b === 0 ? 4 : 0) + Ci(300, cy, r, 4); }
+  return { g, mode: 'cut' + np };
+}
+
 /* ---------------- colour plan ---------------- */
 function hex2rgb(hx) { hx = hx.replace('#', ''); if (hx.length === 3) hx = hx.split('').map((c) => c + c).join(''); return [0, 2, 4].map((i) => parseInt(hx.slice(i, i + 2), 16) / 255); }
 function L_(hx) { const lin = (c) => (c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)); const [r, g, b] = hex2rgb(hx).map(lin); const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b); return 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s; }
@@ -208,7 +296,9 @@ export function composerPlan(seed, colors) {
   return [ground, ...rest];
 }
 
-export const COMPOSER_GRAMMARS = { 'pro-k-echo': echo, 'pro-k-zones': zones, 'pro-k-rays': rays, 'pro-k-chevron': chevron, 'pro-k-flow': flow, 'pro-k-shards': shards, 'pro-k-terrain': terrain, 'pro-k-pixel': pixel };
+export const COMPOSER_GRAMMARS = { 'pro-k-echo': echo, 'pro-k-zones': zones, 'pro-k-rays': rays, 'pro-k-chevron': chevron, 'pro-k-flow': flow, 'pro-k-shards': shards, 'pro-k-terrain': terrain, 'pro-k-pixel': pixel,
+  // Kompozytor II
+  'pro-k-mown': stripes, 'pro-k-orbit': orbit, 'pro-k-arcs': arcs, 'pro-k-argyle': argyle, 'pro-k-plaid': plaid, 'pro-k-steps': steps, 'pro-k-rosette': rosette, 'pro-k-cuts': cuts };
 
 // raw geometry for a seed (slot fills) — used by the curator
 export function composeSlots(familyId, seed, h = 400) { const gr = COMPOSER_GRAMMARS[familyId]; if (!gr) return null; const out = gr(rng(seed), h); return { g: '<rect x="0" y="0" width="600" height="' + f(h) + '" fill="§0"/>' + out.g, mode: out.mode }; }
@@ -246,5 +336,14 @@ export const COMPOSER_FAMILIES = [
   meta('pro-k-shards', 'Płyty', 'PLATE', 'geometric', 'Duże płyty Voronoi, sąsiednie zawsze w innym kolorze, opcjonalnie z fugą koloru tła.', 'Kompozytor: geometria gry'),
   meta('pro-k-terrain', 'Teren', 'TERR', 'organic', 'Warstwice jak na mapie: jedno wzgórze w kole środkowym albo dwa naprzeciw siebie.', 'Kompozytor: geometria gry'),
   meta('pro-k-pixel', 'Pole pikseli', 'PIX', 'play', 'Siatka od środka boiska: wielkość albo kolor kafla płynie w stronę bramek, środka lub po przekątnej.', 'Kompozytor: geometria gry'),
+  // Kompozytor II (2026-11-26)
+  meta('pro-k-mown', 'Koszone pasy', 'MOWN', 'premium', 'Pasy jak na koszonej murawie: w poprzek, wzdłuż, w szachownicę albo pod 45°. Spokojne, tanie w malowaniu.', 'Kompozytor II: geometria gry'),
+  meta('pro-k-orbit', 'Orbita', 'ORBIT', 'geometric', 'Zagnieżdżone koła przesuwające się w stronę bramek jak tunel. Przesunięcie zawsze mniejsze niż pas, więc nic się nie zwęża.', 'Kompozytor II: geometria gry'),
+  meta('pro-k-arcs', 'Łuki', 'ARCS', 'street', 'Koncentryczne łuki z narożników, z linii bramkowych albo ze środka linii bocznych.', 'Kompozytor II: geometria gry'),
+  meta('pro-k-argyle', 'Romby', 'ARGY', 'brand', 'Siatka rombów od punktu środkowego, kolor według pierścieni odległości, opcjonalna fuga.', 'Kompozytor II: geometria gry'),
+  meta('pro-k-plaid', 'Krata', 'PLAID', 'brand', 'Pasy poziome i pionowe lustrzane względem obu osi; skrzyżowania w trzeciej farbie, jak w tkaninie.', 'Kompozytor II: geometria gry'),
+  meta('pro-k-steps', 'Equalizer', 'EQ', 'play', 'Słupki od bramek do środka, wysokość rośnie albo maleje schodkami, jak wskaźnik dźwięku.', 'Kompozytor II: geometria gry'),
+  meta('pro-k-rosette', 'Rozeta', 'ROSE', 'organic', 'Pierścienie wokół koła środkowego z regularnymi płatkami (parzysta liczba, więc obie połowy są równe).', 'Kompozytor II: geometria gry'),
+  meta('pro-k-cuts', 'Cięcia', 'CUTS', 'geometric', 'Proste cięcia parami symetrycznymi; pola na przemian w dwóch kolorach jak złożony papier, z piastą w środku.', 'Kompozytor II: geometria gry'),
 ];
 export function composerMasking(familyId) { const pool = POOL[familyId]; if (!pool || !pool.length) return 'średnia'; const t = pool.slice(0, 12).map((e) => e.m.t).sort((a, b) => a - b)[Math.min(5, pool.length - 1)] / 150; return t < 1 ? 'niska' : t < 2 ? 'średnia' : t < 3.2 ? 'wysoka' : 'bardzo wysoka'; }
