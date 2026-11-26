@@ -1,0 +1,67 @@
+[
+  {
+    "source": "szkoly-2026-11/boiska-dla-szkol.html",
+    "proposed_path": "/en/courts-for-schools/",
+    "status": "pending"
+  },
+  {
+    "source": "miasta-2026-11/dla-miast.html",
+    "proposed_path": "/en/courts-for-cities/",
+    "status": "pending"
+  },
+  {
+    "source": "deweloperzy-2026-11/boiska-dla-deweloperow.html",
+    "proposed_path": "/en/courts-for-developers/",
+    "status": "static-dictionary-review"
+  },
+  {
+    "source": "kluby-2026-11/boiska-dla-klubow.html",
+    "proposed_path": "/en/courts-for-clubs/",
+    "status": "pending"
+  },
+  {
+    "source": "marki-2026-11/aktywacje-sportowe-dla-marek.html",
+    "proposed_path": "/en/sports-brand-activations/",
+    "status": "pending"
+  },
+  {
+    "source": "wynajem-2026-11/wynajem-boisk-mobilnych.html",
+    "proposed_path": "/en/mobile-court-rental/",
+    "status": "pending"
+  },
+  {
+    "source": "renowacja-2026-11/renowacja-boisk.html",
+    "proposed_path": "/en/court-renovation/",
+    "status": "pending"
+  },
+  {
+    "source": "nawierzchnie-2026-11/nawierzchnie-sportowe.html",
+    "proposed_path": "/en/sports-surfaces/",
+    "status": "pending"
+  },
+  {
+    "source": "projektowanie-2026-11/projektowanie-boisk.html",
+    "proposed_path": "/en/court-design/",
+    "status": "pending"
+  },
+  {
+    "source": "budowa-2026-11/budowa-boisk-sportowych.html",
+    "proposed_path": "/en/court-construction/",
+    "status": "pending"
+  },
+  {
+    "source": "realizacje-2026-11/realizacje-gamefields.html",
+    "proposed_path": "/en/projects/",
+    "status": "pending"
+  },
+  {
+    "source": "kontakt-2026-11/kontakt.html",
+    "proposed_path": "/en/contact/",
+    "status": "pending"
+  },
+  {
+    "source": "autentycznosc-2026-11/damian-gawrych.html",
+    "proposed_path": "/en/damian-gawrych/",
+    "status": "pending"
+  }
+]

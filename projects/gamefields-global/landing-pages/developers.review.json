@@ -1,0 +1,13 @@
+{
+  "source": "deweloperzy-2026-11/boiska-dla-deweloperow.html",
+  "proposed_slug": "courts-for-developers",
+  "locale": "en-GB",
+  "status": "review-only",
+  "source_commit": "cc27f44fcf3be23037f72671fbdba4733a2e28f9",
+  "unmapped_diacritic_text": [],
+  "notes": [
+    "Preserve all technical data, price figures and existing assets.",
+    "Source claim about 5–7 m site needs reconciliation with Panna Court dimensions and safety clearance before publication.",
+    "No EN routes, structured data, runtime JS or CF7 verified."
+  ]
+}
