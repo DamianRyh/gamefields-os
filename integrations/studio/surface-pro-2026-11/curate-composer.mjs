@@ -11,7 +11,7 @@
 //  - paints: at most 5 slots used, at least 3 (ground + 2);
 //  - symmetry: the raster equals its 180° turn or its mirror (≤ 1.2 % pixels differ);
 //    mural families (MURAL): a tapered point (thin piece shorter than 75 cm and under 0.09 m²) is allowed, a thin strip is not;
-//    and instead of symmetry the halves are balanced — paint shares differ by ≤ 0.4 (L1) and detail by ≤ 1.6x;
+//    and instead of symmetry the halves are balanced — ground share within 30 %, ≥ 3 paints in each half, detail within 1.6x;
 //  - balance: the ground or any paint covers ≤ 82 % of the court.
 // Measured and stored: area share per slot (paint m²), masking-edge length in metres, mode tag.
 import { createRequire } from 'module';
@@ -55,7 +55,7 @@ window.analyse = async (svg, W, H, sig, sc, taper) => {
     const notEr = new Uint8Array(N); for (let i = 0; i < N; i++) notEr[i] = er[i] ? 0 : 1; const d2 = dt(notEr); // distance to the core
     const thin = new Uint8Array(N); for (let i = 0; i < N; i++) if (m[i] && d2[i] > 13.5 * sc) { thin[i] = 1; thinPx++; }
     thinBad += comps(thin, 40 * sc * sc).filter((c) => !taper || c.len >= 30 * sc || c.n >= 150 * sc * sc).length; // taper: a point shorter than 75 cm is allowed, a strip is not
-    specks += comps(m, 1).filter((c) => c.n < 144 * sc * sc).length; }
+    specks += comps(m, 1).filter((c) => c.n >= 4 * sc * sc && c.n < 144 * sc * sc).length; } // < 4 px: raster seams, not paint
   // symmetry with a 1 px (court scale) tolerance: rasterising a turned edge can move it by a pixel
   const tol = sc; const hasNear = (x, y, v) => { for (let dy = -tol; dy <= tol; dy++) for (let dx = -tol; dx <= tol; dx++) { const xx = x + dx, yy = y + dy; if (xx >= 0 && yy >= 0 && xx < W && yy < H && lab[yy*W+xx] === v) return true; } return false; };
   let rot = 0, mir = 0; for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const v = lab[y*W+x]; if (v !== lab[(H-1-y)*W + (W-1-x)] && !hasNear(W-1-x, H-1-y, v)) rot++; if (v !== lab[y*W + (W-1-x)] && !hasNear(W-1-x, y, v)) mir++; }
@@ -64,7 +64,7 @@ window.analyse = async (svg, W, H, sig, sc, taper) => {
   // half balance for murals: L1 distance between the two halves' paint shares, and their detail (edge) ratio
   const hn = N / 2; let bal = 0; for (let k = 0; k < 5; k++) bal += Math.abs(halfA[0][k] - halfA[1][k]) / hn; const eRatio = Math.max(halfE[0], halfE[1]) / Math.max(1, Math.min(halfE[0], halfE[1]));
   let s = null; if (sig) { s = []; const cs = 10 * sc; for (let y = 0; y < H; y += cs) for (let x = 0; x < W; x += cs) { let e = 0; for (let yy = y; yy < Math.min(H, y+cs) && !e; yy++) for (let xx = x; xx < Math.min(W, x+cs) - 1; xx++) if (lab[yy*W+xx] !== lab[yy*W+xx+1] || (yy < H-1 && lab[yy*W+xx] !== lab[(yy+1)*W+xx])) { e = 1; break; } s.push(e); } }
-  return { area: area.map((a) => a / N), thinBad, thinPx: thinPx / (sc * sc), specks, sym: Math.min(rot, mir) / N, bal, eRatio, edges: edges / sc, sig: s };
+  return { area: area.map((a) => a / N), thinBad, thinPx: thinPx / (sc * sc), specks, sym: Math.min(rot, mir) / N, bal, eRatio, half: halfA.map((h) => h.map((v) => v / hn)), edges: edges / sc, sig: s };
 };`;
 
 const browser = await chromium.launch();
@@ -75,6 +75,9 @@ await page.addScriptTag({ content: ANALYSE });
 // optional 3rd argument: comma-separated families to (re)curate; the others keep their pool and report
 const only = process.argv[4] ? process.argv[4].split(',') : null;
 const prev = only ? await import('./court-composer.mjs?' + Date.now()) : null;
+// murals: colours may differ between halves (a red plane left, a blue one right); what must match is how much is painted,
+// how many paints each half carries and how much detail it has
+const muralBalanced = (m) => Math.abs(m.half[0][0] - m.half[1][0]) <= 0.3 && m.half.every((h) => h.filter((v) => v > 0.02).length >= 3) && m.eRatio <= 1.6;
 const POOL = only ? { ...prev.POOL } : {}; let report = {}; try { if (only) report = JSON.parse(readFileSync(here + 'composer-report.json', 'utf8')); } catch {}
 for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
   if (only && !only.includes(fid)) continue;
@@ -88,7 +91,7 @@ for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
     const [m4, m6] = await page.evaluate(async ([s4, s6, tp]) => [await window.analyse(s4, 1200, 800, true, 2, tp), await window.analyse(s6, 600, 600, false, 1, tp)], [toSvg(a.g, 400, 2), toSvg(b.g, 600), MURAL.has(fid)]);
     const used = m4.area.filter((x) => x > 0.003).length;
     let why = null;
-    if (m4.thinBad || m6.thinBad) why = 'thin'; else if (m4.specks > 2 || m6.specks > 2) why = 'specks'; else if (used < 3 || used > 5) why = 'paints'; else if (MURAL.has(fid) ? (m4.bal > 0.4 || m4.eRatio > 1.6 || m6.bal > 0.45) : (m4.sym > 0.012 || m6.sym > 0.012)) why = 'sym'; else if (Math.max(...m4.area) > 0.82) why = 'balance';
+    if (m4.thinBad || m6.thinBad) why = 'thin'; else if (m4.specks > 2 || m6.specks > 2) why = 'specks'; else if (used < 3 || used > 5) why = 'paints'; else if (MURAL.has(fid) ? !muralBalanced(m4) : (m4.sym > 0.012 || m6.sym > 0.012)) why = 'sym'; else if (Math.max(...m4.area) > 0.82) why = 'balance';
     if (why) { reasons[why]++; continue; }
     const tape = Math.round((m4.edges / 40) * 0.82); // px edges -> metres; 0.82 corrects staircase over-count on curves and diagonals
     cands.push({ seed, mode: a.mode, area: m4.area, tape, used, sig: m4.sig, thinPx: m4.thinPx + m6.thinPx });
