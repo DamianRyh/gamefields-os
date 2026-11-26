@@ -250,5 +250,19 @@
   },
   "modes": 4,
   "tapeMedian": 63
+ },
+ "pro-m-textile": {
+  "candidates": 220,
+  "passed": 121,
+  "kept": 36,
+  "rejected": {
+   "thin": 0,
+   "specks": 97,
+   "paints": 0,
+   "sym": 2,
+   "balance": 0
+  },
+  "modes": 6,
+  "tapeMedian": 241
  }
 }
