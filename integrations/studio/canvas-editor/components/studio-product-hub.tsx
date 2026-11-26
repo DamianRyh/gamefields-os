@@ -1,4 +1,5 @@
 'use client';
+import {useStudioLanguage} from "@/components/studio-language";
 import {MAT_PRODUCT_ENABLED,matNet,matPrintNet} from '@/lib/mat-product';
 import {FolderOpen} from 'lucide-react';
 import {useEffect,useState} from 'react';
@@ -31,19 +32,20 @@ function showAll(){try{if(new URLSearchParams(window.location.search).has('all')
    Courts are the main product and get the large field; surfaces and posters sit beside it. */
 function CourtLines(){return <span className="hub26-lines" aria-hidden="true"><i/><i/><i/><i/></span>}
 export function StudioProductHub({onSelect,onProjects,onContinue}:{onSelect:(kind:StudioEntry)=>void;onProjects:()=>void;onContinue:()=>void}){
+ const {display:tr,locale,setLocale}=useStudioLanguage();
  const shop=useShop();const [all,setAll]=useState(false);useEffect(()=>{if(showAll())setAll(true)},[]);
  const list=products.filter(p=>all||!LAUNCH_HIDDEN.has(p.id));
  return <div className="product-hub hub26" data-product-hub data-count={list.length}>
-  <header className="product-hub-header"><a href="https://www.gamefields.eu/" target="_top" aria-label="Gamefields — strona główna"><span className="hub-brand-wordmark">gamefields.</span></a><nav aria-label="Nawigacja Studia"><button className="hub-active" aria-current="page">Studio</button><button onClick={onProjects}>Moje projekty</button></nav><button className="hub-set" onClick={onContinue}><FolderOpen size={20}/>Kontynuuj projekt</button></header>
+  <header className="product-hub-header"><a href="https://www.gamefields.eu/" target="_top" aria-label={tr("Gamefields — strona główna")}><span className="hub-brand-wordmark">gamefields.</span></a><nav aria-label={tr("Nawigacja Studia")}><button className="hub-active" aria-current="page">Studio</button><button onClick={onProjects}>{tr("Moje projekty")}</button></nav><select aria-label={locale==="en"?"Language":"Język"} value={locale} onChange={e=>setLocale(e.target.value==="en"?"en":"pl")}><option value="pl">PL</option><option value="en">EN</option></select><button className="hub-set" onClick={onContinue}><FolderOpen size={20}/>{tr("Kontynuuj projekt")}</button></header>
   <main className="hub26-main">
-   <div className="hub26-intro"><h1>Co projektujemy?</h1><p>Wybierz, od czego zaczynasz. Projekt zapiszesz i wyślesz do wyceny w każdej chwili.</p></div>
-   <section className="hub26-wall product-hub-grid" aria-label="Wybierz produkt">
-    {list.map(p=><button key={p.id} type="button" aria-label={p.name} aria-describedby={'hub-desc-'+p.id+' hub-price-'+p.id} className={'product-hub-card hub26-tile hub26-'+p.id} onClick={()=>onSelect(p.id)}>
+   <div className="hub26-intro"><h1>{tr("Co projektujemy?")}</h1><p>{tr("Wybierz, od czego zaczynasz. Projekt zapiszesz i wyślesz do wyceny w każdej chwili.")}</p></div>
+   <section className="hub26-wall product-hub-grid" aria-label={tr("Wybierz produkt")}>
+    {list.map(p=><button key={p.id} type="button" aria-label={tr(p.name)} aria-describedby={'hub-desc-'+p.id+' hub-price-'+p.id} className={'product-hub-card hub26-tile hub26-'+p.id} onClick={()=>onSelect(p.id)}>
      {p.id==='surface'||p.id==='mat'?<img className="hub26-fill" src={p.image} alt="" width={1200} height={800} decoding="async"/>:null}
      {p.id!=='surface'&&p.id!=='poster'&&p.id!=='mat'?<CourtLines/>:null}
      {p.id!=='surface'&&p.id!=='mat'?<img className="hub26-art" src={p.image} alt="" width={960} height={540} decoding="async" loading={p.id==='ball'||p.id==='kit'?'lazy':undefined} fetchPriority={p.id==='court'?'high':undefined}/>:null}
-     <span className="hub26-text"><span className="hub26-name">{p.name}</span><span className="hub26-desc" id={'hub-desc-'+p.id}>{p.description}</span></span>
-     <span className="hub26-foot"><span className="hub26-price" id={'hub-price-'+p.id} data-card-price>{cardPrice(p.id,shop)}</span><span className="hub26-go" aria-hidden="true">{p.cta}</span></span>
+     <span className="hub26-text"><span className="hub26-name">{tr(p.name)}</span><span className="hub26-desc" id={'hub-desc-'+p.id}>{tr(p.description)}</span></span>
+     <span className="hub26-foot"><span className="hub26-price" id={'hub-price-'+p.id} data-card-price>{locale==="en"?cardPrice(p.id,shop).replace(/^od /,"from ").replace(/ brutto \/ szt\.$/," incl. VAT / item").replace(/ brutto$/," incl. VAT").replace(/ netto$/," excl. VAT").replace("Wycena indywidualna","Individual quotation"):cardPrice(p.id,shop)}</span><span className="hub26-go" aria-hidden="true">{tr(p.cta)}</span></span>
     </button>)}
    </section>
   </main>
