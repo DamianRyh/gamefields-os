@@ -1,0 +1,408 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-surf{gap:8px}.gfb-surf .tx{padding:10px 12px 12px}.gfb-surf b{font-size:15px}.gfb-surf .nt{font-size:12px}.gfb-surf .r{font-size:13px}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+
+.gfb-hero figure.kit{margin:0;background:#2457D6;overflow:hidden;position:relative}
+.gfb-hero figure.kit img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.gfa .gfb-hero figure.kit figcaption{position:absolute;left:10px;bottom:10px;margin:0;padding:6px 10px;background:rgba(28,9,18,.84);color:#fff;font-size:13px}
+.gfb-zones{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-zones > li{display:flex;flex-direction:column;gap:10px;padding:24px;background:#fff;border:1px solid var(--line)}
+.gfb-zones .n{font-size:13px;font-weight:800;letter-spacing:.06em;color:var(--violet)}
+.gfb-zones b{font-size:clamp(22px,2vw,28px);letter-spacing:-.03em;line-height:1.08}
+.gfb-zones p{margin:0;color:#5A4652;font-size:15px}
+.gfb-zones ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-zones .pr{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-zones a{color:var(--violet);font-weight:800;font-size:14px;text-decoration:none}
+.gfb-mods{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-mods a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-mods a:hover{border-color:var(--violet)}
+.gfb-mods .ph{background:var(--bg);overflow:hidden}
+.gfb-mods img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-mods a:hover img{transform:scale(1.04)}
+.gfb-mods .tx{display:grid;gap:6px;padding:18px 20px 20px}
+.gfb-mods b{font-size:24px;letter-spacing:-.03em}
+.gfb-mods .wh{font-size:14px;color:var(--muted)}
+.gfb-mods .pr{font-size:15px;font-weight:800}.gfb-mods .pr small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-mods .go{margin-top:4px;color:var(--violet);font-weight:800;font-size:14px}
+.gfb-kitb{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:center}
+.gfb-kitb img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#2457D6}
+.gfb-kitb ul{margin:14px 0 0;padding-left:20px;display:grid;gap:6px;font-size:16px;color:rgba(244,241,238,.88)}
+.gfb-kitb .pr{margin:14px 0 0;font-size:18px;font-weight:800;color:#fff}
+.gfb-kitb p.l{margin:16px 0 0;font-size:18px;color:rgba(244,241,238,.85)}
+.gfb-kitb .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-kitb .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+.gfb-surf3{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf3 a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-surf3 a:hover{border-color:var(--violet)}
+.gfb-surf3 img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfb-surf3 .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf3 b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf3 .nt{font-size:14px;color:var(--muted)}
+.gfb-surf3 .r{font-size:14px;font-weight:800}
+.gfb-case{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,2.6vw,36px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfb-case .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfb-case .ph img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#E6E0DA}
+.gfb-case .ph img:first-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfb-case .pl{margin:0 0 6px;color:var(--violet);font-weight:800;font-size:14px}
+.gfb-case h3{font-size:clamp(30px,3vw,46px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-case p.t{margin:12px 0 0;color:#5A4652;font-size:16px}
+.gfb-case blockquote{margin:16px 0 0;padding:0 0 0 14px;border-left:4px solid var(--violet);font-size:17px;font-weight:600;line-height:1.45}
+.gfb-case cite{display:block;margin-top:6px;font-style:normal;font-size:14px;color:var(--muted)}
+.gfb-case .ln{display:inline-block;margin-top:12px;color:var(--violet);font-weight:800;font-size:14px}
+.gfb-auth{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(20px,3vw,48px);align-items:center}
+.gfb-auth img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;background:#2a1520}
+.gfb-auth h2{color:#fff}
+.gfb-auth p.l{margin:16px 0 0;font-size:17px;color:rgba(244,241,238,.85)}
+.gfb-tl{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.gfb-tl li{padding:12px 14px;border:1px solid rgba(244,241,238,.2);font-size:14px;color:rgba(244,241,238,.85)}
+.gfb-tl b{display:block;font-size:20px;color:var(--lime)}
+.gfb-spons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-spons div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-spons dt{font-size:19px;font-weight:800;letter-spacing:-.02em}
+.gfb-spons dd{margin:6px 0 0;font-size:15px;color:#5A4652}
+.gfb-honest{margin:12px 0 0;padding:14px 18px;background:#EEE8FF;font-size:15px}
+.gfb-three{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-three li{padding:22px;background:#fff;border:1px solid var(--line);border-top:4px solid var(--violet)}
+.gfb-three .t{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-three b{display:block;margin-top:6px;font-size:21px;letter-spacing:-.02em}
+.gfb-three p{margin:6px 0 0;font-size:15px;color:#5A4652}
+@media (max-width:1100px){.gfb-surf3,.gfb-spons,.gfb-tl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.gfb-zones,.gfb-mods,.gfb-kitb,.gfb-case,.gfb-auth,.gfb-three{grid-template-columns:minmax(0,1fr)}.gfb-auth img{max-width:360px}}
+@media (max-width:560px){.gfb-surf3,.gfb-spons,.gfb-tl{grid-template-columns:minmax(0,1fr)}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://www.gamefields.eu/boiska-dla-klubow/#usluga","name":"Boiska i strefy treningowe dla klubów","serviceType":"Strefy treningowe 1 na 1 i 3 na 3 dla klubów i akademii","url":"https://www.gamefields.eu/boiska-dla-klubow/","inLanguage":"pl-PL","areaServed":{"@type":"Country","name":"Polska"},"provider":{"@id":"https://www.gamefields.eu/#studio"},"audience":{"@type":"Audience","audienceType":"kluby sportowe, akademie piłkarskie, organizacje sportowe"},"description":"Strefy techniki 1 na 1, boiska 3 na 3 i modernizacje placów dla klubów, w barwach klubu i partnera, z kartą projektu do rozmowy ze sponsorem."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Kluby i akademie","item":"https://www.gamefields.eu/boiska-dla-klubow/"}]},{"@type":"FAQPage","@id":"https://www.gamefields.eu/boiska-dla-klubow/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile kosztuje strefa treningowa dla klubu?","acceptedAnswer":{"@type":"Answer","text":"Panna Cage 180 kosztuje od 58 000 zł netto (z płytą i malowaniem od 69 400 zł), boisko 3 na 3 Street Arena 15 od 100 000 zł netto. Sztuczna trawa na Cage 180 to dodatkowo 5 200 zł–9 100 zł netto. Montaż i transport liczę po zdjęciach."}},{"@type":"Question","name":"Czy można wykorzystać fragment istniejącego obiektu?","acceptedAnswer":{"@type":"Answer","text":"Tak. Boczny plac, betonowa powierzchnia albo niewykorzystany fragment kompleksu można przeprojektować pod dodatkową funkcję treningową, często bez budowy nowej płyty."}},{"@type":"Question","name":"Która arena jest najlepsza dla akademii?","acceptedAnswer":{"@type":"Answer","text":"Do treningu 1 na 1 polecam Panna Cage 180: dwa poziomy paneli (1,80 m), wyższa zabudowa wokół pola gry; w zestawie „Klub” opisana jako arena do treningu 1 na 1 przez cały rok. Do małych gier drużynowych Street Arena 15 (3 na 3)."}},{"@type":"Question","name":"Jaka nawierzchnia do treningu piłkarskiego?","acceptedAnswer":{"@type":"Answer","text":"Najczęściej sztuczna trawa (gra stopą, naturalny wybór do piłki). Przy bardzo intensywnym użytkowaniu EPDM albo płytki PP z punktową wymianą modułów."}},{"@type":"Question","name":"Czy strefa może mieć barwy klubu i sponsora?","acceptedAnswer":{"@type":"Answer","text":"Tak. Kolor ramy, paneli i wzór nawierzchni ustawisz w Studio 3D, a logo partnera może być na bandach i nawierzchni bez utraty czytelności gry."}},{"@type":"Question","name":"Czy pomożecie w rozmowie ze sponsorem albo w dotacji?","acceptedAnswer":{"@type":"Answer","text":"Przygotuję kartę projektu z renderem i ceną do rozmowy z firmą, właścicielem terenu albo samorządem. Nie gwarantuję dotacji ani pozyskania sponsora; zasady konkretnego naboru trzeba sprawdzić u jego organizatora."}},{"@type":"Question","name":"Czy arena wytrzyma intensywny trening?","acceptedAnswer":{"@type":"Answer","text":"Panna Cage 180 pracuje na co dzień i podczas wydarzeń w parku Wake For Friends. Panna Ring stoi na Orliku od 10 lat bez uszkodzeń. Na realizacje daję 12 miesięcy gwarancji."}},{"@type":"Question","name":"Czy możecie zorganizować turniej albo camp na otwarcie?","acceptedAnswer":{"@type":"Answer","text":"Tak. Turnieje organizuję od 2008 roku, w 2017 zorganizowałem Mistrzostwa Świata Freestival Street Games. Nowa strefa może od razu zagrać na campie albo turnieju partnera."}}]}]}</script>
+<div class="gfa gfb">
+<section class="gfb-hero"><div class="w top">
+  <div>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Clubs and academies</p>
+    <p class="k">More training from the space you have</p>
+    <h1 class="d">Courts and training zones for clubs.</h1>
+    <p class="lead">A 1v1 skills zone, a small-sided 3v3 court or a renovated side area. In club and partner colours, with a project sheet for sponsor discussions.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Tell me what your club needs →</a><a class="gfa-btn alt" href="/studio/?arena=circle-cage-2&amp;pattern=pro-munich&amp;variant=2&amp;palette=aicher&amp;panel=2E9C5E&amp;frame=0F5B3A">Club package in Studio ↗</a></div>
+  </div>
+  <figure class="kit"><img src="/wp-content/themes/gamefields/assets/js/home/kits/klub.webp" alt="Panna Cage 180 z nawierzchnią Munich Chevrons, zestaw dla klubu, widok ze Studio 3D" loading="eager" decoding="async"><figcaption>Club package: Panna Cage 180 + Munich Chevrons</figcaption></figure>
+</div>
+<div class="w">
+  <dl class="gfb-nums">
+    <div><dt>Cage 180</dt><dd>from PLN 58,000<small>excluding VAT, clubs and academies</small></dd></div>
+    <div><dt>Boards</dt><dd>1,80 m<small>higher enclosure, Cage 180</small></dd></div>
+    <div><dt>3v3</dt><dd>15 × 10 m<small>Street Arena 15</small></dd></div>
+    <div><dt>Founder</dt><dd>Warsaw FC<small>club founder</small></dd></div>
+  </dl>
+</div></section>
+
+<nav class="gfb-jump" aria-label="On this page"><div class="w"><ul role="list"><li><a href="#strefy">Training zones</a></li><li><a href="#modele">Models</a></li><li><a href="#klub">Club package</a></li><li><a href="#nawierzchnie">Surfaces</a></li><li><a href="#partner">Club + partner</a></li><li><a href="#realizacja">Delivery</a></li><li><a href="#autor">Founder</a></li><li><a href="#start">Getting started</a></li><li><a href="#pytania">FAQs</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="strefy"><div class="w">
+  <div class="gfa-head"><div><p class="k">Training zones</p><h2 class="d">A new function without a new stadium.</h2></div><p>Not every training activity needs a full-size pitch. An unused part of the facility can provide additional space for skills and small-sided games.</p></div>
+  <ul class="gfb-zones" role="list"><li><span class="n">01</span><b>1v1 skills zone</b><p>Repeatable individual training: dribbling, rebounds off boards and 1v1 play.</p><ul><li>arena from approx. 5–6 m in diameter</li><li>0.9–1.8 m boards</li><li>alongside the main pitch</li></ul><span class="pr">Panna Cage 180 from PLN 58,000 excluding VAT</span><a href="#modele">Models ↓</a></li><li><span class="n">02</span><b>Small-sided 3v3 games</b><p>Intensive small-sided training sessions on an enclosed court.</p><ul><li>Street Arena 15: 15 × 10 m</li><li>two goals, 1 m boards</li><li>club tournaments and leagues</li></ul><span class="pr">from PLN 100,000 excluding VAT</span><a href="/product/street-arena-15/">Street Arena 15 →</a></li><li><span class="n">03</span><b>Renovation</b><p>A side area, old concrete or unused part of the complex transformed into a training zone.</p><ul><li>repairs and new surface</li><li>markings for drills</li><li>arena on an existing site</li></ul><span class="pr">painting from PLN 78/m² excluding VAT</span><a href="/renowacja-boisk/">Renovation →</a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="modele"><div class="w">
+  <div class="gfa-head"><div><p class="k">Models</p><h2 class="d">Three structures for clubs.</h2></div><p>Starting prices excluding VAT: structure and complete package with concrete slab and painting. <a href="/boiska-street-football/">All 8 models →</a></p></div>
+  <ul class="gfb-mods" role="list"><li><a href="/studio/?arena=circle-cage-2"><span class="ph" style="--bg:#D8F24A"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage180-720.webp" alt="Panna Octa Cage 180, render konstrukcji" loading="lazy" decoding="async"></span><span class="tx"><b>Panna Octa Cage 180</b><span class="wh">Ø, 1.8 m boards</span><span class="wh">Two panel levels, 1.80 m: a higher enclosure around the playing area.</span><span class="pr">structure from PLN 58,000 excluding VAT<small>with slab and painting from PLN 69,400 excluding VAT</small></span><span class="go">Design in Studio ↗</span></span></a></li><li><a href="/studio/?arena=o1"><span class="ph" style="--bg:#2457D6"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-play-720.webp" alt="Panna Play, render konstrukcji" loading="lazy" decoding="async"></span><span class="tx"><b>Panna Play</b><span class="wh">Ø ~6 m</span><span class="wh">Perforated panels of varying heights, two goals. Clubs, events and schools.</span><span class="pr">structure from PLN 40,000 excluding VAT<small>with slab and painting from PLN 51,000 excluding VAT</small></span><span class="go">Design in Studio ↗</span></span></a></li><li><a href="/studio/?arena=street15"><span class="ph" style="--bg:#1F2A6B"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-street15-720.webp" alt="Boisko 3 na 3 (Street Arena 15), render konstrukcji" loading="lazy" decoding="async"></span><span class="tx"><b>3v3 court (Street Arena 15)</b><span class="wh">Full size, 15 × 10 m</span><span class="wh">Full-size 3v3: 15 × 10 m, smooth boards and space for club colours.</span><span class="pr">structure from PLN 100,000 excluding VAT<small>with slab and painting from PLN 159,300 excluding VAT</small></span><span class="go">Design in Studio ↗</span></span></a></li></ul>
+</div></section>
+
+<section class="gfa-band" id="klub"><div class="w">
+  <div class="gfb-kitb">
+    <img src="/wp-content/themes/gamefields/assets/js/home/kits/klub.webp" alt="Zestaw Klub: Panna Cage 180 z nawierzchnią Munich Chevrons" loading="lazy" decoding="async">
+    <div><p class="k">Club package</p><h2 class="d" style="font-size:clamp(40px,5vw,80px)">Club colours on the court.</h2>
+      <p class="l">Year-round 1v1 training. Club and partner colours on the surface. Academies and training centres.</p>
+      <ul><li>Panna Cage 180: two panel levels, 1.80 m</li><li>Munich Chevrons surface: stripes cut at 45° (Otl Aicher)</li><li>frame and panels in club colours</li></ul>
+      <p class="pr">structure from PLN 58,000 excluding VAT · package from PLN 69,400</p>
+      <div class="gfa-btns" style="margin-top:18px"><a class="gfa-btn" href="/studio/?arena=circle-cage-2&amp;pattern=pro-munich&amp;variant=2&amp;palette=aicher&amp;panel=2E9C5E&amp;frame=0F5B3A">Open package in Studio ↗</a><a class="gfa-btn alt" href="/product/panna-octa-cage-180/">Cage 180 in the shop</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="nawierzchnie"><div class="w">
+  <div class="gfa-head"><div><p class="k">Surfaces</p><h2 class="d">Suited to usage and footwear.</h2></div><p>Finishing cost for Panna Cage 180 (31.1 m² including allowance), from Standard to Premium, excluding VAT. <a href="/nawierzchnie-sportowe/">All surfaces →</a></p></div>
+  <ul class="gfb-surf3" role="list"><li><a href="/product/sztuczna-trawa/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/trawa-macro-768x576.webp" alt="Sztuczna trawa z bliska" loading="lazy" decoding="async"><span class="tx"><b>Artificial turf</b><span class="nt">foot play, a natural choice for football</span><span class="r">Cage 180: PLN 5,200–PLN 9,100</span></span></a></li><li><a href="/product/nawierzchnia-epdm/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-768x576.webp" alt="EPDM wylewana z bliska" loading="lazy" decoding="async"><span class="tx"><b>In-situ EPDM</b><span class="nt">intensive use, Orlik facilities, PN-EN 14877</span><span class="r">Cage 180: PLN 7,800–PLN 12,500</span></span></a></li><li><a href="/product/plytki-sportowe/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plytki-macro-768x576.webp" alt="Płytki sportowe PP z bliska" loading="lazy" decoding="async"><span class="tx"><b>PP sports tiles</b><span class="nt">quick installation, individual tile replacement</span><span class="r">Cage 180: PLN 8,600–PLN 12,500</span></span></a></li><li><a href="/product/maty-gumowe-nawierzchnia/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/maty-gumowe-macro-768x576.webp" alt="Maty gumowe z bliska" loading="lazy" decoding="async"><span class="tx"><b>Rubber mats</b><span class="nt">continuous rubber, R11 slip resistance</span><span class="r">Cage 180: PLN 7,600–PLN 13,300</span></span></a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="partner"><div class="w">
+  <div class="gfa-head"><div><p class="k">Club + partner</p><h2 class="d">A project for sponsor discussions.</h2></div><p>One project sheet helps structure discussions with a company, landowner or local authority.</p></div>
+  <dl class="gfb-spons"><div><dt>Purpose and community</dt><dd>Club needs, age groups and intended use of the space.</dd></div><div><dt>Location and timing</dt><dd>Location, land rights and indicative schedule.</dd></div><div><dt>Project PDF</dt><dd>Render in club and partner colours, dimensions and Studio price.</dd></div><div><dt>Partner visibility</dt><dd>Logos on boards and the surface, tournaments and camps in the new zone.</dd></div></dl>
+  <p class="gfb-honest"><b>To be clear:</b> I do not guarantee funding or sponsorship. Eligibility, land rights, eligible costs, own contribution and deadlines depend on the specific funding round; its organiser makes the decision. <a href="/dofinansowanie-boisk/" style="color:var(--violet);font-weight:700">Funding sources →</a></p>
+</div></section>
+
+<section class="gfa-sec" id="realizacja"><div class="w">
+  <div class="gfb-case">
+    <div class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Damian-Gawrych-x-Wake-for-friends--768x960.jpg" alt="Dzieci grają na arenie Gamefields, Wake For Friends" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/12-3-768x768.jpg" alt="Panna Octa Cage 180, Wake For Friends" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/16-768x432.jpg" alt="Nawierzchnia ze sztucznej trawy, Cage 180" loading="lazy" decoding="async"></div>
+    <div><p class="pl">Grodzisk Mazowiecki, wakeboarding park</p><h3>Cage 180 at Wake For Friends</h3>
+      <p class="t">The artificial-turf arena expanded the park's offering beyond wakeboarding. It is used daily and for events: birthdays, day camps and gatherings.</p>
+      <blockquote>“The Panna Cage 180 court fitted our need to expand the park's offering beyond wakeboarding. It works well every day and during the events we organise.”<cite>Piotr Wiśniewski, Owner, Wake For Friends</cite></blockquote>
+      <a class="ln" href="/realizacje-gamefields/#wake">Project story →</a></div>
+  </div>
+</div></section>
+
+<section class="gfa-band" id="autor"><div class="w">
+  <div class="gfb-auth">
+    <img src="https://www.gamefields.eu/wp-content/uploads/2026/11/DAMIAN-GAWRYCH-1-768x998.jpeg" alt="Damian Gawrych w koszulce Warsaw FC" width="768" height="998" loading="lazy" decoding="async">
+    <div><p class="k">From a club member to clubs</p><h2 class="d" style="font-size:clamp(40px,5vw,80px)">I know how clubs operate.</h2>
+      <p class="l">Damian Gawrych, founder of Warsaw FC. I have played panna since 2005 and organised tournaments since 2008. I design training zones around the real work of coaches, not a catalogue.</p>
+      <ul class="gfb-tl" role="list"><li><b>2005</b>panna and street football player</li><li><b>2008</b>first tournament, Jaktorów</li><li><b>2015</b>world championship podium, Prague</li><li><b>2017</b>organiser of the Freestival Street Games World Championships</li></ul>
+      <ul class="gfa-links"><li><a href="/damian-gawrych/">About me →</a></li></ul></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="start"><div class="w">
+  <div class="gfa-head"><div><p class="k">Getting started</p><h2 class="d">Prepare a space for your club.</h2></div><p>You do not need all the answers at the start. Include your club name, town, needs, site status and timing in your message.</p></div>
+  <ol class="gfb-three" role="list"><li><span class="t">01 / Need</span><b>What do you want to change?</b><p>Users, sports, current facility and project goal.</p></li><li><span class="t">02 / Site</span><b>Where will it be built?</b><p>Location, site status and scope. Mark unknown details as to be confirmed.</p></li><li><span class="t">03 / Partners</span><b>How will it be funded?</b><p>Available funds, potential partners and decisions needed before delivery.</p></li></ol>
+  <div class="gfa-btns" style="margin-top:18px"><a class="gfa-btn" href="/kontakt/">Tell me what your club needs →</a><a class="gfa-btn alt" href="/studio/">Design in Studio ↗</a></div>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><div><p class="k">FAQs</p><h2 class="d">Club, training, sponsor.</h2></div><p>Costs, models, surfaces, branding and funding.</p></div>
+  <div class="gfa-faq"><details><summary>How much does a club training zone cost?</summary><p>Panna Cage 180 kosztuje od 58 000 zł netto (z płytą i malowaniem od 69 400 zł), boisko 3 na 3 Street Arena 15 od 100 000 zł netto. Sztuczna trawa na Cage 180 to dodatkowo 5 200 zł–9 100 zł netto. Montaż i transport liczę po zdjęciach.</p></details><details><summary>Can part of an existing facility be used?</summary><p>Yes. A side area, concrete surface or unused section of a complex can be redesigned for additional training, often without building a new slab.</p></details><details><summary>Which arena is best for an academy?</summary><p>For 1v1 training I recommend Panna Cage 180: two panel levels (1.80 m), a higher enclosure around the playing area; the club package presents it as a year-round 1v1 training arena. For small-sided team games, Street Arena 15 (3v3).</p></details><details><summary>Which surface for football training?</summary><p>Usually artificial turf, a natural choice for football. For very intensive use, EPDM or PP tiles with individually replaceable modules.</p></details><details><summary>Can the zone feature club and sponsor colours?</summary><p>Yes. Set frame and panel colours and surface patterns in 3D Studio. Partner logos can appear on boards and the surface without compromising the clarity of play.</p></details><details><summary>Can you help with sponsor discussions or funding?</summary><p>I prepare a project sheet with a render and price for discussions with companies, landowners or local authorities. I do not guarantee grants or sponsorship; check the specific funding rules with the organiser.</p></details><details><summary>Can the arena withstand intensive training?</summary><p>Panna Cage 180 is used daily and during events at Wake For Friends. Panna Ring has stood at an Orlik facility for 10 years without damage. I provide a 12-month warranty on projects.</p></details><details><summary>Can you organise an opening tournament or camp?</summary><p>Yes. I have organised tournaments since 2008 and organised the Freestival Street Games World Championships in 2017. The new zone can be used immediately for a camp or partner tournament.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><div><p class="k">Explore more</p><h2 class="d">From training zone to tournament.</h2></div><p>Models, surfaces and events.</p></div>
+  <ul class="gfb-next" role="list">
+    <li><a href="/boiska-street-football/"><i>Models</i><b>Panna and street football courts</b><span>8 structures with prices and 3D models.</span></a></li>
+    <li><a href="/nawierzchnie-sportowe/"><i>Surfaces</i><b>Sports surfaces</b><span>Turf, EPDM, tiles and rubber with prices.</span></a></li>
+    <li><a href="/eventy-sportowe/"><i>Events</i><b>Sports events</b><span>Tournaments, camps and activations.</span></a></li>
+  </ul>
+  <ul class="gfb-who" role="list"><li><a href="/aktywacje-sportowe-dla-marek/"><span>For</span>brands and sponsors</a></li><li><a href="/dofinansowanie-boisk/">Funding</a></li><li><a href="/renowacja-boisk/">Renovation</a></li><li><a href="/boiska-do-pilki-noznej/">Football courts</a></li><li><a href="/realizacje-gamefields/">Projects</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">A training zone<br>for your club?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Tell me what your club needs →</a><a class="gfa-btn alt" href="/studio/?arena=circle-cage-2&amp;pattern=pro-munich&amp;variant=2&amp;palette=aicher&amp;panel=2E9C5E&amp;frame=0F5B3A">Club package ↗</a></div>
+</div></section>
+
+</div>
+<!-- /wp:html -->

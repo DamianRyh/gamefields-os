@@ -1,0 +1,23 @@
+[
+  {
+    "id": 3464,
+    "slug": "dla-miast",
+    "modified": "2026-11-25T11:44:41",
+    "matchesRepo": false
+  },
+  {
+    "id": 3703,
+    "slug": "boiska-dla-klubow",
+    "matchesRepo": true
+  },
+  {
+    "id": 3704,
+    "slug": "aktywacje-sportowe-dla-marek",
+    "matchesRepo": true
+  },
+  {
+    "id": 3725,
+    "slug": "wynajem-boisk-mobilnych",
+    "matchesRepo": true
+  }
+]
