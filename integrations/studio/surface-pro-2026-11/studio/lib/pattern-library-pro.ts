@@ -676,6 +676,110 @@ export const proFamilies:PatternFamily[]=[
   ],
   "baseComplexity": 1,
   "renderer": "pro"
+ },
+ {
+  "id": "pro-m-cutouts",
+  "name": "Wycinanki",
+  "short": "CUT",
+  "group": "street",
+  "description": "Wielkie płaskie symbole (gwiazdy, oczy, księżyce, iksy, pioruny) na skośnych płaszczyznach koloru. Mural w duchu wycinanek z amerykańskich boisk.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-field",
+  "name": "Pola malarskie",
+  "short": "FIELD",
+  "group": "premium",
+  "description": "Malarskie pola koloru o miękkich, poszarpanych krawędziach, płynące przez całe boisko, z kilkoma akcentami.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-textile",
+  "name": "Tkanina",
+  "short": "TEX",
+  "group": "brand",
+  "description": "Pasy jak tkane wstęgi, każdy z innym motywem: zygzak, romby, krata, pasy, trójkąty. Od krawędzi do krawędzi.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-landscape",
+  "name": "Pejzaż",
+  "short": "LAND",
+  "group": "organic",
+  "description": "Warstwy wzgórz albo fal i słońce z aureolą: malowany krajobraz na całe boisko.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-flora",
+  "name": "Flora",
+  "short": "FLORA",
+  "group": "organic",
+  "description": "Ogromne liście wchodzące od krawędzi boiska, z malowanym nerwem. Botaniczny mural do parku.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-words",
+  "name": "Wielkie słowa",
+  "short": "WORD",
+  "group": "brand",
+  "description": "Hasło wielkimi literami z blokowego kroju (GRAJ, GOL, RAZEM…), na panelach koloru albo z cieniem.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-frame",
+  "name": "Rama",
+  "short": "FRAME",
+  "group": "play",
+  "description": "Mural na pasie wokół boiska i w polach bramkowych, środek spokojny do gry.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-strokes",
+  "name": "Pociągnięcia",
+  "short": "BRUSH",
+  "group": "street",
+  "description": "Wielkie pociągnięcia pędzla o stałej szerokości i okrągłych końcach, nałożone na siebie przez całe boisko.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
  }
 ];
 export const proPalettes:PatternPalette[]=[
@@ -1176,6 +1280,88 @@ export const proSignaturePresets:SignaturePreset[]=[
   "paletteId": "gamefields",
   "useCase": "klub / sponsor",
   "note": "Numer jako supergrafika — klub, rok założenia, kod dzielnicy."
+ }
+];
+export const muralSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "m-cutouts",
+  "name": "Wycinanki",
+  "eyebrow": "MURALE 01",
+  "familyId": "pro-m-cutouts",
+  "variant": 3,
+  "paletteId": "ndebele",
+  "useCase": "street / youth",
+  "note": "Wielkie płaskie symbole na skośnych płaszczyznach: gwiazdy, oczy, księżyce, pioruny. Mural jak z amerykańskich boisk Project Backboard."
+ },
+ {
+  "id": "m-field",
+  "name": "Pola malarskie",
+  "eyebrow": "MURALE 02",
+  "familyId": "pro-m-field",
+  "variant": 2,
+  "paletteId": "kinloch",
+  "useCase": "park / sztuka publiczna",
+  "note": "Pola koloru o miękkich krawędziach płyną przez całe boisko, jak obraz przeniesiony na nawierzchnię."
+ },
+ {
+  "id": "m-textile",
+  "name": "Tkanina",
+  "eyebrow": "MURALE 03",
+  "familyId": "pro-m-textile",
+  "variant": 1,
+  "paletteId": "gees-bend",
+  "useCase": "kultura / dzielnica",
+  "note": "Pasy jak tkane wstęgi, każdy z innym motywem. Boisko opowiada historię miejsca wzorem, nie napisem."
+ },
+ {
+  "id": "m-landscape",
+  "name": "Pejzaż",
+  "eyebrow": "MURALE 04",
+  "familyId": "pro-m-landscape",
+  "variant": 1,
+  "paletteId": "simultane",
+  "useCase": "miasto / park",
+  "note": "Warstwy wzgórz i słońce z aureolą. Jasne kolory odbijają słońce, więc nawierzchnia mniej się nagrzewa."
+ },
+ {
+  "id": "m-flora",
+  "name": "Flora",
+  "eyebrow": "MURALE 05",
+  "familyId": "pro-m-flora",
+  "variant": 6,
+  "paletteId": "burle-marx",
+  "useCase": "park / eco",
+  "note": "Ogromne liście wchodzą od krawędzi boiska, środek zostaje czytelny do gry."
+ },
+ {
+  "id": "m-words",
+  "name": "Nasze boisko",
+  "eyebrow": "MURALE 06",
+  "familyId": "pro-m-words",
+  "variant": 8,
+  "paletteId": "swiss",
+  "useCase": "szkoła / dzielnica",
+  "note": "Hasło wielkimi literami z blokowego kroju. Każda litera ma co najmniej 20 cm kreski, więc maluje się ją z szablonu."
+ },
+ {
+  "id": "m-frame",
+  "name": "Rama",
+  "eyebrow": "MURALE 07",
+  "familyId": "pro-m-frame",
+  "variant": 3,
+  "paletteId": "nihon",
+  "useCase": "szkoła / klub",
+  "note": "Mural na pasie wokół boiska i w polach bramkowych, środek spokojny. Najtańszy sposób na boisko-mural."
+ },
+ {
+  "id": "m-strokes",
+  "name": "Pociągnięcia",
+  "eyebrow": "MURALE 08",
+  "familyId": "pro-m-strokes",
+  "variant": 3,
+  "paletteId": "stella",
+  "useCase": "event / festiwal",
+  "note": "Wielkie pociągnięcia pędzla przez całe boisko, ruch i energia jak na murach miasta."
  }
 ];
 export const composerSignaturePresets:SignaturePreset[]=[

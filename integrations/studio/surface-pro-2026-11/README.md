@@ -163,3 +163,18 @@ Osiem kolejnych gramatyk w tym samym modelu, sprawdzonych tym samym kuratorem (`
 | Cięcia (`pro-k-cuts`) | geometric | proste cięcia parami symetrycznymi, pola na przemian w dwóch kolorach, piasta | 36 / 90 / 372 |
 
 Poprawki po przeglądzie: Koszone pasy zawsze mają co najmniej dwie farby na tle (wcześniej 88 kandydatów odpadało za 2 kolory); w Orbicie usunięto odmianę pionową, bo jej lustrzane odbicie tworzyło twarde cięcie na linii środkowej.
+
+### Kompozytor III: Murale (2026-11-26)
+
+Osiem rodzin po trendzie z amerykańskich boisk-murali (research: `docs/research/2026-11-26-murale-boisk-usa.md`). Mural rzadko jest lustrzany, więc dla tych rodzin (`MURAL` w `court-composer.mjs`) kurator zamiast symetrii sprawdza **równowagę połówek**: podobny udział tła (±30 %), co najmniej 3 farby w każdej połowie i podobną ilość szczegółu (krawędzie w stosunku ≤ 1,6). Szpic węższy niż 20 cm jest dozwolony, jeśli ma mniej niż 75 cm długości i mniej niż 0,09 m² (malarz wycina go z taśmy). Wąski pas dalej odpada. Plamki mniejsze niż 4 px to szwy rastra, a nie farba, więc kurator ich nie liczy (dotyczy przeliczeń od tej wersji). Projekty MURALE (`signature-murals.json`) są pierwsze w edytorze i w zakładce „Murale”. Podgląd: `composer-3-preview.png`. Razem 85 rodzin × 12 = 1020 wzorów.
+
+| Rodzina | Odniesienie | kept / passed / candidates |
+|---|---|---|
+| Wycinanki (`pro-m-cutouts`) | Nina Chanel Abney, Project Backboard (Memphis) | 36 / 90 / 258 |
+| Pola malarskie (`pro-m-field`) | Kinloch Park (St Louis), „Red Sea” (Lincoln) | 36 / 134 / 220 |
+| Tkanina (`pro-m-textile`) | Andrea Bergart (Providence), Na Chainkua Reindorf (Nowy Jork) | 36 / 121 / 220 |
+| Pejzaż (`pro-m-landscape`) | murale w parkach, chłodzące murale (New Haven) | 36 / 124 / 220 |
+| Flora (`pro-m-flora`) | boiska w parkach | 36 / 90 / 221 |
+| Wielkie słowa (`pro-m-words`) | Timothy Goodman (Brooklyn); 22 hasła blokowym krojem 5 × 7, bez polskich znaków | 24 / 90 / 310 |
+| Rama (`pro-m-frame`) | Liberty Park (Salt Lake City), klucze w Dublin (Kalifornia) | 36 / 175 / 220 |
+| Pociągnięcia (`pro-m-strokes`) | murale gestualne | 36 / 90 / 367 |

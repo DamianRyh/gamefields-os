@@ -1,0 +1,10 @@
+[
+ {"id":"m-cutouts","name":"Wycinanki","familyId":"pro-m-cutouts","variant":3,"paletteId":"ndebele","useCase":"street / youth","note":"Wielkie płaskie symbole na skośnych płaszczyznach: gwiazdy, oczy, księżyce, pioruny. Mural jak z amerykańskich boisk Project Backboard."},
+ {"id":"m-field","name":"Pola malarskie","familyId":"pro-m-field","variant":2,"paletteId":"kinloch","useCase":"park / sztuka publiczna","note":"Pola koloru o miękkich krawędziach płyną przez całe boisko, jak obraz przeniesiony na nawierzchnię."},
+ {"id":"m-textile","name":"Tkanina","familyId":"pro-m-textile","variant":1,"paletteId":"gees-bend","useCase":"kultura / dzielnica","note":"Pasy jak tkane wstęgi, każdy z innym motywem. Boisko opowiada historię miejsca wzorem, nie napisem."},
+ {"id":"m-landscape","name":"Pejzaż","familyId":"pro-m-landscape","variant":1,"paletteId":"simultane","useCase":"miasto / park","note":"Warstwy wzgórz i słońce z aureolą. Jasne kolory odbijają słońce, więc nawierzchnia mniej się nagrzewa."},
+ {"id":"m-flora","name":"Flora","familyId":"pro-m-flora","variant":6,"paletteId":"burle-marx","useCase":"park / eco","note":"Ogromne liście wchodzą od krawędzi boiska, środek zostaje czytelny do gry."},
+ {"id":"m-words","name":"Nasze boisko","familyId":"pro-m-words","variant":8,"paletteId":"swiss","useCase":"szkoła / dzielnica","note":"Hasło wielkimi literami z blokowego kroju. Każda litera ma co najmniej 20 cm kreski, więc maluje się ją z szablonu."},
+ {"id":"m-frame","name":"Rama","familyId":"pro-m-frame","variant":3,"paletteId":"nihon","useCase":"szkoła / klub","note":"Mural na pasie wokół boiska i w polach bramkowych, środek spokojny. Najtańszy sposób na boisko-mural."},
+ {"id":"m-strokes","name":"Pociągnięcia","familyId":"pro-m-strokes","variant":3,"paletteId":"stella","useCase":"event / festiwal","note":"Wielkie pociągnięcia pędzla przez całe boisko, ruch i energia jak na murach miasta."}
+]
