@@ -286,6 +286,129 @@ function cuts(R, h) {
   return { g, mode: 'cut' + np };
 }
 
+/* ---------------- grammars, Kompozytor III: Murale (2026-11-26) ----------------
+   After the US painted-court movement (Project Backboard, Art in the Paint, My HomeCourt, Paint Our Parks):
+   artist murals that run edge to edge, under the game lines, asymmetric but balanced between the halves.
+   These families are checked for half balance instead of strict symmetry (see MURAL below). */
+
+const rotPts = (list, cx, cy, a) => { const c = Math.cos(a), s = Math.sin(a); return list.map(([x, y]) => [cx + (x - cx) * c - (y - cy) * s, cy + (x - cx) * s + (y - cy) * c]); };
+function starPts(cx, cy, r, k, ratio, a0) { const out = []; const cut = 5 / r; for (let i = 0; i < k * 2; i++) { const a = a0 + (i * Math.PI) / k; if (i % 2 === 0) { out.push([cx + Math.cos(a - cut) * r, cy + Math.sin(a - cut) * r]); out.push([cx + Math.cos(a + cut) * r, cy + Math.sin(a + cut) * r]); } else out.push([cx + Math.cos(a) * r * ratio, cy + Math.sin(a) * r * ratio]); } return out; }
+function crescentPts(cx, cy, r, phi, d, r2) {
+  const ca = Math.max(-1, Math.min(1, (d * d + r * r - r2 * r2) / (2 * d * r))), al = Math.acos(ca); const cb = Math.max(-1, Math.min(1, (d * d + r2 * r2 - r * r) / (2 * d * r2))), be = Math.acos(cb);
+  const bx = cx + Math.cos(phi) * d, by = cy + Math.sin(phi) * d; const out = [];
+  for (let i = 0; i <= 40; i++) { const t = phi + al + (TAU - 2 * al) * i / 40; out.push([cx + Math.cos(t) * r, cy + Math.sin(t) * r]); }
+  for (let i = 0; i <= 24; i++) { const t = phi + Math.PI + be - (2 * be) * i / 24; out.push([bx + Math.cos(t) * r2, by + Math.sin(t) * r2]); }
+  return out;
+}
+function leafPts(cx, cy, L, w, a) { const top = [], bot = []; for (let i = 0; i <= 24; i++) { const t = i / 24; const y = (w / 2) * Math.pow(Math.sin(Math.PI * t), 0.6); top.push([cx + L * (t - 0.5), cy - y]); bot.push([cx + L * (t - 0.5), cy + y]); } return rotPts([...top, ...bot.reverse()], cx, cy, a); }
+// half-balanced scatter: alternate halves so both goals get the same amount of mural
+function scatter(R, h, n, rMin, rMax) { const out = []; for (let i = 0; i < n * 8 && out.length < n; i++) { const left = out.length % 2 === 0; const r = rMin + R() * (rMax - rMin); const x = (left ? 0 : 300) + 20 + R() * 260, y = 20 + R() * (h - 40); if (out.every((o) => Math.hypot(o[0] - x, o[1] - y) > (o[2] + r) * 0.75)) out.push([x, y, r]); } return out; }
+
+// Cut-Outs — bold flat symbols over big colour planes (after the cut-paper language of US court murals, e.g. Nina Chanel Abney)
+function muralCutouts(R, h) {
+  const cy = h / 2; let g = ''; const nb = intR(R, 2, 4); const k = 4;
+  // background planes: slanted cuts across the court
+  const cuts = []; for (let i = 0; i < nb; i++) cuts.push(80 + (i + R() * 0.6) * (440 / nb));
+  const tilt = (R() - 0.5) * h * 0.8; let prev = -60;
+  cuts.concat([700]).forEach((x, i) => { g += P([[prev - tilt / 2, -2], [x - tilt / 2, -2], [x + tilt / 2, h + 2], [prev + tilt / 2, h + 2]], i % 2 ? 0 : 1 + (i % 3)); prev = x; });
+  const items = scatter(R, h, intR(R, 5, 9), 38, 105);
+  items.forEach(([x, y, r], i) => { const t = intR(R, 0, 6); const s = 1 + ((i + t) % k); const a = R() * TAU;
+    if (t === 0) g += Ci(x, y, r, s);
+    else if (t === 1) g += Ci(x, y, r, s) + Ci(x, y, r * 0.55, 1 + ((s + 1) % k)) ;
+    else if (t === 2) g += P(starPts(x, y, r, pickR(R, [5, 6, 8]), 0.58, a), s);
+    else if (t === 3) { const bw = Math.max(24, r * 0.38); const bar = [[x - r, y - bw / 2], [x + r, y - bw / 2], [x + r, y + bw / 2], [x - r, y + bw / 2]]; g += P(rotPts(bar, x, y, Math.PI / 4 + a * 0.2), s) + P(rotPts(bar, x, y, -Math.PI / 4 + a * 0.2), s); }
+    else if (t === 4) { const eye = []; for (let j = 0; j <= 24; j++) { const u = j / 24; eye.push([x - r + 2 * r * u, y - r * 0.55 * Math.sin(Math.PI * u)]); } for (let j = 24; j >= 0; j--) { const u = j / 24; eye.push([x - r + 2 * r * u, y + r * 0.55 * Math.sin(Math.PI * u)]); } g += P(rotPts(eye, x, y, a * 0.15), s) + Ci(x, y, r * 0.32, 1 + ((s + 2) % k)); }
+    else if (t === 5) g += P(crescentPts(x, y, r, a, r * 0.45, r * 0.85), s);
+    else { const z = [[x - r * 0.25, y - r], [x + r * 0.45, y - r], [x + r * 0.05, y - r * 0.1], [x + r * 0.5, y - r * 0.1], [x - r * 0.35, y + r], [x - r * 0.02, y + r * 0.15], [x - r * 0.5, y + r * 0.15]]; g += P(rotPts(z, x, y, a * 0.3), s); } });
+  return { g, mode: 'cut' + nb };
+}
+
+// Colour Field — painterly fields with soft, torn edges flowing across the court (Kinloch Park, Felrath Hines' 'Red Sea' court)
+function muralField(R, h) {
+  const n = intR(R, 3, 6); const vertical = R() < 0.4; const len = vertical ? W : h; let g = '';
+  const base = []; for (let i = 1; i < n; i++) base.push((i / n + (R() - 0.5) * 0.12) * (vertical ? W : h));
+  const edge = (b, seed) => { const pp = []; const amp = pickR(R, [10, 18, 28]); const f1 = 1 + R() * 2, f2 = 3 + R() * 3; const ph = R() * TAU; for (let i = 0; i <= 30; i++) { const u = (i / 30) * (vertical ? h : W); pp.push([u, b + Math.sin(u / (vertical ? h : W) * TAU * f1 + ph + seed) * amp + Math.sin(u / 60 * f2 / 3 + seed * 2) * amp * 0.4]); } return pp; };
+  const span = vertical ? h : W; let prevE = [[-10, -10], [span + 10, -10]];
+  const sl = (i) => 1 + ((i + intR(R, 0, 0)) % 4);
+  for (let i = 0; i <= base.length; i++) { const e = i < base.length ? edge(base[i], i) : [[span + 10, len + 10], [-10, len + 10]].reverse(); const poly = [...prevE, ...e.slice().reverse()]; const pts2 = vertical ? poly.map(([u, v]) => [v, u]) : poly; g += P(pts2, i === 0 && R() < 0.4 ? 0 : sl(i)); prevE = e; }
+  // a few floating fields (a painter's accents)
+  const acc = intR(R, 0, 3); for (let i = 0; i < acc; i++) { const x = (i % 2 ? 300 : 0) + 60 + R() * 180, y = 50 + R() * (h - 100); const pp = []; const w = 50 + R() * 80, hh = 30 + R() * 50; for (let j = 0; j < 14; j++) { const a = (j / 14) * TAU; pp.push([x + Math.cos(a) * w * (0.85 + R() * 0.3), y + Math.sin(a) * hh * (0.85 + R() * 0.3)]); } g += D(closedCurve(pp), 1 + ((i + 2) % 4)); }
+  return { g, mode: 'field' + (vertical ? 'v' : 'h') + (acc ? 'a' : '') };
+}
+
+// Textile — woven strips of different motifs, edge to edge (court murals after woven and African textiles, e.g. Andrea Bergart)
+function muralTextile(R, h) {
+  const sw = pickR(R, [60, 75, 100]); const n = Math.ceil(W / sw); const pal = R() < 0.6; const kinds = []; for (let i = 0; i < n; i++) kinds.push(pal && i >= n / 2 ? kinds[n - 1 - i] : [intR(R, 0, 4), 1 + intR(R, 0, 3), 1 + intR(R, 0, 3)]);
+  let g = '';
+  kinds.forEach(([t, a, b], i) => { const x = i * sw; if (b === a) b = 1 + (a % 4); g += Rc(x, 0, sw, h, a); const m = sw / 2;
+    if (t === 0) { for (let y = -sw; y < h + sw; y += sw * 0.8) g += P([[x, y], [x + m, y + m * 0.8], [x + sw, y], [x + sw, y + 22], [x + m, y + m * 0.8 + 22], [x, y + 22]], b); }
+    else if (t === 1) { for (let y = 0; y < h + sw; y += sw * 1.3) g += P([[x + m, y - sw * 0.55], [x + sw - 8, y], [x + m, y + sw * 0.55], [x + 8, y]], b); }
+    else if (t === 2) { const c = sw / 2; for (let y = 0, j = 0; y < h; y += c, j++) g += Rc(x + (j % 2) * c, y, c, c, b); }
+    else if (t === 3) { for (let y = 10; y < h; y += 44) g += Rc(x, y, sw, 20, b); }
+    else { for (let y = 0; y < h + sw; y += sw) g += P([[x, y], [x + sw, y], [x + m, y + sw * 0.8]], b); } });
+  return { g, mode: 'tex' + (pal ? 'p' : 'f') + sw };
+}
+
+// Landscape — layered horizons with a sun and halo, a court-sized painted landscape (parks and 'cooling' light murals)
+function muralLandscape(R, h) {
+  let g = ''; const layers = intR(R, 3, 5); const sunX = pickR(R, [180, 300, 420]) + (R() - 0.5) * 40, sunY = h * pickR(R, [0.3, 0.38]); const sr = pickR(R, [55, 70, 90]);
+  const halo = intR(R, 0, 3); for (let i = halo; i >= 1; i--) g += Ci(sunX, sunY, sr + i * 24, i % 2 ? 2 : 0); g += Ci(sunX, sunY, sr, 1);
+  for (let L = 0; L < layers; L++) { const base = h * (0.42 + (L / layers) * 0.5); const amp = h * (0.12 - L * 0.015); const f1 = 1 + R() * 2.5, ph = R() * TAU; const kind = R() < 0.5; const pp = [[-10, h + 10]];
+    for (let i = 0; i <= 40; i++) { const x = -10 + (i / 40) * 620; const u = x / 600; const y = kind ? base - Math.abs(Math.sin(u * Math.PI * f1 + ph)) * amp * 1.4 : base - Math.sin(u * TAU * f1 / 2 + ph) * amp; pp.push([x, y]); }
+    pp.push([610, h + 10]); g += P(pp, 1 + ((L + 1) % 4)); }
+  return { g, mode: 'land' + (halo ? 'h' : '') };
+}
+
+// Flora — huge leaves reaching in from the edges, with a painted midrib (botanical park murals)
+function muralFlora(R, h) {
+  let g = ''; const n = intR(R, 6, 11); const rib = R() < 0.6;
+  for (let i = 0; i < n; i++) { const left = i % 2 === 0; const edgeSide = intR(R, 0, 2); const L = pickR(R, [180, 240, 300]), w = L * pickR(R, [0.32, 0.4]);
+    let x, y, a; if (edgeSide === 0) { x = left ? 40 + R() * 120 : 560 - R() * 120; y = R() < 0.5 ? 20 : h - 20; a = (y < h / 2 ? 1 : -1) * (Math.PI / 2 + (R() - 0.5) * 0.9); }
+    else { x = left ? 30 : 570; y = 40 + R() * (h - 80); a = (left ? 0 : Math.PI) + (R() - 0.5) * 1.1; }
+    const cx = x + Math.cos(a) * L * 0.35, cy2 = y + Math.sin(a) * L * 0.35; const s = 1 + (i % 4);
+    g += P(leafPts(cx, cy2, L, w, a), s); if (rib) g += P(rotPts([[cx - L * 0.42, cy2 - 6], [cx + L * 0.3, cy2 - 6], [cx + L * 0.3, cy2 + 6], [cx - L * 0.42, cy2 + 6]], cx, cy2, a), 1 + ((s + 1) % 4)); }
+  if (R() < 0.6) g += Ci(300, h / 2, pickR(R, [45, 60]), 1 + intR(R, 0, 3));
+  return { g, mode: 'flora' + (rib ? 'r' : '') };
+}
+
+// Big Words — giant block lettering in panels (hand-lettered court murals, e.g. Timothy Goodman); a 5 x 7 block font keeps strokes paintable
+const FONT = { G: ['01110','10001','10000','10111','10001','10001','01110'], R: ['11110','10001','10001','11110','10100','10010','10001'], A: ['01110','10001','10001','11111','10001','10001','10001'], J: ['00111','00010','00010','00010','10010','10010','01100'], O: ['01110','10001','10001','10001','10001','10001','01110'], L: ['10000','10000','10000','10000','10000','10000','11111'], Z: ['11111','00001','00010','00100','01000','10000','11111'], E: ['11111','10000','10000','11110','10000','10000','11111'], M: ['10001','11011','10101','10101','10001','10001','10001'], P: ['11110','10001','10001','11110','10000','10000','10000'], D: ['11110','10001','10001','10001','10001','10001','11110'], S: ['01111','10000','10000','01110','00001','00001','11110'], T: ['11111','00100','00100','00100','00100','00100','00100'], U: ['10001','10001','10001','10001','10001','10001','01110'], Y: ['10001','10001','01010','00100','00100','00100','00100'], K: ['10001','10010','10100','11000','10100','10010','10001'], N: ['10001','11001','10101','10011','10001','10001','10001'] };
+const WORDS = [['GRAJ'], ['GOL'], ['RAZEM'], ['PODAJ'], ['GRAJ', 'RAZEM'], ['TU', 'GRAMY'], ['PLAY'], ['GO'], ['KOSZ'], ['GOL', 'GOL']];
+function muralWords(R, h) {
+  const words = pickR(R, WORDS); let g = ''; const panels = R() < 0.6; const rows = words.length; const rh = h / rows;
+  if (panels) { const n = pickR(R, [2, 3, 4]); for (let i = 0; i < n; i++) g += Rc((i * W) / n, 0, W / n, h, 1 + ((i + 1) % 4)); }
+  words.forEach((wd, r) => { const cols = wd.length * 6 - 1; const cell = Math.max(10, Math.min((W - 90) / cols, (rh - 44) / 7)); // margins keep the word off the side lines const ww = cols * cell, x0 = (W - ww) / 2, y0 = r * rh + (rh - 7 * cell) / 2; const s = panels ? 0 : 1 + ((r + 2) % 4); const shadow = R() < 0.5;
+    [...wd].forEach((ch, ci) => { const bm = FONT[ch]; if (!bm) return; for (let j = 0; j < 7; j++) for (let i = 0; i < 5; i++) if (bm[j][i] === '1') { const x = x0 + (ci * 6 + i) * cell, y = y0 + j * cell; if (shadow) g = Rc(x + cell * 0.5, y + cell * 0.5, cell, cell, 1 + ((r + 3) % 4)) + g; g += Rc(x, y, cell + 0.6, cell + 0.6, s); } }); });
+  return { g, mode: 'word' + rows + (panels ? 'p' : '') };
+}
+
+// Frame — the mural lives on the run-off band and in the keys; the middle stays calm (perimeter and key murals, e.g. Salt Lake City, Dublin CA)
+function muralFrame(R, h) {
+  const cy = h / 2; const fw = pickR(R, [40, 56, 72]); const motif = intR(R, 0, 3); const a = 1 + intR(R, 0, 3), b = 1 + ((a) % 4), c = 1 + ((a + 1) % 4); let g = '';
+  const band = (x, y, w, hh, horiz) => { let out = Rc(x, y, w, hh, a); const L = horiz ? w : hh, T = horiz ? hh : w; const step = pickR(R, [T, T * 1.5]);
+    for (let u = 0; u < L; u += step) { const P2 = (pp) => P(pp.map(([p, q]) => (horiz ? [x + p, y + q] : [x + q, y + p])), b);
+      if (motif === 0) out += P2([[u, T], [u + step / 2, 0 + 10], [u + step, T]]);
+      else if (motif === 1) out += P2([[u + 6, 6], [u + step / 2 - 2, 6], [u + step / 2 - 2, T - 6], [u + 6, T - 6]]);
+      else if (motif === 2) { const cxp = u + step / 2; out += horiz ? Ci(x + cxp, y + T / 2, T * 0.32, b) : Ci(x + T / 2, y + cxp, T * 0.32, b); }
+      else out += P2([[u, 0], [u + step / 2, 0], [u + step, T], [u + step / 2, T]]); }
+    return out; };
+  g += band(0, 0, W, fw, true) + band(0, h - fw, W, fw, true);
+  const keyW = pickR(R, [100, 130]); const key = Rc(0, cy - 90, keyW, 180, c) + (R() < 0.6 ? Rc(0, cy - 60, keyW - 30, 120, b) + Rc(0, cy - 30, keyW - 60, 60, c) : ''); g += key + mirX(key);
+  if (R() < 0.7) g += Ci(300, cy, 60, b) + Ci(300, cy, 36, c);
+  return { g, mode: 'frame' + motif };
+}
+
+// Strokes — giant gestural brush strokes of constant width with round ends, layered across the court (gestural painter's murals)
+function muralStrokes(R, h) {
+  let g = ''; const n = intR(R, 3, 6);
+  for (let i = 0; i < n; i++) { const w = pickR(R, [34, 46, 60, 76]); const left = i % 2 === 0; const x0 = left ? -20 : 620, x1 = left ? 340 + R() * 260 : 260 - R() * 260; const y0 = 30 + R() * (h - 60), y1 = 30 + R() * (h - 60);
+    const mid = [[x0, y0], [(x0 * 2 + x1) / 3, y0 + (R() - 0.5) * h * 0.6], [(x0 + x1 * 2) / 3, y1 + (R() - 0.5) * h * 0.6], [x1, y1]];
+    const line = sampleSpline(mid, 18); const s = 1 + (i % 4);
+    g += P([...offsetLine(line, -w / 2), ...offsetLine(line, w / 2).reverse()], s) + Ci(line[line.length - 1][0], line[line.length - 1][1], w / 2, s); }
+  const dots = intR(R, 0, 6); for (let i = 0; i < dots; i++) g += Ci((i % 2 ? 300 : 0) + 30 + R() * 240, 30 + R() * (h - 60), pickR(R, [14, 20, 28]), 1 + intR(R, 0, 3));
+  return { g, mode: 'stroke' + (dots ? 'd' : '') };
+}
+
 /* ---------------- colour plan ---------------- */
 function hex2rgb(hx) { hx = hx.replace('#', ''); if (hx.length === 3) hx = hx.split('').map((c) => c + c).join(''); return [0, 2, 4].map((i) => parseInt(hx.slice(i, i + 2), 16) / 255); }
 function L_(hx) { const lin = (c) => (c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)); const [r, g, b] = hex2rgb(hx).map(lin); const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b); return 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s; }
@@ -298,7 +421,11 @@ export function composerPlan(seed, colors) {
 
 export const COMPOSER_GRAMMARS = { 'pro-k-echo': echo, 'pro-k-zones': zones, 'pro-k-rays': rays, 'pro-k-chevron': chevron, 'pro-k-flow': flow, 'pro-k-shards': shards, 'pro-k-terrain': terrain, 'pro-k-pixel': pixel,
   // Kompozytor II
-  'pro-k-mown': stripes, 'pro-k-orbit': orbit, 'pro-k-arcs': arcs, 'pro-k-argyle': argyle, 'pro-k-plaid': plaid, 'pro-k-steps': steps, 'pro-k-rosette': rosette, 'pro-k-cuts': cuts };
+  'pro-k-mown': stripes, 'pro-k-orbit': orbit, 'pro-k-arcs': arcs, 'pro-k-argyle': argyle, 'pro-k-plaid': plaid, 'pro-k-steps': steps, 'pro-k-rosette': rosette, 'pro-k-cuts': cuts,
+  // Kompozytor III: Murale
+  'pro-m-cutouts': muralCutouts, 'pro-m-field': muralField, 'pro-m-textile': muralTextile, 'pro-m-landscape': muralLandscape, 'pro-m-flora': muralFlora, 'pro-m-words': muralWords, 'pro-m-frame': muralFrame, 'pro-m-strokes': muralStrokes };
+// mural families: checked for balance between the halves instead of strict symmetry
+export const MURAL = new Set(['pro-m-cutouts', 'pro-m-field', 'pro-m-textile', 'pro-m-landscape', 'pro-m-flora', 'pro-m-words', 'pro-m-frame', 'pro-m-strokes']);
 
 // raw geometry for a seed (slot fills) — used by the curator
 export function composeSlots(familyId, seed, h = 400) { const gr = COMPOSER_GRAMMARS[familyId]; if (!gr) return null; const out = gr(rng(seed), h); return { g: '<rect x="0" y="0" width="600" height="' + f(h) + '" fill="§0"/>' + out.g, mode: out.mode }; }
@@ -345,5 +472,14 @@ export const COMPOSER_FAMILIES = [
   meta('pro-k-steps', 'Equalizer', 'EQ', 'play', 'Słupki od bramek do środka, wysokość rośnie albo maleje schodkami, jak wskaźnik dźwięku.', 'Kompozytor II: geometria gry'),
   meta('pro-k-rosette', 'Rozeta', 'ROSE', 'organic', 'Pierścienie wokół koła środkowego z regularnymi płatkami (parzysta liczba, więc obie połowy są równe).', 'Kompozytor II: geometria gry'),
   meta('pro-k-cuts', 'Cięcia', 'CUTS', 'geometric', 'Proste cięcia parami symetrycznymi; pola na przemian w dwóch kolorach jak złożony papier, z piastą w środku.', 'Kompozytor II: geometria gry'),
+  // Kompozytor III: Murale (2026-11-26) — after the US painted-court movement
+  meta('pro-m-cutouts', 'Wycinanki', 'CUT', 'street', 'Wielkie płaskie symbole (gwiazdy, oczy, księżyce, iksy, pioruny) na skośnych płaszczyznach koloru. Mural w duchu wycinanek z amerykańskich boisk.', 'Murale USA: Project Backboard, Nina Chanel Abney (Memphis)'),
+  meta('pro-m-field', 'Pola malarskie', 'FIELD', 'premium', 'Malarskie pola koloru o miękkich, poszarpanych krawędziach, płynące przez całe boisko, z kilkoma akcentami.', 'Murale USA: Kinloch Park (St Louis), „Red Sea” (Lincoln)'),
+  meta('pro-m-textile', 'Tkanina', 'TEX', 'brand', 'Pasy jak tkane wstęgi, każdy z innym motywem: zygzak, romby, krata, pasy, trójkąty. Od krawędzi do krawędzi.', 'Murale USA: Andrea Bergart (Providence), Na Chainkua Reindorf (Nowy Jork)'),
+  meta('pro-m-landscape', 'Pejzaż', 'LAND', 'organic', 'Warstwy wzgórz albo fal i słońce z aureolą: malowany krajobraz na całe boisko.', 'Murale USA: parki miejskie, chłodzące murale (New Haven)'),
+  meta('pro-m-flora', 'Flora', 'FLORA', 'organic', 'Ogromne liście wchodzące od krawędzi boiska, z malowanym nerwem. Botaniczny mural do parku.', 'Murale USA: boiska w parkach'),
+  meta('pro-m-words', 'Wielkie słowa', 'WORD', 'brand', 'Hasło wielkimi literami z blokowego kroju (GRAJ, GOL, RAZEM…), na panelach koloru albo z cieniem.', 'Murale USA: Timothy Goodman (Nowy Jork)'),
+  meta('pro-m-frame', 'Rama', 'FRAME', 'play', 'Mural na pasie wokół boiska i w polach bramkowych, środek spokojny do gry.', 'Murale USA: Liberty Park (Salt Lake City), klucze w Dublin (Kalifornia)'),
+  meta('pro-m-strokes', 'Pociągnięcia', 'BRUSH', 'street', 'Wielkie pociągnięcia pędzla o stałej szerokości i okrągłych końcach, nałożone na siebie przez całe boisko.', 'Murale USA: gestural court murals'),
 ];
 export function composerMasking(familyId) { const pool = POOL[familyId]; if (!pool || !pool.length) return 'średnia'; const t = pool.slice(0, 12).map((e) => e.m.t).sort((a, b) => a - b)[Math.min(5, pool.length - 1)] / 150; return t < 1 ? 'niska' : t < 2 ? 'średnia' : t < 3.2 ? 'wysoka' : 'bardzo wysoka'; }
