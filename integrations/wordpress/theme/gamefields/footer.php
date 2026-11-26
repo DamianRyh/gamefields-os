@@ -12,7 +12,7 @@
 			</div>
 			<nav class="gft-foot-col" aria-label="<?php echo esc_attr( gft_global_t( 'offer' ) ); ?>">
 				<p class="gft-kicker"><?php echo esc_html( gft_global_t( 'offer' ) ); ?></p>
-				<?php gft_global_link( 'panna_courts', gft_global_anchor_url( 'boiska' ) ); ?>
+				<?php gft_global_link( 'panna_courts', gft_global_page_url( 'boiska-street-football' ) ); ?>
 				<?php gft_global_link( 'footer_construction', gft_global_page_url( 'budowa-boisk-sportowych' ) ); ?>
 				<?php gft_global_link( 'footer_renovation', gft_global_page_url( 'renowacja-boisk' ) ); ?>
 				<?php gft_global_link( 'footer_surfaces', gft_global_page_url( 'nawierzchnie-sportowe' ) ); ?>
@@ -41,7 +41,6 @@
 			<span>© <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( gft_global_t( 'copyright' ) ); ?></span>
 			<a href="mailto:info@gamefields.eu">info@gamefields.eu</a>
 			<?php gft_global_link( 'privacy', gft_global_privacy_url() ); ?>
-			<?php if ( is_front_page() ) { gft_global_switcher(); } ?>
 		</div>
 	</div>
 </footer>

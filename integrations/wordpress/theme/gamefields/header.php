@@ -1,5 +1,5 @@
 <?php
-/** Site header. The homepage brings its own header, so on the front page only the document head is printed. */
+/** Shared header on every page, based on live Gamefields 1.0.37. */
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -10,7 +10,6 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<?php if ( ! is_front_page() ) : ?>
 <a class="gft-skip" href="#gft-main"><?php echo esc_html( gft_global_t( 'skip' ) ); ?></a>
 <header class="gft-nav" id="gft-nav">
 	<div class="gft-wrap gft-nav-in">
@@ -19,12 +18,14 @@
 		<nav class="gft-links" id="gft-links" aria-label="<?php echo esc_attr( gft_global_t( 'navigation' ) ); ?>"><?php gft_primary_nav(); ?></nav>
 		<?php gft_cart_link(); ?>
 		<?php gft_global_switcher(); ?>
-		<?php gft_global_link( 'enquiry', gft_global_page_url( 'kontakt' ), 'gft-ask' ); ?>
+		<?php $photo_url = 'pl' === gft_global_language() ? ( is_front_page() ? '#zdjecie' : home_url( '/#zdjecie' ) ) : gft_global_anchor_url( 'zdjecie' ); ?>
+		<?php if ( $photo_url ) : ?>
+		<a class="gft-photo" href="<?php echo esc_url( $photo_url ); ?>"><span class="gft-photo-l"><?php echo esc_html( gft_global_t( 'site_photo' ) ); ?></span><span class="gft-photo-s"><?php echo esc_html( gft_global_t( 'photo_short' ) ); ?></span></a>
+		<?php endif; ?>
 		<button type="button" class="gft-menu" aria-expanded="false" aria-controls="gft-links"><?php echo esc_html( gft_global_t( 'menu' ) ); ?></button>
 		<?php if ( 'pl' === gft_global_language() ) : ?>
 		<a class="gft-cta" href="<?php echo esc_url( home_url( '/studio/' ) ); ?>">Studio 3D <span aria-hidden="true">↗</span></a>
 		<?php endif; ?>
 	</div>
 </header>
-<?php endif; ?>
 <?php /* the homepage content has its own <main> */ echo is_front_page() ? '<div id="gft-main" class="gft-main">' : '<main id="gft-main" class="gft-main">'; ?>
