@@ -109,11 +109,14 @@ for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
   POOL[fid] = chosen.map((c) => ({ s: c.seed, m: { a: c.area.map((x) => Math.round(x * 1000) / 1000), t: c.tape, w: 20, md: c.mode } }));
   report[fid] = { candidates: tried, passed: cands.length, kept: chosen.length, rejected: reasons, modes: [...new Set(chosen.map((c) => c.mode))].length, tapeMedian: chosen.length ? chosen.map((c) => c.tape).sort((a, b) => a - b)[chosen.length >> 1] : 0 };
   console.log(fid, JSON.stringify(report[fid]));
+  save(); // after every family, so a crash later never loses finished work
 }
 await browser.close();
+console.log('pool written');
 
+function save() {
 const file = here + 'court-composer.mjs'; const src = readFileSync(file, 'utf8');
-const block = '/*POOL*/\n// ' + new Date().toISOString().slice(0, 10) + ': ' + Object.entries(report).map(([k, r]) => k.replace('pro-k-', '') + ' ' + r.kept + '/' + r.passed + '/' + r.candidates).join(', ') + ' (kept/passed/candidates)\nexport const POOL = ' + JSON.stringify(POOL) + ';\n/*END-POOL*/';
+const block = '/*POOL*/\n// ' + new Date().toISOString().slice(0, 10) + ': ' + Object.entries(report).map(([k, r]) => k.replace(/^pro-[km]-/, '') + ' ' + r.kept + '/' + r.passed + '/' + r.candidates).join(', ') + ' (kept/passed/candidates)\nexport const POOL = ' + JSON.stringify(POOL) + ';\n/*END-POOL*/';
 writeFileSync(file, src.replace(/\/\*POOL\*\/[\s\S]*?\/\*END-POOL\*\//, () => block));
 writeFileSync(here + 'composer-report.json', JSON.stringify(report, null, 1) + '\n');
-console.log('pool written');
+}
