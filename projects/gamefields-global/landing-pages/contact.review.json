@@ -1,0 +1,20 @@
+{
+  "source_wp_id": 3716,
+  "source": "live snapshot",
+  "translated_text_nodes": 94,
+  "translated_attributes": 0,
+  "unmapped_unique": [
+    "Damian Gawrych",
+    "info@gamefields.eu",
+    "Moje Boisko – Orlik 2012",
+    "[contact-form-7 id=\"3758\"]",
+    "info@gamefields.eu →"
+  ],
+  "protected_tokens_identical": true,
+  "status": "review-only",
+  "remaining": [
+    "CF7 shortcode 3758 unchanged; separate English form required.",
+    "Dynamic messages, field placeholders, validation, privacy and actual submission require QA.",
+    "No production deployment."
+  ]
+}
