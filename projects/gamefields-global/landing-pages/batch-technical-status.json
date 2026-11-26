@@ -1,0 +1,65 @@
+[
+  {
+    "key": "renovation",
+    "id": 3685,
+    "sourceLength": 57367,
+    "translatedTextNodes": 71,
+    "translatedAttributes": 1,
+    "unmappedUnique": 194,
+    "status": "partial-review-only"
+  },
+  {
+    "key": "construction",
+    "id": 3684,
+    "sourceLength": 55398,
+    "translatedTextNodes": 113,
+    "translatedAttributes": 3,
+    "unmappedUnique": 222,
+    "status": "partial-review-only"
+  },
+  {
+    "key": "design",
+    "id": 3689,
+    "sourceLength": 47949,
+    "translatedTextNodes": 60,
+    "translatedAttributes": 5,
+    "unmappedUnique": 148,
+    "status": "partial-review-only"
+  },
+  {
+    "key": "surfaces",
+    "id": 3686,
+    "sourceLength": 62494,
+    "translatedTextNodes": 74,
+    "translatedAttributes": 1,
+    "unmappedUnique": 232,
+    "status": "partial-review-only"
+  },
+  {
+    "key": "projects",
+    "id": 3466,
+    "sourceLength": 35282,
+    "translatedTextNodes": 49,
+    "translatedAttributes": 14,
+    "unmappedUnique": 99,
+    "status": "partial-review-only"
+  },
+  {
+    "key": "contact",
+    "id": 3716,
+    "sourceLength": 54863,
+    "translatedTextNodes": 8,
+    "translatedAttributes": 0,
+    "unmappedUnique": 83,
+    "status": "partial-review-only"
+  },
+  {
+    "key": "author",
+    "id": 4626,
+    "sourceLength": 55724,
+    "translatedTextNodes": 6,
+    "translatedAttributes": 2,
+    "unmappedUnique": 306,
+    "status": "partial-review-only"
+  }
+]

@@ -1,0 +1,221 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfr-hero{padding:clamp(36px,5vw,80px) 0 clamp(24px,3vw,40px)}
+.gfr-hero .w.top{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfr-hero h1{font-size:clamp(52px,7.2vw,124px)}
+.gfr-hero .lead{max-width:34rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfr-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(90px,9vw,150px);gap:8px}
+.gfr-mosaic img{width:100%;height:100%;object-fit:cover;display:block;background:#E6E0DA}
+.gfr-mosaic img:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfr-mosaic img:nth-child(2){grid-column:span 2;grid-row:span 2}
+.gfr-mosaic img:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfr-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:clamp(28px,3vw,44px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfr-nums div{padding:18px 18px 18px 0}
+.gfr-nums div+div{padding-left:18px;border-left:1px solid var(--line)}
+.gfr-nums dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfr-nums dd{margin:6px 0 0;font-size:clamp(28px,3.2vw,48px);font-weight:800;letter-spacing:-.045em;line-height:1}
+.gfr-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfr-logos{padding:clamp(24px,3vw,40px) 0}
+.gfr-logos p.k{margin-bottom:12px}
+.gfa-logos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gfa-logos li{display:grid;place-items:center;height:110px;padding:12px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.gfa-logos img{display:block;max-width:100%;max-height:84px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
+.gfr-also{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:0;list-style:none}
+.gfr-also li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600}
+.gfr-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfr-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfr-jump ul::-webkit-scrollbar{display:none}
+.gfr-jump a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfr-jump a:hover{border-color:var(--violet)}
+.gfr-jump small{color:var(--violet);font-weight:800}
+/* case */
+.gfr-case{padding:clamp(48px,6vw,96px) 0;border-top:1px solid var(--line);scroll-margin-top:72px}
+.gfr-case .w{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,3.6vw,56px);align-items:start}
+.gfr-case.flip .gfr-ph{order:2}
+.gfr-ph{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gfr-ph img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#E6E0DA;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gfr-ph img:first-child{grid-column:1/-1;aspect-ratio:16/10}
+.gfr-ph img:hover{transform:scale(1.02)}
+.gfr-ph.two img{grid-column:1/-1;aspect-ratio:16/9}
+.gfr-place{margin:0 0 10px;color:var(--violet);font-weight:800;font-size:14px;letter-spacing:.02em}
+.gfr-case h2{font-size:clamp(40px,4.6vw,76px)}
+.gfr-case .lead{margin:16px 0 0;font-size:18px;color:var(--ink)}
+.gfr-case .more{margin:10px 0 0;font-size:16px;color:var(--muted)}
+.gfr-facts{margin:20px 0 0;border-top:1px solid var(--line)}
+.gfr-facts div{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.gfr-facts dt{color:var(--muted)}.gfr-facts dd{margin:0;font-weight:700}
+.gfr-quote{margin:22px 0 0;padding:22px 24px;background:#fff;border-left:5px solid var(--violet)}
+.gfr-quote blockquote{margin:0;font-size:clamp(18px,1.6vw,22px);line-height:1.4;font-weight:600;color:var(--ink)}
+.gfr-quote blockquote::before{content:"„";color:var(--violet)}
+.gfr-quote blockquote::after{content:"”";color:var(--violet)}
+.gfr-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}.gfr-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfr-model{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:20px 0 0;padding:14px 16px;background:var(--ink);color:var(--paper)}
+.gfr-model span{flex:1 1 180px;font-size:15px}.gfr-model b{color:#fff}
+.gfr-model a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--lime);color:#1F2A6B!important;text-decoration:none;font-weight:800;font-size:14px}
+.gfr-model a.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* quotes band */
+.gfr-voices{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfr-voices li{padding:24px;border:1px solid rgba(244,241,238,.2)}
+.gfr-voices blockquote{margin:0;font-size:clamp(18px,1.6vw,22px);line-height:1.4;font-weight:600}
+.gfr-voices p{margin:12px 0 0;font-size:14px;color:rgba(244,241,238,.75)}.gfr-voices p b{display:block;color:#fff;font-size:15px}
+/* events */
+.gfr-brands{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;padding:0;list-style:none}
+.gfr-brands li{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfr-ev{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.gfr-ev li{position:relative;overflow:hidden;background:#2a1520}
+.gfr-ev li:nth-child(1),.gfr-ev li:nth-child(6){grid-column:span 2;grid-row:span 2}
+.gfr-ev img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gfr-ev li:hover img{transform:scale(1.05)}
+.gfr-ev span{position:absolute;left:8px;right:8px;bottom:8px;padding:8px 10px;background:rgba(28,9,18,.82);color:#fff;font-size:13px;line-height:1.3}
+.gfr-ev span b{display:block;font-size:14px}
+.gfr-more{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfr-more figure{margin:0}
+.gfr-more img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#E6E0DA}
+.gfr-more figcaption{margin-top:8px;font-size:14px;color:var(--muted)}.gfr-more figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfr-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfr-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none}
+.gfr-next a:hover{border-color:var(--violet)}
+.gfr-next b{font-size:20px;letter-spacing:-.02em}.gfr-next span{color:var(--muted);font-size:15px}.gfr-next i{font-style:normal;color:var(--violet);font-weight:800}
+@media (max-width:1100px){.gfr-ev{grid-template-columns:repeat(3,minmax(0,1fr))}.gfr-more,.gfr-next{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfr-hero .w.top,.gfr-case .w{grid-template-columns:minmax(0,1fr)}.gfr-case.flip .gfr-ph{order:0}
+ .gfr-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfr-nums div:nth-child(3){padding-left:0;border-left:0}.gfr-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfa-logos{grid-template-columns:repeat(3,minmax(0,1fr))}.gfa-logos li{height:84px}.gfa-logos img{max-height:62px}
+ .gfr-voices{grid-template-columns:minmax(0,1fr)}.gfr-ev{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){.gfr-mosaic{grid-auto-rows:70px}.gfr-more,.gfr-next{grid-template-columns:minmax(0,1fr)}.gfr-facts div{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Realizacje Gamefields","url":"https://www.gamefields.eu/realizacje-gamefields/","inLanguage":"pl-PL","description":"Realizacje Gamefields: boiska panna i street football w miastach, parkach i na obiektach sportowych, z opiniami zamawiających."},{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"name":"Taras w Parku Świętokrzyskim","url":"https://www.gamefields.eu/realizacje-gamefields/#taras"},{"@type":"ListItem","position":2,"name":"Panna Octa w Kutnie","url":"https://www.gamefields.eu/realizacje-gamefields/#kutno"},{"@type":"ListItem","position":3,"name":"Kraków: od planu do parku","url":"https://www.gamefields.eu/realizacje-gamefields/#krakow"},{"@type":"ListItem","position":4,"name":"Wake For Friends","url":"https://www.gamefields.eu/realizacje-gamefields/#wake"},{"@type":"ListItem","position":5,"name":"Panna Ring na Orliku","url":"https://www.gamefields.eu/realizacje-gamefields/#orlik"}]}]}</script>
+<div class="gfa">
+<section class="gfr-hero"><div class="w top">
+  <div>
+    <p class="k">Realizacje Gamefields</p>
+    <h1 class="d">Realizacje.</h1>
+    <p class="lead">Boiska Gamefields w miastach, parkach i na obiektach sportowych. Zdjęcia z miejsc i słowa osób, które je zamówiły.</p>
+    <ul class="gfa-links"><li><a href="/realizacje-dla-miast/">Dla samorządów: trwałość, opinie, finansowanie →</a></li></ul>
+  </div>
+  <div class="gfr-mosaic"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim, Warszawa" loading="eager" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Panna Octa w Kutnie" loading="eager" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Panna Octa Cage 90, Kraków" loading="eager" decoding="async"></div>
+</div>
+<div class="w">
+  <dl class="gfr-nums">
+    <div><dt>Na Orliku</dt><dd>10 lat<small>Panna Ring bez żadnych uszkodzeń</small></dd></div>
+    <div><dt>Pod Pałacem Kultury</dt><dd>3 areny<small>Taras w Parku Świętokrzyskim</small></dd></div>
+    <div><dt>Miasta</dt><dd>7<small>od Warszawy po Gdańsk</small></dd></div>
+    <div><dt>Turnieje i eventy</dt><dd>od 2008<small>w tym mistrzostwa świata</small></dd></div>
+  </dl>
+</div></section>
+
+<section class="gfr-logos"><div class="w">
+  <p class="k">Zaufali nam</p>
+  <ul class="gfa-logos" role="list"><li style="--z:1.3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Warszawa--300x194.png" alt="Miasto stołeczne Warszawa" width="300" height="194" loading="lazy" decoding="async"></li><li style="--z:1.7"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Zarzad-Zieleni-Miejskiej-Warszawa-300x141.jpg" alt="Zarząd Zieleni m.st. Warszawy" width="300" height="141" loading="lazy" decoding="async"></li><li style="--z:1"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOHO-Krakow--300x200.jpg" alt="Kraków" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1.6"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Grodzisk-Mazowiecki-LOGO-300x200.jpg" alt="Grodzisk Mazowiecki" width="300" height="200" loading="lazy" decoding="async"></li><li style="--z:1"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Kutno--300x231.jpg" alt="Kutno" width="300" height="231" loading="lazy" decoding="async"></li><li style="--z:1.15"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/LOGO-Lodz-300x139.webp" alt="Łódź" width="300" height="139" loading="lazy" decoding="async"></li></ul>
+  <ul class="gfr-also" role="list"><li>Żyrardów</li><li>Gdańsk</li><li>OSiR Grodzisk Mazowiecki</li><li>Wake For Friends</li><li>Fundacja Skwery Sportów Miejskich</li><li>Head &amp; Shoulders</li></ul>
+</div></section>
+
+<nav class="gfr-jump" aria-label="Realizacje na tej stronie"><div class="w"><ul role="list"><li><a href="#taras">Taras w Parku Świętokrzyskim</a></li><li><a href="#kutno">Panna Octa w Kutnie</a></li><li><a href="#krakow">Kraków</a></li><li><a href="#wake">Wake For Friends</a></li><li><a href="#orlik">Panna Ring na Orliku</a></li><li><a href="#opinie">Opinie <small>4</small></a></li><li><a href="#eventy">Turnieje i eventy <small>14</small></a></li></ul></div></nav>
+
+<section class="gfr-case" id="taras"><div class="w"><div class="gfr-ph"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim w Warszawie, areny panna" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/11-1-768x432.jpg" alt="Areny panna na Tarasie, widok na centrum Warszawy" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/2-4-768x768.jpg" alt="Arena panna na Tarasie w Parku Świętokrzyskim" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/6-2-768x768.jpg" alt="Gra na arenie panna, Taras w Parku Świętokrzyskim" loading="lazy" decoding="async"></div><div><p class="gfr-place">Warszawa, Park Świętokrzyski</p><h2 class="d">Taras w Parku Świętokrzyskim</h2><p class="lead">Wielofunkcyjna przestrzeń rekreacji dla osób w każdym wieku: trzy boiska połączone z tarasem i rampą do skateboardingu, tuż obok skrzyżowania linii metra, przy Pałacu Kultury i Nauki.</p><p class="more">Taras stał się jednym z najpopularniejszych miejsc spotkań warszawskiej młodzieży. Po wybuchu wojny w Ukrainie był też ważnym miejscem spotkań ukraińskiej młodzieży, o czym pisał m.in. New York Times. To inwestycja tymczasowa, która zapowiada dalsze zmiany wokół Pałacu Kultury i Nauki.</p><dl class="gfr-facts"><div><dt>Boiska</dt><dd>Panna Ring, trzy areny</dd></div><div><dt>Inwestor</dt><dd>Zarząd Zieleni m.st. Warszawy</dd></div><div><dt>Projekt</dt><dd>Michał Sikorski, Marcin Kwietowicz</dd></div></dl><figure class="gfr-quote"><blockquote>Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży.</blockquote><figcaption><b>Grzegorz Gądek</b>Prezes Fundacji Skwery Sportów Miejskich</figcaption></figure><div class="gfr-model"><span>Model: <b>Panna Ring</b>, konstrukcja od 40 000 zł netto</span><a href="/product/panna-ring/">Zobacz model</a><a class="alt" href="/studio/?arena=w1">Zaprojektuj podobne ↗</a></div></div></div></section><section class="gfr-case flip" id="kutno"><div class="w"><div class="gfr-ph"><img src="https://www.gamefields.eu/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Boisko Panna Octa w Kutnie, dzieci na boisku" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/1-5-768x768.jpg" alt="Boisko Panna Octa w Kutnie" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/2-5-768x768.jpg" alt="Gra na boisku Panna Octa w Kutnie" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/3-5-768x768.jpg" alt="Panna Octa na pasażu sportowym w Kutnie" loading="lazy" decoding="async"></div><div><p class="gfr-place">Kutno, pasaż sportowy</p><h2 class="d">Panna Octa w Kutnie</h2><p class="lead">Ośmiokątna arena na miejskim pasażu sportowym, zamówiona przez Urząd Miasta Kutno.</p><p class="more">Realizacja przebiegła bez zastrzeżeń, a boisko cieszy się dużą popularnością wśród młodzieży.</p><dl class="gfr-facts"><div><dt>Boisko</dt><dd>Panna Octa</dd></div><div><dt>Zamawiający</dt><dd>Urząd Miasta Kutno</dd></div><div><dt>Miejsce</dt><dd>pasaż sportowy</dd></div></dl><figure class="gfr-quote"><blockquote>Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.</blockquote><figcaption><b>Beata Rafalska</b>Urząd Miasta Kutno, ds. inwestycji</figcaption></figure><div class="gfr-model"><span>Model: <b>Panna Octa</b>, konstrukcja od 49 000 zł netto</span><a href="/product/panna-octa/">Zobacz model</a><a class="alt" href="/studio/?arena=octagon">Zaprojektuj podobne ↗</a></div></div></div></section><section class="gfr-case" id="krakow"><div class="w"><div class="gfr-ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Panna Octa Cage 90 w parku, Kraków" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Gamefields-x-boiska-x-Projekt-Krakow--768x768.jpg" alt="Plan zagospodarowania z arenami Gamefields, Kraków" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-montaz-768x576.jpg" alt="Montaż areny w parku, Kraków" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Gamefields-x-Panna-Cage-x-Krakow-768x576.jpg" alt="Arena przed odbiorem, Kraków" loading="lazy" decoding="async"></div><div><p class="gfr-place">Kraków, teren miejski</p><h2 class="d">Kraków: od planu do parku</h2><p class="lead">Panna Octa Cage 90 na terenie miejskim: od projektu na planie zagospodarowania, przez montaż, po gotową arenę w parku.</p><p class="more">Ten sam proces prowadzę dla gmin i szkół: koncepcja na planie, wizualizacja, parametry techniczne i dokumenty do wniosku lub przetargu.</p><p class="more"><a href="/realizacje-dla-miast/">Realizacje dla miast: trwałość, opinie, finansowanie →</a></p><dl class="gfr-facts"><div><dt>Boisko</dt><dd>Panna Octa Cage 90</dd></div><div><dt>Miejsce</dt><dd>park miejski</dd></div><div><dt>Etapy</dt><dd>projekt, montaż, odbiór</dd></div></dl><div class="gfr-model"><span>Model: <b>Panna Octa Cage 90</b>, konstrukcja od 36 000 zł netto</span><a href="/product/panna-octa-cage-90/">Zobacz model</a><a class="alt" href="/studio/?arena=circle-cage-1">Zaprojektuj podobne ↗</a></div></div></div></section><section class="gfr-case flip" id="wake"><div class="w"><div class="gfr-ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Damian-Gawrych-x-Wake-for-friends--768x960.jpg" alt="Dzieci grają na arenie Gamefields, Wake For Friends" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/12-3-768x768.jpg" alt="Boisko Panna Octa Cage 180 w parku Wake For Friends" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/11-3-768x768.jpg" alt="Panna Octa Cage 180, Wake For Friends" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/7-4-768x768.jpg" alt="Arena Cage 180 w parku Wake For Friends" loading="lazy" decoding="async"></div><div><p class="gfr-place">Grodzisk Mazowiecki, park wakeboardowy</p><h2 class="d">Wake For Friends</h2><p class="lead">Boisko w parku wakeboardowym, które poszerzyło ofertę o dyscypliny inne niż wakeboard.</p><p class="more">Arena działa na co dzień i podczas wydarzeń organizowanych w parku: urodzin dzieci, wieczorów kawalerskich i półkolonii. Nawierzchnia to sztuczna trawa.</p><p class="more"><a href="/jak-powstaje-arena/">Zobacz budowę tej areny krok po kroku →</a></p><dl class="gfr-facts"><div><dt>Boisko</dt><dd>Panna Octa Cage 180</dd></div><div><dt>Nawierzchnia</dt><dd>sztuczna trawa</dd></div><div><dt>Zamawiający</dt><dd>Wake For Friends</dd></div></dl><figure class="gfr-quote"><blockquote>Boisko Panna Cage 180 świetnie wpisało się w naszą potrzebę poszerzenia oferty parku o dyscypliny inne niż wakeboard. Sprawdza się na co dzień i podczas wydarzeń, które organizujemy.</blockquote><figcaption><b>Piotr Wiśniewski</b>Właściciel, Wake For Friends</figcaption></figure><div class="gfr-model"><span>Model: <b>Panna Octa Cage 180</b>, konstrukcja od 58 000 zł netto</span><a href="/product/panna-octa-cage-180/">Zobacz model</a><a class="alt" href="/studio/?arena=circle-cage-2">Zaprojektuj podobne ↗</a></div></div></div></section><section class="gfr-case" id="orlik"><div class="w"><div class="gfr-ph two"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/9-768x432.jpg" alt="Boisko Panna Ring, Grodzisk Mazowiecki" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/15-768x432.jpg" alt="Arena Panna Ring na Orliku" loading="lazy" decoding="async"></div><div><p class="gfr-place">Grodzisk Mazowiecki, Orlik</p><h2 class="d">Panna Ring na Orliku</h2><p class="lead">Arena panna na obiekcie Orlik prowadzonym przez OSiR Grodzisk Mazowiecki.</p><p class="more">Boisko stoi na obiekcie od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</p><dl class="gfr-facts"><div><dt>Boisko</dt><dd>Panna Ring</dd></div><div><dt>Zamawiający</dt><dd>OSiR Grodzisk Mazowiecki</dd></div><div><dt>W użyciu</dt><dd>10 lat</dd></div></dl><figure class="gfr-quote"><blockquote>Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</blockquote><figcaption><b>Mariusz Smysło</b>Dyrektor OSiR Grodzisk Mazowiecki</figcaption></figure><div class="gfr-model"><span>Model: <b>Panna Ring</b>, konstrukcja od 40 000 zł netto</span><a href="/product/panna-ring/">Zobacz model</a><a class="alt" href="/studio/?arena=w1">Zaprojektuj podobne ↗</a></div></div></div></section>
+
+<section class="gfa-band" id="opinie"><div class="w">
+  <div class="gfa-head"><div><p class="k">Opinie</p><h2 class="d">Słowa osób, które zamówiły.</h2></div><p>Cztery miejsca, cztery opinie: miasto, park, Orlik i fundacja sportów miejskich.</p></div>
+  <ul class="gfr-voices" role="list"><li><blockquote>„Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży.”</blockquote><p><b>Grzegorz Gądek</b>Prezes Fundacji Skwery Sportów Miejskich</p></li><li><blockquote>„Realizacja przebiegła bez zastrzeżeń. Boisko Panna Octa na pasażu sportowym w Kutnie cieszy się dużą popularnością wśród młodzieży.”</blockquote><p><b>Beata Rafalska</b>Urząd Miasta Kutno, ds. inwestycji</p></li><li><blockquote>„Boisko Panna Cage 180 świetnie wpisało się w naszą potrzebę poszerzenia oferty parku o dyscypliny inne niż wakeboard. Sprawdza się na co dzień i podczas wydarzeń, które organizujemy.”</blockquote><p><b>Piotr Wiśniewski</b>Właściciel, Wake For Friends</p></li><li><blockquote>„Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.”</blockquote><p><b>Mariusz Smysło</b>Dyrektor OSiR Grodzisk Mazowiecki</p></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="eventy"><div class="w">
+  <div class="gfa-head"><h2 class="d">Turnieje i eventy.</h2><p>Mobilne areny panna na mistrzostwach, turniejach i eventach marek. Arenę mobilną można wynająć albo kupić: od 27 000 zł netto.</p></div>
+  <ul class="gfr-brands" role="list"><li>Head &amp; Shoulders</li><li>UEFA Champions League</li><li>Legia Warszawa</li><li>Mistrzostwa Świata 2017</li><li>Superball, Liberec</li></ul>
+  <ul class="gfr-ev" role="list"><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" loading="lazy" decoding="async"><span><b>Event Head &amp; Shoulders</b>Złote Tarasy, Warszawa</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/1-768x576.jpg" alt="Event Head &amp; Shoulders, Stadion, Gdańsk" loading="lazy" decoding="async"><span><b>Event Head &amp; Shoulders</b>Stadion, Gdańsk</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/10-768x432.jpg" alt="Turniej Head &amp; Shoulders, Legia Warszawa" loading="lazy" decoding="async"><span><b>Turniej Head &amp; Shoulders</b>Legia Warszawa</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/1-4-768x768.jpg" alt="Mistrzostwa Świata Street Soccer 2017, Grodzisk Mazowiecki" loading="lazy" decoding="async"><span><b>Mistrzostwa Świata Street Soccer 2017</b>Grodzisk Mazowiecki</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/22-768x432.jpg" alt="Mistrzostwa Świata Superball, Liberec" loading="lazy" decoding="async"><span><b>Mistrzostwa Świata Superball</b>Liberec</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/13-768x432.jpg" alt="UEFA Champions League, event z areną panna" loading="lazy" decoding="async"><span><b>UEFA Champions League</b>event z areną panna</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/3-1-768x432.jpg" alt="Mistrzostwa Polski, Żerków" loading="lazy" decoding="async"><span><b>Mistrzostwa Polski</b>Żerków</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/10-3-768x768.jpg" alt="Puchar Polski, Żerków" loading="lazy" decoding="async"><span><b>Puchar Polski</b>Żerków</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/5-3-768x768.jpg" alt="Mistrzostwa Polski, Street Mekka, Łódź" loading="lazy" decoding="async"><span><b>Mistrzostwa Polski, Street Mekka</b>Łódź</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/7-768x432.jpg" alt="Turniej szkolny, Warszawa" loading="lazy" decoding="async"><span><b>Turniej szkolny</b>Warszawa</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/8-3-768x768.jpg" alt="Turniej Szoła, Panna Ring" loading="lazy" decoding="async"><span><b>Turniej Szoła</b>Panna Ring</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/6-3-768x768.jpg" alt="Trenuj z Krzychem, Panna Octa Cage 180" loading="lazy" decoding="async"><span><b>Trenuj z Krzychem</b>Panna Octa Cage 180</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/IMG_1073.jpg" alt="Turniej street football, Arena Gamefields" loading="lazy" decoding="async"><span><b>Turniej street football</b>Arena Gamefields</span></li><li><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Urodziny-pilkarskie-Gamefields-Damian-Gawrych--768x431.jpg" alt="Urodziny piłkarskie, przy arenie Gamefields" loading="lazy" decoding="async"><span><b>Urodziny piłkarskie</b>przy arenie Gamefields</span></li></ul>
+  <ul class="gfa-links"><li><a href="/wynajem-boisk-mobilnych/">Arena mobilna na event →</a></li></ul>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Więcej boisk.</h2><p>Kolejne miejsca, w których stoją nasze areny.</p></div>
+  <ul class="gfr-more" role="list"><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/13-3-768x768.jpg" alt="Panna Ring, Nowy Świat, Warszawa" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b>Nowy Świat, Warszawa</figcaption></figure></li><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/15-3-768x768.jpg" alt="Panna Octa Cage 180, Kraków" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 180</b>Kraków</figcaption></figure></li><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/4-4-768x768.jpg" alt="Panna Octa Cage 90, Kraków" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 90</b>Kraków</figcaption></figure></li><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/14-768x432.jpg" alt="Panna Octa Cage 90, Grodzisk Mazowiecki" loading="lazy" decoding="async"><figcaption><b>Panna Octa Cage 90</b>Grodzisk Mazowiecki</figcaption></figure></li><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/14-3-768x768.jpg" alt="Panna Ring, plaża" loading="lazy" decoding="async"><figcaption><b>Panna Ring</b>plaża</figcaption></figure></li><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Zyrardow-Panna-Arena-1v1--768x575.jpg" alt="Arena panna 1 na 1, Żyrardów" loading="lazy" decoding="async"><figcaption><b>Arena panna 1 na 1</b>Żyrardów</figcaption></figure></li><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/16-768x432.jpg" alt="Nawierzchnia ze sztucznej trawy, arena Cage 180, Wake For Friends" loading="lazy" decoding="async"><figcaption><b>Nawierzchnia ze sztucznej trawy</b>arena Cage 180, Wake For Friends</figcaption></figure></li></ul>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Twoje miejsce może być następne.</h2><p>Od pomysłu do pierwszego meczu: zaprojektuj, sprawdź cenę i wyślij zdjęcia placu.</p></div>
+  <ul class="gfr-next" role="list">
+    <li><a href="/studio/"><i>↗</i><b>Studio 3D</b><span>Wybierz boisko, kolory i nawierzchnię. Cena liczy się na bieżąco.</span></a></li>
+    <li><a href="/shop/"><i>→</i><b>Boiska i ceny</b><span>Osiem modeli od 36 000 zł netto i osiem nawierzchni.</span></a></li>
+    <li><a href="/dofinansowanie-boisk/"><i>→</i><b>Dofinansowanie</b><span>Dla gmin i szkół: nabory 2027 i dokumenty do wniosku.</span></a></li>
+    <li><a href="/baza-wiedzy/"><i>→</i><b>Baza wiedzy</b><span>Koszty, proces, nawierzchnie i wymiary w pięciu poradnikach.</span></a></li>
+  </ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Chcesz podobne<br>miejsce?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij zdjęcia placu →</a><a class="gfa-btn alt" href="/studio/">Zaprojektuj w Studio ↗</a></div>
+</div></section>
+</div>
+<!-- /wp:html -->

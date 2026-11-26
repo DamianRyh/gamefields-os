@@ -1,0 +1,446 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-surf{gap:8px}.gfb-surf .tx{padding:10px 12px 12px}.gfb-surf b{font-size:15px}.gfb-surf .nt{font-size:12px}.gfb-surf .r{font-size:13px}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+
+.gfb-ba{position:relative;margin:0;overflow:hidden;background:#E6E0DA;aspect-ratio:3/2;user-select:none;touch-action:pan-y}
+.gfb-ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.gfb-ba .after{clip-path:inset(0 0 0 var(--p,50%))}
+.gfb-ba .bar{position:absolute;top:0;bottom:0;left:var(--p,50%);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.15);pointer-events:none}
+.gfb-ba .bar::after{content:"↔";position:absolute;top:50%;left:50%;display:grid;place-items:center;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#fff;color:var(--ink);font-weight:800;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.gfb-ba input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+.gfb-ba .tag{position:absolute;top:10px;padding:5px 10px;background:rgba(28,9,18,.82);color:#fff;font-size:12px;font-weight:800;pointer-events:none}
+.gfb-ba .tag.l{left:10px}.gfb-ba .tag.r{right:10px;background:var(--lime);color:#1F2A6B}
+.gfb-hero figcaption{margin-top:8px;font-size:13px;color:var(--muted)}
+/* symptoms */
+.gfb-sym{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-sym li{display:flex;flex-direction:column;gap:10px;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfb-sym .s{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-sym b{font-size:21px;letter-spacing:-.02em;line-height:1.15}
+.gfb-sym p{margin:0;color:#5A4652;font-size:15px}
+.gfb-sym strong{color:var(--ink)}.gfb-sym li.warn strong{color:#fff}
+.gfb-sym .fix{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;font-size:14px;font-weight:800}
+.gfb-sym .fix a{color:var(--violet);text-decoration:none}
+.gfb-sym li.warn{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.gfb-sym li.warn .s{color:var(--lime)}.gfb-sym li.warn p{color:rgba(244,241,238,.85)}.gfb-sym li.warn .fix{border-color:rgba(244,241,238,.2)}.gfb-sym li.warn .fix a{color:var(--lime)}
+/* or-new */
+.gfb-vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-vs > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-vs h3{font-size:clamp(24px,2.2vw,34px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 14px}
+.gfb-vs ul{margin:0;padding-left:20px;display:grid;gap:6px;color:#5A4652;font-size:16px}
+.gfb-vs .res{margin:16px 0 0;padding:12px 14px;background:var(--paper);font-size:15px;font-weight:700}
+.gfb-vs .res a{color:var(--violet)}
+.gfb-mid{margin:12px 0 0;padding:18px 22px;background:#EEE8FF;font-size:16px;color:var(--ink)}
+/* paint variants */
+.gfb-pv{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:p}
+.gfb-pv li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line)}
+.gfb-pv .n{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-pv b{font-size:clamp(28px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-pv b small{font-size:15px;font-weight:600;letter-spacing:0;color:var(--muted)}
+.gfb-pv p{margin:0;color:#5A4652;font-size:15px}
+.gfb-pv .ex{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.gfb-pv .ex b{font-size:14px;letter-spacing:0;color:var(--ink)}
+.gfb-facts3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0 0}
+.gfb-facts3 div{padding:18px 20px;border:1px solid var(--line)}
+.gfb-facts3 dt{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-facts3 dd{margin:6px 0 0;font-size:15px;color:#5A4652}
+/* looks */
+.gfb-looks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-looks figure{margin:0;background:#fff;border:1px solid var(--line)}
+.gfb-looks img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#E6E0DA}
+.gfb-looks figcaption{padding:14px 16px;font-size:14px;color:var(--muted)}.gfb-looks figcaption b{display:block;color:var(--ink);font-size:17px}
+.gfb-presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.gfb-presets button{min-height:36px;padding:0 12px;border-radius:999px;border:1.5px solid #CDBFC6;background:#fff;color:var(--ink);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.gfb-presets button:hover,.gfb-presets button[aria-pressed=true]{border-color:var(--violet);background:#EEE8FF}
+@media (max-width:1100px){.gfb-sym,.gfb-pv{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.gfb-vs,.gfb-facts3{grid-template-columns:minmax(0,1fr)}.gfb-looks{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.gfb-sym,.gfb-pv{grid-template-columns:minmax(0,1fr)}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://www.gamefields.eu/renowacja-boisk/#usluga","name":"Renowacja boisk sportowych","serviceType":"Renowacja i malowanie boisk","url":"https://www.gamefields.eu/renowacja-boisk/","inLanguage":"pl-PL","areaServed":{"@type":"Country","name":"Polska"},"provider":{"@id":"https://www.gamefields.eu/#studio"},"description":"Renowacja boisk betonowych i asfaltowych: ocena placu, naprawa i grunt, elastyczne farby sportowe z granulatem gumowym, nowe nawierzchnie, wzór i linie.","offers":{"@type":"Offer","priceCurrency":"PLN","priceSpecification":{"@type":"UnitPriceSpecification","price":78,"priceCurrency":"PLN","unitText":"m²","valueAddedTaxIncluded":false}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Renowacja boisk","item":"https://www.gamefields.eu/renowacja-boisk/"}]},{"@type":"FAQPage","@id":"https://www.gamefields.eu/renowacja-boisk/#pytania","inLanguage":"pl-PL","mainEntity":[{"@type":"Question","name":"Ile kosztuje renowacja boiska?","acceptedAnswer":{"@type":"Answer","text":"Malowanie farbą sportową kosztuje od 78 do 183 zł/m² netto, zależnie od wariantu: od jednego koloru z liniami po wzór 7+ kolorów. Nowa nawierzchnia na istniejącym placu od 167 zł/m² netto. Naprawy podłoża (rysy, szlifowanie, wyrównanie) wyceniam po zdjęciach."}},{"@type":"Question","name":"Czy każde stare boisko można odnowić?","acceptedAnswer":{"@type":"Answer","text":"Nie zawsze. Jeśli podłoże ma rozległe zapadnięcia, pracujące pęknięcia albo poważne problemy z wodą, trzeba je przebudować. Dlatego pierwszym etapem jest ocena placu ze zdjęć i wymiarów."}},{"@type":"Question","name":"Czy odnawiacie boiska betonowe i asfaltowe?","acceptedAnswer":{"@type":"Answer","text":"Tak. Stabilny beton albo asfalt czyszczę, naprawiam i wykorzystuję jako bazę pod malowanie albo nową nawierzchnię."}},{"@type":"Question","name":"Czym różni się farba z granulatem od zwykłej?","acceptedAnswer":{"@type":"Answer","text":"Wariant z granulatem to elastyczna powłoka z gumą: lepiej amortyzuje krok, nie ślizga się i przykrywa drobne rysy. Na nim robię też wzory wielokolorowe."}},{"@type":"Question","name":"Czy przy renowacji można zmienić układ boiska?","acceptedAnswer":{"@type":"Answer","text":"Tak. Nowe linie do piłki, koszykówki, 3 na 3 albo kilku gier naraz, inne strefy gry, nowy wzór, a na placu nawet arena panna z bandami."}},{"@type":"Question","name":"Jak długo trwa renowacja?","acceptedAnswer":{"@type":"Answer","text":"Zależy od wielkości boiska i stanu placu na starcie. Termin podaję po ocenie zdjęć, zanim podpiszemy cokolwiek."}},{"@type":"Question","name":"Kiedy można malować boisko?","acceptedAnswer":{"@type":"Answer","text":"Farby sportowe kładziemy na suchy beton przy dodatniej temperaturze, zwykle od wiosny do jesieni. Ocenę, projekt i wycenę można zrobić wcześniej, także zimą."}},{"@type":"Question","name":"Czy mogę zobaczyć nowy wygląd przed renowacją?","acceptedAnswer":{"@type":"Answer","text":"Tak. Wzór, kolory i linie projektujesz w Studio 3D, a cena liczy się na bieżąco. Tak powstała koncepcja Organic Flow dla placu na Polu Mokotowskim."}},{"@type":"Question","name":"Czy pomagacie przy modernizacji Orlika?","acceptedAnswer":{"@type":"Answer","text":"Tak. Przygotowuję koncepcję, parametry techniczne i dokumenty do wniosku o dofinansowanie i do przetargu, z kartami technicznymi i certyfikatami producentów. Nabory na 2027 rok ruszają 4 stycznia."}}]}]}</script>
+<div class="gfa gfb">
+<section class="gfb-hero"><div class="w top">
+  <div>
+    <p class="gfb-crumbs"><a href="/">Gamefields</a> / Renowacja boisk</p>
+    <p class="k">Stary beton, nowe boisko</p>
+    <h1 class="d">Renowacja boisk sportowych.</h1>
+    <p class="lead">Nie każdy plac trzeba rozbierać. Szary beton, asfalt albo zużytą nawierzchnię zamieniam w kolorowe boisko do piłki, kosza i gry 3 na 3: naprawa podłoża, farby z gumą, wzór i linie w jednym zleceniu.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="#kalkulator">Policz renowację ↓</a><a class="gfa-btn alt" href="/kontakt/">Wyślij zdjęcia boiska →</a></div>
+  </div>
+  <figure><div class="gfb-ba" data-ba style="--p:50%"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-przed-1100.webp" srcset="https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-przed-720.webp 720w, https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-przed-1100.webp 1100w" sizes="(max-width:900px) 100vw, 50vw" alt="Przed: szary betonowy plac do koszykówki, Pole Mokotowskie" width="1100" height="733" loading="eager" decoding="async"><img class="after" src="https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-po-1100.webp" srcset="https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-po-720.webp 720w, https://www.gamefields.eu/wp-content/uploads/2026/11/pole-mokotowskie-po-1100.webp 1100w" sizes="(max-width:900px) 100vw, 50vw" alt="Koncepcja po: kolorowe boisko Organic Flow na tym samym placu" width="1100" height="733" loading="eager" decoding="async"><span class="bar"></span><span class="tag l">Przed</span><span class="tag r">Koncepcja po</span><input type="range" min="0" max="100" value="50" aria-label="Przesuń, aby porównać przed i po"></div><figcaption>Pole Mokotowskie, Warszawa: plac do koszykówki (Google Street View, 2017) i koncepcja Organic Flow. Wizualizacja, nie realizacja. <a href="/radar-boisko-koszykowki-warszawa/">Cała koncepcja →</a></figcaption></figure>
+</div>
+<div class="w">
+  <dl class="gfb-nums">
+    <div><dt>Malowanie</dt><dd>od 78 zł/m²<small>netto, z gruntem i liniami</small></dd></div>
+    <div><dt>Nowa nawierzchnia</dt><dd>od 167 zł/m²<small>netto, na istniejącym placu</small></dd></div>
+    <div><dt>Ocena placu</dt><dd>ze zdjęć<small>naprawy wyceniam po oględzinach</small></dd></div>
+    <div><dt>Gwarancja</dt><dd>12 miesięcy<small>i opieka po odbiorze</small></dd></div>
+  </dl>
+</div></section>
+
+<nav class="gfb-jump" aria-label="Na tej stronie"><div class="w"><ul role="list"><li><a href="#objawy">Co z boiskiem?</a></li><li><a href="#czy-nowe">Renowacja czy nowe</a></li><li><a href="#proces">Etapy</a></li><li><a href="#ceny">Ceny malowania</a></li><li><a href="#nawierzchnie">Nowa nawierzchnia</a></li><li><a href="#kalkulator">Kalkulator</a></li><li><a href="#wyglad">Nowy wygląd</a></li><li><a href="#wycena">Do wyceny</a></li><li><a href="#pytania">Pytania</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="objawy"><div class="w">
+  <div class="gfa-head"><div><p class="k">Diagnoza</p><h2 class="d">Co jest z Twoim boiskiem?</h2></div><p>Znajdź objaw, który widzisz na swoim placu. Przy każdym: co robię i ile to mniej więcej kosztuje.</p></div>
+  <ul class="gfb-sym" role="list"><li><span class="s">Objaw</span><b>Wyblakłe kolory, starte linie</b><p>Plac jest równy, ale szary, a linie ledwo widać.</p><p><strong>Co robię:</strong> Mycie, grunt i nowa farba sportowa z liniami.</p><span class="fix"><span>od 78 zł/m²</span><a href="#ceny">Malowanie ↓</a></span></li><li><span class="s">Objaw</span><b>Rysy i drobne ubytki</b><p>Pajęczyna drobnych pęknięć, małe wyrwy przy krawędziach.</p><p><strong>Co robię:</strong> Wypełnienie rys, szlifowanie, warstwa wyrównująca, elastyczna farba z gumą, która przykrywa drobne rysy.</p><span class="fix"><span>naprawy po zdjęciach</span><a href="#proces">Etapy ↓</a></span></li><li><span class="s">Objaw</span><b>Twardo i ślisko</b><p>Beton boli przy upadku, po deszczu się ślizga.</p><p><strong>Co robię:</strong> Powłoka z granulatem gumowym albo natrysk poliuretanowy z EPDM.</p><span class="fix"><span>od 100 zł/m²</span><a href="#nawierzchnie">Nawierzchnie ↓</a></span></li><li><span class="s">Objaw</span><b>Zużyta trawa albo guma</b><p>Nawierzchnia jest wytarta, ale podłoże pod nią trzyma.</p><p><strong>Co robię:</strong> Nowa warstwa na istniejącej bazie: trawa, EPDM, płytki, akryl albo guma.</p><span class="fix"><span>od 167 zł/m²</span><a href="#nawierzchnie">Nawierzchnie ↓</a></span></li><li><span class="s">Objaw</span><b>Boisko stoi puste</b><p>Jest miejsce, ale nikt tu nie gra: brak bramek, band, charakteru.</p><p><strong>Co robię:</strong> Nowy wzór i linie do kilku gier, a na placu arena panna z bandami.</p><span class="fix"><span>arena od 36 000 zł</span><a href="#kalkulator">Policz ↓</a></span></li><li class=warn><span class="s">Objaw</span><b>Woda stoi, beton się zapada</b><p>Zapadnięcia, pracujące pęknięcia, kałuże po każdym deszczu.</p><p><strong>Co robię:</strong> To nie jest robota na farbę: trzeba przebudować podłoże.</p><span class="fix"><span>płyta 283 zł/m²</span><a href="/budowa-boisk-sportowych/">Budowa boisk →</a></span></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="czy-nowe"><div class="w">
+  <div class="gfa-head"><div><p class="k">Decyzja</p><h2 class="d">Renowacja czy nowe boisko?</h2></div><p>Jeśli podłoże jest stabilne, a problemy dotyczą głównie nawierzchni, linii i wyposażenia, renowacja zwykle wystarczy. <a href="/renowacja-czy-budowa-nowego-boiska/">Cały poradnik →</a></p></div>
+  <div class="gfb-vs">
+    <div><h3>Renowacja ma sens, gdy</h3><ul>
+      <li>podłoże nie ma rozległych zapadnięć i pracujących pęknięć,</li><li>odwodnienie działa lub można je poprawić bez pełnej rozbiórki,</li>
+      <li>wymiary i lokalizacja nadal odpowiadają użytkownikom,</li><li>większość problemów dotyczy nawierzchni, linii i wyposażenia,</li><li>nowa funkcja może wykorzystać istniejącą geometrię.</li></ul>
+      <p class="res">Malowanie od 78 zł/m² albo nowa nawierzchnia od 167 zł/m² netto. <a href="#kalkulator">Policz ↓</a></p></div>
+    <div><h3>Budowa od nowa, gdy</h3><ul>
+      <li>podbudowa jest niestabilna i powoduje trwałe deformacje,</li><li>obiekt ma poważne problemy z wodą,</li><li>istniejące wymiary nie pozwalają zrealizować potrzebnych funkcji,</li>
+      <li>trzeba zmienić nawierzchnię razem z konstrukcją pod nią,</li><li>nowa infrastruktura wymaga fundamentów i przebudowy terenu.</li></ul>
+      <p class="res">Nowa płyta betonowa 12 cm z podbudową: 283 zł/m² netto. <a href="/budowa-boisk-sportowych/">Budowa boisk →</a></p></div>
+  </div>
+  <p class="gfb-mid"><b>Najczęściej wychodzi coś pośrodku:</b> zachowuję część placu, lokalnie naprawiam podłoże, kładę nową warstwę, dodaję wyposażenie i zmieniam charakter miejsca. Zakres wynika z oględzin, a nie z założenia z góry.</p>
+</div></section>
+
+<section class="gfa-sec" id="proces"><div class="w">
+  <div class="gfa-head"><div><p class="k">Etapy</p><h2 class="d">Od szarego placu do meczu.</h2></div><p>Pięć kroków. Najwięcej zależy od dwóch pierwszych: naprawy i gruntu.</p></div>
+  <ol class="gfb-steps"><li><b>Ocena placu</b><p>Ze zdjęć i wymiarów sprawdzam pęknięcia, spadki, odwodnienie i stan betonu. Mówię wprost, czy wystarczy malowanie, czy trzeba naprawić podłoże.</p><span class="gf">termin i zakres podaję po zdjęciach, zanim cokolwiek podpiszemy.</span></li><li><b>Naprawa i grunt</b><p>Mycie, szlifowanie, wypełnienie rys i ubytków, grunt do betonu i warstwa wyrównująca. Od tego zależy trwałość koloru.</p><span class="gf">naprawy podłoża wyceniam po oględzinach.</span></li><li><b>Farby z gumą</b><p>Elastyczna powłoka sportowa z granulatem gumowym: amortyzuje krok, nie ślizga się i przykrywa drobne rysy.</p><span class="gf">na wyższe wymagania natrysk poliuretanowy z EPDM.</span></li><li><b>Wzór i linie</b><p>Wzór Signature albo Twój projekt ze Studio 3D. Linie do piłki, koszykówki, 3 na 3 albo kilku gier naraz.</p><span class="gf">wzór i kolory widzisz w Studio przed malowaniem.</span></li><li><b>Odbiór i opieka</b><p>Sprawdzenie wykonania, linii i wyposażenia, odbiór boiska.</p><span class="gf">12 miesięcy gwarancji i stała opieka nad renowacją.</span></li><li class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/malowanie-macro-768x576.webp" alt="Farba sportowa na boisku z bliska" loading="lazy" decoding="async"></li><li class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Studio-%E2%80%94-Organic-Flow-768x432.webp" alt="Wzór Organic Flow w Studio Gamefields" loading="lazy" decoding="async"></li><li class="ph"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-768x576.webp" alt="Nawierzchnia EPDM z bliska" loading="lazy" decoding="async"></li></ol>
+</div></section>
+
+<section class="gfa-sec" id="ceny"><div class="w">
+  <div class="gfa-head"><div><p class="k">Ceny malowania</p><h2 class="d">Ile kosztuje malowanie boiska?</h2></div><p>Ceny za m² netto, jak w Studio 3D i w sklepie. Naprawy podłoża wyceniam po zdjęciach. <a href="/malowanie-boisk/">Malowanie boisk →</a></p></div>
+  <ul class="gfb-pv" role="list"><li><span class="n">Jednokolorowa</span><b>78 <small>zł/m² netto</small></b><p>Grunt, 2 warstwy farby sportowej i standardowe linie.</p><span class="ex">Na przykład: <b>boisko szkolne do odświeżenia</b></span></li><li><span class="n">Jednokolorowa z granulatem</span><b>100 <small>zł/m² netto</small></b><p>Elastyczna powłoka z gumą: lepsza amortyzacja i antypoślizg, z liniami.</p><span class="ex">Na przykład: <b>plac, na którym dzieci się przewracają</b></span></li><li><span class="n">Wzór średni</span><b>150 <small>zł/m² netto</small></b><p>4–6 kolorów, geometryczne wzory typu Signature, na bazie z granulatem.</p><span class="ex">Na przykład: <b>osiedle, które chce mieć swój znak</b></span></li><li><span class="n">Wzór zaawansowany</span><b>183 <small>zł/m² netto</small></b><p>7 i więcej kolorów, złożone grafiki (Organic Flow, gradienty), na bazie z granulatem.</p><span class="ex">Na przykład: <b>miejsce do zdjęć, grafika jak mural</b></span></li></ul>
+  <dl class="gfb-facts3">
+    <div><dt>Czas realizacji</dt><dd>Zależy od wielkości boiska i stanu placu na starcie. Termin podaję po ocenie zdjęć.</dd></div>
+    <div><dt>Pogoda</dt><dd>Farby sportowe kładziemy na suchy beton, przy dodatniej temperaturze, zwykle od wiosny do jesieni.</dd></div>
+    <div><dt>Na start</dt><dd>Zdjęcia placu, przybliżone wymiary i lokalizacja. Nie musisz znać budżetu.</dd></div>
+  </dl>
+</div></section>
+
+<section class="gfa-sec" id="nawierzchnie"><div class="w">
+  <div class="gfa-head"><div><p class="k">Nowa nawierzchnia</p><h2 class="d">Nowa warstwa na starym placu.</h2></div><p>Każde z tych wykończeń kładę na stabilnym, istniejącym placu. Ceny za m² netto, od wariantu Standard do Premium. <a href="/jak-wybrac-nawierzchnie-sportowa/">Jak wybrać →</a></p></div>
+  <ul class="gfb-surf" role="list"><li><a href="/product/sztuczna-trawa/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/trawa-macro-768x576.webp" alt="Sztuczna trawa z bliska" loading="lazy" decoding="async"><span class="tx"><b>Sztuczna trawa</b><span class="nt">klasyczna murawa do piłki</span><span class="r">167–292 zł/m² netto</span></span></a></li><li><a href="/product/akryl-hard-court/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/akryl-macro-768x576.webp" alt="Akryl Hard Court z bliska" loading="lazy" decoding="async"><span class="tx"><b>Akryl Hard Court</b><span class="nt">twardy i szybki, jak na kortach</span><span class="r">200–342 zł/m² netto</span></span></a></li><li><a href="/product/nawierzchnia-epdm/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/granulat-macro-768x576.webp" alt="Nawierzchnia EPDM wylewana z bliska" loading="lazy" decoding="async"><span class="tx"><b>Nawierzchnia EPDM wylewana</b><span class="nt">PN-EN 14877, wodoprzepuszczalna</span><span class="r">250–400 zł/m² netto</span></span></a></li><li><a href="/product/plytki-sportowe/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plytki-macro-768x576.webp" alt="Płytki sportowe PP z bliska" loading="lazy" decoding="async"><span class="tx"><b>Płytki sportowe PP</b><span class="nt">montaż bez klejenia, z drenażem</span><span class="r">275–400 zł/m² netto</span></span></a></li><li><a href="/product/maty-gumowe-nawierzchnia/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/maty-gumowe-macro-768x576.webp" alt="Maty gumowe z bliska" loading="lazy" decoding="async"><span class="tx"><b>Maty gumowe</b><span class="nt">ciągła guma, antypoślizg R11</span><span class="r">242–425 zł/m² netto</span></span></a></li><li><a href="/product/plyty-gumowe/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/plyty-gumowe-macro-768x576.webp" alt="Płyty gumowe z bliska" loading="lazy" decoding="async"><span class="tx"><b>Płyty gumowe</b><span class="nt">PN-EN 1177, atest PZH</span><span class="r">342–492 zł/m² netto</span></span></a></li><li><a href="/product/plyta-betonowa/"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/beton-macro-768x576.webp" alt="Płyta betonowa z bliska" loading="lazy" decoding="async"><span class="tx"><b>Nowa płyta betonowa</b><span class="nt">gdy stare podłoże trzeba wymienić</span><span class="r">283 zł/m² netto</span></span></a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="kalkulator"><div class="w">
+  <div class="gfa-head"><div><p class="k">Kalkulator</p><h2 class="d">Policz renowację.</h2></div><p>Wpisz powierzchnię placu, wybierz malowanie albo nową nawierzchnię. Możesz od razu dodać arenę panna z bandami.</p></div>
+  <div class="gfb-calc">
+    <form id="gfb-ren" aria-label="Kalkulator renowacji boiska">
+      <div><label for="gfb-ren-area">Powierzchnia placu w m²</label><input id="gfb-ren-area" name="area" type="number" min="1" step="1" value="420" inputmode="numeric">
+        <div class="gfb-presets"><button type="button" data-a="150">Boisko 3 na 3 · 15 × 10 m</button><button type="button" data-a="420">Kosz · 28 × 15 m</button><button type="button" data-a="608">Wielofunkcyjne · 19 × 32 m</button></div></div>
+      <fieldset><legend>Co robimy</legend><div class="gfb-chips" role="radiogroup">
+        <label><input type="radio" name="mode" value="paint" checked> Malowanie</label><label><input type="radio" name="mode" value="surf"> Nowa nawierzchnia</label></div></fieldset>
+      <fieldset data-paint><legend>Wariant malowania</legend><div class="gfb-chips"><label><input type="radio" name="pv" value="0"> Jednokolorowa · 78 zł/m²</label><label><input type="radio" name="pv" value="1" checked> Jednokolorowa z granulatem · 100 zł/m²</label><label><input type="radio" name="pv" value="2"> Wzór średni · 150 zł/m²</label><label><input type="radio" name="pv" value="3"> Wzór zaawansowany · 183 zł/m²</label></div></fieldset>
+      <div data-surf hidden><label for="gfb-ren-surf">Nawierzchnia</label><select id="gfb-ren-surf" name="surf"><option value="0">Sztuczna trawa</option><option value="1">Akryl Hard Court</option><option value="2">Nawierzchnia EPDM wylewana</option><option value="3">Płytki sportowe PP</option><option value="4">Maty gumowe</option><option value="5">Płyty gumowe</option></select><div data-tier style="margin-top:10px"></div></div>
+      <div><label for="gfb-ren-arena">Arena na placu (opcjonalnie)</label><select id="gfb-ren-arena" name="arena"><option value="">Bez areny</option><option value="circle-cage-1">Panna Octa Cage 90 · od 36 000 zł</option><option value="o1">Panna Play · od 40 000 zł</option><option value="w1">Panna Ring · od 40 000 zł</option><option value="octagon">Panna Octa · od 49 000 zł</option><option value="street-field">Panna Grid · od 51 000 zł</option><option value="circle-cage-2">Panna Octa Cage 180 · od 58 000 zł</option><option value="p1">Panna Court · od 69 000 zł</option><option value="street15">Boisko 3 na 3 (Street Arena 15) · od 100 000 zł</option></select></div>
+    </form>
+    <div class="gfb-out" aria-live="polite">
+      <p class="k">Szacunkowy koszt netto</p>
+      <p class="sum"><span data-sum>—</span><small data-gross></small></p>
+      <dl data-list></dl>
+      <p>Bez napraw podłoża (rysy, szlifowanie, wyrównanie), transportu i montażu: wycenię je po zdjęciach placu. Koszt zaokrąglony w górę do 100 zł.</p>
+      <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij zdjęcia placu →</a><a class="gfa-btn alt" href="/studio/">Wzór w Studio ↗</a></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="wyglad"><div class="w">
+  <div class="gfa-head"><div><p class="k">Nowy wygląd</p><h2 class="d">Zobacz nowe boisko, zanim pomalujemy.</h2></div><p>Renowacja to najlepszy moment, żeby zmienić charakter miejsca. Wzór, kolory i linie projektujesz w Studio 3D, a cena liczy się na bieżąco.</p></div>
+  <ul class="gfb-looks" role="list"><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Studio-%E2%80%94-Organic-Flow-768x432.webp" alt="Wzór nawierzchni Organic Flow w Studio Gamefields" loading="lazy" decoding="async"><figcaption><b>Organic Flow</b>płynne formy, 7+ kolorów: wzór zaawansowany</figcaption></figure></li><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2026/10/Studio-Urban-Contrast.webp" alt="Wzór nawierzchni Urban Contrast w Studio Gamefields" loading="lazy" decoding="async"><figcaption><b>Urban Contrast</b>mocne kontrasty na miejski plac</figcaption></figure></li><li><figure><img src="https://www.gamefields.eu/wp-content/uploads/2026/10/Studio-Classic-Lines.webp" alt="Wzór nawierzchni Classic Lines w Studio Gamefields" loading="lazy" decoding="async"><figcaption><b>Classic Lines</b>czytelne linie do kilku gier</figcaption></figure></li></ul>
+  <ul class="gfa-links"><li><a href="/studio/">Zaprojektuj wzór w Studio ↗</a></li><li><a href="/koncepcje/">Koncepcje →</a></li><li><a href="/malowanie-boisk/">Malowanie boisk →</a></li></ul>
+</div></section>
+
+<section class="gfa-band" id="gminy"><div class="w">
+  <div class="gfa-head"><div><p class="k">Dla gmin, szkół i Orlików</p><h2 class="d">Modernizacja z dokumentami.</h2></div><p>Modernizacja Orlika albo boiska szkolnego: koncepcja, parametry techniczne i dokumenty do wniosku o dofinansowanie i do przetargu.</p></div>
+  <dl class="gfb-docs">
+    <div><dt>Dokumenty</dt><dd>Karty techniczne i certyfikaty farb i nawierzchni do oferty, wniosku i dokumentacji przetargowej.</dd></div>
+    <div><dt>Orlik 2012</dt><dd>Rozwiązania spełniają wymagania programu „Moje Boisko – Orlik 2012”. Nabory na 2027 rok ruszają 4 stycznia.</dd></div>
+    <div><dt>12 miesięcy</dt><dd>Rok gwarancji i stała opieka nad renowacją boiska po odbiorze.</dd></div>
+    <div><dt>PN-EN 14877</dt><dd>Nawierzchnie poliuretanowe EPDM; płyty gumowe z PN-EN 1177 i atestem PZH.</dd></div>
+  </dl>
+  <ul class="gfa-links"><li><a href="/dofinansowanie-boisk/">Dofinansowanie boisk →</a></li><li><a href="/realizacje-dla-miast/">Realizacje dla miast →</a></li><li><a href="/boiska-dla-szkol/">Dla szkół</a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="wycena"><div class="w">
+  <div class="gfa-head"><div><p class="k">Do wyceny</p><h2 class="d">Co sfotografować?</h2></div><p>Wyślij stare boisko, zamiast od razu planować rozbiórkę. Na podstawie zdjęć ocenię, czy wystarczy renowacja, modernizacja czy nowa konstrukcja.</p></div>
+  <div class="gfb-prep">
+    <div><h3>Zdjęcia placu</h3><ul class="gfb-check">
+      <li><span>Cała powierzchnia z kilku stron.</span></li><li><span>Pęknięcia i ubytki z bliska.</span></li><li><span>Krawędzie i obrzeża.</span></li>
+      <li><span>Odpływy i miejsca, gdzie stoi woda.</span></li><li><span>Fundamenty urządzeń i obecne wyposażenie.</span></li></ul></div>
+    <div><h3>I trzy informacje</h3><ul class="gfb-check">
+      <li><span><b>Wymiary</b>: przybliżone, z miarki albo z mapy.</span></li><li><span><b>Lokalizacja</b>: adres albo pinezka.</span></li>
+      <li><span><b>Do czego ma służyć</b>: piłka, kosz, 3 na 3, kilka gier.</span></li></ul>
+      <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij zdjęcia boiska →</a><a class="gfa-btn alt" href="/studio/">Wzór w Studio ↗</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><div><p class="k">Pytania</p><h2 class="d">Renowacja zamiast rozbiórki.</h2></div><p>Koszty, zakres, terminy i dofinansowanie.</p></div>
+  <div class="gfa-faq"><details><summary>Ile kosztuje renowacja boiska?</summary><p>Malowanie farbą sportową kosztuje od 78 do 183 zł/m² netto, zależnie od wariantu: od jednego koloru z liniami po wzór 7+ kolorów. Nowa nawierzchnia na istniejącym placu od 167 zł/m² netto. Naprawy podłoża (rysy, szlifowanie, wyrównanie) wyceniam po zdjęciach.</p></details><details><summary>Czy każde stare boisko można odnowić?</summary><p>Nie zawsze. Jeśli podłoże ma rozległe zapadnięcia, pracujące pęknięcia albo poważne problemy z wodą, trzeba je przebudować. Dlatego pierwszym etapem jest ocena placu ze zdjęć i wymiarów.</p></details><details><summary>Czy odnawiacie boiska betonowe i asfaltowe?</summary><p>Tak. Stabilny beton albo asfalt czyszczę, naprawiam i wykorzystuję jako bazę pod malowanie albo nową nawierzchnię.</p></details><details><summary>Czym różni się farba z granulatem od zwykłej?</summary><p>Wariant z granulatem to elastyczna powłoka z gumą: lepiej amortyzuje krok, nie ślizga się i przykrywa drobne rysy. Na nim robię też wzory wielokolorowe.</p></details><details><summary>Czy przy renowacji można zmienić układ boiska?</summary><p>Tak. Nowe linie do piłki, koszykówki, 3 na 3 albo kilku gier naraz, inne strefy gry, nowy wzór, a na placu nawet arena panna z bandami.</p></details><details><summary>Jak długo trwa renowacja?</summary><p>Zależy od wielkości boiska i stanu placu na starcie. Termin podaję po ocenie zdjęć, zanim podpiszemy cokolwiek.</p></details><details><summary>Kiedy można malować boisko?</summary><p>Farby sportowe kładziemy na suchy beton przy dodatniej temperaturze, zwykle od wiosny do jesieni. Ocenę, projekt i wycenę można zrobić wcześniej, także zimą.</p></details><details><summary>Czy mogę zobaczyć nowy wygląd przed renowacją?</summary><p>Tak. Wzór, kolory i linie projektujesz w Studio 3D, a cena liczy się na bieżąco. Tak powstała koncepcja Organic Flow dla placu na Polu Mokotowskim.</p></details><details><summary>Czy pomagacie przy modernizacji Orlika?</summary><p>Tak. Przygotowuję koncepcję, parametry techniczne i dokumenty do wniosku o dofinansowanie i do przetargu, z kartami technicznymi i certyfikatami producentów. Nabory na 2027 rok ruszają 4 stycznia.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><div><p class="k">Dalej</p><h2 class="d">Przeczytaj, zanim zdecydujesz.</h2></div><p>Poradniki z cenami Gamefields i powiązane usługi.</p></div>
+  <ul class="gfb-next" role="list">
+    <li><a href="/renowacja-czy-budowa-nowego-boiska/"><i>Decyzja</i><b>Renowacja czy budowa nowego boiska?</b><span>Kiedy wystarczy odnowić stary plac.</span></a></li>
+    <li><a href="/jak-wybrac-nawierzchnie-sportowa/"><i>Technologia</i><b>Jak wybrać nawierzchnię sportową?</b><span>Trawa, EPDM, płytki, guma, akryl, farba.</span></a></li>
+    <li><a href="/ile-kosztuje-budowa-boiska-sportowego/"><i>Budżet</i><b>Ile kosztuje budowa boiska?</b><span>Co tworzy koszt i ceny Gamefields.</span></a></li>
+  </ul>
+  <ul class="gfb-who" role="list"><li><a href="/malowanie-boisk/">Malowanie boisk</a></li><li><a href="/nawierzchnie-sportowe/">Nawierzchnie sportowe</a></li><li><a href="/budowa-boisk-sportowych/">Budowa boisk</a></li><li><a href="/projektowanie-boisk/">Projektowanie boisk</a></li><li><a href="/realizacje-gamefields/">Realizacje</a></li><li><a href="/dla-miast/"><span>Dla</span>miast i gmin</a></li><li><a href="/boiska-dla-szkol/"><span>Dla</span>szkół</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Masz stare boisko<br>do odnowienia?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij zdjęcia boiska →</a><a class="gfa-btn alt" href="/studio/">Zaprojektuj wzór ↗</a></div>
+</div></section>
+<script type="application/json" id="gfb-ren-data">{"paint":[{"n":"Jednokolorowa","r":78},{"n":"Jednokolorowa z granulatem","r":100},{"n":"Wzór średni","r":150},{"n":"Wzór zaawansowany","r":183}],"surf":[{"n":"Sztuczna trawa","v":[{"n":"Standard","r":167},{"n":"Standard+","r":225},{"n":"Premium","r":292}]},{"n":"Akryl Hard Court","v":[{"n":"Standard","r":200},{"n":"Standard+","r":267},{"n":"Premium","r":342}]},{"n":"Nawierzchnia EPDM wylewana","v":[{"n":"Standard","r":250},{"n":"Standard+","r":317},{"n":"Premium","r":400}]},{"n":"Płytki sportowe PP","v":[{"n":"Standard","r":275},{"n":"Standard+","r":325},{"n":"Premium","r":400}]},{"n":"Maty gumowe","v":[{"n":"Standard","r":242},{"n":"Standard+","r":317},{"n":"Premium","r":425}]},{"n":"Płyty gumowe","v":[{"n":"Standard","r":342},{"n":"Standard+","r":400},{"n":"Premium","r":492}]}],"models":[{"id":"circle-cage-1","n":"Panna Octa Cage 90","c":36000},{"id":"o1","n":"Panna Play","c":40000},{"id":"w1","n":"Panna Ring","c":40000},{"id":"octagon","n":"Panna Octa","c":49000},{"id":"street-field","n":"Panna Grid","c":51000},{"id":"circle-cage-2","n":"Panna Octa Cage 180","c":58000},{"id":"p1","n":"Panna Court","c":69000},{"id":"street15","n":"Boisko 3 na 3 (Street Arena 15)","c":100000}],"vat":0.23}</script>
+<script>(function(){var ba=document.querySelector('.gfb [data-ba]');if(ba){var r=ba.querySelector('input');r.addEventListener('input',function(){ba.style.setProperty('--p',r.value+'%')})}
+var f=document.getElementById('gfb-ren');if(!f)return;var D=JSON.parse(document.getElementById('gfb-ren-data').textContent);var q=function(s){return document.querySelector(s)};
+var area=f.querySelector('[name=area]'),mode=f.querySelectorAll('[name=mode]'),pBox=q('[data-paint]'),sBox=q('[data-surf]'),sSel=f.querySelector('[name=surf]'),tBox=q('[data-tier]'),arena=f.querySelector('[name=arena]'),
+out=q('[data-sum]'),gross=q('[data-gross]'),list=q('[data-list]');
+function fmt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')+'\u00a0zł'}
+function up(a,r){return Math.ceil(Math.round(a*r*100)/10000)*100}
+function curMode(){for(var i=0;i<mode.length;i++){if(mode[i].checked)return mode[i].value}return 'paint'}
+function tiers(){var s=D.surf[+sSel.value];var cur=tBox.querySelector('input:checked');var keep=cur?+cur.value:0;
+tBox.innerHTML='<div class="gfb-chips" role="radiogroup">'+s.v.map(function(v,i){return '<label><input type="radio" name="tier" value="'+i+'"'+(i===keep?' checked':'')+'> '+v.n+' · '+v.r+' zł/m²</label>'}).join('')+'</div>'}
+function render(){var a=Math.max(0,parseFloat(String(area.value).replace(',','.'))||0);var m=curMode();pBox.hidden=m!=='paint';sBox.hidden=m==='paint';
+var rows=[],sum=0,v,name;if(m==='paint'){var pi=f.querySelector('[name=pv]:checked');v=D.paint[pi?+pi.value:0];name='Malowanie · '+v.n}else{var s=D.surf[+sSel.value],ti=tBox.querySelector('input:checked');v=s.v[ti?+ti.value:0];name=s.n+' · '+v.n}
+if(a){var c=up(a,v.r);rows.push([name+' · '+String(a).replace('.',',')+' m²',c]);sum+=c}
+var id=arena.value;if(id){for(var i=0;i<D.models.length;i++){if(D.models[i].id===id){rows.push(['Arena '+D.models[i].n+' (konstrukcja)',D.models[i].c]);sum+=D.models[i].c}}}
+out.textContent=sum?fmt(sum):'—';gross.textContent=sum?fmt(sum*(1+D.vat))+' brutto (VAT 23%)':'Wpisz powierzchnię';
+list.innerHTML=rows.map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+fmt(r[1])+'</dd></div>'}).join('');}
+f.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){area.value=b.getAttribute('data-a');f.querySelectorAll('[data-a]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});render()})});
+area.addEventListener('input',function(){f.querySelectorAll('[data-a]').forEach(function(x){x.setAttribute('aria-pressed','false')});render()});
+for(var i=0;i<mode.length;i++)mode[i].addEventListener('change',render);
+f.addEventListener('change',function(e){if(e.target===sSel)tiers();render()});f.addEventListener('submit',function(e){e.preventDefault()});tiers();render();})();</script>
+</div>
+<!-- /wp:html -->

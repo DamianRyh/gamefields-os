@@ -1,0 +1,637 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfc-hero{padding:clamp(36px,5vw,80px) 0 clamp(20px,3vw,36px)}
+.gfc-hero .w{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfc-hero h1{font-size:clamp(52px,8vw,132px)}
+.gfc-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfc-me{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;align-items:center;padding:16px;background:#fff;border:1px solid var(--line)}
+.gfc-me img{display:block;width:120px;height:150px;object-fit:cover;object-position:50% 15%;background:#8E9094}
+.gfc-me b{display:block;font-size:20px;letter-spacing:-.02em}
+.gfc-me p{margin:4px 0 10px;color:var(--muted);font-size:15px}
+.gfc-quick{display:flex;flex-wrap:wrap;gap:8px}
+.gfc-quick a{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px}
+.gfc-quick a:hover{border-color:var(--violet)}
+.gfc-quick a.mail{background:var(--violet);border-color:var(--violet);color:#fff!important}
+/* paths */
+.gfc-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfc-path{display:grid;gap:8px;align-content:start;width:100%;height:100%;padding:22px;text-align:left;background:#fff;border:1.5px solid var(--line);color:var(--ink);font:inherit;cursor:pointer;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.gfc-path:hover{transform:translateY(-3px);border-color:var(--violet)}
+.gfc-path[aria-pressed="true"]{border-color:var(--violet);box-shadow:0 0 0 3px rgba(99,54,245,.18)}
+.gfc-path .n{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800;font-size:13px}
+.gfc-path b{font-size:clamp(19px,1.6vw,24px);letter-spacing:-.025em;line-height:1.1}
+.gfc-path span.who{color:var(--muted);font-size:14px;line-height:1.4}
+.gfc-path.hot{background:var(--lime);border-color:var(--lime)}
+.gfc-path.hot .n{background:#1F2A6B;color:var(--lime)}
+.gfc-path.hot span.who{color:#3d2a33;font-weight:600}
+.gfc-path .go{margin-top:6px;font-size:13px;font-weight:800;color:var(--violet)}
+.gfc-path.hot .go{color:#1F2A6B}
+/* form area */
+.gfc-form{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,3vw,48px);align-items:start;scroll-margin-top:90px}
+.gfc-card{padding:clamp(20px,2.6vw,36px);background:#fff;border:1px solid var(--line)}
+.gfc-card h2{font-size:clamp(30px,3.2vw,48px);font-weight:800;letter-spacing:-.045em;line-height:.95;margin:0 0 8px}
+.gfc-card .sub{margin:0 0 18px;color:var(--muted);font-size:16px}
+.gfc-chosen{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px;padding:10px 12px;background:var(--paper);font-size:14px}
+.gfc-chosen[hidden]{display:none}
+.gfc-chosen b{color:var(--violet)}
+.gfc-chosen button{margin-left:auto;border:0;background:none;color:var(--ink);text-decoration:underline;font:inherit;cursor:pointer}
+.gfc-extra{display:grid;gap:12px;margin:0 0 18px;padding:16px;border:1.5px dashed #CDBFC6}
+.gfc-extra[hidden]{display:none}
+.gfc-extra .h{margin:0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.gfc-x{display:grid;gap:6px;font-size:14px;font-weight:700}
+.gfc-x input[type=text],.gfc-x select{min-height:48px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:12px;background:#fff;color:var(--ink);font:500 16px inherit;font-family:inherit}
+.gfc-check{display:flex;align-items:center;gap:10px;font-weight:600}
+.gfc-check input{width:22px;height:22px;accent-color:var(--violet)}
+.gfc-u16{margin:0;padding:12px 14px;background:#EEE8FF;color:var(--ink);font-size:14px;line-height:1.45}
+/* Contact Form 7 inside */
+.gfc .wpcf7 form{margin:0}
+.gfc .wpcf7 .hidden-fields-container{border:0;margin:0;padding:0;min-width:0}
+.gfc [data-gf-lead] fieldset{border:0;min-width:0;margin:0;padding:0}
+.gfc [data-gf-lead] legend{font-weight:800;font-size:22px;letter-spacing:-.02em;margin:6px 0 14px}
+.gfc .gf-lead-progress p{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px}
+.gfc .gf-lead-progress button{min-height:44px;border:0;border-radius:999px;background:var(--paper);color:var(--muted);font:700 14px inherit;font-family:inherit;cursor:pointer}
+.gfc .gf-lead-progress button[aria-current]{background:var(--ink);color:#fff}
+.gfc .gf-lead-field p{margin:0 0 14px}
+.gfc .gf-lead-field label{display:grid;gap:6px;font-size:14px;font-weight:700}
+.gfc .gf-lead-field br{display:none}
+.gfc .wpcf7 input[type=text],.gfc .wpcf7 input[type=email],.gfc .wpcf7 input[type=tel],.gfc .wpcf7 select,.gfc .wpcf7 textarea{width:100%;min-height:48px;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:12px;background:#fff;color:var(--ink);font:500 16px inherit;font-family:inherit}
+.gfc .wpcf7 textarea{min-height:130px;resize:vertical}
+.gfc .wpcf7 input:focus,.gfc .wpcf7 select:focus,.gfc .wpcf7 textarea:focus,.gfc-x input:focus,.gfc-x select:focus{outline:3px solid rgba(99,54,245,.35);border-color:var(--violet)}
+.gfc .wpcf7 input[type=file]{width:100%;padding:18px;border:1.5px dashed #CDBFC6;border-radius:12px;background:var(--paper);font-size:14px}
+.gfc .wpcf7 small{display:block;margin-top:6px;color:var(--muted);font-size:13px;font-weight:500}
+.gfc [data-gf-lead] fieldset > p:last-child{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.gfc [data-gf-lead] [data-gf-next],.gfc .wpcf7-submit{min-height:52px;padding:0 26px;border:0;border-radius:999px;background:var(--violet);color:#fff;font:700 16px inherit;font-family:inherit;cursor:pointer}
+.gfc [data-gf-lead] [data-gf-prev]{min-height:52px;padding:0 22px;border:1.5px solid #CDBFC6;border-radius:999px;background:transparent;color:var(--ink);font:700 15px inherit;font-family:inherit;cursor:pointer}
+.gfc .gf-lead-note{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.gfc .wpcf7-not-valid-tip{font-size:13px;color:#C0262D;margin-top:4px}
+.gfc .wpcf7-response-output{margin:14px 0 0!important;padding:12px 14px!important;border-radius:12px;font-size:14px}
+.gfc-thanks{display:none;padding:22px;background:var(--lime);color:#1F2A6B}
+.gfc-thanks b{display:block;font-size:24px;letter-spacing:-.02em;margin-bottom:6px}
+.gfc.sent .gfc-thanks{display:block}
+/* side */
+.gfc-side{position:sticky;top:96px;display:grid;gap:12px}
+.gfc-next{padding:22px;background:var(--ink);color:var(--paper)}
+.gfc-next .k{color:var(--lime)}
+.gfc-next ol{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:n}
+.gfc-next li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;counter-increment:n;font-size:15px;line-height:1.45;color:rgba(244,241,238,.9)}
+.gfc-next li::before{content:counter(n);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:13px}
+.gfc-prep{padding:22px;background:#fff;border:1px solid var(--line)}
+.gfc-prep ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfc-prep li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;font-size:15px}
+.gfc-prep li::before{content:"✓";color:var(--violet);font-weight:800}
+.gfc-prep li b{display:block}
+.gfc-prep li span{color:var(--muted);font-size:14px}
+.gfc-faq{border-top:1px solid var(--line)}
+.gfc-faq details{border-bottom:1px solid var(--line)}
+.gfc-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfc-faq summary::-webkit-details-marker{display:none}
+.gfc-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfc-faq details[open] summary::after{content:"\2212"}
+.gfc-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+.gfc-data{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfc-data a,.gfc-data div{display:grid;gap:4px;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none}
+.gfc-data small{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.gfc-data strong{font-size:clamp(18px,1.6vw,24px);letter-spacing:-.02em}
+@media (max-width:1100px){.gfc-paths{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.gfc-hero .w,.gfc-form{grid-template-columns:minmax(0,1fr)}.gfc-side{position:static}.gfc-data{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.gfc-paths{grid-template-columns:minmax(0,1fr)}.gfc-path{grid-template-columns:36px minmax(0,1fr);column-gap:12px;padding:16px}.gfc-path .n{grid-row:span 3}
+ .gfc-me{grid-template-columns:84px minmax(0,1fr)}.gfc-me img{width:84px;height:105px}.gfc .gf-lead-progress button{font-size:12px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ContactPage","name":"Kontakt Gamefields","url":"https://www.gamefields.eu/kontakt/","inLanguage":"pl-PL","mainEntity":{"@type":"Organization","name":"Gamefields","email":"info@gamefields.eu","telephone":"+48794911746","url":"https://www.gamefields.eu/","contactPoint":{"@type":"ContactPoint","email":"info@gamefields.eu","telephone":"+48794911746","contactType":"customer service","availableLanguage":"pl"}}}</script>
+<div class="gfa gfc">
+<section class="gfc-hero"><div class="w">
+  <div>
+    <p class="k">Contact</p>
+    <h1 class="d">Zacznijmy od miejsca.</h1>
+    <p class="lead">Nie potrzebujesz projektu ani budżetu, żeby napisać. Pokaż miejsce, zdjęcie albo swój pomysł, a ja zaproponuję kolejny krok.</p>
+  </div>
+  <div class="gfc-me">
+    <img src="https://www.gamefields.eu/wp-content/uploads/2026/11/DAMIAN-GAWRYCH-1-768x998.jpeg" alt="Damian Gawrych" width="120" height="150" loading="eager" decoding="async">
+    <div><b>Damian Gawrych</b><p>Odpisuję osobiście na każdą wiadomość.</p>
+      <div class="gfc-quick"><a class="mail" href="mailto:info@gamefields.eu">info@gamefields.eu</a><a href="tel:+48794911746">+48 794 911 746</a></div></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="kim-jestes"><div class="w">
+  <div class="gfa-head"><h2 class="d">Kim jesteś?</h2><p>Wybierz, co najlepiej Cię opisuje. Dopasuję pytania i powiem, co wydarzy się dalej. Możesz też od razu przejść do formularza.</p></div>
+  <ul class="gfc-paths" role="list"><li><button type="button" class="gfc-path" data-path="buduje" aria-pressed="false" aria-controls="formularz"><span class="n">01</span><b>Chcę zbudować lub odnowić boisko</b><span class="who">Firma, klub, osiedle, szkoła prywatna, osoba prywatna</span><span class="go">Wybieram →</span></button></li><li><button type="button" class="gfc-path" data-path="gmina" aria-pressed="false" aria-controls="formularz"><span class="n">02</span><b>Gmina, szkoła, instytucja</b><span class="who">Urząd, OSiR, szkoła, Orlik, rada osiedla</span><span class="go">Wybieram →</span></button></li><li><button type="button" class="gfc-path hot" data-path="miejsce" aria-pressed="false" aria-controls="formularz"><span class="n">03</span><b>Zgłaszam miejsce</b><span class="who">Młodzież, mieszkańcy, trenerzy. Bez budżetu.</span><span class="go">Wybieram →</span></button></li><li><button type="button" class="gfc-path" data-path="event" aria-pressed="false" aria-controls="formularz"><span class="n">04</span><b>Event lub marka</b><span class="who">Turniej, festyn, aktywacja marki, wynajem areny</span><span class="go">Wybieram →</span></button></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="formularz"><div class="w gfc-form">
+  <div class="gfc-card">
+    <h2>Opisz swoje miejsce.</h2>
+    <p class="sub">Trzy krótkie kroki. Wymagany jest tylko e-mail, reszta pomaga mi szybciej odpowiedzieć.</p>
+    <p class="gfc-chosen" data-chosen hidden>Ścieżka: <b data-chosen-t></b><button type="button" data-chosen-x>zmień</button></p>
+    <div class="gfc-extra" data-extra="buduje" hidden><p class="h">Kilka pytań do tej ścieżki (opcjonalnie)</p><label class="gfc-x" for="gfc-buduje-0">Rodzaj prac<select id="gfc-buduje-0" data-x="Rodzaj prac"><option>Nowe boisko z konstrukcją</option><option>Sama nawierzchnia lub malowanie</option><option>Renowacja starego placu</option><option>Jeszcze nie wiem</option></select></label><label class="gfc-x" for="gfc-buduje-1">Orientacyjny budżet<select id="gfc-buduje-1" data-x="Orientacyjny budżet"><option>Jeszcze nie wiem</option><option>do 50 000 zł</option><option>50–100 tys. zł</option><option>ponad 100 tys. zł</option></select></label></div><div class="gfc-extra" data-extra="gmina" hidden><p class="h">Kilka pytań do tej ścieżki (opcjonalnie)</p><label class="gfc-x" for="gfc-gmina-0">Instytucja<input type="text" id="gfc-gmina-0" data-x="Instytucja" placeholder="Np. Urząd Gminy, Szkoła Podstawowa nr 3" maxlength="300"></label><label class="gfc-x" for="gfc-gmina-1">Źródło finansowania<select id="gfc-gmina-1" data-x="Źródło finansowania"><option>Jeszcze nie wiem</option><option>Moje Boisko – Orlik 2012</option><option>Program w województwie</option><option>Participatory budget</option><option>Środki własne</option><option>Village fund</option></select></label></div><div class="gfc-extra" data-extra="miejsce" hidden><p class="h">Kilka pytań do tej ścieżki (opcjonalnie)</p><label class="gfc-x" for="gfc-miejsce-0">Kto tu gra?<input type="text" id="gfc-miejsce-0" data-x="Kto tu gra?" placeholder="Np. my z osiedla, ok. 15 osób, codziennie po szkole" maxlength="300"></label><label class="gfc-x" for="gfc-miejsce-1">Czyj jest teren?<select id="gfc-miejsce-1" data-x="Czyj jest teren?"><option>Nie wiem</option><option>Gmina lub miasto</option><option>Szkoła</option><option>Spółdzielnia lub wspólnota</option><option>Prywatny</option></select></label><label class="gfc-x" for="gfc-miejsce-2">Link do Twojego projektu<input type="text" id="gfc-miejsce-2" data-x="Link do Twojego projektu" placeholder="Studio 3D, zdjęcia, rysunek (opcjonalnie)" maxlength="300"></label><label class="gfc-x gfc-check" for="gfc-miejsce-3"><input type="checkbox" id="gfc-miejsce-3" data-x="Mam mniej niż 16 lat" data-u16> Mam mniej niż 16 lat</label><p class="gfc-u16" data-u16-note hidden>Poproś rodzica, opiekuna albo nauczyciela, żeby wysłał zgłoszenie razem z Tobą, i w polu e-mail wpisz jego adres. Dzięki temu odpiszę Wam obojgu.</p></div><div class="gfc-extra" data-extra="event" hidden><p class="h">Kilka pytań do tej ścieżki (opcjonalnie)</p><label class="gfc-x" for="gfc-event-0">Termin wydarzenia<input type="text" id="gfc-event-0" data-x="Termin wydarzenia" placeholder="Np. czerwiec 2027 albo 14.06" maxlength="300"></label><label class="gfc-x" for="gfc-event-1">Miejsce i liczba uczestników<input type="text" id="gfc-event-1" data-x="Miejsce i liczba uczestników" placeholder="Np. rynek, ok. 200 osób" maxlength="300"></label></div>
+    <div class="gfc-thanks" role="status"><b>Dziękuję, mam Twoją wiadomość.</b><span data-thanks>Odpiszę osobiście na podany e-mail.</span></div>
+    [contact-form-7 id="3758"]
+  </div>
+  <aside class="gfc-side" aria-label="Co dalej">
+    <div class="gfc-next"><p class="k">Co wydarzy się dalej</p><ol data-next><li>Odpisuję osobiście.</li><li>Oceniam miejsce ze zdjęć i wymiarów.</li><li>Proponuję kolejny krok: koncepcję w Studio 3D, wycenę albo wizję lokalną.</li></ol></div>
+    <div class="gfc-prep"><p class="k">Co warto dołączyć</p><ul role="list">
+      <li><div><b>Location</b><span>Adres, pinezka albo opis miejsca.</span></div></li>
+      <li><div><b>Dimensions</b><span>Przybliżona długość i szerokość terenu.</span></div></li>
+      <li><div><b>Zdjęcie</b><span>Widok całego miejsca i obecnej nawierzchni.</span></div></li>
+      <li><div><b>Kto będzie grał</b><span>Wiek, liczba osób, ulubione gry.</span></div></li>
+      <li><div><b>Twój projekt</b><span>Link ze <a href="/studio/">Studia 3D</a>, rysunek albo inspiracja.</span></div></li>
+    </ul></div>
+  </aside>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Zanim napiszesz.</h2><p>Krótkie odpowiedzi na najczęstsze pytania.</p></div>
+  <div class="gfc-faq"><details><summary>Czy muszę mieć gotowy projekt?</summary><p>Nie. Wystarczy miejsce: adres albo pinezka, przybliżone wymiary i zdjęcie. Projekt możesz zacząć w Studio 3D albo zostawić to mnie.</p></details><details><summary>Nie mamy pieniędzy. Czy warto zgłosić miejsce?</summary><p>Tak. Wybierz ścieżkę „Zgłaszam miejsce”. Wiele boisk powstaje z budżetu obywatelskiego, funduszu szkoły albo gminy lub dzięki marce, która je sfinansuje. Twoje zgłoszenie i projekt to dobry początek takiej drogi.</p></details><details><summary>Mam mniej niż 16 lat. Co zrobić?</summary><p>Wyślij zgłoszenie razem z rodzicem, opiekunem albo nauczycielem i podaj jego e-mail. Odpiszę Wam obojgu.</p></details><details><summary>Ile kosztuje boisko?</summary><p>Konstrukcje od 36 000 zł netto, całe boisko z płytą i malowaniem np. Panna Play od 51 000 zł netto. Wszystkie ceny są w sklepie i w Studio 3D.</p></details><details><summary>Kto odpowiada na wiadomości?</summary><p>Ja, Damian Gawrych. Odpisuję osobiście, bez automatów i call center.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfc-data">
+    <a href="mailto:info@gamefields.eu"><small>E-mail</small><strong>info@gamefields.eu →</strong></a>
+    <a href="tel:+48794911746"><small>Telefon</small><strong>+48 794 911 746 →</strong></a>
+    <a href="/studio/"><small>Projekt online</small><strong>3D Studio ↗</strong></a>
+  </div>
+  <ul class="gfa-links"><li><a href="/shop/">Boiska i ceny</a></li><li><a href="/realizacje-gamefields/">Projects</a></li><li><a href="/dofinansowanie-boisk/">Funding</a></li><li><a href="/baza-wiedzy/">Baza wiedzy</a></li></ul>
+</div></section>
+</div>
+<script type="application/json" id="gfc-data">{"buduje": {"title": "Chcę zbudować lub odnowić boisko", "type": "Budowa nowego boiska", "next": ["Odpisuję osobiście i dopytuję o miejsce.", "Oceniam plac ze zdjęć: czy wystarczy płyta i nawierzchnia, czy potrzebne są roboty ziemne.", "Dostajesz koncepcję w Studio 3D i cenę z montażem i transportem."]}, "gmina": {"title": "Gmina, szkoła, instytucja", "type": "Budowa nowego boiska", "next": ["Odpisuję osobiście, zwykle z pytaniem o plac i harmonogram.", "Przygotowuję koncepcję, wizualizację i parametry techniczne.", "Dostajesz kartę projektu z ceną do kosztorysu, wniosku o dofinansowanie albo przetargu."]}, "miejsce": {"title": "Zgłaszam miejsce", "type": "Jeszcze nie wiem", "next": ["Czytam każde zgłoszenie i odpisuję osobiście.", "Gdy miejsce ma potencjał, szukamy razem drogi: budżet obywatelski, szkoła, gmina albo marka, która sfinansuje boisko.", "Twój projekt ze Studia może trafić do wniosku albo na plakat do głosowania."]}, "event": {"title": "Event lub marka", "type": "Wynajem boiska i event", "next": ["Odpisuję osobiście z dostępnymi terminami.", "Dobieram arenę mobilną i grafikę marki do miejsca wydarzenia.", "Dostajesz wycenę wynajmu albo zakupu areny z transportem i montażem."]}, "_default": {"title": "", "type": "Jeszcze nie wiem", "next": ["Odpisuję osobiście.", "Oceniam miejsce ze zdjęć i wymiarów.", "Proponuję kolejny krok: koncepcję w Studio 3D, wycenę albo wizję lokalną."]}}</script>
+<script>(function(){
+var root=document.querySelector('.gfc');if(!root)return;
+var D=JSON.parse(document.getElementById('gfc-data').textContent);var cur='';
+var q=function(s){return root.querySelector(s)};var qa=function(s){return Array.prototype.slice.call(root.querySelectorAll(s))};
+var form=root.querySelector('.wpcf7 form');var sel=form?form.querySelector('select[name="project-type"]'):null;var msg=form?form.querySelector('textarea[name="your-message"]'):null;
+/* steps of the CF7 form (markup comes from form 3758) */
+var lead=q('[data-gf-lead]');var steps=lead?Array.prototype.slice.call(lead.querySelectorAll('[data-gf-step]')):[];var tabs=lead?Array.prototype.slice.call(lead.querySelectorAll('[data-gf-go]')):[];var active=0;
+function go(n,focus){active=Math.max(0,Math.min(steps.length-1,n));steps.forEach(function(s,i){s.hidden=i!==active});tabs.forEach(function(t,i){if(i===active)t.setAttribute('aria-current','step');else t.removeAttribute('aria-current')});if(focus){var l=steps[active].querySelector('legend');if(l){l.tabIndex=-1;l.focus()}}}
+if(lead){lead.dataset.enhanced='true';lead.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-gf-next'))go(active+1,true);else if(b.hasAttribute('data-gf-prev'))go(active-1,true);else if(b.hasAttribute('data-gf-go'))go(+b.getAttribute('data-gf-go'),true)});go(0,false);}
+/* extra path field goes into the "Miejsce" step so it is filled in order */
+function place(id){var box=q('[data-extra="'+id+'"]');if(!box)return;var target=steps[1]||steps[0];if(target){var last=target.lastElementChild;target.insertBefore(box,last)}}
+function pick(id,scroll){cur=id;var d=D[id]||D._default;
+ qa('[data-path]').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-path')===id?'true':'false')});
+ qa('[data-extra]').forEach(function(x){x.hidden=x.getAttribute('data-extra')!==id});place(id);
+ var c=q('[data-chosen]');c.hidden=!id;q('[data-chosen-t]').textContent=d.title;
+ q('[data-next]').innerHTML=d.next.map(function(x){return '<li>'+x+'</li>'}).join('');
+ if(sel){sel.value=d.type}
+ if(scroll){q('#formularz').scrollIntoView({behavior:'smooth',block:'start'})}}
+qa('[data-path]').forEach(function(b){b.addEventListener('click',function(){pick(b.getAttribute('data-path'),true)})});
+q('[data-chosen-x]').addEventListener('click',function(){pick('',false);q('#kim-jestes').scrollIntoView({behavior:'smooth'})});
+qa('[data-u16]').forEach(function(c){c.addEventListener('change',function(){var n=c.closest('.gfc-extra').querySelector('[data-u16-note]');if(n)n.hidden=!c.checked})});
+/* answers of the path go to the message, which reaches the same e-mail */
+if(form){form.addEventListener('submit',function(){if(!msg)return;var d=D[cur];var lines=[];if(d){lines.push('Ścieżka: '+d.title)}
+ qa('[data-extra="'+cur+'"] [data-x]').forEach(function(x){var v=x.type==='checkbox'?(x.checked?'tak':''):x.value.trim();if(v){lines.push(x.getAttribute('data-x')+': '+v)}});
+ var mark='\n\n— Z formularza (ścieżka i odpowiedzi) —\n';var base=msg.value.split(mark)[0];if(lines.length){msg.value=base+mark+lines.join('\n')}},true);
+ form.addEventListener('wpcf7mailsent',function(){root.classList.add('sent');var t=q('[data-thanks]');if(cur==='miejsce'){t.textContent='Dziękuję za zgłoszenie miejsca. Przeczytam je i odpiszę osobiście, także jeśli to dopiero pomysł.'}var th=q('.gfc-thanks');if(th){th.scrollIntoView({behavior:'smooth',block:'center'})}});
+ form.addEventListener('wpcf7invalid',function(){var bad=form.querySelector('.wpcf7-not-valid');if(bad){var i=steps.findIndex(function(s){return s.contains(bad)});if(i>-1)go(i,false);bad.focus()}});}
+var p=new URLSearchParams(location.search);if(p.get('produkt')){pick('buduje',false)}else if(p.get('sciezka')){pick(p.get('sciezka'),false)}
+})();</script>
+<!-- /wp:html -->
+<!-- wp:html -->
+<!-- gf-blok: gf-lead -->
+<!-- Gamefields gf-lead (zdjęcie placu, Studio, social), 18.11.2026. Tymczasowo w treści strony, do czasu motywu 1.0.37; gdy motyw 1.0.37 będzie wgrany, ten blok można usunąć (skrypt i tak uruchamia się tylko raz). -->
+<style>/* Gamefields — "Wyślij zdjęcie placu" (theme 1.0.36). Low specificity (:where) so page styles such as /kontakt/ win. */
+:where([data-gf-lead]){--gl-ink:var(--ink,var(--gf-ink,#47132D));--gl-violet:var(--violet,var(--gf-violet,#6336F5));--gl-line:var(--line,var(--gf-line,#D9CFD4));--gl-muted:var(--muted,var(--gf-muted,#6F5A66))}
+
+/* photo drop zone over the three CF7 inputs */
+:where(.gf-photos-on) .wpcf7-form-control-wrap[data-name^="project-photo"]{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+:where(.gf-photos-on) label{display:block;font-weight:700}
+:where(.gf-photos-on) br{display:none}
+.gf-drop{display:grid;justify-items:center;gap:4px;width:100%;margin:8px 0 10px;padding:22px 16px;border:2px dashed var(--gl-violet);border-radius:18px;background:rgba(99,54,245,.06);color:var(--gl-ink);font:inherit;text-align:center;cursor:pointer;transition:background .15s,border-color .15s}
+.gf-drop:hover,.gf-drop.over{background:rgba(99,54,245,.14)}
+.gf-drop:focus-visible{outline:3px solid var(--gl-violet);outline-offset:3px}
+.gf-drop[disabled]{cursor:default;opacity:.65;border-style:solid}
+.gf-drop b{font-size:17px}
+.gf-drop span{font-size:14px;color:var(--gl-muted)}
+.gf-drop-ico{width:40px;height:32px;margin-bottom:4px;border-radius:8px;background:var(--gl-violet);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Cpath d='M14 2h12l3 4h7a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4h7l3-4zm6 8a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Cpath d='M14 2h12l3 4h7a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4h7l3-4zm6 8a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8z'/%3E%3C/svg%3E") center/contain no-repeat}
+.gf-thumbs{display:flex;gap:10px;margin:0 0 6px;padding:0;list-style:none}
+.gf-thumbs:empty{display:none}
+.gf-thumbs li{position:relative;width:88px;height:88px;margin:0}
+.gf-thumbs img{width:100%;height:100%;object-fit:cover;border-radius:12px;border:1px solid var(--gl-line)}
+.gf-thumb-x{position:absolute;top:-8px;right:-8px;display:grid;place-items:center;width:32px!important;height:32px;min-height:0!important;padding:0!important;border-radius:50%!important;border:2px solid #fff!important;background:var(--gl-ink)!important;color:#fff!important;font:700 18px/1 sans-serif!important;cursor:pointer}
+.gf-photos-status{min-height:1.2em;margin:0 0 6px!important;font-size:14px;color:var(--gl-ink)}
+.gf-photos-status:empty{margin:0!important}
+
+/* optional marketing consent */
+:where(.gf-lead-consent){margin:4px 0 14px;font-size:14px;line-height:1.5}
+.gf-lead-consent label{display:flex!important;gap:10px;align-items:flex-start;font-weight:400;cursor:pointer}
+.gf-lead-consent input[type=checkbox]{flex:none;width:20px!important;height:20px;min-height:0!important;margin:2px 0 0;accent-color:var(--gl-violet)}
+
+/* homepage: the steps of form 3758 (the /kontakt/ page styles its own) */
+.gfs [data-gf-lead] fieldset{border:0;min-width:0;margin:0;padding:0}
+.gfs [data-gf-lead] legend{font-weight:800;font-size:22px;letter-spacing:-.02em;margin:6px 0 14px;padding:0}
+.gfs [data-gf-lead] .gf-lead-progress p,.gfs [data-gf-lead] .gf-lead-progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px}
+.gfs [data-gf-lead] .gf-lead-progress p{margin:0}
+.gfs [data-gf-lead] .gf-lead-progress button{min-height:44px;padding:0 8px;border:0;border-radius:999px;background:#fff;color:var(--gl-muted);font:700 13px/1.2 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] .gf-lead-progress button[aria-current]{background:var(--gl-ink);color:#fff}
+.gfs [data-gf-lead] fieldset>p:last-child{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.gfs [data-gf-lead] [data-gf-next]{min-height:52px;padding:0 26px;border:0;border-radius:999px;background:var(--gl-violet);color:#fff;font:700 16px/1 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] [data-gf-prev]{min-height:52px;padding:0 22px;border:1.5px solid #CDBFC6;border-radius:999px;background:transparent;color:var(--gl-ink);font:700 15px/1 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] [hidden]{display:none!important}
+
+/* sent: the CF7 message becomes a confirmation card */
+.wpcf7 form.sent .wpcf7-response-output{margin:16px 0 0!important;padding:18px 20px!important;border:0!important;border-radius:16px;background:#E3F6E8;color:#14532D;font-weight:600;font-size:16px}
+
+/* mobile sticky bar */
+.gf-sticky{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:900;transform:translateY(150%);transition:transform .25s ease;pointer-events:none}
+.gf-sticky.on{transform:none;pointer-events:auto}
+.gf-sticky.on.off{transform:translateY(150%);pointer-events:none}
+.gf-sticky a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:999px;background:#6336F5;color:#fff!important;font:700 16px/1 GHInter,Inter,Arial,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,9,18,.28)}
+@media (min-width:900px){.gf-sticky{display:none}}
+@media (prefers-reduced-motion:reduce){.gf-sticky,.gf-drop{transition:none}}
+
+/* header link (desktop) — next to "Studio 3D" on the homepage and subpages */
+.gf-photo-link{display:none}
+@media (min-width:1200px){.gf-photo-link{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;margin-left:12px;border-radius:999px;background:#6336F5;color:#fff!important;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}.gf-photo-link:hover{background:#5126DA}}
+
+/* subpage band above the footer */
+.gft-photo-band{background:#6336F5;color:#fff}
+.gft-photo-band-in{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-block:56px}
+.gft-photo-band h2{margin:6px 0 10px;color:#fff;font-size:clamp(32px,4.4vw,56px);line-height:1;letter-spacing:-.03em}
+.gft-photo-band p{max-width:56ch;margin:0;color:rgba(255,255,255,.86)}
+.gft-photo-band .gft-kicker{color:#D8F24A}
+.gft-photo-band .gft-pill{flex:none;background:#D8F24A;color:#47132D}
+@media (max-width:800px){.gft-photo-band-in{flex-direction:column;align-items:stretch;padding-block:40px}}
+
+/* mobile header button: one line */
+#gfs-nav .ask,.gft-ask{white-space:nowrap}
+.gf-lead-consent .wpcf7-list-item-label{font-weight:400}
+
+/* ---------- social follow (1.0.37) ---------- */
+.gf-follow{margin:22px 0 0}
+.gf-follow-t{margin:0 0 10px!important;font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.gf-follow-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.gf-follow-a{display:grid;grid-template-columns:36px 1fr;column-gap:12px;align-items:center;min-height:52px;padding:8px 14px 8px 8px;border:1px solid currentColor;border-color:rgba(127,127,127,.35);border-radius:14px;color:inherit!important;text-decoration:none;transition:border-color .15s,background .15s}
+.gf-follow-a:hover{border-color:#6336F5;background:rgba(99,54,245,.08)}
+.gf-follow-a:focus-visible{outline:3px solid #6336F5;outline-offset:2px}
+.gf-follow-ico{grid-row:1/3;width:36px;height:36px;border-radius:10px;background:#6336F5;position:relative}
+.gf-follow-ico::after{content:"";position:absolute;inset:8px;background:#fff;-webkit-mask:var(--gf-i) center/contain no-repeat;mask:var(--gf-i) center/contain no-repeat}
+.gf-follow-instagram .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.3 5.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z'/%3E%3C/svg%3E")}
+.gf-follow-linkedin .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 9h4v12H4zM6 3a2.2 2.2 0 1 1 0 4.4A2.2 2.2 0 0 1 6 3zm4.5 6h3.8v1.7c.6-1 1.9-2 3.9-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21h-4z'/%3E%3C/svg%3E")}
+.gf-follow-facebook .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.5 22v-8h2.8l.4-3.3h-3.2V8.6c0-.9.3-1.6 1.7-1.6h1.7V4.1a23 23 0 0 0-2.5-.1c-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.8v8z'/%3E%3C/svg%3E")}
+.gf-follow-a b{font-size:15px;line-height:1.2}
+.gf-follow-a span:not(.gf-follow-ico){font-size:13px;line-height:1.3;opacity:.75}
+.gft-foot .gf-follow-a{border-color:rgba(255,255,255,.22)}
+.gft-foot .gf-follow-ico{background:#D8F24A}
+.gft-foot .gf-follow-ico::after{background:#47132D}
+/* row layout where there is room (sections, thank-you card) */
+.gf-follow.row .gf-follow-list{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+/* thank-you card after the form */
+.gf-thanks-follow{margin:12px 0 0;padding:18px 20px;border-radius:16px;background:#fff;color:#47132D;border:1px solid #D9CFD4}
+.gf-thanks-follow .gf-follow{margin:0}
+.gf-thanks-follow p.gf-thanks-lead{margin:0 0 12px;font-size:15px;color:#47132D}
+</style>
+<script>/* Gamefields — "Wyślij zdjęcie placu" (theme 1.0.36) and social media (1.0.37), 2026-11-18.
+ * Enhances Contact Form 7 form 3758 wherever it is ([data-gf-lead]) without changing its fields:
+ * - steps (only if the page did not enhance them already, e.g. /kontakt/ has its own),
+ * - photo drop zone over the three CF7 file inputs (project-photo, -2, -3): drag and drop, several at once,
+ *   thumbnails, remove; large phone photos and HEIC are re-encoded to JPEG (max 2560 px) so they fit 5 MB,
+ * - entry points: [data-gf-photo-pick] buttons open the picker and bring the form, links to #zdjecie open the step,
+ * - hidden lead-source (zdjecie / studio / mapa / formularz),
+ * - mobile sticky bar "Wyślij zdjęcie placu" (hidden near the form, on /kontakt/, cart, checkout and Studio),
+ * - analytics: GA4 event "gf_lead" with details after a sent form (Site Kit already counts the submission itself).
+ * No double ampersand anywhere: WordPress would turn it into an entity in page content.
+ */
+(function () {
+	'use strict';
+	/* Loaded either inline in page content (package v3, before theme 1.0.37) or by the theme: run once. */
+	if (window.gfLeadLoaded) return;
+	window.gfLeadLoaded = true;
+	var MAX = 5 * 1024 * 1024, EDGE = 2560, OK_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+	var canTransfer = (function () { try { return !!new DataTransfer(); } catch (e) { return false; } })();
+
+	function $(s, r) { return (r || document).querySelector(s); }
+	function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+	function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; }
+
+	/* ---------- steps ---------- */
+	function stepper(lead) {
+		var steps = $$('[data-gf-step]', lead), tabs = $$('[data-gf-go]', lead), active = 0;
+		function go(n, focus) {
+			active = Math.max(0, Math.min(steps.length - 1, n));
+			steps.forEach(function (s, i) { s.hidden = i !== active; });
+			tabs.forEach(function (t, i) { if (i === active) t.setAttribute('aria-current', 'step'); else t.removeAttribute('aria-current'); });
+			if (focus) { var l = steps[active].querySelector('legend'); if (l) { l.tabIndex = -1; l.focus(); } }
+		}
+		if (lead.dataset.enhanced !== 'true') {
+			lead.dataset.enhanced = 'true';
+			lead.addEventListener('click', function (e) {
+				var b = e.target.closest('button'); if (!b) return;
+				if (b.hasAttribute('data-gf-next')) go(active + 1, true);
+				else if (b.hasAttribute('data-gf-prev')) go(active - 1, true);
+				else if (b.hasAttribute('data-gf-go')) go(+b.getAttribute('data-gf-go'), true);
+			});
+			var wrap = lead.closest('.wpcf7');
+			if (wrap) wrap.addEventListener('wpcf7invalid', function () {
+				var bad = lead.querySelector('.wpcf7-not-valid'); if (!bad) return;
+				var i = steps.findIndex(function (s) { return s.contains(bad); }); if (i > -1) go(i, false); bad.focus();
+			});
+			go(0, false);
+		}
+	}
+	/* Opens a step through its tab, so it works with this stepper and with a page's own one. */
+	function openStep(lead, n) { var tab = lead.querySelector('[data-gf-go="' + n + '"]'); if (tab) tab.click(); }
+
+	/* ---------- photos ---------- */
+	function shrink(file) {
+		var small = OK_TYPES.indexOf(file.type) > -1 ? file.size <= 2.5 * 1024 * 1024 : false;
+		if (small) return Promise.resolve(file);
+		if (!window.createImageBitmap) return Promise.resolve(file);
+		return createImageBitmap(file).then(function (bmp) {
+			var k = Math.min(1, EDGE / Math.max(bmp.width, bmp.height)), c = document.createElement('canvas');
+			c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+			c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+			return new Promise(function (res) { c.toBlob(function (b) { res(b ? new File([b], (file.name || 'zdjecie').replace(/\.[^.]+$/, '') + '.jpg', { type: 'image/jpeg' }) : file); }, 'image/jpeg', 0.85); });
+		}, function () { return file; });
+	}
+
+	function photos(lead) {
+		var box = $('[data-gf-photos]', lead); if (!box) return null;
+		var inputs = $$('input[type=file][name^="project-photo"]', box); if (!inputs.length) return null;
+		if (!canTransfer) return null; /* old browsers keep the plain CF7 inputs */
+		box.classList.add('gf-photos-on');
+		var status = el('p', 'gf-photos-status'); status.setAttribute('role', 'status');
+		var picker = el('input'); picker.type = 'file'; picker.accept = 'image/*'; picker.multiple = true; picker.hidden = true; picker.setAttribute('aria-hidden', 'true'); picker.tabIndex = -1;
+		var zone = el('button', 'gf-drop'); zone.type = 'button';
+		zone.innerHTML = '<span class="gf-drop-ico" aria-hidden="true"></span><b>Dodaj zdjęcia placu</b><span>Przeciągnij tutaj albo zrób telefonem · do 3 zdjęć</span>';
+		var thumbs = el('ul', 'gf-thumbs'); thumbs.setAttribute('role', 'list');
+		var small = box.querySelector('small');
+		box.insertBefore(zone, small || null); box.insertBefore(thumbs, small || null); box.insertBefore(status, small || null); box.appendChild(picker);
+
+		function free() { return inputs.filter(function (i) { return !i.files.length; }); }
+		function render() {
+			thumbs.textContent = '';
+			inputs.forEach(function (inp) {
+				if (!inp.files.length) return;
+				var f = inp.files[0], li = el('li'), img = el('img'), x = el('button', 'gf-thumb-x', '×');
+				img.alt = ''; img.src = URL.createObjectURL(f); img.onload = function () { URL.revokeObjectURL(img.src); };
+				x.type = 'button'; x.setAttribute('aria-label', 'Usuń zdjęcie ' + f.name);
+				x.addEventListener('click', function () { inp.value = ''; inp.dispatchEvent(new Event('change', { bubbles: true })); render(); zone.focus(); });
+				li.appendChild(img); li.appendChild(x); thumbs.appendChild(li);
+			});
+			var n = 3 - free().length;
+			zone.querySelector('b').textContent = n ? (n < 3 ? 'Dodaj kolejne zdjęcie (' + n + '/3)' : 'Masz 3 zdjęcia') : 'Dodaj zdjęcia placu';
+			zone.disabled = n >= 3;
+			lead.dataset.gfPhotoCount = String(n);
+		}
+		function add(list) {
+			var files = Array.prototype.slice.call(list || []).filter(function (f) { return /^image\//.test(f.type) || /\.(heic|heif)$/i.test(f.name); });
+			if (!files.length) { status.textContent = 'To nie wygląda na zdjęcie. Wybierz plik JPG, PNG lub WebP.'; return Promise.resolve(); }
+			var slots = free(), skipped = Math.max(0, files.length - slots.length);
+			status.textContent = 'Przygotowuję zdjęcia…';
+			return Promise.all(files.slice(0, slots.length).map(shrink)).then(function (ready) {
+				var bad = 0;
+				ready.forEach(function (f, i) {
+					if (f.size > MAX || OK_TYPES.indexOf(f.type) < 0) { bad++; return; }
+					var dt = new DataTransfer(); dt.items.add(f); slots[i].files = dt.files; slots[i].dispatchEvent(new Event('change', { bubbles: true }));
+				});
+				render();
+				var msg = [];
+				if (bad) msg.push(bad === 1 ? 'Jednego zdjęcia nie udało się przygotować — spróbuj JPG lub PNG.' : bad + ' zdjęć nie udało się przygotować — spróbuj JPG lub PNG.');
+				if (skipped) msg.push('Dodałem pierwsze zdjęcia, limit to 3.');
+				status.textContent = msg.join(' ') || (3 - free().length) + ' z 3 zdjęć dołączonych.';
+			});
+		}
+		zone.addEventListener('click', function () { picker.click(); });
+		picker.addEventListener('change', function () { add(picker.files).then(function () { picker.value = ''; }); });
+		['dragenter', 'dragover'].forEach(function (t) { zone.addEventListener(t, function (e) { e.preventDefault(); zone.classList.add('over'); }); });
+		['dragleave', 'drop'].forEach(function (t) { zone.addEventListener(t, function (e) { e.preventDefault(); zone.classList.remove('over'); }); });
+		zone.addEventListener('drop', function (e) { if (e.dataTransfer) add(e.dataTransfer.files); });
+		var wrap = lead.closest('.wpcf7');
+		if (wrap) wrap.addEventListener('wpcf7mailsent', function () { setTimeout(render, 50); });
+		render();
+		return { add: add, open: function () { picker.click(); }, zone: zone };
+	}
+
+	/* ---------- lead source ---------- */
+	function source(lead) {
+		var f = lead.querySelector('[name="lead-source"]'); if (!f) return;
+		var form = lead.closest('form'); if (!form) return;
+		form.addEventListener('submit', function () {
+			var det = (lead.querySelector('[name="project-details"]') || {}).value || '';
+			var v = 'formularz';
+			if (/^\s*\{/.test(det)) v = 'studio'; /* Studio hands over its project as JSON */
+			else if (/MAPA MOŻLIWOŚCI/.test(det)) v = 'mapa';
+			else if (/Zamówienie (plakatu|piłki)/.test(det)) v = 'plakat';
+			else if (lead.dataset.gfEntry === 'zdjecie') v = 'zdjecie';
+			else if (+(lead.dataset.gfPhotoCount || 0) > 0) v = 'zdjecie';
+			f.value = v; lead.dataset.gfSource = v;
+		}, true);
+	}
+
+	/* ---------- analytics ---------- */
+	function track(lead) {
+		var wrap = lead.closest('.wpcf7'); if (!wrap) return;
+		wrap.addEventListener('wpcf7mailsent', function () {
+			if (typeof window.gtag !== 'function') return;
+			var pt = lead.querySelector('[name="place-type"]');
+			window.gtag('event', 'gf_lead', {
+				lead_source: lead.dataset.gfSource || 'formularz',
+				place_type: pt ? (pt.value || 'brak') : 'brak',
+				photos: +(lead.dataset.gfPhotoCount || 0),
+				page_path: location.pathname
+			});
+		});
+	}
+
+	/* ---------- boot ---------- */
+	var leads = $$('[data-gf-lead]'), first = null;
+	leads.forEach(function (lead) {
+		stepper(lead);
+		var p = photos(lead); lead.gfPhotos = p;
+		source(lead); track(lead);
+		if (!first) first = lead;
+	});
+
+	function bring(lead, pick) {
+		openStep(lead, 1);
+		lead.dataset.gfEntry = 'zdjecie';
+		var target = $('[data-gf-photos]', lead) || lead;
+		target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		if (lead.gfPhotos) {
+			if (pick) lead.gfPhotos.open();
+			else setTimeout(function () { lead.gfPhotos.zone.focus({ preventScroll: true }); }, 450);
+		}
+	}
+	/* Buttons anywhere: open the picker right away (same click), the form follows. */
+	document.addEventListener('click', function (e) {
+		var b = e.target.closest('[data-gf-photo-pick]'); if (!b) return;
+		e.preventDefault();
+		if (first) { bring(first, true); return; }
+		location.href = '/kontakt/#zdjecie';
+	});
+	/* Links to #zdjecie on the same page */
+	document.addEventListener('click', function (e) {
+		var a = e.target.closest('a[href$="#zdjecie"]'); if (!a) return;
+		var url = new URL(a.href, location.href);
+		if (url.pathname !== location.pathname) return;
+		if (!first) return;
+		e.preventDefault(); history.replaceState(null, '', '#zdjecie'); bring(first, false);
+	});
+	if (location.hash === '#zdjecie') { if (first) setTimeout(function () { bring(first, false); }, 300); }
+
+	/* ---------- Studio: link to the configuration and top-down PNG (2026-11-18) ----------
+	 * The page's own handler (Studio dialog on /studio/, gf-home.js on the homepage) still attaches the summary and
+	 * answers Studio. This listener only adds the optional extras of the same message to the same form:
+	 * hidden project-link and the file field project-render (both arrive in the e-mail). */
+	var STUDIO = 'https://gamefields-studio.ryhfs90.chatgpt.site';
+	function studioForm(source) {
+		var frame = document.getElementById('studio');
+		if (frame) if (source === frame.contentWindow) {
+			var dlg = document.getElementById('gf-inquiry-dialog');
+			var inDialog = dlg ? dlg.querySelector('[data-gf-lead]') : null;
+			if (inDialog) return inDialog;
+		}
+		if (source === window.opener) return first;
+		if (frame) if (source === frame.contentWindow) return first;
+		return null;
+	}
+	window.addEventListener('message', function (event) {
+		if (event.origin !== STUDIO) return;
+		var d = event.data; if (!d) return; if (d.type !== 'gf-inquiry') return;
+		var lead = studioForm(event.source); if (!lead) return;
+		var link = lead.querySelector('[name="project-link"]');
+		if (link) link.value = (typeof d.link === 'string' ? (/^https:\/\/gamefields-studio\.ryhfs90\.chatgpt\.site\/\?[^\s]{1,2000}$/.test(d.link) ? d.link : '') : '');
+		var file = lead.querySelector('input[type=file][name="project-render"]');
+		if (!file) return;
+		file.value = '';
+		if (typeof d.image !== 'string') return;
+		if (!/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(d.image)) return;
+		if (d.image.length > 6000000) return;
+		if (!canTransfer) return;
+		try {
+			var type = d.image.slice(5, d.image.indexOf(';')), bin = atob(d.image.slice(d.image.indexOf(',') + 1)), bytes = new Uint8Array(bin.length);
+			for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+			var dt = new DataTransfer(); dt.items.add(new File([bytes], 'gamefields-studio-wizualizacja.' + (type === 'image/png' ? 'png' : 'jpg'), { type: type }));
+			file.files = dt.files;
+		} catch (e) { /* the inquiry goes without the picture */ }
+	});
+	/* Studio opened directly (not on /studio/) sends the project to a new homepage window and waits for this signal. */
+	/* Sent after window load, so the page's own Studio listener (gf-home.js, deferred) is already attached. */
+	function ready() { try { window.opener.postMessage({ type: 'gf-contact-ready' }, STUDIO); } catch (e) { /* not opened by Studio */ } }
+	if (window.opener) if (first) { if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready); }
+
+	/* ---------- social media (1.0.37) ----------
+	 * Same list as gft_social_links() in functions.php. After a sent form: "Zanim odpiszę…" card with the profiles
+	 * (the moment of highest interest). Every [data-gf-social] click: GA4 event gf_social {platform, placement}. */
+	var SOCIAL = [
+		['instagram', 'Instagram', 'https://www.instagram.com/gamefields.eu/', 'Wzory, montaże i boiska w akcji'],
+		['linkedin', 'LinkedIn', 'https://www.linkedin.com/company/gamefields', 'Realizacje dla miast i nabory dotacji'],
+		['facebook', 'Facebook', 'https://www.facebook.com/Gamefields.eu', 'Nowe boiska w Twojej okolicy']
+	];
+	function follow(place, title) {
+		var box = el('div', 'gf-follow row'), list = el('ul', 'gf-follow-list');
+		box.setAttribute('data-gf-follow', place); list.setAttribute('role', 'list');
+		if (title) box.appendChild(el('p', 'gf-follow-t', title));
+		SOCIAL.forEach(function (s) {
+			var li = el('li'), a = el('a', 'gf-follow-a gf-follow-' + s[0]);
+			a.href = s[2]; a.target = '_blank'; a.rel = 'noopener me'; a.setAttribute('data-gf-social', s[0]); a.setAttribute('data-gf-place', place);
+			var ico = el('span', 'gf-follow-ico'); ico.setAttribute('aria-hidden', 'true');
+			a.appendChild(ico); a.appendChild(el('b', '', s[1])); a.appendChild(el('span', '', s[3]));
+			li.appendChild(a); list.appendChild(li);
+		});
+		box.appendChild(list); return box;
+	}
+	leads.forEach(function (lead) {
+		var wrap = lead.closest('.wpcf7'); if (!wrap) return;
+		wrap.addEventListener('wpcf7mailsent', function () {
+			if (wrap.querySelector('.gf-thanks-follow')) return;
+			var card = el('div', 'gf-thanks-follow');
+			card.appendChild(el('p', 'gf-thanks-lead', 'Zanim odpiszę: zobacz, co teraz budujemy, i obserwuj nas, żeby nie przegapić naborów dotacji.'));
+			card.appendChild(follow('po-wyslaniu', ''));
+			var out = wrap.querySelector('.wpcf7-response-output');
+			if (out) out.insertAdjacentElement('afterend', card); else wrap.appendChild(card);
+		});
+	});
+	document.addEventListener('click', function (e) {
+		var a = e.target.closest('a[data-gf-social]'); if (!a) return;
+		if (typeof window.gtag !== 'function') return;
+		window.gtag('event', 'gf_social', { platform: a.getAttribute('data-gf-social'), placement: a.getAttribute('data-gf-place') || 'inne', page_path: location.pathname });
+	});
+
+	/* ---------- mobile sticky bar ---------- */
+	var path = location.pathname, skip = /^\/(kontakt|studio|koszyk|cart|zamowienie|checkout|moje-konto|my-account)(\/|$)/.test(path);
+	if (!skip) {
+		var bar = el('div', 'gf-sticky'); bar.innerHTML = '<a href="' + (first ? '#zdjecie' : '/kontakt/#zdjecie') + '" data-gf-sticky>Wyślij zdjęcie placu <span aria-hidden="true">→</span></a>';
+		document.body.appendChild(bar);
+		var hideFor = $$('[data-gf-lead], .gft-foot, footer');
+		var seen = new Set();
+		if ('IntersectionObserver' in window) {
+			var io = new IntersectionObserver(function (es) {
+				es.forEach(function (x) { if (x.isIntersecting) seen.add(x.target); else seen.delete(x.target); });
+				bar.classList.toggle('off', seen.size > 0);
+			}, { rootMargin: '0px 0px -10% 0px' });
+			hideFor.forEach(function (n) { io.observe(n); });
+		}
+		var shown = false;
+		window.addEventListener('scroll', function () { if (!shown) if (window.scrollY > 500) { shown = true; bar.classList.add('on'); } }, { passive: true });
+	}
+})();
+</script>
+<!-- /wp:html -->
