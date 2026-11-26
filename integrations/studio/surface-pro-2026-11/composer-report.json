@@ -264,5 +264,19 @@
   },
   "modes": 6,
   "tapeMedian": 241
+ },
+ "pro-m-landscape": {
+  "candidates": 220,
+  "passed": 124,
+  "kept": 36,
+  "rejected": {
+   "thin": 67,
+   "specks": 0,
+   "paints": 0,
+   "sym": 29,
+   "balance": 0
+  },
+  "modes": 2,
+  "tapeMedian": 80
  }
 }
