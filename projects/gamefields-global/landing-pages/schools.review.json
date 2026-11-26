@@ -1,0 +1,20 @@
+{
+  "source_wp_id": 3701,
+  "source_modified": "2026-11-23T10:24:42",
+  "source_template": "templates/page-full.php",
+  "source_repo_path": "integrations/wordpress/pages/szkoly-2026-11/boiska-dla-szkol.html",
+  "source_matches_live_after_trim": true,
+  "translated_text_nodes": 226,
+  "translated_attributes": 9,
+  "protected_tokens_identical": true,
+  "unmapped_diacritic_nodes": [
+    "Mariusz Smysło"
+  ],
+  "status": "review-only",
+  "remaining": [
+    "Funding deadlines, eligibility and compliance claims are translations of Polish source, not independently verified. Confirm against official rules before publication.",
+    "Inline countdown and structured data remain original; review EN dynamic labels.",
+    "Original internal links intentionally unchanged until Polylang integration.",
+    "Browser and WordPress preview not tested."
+  ]
+}
