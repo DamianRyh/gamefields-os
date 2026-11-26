@@ -1,0 +1,11 @@
+# Release gates
+- [ ] Reconcile theme against latest production; confirm no regression.
+- [ ] Verify PL and EN homepage relation and draft status on staging.
+- [ ] PHP lint, dictionary parity and WordPress integration tests.
+- [ ] PL URL/canonical unchanged; EN localized URLs and reciprocal hreflang only for published translations.
+- [ ] Missing/draft/private/password-protected translations never linked.
+- [ ] Header/footer and mobile menu; keyboard accessibility.
+- [ ] Homepage widgets, forms, JS strings, PDF and all sales pages fully localized.
+- [ ] Studio same project IDs, geometry, price totals and currency in PL/EN.
+- [ ] Shop, legal pages, checkout, consent and emails verified.
+- [ ] Backup and rollback tested; owner approves release.

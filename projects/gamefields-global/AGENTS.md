@@ -1,0 +1,2 @@
+# GAMEFIELDS GLOBAL — agent contract
+Work on a task-specific branch from gamefields-global-pl-en. Open draft PRs against that branch; no merge or deployment. Read STATUS and DECISIONS first. No production DB writes, plugin changes, publishing or main changes. Never alter pricing, product IDs, geometry, currency or tax logic as part of localisation. Preserve Polish URLs and user data. Report changed files, commit, test results, blockers and assumptions. Coordinate dictionary keys with GLOBAL-08; no duplicate keys or label-based business logic.

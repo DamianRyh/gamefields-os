@@ -1,0 +1,2 @@
+# GAMEFIELDS GLOBAL v1
+PL default; EN (en_GB) first. WordPress Polylang plus language-aware theme; Studio separate i18n compatible with Vinext. Single product catalogue and prices. No public release until owner approves GLOBAL-12. Preserve existing layout, routes and saved projects. See ROADMAP, AUDIT, DECISIONS and QA-CHECKLIST.

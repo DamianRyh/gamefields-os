@@ -1,0 +1,2 @@
+# GLOBAL-02 remaining work (staging only)
+Verify existing EN draft 4945 and PL homepage 3462. Via Polylang supported translation editor, associate these as translations, save draft, confirm relation from both directions. Do not publish draft or force /en/ live. Verify PL homepage setting and original URL. If REST lacks writable translation fields, use supported admin UI on staging, not direct taxonomy edits. Test draft preview as administrator; check anonymous visitors cannot access it. Record results. Production already has EN registered; do not repeat registration.
