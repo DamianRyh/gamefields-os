@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'GFT_VERSION', '1.0.35' );
+require_once __DIR__ . '/inc/i18n.php';
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -105,13 +106,13 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 /* ---------- navigation ---------- */
 function gft_nav_items() {
 	return array(
-		array( 'Boiska', home_url( '/#boiska' ), '' ),
-		array( 'Ceny', home_url( '/#ceny' ), '' ),
-		array( 'Dla kogo', home_url( '/#dla-kogo' ), '' ),
-		array( 'Realizacje', home_url( '/realizacje-gamefields/' ), 'realizacje-gamefields' ),
-		array( 'Wiedza', home_url( '/baza-wiedzy/' ), 'baza-wiedzy' ),
-		array( 'Sklep', function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ), 'shop' ),
-		array( 'Kontakt', home_url( '/kontakt/' ), 'kontakt' ),
+		array( gft_global_t( 'nav_courts' ), gft_global_anchor_url( 'boiska' ), '' ),
+		array( gft_global_t( 'nav_pricing' ), gft_global_anchor_url( 'ceny' ), '' ),
+		array( gft_global_t( 'nav_audience' ), gft_global_anchor_url( 'dla-kogo' ), '' ),
+		array( gft_global_t( 'nav_projects' ), gft_global_page_url( 'realizacje-gamefields' ), 'realizacje-gamefields' ),
+		array( gft_global_t( 'nav_knowledge' ), gft_global_page_url( 'baza-wiedzy' ), 'baza-wiedzy' ),
+		array( gft_global_t( 'nav_shop' ), gft_global_shop_url(), 'shop' ),
+		array( gft_global_t( 'nav_contact' ), gft_global_page_url( 'kontakt' ), 'kontakt' ),
 	);
 }
 
@@ -122,11 +123,17 @@ function gft_is_current( $slug ) {
 	if ( 'shop' === $slug ) {
 		return function_exists( 'is_woocommerce' ) ? ( is_woocommerce() || is_cart() || is_checkout() ) : false;
 	}
+	if ( 'en' === gft_global_language() && function_exists( 'pll_get_post' ) ) {
+		$page = get_page_by_path( $slug );
+		$target = $page ? pll_get_post( $page->ID, 'en' ) : 0;
+		return $target && is_page( (int) $target );
+	}
 	return is_page( $slug );
 }
 
 function gft_primary_nav() {
 	foreach ( gft_nav_items() as $item ) {
+		if ( ! $item[1] ) { continue; }
 		printf(
 			'<a href="%s"%s>%s</a>',
 			esc_url( $item[1] ),
@@ -137,7 +144,7 @@ function gft_primary_nav() {
 }
 
 function gft_cart_link() {
-	if ( ! function_exists( 'WC' ) || ! WC()->cart ) {
+	if ( 'en' === gft_global_language() || ! function_exists( 'WC' ) || ! WC()->cart ) {
 		return;
 	}
 	$count = WC()->cart->get_cart_contents_count();

@@ -54,5 +54,12 @@
   "language": "Język",
   "cart": "Koszyk",
   "cart_count": "Koszyk, produkty: %d",
-  "price_on_request": "Cena na zapytanie"
+  "price_on_request": "Cena na zapytanie",
+  "enquiry": "Zapytanie",
+  "footer_construction": "Budowa boisk",
+  "footer_renovation": "Renowacja",
+  "footer_surfaces": "Nawierzchnie",
+  "footer_paint": "Malowanie i grafika",
+  "footer_design": "Projektowanie",
+  "breadcrumbs": "Okruszki"
 }

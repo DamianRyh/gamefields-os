@@ -276,3 +276,10 @@ a:hover{color:var(--gf-violet)}
 .gfk-links a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-size:14px;font-weight:600;color:var(--gf-ink)}
 .gfk-links a:hover{border-color:var(--gf-violet);color:var(--gf-violet)}
 @media (max-width:700px){.gfk-spec{grid-template-columns:minmax(0,1fr)}.gfk-spec div{grid-template-columns:120px minmax(0,1fr)}.gfk-table td:last-child{white-space:normal}}
+
+/* GAMEFIELDS GLOBAL — language switcher, no layout change when absent. */
+.gft-language{display:inline-flex;align-items:center;gap:2px;flex:none;font-size:12px;font-weight:600;white-space:nowrap}
+.gft-language a,.gft-language span{display:inline-flex;align-items:center;justify-content:center;min-width:32px;min-height:44px;padding:0 5px;border-radius:8px;text-decoration:none;color:var(--gf-ink)}
+.gft-language [aria-current]{background:var(--gf-ink);color:var(--gf-paper)}
+.gft-language a:focus-visible{outline:2px solid var(--gf-violet);outline-offset:2px}
+@media(max-width:1280px){.gft-nav-in:has(.gft-language){gap:12px}.gft-nav-in:has(.gft-language) .gft-links{gap:10px}}

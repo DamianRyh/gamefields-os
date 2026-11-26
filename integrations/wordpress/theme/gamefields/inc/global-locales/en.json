@@ -54,5 +54,12 @@
   "language": "Language",
   "cart": "Cart",
   "cart_count": "Cart, items: %d",
-  "price_on_request": "Price on request"
+  "price_on_request": "Price on request",
+  "enquiry": "Enquiry",
+  "footer_construction": "Court construction",
+  "footer_renovation": "Renovation",
+  "footer_surfaces": "Surfaces",
+  "footer_paint": "Painting and graphics",
+  "footer_design": "Design",
+  "breadcrumbs": "Breadcrumbs"
 }

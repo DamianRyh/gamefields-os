@@ -67,3 +67,28 @@ function gft_global_switcher() {
         esc_attr( gft_global_t( 'language', 'Język' ) ), esc_attr( $lang ), esc_html( strtoupper( $lang ) ),
         esc_url( $url ), esc_attr( $other ), esc_attr( $other ), esc_html( strtoupper( $other ) ) );
 }
+
+/** Preserve existing PL destinations; do not invent untranslated English routes. */
+function gft_global_anchor_url( $anchor ) {
+    if ( 'pl' === gft_global_language() ) { return home_url( '/#' . $anchor ); }
+    $home = gft_global_home_url();
+    return $home ? trailingslashit( $home ) . '#' . $anchor : '';
+}
+
+function gft_global_link( $key, $url, $class = '', $arrow = false ) {
+    if ( ! $url ) { return; }
+    printf( '<a%s href="%s">%s%s</a>', $class ? ' class="' . esc_attr( $class ) . '"' : '',
+        esc_url( $url ), esc_html( gft_global_t( $key ) ), $arrow ? ' <span aria-hidden="true">→</span>' : '' );
+}
+
+function gft_global_shop_url() {
+    // EN checkout is not enabled until the WooCommerce localisation audit is complete.
+    return 'pl' === gft_global_language() ? ( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ) ) : '';
+}
+
+function gft_global_privacy_url() {
+    $url = get_privacy_policy_url() ? get_privacy_policy_url() : home_url( '/polityka-prywatnosci/' );
+    if ( 'pl' === gft_global_language() ) { return $url; }
+    $id = (int) get_option( 'wp_page_for_privacy_policy' );
+    return $id ? gft_global_translation_url( $id, 'en' ) : gft_global_page_url( 'polityka-prywatnosci' );
+}
