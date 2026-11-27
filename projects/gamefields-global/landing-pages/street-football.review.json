@@ -1,0 +1,14 @@
+{
+  "sourceWpId": 3465,
+  "sourceRepoPath": "integrations/wordpress/pages/boiska-2026-11/boiska-street-football.html",
+  "sourceCommit": "a48b40b356a242b587d80146ed1417e25af4eda1",
+  "liveVerified": false,
+  "translatedNodes": 327,
+  "translatedAttributes": 11,
+  "missing": [],
+  "unmappedAttrs": [],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "Compare current WordPress and approved Studio catalogue. Historical rental and purchase price ambiguity retained. Verify commercial and safety claims, dynamic filters, schema, routes and browser QA."
+  ]
+}
