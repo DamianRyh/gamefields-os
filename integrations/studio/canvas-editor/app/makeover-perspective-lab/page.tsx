@@ -1,4 +1,5 @@
 "use client";
+import {useStudioLanguage} from "@/components/studio-language";
 import { useEffect, useRef, useState } from "react";
 import type { Mesh } from "@/components/renderer";
 import { loadArenaGlb } from "@/components/glb-arena";
@@ -16,6 +17,7 @@ const models = {
 type ModelKey=keyof typeof models;
 const names=["lewy górny","prawy górny","prawy dolny","lewy dolny"];
 export default function MakeoverPerspectiveLab(){
+ const {display:tr}=useStudioLanguage();
   const canvas=useRef<HTMLCanvasElement>(null);
   const renderKey=useRef(0);
   const renderCanvas=useRef<HTMLCanvasElement|null>(null);
@@ -124,50 +126,50 @@ export default function MakeoverPerspectiveLab(){
     <GamefieldsHeader section="makeover"/>
     <div style={{maxWidth:1200,margin:"0 auto"}}>
       <small style={{letterSpacing:".18em",color:"#dd6745",fontWeight:800}}>GAMEFIELDS / PERSPECTIVE LAB / DRAFT</small>
-      <h1 style={{fontSize:"clamp(28px,4vw,52px)",margin:"12px 0"}}>Konstrukcja 3D w perspektywie zdjęcia</h1>
-      <details className="lab-details"><summary>Jak działa wizualizacja?</summary><p>Tryb eksperymentalny w aktualnym Studio. Siatki pochodzą z biblioteki GAMEFIELDS, a podawane wymiary oznaczają granice geometrii 3D, nie wymiary handlowe ani rysunki wykonawcze. Render ma uproszczone materiały; brak przesłonięć i kalibracji geodezyjnej.</p></details>
+      <h1 style={{fontSize:"clamp(28px,4vw,52px)",margin:"12px 0"}}>{tr("Konstrukcja 3D w perspektywie zdjęcia")}</h1>
+      <details className="lab-details"><summary>{tr("Jak działa wizualizacja?")}</summary><p>{tr("Tryb eksperymentalny w aktualnym Studio. Siatki pochodzą z biblioteki GAMEFIELDS, a podawane wymiary oznaczają granice geometrii 3D, nie wymiary handlowe ani rysunki wykonawcze. Render ma uproszczone materiały; brak przesłonięć i kalibracji geodezyjnej.")}</p></details>
       <div className="lab-layout" style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,340px),1fr))",gap:20}}>
         <section className="lab-controls" style={{background:"#fff",borderRadius:14,padding:20}}>
-          <label>1. Zdjęcie miejsca<input type="file" accept="image/jpeg,image/png,image/webp" onChange={fileChange} style={fieldStyle}/></label>
-          <label style={{display:"block",marginTop:18}}>2. Oryginalny model
+          <label>{tr("1. Zdjęcie miejsca")}<input type="file" accept="image/jpeg,image/png,image/webp" onChange={fileChange} style={fieldStyle}/></label>
+          <label style={{display:"block",marginTop:18}}>{tr("2. Oryginalny model")}
             <select value={selected} onChange={e=>setSelected(e.target.value as ModelKey)} style={fieldStyle}>
               {Object.entries(models).map(([key,m])=><option key={key} value={key}>{m.name}</option>)}
             </select>
           </label>
-          <p style={{fontSize:12,color:"#666"}}>{meshes?"Model gotowy do renderowania.":"Ładowanie modelu 3D…"} Konstrukcja pobierana jest dopiero po wyborze.</p>
-          <p style={{fontSize:12,color:"#666"}}>Granice siatki: {current.length.toFixed(2)} × {current.width.toFixed(2)} m (osie X/Z).</p>
-          <details className="lab-details"><summary>Zaawansowane dopasowanie</summary><label style={{display:"block",marginTop:18}}>Ogniskowa w pikselach (opcjonalnie)
-            <input type="number" min={1} placeholder="Automatyczne przybliżenie" value={focal} onChange={e=>setFocal(e.target.value)} style={fieldStyle}/>
+          <p style={{fontSize:12,color:"#666"}}>{tr(meshes?"Model gotowy do renderowania.":"Ładowanie modelu 3D…")} {tr("Konstrukcja pobierana jest dopiero po wyborze.")}</p>
+          <p style={{fontSize:12,color:"#666"}}>{tr("Granice siatki:")} {current.length.toFixed(2)} × {current.width.toFixed(2)} m {tr("(osie X/Z).")}</p>
+          <details className="lab-details"><summary>{tr("Zaawansowane dopasowanie")}</summary><label style={{display:"block",marginTop:18}}>{tr("Ogniskowa w pikselach (opcjonalnie)")}
+            <input type="number" min={1} placeholder={tr("Automatyczne przybliżenie")} value={focal} onChange={e=>setFocal(e.target.value)} style={fieldStyle}/>
           </label>
-          <label style={{display:"block",marginTop:18}}>Kierunek światła: {lightDirection}°
-            <input aria-label="Kierunek światła" type="range" min={0} max={360} step={15} value={lightDirection} onChange={e=>setLightDirection(+e.target.value)} style={{width:"100%"}}/>
+          <label style={{display:"block",marginTop:18}}>{tr("Kierunek światła")}: {lightDirection}°
+            <input aria-label={tr("Kierunek światła")} type="range" min={0} max={360} step={15} value={lightDirection} onChange={e=>setLightDirection(+e.target.value)} style={{width:"100%"}}/>
           </label>
-          <label style={{display:"block",marginTop:18}}>Siła cienia: {shadowOpacity}%
-            <input aria-label="Siła cienia" type="range" min={0} max={60} step={5} value={shadowOpacity} onChange={e=>setShadowOpacity(+e.target.value)} style={{width:"100%"}}/>
-          </label><p style={{fontSize:13}}>Dopasuj światło do zdjęcia. Cień zakłada płaskie podłoże.</p>
-          </details><label style={{display:"block",marginTop:18}}>Krycie modelu: {opacity}%
-            <input aria-label="Krycie modelu" type="range" min={10} max={100} value={opacity} onChange={e=>setOpacity(+e.target.value)} style={{width:"100%"}}/>
+          <label style={{display:"block",marginTop:18}}>{tr("Siła cienia")}: {shadowOpacity}%
+            <input aria-label={tr("Siła cienia")} type="range" min={0} max={60} step={5} value={shadowOpacity} onChange={e=>setShadowOpacity(+e.target.value)} style={{width:"100%"}}/>
+          </label><p style={{fontSize:13}}>{tr("Dopasuj światło do zdjęcia. Cień zakłada płaskie podłoże.")}</p>
+          </details><label style={{display:"block",marginTop:18}}>{tr("Krycie modelu")}: {opacity}%
+            <input aria-label={tr("Krycie modelu")} type="range" min={10} max={100} value={opacity} onChange={e=>setOpacity(+e.target.value)} style={{width:"100%"}}/>
           </label>
-          <p><b>Narożniki:</b> {points.length}/4. {points.length<4?"Wskaż "+names[points.length]+".":"Komplet."}</p>
+          <p><b>{tr("Narożniki:")}</b> {points.length}/4. {points.length<4?tr("Wskaż")+" "+tr(names[points.length])+".":tr("Komplet.")}</p>
           <div style={{display:"flex",gap:10}}>
-            <button onClick={()=>setPoints(p=>p.slice(0,-1))} disabled={!points.length}>Cofnij punkt</button>
-            <button onClick={()=>setPoints([])} disabled={!points.length}>Zacznij od nowa</button>
+            <button onClick={()=>setPoints(p=>p.slice(0,-1))} disabled={!points.length}>{tr("Cofnij punkt")}</button>
+            <button onClick={()=>setPoints([])} disabled={!points.length}>{tr("Zacznij od nowa")}</button>
           </div>
-          <p role="status" style={{lineHeight:1.6}}>{status}</p>
+          <p role="status" style={{lineHeight:1.6}}>{tr(status)}</p>
           <button type="button" disabled={!camera} onClick={()=>setShowBefore(v=>!v)} style={{...fieldStyle,background:"#f1eee8",cursor:"pointer"}}>
-            {showBefore?"Pokaż projekt 3D":"Pokaż zdjęcie przed zmianą"}
+            {tr(showBefore?"Pokaż projekt 3D":"Pokaż zdjęcie przed zmianą")}
           </button>
-          <details className="lab-details"><summary>Dokładność dopasowania</summary><p style={{fontSize:13,color:"#555"}}>{metrics||"Dodaj cztery narożniki, aby sprawdzić dopasowanie."}</p>
-          {camera&&<p style={{fontSize:13}}>Ogniskowa: {camera.focalPx.toFixed(0)} px ({camera.focalWasEstimated?"oszacowana":"podana"}). Ocena: {camera.quality}.</p>}
+          <details className="lab-details"><summary>{tr("Dokładność dopasowania")}</summary><p style={{fontSize:13,color:"#555"}}>{metrics?metrics.replace(/Błąd narożników:|Podstawa modelu:|Wysokość:|Błąd proporcji:|Kontakt 4 narożników z podłożem:|\btak\b|\bnie\b/g,part=>tr(part)):tr("Dodaj cztery narożniki, aby sprawdzić dopasowanie.")}</p>
+          {camera&&<p style={{fontSize:13}}>{tr("Ogniskowa:")} {camera.focalPx.toFixed(0)} px ({tr(camera.focalWasEstimated?"oszacowana":"podana")}). {tr("Ocena:")} {camera.quality}.</p>}
           </details><button onClick={exportPng} disabled={!quality} style={{...fieldStyle,background:quality?"#202524":"#abb0aa",color:"#fff",cursor:quality?"pointer":"not-allowed"}}>
-            Pobierz PNG — wizualizacja koncepcyjna
+            {tr("Pobierz PNG — wizualizacja koncepcyjna")}
           </button>
-          <small>Eksport bez znaczników kalibracyjnych. Wynik pozostaje wizualizacją koncepcyjną; zawsze sprawdź geometrię i miejsce inwestycji.</small>
+          <small>{tr("Eksport bez znaczników kalibracyjnych. Wynik pozostaje wizualizacją koncepcyjną; zawsze sprawdź geometrię i miejsce inwestycji.")}</small>
         </section>
         <section className="lab-preview" style={{background:"#fff",borderRadius:14,padding:20}}>
-          <h2>Twoja przestrzeń</h2><p className="lab-point-guide">{!ready?"Dodaj zdjęcie miejsca w panelu poniżej.":points.length<4?`Dotknij narożnika: ${names[points.length]} (${points.length+1}/4)`:"Porównaj projekt ze zdjęciem lub popraw punkty."}</p>
-          <canvas ref={canvas} width={960} height={640} onClick={mark} aria-label="Zdjęcie miejsca — klikaj cztery narożniki w ustalonej kolejności" style={{width:"100%",height:"auto",cursor:ready&&points.length<4?"crosshair":"default",borderRadius:8,background:"#f5f5f5"}}/>
-          <p style={{fontSize:12,color:"#666"}}>Kontrola punktów styku dotyczy rzutu płaskiej podstawy, nie dopasowania do nierówności terenu. Wszystkie wymiary modelu należy porównać z zatwierdzonymi rysunkami produkcyjnymi.</p>
+          <h2>{tr("Twoja przestrzeń")}</h2><p className="lab-point-guide">{!ready?tr("Dodaj zdjęcie miejsca w panelu poniżej."):points.length<4?`${tr("Dotknij narożnika:")} ${tr(names[points.length])} (${points.length+1}/4)`:tr("Porównaj projekt ze zdjęciem lub popraw punkty.")}</p>
+          <canvas ref={canvas} width={960} height={640} onClick={mark} aria-label={tr("Zdjęcie miejsca — klikaj cztery narożniki w ustalonej kolejności")} style={{width:"100%",height:"auto",cursor:ready&&points.length<4?"crosshair":"default",borderRadius:8,background:"#f5f5f5"}}/>
+          <p style={{fontSize:12,color:"#666"}}>{tr("Kontrola punktów styku dotyczy rzutu płaskiej podstawy, nie dopasowania do nierówności terenu. Wszystkie wymiary modelu należy porównać z zatwierdzonymi rysunkami produkcyjnymi.")}</p>
         </section>
       </div>
     </div>

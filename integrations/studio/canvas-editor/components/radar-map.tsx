@@ -1,10 +1,12 @@
 "use client";
+import {useStudioLanguage} from "@/components/studio-language";
 import {useEffect,useRef,useState} from "react";
 import type {RadarLocation} from "@/lib/radar-locations";
 
 type RadarMapProps={locations:RadarLocation[];selectedId:string;onSelect:(id:string)=>void};
 
 export function RadarMap({locations,selectedId,onSelect}:RadarMapProps){
+ const {display:tr}=useStudioLanguage();
  const containerRef=useRef<HTMLDivElement|null>(null);
  const mapRef=useRef<import("leaflet").Map|null>(null);
  const layerRef=useRef<import("leaflet").LayerGroup|null>(null);
@@ -42,5 +44,5 @@ export function RadarMap({locations,selectedId,onSelect}:RadarMapProps){
   else if(bounds.length===1)map.setView(bounds[0],14);
  },[locations,selectedId,onSelect,mapReady]);
 
- return <div className="radar-map" ref={containerRef} role="region" aria-label="Mapa koncepcji Gamefields w Warszawie"/>;
+ return <div className="radar-map" ref={containerRef} role="region" aria-label={tr("Mapa koncepcji Gamefields w Warszawie")}/>;
 }
