@@ -1,0 +1,8 @@
+{
+  "newKeys": 134,
+  "totalKeys": 999,
+  "missingPolishDiacriticDescriptionsOrUseCases": [],
+  "scope": "exact description/useCase string scan, not full UI coverage",
+  "cataloguesChanged": false,
+  "remaining": "preset notes, variant names, tags, dynamic rendering and runtime tests"
+}
