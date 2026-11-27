@@ -14,3 +14,6 @@
 
 ## 2026-11-27 — summary localisation
 Baseline 052abe1354d116ac89a2b22715704f871d17d7f9. Roadmap remains unaccepted: stages 01–10 partial or unverified; 11–12 not started per STATUS. GitHub Actions branch runs: 0. No verified 90% completion. Localised summary headings, field labels and selected fixed status values only. User-entered text, model codes, colour values, price formulas, callbacks and project persistence untouched. Static check: all 6 modified source lines confined to summary rendering; no full build or browser tests performed. Remaining: dynamic material and pattern labels, PDF, forms, SEO, runtime QA and production reconciliation.
+
+## 2026-11-27 — finish comparison
+Localised comparison headings, price qualifiers and selection controls. Material labels use existing dictionary fallback; complete material descriptions still pending. Static checks: {"calculation":true,"callback":true,"amount":true}. No build or runtime tests executed; roadmap acceptance unchanged.
