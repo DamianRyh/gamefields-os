@@ -349,5 +349,20 @@
   },
   "modes": 6,
   "tapeMedian": 118
+ },
+ "pro-p-pasiak": {
+  "candidates": 220,
+  "passed": 216,
+  "kept": 36,
+  "rejected": {
+   "thin": 0,
+   "specks": 0,
+   "paints": 4,
+   "sym": 0,
+   "balance": 0,
+   "lines": 0
+  },
+  "modes": 2,
+  "tapeMedian": 136
  }
 }
