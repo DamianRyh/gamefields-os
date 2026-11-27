@@ -426,19 +426,19 @@
   "tapeMedian": 104
  },
  "pro-p-parzenica": {
-  "candidates": 660,
-  "passed": 0,
-  "kept": 0,
+  "candidates": 220,
+  "passed": 145,
+  "kept": 36,
   "rejected": {
-   "thin": 115,
-   "specks": 127,
+   "thin": 30,
+   "specks": 45,
    "paints": 0,
    "sym": 0,
-   "balance": 418,
+   "balance": 0,
    "lines": 0
   },
-  "modes": 0,
-  "tapeMedian": 0
+  "modes": 6,
+  "tapeMedian": 105
  },
  "pro-p-witraz": {
   "candidates": 414,
