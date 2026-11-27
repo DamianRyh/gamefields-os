@@ -1,0 +1,14 @@
+{
+  "sourceWpId": 3964,
+  "sourceRepoPath": "integrations/wordpress/audit-2026-10-21/pages/3964.html",
+  "sourceCommit": "2a7e18bdb6fbd54f963dcdb0f1423b7a5838fb7f",
+  "liveVerified": false,
+  "translatedNodes": 14,
+  "translatedAttributes": 4,
+  "missing": [],
+  "unmappedAttrs": [],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "October snapshot must be reconciled with live WP. Dynamic module names and iframe locale routing, schema and browser QA pending."
+  ]
+}
