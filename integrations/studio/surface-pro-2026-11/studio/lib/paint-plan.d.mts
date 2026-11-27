@@ -1,0 +1,11 @@
+export type PaintMeasure = { colours: string[]; area: number[]; edge: number[][]; W: number; H: number };
+export type PaintLayer = { step: number; colour: string; role: string; share: number; visibleM2: number; m2: number; coats: number; extraCoat: boolean; litres: number; tape: number };
+export type PaintPlan = { court: { length: number; width: number; m2: number }; assumptions: { litresPerM2: number; coats: number; reserve: number; tapeRoll: number }; layers: PaintLayer[]; totals: { paints: number; litres: number; tape: number; tapeRolls: number; maskingPerM2: number } };
+export function lightnessOf(hex: string): number;
+export function svgColours(svg: string): string[];
+export function measureLabels(labels: ArrayLike<number>, W: number, H: number, n: number): { area: number[]; edge: number[][]; W: number; H: number };
+export function measureSvg(svg: string, h: number, scale?: number): Promise<PaintMeasure>;
+export function buildPlan(m: PaintMeasure, opts?: { length?: number; width?: number; litresPerM2?: number; coats?: number; reserve?: number; tapeRoll?: number; minShare?: number }): PaintPlan;
+export function pendingTint(ground: string): string;
+export function layerSvg(svg: string, plan: PaintPlan, upTo: number, base?: string): string;
+export function gridSvg(h: number, length: number, width: number, opts?: { color?: string; halo?: string }): string;

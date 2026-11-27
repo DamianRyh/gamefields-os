@@ -127,6 +127,7 @@ footer{padding-block:32px 48px;color:var(--muted);font-size:13px;border-top:1px 
       <div class="row">
         <button class="pill" id="shuffle" type="button">Losuj kompozycję</button>
         <button class="pill ghost" id="view" type="button" aria-pressed="false">Widok 3D</button>
+        <a class="pill ghost" id="planLink" href="plan-malowania.html" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Plan malowania</a>
       </div>
       <div class="spec">
         <div><span class="m">Kolory farby</span><b id="specColors">–</b></div>
@@ -1440,6 +1441,7 @@ var SIG = [{"id":"m-cutouts","name":"Wycinanki","familyId":"pro-m-cutouts","vari
     var cm = fam.composer ? composerMetrics(st.fam, st.v, pal.colors, { seed: st.seed }) : null;
     $('#specTapeBox').hidden = !cm; $('#paintBox').hidden = !cm;
     if (cm) { $('#specTape').textContent = cm.tape + ' m'; $('#paint').innerHTML = Object.keys(cm.paint).map(function(c){ return '<span style="display:inline-flex;align-items:center;gap:6px;margin-right:12px"><i style="width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid rgba(127,127,127,.4);background:' + c + '"></i>' + cm.paint[c] + ' m²</span>'; }).join(''); }
+    $('#planLink').href = 'plan-malowania.html?' + new URLSearchParams({ pattern: st.fam, variant: st.v, palette: st.pal, seed: st.seed || 0 }).toString();
     $('#code').textContent = JSON.stringify({ patternFamily: st.fam, patternVariant: st.v, patternPalette: st.pal, seed: st.seed || undefined });
   }
   build(); draw();

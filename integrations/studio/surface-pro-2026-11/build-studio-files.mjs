@@ -24,5 +24,5 @@ export const mastersSignaturePresets:SignaturePreset[]=${JSON.stringify([...mast
 writeFileSync(here+'studio/lib/pattern-library-pro.ts',out);
 copyFileSync(here+'court-art-pro.mjs',here+'studio/lib/court-art-pro.mjs');copyFileSync(here+'court-composer.mjs',here+'studio/lib/court-composer.mjs');
 const studio=here+'../canvas-editor/lib/';
-writeFileSync(studio+'pattern-library-pro.ts',out);copyFileSync(here+'court-art-pro.mjs',studio+'court-art-pro.mjs');copyFileSync(here+'court-composer.mjs',studio+'court-composer.mjs');for(const d of ['court-art-pro.d.mts','court-composer.d.mts'])copyFileSync(here+'studio/lib/'+d,studio+d);
+writeFileSync(studio+'pattern-library-pro.ts',out);copyFileSync(here+'court-art-pro.mjs',studio+'court-art-pro.mjs');copyFileSync(here+'court-composer.mjs',studio+'court-composer.mjs');for(const d of ['court-art-pro.d.mts','court-composer.d.mts','paint-plan.d.mts'])copyFileSync(here+'studio/lib/'+d,studio+d);copyFileSync(here+'paint-plan.mjs',studio+'paint-plan.mjs');copyFileSync(here+'paint-plan.mjs',here+'studio/lib/paint-plan.mjs');
 console.log(fams.length,pals.length,sig.length,masters.length,masters2.length,composer.length,composer2.length,murals.length);

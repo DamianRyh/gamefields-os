@@ -1,0 +1,131 @@
+<title>Plan malowania</title>
+<meta name="description" content="Plan malowania nawierzchni Gamefields dla wykonawcy: siatka w metrach, warstwy w kolejności, litry farby i taśma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&display=swap">
+<style>
+/* A contractor's document: controls on screen, A4 landscape sheets in print. */
+:root{--paper:#F4F1EE;--card:#FFFFFF;--ink:#47132D;--muted:#6F5A66;--rule:#DCD2D6;--violet:#6336F5;--stage:#E8E2DC;--font:Inter,"Helvetica Neue",Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1A0B12;--card:#24111A;--ink:#F4ECEF;--muted:#BBA8B1;--rule:#3E2531;--violet:#8E6BFF;--stage:#2C1A23}}
+:root[data-theme="dark"]{--paper:#1A0B12;--card:#24111A;--ink:#F4ECEF;--muted:#BBA8B1;--rule:#3E2531;--violet:#8E6BFF;--stage:#2C1A23}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-left,0px)) 60px}
+h1,h2,h3{margin:0;letter-spacing:-.03em}
+.m{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;padding:16px;background:var(--card);border:1px solid var(--rule);border-radius:14px;margin-bottom:20px}
+.controls label{display:flex;flex-direction:column;gap:4px;min-width:0}
+.controls select,.controls input{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:10px 18px;background:var(--violet);color:#fff;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+.sheet{background:#fff;color:#1b1418;border-radius:10px;padding:28px;margin-bottom:22px;box-shadow:0 1px 0 rgba(0,0,0,.04),0 10px 30px rgba(40,10,25,.08)}
+.sheet .m{color:#6f5a66}
+.sheet header{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;border-bottom:2px solid #1b1418;padding-bottom:10px;margin-bottom:16px}
+.sheet h1{font-size:30px;font-weight:800}
+.sheet h2{font-size:20px;font-weight:800;margin-bottom:10px}
+.drawing svg{display:block;width:100%;height:auto;border:1px solid #cfc7cb}
+.two{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:22px;align-items:start}
+/* the table scrolls inside its box on phones instead of widening the page */
+.tbl{overflow-x:auto;max-width:100%}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13.5px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid #e3dde0;vertical-align:middle}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#6f5a66}
+td.n,th.n{text-align:right}
+.sw{display:inline-block;width:16px;height:16px;border-radius:4px;border:1px solid rgba(0,0,0,.25);vertical-align:-3px;margin-right:6px}
+tfoot td{font-weight:800;border-bottom:0}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.facts div{border:1px solid #e3dde0;border-radius:10px;padding:10px}
+.facts b{display:block;font-size:22px;font-weight:800;letter-spacing:-.03em}
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.step svg{display:block;width:100%;height:auto;border:1px solid #cfc7cb;border-radius:4px}
+.step h3{font-size:15px;margin:8px 0 2px}
+.step p{font-size:13px;color:#4a3a42;margin:0}
+ol.work{margin:0;padding-left:20px;columns:2;column-gap:28px}
+ol.work li{margin-bottom:8px;break-inside:avoid}
+.note{font-size:12.5px;color:#5b4a52;margin-top:12px}
+@media (max-width:760px){.two{grid-template-columns:minmax(0,1fr)}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}ol.work{columns:1}.sheet{padding:16px}}
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body{background:#fff}.wrap{max-width:none;padding:0}.controls,.actions,.intro{display:none}
+  .sheet{box-shadow:none;border-radius:0;padding:0;margin:0;break-after:page}
+}
+</style>
+
+<div class="wrap">
+  <div class="intro" style="margin-bottom:14px">
+    <span class="m">Gamefields · dla wykonawcy</span>
+    <h1 style="font-size:clamp(30px,5vw,52px);font-weight:800;letter-spacing:-.05em;margin:4px 0 6px">Plan malowania</h1>
+    <p style="color:var(--muted);max-width:720px">Wybierz wzór, paletę i wymiary boiska. Plan liczy się z rysunku wzoru: kolejność warstw, powierzchnię i litry każdej farby oraz taśmę tylko tam, gdzie trzeba ją położyć. Drukuj albo zapisz jako PDF (A4 poziomo).</p>
+  </div>
+  <div class="controls" id="controls">
+    <label><span class="m">Rodzina wzoru</span><select id="fam"></select></label>
+    <label><span class="m">Wariant</span><select id="var"></select></label>
+    <label><span class="m">Paleta</span><select id="pal"></select></label>
+    <label><span class="m">Ziarno (losowanie)</span><input id="seed" type="number" min="0" max="999999" step="1" value="0"></label>
+    <label><span class="m">Długość, m</span><input id="len" type="number" min="5" max="60" step="0.5" value="15"></label>
+    <label><span class="m">Szerokość, m</span><input id="wid" type="number" min="5" max="40" step="0.5" value="10"></label>
+    <label><span class="m">Farba, l/m² na warstwę</span><input id="lpm" type="number" min="0.1" max="0.6" step="0.01" value="0.25"></label>
+    <label><span class="m">Liczba warstw</span><input id="coats" type="number" min="1" max="4" step="1" value="2"></label>
+  </div>
+  <div class="actions"><button class="btn" id="print" type="button">Drukuj / zapisz PDF</button><button class="btn ghost" id="copy" type="button">Kopiuj link do planu</button></div>
+  <div id="out" aria-live="polite"></div>
+</div>
+
+<script>
+/*ENGINE*/
+(function(){
+  var $ = function(s){ return document.querySelector(s); };
+  var famById = {}; PRO_FAMILIES.forEach(function(x){ famById[x.id] = x; });
+  var palById = {}; PRO_PALETTES.forEach(function(x){ palById[x.id] = x; });
+  var q = new URLSearchParams(location.search);
+  var st = { fam: q.get('pattern') || 'pro-m-landscape', v: +(q.get('variant') || 1), pal: q.get('palette') || 'simultane', seed: +(q.get('seed') || 0), len: +(q.get('length') || 15), wid: +(q.get('width') || 10), lpm: +(q.get('lpm') || 0.25), coats: +(q.get('coats') || 2), colors: q.get('colors') ? q.get('colors').split(',').map(function(c){ return '#' + c.replace('#', '').toUpperCase(); }) : null };
+  if (!famById[st.fam]) st.fam = 'pro-m-landscape'; if (!palById[st.pal]) st.pal = 'simultane';
+  var fam = $('#fam'); var groups = {};
+  PRO_FAMILIES.forEach(function(x){ var g = x.id.indexOf('pro-m-') === 0 ? 'Murale' : x.composer ? 'Kompozytor' : 'Pro i Masters'; (groups[g] = groups[g] || []).push(x); });
+  ['Murale', 'Kompozytor', 'Pro i Masters'].forEach(function(g){ var og = document.createElement('optgroup'); og.label = g; (groups[g] || []).forEach(function(x){ var o = document.createElement('option'); o.value = x.id; o.textContent = x.name; og.appendChild(o); }); fam.appendChild(og); });
+  for (var i = 1; i <= 12; i++){ var o = document.createElement('option'); o.value = i; o.textContent = 'Wariant ' + i; $('#var').appendChild(o); }
+  PRO_PALETTES.forEach(function(p){ var o = document.createElement('option'); o.value = p.id; o.textContent = p.name; $('#pal').appendChild(o); });
+  function sync(){ fam.value = st.fam; $('#var').value = st.v; $('#pal').value = st.pal; $('#seed').value = st.seed; $('#len').value = st.len; $('#wid').value = st.wid; $('#lpm').value = st.lpm; $('#coats').value = st.coats; }
+  function read(){ st.fam = fam.value; st.v = +$('#var').value; if (palById[$('#pal').value] && st.colors && $('#pal').value !== st.pal) st.colors = null; st.pal = $('#pal').value; st.seed = Math.max(0, Math.round(+$('#seed').value || 0)); st.len = Math.min(60, Math.max(5, +$('#len').value || 15)); st.wid = Math.min(40, Math.max(5, +$('#wid').value || 10)); st.lpm = Math.min(0.6, Math.max(0.1, +$('#lpm').value || 0.25)); st.coats = Math.min(4, Math.max(1, Math.round(+$('#coats').value || 2))); }
+  function link(){ var p = new URLSearchParams({ pattern: st.fam, variant: st.v, palette: st.pal, seed: st.seed, length: st.len, width: st.wid, lpm: st.lpm, coats: st.coats }); if (st.colors) p.set('colors', st.colors.map(function(c){ return c.slice(1); }).join(',')); return location.origin + location.pathname + '?' + p.toString(); }
+  function fmt(n, d){ return n.toLocaleString('pl-PL', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+  var busy = 0;
+  async function draw(){
+    var my = ++busy; var f = famById[st.fam]; var colors = st.colors || palById[st.pal].colors; var h = Math.round(600 * st.wid / st.len * 10) / 10;
+    var art = renderPro(st.fam, st.v, h, colors, { seed: st.seed, uid: 'pl' });
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 ' + h + '">' + art + '</svg>';
+    var m = await measureSvg(svg, h, 2); if (my !== busy) return;
+    var plan = buildPlan(m, { length: st.len, width: st.wid, litresPerM2: st.lpm, coats: st.coats });
+    var code = st.fam + ' · v' + st.v + ' · ' + st.pal + (st.seed ? ' · ziarno ' + st.seed : '');
+    var head = function(title){ return '<header><div><span class="m">Gamefields · plan malowania</span><h1>' + title + '</h1></div><div style="text-align:right"><span class="m">' + esc(f.name) + '</span><div style="font-size:13px">' + esc(code) + '</div><div style="font-size:13px">' + fmt(st.len, 1) + ' × ' + fmt(st.wid, 1) + ' m = ' + fmt(plan.court.m2, 1) + ' m²</div></div></header>'; };
+    var big = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 ' + h + '">' + art + gridSvg(h, st.len, st.wid) + '</svg>';
+    var rows = plan.layers.map(function(l){ return '<tr><td>' + l.step + '</td><td><span class="sw" style="background:' + l.colour + '"></span>' + l.colour + (l.step === 1 ? ' <span class="m">tło</span>' : '') + '</td><td class="n">' + fmt(l.m2, 1) + (l.step === 1 ? '<div class="m" style="text-transform:none;letter-spacing:0">widoczne ' + fmt(l.visibleM2, 1) + '</div>' : '') + '</td><td class="n">' + l.coats + (l.extraCoat ? '*' : '') + '</td><td class="n">' + fmt(l.litres, 1) + '</td><td class="n">' + (l.tape ? fmt(l.tape) : '–') + '</td></tr>'; }).join('');
+    var extra = plan.layers.some(function(l){ return l.extraCoat; });
+    var s1 = '<section class="sheet">' + head('Rysunek i materiały') +
+      '<div class="two"><div class="drawing">' + big + '<p class="note">Siatka co 1 m (pełna linia co 5 m), liczone od lewego górnego narożnika. Wytycz siatkę sznurkiem kredowym, przenieś kontury pól z rysunku, potem maluj warstwami.</p></div>' +
+      '<div><div class="facts" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div><span class="m">Farby</span><b>' + plan.totals.paints + '</b></div><div><span class="m">Farba razem</span><b>' + fmt(plan.totals.litres, 1) + ' l</b></div><div><span class="m">Taśma</span><b>' + fmt(plan.totals.tape) + ' m</b></div><div><span class="m">Rolki po ' + plan.assumptions.tapeRoll + ' m</span><b>' + plan.totals.tapeRolls + '</b></div></div>' +
+      '<div class="tbl"><table><thead><tr><th>Krok</th><th>Kolor</th><th class="n">m²</th><th class="n">Warstwy</th><th class="n">Litry</th><th class="n">Taśma, m</th></tr></thead><tbody>' + rows + '</tbody><tfoot><tr><td></td><td>Razem</td><td class="n"></td><td></td><td class="n">' + fmt(plan.totals.litres, 1) + '</td><td class="n">' + fmt(plan.totals.tape) + '</td></tr></tfoot></table></div>' +
+      '<p class="note">Założenia: ' + fmt(plan.assumptions.litresPerM2, 2) + ' l/m² na warstwę, ' + plan.assumptions.coats + ' warstwy, zapas ' + Math.round(plan.assumptions.reserve * 100) + ' %. ' + (extra ? '* Jasny kolor na ciemnym tle: jedna warstwa więcej. ' : '') + 'Taśma liczona tylko na granicach z farbą już położoną, więc każda krawędź jest oklejana raz. Bez gruntu i linii gry. Zużycie sprawdź z kartą techniczną wybranej farby.</p></div></div></section>';
+    var steps = plan.layers.map(function(l, k){ var g = layerSvg(art, plan, k + 1); return '<div class="step"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 ' + h + '">' + g + '</svg><h3><span class="sw" style="background:' + l.colour + '"></span>Krok ' + l.step + (k === 0 ? ': tło' : '') + '</h3><p>' + fmt(l.m2, 1) + ' m² · ' + l.coats + ' warstwy · ' + fmt(l.litres, 1) + ' l' + (l.tape ? ' · taśma ' + fmt(l.tape) + ' m' : '') + '</p></div>'; }).join('');
+    var s2 = '<section class="sheet">' + head('Warstwy po kolei') + '<p style="margin-bottom:14px">Każdy rysunek pokazuje boisko po danym kroku. Tło idzie na całe boisko; pola w jaśniejszym albo ciemniejszym odcieniu tła to miejsca na kolejne farby. Kolejność: najpierw tło, potem od najjaśniejszej do najciemniejszej farby, bo ciemna lepiej kryje jasną.</p><div class="steps">' + steps + '</div></section>';
+    var s3 = '<section class="sheet">' + head('Kolejność prac') + '<ol class="work">' +
+      '<li>Sprawdź podłoże: beton min. 28 dni, suchy, bez mleczka cementowego. Napraw ubytki i rysy.</li>' +
+      '<li>Oczyść i zagruntuj zgodnie z kartą techniczną farby. Grunt nie jest wliczony w litry powyżej.</li>' +
+      '<li>Krok 1: tło na całym boisku (' + fmt(plan.court.m2, 1) + ' m²), ' + plan.layers[0].coats + ' warstwy, wałkiem lub natryskiem.</li>' +
+      '<li>Wytycz siatkę co 1 m z rysunku (sznurek kredowy). Narożnik 0,0 to lewy górny róg rysunku.</li>' +
+      '<li>Przenieś kontury pól ołówkiem lub kredą, łuki z sznurka i punktu środka, krzywe przez punkty na siatce.</li>' +
+      '<li>Kolejne kroki od 2 do ' + plan.layers.length + ': oklej granice z farbą już położoną, maluj, zdejmij taśmę, gdy farba jest jeszcze lekko wilgotna.</li>' +
+      '<li>Zachowaj przerwy między warstwami według karty technicznej (temperatura min. ok. 10 °C, bez deszczu).</li>' +
+      '<li>Na końcu linie gry: taśma, farba liniowa, kolor linii wg projektu.</li>' +
+      '<li>Zrób zdjęcia z góry (dron lub wysoki punkt) do dokumentacji i porównania z projektem.</li></ol>' +
+      '<p class="note">Plan jest generowany z rysunku wzoru w Studio Gamefields. Kolory farb i zużycie potwierdzamy przy zamówieniu konkretnego produktu. Kod projektu: ' + esc(code) + '.</p></section>';
+    $('#out').innerHTML = s1 + s2 + s3;
+  }
+  ['#fam', '#var', '#pal', '#seed', '#len', '#wid', '#lpm', '#coats'].forEach(function(id){ $(id).addEventListener('change', function(){ read(); history.replaceState(null, '', link()); draw(); }); });
+  $('#print').addEventListener('click', function(){ window.print(); });
+  $('#copy').addEventListener('click', function(){ var b = $('#copy'); var done = function(t){ b.textContent = t; setTimeout(function(){ b.textContent = 'Kopiuj link do planu'; }, 1800); }; try { navigator.clipboard.writeText(link()).then(function(){ done('Skopiowano'); }, function(){ done('Nie udało się skopiować'); }); } catch (e) { done('Nie udało się skopiować'); } });
+  sync(); draw();
+})();
+</script>

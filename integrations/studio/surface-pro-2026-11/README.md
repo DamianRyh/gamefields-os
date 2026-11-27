@@ -178,3 +178,21 @@ Osiem rodzin po trendzie z amerykańskich boisk-murali (research: `docs/research
 | Wielkie słowa (`pro-m-words`) | Timothy Goodman (Brooklyn); 22 hasła blokowym krojem 5 × 7, bez polskich znaków | 24 / 90 / 310 |
 | Rama (`pro-m-frame`) | Liberty Park (Salt Lake City), klucze w Dublin (Kalifornia) | 36 / 175 / 220 |
 | Pociągnięcia (`pro-m-strokes`) | murale gestualne | 36 / 90 / 367 |
+
+## Plan malowania (2026-11-27)
+
+Arkusz dla wykonawcy z dowolnego wzoru Pro, Masters albo Kompozytora: `plan-malowania.html` (budowany przez `node build-gallery.mjs` z `plan.template.html`, silnik w `paint-plan.mjs`). Link z parametrami: `plan-malowania.html?pattern=pro-m-landscape&variant=1&palette=simultane&seed=0&length=20&width=12&lpm=0.25&coats=2` (opcjonalnie `colors=RRGGBB,…`, czyli własne kolory projektu). W galerii otwiera go przycisk „Plan malowania”.
+
+Trzy arkusze A4 poziomo (druk albo PDF):
+1. **Rysunek i materiały:** wzór z siatką co 1 m (pełna linia co 5 m) do wytyczenia sznurkiem kredowym oraz tabela warstw: kolor, m², liczba warstw, litry, taśma.
+2. **Warstwy po kolei:** rysunek boiska po każdym kroku. Pola na kolejne farby są w odcieniu tła.
+3. **Kolejność prac:** podłoże, grunt, tło, wytyczenie, warstwy, linie gry, dokumentacja.
+
+Zasady liczenia (`buildPlan`):
+- **Kolejność:** tło (największe pole) na całe boisko, potem farby od najjaśniejszej do najciemniejszej (ciemna kryje jasną).
+- **Warstwy:** domyślnie 2. Jasny kolor na ciemnym tle (ΔL > 0,3 w OKLab) dostaje jedną więcej.
+- **Litry:** m² × warstwy × l/m² na warstwę (domyślnie 0,25) + 10 % zapasu, w górę do 0,5 l. Bez gruntu i linii gry. Zużycie trzeba potwierdzić kartą techniczną wybranej farby.
+- **Taśma:** tylko granice z farbą już położoną, więc każda krawędź jest oklejana raz, przy późniejszym z dwóch kolorów. Obrys boiska się nie liczy.
+- **Pomiar długości** (`measureLabels`): raster 2×. W każdym kwadracie 16 × 16 px kurator liczy przejścia poziome h i pionowe v i bierze √(h² + v²). Sprawdzone: odcinek 5 m daje 5 m, okrąg r = 3 m daje 19 m (dokładnie 18,85 m), skos 16,77 m daje 17 m. Taśma w `composerMetrics` (z kuratora) używa jeszcze starszej poprawki 0,82 i przy prostych krawędziach jest zaniżona. Do wyceny wykonawczej używaj planu.
+
+Studio: `paint-plan.mjs` i `paint-plan.d.mts` są skopiowane do `canvas-editor/lib/` (przez `build-studio-files.mjs`), gotowe do podpięcia w karcie projektu (krok na później: przycisk „Plan malowania” obok PDF projektu).
