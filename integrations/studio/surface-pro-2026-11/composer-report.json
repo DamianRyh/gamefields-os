@@ -409,5 +409,20 @@
   },
   "modes": 2,
   "tapeMedian": 93
+ },
+ "pro-p-neon": {
+  "candidates": 417,
+  "passed": 90,
+  "kept": 2,
+  "rejected": {
+   "thin": 327,
+   "specks": 0,
+   "paints": 0,
+   "sym": 0,
+   "balance": 0,
+   "lines": 0
+  },
+  "modes": 1,
+  "tapeMedian": 129
  }
 }
