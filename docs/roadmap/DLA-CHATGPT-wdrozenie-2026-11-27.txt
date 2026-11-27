@@ -1,56 +1,64 @@
-POLECENIE DLA CHATGPT: WDROŻENIE 27.11.2026 (wersja 2) — Studio + strona Malowanie i grafika
+POLECENIE DLA CHATGPT: WDROŻENIE 27.11.2026 (wersja 3) — małe zmiany do Studio v206 + strona Malowanie i grafika
 
-Odpowiedź na Twoje zatrzymanie: masz rację, gałąź pokazywała plan malowania szerzej niż Studio v206. Poprawione.
-Gałąź ma teraz DOKŁADNIE ten sam zakres planu co v206: plan jest tylko wtedy, gdy nawierzchnia to „Akryl sportowy”,
-boisko nie jest okrągłe, model nie jest jednym z o1, w1, circle-cage-1, circle-cage-2, octagon, projekt ma wzór i nie ma
-dodatkowych grafik (hasSurfaceAssets). Strona „Malowanie i grafika” opisuje ten sam zakres.
+Dziękuję za porównanie. Wniosek właściciela: v206 jest źródłem prawdy. NIE podmieniaj Studia gałęzią
+claude/upbeat-archimedes-uy9b03. Zachowaj wszystko z v206: zabezpieczenia Warsztatu (klucz właściciela przy ponownym zapisie),
+liczniki polubień i poparcia BO w jednej operacji bazy, usuwanie z powiązanymi głosami, przerywanie zbyt dużych żądań,
+mechanizm „Twojej ścieżki”, udostępnianie, widok początkowy, render i eksport 3D. Nowego kreatora kampanii BO z gałęzi
+też nie przenoś (to osobna decyzja). Oferta „Poproś o zakup” / 2 500 zł zostaje pominięta, jak zdecydowano.
 
-Wykonaj dwie części po kolei. Część B dopiero po udanej części A.
-Jeśli cokolwiek się nie zgadza albo któraś kontrola nie przejdzie, przerwij i napisz właścicielowi.
-
-==================================================================
-CZĘŚĆ A. STUDIO (źródło: gałąź claude/upbeat-archimedes-uy9b03, integrations/studio/canvas-editor)
-==================================================================
-
-1. Porównaj gałąź z obecnym Studio v206. Gałąź zawiera wszystko z v206 (Kompozytor, Murale, plan malowania,
-   kampanie BO, Share Your Field, „Twoja ścieżka”, Projekt miesiąca; gałąź claude/ecstatic-hamilton-dgjvt8 jest w niej scalona).
-   Oczekiwane różnice względem v206 to tylko:
-   - lib/quote-engine.ts: linia „Malowanie” w wycenie dopisuje wzór klienta, np. „Wzór: Pejzaż, wariant 1.
-     Z pomiaru wzoru: 5 farb, ok. 104 m taśmy.” (dla Kompozytora i Murali z pomiaru, dla innych tylko nazwa i wariant);
-   - lib/surface-finish.ts: opis progu „Wzór zaawansowany” = „7 i więcej kolorów albo złożone grafiki (murale, gradienty),
-     na bazie z granulatem.” (zamiast „Organic Flow, gradienty”); cena bez zmian (183 zł/m²);
-   - components/journey-guide.tsx: podpowiedź Marka przy karcie PDF kończy się „Pod nią jest plan malowania dla wykonawcy:
-     siatka, farby, litry i taśma.”;
-   - lib/court-composer.mjs: taśma w puli wzorów przeliczona dokładniejszym pomiarem (te same ziarna i wzory, inne metry taśmy);
-   - components/paint-plan-card.tsx: opis karty „…z Twojego wzoru na malowanej nawierzchni…”;
-   - components/studio-workspace.tsx: warunek planu malowania jak w v206 (stała PAINT_PLAN_EXCLUDED_ARENAS);
-   - testy: tests/studio-paint-plan.mjs (sprawdza też, że na O1 nie ma planu), zaktualizowane liczby w testach katalogu.
-   Jeśli v206 ma jakąkolwiek inną zmianę, której nie ma w gałęzi, NIE publikuj: wypisz te różnice właścicielowi.
-2. Przed publikacją: tsc, build, test:studio, test:surface, test:mobile, test:plan. Wszystkie muszą przejść.
-3. Po publikacji sprawdź (390 i 1440 px):
-   - P1 (Panna Court), akryl, MURALE „Pejzaż”: w podsumowaniu jest „Pobierz plan malowania (PDF)” i drukuje 3 strony;
-     w wycenie linia „Malowanie” podaje „Wzór: Pejzaż, wariant …”;
-   - O1, okrągłe klatki i Octagon, EPDM, sztuczna trawa, projekt z dodatkowymi grafikami: karty planu NIE ma;
-   - zakładki „Murale” i „Kompozytor”, kampania BO, Share Your Field, „Twoja ścieżka” działają jak w v206.
-   Nie zmieniaj INTERNAL_COST_CARD ani SALES_MARGIN. Podaj numer nowej wersji.
+Wykonaj trzy części. Jeśli cokolwiek się nie zgadza albo kontrola nie przejdzie, przerwij i napisz właścicielowi.
 
 ==================================================================
-CZĘŚĆ B. STRONA /malowanie-boisk/ (Malowanie i grafika, ID 3687)
+CZĘŚĆ A. STUDIO v206: wprowadź tylko te zmiany (ręcznie albo jako łatkę)
 ==================================================================
+Łatka z dokładnymi fragmentami: https://raw.githubusercontent.com/DamianRyh/gamefields-os/claude/upbeat-archimedes-uy9b03/docs/roadmap/zmiany-dla-studio-v206.patch
+Ścieżki w łatce zaczynają się od integrations/studio/canvas-editor/. Jeśli fragment nie pasuje do v206, nie wymuszaj:
+wprowadź ten sam sens ręcznie albo pomiń i zgłoś.
 
+A1. lib/quote-engine.ts — wzór klienta w linii „Malowanie”:
+    - import: getPatternFamily z ./pattern-library.ts i composerMetrics z ./court-art-pro.mjs;
+    - w typie QuoteInput dodaj patternSeed?:number;
+    - nowa funkcja paintPatternNote(p,area,colors,assets): gdy jest wzór i nie ma dodatkowych grafik, zwraca
+      „ Wzór: {nazwa rodziny}, wariant {v}.” i dla rodzin renderer "pro" z pomiarem „ Z pomiaru wzoru: {n} farb, ok. {t} m taśmy.”;
+    - na końcu opisu linii "paint" dopisz ${paintPatternNote(p,fa,own,assets)}.
+    Ceny, warianty, INTERNAL_COST_CARD i SALES_MARGIN bez zmian.
+A2. lib/surface-finish.ts — opis progu „Wzór zaawansowany”:
+    „7 i więcej kolorów albo złożone grafiki (murale, gradienty), na bazie z granulatem.” (cena 183 zł/m² bez zmian).
+A3. components/journey-guide.tsx — tylko tekst podpowiedzi Marka 'card-in-summary', mechanizm v206 bez zmian:
+    „Pobierz kartę projektu PDF: wymiary, nawierzchnia i cena na jednej stronie. Pod nią jest plan malowania dla wykonawcy: siatka, farby, litry i taśma.”
+A4. components/paint-plan-card.tsx — tylko opis karty: „Trzy strony A4 dla wykonawcy z Twojego wzoru na malowanej nawierzchni: …”.
+    Warunek wyświetlania zostaje jak w v206.
+A5. lib/paint-plan.mjs — tylko jeśli w v206 measureSvg dokleja width/height do <svg> bez usuwania istniejących
+    (to psuło dekodowanie rysunku z DOM): wprowadź fragment z łatki. Jeśli v206 już to obsługuje, pomiń.
+A6. lib/court-composer.mjs — nowe dane taśmy (te same wzory i ziarna, dokładniejszy pomiar metrów taśmy):
+    Podmień plik TYLKO jeśli SHA-256 obecnego pliku w v206 zaczyna się od affcdb93033ef910 (wersja przed przeliczeniem).
+    Nowy plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/claude/upbeat-archimedes-uy9b03/integrations/studio/canvas-editor/lib/court-composer.mjs
+    SHA-256 nowego zaczyna się od fde815568318d37d. Różni się wyłącznie blokiem /*POOL*/ … /*END-POOL*/.
+    Jeśli SHA v206 jest inny, nie podmieniaj i zgłoś.
+
+Przed publikacją: tsc, build oraz testy, które są w v206 (plan, edytor nawierzchni, Studio, mobilny, kampanie, Warsztat, udostępnianie).
+Po publikacji sprawdź (390 i 1440 px): P1, akryl, MURALE „Pejzaż” → w wycenie „Wzór: Pejzaż, wariant 1. Z pomiaru wzoru: …”;
+karta i plan PDF działają jak w v206; podpowiedź Marka ma nowy tekst; wszystko inne jak w v206. Podaj numer wersji.
+
+==================================================================
+CZĘŚĆ B. STRONA /malowanie-boisk/ (ID 3687) — niezależna od A, może iść od razu
+==================================================================
+Strona odsyła do planu malowania w zakresie, który v206 już ma (malowany akryl, boisko prostokątne).
 Właściciel zatwierdza podmianę CAŁEJ treści strony (jeden blok HTML). Adres i tytuł bez zmian. Zmienia się treść i opis SEO.
 Nowa treść: https://raw.githubusercontent.com/DamianRyh/gamefields-os/claude/upbeat-archimedes-uy9b03/integrations/wordpress/pages/malowanie-2026-11/malowanie-boisk.html
 SHA-256 zaczyna się od: ee6bf9181de7fd31
-
 1. Zrób kopię obecnej treści strony 3687 i zapisz jej ID.
-2. Pobierz plik, sprawdź początek SHA-256 i że nie zawiera "&&". Przygotuj szkic z całym plikiem bez zmian.
-3. Pokaż właścicielowi podgląd na komputerze i telefonie. Sprawdź:
-   - pas liczb „Wzory w Studio 1020 · 85 kierunków × 12 wariantów”; nigdzie „732”;
-   - pasek skrótów ma „Murale” i „Plan malowania”; przycisk w nagłówku „Zobacz murale ↓”;
-   - „Boisko jak mural.”: 3 kafelki i 8 kart; kliknięcie otwiera Studio z tym wzorem na P1;
-   - „Plan malowania z Twojego wzoru.”: opis zaczyna się od „Przy malowanym boisku prostokątnym…”, rysunek z siatką,
-     tabela 5 farb, 143,5 l, 99 m taśmy; przycisk otwiera Studio (P1, Pejzaż), gdzie karta planu jest dostępna;
-   - pytanie „Czy wykonawca dostanie plan malowania?” mówi o malowanej nawierzchni na boisku prostokątnym;
-   - reszta bez zmian (ceny i kalkulator, „Pięć miejsc, pięć wzorów.”, Masters II, grafika, etapy); brak przewijania w bok i błędów.
+2. Pobierz plik, sprawdź SHA-256 i brak "&&". Szkic z całym plikiem bez zmian.
+3. Podgląd na komputerze i telefonie: pas liczb „1020 · 85 kierunków × 12 wariantów” (nigdzie „732”); skróty „Murale” i „Plan malowania”;
+   „Boisko jak mural.” (3 kafelki, 8 kart, kliknięcie otwiera Studio z tym wzorem na P1); „Plan malowania z Twojego wzoru.”
+   („Przy malowanym boisku prostokątnym…”, rysunek z siatką, 5 farb, 143,5 l, 99 m; przycisk otwiera P1 z Pejzażem, gdzie karta planu jest);
+   pytanie o plan dla wykonawcy; reszta bez zmian; brak przewijania w bok i błędów.
 4. Opis SEO (Yoast): Malowanie i grafika boisk od 78 zł/m² netto: murale na boisku, 1020 wzorów w Studio 3D, plan malowania dla wykonawcy, linie i branding.
 5. Po akceptacji opublikuj i wyczyść cache LiteSpeed. Niczego nie usuwaj.
+
+==================================================================
+CZĘŚĆ C. SYNCHRONIZACJA REPOZYTORIUM Z v206 (po A)
+==================================================================
+Repozytorium jest teraz za Studiem na żywo. Jeśli możesz zapisywać w GitHub: wypchnij pełne źródła opublikowanej wersji
+(integrations/studio/canvas-editor) na NOWĄ gałąź sites-v{numer} w DamianRyh/gamefields-os, bez zmian w main.
+Jeśli nie możesz: przygotuj archiwum źródeł do pobrania dla właściciela. Kolejne zmiany będą robione od tej wersji.

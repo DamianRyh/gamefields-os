@@ -1,0 +1,94 @@
+diff --git a/integrations/studio/canvas-editor/lib/quote-engine.ts b/integrations/studio/canvas-editor/lib/quote-engine.ts
+index 277d117..2208aa8 100644
+--- a/integrations/studio/canvas-editor/lib/quote-engine.ts
++++ b/integrations/studio/canvas-editor/lib/quote-engine.ts
+@@ -4,11 +4,12 @@ import {modularGeometry} from './studio-modular.ts';
+ import {creativeLineOptions,type DecorativeLineStyle} from './creative-lines.ts';
+ /** Commercial rates are supplied by the owner, never inferred from preview colours or scene. */
+ export type RateCard={workingAssumptions?:boolean;notice?:string;version:string;currency:"PLN";vatRate?:number;surfaces:Record<string,{materialNetPerM2:number;installationNetPerM2:number}>;patternNetPerM2:Record<string,number>;colorPolicy?:{includedColors:number;additionalColorNetPerM2:number};linesNet:number;brandingNetPerItem:number;arenaNet:Record<string,number>;arenaInstallationNet?:Record<string,number>;finishNet?:Record<string,number>;equipmentNet:Record<string,number>;designNet:number;transportNet:number;exclusions:string[]};
+-export type QuoteInput={matProduct?:boolean;constructionOnly?:boolean;matVariant?:MatVariant;rubberVariant?:RubberVariant;acrylicVariant?:AcrylicVariant;turfVariant?:TurfVariant;tileVariant?:TileVariant;epdmVariant?:EpdmVariant;paintVariant?:PaintVariant;gradientEnabled?:boolean;concreteBase?:boolean;decorativeLineStyle?:DecorativeLineStyle;surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string;asset?:{colors?:string[]}}[]};
++export type QuoteInput={matProduct?:boolean;constructionOnly?:boolean;matVariant?:MatVariant;rubberVariant?:RubberVariant;acrylicVariant?:AcrylicVariant;turfVariant?:TurfVariant;tileVariant?:TileVariant;epdmVariant?:EpdmVariant;paintVariant?:PaintVariant;gradientEnabled?:boolean;concreteBase?:boolean;decorativeLineStyle?:DecorativeLineStyle;surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;patternSeed?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string;asset?:{colors?:string[]}}[]};
+ export type QuoteItem={id:string;label:string;quantity:number;unit:string;unitNet:number|null;totalNet:number|null;note?:string};
+ export type ProjectQuote={workingAssumptions?:boolean;constructionPrices?:Record<string,number>;notice?:string;schemaVersion:2;status:"estimated"|"partial"|"unpriced";currency:"PLN";rateVersion:string|null;priceNet:number|null;priceGross:number|null;vatRate:number|null;knownSubtotalNet:number|null;area:number;areaLabel:string;items:QuoteItem[];exclusions:string[];assumptions:string[]};
+ // Shared source-derived geometry; keep this re-export for existing consumers.
+-import {projectPatternColors} from './pattern-library.ts';
++import {projectPatternColors,getPatternFamily} from './pattern-library.ts';
++import {composerMetrics} from './court-art-pro.mjs';
+ import {hasSurfaceAssets,surfaceAssetColors} from './plain-surface.ts';
+ import {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
+ import {MAT_PRODUCT_NET_PER_M2,MAT_PRINT_NET_PER_M2} from './mat-product.ts';
+@@ -18,6 +19,14 @@ import {CONCRETE_BASE_LABEL,CONCRETE_BASE_NET,CONCRETE_BASE_RATE_NET_PER_M2,conc
+ export {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
+ const money=(n:number)=>Math.round((n+Number.EPSILON)*100)/100;
+ const rate=(v:unknown):v is number=>typeof v==="number"&&Number.isFinite(v)&&v>=0&&v<=1e8;
++// Names the customer's own pattern in the painting line; Composer and Murale patterns add their measured paints and tape.
++function paintPatternNote(p:QuoteInput,area:number,colors:string[],assets:boolean){
++ if(assets||!p.patternFamily||p.graphicOpacity<=0)return "";
++ const family=getPatternFamily(p.patternFamily),v=Math.max(1,Math.min(12,p.patternVariant||1));
++ const m=family.renderer==="pro"?composerMetrics(family.id,v,colors,{seed:p.patternSeed??0,area}):null;
++ return ` Wzór: ${family.name}, wariant ${v}.`+(m?` Z pomiaru wzoru: ${m.colors} farb, ok. ${m.tape} m taśmy.`:"");
++}
++
+ export function parseRateCard(raw:string|undefined):RateCard|null{
+  if(!raw)return null;
+  const c=JSON.parse(raw);
+@@ -85,7 +94,7 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
+    const own=projectPatternColors(p);const assets=hasSurfaceAssets(p);
+    const colors=new Set((assets?[p.base,...surfaceAssetColors(p)]:[p.base,p.zone,own[0],own[2],own[3]]).filter((v):v is string=>typeof v==="string"&&/^#[0-9a-f]{6}$/i.test(v)).map(v=>v.toLowerCase())).size;
+    const variant=p.paintVariant||autoPaintVariant({graphic:assets||p.graphicOpacity>0,colors,complexity,gradient:p.gradientEnabled});
+-   add("paint",`Malowanie · ${PAINT_VARIANTS[variant].label}`,1,"kpl.",netForArea(fa,PAINT_VARIANTS[variant].netPerM2),`Około ${areaLabel(fa)} m² × ${PAINT_VARIANTS[variant].netPerM2} zł/m² netto. ${PAINT_VARIANTS[variant].description}${p.paintVariant?"":" Wariant dobrany do projektu."}`);
++   add("paint",`Malowanie · ${PAINT_VARIANTS[variant].label}`,1,"kpl.",netForArea(fa,PAINT_VARIANTS[variant].netPerM2),`Około ${areaLabel(fa)} m² × ${PAINT_VARIANTS[variant].netPerM2} zł/m² netto. ${PAINT_VARIANTS[variant].description}${p.paintVariant?"":" Wariant dobrany do projektu."}${paintPatternNote(p,fa,own,assets)}`);
+   }else if(p.surface===EPDM_MATERIAL){
+    const variant=p.epdmVariant||"standard";
+    add("epdm",`Nawierzchnia EPDM wylewana · ${EPDM_VARIANTS[variant].label}`,1,"kpl.",netForArea(fa,EPDM_VARIANTS[variant].netPerM2),`Około ${areaLabel(fa)} m² × ${EPDM_VARIANTS[variant].netPerM2} zł/m² netto. ${EPDM_VARIANTS[variant].description}`);
+diff --git a/integrations/studio/canvas-editor/lib/surface-finish.ts b/integrations/studio/canvas-editor/lib/surface-finish.ts
+index 2e3f365..b3813dc 100644
+--- a/integrations/studio/canvas-editor/lib/surface-finish.ts
++++ b/integrations/studio/canvas-editor/lib/surface-finish.ts
+@@ -22,7 +22,7 @@ export const PAINT_VARIANTS:Record<PaintVariant,{label:string;netPerM2:number;de
+  "plain":{label:"Jednokolorowa",netPerM2:78,description:"Grunt, 2 warstwy farby sportowej i standardowe linie."},
+  "plain-granulate":{label:"Jednokolorowa z granulatem",netPerM2:100,description:"Elastyczna powłoka z gumą: lepsza amortyzacja i antypoślizg, z liniami."},
+  "pattern":{label:"Wzór średni",netPerM2:150,description:"4–6 kolorów, geometryczne wzory typu Signature, na bazie z granulatem."},
+- "pattern-advanced":{label:"Wzór zaawansowany",netPerM2:183,description:"7 i więcej kolorów, złożone grafiki (Organic Flow, gradienty), na bazie z granulatem."},
++ "pattern-advanced":{label:"Wzór zaawansowany",netPerM2:183,description:"7 i więcej kolorów albo złożone grafiki (murale, gradienty), na bazie z granulatem."},
+ };
+ export const PAINT_NOTES=["Ceny netto, do cen dolicza się VAT 23%.","Nie obejmuje napraw podłoża (wypełnianie rys, szlifowanie): wyceniamy po oględzinach."];
+ /** Surface material in Studio that means painting. Other materials (EPDM, tiles, turf) are priced separately later. */
+diff --git a/integrations/studio/canvas-editor/components/journey-guide.tsx b/integrations/studio/canvas-editor/components/journey-guide.tsx
+index b299258..4256675 100644
+--- a/integrations/studio/canvas-editor/components/journey-guide.tsx
++++ b/integrations/studio/canvas-editor/components/journey-guide.tsx
+@@ -46,7 +46,7 @@ export function JourneyGuide({project,onOpen}:{project:Project;onOpen:(step:Jour
+   const onStep=(e:Event)=>{const step=(e as CustomEvent).detail?.step;if(JOURNEY.some(j=>j.id===step))done(step)};
+   const onShare=(e:Event)=>{const n=(e as CustomEvent).detail?.name;if(['share_png_download','share_film_download','share_native_open','share_link_copy'].includes(n))done('share')};
+   const onSummary=()=>{const d=state.current.done;
+-   if(!d.includes('card'))offer({id:'card-in-summary',guide:'marek',text:'Pobierz kartę projektu PDF: wymiary, nawierzchnia i cena na jednej stronie. Przyda się do rozmowy z zarządcą albo urzędem.',action:'Pobierz kartę PDF',step:'card'});
++   if(!d.includes('card'))offer({id:'card-in-summary',guide:'marek',text:'Pobierz kartę projektu PDF: wymiary, nawierzchnia i cena na jednej stronie. Pod nią jest plan malowania dla wykonawcy: siatka, farby, litry i taśma.',action:'Pobierz kartę PDF',step:'card'});
+    if(!d.includes('financing'))offer({id:'financing-in-summary',guide:'marek',text:'Boisko może sfinansować gmina. Zgłoś je do budżetu obywatelskiego: zrobimy stronę kampanii z licznikiem poparcia.',action:'Zobacz finansowanie',step:'financing'});};
+   const down=()=>{busy.current=true},up=()=>{busy.current=false};
+   window.addEventListener('gf-journey',onStep);window.addEventListener('gf-share',onShare);window.addEventListener('gf-journey-summary',onSummary);
+diff --git a/integrations/studio/canvas-editor/components/paint-plan-card.tsx b/integrations/studio/canvas-editor/components/paint-plan-card.tsx
+index a923152..0f24076 100644
+--- a/integrations/studio/canvas-editor/components/paint-plan-card.tsx
++++ b/integrations/studio/canvas-editor/components/paint-plan-card.tsx
+@@ -74,5 +74,5 @@ export function PaintPlanCard({project}:{project:Project}){
+   setMessage(`Otworzyło się okno drukowania. Wybierz „Zapisz jako PDF”. ${plan.totals.paints} farb, ok. ${num(plan.totals.litres,1)} l, taśma ${num(plan.totals.tape)} m.`);
+   setTimeout(()=>frame.remove(),60000);
+  }catch(e){if(!cancelled)setMessage((e as Error).message)}finally{if(!cancelled)setBusy(false)}})();return()=>{cancelled=true}},[busy,h,length,width,project]);
+- return <section className="studio-project-card" aria-label="Plan malowania dla wykonawcy"><h3>Plan malowania</h3><p>Trzy strony A4 dla wykonawcy z Twojego wzoru: rysunek z siatką co 1 m do wytyczenia, kolejność farb z litrami i taśmą oraz kolejność prac.</p><button type="button" disabled={busy} onClick={()=>{setMessage('');setBusy(true)}}>{busy?'Przygotowuję plan…':'Pobierz plan malowania (PDF)'}</button>{message?<p role="status">{message}</p>:null}{busy?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,top:0,width:600,pointerEvents:'none'}}><svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 600 ${h}`} width={600} height={h}><rect width={600} height={h} fill={project.base}/><PatternArt p={solid} h={h}/></svg></div>:null}</section>;
++ return <section className="studio-project-card" aria-label="Plan malowania dla wykonawcy"><h3>Plan malowania</h3><p>Trzy strony A4 dla wykonawcy z Twojego wzoru na malowanej nawierzchni: rysunek z siatką co 1 m do wytyczenia, kolejność farb z litrami i taśmą oraz kolejność prac.</p><button type="button" disabled={busy} onClick={()=>{setMessage('');setBusy(true)}}>{busy?'Przygotowuję plan…':'Pobierz plan malowania (PDF)'}</button>{message?<p role="status">{message}</p>:null}{busy?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,top:0,width:600,pointerEvents:'none'}}><svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 600 ${h}`} width={600} height={h}><rect width={600} height={h} fill={project.base}/><PatternArt p={solid} h={h}/></svg></div>:null}</section>;
+ }
+diff --git a/integrations/studio/canvas-editor/lib/paint-plan.mjs b/integrations/studio/canvas-editor/lib/paint-plan.mjs
+index b6ed975..07cd18a 100644
+--- a/integrations/studio/canvas-editor/lib/paint-plan.mjs
++++ b/integrations/studio/canvas-editor/lib/paint-plan.mjs
+@@ -36,7 +36,8 @@ export function measureLabels(labels, W, H, n, tile = 16) {
+ export async function measureSvg(svg, h, scale = 2) {
+   const colours = svgColours(svg); const W = 600 * scale, H = Math.round(h * scale);
+   const doc = svg.startsWith('<svg') ? svg : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 ' + h + '">' + svg + '</svg>';
+-  const sized = doc.replace('<svg ', '<svg shape-rendering="crispEdges" width="' + W + '" height="' + H + '" ');
++  // replace any size on the root element (an SVG serialised from the DOM already has width/height; a duplicate attribute is invalid XML)
++  const sized = doc.replace(/<svg\b[^>]*>/, (tag) => tag.replace(/\s(width|height|shape-rendering)="[^"]*"/g, '').replace('<svg', '<svg shape-rendering="crispEdges" width="' + W + '" height="' + H + '"'));
+   const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(sized); await img.decode();
+   const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const cx = cv.getContext('2d', { willReadFrequently: true }); cx.drawImage(img, 0, 0);
+   const px = cx.getImageData(0, 0, W, H).data; const ref = colours.map(hex2rgb); const lab = new Uint8Array(W * H);
