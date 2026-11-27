@@ -1,27 +1,30 @@
 'use client';
+import {useStudioLanguage} from "@/components/studio-language";
 import {useEffect,useRef,useState,type ReactNode} from 'react';
 import type {Project} from '@/lib/project';
 import type {QuoteState} from '@/hooks/use-project-quote';
+import {quoteDisplayLabel} from '@/lib/i18n/quote-display';
 import {PannaStudioPreview} from '@/components/blender-arena-preview';
 
 const esc=(s:string)=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]!);
-const money=(v:number)=>new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',maximumFractionDigits:0}).format(v);
 
 /** One A4 page: top view, parameters, indicative price range and contact. Printed from a hidden iframe, so the
  * customer saves it as PDF with the system print dialog (desktop and phone), without a popup or a PDF library. */
 export type CardSection={title:string;rows:[string,string][]};
 const cell=(v:string)=>/^#[0-9a-f]{6}$/i.test(v)?`<span class="sw" style="background:${v}"></span>${esc(v.toUpperCase())}`:esc(v);
-export function projectCardHtml({project,sections,quote,image,date}:{project:Project;sections:CardSection[];quote:QuoteState['data'];image:string;date:string}){
+export function projectCardHtml({project,sections,quote,image,date,locale='pl',translate=(text:string)=>text}:{project:Project;sections:CardSection[];quote:QuoteState['data'];image:string;date:string;locale?:'pl'|'en';translate?:(text:string)=>string}){
+ const tr=(text:string)=>esc(translate(text));
+ const money=(v:number)=>new Intl.NumberFormat(locale==='en'?'en-GB':'pl-PL',{style:'currency',currency:'PLN',maximumFractionDigits:0}).format(v);
  const arena=quote?.items.find(i=>i.id==='arena');
  const base=quote?.items.find(i=>i.id==='concrete-base'),finish=quote?.items.find(i=>i.id==='paint'||i.id==='epdm'||i.id==='tiles'||i.id==='turf'||i.id==='acrylic'||i.id==='rubber'||i.id==='mats'||i.id==='finish-surface');
  const print=quote?.items.find(i=>i.id==='mat-print');
  const split=(arena?.totalNet!=null||!project.arenaModel)&&(base?.totalNet!=null||finish?.totalNet!=null);
  const total=(arena?.totalNet??0)+(base?.totalNet??0)+(finish?.totalNet??0)+(print?.totalNet??0);
- const rows=split?`<table>${arena?.totalNet!=null?`<tr><td>Konstrukcja boiska z bramkami</td><td>${esc(money(arena.totalNet))}</td></tr>`:''}${base?.totalNet!=null?`<tr><td>Nawierzchnia betonowa bez wykończenia (płyta 12 cm z podbudową)</td><td>${esc(money(base.totalNet))}</td></tr>`:''}<tr><td>${esc(finish?finish.label:'Wykończenie nawierzchni')}</td><td>${finish?.totalNet!=null?esc(money(finish.totalNet)):finish?'do wyceny':'—'}</td></tr>${print?.totalNet!=null?`<tr><td>Nadruk ćwiczeń na macie</td><td>${esc(money(print.totalNet))}</td></tr>`:''}<tr><td><b>Razem</b></td><td><b>${esc(money(total))}</b></td></tr></table>`:'';
- const price=split?`<section class="price"><h2>${arena?.totalNet!=null?"Cena konstrukcji i nawierzchni (netto)":project.matProduct?"Cena maty (netto)":"Cena nawierzchni (netto)"}</h2>${rows}<p>${finish?.id==='paint'&&finish.totalNet!=null?'Malowanie nie obejmuje napraw podłoża (rysy, szlifowanie). ':finish?.id==='epdm'?'Nawierzchnia EPDM wylewana zgodnie z PN-EN 14877; linie sportowe wyceniamy osobno. ':finish?.id==='tiles'?'Płytki z montażem, profilami krawędziowymi i podstawowymi liniami. ':finish?.id==='turf'?'Trawa z montażem na betonie, zasypem i podstawowymi liniami. ':finish?.id==='acrylic'?'Nawierzchnia akrylowa z podstawowymi liniami; przygotowanie podłoża osobno. ':finish?.id==='rubber'?'Płyty gumowe klejone na betonie, z profilami krawędziowymi i podstawowymi liniami. ':finish?.id==='mats'&&project.matProduct?'Mata wysyłana w całości, gotowa do rozłożenia. ':finish?.id==='mats'?'Maty gumowe klejone na betonie, z profilami krawędziowymi i podstawowymi liniami. ':''}${project.arenaModel?'Montaż konstrukcji i transport są wyceniane oddzielnie.':project.matProduct?'Bez podłoża i montażu. Wysyłkę wyceniamy po podaniu adresu.':'Transport wyceniamy oddzielnie.'}</p></section>`
-  :arena?.totalNet!=null?`<section class="price"><h2>Cena konstrukcji</h2><p class="big">${esc(money(arena.totalNet))} netto</p><p>${project.constructionOnly?'Zamówienie obejmuje samą konstrukcję z bramkami. Montaż i transport wyceniamy oddzielnie.':'Konstrukcja z bramkami. Nawierzchnia, montaż, transport i przygotowanie podłoża są wyceniane oddzielnie.'}</p></section>`
-  :`<section class="price"><h2>${project.arenaModel?'Wycena konstrukcji':'Wycena nawierzchni'}</h2><p>Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.</p></section>`;
- return `<!doctype html><html lang="pl"><head><meta charset="utf-8"><title>Gamefields — karta projektu — ${esc(project.name)}</title><style>
+ const rows=split?`<table>${arena?.totalNet!=null?`<tr><td>${tr("Konstrukcja boiska z bramkami")}</td><td>${esc(money(arena.totalNet))}</td></tr>`:''}${base?.totalNet!=null?`<tr><td>${tr("Nawierzchnia betonowa bez wykończenia (płyta 12 cm z podbudową)")}</td><td>${esc(money(base.totalNet))}</td></tr>`:''}<tr><td>${finish?esc(quoteDisplayLabel(finish.label,translate)):tr("Wykończenie nawierzchni")}</td><td>${finish?.totalNet!=null?esc(money(finish.totalNet)):finish?tr("do wyceny"):'—'}</td></tr>${print?.totalNet!=null?`<tr><td>${tr("Nadruk ćwiczeń na macie")}</td><td>${esc(money(print.totalNet))}</td></tr>`:''}<tr><td><b>${tr("Razem")}</b></td><td><b>${esc(money(total))}</b></td></tr></table>`:'';
+ const price=split?`<section class="price"><h2>${arena?.totalNet!=null?tr("Cena konstrukcji i nawierzchni (netto)"):project.matProduct?tr("Cena maty (netto)"):"Cena nawierzchni (netto)"}</h2>${rows}<p>${finish?.id==='paint'&&finish.totalNet!=null?tr("Malowanie nie obejmuje napraw podłoża (rysy, szlifowanie). "):finish?.id==='epdm'?'Nawierzchnia EPDM wylewana zgodnie z PN-EN 14877; linie sportowe wyceniamy osobno. ':finish?.id==='tiles'?'Płytki z montażem, profilami krawędziowymi i podstawowymi liniami. ':finish?.id==='turf'?'Trawa z montażem na betonie, zasypem i podstawowymi liniami. ':finish?.id==='acrylic'?'Nawierzchnia akrylowa z podstawowymi liniami; przygotowanie podłoża osobno. ':finish?.id==='rubber'?'Płyty gumowe klejone na betonie, z profilami krawędziowymi i podstawowymi liniami. ':finish?.id==='mats'&&project.matProduct?tr("Mata wysyłana w całości, gotowa do rozłożenia. "):finish?.id==='mats'?'Maty gumowe klejone na betonie, z profilami krawędziowymi i podstawowymi liniami. ':''}${project.arenaModel?tr("Montaż konstrukcji i transport są wyceniane oddzielnie."):project.matProduct?tr("Bez podłoża i montażu. Wysyłkę wyceniamy po podaniu adresu."):'Transport wyceniamy oddzielnie.'}</p></section>`
+  :arena?.totalNet!=null?`<section class="price"><h2>${tr("Cena konstrukcji")}</h2><p class="big">${esc(money(arena.totalNet))} ${tr("netto")}</p><p>${project.constructionOnly?tr("Zamówienie obejmuje samą konstrukcję z bramkami. Montaż i transport wyceniamy oddzielnie."):'Konstrukcja z bramkami. Nawierzchnia, montaż, transport i przygotowanie podłoża są wyceniane oddzielnie.'}</p></section>`
+  :`<section class="price"><h2>${project.arenaModel?tr("Wycena konstrukcji"):'Wycena nawierzchni'}</h2><p>${tr("Przygotujemy indywidualną wycenę po poznaniu projektu i miejsca realizacji.")}</p></section>`;
+ return `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><title>${tr("Gamefields — karta projektu — ")}${esc(project.name)}</title><style>
 @page{size:A4;margin:14mm}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:#47132d;font-size:11pt;line-height:1.4}
 header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid #47132d;padding-bottom:6mm;margin-bottom:6mm}
@@ -35,17 +38,19 @@ table{width:100%;border-collapse:collapse;font-size:8.5pt;table-layout:fixed;mar
 footer{margin-top:6mm;padding-top:4mm;border-top:1px solid #e1d9de;font-size:8.5pt;color:#6f5a66;display:flex;justify-content:space-between;gap:6mm}
 footer b{color:#47132d}
 </style></head><body>
-<header><div class="logo">gamefields.</div><div class="meta">Karta projektu · ${esc(date)}<br>Studio Gamefields · gamefields.eu/studio</div></header>
+<header><div class="logo">gamefields.</div><div class="meta">${tr("Karta projektu")} · ${esc(date)}<br>Studio Gamefields · gamefields.eu/studio</div></header>
 <h1>${esc(project.name)}</h1>
-<div class="img"><img src="${image}" alt="${project.constructionOnly?'Wizualizacja konstrukcji boiska':'Wizualizacja boiska z wybraną nawierzchnią'}"></div>
-<div class="grid"><section>${sections.map(s=>`<h2>${esc(s.title)}</h2><dl>${s.rows.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${cell(v)}</dd></div>`).join('')}</dl>`).join('')}</section>${price}</div>
-<footer><div><b>Damian Gawrych</b> · Gamefields<br>info@gamefields.eu · gamefields.eu/kontakt</div><div>Wizualizacja koncepcyjna. Cena orientacyjna netto, nie jest ofertą handlową. Ofertę potwierdzimy po sprawdzeniu miejsca realizacji.</div></footer>
+<div class="img"><img src="${image}" alt="${project.constructionOnly?tr("Wizualizacja konstrukcji boiska"):'Wizualizacja boiska z wybraną nawierzchnią'}"></div>
+<div class="grid"><section>${sections.map(s=>`<h2>${tr(s.title)}</h2><dl>${s.rows.map(([k,v])=>`<div><dt>${tr(k)}</dt><dd>${cell(locale==="en"&&["Materiał","Wariant","Wykończenie konstrukcji","Nawierzchnia betonowa","Logo na panelach","Linie","Kod produktu","Rodzaj gumy"].includes(k)?translate(v):v)}</dd></div>`).join('')}</dl>`).join('')}</section>${price}</div>
+<footer><div><b>Damian Gawrych</b> · Gamefields<br>info@gamefields.eu · gamefields.eu/kontakt</div><div>${tr("Wizualizacja koncepcyjna. Cena orientacyjna netto, nie jest ofertą handlową. Ofertę potwierdzimy po sprawdzeniu miejsca realizacji.")}</div></footer>
 </body></html>`;
 }
 
 export function ProjectCard({project,sections,quote,renderCourt}:{project:Project;sections:CardSection[];quote:QuoteState;renderCourt?:(p:Project)=>ReactNode}){
+ const {display:tr,locale,numberLocale}=useStudioLanguage();
+ const languageRef=useRef({tr,locale,numberLocale});languageRef.current={tr,locale,numberLocale};
  const [snapshot,setSnapshot]=useState<Project|null>(null),[message,setMessage]=useState(''),ref=useRef<HTMLDivElement>(null);
- useEffect(()=>{if(!snapshot)return;let cancelled=false;void(async()=>{try{
+ useEffect(()=>{if(!snapshot)return;const {tr,locale,numberLocale}=languageRef.current;let cancelled=false;void(async()=>{try{
   const plan=!!(snapshot.matProduct&&renderCourt);
   let image='';
   if(plan){
@@ -59,16 +64,16 @@ export function ProjectCard({project,sections,quote,renderCourt}:{project:Projec
   const canvas=stage.querySelector('canvas');if(!canvas)throw Error('Nie udało się przygotować modelu boiska.');
   image=canvas.toDataURL('image/png');
   }
-  const date=new Intl.DateTimeFormat('pl-PL',{dateStyle:'long'}).format(new Date());
+  const date=new Intl.DateTimeFormat(numberLocale,{dateStyle:'long'}).format(new Date());
   const frame=document.createElement('iframe');frame.setAttribute('aria-hidden','true');frame.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
   document.body.appendChild(frame);
   const doc=frame.contentDocument;if(!doc||!frame.contentWindow)throw Error('Ta przeglądarka nie obsługuje drukowania karty.');
-  doc.open();doc.write(projectCardHtml({project:snapshot,sections,quote:quote.data,image,date}));doc.close();
+  doc.open();doc.write(projectCardHtml({project:snapshot,sections,quote:quote.data,image,date,locale,translate:tr}));doc.close();
   await new Promise(r=>{const img=doc.querySelector('img');if(!img||img.complete)r(null);else{img.onload=()=>r(null);img.onerror=()=>r(null);}});
   if(cancelled)return;
   frame.contentWindow.focus();frame.contentWindow.print();
   setMessage('Otworzyło się okno drukowania. Wybierz „Zapisz jako PDF”.');
   setTimeout(()=>frame.remove(),60000);
  }catch(e){if(!cancelled)setMessage((e as Error).message)}finally{if(!cancelled)setSnapshot(null)}})();return()=>{cancelled=true}},[snapshot,sections,quote.data,renderCourt]);
- return <section className="studio-project-card" aria-label="Karta projektu PDF"><h3>Karta projektu</h3><p>Jedna strona A4 z całym zamówieniem: wizualizacja boiska z wybraną nawierzchnią i wzorem, parametry konstrukcji i nawierzchni oraz wycena.</p><button type="button" disabled={!!snapshot||quote.loading||(!project.arenaModel&&!project.surfaceModel&&!project.matProduct)} onClick={()=>{setMessage('');setSnapshot(project)}}>{snapshot?'Przygotowuję kartę…':'Pobierz kartę projektu (PDF)'}</button>{!project.arenaModel&&!project.surfaceModel&&!project.matProduct?<p>Wybierz model konstrukcji albo format nawierzchni, aby przygotować kartę.</p>:null}{message?<p role="status">{message}</p>:null}{snapshot?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,top:0,width:1200,height:675,overflow:'hidden',pointerEvents:'none'}}>{snapshot.matProduct&&renderCourt?renderCourt(snapshot):snapshot.constructionOnly?<PannaStudioPreview project={{...snapshot,surfaceModel:undefined,objects:[]}} studio structureOnly/>:<PannaStudioPreview project={snapshot} studio view={snapshot.arenaModel?'perspective':'aerial'}/>}</div>:null}</section>;
+ return <section className="studio-project-card" aria-label={tr("Karta projektu PDF")}><h3>{tr("Karta projektu")}</h3><p>{tr("Jedna strona A4 z całym zamówieniem: wizualizacja boiska z wybraną nawierzchnią i wzorem, parametry konstrukcji i nawierzchni oraz wycena.")}</p><button type="button" disabled={!!snapshot||quote.loading||(!project.arenaModel&&!project.surfaceModel&&!project.matProduct)} onClick={()=>{setMessage('');setSnapshot(project)}}>{tr(snapshot?'Przygotowuję kartę…':'Pobierz kartę projektu (PDF)')}</button>{!project.arenaModel&&!project.surfaceModel&&!project.matProduct?<p>{tr("Wybierz model konstrukcji albo format nawierzchni, aby przygotować kartę.")}</p>:null}{message?<p role="status">{tr(message)}</p>:null}{snapshot?<div ref={ref} aria-hidden="true" style={{position:'fixed',left:-10000,top:0,width:1200,height:675,overflow:'hidden',pointerEvents:'none'}}>{snapshot.matProduct&&renderCourt?renderCourt(snapshot):snapshot.constructionOnly?<PannaStudioPreview project={{...snapshot,surfaceModel:undefined,objects:[]}} studio structureOnly/>:<PannaStudioPreview project={snapshot} studio view={snapshot.arenaModel?'perspective':'aerial'}/>}</div>:null}</section>;
 }
