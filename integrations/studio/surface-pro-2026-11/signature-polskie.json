@@ -1,0 +1,10 @@
+[
+ {"id":"p-wycinanka","name":"Wycinanka","familyId":"pro-p-wycinanka","variant":3,"paletteId":"simultane","useCase":"gmina / dzielnica","note":"Warstwowe płatki wokół koła środkowego, jak w wycinance łowickiej. Lokalny znak, który rozpozna każdy, czytelny z drona."},
+ {"id":"p-pasiak","name":"Pasiak","familyId":"pro-p-pasiak","variant":1,"paletteId":"albers","useCase":"marka / kultura","note":"Żywe pasy różnej szerokości, lustrzane względem linii środkowej. Najprostszy w malowaniu: same proste krawędzie."},
+ {"id":"p-ceramika","name":"Ceramika","familyId":"pro-p-ceramika","variant":6,"paletteId":"nihon","useCase":"szkoła / dzieci","note":"Pawie oczka z Bolesławca z gałązkami. Każdy motyw cały w polu gry, kolory dobrane tak, żeby kropki były wyraźne."},
+ {"id":"p-mozaika","name":"Mozaika","familyId":"pro-p-mozaika","variant":3,"paletteId":"hard-edge","useCase":"miasto / plac","note":"Duże płyty z łukami, połówkami i trójkątami, w duchu powojennych mozaik. Krawędzie kolorów nie biegną wzdłuż linii gry."},
+ {"id":"p-kilim","name":"Kilim","familyId":"pro-p-kilim","variant":8,"paletteId":"stijl","useCase":"klub / turniej","note":"Schodkowe romby z tkanin góralskich i zygzak wzdłuż linii bocznych. Maluje się z siatki kwadratów."},
+ {"id":"p-neon","name":"Neon","familyId":"pro-p-neon","variant":1,"paletteId":"nightshift","useCase":"event / nocne granie","note":"Rury świetlne na ciemnych tablicach, jak warszawskie neony. Każda rura ma min. 20 cm, a między rurami zawsze jest min. 20 cm tła."},
+ {"id":"p-parzenica","name":"Parzenica","familyId":"pro-p-parzenica","variant":2,"paletteId":"ndebele","useCase":"szkoła / dzielnica","note":"Zagnieżdżone serca przy każdej bramce na tle jak sukno, medalion w kole środkowym. Haft góralski w skali boiska."},
+ {"id":"p-witraz","name":"Witraż","familyId":"pro-p-witraz","variant":2,"paletteId":"burle-marx","useCase":"park / sztuka publiczna","note":"Wielkie kwiaty i liście w ciemnej obwódce jak ołów witrażu, w duchu krakowskiej secesji."}
+]
