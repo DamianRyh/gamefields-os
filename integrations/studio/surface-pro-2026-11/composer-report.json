@@ -367,18 +367,18 @@
  },
  "pro-p-ceramika": {
   "candidates": 220,
-  "passed": 179,
-  "kept": 10,
+  "passed": 93,
+  "kept": 16,
   "rejected": {
    "thin": 0,
    "specks": 0,
    "paints": 0,
    "sym": 0,
-   "balance": 41,
+   "balance": 127,
    "lines": 0
   },
-  "modes": 5,
-  "tapeMedian": 155
+  "modes": 6,
+  "tapeMedian": 141
  },
  "pro-p-mozaika": {
   "candidates": 237,
