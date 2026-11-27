@@ -364,5 +364,20 @@
   },
   "modes": 2,
   "tapeMedian": 136
+ },
+ "pro-p-ceramika": {
+  "candidates": 660,
+  "passed": 0,
+  "kept": 0,
+  "rejected": {
+   "thin": 183,
+   "specks": 432,
+   "paints": 0,
+   "sym": 45,
+   "balance": 0,
+   "lines": 0
+  },
+  "modes": 0,
+  "tapeMedian": 0
  }
 }
