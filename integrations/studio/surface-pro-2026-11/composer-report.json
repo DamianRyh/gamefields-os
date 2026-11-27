@@ -381,19 +381,19 @@
   "tapeMedian": 155
  },
  "pro-p-mozaika": {
-  "candidates": 660,
-  "passed": 3,
-  "kept": 3,
+  "candidates": 237,
+  "passed": 90,
+  "kept": 36,
   "rejected": {
-   "thin": 657,
-   "specks": 0,
+   "thin": 126,
+   "specks": 1,
    "paints": 0,
    "sym": 0,
    "balance": 0,
-   "lines": 0
+   "lines": 20
   },
-  "modes": 1,
-  "tapeMedian": 154
+  "modes": 3,
+  "tapeMedian": 166
  },
  "pro-p-kilim": {
   "candidates": 220,
