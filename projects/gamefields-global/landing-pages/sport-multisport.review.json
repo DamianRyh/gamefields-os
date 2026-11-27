@@ -1,0 +1,11 @@
+{
+  "sourceWpId": 3688,
+  "translatedNodes": 69,
+  "translatedAttributes": 0,
+  "missing": [],
+  "unmappedAttrs": [],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "EN routes, structured data and browser QA pending; verify safety and technical claims."
+  ]
+}

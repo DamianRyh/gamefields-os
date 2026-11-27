@@ -1,0 +1,13 @@
+{
+  "sourceWpId": 3700,
+  "translatedNodes": 59,
+  "translatedAttributes": 0,
+  "missing": [
+    "Pokaż teren i grupę użytkowników. Zaprojektujemy strefę jako część spójnego kompleksu."
+  ],
+  "unmappedAttrs": [],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "EN routes, structured data and browser QA pending; verify safety and technical claims."
+  ]
+}
