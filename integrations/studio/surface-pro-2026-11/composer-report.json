@@ -430,11 +430,11 @@
   "passed": 0,
   "kept": 0,
   "rejected": {
-   "thin": 660,
-   "specks": 0,
+   "thin": 115,
+   "specks": 127,
    "paints": 0,
    "sym": 0,
-   "balance": 0,
+   "balance": 418,
    "lines": 0
   },
   "modes": 0,

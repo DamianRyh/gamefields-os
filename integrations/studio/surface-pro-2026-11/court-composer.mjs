@@ -499,15 +499,16 @@ function neon(R, h) {
 // Parzenica — Zakopane embroidery: nested hearts as filled bands (no ground slivers between lines), tip to the centre,
 // with two curls kept clear of the heart; one heart at each goal.
 function parzenica(R, h) {
-  const cy = h / 2; const sz = pickR(R, [4.4, 4.9, 5.3]); /* tip ends before the centre circle: 70 + 30·sz ≤ 230 */ const nest = intR(R, 3, 5); const bw = pickR(R, [16, 20, 24]); const curls = R() < 0.75; let half = '';
+  const cy = h / 2; const sz = pickR(R, [4.4, 4.9, 5.3]); /* tip ends before the centre circle: 70 + 30·sz ≤ 230 */ const nest = intR(R, 3, 5); const bw = pickR(R, [16, 20, 24]); const curls = R() < 0.5; /* square or rounded cloth */ let half = '';
   const hx = 70 + 13 * sz, ox = hx + 3 * sz; // scale about a point toward the tip so every band keeps some width
   const heart = (k) => { const pp = []; for (let i = 0; i < 72; i++) { const t = (i / 72) * TAU; const x = 16 * Math.sin(t) ** 3, y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t); const px = hx - y * sz, py = cy + x * sz; pp.push([ox + (px - ox) * k, cy + (py - cy) * k]); } return pp; };
   const step = bw / (16 * sz);
   for (let n = 0; n < nest; n++) half += P(heart(1 - n * step * 1.15), n === 0 ? 1 : 1 + (n % 3));
   half += Ci(ox, cy, Math.max(14, bw * 0.9), 4);
-  // curls above and below the lobes, clear of the heart and of the goal line
-  if (curls) for (const sgn of [-1, 1]) { const pp = []; const cx0 = hx - 4 * sz, cy0 = cy + sgn * (16 * sz + bw + 22 + 3 * sz); for (let i = 0; i <= 28; i++) { const t = i / 28, a = Math.PI * 1.5 * t, rr = (1 - t * 0.55) * 4.2 * sz; pp.push([cx0 + t * 8 * sz + Math.cos(a) * rr * 0.6, cy0 - sgn * Math.sin(a) * rr]); } half += St('M' + pp.map((p) => f(p[0]) + ' ' + f(p[1])).join('L'), 1 + (nest % 3), bw); }
-  return { g: half + mirX(half), mode: 'parz' + (curls ? 'c' : '') + nest };
+  // the cloth: a panel in a second tone behind each heart (as the embroidery sits on the trouser cloth), and a medallion in the centre
+  const panelW = hx + 17 * sz + pickR(R, [28, 44]), panelH = 2 * (16 * sz + pickR(R, [34, 50])); const cloth = Rc(0, cy - panelH / 2, panelW, panelH, 4, curls ? 0 : 36);
+  const medal = Ci(300, cy, pickR(R, [56, 70]), 2) + Ci(300, cy, 34, 4);
+  return { g: cloth + mirX(cloth) + medal + half + mirX(half), mode: 'parz' + (curls ? 'r' : 'o') + nest };
 }
 
 // Witraż — Kraków Art Nouveau stained glass: big flowers and leaves, every field outlined in dark "lead".
