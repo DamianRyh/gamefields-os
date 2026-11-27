@@ -648,7 +648,7 @@ export const proFamilies:PatternFamily[]=[
    "pro",
    "play"
   ],
-  "baseComplexity": 1,
+  "baseComplexity": 2,
   "renderer": "pro"
  },
  {

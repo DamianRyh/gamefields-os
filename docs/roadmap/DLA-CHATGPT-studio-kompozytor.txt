@@ -1,4 +1,4 @@
-Polecenie dla ChatGPT: Studio — Kompozytor I, II i III (Murale), nowy model wzorów nawierzchni, 26.11.2026
+Polecenie dla ChatGPT: Studio — Kompozytor I, II i III (Murale) oraz Plan malowania, 27.11.2026
 
 Opublikuj Studio z najnowszego commita gałęzi main repozytorium DamianRyh/gamefields-os (integrations/studio/canvas-editor), bez własnych zmian w kodzie.
 
@@ -9,14 +9,18 @@ Nowości: 24 nowe rodziny wzorów nawierzchni, każda z 12 wariantami wybranymi 
 - Kompozytor III — Murale (trend z boisk w USA): Wycinanki, Pola malarskie, Tkanina, Pejzaż, Flora, Wielkie słowa, Rama, Pociągnięcia.
 24 projekty: MURALE 01–08, KOMPOZYTOR II 01–08, KOMPOZYTOR 01–08 — pierwsze w edytorze nawierzchni,
 z zakładkami „Murale” i „Kompozytor”. Razem 85 rodzin, 1020 wzorów.
+Plan malowania: w podsumowaniu projektu, obok karty projektu PDF, nowa karta „Plan malowania” z przyciskiem „Pobierz plan malowania (PDF)”:
+3 strony A4 poziomo dla wykonawcy z projektu klienta (siatka co 1 m, farby w kolejności z m², warstwami, litrami i taśmą, kolejność prac).
 Zmienione pliki: lib/court-art-pro.mjs, lib/court-art-pro.d.mts, lib/pattern-library-pro.ts, lib/pattern-library.ts,
-components/studio-surface-designer.tsx; nowe: lib/court-composer.mjs, lib/court-composer.d.mts.
+components/studio-surface-designer.tsx, components/studio-workspace.tsx, lib/generated/workshop-thumbnail.mjs, package.json, testy;
+nowe: lib/court-composer.mjs, lib/court-composer.d.mts, lib/paint-plan.mjs, lib/paint-plan.d.mts, components/paint-plan-card.tsx, tests/studio-paint-plan.mjs.
 Schemat projektu, ceny, istniejące wzory i zapisane projekty bez zmian. Nie zmieniaj INTERNAL_COST_CARD ani SALES_MARGIN.
 
-Przed publikacją: tsc, build, test:studio, test:mobile.
+Przed publikacją: tsc, build, test:studio, test:mobile, test:surface, test:plan. Jeśli któraś kontrola nie przejdzie, nie publikuj i zgłoś błąd.
 Po publikacji sprawdź w edytorze nawierzchni (390 i 1440 px):
 - zakładka „Murale” pokazuje MURALE 01–08, zakładka „Kompozytor” KOMPOZYTOR II 01–08 i KOMPOZYTOR 01–08, a „Wszystkie” zaczynają się od MURALE;
 - każdy daje się wybrać, zmienić wariant (1–12), paletę i „Losowy wariant”; podgląd 3D i karta projektu PDF pokazują wzór;
 - „Wielkie słowa”: napisy są czytelne i nie wchodzą na linie boczne;
+- w podsumowaniu projektu z wzorem (np. MURALE „Pejzaż”) przycisk „Pobierz plan malowania (PDF)” otwiera druk 3 stron; przy sztucznej trawie karty nie ma;
 - stare projekty i wzory (w tym Masters i Masters II) działają jak wcześniej.
 Pokaż właścicielowi zrzuty i podaj wersję wdrożenia.
