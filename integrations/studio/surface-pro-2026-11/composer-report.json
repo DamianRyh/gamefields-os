@@ -340,10 +340,10 @@
   "passed": 90,
   "kept": 36,
   "rejected": {
-   "thin": 471,
-   "specks": 39,
+   "thin": 213,
+   "specks": 197,
    "paints": 0,
-   "sym": 27,
+   "sym": 127,
    "balance": 6,
    "lines": 0
   },
