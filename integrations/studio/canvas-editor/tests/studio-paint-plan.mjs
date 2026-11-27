@@ -32,5 +32,9 @@ try{
  const sheets=(html.match(/class="sheet"/g)||[]).length,rows=(html.match(/<tr><td>\d/g)||[]).length;
  assert.equal(sheets,3,'three A4 sheets');assert.ok(rows>=3&&rows<=6,'3–5 paints in the plan');assert.match(status,/farb, ok\. [\d,]+ l, taśma \d+ m/);assert.deepEqual(errs,[]);
  assert.match(html,/Pejzaż/,'plan names the customer\'s pattern');assert.match(html,/7,1 × 5,6 m/,'plan uses the project dimensions');
- console.log(JSON.stringify({status:'passed',sheets,rows,message:status}));
+ // scope as on the live Studio v206: no plan for round or polygonal play areas (O1 here)
+ const o1=await browser.newPage({viewport:{width:1440,height:1000}});await o1.goto(base+'/?arena=o1');await o1.locator('.panna-studio-model[data-ready=true]').waitFor({timeout:30000});
+ await o1.getByRole('button',{name:/Podsumowanie/}).first().click();await o1.getByRole('button',{name:/Pobierz kartę projektu/}).first().waitFor({timeout:20000});
+ assert.equal(await o1.getByRole('button',{name:'Pobierz plan malowania (PDF)'}).count(),0,'no paint plan on O1');
+ console.log(JSON.stringify({status:'passed',sheets,rows,message:status,o1:'no plan card'}));
 }catch(e){console.error(e);process.exitCode=1;}finally{await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}

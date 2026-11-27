@@ -225,7 +225,7 @@ FAQ = [
     ("Czy skomplikowany wzór da się dobrze namalować?",
      "Wzory w Studiu są projektowane do malowania: tylko płaskie kształty, gradient to schodkowe pasy. Każdy wzór Kompozytora i Murali jest sprawdzany automatycznie: najwęższy fragment ma co najmniej ok. 20 cm na boisku 15 × 10 m, wzór używa 3–5 farb, nie ma drobnych plamek, a obie połowy są symetryczne albo, w muralach, równie bogate. Do Studia trafiają tylko wzory, które przeszły kontrolę."),
     ("Czy wykonawca dostanie plan malowania?",
-     "Tak. W podsumowaniu projektu w Studio pobierasz plan malowania PDF: rysunek z siatką co 1 m do wytyczenia, farby w kolejności z powierzchnią, litrami i taśmą oraz kolejność prac. Liczy się z Twojego wzoru i wymiarów, więc nadaje się do przetargu albo dla własnej ekipy."),
+     "Tak, przy malowanej nawierzchni na boisku prostokątnym. W podsumowaniu projektu w Studio pobierasz plan malowania PDF: rysunek z siatką co 1 m do wytyczenia, farby w kolejności z powierzchnią, litrami i taśmą oraz kolejność prac. Liczy się z Twojego wzoru i wymiarów, więc nadaje się do przetargu albo dla własnej ekipy. Dla boisk okrągłych i wielokątnych oraz projektów z dodatkowymi grafikami plan przygotowuję indywidualnie."),
     ("Czy na boisku można umieścić logotypy?",
      "Tak. Branding może być w polu gry, na bandach, w strefach poza boiskiem albo na wyposażeniu. Projektuję go tak, żeby nie zaburzał czytelności gry."),
     ("Czy wykonujecie same linie sportowe?",
@@ -309,7 +309,7 @@ body = f"""
 </div></section>
 
 <section class="gfa-sec" id="plan"><div class="w">
-  <div class="gfa-head"><div><p class="k">Dla wykonawcy</p><h2 class="d">Plan malowania z Twojego wzoru.</h2></div><p>W podsumowaniu projektu w Studio pobierasz plan malowania PDF: trzy strony A4, które wykonawca bierze na plac. Liczy się z Twojego wzoru, kolorów i wymiarów.</p></div>
+  <div class="gfa-head"><div><p class="k">Dla wykonawcy</p><h2 class="d">Plan malowania z Twojego wzoru.</h2></div><p>Przy malowanym boisku prostokątnym pobierasz w podsumowaniu projektu w Studio plan malowania PDF: trzy strony A4, które wykonawca bierze na plac. Liczy się z Twojego wzoru, kolorów i wymiarów.</p></div>
   <div class="gfb-plan">
     <figure><span aria-hidden="true">{PREV["plan"]}</span><figcaption>Przykład: Pejzaż na boisku 15 × 10 m z siatką co 1 m (pełna linia co 5 m) do wytyczenia sznurkiem kredowym.</figcaption></figure>
     <div>
