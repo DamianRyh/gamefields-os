@@ -46,7 +46,7 @@ export function JourneyGuide({project,onOpen}:{project:Project;onOpen:(step:Jour
   const onStep=(e:Event)=>{const step=(e as CustomEvent).detail?.step;if(JOURNEY.some(j=>j.id===step))done(step)};
   const onShare=(e:Event)=>{const n=(e as CustomEvent).detail?.name;if(['share_png_download','share_film_download','share_native_open','share_link_copy'].includes(n))done('share')};
   const onSummary=()=>{const d=state.current.done;
-   if(!d.includes('card'))offer({id:'card-in-summary',guide:'marek',text:'Pobierz kartę projektu PDF: wymiary, nawierzchnia i cena na jednej stronie. Przyda się do rozmowy z zarządcą albo urzędem.',action:'Pobierz kartę PDF',step:'card'});
+   if(!d.includes('card'))offer({id:'card-in-summary',guide:'marek',text:'Pobierz kartę projektu PDF: wymiary, nawierzchnia i cena na jednej stronie. Pod nią jest plan malowania dla wykonawcy: siatka, farby, litry i taśma.',action:'Pobierz kartę PDF',step:'card'});
    if(!d.includes('financing'))offer({id:'financing-in-summary',guide:'marek',text:'Boisko może sfinansować gmina. Zgłoś je do budżetu obywatelskiego: zrobimy stronę kampanii z licznikiem poparcia.',action:'Zobacz finansowanie',step:'financing'});};
   const down=()=>{busy.current=true},up=()=>{busy.current=false};
   window.addEventListener('gf-journey',onStep);window.addEventListener('gf-share',onShare);window.addEventListener('gf-journey-summary',onSummary);

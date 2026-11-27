@@ -1,6 +1,11 @@
 Polecenie dla ChatGPT: Studio — Kompozytor I, II i III (Murale) oraz Plan malowania, 27.11.2026
 
-Opublikuj Studio z najnowszego commita gałęzi main repozytorium DamianRyh/gamefields-os (integrations/studio/canvas-editor), bez własnych zmian w kodzie.
+Opublikuj Studio z najnowszego commita gałęzi claude/upbeat-archimedes-uy9b03 repozytorium DamianRyh/gamefields-os
+(integrations/studio/canvas-editor), bez własnych zmian w kodzie. (Po scaleniu PR #129 to samo jest na main.)
+
+WAŻNE: Studio na żywo (27.11) zawiera funkcje z dwóch gałęzi: tej i claude/ecstatic-hamilton-dgjvt8 (kampanie budżetu
+obywatelskiego, Share Your Field, „Twoja ścieżka”, Projekt miesiąca). Ta gałąź ma obie scalone, więc nic nie znika.
+Nie publikuj z claude/ecstatic-hamilton-dgjvt8 ani ze starego main, bo usuniesz Murale albo kampanie.
 
 Nowości: 24 nowe rodziny wzorów nawierzchni, każda z 12 wariantami wybranymi automatycznie spośród kandydatów sprawdzonych na rastrze
 (min. 20 cm szerokości, 3–5 farb, brak plamek; symetria albo, w muralach, równowaga obu połówek boiska).
@@ -9,6 +14,8 @@ Nowości: 24 nowe rodziny wzorów nawierzchni, każda z 12 wariantami wybranymi 
 - Kompozytor III — Murale (trend z boisk w USA): Wycinanki, Pola malarskie, Tkanina, Pejzaż, Flora, Wielkie słowa, Rama, Pociągnięcia.
 24 projekty: MURALE 01–08, KOMPOZYTOR II 01–08, KOMPOZYTOR 01–08 — pierwsze w edytorze nawierzchni,
 z zakładkami „Murale” i „Kompozytor”. Razem 85 rodzin, 1020 wzorów.
+Wycena: linia „Malowanie” podaje wybrany wzór klienta (np. „Wzór: Pejzaż, wariant 1. Z pomiaru wzoru: 5 farb, ok. 104 m taśmy.”).
+Podpowiedź Marka przy karcie PDF wspomina plan malowania.
 Plan malowania: w podsumowaniu projektu, obok karty projektu PDF, nowa karta „Plan malowania” z przyciskiem „Pobierz plan malowania (PDF)”:
 3 strony A4 poziomo dla wykonawcy z projektu klienta (siatka co 1 m, farby w kolejności z m², warstwami, litrami i taśmą, kolejność prac).
 Zmienione pliki: lib/court-art-pro.mjs, lib/court-art-pro.d.mts, lib/pattern-library-pro.ts, lib/pattern-library.ts,
@@ -22,5 +29,6 @@ Po publikacji sprawdź w edytorze nawierzchni (390 i 1440 px):
 - każdy daje się wybrać, zmienić wariant (1–12), paletę i „Losowy wariant”; podgląd 3D i karta projektu PDF pokazują wzór;
 - „Wielkie słowa”: napisy są czytelne i nie wchodzą na linie boczne;
 - w podsumowaniu projektu z wzorem (np. MURALE „Pejzaż”) przycisk „Pobierz plan malowania (PDF)” otwiera druk 3 stron; przy sztucznej trawie karty nie ma;
+- „Twoja ścieżka”, kampania BO, Share Your Field i Projekt miesiąca działają jak przed wdrożeniem;
 - stare projekty i wzory (w tym Masters i Masters II) działają jak wcześniej.
 Pokaż właścicielowi zrzuty i podaj wersję wdrożenia.
