@@ -1,0 +1,324 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "name": "Gamefields panna and street football courts",
+      "url": "https://www.gamefields.eu/en/street-football-courts/",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Product",
+            "name": "Panna Cage 90",
+            "sku": "GF-CT-005",
+            "url": "https://www.gamefields.eu/product/panna-octa-cage-90/",
+            "image": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-1200.webp",
+            "description": "A low, visually open arena. One tier of mesh panels around a circular playing area.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Gamefields"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "PLN",
+              "price": 36000,
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 36000,
+                "priceCurrency": "PLN",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.gamefields.eu/product/panna-octa-cage-90/"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Product",
+            "name": "Panna Play",
+            "sku": "GF-CT-002",
+            "url": "https://www.gamefields.eu/product/panna-play/",
+            "image": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-play-1200.webp",
+            "description": "Circular structure with perforated panels of varying heights and two goals.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Gamefields"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "PLN",
+              "price": 40000,
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 40000,
+                "priceCurrency": "PLN",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.gamefields.eu/product/panna-play/"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Product",
+            "name": "Panna Ring",
+            "sku": "GF-CT-001",
+            "url": "https://www.gamefields.eu/product/panna-ring/",
+            "image": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-ring-1200.webp",
+            "description": "Compact panna arena. Circular boards, two goals and a clear format for 1v1 play.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Gamefields"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "PLN",
+              "price": 40000,
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 40000,
+                "priceCurrency": "PLN",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.gamefields.eu/product/panna-ring/"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Product",
+            "name": "Panna Octa",
+            "sku": "GF-CT-008",
+            "url": "https://www.gamefields.eu/product/panna-octa/",
+            "image": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-octa-1200.webp",
+            "description": "Distinctive octagonal arena. Bar panels and two opposing goal modules.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Gamefields"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "PLN",
+              "price": 49000,
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 49000,
+                "priceCurrency": "PLN",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.gamefields.eu/product/panna-octa/"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "Product",
+            "name": "Panna Grid",
+            "sku": "GF-CT-007",
+            "url": "https://www.gamefields.eu/product/panna-grid/",
+            "image": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-grid-1200.webp",
+            "description": "Compact rectangular structure with bar panels, goals and an entrance.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Gamefields"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "PLN",
+              "price": 51000,
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 51000,
+                "priceCurrency": "PLN",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.gamefields.eu/product/panna-grid/"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "Product",
+            "name": "Panna Cage 180",
+            "sku": "GF-CT-006",
+            "url": "https://www.gamefields.eu/product/panna-octa-cage-180/",
+            "image": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage180-1200.webp",
+            "description": "The same structural family, with two tiers of panels. Higher enclosure around the playing area.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Gamefields"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "PLN",
+              "price": 58000,
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 58000,
+                "priceCurrency": "PLN",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.gamefields.eu/product/panna-octa-cage-180/"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "Product",
+            "name": "Panna Court",
+            "sku": "GF-CT-003",
+            "url": "https://www.gamefields.eu/product/panna-court/",
+            "image": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-court-1200.webp",
+            "description": "Rectangular format with rounded corners. More length for play and perforated boards.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Gamefields"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "PLN",
+              "price": 69000,
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 69000,
+                "priceCurrency": "PLN",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.gamefields.eu/product/panna-court/"
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "Product",
+            "name": "Street Arena 15",
+            "sku": "GF-CT-004",
+            "url": "https://www.gamefields.eu/product/street-arena-15/",
+            "image": "https://www.gamefields.eu/wp-content/uploads/2026/11/gf-street15-1200.webp",
+            "description": "The largest format in the collection. Two goals, smooth unlettered boards and extensive customisation options.",
+            "brand": {
+              "@type": "Brand",
+              "name": "Gamefields"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "PLN",
+              "price": 100000,
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": 100000,
+                "priceCurrency": "PLN",
+                "valueAddedTaxIncluded": false
+              },
+              "url": "https://www.gamefields.eu/product/street-arena-15/"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Gamefields",
+          "item": "https://www.gamefields.eu/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Panna and street football courts",
+          "item": "https://www.gamefields.eu/en/street-football-courts/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.gamefields.eu/en/street-football-courts/#pytania",
+      "inLanguage": "en-GB",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does a panna court cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Structures range from PLN 36,000 excluding VAT (Panna Cage 90) to PLN 100,000 excluding VAT (Street Arena 15). With a concrete slab and painting, Panna Play, for example, starts at PLN 51,000 excluding VAT. Installation, transport and site preparation are quoted after reviewing site photos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is included in the structure price?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The structure with goals in the basic configuration and standard colour. Surfacing, installation, transport and graphics are excluded. The price with surface adds a 12 cm concrete slab with sub-base and single-colour painting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does panna differ from 3v3 street football?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Panna is 1v1 play in a small enclosed arena: technique and playing the ball between an opponent's legs matter. 3v3 street football is fast team play on a larger boarded court, represented in our range by the 15 × 10 m Street Arena 15."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much space does a panna court need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The smallest arenas are approximately 5 m in diameter, and the surface area with a 10% allowance starts at 21.5 m² (Panna Ring). A 3v3 court measures 15 × 10 m. Additional safety space is needed around it. Check your site dimensions in the “Will it fit?” planner."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which arena is best for a school or residential community?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For schools and residential communities I usually recommend Panna Cage 90 (low and visually open) and Panna Play; for municipalities and parks, Panna Octa; for clubs and academies, Panna Cage 180 with a higher enclosure. The final choice depends on the site and age group."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I see the model before ordering?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. View each model in 3D, then choose the frame colour, surface and pattern in Studio and see the price immediately. Download the design as a PDF project sheet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long will the arena last?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Panna Ring has stood at the OSiR Orlik facility in Grodzisk Mazowiecki for 10 years without damage. I provide a 12-month warranty and ongoing support after handover."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can an arena be rented for an event?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Mobile event arena: rental and sale, from PLN 27,000 excluding VAT. It has been used at tournaments, championships and brand activations."
+          }
+        }
+      ]
+    }
+  ]
+}

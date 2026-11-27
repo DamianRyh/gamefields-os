@@ -371,7 +371,7 @@
 var st={shape:'all',h:'all',a:'all'};
 function ok(li){var a=parseFloat(li.getAttribute('data-a'));if(st.shape!=='all'){if(li.getAttribute('data-shape')!==st.shape)return false}
 if(st.h!=='all'){if(li.getAttribute('data-h')!==st.h)return false}if(st.a==='s'){if(a>40)return false}if(st.a==='m'){if(a<=40){return false}if(a>120)return false}if(st.a==='l'){if(a<=120)return false}return true}
-function render(){var n=0;items.forEach(function(li){var v=ok(li);li.hidden=!v;if(v)n++});cnt.textContent=n+(n===1?' model':(n>1?(n<5?' modele':' modeli'):' modeli'));empty.hidden=n>0}
+function render(){var n=0;items.forEach(function(li){var v=ok(li);li.hidden=!v;if(v)n++});cnt.textContent=n+(n===1?' model':' models');empty.hidden=n>0}
 box.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){var g=b.getAttribute('data-g');st[g]=b.getAttribute('data-v');box.querySelectorAll('button[data-g='+g+']').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});render()})});render();})();</script>
 </div>
 <!-- /wp:html -->

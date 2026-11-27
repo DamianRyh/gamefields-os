@@ -63,5 +63,197 @@
     "source": "autentycznosc-2026-11/damian-gawrych.html",
     "proposed_path": "/en/damian-gawrych/",
     "status": "pending"
+  },
+  {
+    "wp_id": 3465,
+    "source_path": "/boiska-street-football/",
+    "proposed_path": "/en/street-football-courts/",
+    "review_file": "street-football.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3687,
+    "source_path": "/malowanie-boisk/",
+    "proposed_path": "/en/court-painting/",
+    "review_file": "painting.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3715,
+    "source_path": "/o-nas/",
+    "proposed_path": "/en/about-us/",
+    "review_file": "about.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3726,
+    "source_path": "/projektuj-i-wybuduj-boisko/",
+    "proposed_path": "/en/design-and-build/",
+    "review_file": "design-build.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3724,
+    "source_path": "/eventy-sportowe/",
+    "proposed_path": "/en/sports-events/",
+    "review_file": "sports-events.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 4633,
+    "source_path": "/dofinansowanie-boisk/",
+    "proposed_path": "/en/sports-court-funding/",
+    "review_file": "funding.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 4634,
+    "source_path": "/realizacje-dla-miast/",
+    "proposed_path": "/en/city-projects/",
+    "review_file": "city-projects.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 4629,
+    "source_path": "/jak-powstaje-arena/",
+    "proposed_path": "/en/how-an-arena-is-built/",
+    "review_file": "arena-building.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 4630,
+    "source_path": "/koncepcje/",
+    "proposed_path": "/en/concepts/",
+    "review_file": "concepts.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 4631,
+    "source_path": "/sztuka-z-gry/",
+    "proposed_path": "/en/art-from-play/",
+    "review_file": "art-from-play.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3964,
+    "source_path": "/os/",
+    "proposed_path": "/en/os/",
+    "review_file": "os.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3695,
+    "source_path": "/boiska-do-koszykowki/",
+    "proposed_path": "/en/basketball-courts/",
+    "review_file": "sport-basketball.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3696,
+    "source_path": "/boiska-do-pilki-noznej/",
+    "proposed_path": "/en/football-courts/",
+    "review_file": "sport-football.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3697,
+    "source_path": "/korty-padel/",
+    "proposed_path": "/en/padel-courts/",
+    "review_file": "sport-padel.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3698,
+    "source_path": "/korty-tenisowe/",
+    "proposed_path": "/en/tennis-courts/",
+    "review_file": "sport-tennis.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3699,
+    "source_path": "/boiska-do-siatkowki/",
+    "proposed_path": "/en/volleyball-courts/",
+    "review_file": "sport-volleyball.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3700,
+    "source_path": "/street-workout/",
+    "proposed_path": "/en/street-workout/",
+    "review_file": "sport-street-workout.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3688,
+    "source_path": "/boiska-wielofunkcyjne/",
+    "proposed_path": "/en/multi-use-courts/",
+    "review_file": "sport-multisport.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3717,
+    "source_path": "/baza-wiedzy/",
+    "proposed_path": "/en/knowledge-hub/",
+    "review_file": "knowledge.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3710,
+    "source_path": "/ile-kosztuje-budowa-boiska-sportowego/",
+    "proposed_path": "/en/sports-court-construction-cost/",
+    "review_file": "guide-cost.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3711,
+    "source_path": "/budowa-boiska-krok-po-kroku/",
+    "proposed_path": "/en/court-construction-step-by-step/",
+    "review_file": "guide-process.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3712,
+    "source_path": "/jak-wybrac-nawierzchnie-sportowa/",
+    "proposed_path": "/en/choosing-sports-surfaces/",
+    "review_file": "guide-surface.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3713,
+    "source_path": "/renowacja-czy-budowa-nowego-boiska/",
+    "proposed_path": "/en/renovate-or-build-a-new-court/",
+    "review_file": "guide-renovation.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
+  },
+  {
+    "wp_id": 3714,
+    "source_path": "/wymiary-boiska-wielofunkcyjnego/",
+    "proposed_path": "/en/multi-use-court-dimensions/",
+    "review_file": "guide-dimensions.review.html",
+    "status": "proposed-unpublished",
+    "live_verified": false
   }
 ]

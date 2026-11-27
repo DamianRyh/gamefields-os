@@ -9,6 +9,8 @@
   "unmappedAttrs": [],
   "protectedIdentical": true,
   "releaseBlocked": [
-    "Compare current WordPress and approved Studio catalogue. Historical rental and purchase price ambiguity retained. Verify commercial and safety claims, dynamic filters, schema, routes and browser QA."
-  ]
+    "Compare current WordPress and approved Studio catalogue. Historical rental and purchase price ambiguity retained. Verify commercial and safety claims, dynamic filter browser QA, proposed EN route and product URL mapping. Schema review not embedded."
+  ],
+  "dynamicTranslatedStrings": 1,
+  "schemaReview": "street-football.schema-en.review.json"
 }
