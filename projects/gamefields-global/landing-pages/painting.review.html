@@ -401,7 +401,7 @@
   <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Send court photos →</a><a class="gfa-btn alt" href="/studio/">Design a pattern ↗</a></div>
 </div></section>
 <script>(function(){var box=document.querySelector('.gfb [data-qc]');if(!box)return;var a=box.querySelector('input'),outs=document.querySelectorAll('.gfb [data-r]');
-function fmt(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')+'\u00a0zł'}
+function fmt(n){return 'PLN '+new Intl.NumberFormat('en-GB',{maximumFractionDigits:0}).format(Math.round(n))}
 function render(){var v=Math.max(0,parseFloat(String(a.value).replace(',','.'))||0);outs.forEach(function(o){var r=+o.getAttribute('data-r');o.textContent=v?fmt(Math.ceil(Math.round(v*r*100)/10000)*100):'—'})}
 box.querySelectorAll('[data-a]').forEach(function(b){b.addEventListener('click',function(){a.value=b.getAttribute('data-a');box.querySelectorAll('[data-a]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});render()})});
 a.addEventListener('input',function(){box.querySelectorAll('[data-a]').forEach(function(x){x.setAttribute('aria-pressed','false')});render()});render();})();</script>

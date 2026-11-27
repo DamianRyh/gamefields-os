@@ -1,0 +1,121 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://www.gamefields.eu/en/court-painting/#usluga",
+      "name": "Court painting and graphics",
+      "serviceType": "Court painting, court design and graphics",
+      "url": "https://www.gamefields.eu/en/court-painting/",
+      "inLanguage": "en-GB",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Poland"
+      },
+      "provider": {
+        "@id": "https://www.gamefields.eu/#studio"
+      },
+      "description": "Court painting using rubber-granulated sports paints: refreshes, markings, Signature and Masters II patterns from Studio 3D, and branding.",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "PLN",
+        "lowPrice": 78,
+        "highPrice": 183,
+        "offerCount": 4,
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "unitText": "m²",
+          "valueAddedTaxIncluded": false
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Gamefields",
+          "item": "https://www.gamefields.eu/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Court painting",
+          "item": "https://www.gamefields.eu/en/court-painting/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.gamefields.eu/en/court-painting/#pytania",
+      "inLanguage": "en-GB",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does court painting cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From PLN 78/m² (one colour, primer, 2 paint coats and markings) to PLN 183/m² (7+ colour pattern on a granulated base), excluding VAT. For a 28 × 15 m court (420 m²), prices start at PLN 32,760 excluding VAT. Substrate repairs are quoted after reviewing photos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can an existing concrete or asphalt court be painted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, provided the surface is stable and properly prepared: cleaning, grinding, crack filling, primer and levelling layer. I assess substrate condition from photos before selecting the technology."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you design patterns or only paint them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both. You can design your own pattern in Studio 3D (732 patterns, each with 12 variants and palettes), I can create a bespoke design or implement an approved visual identity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can complex patterns be painted accurately?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Studio patterns are designed for painting: flat shapes only, with gradients represented by stepped bands. In Masters II each band is at least approximately 20 cm on a 15 × 10 m court, the pattern uses no more than 5 paints and is symmetrical, so both halves play the same."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can logos be placed on the court?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Branding can appear on the playing area, boards, zones outside the court or equipment. I design it to preserve clarity of play."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide sports markings alone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Markings for football, basketball, 3v3 or multiple games, without necessarily changing the overall appearance. I select the marking colour (white, black or lime) for the best contrast with the surface."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does rubber-granulated paint differ from standard paint?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a flexible rubber-modified coating providing better cushioning, slip resistance and coverage of minor cracks. I apply multicolour patterns on this base."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When can painting be carried out?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On dry concrete above freezing, usually from spring to autumn. Design and quotations can be prepared earlier, including in winter."
+          }
+        }
+      ]
+    }
+  ]
+}

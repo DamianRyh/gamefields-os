@@ -1,0 +1,9 @@
+{
+  "checks": {
+    "calculatorLogicUnchanged": true,
+    "schemaOfferIdentical": true,
+    "faqCount": 8
+  },
+  "proposedUrl": "https://www.gamefields.eu/en/court-painting/",
+  "production": false
+}

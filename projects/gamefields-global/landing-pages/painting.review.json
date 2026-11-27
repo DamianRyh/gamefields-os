@@ -6,6 +6,8 @@
   "unmappedAttrs": [],
   "protectedIdentical": true,
   "releaseBlocked": [
-    "Calculator JS and schema remain unchanged in Polish. Verify source pattern count inconsistency (61 x 12 = 732 vs 732 each in 12 variants), paint specifications, prices, IP claims and mobile arena offer before publication. EN routes and browser QA pending."
-  ]
+    "Verify source pattern count inconsistency, paint specifications, prices, IP claims and mobile arena offer. Proposed EN schema route unverified; final route integration and browser QA pending."
+  ],
+  "calculatorLocale": "en-GB; PLN; identical calculation expression",
+  "schemaReview": "painting.schema-en.review.json; not embedded until EN route verified"
 }
