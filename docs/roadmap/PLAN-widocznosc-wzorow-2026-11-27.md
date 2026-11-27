@@ -43,6 +43,14 @@ Wniosek: nowa praca jest w Studiu, ale prowadzi do niej tylko jedna droga: Studi
 9. **Produkt „Projekt muralu + plan malowania”** w sklepie, dla gmin i szkół, które malują własną ekipą: projekt w Studiu, poprawki, plan malowania PDF, kolory dobrane do konkretnej farby. Cena do ustalenia.
 10. **Realizacje:** pierwsze boisko-mural z planu (zdjęcie z drona obok rysunku z planu) jako dowód, że to działa.
 
+## Postęp (27.11, po południu)
+
+- ✅ 1. Studio gotowe do wdrożenia z gałęzi `claude/upbeat-archimedes-uy9b03`. **Gałąź ma teraz scaloną `claude/ecstatic-hamilton-dgjvt8`**: Studio na żywo było zbudowane z obu, a wdrożenie jednej usunęłoby funkcje drugiej. Na scaleniu przechodzą tsc, build, test:studio, test:surface, test:plan i test:mobile.
+- ✅ 2. Wycena: linia „Malowanie” podaje wzór klienta i, dla Kompozytora i Murali, zmierzone farby i taśmę. Próg „Wzór zaawansowany” nie mówi już „Organic Flow” (Studio, oferta, sklep i strony w repo).
+- ✅ 3. Podpowiedź Marka przy karcie PDF wspomina plan malowania.
+- ✅ 4. /malowanie-boisk/ przebudowana (sekcja „Boisko jak mural.” z 8 kartami, „Plan malowania z Twojego wzoru.”, 1020 wzorów, zasady dla wszystkich kolekcji, 9 pytań). Polecenie: `DLA-CHATGPT-malowanie-murale.txt`. Zestawy „Pięć miejsc” zostają na razie z Masters II, bo nowe rendery 3D muralowych zestawów trzeba zrobić w Studiu.
+- ⏳ 5–8. Strona główna, podstrona „Wzory i murale”, strony „dla kogo”, poradnik. Zmiana opisu „Organic Flow” na stronie głównej, w /nawierzchnie-sportowe/, /renowacja-boisk/ i w poradniku jest w repo i wejdzie przy najbliższym wdrożeniu tych stron.
+
 ## Kolejność i zależności
 
 1 → 2 → 3 (Studio) → 4 → 5 → 6 → 7 → 8. Kroki 9 i 10 niezależnie, po decyzji. Kroki 4–8 to strony WordPress budowane w repo jak dotychczas (`integrations/wordpress/pages/*`, `homepage/studio-2026-11/bloki`) i wdrażane poleceniem dla ChatGPT.
