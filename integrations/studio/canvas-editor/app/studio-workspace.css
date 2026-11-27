@@ -11,3 +11,7 @@
 @media(prefers-reduced-motion:reduce){.studio-shell *{transition:none!important;scroll-behavior:auto!important}}
 
 .studio-shell .studio-project-name{background:transparent;border:0;width:200px;margin:0;border-radius:0;padding:10px;color:#f5f7f9}.studio-shell input[type=range]{padding:0;margin:0;background:transparent;border:0}.studio-section>summary{font-size:15px}.studio-section>summary small{font-size:13px}.studio-current-pattern b{font-size:15px}.studio-colors p{font-size:13px}.studio-color{font-size:12px}.studio-save{font-size:12px}.studio-panel-actions button{font-size:14px}
+/* Budżet obywatelski w Podsumowaniu (2026-11-25): kampania ma osobną stronę /kampania/nowa. */
+.studio-bo-cta{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:space-between;margin:12px 0;padding:16px 18px;border-radius:16px;background:#47132d;color:#fff}
+.studio-bo-cta div{flex:1 1 260px;min-width:0}.studio-bo-cta b{font-size:16px}.studio-bo-cta p{margin:4px 0 0;font-size:14px;line-height:1.45;color:#f0e6ec}
+html body .studio-shell .studio-modal .studio-bo-cta button.studio-bo-go,html body .studio-shell .studio-bo-cta button.studio-bo-go{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:#d8f24a!important;color:#47132d!important;font-weight:800;font-size:14px;cursor:pointer}

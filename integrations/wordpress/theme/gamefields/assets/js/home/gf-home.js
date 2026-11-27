@@ -26,7 +26,9 @@
   function pressGroup(container, active) { $$('[aria-pressed]', container).forEach(function (b) { b.setAttribute('aria-pressed', String(b === active)); }); }
 
   /* ---------- NAV (mobile) ---------- */
-  var nav = $('#gfs-nav'), menuBtn = $('.menu-btn', nav);
+  var nav = $('#gfs-nav'), menuBtn = nav ? $('.menu-btn', nav) : null;
+  /* 1.0.36: the theme header is used on every page; the block's own header may be removed or hidden */
+  if (menuBtn ? nav.offsetParent !== null : false) {
   menuBtn.addEventListener('click', function () { var o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', String(o)); });
   $$('.links a', nav).forEach(function (a) { a.addEventListener('click', function () { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
 
@@ -57,6 +59,7 @@
     }, { rootMargin: '-40% 0px -55% 0px' });
     spyLinks.forEach(function (l) { var s = document.getElementById(l.getAttribute('href').slice(1)); if (s) spy.observe(s); });
   }
+  }
 
   /* ---------- HERO: 3D model + court colour ---------- */
   /* The hero keeps one navy ground (owner, 2026-11-06); only the model and its colour change. */
@@ -73,7 +76,7 @@
     { k: 'white', n: 'Biel', c: '#F4F1EE' },
     { k: 'graphite', n: 'Grafit', c: '#2B2226' }
   ];
-  var heroAssets = new URL('hero-r3/', document.currentScript.src);
+  var heroAssets = new URL('hero-r3/', document.currentScript.src), HOME_VER = document.currentScript.src.split('?v=')[1] || '1';
   function heroAsset(name) { return new URL(name, heroAssets).href; }
   function colorFactor(hex) {
     return [1, 3, 5].map(function (index) {
@@ -89,6 +92,11 @@
   ];
   var hero = $('#gfs-hero'), hero3d = $('[data-hero-3d]'), court = $('[data-hero-court]');
   var cur = { panel: COATS[1], frame: COATS[9], model: MODELS3D[0] }, mv = null;
+  /* Shared link (1.0.37): ?boisko=o1&panele=red&rama=graphite opens the hero with that model and those colours. */
+  (function () {
+    var q = new URLSearchParams(location.search), find = function (list, k) { return list.filter(function (x) { return x.k === k; })[0]; };
+    cur.model = find(MODELS3D, q.get('boisko')) || cur.model; cur.panel = find(COATS, q.get('panele')) || cur.panel; cur.frame = find(COATS, q.get('rama')) || cur.frame;
+  })();
 
   function paintHero() {
     hero.style.background = HERO.ground; hero.style.color = HERO.ink;
@@ -160,7 +168,7 @@
   }
   var heroModels = $('[data-hero-models]'), STUDIO_ARENAS = ['o1', 'p1', 'octagon'];
   MODELS3D.forEach(function (m, i) {
-    var b = el('button', { type: 'button', 'aria-pressed': String(i === 0) }, esc(m.n));
+    var b = el('button', { type: 'button', 'aria-pressed': String(m === cur.model) }, esc(m.n));
     b.addEventListener('click', function () { cur.model = m; pressGroup(heroModels, b); paintHero(); loadModel(); });
     heroModels.appendChild(b);
   });
@@ -173,6 +181,31 @@
     });
   });
   paintHero();
+  /* Share Your Field on the homepage (1.0.37): the hero's own model and colours as a Stories/Post graphic or a 6 s film.
+     gf-share-core.js (templates, MP4 writer, generated from the Studio) and gf-share.js load only on the first click. */
+  window.GFHero = {
+    state: function () { return { model: cur.model, panel: cur.panel, frame: cur.frame }; },
+    viewer: function () { return mv; },
+    start: function () { startMV(); },
+    link: function () { return location.origin + '/?' + new URLSearchParams({ boisko: cur.model.k, panele: cur.panel.k, rama: cur.frame.k }).toString() + '#gfs-hero'; },
+    studio: function () { return STUDIO_ARENAS.indexOf(cur.model.k) > -1 ? location.origin + STUDIO + '?' + new URLSearchParams({ arena: cur.model.k, panel: cur.panel.c.slice(1), frame: cur.frame.c.slice(1) }).toString() : null; },
+    ground: HERO.ground
+  };
+  (function () {
+    var cta = $('[data-hero-cta]'); if (!cta) return;
+    var box = el('div', { class: 'gf-hero-acts', style: 'display:flex;flex-wrap:wrap;gap:10px;align-items:center' });
+    cta.parentNode.insertBefore(box, cta); box.appendChild(cta);
+    var share = el('button', { type: 'button', class: 'pill gf-hero-share', 'aria-haspopup': 'dialog', style: 'background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)' }, 'Udostępnij');
+    box.appendChild(share);
+    var loading = null;
+    function load(src) { return new Promise(function (ok, no) { var s = document.createElement('script'); s.src = new URL(src, heroAssets).href + '?v=' + encodeURIComponent(HOME_VER); s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
+    share.addEventListener('click', function () {
+      startMV();
+      loading = loading || load('../gf-share-core.js').then(function () { return load('../gf-share.js'); });
+      share.setAttribute('aria-busy', 'true');
+      loading.then(function () { share.removeAttribute('aria-busy'); window.GFShare.open(share); }, function () { share.removeAttribute('aria-busy'); loading = null; });
+    });
+  })();
   var mvStarted = false;
   function startMV() {
     if (mvStarted) return; mvStarted = true;

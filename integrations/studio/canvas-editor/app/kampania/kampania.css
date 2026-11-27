@@ -1,0 +1,53 @@
+/* Strona kampanii BO. gamefields.eu identity: ink, paper, violet, lime, Inter. Mobile first. */
+.gfk{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--line:#D9CFD4;--violet:#6336F5;--lime:#D8F24A;--navy:#1F2A6B;min-height:100vh;background:var(--paper);color:var(--ink);font:16px/1.5 Inter,GHInter,Arial,sans-serif;padding:0 max(16px,3.4vw) 48px;overflow-x:hidden}
+.gfk *{box-sizing:border-box}
+.gfk h1,.gfk h2{margin:0;letter-spacing:-.04em;line-height:1;text-wrap:balance}
+.gfk-msg{display:grid;place-content:center;gap:16px;text-align:center}.gfk-msg h1{font-size:28px}
+.gfk-top{display:flex;align-items:center;gap:16px;min-height:68px;border-bottom:1px solid var(--line)}
+.gfk-logo{font-weight:800;font-size:26px;letter-spacing:-1.2px;color:var(--ink);text-decoration:none}
+.gfk-top span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.gfk-own{margin-left:auto;color:var(--violet);font-weight:700;text-decoration:none;white-space:nowrap}
+.gfk-k{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfk-hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:center;padding:clamp(24px,4vw,56px) 0}
+.gfk-hero h1{font-size:clamp(40px,6vw,88px);font-weight:900}
+.gfk-place{margin:12px 0 0;font-size:19px;font-weight:600}
+.gfk-about{margin:14px 0 0;max-width:52ch;color:#5a4652;white-space:pre-line}
+.gfk-org{margin:12px 0 0;color:var(--muted)}.gfk-org b{color:var(--ink)}
+.gfk-support{display:grid;gap:12px;margin-top:24px;padding:20px 22px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 18px 40px -28px #47132d66}
+.gfk-count{display:flex;align-items:baseline;gap:10px}.gfk-count b{font-size:clamp(48px,6vw,72px);font-weight:900;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}.gfk-count span{font-size:18px;font-weight:600;color:var(--muted)}
+.gfk-btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 26px;border-radius:999px;border:0;background:var(--ink);color:#fff;font:inherit;font-weight:800;font-size:17px;text-decoration:none;cursor:pointer;transition:transform .15s ease}
+.gfk-btn:hover{transform:translateY(-1px)}.gfk-btn:disabled{opacity:.6}
+.gfk-btn.is-on{background:#E9FBE7;color:#1D6B33;border:2px solid #3FA34D}
+.gfk-lime{background:var(--lime);color:var(--navy)}
+.gfk-note{margin:0;font-size:13.5px;color:var(--muted)}
+.gfk-3d{position:relative;border-radius:22px;background:linear-gradient(160deg,#fff,#ece6ef);overflow:hidden;min-height:420px}
+.gfk-3d>*:first-child{height:100%;min-height:420px}
+.gfk-tag{position:absolute;left:14px;bottom:14px;padding:6px 12px;border-radius:999px;background:rgba(28,9,18,.78);color:#fff;font-size:12.5px;font-weight:600}
+.gfk-vote{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;padding:24px 28px;border-radius:20px;background:var(--navy);color:#fff}
+.gfk-vote .gfk-k{color:var(--lime)}.gfk-vote h2{font-size:clamp(26px,3vw,40px)}.gfk-vote h2 small{font-size:.55em;font-weight:600;letter-spacing:0;color:rgba(255,255,255,.8)}
+.gfk-vote p{margin:8px 0 0;color:rgba(255,255,255,.85);max-width:60ch}
+.gfk-sec{padding:clamp(36px,5vw,64px) 0 0}
+.gfk-head{max-width:720px;margin-bottom:20px}.gfk-head h2{font-size:clamp(32px,4vw,56px);font-weight:900}.gfk-head p{margin:10px 0 0;color:var(--muted)}
+.gfk-quick{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.gfk-quick a,.gfk-quick button{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer}
+.gfk-quick a:hover,.gfk-quick button:hover{border-color:var(--violet)}
+.gfk-quick code{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.gfk-sharebox{container-type:inline-size;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:18px}
+.gfk .gfsm{border-top:0;padding:0}
+.gfk-3d .blender-location-label,.gfk-3d .studio-orbit-hint{display:none!important}
+.gfk-card{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin:0;padding:8px 24px;background:#fff;border:1px solid var(--line);border-radius:18px}
+.gfk-card div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid #eee6ea}
+.gfk-card dt{color:var(--muted);font-size:14px}.gfk-card dd{margin:0;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.gfk-sw{display:inline-block;width:14px;height:14px;border-radius:50%;border:1px solid #0002;margin-right:4px;vertical-align:-2px}
+.gfk-pdf{margin-top:16px}
+.gfk-cta{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;margin-top:clamp(36px,5vw,64px);padding:28px;border-radius:20px;background:var(--ink);color:#fff}
+.gfk-cta h2{font-size:clamp(24px,2.6vw,34px)}.gfk-cta p{margin:8px 0 0;color:rgba(255,255,255,.85);max-width:58ch}
+.gfk-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfk-steps li{display:grid;gap:6px;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:16px;counter-increment:s}
+.gfk-steps li::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfk-steps b{font-size:19px}.gfk-steps span{color:#5a4652;font-size:15px}
+.gfk-manage{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:40px;padding:14px 18px;border-radius:14px;border:1.5px dashed var(--line)}
+.gfk-manage span{color:var(--muted);font-size:14px}.gfk-manage button{min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.gfk-foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.gfk-foot a{color:var(--violet)}
+@media (max-width:900px){.gfk-hero,.gfk-steps{grid-template-columns:minmax(0,1fr)}.gfk-3d,.gfk-3d>*:first-child{min-height:320px}.gfk-card{grid-template-columns:minmax(0,1fr)}.gfk-top span{display:none}}
+@media (prefers-reduced-motion:reduce){.gfk-btn{transition:none}}

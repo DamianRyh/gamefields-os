@@ -1,0 +1,115 @@
+const P={name:'Panna Play',dims:'Ø 6,00 m',dimW:'6,00 m',dimH:'6,62 m',pattern:'Szachownica',
+ pal:['#FBF4EC','#F7B3CB','#EE4D96'],frame:'#F29BBE',price:'konstrukcja od 40 000 zł netto',link:'https://www.gamefields.eu/studio/?arena=o1'};
+const B={ink:'#47132D',paper:'#F4F1EE',violet:'#6336F5',lime:'#D8F24A',navy:'#1F2A6B'};
+const BG={clean:[['auto','Z projektu',null],['paper','Jasne',B.paper],['ink','Śliwka',B.ink],['navy','Granat',B.navy],['violet','Fiolet',B.violet]],
+ street:[['auto','Wzór z projektu',null],['ink','Śliwka',B.ink],['navy','Granat',B.navy]],
+ plan:[['ink','Śliwka',B.ink],['navy','Granat',B.navy],['paper','Jasne',B.paper]]};
+const img={};
+// Film: ANIM.t = time in seconds (null = still image). Text appears in order: fade + rise.
+const ANIM={t:null,n:0};const eo=x=>1-Math.pow(1-Math.min(1,Math.max(0,x)),3);
+function reveal(fn,dy=40){if(ANIM.t==null)return fn();const e=eo((ANIM.t-(.2+ANIM.n++*.12))/.55);ctx.save();ctx.globalAlpha*=e;ctx.translate(0,(1-e)*dy);fn();ctx.restore()}const F="Inter,ui-sans-serif,system-ui,sans-serif";
+const $=id=>document.getElementById(id),cv=$('cv'),ctx=cv.getContext('2d');
+const st={fmt:'story',sty:'clean',bg:'auto'};
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+const onDark=h=>lum(h)<.3;
+function mix(a,b,t){const p=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));const x=p(a),y=p(b);return '#'+x.map((v,i)=>Math.round(v+(y[i]-v)*t).toString(16).padStart(2,'0')).join('')}
+function font(w,s){return `${w} ${s}px ${F}`}
+function text(t,x,y,o={}){reveal(()=>text0(t,x,y,o))}
+function text0(t,x,y,{w=700,s=40,c=B.ink,ls=0,al='left',base='alphabetic'}={}){ctx.font=font(w,s);ctx.fillStyle=c;ctx.textAlign=al;ctx.textBaseline=base;if('letterSpacing' in ctx)ctx.letterSpacing=ls+'px';ctx.fillText(t,x,y);if('letterSpacing' in ctx)ctx.letterSpacing='0px'}
+function fit(t,maxW,w,s){ctx.font=font(w,s);while(ctx.measureText(t).width>maxW&&s>20){s-=2;ctx.font=font(w,s)}return s}
+function draw(im,cx,cy,maxW,maxH){const k=Math.min(maxW/im.width,maxH/im.height);const w=im.width*k,h=im.height*k;ctx.drawImage(im,cx-w/2,cy-h/2,w,h);return{w,h,x:cx-w/2,y:cy-h/2}}
+function rrect(x,y,w,h,r){ctx.beginPath();ctx.roundRect?ctx.roundRect(x,y,w,h,r):ctx.rect(x,y,w,h)}
+function swatches(x,y,r,cols,stroke){cols.forEach((c,i)=>{ctx.beginPath();ctx.arc(x+i*(r*2+12)+r,y,r,0,7);ctx.fillStyle=c;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=stroke;ctx.stroke()})}
+function checker(W,H,sq,rot,cols){ctx.save();ctx.translate(W/2,H/2);ctx.rotate(rot);const n=Math.ceil(Math.hypot(W,H)/sq/2)+1;
+ for(let y=-n;y<n;y++)for(let x=-n;x<n;x++){const odd=(x+y)&1;ctx.fillStyle=odd?((x*7+y*3)%5===0?cols[2]:cols[1]):cols[0];ctx.fillRect(x*sq,y*sq,sq+1,sq+1)}ctx.restore()}
+function safe(){return st.fmt==='story'?{t:250,b:340}:{t:72,b:72}}
+function bgColor(){const o=BG[st.sty].find(o=>o[0]===st.bg)||BG[st.sty][0];return o[2]}
+function caption(){return $('cap').value.trim()}
+
+function clean(W,H){const S=safe(),bg=bgColor()||mix(P.pal[0],P.pal[1],.18),dk=onDark(bg),fg=dk?B.paper:B.ink,mu=dk?'rgba(244,241,238,.72)':'#6F5A66',acc=dk?B.lime:B.violet;
+ ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+ const top=S.t+30,bot=H-S.b-24,M=64;
+ text('gamefields.',M,top+44,{w:800,s:52,c:fg,ls:-2});
+ text('DESIGNED IN GAMEFIELDS STUDIO',W-M,top+40,{w:800,s:20,c:acc,ls:2.4,al:'right'});
+ // soft halo in palette under the model
+ const story=st.fmt==='story';const cy=story?top+520:top+330;
+ const g=ctx.createRadialGradient(W/2,cy+60,40,W/2,cy+60,W*.55);g.addColorStop(0,dk?'rgba(255,255,255,.10)':mix(P.pal[1],bg,.35)+'aa');g.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=g;ctx.fillRect(0,cy-500,W,1000);
+ draw(img.hero,W/2,cy,W-2*M,story?760:500);
+ let y=story?bot-290:cy+330;
+ const cap=caption();if(cap){text(cap.toUpperCase(),M,y-70,{w:800,s:22,c:acc,ls:2.4});}
+ text(P.name,M,y+(story?40:20),{w:800,s:fit(P.name,W-2*M,800,story?112:92),c:fg,ls:-4});
+ y+=story?100:74;
+ text(`${P.dims} · ${P.pattern}`,M,y,{w:500,s:30,c:mu});
+ swatches(W-M-3*(18*2+12)+12,y-10,18,[...P.pal],dk?'rgba(255,255,255,.4)':'rgba(71,19,45,.25)');
+ if($('price').checked){y+=48;text(P.price,M,y,{w:700,s:28,c:fg})}
+ // CTA
+ text('Zaprojektuj swoje boisko',M,bot-44,{w:700,s:32,c:fg});
+ text('gamefields.eu/studio',M,bot,{w:600,s:28,c:acc});
+}
+function street(W,H){const S=safe(),bgc=bgColor(),story=st.fmt==='story';
+ if(bgc){ctx.fillStyle=bgc;ctx.fillRect(0,0,W,H);checker(W,H,170,-.24,[bgc,mix(bgc,'#ffffff',.07),mix(bgc,P.pal[2],.55)])}
+ else{checker(W,H,170,-.24,P.pal)}
+ const dark=!!bgc;const fg=dark?B.paper:B.ink;
+ const M=56,top=S.t+20;
+ // brand chip
+ reveal(()=>{ctx.font=font(800,40);const cw=ctx.measureText('gamefields.').width+68;ctx.fillStyle=B.ink;rrect(M,top,cw,74,37);ctx.fill();text0('gamefields.',M+34,top+50,{w:800,s:40,c:B.paper,ls:-1.5})});
+ // headline
+ const words=P.name.toUpperCase().split(' ');let hs=story?210:170;hs=Math.min(hs,...words.map(w=>fit(w,W-2*M,900,hs)));
+ let hy=top+90+hs*.92;
+ for(const w of words){reveal(()=>{ctx.font=font(900,hs);if('letterSpacing' in ctx)ctx.letterSpacing='-8px';ctx.lineWidth=14;ctx.lineJoin='round';ctx.strokeStyle=dark?B.ink:B.paper;ctx.strokeText(w,M,hy);ctx.fillStyle=fg;ctx.fillText(w,M,hy);if('letterSpacing' in ctx)ctx.letterSpacing='0px'},70);hy+=hs*.86}
+ // model with hard shadow
+ const bandTop=H-S.b-(story?190:170),mh=story?560:430,mw=W+60,k=Math.min(mw/img.low.width,mh/img.low.height),cy=bandTop-40-img.low.height*k/2;
+ ctx.save();ctx.shadowColor='rgba(28,9,18,.45)';ctx.shadowBlur=60;ctx.shadowOffsetY=30;const r=draw(img.low,W/2,cy,mw,mh);ctx.restore();
+ // sticker
+ const cap=caption();if(cap){const pop=ANIM.t==null?1:(x=>x<=0?0:1+2.7*Math.pow(x-1,3)+1.7*Math.pow(x-1,2))(Math.min(1,(ANIM.t-1.1)/.45));ctx.save();ctx.translate(W-M-20,cy-r.h/2-10);ctx.rotate(-.07+(1-pop)*.3);ctx.scale(pop,pop);ctx.font=font(900,44);const tw=ctx.measureText(cap.toUpperCase()).width+56;ctx.fillStyle=B.lime;rrect(-tw,-40,tw,80,10);ctx.fill();ctx.lineWidth=4;ctx.strokeStyle=B.ink;ctx.stroke();text0(cap.toUpperCase(),-tw/2,14,{w:900,s:44,c:B.ink,al:'center',ls:-1});ctx.restore()}
+ // bottom band
+ ctx.fillStyle=B.ink;ctx.fillRect(0,bandTop,W,H-bandTop);
+ text('DESIGNED IN GAMEFIELDS STUDIO',M,bandTop+62,{w:900,s:30,c:B.lime,ls:2});
+ text(`${P.dims} · ${P.pattern}${$('price').checked?' · '+P.price:''}`,M,bandTop+108,{w:500,s:26,c:'rgba(244,241,238,.8)'});
+ text('gamefields.eu/studio',M,bandTop+150,{w:700,s:28,c:B.paper});
+}
+function plan(W,H){const S=safe(),bg=bgColor()||B.ink,dk=onDark(bg),fg=dk?B.paper:B.ink,mu=dk?'rgba(244,241,238,.66)':'#6F5A66',ln=dk?'rgba(244,241,238,.22)':'rgba(71,19,45,.2)',acc=dk?B.lime:B.violet,story=st.fmt==='story';
+ ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+ // blueprint grid
+ ctx.strokeStyle=dk?'rgba(244,241,238,.06)':'rgba(71,19,45,.06)';ctx.lineWidth=1;for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,H);ctx.stroke()}for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y+.5);ctx.lineTo(W,y+.5);ctx.stroke()}
+ const M=64,top=S.t+30;
+ text('gamefields.',M,top+44,{w:800,s:52,c:fg,ls:-2});text('KARTA BOISKA',W-M,top+40,{w:800,s:20,c:acc,ls:2.4,al:'right'});
+ // top view with dimension lines
+ const area=story?680:440,cx=W/2,cy=top+(story?110:90)+area/2;
+ const r=draw(img.top,cx,cy,area,area);
+ ctx.strokeStyle=acc;ctx.fillStyle=acc;ctx.lineWidth=3;
+ const dimLine=(x1,y1,x2,y2,label,vert)=>{ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();[[x1,y1],[x2,y2]].forEach(([x,y])=>{ctx.beginPath();vert?(ctx.moveTo(x-14,y),ctx.lineTo(x+14,y)):(ctx.moveTo(x,y-14),ctx.lineTo(x,y+14));ctx.stroke()});
+  ctx.save();ctx.translate((x1+x2)/2,(y1+y2)/2);if(vert)ctx.rotate(-Math.PI/2);ctx.fillStyle=bg;ctx.font=font(800,26);const tw=ctx.measureText(label).width+24;ctx.fillRect(-tw/2,-20,tw,40);text(label,0,9,{w:800,s:26,c:acc,al:'center'});ctx.restore()};
+ const wTop=r.w*(6.00/6.62*1.0);// arena width vs height incl. goals
+ dimLine(cx-r.w*0.49,r.y+r.h+34,cx+r.w*0.49,r.y+r.h+34,P.dimW,false);
+ dimLine(r.x-34,r.y,r.x-34,r.y+r.h,P.dimH,true);
+ // inset 3D
+ const iw=story?300:240;ctx.save();ctx.shadowColor='rgba(0,0,0,.3)';ctx.shadowBlur=30;draw(img.hero,W-M-iw/2+20,r.y+r.h-iw*.32,iw,iw);ctx.restore();
+ // spec table
+ let y=r.y+r.h+(story?120:100);const rows=[['Model',P.name],['Wymiary',`${P.dimW} × ${P.dimH} (z bramkami)`],['Wzór nawierzchni',P.pattern]];
+ if($('price').checked)rows.push(['Cena',P.price]);const rh=story?62:52;
+ for(const [k,v] of rows){ctx.fillStyle=ln;ctx.fillRect(M,y-rh+16,W-2*M,1.5);text(k.toUpperCase(),M,y,{w:700,s:20,c:mu,ls:1.6});text(v,W-M,y,{w:700,s:story?30:26,c:fg,al:'right'});y+=rh}
+ ctx.fillStyle=ln;ctx.fillRect(M,y-rh+16,W-2*M,1.5);text('KOLORY',M,y,{w:700,s:20,c:mu,ls:1.6});swatches(W-M-3*(16*2+12)+12,y-8,16,[P.frame,...P.pal].slice(0,3),dk?'rgba(255,255,255,.4)':'rgba(71,19,45,.25)');
+ const bot=H-S.b-24,cap=caption();
+ if(cap)text(cap,M,bot-50,{w:800,s:34,c:fg});
+ text('Designed in Gamefields Studio · gamefields.eu/studio',M,bot,{w:600,s:24,c:acc});
+}
+function overlay(W,H){const ig=$('ig');ig.innerHTML='';if(!$('safe').checked||st.fmt!=='story')return;const S=safe(),pct=v=>v/H*100+'%';
+ ig.innerHTML=`<div class="top" style="height:${pct(S.t)}"><span class="bar"></span><span class="av"></span>twoj_profil · 2 min</div>
+ <div class="sticker" style="top:${pct(H-S.b-(st.sty==='street'?250:150))}">miejsce na naklejkę Link</div>
+ <div class="bot" style="height:${pct(S.b)}"><span class="reply">Wyślij wiadomość</span>♡ ➤</div>`}
+function render(){ANIM.n=0;const W=1080,H=st.fmt==='story'?1920:1350;cv.width=W;cv.height=H;ctx.clearRect(0,0,W,H);({clean,street,plan})[st.sty](W,H);overlay(W,H)}
+function swatchUI(){const o=BG[st.sty];if(!o.some(x=>x[0]===st.bg))st.bg=o[0][0];
+ $('sw').innerHTML=o.map(([k,l,c])=>`<label class="${c?'':'auto'}" title="${l}"><input type="radio" name="bg" id="bg-${k}" value="${k}" ${k===st.bg?'checked':''} aria-label="${l}"><span style="${c?'background:'+c:''}"></span></label>`).join('');
+ $('bghint').textContent=st.sty==='plan'?'Karta boiska wygląda jak rysunek techniczny: ciemne albo jasne tło.':st.sty==='street'?'„Wzór z projektu” to Twoja nawierzchnia jako tło całej grafiki.':'„Z projektu” bierze kolory z Twojej palety.'}
+function toast(m){$('toast').textContent=m}
+function png(){const s=$('safe').checked;return cv.toDataURL('image/png')}
+$('f').addEventListener('input',e=>{const t=e.target;if(t.name==='fmt')st.fmt=t.value;if(t.name==='sty'){st.sty=t.value;swatchUI()}if(t.name==='bg')st.bg=t.value;render()});
+$('dl').onclick=()=>{$('png').src=png();$('modal').hidden=false;toast('Grafika gotowa: '+cv.width+' × '+cv.height+' px.')};
+$('mclose').onclick=()=>{$('modal').hidden=true};$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').hidden=true};
+$('copy').onclick=async()=>{try{await navigator.clipboard.writeText(P.link);toast('Skopiowano link do projektu.')}catch{toast('Link do projektu: '+P.link)}};
+$('share').onclick=async()=>{try{await navigator.clipboard.writeText(P.link)}catch{}
+ toast('W Studio: telefon otwiera menu udostępniania z plikiem PNG (Web Share). Link jest już skopiowany, w Instagramie dodaj naklejkę „Link” i wklej. Bez Web Share zapisujemy PNG.');};
+$('close').onclick=()=>toast('W Studio „×” zamyka panel. Ustawienia zostają do następnego otwarcia.');
+Promise.all([...Object.entries(RENDERS).map(([k,s])=>new Promise(ok=>{const i=new Image();i.onload=()=>{img[k]=i;ok()};i.src=s})),
+ document.fonts?Promise.all(['500','600','700','800','900'].map(w=>document.fonts.load(`${w} 40px Inter`))).catch(()=>{}):0]).then(()=>{swatchUI();render()});

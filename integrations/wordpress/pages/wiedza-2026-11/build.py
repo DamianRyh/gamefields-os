@@ -182,7 +182,7 @@ GUIDES = [  # slug, short title, category, teaser, image, image class, backgroun
     ("ile-kosztuje-budowa-boiska-sportowego", "Ile kosztuje budowa boiska?", "Budżet",
      "Z czego składa się cena boiska i od jakich kwot zaczynają się konstrukcje i nawierzchnie Gamefields.",
      UP + "2026/11/gf-play-1200.webp", "fit", "#2457D6",
-     [f"od {zl(MOBILE['constructionFromNet'])} netto", "8 modeli z cenami"]),
+     [f"od {zl(CHEAPEST['constructionFromNet'])} netto", "8 modeli z cenami"]),
     ("budowa-boiska-krok-po-kroku", "Budowa boiska krok po kroku", "Proces",
      "Siedem etapów od analizy placu do pierwszego meczu, na przykładzie areny w Krakowie.",
      UP + "2026/11/Gamefields-x-Panna-Cage-x-Krakow-montaz-768x576.jpg", "", "", ["7 etapów", "od planu do parku"]),

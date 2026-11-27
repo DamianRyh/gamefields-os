@@ -62,18 +62,42 @@ export class ProductRenderer implements ArenaRenderer{
   this.render(moving?1:Math.min(devicePixelRatio,1.75));
   this.idle=window.setTimeout(()=>{if(!this.dead){this.render(Math.min(devicePixelRatio,2));this.canvas.dataset.renderQuality='settled';}},220);
  }
- private render(dpr:number){const W=this.canvas.clientWidth,H=this.canvas.clientHeight;if(!W||!H||this.dead)return;
+ private render(dpr:number){const W=this.canvas.clientWidth,H=this.canvas.clientHeight;if(!W||!H||this.dead||this.capture)return;
   this.canvas.dataset.renderQuality='interactive';if(this.renderer.getPixelRatio()!==dpr)this.renderer.setPixelRatio(dpr);if(W!==this.width||H!==this.height){this.renderer.setSize(W,H,false);this.width=W;this.height=H;}
   const place=this.placement,ppu=place?place.scale*W/1672:Math.min(W/8.5,H/5.8),halfW=W/(2*ppu),halfH=H/(2*ppu);
   Object.assign(this.camera,{left:-halfW,right:halfW,top:halfH,bottom:-halfH});this.camera.updateProjectionMatrix();
   const right=new THREE.Vector3(Math.cos(this.yaw),0,-Math.sin(this.yaw)),up=new THREE.Vector3(-Math.sin(this.yaw)*Math.sin(this.pitch),Math.cos(this.pitch),-Math.cos(this.yaw)*Math.sin(this.pitch));
   const target=right.multiplyScalar(place?(W/2-place.cx*W/1672)/ppu:0).add(up.multiplyScalar(place?(place.cy*H/941-H/2)/ppu:0));
   this.camera.position.copy(target).add(new THREE.Vector3(Math.sin(this.yaw)*Math.cos(this.pitch),Math.sin(this.pitch),Math.cos(this.yaw)*Math.cos(this.pitch)).multiplyScalar(50));this.camera.up.set(0,1,0);this.camera.lookAt(target);
+  this.applyAppearances();
+  this.renderer.render(this.scene,this.camera);this.canvas.dataset.renderFrames=String(++this.frames);
+ }
+ private applyAppearances(){
   for(const part of this.parts){const a=this.appearances[part.source.id];part.mesh.visible=!!a?.visible;if(!a)continue;
    const mat=part.mesh.material;mat.color.set(part.source.group==='floor'||part.key?'#ffffff':a.color);mat.roughness=part.source.group==='floor'?.94:a.finish==='metal'?.34:a.finish==='gloss'?.28:.56;mat.envMapIntensity=part.source.group==='floor'?.22:.85;mat.metalness=part.source.group==='floor'?0:a.finish==='metal'?.92:0;mat.clearcoat=part.source.group==='floor'?0:a.finish==='matte'?.12:.35;
   }
-  this.renderer.render(this.scene,this.camera);this.canvas.dataset.renderFrames=String(++this.frames);
  }
+ /* Share Your Field: shots of the same scene (real model, colours and surface) from a free perspective camera,
+    at any size, with a transparent background. beginCapture() switches the drawing buffer to the shot size and
+    pauses the interactive view; endCapture() restores it. The orbit, crane and dolly of a film are camera moves. */
+ private capture:{w:number;h:number;dpr:number;opacity:string;camera:THREE.PerspectiveCamera;box:THREE.Box3}|null=null;
+ beginCapture(width:number,height:number){if(this.dead)throw Error('Podgląd 3D jest niedostępny.');if(this.capture)this.endCapture();
+  this.applyAppearances();const box=new THREE.Box3();for(const p of this.parts)if(p.mesh.visible)box.expandByObject(p.mesh);if(box.isEmpty())throw Error('Model jeszcze się wczytuje.');
+  this.capture={w:this.width,h:this.height,dpr:this.renderer.getPixelRatio(),opacity:this.canvas.style.opacity,camera:new THREE.PerspectiveCamera(24,width/height,.1,400),box};
+  clearTimeout(this.idle);this.canvas.style.opacity='0';this.renderer.setPixelRatio(1);this.renderer.setSize(Math.round(width),Math.round(height),false);
+ }
+ /** azimuth/elevation in degrees, fov vertical in degrees, dolly 1 = framed, margin = extra room around the model. Returns the WebGL canvas (valid until the next shot). */
+ shot({azimuth,elevation,fov=24,dolly=1,margin=1}:{azimuth:number;elevation:number;fov?:number;dolly?:number;margin?:number}){const c=this.capture;if(!c||this.dead)throw Error('Brak aktywnego ujęcia.');
+  const cam=c.camera,box=c.box,size=box.getSize(new THREE.Vector3()),center=box.getCenter(new THREE.Vector3());cam.fov=fov;cam.aspect=this.canvas.width/this.canvas.height;cam.updateProjectionMatrix();
+  const R=Math.hypot(size.x,size.z)/2*.82,el=elevation*Math.PI/180,az=azimuth*Math.PI/180,hf=2*Math.atan(Math.tan(fov*Math.PI/360)*cam.aspect),vf=fov*Math.PI/180;
+  const d=Math.max(R/Math.tan(hf/2),(R*Math.sin(el)+size.y*.55*Math.cos(el))/Math.tan(vf/2)*1.08)*margin*dolly;
+  const look=new THREE.Vector3(center.x,box.min.y+size.y*.18,center.z);
+  cam.position.set(look.x+Math.sin(az)*Math.cos(el)*d,look.y+Math.sin(el)*d,look.z+Math.cos(az)*Math.cos(el)*d);cam.up.set(0,1,0);cam.lookAt(look);
+  this.renderer.render(this.scene,cam);return this.canvas;
+ }
+ /** The surface artwork currently on the floor (the same image the 3D view uses), for share backgrounds. */
+ surfaceArtwork():CanvasImageSource|null{const map=this.parts.find(p=>p.source.group==='floor'&&p.mesh.visible)?.mesh.material.map;const img=map?.image as CanvasImageSource|undefined;return img&&('width' in img)&&Number(img.width)>0?img:null}
+ endCapture(){const c=this.capture;if(!c)return;this.capture=null;if(this.dead)return;this.canvas.style.opacity=c.opacity;this.renderer.setPixelRatio(c.dpr);this.width=0;this.height=0;this.draw();}
  texture(id:string,source:string|(()=>Promise<string>),key:string,decode?:(source:string)=>Promise<HTMLImageElement>,options:{drawAfterUpload?:boolean}={}):Promise<void>{
   const active=this.jobs.get(id);if(active?.key===key&&this.parts.find(p=>p.source.id===id)?.key===key)return active.promise;
   const promise=this.applyTexture(id,source,key,decode,options),job={key,promise};this.jobs.set(id,job);const clear=()=>{if(this.jobs.get(id)===job)this.jobs.delete(id)};void promise.then(clear,clear);return promise;

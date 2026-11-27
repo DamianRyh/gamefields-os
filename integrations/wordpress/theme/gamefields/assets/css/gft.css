@@ -21,26 +21,38 @@ a:hover{color:var(--gf-violet)}
 /* ---------- header (same look as the homepage) ---------- */
 .gft-nav{position:sticky;top:var(--gf-top);z-index:60;background:var(--gf-paper);transition:box-shadow .2s ease}
 .gft-nav.stuck{box-shadow:0 1px 0 var(--gf-line)}
-.gft-nav-in{display:flex;align-items:center;gap:28px;min-height:72px;position:relative;transition:min-height .2s ease}
+.gft-nav-in{display:flex;align-items:center;gap:20px;min-height:72px;position:relative;transition:min-height .2s ease}
 .gft-nav.stuck .gft-nav-in{min-height:58px}
 .gft-logo{font-weight:800;font-size:26px;letter-spacing:-1.2px;text-decoration:none;color:var(--gf-ink);white-space:nowrap}
 .gft-nav.stuck .gft-logo{font-size:22px}
 .gft-tag{font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gf-muted);white-space:nowrap}
-.gft-links{display:flex;gap:24px;margin-left:auto;font-size:15px;font-weight:500}
+.gft-links{display:flex;gap:22px;margin-left:auto;font-size:15px;font-weight:500}
+.gft-links a,.gft-tag,.gft-cta,.gft-photo,.gft-menu{white-space:nowrap}
 .gft-links li{list-style:none}.gft-links a{position:relative;text-decoration:none;padding-block:6px;color:var(--gf-ink)}
 .gft-links a[aria-current],.gft-links .current-menu-item>a{color:var(--gf-violet)}
 .gft-links a[aria-current]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:currentColor}
 .gft-cta{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;background:var(--gf-ink);color:var(--gf-paper);font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}
 .gft-cta:hover{color:var(--gf-paper)}
+/* 1.0.36: one header on every page. Primary lead action next to Studio 3D, as on the homepage. */
+.gft-photo{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--gf-violet);color:#fff;font-weight:600;font-size:15px;text-decoration:none}
+.gft-photo:hover{background:#5126DA;color:#fff}
+.gft-photo-s{display:none}
+@media (min-width:1100px){.gft-photo + .gft-menu + .gft-cta{margin-left:-10px}}
+/* the homepage block still carries its old header: the theme header replaces it */
+#gfs-nav,#gf-culture > .skip,#gf-culture .nav-spacer{display:none!important}
 .gft-cart{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid var(--gf-ink);font-weight:600;font-size:14px;text-decoration:none}
 .gft-cart b{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:99px;background:var(--gf-lime);font-size:12px}
-.gft-ask,.gft-menu{display:none}
-@media (max-width:1280px){.gft-tag{display:none}.gft-links{gap:18px}}
+.gft-menu{display:none}
+@media (max-width:1360px){.gft-tag{display:none}}
+@media (max-width:1180px){.gft-nav-in{gap:16px}.gft-links{gap:16px}.gft-photo-l{display:none}.gft-photo-s{display:inline}}
+@media (max-width:1099px){.gft-photo{display:none}}
 @media (max-width:900px){
   .gft-nav-in{gap:8px;min-height:64px}
   .gft-cta{display:none}
-  .gft-ask{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;margin-left:auto;border-radius:999px;border:1.5px solid var(--gf-ink);font-weight:600;font-size:15px;text-decoration:none}
-  .gft-cart{margin-left:auto}.gft-cart + .gft-ask{margin-left:0}
+  .gft-photo{display:inline-flex;min-height:44px;padding:0 16px;margin-left:auto;background:transparent;color:var(--gf-ink);border:1.5px solid var(--gf-ink)}
+  .gft-photo:hover{background:transparent;color:var(--gf-violet);border-color:var(--gf-violet)}
+  .gft-photo-l{display:none}.gft-photo-s{display:inline}
+  .gft-cart{margin-left:auto}.gft-cart + .gft-photo{margin-left:0}
   .gft-menu{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--gf-violet);color:#fff;font:600 15px/1 var(--gf-font);cursor:pointer}
   .gft-links{display:none;position:absolute;left:0;right:0;top:100%;margin:0;flex-direction:column;gap:2px;padding:10px;background:#fff;box-shadow:0 16px 30px rgba(71,19,45,.15)}
   .gft-nav.open .gft-links{display:flex}

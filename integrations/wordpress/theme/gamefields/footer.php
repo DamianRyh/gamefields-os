@@ -12,7 +12,7 @@
 			</div>
 			<nav class="gft-foot-col" aria-label="Oferta">
 				<p class="gft-kicker">Oferta</p>
-				<a href="<?php echo esc_url( home_url( '/#boiska' ) ); ?>">Boiska panna i street football</a>
+				<a href="<?php echo esc_url( home_url( '/boiska-street-football/' ) ); ?>">Boiska panna i street football</a>
 				<a href="<?php echo esc_url( home_url( '/budowa-boisk-sportowych/' ) ); ?>">Budowa boisk</a>
 				<a href="<?php echo esc_url( home_url( '/renowacja-boisk/' ) ); ?>">Renowacja</a>
 				<a href="<?php echo esc_url( home_url( '/nawierzchnie-sportowe/' ) ); ?>">Nawierzchnie</a>

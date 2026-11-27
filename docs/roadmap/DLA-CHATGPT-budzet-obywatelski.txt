@@ -1,0 +1,22 @@
+DLA CHATGPT — nowa strona /budzet-obywatelski/ (2026-11-25)
+
+Kolejność: najpierw Codex wdraża Studio (docs/roadmap/DLA-CODEX-kampania-nowa.md), bo przyciski tej strony prowadzą do /studio/?kampania=nowa.
+
+1. W WordPressie utwórz nową stronę:
+   - tytuł: Budżet obywatelski;
+   - slug: budzet-obywatelski;
+   - rodzic: brak.
+2. Wklej całą zawartość pliku integrations/wordpress/pages/budzet-obywatelski-2026-11/budzet-obywatelski.html jako jeden blok „Własny HTML” (plik zaczyna się od <!-- wp:html -->). Nie zmieniaj w nim nic.
+3. SEO (Yoast/Rank Math, jeśli jest):
+   - tytuł: Boisko z budżetu obywatelskiego krok po kroku | Gamefields;
+   - opis: Zaprojektuj boisko, zrób stronę kampanii z licznikiem poparcia sąsiadów i złóż wniosek do budżetu obywatelskiego z bezpłatną pomocą Gamefields.
+   Strona ma być indeksowana.
+4. Linki do nowej strony:
+   - na /dla-miast/ w sekcji „Budżet obywatelski” dodaj pod przyciskami zdanie z linkiem: „Mieszkańcy zbierają poparcie? Strona kampanii i pomoc przy wniosku →” (href /budzet-obywatelski/);
+   - opcjonalnie dodaj w stopce, w kolumnie z Miastami, pozycję „Budżet obywatelski”.
+5. Sprawdź na żywo:
+   - przyciski „Załóż kampanię →” otwierają kreator (/studio/?kampania=nowa);
+   - „Napisz do mnie →” prowadzi do /kontakt/;
+   - na telefonie nie ma poziomego przewijania.
+
+Opiekun na stronie: Damian Gawrych, Grodzisk Mazowiecki (na prośbę właściciela). Strona nie podaje telefonu ani e-maila; kontakt przez /kontakt/.

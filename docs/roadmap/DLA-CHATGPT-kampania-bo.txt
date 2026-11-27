@@ -1,0 +1,14 @@
+Polecenie dla ChatGPT: linki do stron kampanii BO, 25.11.2026
+WYKONAJ DOPIERO, gdy właściciel potwierdzi, że Studio z kampaniami jest wdrożone (DLA-CODEX-kampania-bo.md).
+
+1. Strona /studio/ (szablon z ramką Studio): w skrypcie pod ramką jest lista parametrów przekazywanych do Studia:
+   ['arena','surface','sport','pattern','variant','palette','shadow','view','base','zone','outside','line','seed','workshop','coat','panel','frame','tool']
+   Dopisz na końcu listy 'kampania' (czyli: ...,'frame','tool','kampania']). Nic więcej w tym skrypcie nie zmieniaj.
+   Test: https://www.gamefields.eu/studio/?kampania=<id testowej kampanii od właściciela> otwiera stronę kampanii w ramce Studio.
+2. Strona /dla-miast/ i poradnik o budżecie obywatelskim (jeśli opublikowany): w sekcji o budżecie obywatelskim dodaj akapit:
+   „Zgłaszasz boisko do budżetu obywatelskiego? W Studio 3D zrobisz stronę kampanii: licznik poparcia, grafiki i film do social mediów
+   oraz kartę techniczną dla urzędu.” z przyciskiem „Zrób stronę kampanii ↗” prowadzącym do: /studio/?tool=kampania
+   (Jeśli dodanie przycisku wymaga zmiany całego bloku strony, zatrzymaj się i zapytaj właściciela.)
+3. Polityka prywatności (strona 4087): w sekcji o danych dopisz zdanie:
+   „Na stronach kampanii do budżetu obywatelskiego zapisujemy adres e-mail tylko wtedy, gdy organizator poprosi o pomoc we wniosku; służy wyłącznie do kontaktu w tej sprawie.”
+4. Podgląd, potem publikacja po akceptacji właściciela i czyszczenie cache LiteSpeed. Niczego nie usuwaj.

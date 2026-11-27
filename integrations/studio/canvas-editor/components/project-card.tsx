@@ -3,6 +3,7 @@ import {useEffect,useRef,useState,type ReactNode} from 'react';
 import type {Project} from '@/lib/project';
 import type {QuoteState} from '@/hooks/use-project-quote';
 import {PannaStudioPreview} from '@/components/blender-arena-preview';
+import {journey} from '@/lib/journey';
 
 const esc=(s:string)=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]!);
 const money=(v:number)=>new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',maximumFractionDigits:0}).format(v);
@@ -66,7 +67,7 @@ export function ProjectCard({project,sections,quote,renderCourt}:{project:Projec
   doc.open();doc.write(projectCardHtml({project:snapshot,sections,quote:quote.data,image,date}));doc.close();
   await new Promise(r=>{const img=doc.querySelector('img');if(!img||img.complete)r(null);else{img.onload=()=>r(null);img.onerror=()=>r(null);}});
   if(cancelled)return;
-  frame.contentWindow.focus();frame.contentWindow.print();
+  frame.contentWindow.focus();frame.contentWindow.print();journey('card');
   setMessage('Otworzyło się okno drukowania. Wybierz „Zapisz jako PDF”.');
   setTimeout(()=>frame.remove(),60000);
  }catch(e){if(!cancelled)setMessage((e as Error).message)}finally{if(!cancelled)setSnapshot(null)}})();return()=>{cancelled=true}},[snapshot,sections,quote.data,renderCourt]);
