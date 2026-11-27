@@ -1,0 +1,25 @@
+{
+  "sourceWpId": 3687,
+  "translatedNodes": 202,
+  "translatedAttributes": 0,
+  "missing": [],
+  "unmappedAttrs": [
+    "Panna Cage 90 z nawierzchnią Garden Plan, widok ze Studio 3D",
+    "Panna Cage 90 z nawierzchnią Garden Plan, widok ze Studio 3D",
+    "Panna Play z nawierzchnią Neo-Plastic, widok ze Studio 3D",
+    "Panna Court z nawierzchnią Ndebele, widok ze Studio 3D",
+    "Panna Cage 180 z nawierzchnią Munich Chevrons, widok ze Studio 3D",
+    "Street Arena 15 z nawierzchnią Overprint, widok ze Studio 3D",
+    "Wzór nawierzchni Organic Flow w Studio Gamefields",
+    "Wzór nawierzchni Urban Contrast w Studio Gamefields",
+    "Wzór nawierzchni Classic Lines w Studio Gamefields",
+    "Czerwień i czerń, grafika z serii Sztuka z gry w ramie",
+    "Plakat Gamefields z wzorem boiska na ścianie",
+    "Event Head &amp; Shoulders na arenie Gamefields, Złote Tarasy",
+    "Wzór Classic Lines w Studio Gamefields"
+  ],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "Calculator JS and schema remain unchanged in Polish. Verify source pattern count inconsistency (61 x 12 = 732 vs 732 each in 12 variants), paint specifications, prices, IP claims and mobile arena offer before publication. EN routes and browser QA pending."
+  ]
+}
