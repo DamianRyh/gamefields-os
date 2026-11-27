@@ -1,4 +1,5 @@
 "use client";
+import {useStudioLanguage} from "@/components/studio-language";
 
 import {useId} from "react";
 import {surfaceMaterials,isTurf,surfaceLabel} from "@/lib/surface-materials";
@@ -22,16 +23,18 @@ export function SurfaceAppearance({surface,id,width=600,height=400,length=15}:{s
 }
 
 function MaterialSample({surface,large=false}:{surface:string;large?:boolean}){
+ const {display:tr}=useStudioLanguage();
  const id=useId().replace(/:/g,"");
- return <svg className={large?"material-sample enlarged":"material-sample"} viewBox="0 0 240 135" role="img" aria-label={`Próbka struktury: ${surfaceLabel(surface)}`}><rect width="240" height="135" fill="#246f70"/><SurfaceAppearance surface={surface} id={id} width={240} height={135} length={large?1.5:3}/><path d="M0 105H240" stroke="#fff" strokeWidth="6" opacity=".95"/></svg>;
+ return <svg className={large?"material-sample enlarged":"material-sample"} viewBox="0 0 240 135" role="img" aria-label={`${tr("Próbka struktury")}: ${tr(surfaceLabel(surface))}`}><rect width="240" height="135" fill="#246f70"/><SurfaceAppearance surface={surface} id={id} width={240} height={135} length={large?1.5:3}/><path d="M0 105H240" stroke="#fff" strokeWidth="6" opacity=".95"/></svg>;
 }
 
 export function SurfaceMaterialPicker({value,onChange}:{value:string;onChange:(value:string)=>void}){
+ const {display:tr}=useStudioLanguage();
  const selected=surfaceMaterials.find(item=>item.value===value);
- return <section className="material-picker" aria-label="Materiał nawierzchni">
-  <div className="material-heading"><span className="eyebrow">MATERIAŁ / PODSTAWA PROJEKTU</span><h2>Wybierz nawierzchnię</h2><p>Ten sam projekt. Cztery różne wykończenia.</p></div>
-  <div className="material-grid">{surfaceMaterials.map(item=><button type="button" key={item.value} className={value===item.value?"material-card selected":"material-card"} aria-pressed={value===item.value} aria-label={`${item.label} — ${item.description}`} onClick={()=>onChange(item.value)}><span className="material-image"><MaterialSample surface={item.value}/><span className="material-check" aria-hidden="true">{value===item.value?"✓":""}</span></span><span className="material-copy"><b>{item.label}</b><small>{item.finish}</small></span></button>)}</div>
-  {selected?<><p className="material-selection" aria-live="polite"><b>{selected.label}</b> · {selected.detail}</p><details className="material-detail" key={value}><summary>Zobacz strukturę z bliska <span aria-hidden="true">＋</span></summary><MaterialSample surface={value} large/><p>Próbka poglądowa · fragment 1,5 m szerokości. Ostateczna faktura i kolor zależą od wybranego produktu.</p></details></>:<p className="material-selection">Projekt używa wcześniejszej nawierzchni: {value}. Wybierz kartę, aby ją zmienić.</p>}
-  <p className="material-note">Wizualizacja koncepcyjna, nie próbka produktu. Dobór systemu i możliwość wykonania wzoru wymagają potwierdzenia.</p>
+ return <section className="material-picker" aria-label={tr("Materiał nawierzchni")}>
+  <div className="material-heading"><span className="eyebrow">{tr("MATERIAŁ / PODSTAWA PROJEKTU")}</span><h2>{tr("Wybierz nawierzchnię")}</h2><p>{tr("Ten sam projekt. Cztery różne wykończenia.")}</p></div>
+  <div className="material-grid">{surfaceMaterials.map(item=><button type="button" key={item.value} className={value===item.value?"material-card selected":"material-card"} aria-pressed={value===item.value} aria-label={`${tr(item.label)} — ${tr(item.description)}`} onClick={()=>onChange(item.value)}><span className="material-image"><MaterialSample surface={item.value}/><span className="material-check" aria-hidden="true">{value===item.value?"✓":""}</span></span><span className="material-copy"><b>{tr(item.label)}</b><small>{tr(item.finish)}</small></span></button>)}</div>
+  {selected?<><p className="material-selection" aria-live="polite"><b>{tr(selected.label)}</b> · {tr(selected.detail)}</p><details className="material-detail" key={value}><summary>{tr("Zobacz strukturę z bliska")} <span aria-hidden="true">＋</span></summary><MaterialSample surface={value} large/><p>{tr("Próbka poglądowa · fragment 1,5 m szerokości. Ostateczna faktura i kolor zależą od wybranego produktu.")}</p></details></>:<p className="material-selection">{tr("Projekt używa wcześniejszej nawierzchni:")} {tr(value)}. {tr("Wybierz kartę, aby ją zmienić.")}</p>}
+  <p className="material-note">{tr("Wizualizacja koncepcyjna, nie próbka produktu. Dobór systemu i możliwość wykonania wzoru wymagają potwierdzenia.")}</p>
  </section>;
 }

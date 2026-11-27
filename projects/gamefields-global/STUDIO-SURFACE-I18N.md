@@ -1,0 +1,3 @@
+# GLOBAL-06: surface and pattern presentation
+
+Localised existing surface selection, pattern designer controls, material descriptions and finish variant labels. Existing IDs, category regex filters, pricing maths, material selection and geometry preserved. PLN remains currency. New UI labels use existing display dictionary. Pattern family metadata, preset use cases and variant names still require dictionary coverage; child controls, browser/build tests and full mobile QA pending. No CSS, model, texture, rate card or project schema changes. Static checks: {"materialValues":true,"patternFilters":true,"patternPatch":true,"variantIds":true,"optionMath":true,"geometry":true}
