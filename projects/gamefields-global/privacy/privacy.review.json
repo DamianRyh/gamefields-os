@@ -1,0 +1,10 @@
+{
+  "sourceWpId": 4087,
+  "translatedNodes": 44,
+  "missing": [],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "Source dated 21 October 2026: verify current analytics consent and retention, project sharing, optional marketing consent, providers and international transfers before publication. Translation is not a legal compliance audit.",
+    "English internal links and consent UI require staging QA."
+  ]
+}
