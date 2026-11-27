@@ -1,10 +1,8 @@
 {
   "sourceWpId": 3700,
-  "translatedNodes": 59,
+  "translatedNodes": 60,
   "translatedAttributes": 0,
-  "missing": [
-    "Pokaż teren i grupę użytkowników. Zaprojektujemy strefę jako część spójnego kompleksu."
-  ],
+  "missing": [],
   "unmappedAttrs": [],
   "protectedIdentical": true,
   "releaseBlocked": [
