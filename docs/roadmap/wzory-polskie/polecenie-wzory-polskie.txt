@@ -1,0 +1,42 @@
+POLECENIE DLA CHATGPT: Studio — Kompozytor IV „Wzory polskie”, 27.11.2026
+
+Zasada jak poprzednio: Studio na żywo (v206 albo nowsze) jest źródłem prawdy. NIE podmieniaj Studia gałęzią.
+Wprowadź tylko pliki i fragmenty z tej paczki. Jeśli cokolwiek się nie zgadza, przerwij i napisz właścicielowi.
+Jeśli polecenie z 27.11 (wersja 3, część A) nie zostało jeszcze wdrożone, wykonaj je najpierw albo napisz właścicielowi.
+
+Co dochodzi: 8 nowych rodzin wzorów z polskiej tradycji (Wycinanka, Pasiak, Ceramika, Mozaika, Kilim, Neon, Parzenica,
+Witraż), każda z 12 wariantami z puli sprawdzonej na rastrze; 8 projektów „POLSKIE 01–08” na początku edytora i nowa
+zakładka „Wzory polskie”. Razem 93 rodziny, 1116 wzorów, 80 projektów. Nowość jakości: dla tych rodzin Studio dobiera
+kolejność farb do palety tak, żeby stykające się pola miały największy kontrast (dane sąsiedztwa w puli). Starsze
+wzory wyglądają dokładnie tak jak dziś. Ceny, schemat projektu, INTERNAL_COST_CARD i SALES_MARGIN bez zmian.
+
+Źródło plików: gałąź claude/upbeat-archimedes-uy9b03, katalog integrations/studio/canvas-editor/
+https://raw.githubusercontent.com/DamianRyh/gamefields-os/claude/upbeat-archimedes-uy9b03/integrations/studio/canvas-editor/<ścieżka>
+
+KROK 1. Trzy pliki do podmiany w całości — każdy TYLKO jeśli obecny plik w Studiu ma podany SHA-256 (pierwsze 16 znaków):
+  lib/court-composer.mjs      obecny: fde815568318d37d (po wersji 3) albo affcdb93033ef910 (przed)   nowy: 0592ef56a5d64725
+  lib/court-composer.d.mts    obecny: 69edbf2f4896a809                                              nowy: d7eaaaddec6f528e
+  lib/pattern-library-pro.ts  obecny: d0437050f611ef2e                                              nowy: 4d8301fa0783623b
+  Jeśli SHA obecnego pliku jest inny: NIE podmieniaj, wypisz różnice właścicielowi.
+  (court-composer.mjs to dane i reguły wzorów: zawiera wszystko z poprzedniej wersji plus rodziny pro-p-*;
+   pattern-library-pro.ts jest generowany i dodaje eksport polishSignaturePresets.)
+
+KROK 2. Małe zmiany (łatka: latka-wzory-polskie.patch, ścieżki od integrations/studio/canvas-editor/):
+  - lib/pattern-library.ts: import polishSignaturePresets i kolejność signaturePresets = [...polishSignaturePresets, ...muralSignaturePresets, ...];
+  - components/studio-surface-designer.tsx: nowa zakładka {id:'polish',label:'Wzory polskie',test:/./,eyebrow:'POLSKIE'} przed „Murale”;
+  - testy: tests/studio-scope.mjs (1116 wzorów, 93 rodziny, 80 projektów), tests/surface-pro.mjs (68 rodzin Pro, kolejność
+    Polskie → Murale → Kompozytor → Masters → Pro, dane sąsiedztwa w puli), tests/studio-surface-designer.mjs (80 projektów,
+    93 kierunki, zakładka „Wzory polskie” z 8 projektami).
+  Jeśli fragment nie pasuje do wersji w Studiu, wprowadź ten sam sens ręcznie albo pomiń i zgłoś.
+  lib/generated/workshop-thumbnail.mjs regeneruje build — nie kopiuj go.
+
+KROK 3. Kontrole przed publikacją: tsc, build, test:studio, test:surface, test:plan, test:mobile oraz testy kampanii,
+Warsztatu i udostępniania, które są w Studiu. Wszystkie muszą przejść.
+
+KROK 4. Po publikacji (390 i 1440 px):
+  - zakładka „Wzory polskie” pokazuje POLSKIE 01–08, „Wszystkie” zaczynają się od POLSKIE 01 „Wycinanka”;
+  - każdy projekt: wybór, wariant 1–12, paleta, „Losowy wariant”; podgląd 3D i karta PDF pokazują wzór;
+  - przy zmianie palety kolory pól sąsiednich zostają kontrastowe (np. Neon: jasne rury na ciemnych tablicach);
+  - MURALE, KOMPOZYTOR, Masters i starsze wzory wyglądają jak przed wdrożeniem;
+  - P1, akryl, POLSKIE „Pasiak”: plan malowania PDF działa, w wycenie „Wzór: Pasiak, wariant 1. Z pomiaru wzoru: …”.
+  Podaj numer nowej wersji.
