@@ -1,0 +1,11 @@
+{
+  "sourceWpId": 3726,
+  "translatedNodes": 59,
+  "translatedAttributes": 0,
+  "missing": [],
+  "unmappedAttrs": [],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "EN links, schema, metadata and browser QA pending. Verify service scope and image rights."
+  ]
+}

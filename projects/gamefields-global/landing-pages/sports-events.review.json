@@ -1,0 +1,14 @@
+{
+  "sourceWpId": 3724,
+  "translatedNodes": 73,
+  "translatedAttributes": 0,
+  "missing": [],
+  "unmappedAttrs": [
+    "Zwycięzcy turnieju na podium",
+    "Pokaz gry na Tarasie przy Pałacu Kultury i Nauki"
+  ],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "EN links, schema, metadata and browser QA pending. Verify service scope and image rights."
+  ]
+}
