@@ -1,0 +1,26 @@
+{
+  "sourceCommit": "fe2f2b5e049177ea4de846d6116f68ba47947eae",
+  "reports": {
+    "body.html": {
+      "hits": 293,
+      "attrs": 65,
+      "missing": [],
+      "protectedIdentical": true
+    },
+    "kept-faq-contact.html": {
+      "hits": 34,
+      "attrs": 1,
+      "missing": [],
+      "protectedIdentical": true
+    },
+    "kept-workshop.html": {
+      "hits": 16,
+      "attrs": 1,
+      "missing": [],
+      "protectedIdentical": true
+    }
+  },
+  "releaseBlocked": [
+    "Generated catalogue placeholders, CF7, JS, SEO, EN routes and current live reconciliation; not publishable standalone."
+  ]
+}
