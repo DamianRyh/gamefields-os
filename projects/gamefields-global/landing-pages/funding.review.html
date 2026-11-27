@@ -1,0 +1,198 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfa-hero h1{font-size:clamp(52px,7vw,116px)}
+.gfa-alert{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:var(--lime);color:var(--ink);margin:0 0 12px}
+.gfa-alert h3{font-size:clamp(26px,2.8vw,42px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-alert ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.gfa-alert li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;border-bottom:1px solid rgba(71,19,45,.25);padding-bottom:10px;font-size:16px}
+.gfa-alert li b{white-space:nowrap}
+.gfa-alert small{display:block;margin-top:10px;font-size:13px;opacity:.8}
+.gfa-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-paths li{display:grid;gap:8px;align-content:start;padding:24px;background:#fff;border:1px solid var(--line)}
+.gfa-paths .m{color:var(--violet);font-weight:800;font-size:14px}
+.gfa-paths b{font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.gfa-paths span{color:var(--muted);font-size:15px;line-height:1.5}
+.gfa-paths .fit{margin-top:6px;font-size:13px;font-weight:700;color:var(--ink)}
+.gfa-check{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px}
+.gfa-check li{position:relative;padding:0 0 12px 34px;border-bottom:1px solid var(--line);font-size:17px}
+.gfa-check li::before{content:"✓";position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--violet);color:#fff;font-size:14px;display:grid;place-items:center}
+.gfa-check li small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+.gfa-band .gfa-check li{border-color:rgba(244,241,238,.2)}
+.gfa-band .gfa-check li small{color:rgba(244,241,238,.75)}
+.gfa-nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 0}
+.gfa-nums div{padding:16px;background:var(--paper);border:1px solid var(--line)}
+.gfa-nums dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-nums dd{margin:6px 0 0;font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.gfa-case h4{margin:18px 0 6px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfa-case p{margin:0;color:var(--muted);font-size:16px}
+.gfa-src{margin:0;padding:0 0 0 18px;font-size:14px;color:var(--muted)}
+.gfa-src li{margin:6px 0}
+.gfa-faq{border-top:1px solid var(--line)}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:'+';font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:'−'}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+.gfa-logos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gfa-logos li{display:grid;place-items:center;height:110px;padding:12px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.gfa-logos img{display:block;max-width:100%;max-height:84px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
+.gfa-logos-more{margin:12px 0 0;color:var(--muted);font-size:15px}
+@media (max-width:900px){.gfa-logos{grid-template-columns:repeat(3,minmax(0,1fr))}.gfa-logos li{height:84px}.gfa-logos img{max-height:62px}}
+@media (max-width:900px){.gfa-alert,.gfa-check{grid-template-columns:minmax(0,1fr)}.gfa-paths{grid-template-columns:repeat(2,minmax(0,1fr))}.gfa-nums{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.gfa-paths{grid-template-columns:minmax(0,1fr)}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.gamefields.eu/dofinansowanie-boisk/","url":"https://www.gamefields.eu/dofinansowanie-boisk/","name":"Dofinansowanie boisk dla gmin i szkół","inLanguage":"pl-PL","dateModified":"2026-11-12","author":{"@type":"Person","@id":"https://www.gamefields.eu/#damian-gawrych","name":"Damian Gawrych"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kto składa wniosek o dofinansowanie?","acceptedAnswer":{"@type":"Answer","text":"Wniosek składa uprawniony podmiot, najczęściej gmina, powiat albo szkoła przez organ prowadzący. Gamefields przygotowuje część techniczną: koncepcję, wizualizację, opis rozwiązania i cenę orientacyjną do kosztorysu."}},{"@type":"Question","name":"Czy małe boisko do panny może dostać dofinansowanie?","acceptedAnswer":{"@type":"Answer","text":"To zależy od programu. Programy ministerialne mają własne progi i wymagania, dlatego małą arenę warto włączyć do większego zadania, np. modernizacji Orlika albo strefy sportowej przy szkole. Mniejsze kwoty łatwiej sfinansować z budżetu obywatelskiego, funduszu sołeckiego albo programów województwa."}},{"@type":"Question","name":"Ile trzeba mieć wkładu własnego?","acceptedAnswer":{"@type":"Answer","text":"W edycji 2026 programu rozwoju infrastruktury sportowej w województwach wnioskodawca pokrywał co najmniej 40% kosztów kwalifikowanych, a dofinansowanie wynosiło do 60%. Zasady kolejnych edycji sprawdzamy w aktualnym regulaminie."}},{"@type":"Question","name":"Kiedy zacząć przygotowania?","acceptedAnswer":{"@type":"Answer","text":"Najlepiej kilka tygodni przed naborem. Ministerstwo Sportu zapowiedziało pierwsze nabory na 2027 rok od 4 stycznia 2027 r., dlatego koncepcję i kosztorys warto mieć gotowe jeszcze w grudniu."}},{"@type":"Question","name":"Czy pomagacie w budżecie obywatelskim?","acceptedAnswer":{"@type":"Answer","text":"Tak. Przygotujemy koncepcję, wizualizację i cenę orientacyjną do formularza."}}]}]}</script>
+<div class="gfa">
+<section class="gfa-hero"><div class="w">
+  <div>
+    <p class="k">For municipalities, schools and clubs</p>
+    <h1 class="d">A court with grant funding.</h1>
+    <p class="lead">A panna or street football court, or a colourful surface on an existing site, can be funded through Ministry of Sport programmes, regional programmes, participatory budgeting or village funds. I prepare the technical part of the application: concept, visualisation, description and indicative price.</p>
+    <ul class="gfa-links"><li><a href="#nabory">Upcoming application windows</a></li><li><a href="#sciezki">Funding sources</a></li><li><a href="#do-wniosku">What I prepare</a></li><li><a href="/realizacje-dla-miast/">Projects for cities</a></li></ul>
+  </div>
+  <figure><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/9-768x432.jpg" alt="Panna Ring arena at the Orlik facility in Grodzisk Mazowiecki" loading="lazy" decoding="async"><figcaption><b>Panna Ring at an Orlik facility</b>OSiR Grodzisk Mazowiecki, in use for 10 years</figcaption></figure>
+</div></section>
+
+<section class="gfa-sec" id="nabory"><div class="w">
+  <div class="gfa-alert">
+    <div><p class="k" style="color:var(--ink)">As of 12 November 2026</p><h3>Applications for 2027 open in January.</h3></div>
+    <div>
+      <ul>
+        <li><span>“Moje Boisko – Orlik 2012” (renewal of Orlik facilities)</span><b>4 January–26 February 2027</b></li>
+        <li><span>Development of sports infrastructure in Polish regions</span><b>in 2027, dates specified in programme rules</b></li>
+        <li><span>Municipal participatory budgets</span><b>submissions usually in winter</b></li>
+      </ul>
+      <small>The 2027 dates come from Ministry of Sport and Tourism announcements presented to the Sejm. Before submitting an application, we check the rules on gov.pl. Sources are listed below.</small>
+    </div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="sciezki"><div class="w">
+  <div class="gfa-head"><h2 class="d">Six funding sources.</h2><p>Each has different thresholds and requirements. A location and an idea are enough to start, and I can suggest which suits your site.</p></div>
+  <ul class="gfa-paths">
+    <li><span class="m">01</span><b>Ministry of Sport and Tourism</b><span>Programmes for new and renewed facilities, including “Moje Boisko – Orlik 2012” and regional infrastructure development. In 2026, funding covered up to 60% of eligible costs.</span><span class="fit">For municipalities, counties and schools through their governing bodies</span></li>
+    <li><span class="m">02</span><b>Region</b><span>Regional authorities run their own programmes and co-finance ministerial programmes, such as “Sportowa Małopolska”.</span><span class="fit">For municipalities and counties in the region</span></li>
+    <li><span class="m">03</span><b>Participatory budgeting</b><span>Residents submit projects, the authority assesses them, and residents vote. A suitable route for a single arena in a park or by a school.</span><span class="fit">For residents, neighbourhood councils and schools</span></li>
+    <li><span class="m">04</span><b>Village fund</b><span>A village administrative unit can allocate its funds to facilities such as a sports court. A small arena is on a scale suited to this fund.</span><span class="fit">For village administrative units in rural municipalities</span></li>
+    <li><span class="m">05</span><b>European Funds</b><span>Regional programmes for 2021–2027 fund regeneration projects. A court and colourful surfacing can form part of the renewal of a square or residential community.</span><span class="fit">For municipalities with a regeneration programme</span></li>
+    <li><span class="m">06</span><b>Brand or foundation</b><span>A court with partner branding: a company funds the arena and its logo appears on the boards and surface.</span><span class="fit">For schools, clubs, residential communities and businesses</span></li>
+  </ul>
+</div></section>
+
+<section class="gfa-band" id="do-wniosku"><div class="w">
+  <div class="gfa-head"><div><p class="k">Gamefields prepares</p><h2 class="d">The technical part of the application.</h2></div><p>The municipality or school submits the application. I supply materials showing what will be built, what it costs and why it will work.</p></div>
+  <ul class="gfa-check">
+    <li>Court concept and visualisation on a site photo<small>From the Studio 3D model, with selected colours and surface pattern.</small></li>
+    <li>PDF project sheet with indicative price<small>Specifications, overhead view and price range for the cost estimate.</small></li>
+    <li>Technical description of the structure and surface<small>Dimensions, materials, layers and equipment.</small></li>
+    <li>Delivery schedule<small>From order to handover, subject to weather conditions.</small></li>
+    <li>Supporting arguments for assessment panels<small>Public accessibility, durability, small footprint, maintenance costs and reference projects.</small></li>
+    <li>Support after the funding decision<small>Adapting the project to the scope awarded funding.</small></li>
+  </ul>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">What assessment panels consider.</h2><p>From the rules of the 2026 regional sports infrastructure development programme. Future editions may change these requirements.</p></div>
+  <ul class="gfa-check">
+    <li>Own contribution of at least 40%<small>Funding up to 60% of eligible costs.</small></li>
+    <li>Publicly accessible, free-to-use facility<small>Priority for school facilities open to children and young people.</small></li>
+    <li>No asphalt surfaces<small>Asphalt and asphalt concrete are not funded (with exceptions, such as skateparks).</small></li>
+    <li>New facility or renewal<small>Repairs alone are not funded.</small></li>
+  </ul>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Short answers.</h2><p>Not sure where to start? <a href="/kontakt/">Get in touch</a>, and I will reply personally.</p></div>
+  <div class="gfa-faq"><details><summary>Who submits the funding application?</summary><p>An eligible entity submits the application, usually a municipality, county or school through its governing body. Gamefields prepares the technical part: concept, visualisation, solution description and indicative price for the cost estimate.</p></details><details><summary>Can a small panna court receive funding?</summary><p>It depends on the programme. Ministerial programmes have their own thresholds and requirements, so a small arena may be worth including in a larger project, such as renewal of an Orlik facility or a school sports zone. Smaller amounts are easier to fund through participatory budgets, village funds or regional programmes.</p></details><details><summary>How much own contribution is required?</summary><p>In the 2026 edition of the regional sports infrastructure development programme, applicants covered at least 40% of eligible costs, with funding of up to 60%. We check current programme rules for future editions.</p></details><details><summary>When should preparations begin?</summary><p>Ideally several weeks before applications open. The Ministry of Sport announced the first 2027 application windows from 4 January 2027, so it is worth having the concept and cost estimate ready in December.</p></details><details><summary>Do you help with participatory budgeting?</summary><p>Yes. We prepare the concept, visualisation and indicative price for the form.</p></details></div>
+  <ul class="gfa-links"><li><a href="/baza-wiedzy/">Knowledge hub</a></li><li><a href="/realizacje-dla-miast/">Projects for cities</a></li><li><a href="/renowacja-boisk/">Court renovation</a></li></ul>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <h3 style="font-size:18px;margin:0 0 10px">Sources (as of 12 November 2026)</h3>
+  <ol class="gfa-src">
+    <li><a href="https://www.gov.pl/web/sport/program-rozwoju-infrastruktury-sportowej-w-wojewodztwach--edycja-2027" rel="noopener" target="_blank">Ministry of Sport and Tourism: Regional sports infrastructure development programme</a></li>
+    <li><a href="https://www.lodzkie.pl/sport/infrastruktura-sportowa/nabor-wnioskow-2026-infrastruktura-sportowa/program-rozwoju-infrastruktury-sportowej-w-wojewodztwach-edycja-2026" rel="noopener" target="_blank">Łódź region: application rules, 2026 edition</a></li>
+    <li><a href="https://granty.pl/555764/" rel="noopener" target="_blank">granty.pl: Sports infrastructure 2027, ministry announcements</a></li>
+    <li><a href="https://samorzad.pap.pl/kategoria/aktualnosci/msit-oglosilo-programy-i-warunki-naborow-na-infrastrukture-sportowa-w-2027-r" rel="noopener" target="_blank">PAP Samorząd: programmes and application windows for 2027</a></li>
+    <li><a href="https://www.prawo.pl/samorzad/fundusz-solecki-jako-forma-zaspokajania-zbiorowych-potrzeb-mieszkancow-i-integracji-spolecznej,78429.html" rel="noopener" target="_blank">prawo.pl: village fund</a></li>
+  </ol>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Have a site<br>and a funding application in mind?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Send the location →</a><a class="gfa-btn alt" href="/studio/">Design in Studio ↗</a></div>
+</div></section>
+</div>
+<!-- /wp:html -->

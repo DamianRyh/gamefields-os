@@ -1,0 +1,14 @@
+{
+  "sourceWpId": 4633,
+  "sourceRepoPath": "integrations/wordpress/pages/samorzady-2026-11/dofinansowanie-boisk.html",
+  "sourceCommit": "283efc3a20c53f9cdf9c6ead0bca6103cb92a3a9",
+  "liveVerified": false,
+  "translatedNodes": 90,
+  "translatedAttributes": 1,
+  "missing": [],
+  "unmappedAttrs": [],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "Compare with current WordPress, verify official funding rules and dates, testimonial consent, translated quotation labels, technical dimensions and reference claims. EN links, metadata, schema and browser QA pending."
+  ]
+}
