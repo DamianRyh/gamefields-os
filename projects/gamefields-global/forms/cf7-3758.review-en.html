@@ -1,0 +1,34 @@
+<div class="gf-lead-steps" data-gf-lead>
+<nav class="gf-lead-progress" aria-label="Enquiry stages"><button type="button" data-gf-go="0">1. Requirements</button><button type="button" data-gf-go="1">2. Site</button><button type="button" data-gf-go="2">3. Contact</button></nav>
+<fieldset class="gf-lead-step" data-gf-step="0"><legend>What would you like to do?</legend>
+<div class="gf-lead-field"><label>Project type
+[select project-type "Not sure yet|Jeszcze nie wiem" "Build a new court|Budowa nowego boiska" "Renovate or paint a court|Renowacja lub malowanie boiska" "Court rental and event|Wynajem boiska i event" "Brand activation|Aktywacja marki" "Poster or ball|Plakat lub piłka"]</label></div>
+<p>You can start without choosing a model or having a finished design.</p>
+<button type="button" data-gf-next>Next: site</button></fieldset>
+<fieldset class="gf-lead-step" data-gf-step="1"><legend>Show us the site</legend>
+<div class="gf-lead-field gf-lead-photos" id="zdjecie" data-gf-photos><label>Site photos (optional, up to 3)
+[file project-photo limit:5mb filetypes:jpg|jpeg|png|webp]</label>
+[file project-photo-2 limit:5mb filetypes:jpg|jpeg|png|webp]
+[file project-photo-3 limit:5mb filetypes:jpg|jpeg|png|webp]<small>JPG, PNG or WebP, up to 5 MB each. Large phone photos will be resized automatically before submission.</small></div>
+<div class="gf-lead-field"><label>Site type (optional)
+[select place-type first_as_label "Select site type" "Municipality|Gmina" "Orlik" "School|Szkoła" "Park" "Event" "Other|Inne"]</label></div>
+<div class="gf-lead-field"><label>City / location (optional)
+[text project-location maxlength:250 placeholder "City, address or map link"]</label></div>
+<div class="gf-lead-field"><label>Approximate dimensions (optional)
+[text project-area maxlength:100 placeholder "E.g. 12 × 9 m or not sure yet"]</label></div>
+<button type="button" data-gf-prev>Back</button> <button type="button" data-gf-next>Next: contact</button></fieldset>
+<fieldset class="gf-lead-step" data-gf-step="2"><legend>How can we contact you?</legend>
+<div class="gf-lead-field"><label>Email (required)
+[email* your-email autocomplete:email]</label></div>
+<div class="gf-lead-field"><label>Name or organisation (optional)
+[text your-name autocomplete:name maxlength:160]</label></div>
+<div class="gf-lead-field"><label>Phone (optional)
+[tel your-phone autocomplete:tel]</label></div>
+<div class="gf-lead-field"><label>Describe the site and your goals (optional)
+[textarea your-message maxlength:4000 placeholder "E.g. old asphalt at a school, approx. 20 × 12 m, for football and basketball. Include your budget if known."]</label></div>
+<div class="gf-lead-consent">[acceptance marketing-consent optional] I would like to receive emails from Gamefields about its offer and new projects. Consent is voluntary and may be withdrawn at any time.[/acceptance]</div>
+<p class="gf-lead-note">I reply personally within 1–2 working days. I will review the site and configuration, then agree the next step with you. An individual quotation will follow after reviewing the design and scope.</p>
+<p class="gf-lead-note">I will use your data to respond to your enquiry. I will not send marketing information without your consent. <a href="/polityka-prywatnosci/">Privacy policy</a>.</p>
+<button type="button" data-gf-prev>Back</button> [submit "Send enquiry"]</fieldset>
+<div hidden>[textarea project-details maxlength:500000][hidden lead-source "formularz"][hidden project-link][file project-render limit:5mb filetypes:png|jpg|jpeg]</div>
+</div>
