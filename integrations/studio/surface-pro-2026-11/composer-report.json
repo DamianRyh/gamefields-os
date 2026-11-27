@@ -379,5 +379,20 @@
   },
   "modes": 0,
   "tapeMedian": 0
+ },
+ "pro-p-mozaika": {
+  "candidates": 660,
+  "passed": 3,
+  "kept": 3,
+  "rejected": {
+   "thin": 657,
+   "specks": 0,
+   "paints": 0,
+   "sym": 0,
+   "balance": 0,
+   "lines": 0
+  },
+  "modes": 1,
+  "tapeMedian": 154
  }
 }
