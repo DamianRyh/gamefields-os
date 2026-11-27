@@ -4,11 +4,12 @@ import {modularGeometry} from './studio-modular.ts';
 import {creativeLineOptions,type DecorativeLineStyle} from './creative-lines.ts';
 /** Commercial rates are supplied by the owner, never inferred from preview colours or scene. */
 export type RateCard={workingAssumptions?:boolean;notice?:string;version:string;currency:"PLN";vatRate?:number;surfaces:Record<string,{materialNetPerM2:number;installationNetPerM2:number}>;patternNetPerM2:Record<string,number>;colorPolicy?:{includedColors:number;additionalColorNetPerM2:number};linesNet:number;brandingNetPerItem:number;arenaNet:Record<string,number>;arenaInstallationNet?:Record<string,number>;finishNet?:Record<string,number>;equipmentNet:Record<string,number>;designNet:number;transportNet:number;exclusions:string[]};
-export type QuoteInput={matProduct?:boolean;constructionOnly?:boolean;matVariant?:MatVariant;rubberVariant?:RubberVariant;acrylicVariant?:AcrylicVariant;turfVariant?:TurfVariant;tileVariant?:TileVariant;epdmVariant?:EpdmVariant;paintVariant?:PaintVariant;gradientEnabled?:boolean;concreteBase?:boolean;decorativeLineStyle?:DecorativeLineStyle;surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string;asset?:{colors?:string[]}}[]};
+export type QuoteInput={matProduct?:boolean;constructionOnly?:boolean;matVariant?:MatVariant;rubberVariant?:RubberVariant;acrylicVariant?:AcrylicVariant;turfVariant?:TurfVariant;tileVariant?:TileVariant;epdmVariant?:EpdmVariant;paintVariant?:PaintVariant;gradientEnabled?:boolean;concreteBase?:boolean;decorativeLineStyle?:DecorativeLineStyle;surfaceModel?:import("./sport-surfaces").SurfaceModel;modular?:import("./project").StudioModules;arenaModel?:string;length:number;width:number;courtShape?:string;diameter?:number;surface:string;lines:boolean;patternFamily?:string;patternVariant?:number;patternSeed?:number;shadowIntensity?:number;graphicOpacity:number;base?:string;zone?:string;outside?:string;patternPalette?:string;arenaDesign?:{finish:string;text:string;src?:string};objects:{kind:string;name:string;text?:string;src?:string;asset?:{colors?:string[]}}[]};
 export type QuoteItem={id:string;label:string;quantity:number;unit:string;unitNet:number|null;totalNet:number|null;note?:string};
 export type ProjectQuote={workingAssumptions?:boolean;constructionPrices?:Record<string,number>;notice?:string;schemaVersion:2;status:"estimated"|"partial"|"unpriced";currency:"PLN";rateVersion:string|null;priceNet:number|null;priceGross:number|null;vatRate:number|null;knownSubtotalNet:number|null;area:number;areaLabel:string;items:QuoteItem[];exclusions:string[];assumptions:string[]};
 // Shared source-derived geometry; keep this re-export for existing consumers.
-import {projectPatternColors} from './pattern-library.ts';
+import {projectPatternColors,getPatternFamily} from './pattern-library.ts';
+import {composerMetrics} from './court-art-pro.mjs';
 import {hasSurfaceAssets,surfaceAssetColors} from './plain-surface.ts';
 import {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
 import {MAT_PRODUCT_NET_PER_M2,MAT_PRINT_NET_PER_M2} from './mat-product.ts';
@@ -18,6 +19,14 @@ import {CONCRETE_BASE_LABEL,CONCRETE_BASE_NET,CONCRETE_BASE_RATE_NET_PER_M2,conc
 export {arenaSurfaceQuantities} from './arena-geometry-data.mjs';
 const money=(n:number)=>Math.round((n+Number.EPSILON)*100)/100;
 const rate=(v:unknown):v is number=>typeof v==="number"&&Number.isFinite(v)&&v>=0&&v<=1e8;
+// Names the customer's own pattern in the painting line; Composer and Murale patterns add their measured paints and tape.
+function paintPatternNote(p:QuoteInput,area:number,colors:string[],assets:boolean){
+ if(assets||!p.patternFamily||p.graphicOpacity<=0)return "";
+ const family=getPatternFamily(p.patternFamily),v=Math.max(1,Math.min(12,p.patternVariant||1));
+ const m=family.renderer==="pro"?composerMetrics(family.id,v,colors,{seed:p.patternSeed??0,area}):null;
+ return ` Wzór: ${family.name}, wariant ${v}.`+(m?` Z pomiaru wzoru: ${m.colors} farb, ok. ${m.tape} m taśmy.`:"");
+}
+
 export function parseRateCard(raw:string|undefined):RateCard|null{
  if(!raw)return null;
  const c=JSON.parse(raw);
@@ -85,7 +94,7 @@ export function calculateProjectQuote(p:QuoteInput,c:RateCard|null,complexity:nu
    const own=projectPatternColors(p);const assets=hasSurfaceAssets(p);
    const colors=new Set((assets?[p.base,...surfaceAssetColors(p)]:[p.base,p.zone,own[0],own[2],own[3]]).filter((v):v is string=>typeof v==="string"&&/^#[0-9a-f]{6}$/i.test(v)).map(v=>v.toLowerCase())).size;
    const variant=p.paintVariant||autoPaintVariant({graphic:assets||p.graphicOpacity>0,colors,complexity,gradient:p.gradientEnabled});
-   add("paint",`Malowanie · ${PAINT_VARIANTS[variant].label}`,1,"kpl.",netForArea(fa,PAINT_VARIANTS[variant].netPerM2),`Około ${areaLabel(fa)} m² × ${PAINT_VARIANTS[variant].netPerM2} zł/m² netto. ${PAINT_VARIANTS[variant].description}${p.paintVariant?"":" Wariant dobrany do projektu."}`);
+   add("paint",`Malowanie · ${PAINT_VARIANTS[variant].label}`,1,"kpl.",netForArea(fa,PAINT_VARIANTS[variant].netPerM2),`Około ${areaLabel(fa)} m² × ${PAINT_VARIANTS[variant].netPerM2} zł/m² netto. ${PAINT_VARIANTS[variant].description}${p.paintVariant?"":" Wariant dobrany do projektu."}${paintPatternNote(p,fa,own,assets)}`);
   }else if(p.surface===EPDM_MATERIAL){
    const variant=p.epdmVariant||"standard";
    add("epdm",`Nawierzchnia EPDM wylewana · ${EPDM_VARIANTS[variant].label}`,1,"kpl.",netForArea(fa,EPDM_VARIANTS[variant].netPerM2),`Około ${areaLabel(fa)} m² × ${EPDM_VARIANTS[variant].netPerM2} zł/m² netto. ${EPDM_VARIANTS[variant].description}`);
