@@ -145,5 +145,20 @@
   "Wróć do edycji": "Return to editing",
   "Parametry projektu dołączymy do zapytania. Pliki logo możesz przesłać w dalszej rozmowie.": "Project specifications will be attached to your enquiry. Logo files can be sent later.",
   "Wyślij projekt do wyceny": "Submit project for a quote",
-  "Pobierz kopię projektu JSON": "Download project JSON copy"
+  "Pobierz kopię projektu JSON": "Download project JSON copy",
+  "Grafika": "Graphics",
+  "Podsumowanie": "Summary",
+  "Kroki projektu": "Project steps",
+  "— odwiedzono i zmieniono": "— visited and modified",
+  "Co zamawiasz?": "What are you ordering?",
+  "Konstrukcja z nawierzchnią": "Structure with surface",
+  "Arena, podłoże betonowe i wykończenie z kroku Nawierzchnia.": "Arena, concrete base and finish selected in the Surface step.",
+  "Sama konstrukcja": "Structure only",
+  "Arena z bramkami na Twoje istniejące boisko. Bez nawierzchni.": "Arena with goals for your existing court. No surface included.",
+  "Nawierzchnia betonowa": "Concrete base",
+  "netto · ok.": "excl. VAT · approx.",
+  " · cena osobno od konstrukcji": " · priced separately from the structure",
+  "Płyta 12 cm z podbudową, bez wykończenia. Podstawa pod każde wykończenie z kroku Nawierzchnia. Odznacz, jeśli masz już równe podłoże betonowe.": "12 cm slab with sub-base, without finish. Base for any finish selected in the Surface step. Untick if you already have a level concrete base.",
+  "Co obejmuje": "Included",
+  "Nie obejmuje:": "Not included:"
 }
