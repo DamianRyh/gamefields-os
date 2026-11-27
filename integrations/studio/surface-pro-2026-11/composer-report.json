@@ -424,5 +424,20 @@
   },
   "modes": 1,
   "tapeMedian": 129
+ },
+ "pro-p-parzenica": {
+  "candidates": 660,
+  "passed": 0,
+  "kept": 0,
+  "rejected": {
+   "thin": 660,
+   "specks": 0,
+   "paints": 0,
+   "sym": 0,
+   "balance": 0,
+   "lines": 0
+  },
+  "modes": 0,
+  "tapeMedian": 0
  }
 }
