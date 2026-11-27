@@ -36,7 +36,8 @@ export function measureLabels(labels, W, H, n, tile = 16) {
 export async function measureSvg(svg, h, scale = 2) {
   const colours = svgColours(svg); const W = 600 * scale, H = Math.round(h * scale);
   const doc = svg.startsWith('<svg') ? svg : '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 ' + h + '">' + svg + '</svg>';
-  const sized = doc.replace('<svg ', '<svg shape-rendering="crispEdges" width="' + W + '" height="' + H + '" ');
+  // replace any size on the root element (an SVG serialised from the DOM already has width/height; a duplicate attribute is invalid XML)
+  const sized = doc.replace(/<svg\b[^>]*>/, (tag) => tag.replace(/\s(width|height|shape-rendering)="[^"]*"/g, '').replace('<svg', '<svg shape-rendering="crispEdges" width="' + W + '" height="' + H + '"'));
   const img = new Image(); img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(sized); await img.decode();
   const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const cx = cv.getContext('2d', { willReadFrequently: true }); cx.drawImage(img, 0, 0);
   const px = cx.getImageData(0, 0, W, H).data; const ref = colours.map(hex2rgb); const lab = new Uint8Array(W * H);
