@@ -1,12 +1,9 @@
 {
   "sourceWpId": 3475,
   "translatedNodes": 59,
-  "translatedAttributes": 0,
+  "translatedAttributes": 2,
   "missing": [],
-  "unmappedAttrs": [
-    "Ścieżka nawigacji",
-    "Gamefields — strona główna"
-  ],
+  "unmappedAttrs": [],
   "protectedIdentical": true,
   "releaseBlocked": [
     "Legacy catalogue page explicitly marked as previous variant. Do not infer equivalence to current Studio models or treat historical prices as current. EN links, schema, metadata and browser QA pending."
