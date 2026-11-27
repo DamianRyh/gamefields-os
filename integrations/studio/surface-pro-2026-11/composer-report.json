@@ -394,5 +394,20 @@
   },
   "modes": 1,
   "tapeMedian": 154
+ },
+ "pro-p-kilim": {
+  "candidates": 220,
+  "passed": 96,
+  "kept": 26,
+  "rejected": {
+   "thin": 8,
+   "specks": 0,
+   "paints": 42,
+   "sym": 74,
+   "balance": 0,
+   "lines": 0
+  },
+  "modes": 2,
+  "tapeMedian": 93
  }
 }
