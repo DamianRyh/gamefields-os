@@ -1,16 +1,7 @@
 {
   "sourceWpId": 3712,
-  "translatedNodes": 114,
-  "missing": [
-    "8 600 zł",
-    "od 2 400 zł",
-    "od 5 100 zł",
-    "od 6 100 zł",
-    "od 7 300 zł",
-    "od 7 600 zł",
-    "od 8 300 zł",
-    "od 10 300 zł"
-  ],
+  "translatedNodes": 122,
+  "missing": [],
   "protectedIdentical": true,
   "releaseBlocked": [
     "Verify published source claims: pricing, technical specifications, lifetime, funding and safety requirements. EN links, attributes, schema and browser QA pending."

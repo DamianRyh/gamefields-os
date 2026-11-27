@@ -308,5 +308,13 @@
   "Kolumna „Nawierzchnia”: powierzchnia konstrukcji z 10% zapasem, czyli metraż płyty i wykończenia.": "The “Surface” column shows the structure area plus a 10% allowance, i.e. the slab and finish area.",
   "Wpisz wymiary placu w planerze": "Enter your site dimensions in the",
   "„Zmieści się?”": "“Will it fit?” planner",
-  ": od razu zobaczysz, które modele się mieszczą razem ze strefą bezpieczeństwa. Potem zaprojektuj wybrany model w": ": you will immediately see which models fit with their safety zones. Then design your chosen model in"
+  ": od razu zobaczysz, które modele się mieszczą razem ze strefą bezpieczeństwa. Potem zaprojektuj wybrany model w": ": you will immediately see which models fit with their safety zones. Then design your chosen model in",
+  "8 600 zł": "PLN 8,600",
+  "od 2 400 zł": "from PLN 2,400",
+  "od 5 100 zł": "from PLN 5,100",
+  "od 6 100 zł": "from PLN 6,100",
+  "od 7 300 zł": "from PLN 7,300",
+  "od 7 600 zł": "from PLN 7,600",
+  "od 8 300 zł": "from PLN 8,300",
+  "od 10 300 zł": "from PLN 10,300"
 }
