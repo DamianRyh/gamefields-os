@@ -23,8 +23,8 @@
 		<a class="gft-photo" href="<?php echo esc_url( $photo_url ); ?>"><span class="gft-photo-l"><?php echo esc_html( gft_global_t( 'site_photo' ) ); ?></span><span class="gft-photo-s"><?php echo esc_html( gft_global_t( 'photo_short' ) ); ?></span></a>
 		<?php endif; ?>
 		<button type="button" class="gft-menu" aria-expanded="false" aria-controls="gft-links"><?php echo esc_html( gft_global_t( 'menu' ) ); ?></button>
-		<?php if ( 'pl' === gft_global_language() ) : ?>
-		<a class="gft-cta" href="<?php echo esc_url( home_url( '/studio/' ) ); ?>">Studio 3D <span aria-hidden="true">↗</span></a>
+		<?php $studio_url = gft_global_studio_url(); if ( $studio_url ) : ?>
+		<a class="gft-cta" href="<?php echo esc_url( $studio_url ); ?>"><?php echo esc_html( gft_global_t( 'studio' ) ); ?> <span aria-hidden="true">↗</span></a>
 		<?php endif; ?>
 	</div>
 </header>

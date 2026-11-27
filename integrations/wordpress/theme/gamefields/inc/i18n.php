@@ -92,3 +92,11 @@ function gft_global_privacy_url() {
     $id = (int) get_option( 'wp_page_for_privacy_policy' );
     return $id ? gft_global_translation_url( $id, 'en' ) : gft_global_page_url( 'polityka-prywatnosci' );
 }
+
+/** Explicit Studio locale, preserving all existing URL parameters. EN is gated until a verified translated wrapper exists. */
+function gft_global_studio_url() {
+    if ( 'pl' === gft_global_language() ) { return home_url( '/studio/' ); }
+    $page = get_page_by_path( 'studio' );
+    $url = $page ? gft_global_translation_url( $page->ID, 'en' ) : '';
+    return $url ? add_query_arg( 'lang', 'en', $url ) : '';
+}

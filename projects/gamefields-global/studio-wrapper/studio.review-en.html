@@ -1,0 +1,438 @@
+<!-- wp:html -->
+<style>
+html:has(.gf-builder-page){margin-top:0!important}
+body:has(.gf-builder-page){background:#0b131b!important;overflow-x:hidden}
+body:has(.gf-builder-page) #nm-header,body:has(.gf-builder-page) #nm-footer,body:has(.gf-builder-page) #wpadminbar,body:has(.gf-builder-page) .nm-page-title{display:none!important}
+body:has(.gf-builder-page) .nm-page-wrap,body:has(.gf-builder-page) .nm-page-wrap-inner,body:has(.gf-builder-page) #nm-page-overflow,body:has(.gf-builder-page) #nm-page,body:has(.gf-builder-page) .nm-page-content,body:has(.gf-builder-page) .nm-row,body:has(.gf-builder-page) .nm-page-default-col{padding:0!important;margin:0!important;width:100%!important;max-width:none!important}
+.gf-builder-page{margin:0!important;background:#0b131b;width:100%;max-width:none}
+.gf-builder-frame{display:block;width:100%;height:100vh;height:100dvh;min-height:0;border:0;background:#0b131b}
+.gf-builder-fallback{padding:10px 20px;margin:0;font:12px Arial,sans-serif;color:#a9b7c4;text-align:center;background:#0b131b}.gf-builder-fallback a{color:#87f5b4;text-decoration:underline}
+
+.gf-builder-fallback{font-size:16px!important;line-height:1.5!important}.gf-builder-fallback a{display:inline-flex;align-items:center;min-height:44px}
+/* Gamefields readability audit 2026-10-20 */
+.gf-builder-fallback a:focus-visible{outline:3px solid #87f5b4;outline-offset:4px}
+
+/* One header (2026-11-08): Studio has its own bar with the logo, so the site header and footer are hidden here. */
+body:has(.gf-builder-page) .gft-nav,body:has(.gf-builder-page) .gft-skip,body:has(.gf-builder-page) .gft-foot{display:none!important}
+body:has(.gf-builder-page) .gft-main{padding:0!important;margin:0!important;max-width:none!important}
+html:has(.gf-builder-page),body:has(.gf-builder-page){scroll-padding-top:0!important}
+/* The fallback link stays for screen readers and keyboard users only, so the page has no extra scroll. */
+.gf-builder-fallback:not(:focus-within){position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gf-builder-fallback:focus-within{position:fixed;left:12px;bottom:12px;z-index:9;border-radius:8px}
+/* Studio scrolls inside its own frame. */
+html:has(.gf-builder-page){overflow:hidden!important;height:100%}
+</style>
+<main class="gf-builder-page"><iframe id="studio" class="gf-builder-frame" src="https://gamefields-studio.ryhfs90.chatgpt.site/?v=59" title="Gamefields Studio — design your court" allow="fullscreen; clipboard-write; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="gf-builder-fallback">Need a separate tab? <a href="https://gamefields-studio.ryhfs90.chatgpt.site/" target="_blank" rel="noopener">Open Gamefields Studio</a></p></main>
+<script>
+(()=>{const incoming=new URLSearchParams(location.search),frame=document.getElementById('studio');if(!frame)return;const url=new URL(frame.src);let changed=false;for(const key of ['arena','surface','sport','pattern','variant','palette','shadow','view','base','zone','outside','line','seed','workshop','coat','panel','frame','tool','kampania']){const value=incoming.get(key);if(value&&value.length<150){url.searchParams.set(key,value);changed=true}}const lang='en';if(lang==='en'||lang==='pl'){url.searchParams.set('lang',lang);changed=true;const fallback=document.querySelector('.gf-builder-fallback a');if(fallback){const direct=new URL(fallback.href);direct.searchParams.set('lang',lang);fallback.href=direct.toString()}}if(changed)frame.src=url.toString()})();
+</script>
+<style>[data-gf-lead] fieldset{border:0;min-width:0;margin:0;padding:0}[data-gf-lead] legend{font:700 22px/1.3 Inter,Arial,sans-serif;margin:12px 0 20px;color:inherit}[data-gf-lead] .gf-lead-progress{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}[data-gf-lead] button{min-height:44px;padding:10px 16px;border:1px solid currentColor;border-radius:24px;background:transparent;color:inherit;font:600 14px/1.3 Inter,Arial,sans-serif;cursor:pointer}[data-gf-lead] [aria-current=step]{background:#6336f5;color:#fff;border-color:#6336f5}[data-gf-lead] .gf-lead-field{margin:16px 0}[data-gf-lead] :is(input,select,textarea){width:100%;min-width:0;min-height:44px;font-size:16px;box-sizing:border-box}[data-gf-lead] :is(p,small){font-size:14px;line-height:1.55}[data-gf-lead] [hidden]{display:none!important}[data-gf-lead] :focus-visible{outline:3px solid #6336f5;outline-offset:3px}#gf-culture .form>.lbl,#gf-culture .form>.chips{display:none!important}
+#gf-inquiry-dialog{width:min(680px,calc(100vw - 24px));max-height:90dvh;overflow:auto;border:1px solid #d9cfd4;border-radius:12px;padding:24px;background:#fff;color:#47132d;font-family:Inter,Arial,sans-serif}#gf-inquiry-dialog::backdrop{background:#1c091299}#gf-inquiry-dialog [data-close]{min-height:44px;float:right}#gf-inquiry-dialog h2{font-size:28px;line-height:1.15;color:inherit}#gf-inquiry-dialog pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:220px;overflow:auto}#gf-inquiry-dialog [name=your-message]{max-height:160px}
+</style>
+<dialog id="gf-inquiry-dialog" aria-labelledby="gf-inquiry-title"><button type="button" data-close aria-label="Return to project">Return to project</button><h2 id="gf-inquiry-title">Submit project for a quote</h2><p role="status" data-attachment-status></p><details><summary>Review attached specifications</summary><pre data-attachment-review tabindex="0"></pre><button type="button" data-clear>Remove attached specifications</button></details><!-- GF_GLOBAL_EN_CF7: replace with verified EN form shortcode before publication --></dialog>
+<script>(function(){
+ const frame=document.getElementById('studio'),dialog=document.getElementById('gf-inquiry-dialog');
+ if(!frame||!dialog)return;
+ const origin='https://gamefields-studio.ryhfs90.chatgpt.site',field=dialog.querySelector('[name="project-details"]'),status=dialog.querySelector('[data-attachment-status]'),review=dialog.querySelector('[data-attachment-review]');
+ function render(){const value=field.value.trim();review.textContent=value;status.textContent=value?'Project attached. Review the specifications, enter contact details and request an individual quotation.':'No configuration attached.';}
+ dialog.querySelector('[data-close]').addEventListener('click',()=>{dialog.close();frame.focus()});
+ dialog.querySelector('[data-clear]').addEventListener('click',()=>{field.value='';field.dispatchEvent(new Event('input',{bubbles:true}));render()});
+ window.addEventListener('message',event=>{
+  if(event.origin!==origin||event.source!==frame.contentWindow)return;
+  const d=event.data;if(!d||d.type!=='gf-inquiry'||typeof d.summary!=='string'||d.summary.length>500000||typeof d.requestId!=='string'||d.requestId.length>100)return;
+  const reply=type=>event.source.postMessage({type,requestId:d.requestId,summaryLength:field?.value.length},origin);
+  try{const project=JSON.parse(d.summary);if(!project||typeof project!=='object'||Array.isArray(project)||!field)throw Error();field.value=d.summary;field.dispatchEvent(new Event('input',{bubbles:true}));render();if(!dialog.open)dialog.showModal();reply('gf-inquiry-attached');dialog.querySelector('[name="your-email"]')?.focus()}catch{reply('gf-inquiry-rejected')}
+ });
+})();
+</script><script>(function(){document.querySelectorAll('[data-gf-lead]').forEach(root=>{
+ if(root.dataset.enhanced)return;root.dataset.enhanced='true';
+ const steps=Array.from(root.querySelectorAll('[data-gf-step]')),tabs=Array.from(root.querySelectorAll('[data-gf-go]'));let active=0;
+ function go(n,focus=true){active=Math.max(0,Math.min(steps.length-1,n));steps.forEach((step,i)=>{step.hidden=i!==active});tabs.forEach((tab,i)=>{if(i===active)tab.setAttribute('aria-current','step');else tab.removeAttribute('aria-current')});if(focus){const legend=steps[active].querySelector('legend');legend.tabIndex=-1;legend.focus()}}
+ root.addEventListener('click',event=>{const button=event.target.closest('button');if(!button)return;if(button.hasAttribute('data-gf-next'))go(active+1);else if(button.hasAttribute('data-gf-prev'))go(active-1);else if(button.hasAttribute('data-gf-go'))go(Number(button.dataset.gfGo))});
+ root.closest('.wpcf7')?.addEventListener('wpcf7invalid',()=>{const invalid=root.querySelector('.wpcf7-not-valid');if(invalid){go(steps.findIndex(step=>step.contains(invalid)),false);invalid.focus()}});
+ go(0,false);
+})})();
+</script>
+<!-- /wp:html -->
+<!-- wp:html -->
+<!-- gf-blok: gf-lead -->
+<!-- Gamefields gf-lead (zdjęcie placu, Studio, social), 18.11.2026. Tymczasowo w treści strony, do czasu motywu 1.0.37; gdy motyw 1.0.37 będzie wgrany, ten blok można usunąć (skrypt i tak uruchamia się tylko raz). -->
+<style>/* Gamefields — "Wyślij zdjęcie placu" (theme 1.0.36). Low specificity (:where) so page styles such as /kontakt/ win. */
+:where([data-gf-lead]){--gl-ink:var(--ink,var(--gf-ink,#47132D));--gl-violet:var(--violet,var(--gf-violet,#6336F5));--gl-line:var(--line,var(--gf-line,#D9CFD4));--gl-muted:var(--muted,var(--gf-muted,#6F5A66))}
+
+/* photo drop zone over the three CF7 inputs */
+:where(.gf-photos-on) .wpcf7-form-control-wrap[data-name^="project-photo"]{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+:where(.gf-photos-on) label{display:block;font-weight:700}
+:where(.gf-photos-on) br{display:none}
+.gf-drop{display:grid;justify-items:center;gap:4px;width:100%;margin:8px 0 10px;padding:22px 16px;border:2px dashed var(--gl-violet);border-radius:18px;background:rgba(99,54,245,.06);color:var(--gl-ink);font:inherit;text-align:center;cursor:pointer;transition:background .15s,border-color .15s}
+.gf-drop:hover,.gf-drop.over{background:rgba(99,54,245,.14)}
+.gf-drop:focus-visible{outline:3px solid var(--gl-violet);outline-offset:3px}
+.gf-drop[disabled]{cursor:default;opacity:.65;border-style:solid}
+.gf-drop b{font-size:17px}
+.gf-drop span{font-size:14px;color:var(--gl-muted)}
+.gf-drop-ico{width:40px;height:32px;margin-bottom:4px;border-radius:8px;background:var(--gl-violet);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Cpath d='M14 2h12l3 4h7a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4h7l3-4zm6 8a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 32'%3E%3Cpath d='M14 2h12l3 4h7a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4h7l3-4zm6 8a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8z'/%3E%3C/svg%3E") center/contain no-repeat}
+.gf-thumbs{display:flex;gap:10px;margin:0 0 6px;padding:0;list-style:none}
+.gf-thumbs:empty{display:none}
+.gf-thumbs li{position:relative;width:88px;height:88px;margin:0}
+.gf-thumbs img{width:100%;height:100%;object-fit:cover;border-radius:12px;border:1px solid var(--gl-line)}
+.gf-thumb-x{position:absolute;top:-8px;right:-8px;display:grid;place-items:center;width:32px!important;height:32px;min-height:0!important;padding:0!important;border-radius:50%!important;border:2px solid #fff!important;background:var(--gl-ink)!important;color:#fff!important;font:700 18px/1 sans-serif!important;cursor:pointer}
+.gf-photos-status{min-height:1.2em;margin:0 0 6px!important;font-size:14px;color:var(--gl-ink)}
+.gf-photos-status:empty{margin:0!important}
+
+/* optional marketing consent */
+:where(.gf-lead-consent){margin:4px 0 14px;font-size:14px;line-height:1.5}
+.gf-lead-consent label{display:flex!important;gap:10px;align-items:flex-start;font-weight:400;cursor:pointer}
+.gf-lead-consent input[type=checkbox]{flex:none;width:20px!important;height:20px;min-height:0!important;margin:2px 0 0;accent-color:var(--gl-violet)}
+
+/* homepage: the steps of form 3758 (the /kontakt/ page styles its own) */
+.gfs [data-gf-lead] fieldset{border:0;min-width:0;margin:0;padding:0}
+.gfs [data-gf-lead] legend{font-weight:800;font-size:22px;letter-spacing:-.02em;margin:6px 0 14px;padding:0}
+.gfs [data-gf-lead] .gf-lead-progress p,.gfs [data-gf-lead] .gf-lead-progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 18px}
+.gfs [data-gf-lead] .gf-lead-progress p{margin:0}
+.gfs [data-gf-lead] .gf-lead-progress button{min-height:44px;padding:0 8px;border:0;border-radius:999px;background:#fff;color:var(--gl-muted);font:700 13px/1.2 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] .gf-lead-progress button[aria-current]{background:var(--gl-ink);color:#fff}
+.gfs [data-gf-lead] fieldset>p:last-child{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.gfs [data-gf-lead] [data-gf-next]{min-height:52px;padding:0 26px;border:0;border-radius:999px;background:var(--gl-violet);color:#fff;font:700 16px/1 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] [data-gf-prev]{min-height:52px;padding:0 22px;border:1.5px solid #CDBFC6;border-radius:999px;background:transparent;color:var(--gl-ink);font:700 15px/1 inherit;font-family:inherit;cursor:pointer}
+.gfs [data-gf-lead] [hidden]{display:none!important}
+
+/* sent: the CF7 message becomes a confirmation card */
+.wpcf7 form.sent .wpcf7-response-output{margin:16px 0 0!important;padding:18px 20px!important;border:0!important;border-radius:16px;background:#E3F6E8;color:#14532D;font-weight:600;font-size:16px}
+
+/* mobile sticky bar */
+.gf-sticky{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:900;transform:translateY(150%);transition:transform .25s ease;pointer-events:none}
+.gf-sticky.on{transform:none;pointer-events:auto}
+.gf-sticky.on.off{transform:translateY(150%);pointer-events:none}
+.gf-sticky a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:999px;background:#6336F5;color:#fff!important;font:700 16px/1 GHInter,Inter,Arial,sans-serif;text-decoration:none;box-shadow:0 8px 24px rgba(28,9,18,.28)}
+@media (min-width:900px){.gf-sticky{display:none}}
+@media (prefers-reduced-motion:reduce){.gf-sticky,.gf-drop{transition:none}}
+
+/* header link (desktop) — next to "Studio 3D" on the homepage and subpages */
+.gf-photo-link{display:none}
+@media (min-width:1200px){.gf-photo-link{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;margin-left:12px;border-radius:999px;background:#6336F5;color:#fff!important;font-weight:600;font-size:15px;text-decoration:none;white-space:nowrap}.gf-photo-link:hover{background:#5126DA}}
+
+/* subpage band above the footer */
+.gft-photo-band{background:#6336F5;color:#fff}
+.gft-photo-band-in{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-block:56px}
+.gft-photo-band h2{margin:6px 0 10px;color:#fff;font-size:clamp(32px,4.4vw,56px);line-height:1;letter-spacing:-.03em}
+.gft-photo-band p{max-width:56ch;margin:0;color:rgba(255,255,255,.86)}
+.gft-photo-band .gft-kicker{color:#D8F24A}
+.gft-photo-band .gft-pill{flex:none;background:#D8F24A;color:#47132D}
+@media (max-width:800px){.gft-photo-band-in{flex-direction:column;align-items:stretch;padding-block:40px}}
+
+/* mobile header button: one line */
+#gfs-nav .ask,.gft-ask{white-space:nowrap}
+.gf-lead-consent .wpcf7-list-item-label{font-weight:400}
+
+/* ---------- social follow (1.0.37) ---------- */
+.gf-follow{margin:22px 0 0}
+.gf-follow-t{margin:0 0 10px!important;font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.gf-follow-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.gf-follow-a{display:grid;grid-template-columns:36px 1fr;column-gap:12px;align-items:center;min-height:52px;padding:8px 14px 8px 8px;border:1px solid currentColor;border-color:rgba(127,127,127,.35);border-radius:14px;color:inherit!important;text-decoration:none;transition:border-color .15s,background .15s}
+.gf-follow-a:hover{border-color:#6336F5;background:rgba(99,54,245,.08)}
+.gf-follow-a:focus-visible{outline:3px solid #6336F5;outline-offset:2px}
+.gf-follow-ico{grid-row:1/3;width:36px;height:36px;border-radius:10px;background:#6336F5;position:relative}
+.gf-follow-ico::after{content:"";position:absolute;inset:8px;background:#fff;-webkit-mask:var(--gf-i) center/contain no-repeat;mask:var(--gf-i) center/contain no-repeat}
+.gf-follow-instagram .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.3 5.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z'/%3E%3C/svg%3E")}
+.gf-follow-linkedin .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 9h4v12H4zM6 3a2.2 2.2 0 1 1 0 4.4A2.2 2.2 0 0 1 6 3zm4.5 6h3.8v1.7c.6-1 1.9-2 3.9-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3V21h-4z'/%3E%3C/svg%3E")}
+.gf-follow-facebook .gf-follow-ico{--gf-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.5 22v-8h2.8l.4-3.3h-3.2V8.6c0-.9.3-1.6 1.7-1.6h1.7V4.1a23 23 0 0 0-2.5-.1c-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.8v8z'/%3E%3C/svg%3E")}
+.gf-follow-a b{font-size:15px;line-height:1.2}
+.gf-follow-a span:not(.gf-follow-ico){font-size:13px;line-height:1.3;opacity:.75}
+.gft-foot .gf-follow-a{border-color:rgba(255,255,255,.22)}
+.gft-foot .gf-follow-ico{background:#D8F24A}
+.gft-foot .gf-follow-ico::after{background:#47132D}
+/* row layout where there is room (sections, thank-you card) */
+.gf-follow.row .gf-follow-list{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+/* thank-you card after the form */
+.gf-thanks-follow{margin:12px 0 0;padding:18px 20px;border-radius:16px;background:#fff;color:#47132D;border:1px solid #D9CFD4}
+.gf-thanks-follow .gf-follow{margin:0}
+.gf-thanks-follow p.gf-thanks-lead{margin:0 0 12px;font-size:15px;color:#47132D}
+</style>
+<script>/* Gamefields — "Wyślij zdjęcie placu" (theme 1.0.36) and social media (1.0.37), 2026-11-18.
+ * Enhances Contact Form 7 form 3758 wherever it is ([data-gf-lead]) without changing its fields:
+ * - steps (only if the page did not enhance them already, e.g. /kontakt/ has its own),
+ * - photo drop zone over the three CF7 file inputs (project-photo, -2, -3): drag and drop, several at once,
+ *   thumbnails, remove; large phone photos and HEIC are re-encoded to JPEG (max 2560 px) so they fit 5 MB,
+ * - entry points: [data-gf-photo-pick] buttons open the picker and bring the form, links to #zdjecie open the step,
+ * - hidden lead-source (zdjecie / studio / mapa / formularz),
+ * - mobile sticky bar "Wyślij zdjęcie placu" (hidden near the form, on /kontakt/, cart, checkout and Studio),
+ * - analytics: GA4 event "gf_lead" with details after a sent form (Site Kit already counts the submission itself).
+ * No double ampersand anywhere: WordPress would turn it into an entity in page content.
+ */
+(function () {
+	'use strict';
+	/* Loaded either inline in page content (package v3, before theme 1.0.37) or by the theme: run once. */
+	if (window.gfLeadLoaded) return;
+	window.gfLeadLoaded = true;
+	var MAX = 5 * 1024 * 1024, EDGE = 2560, OK_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+	var canTransfer = (function () { try { return !!new DataTransfer(); } catch (e) { return false; } })();
+
+	function $(s, r) { return (r || document).querySelector(s); }
+	function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+	function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; }
+
+	/* ---------- steps ---------- */
+	function stepper(lead) {
+		var steps = $$('[data-gf-step]', lead), tabs = $$('[data-gf-go]', lead), active = 0;
+		function go(n, focus) {
+			active = Math.max(0, Math.min(steps.length - 1, n));
+			steps.forEach(function (s, i) { s.hidden = i !== active; });
+			tabs.forEach(function (t, i) { if (i === active) t.setAttribute('aria-current', 'step'); else t.removeAttribute('aria-current'); });
+			if (focus) { var l = steps[active].querySelector('legend'); if (l) { l.tabIndex = -1; l.focus(); } }
+		}
+		if (lead.dataset.enhanced !== 'true') {
+			lead.dataset.enhanced = 'true';
+			lead.addEventListener('click', function (e) {
+				var b = e.target.closest('button'); if (!b) return;
+				if (b.hasAttribute('data-gf-next')) go(active + 1, true);
+				else if (b.hasAttribute('data-gf-prev')) go(active - 1, true);
+				else if (b.hasAttribute('data-gf-go')) go(+b.getAttribute('data-gf-go'), true);
+			});
+			var wrap = lead.closest('.wpcf7');
+			if (wrap) wrap.addEventListener('wpcf7invalid', function () {
+				var bad = lead.querySelector('.wpcf7-not-valid'); if (!bad) return;
+				var i = steps.findIndex(function (s) { return s.contains(bad); }); if (i > -1) go(i, false); bad.focus();
+			});
+			go(0, false);
+		}
+	}
+	/* Opens a step through its tab, so it works with this stepper and with a page's own one. */
+	function openStep(lead, n) { var tab = lead.querySelector('[data-gf-go="' + n + '"]'); if (tab) tab.click(); }
+
+	/* ---------- photos ---------- */
+	function shrink(file) {
+		var small = OK_TYPES.indexOf(file.type) > -1 ? file.size <= 2.5 * 1024 * 1024 : false;
+		if (small) return Promise.resolve(file);
+		if (!window.createImageBitmap) return Promise.resolve(file);
+		return createImageBitmap(file).then(function (bmp) {
+			var k = Math.min(1, EDGE / Math.max(bmp.width, bmp.height)), c = document.createElement('canvas');
+			c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+			c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+			return new Promise(function (res) { c.toBlob(function (b) { res(b ? new File([b], (file.name || 'zdjecie').replace(/\.[^.]+$/, '') + '.jpg', { type: 'image/jpeg' }) : file); }, 'image/jpeg', 0.85); });
+		}, function () { return file; });
+	}
+
+	function photos(lead) {
+		var box = $('[data-gf-photos]', lead); if (!box) return null;
+		var inputs = $$('input[type=file][name^="project-photo"]', box); if (!inputs.length) return null;
+		if (!canTransfer) return null; /* old browsers keep the plain CF7 inputs */
+		box.classList.add('gf-photos-on');
+		var status = el('p', 'gf-photos-status'); status.setAttribute('role', 'status');
+		var picker = el('input'); picker.type = 'file'; picker.accept = 'image/*'; picker.multiple = true; picker.hidden = true; picker.setAttribute('aria-hidden', 'true'); picker.tabIndex = -1;
+		var zone = el('button', 'gf-drop'); zone.type = 'button';
+		zone.innerHTML = '<span class="gf-drop-ico" aria-hidden="true"></span><b>Dodaj zdjęcia placu</b><span>Przeciągnij tutaj albo zrób telefonem · do 3 zdjęć</span>';
+		var thumbs = el('ul', 'gf-thumbs'); thumbs.setAttribute('role', 'list');
+		var small = box.querySelector('small');
+		box.insertBefore(zone, small || null); box.insertBefore(thumbs, small || null); box.insertBefore(status, small || null); box.appendChild(picker);
+
+		function free() { return inputs.filter(function (i) { return !i.files.length; }); }
+		function render() {
+			thumbs.textContent = '';
+			inputs.forEach(function (inp) {
+				if (!inp.files.length) return;
+				var f = inp.files[0], li = el('li'), img = el('img'), x = el('button', 'gf-thumb-x', '×');
+				img.alt = ''; img.src = URL.createObjectURL(f); img.onload = function () { URL.revokeObjectURL(img.src); };
+				x.type = 'button'; x.setAttribute('aria-label', 'Usuń zdjęcie ' + f.name);
+				x.addEventListener('click', function () { inp.value = ''; inp.dispatchEvent(new Event('change', { bubbles: true })); render(); zone.focus(); });
+				li.appendChild(img); li.appendChild(x); thumbs.appendChild(li);
+			});
+			var n = 3 - free().length;
+			zone.querySelector('b').textContent = n ? (n < 3 ? 'Dodaj kolejne zdjęcie (' + n + '/3)' : 'Masz 3 zdjęcia') : 'Dodaj zdjęcia placu';
+			zone.disabled = n >= 3;
+			lead.dataset.gfPhotoCount = String(n);
+		}
+		function add(list) {
+			var files = Array.prototype.slice.call(list || []).filter(function (f) { return /^image\//.test(f.type) || /\.(heic|heif)$/i.test(f.name); });
+			if (!files.length) { status.textContent = 'To nie wygląda na zdjęcie. Wybierz plik JPG, PNG lub WebP.'; return Promise.resolve(); }
+			var slots = free(), skipped = Math.max(0, files.length - slots.length);
+			status.textContent = 'Przygotowuję zdjęcia…';
+			return Promise.all(files.slice(0, slots.length).map(shrink)).then(function (ready) {
+				var bad = 0;
+				ready.forEach(function (f, i) {
+					if (f.size > MAX || OK_TYPES.indexOf(f.type) < 0) { bad++; return; }
+					var dt = new DataTransfer(); dt.items.add(f); slots[i].files = dt.files; slots[i].dispatchEvent(new Event('change', { bubbles: true }));
+				});
+				render();
+				var msg = [];
+				if (bad) msg.push(bad === 1 ? 'Jednego zdjęcia nie udało się przygotować — spróbuj JPG lub PNG.' : bad + ' zdjęć nie udało się przygotować — spróbuj JPG lub PNG.');
+				if (skipped) msg.push('Dodałem pierwsze zdjęcia, limit to 3.');
+				status.textContent = msg.join(' ') || (3 - free().length) + ' z 3 zdjęć dołączonych.';
+			});
+		}
+		zone.addEventListener('click', function () { picker.click(); });
+		picker.addEventListener('change', function () { add(picker.files).then(function () { picker.value = ''; }); });
+		['dragenter', 'dragover'].forEach(function (t) { zone.addEventListener(t, function (e) { e.preventDefault(); zone.classList.add('over'); }); });
+		['dragleave', 'drop'].forEach(function (t) { zone.addEventListener(t, function (e) { e.preventDefault(); zone.classList.remove('over'); }); });
+		zone.addEventListener('drop', function (e) { if (e.dataTransfer) add(e.dataTransfer.files); });
+		var wrap = lead.closest('.wpcf7');
+		if (wrap) wrap.addEventListener('wpcf7mailsent', function () { setTimeout(render, 50); });
+		render();
+		return { add: add, open: function () { picker.click(); }, zone: zone };
+	}
+
+	/* ---------- lead source ---------- */
+	function source(lead) {
+		var f = lead.querySelector('[name="lead-source"]'); if (!f) return;
+		var form = lead.closest('form'); if (!form) return;
+		form.addEventListener('submit', function () {
+			var det = (lead.querySelector('[name="project-details"]') || {}).value || '';
+			var v = 'formularz';
+			if (/^\s*\{/.test(det)) v = 'studio'; /* Studio hands over its project as JSON */
+			else if (/MAPA MOŻLIWOŚCI/.test(det)) v = 'mapa';
+			else if (/Zamówienie (plakatu|piłki)/.test(det)) v = 'plakat';
+			else if (lead.dataset.gfEntry === 'zdjecie') v = 'zdjecie';
+			else if (+(lead.dataset.gfPhotoCount || 0) > 0) v = 'zdjecie';
+			f.value = v; lead.dataset.gfSource = v;
+		}, true);
+	}
+
+	/* ---------- analytics ---------- */
+	function track(lead) {
+		var wrap = lead.closest('.wpcf7'); if (!wrap) return;
+		wrap.addEventListener('wpcf7mailsent', function () {
+			if (typeof window.gtag !== 'function') return;
+			var pt = lead.querySelector('[name="place-type"]');
+			window.gtag('event', 'gf_lead', {
+				lead_source: lead.dataset.gfSource || 'formularz',
+				place_type: pt ? (pt.value || 'brak') : 'brak',
+				photos: +(lead.dataset.gfPhotoCount || 0),
+				page_path: location.pathname
+			});
+		});
+	}
+
+	/* ---------- boot ---------- */
+	var leads = $$('[data-gf-lead]'), first = null;
+	leads.forEach(function (lead) {
+		stepper(lead);
+		var p = photos(lead); lead.gfPhotos = p;
+		source(lead); track(lead);
+		if (!first) first = lead;
+	});
+
+	function bring(lead, pick) {
+		openStep(lead, 1);
+		lead.dataset.gfEntry = 'zdjecie';
+		var target = $('[data-gf-photos]', lead) || lead;
+		target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		if (lead.gfPhotos) {
+			if (pick) lead.gfPhotos.open();
+			else setTimeout(function () { lead.gfPhotos.zone.focus({ preventScroll: true }); }, 450);
+		}
+	}
+	/* Buttons anywhere: open the picker right away (same click), the form follows. */
+	document.addEventListener('click', function (e) {
+		var b = e.target.closest('[data-gf-photo-pick]'); if (!b) return;
+		e.preventDefault();
+		if (first) { bring(first, true); return; }
+		location.href = '/kontakt/#zdjecie';
+	});
+	/* Links to #zdjecie on the same page */
+	document.addEventListener('click', function (e) {
+		var a = e.target.closest('a[href$="#zdjecie"]'); if (!a) return;
+		var url = new URL(a.href, location.href);
+		if (url.pathname !== location.pathname) return;
+		if (!first) return;
+		e.preventDefault(); history.replaceState(null, '', '#zdjecie'); bring(first, false);
+	});
+	if (location.hash === '#zdjecie') { if (first) setTimeout(function () { bring(first, false); }, 300); }
+
+	/* ---------- Studio: link to the configuration and top-down PNG (2026-11-18) ----------
+	 * The page's own handler (Studio dialog on /studio/, gf-home.js on the homepage) still attaches the summary and
+	 * answers Studio. This listener only adds the optional extras of the same message to the same form:
+	 * hidden project-link and the file field project-render (both arrive in the e-mail). */
+	var STUDIO = 'https://gamefields-studio.ryhfs90.chatgpt.site';
+	function studioForm(source) {
+		var frame = document.getElementById('studio');
+		if (frame) if (source === frame.contentWindow) {
+			var dlg = document.getElementById('gf-inquiry-dialog');
+			var inDialog = dlg ? dlg.querySelector('[data-gf-lead]') : null;
+			if (inDialog) return inDialog;
+		}
+		if (source === window.opener) return first;
+		if (frame) if (source === frame.contentWindow) return first;
+		return null;
+	}
+	window.addEventListener('message', function (event) {
+		if (event.origin !== STUDIO) return;
+		var d = event.data; if (!d) return; if (d.type !== 'gf-inquiry') return;
+		var lead = studioForm(event.source); if (!lead) return;
+		var link = lead.querySelector('[name="project-link"]');
+		if (link) link.value = (typeof d.link === 'string' ? (/^https:\/\/gamefields-studio\.ryhfs90\.chatgpt\.site\/\?[^\s]{1,2000}$/.test(d.link) ? d.link : '') : '');
+		var file = lead.querySelector('input[type=file][name="project-render"]');
+		if (!file) return;
+		file.value = '';
+		if (typeof d.image !== 'string') return;
+		if (!/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(d.image)) return;
+		if (d.image.length > 6000000) return;
+		if (!canTransfer) return;
+		try {
+			var type = d.image.slice(5, d.image.indexOf(';')), bin = atob(d.image.slice(d.image.indexOf(',') + 1)), bytes = new Uint8Array(bin.length);
+			for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+			var dt = new DataTransfer(); dt.items.add(new File([bytes], 'gamefields-studio-wizualizacja.' + (type === 'image/png' ? 'png' : 'jpg'), { type: type }));
+			file.files = dt.files;
+		} catch (e) { /* the inquiry goes without the picture */ }
+	});
+	/* Studio opened directly (not on /studio/) sends the project to a new homepage window and waits for this signal. */
+	/* Sent after window load, so the page's own Studio listener (gf-home.js, deferred) is already attached. */
+	function ready() { try { window.opener.postMessage({ type: 'gf-contact-ready' }, STUDIO); } catch (e) { /* not opened by Studio */ } }
+	if (window.opener) if (first) { if (document.readyState === 'complete') ready(); else window.addEventListener('load', ready); }
+
+	/* ---------- social media (1.0.37) ----------
+	 * Same list as gft_social_links() in functions.php. After a sent form: "Zanim odpiszę…" card with the profiles
+	 * (the moment of highest interest). Every [data-gf-social] click: GA4 event gf_social {platform, placement}. */
+	var SOCIAL = [
+		['instagram', 'Instagram', 'https://www.instagram.com/gamefields.eu/', 'Wzory, montaże i boiska w akcji'],
+		['linkedin', 'LinkedIn', 'https://www.linkedin.com/company/gamefields', 'Realizacje dla miast i nabory dotacji'],
+		['facebook', 'Facebook', 'https://www.facebook.com/Gamefields.eu', 'Nowe boiska w Twojej okolicy']
+	];
+	function follow(place, title) {
+		var box = el('div', 'gf-follow row'), list = el('ul', 'gf-follow-list');
+		box.setAttribute('data-gf-follow', place); list.setAttribute('role', 'list');
+		if (title) box.appendChild(el('p', 'gf-follow-t', title));
+		SOCIAL.forEach(function (s) {
+			var li = el('li'), a = el('a', 'gf-follow-a gf-follow-' + s[0]);
+			a.href = s[2]; a.target = '_blank'; a.rel = 'noopener me'; a.setAttribute('data-gf-social', s[0]); a.setAttribute('data-gf-place', place);
+			var ico = el('span', 'gf-follow-ico'); ico.setAttribute('aria-hidden', 'true');
+			a.appendChild(ico); a.appendChild(el('b', '', s[1])); a.appendChild(el('span', '', s[3]));
+			li.appendChild(a); list.appendChild(li);
+		});
+		box.appendChild(list); return box;
+	}
+	leads.forEach(function (lead) {
+		var wrap = lead.closest('.wpcf7'); if (!wrap) return;
+		wrap.addEventListener('wpcf7mailsent', function () {
+			if (wrap.querySelector('.gf-thanks-follow')) return;
+			var card = el('div', 'gf-thanks-follow');
+			card.appendChild(el('p', 'gf-thanks-lead', 'Zanim odpiszę: zobacz, co teraz budujemy, i obserwuj nas, żeby nie przegapić naborów dotacji.'));
+			card.appendChild(follow('po-wyslaniu', ''));
+			var out = wrap.querySelector('.wpcf7-response-output');
+			if (out) out.insertAdjacentElement('afterend', card); else wrap.appendChild(card);
+		});
+	});
+	document.addEventListener('click', function (e) {
+		var a = e.target.closest('a[data-gf-social]'); if (!a) return;
+		if (typeof window.gtag !== 'function') return;
+		window.gtag('event', 'gf_social', { platform: a.getAttribute('data-gf-social'), placement: a.getAttribute('data-gf-place') || 'inne', page_path: location.pathname });
+	});
+
+	/* ---------- mobile sticky bar ---------- */
+	var path = location.pathname, skip = /^\/(kontakt|studio|koszyk|cart|zamowienie|checkout|moje-konto|my-account)(\/|$)/.test(path);
+	if (!skip) {
+		var bar = el('div', 'gf-sticky'); bar.innerHTML = '<a href="' + (first ? '#zdjecie' : '/kontakt/#zdjecie') + '" data-gf-sticky>Wyślij zdjęcie placu <span aria-hidden="true">→</span></a>';
+		document.body.appendChild(bar);
+		var hideFor = $$('[data-gf-lead], .gft-foot, footer');
+		var seen = new Set();
+		if ('IntersectionObserver' in window) {
+			var io = new IntersectionObserver(function (es) {
+				es.forEach(function (x) { if (x.isIntersecting) seen.add(x.target); else seen.delete(x.target); });
+				bar.classList.toggle('off', seen.size > 0);
+			}, { rootMargin: '0px 0px -10% 0px' });
+			hideFor.forEach(function (n) { io.observe(n); });
+		}
+		var shown = false;
+		window.addEventListener('scroll', function () { if (!shown) if (window.scrollY > 500) { shown = true; bar.classList.add('on'); } }, { passive: true });
+	}
+})();
+</script>
+<!-- /wp:html -->
