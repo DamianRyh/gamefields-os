@@ -10,7 +10,7 @@
 //  - specks: islands smaller than 30 x 30 cm (144 px) — more than two reject;
 //  - paints: at most 5 slots used, at least 3 (ground + 2);
 //  - symmetry: the raster equals its 180° turn or its mirror (≤ 1.2 % pixels differ);
-//    mural families (MURAL): a tapered point (thin piece shorter than 75 cm and under 0.09 m²) is allowed, a thin strip is not;
+//    mural and Polish families (MURAL, QUALITY): a tapered point (thin piece shorter than 75 cm and under 0.09 m²) is allowed, a thin strip is not;
 //    and instead of symmetry the halves are balanced — ground share within 30 %, ≥ 3 paints in each half, detail within 1.6x;
 //  - balance: the ground or any paint covers ≤ 82 % of the court.
 // Measured and stored: area share per slot (paint m²), masking-edge length in metres, mode tag.
@@ -110,7 +110,7 @@ for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
   for (let i = 0; i < 3 * N && (i < N || cands.length < POOL_SIZE * 2.5); i++, tried++) {
     const seed = (base + i * 7919) % 999983 + 1;
     const a = composeSlots(fid, seed, 400), b = composeSlots(fid, seed, 600);
-    const [m4, m6] = await page.evaluate(async ([s4, s6, tp]) => [await window.analyse(s4, 1200, 800, true, 2, tp), await window.analyse(s6, 600, 600, false, 1, tp)], [toSvg(a.g, 400, 2), toSvg(b.g, 600), MURAL.has(fid)]);
+    const [m4, m6] = await page.evaluate(async ([s4, s6, tp]) => [await window.analyse(s4, 1200, 800, true, 2, tp), await window.analyse(s6, 600, 600, false, 1, tp)], [toSvg(a.g, 400, 2), toSvg(b.g, 600), MURAL.has(fid) || QUALITY(fid)]);
     const used = m4.area.filter((x) => x > 0.003).length;
     let why = null;
     if (m4.thinBad || m6.thinBad) why = 'thin'; else if (m4.specks > 2 || m6.specks > 2) why = 'specks'; else if (used < 3 || used > 5) why = 'paints'; else if (MURAL.has(fid) ? !muralBalanced(m4) : (m4.sym > 0.012 || m6.sym > 0.012)) why = 'sym'; else if (Math.max(...m4.area) > 0.82) why = 'balance';

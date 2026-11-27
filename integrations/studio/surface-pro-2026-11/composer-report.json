@@ -334,5 +334,20 @@
   },
   "modes": 2,
   "tapeMedian": 101
+ },
+ "pro-p-wycinanka": {
+  "candidates": 633,
+  "passed": 90,
+  "kept": 36,
+  "rejected": {
+   "thin": 471,
+   "specks": 39,
+   "paints": 0,
+   "sym": 27,
+   "balance": 6,
+   "lines": 0
+  },
+  "modes": 6,
+  "tapeMedian": 118
  }
 }
