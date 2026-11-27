@@ -1,0 +1,16 @@
+{
+  "sourceWpId": 4629,
+  "sourceRepoPath": "integrations/wordpress/pages/autentycznosc-2026-11/jak-powstaje-arena.html",
+  "sourceCommit": "80905592129086a99d963e83e913e8e1d5807a3a",
+  "liveVerified": false,
+  "translatedNodes": 26,
+  "translatedAttributes": 12,
+  "missing": [
+    "Piotr Wiśniewski"
+  ],
+  "unmappedAttrs": [],
+  "protectedIdentical": true,
+  "releaseBlocked": [
+    "Compare source against current live WordPress after WPVibe limit resets. EN links, metadata, schema and browser QA pending. Confirm image rights, testimonial consent and technical project details."
+  ]
+}
