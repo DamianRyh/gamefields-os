@@ -14,6 +14,7 @@ import {SurfaceBaseColor} from "@/components/studio-asset-library";
 type Patch=Partial<Project>;
 const CATEGORIES=[
  {id:'all',label:'Wszystkie',test:/./},
+ {id:'polish',label:'Wzory polskie',test:/./,eyebrow:'POLSKIE'},
  {id:'murals',label:'Murale',test:/./,eyebrow:'MURALE'},
  {id:'composer',label:'Kompozytor',test:/./,eyebrow:'KOMPOZYTOR'},
  {id:'masters',label:'Inspiracje mistrzów',test:/./,eyebrow:'MASTERS'},

@@ -63,8 +63,28 @@ window.analyse = async (svg, W, H, sig, sc, taper) => {
   for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = y*W + x; const side = x < W / 2 ? 0 : 1; halfA[side][lab[i]]++; if (x < W-1 && lab[i] !== lab[i+1]) { edges++; halfE[side]++; } if (y < H-1 && lab[i] !== lab[i+W]) { edges++; halfE[side]++; } }
   // half balance for murals: L1 distance between the two halves' paint shares, and their detail (edge) ratio
   const hn = N / 2; let bal = 0; for (let k = 0; k < 5; k++) bal += Math.abs(halfA[0][k] - halfA[1][k]) / hn; const eRatio = Math.max(halfE[0], halfE[1]) / Math.max(1, Math.min(halfE[0], halfE[1]));
+  // slot adjacency (how much each pair of slots touches) for the colour plan, normalised to the strongest pair
+  const adjM = Array.from({ length: 5 }, () => [0,0,0,0,0]);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = y*W + x, a = lab[i]; if (x < W-1 && lab[i+1] !== a) { adjM[a][lab[i+1]]++; adjM[lab[i+1]][a]++; } if (y < H-1 && lab[i+W] !== a) { adjM[a][lab[i+W]]++; adjM[lab[i+W]][a]++; } }
+  const adj = []; for (let i = 0; i < 5; i++) for (let j = i + 1; j < 5; j++) adj.push(adjM[i][j]); const amax = Math.max(1, ...adj);
+  // line clash: a colour edge running alongside a court line, 4–12 cm from it, makes the line hard to read
+  let clash = 0, samples = 0, keyEdges = 0, keyPx = 0;
+  if (sig) {
+    const k = W / 600, cy = H / 2, at = (x, y) => lab[Math.max(0, Math.min(H-1, Math.round(y)))*W + Math.max(0, Math.min(W-1, Math.round(x)))];
+    const probe = (x, y, nx, ny) => { samples++; let prev = at(x - nx*10, y - ny*10); for (let d = -9; d <= 10; d++) { const v = at(x + nx*d, y + ny*d); if (v !== prev && Math.abs(d - 0.5) >= 3) { clash++; return; } prev = v; } };
+    const seg = (x0, y0, x1, y1) => { const L = Math.hypot(x1-x0, y1-y0), nx = -(y1-y0)/L, ny = (x1-x0)/L; for (let t = 0; t <= L; t += 4) probe(x0 + (x1-x0)*t/L, y0 + (y1-y0)*t/L, nx, ny); };
+    const o = 15*k; seg(o, o, W-o, o); seg(o, H-o, W-o, H-o); seg(o, o, o, H-o); seg(W-o, o, W-o, H-o); seg(W/2, o, W/2, H-o);
+    for (const sx of [1, -1]) { const bx = sx > 0 ? o : W - o, kx = bx + sx*70*k; seg(bx, cy-75*k, kx, cy-75*k); seg(bx, cy+75*k, kx, cy+75*k); seg(kx, cy-75*k, kx, cy+75*k); }
+    const r = 45*k; for (let a = 0; a < Math.PI*2; a += 4/r) probe(W/2 + Math.cos(a)*r, cy + Math.sin(a)*r, Math.cos(a), Math.sin(a));
+    // key busyness: edge density inside the two keys against the whole court
+    for (const [x0, x1] of [[o, o + 70*k], [W - o - 70*k, W - o]]) for (let y = Math.round(cy-75*k); y < cy+75*k; y++) for (let x = Math.round(x0); x < x1; x++) { keyPx++; const i = y*W + x; if (lab[i] !== lab[i+1] || lab[i] !== lab[i+W]) keyEdges++; }
+  }
+  // boundary length as in paint-plan.mjs: per tile (16 px at court scale) sqrt(h² + v²), exact on straight edges
+  let tileLen = 0; { const t = 16 * sc, tw = Math.ceil(W / t), th = Math.ceil(H / t), hh = new Float64Array(tw*th), vv = new Float64Array(tw*th);
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = y*W + x, ti = ((y / t) | 0) * tw + ((x / t) | 0); if (x < W-1 && lab[i] !== lab[i+1]) hh[ti]++; if (y < H-1 && lab[i] !== lab[i+W]) vv[ti]++; }
+    for (let i = 0; i < tw*th; i++) tileLen += Math.hypot(hh[i], vv[i]); }
   let s = null; if (sig) { s = []; const cs = 10 * sc; for (let y = 0; y < H; y += cs) for (let x = 0; x < W; x += cs) { let e = 0; for (let yy = y; yy < Math.min(H, y+cs) && !e; yy++) for (let xx = x; xx < Math.min(W, x+cs) - 1; xx++) if (lab[yy*W+xx] !== lab[yy*W+xx+1] || (yy < H-1 && lab[yy*W+xx] !== lab[(yy+1)*W+xx])) { e = 1; break; } s.push(e); } }
-  return { area: area.map((a) => a / N), thinBad, thinPx: thinPx / (sc * sc), specks, sym: Math.min(rot, mir) / N, bal, eRatio, half: halfA.map((h) => h.map((v) => v / hn)), edges: edges / sc, sig: s };
+  return { area: area.map((a) => a / N), thinBad, thinPx: thinPx / (sc * sc), specks, sym: Math.min(rot, mir) / N, bal, eRatio, half: halfA.map((h) => h.map((v) => v / hn)), edges: edges / sc, tileLen: tileLen / sc, sig: s, adj: adj.map((v) => Math.round(v / amax * 1000) / 1000), lineClash: samples ? clash / samples : 0, keyBusy: keyPx ? (keyEdges / keyPx) / Math.max(1e-6, edges / N) : 0 };
 };`;
 
 const browser = await chromium.launch();
@@ -77,12 +97,14 @@ const only = process.argv[4] ? process.argv[4].split(',') : null;
 const prev = only ? await import('./court-composer.mjs?' + Date.now()) : null;
 // murals: colours may differ between halves (a red plane left, a blue one right); what must match is how much is painted,
 // how many paints each half carries and how much detail it has
+// Kompozytor IV and later (QUALITY): colour plan from measured adjacency, readable court lines, calm keys
+const QUALITY = (fid) => fid.startsWith('pro-p-');
 const muralBalanced = (m) => Math.abs(m.half[0][0] - m.half[1][0]) <= 0.3 && m.half.every((h) => h.filter((v) => v > 0.02).length >= 3) && m.eRatio <= 1.6;
 const POOL = only ? { ...prev.POOL } : {}; let report = {}; try { if (only) report = JSON.parse(readFileSync(here + 'composer-report.json', 'utf8')); } catch {}
 for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
   if (only && !only.includes(fid)) continue;
   const base = hashS(fid); const cands = [];
-  const reasons = { thin: 0, specks: 0, paints: 0, sym: 0, balance: 0 };
+  const reasons = { thin: 0, specks: 0, paints: 0, sym: 0, balance: 0, lines: 0 };
   // N candidates, more (up to 3 N) for strict families until 2.5 x the pool has passed
   let tried = 0;
   for (let i = 0; i < 3 * N && (i < N || cands.length < POOL_SIZE * 2.5); i++, tried++) {
@@ -92,12 +114,13 @@ for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
     const used = m4.area.filter((x) => x > 0.003).length;
     let why = null;
     if (m4.thinBad || m6.thinBad) why = 'thin'; else if (m4.specks > 2 || m6.specks > 2) why = 'specks'; else if (used < 3 || used > 5) why = 'paints'; else if (MURAL.has(fid) ? !muralBalanced(m4) : (m4.sym > 0.012 || m6.sym > 0.012)) why = 'sym'; else if (Math.max(...m4.area) > 0.82) why = 'balance';
+    else if (QUALITY(fid) && m4.lineClash > 0.22) why = 'lines';
     if (why) { reasons[why]++; continue; }
-    const tape = Math.round((m4.edges / 40) * 0.82); // px edges -> metres; 0.82 corrects staircase over-count on curves and diagonals
-    cands.push({ seed, mode: a.mode, area: m4.area, tape, used, sig: m4.sig, thinPx: m4.thinPx + m6.thinPx });
+    const tape = Math.round(m4.tileLen / 40); // metres on the 15 x 10 m reference court (40 px = 1 m), same measure as the paint plan
+    cands.push({ seed, mode: a.mode, area: m4.area, tape, used, sig: m4.sig, thinPx: m4.thinPx + m6.thinPx, adj: m4.adj, lineClash: m4.lineClash, keyBusy: m4.keyBusy });
   }
   // score: clean edges, balanced paint, moderate masking (≈ 1–3 m of tape per m²)
-  for (const c of cands) { const t = c.tape / 150; const bal = 1 - Math.max(...c.area); c.score = bal * 1.2 - Math.abs(Math.log((t + 0.3) / 1.8)) * 0.6 - c.thinPx / 4000 + (c.used >= 4 ? 0.1 : 0); }
+  for (const c of cands) { const t = c.tape / 150; const bal = 1 - Math.max(...c.area); c.score = bal * 1.2 - Math.abs(Math.log((t + 0.3) / 1.8)) * 0.6 - c.thinPx / 4000 + (c.used >= 4 ? 0.1 : 0); if (QUALITY(fid)) c.score -= c.lineClash * 2 + Math.max(0, c.keyBusy - 1.5) * 0.4; }
   cands.sort((x, y) => y.score - x.score);
   // varied pick: round-robin over modes, reject near-duplicates (structure Jaccard distance < 0.35)
   const jd = (p, q) => { let i = 0, u = 0; for (let k = 0; k < p.length; k++) { if (p[k] && q[k]) i++; if (p[k] || q[k]) u++; } return u ? 1 - i / u : 0; };
@@ -106,7 +129,7 @@ for (const fid of Object.keys(COMPOSER_GRAMMARS)) {
   for (let minD = 0.35; minD >= 0.1 && chosen.length < POOL_SIZE; minD -= 0.08) {
     let progress = true; while (chosen.length < POOL_SIZE && progress) { progress = false; for (const md of modes) { if (chosen.length >= POOL_SIZE) break; const list = byMode[md]; const k = list.findIndex((c) => !chosen.includes(c) && chosen.every((o) => jd(o.sig, c.sig) >= minD)); if (k >= 0) { chosen.push(list[k]); progress = true; } } }
   }
-  POOL[fid] = chosen.map((c) => ({ s: c.seed, m: { a: c.area.map((x) => Math.round(x * 1000) / 1000), t: c.tape, w: 20, md: c.mode } }));
+  POOL[fid] = chosen.map((c) => ({ s: c.seed, m: { a: c.area.map((x) => Math.round(x * 1000) / 1000), t: c.tape, w: 20, md: c.mode, ...(QUALITY(fid) ? { e: c.adj, lc: Math.round(c.lineClash * 1000) / 1000, kb: Math.round(c.keyBusy * 100) / 100 } : {}) } }));
   report[fid] = { candidates: tried, passed: cands.length, kept: chosen.length, rejected: reasons, modes: [...new Set(chosen.map((c) => c.mode))].length, tapeMedian: chosen.length ? chosen.map((c) => c.tape).sort((a, b) => a - b)[chosen.length >> 1] : 0 };
   console.log(fid, JSON.stringify(report[fid]));
   save(); // after every family, so a crash later never loses finished work

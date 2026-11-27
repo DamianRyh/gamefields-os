@@ -7,7 +7,8 @@ const masters=JSON.parse(readFileSync(here+'signature-masters.json','utf8'));
 const masters2=JSON.parse(readFileSync(here+'signature-masters-2.json','utf8')); // Masters II (2026-11-17)
 const composer=JSON.parse(readFileSync(here+'signature-composer.json','utf8')); // Court Composer (2026-11-26)
 const composer2=JSON.parse(readFileSync(here+'signature-composer-2.json','utf8')); // Kompozytor II (2026-11-26)
-const murals=JSON.parse(readFileSync(here+'signature-murals.json','utf8')); // Kompozytor III: Murale (2026-11-26), shown first
+const murals=JSON.parse(readFileSync(here+'signature-murals.json','utf8')); // Kompozytor III: Murale (2026-11-26)
+const polish=JSON.parse(readFileSync(here+'signature-polskie.json','utf8')); // Kompozytor IV: Wzory polskie (2026-11-27), shown first
 const cx={'niska':1,'średnia':2,'wysoka':3,'bardzo wysoka':4};
 const fams=PRO_FAMILIES.map(f=>({id:f.id,name:f.name,short:f.short,group:f.group,description:f.description,tags:['pro',f.group],baseComplexity:cx[f.masking]||3,renderer:'pro'}));
 const pals=PRO_PALETTES.map(p=>({id:p.id,name:p.name,colors:p.colors,tone:p.tone}));
@@ -17,6 +18,7 @@ import type {PatternFamily,PatternPalette,SignaturePreset} from "./pattern-libra
 export const proFamilies:PatternFamily[]=${JSON.stringify(fams,null,1)};
 export const proPalettes:PatternPalette[]=${JSON.stringify(pals,null,1)} as PatternPalette[];
 export const proSignaturePresets:SignaturePreset[]=${JSON.stringify(sig.map(preset('SIGNATURE PRO')),null,1)};
+export const polishSignaturePresets:SignaturePreset[]=${JSON.stringify(polish.map(preset('POLSKIE')),null,1)};
 export const muralSignaturePresets:SignaturePreset[]=${JSON.stringify(murals.map(preset('MURALE')),null,1)};
 export const composerSignaturePresets:SignaturePreset[]=${JSON.stringify([...composer2.map(preset('KOMPOZYTOR II')),...composer.map(preset('KOMPOZYTOR'))],null,1)};
 export const mastersSignaturePresets:SignaturePreset[]=${JSON.stringify([...masters2.map(preset('MASTERS II')),...masters.map(preset('MASTERS'))],null,1)};
@@ -25,4 +27,4 @@ writeFileSync(here+'studio/lib/pattern-library-pro.ts',out);
 copyFileSync(here+'court-art-pro.mjs',here+'studio/lib/court-art-pro.mjs');copyFileSync(here+'court-composer.mjs',here+'studio/lib/court-composer.mjs');
 const studio=here+'../canvas-editor/lib/';
 writeFileSync(studio+'pattern-library-pro.ts',out);copyFileSync(here+'court-art-pro.mjs',studio+'court-art-pro.mjs');copyFileSync(here+'court-composer.mjs',studio+'court-composer.mjs');for(const d of ['court-art-pro.d.mts','court-composer.d.mts','paint-plan.d.mts'])copyFileSync(here+'studio/lib/'+d,studio+d);copyFileSync(here+'paint-plan.mjs',studio+'paint-plan.mjs');copyFileSync(here+'paint-plan.mjs',here+'studio/lib/paint-plan.mjs');
-console.log(fams.length,pals.length,sig.length,masters.length,masters2.length,composer.length,composer2.length,murals.length);
+console.log(fams.length,pals.length,sig.length,masters.length,masters2.length,composer.length,composer2.length,murals.length,polish.length);

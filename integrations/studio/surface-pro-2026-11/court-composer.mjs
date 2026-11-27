@@ -410,27 +410,142 @@ function muralStrokes(R, h) {
   return { g, mode: 'stroke' + (dots ? 'd' : '') };
 }
 
+/* ---------------- grammars, Kompozytor IV: Wzory polskie (2026-11-27) ----------------
+   Traditional Polish ornament translated into court geometry: method of the craft, not a copy of a given piece.
+   Checked with the QUALITY rules (colour plan from measured adjacency, readable court lines, calm keys). */
+const St = (d, s, w) => '<path d="' + d + '" fill="none" stroke="§' + s + '" stroke-width="' + f(w) + '" stroke-linecap="round" stroke-linejoin="round"/>';
+
+// Wycinanka — Łowicz paper cut: layered petals around the centre circle, small rosettes in the corners
+function wycinanka(R, h) {
+  const cy = h / 2; const m = pickR(R, [8, 10, 12, 16]); const L1 = pickR(R, [0.62, 0.72, 0.8]) * cy; const w1 = L1 * pickR(R, [0.36, 0.44]);
+  const inner = R() < 0.7; const corners = R() < 0.6; const ph = R() < 0.5 ? 0 : Math.PI / m; let g = '';
+  for (let i = 0; i < m; i++) { const a = ph + (i / m) * TAU; const cx = 300 + Math.cos(a) * (L1 * 0.5 + 40), cyy = cy + Math.sin(a) * (L1 * 0.5 + 40);
+    g += P(leafPts(cx, cyy, L1, w1, a), 1 + (i % 2)); if (inner) g += P(leafPts(cx, cyy, L1 * 0.62, w1 * 0.5, a), 3); }
+  g += Ci(300, cy, 52, 4) + Ci(300, cy, 34, 1 + (m % 2)) + Ci(300, cy, 16, 3);
+  if (corners) { const r = pickR(R, [70, 90]); let c = ''; const n = 5; for (let i = 0; i < n; i++) { const a = (i / (n - 1)) * Math.PI / 2; c += P(leafPts(Math.cos(a) * r * 0.55, Math.sin(a) * r * 0.55, r, r * 0.42, a), 1 + ((i + 1) % 2)); } c += Ci(0, 0, r * 0.28, 4); const left = c + mirY(h, c); g += left + mirX(left); }
+  return { g, mode: 'wyc' + m + (corners ? 'c' : '') };
+}
+
+// Pasiak — Łowicz striped wool: bright stripes of several widths, mirrored about the centre line
+function pasiak(R, h) {
+  const cy = h / 2; const vertical = R() < 0.7; const len = vertical ? 300 : cy; const widths = [24, 32, 40, 56, 72]; const seq = []; let o = 0, k = intR(R, 0, 3);
+  while (o < len) { const w = Math.min(pickR(R, widths), len - o); if (w < 20) { if (seq.length) seq[seq.length - 1][1] += w; break; } k = (k + 1 + intR(R, 0, 1)) % 4; seq.push([o, w, 1 + k]); o += w; }
+  let g = ''; for (const [a, w, s] of seq) g += vertical ? Rc(a, 0, w, h, s) + Rc(600 - a - w, 0, w, h, s) : Rc(0, a, 600, w, s) + Rc(0, h - a - w, 600, w, s);
+  if (R() < 0.5) { const bw = pickR(R, [40, 60]); g += vertical ? Rc(0, cy - bw / 2, 600, bw, 0) : Rc(300 - bw / 2, 0, bw, h, 0); }
+  return { g, mode: 'pas' + (vertical ? 'v' : 'h') };
+}
+
+// Ceramika — Bolesławiec stoneware: "peacock eye" dot motifs (dot, ring, dot) on a calm ground, with sprigs
+function ceramika(R, h) {
+  const cy = h / 2; const sp = pickR(R, [90, 110, 130]); const r = sp * pickR(R, [0.28, 0.34]); const sprig = R() < 0.6; let g = '';
+  const eye = (x, y, rr, k) => Ci(x, y, rr, 1 + (k % 2)) + Ci(x, y, rr * 0.66, 3) + Ci(x, y, rr * 0.32, 4);
+  const ny = Math.ceil(cy / (sp * 0.866)) + 1, nx = Math.ceil(300 / sp) + 1;
+  for (let j = -ny; j <= ny; j++) for (let i = -nx; i <= nx; i++) { const x = 300 + i * sp + (Math.abs(j) % 2) * sp / 2, y = cy + j * sp * 0.866; if (Math.hypot(x - 300, y - cy) < 75) continue; if (x < -r || x > 600 + r || y < -r || y > h + r) continue;
+    g += eye(x, y, r, Math.abs(i + j)); if (sprig) { for (const a of [0, Math.PI / 2, Math.PI, Math.PI * 1.5]) { const lx = x + Math.cos(a + Math.PI / 4) * (r + sp * 0.16), ly = y + Math.sin(a + Math.PI / 4) * (r + sp * 0.16); g += P(leafPts(lx, ly, sp * 0.2, Math.max(12, sp * 0.08), a + Math.PI / 4), 2); } } }
+  g += eye(300, cy, 62, 0);
+  return { g, mode: 'cer' + (sprig ? 's' : '') };
+}
+
+// Mozaika — Polish post-war modernist mosaics: big tiles with quarter circles, halves, triangles; point-symmetric
+function mozaika(R, h) {
+  const cy = h / 2; const s = pickR(R, [100, 120, 150]); const nx = Math.ceil(300 / s), ny = Math.ceil(h / s); const oy = (h - ny * s) / 2; let half = '';
+  for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) { const x = 300 - (i + 1) * s, y = oy + j * s; const t = intR(R, 0, 4), rot = intR(R, 0, 3), a = 1 + intR(R, 0, 3), b = 1 + ((a + intR(R, 0, 2)) % 4);
+    let tile = Rc(x, y, s, s, a); const c = [[x, y], [x + s, y], [x + s, y + s], [x, y + s]];
+    if (t === 0) tile += P(sectorPts(c[rot][0], c[rot][1], 0, s, rot * Math.PI / 2, rot * Math.PI / 2 + Math.PI / 2), b);
+    else if (t === 1) tile += P([c[rot], c[(rot + 1) % 4], c[(rot + 2) % 4]], b);
+    else if (t === 2) { const mx = x + s / 2, my = y + s / 2; tile += P(sectorPts(mx, my, 0, s / 2, rot * Math.PI / 2, rot * Math.PI / 2 + Math.PI), b); }
+    else if (t === 3) tile += Ci(x + s / 2, y + s / 2, s * 0.32, b);
+    else { for (let q = 0; q < 3; q++) tile += Rc(x + (q * s) / 3 + s / 12, y, s / 6 + 4, s, b); }
+    half += tile; }
+  return { g: half + rot180(h, half), mode: 'moz' + s };
+}
+
+// Kilim — stepped diamonds of the highland weaves (Podhale, Hutsul): Manhattan rings on a coarse grid
+function kilim(R, h) {
+  const cy = h / 2; const s = pickR(R, [20, 24, 30]); const band = pickR(R, [2, 3]); const k = intR(R, 3, 4); const centres = R() < 0.5 ? [[300, cy]] : [[150, cy], [300, cy], [450, cy]]; const Rmax = pickR(R, [0.42, 0.5]) * h;
+  const nx = Math.ceil(300 / s), ny = Math.ceil(cy / s); let g = '';
+  for (let j = -ny; j < ny; j++) for (let i = -nx; i < nx; i++) { const x = 300 + i * s + s / 2, y = cy + j * s + s / 2; let best = 1e9, sl = 0;
+    for (const [qx, qy] of centres) { const d = Math.abs(x - qx) + Math.abs(y - qy); if (d < best) best = d; }
+    if (best > Rmax * (centres.length > 1 ? 0.7 : 1)) continue; const ring = Math.floor(best / (s * band)); sl = ring % (k + 1); if (sl === 0) continue;
+    g += Rc(300 + i * s, cy + j * s, s + 0.6, s + 0.6, sl); }
+  if (R() < 0.6) { const bw = s * 2; let z = ''; for (let x = 0; x < 600; x += bw * 2) z += P([[x, 0], [x + bw, bw], [x + bw * 2, 0]], 1 + (k % 4)); g += z + mirY(h, z); }
+  return { g, mode: 'kil' + centres.length };
+}
+
+// Neon — Warsaw neon signs: thick tubes (flat paint, at least 20 cm) tracing figures on a dark ground
+function neon(R, h) {
+  const cy = h / 2; const w = pickR(R, [18, 22, 26]); let g = ''; const k = intR(R, 2, 3); const kind = intR(R, 0, 2);
+  const ring = (r, sl) => St('M' + f(300 - r) + ' ' + f(cy) + 'a' + f(r) + ' ' + f(r) + ' 0 1 0 ' + f(2 * r) + ' 0a' + f(r) + ' ' + f(r) + ' 0 1 0 ' + f(-2 * r) + ' 0', sl, w);
+  g += ring(70, 1) + ring(70 + w + 22, 1 + (1 % k));
+  if (kind === 0) { let half = ''; for (let i = 0; i < 4; i++) { const r = 100 + i * (w + 24); half += St('M' + f(60) + ' ' + f(cy - r * 0.72) + 'Q' + f(60 + r * 0.95) + ' ' + f(cy) + ' ' + f(60) + ' ' + f(cy + r * 0.72), 1 + ((i + 1) % k), w); } g += half + mirX(half); }
+  else if (kind === 1) { for (const yy of [0.3, 0.7]) { let z = 'M40 ' + f(cy * yy * 2 - 30); for (let x = 40, up = true; x <= 560; x += 60, up = !up) z += 'L' + f(x) + ' ' + f(cy * yy * 2 + (up ? -30 : 30)); g += St(z, yy < 0.5 ? 2 : 1 + (2 % k), w); } }
+  else { const star = (x, y, r, sl) => St('M' + starPts(x, y, r, 5, 0.5, -Math.PI / 2).map((p) => f(p[0]) + ' ' + f(p[1])).join('L') + 'Z', sl, w * 0.85); const one = star(125, cy * 0.55, 62, 2) + star(125, cy * 1.45, 44, 1 + (2 % k)) + St('M' + f(190) + ' ' + f(cy * 0.55) + 'h' + f(40), 1, w); g += one + rot180(h, one); }
+  return { g, mode: 'neon' + kind };
+}
+
+// Parzenica — Zakopane embroidery: a heart of nested lines with two curls at its lobes, at each goal, tip to the centre
+function parzenica(R, h) {
+  const cy = h / 2; const sz = pickR(R, [5.2, 6, 6.8]); const nest = intR(R, 2, 4); const bw = pickR(R, [16, 20]); const gap = bw * pickR(R, [0.9, 1.2]); let half = '';
+  // classic heart curve, tip pointing +x (to the centre), centred at (hx, cy)
+  const hx = 70 + 13 * sz; const heart = (k) => { const pp = []; for (let i = 0; i <= 64; i++) { const t = (i / 64) * TAU; const x = 16 * Math.sin(t) ** 3, y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t); pp.push([hx - y * sz * k, cy + x * sz * k]); } return 'M' + pp.map((p) => f(p[0]) + ' ' + f(p[1])).join('L') + 'Z'; };
+  const outer = 1; const step = (bw + gap) / (16 * sz);
+  for (let n = 0; n < nest; n++) half += St(heart(outer - n * step), 1 + (n % 3), bw);
+  half += Ci(hx + 4 * sz, cy, Math.max(14, bw), 4);
+  // curls ("wąsy") from the lobes back toward the goal line
+  for (const sgn of [-1, 1]) { const pp = []; for (let i = 0; i <= 30; i++) { const t = i / 30, a = Math.PI * 1.5 * t, rr = (1 - t * 0.75) * 8 * sz; pp.push([hx - 12 * sz - t * 6 * sz + Math.cos(a) * rr * 0.3, cy + sgn * (13 * sz + Math.sin(a) * rr)]); } half += St('M' + pp.map((p) => f(p[0]) + ' ' + f(p[1])).join('L'), 1 + (nest % 3), bw); }
+  return { g: half + mirX(half), mode: 'parz' + nest };
+}
+
+// Witraż — Kraków Art Nouveau stained glass: big flowers and leaves, every field outlined in dark "lead"
+function witraz(R, h) {
+  const cy = h / 2; const lead = pickR(R, [10, 12, 14]); let g = ''; const n = pickR(R, [6, 8]);
+  const flower = (x, y, r, sl, rot) => { let s = ''; for (let i = 0; i < n; i++) { const a = rot + (i / n) * TAU; const lx = x + Math.cos(a) * r * 0.55, ly = y + Math.sin(a) * r * 0.55; s += '<polygon points="' + pts(leafPts(lx, ly, r * 0.95, r * 0.5, a)) + '" fill="§' + (1 + ((sl + i) % 2)) + '" stroke="§0" stroke-width="' + lead + '" stroke-linejoin="round"/>'; } return s + '<circle cx="' + f(x) + '" cy="' + f(y) + '" r="' + f(r * 0.3) + '" fill="§3" stroke="§0" stroke-width="' + lead + '"/>'; };
+  g += flower(300, cy, pickR(R, [110, 130]), 0, 0);
+  const cx = pickR(R, [110, 130]), cyy = cy + pickR(R, [-0.18, 0.18]) * h; const f2 = flower(cx, cyy, 80, 1, 0.3) + '<polygon points="' + pts(leafPts(cx + 40, cyy + (cyy < cy ? 120 : -120), 150, 50, cyy < cy ? 1.2 : -1.2)) + '" fill="§4" stroke="§0" stroke-width="' + lead + '" stroke-linejoin="round"/>';
+  g = Rc(0, 0, 600, h, 0) + (R() < 0.5 ? Rc(lead / 2, lead / 2, 600 - lead, h - lead, 4) : '') + g + f2 + rot180(h, f2);
+  return { g, mode: 'wit' + n };
+}
+
 /* ---------------- colour plan ---------------- */
 function hex2rgb(hx) { hx = hx.replace('#', ''); if (hx.length === 3) hx = hx.split('').map((c) => c + c).join(''); return [0, 2, 4].map((i) => parseInt(hx.slice(i, i + 2), 16) / 255); }
 function L_(hx) { const lin = (c) => (c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)); const [r, g, b] = hex2rgb(hx).map(lin); const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b); return 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s; }
-// slot -> colour; ground is the lightest or darkest paint, the other four in a seeded order
-export function composerPlan(seed, colors) {
-  const R = rng((seed ^ 0x9E3779B9) >>> 0); const L = [...colors].sort((a, b) => L_(a) - L_(b)); const dark = R() < 0.28; const ground = dark ? L[0] : L[4]; const rest = dark ? L.slice(1) : L.slice(0, 4);
-  for (let i = rest.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [rest[i], rest[j]] = [rest[j], rest[i]]; }
-  return [ground, ...rest];
+// slot -> colour; ground is the lightest or darkest paint, the other four in a seeded order.
+// With `adj` (measured by the curator: how much each pair of slots touches, 10 weights for i<j) the order is chosen
+// for the actual palette so that the slots that touch most get the most different lightness (legible on any palette).
+const PAIRS = []; for (let i = 0; i < 5; i++) for (let j = i + 1; j < 5; j++) PAIRS.push([i, j]);
+const PERMS4 = (() => { const out = []; const go = (a, rest) => { if (!rest.length) { out.push(a); return; } rest.forEach((x, k) => go([...a, x], rest.filter((_, q) => q !== k))); }; go([], [0, 1, 2, 3]); return out; })();
+export function composerPlan(seed, colors, adj) {
+  const R = rng((seed ^ 0x9E3779B9) >>> 0); const L = [...colors].sort((a, b) => L_(a) - L_(b)); const dark = R() < 0.28;
+  if (!adj) {
+    const ground = dark ? L[0] : L[4]; const rest = dark ? L.slice(1) : L.slice(0, 4);
+    for (let i = rest.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [rest[i], rest[j]] = [rest[j], rest[i]]; }
+    return [ground, ...rest];
+  }
+  let best = null, bs = -1;
+  for (const g of dark ? [0, 4] : [4, 0]) {
+    const ground = L[g], rest = L.filter((_, i) => i !== g);
+    for (const perm of PERMS4) {
+      const plan = [ground, ...perm.map((k) => rest[k])]; const lum = plan.map(L_);
+      let sc = 0; PAIRS.forEach(([i, j], k) => { sc += (adj[k] || 0) * Math.min(Math.abs(lum[i] - lum[j]), 0.3); });
+      if (sc > bs + 1e-9) { bs = sc; best = plan; }
+    }
+  }
+  return best;
 }
 
 export const COMPOSER_GRAMMARS = { 'pro-k-echo': echo, 'pro-k-zones': zones, 'pro-k-rays': rays, 'pro-k-chevron': chevron, 'pro-k-flow': flow, 'pro-k-shards': shards, 'pro-k-terrain': terrain, 'pro-k-pixel': pixel,
   // Kompozytor II
   'pro-k-mown': stripes, 'pro-k-orbit': orbit, 'pro-k-arcs': arcs, 'pro-k-argyle': argyle, 'pro-k-plaid': plaid, 'pro-k-steps': steps, 'pro-k-rosette': rosette, 'pro-k-cuts': cuts,
   // Kompozytor III: Murale
-  'pro-m-cutouts': muralCutouts, 'pro-m-field': muralField, 'pro-m-textile': muralTextile, 'pro-m-landscape': muralLandscape, 'pro-m-flora': muralFlora, 'pro-m-words': muralWords, 'pro-m-frame': muralFrame, 'pro-m-strokes': muralStrokes };
+  'pro-m-cutouts': muralCutouts, 'pro-m-field': muralField, 'pro-m-textile': muralTextile, 'pro-m-landscape': muralLandscape, 'pro-m-flora': muralFlora, 'pro-m-words': muralWords, 'pro-m-frame': muralFrame, 'pro-m-strokes': muralStrokes,
+  // Kompozytor IV: Wzory polskie
+  'pro-p-wycinanka': wycinanka, 'pro-p-pasiak': pasiak, 'pro-p-ceramika': ceramika, 'pro-p-mozaika': mozaika, 'pro-p-kilim': kilim, 'pro-p-neon': neon, 'pro-p-parzenica': parzenica, 'pro-p-witraz': witraz };
 // mural families: checked for balance between the halves instead of strict symmetry
 export const MURAL = new Set(['pro-m-cutouts', 'pro-m-field', 'pro-m-textile', 'pro-m-landscape', 'pro-m-flora', 'pro-m-words', 'pro-m-frame', 'pro-m-strokes']);
 
 // raw geometry for a seed (slot fills) — used by the curator
 export function composeSlots(familyId, seed, h = 400) { const gr = COMPOSER_GRAMMARS[familyId]; if (!gr) return null; const out = gr(rng(seed), h); return { g: '<rect x="0" y="0" width="600" height="' + f(h) + '" fill="§0"/>' + out.g, mode: out.mode }; }
-export function composeSeed(familyId, seed, h, colors) { const s = composeSlots(familyId, seed, h); if (!s) return ''; const plan = composerPlan(seed, colors); return s.g.replace(/§(\d)/g, (_, i) => plan[+i] || plan[0]); }
+export function composeSeed(familyId, seed, h, colors, adj) { const s = composeSlots(familyId, seed, h); if (!s) return ''; const plan = composerPlan(seed, colors, adj); return s.g.replace(/§(\d)/g, (_, i) => plan[+i] || plan[0]); }
 
 /* ---------------- curated pool (written by curate-composer.mjs) ---------------- */
 /*POOL*/
@@ -444,12 +559,12 @@ export function composerEntry(familyId, variant, seed = 0) {
   if (!pool || !pool.length) return { s: hash(familyId + ':' + v + ':' + seed), m: null };
   const pages = Math.max(1, Math.floor(pool.length / 12)); const idx = ((v - 1) + 12 * ((seed >>> 0) % pages)) % pool.length; return pool[idx];
 }
-export function renderComposer(familyId, variant, h, colors, opts = {}) { return composeSeed(familyId, composerEntry(familyId, variant, opts.seed || 0).s, h, colors); }
+export function renderComposer(familyId, variant, h, colors, opts = {}) { const e = composerEntry(familyId, variant, opts.seed || 0); return composeSeed(familyId, e.s, h, colors, e.m && e.m.e); }
 
 // Measured execution numbers for a 15 x 10 m court, scaled to the real area (m²).
 // paint: m² per actual colour; tape: metres of masking edge; masking label from tape per m².
 export function composerMetrics(familyId, variant, colors, { seed = 0, area = 150 } = {}) {
-  const e = composerEntry(familyId, variant, seed); if (!e.m) return null; const plan = composerPlan(e.s, colors); const k = area / 150; const paint = {};
+  const e = composerEntry(familyId, variant, seed); if (!e.m) return null; const plan = composerPlan(e.s, colors, e.m.e); const k = area / 150; const paint = {};
   e.m.a.forEach((fr, i) => { if (fr > 0) { const c = plan[i]; paint[c] = Math.round(((paint[c] || 0) + fr * area) * 10) / 10; } });
   const tape = Math.round(e.m.t * Math.sqrt(k)); const perM2 = e.m.t / 150; const masking = perM2 < 1 ? 'niska' : perM2 < 2 ? 'średnia' : perM2 < 3.2 ? 'wysoka' : 'bardzo wysoka';
   return { colors: Object.keys(paint).length, paint, tape, masking, minWidthCm: e.m.w };
@@ -483,5 +598,14 @@ export const COMPOSER_FAMILIES = [
   meta('pro-m-words', 'Wielkie słowa', 'WORD', 'brand', 'Hasło wielkimi literami z blokowego kroju (GRAJ, GOL, RAZEM…), na panelach koloru albo z cieniem.', 'Murale USA: Timothy Goodman (Nowy Jork)'),
   meta('pro-m-frame', 'Rama', 'FRAME', 'play', 'Mural na pasie wokół boiska i w polach bramkowych, środek spokojny do gry.', 'Murale USA: Liberty Park (Salt Lake City), klucze w Dublin (Kalifornia)'),
   meta('pro-m-strokes', 'Pociągnięcia', 'BRUSH', 'street', 'Wielkie pociągnięcia pędzla o stałej szerokości i okrągłych końcach, nałożone na siebie przez całe boisko.', 'Murale USA: gestural court murals'),
+  // Kompozytor IV: Wzory polskie (2026-11-27) — traditional ornament, the method of the craft, not a copy of a piece
+  meta('pro-p-wycinanka', 'Wycinanka', 'WYC', 'organic', 'Warstwowe płatki wokół koła środkowego i rozety w narożnikach, jak w wycinance łowickiej.', 'Wzory polskie: wycinanka łowicka'),
+  meta('pro-p-pasiak', 'Pasiak', 'PAS', 'brand', 'Żywe pasy różnej szerokości, lustrzane względem linii środkowej, jak w łowickim pasiaku.', 'Wzory polskie: pasiak łowicki'),
+  meta('pro-p-ceramika', 'Ceramika', 'CER', 'play', 'Pawie oczka (kropka, pierścień, kropka) z gałązkami na spokojnym tle, jak na ceramice z Bolesławca.', 'Wzory polskie: ceramika bolesławiecka'),
+  meta('pro-p-mozaika', 'Mozaika', 'MOZ', 'geometric', 'Duże płyty z ćwierćkołami, połówkami i trójkątami, jak w powojennych mozaikach modernistycznych.', 'Wzory polskie: mozaiki modernizmu'),
+  meta('pro-p-kilim', 'Kilim', 'KIL', 'street', 'Schodkowe romby i zygzaki z tkanin góralskich, na grubej siatce.', 'Wzory polskie: kilimy z Podhala'),
+  meta('pro-p-neon', 'Neon', 'NEON', 'street', 'Grube rury świetlne na ciemnym tle: koło, łuki, zygzak albo gwiazdy, jak warszawskie neony.', 'Wzory polskie: neony Warszawy'),
+  meta('pro-p-parzenica', 'Parzenica', 'PARZ', 'organic', 'Lustrzane serce z zawijasów przy każdej bramce, kilka zagnieżdżonych linii, jak na góralskich spodniach.', 'Wzory polskie: parzenica'),
+  meta('pro-p-witraz', 'Witraż', 'WIT', 'premium', 'Wielkie kwiaty i liście, każde pole w ciemnej obwódce jak ołów witrażu, w duchu krakowskiej secesji.', 'Wzory polskie: witraże secesji'),
 ];
 export function composerMasking(familyId) { const pool = POOL[familyId]; if (!pool || !pool.length) return 'średnia'; const t = pool.slice(0, 12).map((e) => e.m.t).sort((a, b) => a - b)[Math.min(5, pool.length - 1)] / 150; return t < 1 ? 'niska' : t < 2 ? 'średnia' : t < 3.2 ? 'wysoka' : 'bardzo wysoka'; }
