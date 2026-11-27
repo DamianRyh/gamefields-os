@@ -397,18 +397,18 @@
  },
  "pro-p-kilim": {
   "candidates": 220,
-  "passed": 96,
-  "kept": 26,
+  "passed": 141,
+  "kept": 36,
   "rejected": {
-   "thin": 8,
-   "specks": 0,
-   "paints": 42,
-   "sym": 74,
+   "thin": 0,
+   "specks": 41,
+   "paints": 38,
+   "sym": 0,
    "balance": 0,
    "lines": 0
   },
   "modes": 2,
-  "tapeMedian": 93
+  "tapeMedian": 102
  },
  "pro-p-neon": {
   "candidates": 417,
