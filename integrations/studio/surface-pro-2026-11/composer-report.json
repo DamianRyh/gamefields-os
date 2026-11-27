@@ -411,19 +411,19 @@
   "tapeMedian": 102
  },
  "pro-p-neon": {
-  "candidates": 417,
-  "passed": 90,
-  "kept": 2,
+  "candidates": 220,
+  "passed": 220,
+  "kept": 25,
   "rejected": {
-   "thin": 327,
+   "thin": 0,
    "specks": 0,
    "paints": 0,
    "sym": 0,
    "balance": 0,
    "lines": 0
   },
-  "modes": 1,
-  "tapeMedian": 129
+  "modes": 3,
+  "tapeMedian": 104
  },
  "pro-p-parzenica": {
   "candidates": 660,
