@@ -9,6 +9,9 @@
   "unmappedAttrs": [],
   "protectedIdentical": true,
   "releaseBlocked": [
-    "October snapshot must be reconciled with live WP. Dynamic module names and iframe locale routing, schema and browser QA pending."
-  ]
+    "October snapshot must be reconciled with live WP. Iframe locale routing, existing click handler issue, schema and browser QA pending."
+  ],
+  "dynamicTranslatedStrings": 15,
+  "dynamicUrlsIdentical": true,
+  "existingSourceIssue": "Click handler contains constbutton=... followed by if(button); verify live source before changing this pre-existing issue."
 }

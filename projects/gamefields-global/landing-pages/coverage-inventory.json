@@ -77,13 +77,11 @@
     ]
   },
   "monitoringScope": 43,
-  "completeStaticReviewDrafts": 42,
+  "completeStaticReviewDrafts": 44,
   "partialAboutSnapshot": 3715,
   "additionalContentPending": [
-    3465,
     3650,
-    3799,
-    3964
+    3799
   ],
   "homeStudioPartial": [
     3462,
@@ -98,6 +96,7 @@
   "notes": [
     "No new live reads due WPVibe limit.",
     "Do not report 43/43 as finished: About Us snapshot excludes live founder section.",
-    "No production publication or verified release readiness."
+    "No production publication or verified release readiness.",
+    "Street football and OS static drafts added; OS dynamic labels translated; both require live reconciliation."
   ]
 }

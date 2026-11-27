@@ -15,5 +15,18 @@
   "Polityka prywatności": "Privacy notice",
   "Wybierz moduł": "Choose a module",
   "Moduły Gamefields OS": "Gamefields OS modules",
-  "Interaktywny model boiska 3D": "Interactive 3D court model"
+  "Interaktywny model boiska 3D": "Interactive 3D court model",
+  " · przeciągnij, aby obrócić; przewiń, aby przybliżyć": " · drag to rotate; scroll to zoom",
+  "Nie udało się wczytać modelu. Otwórz go w Studio.": "Unable to load the model. Open it in Studio.",
+  "Panna Play — konfigurator i dziedziniec szkolny": "Panna Play — configurator and school courtyard",
+  "Panna Ring — oryginalny model 3D": "Panna Ring — original 3D model",
+  "Street Arena 15 — kolory paneli": "Street Arena 15 — panel colours",
+  "Biblioteka oryginalnych modeli 3D": "Original 3D model library",
+  "Komponenty źródłowe Gamefields": "Gamefields source components",
+  "System modułowy — komponenty Gamefields": "Modular system — Gamefields components",
+  "Court Objects — konfigurator obiektów": "Court Objects — object configurator",
+  " — model 3D": " — 3D model",
+  "Wczytuję ": "Loading ",
+  "Otwórz ustawienia Panna Ring ↗": "Open Panna Ring settings ↗",
+  "Konfiguruj w Studio ↗": "Configure in Studio ↗"
 }
