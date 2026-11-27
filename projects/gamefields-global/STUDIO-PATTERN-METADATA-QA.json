@@ -1,0 +1,11 @@
+{
+  "scope": "literal metadata note/tone/description/useCase containing Polish diacritics",
+  "scannedUnique": 223,
+  "missing": [],
+  "added": 79,
+  "total": 1078,
+  "limitations": [
+    "Does not verify non-diacritic Polish strings, variant names, tags or actual rendering",
+    "No build/browser test"
+  ]
+}
