@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "preRenderIdentical": true,
+    "canonicalProjectName": true,
+    "modelSelection": true,
+    "projectFileImport": true,
+    "filterPreserved": true,
+    "saveStatusPredicate": true
+  },
+  "added": 91,
+  "total": 1169,
+  "remaining": "Build and runtime QA, unknown save/status messages, dynamic user-facing components. No production writes."
+}
