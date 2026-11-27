@@ -1,0 +1,3 @@
+# GLOBAL-06 — quote display
+
+Added bilingual quote presentation with PLN currency and locale-aware display. Existing pricing functions, rate card, totals, API schema and project state untouched. Finish-note selection uses stable quote item IDs where possible; legacy mat discriminator retained. Dynamic material notes translated by bounded pattern; other unknown server messages deliberately fall back to original. WordPress contact route stays PL until EN is published. Full build, price parity tests, PDF and remaining dynamic messages pending. Static checks: {"sameTotal":true,"samePriceSelection":true,"sameBadgeMath":true,"currencyPLN":true,"rangeUnchanged":true}
