@@ -1,4 +1,5 @@
 "use client";
+import {useStudioLanguage} from "@/components/studio-language";
 import {LazyMedia} from "./lazy-media";
 import {useEffect,useRef,type ReactNode,type KeyboardEvent} from "react";
 import "@/app/studio-visual-carousel.css";
@@ -8,6 +9,7 @@ type Props={items:StudioVisualCarouselItem[];value:string;onChange:(id:string)=>
 
 /** Native scrolling stays local to the rail; only a deliberate horizontal gesture commits a preview. */
 export function StudioVisualCarousel({items,value,onChange,label,className="",compact=false}:Props){
+ const {display:tr}=useStudioLanguage();
  const rail=useRef<HTMLDivElement>(null);
  const buttons=useRef(new Map<string,HTMLButtonElement>());
  const timer=useRef<ReturnType<typeof setTimeout>|null>(null);
@@ -58,8 +60,8 @@ export function StudioVisualCarousel({items,value,onChange,label,className="",co
    if(nearest&&nearest!==latest.current.value)latest.current.onChange(nearest);
   },350);
  };
- return <section className={`studio-visual-carousel ${compact?"is-compact":""} ${className}`} aria-label={label} aria-roledescription="karuzela" data-visual-carousel={label}>
-  <div className="studio-visual-carousel-heading"><span>{label}</span><div className="studio-visual-carousel-controls"><button type="button" aria-label={`Poprzednia opcja: ${label}`} disabled={index<=0} onClick={()=>choose(items[Math.max(0,index-1)].id)}>←</button><button type="button" aria-label={`Następna opcja: ${label}`} disabled={index>=items.length-1||!items.length} onClick={()=>choose(items[Math.min(items.length-1,index+1)].id)}>→</button></div></div>
+ return <section className={`studio-visual-carousel ${compact?"is-compact":""} ${className}`} aria-label={label} aria-roledescription={tr("karuzela")} data-visual-carousel={label}>
+  <div className="studio-visual-carousel-heading"><span>{label}</span><div className="studio-visual-carousel-controls"><button type="button" aria-label={`${tr("Poprzednia opcja:")} ${label}`} disabled={index<=0} onClick={()=>choose(items[Math.max(0,index-1)].id)}>←</button><button type="button" aria-label={`${tr("Następna opcja:")} ${label}`} disabled={index>=items.length-1||!items.length} onClick={()=>choose(items[Math.min(items.length-1,index+1)].id)}>→</button></div></div>
   <div className="studio-visual-carousel-rail" ref={rail} data-carousel-rail onKeyDown={keyDown} onScroll={settle}
    onPointerDown={event=>{pointer.current={x:event.clientX,y:event.clientY};horizontalIntent.current=false;dragged.current=false;}}
    onTouchStart={event=>{const t=event.touches[0];pointer.current={x:t.clientX,y:t.clientY};dragged.current=false;}}
@@ -74,6 +76,6 @@ export function StudioVisualCarousel({items,value,onChange,label,className="",co
     <span className="studio-visual-carousel-name">{item.label}</span>{item.caption&&<span className="studio-visual-carousel-caption">{item.caption}</span>}{item.price}
    </button>)}
   </div>
-  <span className="studio-visual-carousel-status" aria-live="polite" aria-atomic="true">{selected?`Wybrano: ${selected.label}`:""}</span>
+  <span className="studio-visual-carousel-status" aria-live="polite" aria-atomic="true">{selected?`${tr("Wybrano:")} ${selected.label}`:""}</span>
  </section>;
 }
