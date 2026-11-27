@@ -17,3 +17,6 @@ Baseline 052abe1354d116ac89a2b22715704f871d17d7f9. Roadmap remains unaccepted: s
 
 ## 2026-11-27 — finish comparison
 Localised comparison headings, price qualifiers and selection controls. Material labels use existing dictionary fallback; complete material descriptions still pending. Static checks: {"calculation":true,"callback":true,"amount":true}. No build or runtime tests executed; roadmap acceptance unchanged.
+
+## 2026-11-27 — release gate
+Studio dictionary contains 1169 entries at baseline 00db4f288983ebbbf8a44b9b0a73e87b5a1d3922. 13 core landing page static review files, CF7 EN review, wrapper review, quote/PDF, Radar, Makeover and graphics localisation committed. None are accepted as release-ready. Variant names already English. Added own-property dictionary fallback and branch-only CI for dictionary, TypeScript, price tests and build. Workflow execution not yet verified. No deployment or merge. Remaining: additional WordPress pages, dynamic messages, privacy, SEO, staging integration and browser tests.

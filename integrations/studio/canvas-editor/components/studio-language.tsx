@@ -3,7 +3,7 @@ import {createContext,useContext,useEffect,useState,type ReactNode} from "react"
 import pl from "@/lib/i18n/pl.json";
 import en from "@/lib/i18n/en.json";
 import displayEn from "@/lib/i18n/display-en.json";
-import {studioLocaleFromSearch,studioLocalHref,studioNumberLocale} from "@/lib/i18n/locale.mjs";
+import {studioLocaleFromSearch,studioLocalHref,studioNumberLocale,studioDisplay} from "@/lib/i18n/locale.mjs";
 export type StudioLocale="pl"|"en";
 type Key=keyof typeof pl;
 const messages:Record<StudioLocale,Record<Key,string>>={pl,en};
@@ -22,6 +22,6 @@ export function StudioLanguageProvider({children}:{children:ReactNode}){
   window.history.replaceState(window.history.state,"",studioLocalHref(path,next));
   setLanguage(next);
  }
- return <Language.Provider value={{locale,setLocale,t:key=>messages[locale][key],href:path=>studioLocalHref(path,locale),numberLocale:studioNumberLocale(locale),display:text=>locale==="en"?(displayEn as Record<string,string>)[text]??text:text}}>{children}</Language.Provider>;
+ return <Language.Provider value={{locale,setLocale,t:key=>messages[locale][key],href:path=>studioLocalHref(path,locale),numberLocale:studioNumberLocale(locale),display:text=>studioDisplay(text,locale,displayEn)}}>{children}</Language.Provider>;
 }
 export const useStudioLanguage=()=>useContext(Language);

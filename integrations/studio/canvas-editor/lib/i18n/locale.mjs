@@ -9,3 +9,8 @@ export function studioLocalHref(href,locale){
  return url.pathname+url.search+url.hash;
 }
 export function studioNumberLocale(locale){return locale==="en"?"en-GB":"pl-PL"}
+
+/** Translate only own dictionary entries; never return inherited object properties. */
+export function studioDisplay(text,locale,dictionary){
+ return locale==="en" && Object.prototype.hasOwnProperty.call(dictionary,text) && typeof dictionary[text]==="string" ? dictionary[text] : text;
+}
