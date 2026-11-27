@@ -26,7 +26,7 @@ import {resolve} from 'node:path';
 const root=resolve(import.meta.dirname,'..');
 const read=path=>readFile(resolve(root,path),'utf8');
 const {patternFamilies,patternPalettes,signaturePresets,variants,PATTERN_COUNT}=await import('../lib/pattern-library.ts');
-assert.equal(PATTERN_COUNT,1020);assert.equal(patternFamilies.length,85);assert.equal(patternPalettes.length,47);assert.equal(signaturePresets.length,72);assert.equal(variants.length,12);
+assert.equal(PATTERN_COUNT,1116);assert.equal(patternFamilies.length,93);assert.equal(patternPalettes.length,47);assert.equal(signaturePresets.length,80);assert.equal(variants.length,12);
 const home=await read('app/page.tsx');
 assert.ok(!home.includes('/api/projects'));assert.ok(!home.includes('/play'));assert.ok(!home.includes('Object.values(realisticPreviews).forEach'));
 assert.ok((await read('app/manifest.ts')).includes('start_url: "/"'));
@@ -36,6 +36,6 @@ for(const dir of ['app','components','lib']){
 const sources=await Promise.all(['app/page.tsx','components/street-football-realistic-preview.tsx','lib/radar-locations.ts'].map(read));
 for(const src of new Set(sources.join('\n').match(/\/(?:studio|radar)\/[^"'`\s]+\.(?:png|webp)/g)||[]))await access(resolve(root,'public'+src));
 assert.ok((await read('lib/realistic-locations.ts')).includes('enabled:false'));
-console.log('PASS: Studio/Radar scope, 1020 patterns, 47 palettes, 8 Murale + 16 Kompozytor + 20 Masters + 16 Signature Pro + 12 legacy presets, assets present, Kraków hidden, no retired account calls.');
+console.log('PASS: Studio/Radar scope, 1116 patterns, 47 palettes, 8 Polskie + 8 Murale + 16 Kompozytor + 20 Masters + 16 Signature Pro + 12 legacy presets, assets present, Kraków hidden, no retired account calls.');
 
 for(const loc of ["park","school","courtyard","warsaw-pkin"])for(const view of ["perspective","aerial","ground"])await access(resolve(root,`public/studio/panna/${loc}-${view}.webp`));

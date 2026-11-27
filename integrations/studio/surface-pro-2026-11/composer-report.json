@@ -441,18 +441,18 @@
   "tapeMedian": 105
  },
  "pro-p-witraz": {
-  "candidates": 414,
+  "candidates": 227,
   "passed": 90,
-  "kept": 15,
+  "kept": 28,
   "rejected": {
-   "thin": 17,
-   "specks": 0,
+   "thin": 8,
+   "specks": 17,
    "paints": 0,
-   "sym": 207,
-   "balance": 100,
+   "sym": 25,
+   "balance": 87,
    "lines": 0
   },
-  "modes": 3,
-  "tapeMedian": 202
+  "modes": 6,
+  "tapeMedian": 210
  }
 }

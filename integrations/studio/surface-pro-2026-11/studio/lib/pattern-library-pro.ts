@@ -780,6 +780,110 @@ export const proFamilies:PatternFamily[]=[
   ],
   "baseComplexity": 1,
   "renderer": "pro"
+ },
+ {
+  "id": "pro-p-wycinanka",
+  "name": "Wycinanka",
+  "short": "WYC",
+  "group": "organic",
+  "description": "Warstwowe płatki wokół koła środkowego i rozety w narożnikach, jak w wycinance łowickiej.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-pasiak",
+  "name": "Pasiak",
+  "short": "PAS",
+  "group": "brand",
+  "description": "Żywe pasy różnej szerokości, lustrzane względem linii środkowej, jak w łowickim pasiaku.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-ceramika",
+  "name": "Ceramika",
+  "short": "CER",
+  "group": "play",
+  "description": "Pawie oczka (kropka, pierścień, kropka) z gałązkami na spokojnym tle, jak na ceramice z Bolesławca.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-mozaika",
+  "name": "Mozaika",
+  "short": "MOZ",
+  "group": "geometric",
+  "description": "Duże płyty z ćwierćkołami, połówkami i trójkątami, jak w powojennych mozaikach modernistycznych.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-kilim",
+  "name": "Kilim",
+  "short": "KIL",
+  "group": "street",
+  "description": "Schodkowe romby i zygzaki z tkanin góralskich, na grubej siatce.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-neon",
+  "name": "Neon",
+  "short": "NEON",
+  "group": "street",
+  "description": "Grube rury świetlne na ciemnym tle: koło, łuki, zygzak albo gwiazdy, jak warszawskie neony.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-parzenica",
+  "name": "Parzenica",
+  "short": "PARZ",
+  "group": "organic",
+  "description": "Lustrzane serce z zawijasów przy każdej bramce, kilka zagnieżdżonych linii, jak na góralskich spodniach.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-witraz",
+  "name": "Witraż",
+  "short": "WIT",
+  "group": "premium",
+  "description": "Wielkie kwiaty i liście, każde pole w ciemnej obwódce jak ołów witrażu, w duchu krakowskiej secesji.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
  }
 ];
 export const proPalettes:PatternPalette[]=[
@@ -1280,6 +1384,88 @@ export const proSignaturePresets:SignaturePreset[]=[
   "paletteId": "gamefields",
   "useCase": "klub / sponsor",
   "note": "Numer jako supergrafika — klub, rok założenia, kod dzielnicy."
+ }
+];
+export const polishSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "p-wycinanka",
+  "name": "Wycinanka",
+  "eyebrow": "POLSKIE 01",
+  "familyId": "pro-p-wycinanka",
+  "variant": 3,
+  "paletteId": "simultane",
+  "useCase": "gmina / dzielnica",
+  "note": "Warstwowe płatki wokół koła środkowego, jak w wycinance łowickiej. Lokalny znak, który rozpozna każdy, czytelny z drona."
+ },
+ {
+  "id": "p-pasiak",
+  "name": "Pasiak",
+  "eyebrow": "POLSKIE 02",
+  "familyId": "pro-p-pasiak",
+  "variant": 1,
+  "paletteId": "albers",
+  "useCase": "marka / kultura",
+  "note": "Żywe pasy różnej szerokości, lustrzane względem linii środkowej. Najprostszy w malowaniu: same proste krawędzie."
+ },
+ {
+  "id": "p-ceramika",
+  "name": "Ceramika",
+  "eyebrow": "POLSKIE 03",
+  "familyId": "pro-p-ceramika",
+  "variant": 6,
+  "paletteId": "nihon",
+  "useCase": "szkoła / dzieci",
+  "note": "Pawie oczka z Bolesławca z gałązkami. Każdy motyw cały w polu gry, kolory dobrane tak, żeby kropki były wyraźne."
+ },
+ {
+  "id": "p-mozaika",
+  "name": "Mozaika",
+  "eyebrow": "POLSKIE 04",
+  "familyId": "pro-p-mozaika",
+  "variant": 3,
+  "paletteId": "hard-edge",
+  "useCase": "miasto / plac",
+  "note": "Duże płyty z łukami, połówkami i trójkątami, w duchu powojennych mozaik. Krawędzie kolorów nie biegną wzdłuż linii gry."
+ },
+ {
+  "id": "p-kilim",
+  "name": "Kilim",
+  "eyebrow": "POLSKIE 05",
+  "familyId": "pro-p-kilim",
+  "variant": 8,
+  "paletteId": "stijl",
+  "useCase": "klub / turniej",
+  "note": "Schodkowe romby z tkanin góralskich i zygzak wzdłuż linii bocznych. Maluje się z siatki kwadratów."
+ },
+ {
+  "id": "p-neon",
+  "name": "Neon",
+  "eyebrow": "POLSKIE 06",
+  "familyId": "pro-p-neon",
+  "variant": 1,
+  "paletteId": "nightshift",
+  "useCase": "event / nocne granie",
+  "note": "Rury świetlne na ciemnych tablicach, jak warszawskie neony. Każda rura ma min. 20 cm, a między rurami zawsze jest min. 20 cm tła."
+ },
+ {
+  "id": "p-parzenica",
+  "name": "Parzenica",
+  "eyebrow": "POLSKIE 07",
+  "familyId": "pro-p-parzenica",
+  "variant": 2,
+  "paletteId": "ndebele",
+  "useCase": "szkoła / dzielnica",
+  "note": "Zagnieżdżone serca przy każdej bramce na tle jak sukno, medalion w kole środkowym. Haft góralski w skali boiska."
+ },
+ {
+  "id": "p-witraz",
+  "name": "Witraż",
+  "eyebrow": "POLSKIE 08",
+  "familyId": "pro-p-witraz",
+  "variant": 2,
+  "paletteId": "burle-marx",
+  "useCase": "park / sztuka publiczna",
+  "note": "Wielkie kwiaty i liście w ciemnej obwódce jak ołów witrażu, w duchu krakowskiej secesji."
  }
 ];
 export const muralSignaturePresets:SignaturePreset[]=[

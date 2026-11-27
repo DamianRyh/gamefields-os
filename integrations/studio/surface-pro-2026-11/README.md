@@ -196,3 +196,25 @@ Zasady liczenia (`buildPlan`):
 - **Pomiar długości** (`measureLabels`): raster 2×. W każdym kwadracie 16 × 16 px kurator liczy przejścia poziome h i pionowe v i bierze √(h² + v²). Sprawdzone: odcinek 5 m daje 5 m, okrąg r = 3 m daje 19 m (dokładnie 18,85 m), skos 16,77 m daje 17 m. Taśma w `composerMetrics` (pula Kompozytora) została 27.11 przeliczona tym samym pomiarem (`retape-composer.mjs`, 838 ziaren). Razem wyszło +1,3 %, ale rodziny z prostymi krawędziami wcześniej zaniżały taśmę (Krata +22 %, Equalizer +20 %, Pole pikseli i Wielkie słowa +17 %, Strefy gry +12 %), a rodziny skośne zawyżały ją (Romby −13 %, Szewrony −11 %).
 
 Studio: `paint-plan.mjs` i `paint-plan.d.mts` są w `canvas-editor/lib/` (kopiuje je `build-studio-files.mjs`). Karta **„Plan malowania”** (`components/paint-plan-card.tsx`) w podsumowaniu projektu, obok karty projektu PDF, drukuje plan z projektu klienta: wzór, kolory, obrót, skala i wymiary. Wzór jest liczony z pełnym kryciem i bez cienia, bo farba jest kryjąca. Karta działa dla każdego z 1020 wzorów. Nie pojawia się przy sztucznej trawie, macie, samej konstrukcji i boisku okrągłym. Test end-to-end: `pnpm test:plan`.
+
+### Kompozytor IV: Wzory polskie (2026-11-27)
+
+Osiem kierunków z polskiej tradycji zdobniczej. Każdy przejmuje metodę rzemiosła, a nie konkretne dzieło: Wycinanka (łowicka), Pasiak (łowicki), Ceramika (bolesławiecka), Mozaika (powojenny modernizm), Kilim (Podhale), Neon (Warszawa), Parzenica, Witraż (krakowska secesja). Projekty POLSKIE (`signature-polskie.json`) są pierwsze w edytorze i w zakładce „Wzory polskie”. Podgląd: `composer-4-preview.png`. Razem 93 rodziny × 12 = 1116 wzorów.
+
+**Co jest lepsze niż w poprzednich seriach** (reguły QUALITY w `curate-composer.mjs`, rodziny `pro-p-*`):
+1. **Kolory dobrane do wzoru.** Kurator mierzy, ile każda para pól się styka (10 wag w `m.e`). `composerPlan(seed, colors, adj)` wybiera dla rzeczywistej palety takie przypisanie farb (tło jasne albo ciemne × 24 kolejności), żeby najmocniej stykające się pola miały największą różnicę jasności. To usuwa problem z Wielkich słów, gdzie litery zlewały się z panelem. Starsze rodziny nie mają `m.e`, więc ich kolory się nie zmieniają.
+2. **Czytelne linie gry.** Kurator sprawdza obrys, linię środkową, pola bramkowe i koło. Odrzuca wzór, jeśli przy ponad 22 % długości linii krawędź koloru biegnie 4–12 cm od niej (`m.lc`).
+3. **Spokojne pola bramkowe.** Gęstość krawędzi w polach bramkowych jest porównywana z resztą boiska (`m.kb`), a powyżej 1,5× wzór dostaje gorszą ocenę.
+4. **Dokładna taśma od razu.** Kurator liczy ją tym samym pomiarem co plan malowania (16 px, √(h² + v²)), zamiast poprawki 0,82.
+5. Krótkie szpice (płatki, liście) są dozwolone jak w muralach. Wąskie pasy nadal odpadają.
+
+| Rodzina | kept / passed / candidates | Poprawki po przeglądzie |
+|---|---|---|
+| Wycinanka | 36 / 90 / 633 | szpice płatków dozwolone |
+| Pasiak | 36 / 216 / 220 | — |
+| Ceramika | 16 / 93 / 220 | symetryczna siatka, tylko całe motywy, większe gałązki, 4 układy (wcześniej 0 z 660, potem 10 podobnych) |
+| Mozaika | 36 / 90 / 237 | 2 szersze paski w kaflu (przerwa była 13 px); 20 odrzuconych przez linie gry |
+| Kilim | 36 / 141 / 220 | zygzak wyśrodkowany (74 odrzuconych za symetrię) |
+| Neon | 25 / 220 / 220 | rury się nie przecinają, odstęp min. 24 px, 3 układy, tablice tła (wcześniej w puli 2) |
+| Parzenica | 36 / 145 / 220 | wypełnione serca zamiast linii (wcześniej 0 z 660), tło-sukno, medalion |
+| Witraż | 28 / 90 / 227 | 8 lub 12 płatków (przy 6 obrót zamieniał kolory), kwiat środkowy na wierzchu, całkowity numer koloru w girlandzie, 3 układy |
