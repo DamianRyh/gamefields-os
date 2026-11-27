@@ -1,0 +1,103 @@
+{
+  "basis": "Previously observed published WordPress inventory; not a fresh production audit",
+  "totalUniqueIds": 53,
+  "groups": {
+    "core": [
+      3464,
+      3701,
+      3702,
+      3703,
+      3704,
+      3725,
+      3685,
+      3684,
+      3689,
+      3686,
+      3466,
+      3716,
+      4626
+    ],
+    "knowledge": [
+      3717,
+      3710,
+      3711,
+      3712,
+      3713,
+      3714
+    ],
+    "privacy": [
+      4087
+    ],
+    "sports": [
+      3695,
+      3696,
+      3697,
+      3698,
+      3699,
+      3700,
+      3688
+    ],
+    "legacy": [
+      3473,
+      3475,
+      3476,
+      3477,
+      3478,
+      3479,
+      3480
+    ],
+    "services": [
+      3726,
+      3687,
+      3724
+    ],
+    "identity": [
+      3715,
+      4633,
+      4634,
+      4629,
+      4630,
+      4631
+    ],
+    "additionalContent": [
+      3465,
+      3650,
+      3799,
+      3964
+    ],
+    "homeStudio": [
+      3462,
+      3644
+    ],
+    "commerce": [
+      10,
+      11,
+      12,
+      13
+    ]
+  },
+  "monitoringScope": 43,
+  "completeStaticReviewDrafts": 42,
+  "partialAboutSnapshot": 3715,
+  "additionalContentPending": [
+    3465,
+    3650,
+    3799,
+    3964
+  ],
+  "homeStudioPartial": [
+    3462,
+    3644
+  ],
+  "commerceSystemLocalizationPending": [
+    10,
+    11,
+    12,
+    13
+  ],
+  "notes": [
+    "No new live reads due WPVibe limit.",
+    "Do not report 43/43 as finished: About Us snapshot excludes live founder section.",
+    "No production publication or verified release readiness."
+  ]
+}

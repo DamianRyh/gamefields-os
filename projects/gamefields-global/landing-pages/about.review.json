@@ -1,0 +1,21 @@
+{
+  "sourceWpId": 3715,
+  "sourceRepoPath": "integrations/wordpress/audit-2026-10-21/pages/3715.html",
+  "sourceCommit": "861547ee6acc1bb347e862b063d0c19ed2ce1b4a",
+  "liveVerified": false,
+  "translatedNodes": 33,
+  "missing": [],
+  "protectedIdentical": true,
+  "additionalLiveTextDictionaryKeys": [
+    "Kto stoi za Gamefields.",
+    "Gamefields to autorskie studio Damiana Gawrycha. Od lat buduje wokół panny i street footballu turnieje, areny i społeczność, a z tego doświadczenia projektuje boiska.",
+    "założyciel Alternative Soccer",
+    "Gra bez barier",
+    "zajęcia z zawodnikami Olimpiad Specjalnych",
+    "promocja festiwalu na PGE Narodowym",
+    "Poznaj Damiana →"
+  ],
+  "releaseBlocked": [
+    "October snapshot lacks founder section observed in newer live WordPress. Additional live text translations prepared in dictionary but not inserted into old layout. Rebuild from current live source before release. EN metadata, links, schema and browser QA pending."
+  ]
+}
