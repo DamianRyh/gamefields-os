@@ -1,0 +1,3 @@
+# GLOBAL-07 — enquiry and sharing presentation
+
+Translated enquiry handshake statuses and errors, sharing dialogs, consent text, link management and date display. No changes to postMessage origin, request IDs, payloads, recipient, contact route, share API, retention or consent logic. Existing Polish contact endpoint retained intentionally until EN WordPress contact page and CF7 form can be tested together. Locale forwarding and EN shared landing page remain pending; do not claim complete integration. Full browser and build tests pending. Static checks: {"inquiryTransportUnchanged":true,"sharePayloadUnchanged":true,"linkPayloadUnchanged":true,"consentUnchanged":true,"messageTranslation":true}
