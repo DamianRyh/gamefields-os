@@ -1,0 +1,23 @@
+Polecenie dla ChatGPT: strona główna, nowa sekcja „Jeden plac. Każda gra.” (nawierzchnie pod 9 dyscyplin), 28.11.2026
+
+Cel: pokazać, że Gamefields robi nie tylko areny do panny i 3 na 3, ale też PODŁOŻA pod inne sporty
+(koszykówka 3×3 i pełna, padel, pickleball, teqball, siatkówka, tenis, futsal, piłka 3×3): płyta, nawierzchnia, linie.
+Bez wyposażenia (kosze, siatki, stoły, obudowy nie są w ofercie). Motywu NIE ruszaj.
+
+Strona główna (ID 3462): DODAJ JEDEN NOWY blok, nic nie usuwaj i nie zmieniaj innych bloków.
+- nowy blok Własny HTML z pliku:
+  https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/bloki/sporty.html  (SHA-256 zaczyna się od: dab3a87fa7926297)
+  Plik zawiera <!-- wp:html --> i <!-- /wp:html --> oraz znacznik <!-- gf-blok: sporty -->.
+- Miejsce: zaraz PO bloku z <!-- gf-blok: naglowek --> (baner „Gra zmienia miejsce.”), PRZED blokiem z <!-- gf-blok: boiska -->.
+- W środku jest tekst „__GFAND__”: NIE zamieniaj go, NIE formatuj kodu, wklej plik dokładnie tak, jak jest.
+
+Kroki:
+1. Kopia strony głównej, potem szkic z nowym blokiem i porównanie (doszedł tylko blok „sporty”, reszta bez zmian).
+2. Podgląd szkicu na komputerze i telefonie, sekcja „Jeden plac. Każda gra.”:
+   - na ciemnej scenie płyta z liniami „Koszykówka 3×3” (linie się rysują), obok sylwetka człowieka;
+   - kliknięcie innej gry (np. Padel, Tenis) zmienia płytę, linie, wymiary i cenę „od … zł netto”;
+   - wpisanie placu 25 × 15 m: napis „6 z 9 gier mieści się”, gry, które się nie mieszczą, są przygaszone;
+   - „Kilka gier na jednym placu”: zaznaczenie i wybór 2–3 gier rysuje ich linie w różnych kolorach na jednej płycie;
+   - „Zaprojektuj: …” otwiera Studio z tą nawierzchnią (adres /studio/?surface=…);
+   - brak przewijania w bok, konsola bez błędów.
+3. Po akceptacji właściciela opublikuj i wyczyść cache (LiteSpeed, Cloudflare jeśli jest). Niczego nie usuwaj.
