@@ -1443,5 +1443,14 @@
   "wysyłkę wyceniamy po podaniu adresu": "Shipping quoted after you provide the address",
   "Shipping": "Shipping",
   "free from": "free from",
-  "matę": "mat"
+  "matę": "mat",
+  "Nie mieści się na macie": "Does not fit on the mat",
+  "Zmniejsz liczbę pachołków albo odstępy w ustawieniach ćwiczenia lub powiększ matę.": "Reduce the number of cones or spacing in the drill settings, or enlarge the mat.",
+  "Gumowa mata z ćwiczeniami ze Studio, wysyłana w całości i gotowa do rozłożenia. Wybierz wielkość i rodzaj gumy, a ćwiczenia dodaj poniżej.": "Rubber mat with Studio drills, shipped in one piece and ready to lay out. Choose the size and rubber type, then add drills below.",
+  "Własne wymiary": "Custom dimensions",
+  "Albo własne wymiary": "Or custom dimensions",
+  "Mata wysyłana w całości, gotowa do rozłożenia. Bez podłoża i montażu.": "Mat shipped in one piece, ready to lay out. Base and installation excluded.",
+  "Wysyłkę wyceniamy po podaniu adresu.": "Shipping quoted after you provide the address.",
+  "dodaj ćwiczenia, aby kupić od razu": "add drills to buy directly",
+  "własny wymiar: zamówienie przez formularz": "custom size: order via the form"
 }
