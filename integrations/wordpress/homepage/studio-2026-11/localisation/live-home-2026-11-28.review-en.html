@@ -1768,8 +1768,8 @@ $('#gm-locate').addEventListener('click',()=>{
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-pro.js?v=81274c9b16"></script>
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-ball-core.js?v=0dff1b42a9"></script>
 <script defer src="/wp-content/themes/gamefields/assets/js/home/gf-home.js?v=09a48c75af"></script>
-<script>(function(){const names={"w1":"Panna Ring","o1":"Panna Play","p1":"Panna Court","street15":"Street Arena 15","circle-cage-1":"Panna Cage 90","circle-cage-2":"Panna Cage 180","street-field":"Panna Grid","octagon":"Panna Octa","street-football-15x10":"Street Arena 15","panna-perfo-circle": "Panna Perfo-Circle", "panna-perfo-rect": "Panna Perfo-Rect", "panna-net-rect": "Panna Net-Rect", "panna-solid-circle": "Panna Solid-Circle", "panna-net-circle": "Panna Net-Circle", "panna-high-net-circle": "Panna High Net-Circle", "panna-steel-octaground": "Panna Steel OctaGround"};const key=new URLSearchParams(window.location.search).get('gf_product');if(!Object.prototype.hasOwnProperty.call(names,key))return;const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]');if(!field)return;const name=names[key],summary='Wybrany model: '+name+'. Proszę o dobór konfiguracji i wycenę dla mojej lokalizacji.';root.dataset.gfProductName=name;field.addEventListener('input',function(){if(!field.value.includes(summary))delete root.dataset.gfProductName});field.value=summary+(field.value.trim()?'\n\n'+field.value.trim():'');field.dispatchEvent(new Event('input',{bubbles:true}));const attached=root.querySelector('#gc-attached');if(attached){attached.textContent='Wybrany model: '+name+'. Opisz miejsce i sposób użytkowania — model został dołączony do zapytania.';attached.hidden=false;}if(window.location.hash==='#kontakt'){root.querySelector('#kontakt')?.scrollIntoView({behavior:'auto'});root.querySelector('[name="your-email"]')?.focus({preventScroll:true});}})();</script>
-<script>(function(){const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]'),review=root?.querySelector('#gc-project-review'),text=root?.querySelector('#gc-project-text'),status=root?.querySelector('#gc-review-status');if(!field||!review||!text||!status)return;let cleared=false;function render(){const value=field.value.trim();text.textContent=value;review.hidden=!value;if(!value){review.open=false;root.querySelector('#gc-attached').hidden=true;status.textContent=cleared?'Dołączone parametry usunięte. Twoja wiadomość i dane kontaktowe pozostały w formularzu.':'';}else status.textContent='Parametry dołączone — możesz je przejrzeć przed wysłaniem.';}field.addEventListener('input',function(){cleared=false;queueMicrotask(render)});root.querySelector('#gc-clear-project').addEventListener('click',function(){field.value='';field.dispatchEvent(new Event('input',{bubbles:true}));cleared=true;delete root.dataset.gfProductName;root.querySelectorAll('[data-gf-inquiry]').forEach(function(item){item.setAttribute('aria-pressed','false');item.closest('.gc-direction').setAttribute('data-selected','false')});root.querySelector('#gc-direction-status').textContent='Wybór kierunku usunięty. Możesz wybrać inny.';const url=new URL(window.location.href);url.searchParams.delete('gf_product');window.history.replaceState(window.history.state,'',url);status.textContent='Dołączone parametry usunięte. Twoja wiadomość i dane kontaktowe pozostały w formularzu.';render();root.querySelector('[name="your-email"]')?.focus({preventScroll:true});});render();})();</script>
+<script>(function(){const names={"w1":"Panna Ring","o1":"Panna Play","p1":"Panna Court","street15":"Street Arena 15","circle-cage-1":"Panna Cage 90","circle-cage-2":"Panna Cage 180","street-field":"Panna Grid","octagon":"Panna Octa","street-football-15x10":"Street Arena 15","panna-perfo-circle": "Panna Perfo-Circle", "panna-perfo-rect": "Panna Perfo-Rect", "panna-net-rect": "Panna Net-Rect", "panna-solid-circle": "Panna Solid-Circle", "panna-net-circle": "Panna Net-Circle", "panna-high-net-circle": "Panna High Net-Circle", "panna-steel-octaground": "Panna Steel OctaGround"};const key=new URLSearchParams(window.location.search).get('gf_product');if(!Object.prototype.hasOwnProperty.call(names,key))return;const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]');if(!field)return;const name=names[key],summary='Wybrany model: '+name+'. Proszę o dobór konfiguracji i wycenę dla mojej lokalizacji.';root.dataset.gfProductName=name;field.addEventListener('input',function(){if(!field.value.includes(summary))delete root.dataset.gfProductName});field.value=summary+(field.value.trim()?'\n\n'+field.value.trim():'');field.dispatchEvent(new Event('input',{bubbles:true}));const attached=root.querySelector('#gc-attached');if(attached){attached.textContent='Selected model: '+name+". Describe the location and intended use — the model has been attached to your enquiry.";attached.hidden=false;}if(window.location.hash==='#kontakt'){root.querySelector('#kontakt')?.scrollIntoView({behavior:'auto'});root.querySelector('[name="your-email"]')?.focus({preventScroll:true});}})();</script>
+<script>(function(){const root=document.getElementById('gf-culture'),field=root?.querySelector('[name="project-details"]'),review=root?.querySelector('#gc-project-review'),text=root?.querySelector('#gc-project-text'),status=root?.querySelector('#gc-review-status');if(!field||!review||!text||!status)return;let cleared=false;function render(){const value=field.value.trim();text.textContent=value;review.hidden=!value;if(!value){review.open=false;root.querySelector('#gc-attached').hidden=true;status.textContent=cleared?"Attached parameters removed. Your message and contact details remain in the form.":'';}else status.textContent="Parameters attached — review them before submitting.";}field.addEventListener('input',function(){cleared=false;queueMicrotask(render)});root.querySelector('#gc-clear-project').addEventListener('click',function(){field.value='';field.dispatchEvent(new Event('input',{bubbles:true}));cleared=true;delete root.dataset.gfProductName;root.querySelectorAll('[data-gf-inquiry]').forEach(function(item){item.setAttribute('aria-pressed','false');item.closest('.gc-direction').setAttribute('data-selected','false')});root.querySelector('#gc-direction-status').textContent="Selection cleared. You can choose another option.";const url=new URL(window.location.href);url.searchParams.delete('gf_product');window.history.replaceState(window.history.state,'',url);status.textContent="Attached parameters removed. Your message and contact details remain in the form.";render();root.querySelector('[name="your-email"]')?.focus({preventScroll:true});});render();})();</script>
 <!-- /wp:html -->
 <!-- wp:html -->
 <!-- gf-blok: gf-lead -->
@@ -1937,7 +1937,7 @@ $('#gm-locate').addEventListener('click',()=>{
 		var status = el('p', 'gf-photos-status'); status.setAttribute('role', 'status');
 		var picker = el('input'); picker.type = 'file'; picker.accept = 'image/*'; picker.multiple = true; picker.hidden = true; picker.setAttribute('aria-hidden', 'true'); picker.tabIndex = -1;
 		var zone = el('button', 'gf-drop'); zone.type = 'button';
-		zone.innerHTML = '<span class="gf-drop-ico" aria-hidden="true"></span><b>Dodaj zdjęcia placu</b><span>Przeciągnij tutaj albo zrób telefonem · do 3 zdjęć</span>';
+		zone.innerHTML = '<span class="gf-drop-ico" aria-hidden="true"></span><b>Add site photos</b><span>Drag photos here or take them with your phone · up to 3 photos</span>';
 		var thumbs = el('ul', 'gf-thumbs'); thumbs.setAttribute('role', 'list');
 		var small = box.querySelector('small');
 		box.insertBefore(zone, small || null); box.insertBefore(thumbs, small || null); box.insertBefore(status, small || null); box.appendChild(picker);
@@ -1949,20 +1949,20 @@ $('#gm-locate').addEventListener('click',()=>{
 				if (!inp.files.length) return;
 				var f = inp.files[0], li = el('li'), img = el('img'), x = el('button', 'gf-thumb-x', '×');
 				img.alt = ''; img.src = URL.createObjectURL(f); img.onload = function () { URL.revokeObjectURL(img.src); };
-				x.type = 'button'; x.setAttribute('aria-label', 'Usuń zdjęcie ' + f.name);
+				x.type = 'button'; x.setAttribute('aria-label', "Remove photo " + f.name);
 				x.addEventListener('click', function () { inp.value = ''; inp.dispatchEvent(new Event('change', { bubbles: true })); render(); zone.focus(); });
 				li.appendChild(img); li.appendChild(x); thumbs.appendChild(li);
 			});
 			var n = 3 - free().length;
-			zone.querySelector('b').textContent = n ? (n < 3 ? 'Dodaj kolejne zdjęcie (' + n + '/3)' : 'Masz 3 zdjęcia') : 'Dodaj zdjęcia placu';
+			zone.querySelector('b').textContent = n ? (n < 3 ? "Add another photo (" + n + '/3)' : "You have 3 photos") : "Add site photos";
 			zone.disabled = n >= 3;
 			lead.dataset.gfPhotoCount = String(n);
 		}
 		function add(list) {
 			var files = Array.prototype.slice.call(list || []).filter(function (f) { return /^image\//.test(f.type) || /\.(heic|heif)$/i.test(f.name); });
-			if (!files.length) { status.textContent = 'To nie wygląda na zdjęcie. Wybierz plik JPG, PNG lub WebP.'; return Promise.resolve(); }
+			if (!files.length) { status.textContent = "This does not appear to be a photo. Choose a JPG, PNG or WebP file."; return Promise.resolve(); }
 			var slots = free(), skipped = Math.max(0, files.length - slots.length);
-			status.textContent = 'Przygotowuję zdjęcia…';
+			status.textContent = "Preparing photos…";
 			return Promise.all(files.slice(0, slots.length).map(shrink)).then(function (ready) {
 				var bad = 0;
 				ready.forEach(function (f, i) {
@@ -1971,9 +1971,9 @@ $('#gm-locate').addEventListener('click',()=>{
 				});
 				render();
 				var msg = [];
-				if (bad) msg.push(bad === 1 ? 'Jednego zdjęcia nie udało się przygotować — spróbuj JPG lub PNG.' : bad + ' zdjęć nie udało się przygotować — spróbuj JPG lub PNG.');
-				if (skipped) msg.push('Dodałem pierwsze zdjęcia, limit to 3.');
-				status.textContent = msg.join(' ') || (3 - free().length) + ' z 3 zdjęć dołączonych.';
+				if (bad) msg.push(bad === 1 ? "One photo could not be prepared — try JPG or PNG." : bad + " photos could not be prepared — try JPG or PNG.");
+				if (skipped) msg.push("The first photos have been added, up to the limit of 3.");
+				status.textContent = msg.join(' ') || (3 - free().length) + " of 3 photos attached.";
 			});
 		}
 		zone.addEventListener('click', function () { picker.click(); });
@@ -2099,9 +2099,9 @@ $('#gm-locate').addEventListener('click',()=>{
 	 * Same list as gft_social_links() in functions.php. After a sent form: "Zanim odpiszę…" card with the profiles
 	 * (the moment of highest interest). Every [data-gf-social] click: GA4 event gf_social {platform, placement}. */
 	var SOCIAL = [
-		['instagram', 'Instagram', 'https://www.instagram.com/gamefields.eu/', 'Wzory, montaże i boiska w akcji'],
-		['linkedin', 'LinkedIn', 'https://www.linkedin.com/company/gamefields', 'Realizacje dla miast i nabory dotacji'],
-		['facebook', 'Facebook', 'https://www.facebook.com/Gamefields.eu', 'Nowe boiska w Twojej okolicy']
+		['instagram', 'Instagram', 'https://www.instagram.com/gamefields.eu/', "Patterns, installations and courts in action"],
+		['linkedin', 'LinkedIn', 'https://www.linkedin.com/company/gamefields', "Municipal projects and funding calls"],
+		['facebook', 'Facebook', 'https://www.facebook.com/Gamefields.eu', "New courts in your area"]
 	];
 	function follow(place, title) {
 		var box = el('div', 'gf-follow row'), list = el('ul', 'gf-follow-list');
@@ -2121,7 +2121,7 @@ $('#gm-locate').addEventListener('click',()=>{
 		wrap.addEventListener('wpcf7mailsent', function () {
 			if (wrap.querySelector('.gf-thanks-follow')) return;
 			var card = el('div', 'gf-thanks-follow');
-			card.appendChild(el('p', 'gf-thanks-lead', 'Zanim odpiszę: zobacz, co teraz budujemy, i obserwuj nas, żeby nie przegapić naborów dotacji.'));
+			card.appendChild(el('p', 'gf-thanks-lead', "While you wait for my reply, see what we are building and follow us for funding calls."));
 			card.appendChild(follow('po-wyslaniu', ''));
 			var out = wrap.querySelector('.wpcf7-response-output');
 			if (out) out.insertAdjacentElement('afterend', card); else wrap.appendChild(card);
@@ -2136,7 +2136,7 @@ $('#gm-locate').addEventListener('click',()=>{
 	/* ---------- mobile sticky bar ---------- */
 	var path = location.pathname, skip = /^\/(kontakt|studio|koszyk|cart|zamowienie|checkout|moje-konto|my-account)(\/|$)/.test(path);
 	if (!skip) {
-		var bar = el('div', 'gf-sticky'); bar.innerHTML = '<a href="' + (first ? '#zdjecie' : '/kontakt/#zdjecie') + '" data-gf-sticky>Wyślij zdjęcie placu <span aria-hidden="true">→</span></a>';
+		var bar = el('div', 'gf-sticky'); bar.innerHTML = '<a href="' + (first ? '#zdjecie' : '/kontakt/#zdjecie') + '" data-gf-sticky>Send a site photo <span aria-hidden="true">→</span></a>';
 		document.body.appendChild(bar);
 		var hideFor = $$('[data-gf-lead], .gft-foot, footer');
 		var seen = new Set();

@@ -1,0 +1,14 @@
+{
+  "reviewOnly": true,
+  "uiReplacements": 22,
+  "files": 3,
+  "photoLimitsPreserved": true,
+  "leadSourceAndAnalyticsPreserved": true,
+  "studioOriginAndPayloadPreserved": true,
+  "remaining": [
+    "CF7 form language and server validation messages need EN form integration.",
+    "Attached Polish technical summaries intentionally preserved.",
+    "Theme shared lead script must be reconciled before deployment; inline guard prevents duplicate execution.",
+    "Browser tests pending."
+  ]
+}
