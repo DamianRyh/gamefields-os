@@ -1,0 +1,24 @@
+Polecenie dla ChatGPT: strona główna, sekcja „Wzory” jako eksplorator, 28.11.2026
+
+Cel: obecne 4 kafle kolekcji (Wzory polskie, Murale, Kompozytor, Masters) mają przycięte linie boiska.
+Nowy blok to interaktywna sekcja „Szary plac. Twój wzór.” na całą szerokość, jak pierwszy blok z boiskiem:
+4 kolekcje i 52 wzory jako całe boiska, duża scena z suwakiem przed/po (beton → wzór), kompozycja 1–12,
+palety, „Losuj wzór” i „Otwórz ten wzór w Studio”. Motywu NIE ruszaj (zostaje jak jest).
+
+Strona główna (ID 3462): podmień JEDEN blok, pozostałych nie ruszaj.
+- blok „wzory” (blok Własny HTML zawierający <!-- gf-blok: wzory -->):
+  https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/wzory-2026-11/bloki-eksplorator/wzory.html  (SHA-256 zaczyna się od: 206c4abb068497a0)
+  Plik zastępuje CAŁY ten blok (zawiera <!-- wp:html --> i <!-- /wp:html -->).
+  Blok jest duży (ok. 209 KB): zawiera silnik wzorów ze Studia. To celowe. W środku jest tekst „__GFAND__”:
+  NIE zamieniaj go, NIE formatuj kodu, wklej plik dokładnie tak, jak jest.
+
+Kroki:
+1. Kopia strony głównej, potem szkic z podmienionym blokiem i porównanie (różni się tylko blok „wzory”).
+2. Podgląd szkicu na komputerze i telefonie, sekcja „Szary plac. Twój wzór.” (zaraz pod „Osiem boisk. Jeden system.”):
+   - po przewinięciu szary beton na boisku sam zamienia się we wzór (Wycinanka);
+   - suwak (żółte kółko) można przeciągać: lewa strona beton, prawa wzór;
+   - przyciski kolekcji zmieniają listę wzorów (8 / 8 / 16 / 20), kliknięcie miniatury zmienia boisko;
+   - kolory, strzałki „Kompozycja” i „Losuj wzór” działają, tło sekcji zmienia kolor z paletą;
+   - „Otwórz ten wzór w Studio” otwiera Studio z tym samym wzorem i kolorami;
+   - linie boiska są całe (nic nie jest przycięte), brak przewijania w bok, konsola bez błędów.
+3. Po akceptacji właściciela opublikuj i wyczyść cache (LiteSpeed, Cloudflare jeśli jest). Niczego nie usuwaj.
