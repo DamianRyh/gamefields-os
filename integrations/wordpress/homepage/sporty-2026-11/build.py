@@ -65,6 +65,9 @@ def card_colour(look):
 
 
 MAT = {"Akryl sportowy": ("acrylic", "akryl"), "Sztuczna trawa 60 mm": ("turf", "sztuczna trawa")}
+PAGE = {"basketball-3x3": "boisko-do-koszykowki-3x3", "padel": "kort-do-padla", "pickleball": "boisko-do-pickleballa", "teqball": "boisko-do-teqballa",
+        "volleyball": "boisko-do-siatkowki", "tennis": "kort-tenisowy", "basketball-full": "boisko-do-koszykowki", "futsal": "boisko-do-futsalu",
+        "street-football-3x3": "boisko-do-pilki-3x3"}  # sales pages, pages/sporty-2026-11
 ORDER = ["basketball-3x3", "padel", "pickleball", "teqball", "volleyball", "tennis", "basketball-full", "futsal", "street-football-3x3"]
 NAME = {"basketball-full": "Koszykówka", "street-football-3x3": "Piłka 3×3"}
 FOR = {"basketball-3x3": "osiedla, szkoły, parki", "padel": "kluby, hotele, osiedla", "pickleball": "osiedla, seniorzy, kluby",
@@ -122,11 +125,11 @@ def card_html(c):
     price = (f'<p class="gsp-pr"><span>Ze wzorem od</span><b>{zl(c["painted"])}</b><small>jednolity kolor od {zl(c["plain"])} · netto</small></p>' if c["painted"]
              else f'<p class="gsp-pr"><span>Nawierzchnia od</span><b>{zl(c["plain"])}</b><small>sztuczna trawa · netto</small></p>')
     return (f'<article class="gsp-card" data-name="{html.escape(c["name"])}" data-looks="{data}" style="--bg:{l0["bg"]};--ink:{l0["ink"]}">'
-            f'<div class="gsp-top"><p class="gsp-n">{c["i"]:02d} / {len(cards):02d}</p><h3>{html.escape(c["name"])}</h3>'
+            f'<div class="gsp-top"><p class="gsp-n">{c["i"]:02d} / {len(cards):02d}</p><h3><a href="/{PAGE[c["id"]]}/">{html.escape(c["name"])}</a></h3>'
             f'<p class="gsp-m">pole {num(s["fieldLength"])} × {num(s["fieldWidth"])} m · nawierzchnia {num(s["length"])} × {num(s["width"])} m · {html.escape(FOR[c["id"]])}</p></div>'
             f'<figure><img src="{l0["src"]}" alt="{html.escape(l0["alt"])}" width="1600" height="1000" loading="{"eager" if c["i"] == 1 else "lazy"}" decoding="async"></figure>'
             f'<div class="gsp-bar"><div class="gsp-looks"><span data-look-name>{html.escape(l0["name"])}</span><div class="gsp-pick">{picks}</div></div>'
-            f'{price}<a class="gsp-go" data-studio href="{html.escape(l0["studio"])}">Zaprojektuj <span aria-hidden="true">↗</span></a></div></article>')
+            f'{price}<div class="gsp-acts"><a class="gsp-go" href="/{PAGE[c["id"]]}/">Wycena i szczegóły <span aria-hidden="true">→</span></a><a class="gsp-go alt" data-studio href="{html.escape(l0["studio"])}">Studio <span aria-hidden="true">↗</span></a></div></div></article>')
 
 
 CSS = """
@@ -163,6 +166,9 @@ CSS = """
 .gsp .gsp-card .gsp-pr small{display:block;font-size:12px;opacity:.75}
 .gsp .gsp-card .gsp-go{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg)!important;font-weight:800;font-size:15px;text-decoration:none;white-space:nowrap;transition:transform .2s ease}
 .gsp .gsp-card .gsp-go:hover{transform:translateY(-2px)}
+.gsp .gsp-card .gsp-acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.gsp .gsp-card .gsp-go.alt{background:transparent;color:var(--ink)!important;border:1.5px solid var(--ink)}
+.gsp .gsp-card h3 a{color:inherit;text-decoration:none}.gsp .gsp-card h3 a:hover{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
 .gsp .gsp-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px}
 .gsp .gsp-dots{display:flex;gap:6px;flex-wrap:wrap}
 .gsp .gsp-dots button{width:28px;height:6px;padding:0;border:0;border-radius:999px;background:#D9CFD4;cursor:pointer;transition:background .2s ease,width .2s ease}
@@ -174,7 +180,7 @@ CSS = """
 .gsp .gsp-scope{margin:18px 0 0;font-size:13px;line-height:1.45;color:#6F5A66}
 .gsp:not(.gsp-ready) .gsp-nav,.gsp:not(.gsp-ready) .gsp-pick{visibility:hidden}
 @media (max-width:900px){.gsp .gsp-head{grid-template-columns:minmax(0,1fr)}.gsp .gsp-card{width:86vw;min-height:0}
- .gsp .gsp-card .gsp-bar{grid-template-columns:minmax(0,1fr) auto}.gsp .gsp-card .gsp-looks{grid-column:1/-1}.gsp .gsp-card .gsp-pr{text-align:left}
+ .gsp .gsp-card .gsp-bar{grid-template-columns:minmax(0,1fr)}.gsp .gsp-card .gsp-pr{text-align:left}.gsp .gsp-card .gsp-acts{justify-content:flex-start}.gsp .gsp-card .gsp-go{min-height:46px;padding:0 18px;font-size:14px}
  .gsp .gsp-card figure{margin:10px -8px}.gsp .gsp-arrows{display:none}}
 @media (prefers-reduced-motion:reduce){.gsp .gsp-card,.gsp .gsp-card img{transition:none}}
 """

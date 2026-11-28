@@ -1,0 +1,389 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfb-hero{padding:clamp(28px,4vw,64px) 0 clamp(24px,3vw,40px)}
+.gfb-hero .w.top{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfb-hero h1{font-size:clamp(46px,6.4vw,112px)}
+.gfb-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfb-hero .gfa-btns{margin-top:24px}
+.gfb-crumbs{margin:0 0 16px;font-size:13px;color:var(--muted)}.gfb-crumbs a{text-decoration:none}
+.gfb-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(80px,8.4vw,140px);gap:8px;margin:0;padding:0;list-style:none}
+.gfb-mosaic li{position:relative;overflow:hidden;background:#E6E0DA}
+.gfb-mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.gfb-mosaic li:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfb-mosaic li:nth-child(2),.gfb-mosaic li:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic li:nth-child(4){grid-column:span 2;grid-row:span 1}
+.gfb-mosaic span{position:absolute;left:6px;bottom:6px;padding:4px 8px;background:rgba(28,9,18,.8);color:#fff;font-size:12px;font-weight:700}
+.gfb-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:clamp(24px,3vw,40px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-nums div{padding:16px 16px 16px 0}
+.gfb-nums div+div{padding-left:16px;border-left:1px solid var(--line)}
+.gfb-nums dt{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-nums dd{margin:6px 0 0;font-size:clamp(24px,2.6vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfb-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfb-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfb-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfb-jump ul::-webkit-scrollbar{display:none}
+.gfb-jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-jump a:hover{border-color:var(--violet)}
+.gfa-sec,.gfa-band{scroll-margin-top:120px}
+/* paths */
+.gfb-paths{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-paths a{display:flex;flex-direction:column;gap:10px;height:100%;padding:24px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease,transform .25s ease}
+.gfb-paths a:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfb-paths .q{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--violet)}
+.gfb-paths b{font-size:clamp(22px,2vw,30px);letter-spacing:-.035em;line-height:1.05}
+.gfb-paths p{margin:0;color:var(--muted);font-size:15px}
+.gfb-paths ul{margin:0;padding-left:18px;font-size:14px;color:#5A4652;display:grid;gap:4px}
+.gfb-paths .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-weight:800;font-size:15px}
+.gfb-paths .go{color:var(--violet);font-weight:800;font-size:14px}
+/* price table */
+.gfb-table{width:100%;border-collapse:collapse;background:#fff;font-size:15px}
+.gfb-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);font-weight:700}
+.gfb-table td{padding:14px;border-top:1px solid var(--line);vertical-align:middle;color:#5A4652}
+.gfb-table td b{color:var(--ink);font-size:16px}
+.gfb-table td.r,.gfb-table th.r{text-align:right;white-space:nowrap}
+.gfb-table td.r{font-weight:800;color:var(--ink)}
+.gfb-table td.r small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-table a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfb-table a:hover{border-color:var(--violet)}
+.gfb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfb-incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.gfb-incl > div{padding:20px 22px;background:#fff;border:1px solid var(--line)}
+.gfb-incl ul{margin:8px 0 0;padding-left:20px;display:grid;gap:4px;color:#5A4652;font-size:15px}
+.gfb-incl .k{margin:0}
+.gfb-note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+/* calculator */
+.gfb-calc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.gfb-calc form{display:grid;gap:18px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-calc label,.gfb-calc legend{display:block;margin:0 0 8px;font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfb-calc fieldset{margin:0;padding:0;border:0;min-width:0}
+.gfb-calc select,.gfb-calc input[type=number]{width:100%;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.gfb-calc select:focus,.gfb-calc input:focus{outline:3px solid #CFC2FF;border-color:var(--violet)}
+.gfb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.gfb-chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:0 14px;border-radius:999px;border:1.5px solid #CDBFC6;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-chips input{accent-color:var(--violet);margin:0}
+.gfb-chips label:has(input:checked){border-color:var(--violet);background:#EEE8FF}
+.gfb-tog{display:grid;gap:8px}
+.gfb-tog label{display:flex;align-items:flex-start;gap:10px;margin:0;padding:12px 14px;border:1.5px solid #CDBFC6;border-radius:10px;font-size:15px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer}
+.gfb-tog label small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.gfb-tog input{accent-color:var(--violet);width:18px;height:18px;margin:2px 0 0;flex:none}
+.gfb-tog label:has(input:checked){border-color:var(--violet)}
+.gfb-tog label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.gfb-area[hidden]{display:none}
+.gfb-out{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:var(--ink);color:var(--paper)}
+.gfb-out .k{color:var(--lime);margin:0}
+.gfb-out .sum{margin:0;font-size:clamp(40px,4.4vw,68px);font-weight:800;letter-spacing:-.05em;line-height:.95}
+.gfb-out .sum small{display:block;margin-top:8px;font-size:15px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+.gfb-out dl{margin:0;border-top:1px solid rgba(244,241,238,.2)}
+.gfb-out dl div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(244,241,238,.2);font-size:15px}
+.gfb-out dt{color:rgba(244,241,238,.82)}.gfb-out dd{margin:0;font-weight:800;white-space:nowrap}
+.gfb-out p{margin:0;font-size:14px;color:rgba(244,241,238,.78)}
+.gfb-out .gfa-btns{margin-top:auto}
+.gfb-out .gfa-btn{background:var(--lime);color:#1F2A6B!important}
+.gfb-out .gfa-btn.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* steps */
+.gfb-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.gfb-steps li{display:flex;flex-direction:column;gap:8px;padding:22px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfb-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfb-steps b{font-size:21px;letter-spacing:-.02em;line-height:1.1}
+.gfb-steps p{margin:0;color:var(--muted);font-size:15px}
+.gfb-steps .gf{margin-top:auto;padding:10px 12px;background:var(--paper);font-size:14px;color:var(--ink)}
+.gfb-steps .gf::before{content:"U mnie: ";font-weight:800;color:var(--violet)}
+.gfb-steps li.ph{padding:0;overflow:hidden}.gfb-steps li.ph::before{display:none}
+.gfb-steps li.ph img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+/* surfaces */
+.gfb-surf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-surf a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden;transition:border-color .2s ease}
+.gfb-surf a:hover{border-color:var(--violet)}
+.gfb-surf img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-surf a:hover img{transform:scale(1.06)}
+.gfb-surf .tx{display:grid;gap:4px;padding:14px 16px 16px;color:var(--ink)}
+.gfb-surf b{font-size:18px;letter-spacing:-.02em}
+.gfb-surf .nt{color:var(--muted);font-size:14px}
+.gfb-surf .r{color:var(--ink);font-weight:800;font-size:15px}
+/* municipalities band */
+.gfb-docs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfb-docs div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfb-docs dt{font-size:clamp(24px,2.4vw,36px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#fff}
+.gfb-docs dd{margin:10px 0 0;font-size:15px;color:rgba(244,241,238,.82)}
+.gfb-norms{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.gfb-norms li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(244,241,238,.3);font-size:14px}
+.gfb-norms b{color:var(--lime);margin-right:6px}
+.gfa-band .gfa-links a{border-color:rgba(244,241,238,.4);color:var(--paper)}
+.gfa-band .gfa-links a:hover{border-color:var(--lime)}
+/* realizations */
+.gfb-reals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfb-reals a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;overflow:hidden}
+.gfb-reals a:hover{border-color:var(--violet)}
+.gfb-reals .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:#E6E0DA}
+.gfb-reals .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfb-reals a:hover .ph img{transform:scale(1.05)}
+.gfb-reals .who{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:12px}
+.gfb-reals .tx{display:grid;gap:4px;padding:16px 18px 18px}
+.gfb-reals .pl{font-size:13px;color:var(--violet);font-weight:800}
+.gfb-reals b{font-size:19px;letter-spacing:-.02em;line-height:1.15}
+.gfb-reals .ld{color:var(--muted);font-size:14px}
+.gfb-reals .md{margin-top:6px;font-size:14px;font-weight:700}
+/* quote prep */
+.gfb-prep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfb-prep > div{padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gfb-prep h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:0 0 12px}
+.gfb-check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.gfb-check li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;font-size:16px;color:#5A4652}
+.gfb-check li::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfb-check b{color:var(--ink)}
+.gfb-prep .gfa-btns{margin-top:18px}
+/* faq */
+.gfa-faq{border-top:1px solid var(--line);max-width:960px}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"\2212"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+/* guides and related */
+.gfb-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfb-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfb-next a:hover{border-color:var(--violet)}
+.gfb-next i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfb-next b{font-size:20px;letter-spacing:-.02em;line-height:1.15}.gfb-next span{color:var(--muted);font-size:15px}
+.gfb-who{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfb-who a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:#fff;border:1px solid var(--line);text-decoration:none;font-weight:700;font-size:15px}
+.gfb-who a:hover{border-color:var(--violet)}
+.gfb-who span{color:var(--muted);font-weight:600;margin-right:4px}
+@media (max-width:1100px){.gfb-paths,.gfb-surf,.gfb-reals,.gfb-docs{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfb-hero .w.top,.gfb-calc,.gfb-incl,.gfb-prep{grid-template-columns:minmax(0,1fr)}
+ .gfb-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfb-nums div:nth-child(3){padding-left:0;border-left:0}.gfb-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfb-next{grid-template-columns:minmax(0,1fr)}
+ .gfb-table thead{display:none}.gfb-table,.gfb-table tbody,.gfb-table tr,.gfb-table td{display:block;width:100%}
+ .gfb-table tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px;padding:14px;border-top:1px solid var(--line)}
+ .gfb-table td{padding:0;border:0}.gfb-table td:first-child{grid-column:1/-1}.gfb-table td.r{text-align:left}
+ .gfb-table td.r::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+ .gfb-table td:last-child{grid-column:1/-1}
+}
+@media (max-width:560px){.gfb-paths,.gfb-reals,.gfb-docs,.gfb-steps{grid-template-columns:minmax(0,1fr)}.gfb-surf{gap:8px}.gfb-surf .tx{padding:10px 12px 12px}.gfb-surf b{font-size:15px}.gfb-surf .nt{font-size:12px}.gfb-surf .r{font-size:13px}.gfb-mosaic{grid-auto-rows:64px}.gfb-steps li.ph{display:none}}
+
+.gsp2-hero figure{margin:0;border-radius:22px;background:var(--card);display:grid;place-items:center;padding:clamp(12px,2vw,28px);min-height:clamp(280px,32vw,460px)}
+.gsp2-hero figure img{width:100%;height:auto;max-height:430px;object-fit:contain;filter:drop-shadow(0 26px 34px rgba(28,9,18,.18))}
+.gsp2-looks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gsp2-looks a{display:grid;height:100%;border-radius:18px;overflow:hidden;text-decoration:none;background:var(--c);color:#1C0912;transition:transform .25s ease}
+.gsp2-looks a:hover{transform:translateY(-3px)}
+.gsp2-looks img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;padding:12px}
+.gsp2-looks .tx{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:0 18px 16px;font-weight:700}
+.gsp2-looks .tx span{font-size:13px;font-weight:800;color:#6336F5}
+.gsp2-plan{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px;align-items:stretch}
+.gsp2-plan figure{margin:0;padding:clamp(14px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gsp2-plan svg{display:block;width:100%;height:auto}
+.gsp2-fit{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line)}
+.gsp2-fit .row{display:flex;gap:8px;align-items:center}
+.gsp2-fit input{width:110px;min-height:52px;padding:0 14px;border:1.5px solid #CDBFC6;border-radius:10px;font:inherit;font-size:16px}
+.gsp2-fit output{display:block;padding:14px 16px;border-radius:10px;background:var(--paper);font-weight:700;min-height:52px}
+.gsp2-fit output.ok{background:#E9F7C9}.gsp2-fit output.no{background:#FFE1D6}
+.gsp2-others{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gsp2-others a{display:grid;border-radius:16px;overflow:hidden;text-decoration:none;background:var(--c);color:#1C0912;transition:transform .25s ease}
+.gsp2-others a:hover{transform:translateY(-3px)}
+.gsp2-others img{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;padding:8px}
+.gsp2-others b{padding:0 14px 4px;font-size:18px;letter-spacing:-.02em}.gsp2-others small{padding:0 14px 14px;font-size:13px;font-weight:600}
+.gsp2-own{display:flex;gap:8px;margin-top:10px}.gsp2-own[hidden]{display:none}
+.gsp2-bar{display:none}
+@media (max-width:900px){.gsp2-looks,.gsp2-plan{grid-template-columns:minmax(0,1fr)}.gsp2-others{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gsp2-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(244,241,238,.96);box-shadow:0 -4px 18px rgba(71,19,45,.14)}
+ .gsp2-bar a{flex:1;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;font-weight:800;font-size:15px;text-decoration:none;background:var(--violet);color:#fff!important}
+ .gsp2-bar a.alt{background:#fff;color:var(--ink)!important;border:1.5px solid var(--ink)}
+ .gfa{padding-bottom:72px}}
+.gfa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Boisko do teqballa: nawierzchnia","serviceType":"Nawierzchnia sportowa: Teqball","url":"https://www.gamefields.eu/boisko-do-teqballa/","image":"https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-teqball-1.webp","areaServed":"PL","provider":{"@type":"Organization","name":"Gamefields","url":"https://www.gamefields.eu/"},"offers":{"@type":"Offer","priceCurrency":"PLN","price":91500,"priceSpecification":{"@type":"PriceSpecification","price":91500,"priceCurrency":"PLN","valueAddedTaxIncluded":false},"url":"https://www.gamefields.eu/boisko-do-teqballa/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Nawierzchnie sportowe","item":"https://www.gamefields.eu/nawierzchnie-sportowe/"},{"@type":"ListItem","position":3,"name":"Boisko do teqballa","item":"https://www.gamefields.eu/boisko-do-teqballa/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ile kosztuje nawierzchnia pod teqball?","acceptedAnswer":{"@type":"Answer","text":"Od 91 500 zł netto za 211,2 m² (nawierzchnia 16 × 12 m z zapasem 10%), razem z płytą betonową z podbudową. Ze wzorem Gamefields od 91 500 zł netto, w jednolitym akrylu od 102 100 zł netto. Montaż, transport i przygotowanie terenu potwierdzam po zdjęciach placu."}},{"@type":"Question","name":"Jakie wymiary przyjmujecie?","acceptedAnswer":{"@type":"Answer","text":"Koncepcja strefy 16 × 12 m ze stołem pośrodku; FITEQ 2026 wskazuje minimum 7 m wolnej wysokości dla zawodów. Stół 3 × 1,7 × 0,9 m jest poglądowy. Dobór konkretnego stołu TEQ™, otoczenie i warunki realizacji wymagają potwierdzenia."}},{"@type":"Question","name":"Czy da się zrobić to na starym betonie albo asfalcie?","acceptedAnswer":{"@type":"Answer","text":"Tak, jeśli podłoże jest stabilne. Naprawiam rysy i ubytki, a wykończenie kładę na istniejącym placu, bez nowej płyty. Zakres napraw wyceniam po oględzinach."}},{"@type":"Question","name":"Czy dostarczacie wyposażenie?","acceptedAnswer":{"@type":"Answer","text":"Nie. Robię podłoże: płytę, nawierzchnię albo malowany wzór i linie. Kosze, siatki, stoły czy obudowy dobiera i montuje dostawca wyposażenia; zostawiam pod nie przygotowane miejsce w projekcie."}},{"@type":"Question","name":"Czy na jednym placu można mieć kilka gier?","acceptedAnswer":{"@type":"Answer","text":"Tak. Linie kilku dyscyplin w różnych kolorach na jednej płycie to częsty układ dla szkół i osiedli. Kolory dobieram tak, żeby każda gra była czytelna."}},{"@type":"Question","name":"Ile kosztuje wzór zamiast jednolitego koloru?","acceptedAnswer":{"@type":"Answer","text":"Malowany wzór Gamefields (4–6 kolorów) to 150 zł/m² netto, zaawansowany (7+ kolorów) 183 zł/m²; akryl jednolity od 200 zł/m². Do wzoru dostajesz plan malowania dla wykonawcy."}}]}]}</script>
+<div class="gfa gfb">
+<div data-gsp2="{&quot;name&quot;: &quot;Boisko do teqballa&quot;, &quot;slug&quot;: &quot;/boisko-do-teqballa/&quot;, &quot;L&quot;: 16, &quot;W&quot;: 12, &quot;fl&quot;: 16, &quot;fw&quot;: 12, &quot;rate&quot;: 283, &quot;opts&quot;: {&quot;pattern&quot;: {&quot;n&quot;: &quot;Wzór Gamefields&quot;, &quot;r&quot;: 150}, &quot;pattern-advanced&quot;: {&quot;n&quot;: &quot;Wzór zaawansowany&quot;, &quot;r&quot;: 183}, &quot;acrylic-0&quot;: {&quot;n&quot;: &quot;Akryl Standard (jednolity kolor)&quot;, &quot;r&quot;: 200}, &quot;acrylic-1&quot;: {&quot;n&quot;: &quot;Akryl Standard+ (jednolity kolor)&quot;, &quot;r&quot;: 267}, &quot;acrylic-2&quot;: {&quot;n&quot;: &quot;Akryl Premium (jednolity kolor)&quot;, &quot;r&quot;: 342}}}">
+<section class="gfb-hero gsp2-hero"><div class="w top">
+  <div>
+    <p class="gfb-crumbs"><a href="/nawierzchnie-sportowe/">Nawierzchnie sportowe</a> / Teqball</p>
+    <p class="k">Nawierzchnia sportowa · Teqball</p>
+    <h1 class="d">Boisko do teqballa.</h1>
+    <p class="lead">Strefa gry 16 × 12 m wokół stołu: piłka nożna w nowym formacie. Płyta, nawierzchnia albo malowany wzór Gamefields i linie w wymiarach dyscypliny, z ceną od razu.</p>
+    <div class="gfa-btns"><a class="gfa-btn" href="#wycena">Policz wycenę ↓</a><a class="gfa-btn alt" href="/studio/?surface=teqball">Zaprojektuj w Studio ↗</a></div>
+  </div>
+  <figure style="--card:#F2E7D6"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-teqball-1.webp" alt="Boisko do teqballa: Promenade" width="1600" height="1000" loading="eager" decoding="async"></figure>
+</div>
+<div class="w"><dl class="gfb-nums">
+  <div><dt>Pole gry</dt><dd>16 × 12 m<small>wymiar dyscypliny</small></dd></div>
+  <div><dt>Nawierzchnia</dt><dd>16 × 12 m<small>z wybiegami</small></dd></div>
+  <div><dt>Ze wzorem od</dt><dd>91 500 zł<small>netto, z płytą betonową</small></dd></div>
+  <div><dt>Gwarancja</dt><dd>12 mies.<small>i opieka po odbiorze</small></dd></div>
+</dl></div></section>
+
+<nav class="gfb-jump" aria-label="Na tej stronie"><div class="w"><ul><li><a href="#wyglad">Wygląd</a></li><li><a href="#wycena">Wycena</a></li><li><a href="#wymiary">Wymiary</a></li><li><a href="#zakres">Zakres</a></li><li><a href="#proces">Jak to działa</a></li><li><a href="#pytania">Pytania</a></li></ul></div></nav>
+
+<section class="gfa-sec" id="wyglad"><div class="w">
+  <div class="gfa-head"><h2 class="d">Twój wzór na polu gry.</h2><p>Trzy przykłady z kolekcji Gamefields. W Studio 3D zmienisz wzór, kompozycję i kolory, a cena policzy się sama. Ponad 1000 wzorów w kolekcji.</p></div>
+  <ul class="gsp2-looks" role="list"><li><a href="/studio/?surface=teqball&amp;pattern=pro-promenade&amp;variant=1&amp;palette=copacabana" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-teqball-1.webp" alt="Boisko do teqballa: Promenade" width="1600" height="1000" loading="lazy" decoding="async"><span class="tx">Promenade<span>Otwórz w Studio ↗</span></span></a></li><li><a href="/studio/?surface=teqball&amp;pattern=pro-p-wycinanka&amp;variant=3&amp;palette=simultane" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-teqball-2.webp" alt="Boisko do teqballa: Wycinanka" width="1600" height="1000" loading="lazy" decoding="async"><span class="tx">Wycinanka<span>Otwórz w Studio ↗</span></span></a></li><li><a href="/studio/?surface=teqball&amp;pattern=pro-k-orbit&amp;variant=4&amp;palette=vasarely" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-teqball-3.webp" alt="Boisko do teqballa: Orbita" width="1600" height="1000" loading="lazy" decoding="async"><span class="tx">Orbita<span>Otwórz w Studio ↗</span></span></a></li></ul>
+  <ul class="gfa-links"><li><a href="/wzory-na-boisko/">Wszystkie wzory na boisko →</a></li></ul>
+</div></section>
+
+<section class="gfa-sec" id="wycena"><div class="w">
+  <div class="gfa-head"><h2 class="d">Wycena w 30 sekund.</h2><p>Wybierz wykończenie i podłoże. Wynik możesz od razu wysłać w zapytaniu: dostanę wymiary, wariant i kwotę.</p></div>
+  <div class="gfb-calc">
+  <form data-calc onsubmit="return false">
+    <fieldset><legend>Wykończenie</legend><div class="gfb-tog"><label><input type="radio" name="finish" value="pattern" checked><span>Wzór Gamefields · 150 zł/m²<small>malowanie 4–6 kolorów, plan malowania dla wykonawcy</small></span></label><label><input type="radio" name="finish" value="pattern-advanced"><span>Wzór zaawansowany · 183 zł/m²<small>7 i więcej kolorów, murale, gradienty</small></span></label><label><input type="radio" name="finish" value="acrylic-0"><span>Akryl Standard (jednolity kolor) · 200 zł/m²<small>Klasyczny hard court, 4–6 warstw, ok. 1–2 mm, twardy i szybki.</small></span></label><label><input type="radio" name="finish" value="acrylic-1"><span>Akryl Standard+ (jednolity kolor) · 267 zł/m²<small>Więcej warstw i lekka amortyzacja, ok. 2–3,5 mm.</small></span></label><label><input type="radio" name="finish" value="acrylic-2"><span>Akryl Premium (jednolity kolor) · 342 zł/m²<small>Warstwy gumowe 4–8 mm, wysoka amortyzacja, klasa Plexipave / Laykold.</small></span></label></div></fieldset>
+    <fieldset><legend>Podłoże</legend><div class="gfb-tog"><label><input type="radio" name="base" value="yes" checked><span>Nowa płyta betonowa 12 cm z podbudową · 283 zł/m²<small>korytowanie, podbudowa, płyta ze spadkami i dylatacjami</small></span></label><label><input type="radio" name="base" value="no"><span>Mam stabilny beton lub asfalt<small>wykończenie na istniejącym placu; naprawy wyceniam po oględzinach</small></span></label></div></fieldset>
+    <fieldset><legend>Wymiary</legend><div class="gfb-tog"><label><input type="radio" name="size" value="std" checked><span>Wymiar dyscypliny z wybiegami: 16 × 12 m<small>jak w Studio 3D</small></span></label><label><input type="radio" name="size" value="own"><span>Własne wymiary placu<small>wpisz długość i szerokość w metrach</small></span></label></div>
+      <div class="gfb-area gsp2-own" data-own hidden><input type="number" name="ol" min="1" step="0.1" placeholder="długość" aria-label="Długość w metrach"><input type="number" name="ow" min="1" step="0.1" placeholder="szerokość" aria-label="Szerokość w metrach"></div></fieldset>
+  </form>
+  <div class="gfb-out" data-out>
+    <p class="k">Twoja wycena orientacyjna</p>
+    <p class="sum"><span data-sum>91 500 zł</span><small data-gross></small></p>
+    <dl><div><dt>Płyta betonowa z podbudową</dt><dd data-b></dd></div><div><dt data-fl>Wykończenie</dt><dd data-f></dd></div><div><dt>Linie do teqballa</dt><dd>w cenie</dd></div></dl>
+    <p data-warn hidden>Wymiary są mniejsze niż pole gry tej dyscypliny. Pomogę dobrać układ albo inną grę.</p>
+    <p>Ceny netto „od”, jak w Studio 3D. Montaż, transport i przygotowanie terenu potwierdzam po zdjęciach placu.</p>
+    <div class="gfa-btns"><a class="gfa-btn" data-send href="/kontakt/">Wyślij zapytanie z tą wyceną →</a><a class="gfa-btn alt" href="/studio/?surface=teqball">Zaprojektuj w Studio ↗</a></div>
+  </div>
+</div>
+</div></section>
+
+<section class="gfa-sec" id="wymiary"><div class="w">
+  <div class="gfa-head"><h2 class="d">Wymiary i miejsce.</h2><p>Koncepcja strefy 16 × 12 m ze stołem pośrodku; FITEQ 2026 wskazuje minimum 7 m wolnej wysokości dla zawodów. Stół 3 × 1,7 × 0,9 m jest poglądowy. Dobór konkretnego stołu TEQ™, otoczenie i warunki realizacji wymagają potwierdzenia.</p></div>
+  <div class="gsp2-plan"><figure><svg viewBox="-1.92 -1.92 19.84 15.84" role="img" aria-label="Plan: nawierzchnia 16 × 12 m, pole 16 × 12 m" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="12" fill="#D8FF77" rx="0.096"/><rect x="0" y="0" width="16" height="12" fill="#28554F"/><path d="M0.04 0.04h15.92v11.92h-15.92ZM8 0L8 12M4.5 0L4.5 12M11.5 0L11.5 12" transform="translate(0 0)" fill="none" stroke="#fff" stroke-width="0.0615385"/><g stroke="#6336F5" stroke-width="0.04"><path d="M0 -0.864H16M0 -1.152V-0.576M16 -1.152V-0.576"/><path d="M16.864 0V12M16.576 0H17.152M16.576 12H17.152"/></g><text x="8" y="-1.152" text-anchor="middle" font-size="0.416" font-weight="700" fill="#47132D">nawierzchnia 16 m</text><text x="17.1904" y="6" text-anchor="middle" font-size="0.416" font-weight="700" fill="#47132D" transform="rotate(90 17.1904 6)">12 m</text><text x="8" y="13.056" text-anchor="middle" font-size="0.416" font-weight="700" fill="#47132D">pole gry 16 × 12 m</text></svg></figure>
+    <div class="gsp2-fit" data-fit><p class="k">Zmieści się?</p><p style="margin:0;color:var(--muted)">Wpisz wymiary swojego placu.</p>
+      <div class="row"><input type="number" name="pl" min="1" step="0.1" placeholder="dł. m" aria-label="Długość placu w metrach"><span>×</span><input type="number" name="pw" min="1" step="0.1" placeholder="szer. m" aria-label="Szerokość placu w metrach"></div>
+      <output aria-live="polite">Wpisz wymiary placu.</output>
+      <p style="margin:0;font-size:14px;color:var(--muted)">Za mało miejsca? Sprawdź <a href="/boisko-do-pickleballa/">pickleball</a>, <a href="/boisko-do-koszykowki-3x3/">koszykówkę 3×3</a> albo <a href="/boiska-street-football/">areny do panny</a> od Ø 5 m.</p></div>
+  </div>
+</div></section>
+
+<section class="gfa-sec" id="zakres"><div class="w">
+  <div class="gfa-head"><h2 class="d">Co dostajesz.</h2><p>Robię podłoże pod grę. Wyposażenie dobiera i montuje jego dostawca.</p></div>
+  <div class="gfb-incl"><div><p class="k">W cenie</p><ul><li>Płyta betonowa 12 cm z podbudową (albo wykończenie na Twoim stabilnym placu)</li><li>Malowanie pola we wzorze Gamefields albo akryl Hard Court</li><li>Plan malowania dla wykonawcy: warstwy, kolory, m²</li><li>Linie do teqballa w wymiarach dyscypliny</li><li>Karty techniczne i dokumenty producentów do oferty i wniosku</li><li>12 miesięcy gwarancji i opieka po odbiorze</li></ul></div>
+  <div><p class="k">Nie dostarczam</p><ul><li>Wyposażenie: kosze, słupki, siatki, stoły, bramki, obudowy</li><li>Ogrodzenie, piłkochwyty i oświetlenie</li><li>Skomplikowany drenaż lub wymiana gruntu głębiej niż 30 cm</li><li>Naprawy istniejącego podłoża: wycena po oględzinach</li></ul></div></div>
+</div></section>
+
+<section class="gfa-sec" id="proces"><div class="w">
+  <div class="gfa-head"><h2 class="d">Jak to działa.</h2><p>Od zdjęcia placu do pierwszego meczu w czterech krokach.</p></div>
+  <ol class="gfb-steps"><li><b>Zdjęcia i wymiary placu</b><p>Wyślij zdjęcia i lokalizację. Sprawdzę podłoże, spadki i dojazd.</p></li><li><b>Projekt w Studio 3D</b><p>Wybierasz wzór i kolory boiska do teqballa, cena liczy się na bieżąco.</p></li><li><b>Wycena i dokumenty</b><p>Oferta z kartami technicznymi; dla gmin i szkół materiały do wniosku.</p></li><li><b>Realizacja i odbiór</b><p>Płyta, nawierzchnia, linie, odbiór i 12 miesięcy gwarancji.</p></li></ol>
+</div></section>
+
+<section class="gfa-band"><div class="w">
+  <div class="gfa-head"><div><p class="k">Dla kogo</p><h2 class="d">Parki, kluby, eventy.</h2></div>
+  <p>Gminy i szkoły dostają koncepcję, wizualizację i dokumenty do wniosku. <a href="/dofinansowanie-boisk/" style="color:var(--lime)">Dofinansowanie boisk →</a></p></div>
+</div></section>
+
+<section class="gfa-sec" id="pytania"><div class="w">
+  <div class="gfa-head"><h2 class="d">Pytania.</h2><p>Najczęstsze pytania przed zamówieniem.</p></div>
+  <div class="gfa-faq"><details><summary>Ile kosztuje nawierzchnia pod teqball?</summary><p>Od 91 500 zł netto za 211,2 m² (nawierzchnia 16 × 12 m z zapasem 10%), razem z płytą betonową z podbudową. Ze wzorem Gamefields od 91 500 zł netto, w jednolitym akrylu od 102 100 zł netto. Montaż, transport i przygotowanie terenu potwierdzam po zdjęciach placu.</p></details><details><summary>Jakie wymiary przyjmujecie?</summary><p>Koncepcja strefy 16 × 12 m ze stołem pośrodku; FITEQ 2026 wskazuje minimum 7 m wolnej wysokości dla zawodów. Stół 3 × 1,7 × 0,9 m jest poglądowy. Dobór konkretnego stołu TEQ™, otoczenie i warunki realizacji wymagają potwierdzenia.</p></details><details><summary>Czy da się zrobić to na starym betonie albo asfalcie?</summary><p>Tak, jeśli podłoże jest stabilne. Naprawiam rysy i ubytki, a wykończenie kładę na istniejącym placu, bez nowej płyty. Zakres napraw wyceniam po oględzinach.</p></details><details><summary>Czy dostarczacie wyposażenie?</summary><p>Nie. Robię podłoże: płytę, nawierzchnię albo malowany wzór i linie. Kosze, siatki, stoły czy obudowy dobiera i montuje dostawca wyposażenia; zostawiam pod nie przygotowane miejsce w projekcie.</p></details><details><summary>Czy na jednym placu można mieć kilka gier?</summary><p>Tak. Linie kilku dyscyplin w różnych kolorach na jednej płycie to częsty układ dla szkół i osiedli. Kolory dobieram tak, żeby każda gra była czytelna.</p></details><details><summary>Ile kosztuje wzór zamiast jednolitego koloru?</summary><p>Malowany wzór Gamefields (4–6 kolorów) to 150 zł/m² netto, zaawansowany (7+ kolorów) 183 zł/m²; akryl jednolity od 200 zł/m². Do wzoru dostajesz plan malowania dla wykonawcy.</p></details></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Inne gry.</h2><p>Ta sama płyta, inne linie. Zobacz pozostałe nawierzchnie.</p></div>
+  <ul class="gsp2-others" role="list"><li><a href="/boisko-do-koszykowki-3x3/" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-basketball-3x3-1.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"><b>Boisko do koszykówki 3×3</b><small>18 × 14 m</small></a></li><li><a href="/kort-do-padla/" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-padel-1.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"><b>Kort do padla</b><small>20 × 10 m</small></a></li><li><a href="/boisko-do-pickleballa/" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-pickleball-1.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"><b>Boisko do pickleballa</b><small>18,29 × 9,14 m</small></a></li><li><a href="/boisko-do-siatkowki/" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-volleyball-1.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"><b>Boisko do siatkówki</b><small>24 × 15 m</small></a></li><li><a href="/kort-tenisowy/" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-tennis-1.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"><b>Kort tenisowy</b><small>36,57 × 18,29 m</small></a></li><li><a href="/boisko-do-koszykowki/" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-basketball-full-1.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"><b>Boisko do koszykówki</b><small>32 × 19 m</small></a></li><li><a href="/boisko-do-futsalu/" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-futsal-1.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"><b>Boisko do futsalu</b><small>44 × 24 m</small></a></li><li><a href="/boisko-do-pilki-3x3/" style="--c:#EDE9E3"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-street-football-3x3-1.webp" alt="" width="1600" height="1000" loading="lazy" decoding="async"><b>Boisko do piłki 3×3</b><small>15 × 10 m</small></a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Masz plac?<br>Zróbmy na nim grę.</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/?produkt=Boisko%20do%20teqballa">Wyślij zdjęcia placu →</a><a class="gfa-btn alt" href="/studio/?surface=teqball">Zaprojektuj w Studio ↗</a></div>
+</div></section>
+<nav class="gsp2-bar" aria-label="Szybkie akcje"><a href="#wycena">Policz wycenę</a><a class="alt" href="/studio/?surface=teqball">Studio 3D</a></nav>
+</div>
+<script>
+(function(){
+var root=document.querySelector('[data-gsp2]');if(!root)return;
+var D=JSON.parse(root.getAttribute('data-gsp2'));
+var f=root.querySelector('[data-calc]'),out=root.querySelector('[data-out]');
+function up(x){return Math.ceil(Math.round(x*100)/10000)*100}
+function zl(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0')+'\u00a0zł'}
+function m(n){return String(Math.round(n*100)/100).replace('.',',')}
+function val(name){var c=f.querySelector('input[name='+name+']:checked');return c?c.value:''}
+function calc(){
+ var own=val('size')==='own',L=D.L,W=D.W;
+ f.querySelector('[data-own]').hidden=!own;
+ if(own){var a=parseFloat(String(f.querySelector('[name=ol]').value).replace(',','.')),b=parseFloat(String(f.querySelector('[name=ow]').value).replace(',','.'));if(a>0){if(b>0){L=Math.max(a,b);W=Math.min(a,b)}}}
+ var area=Math.round(L*W*1.1*10)/10,base=val('base')==='yes'?up(area*D.rate):0,opt=D.opts[val('finish')],fin=up(area*opt.r),sum=base+fin;
+ out.querySelector('[data-sum]').textContent=zl(sum);
+ out.querySelector('[data-gross]').textContent='brutto '+zl(Math.round(sum*1.23))+' · '+m(area)+' m² z zapasem 10%';
+ out.querySelector('[data-b]').textContent=base?zl(base):'—';
+ out.querySelector('[data-f]').textContent=zl(fin);out.querySelector('[data-fl]').textContent=opt.n;
+ var warn=out.querySelector('[data-warn]'),small=L+0.001<D.fl?true:(W+0.001<D.fw);warn.hidden=!small;
+ var txt=D.name+': '+m(L)+' × '+m(W)+' m, '+opt.n+(base?', z płytą betonową':', na istniejącym podłożu')+', wycena od '+zl(sum)+' netto (strona '+D.slug+')';
+ out.querySelector('[data-send]').href='/kontakt/?produkt='+encodeURIComponent(txt);
+}
+f.addEventListener('input',calc);f.addEventListener('change',calc);calc();
+var fit=root.querySelector('[data-fit]');
+if(fit){var o=fit.querySelector('output');fit.addEventListener('input',function(){
+ var a=parseFloat(String(fit.querySelector('[name=pl]').value).replace(',','.')),b=parseFloat(String(fit.querySelector('[name=pw]').value).replace(',','.'));
+ if(a>0){if(b>0){var L=Math.max(a,b),W=Math.min(a,b),ok=D.L<=L+0.001?D.W<=W+0.001:false,okf=D.fl<=L+0.001?D.fw<=W+0.001:false;
+  o.className=ok?'ok':'no';o.textContent=ok?'Mieści się z wybiegami ('+m(D.L)+' × '+m(D.W)+' m).':(okf?'Pole gry się mieści, ale bez pełnych wybiegów ('+m(D.L)+' × '+m(D.W)+' m). Porozmawiajmy o układzie.':'Za mało miejsca: potrzeba '+m(D.L)+' × '+m(D.W)+' m z wybiegami.');return}}
+ o.className='';o.textContent='Wpisz wymiary placu.';});}
+})();
+</script>
+</div>
+<!-- /wp:html -->
