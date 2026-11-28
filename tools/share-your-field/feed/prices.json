@@ -1,0 +1,122 @@
+{
+ "models": [
+  {
+   "name": "Panna Octa Cage 90",
+   "from": 36000,
+   "full": 47400,
+   "area": 31.1
+  },
+  {
+   "name": "Panna Play",
+   "from": 40000,
+   "full": 51000,
+   "area": 30.1
+  },
+  {
+   "name": "Panna Ring",
+   "from": 40000,
+   "full": 47800,
+   "area": 21.5
+  },
+  {
+   "name": "Panna Octa",
+   "from": 49000,
+   "full": 60900,
+   "area": 32.8
+  },
+  {
+   "name": "Panna Grid",
+   "from": 51000,
+   "full": 66500,
+   "area": 42.6
+  },
+  {
+   "name": "Panna Octa Cage 180",
+   "from": 58000,
+   "full": 69400,
+   "area": 31.1
+  },
+  {
+   "name": "Panna Court",
+   "from": 69000,
+   "full": 84700,
+   "area": 43.2
+  },
+  {
+   "name": "Boisko 3 na 3 (Street Arena 15)",
+   "from": 100000,
+   "full": 159300,
+   "area": 164.1
+  }
+ ],
+ "surfaces": [
+  {
+   "name": "Malowanie farbą sportową",
+   "range": [
+    78,
+    183
+   ]
+  },
+  {
+   "name": "Sztuczna trawa",
+   "range": [
+    167,
+    292
+   ]
+  },
+  {
+   "name": "Akryl Hard Court",
+   "range": [
+    200,
+    342
+   ]
+  },
+  {
+   "name": "Nawierzchnia EPDM wylewana",
+   "range": [
+    250,
+    400
+   ]
+  },
+  {
+   "name": "Płytki sportowe PP",
+   "range": [
+    275,
+    400
+   ]
+  },
+  {
+   "name": "Maty gumowe",
+   "range": [
+    242,
+    425
+   ]
+  },
+  {
+   "name": "Płyty gumowe",
+   "range": [
+    342,
+    492
+   ]
+  }
+ ],
+ "paint": [
+  {
+   "name": "Jednokolorowa",
+   "r": 78
+  },
+  {
+   "name": "Jednokolorowa z granulatem",
+   "r": 100
+  },
+  {
+   "name": "Wzór średni",
+   "r": 150
+  },
+  {
+   "name": "Wzór zaawansowany",
+   "r": 183
+  }
+ ],
+ "slab": 283
+}

@@ -1,0 +1,14 @@
+Motyw Gamefields 1.0.38 — pozycja „Wzory” w menu i link w stopce (28.11.2026)
+
+Zmiany względem 1.0.37 (sprawdzone: css/js na żywo identyczne z repozytorium przed zmianą):
+- functions.php: w menu głównym nowa pozycja „Wzory” → /wzory-na-boisko/ (między „Ceny” a „Dla kogo”), GFT_VERSION 1.0.38;
+- footer.php: w kolumnie usług link „Wzory na boisko” pod „Malowanie i grafika”;
+- style.css: Version 1.0.38.
+
+Wgranie (właściciel): Wygląd → Motywy → Dodaj nowy → Wyślij motyw na serwer → plik motyw-gamefields-1.0.38-*.zip
+→ „Zastąp obecny wgranym”. Potem LiteSpeed Cache → Wyczyść wszystko.
+Sprawdzenie: w menu na każdej stronie jest „Wzory”, kliknięcie otwiera /wzory-na-boisko/ (podświetlone jako bieżąca),
+w stopce jest „Wzory na boisko”, wersja motywu 1.0.38.
+
+Opis SEO strony /wzory-na-boisko/ (ID 4954) — Yoast nie przyjmuje go przez API, wklej w edytorze strony (Yoast → Meta opis):
+Wzory na boisko: wzory polskie, murale i Kompozytor, sprawdzone do malowania. Ponad 1000 wzorów w Studio 3D z ceną i planem malowania dla wykonawcy.

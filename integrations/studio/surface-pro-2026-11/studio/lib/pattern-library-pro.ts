@@ -468,6 +468,422 @@ export const proFamilies:PatternFamily[]=[
   ],
   "baseComplexity": 2,
   "renderer": "pro"
+ },
+ {
+  "id": "pro-k-echo",
+  "name": "Echo",
+  "short": "ECHO",
+  "group": "premium",
+  "description": "Linie boiska powtórzone na zewnątrz pasami: pierścienie wokół koła środkowego i obwiednie pól bramkowych.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-zones",
+  "name": "Strefy gry",
+  "short": "ZONES",
+  "group": "geometric",
+  "description": "Kolorem malowane same strefy gry: pola bramkowe, koło, pas środkowy, narożniki. Mało taśmy, czytelna gra.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-rays",
+  "name": "Promienie",
+  "short": "RAYS",
+  "group": "street",
+  "description": "Wachlarze promieni z bramek, narożników albo ze środka, z piastą, dzięki której ostrza są malowalne.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-chevron",
+  "name": "Szewrony",
+  "short": "CHEV",
+  "group": "brand",
+  "description": "Pasy w kształcie V skierowane na bramki albo do środka, lustrzane względem linii środkowej.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-flow",
+  "name": "Tor",
+  "short": "FLOW",
+  "group": "organic",
+  "description": "Wstęga pasów biegnąca od bramki do bramki przez punkt środkowy, symetryczna po obrocie.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-shards",
+  "name": "Płyty",
+  "short": "PLATE",
+  "group": "geometric",
+  "description": "Duże płyty Voronoi, sąsiednie zawsze w innym kolorze, opcjonalnie z fugą koloru tła.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-terrain",
+  "name": "Teren",
+  "short": "TERR",
+  "group": "organic",
+  "description": "Warstwice jak na mapie: jedno wzgórze w kole środkowym albo dwa naprzeciw siebie.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-pixel",
+  "name": "Pole pikseli",
+  "short": "PIX",
+  "group": "play",
+  "description": "Siatka od środka boiska: wielkość albo kolor kafla płynie w stronę bramek, środka lub po przekątnej.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-mown",
+  "name": "Koszone pasy",
+  "short": "MOWN",
+  "group": "premium",
+  "description": "Pasy jak na koszonej murawie: w poprzek, wzdłuż, w szachownicę albo pod 45°. Spokojne, tanie w malowaniu.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-orbit",
+  "name": "Orbita",
+  "short": "ORBIT",
+  "group": "geometric",
+  "description": "Zagnieżdżone koła przesuwające się w stronę bramek jak tunel. Przesunięcie zawsze mniejsze niż pas, więc nic się nie zwęża.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-arcs",
+  "name": "Łuki",
+  "short": "ARCS",
+  "group": "street",
+  "description": "Koncentryczne łuki z narożników, z linii bramkowych albo ze środka linii bocznych.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-argyle",
+  "name": "Romby",
+  "short": "ARGY",
+  "group": "brand",
+  "description": "Siatka rombów od punktu środkowego, kolor według pierścieni odległości, opcjonalna fuga.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-plaid",
+  "name": "Krata",
+  "short": "PLAID",
+  "group": "brand",
+  "description": "Pasy poziome i pionowe lustrzane względem obu osi; skrzyżowania w trzeciej farbie, jak w tkaninie.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-steps",
+  "name": "Equalizer",
+  "short": "EQ",
+  "group": "play",
+  "description": "Słupki od bramek do środka, wysokość rośnie albo maleje schodkami, jak wskaźnik dźwięku.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-rosette",
+  "name": "Rozeta",
+  "short": "ROSE",
+  "group": "organic",
+  "description": "Pierścienie wokół koła środkowego z regularnymi płatkami (parzysta liczba, więc obie połowy są równe).",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-k-cuts",
+  "name": "Cięcia",
+  "short": "CUTS",
+  "group": "geometric",
+  "description": "Proste cięcia parami symetrycznymi; pola na przemian w dwóch kolorach jak złożony papier, z piastą w środku.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-cutouts",
+  "name": "Wycinanki",
+  "short": "CUT",
+  "group": "street",
+  "description": "Wielkie płaskie symbole (gwiazdy, oczy, księżyce, iksy, pioruny) na skośnych płaszczyznach koloru. Mural w duchu wycinanek z amerykańskich boisk.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-field",
+  "name": "Pola malarskie",
+  "short": "FIELD",
+  "group": "premium",
+  "description": "Malarskie pola koloru o miękkich, poszarpanych krawędziach, płynące przez całe boisko, z kilkoma akcentami.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-textile",
+  "name": "Tkanina",
+  "short": "TEX",
+  "group": "brand",
+  "description": "Pasy jak tkane wstęgi, każdy z innym motywem: zygzak, romby, krata, pasy, trójkąty. Od krawędzi do krawędzi.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-landscape",
+  "name": "Pejzaż",
+  "short": "LAND",
+  "group": "organic",
+  "description": "Warstwy wzgórz albo fal i słońce z aureolą: malowany krajobraz na całe boisko.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-flora",
+  "name": "Flora",
+  "short": "FLORA",
+  "group": "organic",
+  "description": "Ogromne liście wchodzące od krawędzi boiska, z malowanym nerwem. Botaniczny mural do parku.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-words",
+  "name": "Wielkie słowa",
+  "short": "WORD",
+  "group": "brand",
+  "description": "Hasło wielkimi literami z blokowego kroju (GRAJ, GOL, RAZEM…), na panelach koloru albo z cieniem.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-frame",
+  "name": "Rama",
+  "short": "FRAME",
+  "group": "play",
+  "description": "Mural na pasie wokół boiska i w polach bramkowych, środek spokojny do gry.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-m-strokes",
+  "name": "Pociągnięcia",
+  "short": "BRUSH",
+  "group": "street",
+  "description": "Wielkie pociągnięcia pędzla o stałej szerokości i okrągłych końcach, nałożone na siebie przez całe boisko.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-wycinanka",
+  "name": "Wycinanka",
+  "short": "WYC",
+  "group": "organic",
+  "description": "Warstwowe płatki wokół koła środkowego i rozety w narożnikach, jak w wycinance łowickiej.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-pasiak",
+  "name": "Pasiak",
+  "short": "PAS",
+  "group": "brand",
+  "description": "Żywe pasy różnej szerokości, lustrzane względem linii środkowej, jak w łowickim pasiaku.",
+  "tags": [
+   "pro",
+   "brand"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-ceramika",
+  "name": "Ceramika",
+  "short": "CER",
+  "group": "play",
+  "description": "Pawie oczka (kropka, pierścień, kropka) z gałązkami na spokojnym tle, jak na ceramice z Bolesławca.",
+  "tags": [
+   "pro",
+   "play"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-mozaika",
+  "name": "Mozaika",
+  "short": "MOZ",
+  "group": "geometric",
+  "description": "Duże płyty z ćwierćkołami, połówkami i trójkątami, jak w powojennych mozaikach modernistycznych.",
+  "tags": [
+   "pro",
+   "geometric"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-kilim",
+  "name": "Kilim",
+  "short": "KIL",
+  "group": "street",
+  "description": "Schodkowe romby i zygzaki z tkanin góralskich, na grubej siatce.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-neon",
+  "name": "Neon",
+  "short": "NEON",
+  "group": "street",
+  "description": "Grube rury świetlne na ciemnym tle: koło, łuki, zygzak albo gwiazdy, jak warszawskie neony.",
+  "tags": [
+   "pro",
+   "street"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-parzenica",
+  "name": "Parzenica",
+  "short": "PARZ",
+  "group": "organic",
+  "description": "Lustrzane serce z zawijasów przy każdej bramce, kilka zagnieżdżonych linii, jak na góralskich spodniach.",
+  "tags": [
+   "pro",
+   "organic"
+  ],
+  "baseComplexity": 1,
+  "renderer": "pro"
+ },
+ {
+  "id": "pro-p-witraz",
+  "name": "Witraż",
+  "short": "WIT",
+  "group": "premium",
+  "description": "Wielkie kwiaty i liście, każde pole w ciemnej obwódce jak ołów witrażu, w duchu krakowskiej secesji.",
+  "tags": [
+   "pro",
+   "premium"
+  ],
+  "baseComplexity": 2,
+  "renderer": "pro"
  }
 ];
 export const proPalettes:PatternPalette[]=[
@@ -968,6 +1384,332 @@ export const proSignaturePresets:SignaturePreset[]=[
   "paletteId": "gamefields",
   "useCase": "klub / sponsor",
   "note": "Numer jako supergrafika — klub, rok założenia, kod dzielnicy."
+ }
+];
+export const polishSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "p-wycinanka",
+  "name": "Wycinanka",
+  "eyebrow": "POLSKIE 01",
+  "familyId": "pro-p-wycinanka",
+  "variant": 3,
+  "paletteId": "simultane",
+  "useCase": "gmina / dzielnica",
+  "note": "Warstwowe płatki wokół koła środkowego, jak w wycinance łowickiej. Lokalny znak, który rozpozna każdy, czytelny z drona."
+ },
+ {
+  "id": "p-pasiak",
+  "name": "Pasiak",
+  "eyebrow": "POLSKIE 02",
+  "familyId": "pro-p-pasiak",
+  "variant": 1,
+  "paletteId": "albers",
+  "useCase": "marka / kultura",
+  "note": "Żywe pasy różnej szerokości, lustrzane względem linii środkowej. Najprostszy w malowaniu: same proste krawędzie."
+ },
+ {
+  "id": "p-ceramika",
+  "name": "Ceramika",
+  "eyebrow": "POLSKIE 03",
+  "familyId": "pro-p-ceramika",
+  "variant": 6,
+  "paletteId": "nihon",
+  "useCase": "szkoła / dzieci",
+  "note": "Pawie oczka z Bolesławca z gałązkami. Każdy motyw cały w polu gry, kolory dobrane tak, żeby kropki były wyraźne."
+ },
+ {
+  "id": "p-mozaika",
+  "name": "Mozaika",
+  "eyebrow": "POLSKIE 04",
+  "familyId": "pro-p-mozaika",
+  "variant": 3,
+  "paletteId": "hard-edge",
+  "useCase": "miasto / plac",
+  "note": "Duże płyty z łukami, połówkami i trójkątami, w duchu powojennych mozaik. Krawędzie kolorów nie biegną wzdłuż linii gry."
+ },
+ {
+  "id": "p-kilim",
+  "name": "Kilim",
+  "eyebrow": "POLSKIE 05",
+  "familyId": "pro-p-kilim",
+  "variant": 8,
+  "paletteId": "stijl",
+  "useCase": "klub / turniej",
+  "note": "Schodkowe romby z tkanin góralskich i zygzak wzdłuż linii bocznych. Maluje się z siatki kwadratów."
+ },
+ {
+  "id": "p-neon",
+  "name": "Neon",
+  "eyebrow": "POLSKIE 06",
+  "familyId": "pro-p-neon",
+  "variant": 1,
+  "paletteId": "nightshift",
+  "useCase": "event / nocne granie",
+  "note": "Rury świetlne na ciemnych tablicach, jak warszawskie neony. Każda rura ma min. 20 cm, a między rurami zawsze jest min. 20 cm tła."
+ },
+ {
+  "id": "p-parzenica",
+  "name": "Parzenica",
+  "eyebrow": "POLSKIE 07",
+  "familyId": "pro-p-parzenica",
+  "variant": 2,
+  "paletteId": "ndebele",
+  "useCase": "szkoła / dzielnica",
+  "note": "Zagnieżdżone serca przy każdej bramce na tle jak sukno, medalion w kole środkowym. Haft góralski w skali boiska."
+ },
+ {
+  "id": "p-witraz",
+  "name": "Witraż",
+  "eyebrow": "POLSKIE 08",
+  "familyId": "pro-p-witraz",
+  "variant": 2,
+  "paletteId": "burle-marx",
+  "useCase": "park / sztuka publiczna",
+  "note": "Wielkie kwiaty i liście w ciemnej obwódce jak ołów witrażu, w duchu krakowskiej secesji."
+ }
+];
+export const muralSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "m-cutouts",
+  "name": "Wycinanki",
+  "eyebrow": "MURALE 01",
+  "familyId": "pro-m-cutouts",
+  "variant": 3,
+  "paletteId": "ndebele",
+  "useCase": "street / youth",
+  "note": "Wielkie płaskie symbole na skośnych płaszczyznach: gwiazdy, oczy, księżyce, pioruny. Mural jak z amerykańskich boisk Project Backboard."
+ },
+ {
+  "id": "m-field",
+  "name": "Pola malarskie",
+  "eyebrow": "MURALE 02",
+  "familyId": "pro-m-field",
+  "variant": 2,
+  "paletteId": "kinloch",
+  "useCase": "park / sztuka publiczna",
+  "note": "Pola koloru o miękkich krawędziach płyną przez całe boisko, jak obraz przeniesiony na nawierzchnię."
+ },
+ {
+  "id": "m-textile",
+  "name": "Tkanina",
+  "eyebrow": "MURALE 03",
+  "familyId": "pro-m-textile",
+  "variant": 1,
+  "paletteId": "gees-bend",
+  "useCase": "kultura / dzielnica",
+  "note": "Pasy jak tkane wstęgi, każdy z innym motywem. Boisko opowiada historię miejsca wzorem, nie napisem."
+ },
+ {
+  "id": "m-landscape",
+  "name": "Pejzaż",
+  "eyebrow": "MURALE 04",
+  "familyId": "pro-m-landscape",
+  "variant": 1,
+  "paletteId": "simultane",
+  "useCase": "miasto / park",
+  "note": "Warstwy wzgórz i słońce z aureolą. Jasne kolory odbijają słońce, więc nawierzchnia mniej się nagrzewa."
+ },
+ {
+  "id": "m-flora",
+  "name": "Flora",
+  "eyebrow": "MURALE 05",
+  "familyId": "pro-m-flora",
+  "variant": 6,
+  "paletteId": "burle-marx",
+  "useCase": "park / eco",
+  "note": "Ogromne liście wchodzą od krawędzi boiska, środek zostaje czytelny do gry."
+ },
+ {
+  "id": "m-words",
+  "name": "Nasze boisko",
+  "eyebrow": "MURALE 06",
+  "familyId": "pro-m-words",
+  "variant": 8,
+  "paletteId": "swiss",
+  "useCase": "szkoła / dzielnica",
+  "note": "Hasło wielkimi literami z blokowego kroju. Każda litera ma co najmniej 20 cm kreski, więc maluje się ją z szablonu."
+ },
+ {
+  "id": "m-frame",
+  "name": "Rama",
+  "eyebrow": "MURALE 07",
+  "familyId": "pro-m-frame",
+  "variant": 3,
+  "paletteId": "nihon",
+  "useCase": "szkoła / klub",
+  "note": "Mural na pasie wokół boiska i w polach bramkowych, środek spokojny. Najtańszy sposób na boisko-mural."
+ },
+ {
+  "id": "m-strokes",
+  "name": "Pociągnięcia",
+  "eyebrow": "MURALE 08",
+  "familyId": "pro-m-strokes",
+  "variant": 3,
+  "paletteId": "stella",
+  "useCase": "event / festiwal",
+  "note": "Wielkie pociągnięcia pędzla przez całe boisko, ruch i energia jak na murach miasta."
+ }
+];
+export const composerSignaturePresets:SignaturePreset[]=[
+ {
+  "id": "k2-mown",
+  "name": "Koszone pasy",
+  "eyebrow": "KOMPOZYTOR II 01",
+  "familyId": "pro-k-mown",
+  "variant": 4,
+  "paletteId": "bondy",
+  "useCase": "klub / turniej",
+  "note": "Szachownica jak na skoszonej murawie stadionu i koło w środku. Trzy farby, proste oklejanie, wygląda jak prawdziwe boisko."
+ },
+ {
+  "id": "k2-orbit",
+  "name": "Orbita",
+  "eyebrow": "KOMPOZYTOR II 02",
+  "familyId": "pro-k-orbit",
+  "variant": 4,
+  "paletteId": "vasarely",
+  "useCase": "park / ikona miejsca",
+  "note": "Koła wsuwają się w siebie w stronę bramek jak tunel. Przesunięcie jest zawsze mniejsze niż pas, więc żaden pierścień się nie zwęża."
+ },
+ {
+  "id": "k2-arcs",
+  "name": "Łuki",
+  "eyebrow": "KOMPOZYTOR II 03",
+  "familyId": "pro-k-arcs",
+  "variant": 2,
+  "paletteId": "nihon",
+  "useCase": "miasto / plac",
+  "note": "Koncentryczne łuki wyrastają z linii bramkowych. Bramki stają się środkiem kompozycji, a pole gry zostaje spokojne."
+ },
+ {
+  "id": "k2-argyle",
+  "name": "Romby",
+  "eyebrow": "KOMPOZYTOR II 04",
+  "familyId": "pro-k-argyle",
+  "variant": 10,
+  "paletteId": "martens",
+  "useCase": "marka / kampania",
+  "note": "Siatka rombów od punktu środkowego, kolory w pierścieniach. Wzór jak z dzianiny, łatwy do przeniesienia na merch."
+ },
+ {
+  "id": "k2-plaid",
+  "name": "Krata",
+  "eyebrow": "KOMPOZYTOR II 05",
+  "familyId": "pro-k-plaid",
+  "variant": 2,
+  "paletteId": "albers",
+  "useCase": "moda / kultura",
+  "note": "Pasy poziome i pionowe, skrzyżowania w trzeciej farbie, jak w tkaninie. Lustrzana względem obu osi boiska."
+ },
+ {
+  "id": "k2-steps",
+  "name": "Equalizer",
+  "eyebrow": "KOMPOZYTOR II 06",
+  "familyId": "pro-k-steps",
+  "variant": 5,
+  "paletteId": "gamefields",
+  "useCase": "event / festiwal",
+  "note": "Słupki rosną od środka do bramek jak wskaźnik dźwięku. Mało taśmy, mocny efekt na zdjęciach z drona."
+ },
+ {
+  "id": "k2-rosette",
+  "name": "Rozeta",
+  "eyebrow": "KOMPOZYTOR II 07",
+  "familyId": "pro-k-rosette",
+  "variant": 12,
+  "paletteId": "simultane",
+  "useCase": "szkoła / dzieci",
+  "note": "Pierścienie z płatkami wokół koła środkowego. Parzysta liczba płatków, więc obie połowy boiska są identyczne."
+ },
+ {
+  "id": "k2-cuts",
+  "name": "Cięcia",
+  "eyebrow": "KOMPOZYTOR II 08",
+  "familyId": "pro-k-cuts",
+  "variant": 6,
+  "paletteId": "hard-edge",
+  "useCase": "street / youth",
+  "note": "Proste cięcia parami, pola na przemian w dwóch kolorach jak złożony papier, piasta w kole środkowym. Najtańsza w kolekcji."
+ },
+ {
+  "id": "k-echo",
+  "name": "Echo",
+  "eyebrow": "KOMPOZYTOR 01",
+  "familyId": "pro-k-echo",
+  "variant": 4,
+  "paletteId": "swiss",
+  "useCase": "miasto / park",
+  "note": "Koło środkowe i pola bramkowe powtórzone pasami jak echo. Gra jest czytelna, bo wzór rośnie z jej własnych linii."
+ },
+ {
+  "id": "k-zones",
+  "name": "Strefy gry",
+  "eyebrow": "KOMPOZYTOR 02",
+  "familyId": "pro-k-zones",
+  "variant": 1,
+  "paletteId": "stijl",
+  "useCase": "szkoła / dzieci",
+  "note": "Kolorem malowane tylko strefy gry. Najmniej taśmy w kolekcji, a dzieci od razu widzą, gdzie stać."
+ },
+ {
+  "id": "k-rays",
+  "name": "Promienie",
+  "eyebrow": "KOMPOZYTOR 03",
+  "familyId": "pro-k-rays",
+  "variant": 3,
+  "paletteId": "stella",
+  "useCase": "street / turnieje",
+  "note": "Wachlarze promieni wychodzą z bramek. Piasta przy bramce sprawia, że żadne ostrze nie jest węższe niż 20 cm."
+ },
+ {
+  "id": "k-chevron",
+  "name": "Szewrony",
+  "eyebrow": "KOMPOZYTOR 04",
+  "familyId": "pro-k-chevron",
+  "variant": 6,
+  "paletteId": "aicher",
+  "useCase": "klub / turniej",
+  "note": "Pasy w kształcie V prowadzą wzrok do bramek. Szerokość liczona prostopadle do pasa, więc każdy pas da się okleić."
+ },
+ {
+  "id": "k-flow",
+  "name": "Tor",
+  "eyebrow": "KOMPOZYTOR 05",
+  "familyId": "pro-k-flow",
+  "variant": 2,
+  "paletteId": "nightshift",
+  "useCase": "event / nocne granie",
+  "note": "Wstęga pasów biegnie od bramki do bramki przez punkt środkowy. Po obrocie o 180° obie połowy są identyczne."
+ },
+ {
+  "id": "k-shards",
+  "name": "Płyty",
+  "eyebrow": "KOMPOZYTOR 06",
+  "familyId": "pro-k-shards",
+  "variant": 3,
+  "paletteId": "gees-bend",
+  "useCase": "plac / rewitalizacja",
+  "note": "Duże płyty, sąsiednie zawsze w innym kolorze. Z 355 kandydatów kontrolę przeszło 90, do Studia trafiło 36."
+ },
+ {
+  "id": "k-terrain",
+  "name": "Teren",
+  "eyebrow": "KOMPOZYTOR 07",
+  "familyId": "pro-k-terrain",
+  "variant": 2,
+  "paletteId": "burle-marx",
+  "useCase": "park / eco",
+  "note": "Dwa wzgórza warstwic naprzeciw siebie na ciemnej zieleni. Mapa miejsca na nawierzchni."
+ },
+ {
+  "id": "k-pixel",
+  "name": "Pole pikseli",
+  "eyebrow": "KOMPOZYTOR 08",
+  "familyId": "pro-k-pixel",
+  "variant": 6,
+  "paletteId": "cruz-diez",
+  "useCase": "szkoła / zabawa",
+  "note": "Siatka kafli od środka boiska, kolor płynie pasmami. Maluje się z jednego szablonu kratki."
  }
 ];
 export const mastersSignaturePresets:SignaturePreset[]=[

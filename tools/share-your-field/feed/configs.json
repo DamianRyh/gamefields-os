@@ -1,0 +1,16 @@
+[
+ {"id":"play-ndebele","q":"arena=o1&pattern=pro-ndebele&variant=3&palette=ndebele&panel=F4C430&frame=141414","price":40000,
+  "posts":[{"name":"karta","format":"post","style":"plan","bg":"ink","caption":"Model tygodnia","showPrice":true},{"name":"clean-story","format":"story","style":"clean","bg":"auto","caption":"Model tygodnia","showPrice":false}]},
+ {"id":"court-neoplastic","q":"arena=p1&pattern=pro-neoplastic&variant=6&palette=stijl&panel=1F4E9C&frame=111111","price":69000,
+  "posts":[{"name":"clean","format":"post","style":"clean","bg":"auto","caption":"Wzór 1 z 3 · De Stijl","showPrice":false}]},
+ {"id":"court-overprint","q":"arena=p1&pattern=pro-overprint&variant=1&palette=martens&panel=E5383B&frame=1E1E1E","price":69000,
+  "posts":[{"name":"clean","format":"post","style":"clean","bg":"auto","caption":"Wzór 2 z 3 · Karel Martens","showPrice":false}]},
+ {"id":"court-vega","q":"arena=p1&pattern=pro-vega&variant=3&palette=vasarely&panel=F4F1EE&frame=141414","price":69000,
+  "posts":[{"name":"clean","format":"post","style":"clean","bg":"auto","caption":"Wzór 3 z 3 · Vasarely","showPrice":false}]},
+ {"id":"cage180-munich","q":"arena=circle-cage-2&pattern=pro-munich&variant=2&palette=aicher&panel=2E9C5E&frame=0F5B3A","price":58000,
+  "posts":[{"name":"street","format":"post","style":"street","bg":"auto","caption":"Dla klubów","showPrice":false}]},
+ {"id":"play-stijl","q":"arena=o1&pattern=pro-neoplastic&variant=6&palette=stijl&panel=1F4E9C&frame=111111","price":40000,"posts":[]},
+ {"id":"cage90-garden","q":"arena=circle-cage-1&pattern=pro-garden&variant=3&palette=burle-marx&panel=1F5E3A&frame=1B1B1B","price":36000,"posts":[]},
+ {"id":"street15-overprint","q":"arena=street15&pattern=pro-overprint&variant=1&palette=martens&panel=E5383B&frame=1E1E1E","price":100000,
+  "posts":[{"name":"street","format":"post","style":"street","bg":"auto","caption":"Twój projekt do BO","showPrice":false}]}
+]

@@ -1,0 +1,146 @@
+diff --git a/integrations/studio/canvas-editor/components/studio-surface-designer.tsx b/integrations/studio/canvas-editor/components/studio-surface-designer.tsx
+index 4bf81ab..93cfb73 100644
+--- a/integrations/studio/canvas-editor/components/studio-surface-designer.tsx
++++ b/integrations/studio/canvas-editor/components/studio-surface-designer.tsx
+@@ -14,6 +14,7 @@ import {SurfaceBaseColor} from "@/components/studio-asset-library";
+ type Patch=Partial<Project>;
+ const CATEGORIES=[
+  {id:'all',label:'Wszystkie',test:/./},
++ {id:'polish',label:'Wzory polskie',test:/./,eyebrow:'POLSKIE'},
+  {id:'murals',label:'Murale',test:/./,eyebrow:'MURALE'},
+  {id:'composer',label:'Kompozytor',test:/./,eyebrow:'KOMPOZYTOR'},
+  {id:'masters',label:'Inspiracje mistrzów',test:/./,eyebrow:'MASTERS'},
+diff --git a/integrations/studio/canvas-editor/lib/pattern-library.ts b/integrations/studio/canvas-editor/lib/pattern-library.ts
+index 80e6f9d..d90d101 100644
+--- a/integrations/studio/canvas-editor/lib/pattern-library.ts
++++ b/integrations/studio/canvas-editor/lib/pattern-library.ts
+@@ -1,4 +1,4 @@
+-import {proFamilies,proPalettes,proSignaturePresets,mastersSignaturePresets,composerSignaturePresets,muralSignaturePresets} from "./pattern-library-pro.ts";
++import {proFamilies,proPalettes,proSignaturePresets,mastersSignaturePresets,composerSignaturePresets,muralSignaturePresets,polishSignaturePresets} from "./pattern-library-pro.ts";
+ export type PatternGroup="organic"|"geometric"|"street"|"premium"|"brand"|"play";
+ export type PatternFamily={
+  id:string;
+@@ -106,7 +106,7 @@ const baseSignaturePresets:SignaturePreset[]=[
+  {id:"local-lettering",name:"Local Lettering",eyebrow:"SIGNATURE 11",familyId:"local-id",variant:12,paletteId:"warsaw",useCase:"dzielnica / placemaking",note:"Wzór budowany pod nazwę miejsca, dzielnicy lub lokalne hasło."},
+  {id:"festival-art",name:"Festival Art",eyebrow:"SIGNATURE 12",familyId:"street-art",variant:5,paletteId:"sunset",useCase:"event / kultura",note:"Najbardziej ekspresyjny kierunek do realizacji muralowych i przestrzeni eventowych."}
+ ];
+-export const signaturePresets:SignaturePreset[]=[...muralSignaturePresets,...composerSignaturePresets,...mastersSignaturePresets,...proSignaturePresets,...baseSignaturePresets];
++export const signaturePresets:SignaturePreset[]=[...polishSignaturePresets,...muralSignaturePresets,...composerSignaturePresets,...mastersSignaturePresets,...proSignaturePresets,...baseSignaturePresets];
+ 
+ 
+ export const curatedPatterns:CuratedPattern[]=[
+diff --git a/integrations/studio/canvas-editor/tests/studio-scope.mjs b/integrations/studio/canvas-editor/tests/studio-scope.mjs
+index ecc8d10..3bf314f 100644
+--- a/integrations/studio/canvas-editor/tests/studio-scope.mjs
++++ b/integrations/studio/canvas-editor/tests/studio-scope.mjs
+@@ -26,7 +26,7 @@ import {resolve} from 'node:path';
+ const root=resolve(import.meta.dirname,'..');
+ const read=path=>readFile(resolve(root,path),'utf8');
+ const {patternFamilies,patternPalettes,signaturePresets,variants,PATTERN_COUNT}=await import('../lib/pattern-library.ts');
+-assert.equal(PATTERN_COUNT,1020);assert.equal(patternFamilies.length,85);assert.equal(patternPalettes.length,47);assert.equal(signaturePresets.length,72);assert.equal(variants.length,12);
++assert.equal(PATTERN_COUNT,1116);assert.equal(patternFamilies.length,93);assert.equal(patternPalettes.length,47);assert.equal(signaturePresets.length,80);assert.equal(variants.length,12);
+ const home=await read('app/page.tsx');
+ assert.ok(!home.includes('/api/projects'));assert.ok(!home.includes('/play'));assert.ok(!home.includes('Object.values(realisticPreviews).forEach'));
+ assert.ok((await read('app/manifest.ts')).includes('start_url: "/"'));
+@@ -36,6 +36,6 @@ for(const dir of ['app','components','lib']){
+ const sources=await Promise.all(['app/page.tsx','components/street-football-realistic-preview.tsx','lib/radar-locations.ts'].map(read));
+ for(const src of new Set(sources.join('\n').match(/\/(?:studio|radar)\/[^"'`\s]+\.(?:png|webp)/g)||[]))await access(resolve(root,'public'+src));
+ assert.ok((await read('lib/realistic-locations.ts')).includes('enabled:false'));
+-console.log('PASS: Studio/Radar scope, 1020 patterns, 47 palettes, 8 Murale + 16 Kompozytor + 20 Masters + 16 Signature Pro + 12 legacy presets, assets present, Kraków hidden, no retired account calls.');
++console.log('PASS: Studio/Radar scope, 1116 patterns, 47 palettes, 8 Polskie + 8 Murale + 16 Kompozytor + 20 Masters + 16 Signature Pro + 12 legacy presets, assets present, Kraków hidden, no retired account calls.');
+ 
+ for(const loc of ["park","school","courtyard","warsaw-pkin"])for(const view of ["perspective","aerial","ground"])await access(resolve(root,`public/studio/panna/${loc}-${view}.webp`));
+diff --git a/integrations/studio/canvas-editor/tests/studio-surface-designer.mjs b/integrations/studio/canvas-editor/tests/studio-surface-designer.mjs
+index 5097c99..e92e0bd 100644
+--- a/integrations/studio/canvas-editor/tests/studio-surface-designer.mjs
++++ b/integrations/studio/canvas-editor/tests/studio-surface-designer.mjs
+@@ -26,12 +26,13 @@ try{
+   assert.equal(await page.locator('.studio-design-flow').count(),0,'old carousels are gone');
+   assert.equal(await page.locator('.scene-paint-palette').count(),0,'no colour popover over the court');
+   assert.equal(await d.locator('.gfsd-card').count(),8,'first 8 ready projects');
+-  await d.getByRole('button',{name:'Pokaż wszystkie projekty (72)',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),72,'all 72 projects: Murale, Kompozytor, Masters, Signature Pro and the earlier library');
+-  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Szkoła i dzieci',exact:true}).click();const school=await d.locator('.gfsd-card').count();assert(school>=2&&school<72,'filter by use');
++  await d.getByRole('button',{name:'Pokaż wszystkie projekty (80)',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),80,'all 80 projects: Polskie, Murale, Kompozytor, Masters, Signature Pro and the earlier library');
++  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Szkoła i dzieci',exact:true}).click();const school=await d.locator('.gfsd-card').count();assert(school>=2&&school<80,'filter by use');
++  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Wzory polskie',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),8,'8 Polish projects');
+   await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Murale',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),8,'8 Murale projects');
+   await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Kompozytor',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),8,'Kompozytor filter starts with 8');await d.getByRole('button',{name:'Pokaż wszystkie projekty (16)',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),16,'16 Kompozytor projects');
+   await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Inspiracje mistrzów',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),8,'Masters filter starts with 8');await d.getByRole('button',{name:'Pokaż wszystkie projekty (20)',exact:true}).click();assert.equal(await d.locator('.gfsd-card').count(),20,'20 Masters projects (Masters II and Masters)');
+-  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Wszystkie',exact:true}).click();await d.getByRole('button',{name:'Pokaż wszystkie projekty (72)',exact:true}).click();
++  await d.getByRole('group',{name:'Zastosowanie'}).getByRole('button',{name:'Wszystkie',exact:true}).click();await d.getByRole('button',{name:'Pokaż wszystkie projekty (80)',exact:true}).click();
+   const before=await downloadProject(page);
+   await d.getByRole('button',{name:/^City Fluid,/}).click();let p=await downloadProject(page);
+   assert.equal(p.patternFamily,'organic-flow');assert.equal(p.patternVariant,6);assert.equal(p.patternPalette,'warsaw');assert.equal(p.base,'#8E1D23');assert.equal(p.patternColors,undefined);
+@@ -47,11 +48,11 @@ try{
+   assert.equal(await d.locator('.gfsd-colors>button[aria-pressed=true]').count(),1,'one colour marked');
+   await d.getByRole('button',{name:'przywróć kolory palety',exact:true}).click();p=await downloadProject(page);assert.equal(p.patternColors,undefined);
+   // all directions, collapsed until asked
+-  assert.equal(await d.locator('.gfsd-more .gfsd-card').count(),0);await d.locator('.gfsd-more>summary').click();await d.locator('.gfsd-more .gfsd-card').first().waitFor();assert.equal(await d.locator('.gfsd-more .gfsd-card').count(),85);
++  assert.equal(await d.locator('.gfsd-more .gfsd-card').count(),0);await d.locator('.gfsd-more>summary').click();await d.locator('.gfsd-more .gfsd-card').first().waitFor();assert.equal(await d.locator('.gfsd-more .gfsd-card').count(),93);
+   await d.locator('.gfsd-more').getByRole('button',{name:'Bauhaus',exact:true}).click();p=await downloadProject(page);assert.equal(p.patternFamily,'bauhaus');
+   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,'no sideways scroll');
+   await d.screenshot({path:`outputs/studio-ux/surface-designer-${width}.png`});
+-  report.cases.push({width,projects:72,directions:85,ownColours:true});await page.close();
++  report.cases.push({width,projects:80,directions:93,ownColours:true});await page.close();
+  }
+  report.status='passed';console.log(JSON.stringify(report));
+ }catch(e){report.status='failed';report.error=String(e);console.error(e);process.exitCode=1;}finally{await writeFile('outputs/studio-ux/surface-offers-verification.json',JSON.stringify(report,null,2));await browser?.close();if(server)await new Promise(r=>server.close(r));await mf.dispose();}
+diff --git a/integrations/studio/canvas-editor/tests/surface-pro.mjs b/integrations/studio/canvas-editor/tests/surface-pro.mjs
+index 96ad8be..7a093c7 100644
+--- a/integrations/studio/canvas-editor/tests/surface-pro.mjs
++++ b/integrations/studio/canvas-editor/tests/surface-pro.mjs
+@@ -1,22 +1,23 @@
+ import assert from 'node:assert/strict';
+ import {renderPro} from '../lib/court-art-pro.mjs';
+-import {proFamilies,proPalettes,proSignaturePresets,mastersSignaturePresets,composerSignaturePresets,muralSignaturePresets} from '../lib/pattern-library-pro.ts';
++import {proFamilies,proPalettes,proSignaturePresets,mastersSignaturePresets,composerSignaturePresets,muralSignaturePresets,polishSignaturePresets} from '../lib/pattern-library-pro.ts';
+ import {composerMetrics,proExecution} from '../lib/court-art-pro.mjs';
+ import {POOL,MURAL} from '../lib/court-composer.mjs';
+ import {measureLabels,buildPlan} from '../lib/paint-plan.mjs';
+ import {patternFamilies,patternPalettes,signaturePresets} from '../lib/pattern-library.ts';
+ 
+-// 16 Signature Pro + 12 Masters + 8 Masters II + 24 Composer families (Kompozytor I, II, III Murale)
+-assert.equal(proFamilies.length,60);
++// 16 Signature Pro + 12 Masters + 8 Masters II + 32 Composer families (Kompozytor I, II, III Murale, IV Wzory polskie)
++assert.equal(proFamilies.length,68);
+ assert.equal(proPalettes.length,28);
+ assert.equal(proSignaturePresets.length,16);
+ assert.equal(mastersSignaturePresets.length,20,'Masters II (8) then Masters (12)');
+ assert.equal(composerSignaturePresets.length,16,'Kompozytor II (8) then Kompozytor (8)');
+ assert.equal(muralSignaturePresets.length,8);
+-assert.equal(new Set([...composerSignaturePresets,...muralSignaturePresets].map(p=>p.familyId)).size,24,'one preset per Composer family');
++assert.equal(polishSignaturePresets.length,8);
++assert.equal(new Set([...composerSignaturePresets,...muralSignaturePresets,...polishSignaturePresets].map(p=>p.familyId)).size,32,'one preset per Composer family');
+ assert.equal(patternFamilies.filter(f=>!f.id.startsWith('pro-')).length,25);
+-const order=[...muralSignaturePresets,...composerSignaturePresets,...mastersSignaturePresets,...proSignaturePresets];
+-assert.deepEqual(signaturePresets.slice(0,order.length),order,'Murale, Kompozytor, Masters, Pro, then the legacy presets');
++const order=[...polishSignaturePresets,...muralSignaturePresets,...composerSignaturePresets,...mastersSignaturePresets,...proSignaturePresets];
++assert.deepEqual(signaturePresets.slice(0,order.length),order,'Polskie, Murale, Kompozytor, Masters, Pro, then the legacy presets');
+ assert.equal(signaturePresets.slice(order.length).length,12);
+ for(const rows of [patternFamilies,patternPalettes,signaturePresets])assert.equal(new Set(rows.map(row=>row.id)).size,rows.length,'Identifiers must remain unique');
+ for(const preset of order){
+@@ -34,8 +35,8 @@ for(const family of proFamilies)for(let variant=1;variant<=12;variant++){
+  rendered++;
+ }
+ // Composer: every shown variant comes from the checked pool and carries measurements
+-const composer=proFamilies.filter(f=>f.id.startsWith('pro-k-')||f.id.startsWith('pro-m-'));
+-assert.equal(composer.length,24);
++const composer=proFamilies.filter(f=>/^pro-[kmp]-/.test(f.id));
++assert.equal(composer.length,32);
+ for(const f of composer){
+  assert.ok(POOL[f.id]&&POOL[f.id].length>=12,`${f.id}: at least 12 checked seeds`);
+  const m=composerMetrics(f.id,1,proPalettes[0].colors,{area:150});
+@@ -43,10 +44,12 @@ for(const f of composer){
+  assert.equal(proExecution(f.id,1,400,proPalettes[0].colors).masking,m.masking);
+ }
+ assert.equal([...MURAL].length,8);
++// Wzory polskie carry the measured slot adjacency used for the colour plan
++for(const f of composer.filter(f=>f.id.startsWith('pro-p-')))assert.ok(POOL[f.id].every(e=>Array.isArray(e.m.e)&&e.m.e.length===10),`${f.id}: adjacency for the colour plan`);
+ // Paint plan: exact on known shapes (15 x 10 m court at 40 px per metre)
+ const plan=(W,H,fn,cols)=>{const lab=new Uint8Array(W*H);for(let y=0;y<H;y++)for(let x=0;x<W;x++)lab[y*W+x]=fn(x,y);return buildPlan({colours:cols,...measureLabels(lab,W,H,cols.length)},{length:15,width:10})};
+ const q=plan(600,400,(x,y)=>x<300?0:(y<200?1:2),['#F4F1EA','#111111','#E63A2E']);
+ assert.equal(q.layers[0].m2,150,'ground covers the whole court');assert.deepEqual(q.layers.map(l=>l.tape),[0,5,13],'tape only against paint already down');
+ const c=plan(1200,800,(x,y)=>Math.hypot(x-600,y-400)<240?1:0,['#F4F1EA','#E63A2E']);
+ assert.ok(Math.abs(c.layers[1].tape-18.85)<0.6&&Math.abs(c.layers[1].m2-28.27)<0.2,'circle r 3 m: perimeter and area');
+-console.log(`PASS: ${rendered} deterministic Pro patterns, flat finite SVG, unique identifiers, Murale/Kompozytor/Masters/Pro preset order, ${composer.length} Composer families from checked pools, paint plan measures.`);
++console.log(`PASS: ${rendered} deterministic Pro patterns, flat finite SVG, unique identifiers, Polskie/Murale/Kompozytor/Masters/Pro preset order, ${composer.length} Composer families from checked pools, paint plan measures.`);

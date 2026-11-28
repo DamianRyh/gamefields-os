@@ -104,3 +104,117 @@ Każdy kierunek przejmuje **metodę** szkoły lub artysty, nie konkretne dzieło
 | Garden Plan | organic | Roberto Burle Marx, plany ogrodów: rabaty w pasy i ścieżka | średnia |
 
 Regeneracja: `node build-studio-files.mjs` (kopiuje silnik i `pattern-library-pro.ts` do `canvas-editor/lib/`), `node build-gallery.mjs`.
+
+## Kompozytor (2026-11-26): model, który sam sprawdza swoje wzory
+
+Nowy sposób tworzenia wzorów w tym samym silniku. Do tej pory każda rodzina miała 12 ręcznie zakodowanych kompozycji, a malowalność sprawdzał człowiek na podglądach. Kompozytor odwraca kolejność:
+
+1. **Gramatyka zamiast 12 obrazków.** Każda rodzina to zbiór reguł zakotwiczonych w samym boisku (koło środkowe, pola bramkowe, bramki, połowy). Parametry (szerokość pasa w krokach co 0,5–1 m, liczba pasów, tryb, symetria, kolejność farb) losuje ziarno, więc kandydatów jest nieograniczenie wiele.
+2. **Sloty zamiast kolorów.** Geometria jest zapisana w slotach (0 = tło, 1–4 = farby). Jedno sprawdzenie obowiązuje dla każdej palety.
+3. **Kontrola na rastrze.** `curate-composer.mjs` renderuje w Chromium setki kandydatów na rodzinę, przy h = 400 (15 × 10 m, raster 2×) i h = 600 (kwadrat / Panna), i odrzuca każdego, który:
+   - ma fragment węższy niż 20 cm (otwarcie morfologiczne dyskiem 8 px; odpada każdy utracony kawałek > 40 px),
+   - ma więcej niż dwie plamki mniejsze niż 30 × 30 cm,
+   - używa mniej niż 3 albo więcej niż 5 farb,
+   - nie jest symetryczny (obrót o 180° albo lustro, różnica ≤ 1,2 % pikseli),
+   - ma jeden kolor na ponad 82 % boiska.
+4. **Wybór najlepszych i różnych.** Ocena: zrównoważone pola koloru i umiarkowane maskowanie (ok. 1–3 m taśmy na m²). Wybór po kolei z każdego trybu rodziny, z odrzuceniem prawie identycznych (odległość Jaccarda krawędzi < 0,35). Zostaje 36 sprawdzonych ziaren na rodzinę.
+5. **Liczby do wyceny.** Każde ziarno ma zmierzony udział każdej farby i długość krawędzi do oklejenia. `composerMetrics(rodzina, wariant, kolory, {seed, area})` zwraca m² każdej farby i metry taśmy dla rzeczywistego metrażu, a `proExecution()` dla rodzin Kompozytora podaje poziom maskowania wyliczony z taśmy, nie z tabeli.
+
+W Studiu wariant 1–12 to 12 najlepszych ziaren, a przycisk „Losowy wariant” (`patternSeed`) przegląda pozostałe sprawdzone ziarna, więc losowanie nigdy nie da wzoru, który nie przeszedł kontroli. Schemat projektu bez zmian.
+
+| Rodzina | Grupa | Reguła |
+|---|---|---|
+| Echo (`pro-k-echo`) | premium | linie boiska powtórzone pasami: pierścienie wokół koła, obwiednie pól bramkowych |
+| Strefy gry (`pro-k-zones`) | geometric | kolorem tylko strefy gry: pola bramkowe, koło, pas środkowy, pasy boczne, narożniki |
+| Promienie (`pro-k-rays`) | street | wachlarze z bramek, narożników albo ze środka, z piastą chroniącą ostrza |
+| Szewrony (`pro-k-chevron`) | brand | pasy V na bramki albo do środka, szerokość liczona prostopadle do pasa |
+| Tor (`pro-k-flow`) | organic | wstęga pasów od bramki do bramki przez punkt środkowy |
+| Płyty (`pro-k-shards`) | geometric | duże płyty Voronoi, sąsiednie zawsze w innym kolorze, opcjonalna fuga |
+| Teren (`pro-k-terrain`) | organic | warstwice: jedno wzgórze w środku albo dwa naprzeciw siebie |
+| Pole pikseli (`pro-k-pixel`) | play | siatka od środka boiska, wielkość albo kolor kafla płynie wg pola |
+
+Pliki: `court-composer.mjs` (gramatyki, plan kolorów, `POOL` z ziarnami i pomiarami), `curate-composer.mjs` (kurator), `composer-report.json` (ile kandydatów, ile przeszło, powody odrzuceń), `preview-composer.mjs` → `composer-preview.png` (8 × 12), `signature-composer.json` (8 projektów KOMPOZYTOR, pierwsze w edytorze i w zakładce „Kompozytor”).
+
+Regeneracja:
+
+```bash
+NODE_PATH=$(npm root -g) node curate-composer.mjs 220 36
+node build-studio-files.mjs && node build-gallery.mjs
+NODE_PATH=$(npm root -g) node preview-composer.mjs
+```
+
+Wynik 26.11 (kept/passed/candidates): Echo 36/172/220, Strefy gry 36/173/220, Promienie 36/199/220, Szewrony 36/180/220, Tor 36/158/220, Płyty 36/90/355, Teren 36/193/220, Pole pikseli 34/108/220. Sprawdzone: `tsc --strict` na `pattern-library.ts` z nowymi plikami, 69 rodzin i `PATTERN_COUNT` = 828, wszystkie presety wskazują istniejące rodziny i palety, galeria bez błędów JS i bez przewijania w bok przy 390 i 1360 px. Pełne kontrole Studia (build, test:studio, test:mobile) nie były uruchamiane w tej sesji (brak `node_modules`).
+
+Nową rodzinę dodaje się jako funkcję gramatyki w `COMPOSER_GRAMMARS` i wpis w `COMPOSER_FAMILIES`; kurator sam ją sprawdzi. Razem 69 rodzin × 12 = 828 wzorów.
+
+### Kompozytor II (2026-11-26)
+
+Osiem kolejnych gramatyk w tym samym modelu, sprawdzonych tym samym kuratorem (`node curate-composer.mjs 220 36 <rodziny>` przelicza tylko wskazane rodziny, pozostałe zachowują pulę). Projekty KOMPOZYTOR II (`signature-composer-2.json`) są pierwsze w edytorze i w zakładce „Kompozytor”. Podgląd: `composer-2-preview.png` (`node preview-composer.mjs composer-2-preview.png II`). Razem 77 rodzin × 12 = 924 wzory.
+
+| Rodzina | Grupa | Reguła | kept / passed / candidates |
+|---|---|---|---|
+| Koszone pasy (`pro-k-mown`) | premium | pasy w poprzek, wzdłuż, szachownica albo 45°, jak koszona murawa | 28 / 165 / 220 |
+| Orbita (`pro-k-orbit`) | geometric | zagnieżdżone koła przesunięte w stronę bramek; przesunięcie < szerokość pasa | 36 / 135 / 220 |
+| Łuki (`pro-k-arcs`) | street | koncentryczne łuki z narożników, linii bramkowych albo środka linii bocznych | 36 / 153 / 220 |
+| Romby (`pro-k-argyle`) | brand | siatka rombów od punktu środkowego, kolor wg pierścieni, opcjonalna fuga | 32 / 131 / 220 |
+| Krata (`pro-k-plaid`) | brand | pasy poziome i pionowe lustrzane względem obu osi, skrzyżowania w trzeciej farbie | 36 / 155 / 220 |
+| Equalizer (`pro-k-steps`) | play | słupki od bramek do środka, wysokość schodkami | 36 / 220 / 220 |
+| Rozeta (`pro-k-rosette`) | organic | pierścienie z parzystą liczbą płatków wokół koła środkowego | 36 / 161 / 220 |
+| Cięcia (`pro-k-cuts`) | geometric | proste cięcia parami symetrycznymi, pola na przemian w dwóch kolorach, piasta | 36 / 90 / 372 |
+
+Poprawki po przeglądzie: Koszone pasy zawsze mają co najmniej dwie farby na tle (wcześniej 88 kandydatów odpadało za 2 kolory); w Orbicie usunięto odmianę pionową, bo jej lustrzane odbicie tworzyło twarde cięcie na linii środkowej.
+
+### Kompozytor III: Murale (2026-11-26)
+
+Osiem rodzin po trendzie z amerykańskich boisk-murali (research: `docs/research/2026-11-26-murale-boisk-usa.md`). Mural rzadko jest lustrzany, więc dla tych rodzin (`MURAL` w `court-composer.mjs`) kurator zamiast symetrii sprawdza **równowagę połówek**: podobny udział tła (±30 %), co najmniej 3 farby w każdej połowie i podobną ilość szczegółu (krawędzie w stosunku ≤ 1,6). Szpic węższy niż 20 cm jest dozwolony, jeśli ma mniej niż 75 cm długości i mniej niż 0,09 m² (malarz wycina go z taśmy). Wąski pas dalej odpada. Plamki mniejsze niż 4 px to szwy rastra, a nie farba, więc kurator ich nie liczy (dotyczy przeliczeń od tej wersji). Projekty MURALE (`signature-murals.json`) są pierwsze w edytorze i w zakładce „Murale”. Podgląd: `composer-3-preview.png`. Razem 85 rodzin × 12 = 1020 wzorów.
+
+| Rodzina | Odniesienie | kept / passed / candidates |
+|---|---|---|
+| Wycinanki (`pro-m-cutouts`) | Nina Chanel Abney, Project Backboard (Memphis) | 36 / 90 / 258 |
+| Pola malarskie (`pro-m-field`) | Kinloch Park (St Louis), „Red Sea” (Lincoln) | 36 / 134 / 220 |
+| Tkanina (`pro-m-textile`) | Andrea Bergart (Providence), Na Chainkua Reindorf (Nowy Jork) | 36 / 121 / 220 |
+| Pejzaż (`pro-m-landscape`) | murale w parkach, chłodzące murale (New Haven) | 36 / 124 / 220 |
+| Flora (`pro-m-flora`) | boiska w parkach | 36 / 90 / 221 |
+| Wielkie słowa (`pro-m-words`) | Timothy Goodman (Brooklyn); 22 hasła blokowym krojem 5 × 7, bez polskich znaków | 24 / 90 / 310 |
+| Rama (`pro-m-frame`) | Liberty Park (Salt Lake City), klucze w Dublin (Kalifornia) | 36 / 175 / 220 |
+| Pociągnięcia (`pro-m-strokes`) | murale gestualne | 36 / 90 / 367 |
+
+## Plan malowania (2026-11-27)
+
+Arkusz dla wykonawcy z dowolnego wzoru Pro, Masters albo Kompozytora: `plan-malowania.html` (budowany przez `node build-gallery.mjs` z `plan.template.html`, silnik w `paint-plan.mjs`). Link z parametrami: `plan-malowania.html?pattern=pro-m-landscape&variant=1&palette=simultane&seed=0&length=20&width=12&lpm=0.25&coats=2` (opcjonalnie `colors=RRGGBB,…`, czyli własne kolory projektu). W galerii otwiera go przycisk „Plan malowania”.
+
+Trzy arkusze A4 poziomo (druk albo PDF):
+1. **Rysunek i materiały:** wzór z siatką co 1 m (pełna linia co 5 m) do wytyczenia sznurkiem kredowym oraz tabela warstw: kolor, m², liczba warstw, litry, taśma.
+2. **Warstwy po kolei:** rysunek boiska po każdym kroku. Pola na kolejne farby są w odcieniu tła.
+3. **Kolejność prac:** podłoże, grunt, tło, wytyczenie, warstwy, linie gry, dokumentacja.
+
+Zasady liczenia (`buildPlan`):
+- **Kolejność:** tło (największe pole) na całe boisko, potem farby od najjaśniejszej do najciemniejszej (ciemna kryje jasną).
+- **Warstwy:** domyślnie 2. Jasny kolor na ciemnym tle (ΔL > 0,3 w OKLab) dostaje jedną więcej.
+- **Litry:** m² × warstwy × l/m² na warstwę (domyślnie 0,25) + 10 % zapasu, w górę do 0,5 l. Bez gruntu i linii gry. Zużycie trzeba potwierdzić kartą techniczną wybranej farby.
+- **Taśma:** tylko granice z farbą już położoną, więc każda krawędź jest oklejana raz, przy późniejszym z dwóch kolorów. Obrys boiska się nie liczy.
+- **Pomiar długości** (`measureLabels`): raster 2×. W każdym kwadracie 16 × 16 px kurator liczy przejścia poziome h i pionowe v i bierze √(h² + v²). Sprawdzone: odcinek 5 m daje 5 m, okrąg r = 3 m daje 19 m (dokładnie 18,85 m), skos 16,77 m daje 17 m. Taśma w `composerMetrics` (pula Kompozytora) została 27.11 przeliczona tym samym pomiarem (`retape-composer.mjs`, 838 ziaren). Razem wyszło +1,3 %, ale rodziny z prostymi krawędziami wcześniej zaniżały taśmę (Krata +22 %, Equalizer +20 %, Pole pikseli i Wielkie słowa +17 %, Strefy gry +12 %), a rodziny skośne zawyżały ją (Romby −13 %, Szewrony −11 %).
+
+Studio: `paint-plan.mjs` i `paint-plan.d.mts` są w `canvas-editor/lib/` (kopiuje je `build-studio-files.mjs`). Karta **„Plan malowania”** (`components/paint-plan-card.tsx`) w podsumowaniu projektu, obok karty projektu PDF, drukuje plan z projektu klienta: wzór, kolory, obrót, skala i wymiary. Wzór jest liczony z pełnym kryciem i bez cienia, bo farba jest kryjąca. Karta działa dla każdego z 1020 wzorów. Nie pojawia się przy sztucznej trawie, macie, samej konstrukcji i boisku okrągłym. Test end-to-end: `pnpm test:plan`.
+
+### Kompozytor IV: Wzory polskie (2026-11-27)
+
+Osiem kierunków z polskiej tradycji zdobniczej. Każdy przejmuje metodę rzemiosła, a nie konkretne dzieło: Wycinanka (łowicka), Pasiak (łowicki), Ceramika (bolesławiecka), Mozaika (powojenny modernizm), Kilim (Podhale), Neon (Warszawa), Parzenica, Witraż (krakowska secesja). Projekty POLSKIE (`signature-polskie.json`) są pierwsze w edytorze i w zakładce „Wzory polskie”. Podgląd: `composer-4-preview.png`. Razem 93 rodziny × 12 = 1116 wzorów.
+
+**Co jest lepsze niż w poprzednich seriach** (reguły QUALITY w `curate-composer.mjs`, rodziny `pro-p-*`):
+1. **Kolory dobrane do wzoru.** Kurator mierzy, ile każda para pól się styka (10 wag w `m.e`). `composerPlan(seed, colors, adj)` wybiera dla rzeczywistej palety takie przypisanie farb (tło jasne albo ciemne × 24 kolejności), żeby najmocniej stykające się pola miały największą różnicę jasności. To usuwa problem z Wielkich słów, gdzie litery zlewały się z panelem. Starsze rodziny nie mają `m.e`, więc ich kolory się nie zmieniają.
+2. **Czytelne linie gry.** Kurator sprawdza obrys, linię środkową, pola bramkowe i koło. Odrzuca wzór, jeśli przy ponad 22 % długości linii krawędź koloru biegnie 4–12 cm od niej (`m.lc`).
+3. **Spokojne pola bramkowe.** Gęstość krawędzi w polach bramkowych jest porównywana z resztą boiska (`m.kb`), a powyżej 1,5× wzór dostaje gorszą ocenę.
+4. **Dokładna taśma od razu.** Kurator liczy ją tym samym pomiarem co plan malowania (16 px, √(h² + v²)), zamiast poprawki 0,82.
+5. Krótkie szpice (płatki, liście) są dozwolone jak w muralach. Wąskie pasy nadal odpadają.
+
+| Rodzina | kept / passed / candidates | Poprawki po przeglądzie |
+|---|---|---|
+| Wycinanka | 36 / 90 / 633 | szpice płatków dozwolone |
+| Pasiak | 36 / 216 / 220 | — |
+| Ceramika | 16 / 93 / 220 | symetryczna siatka, tylko całe motywy, większe gałązki, 4 układy (wcześniej 0 z 660, potem 10 podobnych) |
+| Mozaika | 36 / 90 / 237 | 2 szersze paski w kaflu (przerwa była 13 px); 20 odrzuconych przez linie gry |
+| Kilim | 36 / 141 / 220 | zygzak wyśrodkowany (74 odrzuconych za symetrię) |
+| Neon | 25 / 220 / 220 | rury się nie przecinają, odstęp min. 24 px, 3 układy, tablice tła (wcześniej w puli 2) |
+| Parzenica | 36 / 145 / 220 | wypełnione serca zamiast linii (wcześniej 0 z 660), tło-sukno, medalion |
+| Witraż | 28 / 90 / 227 | 8 lub 12 płatków (przy 6 obrót zamieniał kolory), kwiat środkowy na wierzchu, całkowity numer koloru w girlandzie, 3 układy |

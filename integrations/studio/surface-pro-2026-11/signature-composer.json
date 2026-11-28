@@ -1,0 +1,10 @@
+[
+ {"id":"k-echo","name":"Echo","familyId":"pro-k-echo","variant":4,"paletteId":"swiss","useCase":"miasto / park","note":"Koło środkowe i pola bramkowe powtórzone pasami jak echo. Gra jest czytelna, bo wzór rośnie z jej własnych linii."},
+ {"id":"k-zones","name":"Strefy gry","familyId":"pro-k-zones","variant":1,"paletteId":"stijl","useCase":"szkoła / dzieci","note":"Kolorem malowane tylko strefy gry. Najmniej taśmy w kolekcji, a dzieci od razu widzą, gdzie stać."},
+ {"id":"k-rays","name":"Promienie","familyId":"pro-k-rays","variant":3,"paletteId":"stella","useCase":"street / turnieje","note":"Wachlarze promieni wychodzą z bramek. Piasta przy bramce sprawia, że żadne ostrze nie jest węższe niż 20 cm."},
+ {"id":"k-chevron","name":"Szewrony","familyId":"pro-k-chevron","variant":6,"paletteId":"aicher","useCase":"klub / turniej","note":"Pasy w kształcie V prowadzą wzrok do bramek. Szerokość liczona prostopadle do pasa, więc każdy pas da się okleić."},
+ {"id":"k-flow","name":"Tor","familyId":"pro-k-flow","variant":2,"paletteId":"nightshift","useCase":"event / nocne granie","note":"Wstęga pasów biegnie od bramki do bramki przez punkt środkowy. Po obrocie o 180° obie połowy są identyczne."},
+ {"id":"k-shards","name":"Płyty","familyId":"pro-k-shards","variant":3,"paletteId":"gees-bend","useCase":"plac / rewitalizacja","note":"Duże płyty, sąsiednie zawsze w innym kolorze. Z 355 kandydatów kontrolę przeszło 90, do Studia trafiło 36."},
+ {"id":"k-terrain","name":"Teren","familyId":"pro-k-terrain","variant":2,"paletteId":"burle-marx","useCase":"park / eco","note":"Dwa wzgórza warstwic naprzeciw siebie na ciemnej zieleni. Mapa miejsca na nawierzchni."},
+ {"id":"k-pixel","name":"Pole pikseli","familyId":"pro-k-pixel","variant":6,"paletteId":"cruz-diez","useCase":"szkoła / zabawa","note":"Siatka kafli od środka boiska, kolor płynie pasmami. Maluje się z jednego szablonu kratki."}
+]

@@ -1,0 +1,2 @@
+NIEAKTUALNE (27.11): użyj docs/roadmap/DLA-CHATGPT-wdrozenie-2026-11-27.txt (wersja 2).
+To polecenie miało szerszy zakres planu malowania niż Studio v206 i inną sumę SHA strony.
