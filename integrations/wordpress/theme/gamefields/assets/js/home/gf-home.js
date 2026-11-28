@@ -87,7 +87,64 @@
     "Próbki materiałów": "Material samples",
     "Pakiet dla projektanta": "Designer package",
     "Plakat": "Poster",
-    "Szczegóły projektu": "Project details"
+    "Szczegóły projektu": "Project details",
+    "Miasto": "City",
+    "Szkoła": "School",
+    "Osiedle": "Residential estate",
+    "Klub": "Club",
+    "Marka": "Brand",
+    "Mała arena jako punkt spotkań w parku. Komplet materiałów do budżetu obywatelskiego.": "A small arena as a meeting point in a park. A complete set of materials for participatory budgeting.",
+    "Czytelna, bezpieczna arena na przerwę i WF. Przyjazne kolory dla dzieci.": "A clear, safe arena for breaks and PE. Child-friendly colours.",
+    "Wyróżnik inwestycji wpisany w zieleń. Mieści się na placu o boku 5–7 m.": "A distinctive development feature integrated into green space. Fits a site measuring 5–7 m on each side.",
+    "Trening 1 na 1 przez cały rok. Barwy klubu i partnera na nawierzchni.": "Year-round 1v1 training. Club and partner colours on the surface.",
+    "Boisko jako nośnik kampanii. Turniej, logo i treści z wydarzenia.": "A court as a campaign platform. Tournament, logo and event content.",
+    "park, skwer, plac": "park, public garden, square",
+    "boisko szkolne, dziedziniec": "school court, courtyard",
+    "dziedziniec, zieleń osiedlowa": "courtyard, residential green space",
+    "akademia, ośrodek treningowy": "academy, training centre",
+    "event, galeria, festiwal": "event, shopping centre, festival",
+    " z nawierzchnią ": " with surface ",
+    ", widok ze Studio 3D": ", view from Studio 3D",
+    "Widok ze Studio 3D": "View from Studio 3D",
+    "Konstrukcja": "Structure",
+    "Nawierzchnia": "Surface",
+    "Miejsce": "Location",
+    "Cena konstrukcji": "Structure price",
+    "Otwórz zestaw w Studio": "Open package in Studio",
+    "Wybierz": "Choose",
+    "Zaprojektuj": "Design",
+    "Sprawdź": "Check",
+    "Graj": "Play",
+    "Forma boiska albo gotowy zestaw dla szkoły, osiedla czy klubu.": "Court shape or a ready-made package for a school, residential estate or club.",
+    "Zacznij od kształtu. Okrąg daje najwięcej gry na małym placu, prostokąt lepiej wpisuje się w istniejące boisko.": "Start with the shape. A circle maximises play on a small site; a rectangle fits better into an existing court.",
+    "Przeglądaj boiska": "Browse courts",
+    "Kolor ramy, nawierzchnia i wzór w Studio 3D.": "Frame colour, surface and pattern in Studio 3D.",
+    "W Studio zmieniasz kolor ramy, nawierzchnię i wzór Signature. Gotowy projekt możesz dołączyć do zapytania.": "Change the frame colour, surface and Signature pattern in Studio. Attach your finished design to an enquiry.",
+    "Otwórz Studio": "Open Studio",
+    "Wymiary i zdjęcia placu. Przygotuję koncepcję dla Twojego miejsca.": "Site dimensions and photos. I will prepare a concept for your location.",
+    "Prześlij wymiary albo zdjęcia placu. Na tej podstawie przygotuję koncepcję i umówimy wizję lokalną.": "Send the site dimensions or photos. I will prepare a concept and arrange a site visit.",
+    "Opisz miejsce": "Describe your site",
+    "Montaż i odbiór. Potem boisko żyje swoim życiem.": "Installation and handover. Then the court takes on a life of its own.",
+    "Montaż, odbiór i pierwszy mecz. Potem chętnie wrócę zobaczyć, jak miejsce działa.": "Installation, handover and the first match. I would be happy to return and see how the place works.",
+    "Napisz do mnie": "Contact me",
+    "Zwiń edycję": "Collapse editor",
+    "Bez ramy": "No frame",
+    "Czarna": "Black",
+    "Dąb": "Oak",
+    "Biała": "White",
+    "Biały": "White",
+    "Kremowy": "Cream",
+    "Czarny": "Black",
+    "Śliwka": "Plum",
+    "Ciepła biel": "Warm white",
+    "Beton": "Concrete",
+    "Pełny spad": "Full bleed",
+    "Białe": "White",
+    "Czarne": "Black",
+    "Bez linii": "No markings",
+    "4,96 m między bokami · 1,22 m · 1 na 1": "4.96 m across flats · 1.22 m · 1v1",
+    "4,96 m między bokami · wys. 1,22 m · 1 na 1": "4.96 m across flats · height 1.22 m · 1v1",
+    ". Otwórz w Studio.": ". Open in Studio."
   };
   function homeText(value) { return homeLocale === 'en' ? (Object.prototype.hasOwnProperty.call(homeEnglish, value) ? homeEnglish[value] : value) : value; }
 
@@ -300,12 +357,14 @@
   var wall = $('[data-wall]'), filters = $('[data-filters]');
   // Construction 'from' prices (net) come from the page (data-prices, built from offer/price-from.json), 2026-11-16.
   var PRICE = {}; try { PRICE = JSON.parse(wall.getAttribute('data-prices') || '{}'); } catch (e) {}
-  function priceFrom(k) { return PRICE[k] ? '<span class="pr">od ' + String(PRICE[k]).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0zł netto</span>' : ''; }
+  function homePrice(v) { return homeLocale === 'en' ? 'PLN ' + Number(v).toLocaleString('en-GB') : String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0zł'; }
+  function homeNet(v) { return (homeLocale === 'en' ? 'from ' : 'od ') + homePrice(v) + (homeLocale === 'en' ? ' excl. VAT' : ' netto'); }
+  function priceFrom(k) { return PRICE[k] ? '<span class="pr">' + homeNet(PRICE[k]) + '</span>' : ''; }
   function renderWall(shape) {
     var list = ALL.filter(function (m) { return shape === 'all' ? true : m.shape === shape; });
     var lay = LAYOUT[list.length] || LAYOUT[8];
     wall.replaceChildren.apply(wall, list.map(function (m, i) {
-      var a = el('a', { class: 'tile ' + lay[i], href: STUDIO + '?' + new URLSearchParams({ arena: m.k }).toString(), style: 'background:' + m.bg + ';color:' + m.ink, 'aria-label': m.name + ', ' + m.dim + (PRICE[m.k] ? ', od ' + PRICE[m.k] + ' zł netto' : '') + '. Otwórz w Studio.' });
+      var a = el('a', { class: 'tile ' + lay[i], href: STUDIO + '?' + new URLSearchParams({ arena: m.k }).toString(), style: 'background:' + m.bg + ';color:' + m.ink, 'aria-label': m.name + ', ' + homeText(m.dim) + (PRICE[m.k] ? ', ' + (homeLocale === 'en' ? homeNet(PRICE[m.k]) : 'od ' + PRICE[m.k] + ' zł netto') : '') + homeText('. Otwórz w Studio.') });
       a.innerHTML = '<div class="court" style="--ln:' + m.line + ';--cr:30%"><i></i><i></i></div><span class="go">Konfiguruj →</span><span class="num d">' + m.n + '</span><img loading="lazy" decoding="async" src="' + m.img + '" alt="" loading="lazy" decoding="async"><div class="bar"><b>' + esc(m.name) + priceFrom(m.k) + '</b><span class="m">' + esc(m.dim) + '</span></div>';
       return a;
     }));
@@ -643,7 +702,7 @@
       list.innerHTML = '';
       rows.forEach(function (row) {
         var b = el('button', { type: 'button', class: 'pn-it', 'aria-pressed': String(row.m.k === sel) },
-          '<b>' + esc(row.m.name) + '</b><span class="pn-pill ' + (row.f.ok ? 'ok' : 'no') + '">' + (row.f.ok ? homeText('mieści się · +') + nf(row.f.spare) + ' m' : homeText('brakuje ') + nf(-row.f.spare) + ' m') + '</span><small>' + esc(row.m.meta) + '</small>');
+          '<b>' + esc(row.m.name) + '</b><span class="pn-pill ' + (row.f.ok ? 'ok' : 'no') + '">' + (row.f.ok ? homeText('mieści się · +') + nf(row.f.spare) + ' m' : homeText('brakuje ') + nf(-row.f.spare) + ' m') + '</span><small>' + esc(homeText(row.m.meta)) + '</small>');
         b.addEventListener('click', function () { sel = row.m.k; draw(); });
         list.appendChild(b);
       });
@@ -899,21 +958,21 @@
     { seg: 'Marka', pitch: 'Boisko jako nośnik kampanii. Turniej, logo i treści z wydarzenia.', arena: 'street15', model: 'Street Arena 15', file: 'marka', pattern: 'pro-overprint', variant: 1, palette: 'martens', panel: 'E5383B', frame: '1E1E1E', surfName: 'Overprint', space: 'event, galeria, festiwal', bg: '#47132D', ink: '#F4F1EE' }
   ];
   var kitsBox = $('[data-kits]'), openKit = -1;
-  function kitPrice(k) { var n = PRICE[k.arena]; return n ? 'od ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' zł netto' : ''; }
+  function kitPrice(k) { var n = PRICE[k.arena]; return n ? homeNet(n) : ''; }
   function renderKits() {
     kitsBox.replaceChildren.apply(kitsBox, KITS.map(function (k, i) {
       var wrap = el('div', { style: 'background:' + k.bg + ';color:' + k.ink });
       var btn = el('button', { type: 'button', class: 'stripe', 'aria-expanded': String(openKit === i), 'aria-controls': 'gfs-kit-' + i },
-        '<span class="d w">' + esc(k.seg) + '</span><span class="p">' + esc(k.pitch) + '</span><span class="combo"><img loading="lazy" src="' + kitImg(k.file, true) + '" alt=""></span><span class="m meta">' + (openKit === i ? homeText('Zwiń −') : homeText('Zobacz zestaw +')) + '</span>');
+        '<span class="d w">' + esc(homeText(k.seg)) + '</span><span class="p">' + esc(homeText(k.pitch)) + '</span><span class="combo"><img loading="lazy" src="' + kitImg(k.file, true) + '" alt=""></span><span class="m meta">' + (openKit === i ? homeText('Zwiń −') : homeText('Zobacz zestaw +')) + '</span>');
       btn.addEventListener('click', function () { openKit = openKit === i ? -1 : i; renderKits(); });
       wrap.appendChild(btn);
       if (openKit === i) {
         var href = STUDIO + '?' + new URLSearchParams({ arena: k.arena, pattern: k.pattern, variant: String(k.variant), palette: k.palette, panel: k.panel, frame: k.frame }).toString();
         var price = kitPrice(k);
         wrap.appendChild(el('div', { class: 'kit-open', id: 'gfs-kit-' + i },
-          '<div class="big"><img loading="lazy" src="' + kitImg(k.file, false) + '" alt="' + esc(k.model) + ' z nawierzchnią ' + esc(k.surfName) + ', widok ze Studio 3D"><span class="kit-tag m">Widok ze Studio 3D</span></div>' +
-          '<div style="display:grid;gap:22px;align-content:center"><ul><li><span class="m">Konstrukcja</span><b>' + esc(k.model) + '</b></li><li><span class="m">Nawierzchnia</span><b>' + esc(k.surfName) + '</b></li><li><span class="m">Miejsce</span><b>' + esc(k.space) + '</b></li>' + (price ? '<li><span class="m">Cena konstrukcji</span><b>' + price + '</b></li>' : '') + '</ul>' +
-          '<a class="pill" href="' + href + '" style="background:' + k.ink + ';color:' + k.bg + ';justify-self:start">Otwórz zestaw w Studio <span aria-hidden="true">→</span></a></div>'));
+          '<div class="big"><img loading="lazy" src="' + kitImg(k.file, false) + '" alt="' + esc(k.model) + homeText(' z nawierzchnią ') + esc(k.surfName) + homeText(', widok ze Studio 3D') + '"><span class="kit-tag m">' + homeText('Widok ze Studio 3D') + '</span></div>' +
+          '<div style="display:grid;gap:22px;align-content:center"><ul><li><span class="m">' + homeText("Konstrukcja") + '</span><b>' + esc(k.model) + '</b></li><li><span class="m">' + homeText("Nawierzchnia") + '</span><b>' + esc(k.surfName) + '</b></li><li><span class="m">' + homeText("Miejsce") + '</span><b>' + esc(homeText(k.space)) + '</b></li>' + (price ? '<li><span class="m">' + homeText("Cena konstrukcji") + '</span><b>' + price + '</b></li>' : '') + '</ul>' +
+          '<a class="pill" href="' + href + '" style="background:' + k.ink + ';color:' + k.bg + ';justify-self:start">' + homeText("Otwórz zestaw w Studio") + ' <span aria-hidden="true">→</span></a></div>'));
       }
       return wrap;
     }));
@@ -948,9 +1007,9 @@
     { t: 'Graj', p: 'Montaż i odbiór. Potem boisko żyje swoim życiem.', d: 'Montaż, odbiór i pierwszy mecz. Potem chętnie wrócę zobaczyć, jak miejsce działa.', cta: 'Napisz do mnie', href: '#kontakt' }
   ];
   var stepsBox = $('[data-steps]');
-  function pickStep(i) { $('[data-step-text]').textContent = STEPS[i].d; var c = $('[data-step-cta]'); c.textContent = STEPS[i].cta + ' →'; c.href = STEPS[i].href; }
+  function pickStep(i) { $('[data-step-text]').textContent = homeText(STEPS[i].d); var c = $('[data-step-cta]'); c.textContent = homeText(STEPS[i].cta) + ' →'; c.href = STEPS[i].href; }
   STEPS.forEach(function (s, i) {
-    var b = el('button', { type: 'button', 'aria-pressed': String(i === 0) }, '<span class="m">0' + (i + 1) + '</span><h3 class="d">' + esc(s.t) + '</h3><p>' + esc(s.p) + '</p>');
+    var b = el('button', { type: 'button', 'aria-pressed': String(i === 0) }, '<span class="m">0' + (i + 1) + '</span><h3 class="d">' + esc(homeText(s.t)) + '</h3><p>' + esc(homeText(s.p)) + '</p>');
     b.addEventListener('click', function () { pressGroup(stepsBox, b); pickStep(i); });
     stepsBox.appendChild(b);
   });
@@ -1011,8 +1070,8 @@
     var q = qtyOf(key), u1 = unitPrice(key), free = q * u1 >= 299;
     var tot = $('[data-total="' + key + '"]'), note = $('[data-price-note="' + key + '"]'), btn = $(key === 'pl' ? '[data-print-order]' : '[data-bl-order]');
     if (tot) tot.textContent = zl(q * u1);
-    if (note) note.textContent = zl(u1) + homeText(' brutto / szt. · ') + (free ? homeText('wysyłka gratis') : homeText('wysyłka 19 zł, od 299 zł gratis'));
-    if (btn) btn.innerHTML = (canBuy(key) ? homeText('Do koszyka · ') : homeText('Zamów · ')) + zl(q * u1) + ' <span aria-hidden="true">→</span>';
+    if (note) note.textContent = homeLocale === 'en' ? homePrice(u1) + homeText(' brutto / szt. · ') + (free ? homeText('wysyłka gratis') : homeText('wysyłka 19 zł, od 299 zł gratis')) : zl(u1) + homeText(' brutto / szt. · ') + (free ? homeText('wysyłka gratis') : homeText('wysyłka 19 zł, od 299 zł gratis'));
+    if (btn) btn.innerHTML = (canBuy(key) ? homeText('Do koszyka · ') : homeText('Zamów · ')) + (homeLocale === 'en' ? homePrice(q * u1) : zl(q * u1)) + ' <span aria-hidden="true">→</span>';
   }
   function toCart(key, link, note) {
     var s = shop(), p = key === 'pl' ? s.poster : s.ball;
@@ -1040,7 +1099,7 @@
     function set(open) {
       box.classList.toggle('tool-closed', !open);
       btn.setAttribute('aria-expanded', String(open));
-      btn.innerHTML = open ? 'Zwiń edycję <span aria-hidden="true">↑</span>' : label + ' <span aria-hidden="true">→</span>';
+      btn.innerHTML = open ? homeText('Zwiń edycję') + ' <span aria-hidden="true">↑</span>' : label + ' <span aria-hidden="true">→</span>';
     }
     btn.addEventListener('click', function () {
       var open = box.classList.contains('tool-closed');
