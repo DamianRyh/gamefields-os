@@ -11,43 +11,45 @@
     {
       "q": "How much space do I need for a court?",
       "questionVisible": true,
-      "answerExactVisible": false
+      "answerExactVisible": true
     },
     {
       "q": "Can I change the colours and patterns?",
       "questionVisible": true,
-      "answerExactVisible": false
+      "answerExactVisible": true
     },
     {
-      "q": "Do you also install sports surfaces on their own?",
-      "questionVisible": false,
-      "answerExactVisible": false
+      "q": "Do you also install surfaces separately?",
+      "questionVisible": true,
+      "answerExactVisible": true
     },
     {
-      "q": "Can a court be built on existing concrete?",
-      "questionVisible": false,
-      "answerExactVisible": false
+      "q": "Can a court be built on old concrete?",
+      "questionVisible": true,
+      "answerExactVisible": true
     },
     {
-      "q": "How long does site modernisation take?",
-      "questionVisible": false,
-      "answerExactVisible": false
+      "q": "How long does site renovation take?",
+      "questionVisible": true,
+      "answerExactVisible": true
     },
     {
       "q": "Can I start without a finished design?",
       "questionVisible": true,
-      "answerExactVisible": false
+      "answerExactVisible": true
     },
     {
       "q": "Can I see the price immediately?",
       "questionVisible": true,
-      "answerExactVisible": false
+      "answerExactVisible": true
     }
   ],
   "limitations": [
     "EN homepage route proposed, not verified live.",
-    "Do not emit FAQ schema until all questions and answers match visible English content; review exact matches.",
     "Yoast organization graph reconciliation, translated founder link, canonical and hreflang pending.",
-    "Source prices and claims translated, not independently verified."
-  ]
+    "Source prices and claims translated, not independently verified.",
+    "FAQ text equality confirmed statically, browser visibility and final URL still pending."
+  ],
+  "faqSource": "Derived verbatim from visible EN FAQ HTML (inline link text retained, tags removed).",
+  "embeddedInReviewHtml": true
 }

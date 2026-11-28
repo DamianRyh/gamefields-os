@@ -1,0 +1,18 @@
+{
+  "reviewOnly": true,
+  "locale": "en-GB",
+  "proposedCanonical": "https://www.gamefields.eu/en/",
+  "title": "Gamefields | Urban Sports Courts & Court Design Studio",
+  "description": "Design and customise panna courts, street football arenas and colourful sports surfaces in Gamefields Studio. Explore court renovation, construction and indicative prices.",
+  "hreflangCandidates": [
+    {
+      "lang": "pl-PL",
+      "url": "https://www.gamefields.eu/"
+    },
+    {
+      "lang": "en-GB",
+      "url": "https://www.gamefields.eu/en/"
+    }
+  ],
+  "publishGate": "Verify actual Polylang translation association, published URLs, self-canonical and reciprocal hreflang; reconcile Yoast output to avoid duplicate graphs. No country expansion implied."
+}

@@ -266,7 +266,7 @@
           "name": "How much space do I need for a court?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on the structure you choose and its surrounding safety zone. Enter your site dimensions in the “Will it fit?” planner to see which models fit. Include approximate site dimensions in your enquiry."
+            "text": "It depends on the selected structure and surrounding safety zone. Enter your site dimensions in the “Will it fit?” planner — you will see which models fit. Include approximate site dimensions in your enquiry."
           }
         },
         {
@@ -274,31 +274,31 @@
           "name": "Can I change the colours and patterns?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. In GAMEFIELDS Studio, you can create your own colour and graphic variant. We confirm the scope of delivery when agreeing the project."
+            "text": "Yes. In GAMEFIELDS Studio you can create your own colour and graphics combination. We confirm the scope during project planning."
           }
         },
         {
           "@type": "Question",
-          "name": "Do you also install sports surfaces on their own?",
+          "name": "Do you also install surfaces separately?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Surfaces are the other half of my work, alongside court structures: pattern design, painting, EPDM, tiles and turf. See how I transform existing sites."
+            "text": "Yes. Surfaces are the other half of my work alongside court structures: pattern design, painting, EPDM, tiles and turf. See how I transform old sites."
           }
         },
         {
           "@type": "Question",
-          "name": "Can a court be built on existing concrete?",
+          "name": "Can a court be built on old concrete?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Usually, yes. If the concrete is stable, I repair cracks and defects, prime the base and apply flexible sports paint with rubber granules, followed by the pattern and markings. A seriously damaged base must first be rebuilt. I will assess it from photographs. Old concrete, new court."
+            "text": "Usually, yes. If the concrete is stable, I repair cracks and defects, prime the substrate and apply a flexible sports coating with rubber granules, followed by graphics and markings. Severely damaged substrates need reconstruction first. I can assess this from photos. Old concrete, new court."
           }
         },
         {
           "@type": "Question",
-          "name": "How long does site modernisation take?",
+          "name": "How long does site renovation take?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on the court size and the initial condition of the site: the amount of base repair, the number of layers and the colours in the pattern. Sports paints are applied to dry concrete at above-freezing temperatures, so we usually work from spring to autumn. I provide a schedule after reviewing the photographs. Send us site photos."
+            "text": "It depends on court size and initial site condition: the repairs, layers and number of colours required. Sports coatings are applied to dry concrete above freezing, so we usually work from spring to autumn. I confirm the schedule after reviewing photos. Send site photos."
           }
         },
         {
@@ -306,7 +306,7 @@
           "name": "Can I start without a finished design?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. A description of your idea, approximate dimensions and, if available, site photos are enough. Send an enquiry to discuss the options."
+            "text": "Yes. A description of the idea, approximate dimensions and site photos, if available, are enough. Send an enquiry to discuss the possibilities."
           }
         },
         {
@@ -314,7 +314,7 @@
           "name": "Can I see the price immediately?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Structures start from PLN 27,000 excl. VAT (mobile arena) and PLN 36,000 excl. VAT (Panna Octa Cage 90). The full list is in the “How much does an arena cost?” section. The cost of a complete court with surface, installation and transport depends on the location, so we prepare a detailed quotation after reviewing site photos. Our guide “How much does it cost to build a sports court?” explains what affects the budget."
+            "text": "Yes. Structures start at PLN 27,000 excluding VAT (mobile arena) and PLN 36,000 excluding VAT (Panna Octa Cage 90). The full list is in the section “How much does an arena cost?”. The cost of a complete court with surfacing, installation and transport depends on the site, so we prepare a detailed quotation after reviewing site photos. Budget factors are explained in our guide “How much does sports court construction cost?”."
           }
         }
       ]
