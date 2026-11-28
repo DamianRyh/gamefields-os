@@ -1,0 +1,15 @@
+{
+  "reviewOnly": true,
+  "materials": 8,
+  "variants": 23,
+  "technicalFeatures": 24,
+  "ratesAndUrlsUnchanged": true,
+  "formulaUnchanged": true,
+  "currency": "PLN",
+  "limitations": [
+    "Existing calculator displays net prices; no VAT computation added.",
+    "Source technical claims and rates not independently verified.",
+    "Polish product links retained until translated routes exist.",
+    "Browser QA pending."
+  ]
+}

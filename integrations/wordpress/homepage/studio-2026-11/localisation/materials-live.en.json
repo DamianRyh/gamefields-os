@@ -1,0 +1,198 @@
+[
+  {
+    "k": "granulat",
+    "n": "EPDM surface",
+    "t": "poured in place",
+    "u": "/product/nawierzchnia-epdm/",
+    "v": [
+      {
+        "n": "Standard",
+        "r": 250
+      },
+      {
+        "n": "Standard+",
+        "r": 317
+      },
+      {
+        "n": "Premium",
+        "r": 400
+      }
+    ],
+    "f": [
+      "PN-EN 14877",
+      "Water-permeable spray coating",
+      "Service life from 8–12 to 12–20 years, depending on the variant"
+    ]
+  },
+  {
+    "k": "plytki",
+    "n": "PP sports tiles",
+    "t": "modular",
+    "u": "/product/plytki-sportowe/",
+    "v": [
+      {
+        "n": "Standard",
+        "r": 275
+      },
+      {
+        "n": "Standard+",
+        "r": 325
+      },
+      {
+        "n": "Premium",
+        "r": 400
+      }
+    ],
+    "f": [
+      "Glue-free installation with drainage",
+      "Thickness from 15–18 mm to 19 mm+",
+      "Premium: 5–10-year warranty"
+    ]
+  },
+  {
+    "k": "trawa",
+    "n": "Artificial turf",
+    "t": "classic turf",
+    "u": "/product/sztuczna-trawa/",
+    "v": [
+      {
+        "n": "Standard",
+        "r": 167
+      },
+      {
+        "n": "Standard+",
+        "r": 225
+      },
+      {
+        "n": "Premium",
+        "r": 292
+      }
+    ],
+    "f": [
+      "Installation on a concrete slab",
+      "Three quality options",
+      "A natural choice for football"
+    ]
+  },
+  {
+    "k": "malowanie",
+    "n": "Sports paint coating",
+    "t": "on a slab or existing court",
+    "u": "/product/malowanie-farba-sportowa/",
+    "v": [
+      {
+        "n": "Single colour",
+        "r": 78
+      },
+      {
+        "n": "Single colour with granules",
+        "r": 100
+      },
+      {
+        "n": "Intermediate pattern",
+        "r": 150
+      },
+      {
+        "n": "Advanced pattern",
+        "r": 183
+      }
+    ],
+    "f": [
+      "Paint with rubber granules: cushioning and slip resistance",
+      "Signature patterns, 4–6 and 7+ colours",
+      "Markings for football, basketball and 3v3"
+    ]
+  },
+  {
+    "k": "akryl",
+    "n": "Acrylic Hard Court",
+    "t": "tennis court style",
+    "u": "/product/akryl-hard-court/",
+    "v": [
+      {
+        "n": "Standard",
+        "r": 200
+      },
+      {
+        "n": "Standard+",
+        "r": 267
+      },
+      {
+        "n": "Premium",
+        "r": 342
+      }
+    ],
+    "f": [
+      "Standard: 4–6 layers, approx. 1–2 mm",
+      "Hard and fast",
+      "Premium: 4–8 mm rubber layers"
+    ]
+  },
+  {
+    "k": "plyty-gumowe",
+    "n": "Rubber tiles",
+    "t": "fall protection",
+    "u": "/product/plyty-gumowe/",
+    "v": [
+      {
+        "n": "Standard",
+        "r": 342
+      },
+      {
+        "n": "Standard+",
+        "r": 400
+      },
+      {
+        "n": "Premium",
+        "r": 492
+      }
+    ],
+    "f": [
+      "PN-EN 1177, PZH certification",
+      "R11 slip resistance, water permeable",
+      "50 × 50 cm tiles, 40–50 mm"
+    ]
+  },
+  {
+    "k": "maty-gumowe",
+    "n": "Rubber mats",
+    "t": "continuous rubber surface",
+    "u": "/product/maty-gumowe-nawierzchnia/",
+    "v": [
+      {
+        "n": "Standard",
+        "r": 242
+      },
+      {
+        "n": "Standard+",
+        "r": 317
+      },
+      {
+        "n": "Premium",
+        "r": 425
+      }
+    ],
+    "f": [
+      "SBR, with an EPDM layer in Premium",
+      "R11 slip resistance",
+      "Slab finish in Studio"
+    ]
+  },
+  {
+    "k": "beton",
+    "n": "12 cm concrete slab",
+    "t": "base",
+    "u": "/product/plyta-betonowa/",
+    "v": [
+      {
+        "n": "per m²",
+        "r": 283
+      }
+    ],
+    "f": [
+      "C20/25 with gradients and expansion joints",
+      "Reinforcing mesh, aggregate sub-base",
+      "Ready for any finish"
+    ]
+  }
+]
