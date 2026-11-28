@@ -1,0 +1,81 @@
+Polecenie dla ChatGPT: 9 stron sprzedażowych nawierzchni sportowych + galeria na stronie głównej, 28.11.2026
+
+Cel: każda dyscyplina ma własną stronę sprzedażową (wygląd, wycena w 30 sekund z wysłaniem zapytania, wymiary i „Zmieści się?”,
+zakres, proces, pytania, inne gry). Galeria „Jeden plac. Każda gra.” na stronie głównej prowadzi do tych stron. Motywu NIE ruszaj.
+
+KROK 0. Zdjęcia: jeśli 27 zdjęć gf-sport-*.webp z polecenia DLA-CHATGPT-sporty-galeria.txt nie jest jeszcze w bibliotece mediów
+(adres https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-tennis-1.webp), najpierw wykonaj KROK A z tamtego polecenia.
+
+KROK 1. Utwórz 9 NOWYCH STRON (Strony → Dodaj nową), każda jako szkic:
+- tytuł i adres (slug) jak niżej, bez strony nadrzędnej, szablon domyślny;
+- treść: jeden blok Własny HTML z pliku (zawiera <!-- wp:html --> i <!-- /wp:html -->); w treści NIE zamieniaj niczego;
+- Yoast: tytuł SEO i opis jak niżej. Sprawdź SHA-256 pliku (pierwsze 16 znaków).
+
+• Boisko do koszykówki 3×3
+  adres: /boisko-do-koszykowki-3x3/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/boisko-do-koszykowki-3x3.html  (SHA-256: e269fc022aae6bc8)
+  tytuł SEO: Boisko do koszykówki 3×3 – nawierzchnia i malowanie | Gamefields
+  opis SEO: Boisko do koszykówki 3×3: płyta, akryl albo wzór Gamefields i linie do koszykówki 3×3 (15 × 11 m). Ze wzorem od 120 100 zł netto. Wycena online i projekt w Studio 3D.
+
+• Kort do padla
+  adres: /kort-do-padla/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/kort-do-padla.html  (SHA-256: 5e08223df6c79269)
+  tytuł SEO: Kort do padla – nawierzchnia | Gamefields
+  opis SEO: Kort do padla: płyta, sztuczna trawa i linie do padla (20 × 10 m). Z trawą od 99 100 zł netto. Wycena online i projekt w Studio 3D.
+
+• Boisko do pickleballa
+  adres: /boisko-do-pickleballa/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/boisko-do-pickleballa.html  (SHA-256: c1355983e18f256f)
+  tytuł SEO: Boisko do pickleballa – nawierzchnia i malowanie | Gamefields
+  opis SEO: Boisko do pickleballa: płyta, akryl albo wzór Gamefields i linie do pickleballa (13,41 × 6,1 m). Ze wzorem od 79 700 zł netto. Wycena online i projekt w Studio 3D.
+
+• Boisko do teqballa
+  adres: /boisko-do-teqballa/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/boisko-do-teqballa.html  (SHA-256: d248637d92b29cc8)
+  tytuł SEO: Boisko do teqballa – nawierzchnia i malowanie | Gamefields
+  opis SEO: Boisko do teqballa: płyta, akryl albo wzór Gamefields i linie do teqballa (16 × 12 m). Ze wzorem od 91 500 zł netto. Wycena online i projekt w Studio 3D.
+
+• Boisko do siatkówki
+  adres: /boisko-do-siatkowki/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/boisko-do-siatkowki.html  (SHA-256: c1a59bccaed47e09)
+  tytuł SEO: Boisko do siatkówki – nawierzchnia i malowanie | Gamefields
+  opis SEO: Boisko do siatkówki: płyta, akryl albo wzór Gamefields i linie do siatkówki (18 × 9 m). Ze wzorem od 171 500 zł netto. Wycena online i projekt w Studio 3D.
+
+• Kort tenisowy
+  adres: /kort-tenisowy/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/kort-tenisowy.html  (SHA-256: ba801c940f200123)
+  tytuł SEO: Kort tenisowy – nawierzchnia i malowanie | Gamefields
+  opis SEO: Kort tenisowy: płyta, akryl albo wzór Gamefields i linie do tenisa (23,77 × 10,97 m). Ze wzorem od 318 700 zł netto. Wycena online i projekt w Studio 3D.
+
+• Boisko do koszykówki
+  adres: /boisko-do-koszykowki/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/boisko-do-koszykowki.html  (SHA-256: bc52ad8dd34942f7)
+  tytuł SEO: Boisko do koszykówki – nawierzchnia i malowanie | Gamefields
+  opis SEO: Boisko do koszykówki: płyta, akryl albo wzór Gamefields i linie do koszykówki (28 × 15 m). Ze wzorem od 289 700 zł netto. Wycena online i projekt w Studio 3D.
+
+• Boisko do futsalu
+  adres: /boisko-do-futsalu/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/boisko-do-futsalu.html  (SHA-256: f7e8e8a6e3b61ab1)
+  tytuł SEO: Boisko do futsalu – nawierzchnia i malowanie | Gamefields
+  opis SEO: Boisko do futsalu: płyta, akryl albo wzór Gamefields i linie do futsalu (40 × 20 m). Ze wzorem od 503 100 zł netto. Wycena online i projekt w Studio 3D.
+
+• Boisko do piłki 3×3
+  adres: /boisko-do-pilki-3x3/
+  plik: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/sporty-2026-11/boisko-do-pilki-3x3.html  (SHA-256: 82c1c190d04c7a8e)
+  tytuł SEO: Boisko do piłki 3×3 – nawierzchnia i malowanie | Gamefields
+  opis SEO: Boisko do piłki 3×3: płyta, akryl albo wzór Gamefields i linie do piłki 3×3 (15 × 10 m). Ze wzorem od 71 500 zł netto. Wycena online i projekt w Studio 3D.
+
+KROK 2. Strona główna (ID 3462): podmień CAŁY blok z <!-- gf-blok: sporty --> na:
+  https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/bloki/sporty.html  (SHA-256: f9f331458ca67b8b)
+  (jeśli bloku jeszcze nie ma: dodaj go zaraz PO bloku z <!-- gf-blok: naglowek -->, PRZED <!-- gf-blok: boiska -->).
+  W środku jest tekst „__GFAND__”: NIE zamieniaj go, wklej plik dokładnie tak, jak jest.
+
+Sprawdzenie (komputer i telefon) przed publikacją:
+- /boisko-do-koszykowki-3x3/: hero ze zdjęciem, liczby (15 × 11 m, 18 × 14 m, Ze wzorem od 120 100 zł), 3 wyglądy;
+  „Wycena w 30 sekund”: zmiana wykończenia/podłoża zmienia kwotę (np. Akryl Standard + „Mam stabilny beton” = 55 500 zł);
+  „Wyślij zapytanie z tą wyceną” otwiera /kontakt/ i opis wyceny jest w treści wiadomości;
+  „Zmieści się?” 22 × 15 → „Mieści się z wybiegami”; na telefonie dolny pasek „Policz wycenę / Studio 3D”;
+- /kort-do-padla/: kolory trawy, kalkulator z trawą Standard/Standard+/Premium;
+- strona główna: w galerii tytuł karty i „Wycena i szczegóły →” prowadzą do strony dyscypliny;
+- wszystkie 9 stron otwierają się, zdjęcia się wczytują, brak przewijania w bok, konsola bez błędów.
+Po akceptacji właściciela opublikuj strony i stronę główną, wyczyść cache (LiteSpeed, Cloudflare jeśli jest). Niczego nie usuwaj.
