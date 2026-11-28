@@ -11,6 +11,7 @@ const svg = (inner, h = 400) => '<svg xmlns="http://www.w3.org/2000/svg" viewBox
 const card = (s) => { const c = pal[s.paletteId]; const m = composerMetrics(s.familyId, s.variant, c, { area: 150 }); return { ...s, svg: svg(renderPro(s.familyId, s.variant, 400, c, { uid: 'm' + s.id.replace(/\W/g, '') }) + courtLines(400, recommendLineColor(c))), paints: m?.colors ?? null, tape: m?.tape ?? null }; };
 const murals = JSON.parse(readFileSync(here + 'signature-murals.json', 'utf8')).map(card);
 const composer = [...JSON.parse(readFileSync(here + 'signature-composer-2.json', 'utf8')), ...JSON.parse(readFileSync(here + 'signature-composer.json', 'utf8'))].map(card);
+const polish = JSON.parse(readFileSync(here + 'signature-polskie.json', 'utf8')).map(card);
 const pc = pal.simultane; const ph = 400;
 const plan = svg(renderPro('pro-m-landscape', 1, ph, pc, { uid: 'pl' }) + gridSvg(ph, 15, 10), ph);
-process.stdout.write(JSON.stringify({ murals, composer, plan }));
+process.stdout.write(JSON.stringify({ murals, composer, polish, plan }));
