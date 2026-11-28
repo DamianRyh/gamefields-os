@@ -145,6 +145,44 @@
     "4,96 m między bokami · 1,22 m · 1 na 1": "4.96 m across flats · 1.22 m · 1v1",
     "4,96 m między bokami · wys. 1,22 m · 1 na 1": "4.96 m across flats · height 1.22 m · 1v1",
     ". Otwórz w Studio.": ". Open in Studio."
+,
+    "Konfiguruj →": "Configure →",
+    "Ø ~6 m · do 1,52 m · 1 na 1": "Ø ~6 m · up to 1.52 m · 1v1",
+    "7,14 × 5,57 m · do 1,22 m · 1 na 1": "7.14 × 5.57 m · up to 1.22 m · 1v1",
+    "Ø zewn. 5,09 m · 1 m · 1 na 1": "Outer Ø 5.09 m · 1 m · 1v1",
+    "Ø ~6 m · 0,90 m": "Ø ~6 m · 0.90 m",
+    "Ø ~6 m · 1,80 m": "Ø ~6 m · 1.80 m",
+    "Ø ~6 m · do 1,52 m": "Ø ~6 m · up to 1.52 m",
+    "7,14 × 5,57 m": "7.14 × 5.57 m",
+    "4,96 m · 1,22 m": "4.96 m · 1.22 m",
+    "6,21 × 4,65 m": "6.21 × 4.65 m",
+    "15 × 10 m · 3 na 3": "15 × 10 m · 3v3",
+    "Pigalle Duperré, Paryż (Ill-Studio, Pigalle, Nike, 2017)": "Pigalle Duperré, Paris (Ill-Studio, Pigalle, Nike, 2017)",
+    "Malewicz „Sportowcy” · Pigalle Duperré 2015": "Malevich, “Sportsmen” · Pigalle Duperré 2015",
+    "La Doce, Meksyk (All Arquitectura, 2018)": "La Doce, Mexico (All Arquitectura, 2018)",
+    "MRKA, Casa Axis International Open, Walencja (2026)": "MRKA, Casa Axis International Open, Valencia (2026)",
+    "Plakat sportowy, flagi kibicowskie": "Sports posters, supporters' flags",
+    "Druk rastrowy, pop-art": "Halftone printing, pop art",
+    "Mapy topograficzne": "Topographic maps",
+    "Nike Bondy pitch, Paryż (laisné roussel, Midori Hasuike)": "Nike Bondy pitch, Paris (laisné roussel, Midori Hasuike)",
+    "Terrazzo, mozaika, Yinka Ilori (płytki 3D)": "Terrazzo, mosaic, Yinka Ilori (3D tiles)",
+    "Supergrafika, numery koszulek": "Supergraphics, shirt numbers",
+    "Schodkowy gradient od bramek do środka, symetryczny względem linii środkowej.": "Stepped gradient from the goals to the centre, symmetrical about the halfway line.",
+    "Malarskie pola koloru dzielone rekurencyjnie, z akcentami w wybranych polach.": "Painterly colour fields divided recursively, with accents in selected areas.",
+    "Pochylone belki, płaszczyzny i koło na dwóch osiach — sport w ruchu.": "Tilted bars, planes and a circle on two axes — sport in motion.",
+    "Pierścienie i fale optyczne budowane od środka i od bramek.": "Optical rings and waves built from the centre and goals.",
+    "Szachownica rozciągnięta, zwężona do linii środkowej, falująca lub wypukła.": "A stretched, tapered, wavy or convex checkerboard.",
+    "Izometryczne bloki — złudzenie 3D czytelne z drona.": "Isometric blocks — a 3D illusion visible from above.",
+    "Pasy tkane jak kente: romby, zygzaki, szachownice, lustrzana symetria.": "Kente-inspired woven bands: diamonds, zigzags, checkerboards and mirror symmetry.",
+    "Rozsypane formy, zygzaki i kropki omijające koło środkowe.": "Scattered shapes, zigzags and dots around the centre circle.",
+    "Tonalne płyty „betonu” łączone złotymi żyłami.": "Tonal concrete-like slabs joined by gold veins.",
+    "Luźne, rysowane ręką echa linii boiska na głębokim kolorze.": "Loose hand-drawn echoes of court markings on a deep colour.",
+    "Promienie od koła środkowego lub od obu bramek.": "Rays from the centre circle or both goals.",
+    "Raster punktów, których wielkość tworzy falę, gradient lub poświatę.": "A dot raster with varying sizes creating a wave, gradient or glow.",
+    "Wypełnione warstwice jak mapa wysokości, płynne przejście barw.": "Filled contour lines like an elevation map, with smooth colour transitions.",
+    "Czterowarstwowy kamuflaż, także w wersji cyfrowej.": "Four-layer camouflage, also in a digital version.",
+    "Mozaika płytek z fugą, kolor płynie po polu gry.": "A grouted tile mosaic with colour flowing across the playing area.",
+    "Ogromne cyfry blokowe jako supergrafika — numer klubu, kod dzielnicy, rok.": "Oversized block numbers as supergraphics — club number, district code or year."
   };
   function homeText(value) { return homeLocale === 'en' ? (Object.prototype.hasOwnProperty.call(homeEnglish, value) ? homeEnglish[value] : value) : value; }
 
@@ -249,7 +287,7 @@
     $('[data-hero-colorname="panel"]').textContent = homeText('Panele · ') + cur.panel.n;
     $('[data-hero-colorname="frame"]').textContent = homeText('Rama i bramki · ') + cur.frame.n;
     $('[data-hero-code]').textContent = cur.model.code + ' · ' + cur.model.full + homeText(' · model 3D');
-    $('[data-hero-dim]').textContent = cur.model.dim;
+    $('[data-hero-dim]').textContent = homeText(cur.model.dim);
     var stillImg = $('.still', hero3d), stillSrc = stillImg.parentNode.tagName === 'PICTURE' ? $('source', stillImg.parentNode) : null;
     var desktopPoster = heroAsset(cur.model.still + '-1200.webp');
     var mobilePoster = heroAsset(cur.model.still + '-720.webp');
@@ -365,7 +403,7 @@
     var lay = LAYOUT[list.length] || LAYOUT[8];
     wall.replaceChildren.apply(wall, list.map(function (m, i) {
       var a = el('a', { class: 'tile ' + lay[i], href: STUDIO + '?' + new URLSearchParams({ arena: m.k }).toString(), style: 'background:' + m.bg + ';color:' + m.ink, 'aria-label': m.name + ', ' + homeText(m.dim) + (PRICE[m.k] ? ', ' + (homeLocale === 'en' ? homeNet(PRICE[m.k]) : 'od ' + PRICE[m.k] + ' zł netto') : '') + homeText('. Otwórz w Studio.') });
-      a.innerHTML = '<div class="court" style="--ln:' + m.line + ';--cr:30%"><i></i><i></i></div><span class="go">Konfiguruj →</span><span class="num d">' + m.n + '</span><img loading="lazy" decoding="async" src="' + m.img + '" alt="" loading="lazy" decoding="async"><div class="bar"><b>' + esc(m.name) + priceFrom(m.k) + '</b><span class="m">' + esc(m.dim) + '</span></div>';
+      a.innerHTML = '<div class="court" style="--ln:' + m.line + ';--cr:30%"><i></i><i></i></div><span class="go">' + homeText("Konfiguruj →") + '</span><span class="num d">' + m.n + '</span><img loading="lazy" decoding="async" src="' + m.img + '" alt="" loading="lazy" decoding="async"><div class="bar"><b>' + esc(m.name) + priceFrom(m.k) + '</b><span class="m">' + esc(homeText(m.dim)) + '</span></div>';
       return a;
     }));
   }
@@ -472,7 +510,7 @@
       var g = $(sel);
       if (!g) return null; // control removed from the page (e.g. paper colour since posters are full bleed)
       list.forEach(function (it, i) {
-        var b = el('button', { type: 'button', class: swatch ? 'sw2' : 'chip', 'aria-pressed': 'false', 'aria-label': it[1] || it[0] }, swatch ? '' : esc(it[1] || it[0]));
+        var b = el('button', { type: 'button', class: swatch ? 'sw2' : 'chip', 'aria-pressed': 'false', 'aria-label': homeText(it[1] || it[0]) }, swatch ? '' : esc(homeText(it[1] || it[0])));
         if (swatch) b.style.background = it[0];
         b.addEventListener('click', function () { onPick(i); });
         g.appendChild(b);
@@ -515,7 +553,7 @@
       b.addEventListener('click', function () { st.layout = l[0]; draw(); });
       laysBox.appendChild(b);
     });
-    var fmtBox = chipList('[data-pl-formats]', FORMATS.map(function (f) { return [f.name, f.size + ' · ' + f.price + ' zł']; }), function (i) { st.fmt = i; draw(); });
+    var fmtBox = chipList('[data-pl-formats]', FORMATS.map(function (f) { return [f.name, f.size + ' · ' + (homeLocale === 'en' ? homePrice(f.price) : f.price + ' zł')]; }), function (i) { st.fmt = i; draw(); });
     var wallBox = chipList('[data-pl-walls]', WALLS, function (i) { st.wall = i; draw(); }, true);
     [inTitle, inSub, inNote].filter(Boolean).forEach(function (inp) { inp.addEventListener('input', function () { st.title = inTitle ? inTitle.value : ''; st.sub = inSub ? inSub.value : ''; st.note = inNote ? inNote.value : ''; schedule(); }); });
     $('[data-pl-random]').addEventListener('click', function () {
@@ -553,9 +591,9 @@
       $('[data-pl-tag]').textContent = flat ? FORMATS[st.fmt].size + ' · No. ' + no : FORMATS[st.fmt].size + homeText(' · podgląd poglądowy');
       var f = FAM[st.fam];
       $('[data-pl-famname]').textContent = f.name;
-      $('[data-pl-insp]').textContent = f.inspiration;
+      $('[data-pl-insp]').textContent = homeText(f.inspiration);
       $('[data-pl-palname]').textContent = st.pal === 'custom' ? homeText('Własne kolory') : PAL[st.pal].name;
-      if ($('[data-pl-layname]')) $('[data-pl-layname]').textContent = LAYOUTS.filter(function (l) { return l[0] === st.layout; })[0][1];
+      if ($('[data-pl-layname]')) $('[data-pl-layname]').textContent = homeText(LAYOUTS.filter(function (l) { return l[0] === st.layout; })[0][1]);
       press(sigBox, function (b, i) { var s = SIGP[i]; return s.familyId === st.fam ? (s.variant === st.v ? (s.paletteId === st.pal ? !st.seed : false) : false) : false; });
       press(famsBox, function (b, i) { return G.PRO_FAMILIES[i].id === st.fam; });
       press(varsBox, function (b, i) { return i + 1 === st.v; });
@@ -590,7 +628,7 @@
       if (key === layKey) return; layKey = key;
       $$('button', laysBox).forEach(function (b, i) {
         var s = {}; Object.keys(st).forEach(function (k) { s[k] = st[k]; }); s.layout = LAYOUTS[i][0];
-        b.innerHTML = posterSvg(s, 'plL' + i, { no: '0000' }) + '<span>' + esc(LAYOUTS[i][1]) + '</span>';
+        b.innerHTML = posterSvg(s, 'plL' + i, { no: '0000' }) + '<span>' + esc(homeText(LAYOUTS[i][1])) + '</span>';
       });
     }
 
