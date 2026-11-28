@@ -125,7 +125,7 @@ CASES = [
      "quote": ("Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży.", "Grzegorz Gądek", "Prezes Fundacji Skwery Sportów Miejskich"),
      "photos": [("2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg", "Taras w Parku Świętokrzyskim w Warszawie, areny panna"), ("2024/12/11-1-768x432.jpg", "Areny panna na Tarasie, widok na centrum Warszawy"),
                 ("2024/12/2-4-768x768.jpg", "Arena panna na Tarasie w Parku Świętokrzyskim"), ("2024/12/6-2-768x768.jpg", "Gra na arenie panna, Taras w Parku Świętokrzyskim")],
-     "model": "w1"},
+     "model": "w1", "extra": '<p class="more"><a href="/taras-park-swietokrzyski-warszawa/">Przeczytaj case study →</a></p>'},
     {"id": "kutno", "place": "Kutno, pasaż sportowy", "title": "Panna Octa w Kutnie",
      "lead": "Ośmiokątna arena na miejskim pasażu sportowym, zamówiona przez Urząd Miasta Kutno.",
      "more": "Realizacja przebiegła bez zastrzeżeń, a boisko cieszy się dużą popularnością wśród młodzieży.",
@@ -156,7 +156,7 @@ CASES = [
      "facts": [("Boisko", "Panna Ring"), ("Zamawiający", "OSiR Grodzisk Mazowiecki"), ("W użyciu", "10 lat")],
      "quote": ("Boisko Panna Ring stoi na naszym Orliku od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.", "Mariusz Smysło", "Dyrektor OSiR Grodzisk Mazowiecki"),
      "photos": [("2024/12/9-768x432.jpg", "Boisko Panna Ring, Grodzisk Mazowiecki"), ("2024/12/15-768x432.jpg", "Arena Panna Ring na Orliku")],
-     "model": "w1"},
+     "model": "w1", "extra": '<p class="more"><a href="/panna-ring-orlik-grodzisk-mazowiecki/">Przeczytaj case study →</a></p>'},
 ]
 
 EVENTS = [
@@ -257,7 +257,7 @@ body = f"""
     <li><a href="/studio/"><i>↗</i><b>Studio 3D</b><span>Wybierz boisko, kolory i nawierzchnię. Cena liczy się na bieżąco.</span></a></li>
     <li><a href="/shop/"><i>→</i><b>Boiska i ceny</b><span>Osiem modeli od {zl(PRICE["circle-cage-1"]["constructionFromNet"])} netto i osiem nawierzchni.</span></a></li>
     <li><a href="/dofinansowanie-boisk/"><i>→</i><b>Dofinansowanie</b><span>Dla gmin i szkół: nabory 2027 i dokumenty do wniosku.</span></a></li>
-    <li><a href="/baza-wiedzy/"><i>→</i><b>Baza wiedzy</b><span>Koszty, proces, nawierzchnie i wymiary w pięciu poradnikach.</span></a></li>
+    <li><a href="/baza-wiedzy/"><i>→</i><b>Baza wiedzy</b><span>Koszty, nawierzchnie, Orlik i dofinansowanie w dwunastu poradnikach.</span></a></li>
   </ul>
 </div></section>
 
@@ -277,3 +277,136 @@ if "&&" in out:
     raise SystemExit("double ampersand would break in WordPress")
 (HERE / "realizacje-gamefields.html").write_text(out, encoding="utf-8")
 print(f"realizacje-gamefields.html {len(out)} bytes")
+
+# ================================================================ case study pages (published 28.11.2026, pages 4973 and 4974)
+# Text from the published pages (written with ChatGPT) and from CASES above; the placeholder sentence
+# "Szczegóły nawierzchni i pełne parametry realizacji wymagają uzupełnienia." is dropped. Same look as this page.
+CASE_CSS = """
+.gfc-hero{padding:clamp(36px,5vw,80px) 0 clamp(28px,3vw,48px);border-bottom:1px solid var(--line)}
+.gfc-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center}
+.gfc-hero h1{font-size:clamp(44px,5.6vw,92px)}
+.gfc-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfc-hero figure{margin:0}.gfc-hero figure img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfc-crumbs{margin:0 0 18px;font-size:13px;color:var(--muted)}.gfc-crumbs a{text-decoration:none}
+.gfc-meta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfc-meta li{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:600}
+.gfc-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:start}
+.gfc-body h2{font-size:clamp(32px,3.6vw,56px);font-weight:800;letter-spacing:-.045em;line-height:.95;margin:0 0 16px}
+.gfc-body section{padding:0 0 clamp(28px,3vw,44px)}
+.gfc-body p{font-size:17px;line-height:1.6;color:#5A4652;margin:0 0 12px}
+.gfc-side{position:sticky;top:96px;display:grid;gap:12px}
+.gfc-model{display:grid;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.gfc-model .ph{background:var(--bg,#E6E0DA)}.gfc-model .ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;padding:8%}
+.gfc-model .tx{display:grid;gap:6px;padding:18px 20px 20px}
+.gfc-model .tx span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfc-model .tx b{font-size:26px;letter-spacing:-.03em}
+.gfc-model .tx p{margin:0;color:var(--muted);font-size:15px}
+.gfc-model .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.gfc-model .acts a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:var(--ink);color:var(--paper);font-weight:700;font-size:15px;text-decoration:none}
+.gfc-model .acts a.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.gfc-gal{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:8px}
+.gfc-gal img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfc-gal[style="--n:1"]{max-width:900px}.gfc-gal[style="--n:1"] img{aspect-ratio:16/9}
+.gfc-other{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfc-other a{display:grid;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:border-color .2s ease}
+.gfc-other a:hover{border-color:var(--violet)}
+.gfc-other img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#E6E0DA}
+.gfc-other span{display:grid;gap:4px;padding:14px 16px 16px;font-size:14px;color:var(--muted)}.gfc-other b{font-size:20px;letter-spacing:-.02em;color:var(--ink)}
+@media (max-width:900px){.gfc-hero .w,.gfc-body{grid-template-columns:minmax(0,1fr)}.gfc-side{position:static}.gfc-gal{grid-template-columns:minmax(0,1fr)}.gfc-other{grid-template-columns:minmax(0,1fr)}}
+"""
+RENDER = {"w1": ("gf-ring-1200.webp", "#6336F5"), "octagon": ("gf-octa-1200.webp", "#47132D"), "circle-cage-1": ("gf-cage90-1200.webp", "#D23A26"),
+          "circle-cage-2": ("gf-cage180-1200.webp", "#D8F24A")}
+CASE = {c["id"]: c for c in CASES}
+CASE_PAGES = [
+    {"slug": "taras-park-swietokrzyski-warszawa", "case": "taras", "city": "Warszawa",
+     "h1": "Areny do panny przy Pałacu Kultury w Warszawie",
+     "lead": "W Parku Świętokrzyskim, w sąsiedztwie Pałacu Kultury i Nauki, trzy areny do panny tworzą część przestrzeni tarasu. Projekt pokazuje, jak niewielkie boiska mogą stać się elementem publicznej przestrzeni miejskiej.",
+     "sections": [
+         ("Trzy areny i przestrzeń spotkań",
+          "<p>W Parku Świętokrzyskim powstała przestrzeń z trzema arenami Panna Ring, tarasem i rampą do skateboardingu. Inwestorem był Zarząd Zieleni m.st. Warszawy. "
+          "To wielofunkcyjna przestrzeń rekreacji dla osób w każdym wieku, tuż obok skrzyżowania linii metra.</p>"),
+         ("Boiska w przestrzeni miasta",
+          "<p>Układ aren i tarasu łączy możliwość gry z miejscem spotkań. " + CASE["taras"]["more"] + "</p>")]},
+    {"slug": "panna-ring-orlik-grodzisk-mazowiecki", "case": "orlik", "city": "Grodzisk Mazowiecki",
+     "h1": "Panna Ring na Orliku w Grodzisku Mazowieckim",
+     "lead": "Panna Ring to kompaktowa arena do gry 1 na 1, zastosowana przy Orliku w Grodzisku Mazowieckim. To przykład wykorzystania niewielkiej przestrzeni sportowej do gry i treningu technicznego.",
+     "sections": [
+         ("Model i zastosowanie",
+          "<p>Panna Ring ma około 5 m średnicy. Rozwiązanie nadaje się do przestrzeni osiedlowych i szkolnych oraz obiektów otwartych dla lokalnej społeczności. "
+          "Arena uzupełnia większą przestrzeń sportową Orlika.</p>"),
+         ("10 lat na Orliku",
+          "<p>Boisko stoi na obiekcie prowadzonym przez OSiR Grodzisk Mazowiecki od 10 lat i przez cały ten czas spełnia swoją rolę bez żadnych uszkodzeń.</p>"
+          "<p>Przy planowaniu modernizacji pomagamy dobrać rozwiązanie i przygotować dokumentację techniczną odpowiednią do inwestycji. "
+          'Zobacz <a href="/dofinansowanie-boisk-2027-jak-przygotowac-wniosek/">poradnik o dofinansowaniu</a> i <a href="/modernizacja-orlika-epdm-trawa-czy-plyty/">modernizację Orlika</a>.</p>')]},
+]
+
+
+def case_page(cp):
+    c = CASE[cp["case"]]
+    m = PRICE[c["model"]]
+    render, bg = RENDER[c["model"]]
+    q = c["quote"]
+    facts = "".join(f"<li>{a}: {b}</li>" for a, b in c["facts"])
+    secs = "".join(f"<section><h2>{h}</h2>{t}</section>" for h, t in cp["sections"])
+    quote = f'<figure class="gfr-quote"><blockquote>{html.escape(q[0])}</blockquote><figcaption><b>{q[1]}</b>{q[2]}</figcaption></figure>' if q else ""
+    gal_photos = c["photos"][1:]  # the first one is in the hero
+    gal = f'<div class="gfc-gal" style="--n:{len(gal_photos)}">' + "".join(img(p, a) for p, a in gal_photos) + "</div>"
+    others = [x for x in CASES if x["id"] != cp["case"]][:3]
+    other = "".join(f'<li><a href="/realizacje-gamefields/#{o["id"]}">{img(o["photos"][0][0], o["photos"][0][1])}<span><b>{o["title"]}</b>{o["place"]}</span></a></li>' for o in others)
+    body = f"""
+<section class="gfc-hero"><div class="w">
+  <div>
+    <p class="gfc-crumbs"><a href="/realizacje-gamefields/">Realizacje</a> / {cp["city"]}</p>
+    <p class="k">Case study · {c["place"]}</p>
+    <h1 class="d">{cp["h1"]}</h1>
+    <p class="lead">{cp["lead"]}</p>
+    <ul class="gfc-meta">{facts}</ul>
+  </div>
+  <figure>{img(c["photos"][0][0], c["photos"][0][1], eager=True)}</figure>
+</div></section>
+
+<section class="gfa-sec"><div class="w gfc-body">
+  <div>{secs}{quote}</div>
+  <aside class="gfc-side">
+    <div class="gfc-model"><span class="ph" style="--bg:{bg}"><img src="{UP}2026/11/{render}" alt="{m["name"]}, render" loading="lazy" decoding="async"></span>
+      <span class="tx"><span>Model w tej realizacji</span><b>{m["name"]}</b><p>Konstrukcja od {zl(m["constructionFromNet"])} netto. Ceny orientacyjne; montaż i transport wyceniamy osobno.</p>
+      <span class="acts"><a href="{m["link"]}">Zaprojektuj podobne ↗</a><a class="alt" href="/product/{SLUG[c["model"]]}/">Zobacz model</a></span></span></div>
+  </aside>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Zdjęcia.</h2><p>{c["title"]}, {c["place"]}.</p></div>
+  {gal}
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Inne realizacje.</h2><p>Kolejne miejsca z boiskami Gamefields.</p></div>
+  <ul class="gfc-other" role="list">{other}</ul>
+  <ul class="gfa-links"><li><a href="/realizacje-gamefields/">← Wszystkie realizacje</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Chcesz podobne<br>miejsce?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij zdjęcia placu →</a><a class="gfa-btn alt" href="{m["link"]}">Zaprojektuj podobne w Studio ↗</a></div>
+</div></section>
+"""
+    url = SITE + cp["slug"] + "/"
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "Article", "headline": cp["h1"], "description": cp["lead"], "inLanguage": "pl-PL", "dateModified": "2026-11-28",
+         "image": UP + c["photos"][0][0], "author": {"@type": "Person", "name": "Damian Gawrych", "url": SITE + "damian-gawrych/"},
+         "publisher": {"@type": "Organization", "name": "Gamefields", "url": SITE}, "mainEntityOfPage": url,
+         "about": {"@type": "Product", "name": m["name"], "url": SITE + "product/" + SLUG[c["model"]] + "/"}},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Gamefields", "item": SITE},
+            {"@type": "ListItem", "position": 2, "name": "Realizacje", "item": SITE + "realizacje-gamefields/"},
+            {"@type": "ListItem", "position": 3, "name": cp["h1"], "item": url}]}]}
+    return ("<!-- wp:html -->\n<style>\n" + BASE_CSS + CSS + CASE_CSS + "</style>\n<script type=\"application/ld+json\">" +
+            json.dumps(ld, ensure_ascii=False, separators=(",", ":")) + "</script>\n" + '<div class="gfa">\n' + body.strip() + "\n</div>\n<!-- /wp:html -->\n")
+
+
+for cp in CASE_PAGES:
+    page_html = case_page(cp)
+    if "&&" in page_html:
+        raise SystemExit("double ampersand would break in WordPress")
+    (HERE / f'{cp["slug"]}.html').write_text(page_html, encoding="utf-8")
+    print(f'{cp["slug"]}.html {len(page_html)} bytes')

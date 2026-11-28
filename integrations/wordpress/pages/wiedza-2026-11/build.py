@@ -38,6 +38,11 @@ SLAB = {m["id"]: m for m in BASE["models"]}
 PAINT = {m["id"]: m["net"]["plain"] for m in FIN["models"]}
 
 
+def bandy(h):
+    """Height label as "bandy 1 m"; some catalog labels already start with the word."""
+    return html.escape(h if h.startswith("band") else "bandy " + h)
+
+
 def zl(n):
     return f"{n:,.0f}".replace(",", " ") + " zł"
 
@@ -167,9 +172,14 @@ EXTRA_CSS = """
 .gfw-steps p{margin:0 0 8px}
 .gfw-steps .gf{display:block;margin-top:6px;padding:10px 12px;background:var(--paper);font-size:15px;color:var(--ink)}
 .gfw-steps .gf::before{content:"W Gamefields: ";font-weight:800;color:var(--violet)}
+.gfw-cards2{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfw-cards2 li,.gfw-cards2 li:nth-child(2),.gfw-cards2 li:nth-child(n+4){grid-column:span 1}
+.gfw-cards2 li:first-child{grid-column:span 2;grid-row:span 2}
+.gfw-cards2 li:nth-child(n+6){grid-column:span 2}
+.gfw-cards2 li:nth-child(n+6) .ph{aspect-ratio:21/9}
 .gfw-related{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .gfw-related .gfw-card .ph{aspect-ratio:16/9}
-@media (max-width:1100px){.gfw-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.gfw-cards li,.gfw-cards li:first-child,.gfw-cards li:nth-child(2){grid-column:span 1;grid-row:auto}.gfw-cards li:first-child{grid-column:1/-1}.gfw-cards li:first-child .ph{min-height:260px;flex:none;aspect-ratio:16/9}
+@media (max-width:1100px){.gfw-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.gfw-cards2 li,.gfw-cards2 li:nth-child(n+6){grid-column:span 1;grid-row:auto}.gfw-cards2 li:nth-child(n+6) .ph{aspect-ratio:16/10}.gfw-cards li,.gfw-cards li:first-child,.gfw-cards li:nth-child(2){grid-column:span 1;grid-row:auto}.gfw-cards li:first-child{grid-column:1/-1}.gfw-cards li:first-child .ph{min-height:260px;flex:none;aspect-ratio:16/9}
  .gfw-nums,.gfw-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){.gfw-art{grid-template-columns:minmax(0,1fr)}.gfw-toc{position:static;grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;gap:6px;padding-bottom:4px}.gfw-toc p{display:none}
  .gfw-toc a{border:1.5px solid #CDBFC6;border-radius:999px;padding:8px 14px;white-space:nowrap}
@@ -182,7 +192,7 @@ GUIDES = [  # slug, short title, category, teaser, image, image class, backgroun
     ("ile-kosztuje-budowa-boiska-sportowego", "Ile kosztuje budowa boiska?", "Budżet",
      "Z czego składa się cena boiska i od jakich kwot zaczynają się konstrukcje i nawierzchnie Gamefields.",
      UP + "2026/11/gf-play-1200.webp", "fit", "#2457D6",
-     [f"od {zl(MOBILE['constructionFromNet'])} netto", "8 modeli z cenami"]),
+     [f"od {zl(CHEAPEST['constructionFromNet'])} netto", "8 modeli z cenami"]),
     ("budowa-boiska-krok-po-kroku", "Budowa boiska krok po kroku", "Proces",
      "Siedem etapów od analizy placu do pierwszego meczu, na przykładzie areny w Krakowie.",
      UP + "2026/11/Gamefields-x-Panna-Cage-x-Krakow-montaz-768x576.jpg", "", "", ["7 etapów", "od planu do parku"]),
@@ -228,7 +238,7 @@ CTA = """
 </div></section>"""
 
 
-def article(slug, title, lead, short, sections, related, faq=None):
+def article(slug, title, lead, short, sections, related, faq=None, updated=UPDATED):
     """sections: list of (id, heading, html)."""
     words = len(re.sub(r"<[^>]+>", " ", lead + short + "".join(s[2] for s in sections)).split())
     READ[slug] = max(3, round(words / 200))
@@ -244,7 +254,7 @@ def article(slug, title, lead, short, sections, related, faq=None):
     <p class="k">Poradnik inwestora · {cat}</p>
     <h1 class="d">{title}</h1>
     <p class="lead">{lead}</p>
-    <ul class="gfw-meta"><li>{READ[slug]} min czytania</li><li>Aktualizacja {UPDATED}</li><li>Ceny netto ze Studia</li></ul>
+    <ul class="gfw-meta"><li>{READ[slug]} min czytania</li><li>Aktualizacja {updated}</li><li>Ceny netto ze Studia</li></ul>
   </div>
   <figure{style}>{hero_img}</figure>
 </div></section>
@@ -265,7 +275,7 @@ def article(slug, title, lead, short, sections, related, faq=None):
 {CTA}</div>"""
     ld = {"@context": "https://schema.org", "@graph": [
         {"@type": "Article", "headline": title, "description": re.sub(r"<[^>]+>", "", lead), "inLanguage": "pl-PL",
-         "dateModified": "2026-11-16", "author": {"@type": "Person", "name": "Damian Gawrych", "url": SITE + "damian-gawrych/"},
+         "dateModified": "-".join(reversed(updated.split("."))), "author": {"@type": "Person", "name": "Damian Gawrych", "url": SITE + "damian-gawrych/"},
          "publisher": {"@type": "Organization", "name": "Gamefields", "url": SITE}, "mainEntityOfPage": SITE + slug + "/"},
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Gamefields", "item": SITE},
@@ -429,7 +439,7 @@ REN = article(
     ["jak-wybrac-nawierzchnie-sportowa", "ile-kosztuje-budowa-boiska-sportowego", "budowa-boiska-krok-po-kroku"])
 
 # ---------------------------------------------------------------- 5. sizes
-size_rows = "".join(f'<tr><td><b>{html.escape(m["name"])}</b><br>{html.escape(CAT[m["code"]]["shape_label"])}, bandy {html.escape(CAT[m["code"]]["height_label"])}</td>'
+size_rows = "".join(f'<tr><td><b>{html.escape(m["name"])}</b><br>{html.escape(CAT[m["code"]]["shape_label"])}, {bandy(CAT[m["code"]]["height_label"])}</td>'
                     f'<td>{html.escape(CAT[m["code"]]["dimension_label"])}</td><td class="r">{str(SLAB[m["id"]]["areaM2"]).replace(".", ",")} m²</td></tr>'
                     for m in sorted(MODELS, key=lambda m: SLAB[m["id"]]["areaM2"]))
 WYM = article(
@@ -453,6 +463,227 @@ WYM = article(
       + gf('<p>Wpisz wymiary placu w planerze <a href="/#planer">„Zmieści się?”</a>: od razu zobaczysz, które modele się mieszczą razem ze strefą bezpieczeństwa. Potem zaprojektuj wybrany model w <a href="/studio/">Studio 3D</a>.</p>'))],
     ["budowa-boiska-krok-po-kroku", "ile-kosztuje-budowa-boiska-sportowego", "jak-wybrac-nawierzchnie-sportowa"])
 
+# ================================================================ seven guides published 28.11.2026 (pages 4959-4991)
+# Their text was written with ChatGPT and published as plain paragraphs. Here they get the guide layout: short answer,
+# contents, tables from the offer files, photos from the media library, Gamefields boxes and related guides.
+# Nothing is added that is not in the published text or in the repository data.
+NEW = "28.11.2026"
+CAT_PANNA = {m["id"]: m for m in MODELS}
+CAGE90 = CAT_PANNA["circle-cage-1"]
+CAGE90_FULL = CAGE90["constructionFromNet"] + SLAB["circle-cage-1"]["net"] + PAINT["circle-cage-1"]
+SHOP = {"paint": "malowanie-farba-sportowa", "turf": "sztuczna-trawa", "acrylic": "akryl-hard-court", "mats": "maty-gumowe-nawierzchnia",
+        "epdm": "nawierzchnia-epdm", "tiles": "plytki-sportowe", "rubber": "plyty-gumowe"}
+SLUGS = {"w1": "panna-ring", "o1": "panna-play", "p1": "panna-court", "street15": "street-arena-15", "circle-cage-1": "panna-octa-cage-90",
+         "circle-cage-2": "panna-octa-cage-180", "street-field": "panna-grid", "octagon": "panna-octa"}
+GUIDES += [
+    ("ile-kosztuje-boisko-do-panny", "Ile kosztuje boisko do panny?", "Budżet",
+     "Ceny ośmiu konstrukcji, koszt całego boiska z nawierzchnią i to, co liczymy osobno.",
+     UP + "2026/11/gf-cage90-1200.webp", "fit", "#D23A26", [f"od {zl(CHEAPEST['constructionFromNet'])} netto", "8 modeli"]),
+    ("jak-wybrac-nawierzchnie-na-boisko-do-panny", "Nawierzchnia na boisko do panny", "Technologia",
+     "Malowanie, EPDM, trawa, płytki i guma: co wybrać pod arenę i ile kosztuje metr.",
+     UP + "2026/11/trawa-macro.webp", "", "", [f"od {min(rates('paint'))} zł/m²", "7 wykończeń"]),
+    ("boisko-na-starym-betonie-malowanie", "Boisko na starym betonie", "Modernizacja",
+     "Kiedy wystarczy malowanie farbą sportową, a kiedy potrzebna jest nowa płyta.",
+     MOD + "pole-mokotowskie-przed-720.webp", "", "", ["3 kroki", f"od {min(rates('paint'))} zł/m²"]),
+    ("modernizacja-orlika-epdm-trawa-czy-plyty", "Modernizacja Orlika", "Orlik",
+     "EPDM, sztuczna trawa czy płyty gumowe: porównanie cen, norm i utrzymania.",
+     UP + "2024/12/15-768x432.jpg", "", "", ["EPDM · trawa · płyty", f"od {min(rates('turf'))} zł/m²"]),
+    ("dofinansowanie-boisk-2027-jak-przygotowac-wniosek", "Dofinansowanie boisk 2027", "Finansowanie",
+     "Termin naboru na modernizację Orlików i dokumenty, które warto mieć przed wnioskiem.",
+     UP + "2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg", "", "", ["nabór 4.01–26.02.2027", "lista dokumentów"]),
+    ("mobilne-boisko-na-event-wynajem-czy-zakup", "Mobilne boisko na event", "Eventy",
+     "Wynajem na jedno wydarzenie czy zakup areny na wiele sezonów.",
+     UP + "2026/11/12-768x574.jpg", "", "", [f"zakup od {zl(MOBILE['constructionFromNet'])} netto", "wynajem lub zakup"]),
+    ("boisko-do-panny-na-osiedlu", "Boisko do panny na osiedlu", "Osiedle",
+     "Który model zmieści się między blokami i na co uważać przed zamówieniem.",
+     UP + "2026/11/gf-court-1200.webp", "fit", "#FFB3C8", [f"od {zl(CHEAPEST['constructionFromNet'])} netto", "4 modele na osiedle"]),
+]
+GUIDE = {g[0]: g for g in GUIDES}
+
+
+def model_rows(ids, cols=("dims", "full")):
+    """Table rows for the given models: name with link, dimensions, construction and complete court prices."""
+    rows = ""
+    for i in ids:
+        m, c = CAT_PANNA[i], CAT[CAT_PANNA[i]["code"]]
+        full = m["constructionFromNet"] + SLAB[i]["net"] + PAINT[i]
+        rows += (f'<tr><td><b><a href="/product/{SLUGS[i]}/">{html.escape(m["name"])}</a></b><br>{html.escape(c["shape_label"])}, {bandy(c["height_label"])}</td>'
+                 f'<td>{html.escape(c["dimension_label"])}</td><td class="r">{zl(m["constructionFromNet"])}</td><td class="r">{zl(full)}</td></tr>')
+    return ('<div class="gfw-scroll"><table class="gfw-table"><thead><tr><th>Model</th><th>Wymiary</th><th class="r">Konstrukcja od</th><th class="r">Z nawierzchnią od</th></tr></thead>'
+            f"<tbody>{rows}</tbody></table></div>")
+
+
+def surf_rows(keys):
+    out = '<dl class="gfw-rows">'
+    for k, note in keys:
+        name = next(n for n, key, _, _ in SURF if key == k)
+        out += f'<div><dt><a href="/product/{SHOP[k]}/">{name}</a><span>od {min(rates(k))} zł/m² netto</span></dt><dd>{note}</dd></div>'
+    return out + "</dl>"
+
+
+PANNA_ORDER = sorted(CAT_PANNA, key=lambda i: CAT_PANNA[i]["constructionFromNet"])
+
+ILE_P = article(
+    "ile-kosztuje-boisko-do-panny", "Ile kosztuje boisko do panny w 2026/2027?",
+    "Koszt boiska do panny zależy od wielkości konstrukcji i rodzaju nawierzchni. Poniżej ceny ośmiu modeli Gamefields, koszt całego boiska z płytą i malowaniem oraz to, co liczymy osobno.",
+    f"<p>Konstrukcja {CAGE90['name']} zaczyna się od {zl(CAGE90['constructionFromNet'])} netto. Boisko z płytą betonową i malowaniem jednokolorowym kosztuje orientacyjnie od {zl(CAGE90_FULL)} netto. Montaż, transport i przygotowanie terenu wyceniamy indywidualnie.</p>",
+    [("modele", "Porównanie modeli",
+      "<p>Konstrukcja to bandy i bramki w podstawowej konfiguracji i standardowym kolorze. „Z nawierzchnią” dodaje płytę betonową 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p>"
+      + model_rows(PANNA_ORDER) +
+      f"<p>Arena mobilna eventowa (wynajem i sprzedaż): od {zl(MOBILE['constructionFromNet'])} netto. Ceny orientacyjne „od”, netto; brutto z VAT 23%.</p>"),
+     ("nawierzchnia", "Jak nawierzchnia wpływa na cenę?",
+      f"<p>Orientacyjne ceny wykończenia zaczynają się od {min(rates('paint'))} zł/m² netto za malowanie, {min(rates('epdm'))} zł/m² netto za EPDM wylewany i {min(rates('rubber'))} zł/m² netto za płyty gumowe. Zakres i stan podłoża mają wpływ na końcową wycenę.</p>"
+      + surf_table(SLAB["circle-cage-1"]["areaM2"], CAGE90["name"]) +
+      f"<p>Ostatnia kolumna: koszt dla {str(SLAB['circle-cage-1']['areaM2']).replace('.', ',')} m² ({CAGE90['name']} z 10% zapasem), najtańszy wariant, zaokrąglony w górę do 100 zł.</p>"
+      '<p><a href="/jak-wybrac-nawierzchnie-na-boisko-do-panny/">Jak wybrać nawierzchnię na boisko do panny →</a></p>'),
+     ("przyklad", "Przykład: całe boisko",
+      gf(f"<p><b>{CAGE90['name']}.</b> Konstrukcja {zl(CAGE90['constructionFromNet'])} + płyta betonowa {zl(SLAB['circle-cage-1']['net'])} + malowanie {zl(PAINT['circle-cage-1'])} = <b>{zl(CAGE90_FULL)} netto</b>.</p>"
+         "<p>Montaż, transport i przygotowanie terenu wyceniamy indywidualnie, po zdjęciach placu. W <a href=\"/studio/\">Studio 3D</a> cena liczy się na bieżąco dla wybranego modelu, nawierzchni i wzoru.</p>")),
+     ("start", "Od czego zacząć?",
+      '<p>Sprawdź w planerze <a href="/#planer">„Zmieści się?”</a>, które modele mieszczą się na placu razem ze strefą bezpieczeństwa, potem zaprojektuj boisko w Studio 3D.</p>'
+      + gf('<p>Zobacz <a href="/studio/">Studio 3D</a> i <a href="/kontakt/">skontaktuj się z Gamefields</a>, aby omówić swoje miejsce.</p>'))],
+    ["jak-wybrac-nawierzchnie-na-boisko-do-panny", "boisko-do-panny-na-osiedlu", "ile-kosztuje-budowa-boiska-sportowego"],
+    faq=[("Ile kosztuje boisko do panny?", f"Konstrukcja {CAGE90['name']} od {zl(CAGE90['constructionFromNet'])} netto, boisko z płytą betonową i malowaniem od {zl(CAGE90_FULL)} netto. Montaż, transport i przygotowanie terenu wyceniamy indywidualnie."),
+         ("Ile kosztuje metr nawierzchni pod arenę?", f"Od {min(rates('paint'))} zł/m² netto za malowanie, {min(rates('epdm'))} zł/m² za EPDM wylewany i {min(rates('rubber'))} zł/m² za płyty gumowe. Płyta betonowa z podbudową {BASE['rateNetPerM2']} zł/m² netto.")],
+    updated=NEW)
+
+NAW_P = article(
+    "jak-wybrac-nawierzchnie-na-boisko-do-panny", "Jak wybrać nawierzchnię na boisko do panny?",
+    "Wybór nawierzchni boiska do panny zależy od stanu podłoża, intensywności gry, budżetu i sposobu użytkowania. Podane ceny są orientacyjne i dotyczą wykończenia na odpowiednio przygotowanym podłożu.",
+    "<p>Na stabilnym betonie najprościej zacząć od malowania farbą sportową. EPDM, trawa, płytki i guma to kolejne poziomy amortyzacji i ceny. Właściwości i certyfikaty sprawdzamy zawsze dla konkretnego produktu.</p>",
+    [("malowanie", "Malowanie farbą sportową",
+      f'<figure class="gfw-ph" style="grid-template-columns:minmax(0,1fr)"><img src="{UP}2026/11/malowanie-macro.webp" alt="Farba sportowa na betonie, zbliżenie" loading="lazy" decoding="async"></figure>'
+      f'<p><a href="/product/malowanie-farba-sportowa/">Malowanie</a> od {min(rates("paint"))} zł/m² netto sprawdza się na odpowiednio przygotowanym betonie. O zakresie napraw i doborze materiału decyduje stan placu.</p>'
+      f"<ul>{paint_rows}</ul>"),
+     ("epdm", "EPDM wylewany",
+      f'<p><a href="/product/nawierzchnia-epdm/">EPDM</a> od {min(rates("epdm"))} zł/m² netto oferuje różne możliwości wykończenia. Przepuszczalność i zgodność z normami zależą od konkretnego systemu i podbudowy.</p><ul>{epdm_rows}</ul>'),
+     ("trawa-plytki", "Sztuczna trawa i płytki PP",
+      surf_rows([("turf", "Wymaga regularnej pielęgnacji."), ("tiles", "Modułowe, co ułatwia wymianę elementów.")])),
+     ("guma", "Płyty i maty gumowe",
+      surf_rows([("mats", "Ciągła guma o różnych wariantach grubości."), ("rubber", "Stabilizowane płyty w różnych wariantach.")])
+      + "<p>Właściwości amortyzujące, antypoślizgowość i certyfikaty trzeba sprawdzić dla konkretnego produktu i zastosowania.</p>"),
+     ("ceny", "Wszystkie wykończenia na jednym przykładzie", sw + sw2 + surf_table(SLAB["o1"]["areaM2"], "Panna Play") +
+      f"<p>Ostatnia kolumna: koszt dla {str(SLAB['o1']['areaM2']).replace('.', ',')} m² (Panna Play z 10% zapasem), najtańszy wariant, zaokrąglony w górę do 100 zł.</p>"
+      + gf('<p>Porównaj konfiguracje w <a href="/studio/">Studio 3D</a> lub <a href="/kontakt/">prześlij zdjęcia placu</a>.</p>'))],
+    ["ile-kosztuje-boisko-do-panny", "modernizacja-orlika-epdm-trawa-czy-plyty", "boisko-na-starym-betonie-malowanie"],
+    updated=NEW)
+
+BETON = article(
+    "boisko-na-starym-betonie-malowanie", "Boisko na starym betonie – kiedy malowanie wystarczy?",
+    "Nie każdy stary beton trzeba rozbierać. Stabilne podłoże po ocenie stanu, naprawie rys i przygotowaniu powierzchni może nadawać się do malowania farbą sportową.",
+    "<p>O koniecznym zakresie prac decydują m.in. pęknięcia, odwodnienie i stan betonu. Malowanie jednokolorowe zaczyna się orientacyjnie od "
+    f"{min(rates('paint'))} zł/m² netto; przy poważnych uszkodzeniach może być potrzebna naprawa lub nowa płyta.</p>",
+    [("proces", "Jak wygląda proces?",
+      '<ol class="gfw-steps"><li><div><h3>Ocena placu</h3><p>Na podstawie zdjęć, wymiarów i w razie potrzeby oględzin.</p></div></li>'
+      '<li><div><h3>Przygotowanie</h3><p>Mycie, szlifowanie, naprawa rys i ubytków oraz gruntowanie odpowiednio do stanu podłoża.</p></div></li>'
+      '<li><div><h3>Malowanie</h3><p>Jednolity kolor lub indywidualny wzór, dobrany do podłoża i użytkowania.</p></div></li></ol>'),
+     ("przed-po", "Stary plac, nowe boisko",
+      f'<figure class="gfw-ph"><img src="{MOD}pole-mokotowskie-przed-720.webp" alt="Przed: szary betonowy plac do koszykówki, Pole Mokotowskie" loading="lazy">'
+      f'<img src="{MOD}pole-mokotowskie-po-720.webp" alt="Koncepcja po modernizacji, Pole Mokotowskie" loading="lazy">'
+      "<figcaption>Pole Mokotowskie, Warszawa: plac do koszykówki (Google Street View, 2017) i koncepcja na tym samym zdjęciu. Wizualizacja, nie realizacja.</figcaption></figure>"),
+     ("ceny", "Ile kosztuje malowanie?",
+      f"<p>Malowanie jednokolorowe zaczyna się orientacyjnie od {min(rates('paint'))} zł/m² netto; warianty z granulatem lub wzorem mają osobną wycenę:</p><ul>{paint_rows}</ul>"
+      f"<p>W przypadku poważnych uszkodzeń może być potrzebna naprawa lub nowa płyta. Płyta betonowa z podbudową zaczyna się orientacyjnie od {BASE['rateNetPerM2']} zł/m² netto. Stan i zakres prac potwierdzimy po analizie miejsca.</p>"
+      + gf('<p>Zobacz <a href="/malowanie-boisk/">malowanie boisk i wzornictwo</a>, <a href="/product/malowanie-farba-sportowa/">malowanie farbą sportową</a> oraz <a href="/product/plyta-betonowa/">płytę betonową</a>. '
+           'Swoje miejsce omówisz po <a href="/kontakt/">wysłaniu zdjęć placu</a>, a wzór zaprojektujesz w <a href="/studio/">Studio 3D</a>.</p>'))],
+    ["renowacja-czy-budowa-nowego-boiska", "jak-wybrac-nawierzchnie-na-boisko-do-panny", "modernizacja-orlika-epdm-trawa-czy-plyty"],
+    updated=NEW)
+
+ORLIK = article(
+    "modernizacja-orlika-epdm-trawa-czy-plyty", "Modernizacja Orlika – co wybrać: EPDM, trawa czy płyty?",
+    "Przy modernizacji Orlika warto porównać EPDM wylewany, sztuczną trawę i płyty gumowe SBR/EPDM. Dobór zależy od dyscypliny, stanu podłoża, sposobu użytkowania i budżetu.",
+    f"<p>Najtańsza w metrze jest sztuczna trawa (od {min(rates('turf'))} zł/m² netto), EPDM wylewany zaczyna się od {min(rates('epdm'))} zł/m², płyty gumowe od {min(rates('rubber'))} zł/m². Parametry i zgodność z normami potwierdzamy dla konkretnego produktu.</p>",
+    [("porownanie", "Porównanie w skrócie",
+      '<div class="gfw-scroll"><table class="gfw-table"><thead><tr><th>Nawierzchnia</th><th>Na co zwrócić uwagę</th><th class="r">Od, za m² netto</th></tr></thead><tbody>'
+      f'<tr><td><b><a href="/product/nawierzchnia-epdm/">EPDM wylewany</a></b></td><td>dokumentacja systemu w odniesieniu do PN-EN 14877; przepuszczalność zależy od systemu i podbudowy</td><td class="r">{min(rates("epdm"))} zł</td></tr>'
+      f'<tr><td><b><a href="/product/sztuczna-trawa/">Sztuczna trawa</a></b></td><td>regularna pielęgnacja; parametry i zgodność z EN 15330 dla konkretnego produktu</td><td class="r">{min(rates("turf"))} zł</td></tr>'
+      f'<tr><td><b><a href="/product/plyty-gumowe/">Płyty gumowe SBR/EPDM</a></b></td><td>bezpieczeństwo, antypoślizgowość i atesty zależą od konkretnej płyty</td><td class="r">{min(rates("rubber"))} zł</td></tr>'
+      "</tbody></table></div>"),
+     ("epdm", "EPDM wylewany",
+      f"<p>Orientacyjna cena zaczyna się od {min(rates('epdm'))} zł/m² netto. Właściwości, przepuszczalność i trwałość zależą od wybranego systemu, podbudowy i eksploatacji. Przy doborze warto sprawdzić dokumentację systemu w odniesieniu do PN-EN 14877.</p><ul>{epdm_rows}</ul>"),
+     ("trawa", "Sztuczna trawa",
+      f"<p>Orientacyjna cena zaczyna się od {min(rates('turf'))} zł/m² netto. Sposób montażu zależy od podłoża i projektu. Trawa wymaga regularnej pielęgnacji; parametry i zgodność z EN 15330 należy potwierdzić dla konkretnego produktu.</p>"),
+     ("plyty", "Płyty gumowe",
+      f"<p>Orientacyjna cena zaczyna się od {min(rates('rubber'))} zł/m² netto. Parametry bezpieczeństwa, antypoślizgowość i atesty zależą od konkretnej płyty i zastosowania. Przed wyborem należy sprawdzić aktualne certyfikaty produktu.</p>"),
+     ("arena", "Arena do panny na Orliku",
+      f'<figure class="gfw-ph"><img src="{UP}2024/12/15-768x432.jpg" alt="Arena Panna Ring na Orliku w Grodzisku Mazowieckim" loading="lazy" decoding="async">'
+      f'<img src="{UP}2024/12/9-768x432.jpg" alt="Boisko Panna Ring, Grodzisk Mazowiecki" loading="lazy" decoding="async">'
+      "<figcaption>Panna Ring na Orliku w Grodzisku Mazowieckim: stoi na obiekcie od 10 lat.</figcaption></figure>"
+      '<p>Modernizacja to też dobry moment, żeby dodać do obiektu małą arenę do gry 1 na 1. <a href="/panna-ring-orlik-grodzisk-mazowiecki/">Zobacz case study z Grodziska →</a></p>'
+      + gf("<p>Wymagania programu dofinansowania i dokumenty techniczne sprawdzamy dla konkretnej inwestycji. Ceny są orientacyjne; podłoże i prace dodatkowe wycenia się osobno. "
+           'Zobacz <a href="/dofinansowanie-boisk-2027-jak-przygotowac-wniosek/">dofinansowanie boisk 2027</a>, <a href="/studio/">Studio 3D</a> i <a href="/kontakt/">skontaktuj się z Gamefields</a>.</p>'))],
+    ["dofinansowanie-boisk-2027-jak-przygotowac-wniosek", "jak-wybrac-nawierzchnie-na-boisko-do-panny", "renowacja-czy-budowa-nowego-boiska"],
+    updated=NEW)
+
+DOF = article(
+    "dofinansowanie-boisk-2027-jak-przygotowac-wniosek", "Dofinansowanie boisk 2027 – jak przygotować wniosek?",
+    "Termin naboru na modernizację Orlików w 2027 roku, dokumenty, które warto przygotować wcześniej, i to, w czym pomaga Gamefields.",
+    "<p>W planie Ministerstwa Sportu i Turystyki dla programu modernizacji kompleksów „Moje Boisko – Orlik 2012” na 2027 r. podano nabór od 4 stycznia do 26 lutego 2027 r. "
+    "Przed złożeniem wniosku sprawdź aktualny regulamin, kwalifikowalność inwestycji i terminy na stronie ministerstwa.</p>",
+    [("termin", "Termin naboru",
+      '<dl class="gfw-rows"><div><dt><span>Program</span>Moje Boisko – Orlik 2012</dt><dd>modernizacja kompleksów sportowych</dd></div>'
+      '<div><dt><span>Nabór</span>4.01–26.02.2027</dt><dd>według planu programów na 2027 rok</dd></div></dl>'
+      '<p>Źródło: <a href="https://www.gov.pl/web/sport/przyspieszenie-infrastrukturalne-minister-zaprezentowal-plan-programow-na-2027-rok">harmonogram Ministerstwa Sportu i Turystyki</a>.</p>'),
+     ("dokumenty", "Co przygotować?",
+      "<p>Zacznij od zdjęć i wymiarów miejsca, informacji o stanie podłoża oraz założeń inwestycji. Do wniosku mogą być potrzebne:</p>"
+      '<ol class="gfw-steps"><li><div><h3>Koncepcja</h3><p>Układ boiska na działce i funkcje obiektu.</p></div></li>'
+      '<li><div><h3>Wizualizacja</h3><p>Jak obiekt będzie wyglądał w otoczeniu.</p></div></li>'
+      '<li><div><h3>Opis techniczny</h3><p>Konstrukcja, nawierzchnia, wyposażenie.</p></div></li>'
+      '<li><div><h3>Kosztorys</h3><p>Oraz dokumenty wymagane przez dany program.</p></div></li></ol>'),
+     ("gamefields", "Jak może pomóc Gamefields?",
+      "<p>Przygotujemy koncepcję, wizualizację i orientacyjną wycenę. Dokumentację techniczną i właściwe certyfikaty dobieramy do konkretnych produktów oraz wymagań naboru. "
+      "Możliwość uwzględnienia boiska do panny w większej inwestycji zależy od warunków programu.</p>"
+      f'<figure class="gfw-ph"><img src="{UP}2026/11/Gamefields-x-boiska-x-Projekt-Krakow--768x768.jpg" alt="Plan zagospodarowania z arenami Gamefields, Kraków" loading="lazy">'
+      f'<img src="{UP}2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Panna Octa Cage 90 w parku, Kraków" loading="lazy">'
+      "<figcaption>Kraków: koncepcja na planie zagospodarowania i gotowa arena w parku.</figcaption></figure>"
+      + gf('<p>Zobacz <a href="/dofinansowanie-boisk/">dofinansowanie boisk</a>: źródła finansowania i nabory. Projekt z ceną zaczniesz w <a href="/studio/">Studio 3D</a>, a koncepcję do wniosku przygotujemy po <a href="/kontakt/">zdjęciach miejsca</a>.</p>'))],
+    ["modernizacja-orlika-epdm-trawa-czy-plyty", "ile-kosztuje-boisko-do-panny", "budowa-boiska-krok-po-kroku"],
+    updated=NEW)
+
+EVENT = article(
+    "mobilne-boisko-na-event-wynajem-czy-zakup", "Mobilne boisko na event – wynajem czy zakup?",
+    "Mobilną arenę do panny można wynająć na wydarzenie albo kupić do wielokrotnego użytku. Arena sprawdzi się na turniejach, aktywacjach marek i wydarzeniach sportowych; jej wygląd można dopasować do projektu.",
+    "<p>Na pojedynczy event lub serię wydarzeń wybierz wynajem. Przy częstym użytkowaniu porównaj koszt wynajmu z zakupem: mobilne konstrukcje zaczynają się od "
+    f"{zl(MOBILE['constructionFromNet'])} netto.</p>",
+    [("porownanie", "Wynajem czy zakup?",
+      '<dl class="gfw-rows">'
+      '<div><dt><span>Wynajem</span>Pojedynczy event lub seria</dt><dd>Wycena zależy od terminu, lokalizacji, czasu użytkowania, transportu, montażu i zakresu obsługi. <a href="/wynajem-boisk-mobilnych/">Zobacz ofertę wynajmu</a>.</dd></div>'
+      f'<div><dt><span>Zakup</span>Od {zl(MOBILE["constructionFromNet"])} netto</dt><dd>Przy częstym użytkowaniu warto porównać koszt zakupu z wynajmem. Dostępność i pełną wycenę potwierdzimy dla wybranej konfiguracji.</dd></div></dl>'),
+     ("eventy", "Gdzie stały nasze areny",
+      f'<figure class="gfw-ph"><img src="{UP}2026/11/12-768x574.jpg" alt="Event Head &amp; Shoulders, Złote Tarasy, Warszawa" loading="lazy" decoding="async">'
+      f'<img src="{UP}2026/11/1-768x576.jpg" alt="Event Head &amp; Shoulders, stadion w Gdańsku" loading="lazy" decoding="async">'
+      "<figcaption>Head &amp; Shoulders: Złote Tarasy w Warszawie i stadion w Gdańsku.</figcaption></figure>"
+      '<p>Więcej turniejów i eventów w <a href="/realizacje-gamefields/#eventy">realizacjach</a>.</p>'),
+     ("propozycja", "Jak przygotować propozycję?",
+      gf('<p><a href="/kontakt/">Napisz do Gamefields</a>, aby omówić format wydarzenia i przygotować propozycję. Wygląd areny dopasujesz w <a href="/studio/">Studio 3D</a>; dla marek zobacz też <a href="/aktywacje-sportowe-dla-marek/">aktywacje sportowe</a>.</p>'))],
+    ["ile-kosztuje-boisko-do-panny", "boisko-do-panny-na-osiedlu", "jak-wybrac-nawierzchnie-na-boisko-do-panny"],
+    updated=NEW)
+
+OS_IDS = ["circle-cage-1", "w1", "o1", "p1"]
+OSIEDLE = article(
+    "boisko-do-panny-na-osiedlu", "Boisko do panny na osiedlu – jaki model wybrać?",
+    "Na osiedlu warto rozważyć kompaktową arenę do panny dopasowaną do dostępnego miejsca i potrzeb mieszkańców. Porównanie czterech modeli i lista rzeczy do sprawdzenia przed zamówieniem.",
+    f"<p>Konstrukcje zaczynają się od {zl(CHEAPEST['constructionFromNet'])} netto; montaż, transport i przygotowanie terenu wyceniane są osobno. "
+    "Niska banda Panna Octa Cage 90 ułatwia obserwowanie gry, Panna Ring i Panna Play mieszczą się na małych placach.</p>",
+    [("modele", "Który model wybrać?",
+      f'<p><a href="/product/panna-octa-cage-90/">Panna Octa Cage 90</a> ma niską bandę o wysokości około 0,9 m, która ułatwia obserwowanie gry. <a href="/product/panna-ring/">Panna Ring</a> ma około 5 m średnicy, '
+      f'a <a href="/product/panna-play/">Panna Play</a> około 6 m. Porównaj modele i sprawdź miejsce potrzebne dla wybranej konstrukcji.</p>' + model_rows(OS_IDS)),
+     ("miejsce", "Miejsce i montaż",
+      "<p>Przed zamówieniem sprawdź:</p><ul><li>wymiary placu,</li><li>stan podłoża,</li><li>dostęp dla montażu,</li><li>wymagane strefy bezpieczeństwa, odpowiednie do lokalnych warunków i projektu.</li></ul>"
+      "<p>Konstrukcje są modułowe; termin montażu ustalamy indywidualnie.</p>"),
+     ("przyklad", "Przykład z miasta",
+      f'<figure class="gfw-ph"><img src="{UP}2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Areny panna w Parku Świętokrzyskim, Warszawa" loading="lazy" decoding="async">'
+      f'<img src="{UP}2024/12/2-4-768x768.jpg" alt="Arena panna na Tarasie w Parku Świętokrzyskim" loading="lazy" decoding="async">'
+      "<figcaption>Trzy areny Panna Ring w Parku Świętokrzyskim w Warszawie.</figcaption></figure>"
+      '<p><a href="/taras-park-swietokrzyski-warszawa/">Zobacz case study: areny przy Pałacu Kultury →</a></p>'
+      + gf('<p>Wpisz wymiary placu w planerze <a href="/#planer">„Zmieści się?”</a>, zaprojektuj boisko w <a href="/studio/">Studio 3D</a> lub <a href="/kontakt/">prześlij nam zdjęcia placu</a>. Dla inwestycji mieszkaniowych zobacz <a href="/boiska-dla-deweloperow/">boiska dla deweloperów</a>.</p>'))],
+    ["ile-kosztuje-boisko-do-panny", "jak-wybrac-nawierzchnie-na-boisko-do-panny", "wymiary-boiska-wielofunkcyjnego"],
+    updated=NEW)
+NEW_OUT = {"ile-kosztuje-boisko-do-panny": ILE_P, "jak-wybrac-nawierzchnie-na-boisko-do-panny": NAW_P, "boisko-na-starym-betonie-malowanie": BETON,
+           "modernizacja-orlika-epdm-trawa-czy-plyty": ORLIK, "dofinansowanie-boisk-2027-jak-przygotowac-wniosek": DOF,
+           "mobilne-boisko-na-event-wynajem-czy-zakup": EVENT, "boisko-do-panny-na-osiedlu": OSIEDLE}
+
+
 # ---------------------------------------------------------------- hub
 FAQ = [
     ("Ile kosztuje boisko do panny?", f"Konstrukcje od {zl(CHEAPEST['constructionFromNet'])} netto, całe boisko z płytą i malowaniem np. {PLAY['name']} od {zl(PLAY['constructionFromNet'] + PLAY_SLAB + PLAY_PAINT)} netto. Montaż, transport i przygotowanie terenu liczę po zdjęciach placu."),
@@ -466,15 +697,20 @@ hub_body = f"""
   <div>
     <p class="k">Baza wiedzy</p>
     <h1 class="d">Zanim powstanie boisko.</h1>
-    <p class="lead">Pięć krótkich poradników dla inwestorów: koszt, proces, nawierzchnie, wymiary i decyzja między renowacją a nową budową. Bez katalogowego żargonu, z cenami ze Studia.</p>
-    <ul class="gfa-links"><li><a href="#poradniki">Poradniki</a></li><li><a href="#liczby">Liczby</a></li><li><a href="#pytania">Szybkie odpowiedzi</a></li><li><a href="#narzedzia">Narzędzia</a></li></ul>
+    <p class="lead">Dwanaście krótkich poradników dla inwestorów: koszt, proces, nawierzchnie, wymiary, modernizacja i dofinansowanie. Bez katalogowego żargonu, z cenami ze Studia.</p>
+    <ul class="gfa-links"><li><a href="#poradniki">Poradniki</a></li><li><a href="#panna">Boisko do panny</a></li><li><a href="#liczby">Liczby</a></li><li><a href="#pytania">Szybkie odpowiedzi</a></li><li><a href="#narzedzia">Narzędzia</a></li></ul>
   </div>
   <figure><img src="{UP}2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Panna Octa Cage 90 w parku, Kraków" loading="eager" decoding="async"><figcaption><b>Panna Octa Cage 90</b>Kraków, teren miejski</figcaption></figure>
 </div></section>
 
 <section class="gfa-sec" id="poradniki"><div class="w">
   <div class="gfa-head"><h2 class="d">Zacznij od pytania.</h2><p>Każdy poradnik ma krótką odpowiedź na górze, a pod nią szczegóły i konkretne liczby z oferty Gamefields.</p></div>
-  <ul class="gfw-cards" role="list">{"".join(f"<li>{card(g[0])}</li>" for g in GUIDES)}</ul>
+  <ul class="gfw-cards" role="list">{"".join(f"<li>{card(g[0])}</li>" for g in GUIDES[:5])}</ul>
+</div></section>
+
+<section class="gfa-sec" id="panna"><div class="w">
+  <div class="gfa-head"><h2 class="d">Boisko do panny.</h2><p>Siedem poradników o arenach do gry 1 na 1: ceny modeli, nawierzchnia, stary beton, Orlik, dofinansowanie, eventy i osiedla.</p></div>
+  <ul class="gfw-cards gfw-cards2" role="list">{"".join(f"<li>{card(g[0])}</li>" for g in GUIDES[5:])}</ul>
 </div></section>
 
 <section class="gfa-band" id="liczby"><div class="w">
@@ -509,8 +745,8 @@ hub_ld = {"@context": "https://schema.org", "@graph": [
 HUB = page(hub_body, hub_ld)
 
 OUT = {"baza-wiedzy": HUB, "ile-kosztuje-budowa-boiska-sportowego": ILE, "budowa-boiska-krok-po-kroku": KROK,
-       "jak-wybrac-nawierzchnie-sportowa": NAW, "renowacja-czy-budowa-nowego-boiska": REN, "wymiary-boiska-wielofunkcyjnego": WYM}
-OUT = {k: re.sub(r"\[\[READ:([a-z-]+)\]\]", lambda m: str(READ[m.group(1)]), v) for k, v in OUT.items()}
+       "jak-wybrac-nawierzchnie-sportowa": NAW, "renowacja-czy-budowa-nowego-boiska": REN, "wymiary-boiska-wielofunkcyjnego": WYM, **NEW_OUT}
+OUT = {k: re.sub(r"\[\[READ:([a-z0-9-]+)\]\]", lambda m: str(READ[m.group(1)]), v) for k, v in OUT.items()}
 for name, content in OUT.items():
     if "[[READ:" in content:
         raise SystemExit(f"{name}: unresolved reading time")
