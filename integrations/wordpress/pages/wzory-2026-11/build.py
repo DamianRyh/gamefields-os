@@ -17,7 +17,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from gfb_common import (FIN, GFB_CSS, SITE, faq_html, jump_html, write)  # noqa: E402
 
-STUDIO_HAS_POLISH = False
+STUDIO_HAS_POLISH = True  # 28.11.2026: the live Studio has the Wzory polskie tab
 URL = SITE + "wzory-na-boisko/"
 ENGINE = HERE.parents[2] / "studio" / "surface-pro-2026-11"
 PREV = json.loads(subprocess.run(["node", str(ENGINE / "export-previews.mjs")], capture_output=True, text=True, check=True).stdout)
