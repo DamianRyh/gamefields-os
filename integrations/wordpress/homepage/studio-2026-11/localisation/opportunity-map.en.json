@@ -1,0 +1,727 @@
+{
+  "verifiedAt": "2026-11-18",
+  "note": "Amounts and dates are from 2026 announcements. Future editions may have different rules — always check the current application guidelines. Update this file at least quarterly and whenever a new call opens.",
+  "who": [
+    {
+      "id": "resident",
+      "label": "I live here",
+      "hint": "On my own, with friends or neighbours"
+    },
+    {
+      "id": "ngo",
+      "label": "Club or association",
+      "hint": "Also foundations, rural women's associations, volunteer fire brigades and school sports clubs"
+    },
+    {
+      "id": "school",
+      "label": "School or institution",
+      "hint": "School, municipality, housing cooperative or municipal sports centre"
+    },
+    {
+      "id": "company",
+      "label": "Company",
+      "hint": "Showcase your brand and support the local area"
+    },
+    {
+      "id": "private",
+      "label": "For myself",
+      "hint": "A court at home or on my own land"
+    }
+  ],
+  "area": [
+    {
+      "id": "city",
+      "label": "City"
+    },
+    {
+      "id": "village",
+      "label": "Village or small town"
+    }
+  ],
+  "need": [
+    {
+      "id": "renovate",
+      "label": "Renovate an old court or concrete surface"
+    },
+    {
+      "id": "new",
+      "label": "Build a new court"
+    },
+    {
+      "id": "vision",
+      "label": "Present an idea for now"
+    }
+  ],
+  "levels": [
+    {
+      "id": 1,
+      "title": "Start right away",
+      "lead": "No organisation or funding required. Start with an idea and a few people."
+    },
+    {
+      "id": 2,
+      "title": "With an organisation's help",
+      "lead": "An association, club, rural women's association or foundation submits the application — it could be one you already know."
+    },
+    {
+      "id": 3,
+      "title": "Major programmes",
+      "lead": "A municipality, school or club submits the application. You can provide a ready concept and residents' support."
+    }
+  ],
+  "tools": [
+    {
+      "id": "budzet-obywatelski",
+      "name": "Participatory budgeting",
+      "short": "Submit a project, residents vote and the city builds it.",
+      "level": 1,
+      "who": [
+        "resident"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new",
+        "vision"
+      ],
+      "submits": "A resident (age and support requirements are set by the municipality)",
+      "amount": "The municipality sets the budget and project limit",
+      "timing": {
+        "kind": "yearly",
+        "text": "Annually, on dates set by the municipality"
+      },
+      "own": "No",
+      "weDo": "Visualisation, estimated cost, description and graphics to gather votes.",
+      "steps": [
+        "Check the municipal participatory budgeting deadline.",
+        "Get a visualisation and estimate from us.",
+        "Submit the project and gather votes from friends and neighbours."
+      ],
+      "source": {
+        "label": "Municipal Government Act, Article 5a",
+        "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19900160095"
+      }
+    },
+    {
+      "id": "fundusz-solecki",
+      "name": "Village fund (fundusz sołecki)",
+      "short": "Residents decide how their village fund is spent.",
+      "level": 1,
+      "who": [
+        "resident"
+      ],
+      "area": [
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new",
+        "vision"
+      ],
+      "submits": "Village assembly; the village head submits the application",
+      "amount": "Allocation depends on legislation and population — ask the village head",
+      "timing": {
+        "kind": "yearly",
+        "text": "Usually due by 30 September for the following year"
+      },
+      "own": "No",
+      "weDo": "A proposal for the village assembly: visualisation, cost and description.",
+      "steps": [
+        "Speak to the village head or council.",
+        "Bring our visualisation to the assembly.",
+        "The assembly includes the court in its fund application."
+      ],
+      "source": {
+        "label": "Village Fund Act",
+        "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20140000301"
+      }
+    },
+    {
+      "id": "inicjatywa-lokalna",
+      "name": "Local initiative",
+      "short": "Residents propose a municipal task and contribute, for example, labour.",
+      "level": 1,
+      "who": [
+        "resident",
+        "ngo"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new"
+      ],
+      "submits": "Residents (including informal groups) or an organisation",
+      "amount": "Set by municipality, county or region",
+      "timing": {
+        "kind": "yearly",
+        "text": "Depends on municipal resolution, often throughout the year"
+      },
+      "own": "Yes — labour, materials or money",
+      "weDo": "Quotation, task description and plan for residents' contributions (e.g. painting).",
+      "steps": [
+        "Check the municipal local initiative resolution.",
+        "Gather a group and agree contributions (labour, equipment).",
+        "Submit with our quotation and visualisation."
+      ],
+      "source": {
+        "label": "Public Benefit and Volunteer Work Act, Articles 19b–19h",
+        "url": "https://lexlege.pl/ustawa-o-dzialalnosci-pozytku-publicznego-i-o-wolontariacie/rozdzial-2a-inicjatywa-lokalna/4255/"
+      }
+    },
+    {
+      "id": "dzialaj-lokalnie",
+      "name": "Działaj Lokalnie",
+      "short": "A small grant for the first step, including groups of friends.",
+      "level": 1,
+      "who": [
+        "resident",
+        "ngo"
+      ],
+      "area": [
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "vision"
+      ],
+      "submits": "Informal group (with a local centre's help) or organisation",
+      "amount": "Usually up to approx. PLN 6,000 (local limit)",
+      "timing": {
+        "kind": "yearly",
+        "text": "2026 calls were in spring (March–May)",
+        "next": "Indicatively spring 2027"
+      },
+      "own": "Contribution usually required (volunteer work may qualify)",
+      "weDo": "An achievable project idea, e.g. event, campaign or first renovation phase.",
+      "steps": [
+        "Find the local Działaj Lokalnie centre.",
+        "Gather a group and plan the first step.",
+        "Apply in the spring call."
+      ],
+      "source": {
+        "label": "Działaj Lokalnie",
+        "url": "https://dzialajlokalnie.pl/"
+      }
+    },
+    {
+      "id": "nowefio",
+      "name": "NOWEFIO — microgrants",
+      "short": "Local initiative grants, often prioritising young people.",
+      "level": 1,
+      "who": [
+        "resident",
+        "ngo"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "vision"
+      ],
+      "submits": "Group of at least 3 adults or young organisation",
+      "amount": "Usually approx. PLN 1,000–6,000 (varies by region)",
+      "timing": {
+        "kind": "yearly",
+        "text": "2026 calls were in March and April",
+        "next": "Indicatively spring 2027"
+      },
+      "own": "Depends on operator rules",
+      "weDo": "Help with description and quotation.",
+      "steps": [
+        "Find your regional NOWEFIO operator.",
+        "Gather at least 3 adults.",
+        "Apply when the call opens."
+      ],
+      "source": {
+        "label": "NIW — NOWEFIO operators",
+        "url": "https://niw.gov.pl/nasze-programy/nowefio/operatorzy-lokalni-nowefio/"
+      }
+    },
+    {
+      "id": "zbiorka",
+      "name": "Online fundraising",
+      "short": "Raise money from people who care about the project.",
+      "level": 1,
+      "who": [
+        "resident",
+        "ngo",
+        "school"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new",
+        "vision"
+      ],
+      "submits": "Anyone (an adult starts a fundraiser on behalf of minors)",
+      "amount": "Whatever you raise",
+      "timing": {
+        "kind": "always",
+        "text": "Any time"
+      },
+      "own": "No",
+      "weDo": "Visualisation and a specific fundraising target.",
+      "steps": [
+        "Get a visualisation and target amount from us.",
+        "Set up and share the fundraiser locally.",
+        "Combine fundraising with a sponsor or grant."
+      ],
+      "source": null
+    },
+    {
+      "id": "sponsor",
+      "name": "Local sponsor",
+      "short": "A local company funds the court and showcases its brand.",
+      "level": 1,
+      "who": [
+        "resident",
+        "ngo",
+        "school"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new"
+      ],
+      "submits": "No formal application — start a conversation",
+      "amount": "To be agreed with the company",
+      "timing": {
+        "kind": "always",
+        "text": "Any time"
+      },
+      "own": "No",
+      "weDo": "We look for a company interested in supporting your area and prepare a proposal.",
+      "steps": [
+        "Send us your location.",
+        "We show it to companies seeking such projects.",
+        "If a company agrees, we develop the project together."
+      ],
+      "source": null
+    },
+    {
+      "id": "male-granty",
+      "name": "Small municipal grants",
+      "short": "A quick municipal grant without a major competition.",
+      "level": 2,
+      "who": [
+        "ngo"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "vision"
+      ],
+      "submits": "Non-governmental organisation",
+      "amount": "Up to PLN 10,000; project duration up to 90 days",
+      "timing": {
+        "kind": "always",
+        "text": "Throughout the year while funds remain"
+      },
+      "own": "Depends on municipality",
+      "weDo": "A project tailored to budget and schedule.",
+      "steps": [
+        "Ask about small grants (Article 19a).",
+        "Prepare a short proposal with our quotation.",
+        "Complete the project within 90 days."
+      ],
+      "source": {
+        "label": "Public Benefit and Volunteer Work Act, Article 19a",
+        "url": "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20030960873"
+      }
+    },
+    {
+      "id": "orlen",
+      "name": "ORLEN Foundation — Moje miejsce na Ziemi",
+      "short": "Corporate grants for local communities, including sport.",
+      "level": 2,
+      "who": [
+        "ngo",
+        "school"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new"
+      ],
+      "submits": "Association, foundation, rural women's association, volunteer fire brigade or school",
+      "amount": "PLN 10,000–25,000 in recent editions",
+      "timing": {
+        "kind": "unconfirmed",
+        "text": "2026 edition unconfirmed; previous calls closed at end of July"
+      },
+      "own": "Depends on rules",
+      "weDo": "Description, visualisation and quotation for the application.",
+      "steps": [
+        "Check programme website for an open call.",
+        "Find an organisation to apply.",
+        "Attach our visualisation and quotation."
+      ],
+      "source": {
+        "label": "mojemiejscenaziemi.pl",
+        "url": "https://mojemiejscenaziemi.pl/"
+      }
+    },
+    {
+      "id": "enea",
+      "name": "Enea Foundation — Zielona społeczność",
+      "short": "Grants for greening and revitalising shared spaces.",
+      "level": 2,
+      "who": [
+        "ngo",
+        "school"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "vision"
+      ],
+      "submits": "Association, foundation, school or cultural institution",
+      "amount": "Check the rules",
+      "timing": {
+        "kind": "unconfirmed",
+        "text": "2026 edition announced — check deadline and area"
+      },
+      "own": "Depends on rules",
+      "weDo": "Court design incorporating greenery and quotation.",
+      "steps": [
+        "Check whether your area is covered.",
+        "Plan the court with greenery.",
+        "Apply with our visualisation."
+      ],
+      "source": {
+        "label": "Zielona społeczność 2026",
+        "url": "https://www.kolektywaktywnemiasto.pl/zielona-spolecznosc/edycja-2026/"
+      }
+    },
+    {
+      "id": "leader",
+      "name": "LEADER — Local Action Group",
+      "short": "EU funding for publicly accessible rural courts.",
+      "level": 2,
+      "who": [
+        "ngo",
+        "school"
+      ],
+      "area": [
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new"
+      ],
+      "submits": "Association, foundation or municipality (depends on LAG)",
+      "amount": "Up to PLN 500,000 per beneficiary over programme period",
+      "timing": {
+        "kind": "yearly",
+        "text": "Each LAG has its own call dates"
+      },
+      "own": "Yes",
+      "weDo": "Technical documentation, quotation and visualisation.",
+      "steps": [
+        "Find your municipality's LAG.",
+        "Check recreational infrastructure calls.",
+        "Apply with our documentation."
+      ],
+      "source": {
+        "label": "Example 2026 LAG call",
+        "url": "https://partnerstwo5gmin.pl/index.php/ps-wpr/nabory-konkursy/nabor-nr-1-2026"
+      }
+    },
+    {
+      "id": "opp",
+      "name": "1.5% tax allocation",
+      "short": "People allocate part of their tax to your organisation.",
+      "level": 2,
+      "who": [
+        "ngo"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new"
+      ],
+      "submits": "Public benefit organisation (OPP)",
+      "amount": "Whatever taxpayers allocate",
+      "timing": {
+        "kind": "yearly",
+        "text": "Personal income tax returns due by 30 April"
+      },
+      "own": "No",
+      "weDo": "Visualisation for a campaign to allocate 1.5% to your court.",
+      "steps": [
+        "Ensure you have OPP status.",
+        "Show a specific goal with a visualisation.",
+        "Collect over subsequent years if needed."
+      ],
+      "source": null
+    },
+    {
+      "id": "msit-wojewodztwa",
+      "name": "Sports Infrastructure Development Programme (MSiT)",
+      "short": "Major ministry programme for construction and modernisation.",
+      "level": 3,
+      "who": [
+        "ngo",
+        "school",
+        "company"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new"
+      ],
+      "submits": "Municipality, county and, since 2026, associations, foundations and companies",
+      "amount": "Up to 60% of costs; 2026 budget: PLN 400 million",
+      "timing": {
+        "kind": "yearly",
+        "text": "2026 call: 21 January–15 March",
+        "next": "Indicatively early 2027"
+      },
+      "own": "Yes, at least 40%",
+      "weDo": "Documentation, specifications and investment estimate.",
+      "steps": [
+        "Establish the applicant and land-use rights.",
+        "Prepare documentation with us in autumn.",
+        "Apply when the call opens."
+      ],
+      "source": {
+        "label": "Ministry of Sport and Tourism",
+        "url": "https://www.gov.pl/web/sport/program-rozwoju-infrastruktury-sportowej-w-wojewodztwach--edycja-2026"
+      }
+    },
+    {
+      "id": "moje-boisko",
+      "name": "Moje Boisko — Orlik modernisation",
+      "short": "Funding to renovate existing Orlik courts.",
+      "level": 3,
+      "who": [
+        "school",
+        "resident"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate"
+      ],
+      "submits": "Municipality (a resident may initiate the project)",
+      "amount": "At least PLN 100,000 per facility",
+      "timing": {
+        "kind": "yearly",
+        "text": "2026 call: 18 February–31 March",
+        "next": "Indicatively early 2027"
+      },
+      "own": "Yes",
+      "weDo": "Surface assessment, renovation design and cost estimate.",
+      "steps": [
+        "Show us the Orlik needing renovation.",
+        "Take our proposal to the municipality or councillor.",
+        "The municipality submits the application."
+      ],
+      "source": {
+        "label": "Orlik 2026 programme (PDF)",
+        "url": "https://www.gov.pl/web/sport/program-modernizacji-kompleksow-sportowych-moje-boisko---orlik-2012-edycja-2026"
+      }
+    },
+    {
+      "id": "orly",
+      "name": "Orły — full-size pitches",
+      "short": "Ministry programme for large football pitches.",
+      "level": 3,
+      "who": [
+        "school",
+        "ngo"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "new"
+      ],
+      "submits": "Municipality or club, according to edition rules",
+      "amount": "Up to 60% of costs",
+      "timing": {
+        "kind": "yearly",
+        "text": "2026 call: January–March",
+        "next": "Indicatively early 2027"
+      },
+      "own": "Yes",
+      "weDo": "Surface design and cost estimate.",
+      "steps": [
+        "Check next edition's rules.",
+        "Agree with municipality or club who applies.",
+        "Prepare documentation with us."
+      ],
+      "source": {
+        "label": "Ministry of Sport and Tourism — Orły",
+        "url": "https://www.gov.pl/web/sport/czas-na-orly-ponad-300-mln-zl-na-dofinansowanie-budowy-pelnowymiarowych-boisk-pilkarskich"
+      }
+    },
+    {
+      "id": "solectwa-wojewodztwo",
+      "name": "Regional programmes for villages",
+      "short": "Regional authorities contribute to village-selected projects.",
+      "level": 3,
+      "who": [
+        "resident",
+        "school"
+      ],
+      "area": [
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new"
+      ],
+      "submits": "Municipality at the village's request",
+      "amount": "Example: Mazovia, PLN 10,000 per task",
+      "timing": {
+        "kind": "check",
+        "text": "Mazovia: 2026 call ran 24 Nov–12 Dec 2025 — check 2027 edition"
+      },
+      "own": "Yes, e.g. from village fund",
+      "weDo": "Quotation and visualisation for village and municipality.",
+      "steps": [
+        "Check your region's programme.",
+        "Ask the village head to propose the court.",
+        "Combine with the village fund."
+      ],
+      "source": {
+        "label": "Mazowsze dla sołectw",
+        "url": "https://bip.mazovia.pl/pl/bip/komunikaty/mazowsze-dla-solectw-2026-rusza-nabor-wnioskow.html"
+      }
+    },
+    {
+      "id": "adoptuj",
+      "name": "Adopt a location",
+      "short": "Choose a site suggested by residents and fund a branded court.",
+      "level": 1,
+      "who": [
+        "company"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new",
+        "vision"
+      ],
+      "submits": "Company",
+      "amount": "From painting existing concrete to a complete court",
+      "timing": {
+        "kind": "always",
+        "text": "Any time"
+      },
+      "own": "—",
+      "weDo": "Site selection, branded design, delivery, social media photos and videos.",
+      "steps": [
+        "Tell us where your company operates.",
+        "We show locations suggested nearby.",
+        "We design, build and open the court with residents."
+      ],
+      "source": null
+    },
+    {
+      "id": "wspolfinansowanie",
+      "name": "Co-fund a grant",
+      "short": "Contribute the missing share of a school, club or municipal grant.",
+      "level": 2,
+      "who": [
+        "company"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new"
+      ],
+      "submits": "Company with an organisation or municipality",
+      "amount": "Usually 20–40% of project value",
+      "timing": {
+        "kind": "always",
+        "text": "Ideally before the grant call"
+      },
+      "own": "—",
+      "weDo": "We connect you with an organisation preparing an application.",
+      "steps": [
+        "Tell us your intended contribution.",
+        "We match you with a project and partner.",
+        "Your brand appears on the court and in communications."
+      ],
+      "source": null
+    },
+    {
+      "id": "studio",
+      "name": "Design and order",
+      "short": "Design in Studio, see the result and request a quotation.",
+      "level": 1,
+      "who": [
+        "private",
+        "company",
+        "school",
+        "ngo"
+      ],
+      "area": [
+        "city",
+        "village"
+      ],
+      "need": [
+        "renovate",
+        "new",
+        "vision"
+      ],
+      "submits": "You",
+      "amount": "Quotation for your location",
+      "timing": {
+        "kind": "always",
+        "text": "Any time"
+      },
+      "own": "—",
+      "weDo": "Structure and surface selection, quotation and installation.",
+      "steps": [
+        "Design a court in Studio.",
+        "Send us the design.",
+        "Receive a quotation for your location."
+      ],
+      "source": {
+        "label": "Gamefields Studio",
+        "url": "/konfigurator-boisk/"
+      }
+    }
+  ]
+}

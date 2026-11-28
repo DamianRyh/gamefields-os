@@ -1,0 +1,16 @@
+{
+  "reviewOnly": true,
+  "tools": 19,
+  "options": 10,
+  "levels": 3,
+  "uiStringReplacements": 27,
+  "sourceDate": "2026-11-18",
+  "unchangedIdsEligibilityAndUrls": true,
+  "polishContactPayloadRetained": true,
+  "consentScriptAttributesPreserved": true,
+  "limitations": [
+    "No browser QA or fresh funding verification.",
+    "Competition and other inline scripts still pending.",
+    "English review only, not publishable."
+  ]
+}
