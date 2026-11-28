@@ -1,23 +1,29 @@
-Polecenie dla ChatGPT: strona główna, nowa sekcja „Jeden plac. Każda gra.” (nawierzchnie pod 9 dyscyplin), 28.11.2026
+Polecenie dla ChatGPT: strona główna, nowa sekcja „Jeden plac. Każda gra.” (nawierzchnie pod 9 dyscyplin, malowane we wzorach), 28.11.2026
 
 Cel: pokazać, że Gamefields robi nie tylko areny do panny i 3 na 3, ale też PODŁOŻA pod inne sporty
-(koszykówka 3×3 i pełna, padel, pickleball, teqball, siatkówka, tenis, futsal, piłka 3×3): płyta, nawierzchnia, linie.
-Bez wyposażenia (kosze, siatki, stoły, obudowy nie są w ofercie). Motywu NIE ruszaj.
+(koszykówka 3×3 i pełna, padel, pickleball, teqball, siatkówka, tenis, futsal, piłka 3×3): płyta, nawierzchnia albo
+malowany wzór Gamefields, linie. Bez wyposażenia. Motywu NIE ruszaj.
 
-Strona główna (ID 3462): DODAJ JEDEN NOWY blok, nic nie usuwaj i nie zmieniaj innych bloków.
-- nowy blok Własny HTML z pliku:
-  https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/bloki/sporty.html  (SHA-256 zaczyna się od: dab3a87fa7926297)
-  Plik zawiera <!-- wp:html --> i <!-- /wp:html --> oraz znacznik <!-- gf-blok: sporty -->.
-- Miejsce: zaraz PO bloku z <!-- gf-blok: naglowek --> (baner „Gra zmienia miejsce.”), PRZED blokiem z <!-- gf-blok: boiska -->.
-- W środku jest tekst „__GFAND__”: NIE zamieniaj go, NIE formatuj kodu, wklej plik dokładnie tak, jak jest.
+Strona główna (ID 3462): DWIE zmiany w jednym szkicu (muszą wejść razem: obie sekcje używają wspólnego silnika wzorów).
+1. DODAJ nowy blok Własny HTML (sekcja „sporty”):
+   https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/bloki/sporty.html  (SHA-256 zaczyna się od: e3443d2eaa124c6c)
+   Miejsce: zaraz PO bloku z <!-- gf-blok: naglowek --> (baner „Gra zmienia miejsce.”), PRZED blokiem z <!-- gf-blok: boiska -->.
+2. PODMIEŃ cały blok z <!-- gf-blok: wzory --> (sekcja „Szary plac. Twój wzór.”) na nową wersję:
+   https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/wzory-2026-11/bloki-eksplorator/wzory.html  (SHA-256 zaczyna się od: 9ec8a31b14006fe3)
+   Wygląda i działa tak samo; zmiana techniczna: silnik wzorów jest teraz wspólny dla obu sekcji.
+Oba pliki zawierają <!-- wp:html --> i <!-- /wp:html -->. W środku jest tekst „__GFAND__”: NIE zamieniaj go,
+NIE formatuj kodu, wklej pliki dokładnie tak, jak są. Innych bloków nie ruszaj.
 
 Kroki:
-1. Kopia strony głównej, potem szkic z nowym blokiem i porównanie (doszedł tylko blok „sporty”, reszta bez zmian).
-2. Podgląd szkicu na komputerze i telefonie, sekcja „Jeden plac. Każda gra.”:
-   - na ciemnej scenie płyta z liniami „Koszykówka 3×3” (linie się rysują), obok sylwetka człowieka;
-   - kliknięcie innej gry (np. Padel, Tenis) zmienia płytę, linie, wymiary i cenę „od … zł netto”;
-   - wpisanie placu 25 × 15 m: napis „6 z 9 gier mieści się”, gry, które się nie mieszczą, są przygaszone;
-   - „Kilka gier na jednym placu”: zaznaczenie i wybór 2–3 gier rysuje ich linie w różnych kolorach na jednej płycie;
-   - „Zaprojektuj: …” otwiera Studio z tą nawierzchnią (adres /studio/?surface=…);
-   - brak przewijania w bok, konsola bez błędów.
+1. Kopia strony głównej, potem szkic z obiema zmianami i porównanie (doszedł blok „sporty”, zmienił się blok „wzory”, reszta bez zmian).
+2. Podgląd szkicu na komputerze i telefonie:
+   a) „Jeden plac. Każda gra.”:
+   - jasna scena, płyta w perspektywie z polem gry pomalowanym wzorem (Pasiak) i liniami koszykówki 3×3;
+   - zakładki z rysunkami linii zmieniają grę (Padel, Tenis…), linie się rysują, karta pokazuje wymiary i dwie ceny:
+     „Jednolity kolor” i „Ze wzorem Gamefields”;
+   - miniatury „Wzór na polu gry”, „Kolory” i „Losuj wzór” zmieniają malowanie pola; przy Padlu (trawa) wzór jest wyłączony;
+   - „Mój plac” 25 × 15: „6 z 9 gier się zmieści”, gry, które się nie mieszczą, są przygaszone;
+   - „Zaprojektuj w Studio” otwiera Studio z tą nawierzchnią (adres /studio/?surface=…).
+   b) „Szary plac. Twój wzór.” działa jak dotąd (kolekcje, suwak przed/po, palety, Studio).
+   c) Brak przewijania w bok, konsola bez błędów.
 3. Po akceptacji właściciela opublikuj i wyczyść cache (LiteSpeed, Cloudflare jeśli jest). Niczego nie usuwaj.

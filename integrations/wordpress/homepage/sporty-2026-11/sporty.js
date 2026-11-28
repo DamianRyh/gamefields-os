@@ -1,36 +1,41 @@
-/* "Jeden plac. Każda gra." (28.11.2026): sport surfaces on the homepage. Data in #gsp-data comes from the Studio's
-   sport-surfaces/catalog.json (field and surface sizes, colours) and the offer files (prices). Lines follow the
-   Studio's SportSurfaceLines (components/sport-surface-art.tsx), in metres. Gamefields builds the surface only:
-   base, finish and lines; equipment is not part of the offer. */
+/* "Jeden plac. Każda gra." (28.11.2026, v2): sport surfaces painted in Gamefields patterns.
+   Data in #gsp-data: sizes and colours from the Studio's sport-surfaces/catalog.json, prices from the offer files,
+   curated patterns from the Studio's pattern library. The pattern engine is window.GFW (the Studio's
+   court-art-pro.mjs, shared with the "wzory" block); without it the section shows plain colours.
+   Lines follow the Studio's SportSurfaceLines (components/sport-surface-art.tsx), in metres.
+   Gamefields builds the surface only: base, finish or painted pattern, lines; no equipment. */
 (function () {
   'use strict';
   var root = document.getElementById('sporty');
   if (!root) return;
+  var G = window.GFW || null;
   var D = JSON.parse(document.getElementById('gsp-data').textContent);
   var S = {};
   D.sports.forEach(function (s) { S[s.id] = s; });
+  var PAL = {};
+  if (G) G.PRO_PALETTES.forEach(function (p) { PAL[p.id] = p; });
   var $ = function (q) { return root.querySelector(q); };
-  var NS = 'http://www.w3.org/2000/svg';
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var st = { id: D.sports[0].id, multi: false, picked: [D.sports[0].id], plot: null };
-  var INK = ['#FFFFFF', '#D8F24A', '#FF8A5B'];
+  var st = { id: D.sports[0].id, pat: G ? 0 : -1, pal: G ? D.patterns[0].paletteId : '', v: D.patterns[0].variant, plot: null };
+  var uid = 0;
 
   function zl(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' zł'; }
   function m(n) { return (Math.round(n * 100) / 100).toString().replace('.', ','); }
   function up100(x) { return Math.ceil(Math.round(x * 100) / 10000) * 100; }
-  function price(s) {
+  function prices(s) {
     var a = Math.round(s.length * s.width * 1.1 * 10) / 10;
-    return { area: a, base: up100(a * D.baseRate), finish: up100(a * s.finishFrom), total: up100(a * D.baseRate) + up100(a * s.finishFrom) };
+    var base = up100(a * D.baseRate);
+    return { area: a, plain: base + up100(a * s.finishFrom), pattern: s.paintable ? base + up100(a * D.patternRate) : null };
   }
 
-  /* court lines in metres, origin at the field's corner (same geometry as the Studio) */
+  /* court lines in metres from the field's corner (same geometry as the Studio) */
   function lines(s) {
     var L = s.fieldLength, W = s.fieldWidth, o = [];
     function ln(a, b, c, d) { o.push('M' + a + ' ' + b + 'L' + c + ' ' + d); }
     function circ(cx, cy, r) { o.push('M' + (cx - r) + ' ' + cy + 'a' + r + ' ' + r + ' 0 1 0 ' + 2 * r + ' 0a' + r + ' ' + r + ' 0 1 0 ' + -2 * r + ' 0'); }
     function rect(x, y, w, h) { o.push('M' + x + ' ' + y + 'h' + w + 'v' + h + 'h' + -w + 'Z'); }
     function mirror(fn) { fn(function (x) { return x; }, function (y) { return y; }); fn(function (x) { return L - x; }, function (y) { return W - y; }); }
-    rect(0.025, 0.025, L - 0.05, W - 0.05);
+    rect(0.04, 0.04, L - 0.08, W - 0.08);
     if (s.id === 'teqball') { ln(L / 2, 0, L / 2, W); ln(L / 2 - 3.5, 0, L / 2 - 3.5, W); ln(L / 2 + 3.5, 0, L / 2 + 3.5, W); }
     if (s.id === 'tennis') { ln(L / 2, 0, L / 2, W); ln(0, 1.37, L, 1.37); ln(0, W - 1.37, L, W - 1.37); ln(L / 2 - 6.4, 1.37, L / 2 - 6.4, W - 1.37); ln(L / 2 + 6.4, 1.37, L / 2 + 6.4, W - 1.37); ln(L / 2 - 6.4, W / 2, L / 2 + 6.4, W / 2); }
     if (s.id === 'padel') { ln(10, 0, 10, W); ln(3.05, 0, 3.05, W); ln(16.95, 0, 16.95, W); ln(3.05, 5, 16.95, 5); }
@@ -60,117 +65,121 @@
     }
     return o.join('');
   }
-  function fieldOffset(s) { return { x: (s.length - s.fieldLength) / 2, y: typeof s.fieldOffsetY === 'number' ? s.fieldOffsetY : (s.width - s.fieldWidth) / 2 }; }
+  function fieldPos(s) { return { x: (s.length - s.fieldLength) / 2, y: typeof s.fieldOffsetY === 'number' ? s.fieldOffsetY : (s.width - s.fieldWidth) / 2 }; }
+  function sorted(cs) { return cs.slice().sort(function (a, b) { return G.lightness(a) - G.lightness(b); }); }
 
-  /* stage: one SVG in metres, fixed scale = the largest surface, so sizes compare honestly */
-  var svg = $('[data-gsp-svg]');
-  var MAXL = 0, MAXW = 0;
-  D.sports.forEach(function (s) { MAXL = Math.max(MAXL, s.length); MAXW = Math.max(MAXW, s.width); });
-  var PAD = 2.5;
-  svg.setAttribute('viewBox', [-PAD, -PAD, MAXL + 2 * PAD, MAXW + 2 * PAD].join(' '));
-  function el(tag, attrs) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
-  var gPlot = el('g', {}), gSlab = el('g', {}), gLines = el('g', {}), gMan = el('g', {});
-  svg.appendChild(gPlot); svg.appendChild(gSlab); svg.appendChild(gLines); svg.appendChild(gMan);
-
-  function slabFor(ids) {
-    var L = 0, W = 0;
-    ids.forEach(function (id) { L = Math.max(L, S[id].length); W = Math.max(W, S[id].width); });
-    return { L: L, W: W };
+  /* the slab: run-off zone, painted field, lines; everything in metres */
+  function slabSvg(s, painted, anim) {
+    var f = fieldPos(s), cs = painted ? PAL[st.pal].colors : null;
+    var zone = painted ? sorted(cs)[0] : s.zone;
+    var lc = painted ? G.recommendLineColor(cs) : '#FFFFFF';
+    var field;
+    if (painted) {
+      uid += 1;
+      var h = Math.round(600 * s.fieldWidth / s.fieldLength);
+      field = '<svg x="' + f.x + '" y="' + f.y + '" width="' + s.fieldLength + '" height="' + s.fieldWidth + '" viewBox="0 0 600 ' + h + '" preserveAspectRatio="none">' +
+        G.renderPro(D.patterns[st.pat].familyId, st.v, h, cs, { uid: 'gsp' + uid }) + '</svg>';
+    } else field = '<rect x="' + f.x + '" y="' + f.y + '" width="' + s.fieldLength + '" height="' + s.fieldWidth + '" fill="' + s.base + '"/>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + s.length + ' ' + s.width + '" preserveAspectRatio="none" aria-hidden="true">' +
+      '<rect width="' + s.length + '" height="' + s.width + '" fill="' + zone + '"/>' + field +
+      '<path d="' + lines(s) + '" transform="translate(' + f.x + ' ' + f.y + ')" fill="none" stroke="' + lc + '" stroke-width="' + Math.max(0.08, s.length / 260) + '" stroke-linejoin="round" pathLength="1"' + (anim ? ' class="gsp-draw"' : '') + '/></svg>';
   }
-  function draw() {
-    var ids = st.multi ? st.picked : [st.id];
-    var slab = slabFor(ids), main = S[ids[0]];
-    var ox = (MAXL - slab.L) / 2, oy = (MAXW - slab.W) / 2;
-    gSlab.innerHTML = ''; gLines.innerHTML = ''; gMan.innerHTML = ''; gPlot.innerHTML = '';
-    gSlab.appendChild(el('rect', { x: ox, y: oy + 0.35, width: slab.L, height: slab.W, fill: 'rgba(0,0,0,.35)', rx: 0.2 }));
-    gSlab.appendChild(el('rect', { x: ox, y: oy, width: slab.L, height: slab.W, fill: main.zone, rx: 0.15, class: 'gsp-slab' }));
-    ids.forEach(function (id, i) {
-      var s = S[id], f = fieldOffset(s);
-      var fx = ox + (slab.L - s.length) / 2 + f.x, fy = oy + (slab.W - s.width) / 2 + f.y;
-      if (i === 0) gSlab.appendChild(el('rect', { x: fx, y: fy, width: s.fieldLength, height: s.fieldWidth, fill: s.base }));
-      var p = el('path', { d: lines(s), transform: 'translate(' + fx + ' ' + fy + ')', fill: 'none', stroke: st.multi ? INK[i] : '#FFFFFF', 'stroke-width': 0.09, 'stroke-linejoin': 'round', 'vector-effect': 'none', pathLength: 1, class: reduced ? '' : 'gsp-draw' });
-      gLines.appendChild(p);
+
+  /* sport tabs with a small line drawing */
+  var tabs = $('[data-gsp-tabs]');
+  D.sports.forEach(function (s) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.dataset.id = s.id; b.setAttribute('role', 'tab');
+    var f = fieldPos(s);
+    b.innerHTML = '<svg viewBox="-0.5 -0.5 ' + (s.length + 1) + ' ' + (s.width + 1) + '" aria-hidden="true"><rect width="' + s.length + '" height="' + s.width + '" rx="' + s.length / 40 + '" class="z"/><path d="' + lines(s) + '" transform="translate(' + f.x + ' ' + f.y + ')" fill="none" stroke-width="' + s.length / 34 + '"/></svg><span>' + s.name + '</span>';
+    b.addEventListener('click', function () { st.id = s.id; paint(true); });
+    tabs.appendChild(b);
+  });
+
+  /* patterns and palettes */
+  var patBox = $('[data-gsp-pats]'), palBox = $('[data-gsp-pals]');
+  if (G) {
+    var none = document.createElement('button');
+    none.type = 'button'; none.className = 'plain'; none.title = 'Jednolity kolor'; none.innerHTML = '<span>Kolor</span>';
+    none.addEventListener('click', function () { st.pat = -1; paint(false); });
+    patBox.appendChild(none);
+    D.patterns.forEach(function (p, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.title = p.name;
+      uid += 1;
+      b.innerHTML = '<svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + G.renderPro(p.familyId, p.variant, 400, PAL[p.paletteId].colors, { uid: 'gspt' + uid }) + '</svg>';
+      b.setAttribute('aria-label', 'Wzór ' + p.name);
+      b.addEventListener('click', function () { st.pat = i; st.v = p.variant; st.pal = p.paletteId; paint(false); });
+      patBox.appendChild(b);
     });
-    /* a 1.8 m person for scale, next to the slab */
-    var mx = ox + slab.L + 0.8, my = oy + slab.W - 1.8;
-    if (mx + 0.6 > MAXL + PAD) mx = ox - 1.4;
-    gMan.appendChild(el('circle', { cx: mx + 0.3, cy: my + 0.22, r: 0.22, fill: '#F4F1EE' }));
-    gMan.appendChild(el('rect', { x: mx + 0.08, y: my + 0.5, width: 0.44, height: 1.3, rx: 0.18, fill: '#F4F1EE' }));
-    /* the visitor's plot, dashed, centred on the slab */
-    if (st.plot) {
-      var pl = st.plot;
-      gPlot.appendChild(el('rect', { x: (MAXL - pl.L) / 2, y: (MAXW - pl.W) / 2, width: pl.L, height: pl.W, fill: 'rgba(216,242,74,.08)', stroke: '#D8F24A', 'stroke-width': 0.12, 'stroke-dasharray': '0.5 0.35' }));
-    }
-    info(ids, slab);
-  }
+    D.palettes.forEach(function (id) {
+      var p = PAL[id]; if (!p) return;
+      var b = document.createElement('button');
+      b.type = 'button'; b.title = p.name; b.dataset.id = id; b.setAttribute('aria-label', 'Kolory ' + p.name);
+      b.innerHTML = '<i>' + p.colors.map(function (c) { return '<b style="background:' + c + '"></b>'; }).join('') + '</i>';
+      b.addEventListener('click', function () { if (st.pat < 0) st.pat = 0; st.pal = id; paint(false); });
+      palBox.appendChild(b);
+    });
+    $('[data-gsp-shuffle]').addEventListener('click', function () {
+      st.pat = Math.floor(Math.random() * D.patterns.length);
+      st.v = 1 + Math.floor(Math.random() * 12);
+      st.pal = D.palettes[Math.floor(Math.random() * D.palettes.length)];
+      paint(false);
+    });
+  } else root.classList.add('gsp-noeng');
 
   function fits(s) { if (!st.plot) return null; var a = st.plot.L, b = st.plot.W; return (s.length <= a + 1e-6 ? s.width <= b + 1e-6 : false) || (s.length <= b + 1e-6 ? s.width <= a + 1e-6 : false); }
 
-  var chips = $('[data-gsp-chips]');
-  D.sports.forEach(function (s) {
-    var b = document.createElement('button');
-    b.type = 'button'; b.dataset.id = s.id;
-    b.innerHTML = '<b>' + s.name + '</b><small>' + m(s.length) + ' × ' + m(s.width) + ' m</small>';
-    b.addEventListener('click', function () {
-      if (st.multi) {
-        var i = st.picked.indexOf(s.id);
-        if (i > -1) { if (st.picked.length > 1) st.picked.splice(i, 1); }
-        else { st.picked.push(s.id); if (st.picked.length > 3) st.picked.shift(); }
-        st.id = st.picked[0];
-      } else { st.id = s.id; st.picked = [s.id]; }
-      paintChips(); draw();
+  /* the slab keeps the sport's proportions and fills the stage */
+  var stage = $('[data-gsp-stage]'), slab = $('[data-gsp-slab]');
+  function fitSlab() {
+    var s = S[st.id], r = $('[data-gsp-floor]').getBoundingClientRect();
+    var maxW = r.width * 0.86, maxH = (r.height > 120 ? r.height : r.width * 0.7) * 0.8;
+    var w = Math.min(maxW, maxH * s.length / s.width);
+    slab.style.width = Math.round(w) + 'px';
+    slab.style.height = Math.round(w * s.width / s.length) + 'px';
+  }
+  window.addEventListener('resize', fitSlab);
+
+  function paint(anim) {
+    var s = S[st.id];
+    var painted = G ? (st.pat > -1 ? s.paintable : false) : false;
+    slab.innerHTML = slabSvg(s, painted, anim ? !reduced : false);
+    fitSlab();
+    root.style.setProperty('--gsp-tone', painted ? sorted(PAL[st.pal].colors)[0] : s.base);
+    [].forEach.call(tabs.children, function (b) {
+      b.setAttribute('aria-selected', String(b.dataset.id === st.id));
+      var f = fits(S[b.dataset.id]);
+      b.classList.toggle('no', f === false); b.classList.toggle('ok', f === true);
     });
-    chips.appendChild(b);
-  });
-  function paintChips() {
-    [].forEach.call(chips.children, function (b) {
-      var on = st.picked.indexOf(b.dataset.id) > -1, f = fits(S[b.dataset.id]);
-      b.setAttribute('aria-pressed', String(on));
-      b.classList.toggle('no', f === false);
-      b.classList.toggle('ok', f === true);
-      var i = st.picked.indexOf(b.dataset.id);
-      b.style.setProperty('--ink', st.multi ? (i > -1 ? INK[i] : 'transparent') : 'transparent');
-    });
+    [].forEach.call(patBox.children, function (b, i) { b.setAttribute('aria-pressed', String(i - 1 === st.pat)); });
+    [].forEach.call(palBox.children, function (b) { b.setAttribute('aria-pressed', String(st.pat > -1 ? b.dataset.id === st.pal : false)); });
+    root.classList.toggle('gsp-turf', !s.paintable);
+    var p = prices(s);
+    $('[data-gsp-name]').textContent = s.name;
+    $('[data-gsp-dims]').textContent = 'pole ' + m(s.fieldLength) + ' × ' + m(s.fieldWidth) + ' m · nawierzchnia ' + m(s.length) + ' × ' + m(s.width) + ' m · ' + m(p.area) + ' m² do wyceny';
+    $('[data-gsp-plain]').textContent = zl(p.plain);
+    $('[data-gsp-plainlabel]').textContent = s.paintable ? 'Jednolity kolor (' + s.materialShort + ')' : 'Nawierzchnia (' + s.materialShort + ')';
+    $('[data-gsp-pattern]').textContent = p.pattern ? zl(p.pattern) : 'bez malowanego wzoru';
+    $('[data-gsp-rowpat]').classList.toggle('on', painted);
+    $('[data-gsp-rowplain]').classList.toggle('on', !painted);
+    $('[data-gsp-tag]').textContent = painted ? D.patterns[st.pat].name + ' · ' + PAL[st.pal].name + ' · kompozycja ' + st.v : (s.paintable ? 'Jednolity kolor' : 'Sztuczna trawa: kolor trawy, bez malowanego wzoru');
+    var q = 'surface=' + s.id + (painted ? '&pattern=' + D.patterns[st.pat].familyId + '&variant=' + st.v + '&palette=' + st.pal : '');
+    $('[data-gsp-studio]').href = '/studio/?' + q;
+    var fit = fits(s), fe = $('[data-gsp-fit]');
+    fe.hidden = fit === null;
+    if (fit !== null) { fe.className = 'gsp-fit ' + (fit ? 'ok' : 'no'); fe.textContent = fit ? 'Mieści się na placu ' + m(st.plot.L) + ' × ' + m(st.plot.W) + ' m' : 'Potrzeba ' + m(s.length) + ' × ' + m(s.width) + ' m'; }
   }
 
-  function info(ids, slab) {
-    var s = S[ids[0]];
-    var size = st.multi ? { length: slab.L, width: slab.W, finishFrom: Math.max.apply(null, ids.map(function (id) { return S[id].finishFrom; })) } : s;
-    var p = price(size);
-    $('[data-gsp-name]').textContent = st.multi ? ids.map(function (id) { return S[id].name; }).join(' + ') : s.name;
-    $('[data-gsp-field]').textContent = st.multi ? 'jedna płyta, linie ' + ids.length + ' gier w różnych kolorach' : 'pole ' + m(s.fieldLength) + ' × ' + m(s.fieldWidth) + ' m';
-    $('[data-gsp-surface]').textContent = m(size.length) + ' × ' + m(size.width) + ' m';
-    $('[data-gsp-area]').textContent = m(p.area) + ' m²';
-    $('[data-gsp-mat]').textContent = st.multi ? 'akryl sportowy' : s.materialLabel;
-    $('[data-gsp-price]').textContent = 'od ' + zl(p.total) + ' netto';
-    $('[data-gsp-split]').textContent = 'płyta ' + zl(p.base) + ' + ' + (st.multi ? 'nawierzchnia' : s.materialShort) + ' ' + zl(p.finish);
-    $('[data-gsp-note]').textContent = st.multi ? 'Wspólna płyta o wymiarach największej gry. Kolory linii ustalimy tak, żeby każda gra była czytelna.' : s.note;
-    $('[data-gsp-studio]').href = '/studio/?surface=' + s.id;
-    $('[data-gsp-studio]').textContent = 'Zaprojektuj: ' + s.name + ' ↗';
-    var f = fits(size);
-    var fitEl = $('[data-gsp-fit]');
-    fitEl.hidden = f === null;
-    if (f !== null) {
-      fitEl.className = 'gsp-fit ' + (f ? 'ok' : 'no');
-      fitEl.textContent = f ? 'Mieści się na Twoim placu ' + m(st.plot.L) + ' × ' + m(st.plot.W) + ' m' : 'Potrzeba ' + m(size.length) + ' × ' + m(size.width) + ' m z wybiegami, plac ma ' + m(st.plot.L) + ' × ' + m(st.plot.W) + ' m';
-    }
-  }
-
-  $('[data-gsp-multi]').addEventListener('change', function (e) {
-    st.multi = e.target.checked;
-    if (!st.multi) st.picked = [st.id];
-    root.classList.toggle('gsp-is-multi', st.multi);
-    paintChips(); draw();
-  });
   function readPlot() {
     var a = parseFloat(String($('[data-gsp-l]').value).replace(',', '.')), b = parseFloat(String($('[data-gsp-w]').value).replace(',', '.'));
     st.plot = a > 0 ? (b > 0 ? { L: Math.max(a, b), W: Math.min(a, b) } : null) : null;
-    $('[data-gsp-count]').textContent = st.plot ? D.sports.filter(fits).length + ' z ' + D.sports.length + ' gier mieści się' : '';
-    paintChips(); draw();
+    $('[data-gsp-count]').textContent = st.plot ? D.sports.filter(fits).length + ' z ' + D.sports.length + ' gier się zmieści' : '';
+    paint(false);
   }
   $('[data-gsp-l]').addEventListener('input', readPlot);
   $('[data-gsp-w]').addEventListener('input', readPlot);
 
   root.classList.add('gsp-ready');
-  paintChips(); draw();
+  paint(true);
 })();
