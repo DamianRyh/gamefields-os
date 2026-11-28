@@ -25,9 +25,9 @@ export function MatProductPanel({project:p,update,priced}:{project:Project;updat
  const net=matNet(p,variant)+(drills.length?matPrintNet(p):0),gross=Math.round(net*1.23);
  // Ready formats with drills can go to the cart; own sizes (or a mat without drills) go by inquiry with the same price.
  const line={product:preset?product:{...product,published:false},value,qty,price:preset?(product.variants?.find(v=>v.value===value)?.price??gross):gross};
- const note=`Mata treningowa ${value}${drills.length?" · ćwiczenia: "+drills.map(d=>d.name).join(", "):" · bez ćwiczeń"}`;
+ const note=locale==="en"?`Training mat ${m(p.length)} × ${m(p.width)} m · ${tr(MAT_VARIANTS[variant].label)}${drills.length?" · drills: "+drills.map(d=>tr(d.name)).join(", "):" · no drills"}`:`Mata treningowa ${value}${drills.length?" · ćwiczenia: "+drills.map(d=>d.name).join(", "):" · bez ćwiczeń"}`;
  return <section className="studio-mat-panel" aria-label={tr("Mata treningowa")}>
-  {big.length?<p className="studio-mat-warning" role="alert">{tr("Nie mieści się na macie")} {m(p.length)} × {m(p.width)} m: {big.map(b=>`${b.name} (${m(b.w)} × ${m(b.h)} m)`).join(", ")}. {tr("Zmniejsz liczbę pachołków albo odstępy w ustawieniach ćwiczenia lub powiększ matę.")}</p>:null}
+  {big.length?<p className="studio-mat-warning" role="alert">{tr("Nie mieści się na macie")} {m(p.length)} × {m(p.width)} m: {big.map(b=>`${tr(b.name)} (${m(b.w)} × ${m(b.h)} m)`).join(", ")}. {tr("Zmniejsz liczbę pachołków albo odstępy w ustawieniach ćwiczenia lub powiększ matę.")}</p>:null}
   <h3>{tr("Mata treningowa")}</h3>
   <p className="studio-mat-lead">{tr("Gumowa mata z ćwiczeniami ze Studio, wysyłana w całości i gotowa do rozłożenia. Wybierz wielkość i rodzaj gumy, a ćwiczenia dodaj poniżej.")}</p>
   <fieldset className="studio-mat-sizes"><legend>{tr("Wielkość")}</legend>
@@ -43,6 +43,6 @@ export function MatProductPanel({project:p,update,priced}:{project:Project;updat
   </fieldset>
   <p className="studio-mat-print">{SHOW_PRICE_RANGE&&priced?<b>{tr("Nadruk ćwiczeń")}: +{money(matPrintNet(p))} {tr("netto")}</b>:<b>{tr("Nadruk ćwiczeń")}</b>}<small>{locale==="en"?`${rate(MAT_PRINT_NET_PER_M2)} of mat area, added when drills are included${drills.length?` (currently: ${drills.length})`:" (add them below)"}.`:`${MAT_PRINT_NET_PER_M2} zł/m² maty, doliczany, gdy na macie są ćwiczenia${matDrills(p).length?` (teraz: ${matDrills(p).length})`:" (dodaj je poniżej)"}.`}</small></p>
   <ul className="studio-mat-notes">{MAT_PRODUCT_NOTES.map(t=><li key={t}>{tr(t)}</li>)}</ul>
-  {SHOW_PRICE_RANGE&&priced?<StudioShopOrder shop={shop} lines={[line]} note={note} qty={qty} onQty={setQty} unitLabel="matę" shipping="wysyłkę wyceniamy po podaniu adresu" extra={locale==="en"?`${money(net)} excl. VAT + 23% VAT${preset?"":` · ${tr(isMatFormat(p.length,p.width)?"dodaj ćwiczenia, aby kupić od razu":"własny wymiar: zamówienie przez formularz")}`}`:`${zl(net)} netto + VAT 23%${preset?"":isMatFormat(p.length,p.width)?" · dodaj ćwiczenia, aby kupić od razu":" · własny wymiar: zamówienie przez formularz"}`}/>:null}
+  {SHOW_PRICE_RANGE&&priced?<StudioShopOrder shop={shop} lines={[line]} note={note} qty={qty} onQty={setQty} unitLabel="matę" shipping="wysyłkę wyceniamy po podaniu adresu" extra={locale==="en"?`${money(net)} excl. VAT + 23% VAT${preset?"":` · ${(isMatFormat(p.length,p.width)?"add drills to buy directly":"custom dimensions: order by enquiry")}`}`:`${zl(net)} netto + VAT 23%${preset?"":isMatFormat(p.length,p.width)?" · dodaj ćwiczenia, aby kupić od razu":" · własny wymiar: zamówienie przez formularz"}`}/>:null}
  </section>;
 }
