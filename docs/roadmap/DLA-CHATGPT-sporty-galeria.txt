@@ -1,0 +1,56 @@
+Polecenie dla ChatGPT: strona główna, sekcja „Jeden plac. Każda gra.” jako galeria (v4), 28.11.2026
+Zastępuje poprzednie polecenie DLA-CHATGPT-sporty-nawierzchnie (wersja ze sceną). Motywu NIE ruszaj.
+
+Cel: galeria 9 dyscyplin (koszykówka 3×3 i pełna, padel, pickleball, teqball, siatkówka, tenis, futsal, piłka 3×3):
+duże karty przewijane w bok, w każdej zdjęcie produktowe nawierzchni w 3 wyglądach, wymiary, ceny i „Zaprojektuj”.
+Tylko podłoże, bez wyposażenia.
+
+KROK A. Wgraj 27 zdjęć do biblioteki mediów (Media → Dodaj nowy), NAZWY PLIKÓW BEZ ZMIAN.
+Muszą trafić do folderu listopada 2026, czyli adresy mają brzmieć https://www.gamefields.eu/wp-content/uploads/2026/11/<nazwa>.
+Jeśli WordPress doda do nazwy końcówkę (np. „-1”) albo trafią do innego miesiąca, zatrzymaj się i daj znać właścicielowi.
+Pliki (folder integrations/wordpress/homepage/sporty-2026-11/renders/ w repozytorium albo ZIP od właściciela):
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-basketball-3x3-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-basketball-3x3-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-basketball-3x3-3.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-basketball-full-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-basketball-full-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-basketball-full-3.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-futsal-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-futsal-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-futsal-3.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-padel-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-padel-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-padel-3.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-pickleball-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-pickleball-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-pickleball-3.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-street-football-3x3-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-street-football-3x3-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-street-football-3x3-3.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-tennis-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-tennis-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-tennis-3.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-teqball-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-teqball-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-teqball-3.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-volleyball-1.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-volleyball-2.webp
+- https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/renders/gf-sport-volleyball-3.webp
+Po wgraniu sprawdź 2 adresy w przeglądarce, np.
+https://www.gamefields.eu/wp-content/uploads/2026/11/gf-sport-tennis-1.webp i .../gf-sport-padel-3.webp: muszą pokazać obrazek.
+
+KROK B. Strona główna (ID 3462), jeden blok Własny HTML:
+  https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/homepage/sporty-2026-11/bloki/sporty.html  (SHA-256 zaczyna się od: a534123b76a335d5)
+  Plik zawiera <!-- wp:html --> i <!-- /wp:html --> oraz znacznik <!-- gf-blok: sporty -->.
+  - Jeśli na stronie JEST już blok z <!-- gf-blok: sporty --> (wcześniejsza wersja): podmień go w całości.
+  - Jeśli go NIE MA: dodaj zaraz PO bloku z <!-- gf-blok: naglowek --> (baner), PRZED blokiem z <!-- gf-blok: boiska -->.
+  W środku jest tekst „__GFAND__”: NIE zamieniaj go, NIE formatuj kodu, wklej plik dokładnie tak, jak jest.
+  Bloku „wzory” w tym poleceniu nie zmieniasz (działa z każdą wersją).
+
+Sprawdzenie (komputer i telefon), przed publikacją w podglądzie szkicu:
+- pod banerem „Jeden plac. Każda gra.”, pierwsza karta „01 / 09 Koszykówka 3×3” ze zdjęciem boiska we wzorze, cena „Ze wzorem od 120 100 zł”;
+- karty przewijają się w bok (strzałki →/← na komputerze, przesunięcie palcem na telefonie), kropki pokazują pozycję;
+- 3 przełączniki koloru w karcie zmieniają zdjęcie, kolor karty i link „Zaprojektuj”;
+- Padel: 3 kolory trawy, cena „Nawierzchnia od 99 100 zł”;
+- wszystkie 27 zdjęć się wczytują (przejrzyj każdą kartę i każdy wygląd), brak przewijania całej strony w bok, konsola bez błędów.
+Po akceptacji właściciela opublikuj i wyczyść cache (LiteSpeed, Cloudflare jeśli jest). Niczego nie usuwaj.
