@@ -15,8 +15,8 @@ export function StudioShopOrder({shop,lines,note,qty,onQty,unitLabel,extra,shipp
  const buy=canBuy(shop,lines),unit=lines.length&&lines.every(l=>l.price===lines[0].price)?lines[0].price:null;
  const ship=shipping??shippingNote(shop,total);
  const displayShip=locale==='pl'?ship:shipping?tr(shipping):shop.shipping.free_from!=null&&total>=shop.shipping.free_from?tr('wysyłka gratis'):shop.shipping.cost==null?tr('wysyłkę potwierdzimy'):`Shipping ${money(shop.shipping.cost)}${shop.shipping.free_from!=null?`, free from ${money(shop.shipping.free_from)}`:''}`;
- const text=`${note} · ilość: ${count} · `+(unit!=null?`cena: ${zl(unit)} brutto/szt., `:"")+`razem ${zl(total)} brutto · ${ship}`;
- const href=buy?cartLink(shop,lines,note):inquiryLink(shop,"Zamówienie ze Studia: "+text);
+ const text=locale==="en"?`${note} · quantity: ${count} · `+(unit!=null?`price: ${money(unit)} including VAT/item, `:"")+`total ${money(total)} including VAT · ${displayShip}`:`${note} · ilość: ${count} · `+(unit!=null?`cena: ${zl(unit)} brutto/szt., `:"")+`razem ${zl(total)} brutto · ${ship}`;
+ const href=buy?cartLink(shop,lines,note):inquiryLink(shop,(locale==="en"?"Studio order: ":"Zamówienie ze Studia: ")+text);
  const set=(q:number)=>onQty?.(Math.max(1,Math.min(999,Math.round(q)||1)));
  return <section className="studio-shop-order" aria-label={tr("Cena i zamówienie")} data-shop-pay={shop.pay?"true":"false"}>
   <div className="studio-shop-row">
