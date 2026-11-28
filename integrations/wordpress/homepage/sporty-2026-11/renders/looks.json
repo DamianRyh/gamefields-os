@@ -1,0 +1,206 @@
+{
+ "street-football-3x3": [
+  {
+   "familyId": "pro-ndebele",
+   "variant": 3,
+   "paletteId": "ndebele",
+   "name": "Ndebele",
+   "file": "gf-sport-street-football-3x3-1.webp"
+  },
+  {
+   "familyId": "pro-m-cutouts",
+   "variant": 3,
+   "paletteId": "ndebele",
+   "name": "Wycinanki",
+   "file": "gf-sport-street-football-3x3-2.webp"
+  },
+  {
+   "familyId": "pro-p-neon",
+   "variant": 1,
+   "paletteId": "nightshift",
+   "name": "Neon",
+   "file": "gf-sport-street-football-3x3-3.webp"
+  }
+ ],
+ "basketball-3x3": [
+  {
+   "familyId": "pro-p-pasiak",
+   "variant": 1,
+   "paletteId": "albers",
+   "name": "Pasiak",
+   "file": "gf-sport-basketball-3x3-1.webp"
+  },
+  {
+   "familyId": "pro-k-echo",
+   "variant": 4,
+   "paletteId": "swiss",
+   "name": "Echo",
+   "file": "gf-sport-basketball-3x3-2.webp"
+  },
+  {
+   "familyId": "pro-munich",
+   "variant": 2,
+   "paletteId": "aicher",
+   "name": "Munich Chevrons",
+   "file": "gf-sport-basketball-3x3-3.webp"
+  }
+ ],
+ "basketball-full": [
+  {
+   "familyId": "pro-munich",
+   "variant": 2,
+   "paletteId": "aicher",
+   "name": "Munich Chevrons",
+   "file": "gf-sport-basketball-full-1.webp"
+  },
+  {
+   "familyId": "pro-p-pasiak",
+   "variant": 1,
+   "paletteId": "albers",
+   "name": "Pasiak",
+   "file": "gf-sport-basketball-full-2.webp"
+  },
+  {
+   "familyId": "pro-supergraphic",
+   "variant": 1,
+   "paletteId": "lagos",
+   "name": "Supergraphic",
+   "file": "gf-sport-basketball-full-3.webp"
+  }
+ ],
+ "tennis": [
+  {
+   "familyId": "pro-m-flora",
+   "variant": 6,
+   "paletteId": "burle-marx",
+   "name": "Flora",
+   "file": "gf-sport-tennis-1.webp"
+  },
+  {
+   "familyId": "pro-k-echo",
+   "variant": 4,
+   "paletteId": "swiss",
+   "name": "Echo",
+   "file": "gf-sport-tennis-2.webp"
+  },
+  {
+   "familyId": "pro-homage",
+   "variant": 1,
+   "paletteId": "albers",
+   "name": "Homage Squares",
+   "file": "gf-sport-tennis-3.webp"
+  }
+ ],
+ "padel": [
+  {
+   "turf": "#2F6DB5",
+   "zone": "#1F4E8A",
+   "name": "Trawa niebieska",
+   "file": "gf-sport-padel-1.webp"
+  },
+  {
+   "turf": "#2E8B57",
+   "zone": "#1F6B42",
+   "name": "Trawa zielona",
+   "file": "gf-sport-padel-2.webp"
+  },
+  {
+   "turf": "#C4643B",
+   "zone": "#9C4A28",
+   "name": "Trawa terakota",
+   "file": "gf-sport-padel-3.webp"
+  }
+ ],
+ "volleyball": [
+  {
+   "familyId": "pro-m-landscape",
+   "variant": 1,
+   "paletteId": "simultane",
+   "name": "Pejzaż",
+   "file": "gf-sport-volleyball-1.webp"
+  },
+  {
+   "familyId": "pro-k-chevron",
+   "variant": 6,
+   "paletteId": "aicher",
+   "name": "Szewrony",
+   "file": "gf-sport-volleyball-2.webp"
+  },
+  {
+   "familyId": "pro-p-kilim",
+   "variant": 8,
+   "paletteId": "stijl",
+   "name": "Kilim",
+   "file": "gf-sport-volleyball-3.webp"
+  }
+ ],
+ "pickleball": [
+  {
+   "familyId": "pro-neoplastic",
+   "variant": 6,
+   "paletteId": "stijl",
+   "name": "Neo-Plastic",
+   "file": "gf-sport-pickleball-1.webp"
+  },
+  {
+   "familyId": "pro-k-rays",
+   "variant": 3,
+   "paletteId": "stella",
+   "name": "Promienie",
+   "file": "gf-sport-pickleball-2.webp"
+  },
+  {
+   "familyId": "pro-m-flora",
+   "variant": 6,
+   "paletteId": "burle-marx",
+   "name": "Flora",
+   "file": "gf-sport-pickleball-3.webp"
+  }
+ ],
+ "futsal": [
+  {
+   "familyId": "pro-k-zones",
+   "variant": 1,
+   "paletteId": "stijl",
+   "name": "Strefy gry",
+   "file": "gf-sport-futsal-1.webp"
+  },
+  {
+   "familyId": "pro-garden",
+   "variant": 3,
+   "paletteId": "burle-marx",
+   "name": "Garden Plan",
+   "file": "gf-sport-futsal-2.webp"
+  },
+  {
+   "familyId": "pro-p-mozaika",
+   "variant": 3,
+   "paletteId": "hard-edge",
+   "name": "Mozaika",
+   "file": "gf-sport-futsal-3.webp"
+  }
+ ],
+ "teqball": [
+  {
+   "familyId": "pro-promenade",
+   "variant": 1,
+   "paletteId": "copacabana",
+   "name": "Promenade",
+   "file": "gf-sport-teqball-1.webp"
+  },
+  {
+   "familyId": "pro-p-wycinanka",
+   "variant": 3,
+   "paletteId": "simultane",
+   "name": "Wycinanka",
+   "file": "gf-sport-teqball-2.webp"
+  },
+  {
+   "familyId": "pro-k-orbit",
+   "variant": 4,
+   "paletteId": "vasarely",
+   "name": "Orbita",
+   "file": "gf-sport-teqball-3.webp"
+  }
+ ]
+}
