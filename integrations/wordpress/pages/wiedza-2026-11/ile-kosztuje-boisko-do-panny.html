@@ -1,0 +1,215 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfa-hero h1{font-size:clamp(48px,7.4vw,124px)}
+.gfw-a .gfa-hero h1{font-size:clamp(42px,5.4vw,88px)}
+.gfa-hero figure.bg img{background:transparent!important;object-fit:contain;padding:6%}
+.gfa-hero figure.bg{display:block}
+.gfa-faq{border-top:1px solid var(--line)}
+.gfa-faq details{border-bottom:1px solid var(--line)}
+.gfa-faq summary{display:flex;justify-content:space-between;gap:14px;list-style:none;cursor:pointer;padding:20px 4px;font-size:18px;font-weight:700}
+.gfa-faq summary::-webkit-details-marker{display:none}
+.gfa-faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--violet)}
+.gfa-faq details[open] summary::after{content:"2"}
+.gfa-faq details p{max-width:780px;margin:0;padding:0 4px 22px;font-size:16px;color:var(--muted)}
+.gfw-crumbs{margin:0 0 18px;font-size:13px;color:var(--muted)}.gfw-crumbs a{text-decoration:none}
+.gfw-meta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfw-meta li{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:600}
+/* hub cards */
+.gfw-cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.gfw-cards li{grid-column:span 2}
+.gfw-cards li:first-child{grid-column:span 4;grid-row:span 2}
+.gfw-cards li:nth-child(2){grid-column:span 2}
+.gfw-cards li:nth-child(n+4){grid-column:span 3}
+.gfw-card{position:relative;display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink);overflow:hidden;transition:border-color .2s ease,transform .25s ease}
+.gfw-card:hover{border-color:var(--violet);transform:translateY(-3px)}
+.gfw-card .ph{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg,#E6E0DA)}
+.gfw-cards li:first-child .ph{aspect-ratio:auto;flex:1;min-height:320px}
+.gfw-card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.gfw-card .ph img.fit{object-fit:contain;padding:6%}
+.gfw-card:hover .ph img{transform:scale(1.05)}
+.gfw-card .num{position:absolute;top:12px;left:12px;padding:6px 10px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:13px}
+.gfw-card .tx{display:grid;gap:6px;padding:18px 20px 20px}
+.gfw-card .cat{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfw-card b{font-size:clamp(21px,1.8vw,28px);letter-spacing:-.03em;line-height:1.08}
+.gfw-cards li:first-child .gfw-card b{font-size:clamp(28px,3vw,46px)}
+.gfw-card p{margin:0;color:var(--muted);font-size:15px}
+.gfw-card .key{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font-size:13px;font-weight:700}
+.gfw-card .key span:first-child{color:var(--violet)}
+/* numbers band */
+.gfw-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0}
+.gfw-nums div{padding:20px;border:1px solid rgba(244,241,238,.2)}
+.gfw-nums dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:rgba(244,241,238,.75)}
+.gfw-nums dd{margin:8px 0 0;font-size:clamp(28px,3vw,44px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.gfw-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:rgba(244,241,238,.78)}
+/* tools */
+.gfw-tools{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfw-tools a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none;transition:border-color .2s ease}
+.gfw-tools a:hover{border-color:var(--violet)}
+.gfw-tools b{font-size:20px;letter-spacing:-.02em}.gfw-tools span{color:var(--muted);font-size:15px}
+.gfw-tools i{font-style:normal;color:var(--violet);font-weight:800}
+/* article */
+.gfw-art{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(24px,4vw,64px);align-items:start}
+.gfw-toc{position:sticky;top:96px;display:grid;gap:4px;font-size:14px}
+.gfw-toc p{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.gfw-toc a{display:block;padding:7px 0 7px 12px;border-left:2px solid var(--line);text-decoration:none;color:var(--muted);line-height:1.3}
+.gfw-toc a:hover{border-color:var(--violet);color:var(--ink)}
+.gfw-body{max-width:820px}
+.gfw-body > section{padding:0 0 clamp(28px,3vw,44px);scroll-margin-top:96px}
+.gfw-body h2{font-size:clamp(32px,3.6vw,56px);font-weight:800;letter-spacing:-.045em;line-height:.95;margin:0 0 16px}
+.gfw-body h3{font-size:21px;font-weight:800;letter-spacing:-.02em;margin:22px 0 8px}
+.gfw-body p,.gfw-body li{font-size:17px;line-height:1.6;color:#5A4652}
+.gfw-body p{margin:0 0 12px}
+.gfw-body ul,.gfw-body ol{margin:0 0 12px;padding-left:22px;display:grid;gap:6px}
+.gfw-body b{color:var(--ink)}
+.gfw-short{margin:0 0 clamp(28px,3vw,44px);padding:22px 24px;background:#fff;border-left:5px solid var(--lime)}
+.gfw-short p:last-child{margin:0}
+.gfw-short .k{margin-bottom:8px}
+.gfw-short p{font-size:19px;color:var(--ink);font-weight:600;line-height:1.45}
+.gfw-gf{margin:18px 0 0;padding:20px 22px;background:var(--ink);color:var(--paper)}
+.gfw-gf .k{color:var(--lime);margin-bottom:8px}
+.gfw-gf p,.gfw-gf li{color:rgba(244,241,238,.88)}
+.gfw-gf b{color:#fff}
+.gfw-gf a{color:var(--lime)}
+.gfw-rows{margin:0;border-top:1px solid var(--line)}
+.gfw-rows div{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.gfw-rows dt{font-weight:800;color:var(--ink)}.gfw-rows dt span{display:block;color:var(--violet);font-size:13px;letter-spacing:.06em}
+.gfw-rows dd{margin:0;color:#5A4652;font-size:16px;line-height:1.55}
+.gfw-table{width:100%;border-collapse:collapse;margin:8px 0 12px;background:#fff;font-size:15px}
+.gfw-table th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line)}
+.gfw-table td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;color:#5A4652}
+.gfw-table td b{color:var(--ink)}
+.gfw-table td.r,.gfw-table th.r{text-align:right;white-space:nowrap;font-weight:700;color:var(--ink)}
+.gfw-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.gfw-sw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
+.gfw-sw figure{margin:0;background:#fff}
+.gfw-sw img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.gfw-sw figcaption{padding:8px 10px;font-size:13px;line-height:1.3;color:var(--muted)}.gfw-sw figcaption b{display:block;color:var(--ink);font-size:14px}
+.gfw-ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}
+.gfw-ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfw-ph figcaption{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.gfw-steps{list-style:none;margin:0;padding:0!important;display:grid;gap:10px!important;counter-reset:s}
+.gfw-steps li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding:18px;background:#fff;border:1px solid var(--line);counter-increment:s}
+.gfw-steps li::before{content:counter(s,decimal-leading-zero);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#EEE8FF;color:var(--violet);font-weight:800}
+.gfw-steps h3{margin:4px 0 6px;font-size:22px}
+.gfw-steps p{margin:0 0 8px}
+.gfw-steps .gf{display:block;margin-top:6px;padding:10px 12px;background:var(--paper);font-size:15px;color:var(--ink)}
+.gfw-steps .gf::before{content:"W Gamefields: ";font-weight:800;color:var(--violet)}
+.gfw-cards2{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfw-cards2 li,.gfw-cards2 li:nth-child(2),.gfw-cards2 li:nth-child(n+4){grid-column:span 1}
+.gfw-cards2 li:first-child{grid-column:span 2;grid-row:span 2}
+.gfw-cards2 li:nth-child(n+6){grid-column:span 2}
+.gfw-cards2 li:nth-child(n+6) .ph{aspect-ratio:21/9}
+.gfw-related{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfw-related .gfw-card .ph{aspect-ratio:16/9}
+@media (max-width:1100px){.gfw-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.gfw-cards2 li,.gfw-cards2 li:nth-child(n+6){grid-column:span 1;grid-row:auto}.gfw-cards2 li:nth-child(n+6) .ph{aspect-ratio:16/10}.gfw-cards li,.gfw-cards li:first-child,.gfw-cards li:nth-child(2){grid-column:span 1;grid-row:auto}.gfw-cards li:first-child{grid-column:1/-1}.gfw-cards li:first-child .ph{min-height:260px;flex:none;aspect-ratio:16/9}
+ .gfw-nums,.gfw-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){.gfw-art{grid-template-columns:minmax(0,1fr)}.gfw-toc{position:static;grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto;gap:6px;padding-bottom:4px}.gfw-toc p{display:none}
+ .gfw-toc a{border:1.5px solid #CDBFC6;border-radius:999px;padding:8px 14px;white-space:nowrap}
+ .gfw-related{grid-template-columns:minmax(0,1fr)}.gfw-sw{grid-template-columns:repeat(2,minmax(0,1fr))}.gfw-rows div{grid-template-columns:minmax(0,1fr);gap:4px}}
+@media (max-width:560px){.gfw-cards{grid-template-columns:minmax(0,1fr)}.gfw-nums,.gfw-tools{grid-template-columns:minmax(0,1fr)}.gfw-steps li{grid-template-columns:minmax(0,1fr);gap:8px}
+ .gfw-body p,.gfw-body li{font-size:16px}.gfw-short p{font-size:17px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Ile kosztuje boisko do panny w 2026/2027?","description":"Koszt boiska do panny zależy od wielkości konstrukcji i rodzaju nawierzchni. Poniżej ceny ośmiu modeli Gamefields, koszt całego boiska z płytą i malowaniem oraz to, co liczymy osobno.","inLanguage":"pl-PL","dateModified":"2026-11-28","author":{"@type":"Person","name":"Damian Gawrych","url":"https://www.gamefields.eu/damian-gawrych/"},"publisher":{"@type":"Organization","name":"Gamefields","url":"https://www.gamefields.eu/"},"mainEntityOfPage":"https://www.gamefields.eu/ile-kosztuje-boisko-do-panny/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Baza wiedzy","item":"https://www.gamefields.eu/baza-wiedzy/"},{"@type":"ListItem","position":3,"name":"Ile kosztuje boisko do panny?","item":"https://www.gamefields.eu/ile-kosztuje-boisko-do-panny/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ile kosztuje boisko do panny?","acceptedAnswer":{"@type":"Answer","text":"Konstrukcja Panna Octa Cage 90 od 36 000 zł netto, boisko z płytą betonową i malowaniem od 47 400 zł netto. Montaż, transport i przygotowanie terenu wyceniamy indywidualnie."}},{"@type":"Question","name":"Ile kosztuje metr nawierzchni pod arenę?","acceptedAnswer":{"@type":"Answer","text":"Od 78 zł/m² netto za malowanie, 250 zł/m² za EPDM wylewany i 342 zł/m² za płyty gumowe. Płyta betonowa z podbudową 283 zł/m² netto."}}]}]}</script>
+<div class="gfa">
+<div class="gfw-a"><section class="gfa-hero"><div class="w">
+  <div>
+    <p class="gfw-crumbs"><a href="/baza-wiedzy/">Baza wiedzy</a> / Budżet</p>
+    <p class="k">Poradnik inwestora · Budżet</p>
+    <h1 class="d">Ile kosztuje boisko do panny w 2026/2027?</h1>
+    <p class="lead">Koszt boiska do panny zależy od wielkości konstrukcji i rodzaju nawierzchni. Poniżej ceny ośmiu modeli Gamefields, koszt całego boiska z płytą i malowaniem oraz to, co liczymy osobno.</p>
+    <ul class="gfw-meta"><li>3 min czytania</li><li>Aktualizacja 28.11.2026</li><li>Ceny netto ze Studia</li></ul>
+  </div>
+  <figure class="bg" style="background:#D23A26"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-cage90-1200.webp" alt="" loading="eager" decoding="async"></figure>
+</div></section>
+
+<section class="gfa-sec"><div class="w gfw-art">
+  <nav class="gfw-toc" aria-label="Spis treści"><p>W tym poradniku</p><a href="#modele">Porównanie modeli</a><a href="#nawierzchnia">Jak nawierzchnia wpływa na cenę?</a><a href="#przyklad">Przykład: całe boisko</a><a href="#start">Od czego zacząć?</a></nav>
+  <div class="gfw-body">
+    <div class="gfw-short"><p class="k">Krótka odpowiedź</p><p>Konstrukcja Panna Octa Cage 90 zaczyna się od 36 000 zł netto. Boisko z płytą betonową i malowaniem jednokolorowym kosztuje orientacyjnie od 47 400 zł netto. Montaż, transport i przygotowanie terenu wyceniamy indywidualnie.</p></div>
+    <section id="modele"><h2>Porównanie modeli</h2><p>Konstrukcja to bandy i bramki w podstawowej konfiguracji i standardowym kolorze. „Z nawierzchnią” dodaje płytę betonową 12 cm z podbudową i malowanie jednokolorowe, liczone od powierzchni konstrukcji z 10% zapasem.</p><div class="gfw-scroll"><table class="gfw-table"><thead><tr><th>Model</th><th>Wymiary</th><th class="r">Konstrukcja od</th><th class="r">Z nawierzchnią od</th></tr></thead><tbody><tr><td><b><a href="/product/panna-octa-cage-90/">Panna Octa Cage 90</a></b><br>Okrąg, bandy 0,90 m</td><td>około 6 m</td><td class="r">36 000 zł</td><td class="r">47 400 zł</td></tr><tr><td><b><a href="/product/panna-play/">Panna Play</a></b><br>Okrąg, bandy do 1,52 m</td><td>około 6 m</td><td class="r">40 000 zł</td><td class="r">51 000 zł</td></tr><tr><td><b><a href="/product/panna-ring/">Panna Ring</a></b><br>Okrąg, bandy 1 m</td><td>około 5 m</td><td class="r">40 000 zł</td><td class="r">47 800 zł</td></tr><tr><td><b><a href="/product/panna-octa/">Panna Octa</a></b><br>Oktagon, bandy około 1,22 m</td><td>4,962 m między bokami</td><td class="r">49 000 zł</td><td class="r">60 900 zł</td></tr><tr><td><b><a href="/product/panna-grid/">Panna Grid</a></b><br>Prostokąt, bandy około 1,09 m</td><td>6,214 × 4,648 m</td><td class="r">51 000 zł</td><td class="r">66 500 zł</td></tr><tr><td><b><a href="/product/panna-octa-cage-180/">Panna Octa Cage 180</a></b><br>Okrąg, bandy 1,80 m</td><td>około 6 m</td><td class="r">58 000 zł</td><td class="r">69 400 zł</td></tr><tr><td><b><a href="/product/panna-court/">Panna Court</a></b><br>Prostokąt, bandy do 1,22 m</td><td>7,14 × 5,57 m</td><td class="r">69 000 zł</td><td class="r">84 700 zł</td></tr><tr><td><b><a href="/product/street-arena-15/">Boisko 3 na 3 (Street Arena 15)</a></b><br>Prostokąt, bandy 1 m</td><td>15 × 10 m</td><td class="r">100 000 zł</td><td class="r">159 300 zł</td></tr></tbody></table></div><p>Arena mobilna eventowa (wynajem i sprzedaż): od 27 000 zł netto. Ceny orientacyjne „od”, netto; brutto z VAT 23%.</p></section><section id="nawierzchnia"><h2>Jak nawierzchnia wpływa na cenę?</h2><p>Orientacyjne ceny wykończenia zaczynają się od 78 zł/m² netto za malowanie, 250 zł/m² netto za EPDM wylewany i 342 zł/m² netto za płyty gumowe. Zakres i stan podłoża mają wpływ na końcową wycenę.</p><div class="gfw-scroll"><table class="gfw-table"><thead><tr><th>Nawierzchnia</th><th class="r">Za m² netto</th><th class="r">Panna Octa Cage 90</th></tr></thead><tbody><tr><td><b>Płyta betonowa 12 cm z podbudową</b><br>podstawa pod każde wykończenie</td><td class="r">283 zł</td><td class="r">8 900 zł</td></tr><tr><td><b>Malowanie farbą sportową</b><br>na płycie albo starym placu</td><td class="r">78–183 zł</td><td class="r">od 2 500 zł</td></tr><tr><td><b>Sztuczna trawa</b><br>klasyczna murawa</td><td class="r">167–292 zł</td><td class="r">od 5 200 zł</td></tr><tr><td><b>Akryl Hard Court</b><br>jak na kortach</td><td class="r">200–342 zł</td><td class="r">od 6 300 zł</td></tr><tr><td><b>Maty gumowe</b><br>ciągła guma, R11</td><td class="r">242–425 zł</td><td class="r">od 7 600 zł</td></tr><tr><td><b>Nawierzchnia EPDM wylewana</b><br>PN-EN 14877</td><td class="r">250–400 zł</td><td class="r">od 7 800 zł</td></tr><tr><td><b>Płytki sportowe PP</b><br>montaż bez klejenia</td><td class="r">275–400 zł</td><td class="r">od 8 600 zł</td></tr><tr><td><b>Płyty gumowe</b><br>PN-EN 1177, atest PZH</td><td class="r">342–492 zł</td><td class="r">od 10 700 zł</td></tr></tbody></table></div><p>Ostatnia kolumna: koszt dla 31,1 m² (Panna Octa Cage 90 z 10% zapasem), najtańszy wariant, zaokrąglony w górę do 100 zł.</p><p><a href="/jak-wybrac-nawierzchnie-na-boisko-do-panny/">Jak wybrać nawierzchnię na boisko do panny →</a></p></section><section id="przyklad"><h2>Przykład: całe boisko</h2><div class="gfw-gf"><p class="k">W Gamefields</p><p><b>Panna Octa Cage 90.</b> Konstrukcja 36 000 zł + płyta betonowa 8 900 zł + malowanie 2 500 zł = <b>47 400 zł netto</b>.</p><p>Montaż, transport i przygotowanie terenu wyceniamy indywidualnie, po zdjęciach placu. W <a href="/studio/">Studio 3D</a> cena liczy się na bieżąco dla wybranego modelu, nawierzchni i wzoru.</p></div></section><section id="start"><h2>Od czego zacząć?</h2><p>Sprawdź w planerze <a href="/#planer">„Zmieści się?”</a>, które modele mieszczą się na placu razem ze strefą bezpieczeństwa, potem zaprojektuj boisko w Studio 3D.</p><div class="gfw-gf"><p class="k">W Gamefields</p><p>Zobacz <a href="/studio/">Studio 3D</a> i <a href="/kontakt/">skontaktuj się z Gamefields</a>, aby omówić swoje miejsce.</p></div></section>
+  </div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Czytaj dalej.</h2><p>Pozostałe poradniki z bazy wiedzy Gamefields.</p></div>
+  <ul class="gfw-related" role="list"><li><a class="gfw-card" href="/jak-wybrac-nawierzchnie-na-boisko-do-panny/"><span class="ph"><img class="" src="https://www.gamefields.eu/wp-content/uploads/2026/11/trawa-macro.webp" alt="" loading="lazy" decoding="async"><span class="num">07 · Technologia</span></span><span class="tx"><b>Nawierzchnia na boisko do panny</b><p>Malowanie, EPDM, trawa, płytki i guma: co wybrać pod arenę i ile kosztuje metr.</p><span class="key"><span>od 78 zł/m²</span><span>7 wykończeń</span><span>3 min czytania</span></span></span></a></li><li><a class="gfw-card" href="/boisko-do-panny-na-osiedlu/"><span class="ph" style="--bg:#FFB3C8"><img class="fit" src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-court-1200.webp" alt="" loading="lazy" decoding="async"><span class="num">12 · Osiedle</span></span><span class="tx"><b>Boisko do panny na osiedlu</b><p>Który model zmieści się między blokami i na co uważać przed zamówieniem.</p><span class="key"><span>od 36 000 zł netto</span><span>4 modele na osiedle</span><span>3 min czytania</span></span></span></a></li><li><a class="gfw-card" href="/ile-kosztuje-budowa-boiska-sportowego/"><span class="ph" style="--bg:#2457D6"><img class="fit" src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-play-1200.webp" alt="" loading="lazy" decoding="async"><span class="num">01 · Budżet</span></span><span class="tx"><b>Ile kosztuje budowa boiska?</b><p>Z czego składa się cena boiska i od jakich kwot zaczynają się konstrukcje i nawierzchnie Gamefields.</p><span class="key"><span>od 36 000 zł netto</span><span>8 modeli z cenami</span><span>4 min czytania</span></span></span></a></li></ul>
+  <ul class="gfa-links"><li><a href="/baza-wiedzy/">← Wszystkie poradniki</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Od wiedzy<br>do projektu.</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij zdjęcia placu →</a><a class="gfa-btn alt" href="/studio/">Zaprojektuj w Studio 3D ↗</a></div>
+</div></section></div>
+</div>
+<!-- /wp:html -->

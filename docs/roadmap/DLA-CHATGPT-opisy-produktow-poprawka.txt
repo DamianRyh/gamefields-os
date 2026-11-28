@@ -1,0 +1,28 @@
+Polecenie dla ChatGPT: poprawka opisów produktów (za duże nagłówki), 28.11.2026
+
+Opisy 16 produktów wdrożone dziś (DLA-CHATGPT-tresci-w-stylu-strony.txt) mają na komputerze za duże nagłówki
+(ok. 58 px zamiast 32 px): motyw ma własne style dla klasy .gfp. Nowe pliki używają klasy .gfpd; treść jest ta sama.
+Motywu NIE ruszaj. Strony (poradniki, case study, baza wiedzy, realizacje) są w porządku, ich nie ruszaj.
+
+Dla każdego produktu: zastąp CAŁY opis (zakładka „Opis”, pole opisu) zawartością pliku. Plik to jeden blok „Własny HTML”.
+Przed podmianą kopia obecnego opisu. Sprawdź SHA-256 (pierwsze 16 znaków). Krótki opis, cena, zdjęcia, SEO bez zmian.
+
+- /product/akryl-hard-court/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/akryl-hard-court.html  (SHA-256: 414f7636f428f0b4)
+- /product/malowanie-farba-sportowa/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/malowanie-farba-sportowa.html  (SHA-256: 36a1b339d5801046)
+- /product/maty-gumowe-nawierzchnia/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/maty-gumowe-nawierzchnia.html  (SHA-256: 25a1db4ae0af2874)
+- /product/nawierzchnia-epdm/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/nawierzchnia-epdm.html  (SHA-256: ab52151e7ff81ddb)
+- /product/panna-court/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-court.html  (SHA-256: 547bf29102460a4a)
+- /product/panna-grid/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-grid.html  (SHA-256: 0a09ea28c7132e00)
+- /product/panna-octa-cage-180/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-octa-cage-180.html  (SHA-256: e6ef64755d9f3517)
+- /product/panna-octa-cage-90/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-octa-cage-90.html  (SHA-256: 557e1af12454150b)
+- /product/panna-octa/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-octa.html  (SHA-256: 4c373c9ca1851c7c)
+- /product/panna-play/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-play.html  (SHA-256: a9734ec29442f913)
+- /product/panna-ring/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-ring.html  (SHA-256: 70c4b40c24939f75)
+- /product/plyta-betonowa/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/plyta-betonowa.html  (SHA-256: 80d074767c2998f7)
+- /product/plytki-sportowe/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/plytki-sportowe.html  (SHA-256: f93e48b9251bde4a)
+- /product/plyty-gumowe/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/plyty-gumowe.html  (SHA-256: 65503b14f00e5c12)
+- /product/street-arena-15/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/street-arena-15.html  (SHA-256: 1a37cc601fe08ff9)
+- /product/sztuczna-trawa/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/sztuczna-trawa.html  (SHA-256: f221880ec3a3d9cc)
+
+Sprawdzenie: /product/panna-ring/ → zakładka „Opis” na komputerze: nagłówki „Zobacz na miejscu”, „Najczęstsze pytania” itd.
+mają ok. 32 px (podobne do „Parametry” w zakładce „Wiedza o produkcie”), na telefonie ok. 24 px. Potem wyczyść cache (LiteSpeed).

@@ -1,0 +1,63 @@
+Polecenie dla ChatGPT: nowe poradniki, case study i opisy produktów w stylu strony, 28.11.2026
+
+Cel: treści wdrożone 27–28.11 (7 poradników, 2 case study, opisy produktów) wyświetlają się dziś jako goły tekst,
+a w bazie wiedzy blok „Nowe poradniki” nachodzi na nagłówek „Zacznij od pytania.”. Poniższe pliki to te same treści
+w wyglądzie reszty strony (jak poradniki i realizacje). Motywu NIE ruszaj (zostaje 1.0.38).
+
+Zasady:
+- Każdy plik to jeden blok „Własny HTML” (zawiera <!-- wp:html --> i <!-- /wp:html -->) i zastępuje CAŁĄ treść strony / CAŁY opis produktu.
+- Przed każdą podmianą: kopia obecnej treści (wersja/rewizja). Po podmianie: podgląd na komputerze i telefonie.
+- Sprawdź SHA-256 pobranego pliku (pierwsze 16 znaków podane obok).
+- Nie zmieniaj tytułów, adresów (slug), opisów SEO Yoast, krótkiego opisu produktu, ceny ani zdjęć produktu.
+- Nie ruszaj żadnych innych stron.
+
+A. Strony (zastąp całą treść):
+- strona 4959: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/ile-kosztuje-boisko-do-panny.html  (SHA-256: 47bdb41f4ba33550)
+- strona 4960: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/boisko-na-starym-betonie-malowanie.html  (SHA-256: 3a1bcfe79cf03734)
+- strona 4961: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/modernizacja-orlika-epdm-trawa-czy-plyty.html  (SHA-256: cb51078e1fedfe43)
+- strona 4971: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/jak-wybrac-nawierzchnie-na-boisko-do-panny.html  (SHA-256: b47aaa20f127edf6)
+- strona 4972: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/dofinansowanie-boisk-2027-jak-przygotowac-wniosek.html  (SHA-256: 6ca396914a04ec11)
+- strona 4989: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/mobilne-boisko-na-event-wynajem-czy-zakup.html  (SHA-256: 9887252fc71a6c4c)
+- strona 4991: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/boisko-do-panny-na-osiedlu.html  (SHA-256: fdc3e24a132120ec)
+- strona 4973: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/realizacje-2026-11/panna-ring-orlik-grodzisk-mazowiecki.html  (SHA-256: 8b4da3f3080bb769)
+- strona 4974: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/realizacje-2026-11/taras-park-swietokrzyski-warszawa.html  (SHA-256: 8ad3f89be76f44c2)
+- strona 3717: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/wiedza-2026-11/baza-wiedzy.html  (SHA-256: 91c3ac2a401bca88)
+- strona 3466: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/realizacje-2026-11/realizacje-gamefields.html  (SHA-256: 5cd1992b30f729bd)
+
+Uwagi do A:
+- Baza wiedzy (3717) i Realizacje (3466): nowa wersja zawiera wszystko, co jest dziś na stronie, plus 7 nowych poradników
+  w osobnej sekcji „Boisko do panny.” i linki „Przeczytaj case study →” przy Tarasie i Orliku. Dodane ręcznie bloki
+  „Nowe poradniki”, „Kolejne poradniki”, „Polecane poradniki” i „Poznaj nasze realizacje” znikają, bo ich linki są już w nowym układzie.
+  Przed publikacją porównaj tekst starej i nowej wersji: poza tymi blokami nie powinno zniknąć nic.
+- W case study z Grodziska znika zdanie „Szczegóły nawierzchni i pełne parametry realizacji wymagają uzupełnienia.”.
+
+B. Opisy produktów (zakładka „Opis”, pole opisu produktu; zastąp cały opis):
+- produkt /product/akryl-hard-court/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/akryl-hard-court.html  (SHA-256: 99cd0c9585857597)
+- produkt /product/malowanie-farba-sportowa/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/malowanie-farba-sportowa.html  (SHA-256: a930f17c200fc53e)
+- produkt /product/maty-gumowe-nawierzchnia/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/maty-gumowe-nawierzchnia.html  (SHA-256: bd9e55e2e86676af)
+- produkt /product/nawierzchnia-epdm/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/nawierzchnia-epdm.html  (SHA-256: d944f8d0b1389adb)
+- produkt /product/panna-court/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-court.html  (SHA-256: 331599acfeedbd5c)
+- produkt /product/panna-grid/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-grid.html  (SHA-256: cbd347a5bc225ec1)
+- produkt /product/panna-octa-cage-180/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-octa-cage-180.html  (SHA-256: 108a49b6b576cfe2)
+- produkt /product/panna-octa-cage-90/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-octa-cage-90.html  (SHA-256: c76e3e95d956d358)
+- produkt /product/panna-octa/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-octa.html  (SHA-256: 32aa0c732f0e7951)
+- produkt /product/panna-play/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-play.html  (SHA-256: ce0cf70b773e26dc)
+- produkt /product/panna-ring/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/panna-ring.html  (SHA-256: 13a923c9210c4f31)
+- produkt /product/plyta-betonowa/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/plyta-betonowa.html  (SHA-256: 7f130389c609c824)
+- produkt /product/plytki-sportowe/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/plytki-sportowe.html  (SHA-256: 5ebb8c098c239953)
+- produkt /product/plyty-gumowe/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/plyty-gumowe.html  (SHA-256: 8bc52626e12bdedf)
+- produkt /product/street-arena-15/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/street-arena-15.html  (SHA-256: 29e7e5b82ff2a959)
+- produkt /product/sztuczna-trawa/: https://raw.githubusercontent.com/DamianRyh/gamefields-os/main/integrations/wordpress/pages/produkty-2026-11/sztuczna-trawa.html  (SHA-256: f5171822e39fbd54)
+
+Uwagi do B:
+- Blok Yoast FAQ zostaje zastąpiony rozwijanymi pytaniami z własnymi danymi FAQPage (JSON-LD w bloku), więc dane
+  strukturalne zostają. Treść pytań i odpowiedzi jest ta sama co dziś (w nawierzchniach poprawione nazwy, np. „Ile kosztują płyty gumowe?”).
+- Krótki opis (obok ceny) i zakładka „Wiedza o produkcie” bez zmian.
+
+C. Sprawdzenie (komputer i telefon):
+1. /ile-kosztuje-boisko-do-panny/: nagłówek z renderem areny, „Krótka odpowiedź”, spis treści, tabela 8 modeli z cenami, brak przewijania w bok.
+2. /panna-ring-orlik-grodzisk-mazowiecki/: zdjęcie, cytat Mariusza Smysło, karta Panna Ring z przyciskami „Zaprojektuj podobne” i „Zobacz model”.
+3. /baza-wiedzy/: sekcja „Zacznij od pytania.” (5 poradników) i „Boisko do panny.” (7 poradników), nic na siebie nie nachodzi.
+4. /product/panna-ring/ → zakładka „Opis”: wyróżniony opis, „Zobacz na miejscu” (2 case study), pytania rozwijane, kafle „Następny krok”.
+5. Google Rich Results Test dla /product/panna-ring/ i /ile-kosztuje-boisko-do-panny/: FAQ wykryte, bez błędów.
+6. Po akceptacji właściciela opublikuj i wyczyść cache (LiteSpeed i Cloudflare, jeśli jest). Niczego nie usuwaj.
