@@ -1,0 +1,229 @@
+<!-- wp:html -->
+<style>
+.gfa{--ink:#47132D;--muted:#6F5A66;--paper:#F4F1EE;--violet:#6336F5;--lime:#D8F24A;--line:#D9CFD4;background:var(--paper);color:var(--ink);font-family:GHInter,Inter,Arial,sans-serif;line-height:1.5;overflow-x:clip}
+.gfa *{box-sizing:border-box}
+.gfa figure{margin:0}
+.gfa .w{max-width:1360px;margin:0 auto;padding:0 clamp(16px,3.4vw,48px)}
+.gfa h1,.gfa h2,.gfa h3{font-family:inherit;text-transform:none;margin:0;color:inherit}
+.gfa .d{font-weight:800;letter-spacing:-.055em;line-height:.9;text-wrap:balance}
+.gfa .k{margin:0 0 14px;color:var(--violet);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.gfa a{color:inherit}
+.gfa-hero{padding:clamp(40px,6vw,96px) 0 clamp(28px,4vw,56px)}
+.gfa-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfa-hero h1{font-size:clamp(56px,9vw,148px)}
+.gfa-hero .lead{max-width:38rem;margin:22px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfa-hero figure{margin:0}
+.gfa-hero img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-hero figcaption,.gfa figure figcaption{margin-top:8px;font-size:14px;line-height:1.35;color:var(--muted)}
+.gfa figure figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-sec{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:16px 32px;align-items:end;margin-bottom:clamp(24px,3vw,44px)}
+.gfa-head h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-head p{margin:0;font-size:18px;color:var(--muted)}
+.gfa-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfa-grid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.gfa-grid figure{margin:0}
+.gfa-grid img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-grid .tall img{aspect-ratio:3/4}
+.gfa-mom{display:grid;gap:12px}
+.gfa-mom article{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,3vw,40px);padding:clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);align-items:start}
+.gfa-mom .y{color:var(--violet);font-weight:800;font-size:15px;margin:0 0 6px}
+.gfa-mom h3{font-size:clamp(26px,2.6vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1}
+.gfa-mom p{margin:12px 0 0;color:var(--muted);font-size:16px}
+.gfa-mom .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-mom .ph img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfa-mom .ph .one{grid-column:1/-1}
+.gfa-steps{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:12px}
+.gfa-steps li{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,3vw,40px);align-items:center;padding:clamp(16px,2vw,24px);background:#fff;border:1px solid var(--line)}
+.gfa-steps li:nth-child(even) .ph{order:2}
+.gfa-steps .ph{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.gfa-steps .ph img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#E6E0DA}
+.gfa-steps .ph img:only-child{grid-column:1/-1;aspect-ratio:4/3}
+.gfa-steps .n{color:var(--violet);font-weight:800;font-size:15px}
+.gfa-steps h3{font-size:clamp(28px,3vw,48px);font-weight:800;letter-spacing:-.04em;line-height:.95;margin-top:6px}
+.gfa-steps p{margin:12px 0 0;color:var(--muted);font-size:17px}
+.gfa-quote{margin:0;padding:24px;background:#fff;border-top:4px solid var(--violet);max-width:760px}
+.gfa-quote blockquote{margin:0;padding:0;border:0;font-style:normal;font-size:19px;line-height:1.45}
+.gfa-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
+.gfa-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfa-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0}
+.gfa-facts div{border-top:1px solid var(--line);padding-top:12px}
+.gfa-facts dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfa-facts dd{margin:6px 0 0;font-size:18px;font-weight:700}
+.gfa-band{padding:clamp(40px,5vw,80px) 0;background:var(--ink);color:var(--paper);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
+.gfa-band .gfa-head p,.gfa-band figure figcaption{color:rgba(244,241,238,.78)}
+.gfa-band figure figcaption b{color:var(--paper)}
+.gfa-band .k{color:var(--lime)}
+.gfa-cta{padding:clamp(40px,5vw,80px) 0;border-top:1px solid var(--line)}
+.gfa-cta .w{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px}
+.gfa-cta h2{font-size:clamp(40px,5.6vw,88px)}
+.gfa-btns{display:flex;flex-wrap:wrap;gap:12px}
+.gfa-btn{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--violet);color:#fff!important;text-decoration:none;font-weight:700}
+.gfa-btn.alt{background:var(--ink)}
+.gfa-links{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;padding:0;list-style:none}
+.gfa-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1.5px solid #CDBFC6;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px}
+.gfa-links a:hover{border-color:var(--ink)}
+@media (max-width:900px){
+ .gfa-hero .w,.gfa-head,.gfa-mom article,.gfa-steps li{grid-template-columns:minmax(0,1fr)}
+ .gfa-steps li:nth-child(even) .ph{order:0}
+ .gfa-grid,.gfa-grid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gfa-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){.gfa-grid,.gfa-grid.c4{grid-template-columns:minmax(0,1fr)}}
+
+.gfr-hero{padding:clamp(36px,5vw,80px) 0 clamp(24px,3vw,40px)}
+.gfr-hero .w.top{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,48px);align-items:end}
+.gfr-hero h1{font-size:clamp(52px,7.2vw,124px)}
+.gfr-hero .lead{max-width:34rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfr-mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:clamp(90px,9vw,150px);gap:8px}
+.gfr-mosaic img{width:100%;height:100%;object-fit:cover;display:block;background:#E6E0DA}
+.gfr-mosaic img:nth-child(1){grid-column:span 4;grid-row:span 3}
+.gfr-mosaic img:nth-child(2){grid-column:span 2;grid-row:span 2}
+.gfr-mosaic img:nth-child(3){grid-column:span 2;grid-row:span 1}
+.gfr-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:clamp(28px,3vw,44px) 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfr-nums div{padding:18px 18px 18px 0}
+.gfr-nums div+div{padding-left:18px;border-left:1px solid var(--line)}
+.gfr-nums dt{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gfr-nums dd{margin:6px 0 0;font-size:clamp(28px,3.2vw,48px);font-weight:800;letter-spacing:-.045em;line-height:1}
+.gfr-nums dd small{display:block;margin-top:6px;font-size:14px;font-weight:500;letter-spacing:0;color:var(--muted)}
+.gfr-logos{padding:clamp(24px,3vw,40px) 0}
+.gfr-logos p.k{margin-bottom:12px}
+.gfa-logos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gfa-logos li{display:grid;place-items:center;height:110px;padding:12px;background:#fff;border:1px solid var(--line);overflow:hidden}
+.gfa-logos img{display:block;max-width:100%;max-height:84px;width:auto;height:auto;object-fit:contain;transform:scale(var(--z,1))}
+.gfr-also{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:0;list-style:none}
+.gfr-also li{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600}
+.gfr-jump{position:sticky;top:calc(var(--wp-admin--admin-bar--height,0px) + 58px);z-index:5;background:rgba(244,241,238,.94);backdrop-filter:blur(8px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.gfr-jump ul{display:flex;gap:8px;overflow-x:auto;margin:0;padding:10px 0;list-style:none;scrollbar-width:none}
+.gfr-jump ul::-webkit-scrollbar{display:none}
+.gfr-jump a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid #CDBFC6;text-decoration:none;font-weight:700;font-size:14px;white-space:nowrap}
+.gfr-jump a:hover{border-color:var(--violet)}
+.gfr-jump small{color:var(--violet);font-weight:800}
+/* case */
+.gfr-case{padding:clamp(48px,6vw,96px) 0;border-top:1px solid var(--line);scroll-margin-top:72px}
+.gfr-case .w{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,3.6vw,56px);align-items:start}
+.gfr-case.flip .gfr-ph{order:2}
+.gfr-ph{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.gfr-ph img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#E6E0DA;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gfr-ph img:first-child{grid-column:1/-1;aspect-ratio:16/10}
+.gfr-ph img:hover{transform:scale(1.02)}
+.gfr-ph.two img{grid-column:1/-1;aspect-ratio:16/9}
+.gfr-place{margin:0 0 10px;color:var(--violet);font-weight:800;font-size:14px;letter-spacing:.02em}
+.gfr-case h2{font-size:clamp(40px,4.6vw,76px)}
+.gfr-case .lead{margin:16px 0 0;font-size:18px;color:var(--ink)}
+.gfr-case .more{margin:10px 0 0;font-size:16px;color:var(--muted)}
+.gfr-facts{margin:20px 0 0;border-top:1px solid var(--line)}
+.gfr-facts div{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+.gfr-facts dt{color:var(--muted)}.gfr-facts dd{margin:0;font-weight:700}
+.gfr-quote{margin:22px 0 0;padding:22px 24px;background:#fff;border-left:5px solid var(--violet)}
+.gfr-quote blockquote{margin:0;font-size:clamp(18px,1.6vw,22px);line-height:1.4;font-weight:600;color:var(--ink)}
+.gfr-quote blockquote::before{content:"„";color:var(--violet)}
+.gfr-quote blockquote::after{content:"”";color:var(--violet)}
+.gfr-quote figcaption{margin-top:12px;font-size:14px;color:var(--muted)}.gfr-quote figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfr-model{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:20px 0 0;padding:14px 16px;background:var(--ink);color:var(--paper)}
+.gfr-model span{flex:1 1 180px;font-size:15px}.gfr-model b{color:#fff}
+.gfr-model a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--lime);color:#1F2A6B!important;text-decoration:none;font-weight:800;font-size:14px}
+.gfr-model a.alt{background:transparent;border:1.5px solid rgba(244,241,238,.5);color:var(--paper)!important}
+/* quotes band */
+.gfr-voices{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gfr-voices li{padding:24px;border:1px solid rgba(244,241,238,.2)}
+.gfr-voices blockquote{margin:0;font-size:clamp(18px,1.6vw,22px);line-height:1.4;font-weight:600}
+.gfr-voices p{margin:12px 0 0;font-size:14px;color:rgba(244,241,238,.75)}.gfr-voices p b{display:block;color:#fff;font-size:15px}
+/* events */
+.gfr-brands{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px;padding:0;list-style:none}
+.gfr-brands li{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:999px;background:var(--lime);color:#1F2A6B;font-weight:800;font-size:14px}
+.gfr-ev{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.gfr-ev li{position:relative;overflow:hidden;background:#2a1520}
+.gfr-ev li:nth-child(1),.gfr-ev li:nth-child(6){grid-column:span 2;grid-row:span 2}
+.gfr-ev img{display:block;width:100%;height:100%;aspect-ratio:1;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.gfr-ev li:hover img{transform:scale(1.05)}
+.gfr-ev span{position:absolute;left:8px;right:8px;bottom:8px;padding:8px 10px;background:rgba(28,9,18,.82);color:#fff;font-size:13px;line-height:1.3}
+.gfr-ev span b{display:block;font-size:14px}
+.gfr-more{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfr-more figure{margin:0}
+.gfr-more img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#E6E0DA}
+.gfr-more figcaption{margin-top:8px;font-size:14px;color:var(--muted)}.gfr-more figcaption b{display:block;color:var(--ink);font-size:15px}
+.gfr-next{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.gfr-next a{display:grid;gap:6px;height:100%;padding:22px;background:#fff;border:1px solid var(--line);text-decoration:none}
+.gfr-next a:hover{border-color:var(--violet)}
+.gfr-next b{font-size:20px;letter-spacing:-.02em}.gfr-next span{color:var(--muted);font-size:15px}.gfr-next i{font-style:normal;color:var(--violet);font-weight:800}
+@media (max-width:1100px){.gfr-ev{grid-template-columns:repeat(3,minmax(0,1fr))}.gfr-more,.gfr-next{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:900px){
+ .gfr-hero .w.top,.gfr-case .w{grid-template-columns:minmax(0,1fr)}.gfr-case.flip .gfr-ph{order:0}
+ .gfr-nums{grid-template-columns:repeat(2,minmax(0,1fr))}.gfr-nums div:nth-child(3){padding-left:0;border-left:0}.gfr-nums div:nth-child(n+3){border-top:1px solid var(--line)}
+ .gfa-logos{grid-template-columns:repeat(3,minmax(0,1fr))}.gfa-logos li{height:84px}.gfa-logos img{max-height:62px}
+ .gfr-voices{grid-template-columns:minmax(0,1fr)}.gfr-ev{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){.gfr-mosaic{grid-auto-rows:70px}.gfr-more,.gfr-next{grid-template-columns:minmax(0,1fr)}.gfr-facts div{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}}
+
+.gfc-hero{padding:clamp(36px,5vw,80px) 0 clamp(28px,3vw,48px);border-bottom:1px solid var(--line)}
+.gfc-hero .w{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center}
+.gfc-hero h1{font-size:clamp(44px,5.6vw,92px)}
+.gfc-hero .lead{max-width:36rem;margin:20px 0 0;font-size:clamp(17px,1.5vw,21px);color:var(--muted)}
+.gfc-hero figure{margin:0}.gfc-hero figure img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfc-crumbs{margin:0 0 18px;font-size:13px;color:var(--muted)}.gfc-crumbs a{text-decoration:none}
+.gfc-meta{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.gfc-meta li{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px;font-weight:600}
+.gfc-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:start}
+.gfc-body h2{font-size:clamp(32px,3.6vw,56px);font-weight:800;letter-spacing:-.045em;line-height:.95;margin:0 0 16px}
+.gfc-body section{padding:0 0 clamp(28px,3vw,44px)}
+.gfc-body p{font-size:17px;line-height:1.6;color:#5A4652;margin:0 0 12px}
+.gfc-side{position:sticky;top:96px;display:grid;gap:12px}
+.gfc-model{display:grid;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.gfc-model .ph{background:var(--bg,#E6E0DA)}.gfc-model .ph img{display:block;width:100%;aspect-ratio:4/3;object-fit:contain;padding:8%}
+.gfc-model .tx{display:grid;gap:6px;padding:18px 20px 20px}
+.gfc-model .tx span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+.gfc-model .tx b{font-size:26px;letter-spacing:-.03em}
+.gfc-model .tx p{margin:0;color:var(--muted);font-size:15px}
+.gfc-model .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.gfc-model .acts a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:var(--ink);color:var(--paper);font-weight:700;font-size:15px;text-decoration:none}
+.gfc-model .acts a.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.gfc-gal{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:8px}
+.gfc-gal img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#E6E0DA}
+.gfc-gal[style="--n:1"]{max-width:900px}.gfc-gal[style="--n:1"] img{aspect-ratio:16/9}
+.gfc-other{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.gfc-other a{display:grid;background:#fff;border:1px solid var(--line);text-decoration:none;color:var(--ink);transition:border-color .2s ease}
+.gfc-other a:hover{border-color:var(--violet)}
+.gfc-other img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#E6E0DA}
+.gfc-other span{display:grid;gap:4px;padding:14px 16px 16px;font-size:14px;color:var(--muted)}.gfc-other b{font-size:20px;letter-spacing:-.02em;color:var(--ink)}
+@media (max-width:900px){.gfc-hero .w,.gfc-body{grid-template-columns:minmax(0,1fr)}.gfc-side{position:static}.gfc-gal{grid-template-columns:minmax(0,1fr)}.gfc-other{grid-template-columns:minmax(0,1fr)}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"Areny do panny przy Pałacu Kultury w Warszawie","description":"W Parku Świętokrzyskim, w sąsiedztwie Pałacu Kultury i Nauki, trzy areny do panny tworzą część przestrzeni tarasu. Projekt pokazuje, jak niewielkie boiska mogą stać się elementem publicznej przestrzeni miejskiej.","inLanguage":"pl-PL","dateModified":"2026-11-28","image":"https://www.gamefields.eu/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg","author":{"@type":"Person","name":"Damian Gawrych","url":"https://www.gamefields.eu/damian-gawrych/"},"publisher":{"@type":"Organization","name":"Gamefields","url":"https://www.gamefields.eu/"},"mainEntityOfPage":"https://www.gamefields.eu/taras-park-swietokrzyski-warszawa/","about":{"@type":"Product","name":"Panna Ring","url":"https://www.gamefields.eu/product/panna-ring/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gamefields","item":"https://www.gamefields.eu/"},{"@type":"ListItem","position":2,"name":"Realizacje","item":"https://www.gamefields.eu/realizacje-gamefields/"},{"@type":"ListItem","position":3,"name":"Areny do panny przy Pałacu Kultury w Warszawie","item":"https://www.gamefields.eu/taras-park-swietokrzyski-warszawa/"}]}]}</script>
+<div class="gfa">
+<section class="gfc-hero"><div class="w">
+  <div>
+    <p class="gfc-crumbs"><a href="/realizacje-gamefields/">Realizacje</a> / Warszawa</p>
+    <p class="k">Case study · Warszawa, Park Świętokrzyski</p>
+    <h1 class="d">Areny do panny przy Pałacu Kultury w Warszawie</h1>
+    <p class="lead">W Parku Świętokrzyskim, w sąsiedztwie Pałacu Kultury i Nauki, trzy areny do panny tworzą część przestrzeni tarasu. Projekt pokazuje, jak niewielkie boiska mogą stać się elementem publicznej przestrzeni miejskiej.</p>
+    <ul class="gfc-meta"><li>Boiska: Panna Ring, trzy areny</li><li>Inwestor: Zarząd Zieleni m.st. Warszawy</li><li>Projekt: Michał Sikorski, Marcin Kwietowicz</li></ul>
+  </div>
+  <figure><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/Areny-Panna-Football-Alternative-Soccer-Warszawa-3-768x576.jpg" alt="Taras w Parku Świętokrzyskim w Warszawie, areny panna" loading="eager" decoding="async"></figure>
+</div></section>
+
+<section class="gfa-sec"><div class="w gfc-body">
+  <div><section><h2>Trzy areny i przestrzeń spotkań</h2><p>W Parku Świętokrzyskim powstała przestrzeń z trzema arenami Panna Ring, tarasem i rampą do skateboardingu. Inwestorem był Zarząd Zieleni m.st. Warszawy. To wielofunkcyjna przestrzeń rekreacji dla osób w każdym wieku, tuż obok skrzyżowania linii metra.</p></section><section><h2>Boiska w przestrzeni miasta</h2><p>Układ aren i tarasu łączy możliwość gry z miejscem spotkań. Taras stał się jednym z najpopularniejszych miejsc spotkań warszawskiej młodzieży. Po wybuchu wojny w Ukrainie był też ważnym miejscem spotkań ukraińskiej młodzieży, o czym pisał m.in. New York Times. To inwestycja tymczasowa, która zapowiada dalsze zmiany wokół Pałacu Kultury i Nauki.</p></section><figure class="gfr-quote"><blockquote>Boiska pod Pałacem Kultury były czymś nowym dla Warszawy. Trzy boiska połączone z tarasem i rampą do skateboardingu dały mocny efekt wizualny i przyciągają bardzo dużo młodzieży.</blockquote><figcaption><b>Grzegorz Gądek</b>Prezes Fundacji Skwery Sportów Miejskich</figcaption></figure></div>
+  <aside class="gfc-side">
+    <div class="gfc-model"><span class="ph" style="--bg:#6336F5"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/gf-ring-1200.webp" alt="Panna Ring, render" loading="lazy" decoding="async"></span>
+      <span class="tx"><span>Model w tej realizacji</span><b>Panna Ring</b><p>Konstrukcja od 40 000 zł netto. Ceny orientacyjne; montaż i transport wyceniamy osobno.</p>
+      <span class="acts"><a href="/studio/?arena=w1">Zaprojektuj podobne ↗</a><a class="alt" href="/product/panna-ring/">Zobacz model</a></span></span></div>
+  </aside>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Zdjęcia.</h2><p>Taras w Parku Świętokrzyskim, Warszawa, Park Świętokrzyski.</p></div>
+  <div class="gfc-gal" style="--n:3"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/11-1-768x432.jpg" alt="Areny panna na Tarasie, widok na centrum Warszawy" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/2-4-768x768.jpg" alt="Arena panna na Tarasie w Parku Świętokrzyskim" loading="lazy" decoding="async"><img src="https://www.gamefields.eu/wp-content/uploads/2024/12/6-2-768x768.jpg" alt="Gra na arenie panna, Taras w Parku Świętokrzyskim" loading="lazy" decoding="async"></div>
+</div></section>
+
+<section class="gfa-sec"><div class="w">
+  <div class="gfa-head"><h2 class="d">Inne realizacje.</h2><p>Kolejne miejsca z boiskami Gamefields.</p></div>
+  <ul class="gfc-other" role="list"><li><a href="/realizacje-gamefields/#kutno"><img src="https://www.gamefields.eu/wp-content/uploads/2025/06/IMG_6608-scaled-e1749983082809-768x696.jpg" alt="Boisko Panna Octa w Kutnie, dzieci na boisku" loading="lazy" decoding="async"><span><b>Panna Octa w Kutnie</b>Kutno, pasaż sportowy</span></a></li><li><a href="/realizacje-gamefields/#krakow"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Krakow-Panna-Arena-Octa-Cage-90-Gamefields-768x768.jpg" alt="Panna Octa Cage 90 w parku, Kraków" loading="lazy" decoding="async"><span><b>Kraków: od planu do parku</b>Kraków, teren miejski</span></a></li><li><a href="/realizacje-gamefields/#wake"><img src="https://www.gamefields.eu/wp-content/uploads/2026/11/Damian-Gawrych-x-Wake-for-friends--768x960.jpg" alt="Dzieci grają na arenie Gamefields, Wake For Friends" loading="lazy" decoding="async"><span><b>Wake For Friends</b>Grodzisk Mazowiecki, park wakeboardowy</span></a></li></ul>
+  <ul class="gfa-links"><li><a href="/realizacje-gamefields/">← Wszystkie realizacje</a></li></ul>
+</div></section>
+
+<section class="gfa-cta"><div class="w">
+  <h2 class="d">Chcesz podobne<br>miejsce?</h2>
+  <div class="gfa-btns"><a class="gfa-btn" href="/kontakt/">Wyślij zdjęcia placu →</a><a class="gfa-btn alt" href="/studio/?arena=w1">Zaprojektuj podobne w Studio ↗</a></div>
+</div></section>
+</div>
+<!-- /wp:html -->
