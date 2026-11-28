@@ -1995,7 +1995,7 @@ $('#gm-locate').addEventListener('click',()=>{
 			var det = (lead.querySelector('[name="project-details"]') || {}).value || '';
 			var v = 'formularz';
 			if (/^\s*\{/.test(det)) v = 'studio'; /* Studio hands over its project as JSON */
-			else if (/MAPA MOŻLIWOŚCI/.test(det)) v = 'mapa';
+			else if (/(?:MAPA MOŻLIWOŚCI|OPPORTUNITY MAP)/.test(det)) v = 'mapa';
 			else if (/Zamówienie (plakatu|piłki)/.test(det)) v = 'plakat';
 			else if (lead.dataset.gfEntry === 'zdjecie') v = 'zdjecie';
 			else if (+(lead.dataset.gfPhotoCount || 0) > 0) v = 'zdjecie';
