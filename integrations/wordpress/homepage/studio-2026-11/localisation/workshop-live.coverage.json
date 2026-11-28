@@ -1,0 +1,22 @@
+{
+  "reviewOnly": true,
+  "uniqueUiStrings": 34,
+  "replacements": 45,
+  "dates": "en-GB",
+  "pluralisation": "English",
+  "preserved": [
+    "vote API and request methods",
+    "ranking filters",
+    "storage key",
+    "preview origin checks",
+    "sandbox",
+    "user titles and nicknames",
+    "contest rules URL"
+  ],
+  "remaining": [
+    "API contest title, brief and prize require verified EN fields or a locale-aware API",
+    "API error strings remain untranslated unless known",
+    "Studio route remains /studio/ pending verified EN route",
+    "Browser QA pending"
+  ]
+}
