@@ -1,4 +1,5 @@
 "use client";
+import {useStudioLanguage} from "@/components/studio-language";
 
 import {useEffect,useMemo,useRef,useState} from 'react';
 import type {Group,WebGLRenderer} from 'three';
@@ -8,6 +9,7 @@ type PreviewFile={version:number;models:Record<string,PreviewPart[]>};
 export type FloatingArena={id:string;model:string;label:string};
 
 export function FloatingArenaCarousel({items,selected,onSelect}:{items:FloatingArena[];selected:string;onSelect:(id:string)=>void}){
+ const {display:tr}=useStudioLanguage();
  const visibleItems=useMemo(()=>items.filter(item=>item.id!==selected),[items,selected]);
  const canvas=useRef<HTMLCanvasElement>(null);
  const [fallback,setFallback]=useState(false);
@@ -66,9 +68,9 @@ export function FloatingArenaCarousel({items,selected,onSelect}:{items:FloatingA
   void init();
   return()=>{disposed=true;controller.abort();cancelAnimationFrame(frame);if(root)root.traverse(object=>{if('geometry'in object)(object as {geometry?:{dispose:()=>void}}).geometry?.dispose()});renderer?.dispose()};
  },[visibleItems]);
- return <div className={'floating-arena-view'+(fallback?' has-fallback':'')} aria-label="Lewitujące modele boisk 3D">
+ return <div className={'floating-arena-view'+(fallback?' has-fallback':'')} aria-label={tr("Lewitujące modele boisk 3D")}>
   <canvas ref={canvas} aria-hidden="true" width={visibleItems.length*196} height={132}/>
-  <div className="floating-arena-actions" role="group" aria-label="Wybierz konstrukcję">{visibleItems.map(item=><button key={item.id} type="button" aria-label={`Powiększ ${item.label}`} onMouseEnter={()=>setHovered(item.id)} onMouseLeave={()=>setHovered(null)} onFocus={()=>setHovered(item.id)} onBlur={()=>setHovered(null)} onClick={()=>onSelect(item.id)}><span className="floating-arena-name">{item.label}</span>{fallback?<img src={`/arenas/showroom/${item.model}.webp`} alt="" loading="lazy"/>:null}</button>)}</div>
-  {!ready&&!fallback?<span className="floating-arena-loading">Wczytujemy miniaturowe modele 3D…</span>:null}
+  <div className="floating-arena-actions" role="group" aria-label={tr("Wybierz konstrukcję")}>{visibleItems.map(item=><button key={item.id} type="button" aria-label={`${tr('Powiększ')} ${tr(item.label)}`} onMouseEnter={()=>setHovered(item.id)} onMouseLeave={()=>setHovered(null)} onFocus={()=>setHovered(item.id)} onBlur={()=>setHovered(null)} onClick={()=>onSelect(item.id)}><span className="floating-arena-name">{tr(item.label)}</span>{fallback?<img src={`/arenas/showroom/${item.model}.webp`} alt="" loading="lazy"/>:null}</button>)}</div>
+  {!ready&&!fallback?<span className="floating-arena-loading">{tr('Wczytujemy miniaturowe modele 3D…')}</span>:null}
  </div>;
 }
