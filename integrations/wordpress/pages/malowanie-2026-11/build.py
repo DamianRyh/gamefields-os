@@ -251,7 +251,7 @@ body = f"""
     <p class="k">Kolor, wzór, linie, branding</p>
     <h1 class="d">Malowanie i grafika boisk.</h1>
     <p class="lead">Od odświeżenia kolorów i linii po autorski court design. Wzór projektujesz w Studio 3D, widzisz cenę, a ja przenoszę go na nawierzchnię farbami sportowymi z gumą.</p>
-    <div class="gfa-btns"><a class="gfa-btn" href="#murale">Zobacz murale ↓</a><a class="gfa-btn alt" href="/kontakt/">Wyślij zdjęcia boiska →</a></div>
+    <div class="gfa-btns"><a class="gfa-btn" href="/wzory-na-boisko/">Zobacz wzory →</a><a class="gfa-btn alt" href="/kontakt/">Wyślij zdjęcia boiska →</a></div>
   </div>
   {hero_fig}
 </div>
@@ -289,6 +289,7 @@ body = f"""
   <ul class="gfb-trend" role="list"><li><b>Od krawędzi do krawędzi</b>Mural zajmuje całe boisko, a linie gry leżą na wierzchu.</li><li><b>Asymetria w równowadze</b>Kompozycja nie musi być lustrzana, ale obie połowy są tak samo bogate.</li><li><b>Znak miejsca</b>Symbole, krajobraz, słowa i wzory tkanin, które mówią, czyje to boisko.</li></ul>
   <ul class="gfb-murals" role="list">{murals_html}</ul>
   <p class="gfb-note">Inspiracje: boiska Project Backboard (Memphis, St Louis), My HomeCourt (Providence), murale w parkach Nowego Jorku i Bostonu. Kierunki przejmują sposób pracy, nie konkretne dzieła. Liczby farb i taśmy z pomiaru wzoru na boisku 15 × 10 m.</p>
+  <ul class="gfa-links"><li><a href="/wzory-na-boisko/">Wszystkie wzory na boisko: polskie, murale, Kompozytor →</a></li></ul>
 </div></section>
 
 <section class="gfa-band" id="masters"><div class="w">

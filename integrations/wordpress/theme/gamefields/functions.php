@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'GFT_VERSION', '1.0.37' );
+define( 'GFT_VERSION', '1.0.38' );
 
 add_action( 'after_setup_theme', function () {
 	load_theme_textdomain( 'gamefields' );
@@ -107,6 +107,7 @@ function gft_nav_items() {
 	return array(
 		array( 'Boiska', home_url( '/#boiska' ), '' ),
 		array( 'Ceny', home_url( '/#ceny' ), '' ),
+		array( 'Wzory', home_url( '/wzory-na-boisko/' ), 'wzory-na-boisko' ),
 		array( 'Dla kogo', home_url( '/#dla-kogo' ), '' ),
 		array( 'Realizacje', home_url( '/realizacje-gamefields/' ), 'realizacje-gamefields' ),
 		array( 'Wiedza', home_url( '/baza-wiedzy/' ), 'baza-wiedzy' ),

@@ -17,6 +17,7 @@
 				<a href="<?php echo esc_url( home_url( '/renowacja-boisk/' ) ); ?>">Renowacja</a>
 				<a href="<?php echo esc_url( home_url( '/nawierzchnie-sportowe/' ) ); ?>">Nawierzchnie</a>
 				<a href="<?php echo esc_url( home_url( '/malowanie-boisk/' ) ); ?>">Malowanie i grafika</a>
+				<a href="<?php echo esc_url( home_url( '/wzory-na-boisko/' ) ); ?>">Wzory na boisko</a>
 				<a href="<?php echo esc_url( home_url( '/projektowanie-boisk/' ) ); ?>">Projektowanie</a>
 			</nav>
 			<nav class="gft-foot-col" aria-label="Dla kogo">
