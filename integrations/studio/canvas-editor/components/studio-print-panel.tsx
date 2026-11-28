@@ -9,16 +9,16 @@ import {useShop,variantPrice,zl,type ShopData} from '@/lib/shop';
 import {StudioShopOrder} from '@/components/studio-shop-order';
 import '@/app/studio-print.css';
 /* Order data of a poster or ball, shared by the panel and the summary. */
-export function printOrder(d:StudioPrintDesign,shop:ShopData){
+export function printOrder(d:StudioPrintDesign,shop:ShopData,locale:"pl"|"en"="pl"){
  const fam=engine.PRO_FAMILIES.find(f=>f.id===d.fam)?.name||d.fam,qty=d.qty||1,format=printFormats[d.fmt]||printFormats[0];
- if(d.product==='poster'&&shop.poster)return {extra:'Sam print, bez ramy',note:`Plakat „${d.title||'bez tytułu'}” · ${fam} ${d.v} · ${format} · sam print, bez ramy`,lines:[{product:shop.poster,value:format,qty,price:variantPrice(shop.poster,format,99)}]};
- if(d.product==='ball'&&shop.ball)return {extra:d.logo?'Plik logo prześlesz mailem':undefined,note:`Piłka · ${fam} ${d.v} · rozmiar ${d.size} · napis „${d.label}”${d.number?' · nr '+d.number:''}`,lines:[{product:shop.ball,qty,price:shop.ball.price}]};
+ if(d.product==='poster'&&shop.poster)return {extra:'Sam print, bez ramy',note:locale==="en"?`Poster “${d.title||"untitled"}” · ${fam} ${d.v} · ${format} · print only, without frame`:`Plakat „${d.title||'bez tytułu'}” · ${fam} ${d.v} · ${format} · sam print, bez ramy`,lines:[{product:shop.poster,value:format,qty,price:variantPrice(shop.poster,format,99)}]};
+ if(d.product==='ball'&&shop.ball)return {extra:d.logo?'Plik logo prześlesz mailem':undefined,note:locale==="en"?`Ball · ${fam} ${d.v} · size ${d.size} · lettering “${d.label}”${d.number?" · no. "+d.number:""}`:`Piłka · ${fam} ${d.v} · rozmiar ${d.size} · napis „${d.label}”${d.number?' · nr '+d.number:''}`,lines:[{product:shop.ball,qty,price:shop.ball.price}]};
  return null;
 }
 export function StudioPrintPanel({design:d,onChange,brush,onBrush}:{design:StudioPrintDesign;onChange:(patch:Partial<StudioPrintDesign>)=>void;brush:string|null;onBrush:(hex:string|null)=>void}){
- const {display:tr}=useStudioLanguage();
+ const {display:tr,locale}=useStudioLanguage();
  const shop=useShop(),qty=d.qty||1;
- const o=printOrder(d,shop),order=o?<StudioShopOrder shop={shop} qty={qty} onQty={q=>onChange({qty:q})} {...o}/>:null;
+ const o=printOrder(d,shop,locale),order=o?<StudioShopOrder shop={shop} qty={qty} onQty={q=>onChange({qty:q})} {...o}/>:null;
  const [tab,setTab]=useState('art'),[error,setError]=useState(''),upload=useRef<HTMLInputElement>(null);const button=(key:string,label:string)=><button key={key} aria-pressed={tab===key} onClick={()=>setTab(key)} >{tr(label)}</button>;
  async function logo(file?:File){if(!file)return;try{if(!['image/png','image/jpeg'].includes(file.type)||file.size>1500000)throw Error('Wybierz PNG lub JPG do 1,5 MB.');const image=new Image(),url=URL.createObjectURL(file);try{await new Promise<void>((ok,no)=>{image.onload=()=>ok();image.onerror=no;image.src=url});const c=document.createElement('canvas'),scale=Math.min(1,768/Math.max(image.width,image.height));c.width=Math.max(1,Math.round(image.width*scale));c.height=Math.max(1,Math.round(image.height*scale));c.getContext('2d')!.drawImage(image,0,0,c.width,c.height);const src=c.toDataURL('image/png');if(src.length>1500000)throw Error('Wybierz mniejszy obraz.');onChange({logo:src});setError('')}finally{URL.revokeObjectURL(url)}}catch(e){setError((e as Error).message)}}
  async function exportImage(){try{let url:string;if(d.product==='poster'){const svg=renderHomepagePoster(d),im=new Image();await new Promise<void>((ok,no)=>{im.onload=()=>ok();im.onerror=no;im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg)});const c=document.createElement('canvas');c.width=1500;c.height=Math.round(1500*printFormatRatio[d.fmt]);c.getContext('2d')!.drawImage(im,0,0,c.width,c.height);url=c.toDataURL('image/png')}else{const c=document.querySelector<HTMLCanvasElement>('.studio-print-preview.is-ball canvas');if(!c)throw Error('Poczekaj na model.');url=c.toDataURL('image/png')}const a=document.createElement('a');a.href=url;a.download=d.product==='poster'?'plakat-gamefields-podglad.png':'pilka-gamefields.png';a.click()}catch{setError('Nie udało się pobrać podglądu. Zapisz projekt JSON i spróbuj ponownie.')}}
