@@ -1,0 +1,323 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.gamefields.eu/#studio",
+      "name": "Gamefields",
+      "alternateName": "Gamefields — independent urban sports court design studio",
+      "url": "https://www.gamefields.eu/",
+      "email": "info@gamefields.eu",
+      "image": "https://www.gamefields.eu/wp-content/uploads/2026/10/Gamefields-Panna-Play-wide-v3-default.webp",
+      "description": "Design, renovation and delivery of urban sports courts: street football, panna courts, colourful surfaces, murals and modular arenas for cities, schools, developers and brands.",
+      "founder": {
+        "@type": "Person",
+        "@id": "https://www.gamefields.eu/#damian-gawrych",
+        "name": "Damian Gawrych",
+        "url": "https://www.gamefields.eu/damian-gawrych/",
+        "sameAs": [
+          "https://www.instagram.com/damiangawrych/",
+          "https://www.damiangawrych.pl/"
+        ]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Warsaw",
+        "addressCountry": "PL"
+      },
+      "parentOrganization": {
+        "@id": "https://www.gamefields.eu/#organization"
+      },
+      "sameAs": [
+        "https://www.instagram.com/gamefields.eu/",
+        "https://www.linkedin.com/company/gamefields",
+        "https://www.facebook.com/Gamefields.eu"
+      ],
+      "knowsAbout": [
+        "panna courts",
+        "street football",
+        "urban sports courts",
+        "sports surfaces",
+        "court painting",
+        "concrete court renovation",
+        "sports space design"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Gamefields services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Urban sports court design",
+              "description": "Concept design for a place to play: structure, surface and graphics designed as a single object.",
+              "provider": {
+                "@id": "https://www.gamefields.eu/#studio"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Modular panna and street football courts",
+              "description": "Panna Ring, Panna Play, Panna Court, Panna Octa, Panna Grid, Cage 90, Cage 180 and Street Arena 15.",
+              "provider": {
+                "@id": "https://www.gamefields.eu/#studio"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Colourful surfaces and court graphics",
+              "description": "Painted surface patterns, EPDM, tiles and turf designed in Studio 3D.",
+              "provider": {
+                "@id": "https://www.gamefields.eu/#studio"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Modernisation of concrete sites into colourful courts",
+              "description": "Repair and priming of existing concrete or asphalt, flexible sports paints with rubber granules, patterns and markings for football, basketball and 3v3 play.",
+              "provider": {
+                "@id": "https://www.gamefields.eu/#studio"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Court posters",
+              "description": "A poster with a surface pattern and court markings, designed in your browser.",
+              "provider": {
+                "@id": "https://www.gamefields.eu/#studio"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Mobile event arena"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 27000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Panna Octa Cage 90",
+              "sku": "GF-CT-005"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 36000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Panna Play",
+              "sku": "GF-CT-002"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 40000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Panna Ring",
+              "sku": "GF-CT-001"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 40000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Panna Octa",
+              "sku": "GF-CT-008"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 49000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Panna Grid",
+              "sku": "GF-CT-007"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 51000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Panna Octa Cage 180",
+              "sku": "GF-CT-006"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 58000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Panna Court",
+              "sku": "GF-CT-003"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 69000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "3v3 court (Street Arena 15)",
+              "sku": "GF-CT-004"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 100000,
+              "priceCurrency": "PLN",
+              "valueAddedTaxIncluded": false
+            },
+            "seller": {
+              "@id": "https://www.gamefields.eu/#studio"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.gamefields.eu/en/#pytania",
+      "inLanguage": "en-GB",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much space do I need for a court?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the structure you choose and its surrounding safety zone. Enter your site dimensions in the “Will it fit?” planner to see which models fit. Include approximate site dimensions in your enquiry."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I change the colours and patterns?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In GAMEFIELDS Studio, you can create your own colour and graphic variant. We confirm the scope of delivery when agreeing the project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you also install sports surfaces on their own?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Surfaces are the other half of my work, alongside court structures: pattern design, painting, EPDM, tiles and turf. See how I transform existing sites."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a court be built on existing concrete?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually, yes. If the concrete is stable, I repair cracks and defects, prime the base and apply flexible sports paint with rubber granules, followed by the pattern and markings. A seriously damaged base must first be rebuilt. I will assess it from photographs. Old concrete, new court."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does site modernisation take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the court size and the initial condition of the site: the amount of base repair, the number of layers and the colours in the pattern. Sports paints are applied to dry concrete at above-freezing temperatures, so we usually work from spring to autumn. I provide a schedule after reviewing the photographs. Send us site photos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I start without a finished design?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. A description of your idea, approximate dimensions and, if available, site photos are enough. Send an enquiry to discuss the options."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I see the price immediately?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Structures start from PLN 27,000 excl. VAT (mobile arena) and PLN 36,000 excl. VAT (Panna Octa Cage 90). The full list is in the “How much does an arena cost?” section. The cost of a complete court with surface, installation and transport depends on the location, so we prepare a detailed quotation after reviewing site photos. Our guide “How much does it cost to build a sports court?” explains what affects the budget."
+          }
+        }
+      ]
+    }
+  ]
+}
