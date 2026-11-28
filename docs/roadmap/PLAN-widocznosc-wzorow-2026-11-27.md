@@ -49,7 +49,8 @@ Wniosek: nowa praca jest w Studiu, ale prowadzi do niej tylko jedna droga: Studi
 - ✅ 2. Wycena: linia „Malowanie” podaje wzór klienta i, dla Kompozytora i Murali, zmierzone farby i taśmę. Próg „Wzór zaawansowany” nie mówi już „Organic Flow” (Studio, oferta, sklep i strony w repo).
 - ✅ 3. Podpowiedź Marka przy karcie PDF wspomina plan malowania.
 - ✅ 4. /malowanie-boisk/ przebudowana (sekcja „Boisko jak mural.” z 8 kartami, „Plan malowania z Twojego wzoru.”, 1020 wzorów, zasady dla wszystkich kolekcji, 9 pytań). Polecenie: `DLA-CHATGPT-malowanie-murale.txt`. Zestawy „Pięć miejsc” zostają na razie z Masters II, bo nowe rendery 3D muralowych zestawów trzeba zrobić w Studiu.
-- ⏳ 5–8. Strona główna, podstrona „Wzory i murale”, strony „dla kogo”, poradnik. Zmiana opisu „Organic Flow” na stronie głównej, w /nawierzchnie-sportowe/, /renowacja-boisk/ i w poradniku jest w repo i wejdzie przy najbliższym wdrożeniu tych stron.
+- ✅ 6. Podstrona **/wzory-na-boisko/** (ID 4954) opublikowana 28.11: wzory polskie, Murale, Kompozytor (32 karty z silnika), zasady, pytania. Bez pozycji w menu (decyzja właściciela). Karty wzorów polskich prowadzą do kontaktu, dopóki Studio ich nie ma (`STUDIO_HAS_POLISH` w build.py).
+- ⏳ 5, 7, 8. Strona główna, podstrona „Wzory i murale” (zrobiona jako /wzory-na-boisko/), strony „dla kogo”, poradnik. Zmiana opisu „Organic Flow” na stronie głównej, w /nawierzchnie-sportowe/, /renowacja-boisk/ i w poradniku jest w repo i wejdzie przy najbliższym wdrożeniu tych stron.
 
 ## Kolejność i zależności
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""/wzory-na-boisko/ (new, 28.11.2026): the pattern collections in one place, in the .gfb style.
+"""/wzory-na-boisko/ (page 4954, published 28.11.2026 by Claude via the REST API after the owner's approval): the pattern collections in one place, in the .gfb style.
 
 Output: wzory-na-boisko.html (one wp:html block). Cards are inline SVG rendered by the same engine as the Studio
 (integrations/studio/surface-pro-2026-11/export-previews.mjs), with measured paints and masking tape on 15 x 10 m.
