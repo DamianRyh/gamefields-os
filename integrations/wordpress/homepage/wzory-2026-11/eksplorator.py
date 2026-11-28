@@ -56,17 +56,12 @@ data = {"collections": [{"name": n, "note": note, "presets": [{k: p[k] for k in 
         "palettes": ["gamefields", "riley", "stijl", "burle-marx", "aicher", "nihon", "vasarely", "lagos", "malevich", "copacabana", "swiss", "duperre"]}
 count = sum(len(c["presets"]) for c in data["collections"])
 
-# engine bundle (same functions the Studio uses) + explorer
-entry = HERE / ".entry.mjs"
-entry.write_text("export { PRO_PALETTES, PRO_FAMILIES, renderPro, courtLines, recommendLineColor, lightness } from '"
-                 + (ENGINE / "court-art-pro.mjs").as_posix() + "';\n", encoding="utf-8")
-bundle = subprocess.run([ESBUILD, str(entry), "--bundle", "--minify", "--format=iife", "--global-name=GFW"],
-                        capture_output=True, text=True, check=True).stdout
-entry.unlink()
-ctrl = subprocess.run([ESBUILD, str(HERE / "eksplorator.js"), "--minify"], capture_output=True, text=True, check=True).stdout
-code = bundle + "\n" + ctrl
-assert TOKEN not in code and "</script" not in code.lower() and "<!--" not in code
-code = code.replace("&&", TOKEN)
+# engine bundle (same functions the Studio uses), shared with the "sporty" block, + explorer
+sys.path.insert(0, str(HERE.parent))
+import gfw_shared as SH  # noqa: E402
+engine = SH.stored(SH.engine_bundle(ESBUILD, HERE))
+ctrl = SH.stored(SH.minify(ESBUILD, HERE / "eksplorator.js"))
+code = engine + ctrl
 
 # first preset rendered at build time (visible before the engine loads, and for crawlers)
 first = data["collections"][0]["presets"][0]
@@ -180,15 +175,10 @@ body = f"""<section id="wzory" class="gwz" aria-labelledby="gfs-wzory">
 </section>"""
 
 data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("&", "\\u0026").replace("<", "\\u003c")
-boot = ("(function(){var s=document.getElementById('gwz-src'),r=document.getElementById('wzory');if(!s)return;var done=0;"
-        "function go(){if(done)return;done=1;var c=s.textContent.split('" + TOKEN + "').join(String.fromCharCode(38,38));"
-        "var t=document.createElement('script');t.src=URL.createObjectURL(new Blob([c],{type:'text/javascript'}));document.body.appendChild(t);}"
-        "if(!('IntersectionObserver' in window)){go();return;}"
-        "var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();go();}},{rootMargin:'600px 0px'});io.observe(r);})();")
-assert "&&" not in boot
+boot = SH.boot("gwz-src", "wzory")
 block = ("<!-- wp:html -->\n<!-- gf-blok: wzory -->\n<!-- WZORY: explorer (28.11.2026), built by homepage/wzory-2026-11/eksplorator.py -->\n<style>" + CSS.strip() + "</style>\n"
          + body + "\n<script type=\"application/json\" id=\"gwz-data\">" + data_json + "</script>\n"
-         + "<script type=\"text/plain\" id=\"gwz-src\">" + code + "</script>\n<script>" + boot + "</script>\n<!-- /wp:html -->\n")
+         + "<script type=\"text/plain\" id=\"gfw-engine\">" + engine + "</script>\n<script type=\"text/plain\" id=\"gwz-src\">" + ctrl + "</script>\n<script>" + boot + "</script>\n<!-- /wp:html -->\n")
 if "&&" in block:
     raise SystemExit("double ampersand would break in WordPress")
 OUT.mkdir(exist_ok=True)
